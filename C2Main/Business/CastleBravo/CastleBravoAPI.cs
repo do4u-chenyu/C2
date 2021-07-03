@@ -50,7 +50,7 @@ namespace C2.Business.CastleBravo
                 {
                     resDict.TryGetValue("taskid", out string taskId);
                     cbaResp.Data = taskId;
-                    cbaResp.Message = String.Format("任务下发成功，ID:[{0}]", taskId); 
+                    cbaResp.Message = String.Format("任务下发成功 [{0}]", taskId); 
                 }
                 else
                     cbaResp.Message = "网络OK，但向服务器下发任务失败";
@@ -63,18 +63,18 @@ namespace C2.Business.CastleBravo
         }
 
 
-        public bool QueryTaskResultsById(string taskId, out CastleBravoAPIResponse result)
+        public CastleBravoAPIResponse QueryTaskResultsById(string taskId)
         {
-            result = new CastleBravoAPIResponse();
+            CastleBravoAPIResponse result = new CastleBravoAPIResponse();
 
-            //目前默认输出全部分类结果，flag默认为1，后期有需求再改flag参数
-            //Dictionary<string, string> pairs = new Dictionary<string, string> { { "taskId", taskId } };
             string pairs = "taskId=" + taskId;
             try
             {
                 Response resp = httpHandler.PostCode(ResultUrl, pairs);
-                if (resp.StatusCode != HttpStatusCode.OK)
-                    result.Message = string.Format("http 状态码错误：{0}.", resp.StatusCode.ToString());
+                result.StatusCode = resp.StatusCode;
+
+                if (result.StatusCode != HttpStatusCode.OK)
+                    result.Message = string.Format("http 状态码：{0}.", result.StatusCode);
 
                 Dictionary<string, string> resDict = resp.ResDict;
 
@@ -85,13 +85,15 @@ namespace C2.Business.CastleBravo
                     result.Message = status;
                 }
                 else
-                    result.Message = "任务结果查询失败。";
+                    result.Message = "任务结果查询失败：返回数据格式不对,没有status字段";
             }
             catch (Exception ex)
             {
+                result.StatusCode = HttpStatusCode.Unused;  // 此处抛出异常时,不知道到底发生了什么
                 result.Message = ex.Message;
             }
-            return true;
+
+            return result;
         }
     }
 }

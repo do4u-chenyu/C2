@@ -85,7 +85,7 @@
             this.taskStatusLabel.Name = "taskStatusLabel";
             this.taskStatusLabel.Size = new System.Drawing.Size(48, 19);
             this.taskStatusLabel.TabIndex = 6;
-            this.taskStatusLabel.Text = "运行中";
+            this.taskStatusLabel.Text = "Running";
             // 
             // taskIdLabel
             // 

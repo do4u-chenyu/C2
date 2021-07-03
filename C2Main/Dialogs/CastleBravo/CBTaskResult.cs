@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.CastleBravo
@@ -32,15 +33,26 @@ namespace C2.Dialogs.CastleBravo
 
         private void CBTaskResult_Shown(object sender, EventArgs e)
         {
-            if (TaskInfo.Status == CastleBravoTaskStatus.Done && ShowResults())
+            if (TaskInfo.Status == CastleBravoTaskStatus.Done)
+            {
+                ShowResults();
                 return;
-
+            }
+               
             CastleBravoAPIResponse resp = new CastleBravoAPIResponse();
             using (GuarderUtil.WaitCursor)
-                if (!CastleBravoAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID, out resp))
-                    return;
+                resp = CastleBravoAPI.GetInstance().QueryTaskResultsById(TaskInfo.TaskID);    
 
-            UpdateTaskInfoByResp(resp.Message, resp.Data);
+            if (resp.StatusCode != HttpStatusCode.OK)
+            {
+                HelpUtil.ShowMessageBox(String.Format("访问服务器出现错误, 错误码 : [{0}],  详细 : [{1}]", 
+                    resp.StatusCode, 
+                    resp.Message), 
+                    "提示");
+                return;
+            }
+
+            UpdateTaskInfo(resp.Message, resp.Data);
             Global.GetCastleBravoControl().Save();//状态刷新，修改本地持久化文件
             FillDGV();
         }
@@ -75,22 +87,22 @@ namespace C2.Dialogs.CastleBravo
             return results;
         }
 
-        private void UpdateTaskInfoByResp(string respMsg, string datas)
+        private void UpdateTaskInfo(string statusMsg, string datas)
         {
-            if (respMsg == "Error")
+            if (statusMsg == "Error")
             {
                 TaskInfo.Status = CastleBravoTaskStatus.Fail;
                 this.taskStatusLabel.Text = "Fail";
                 return;
             }
 
-            if (respMsg == "Done")
+            if (statusMsg == "Done")
                 TaskInfo.Status = CastleBravoTaskStatus.Done;
-            else if (respMsg == "Running")
+            else if (statusMsg == "Running")
                 TaskInfo.Status = CastleBravoTaskStatus.Running;
 
             TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
-            this.taskStatusLabel.Text = String.Format("{0}   成功数 : {1}", TaskInfo.Status.ToString(), TaskInfo.PreviewResults.Count);
+            this.taskStatusLabel.Text = String.Format("{0}   成功数 : {1}", TaskInfo.Status, TaskInfo.PreviewResults.Count);
         }
 
         private List<CastleBravoResultOne> DealData(string resultFilePath, string apiResults)
