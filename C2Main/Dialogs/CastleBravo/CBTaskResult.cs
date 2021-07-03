@@ -62,13 +62,16 @@ namespace C2.Dialogs.CastleBravo
                 return false;
 
             Tuple<List<string>, List<List<string>>> headersAndRows = FileUtil.ReadBcpFile(TaskInfo.ResultFilePath, OpUtil.Encoding.UTF8, OpUtil.TabSeparator, int.MaxValue);
-            //列数不对或为空文件，也要重新发起请求
-            if (headersAndRows.Item1.Count == 0 || headersAndRows.Item2.Count == 0)
-                return false;
-
             TaskInfo.PreviewResults = TransListToCBResult(headersAndRows);
+            
+            UpdateTaskStatusLabel();
             FillDGV();
             return true;
+        }
+
+        private void UpdateTaskStatusLabel()
+        {
+            this.taskStatusLabel.Text = String.Format("{0}   成功数 : {1}", TaskInfo.Status, TaskInfo.PreviewResults.Count);
         }
 
         private List<CastleBravoResultOne> TransListToCBResult(Tuple<List<string>, List<List<string>>> headersAndRows)
@@ -102,7 +105,7 @@ namespace C2.Dialogs.CastleBravo
                 TaskInfo.Status = CastleBravoTaskStatus.Running;
 
             TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
-            this.taskStatusLabel.Text = String.Format("{0}   成功数 : {1}", TaskInfo.Status, TaskInfo.PreviewResults.Count);
+            UpdateTaskStatusLabel();
         }
 
         private List<CastleBravoResultOne> DealData(string resultFilePath, string apiResults)
