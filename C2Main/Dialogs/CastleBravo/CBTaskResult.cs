@@ -72,10 +72,11 @@ namespace C2.Dialogs.CastleBravo
         private void UpdateTaskStatusLabel()
         {
             String statusDes = TaskInfo.Status.ToString();
-            if (TaskInfo.Status == CastleBravoTaskStatus.Running)
-                statusDes = "Running ...请耐心等待...";
+
             if (TaskInfo.Status == CastleBravoTaskStatus.Done)
                 statusDes = "Done ...点详情查看...";
+            if (TaskInfo.Status == CastleBravoTaskStatus.Running)
+                statusDes = "Running ...请耐心等待...";
 
             taskStatusLabel.Text = String.Format("[{0}]     成功率 : {1}/{2} = {3:0.00%}",
                 statusDes, 
