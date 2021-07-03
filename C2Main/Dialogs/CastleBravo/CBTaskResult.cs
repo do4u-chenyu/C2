@@ -72,7 +72,7 @@ namespace C2.Dialogs.CastleBravo
         private void UpdateTaskStatusLabel()
         {
 
-            this.taskStatusLabel.Text = String.Format("{0}  成功 : {1}/{2} = {3:0.00%}", 
+            this.taskStatusLabel.Text = String.Format("[{0}]     成功率 : {1}/{2} = {3:0.00%}", 
                 TaskInfo.Status, 
                 TaskInfo.PreviewResults.Count, 
                 TaskInfo.TaskCount,
