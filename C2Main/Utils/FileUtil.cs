@@ -27,6 +27,9 @@ namespace C2.Utils
             ReturnCode = rtc;
             Msg = m;
         }
+
+        public static readonly ReadRst OK = new ReadRst(new List<List<string>>(), 0, String.Empty);
+        public static readonly ReadRst BIGFILE = new ReadRst(new List<List<string>>(), -4, "文件太大,超过100M的处理上限。");
     }
     class FileUtil
     {
@@ -338,12 +341,12 @@ namespace C2.Utils
         {
             FileStream fs = null;
             List<List<string>> rst = new List<List<string>>();
-            int returnCode = 1;
+            int returnCode = 0;
             string errMsg = String.Empty;
             if (!File.Exists(fullFilePath))
             {
-                returnCode = 0;
-                errMsg = fullFilePath + "文件不存在";
+                returnCode = -1;
+                errMsg = string.Format("文件不存在 {0}", fullFilePath);
                 log.Error(errMsg);
                 return new ReadRst(rst, returnCode, errMsg);
             }
@@ -368,19 +371,10 @@ namespace C2.Utils
                         if (worksheet == null)
                         {
                             fs.Close();
-                            return new ReadRst(rst, 0, "");
+                            return new ReadRst(rst, 0, String.Empty);
                         }
                         int rowCount = worksheet.Dimension.End.Row;
                         int colCount = worksheet.Dimension.End.Column;
-                        //int realColCount = colCount;
-                        //因为是最大列数，可能出现表头列数小于最大列数的情况
-                        //for (int i = colCount; i > 0; i--)
-                        //{
-                        //    if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
-                        //        realColCount--;
-                        //    else
-                        //        break;//从后往前，遇到不为空的代表剩下的表头均有值
-                        //}
 
                         //遍历单元格赋值
                         for (int row = 1; row <= Math.Min(maxRow, rowCount); row++)
@@ -409,7 +403,7 @@ namespace C2.Utils
                     if (firstRow == null)
                     {
                         returnCode = -1;
-                        errMsg = "不支持预览和导入没有表头的xls文件，请给文件添加合适的表头";
+                        errMsg = "不支持没有表头的xls文件，请给文件添加表头";
                         log.Error(errMsg);
                         return new ReadRst(rst, returnCode, errMsg);
                     }
@@ -436,10 +430,10 @@ namespace C2.Utils
                     }
                 }
             }
-            catch (System.IO.IOException)
+            catch (IOException)
             {
                 returnCode = -2;
-                errMsg = string.Format("文件{0}可能是空文件或者已被其他应用打开。", fullFilePath);
+                errMsg = string.Format("空文件或者已被其他应用打开 {0}", fullFilePath);
                 log.Error(errMsg);
             }
             catch (Exception ex)

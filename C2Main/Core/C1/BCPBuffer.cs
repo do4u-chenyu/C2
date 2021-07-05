@@ -118,47 +118,39 @@ namespace C2.Core
             }
             return ret;
         }
-        private bool PreLoadExcelFileNew(string fullFilePath)
+        private ReadRst PreLoadExcelFileNew(string fullFilePath)
         {
             // 查看是否命中本地大文件缓存
             if (HasCache(fullFilePath, ProgramEnvironment.DataBufferFilename))
-            {
-                return true;
-            }
+                return ReadRst.OK;
 
             ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
-            if (rrst.ReturnCode <= 0 || rrst.ReturnCode > 0 && rrst.Result.Count == 0)
-            {
-                // 不能把显示messagebox的逻辑放到底层，这种方式很容易出问题
-                // HelpUtil.ShowMessageBox(rrst.Msg);
-                return false;
-            }
+            if (rrst.ReturnCode < 0 || rrst.ReturnCode == 0 && rrst.Result.Count == 0)
+                return rrst;
+       
             List<List<string>> rowContentList = rrst.Result;
             string firstLine = String.Join("\t", rowContentList[0]);
             StringBuilder sb = new StringBuilder(1024 * 16);
             for (int i = 0; i < rowContentList.Count; i++)
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
-            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
-            dataPreviewDict[fullFilePath].CrcValue = FileUtil.GetFileCRC32Value(fullFilePath);
+            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine)
+            {
+                CrcValue = FileUtil.GetFileCRC32Value(fullFilePath)
+            };
 
             // 大文件(10M以上)内容写入本地缓存
             if (FileUtil.TryGetFileSize(fullFilePath) > 10 * 1024 * 1024)
-            {
                 WriteBuffer(fullFilePath, sb, firstLine);
-            }
-            return true;
+          
+            return rrst;
         }
-        private bool PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
+        private ReadRst PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
         {
             if (!File.Exists(fullFilePath))
-            {
-                // 不能把显示messagebox的逻辑放到底层，这种方式很容易出问题
-                //HelpUtil.ShowMessageBox(fullFilePath + "该文件不存在");
-                return false;
-            }
+                return new ReadRst(new List<List<string>>(), -1, string.Format("文件不存在 {0}", fullFilePath));
+
 
             StreamReader sr = null;
-            bool returnVar = true;
             try
             {
                 if (encoding == OpUtil.Encoding.UTF8)
@@ -179,14 +171,14 @@ namespace C2.Core
             catch (Exception e)
             {
                 log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
-                returnVar = false;
+                return new ReadRst(new List<List<string>>(), -5, "BCPBuffer 预加载BCP文件出错: " + e.ToString());
             }
             finally
             {
                 if (sr != null)
                     sr.Close();
             }
-            return returnVar;
+            return ReadRst.OK;
         }
         #endregion
         public  string GetFirstLine(string tbContent)
@@ -251,17 +243,15 @@ namespace C2.Core
             long crcValue = FileUtil.GetFileCRC32Value(fullFilePath);
             long oldCrc = dataPreviewDict[fullFilePath].CrcValue;
             if (crcValue != oldCrc)
-            {
                 PreLoadExcelFileNew(fullFilePath);
-            }
         }
-        public bool TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
+        public ReadRst TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
-            bool returnVar = true;
+            ReadRst returnVar = ReadRst.OK;
 
             // 超过100M Excel不处理
             if (IsBigFile(fullFilePath))
-                return !returnVar;
+                return ReadRst.BIGFILE;
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
             {

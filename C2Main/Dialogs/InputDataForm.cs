@@ -121,8 +121,8 @@ namespace C2.Dialogs
                 else
                     this.extType = OpUtil.ExtType.Text;
 
-                bool success = BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
-                if (!success)
+                ReadRst rrst = BCPBuffer.GetInstance().TryLoadFile(fullFilePath, extType, encoding, separator);
+                if (rrst.ReturnCode != 0)
                     return;
                 if (BCPBuffer.GetInstance().IsEmptyHeader(this.fullFilePath))
                 {
@@ -196,10 +196,11 @@ namespace C2.Dialogs
 
         private void PreviewExcelFileNew()
         {
-            this.Cursor = Cursors.WaitCursor;
-            bool isReadSucc = BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
-            this.Cursor = Cursors.Default;
-            if (!isReadSucc)
+            ReadRst rrst = ReadRst.OK;
+            using (GuarderUtil.WaitCursor)
+                rrst = BCPBuffer.GetInstance().TryLoadFile(fullFilePath, extType, encoding, separator);
+
+            if (rrst.ReturnCode != 0)
                 return;
             List<List<String>> rowContentList = StringTo2DList(BCPBuffer.GetInstance().GetCachePreviewExcelContent(this.fullFilePath), '\t');
             if (rowContentList.Count == 0)
