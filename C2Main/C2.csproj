@@ -180,6 +180,7 @@
     <Compile Include="Business\IAOLab\WifiMac\WifiMac.cs" />
     <Compile Include="Business\Model\ExportModel.cs" />
     <Compile Include="Business\Model\ImportModel.cs" />
+    <Compile Include="Business\Model\ImportWordFile.cs" />
     <Compile Include="Business\Model\ModelInfo.cs" />
     <Compile Include="Business\Model\World\WorldMap.cs" />
     <Compile Include="Business\Option\BcpInfo.cs" />
