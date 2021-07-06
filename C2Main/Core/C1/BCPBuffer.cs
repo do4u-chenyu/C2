@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Core
@@ -125,7 +124,7 @@ namespace C2.Core
                 return ReadRst.OK;
 
             ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
-            if (rrst.ReturnCode < 0 || rrst.ReturnCode == 0 && rrst.Result.Count == 0)
+            if (rrst.ReturnCode != 0 || rrst.Result.Count == 0)
                 return rrst;
        
             List<List<string>> rowContentList = rrst.Result;
@@ -147,7 +146,7 @@ namespace C2.Core
         private ReadRst PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
         {
             if (!File.Exists(fullFilePath))
-                return new ReadRst(new List<List<string>>(), -1, string.Format("文件不存在 {0}", fullFilePath));
+                return ReadRst.NotExists(fullFilePath);
 
 
             StreamReader sr = null;
@@ -170,8 +169,8 @@ namespace C2.Core
             }
             catch (Exception e)
             {
-                log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
-                return new ReadRst(new List<List<string>>(), -5, "BCPBuffer 预加载BCP文件出错: " + e.ToString());
+                String message = String.Format("BCPBuffer 预加载 {0} 文件出错 : {1}", fullFilePath, e.Message);
+                return ReadRst.PreloadBcpError(message);
             }
             finally
             {
@@ -247,30 +246,30 @@ namespace C2.Core
         }
         public ReadRst TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
-            ReadRst returnVar = ReadRst.OK;
+            ReadRst rrst = ReadRst.OK;
 
             // 超过100M Excel不处理
             if (IsBigFile(fullFilePath))
-                return ReadRst.BIGFILE;
+                return ReadRst.BigFile(fullFilePath);
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
             {
                 IsUpdateCache(extType, fullFilePath);
-                return returnVar;
+                return rrst;
             }             
             switch (extType)
             {
                 case OpUtil.ExtType.Excel:
-                    returnVar = PreLoadExcelFileNew(fullFilePath);
+                    rrst = PreLoadExcelFileNew(fullFilePath);
                     break;
                 case OpUtil.ExtType.Text:
-                    returnVar = PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
+                    rrst = PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
                     break;
                 case OpUtil.ExtType.Unknow:
                 default:
                     break;
             }
-            return returnVar;
+            return rrst;
         }
 
         private bool HitCache(string fullFilePath)

@@ -15,29 +15,68 @@ using System.Windows.Forms;
 
 namespace C2.Utils
 {
-    class ReadRst
+    struct ReadRst
     {
-        public List<List<string>> Result { get; }
-        public int ReturnCode { get; }
-        public string Msg { get; }
+        const int RT_SUCC      = 0;
+        const int RT_NOTEXISTS = -1;
+        const int RT_INUSE     = -2;
+        const int RT_XLSERROR  = -3;
+        const int RT_BIGFILE   = -4;
+        const int RT_PRELOADBCPERROR = -5;
+        const int RT_NOHEAD    = -6;
 
-        public ReadRst(List<List<string>> rst , int rtc, string m)
+        public List<List<String>> Result { get; }
+        public int ReturnCode { get; }
+        public String Msg { get; }
+
+        public ReadRst(List<List<String>> rst , int returnCode, String msg)
         {
             Result = rst;
-            ReturnCode = rtc;
-            Msg = m;
+            ReturnCode = returnCode;
+            Msg = msg;
         }
 
-        public static readonly ReadRst OK = new ReadRst(new List<List<string>>(), 0, String.Empty);
-        public static readonly ReadRst BIGFILE = new ReadRst(new List<List<string>>(), -4, "文件太大,超过100M的处理上限。");
+        public ReadRst(List<List<String>> rst) : this(rst, RT_SUCC, String.Empty)
+        { }
+        public ReadRst(int returnCode, String msg) : this(new List<List<String>>(), returnCode, msg)
+        { }
+
+        public static readonly ReadRst OK = new ReadRst(RT_SUCC, String.Empty);
+        public static ReadRst BigFile(String ffp = "") 
+        {
+            return new ReadRst(RT_BIGFILE, String.Format("{0} 文件太大,超过100M的处理上限", ffp));
+        }
+        public static ReadRst NotExists(String ffp = "")
+        {
+            return new ReadRst(RT_NOTEXISTS, String.Format("{0} 文件不存在", ffp));
+        }
+        public static ReadRst PreloadBcpError(String msg)
+        {
+            return new ReadRst(RT_PRELOADBCPERROR, msg);
+        }
+
+        public static ReadRst FileEmptyOrInUse(String ffp = "")
+        {
+            return new ReadRst(RT_INUSE, String.Format("空文件或者已被其他应用打开 {0}", ffp));
+        }
+
+        public static ReadRst XLSError(String ffp = "", String errorMessage = "")
+        {
+            return new ReadRst(RT_XLSERROR, String.Format("加载 Excel {0} 失败 : {1}", ffp, errorMessage));
+        }
+        public static ReadRst NoHead(String ffp)
+        {
+            return new ReadRst(RT_NOHEAD, String.Format("xls文件没有表头，需添加表头以标定数据列 {0}", ffp));
+        }
+
     }
     class FileUtil
     {
-        private static LogUtil log = LogUtil.GetInstance("FileUtil");
-        private static Crc32 crc32 = new Crc32();
-        public static void AddPathPower(string pathName, string power)
+        private static readonly LogUtil log = LogUtil.GetInstance("FileUtil");
+        private static readonly Crc32 crc32 = new Crc32();
+        public static void AddPathPower(String pathName, String power)
         {
-            string userName = Environment.UserName;
+            String userName = Environment.UserName;
             DirectoryInfo dirInfo = new DirectoryInfo(pathName);
 
             if ((dirInfo.Attributes & FileAttributes.ReadOnly) != 0)
@@ -93,14 +132,14 @@ namespace C2.Utils
 
         // 实践中发现复制粘贴板有时会出异常
         // 非核心功能,捕捉异常忽略之
-        public static bool TryClipboardSetText(string text)
+        public static bool TryClipboardSetText(String text)
         {
             bool ret = true;
             try { Clipboard.SetText(text); }
             catch { ret = false; }
             return ret;
         }
-        public static void ExploreDirectory(string fullFilePath)
+        public static void ExploreDirectory(String fullFilePath)
         {//判断文件的存在
             if (File.Exists(fullFilePath))
             {
@@ -115,7 +154,7 @@ namespace C2.Utils
             
         }
 
-        public static void TryExploreDirectory(string fullFilePath)
+        public static void TryExploreDirectory(String fullFilePath)
         {
             try
             {
@@ -132,7 +171,7 @@ namespace C2.Utils
                 FileUtil.AnotherOpenFilePathMethod(fullFilePath);
             }
         }
-        public static long TryGetFileSize(string fullFilePath, int failCode = -1)
+        public static long TryGetFileSize(String fullFilePath, int failCode = -1)
         {
             try
             {
@@ -144,7 +183,7 @@ namespace C2.Utils
             }
             
         }
-        private static void AnotherOpenFilePathMethod(string fullFilePath)
+        private static void AnotherOpenFilePathMethod(String fullFilePath)
         {
             try
             {
@@ -172,7 +211,7 @@ namespace C2.Utils
             return true;
         }
 
-        public static bool DeleteFile(string filePath)
+        public static bool DeleteFile(String filePath)
         {
             try
             {
@@ -185,7 +224,7 @@ namespace C2.Utils
             }
         }
 
-        public static void DeleteDirectory(string directoryPath)
+        public static void DeleteDirectory(String directoryPath)
         {
             try
             {
@@ -197,7 +236,7 @@ namespace C2.Utils
             }
         }
 
-        public static bool CreateDirectory(string dicectoryPath)
+        public static bool CreateDirectory(String dicectoryPath)
         {
             bool ret = true;
             try
@@ -208,7 +247,7 @@ namespace C2.Utils
             return ret;
         }
 
-        public static bool CopyDirectory(string sourcePath, string destinationPath, bool overwriteexisting)
+        public static bool CopyDirectory(String sourcePath, String destinationPath, bool overwriteexisting)
         {
             bool ret = false;
             try
@@ -221,12 +260,12 @@ namespace C2.Utils
                     if (Directory.Exists(destinationPath) == false)
                         Directory.CreateDirectory(destinationPath);
 
-                    foreach (string fls in Directory.GetFiles(sourcePath))
+                    foreach (String fls in Directory.GetFiles(sourcePath))
                     {
                         FileInfo flinfo = new FileInfo(fls);
                         flinfo.CopyTo(destinationPath + flinfo.Name, overwriteexisting);
                     }
-                    foreach (string drs in Directory.GetDirectories(sourcePath))
+                    foreach (String drs in Directory.GetDirectories(sourcePath))
                     {
                         DirectoryInfo drinfo = new DirectoryInfo(drs);
                         if (CopyDirectory(drs, destinationPath + drinfo.Name, overwriteexisting) == false)
@@ -242,7 +281,7 @@ namespace C2.Utils
             return ret;
         }
 
-        public static bool FileMove(string oldFFP, string newFFP)
+        public static bool FileMove(String oldFFP, String newFFP)
         {
             bool ret = true;
             try
@@ -253,7 +292,7 @@ namespace C2.Utils
             return ret;
         }
 
-        public static bool DirecotryMove(string oldDirectory, string newDirectory)
+        public static bool DirecotryMove(String oldDirectory, String newDirectory)
         {
             bool ret = true;
             try
@@ -264,9 +303,9 @@ namespace C2.Utils
             return ret;
         }
 
-        public static string TryGetPathRoot(string path)
+        public static String TryGetPathRoot(String path)
         {
-            string root;
+            String root;
             try
             {
                 root = Path.GetPathRoot(path);
@@ -278,16 +317,16 @@ namespace C2.Utils
             return root;
         }
 
-        public static string TryGetSysTempDir()
+        public static String TryGetSysTempDir()
         {
-            string tempDir;
+            String tempDir;
             try
             {
                 tempDir = Path.GetTempPath();
             }
             catch (System.Security.SecurityException)
             {
-                tempDir = string.Empty;
+                tempDir = String.Empty;
             }
             return tempDir;
         }
@@ -341,15 +380,9 @@ namespace C2.Utils
         {
             FileStream fs = null;
             List<List<string>> rst = new List<List<string>>();
-            int returnCode = 0;
-            string errMsg = String.Empty;
+
             if (!File.Exists(fullFilePath))
-            {
-                returnCode = -1;
-                errMsg = string.Format("文件不存在 {0}", fullFilePath);
-                log.Error(errMsg);
-                return new ReadRst(rst, returnCode, errMsg);
-            }
+                return ReadRst.NotExists(fullFilePath);
 
             try
             {
@@ -371,7 +404,7 @@ namespace C2.Utils
                         if (worksheet == null)
                         {
                             fs.Close();
-                            return new ReadRst(rst, 0, String.Empty);
+                            return ReadRst.OK;
                         }
                         int rowCount = worksheet.Dimension.End.Row;
                         int colCount = worksheet.Dimension.End.Column;
@@ -379,11 +412,11 @@ namespace C2.Utils
                         //遍历单元格赋值
                         for (int row = 1; row <= Math.Min(maxRow, rowCount); row++)
                         {
-                            List<string> tmpRowValueList = new List<string>();
+                            List<String> tmpRowValueList = new List<String>();
                             for (int col = 1; col <= colCount; col++)
                             {
                                 ExcelRange cell = worksheet.Cells[row, col];
-                                string unit = ExcelUtil.GetCellValue(cell).Replace(OpUtil.LineSeparator, OpUtil.Blank);
+                                String unit = ExcelUtil.GetCellValue(cell).Replace(OpUtil.LineSeparator, OpUtil.Blank);
                                 tmpRowValueList.Add(unit);
                             }
                             rst.Add(tmpRowValueList);
@@ -397,32 +430,28 @@ namespace C2.Utils
                     if (sheet == null)
                     {
                         fs.Close();
-                        return new ReadRst(rst, 0, String.Empty); ;
+                        return ReadRst.OK;
                     }
                     IRow firstRow = sheet.GetRow(0);
                     if (firstRow == null)
-                    {
-                        returnCode = -1;
-                        errMsg = "不支持没有表头的xls文件，请给文件添加表头";
-                        log.Error(errMsg);
-                        return new ReadRst(rst, returnCode, errMsg);
-                    }
+                        return ReadRst.NoHead(fullFilePath);
+                 
                     int rowCount = sheet.LastRowNum + 1;
                     int cellCount = firstRow is null ? 1 : firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
 
                     for (int i = 0; i < Math.Min(maxRow + 1, rowCount); i++)
                     {
-                        List<string> tmpRowValueList = new List<string>();
+                        List<String> tmpRowValueList = new List<String>();
                         for (int j = 0; j < cellCount; j++)
                         {
                             if (sheet.GetRow(i) == null || sheet.GetRow(i).GetCell(j) == null) //同理，没有数据的单元格都默认是null
                             {
-                                tmpRowValueList.Add(string.Empty);
+                                tmpRowValueList.Add(String.Empty);
                             }
                             else
                             {
                                 ICell cell = sheet.GetRow(i).GetCell(j);
-                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace(OpUtil.LineSeparator, OpUtil.Blank);
+                                String unit = ExcelUtil.GetCellValue(workbook, cell).Replace(OpUtil.LineSeparator, OpUtil.Blank);
                                 tmpRowValueList.Add(unit);
                             }
                         }
@@ -432,15 +461,11 @@ namespace C2.Utils
             }
             catch (IOException)
             {
-                returnCode = -2;
-                errMsg = string.Format("空文件或者已被其他应用打开 {0}", fullFilePath);
-                log.Error(errMsg);
+                return ReadRst.FileEmptyOrInUse(fullFilePath);
             }
             catch (Exception ex)
             {
-                returnCode = -3;
-                errMsg = "预读Excel: " + fullFilePath + " 失败, error: " + ex.Message;
-                log.Error(errMsg);
+                return ReadRst.XLSError(fullFilePath, ex.Message);
             }
             finally
             {
@@ -448,9 +473,9 @@ namespace C2.Utils
                     fs.Close();
             }
 
-            return new ReadRst(rst, returnCode, errMsg);
+            return new ReadRst(rst);
         }
-        public static List<List<string>> FormatDatas(List<List<string>> datas, int maxNumOfRow)
+        public static List<List<String>> FormatDatas(List<List<String>> datas, int maxNumOfRow)
         {
             /*
              *  返回一个maxNumOfRow长的二维数组
@@ -460,15 +485,15 @@ namespace C2.Utils
              */
             if (datas.Count == 0)
             {
-                List<List<string>> result = new List<List<string>>();
+                List<List<String>> result = new List<List<String>>();
                 for (int i = 0; i < maxNumOfRow; i++)
                 {
-                    result.Add(new List<string> { String.Empty });
+                    result.Add(new List<String> { String.Empty });
                 }
                 return result;
             }
             int maxNumOfCol = 0;
-            List<string> blankRow = new List<string> { };
+            List<String> blankRow = new List<String> { };
             for (int i = 0; i < datas.Count; i++)
                 maxNumOfCol = Math.Max(datas[i].Count, maxNumOfCol);
             for (int i = 0; i < maxNumOfCol; i++)
@@ -488,10 +513,10 @@ namespace C2.Utils
             return datas;
         }
 
-        public static bool IsContainIllegalCharacters(string userName, string target, bool isShowMsg=true)
+        public static bool IsContainIllegalCharacters(String userName, String target, bool isShowMsg=true)
         {
-            string[] illegalCharacters = new string[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
-            foreach (string character in illegalCharacters)
+            String[] illegalCharacters = new String[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
+            foreach (String character in illegalCharacters)
             {
                 if (userName.Contains(character))
                 {
@@ -502,9 +527,9 @@ namespace C2.Utils
             }
             return false;
         }
-        public static string ReName(string name,int maxLen=10)
+        public static String ReName(String name,int maxLen=10)
         {
-            string newName;
+            String newName;
             int maxLength = maxLen;
 
             if (name.Length <= maxLength)
