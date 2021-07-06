@@ -27,13 +27,13 @@ namespace C2.Utils
 
         public List<List<String>> Result { get; }
         public int ReturnCode { get; }
-        public String Msg { get; }
+        public String Message { get; }
 
         public ReadRst(List<List<String>> rst , int returnCode, String msg)
         {
             Result = rst;
             ReturnCode = returnCode;
-            Msg = msg;
+            Message = msg;
         }
 
         public ReadRst(List<List<String>> rst) : this(rst, RT_SUCC, String.Empty)

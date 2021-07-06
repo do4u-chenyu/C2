@@ -13,20 +13,20 @@ namespace C2.Dialogs
     public delegate void DelegateInputData(string name, string filePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding);
     public partial class InputDataForm : Form
     {
-        private static LogUtil log = LogUtil.GetInstance("InputDataForm"); // 获取日志模块
+        private static readonly LogUtil log = LogUtil.GetInstance("InputDataForm"); // 获取日志模块
         private OpUtil.Encoding encoding = OpUtil.Encoding.GBK;
         private OpUtil.ExtType extType = OpUtil.ExtType.Unknow;
         private string fullFilePath;
-        private int maxNumOfRow = 100;
-        private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
-        private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
+        private readonly int maxNumOfRow = 100;
+        private readonly Font boldFont = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
+        private readonly Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private char separator = '\t';
 
-        private string invalidChars = "&\"' ";
+        private readonly string invalidChars = "&\"' ";
         private string invalidCharsPattern;
         private string[] invalidStringArr;
 
-        private char emptySep = '\0';
+        private readonly char emptySep = '\0';
 
         public InputDataForm()
         {
@@ -39,7 +39,7 @@ namespace C2.Dialogs
         public void ReSetParams()
         {
             this.encoding = OpUtil.Encoding.GBK;
-            this.gbkLable.Font = bold_font;
+            this.gbkLable.Font = boldFont;
             this.utf8Lable.Font = font;
 
             this.radioButton1.Checked = true;
@@ -123,7 +123,11 @@ namespace C2.Dialogs
 
                 ReadRst rrst = BCPBuffer.GetInstance().TryLoadFile(fullFilePath, extType, encoding, separator);
                 if (rrst.ReturnCode != 0)
+                {
+                    HelpUtil.ShowMessageBox(rrst.Message);
                     return;
+                }
+                    
                 if (BCPBuffer.GetInstance().IsEmptyHeader(this.fullFilePath))
                 {
                     BCPBuffer.GetInstance().Remove(this.fullFilePath);
@@ -164,7 +168,7 @@ namespace C2.Dialogs
             if (this.extType == OpUtil.ExtType.Text)
             {
                 this.gbkLable.Font = font;
-                this.utf8Lable.Font = bold_font;
+                this.utf8Lable.Font = boldFont;
                 this.encoding = OpUtil.Encoding.UTF8;
                 PreviewBcpFile();
             }
@@ -201,7 +205,11 @@ namespace C2.Dialogs
                 rrst = BCPBuffer.GetInstance().TryLoadFile(fullFilePath, extType, encoding, separator);
 
             if (rrst.ReturnCode != 0)
+            {
+                HelpUtil.ShowMessageBox(rrst.Message);
                 return;
+            }
+                
             List<List<String>> rowContentList = StringTo2DList(BCPBuffer.GetInstance().GetCachePreviewExcelContent(this.fullFilePath), '\t');
             if (rowContentList.Count == 0)
             {
@@ -257,7 +265,7 @@ namespace C2.Dialogs
         {
             if (this.extType == OpUtil.ExtType.Text)
             {
-                this.gbkLable.Font = bold_font;
+                this.gbkLable.Font = boldFont;
                 this.utf8Lable.Font = font;
                 this.encoding = OpUtil.Encoding.GBK;
                 PreviewBcpFile();
