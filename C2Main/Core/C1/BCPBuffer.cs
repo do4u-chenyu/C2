@@ -124,7 +124,7 @@ namespace C2.Core
                 return ReadRst.OK;
 
             ReadRst rrst = FileUtil.ReadExcel(fullFilePath, maxRow);
-            if (rrst.ReturnCode != 0 | rrst.Result.Count == 0)
+            if (rrst.ReturnCode != 0 || rrst.Result.Count == 0)
                 return rrst;
        
             List<List<string>> rowContentList = rrst.Result;

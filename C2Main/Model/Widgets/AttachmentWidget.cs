@@ -63,12 +63,12 @@ namespace C2.Model.Widgets
 
         public static void DoOpenAttachment(string ffp)
         {
-            string[] ex = { ".doc", ".docx", ".xlsx", ".xls", ".pdf", ".xmind", ".txt", ".png", ".jpg" };
+            string[] ext = { ".doc", ".docx", ".xlsx", ".xls", ".pdf", ".xmind", ".txt", ".png", ".jpg" };
 
             if (File.Exists(ffp))
             {
 
-                if (Array.IndexOf(ex, Path.GetExtension(ffp)) == -1)
+                if (Array.IndexOf(ext, Path.GetExtension(ffp)) == -1)
                 {
                     FileUtil.ExploreDirectory(ffp);
                 }
