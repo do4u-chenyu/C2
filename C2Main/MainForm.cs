@@ -456,6 +456,10 @@ namespace C2
             DocumentForm form = new DocumentForm(doc);
             ShowForm(form);
         }
+        public void ShowFormWord(DocumentForm form) 
+        {
+            ShowForm(form);
+        }
         private void NewCanvasForm()
         {
             ModelDocument doc = new ModelDocument("运算视图", this.UserName);
@@ -513,7 +517,10 @@ namespace C2
             StartForm form = new StartForm();
             ShowForm(form, true, false);
         }
-        
+        public  Document CreateNewMapForWord(string templateName) 
+        {
+            return CreateNewMap(templateName);
+        }
         Document CreateNewMap(string templateName)
         {
             Document doc = LoadDocumentTemplate(templateName);

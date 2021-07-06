@@ -3,6 +3,7 @@ using C2.Core;
 using C2.Dialogs;
 using C2.Utils;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Controls.Left
@@ -101,6 +102,11 @@ namespace C2.Controls.Left
             {
                 string fullFilePath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
+                if (Path.GetExtension(fullFilePath) == ".doc" || Path.GetExtension(fullFilePath) == ".docx")
+                {
+                    ImportWordFile.GetInstance().Import(fullFilePath);
+                    return;
+                }
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
                     HelpUtil.ShowMessageBox("导入成功");
             }
