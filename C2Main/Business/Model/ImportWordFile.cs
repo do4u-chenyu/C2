@@ -35,28 +35,28 @@ namespace C2.Business.Model
             NodeCollection paragraphs = doc.GetChildNodes(NodeType.Paragraph, true);
             foreach (Paragraph paragraph in paragraphs)
             {
-                if (paragraph.ParagraphFormat.Style.Name == "标题 1")
+                if (paragraph.ParagraphFormat.Style.StyleIdentifier == StyleIdentifier.Heading1)
                 {
                     List<string> titleInfo = new List<string>();
                     titleInfo.Add(paragraph.Range.Text);
                     titleInfo.Add("1");
                     titles.Add(titleInfo);
                 }
-                if (paragraph.ParagraphFormat.Style.Name == "标题 2")
+                if (paragraph.ParagraphFormat.Style.StyleIdentifier == StyleIdentifier.Heading2)
                 {
                     List<string> titleInfo = new List<string>();
                     titleInfo.Add(paragraph.Range.Text);
                     titleInfo.Add("2");
                     titles.Add(titleInfo);
                 }
-                if (paragraph.ParagraphFormat.Style.Name == "标题 3")
+                if (paragraph.ParagraphFormat.Style.StyleIdentifier == StyleIdentifier.Heading3)
                 {
                     List<string> titleInfo = new List<string>();
                     titleInfo.Add(paragraph.Range.Text);
                     titleInfo.Add("3");
                     titles.Add(titleInfo);
                 }
-                if (paragraph.ParagraphFormat.Style.Name == "标题 4")
+                if (paragraph.ParagraphFormat.Style.StyleIdentifier == StyleIdentifier.Heading4)
                 {
                     List<string> titleInfo = new List<string>();
                     titleInfo.Add(paragraph.Range.Text);
@@ -86,22 +86,22 @@ namespace C2.Business.Model
             topic.Text = titles[j + 1][0];
             if (int.Parse(titles[j + 1][1]) > int.Parse(titles[j][1])) 
             { 
-                lastTopic.Children.Insert(0, topic);
+                lastTopic.Children.Insert(lastTopic.Children.Count, topic);
                
             }
             if (int.Parse(titles[j + 1][1]) == int.Parse(titles[j][1]))
             {
-                lastTopic.ParentTopic.Children.Insert(0, topic);
+                lastTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.Children.Count, topic);
 
             }
             if (int.Parse(titles[j + 1][1]) - int.Parse(titles[j][1]) == -1)
             {
-                lastTopic.ParentTopic.ParentTopic.Children.Insert(0, topic);
+                lastTopic.ParentTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.ParentTopic.Children.Count, topic);
 
             }
             if (int.Parse(titles[j + 1][1]) - int.Parse(titles[j][1]) == -2)
             {
-                lastTopic.ParentTopic.ParentTopic.ParentTopic.Children.Insert(0, topic);
+                lastTopic.ParentTopic.ParentTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.ParentTopic.ParentTopic.Children.Count, topic);
 
             }
             j++;
