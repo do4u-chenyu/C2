@@ -63,8 +63,18 @@ namespace C2.Model.Widgets
 
         public static void DoOpenAttachment(string ffp)
         {
-            if(File.Exists(ffp))
-                ProcessUtil.ProcessOpen(ffp);
+            string[] ex = { ".doc", ".docx", ".xlsx", ".xls", ".pdf", ".xmind", ".txt", ".png", ".jpg" };
+
+            if (File.Exists(ffp))
+            {
+
+                if (Array.IndexOf(ex, Path.GetExtension(ffp)) == -1)
+                {
+                    FileUtil.ExploreDirectory(ffp);
+                }
+                else
+                    ProcessUtil.ProcessOpen(ffp);
+            }
             else
                 HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
         }

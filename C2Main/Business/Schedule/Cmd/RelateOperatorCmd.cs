@@ -35,7 +35,7 @@ namespace C2.Business.Schedule.Cmd
 
             ReWriteBCPFile("relate");
 
-            cmds.Add(string.Format("sbin\\relate.exe {0} {1} {2} {3} {4} {5} {6} {7} {8}| sbin\\iconv.exe -f gbk -t utf-8  -c>> {9}",
+            cmds.Add(string.Format("sbin\\relate.exe {0} {1} {2} {3} {4} {5} {6} {7} {8}| sbin\\iconv.exe -f gbk -t utf-8  -c | sbin\\tr.exe -d '\\r'>> {9}",
                 inputFilePath1, inputFileEncoding1, inputFileSeparator1,
                 inputFilePath2, inputFileEncoding2, inputFileSeparator2,
                 outField1, outField2, relateOption, this.outputFilePath));
