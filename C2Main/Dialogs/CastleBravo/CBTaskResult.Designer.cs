@@ -96,11 +96,12 @@
             // 
             this.taskIdLabel.AutoSize = true;
             this.taskIdLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskIdLabel.Location = new System.Drawing.Point(161, 46);
+            this.taskIdLabel.Location = new System.Drawing.Point(161, 44);
             this.taskIdLabel.Name = "taskIdLabel";
             this.taskIdLabel.Size = new System.Drawing.Size(23, 19);
             this.taskIdLabel.TabIndex = 5;
             this.taskIdLabel.Text = "ID";
+            this.taskIdLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskIdLabel_MouseDoubleClick);
             // 
             // taskNameLabel
             // 

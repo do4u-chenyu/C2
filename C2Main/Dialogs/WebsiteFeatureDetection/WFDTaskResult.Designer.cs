@@ -265,6 +265,7 @@
             this.taskIDLabel.TabIndex = 10010;
             this.taskIDLabel.Text = "ID";
             this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.taskIDLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskIDLabel_MouseDoubleClick);
             // 
             // taskStatusLabel
             // 

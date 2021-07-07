@@ -369,5 +369,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //e.cancel为true表示取消关闭，为false表示可以关闭窗口
             e.Cancel = !CanFormClose();
         }
+
+        private void TaskIDLabel_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (FileUtil.TryClipboardSetText(TaskInfo.TaskID))
+                HelpUtil.ShowMessageBox(String.Format("已复制任务ID[{0}]到剪切板", TaskInfo.TaskID));
+        }
     }
 }

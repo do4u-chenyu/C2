@@ -182,5 +182,10 @@ namespace C2.Dialogs.CastleBravo
                 HelpUtil.ShowMessageBox("该文件不存在。", "提示");
         }
 
+        private void TaskIdLabel_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (FileUtil.TryClipboardSetText(TaskInfo.TaskID))
+                HelpUtil.ShowMessageBox(String.Format("已复制任务ID[{0}]到剪切板", TaskInfo.TaskID));
+        }
     }
 }
