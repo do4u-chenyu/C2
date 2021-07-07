@@ -576,16 +576,16 @@ namespace C2.Utils
             }
             try
             {
-                headers = new List<string>(sr.ReadLine().Split(separator));
+                String line = sr.ReadLine();
+                headers = line == null ? new List<String> () : line.Split(separator).ToList();
                 for (int rowIndex = 1; rowIndex < maxNumOfRow && !sr.EndOfStream; rowIndex++)
                 {
-                    String line = sr.ReadLine();
+                    line = sr.ReadLine();
                     if (line == null)
                         break;
                     String[] elements = line.Split(separator);
-                    if (elements.Length > maxColsNum)
-                        maxColsNum = elements.Length;
-                    rows.Add(new List<string>(elements));
+                    maxColsNum = Math.Max(elements.Length, maxColsNum);
+                    rows.Add(elements.ToList());
                 }
                 for (int headersColNum = headers.Count; headersColNum < maxColsNum; headersColNum++)
                     headers.Add(String.Empty);
