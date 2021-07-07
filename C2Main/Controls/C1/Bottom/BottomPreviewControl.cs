@@ -28,53 +28,43 @@ namespace C2.Controls.Bottom
             List<string> headers = datas[0];
             int numOfCols = headers.Count;
             for (int i = 0; i < maxNumOfRows; i++)
-                datas.Add(new List<string>() { String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty });
+                datas.Add(new List<string>(5));
 
             InitializeDGV(datas, headers, numOfCols);
             
         }
         private void InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
         {
-            DataTable table = new DataTable();
-            DataRow row;
-            DataView view;
             DataColumn[] cols = new DataColumn[numOfCol];
-            Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
-            string headerText;
-            char[] seperator = new char[] { '_' };
+            Dictionary<string, int> induplicatedName = new Dictionary<string, int>();
 
             // 可能有同名列，这里需要重命名一下
             for (int i = 0; i < numOfCol; i++)
             {
                 cols[i] = new DataColumn();
-                headerText = headers[i];
-                if (!induplicatedName.ContainsKey(headerText))
-                    induplicatedName.Add(headerText, 0);
+                string headerText = headers[i];
+                if (induplicatedName.ContainsKey(headerText))
+                    induplicatedName[headerText]++;
                 else
-                {
-                    induplicatedName[headerText] += 1;
-                    induplicatedName[headerText] = induplicatedName[headerText];
-                }
-                headerText = induplicatedName[headerText] + "_" + headerText;
-                cols[i].ColumnName = headerText;
+                    induplicatedName[headerText] = 0;
+
+                cols[i].ColumnName = induplicatedName[headerText] + "_" + headerText;
             }
 
+            DataTable table = new DataTable();
             table.Columns.AddRange(cols);
 
             for (int rowIndex = 1; rowIndex < Math.Min(maxNumOfRows, datas.Count - 1); rowIndex++)
             {
-                List<String> eles = datas[rowIndex];
-                if (eles == null)
+                List<String> elements = datas[rowIndex];
+                if (elements == null)
                     continue;
-                row = table.NewRow();
-                for (int colIndex = 0; colIndex < Math.Min(numOfCol, eles.Count); colIndex++)
-                {
-                    row[colIndex] = eles[colIndex];
-                }
+                DataRow row = table.NewRow();
+                for (int colIndex = 0; colIndex < Math.Min(numOfCol, elements.Count); colIndex++)
+                    row[colIndex] = elements[colIndex];
                 table.Rows.Add(row);
             }
-            view = new DataView(table);
-            this.dataGridView.DataSource = view;
+            this.dataGridView.DataSource = new DataView(table);
             DgvUtil.ResetColumnsWidth(this.dataGridView);
 
             // 取消重命名
@@ -82,7 +72,7 @@ namespace C2.Controls.Bottom
             {
                 try
                 {
-                    this.dataGridView.Columns[i].HeaderText = this.dataGridView.Columns[i].Name.Split(seperator, 2)[1];
+                    this.dataGridView.Columns[i].HeaderText = this.dataGridView.Columns[i].Name.Split(new char[] { '_' }, 2)[1];
                 }
                 catch
                 {
@@ -99,6 +89,7 @@ namespace C2.Controls.Bottom
             this.dataGridView.RowHeadersWidth = 28;
             this.dataGridView.EnableHeadersVisualStyles = true;
             this.dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.BackgroundColor = Color.FromArgb(230, 237, 246);
         }
         
         public void PreViewDataByFullFilePath(string fullFilePath,
