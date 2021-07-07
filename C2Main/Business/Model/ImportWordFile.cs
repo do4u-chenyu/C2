@@ -71,6 +71,7 @@ namespace C2.Business.Model
         {
             string name = Path.GetFileNameWithoutExtension(path);
             C2.Model.Documents.Document doc = Global.GetMainForm().CreateNewMapForWord(name);
+            doc.FileName = name;
             DocumentForm form = new DocumentForm(doc);
             Global.GetMainForm().ShowFormWord(form);
             MindMap mindMap = form.ActivedChartPage.Chart as MindMap;

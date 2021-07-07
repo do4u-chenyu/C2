@@ -889,7 +889,7 @@ namespace C2.ChartPageView
         {
             Global.GetDocumentForm().Save();
             var dialog = new SaveFileDialog();
-            dialog.Filter = "Word(*.Docx) | *.Docx";
+            dialog.Filter = "Word(*.docx) | *.docx";
             dialog.Title = Lang._("Export");
             dialog.FileName = ST.EscapeFileName(this.Chart.Document.Name);
             if (dialog.ShowDialog(Global.GetMainForm()) == DialogResult.OK)
