@@ -17,8 +17,9 @@ namespace C2.Business.CastleBravo
         private static readonly Dictionary<String, String> MD5ModelTable = new Dictionary<String, String>
         {
             ["btpwd"]     = "宝塔面板",
-            ["md5md5"]    = "md5(md5($pass))",
-            ["md5md5md5"] = "md5(md5(md5($pass)))"
+            ["md5"]       = "MD5",
+            ["md5md5"]    = "MD5(MD5($pass))",
+            ["md5md5md5"] = "MD5(MD5(MD5($pass)))"
         };
 
         public static readonly CastleBravoTaskInfo Empty = new CastleBravoTaskInfo();
