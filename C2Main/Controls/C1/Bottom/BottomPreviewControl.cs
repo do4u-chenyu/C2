@@ -15,11 +15,11 @@ namespace C2.Controls.Bottom
         public BottomPreviewControl()
         {
             InitializeComponent();
-            this.dataGridView.DoubleBuffered(true);
-            InitializeDgv();
+            InitializeDataGridView();
+            InitializeDataGridViewStyle();
         }
 
-        private void InitializeDgv()
+        private void InitializeDataGridView()
         {
             List<List<string>> datas = new List<List<string>>
             {
@@ -31,7 +31,7 @@ namespace C2.Controls.Bottom
                 datas.Add(new List<string>() { String.Empty, String.Empty, String.Empty, String.Empty, String.Empty, String.Empty });
 
             InitializeDGV(datas, headers, numOfCols);
-            DgvUtil.DisableOrder(this.dataGridView);
+            
         }
         private void InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
         {
@@ -89,8 +89,18 @@ namespace C2.Controls.Bottom
                     this.dataGridView.Columns[i].HeaderText = this.dataGridView.Columns[i].Name;
                 }
             }
+            // 取消排序功能
+            DgvUtil.DisableOrder(this.dataGridView);
         }
 
+        private void InitializeDataGridViewStyle()
+        {
+            this.dataGridView.DoubleBuffered(true);
+            this.dataGridView.RowHeadersWidth = 28;
+            this.dataGridView.EnableHeadersVisualStyles = true;
+            this.dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+        
         public void PreViewDataByFullFilePath(string fullFilePath,
             char separator = '\t',
             OpUtil.ExtType extType = OpUtil.ExtType.Text,
