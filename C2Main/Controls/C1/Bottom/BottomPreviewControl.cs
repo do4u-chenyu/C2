@@ -86,10 +86,6 @@ namespace C2.Controls.Bottom
         private void InitializeDataGridViewStyle()
         {
             this.dataGridView.DoubleBuffered(true);
-            this.dataGridView.RowHeadersWidth = 28;
-            this.dataGridView.EnableHeadersVisualStyles = true;
-            this.dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.BackgroundColor = Color.FromArgb(230, 237, 246);
         }
         
         public void PreViewDataByFullFilePath(string fullFilePath,
