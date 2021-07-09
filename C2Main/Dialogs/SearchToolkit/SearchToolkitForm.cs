@@ -287,5 +287,11 @@ namespace C2.SearchToolkit
             else
                 HelpUtil.ShowMessageBox(validateMessage);
         }
+
+        private void Label4_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (FileUtil.TryClipboardSetText(this.remoteWorkspaceTB.Text))
+                HelpUtil.ShowMessageBox(String.Format("[{0}] 已复制到剪切板", this.remoteWorkspaceTB.Text));
+        }
     }
 }

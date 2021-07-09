@@ -304,9 +304,8 @@
             this.taskStatusLabel.ForeColor = System.Drawing.Color.DimGray;
             this.taskStatusLabel.Location = new System.Drawing.Point(66, 28);
             this.taskStatusLabel.Name = "taskStatusLabel";
-            this.taskStatusLabel.Size = new System.Drawing.Size(154, 36);
+            this.taskStatusLabel.Size = new System.Drawing.Size(0, 36);
             this.taskStatusLabel.TabIndex = 0;
-            this.taskStatusLabel.Text = "RUNNING";
             this.taskStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // taskNameTB
@@ -393,6 +392,7 @@
             this.label4.Size = new System.Drawing.Size(61, 19);
             this.label4.TabIndex = 35;
             this.label4.Text = "远程目录";
+            this.label4.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Label4_MouseDoubleClick);
             // 
             // panelCenter
             // 
