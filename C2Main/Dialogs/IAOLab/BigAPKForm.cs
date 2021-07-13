@@ -21,17 +21,16 @@ namespace C2.Dialogs.IAOLab
             IntPtr Hicon = global::C2.Properties.Resources.BigAPK.GetHicon();
             this.Icon = Icon.FromHandle(Hicon);
         }
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             string chromePath = GetChromePath();
-            if (!string.IsNullOrEmpty(chromePath))
-            {
-                System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:5147/APK/login/");
-            }
-            else
-                MessageBox.Show("未能找到chrome启动路径");
-
+            System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:5147/APK/login/");
             this.Close();
         }
 
@@ -59,6 +58,10 @@ namespace C2.Dialogs.IAOLab
                 }
             }
             return string.Empty;
+        }
+        private void BigAPKForm_Load(object sender, EventArgs e)
+        {
+            this.webBrowser1.Url = new System.Uri(" http://113.31.110.244:5147/APK/login/", System.UriKind.Absolute);
         }
     }
 }
