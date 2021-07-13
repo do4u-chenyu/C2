@@ -520,13 +520,13 @@ namespace C2
         public  Document CreateNewMapForWord(string templateName) 
         {
             return CreateNewMap(templateName);
-        }
+        }   
         Document CreateNewMap(string templateName)
         {
             Document doc = LoadDocumentTemplate(templateName);
             doc.Modified = true;
             return doc;
-        }
+        }    
         private Document LoadDocumentTemplate(string templateName)
         {
             Document doc;
@@ -550,7 +550,7 @@ namespace C2
             }
             return doc;
         }
-
+        
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
         {
             if (MyFindDialog == null || MyFindDialog.IsDisposed)
