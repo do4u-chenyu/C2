@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aspose.Words;
 using C2.Core;
+using C2.Dialogs;
 using C2.Forms;
 using C2.Model.MindMaps;
 
@@ -49,6 +50,8 @@ namespace C2.Business.Model
                 NodeCollection paragraphs = doc.GetChildNodes(NodeType.Paragraph, true);
                 foreach (Paragraph paragraph in paragraphs)
                 {
+                    if (paragraph.Range.Text == string.Empty)
+                        continue;
                     if (paragraph.ParagraphFormat.Style.StyleIdentifier == StyleIdentifier.Heading1)
                     {
                         List<string> titleInfo = new List<string>();
@@ -92,6 +95,9 @@ namespace C2.Business.Model
             if (titles.Count == 0)
                 return;
             string name = Path.GetFileNameWithoutExtension(path);
+            CreateNewModelForm createNewModelForm = new CreateNewModelForm();
+            if(createNewModelForm.CheckNameWord(name))
+                return;
             C2.Model.Documents.Document doc = Global.GetMainForm().CreateNewMapForWord(name);
             doc.FileName = name;
             DocumentForm form = new DocumentForm(doc);
@@ -127,17 +133,14 @@ namespace C2.Business.Model
             if (int.Parse(titles[j + 1][1]) > int.Parse(titles[j][1])) 
             { 
                 lastTopic.Children.Insert(lastTopic.Children.Count, topic);
-               
             }
             if (int.Parse(titles[j + 1][1]) == int.Parse(titles[j][1]))
             {
                 lastTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.Children.Count, topic);
-
             }
             if (int.Parse(titles[j + 1][1]) - int.Parse(titles[j][1]) == -1)
             {
                 lastTopic.ParentTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.ParentTopic.Children.Count, topic);
-
             }
             if (int.Parse(titles[j + 1][1]) - int.Parse(titles[j][1]) == -2)
             {
@@ -150,14 +153,7 @@ namespace C2.Business.Model
             j++;
             if (j + 1 < titles.Count())
             {
-                try
-                {
-                    CreatTopic(titles, topic, j);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                CreatTopic(titles, topic, j); 
             }
         }
     }

@@ -35,6 +35,7 @@ namespace C2.Model.MindMaps
         {
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.MoveToDocumentEnd();
+            builder.Writeln("");
             //builder.Font.Size = 10.5;
             ////builder.Font.Bold = true;
             //builder.Font.Name = "宋体";
@@ -45,7 +46,7 @@ namespace C2.Model.MindMaps
 
             builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
             builder.ParagraphFormat.FirstLineIndent = 21;
-            builder.Writeln(text);
+            builder.Write(text);
             builder.ParagraphFormat.FirstLineIndent = 0;
         }
         private Size RotateImageSize(int width, int height)
@@ -63,6 +64,7 @@ namespace C2.Model.MindMaps
             {
                 DocumentBuilder builder = new DocumentBuilder(docx);
                 builder.MoveToDocumentEnd();
+                builder.Writeln("");
                 builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["tips"];
 
                 int width = pictureWidget.Data.Width;
@@ -87,11 +89,23 @@ namespace C2.Model.MindMaps
             }
 
         }
-
-        private void WriteTitleToDocx(string title, Document docx, int layer, string serialNumber, StyleCollection styles)
+        private bool IsLast(Topic topic) 
+        { 
+            if(topic.Children.Count == 0) 
+            {
+                return true;
+            }
+            else 
+            { 
+                return false;
+            }
+        }
+        private void WriteTitleToDocx(string title, Document docx, Topic topic, string serialNumber, StyleCollection styles)
         {
+            int layer = topic.GetDepth(topic);
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.MoveToDocumentEnd();
+            builder.Writeln("");
             switch (layer)
             {
                 case 1:
@@ -107,7 +121,7 @@ namespace C2.Model.MindMaps
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["IAO正文"]);
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["tips"]);
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 1"];
-                    builder.Writeln(title);
+                    builder.Write(title);
                     break;
                 case 2:
 
@@ -118,7 +132,8 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.Font.Name = "黑体";
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 2"];
-                    builder.Writeln(string.Format("{0} {1}", serialNumber, title));
+
+                    builder.Write(string.Format("{0} {1}", serialNumber, title));
                     break;
                 case 3:
                     //builder.Font.Size = 14;
@@ -130,7 +145,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.LineSpacing = 18;
 
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 3"];
-                    builder.Writeln(string.Format("{0} {1}", serialNumber, title));
+                    builder.Write(string.Format("{0} {1}", serialNumber, title));
                     break;
                 case 4:
                     //builder.Font.Size = 10.5;
@@ -142,7 +157,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
 
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 4"];
-                    builder.Writeln(string.Format("{0} {1}", serialNumber, title));
+                    builder.Write(string.Format("{0} {1}", serialNumber, title));
                     break;
                 default:
                     //builder.Font.Size = 10.5;
@@ -154,7 +169,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 21;
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["IAO正文"]);
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
-                    builder.Writeln(title);
+                    builder.Write(title);
                     break;
             }
 
@@ -166,6 +181,7 @@ namespace C2.Model.MindMaps
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
             builder.MoveToDocumentEnd();
+            builder.Writeln("");
             int i = 0;
             foreach (var dataSource in dataSourceWidget.DataItems)
             {
@@ -214,6 +230,7 @@ namespace C2.Model.MindMaps
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
             builder.MoveToDocumentEnd();
+            builder.Writeln("");
             int i= 0;
             foreach (string path in attachmentWidget.AttachmentPaths) 
            {
@@ -385,7 +402,7 @@ namespace C2.Model.MindMaps
         {
             
             //写入标题
-            WriteTitleToDocx(topic.Text, docx, topic.GetDepth(topic), serialNumber, styles);
+            WriteTitleToDocx(topic.Text, docx, topic, serialNumber, styles);
 
             //在标题后写入内容
 
