@@ -14,6 +14,7 @@ namespace C2.Business.Model
 {
     public class ImportWordFile
     {
+        private int rootCount = 0;
         private static ImportWordFile ImportWordFileInstance;
         public static ImportWordFile GetInstance()
         {
@@ -22,6 +23,12 @@ namespace C2.Business.Model
                 ImportWordFileInstance = new ImportWordFile();
             }
             return ImportWordFileInstance;
+        }
+        private bool IsRoot() 
+        {
+            if (rootCount > 1)
+                return false;
+            return true;
         }
         public void Import(string path)
         {
@@ -48,6 +55,7 @@ namespace C2.Business.Model
                         titleInfo.Add(paragraph.Range.Text);
                         titleInfo.Add("1");
                         titles.Add(titleInfo);
+                        rootCount++;
                     }
                     if (paragraph.ParagraphFormat.Style.StyleIdentifier == StyleIdentifier.Heading2)
                     {
@@ -91,15 +99,25 @@ namespace C2.Business.Model
             MindMap mindMap = form.ActivedChartPage.Chart as MindMap;
             var root = mindMap.Root;
             root.Children.Remove(root.GetChildByText("子主题 1"));
-            if (titles[0][1] == "1")
+            if (titles[0][1] == "1" && IsRoot())
                 root.Text = titles[0][0];
             try
             {
-                CreatTopic(titles, root, 0);
+                if (IsRoot())
+                {
+                    CreatTopic(titles, root, 0);
+                }
+                else 
+                {
+                    Topic topic = new Topic();
+                    topic.Text = titles[0][0];
+                    root.Children.Insert(0, topic);
+                    CreatTopic(titles, topic, 0); 
+                }
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.Message,"ERROR");
+                MessageBox.Show(ex.Message,"文件格式不正确");
             }
         }
         private void CreatTopic(List<List<string>> titles, Topic lastTopic, int j) 
@@ -124,11 +142,23 @@ namespace C2.Business.Model
             if (int.Parse(titles[j + 1][1]) - int.Parse(titles[j][1]) == -2)
             {
                 lastTopic.ParentTopic.ParentTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.ParentTopic.ParentTopic.Children.Count, topic);
-
+            }
+            if (int.Parse(titles[j + 1][1]) - int.Parse(titles[j][1]) == -3)
+            {
+                lastTopic.ParentTopic.ParentTopic.ParentTopic.ParentTopic.Children.Insert(lastTopic.ParentTopic.ParentTopic.ParentTopic.ParentTopic.Children.Count, topic);
             }
             j++;
             if (j + 1 < titles.Count())
-                CreatTopic(titles, topic, j);
+            {
+                try
+                {
+                    CreatTopic(titles, topic, j);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
     }
 }
