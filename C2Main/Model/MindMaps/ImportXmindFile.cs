@@ -10,21 +10,16 @@ using System.Xml;
 
 namespace C2.Model.MindMaps
 {
-    public class C2File
+    public class ImportXmindFile
     {
-        private static C2File C2FileInstance;
-        public static C2File GetInstance()
+        private static ImportXmindFile C2FileInstance;
+        public static ImportXmindFile GetInstance()
         {
             if (C2FileInstance == null)
             {
-                C2FileInstance = new C2File();
+                C2FileInstance = new ImportXmindFile();
             }
             return C2FileInstance;
-        }
-
-        public void Import(string path)
-        {
-            LoadXml(path);
         }
 
         public void LoadXml(String path)
@@ -50,14 +45,15 @@ namespace C2.Model.MindMaps
             XmlNode firstTopic = sheet.SelectSingleNode("ns:topic", xmlns);
             String firstTitle = firstTopic["title"].InnerText;
 
-            XmlNodeList topicChildrenTopicsTopic = firstTopic.SelectNodes("ns:children/ns:topics/ns:topic", xmlns);
+            XmlNodeList searchTopic = firstTopic.SelectNodes("ns:children/ns:topics/ns:topic", xmlns);
 
             Topic xmlRoot = new Topic();
             xmlRoot.Text = firstTitle;
-            CreateC2(xmindName, xmlRoot, topicChildrenTopicsTopic, xmlns);
+            CreateC2(xmindName, xmlRoot, searchTopic, xmlns);
+            DeleteDir(tmpDir);
         }
 
-        public void CreateC2(string xmindName, Topic xmlRoot, XmlNodeList topicChildrenTopicsTopic, XmlNamespaceManager xmlns)
+        public void CreateC2(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns)
         {
             C2.Model.Documents.Document doc2 = Global.GetMainForm().CreateNewMapForWord(xmindName);
             doc2.FileName = xmindName;
@@ -68,14 +64,14 @@ namespace C2.Model.MindMaps
             mindMapRoot.Children.Remove(mindMapRoot.GetChildByText("子主题 1"));
             mindMapRoot.Text = xmlRoot.Text;
 
-            foreach (XmlNode node in topicChildrenTopicsTopic)
+            foreach (XmlNode node in SearchTopic)
             {
-                Topic xmlRoot2 = new Topic();
+                Topic newXmlRoot = new Topic();
                 String nodeTitle = node["title"].InnerText;
-                xmlRoot2.Text = nodeTitle;
+                newXmlRoot.Text = nodeTitle;
 
-                mindMapRoot.Children.Insert(mindMapRoot.Children.Count, xmlRoot2);
-                RecursionTopic(node, xmlRoot2, xmlns);
+                mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
+                RecursionTopic(node, newXmlRoot, xmlns);
             }
         }
 
@@ -90,6 +86,11 @@ namespace C2.Model.MindMaps
                 mindMap_root.Children.Insert(mindMap_root.Children.Count, xmlRoot);
                 RecursionTopic(nodeSingle, xmlRoot, xmlns);
             }
+        }
+
+        private void DeleteDir(string tmpDir)
+        {
+            FileUtil.DeleteDirectory(tmpDir);
         }
     }
 }
