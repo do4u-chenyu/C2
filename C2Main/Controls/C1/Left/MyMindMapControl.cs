@@ -110,7 +110,7 @@ namespace C2.Controls.Left
                 }
                 if (Path.GetExtension(fullFilePath) == ".xmind")
                 {
-                    C2File.GetInstance().Import(fullFilePath);
+                    ImportXmindFile.GetInstance().LoadXml(fullFilePath);
                     return;
                 }
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
