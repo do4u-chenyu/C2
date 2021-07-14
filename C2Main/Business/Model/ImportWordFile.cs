@@ -132,7 +132,7 @@ namespace C2.Business.Model
         private void CreatTopic(List<List<string>> titles, Topic lastTopic, int j) 
         {
             Topic topic = new Topic();
-            topic.Text = titles[j + 1][0];
+            topic.Text = titles[j + 1][0].Trim('\f');
             if (int.Parse(titles[j + 1][1]) > int.Parse(titles[j][1])) 
             { 
                 lastTopic.Children.Insert(lastTopic.Children.Count, topic);
