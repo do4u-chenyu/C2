@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Core;
 using C2.Dialogs;
+using C2.Model.MindMaps;
 using C2.Utils;
 using System.Drawing;
 using System.IO;
@@ -96,7 +97,7 @@ namespace C2.Controls.Left
         }
 
         private void AddMindMapButton_Click(object sender, System.EventArgs e)
-        {
+        {     
             ZipDialog zipDialog = new ImportZipDialog();
             if (zipDialog.ShowDialog() == DialogResult.OK)
             {
@@ -105,6 +106,11 @@ namespace C2.Controls.Left
                 if (Path.GetExtension(fullFilePath) == ".doc" || Path.GetExtension(fullFilePath) == ".docx")
                 {
                     ImportWordFile.GetInstance().Import(fullFilePath);
+                    return;
+                }
+                if (Path.GetExtension(fullFilePath) == ".xmind")
+                {
+                    C2File.GetInstance().Import(fullFilePath);
                     return;
                 }
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
