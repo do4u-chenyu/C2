@@ -38,6 +38,7 @@ namespace C2.Business.Model
                 MessageBox.Show("文件不存在");
                 return;
             }
+            rootCount = 0;
             CreateC2(LoadWord(path),path);
         }
         private List<List<string>> LoadWord(string path)
