@@ -132,13 +132,12 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.Font.Name = "黑体";
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["Heading 2"];
-
                     builder.Write(string.Format("{0} {1}", serialNumber, title));
                     break;
                 case 3:
                     //builder.Font.Size = 14;
                     //builder.Font.Bold = true;
-                    //builder.Font.Name = "宋体";
+                    //builder.Font.Name = "黑体";
                     //builder.Font.Name = "Times New Roman";
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
@@ -149,8 +148,8 @@ namespace C2.Model.MindMaps
                     break;
                 case 4:
                     //builder.Font.Size = 10.5;
-                    //builder.Font.Bold = true;
-                    //builder.Font.Name = "宋体";
+                    //builder.Font.Bold = false;
+                    //builder.Font.Name = "黑体";
                     //builder.Font.Name = "Times New Roman";
                     //builder.ParagraphFormat.FirstLineIndent = 0;
                     //builder.ParagraphFormat.LineSpacing = 18;

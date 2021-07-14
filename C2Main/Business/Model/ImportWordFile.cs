@@ -92,8 +92,11 @@ namespace C2.Business.Model
         }
         private void CreateC2(List<List<string>> titles,string path)
         {
-            if (titles.Count == 0)
+            if (titles.Count == 0) 
+            {
+                MessageBox.Show("文档格式不正确，无法读取标题", "ERROR");
                 return;
+            }   
             string name = Path.GetFileNameWithoutExtension(path);
             CreateNewModelForm createNewModelForm = new CreateNewModelForm();
             if(createNewModelForm.CheckNameWord(name))
