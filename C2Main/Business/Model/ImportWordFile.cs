@@ -109,7 +109,7 @@ namespace C2.Business.Model
             var root = mindMap.Root;
             root.Children.Remove(root.GetChildByText("子主题 1"));
             if (titles[0][1] == "1" && IsRoot())
-                root.Text = titles[0][0];
+                root.Text = titles[0][0].Trim('\f');
             try
             {
                 if (IsRoot())
@@ -119,18 +119,20 @@ namespace C2.Business.Model
                 else 
                 {
                     Topic topic = new Topic();
-                    topic.Text = titles[0][0];
+                    topic.Text = titles[0][0].Trim('\f');
                     root.Children.Insert(0, topic);
                     CreatTopic(titles, topic, 0); 
                 }
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.Message,"文件格式不正确");
+                MessageBox.Show(ex.Message,"文档格式不正确");
             }
         }
         private void CreatTopic(List<List<string>> titles, Topic lastTopic, int j) 
         {
+            if (titles.Count == 1)
+                return;
             Topic topic = new Topic();
             topic.Text = titles[j + 1][0].Trim('\f');
             if (int.Parse(titles[j + 1][1]) > int.Parse(titles[j][1])) 
