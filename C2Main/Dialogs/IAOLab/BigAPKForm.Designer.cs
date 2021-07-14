@@ -31,37 +31,30 @@ namespace C2.Dialogs.IAOLab
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BigAPKForm));
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            if (!string.IsNullOrEmpty(GetChromePath()))
-            {
-                this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                this.ClientSize = new System.Drawing.Size(180, 0);
-                this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-                this.Name = "BigAPKForm";
-                this.Text = "APK检测";
-                this.Load += new System.EventHandler(this.Form1_Load);
-                this.ResumeLayout(false);
-
-            }
-            else
-            {
-                this.SuspendLayout();
-                this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-                this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-                this.webBrowser1.Name = "webBrowser1";
-                this.webBrowser1.Size = new System.Drawing.Size(800, 450);
-                this.webBrowser1.TabIndex = 0;
-                this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-                this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                this.ClientSize = new System.Drawing.Size(800, 450);
-                this.Controls.Add(this.webBrowser1);
-                this.Name = "BigAPKForm";
-                this.Text = "APK检测";
-                this.Load += new System.EventHandler(this.BigAPKForm_Load);
-                this.ResumeLayout(false);
-            }
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(180, 0);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "BigAPKForm";
+            this.Text = "APK检测";
+            this.Load += new System.EventHandler(this.BigApkForm_Load);
+            this.ResumeLayout(false);
+            this.SuspendLayout();
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(800, 450);
+            this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.webBrowser1);
+            this.Name = "BigAPKForm";
+            this.Text = "APK检测";
+            this.ResumeLayout(false);
+            
 
 
 

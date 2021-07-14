@@ -27,11 +27,18 @@ namespace C2.Dialogs.IAOLab
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void BigApkForm_Load(object sender, EventArgs e)
         {
-            string chromePath = GetChromePath();
-            System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:5147/APK/login/");
-            this.Close();
+            if (!string.IsNullOrEmpty(GetChromePath()))
+            {
+                string chromePath = GetChromePath();
+                System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:5147/APK/login/");
+                this.Close();
+            }
+            else
+            {
+                this.webBrowser1.Url = new System.Uri(" http://113.31.110.244:5147/APK/login/", System.UriKind.Absolute);
+            }
         }
 
         public string GetChromePath()
@@ -58,10 +65,6 @@ namespace C2.Dialogs.IAOLab
                 }
             }
             return string.Empty;
-        }
-        private void BigAPKForm_Load(object sender, EventArgs e)
-        {
-            this.webBrowser1.Url = new System.Uri(" http://113.31.110.244:5147/APK/login/", System.UriKind.Absolute);
         }
     }
 }
