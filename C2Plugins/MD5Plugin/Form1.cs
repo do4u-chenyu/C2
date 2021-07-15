@@ -18,8 +18,8 @@ namespace MD5Plugin
         public Form1()
         {
             InitializeComponent();
-            textBox1.Select(textBox1.TextLength , 0);
-            textBox1.Select(0, 0);
+            inputTextBox.Select(inputTextBox.TextLength, 0);
+            inputTextBox.Select(0, 0);
         }
 
         private bool isReturnNum;
@@ -50,210 +50,160 @@ namespace MD5Plugin
             return this.ShowDialog();
         }
 
-
-
-        //md5(128位)
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void SetDefault1()
         {
-            //button1.Visible;
-            button1.Text = "加密 =>";
-            button2.Visible = false;
-            textBox1.Text = "请把你需要加密的内容粘贴在这里";
-            textBox2.Text = "加密后的结果";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
+            inputTextBox.Text = "请把你需要加密的内容粘贴在这里";
+            outputTextBox.Text = "加密后的结果";
+            inputTextBox.ForeColor = Color.DarkGray;
+            outputTextBox.ForeColor = Color.DarkGray;
+        }
+        private void SetDefault2()
+        {
+            inputTextBox.Text = "请输入你要编码的内容";
+            outputTextBox.Text = "请输入你要解码的内容";
+            inputTextBox.ForeColor = Color.DarkGray;
+            outputTextBox.ForeColor = Color.DarkGray;
         }
 
-        //md5(64位)
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        //md5(128位)
+        private void Md5128RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            button1.Text = "加密 =>";
-            button2.Visible = false;
-            textBox1.Text = "请把你需要加密的内容粘贴在这里";
-            textBox2.Text = "加密后的结果";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
+            //button1.Visible;
+            encodeButton.Text = "加密 =>";
+            decodeButton.Visible = false;
+            SetDefault1();
+        }
+        
+
+        //md5(64位)
+        private void Md564RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            encodeButton.Text = "加密 =>";
+            decodeButton.Visible = false;
+            SetDefault1();
         }
 
         //Base64
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void Base64RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            button1.Text = "编码 =>";
-            button2.Text = "<= 解码";
-            button2.Visible = true;
-            textBox1.Text = "请输入你要用Base64加密的内容";
-            textBox2.Text = "请输入你要用Base64解密的内容";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
+            encodeButton.Text = "编码 =>";
+            decodeButton.Text = "<= 解码";
+            decodeButton.Visible = true;
+            SetDefault2();
         }
 
         //url编解码
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        private void UrlRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            button1.Text = "编码 =>";
-            button2.Text = "<= 解码";
-            button2.Visible = true;
-            textBox1.Text = "请输入你要编码的Url";
-            textBox2.Text = "请输入你要解码的Url";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
-
+            encodeButton.Text = "编码 =>";
+            decodeButton.Text = "<= 解码";
+            decodeButton.Visible = true;
+            SetDefault2();
         }
 
         //使用sha1对字符串进行加密
-        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        private void Sha1RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            button1.Text = "加密 =>";
-            button2.Visible = false;
-            textBox1.Text = "请把你需要加密的内容粘贴在这里";
-            textBox2.Text = "加密后的结果";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
+            encodeButton.Text = "加密 =>";
+            decodeButton.Visible = false;
+            SetDefault1();
         }
 
         //使用sha256对字符串进行加密
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        private void Sha256RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            button1.Text = "加密 =>";
-            button2.Visible = false;
-            textBox1.Text = "请把你需要加密的内容粘贴在这里";
-            textBox2.Text = "加密后的结果";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
+            encodeButton.Text = "加密 =>";
+            decodeButton.Visible = false;
+            SetDefault1();
         }
 
         //使用sha512对字符串进行加密
-        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        private void Sha512RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            button1.Text = "加密 =>";
-            button2.Visible = false;
-            textBox1.Text = "请把你需要加密的内容粘贴在这里";
-            textBox2.Text = "加密后的结果";
-            textBox1.ForeColor = Color.DarkGray;
-            textBox2.ForeColor = Color.DarkGray;
+            encodeButton.Text = "加密 =>";
+            decodeButton.Visible = false;
+            SetDefault1();
         }
 
 
 
-        private void textBox1_MouseDown(object sender, EventArgs e)
+        private void InputTextBox_MouseDown(object sender, EventArgs e)
         {
-            if (textBox1.Text == "请把你需要加密的内容粘贴在这里" || textBox1.Text == "请输入你要用Base64加密的内容" || textBox1.Text == "请输入你要编码的Url")
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里" || inputTextBox.Text == "请输入你要用Base64加密的内容" || inputTextBox.Text == "请输入你要编码的Url")
             {
-                textBox1.Text = "";
+                inputTextBox.Text = "";
             }
-            textBox1.ForeColor = Color.Black;
+            inputTextBox.ForeColor = Color.Black;
         }
 
-        private void textBox2_MouseDown(object sender, EventArgs e)
+        private void OutputTextBox_MouseDown(object sender, EventArgs e)
         {
-            if (textBox2.Text == "加密后的结果" || textBox2.Text == "请输入你要用Base64解密的内容" || textBox2.Text == "请输入你要解码的Url")
+            if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要用Base64解密的内容" || outputTextBox.Text == "请输入你要解码的Url")
             {
-                textBox2.Text = "";
+                outputTextBox.Text = "";
             }
-            textBox2.ForeColor = Color.Black;
+            outputTextBox.ForeColor = Color.Black;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void EncodeButton_Click(object sender, EventArgs e)
         {
-            int num = 3;
-            if (radioButton1.Checked)
+            if (md5128RadioButton.Checked)
             {
-                num = 1;
+                Md5Code_128(inputTextBox.Text);
             }
-            if (radioButton4.Checked)
+            else if (md564RadioButton.Checked)
             {
-                num = 2;
+                Md5Code_64(inputTextBox.Text);
             }
-            if (radioButton2.Checked)
+            else if (base64RadioButton.Checked)
             {
-                num = 3;
+                //Console.WriteLine("base64编码");
+                EncodeBase64(inputTextBox.Text);
             }
-            if (radioButton3.Checked)
+            else if (urlRadioButton.Checked)
             {
-                num = 4;
+                //Console.WriteLine("UrlDecode编码");
+                UrlEncode(inputTextBox.Text);
             }
-            if (radioButton5.Checked)
+            else if (sha1RadioButton.Checked)
             {
-                num = 5;
+                //Console.WriteLine("sha1加密");
+                SHA1Encrypt(inputTextBox.Text);
             }
-            if (radioButton6.Checked)
+            else if (sha256RadioButton.Checked)
             {
-                num = 6;
+                //Console.WriteLine("sha256加密");
+                SHA256Encrypt(inputTextBox.Text);
             }
-            if (radioButton7.Checked)
+            else if (sha512RadioButton.Checked)
             {
-                num = 7;
+                //Console.WriteLine("sha512加密");
+                SHA512Encrypt(inputTextBox.Text);
             }
-            switch (num)
+            else
             {
-                case 1:
-                    textBox2.ForeColor = Color.Black;
-                    Md5Code_128(textBox1.Text);
-                    break;
-                case 2:
-                    textBox2.ForeColor = Color.Black;
-                    Md5Code_64(textBox1.Text);
-                    break;
-                case 3:
-                    textBox2.ForeColor = Color.Black;
-                    //Console.WriteLine("base64编码");
-                    EncodeBase64(textBox1.Text);
-                    break;
-                case 4:
-                    textBox2.ForeColor = Color.Black;
-                    //Console.WriteLine("UrlDecode编码");
-                    UrlEncode(textBox1.Text);
-                    break;
-                case 5:
-                    textBox2.ForeColor = Color.Black;
-                    //Console.WriteLine("sha1加密");
-                    SHA1Encrypt(textBox1.Text);
-                    break;
-                case 6:
-                    textBox2.ForeColor = Color.Black;
-                    //Console.WriteLine("sha256加密");
-                    SHA256Encrypt(textBox1.Text);
-                    break;
-                case 7:
-                    textBox2.ForeColor = Color.Black;
-                    //Console.WriteLine("sha512加密");
-                    SHA512Encrypt(textBox1.Text);
-                    break;
-                default:
-                    textBox2.ForeColor = Color.Black;
-                    //Console.WriteLine("base64");
-                    EncodeBase64(textBox1.Text);
-                    break;
+                //Console.WriteLine("base64");
+                EncodeBase64(inputTextBox.Text);
             }
+            outputTextBox.ForeColor = Color.Black;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void DecodeButton_Click(object sender, EventArgs e)
         {
-            int num = 3;
-            if (radioButton2.Checked)
+            inputTextBox.ForeColor = Color.Black;
+            if (base64RadioButton.Checked)
             {
-                num = 3;
+                DecodeBase64(outputTextBox.Text);
             }
-            if (radioButton3.Checked)
+            else if (urlRadioButton.Checked)
             {
-                num = 4;
+                //Console.WriteLine("UrlDecode解码");
+                UrlDecode(outputTextBox.Text);
             }
-            switch (num)
+            else
             {
-                case 3:
-                    textBox1.ForeColor = Color.Black;
-                    DecodeBase64(textBox2.Text);
-                    break;
-                case 4:
-                    textBox1.ForeColor = Color.Black;
-                    //Console.WriteLine("UrlDecode解码");
-                    UrlDecode(textBox2.Text);
-                    break;
-                default:
-                    textBox1.ForeColor = Color.Black;
-                    //Console.WriteLine("base64解码");
-                    DecodeBase64(textBox2.Text);
-                    break;
+                //Console.WriteLine("base64解码");
+                DecodeBase64(outputTextBox.Text);
             }
         }
 
@@ -270,7 +220,7 @@ namespace MD5Plugin
 
             }
             //return sBuilder.ToString();
-            textBox2.Text = sBuilder.ToString();
+            outputTextBox.Text = sBuilder.ToString();
 
         }
 
@@ -280,13 +230,13 @@ namespace MD5Plugin
             string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str)), 4, 8);
             t2 = t2.Replace("-", "");
             t2 = t2.ToLower();
-            textBox2.Text = t2;
+            outputTextBox.Text = t2;
         }
 
         public void EncodeBase64(string str)
         {
             byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(str);
-            textBox2.Text = Convert.ToBase64String(bytes);
+            outputTextBox.Text = Convert.ToBase64String(bytes);
         }
 
         public void DecodeBase64(string str)
@@ -294,7 +244,7 @@ namespace MD5Plugin
             if(IsBase64Formatted(str))
             {
                 byte[] bytes = Convert.FromBase64String(str);
-                textBox1.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+                inputTextBox.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
             }
             else
             {
@@ -317,13 +267,13 @@ namespace MD5Plugin
 
         public void UrlEncode(string url)
         {
-            textBox2.Text = HttpUtility.UrlEncode(url);
+            outputTextBox.Text = HttpUtility.UrlEncode(url);
         }
 
         public void UrlDecode(string url)
         {
     
-            textBox1.Text = HttpUtility.UrlDecode(url);
+            inputTextBox.Text = HttpUtility.UrlDecode(url);
             
         }
 
@@ -337,7 +287,7 @@ namespace MD5Plugin
             {
                 enText.AppendFormat("{0:x2}", iByte);
             }
-            textBox2.Text = enText.ToString();
+            outputTextBox.Text = enText.ToString();
         }
 
         public void SHA256Encrypt(string str)
@@ -350,7 +300,7 @@ namespace MD5Plugin
             {
                 sb.Append(retVal[i].ToString("x2"));
             }
-            textBox2.Text = sb.ToString();
+            outputTextBox.Text = sb.ToString();
 
         }
 
@@ -364,7 +314,7 @@ namespace MD5Plugin
             {
                 sb.Append(retVal[i].ToString("x2"));
             }
-            textBox2.Text = sb.ToString();
+            outputTextBox.Text = sb.ToString();
         }
     }
 }
