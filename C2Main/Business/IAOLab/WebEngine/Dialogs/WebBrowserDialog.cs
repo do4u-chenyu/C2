@@ -583,7 +583,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 };
                 template.Image = CurrentObject;
                 template.SizeType = PictureSizeType.Thumb;
-                HitTopic.Add(template);
+                HitTopic.Widgets.Add(template);
             }
             else if (WebType == WebType.Map)
             {

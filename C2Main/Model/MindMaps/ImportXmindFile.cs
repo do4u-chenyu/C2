@@ -6,12 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using C2.Model.Widgets;
 
 
 namespace C2.Model.MindMaps
 {
     public class ImportXmindFile
     {
+        public PictureWidget.PictureDesign CurrentObject;
+        string firstImgeName;
         private static ImportXmindFile C2FileInstance;
         public static ImportXmindFile GetInstance()
         {
@@ -36,6 +39,7 @@ namespace C2.Model.MindMaps
             }
             string pathXml = "content.xml";
             string targetPath = Path.Combine(tmpDir, pathXml);
+     
             XmlDocument doc = new XmlDocument();
             doc.Load(targetPath);
             XmlNamespaceManager xmlns = new XmlNamespaceManager(doc.NameTable);
@@ -49,15 +53,45 @@ namespace C2.Model.MindMaps
 
             Topic xmlRoot = new Topic();
             xmlRoot.Text = firstTitle;
-            CreateC2(xmindName, xmlRoot, searchTopic, xmlns);
-            DeleteDir(tmpDir);
+
+            
+            if (firstTopic["xhtml:img"] == null)
+            {
+                CreateC2Exception(xmindName, xmlRoot, searchTopic, xmlns);
+                return;
+            }
+            
+            
+ 
+            firstImgeName = firstTopic["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+            string imgXml = "attachments";
+            string imageUrl = Path.Combine(imgXml, firstImgeName);
+            string imagePath = Path.Combine(tmpDir, imageUrl);
+            // 图片挂件           
+            PictureWidget picutreWidget = new PictureWidget();
+            CurrentObject = new PictureWidget.PictureDesign
+            {
+                SourceType = PictureSource.File,
+                Url = imagePath,
+                AddToLibrary = false,
+                LimitImageSize = true,
+                Name = Path.GetFileNameWithoutExtension(imagePath),
+                EmbedIn = false
+             };
+            picutreWidget.Image = CurrentObject;
+            xmlRoot.Widgets.Add(picutreWidget);
+
+            CreateC2(xmindName, xmlRoot, searchTopic, xmlns, picutreWidget);
+            //DeleteDir(tmpDir);  
         }
 
-        public void CreateC2(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns)
+
+        
+        public void CreateC2Exception(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns)
         {
-            C2.Model.Documents.Document doc2 = Global.GetMainForm().CreateNewMapForWord(xmindName);
-            doc2.FileName = xmindName;
-            DocumentForm form = new DocumentForm(doc2);
+            C2.Model.Documents.Document doc = Global.GetMainForm().CreateNewMapForWord(xmindName);
+            doc.FileName = xmindName;
+            DocumentForm form = new DocumentForm(doc);
             Global.GetMainForm().ShowFormWord(form);
             MindMap mindMap = form.ActivedChartPage.Chart as MindMap;
             var mindMapRoot = mindMap.Root;
@@ -70,12 +104,109 @@ namespace C2.Model.MindMaps
                 String nodeTitle = node["title"].InnerText;
                 newXmlRoot.Text = nodeTitle;
 
+                if (node["xhtml:img"] == null)
+                {
+                    mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
+                    RecursionTopic(xmindName, node, newXmlRoot, xmlns);
+                    continue;
+                }
+
+                String ImgeName = node["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+
+
+                string imgXml = "attachments";
+                string imageUrl = Path.Combine(imgXml, ImgeName);
+                string tmpDir = Path.Combine(Global.TempDirectory, xmindName);
+                string imagePath = Path.Combine(tmpDir, imageUrl);
+
+
+                PictureWidget picutreWidget2 = new PictureWidget();
+                CurrentObject = new PictureWidget.PictureDesign
+                {
+                    SourceType = PictureSource.File,
+                    Url = imagePath,
+                    AddToLibrary = false,
+                    LimitImageSize = true,
+                    Name = Path.GetFileNameWithoutExtension(imagePath),
+                    EmbedIn = false
+                };
+
+                picutreWidget2.Image = CurrentObject;
+
+
+                newXmlRoot.Widgets.Add(picutreWidget2);
+
+
+
                 mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
-                RecursionTopic(node, newXmlRoot, xmlns);
+                RecursionTopic(xmindName, node, newXmlRoot, xmlns);
+            }
+        }
+        
+        
+
+            public void CreateC2(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns, PictureWidget picutreWidget)
+        {
+            C2.Model.Documents.Document doc = Global.GetMainForm().CreateNewMapForWord(xmindName);
+            doc.FileName = xmindName;
+            DocumentForm form = new DocumentForm(doc);
+            Global.GetMainForm().ShowFormWord(form);
+            MindMap mindMap = form.ActivedChartPage.Chart as MindMap;
+            var mindMapRoot = mindMap.Root;
+            mindMapRoot.Children.Remove(mindMapRoot.GetChildByText("子主题 1"));
+            mindMapRoot.Text = xmlRoot.Text;
+            mindMapRoot.Widgets.Add(picutreWidget); 
+
+
+            foreach (XmlNode node in SearchTopic)
+            {
+                Topic newXmlRoot = new Topic();
+                String nodeTitle = node["title"].InnerText;
+                newXmlRoot.Text = nodeTitle;
+
+                if (node["xhtml:img"] == null)
+                {
+                    mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
+                    RecursionTopic(xmindName, node, newXmlRoot, xmlns);
+                    continue;
+                }
+                   
+                String ImgeName = node["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+                
+                
+                string imgXml = "attachments";
+                string imageUrl = Path.Combine(imgXml, ImgeName);
+                string tmpDir = Path.Combine(Global.TempDirectory, xmindName);
+                string imagePath = Path.Combine(tmpDir, imageUrl);
+
+
+                PictureWidget picutreWidget2 = new PictureWidget();
+                CurrentObject = new PictureWidget.PictureDesign
+                {
+                    SourceType = PictureSource.File,
+                    Url = imagePath,
+                    AddToLibrary = false,
+                    LimitImageSize = true,
+                    Name = Path.GetFileNameWithoutExtension(imagePath),
+                    EmbedIn = false
+                };
+
+                picutreWidget2.Image = CurrentObject;
+
+
+                newXmlRoot.Widgets.Add(picutreWidget2);
+               
+                
+
+                mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
+                RecursionTopic(xmindName, node, newXmlRoot, xmlns);
             }
         }
 
-        public void RecursionTopic(XmlNode node, Topic mindMap_root, XmlNamespaceManager xmlns)
+
+
+
+        public void RecursionTopic(string xmindName, XmlNode node, Topic mindMap_root, XmlNamespaceManager xmlns)
         {
             XmlNodeList nodeList = node.SelectNodes("ns:children/ns:topics/ns:topic", xmlns);
             foreach (XmlNode nodeSingle in nodeList)
@@ -83,10 +214,46 @@ namespace C2.Model.MindMaps
                 Topic xmlRoot = new Topic();
                 String nodeTitle = nodeSingle["title"].InnerText;
                 xmlRoot.Text = nodeTitle;
+
+                if (nodeSingle["xhtml:img"] == null)
+                {
+                    mindMap_root.Children.Insert(mindMap_root.Children.Count, xmlRoot);
+                    continue;
+                }
+
+                String ImgeName = nodeSingle["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+
+
+                string imgXml = "attachments";
+                string imageUrl = Path.Combine(imgXml, ImgeName);
+                string tmpDir = Path.Combine(Global.TempDirectory, xmindName);
+                string imagePath = Path.Combine(tmpDir, imageUrl);
+
+
+                PictureWidget picutreWidget = new PictureWidget();
+                CurrentObject = new PictureWidget.PictureDesign
+                {
+                    SourceType = PictureSource.File,
+                    Url = imagePath,
+                    AddToLibrary = false,
+                    LimitImageSize = true,
+                    Name = Path.GetFileNameWithoutExtension(imagePath),
+                    EmbedIn = false
+                };
+
+                picutreWidget.Image = CurrentObject;
+
+
+                xmlRoot.Widgets.Add(picutreWidget);
+
+
                 mindMap_root.Children.Insert(mindMap_root.Children.Count, xmlRoot);
-                RecursionTopic(nodeSingle, xmlRoot, xmlns);
+
+                RecursionTopic(xmindName, nodeSingle, xmlRoot, xmlns);
             }
         }
+
+
 
         private void DeleteDir(string tmpDir)
         {
