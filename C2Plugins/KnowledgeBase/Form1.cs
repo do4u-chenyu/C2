@@ -50,7 +50,7 @@ namespace KnowledgeBase
             string chromePath = GetChromePath();
             if (!string.IsNullOrEmpty(chromePath))
             {
-                //System.Diagnostics.Process.Start(chromePath, "15.73.3.241:19001/KnowledgeBase/");
+                System.Diagnostics.Process.Start(chromePath, "15.73.3.241:19001/KnowledgeBase/");
                 System.Diagnostics.Process.Start(chromePath, "172.17.31.4:19001/KnowledgeBase/");
             }
             else
