@@ -47,7 +47,7 @@ namespace C2.Model.MindMaps
             builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
             builder.ParagraphFormat.FirstLineIndent = 21;
             builder.Write(text);
-            builder.ParagraphFormat.FirstLineIndent = 0;
+           
         }
         private Size RotateImageSize(int width, int height)
         {
