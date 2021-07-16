@@ -42,15 +42,27 @@ namespace C2.Dialogs
         }
         public bool CheckNameWord(string inputModelTitle) 
         {
-            if ((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)) ||
-                (NewFormType == FormType.CanvasForm && GetMindMapTitleList().Contains(inputModelTitle)) ||
-                (NewFormType == FormType.Null && Global.GetMyModelControl().ContainModel(inputModelTitle)))
+            NewFormType = FormType.DocumentForm;
+            OpenDocuments = Global.GetMainForm().OpendDocuments();
+            if ((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)))
             {
                 MessageBox.Show(inputModelTitle + "，同名文件已存在", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
-            else
-                return false;
+            NewFormType = FormType.CanvasForm;
+            if ((NewFormType == FormType.CanvasForm && GetMindMapTitleList().Contains(inputModelTitle)))
+            {
+                MessageBox.Show(inputModelTitle + "，同名文件已存在", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            NewFormType = FormType.Null;
+            if ((NewFormType == FormType.Null && Global.GetMyModelControl().ContainModel(inputModelTitle)))
+            {
+                MessageBox.Show(inputModelTitle + "，同名文件已存在", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            return false;
         }
         private void CheckName()
         {
