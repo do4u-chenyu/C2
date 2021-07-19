@@ -125,9 +125,9 @@ namespace C2.Business.Model
                     CreatTopic(titles, topic, 0); 
                 }
             }
-            catch (Exception ex) 
+            catch  
             {
-                MessageBox.Show(ex.Message,"文档格式不正确");
+                MessageBox.Show("文档格式不正确","ERROR");
             }
         }
         private void CreatTopic(List<List<string>> titles, Topic lastTopic, int j) 

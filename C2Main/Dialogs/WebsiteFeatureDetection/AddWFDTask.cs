@@ -133,5 +133,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             this.FilePath = ofd.ShowDialog() == DialogResult.OK ? ofd.FileName : String.Empty;
         }
+
+        private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

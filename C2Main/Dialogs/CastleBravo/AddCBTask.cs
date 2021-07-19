@@ -153,5 +153,12 @@ namespace C2.Dialogs.CastleBravo
         {
             Reset(this.taskComboBox.SelectedIndex);
         }
+
+        private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
+        {
+            this.md5TextBox.Clear();
+            this.md5TextBox.ReadOnly = !this.pasteModeCB.Checked;
+            this.filePathTextBox.ReadOnly = !this.md5TextBox.ReadOnly;
+        }
     }
 }

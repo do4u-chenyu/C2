@@ -35,6 +35,8 @@
             this.browserButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
+            this.md5TextBox = new System.Windows.Forms.TextBox();
+            this.pasteModeCB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +64,7 @@
             this.taskNameTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.taskNameTextBox.Location = new System.Drawing.Point(103, 36);
             this.taskNameTextBox.Name = "taskNameTextBox";
-            this.taskNameTextBox.Size = new System.Drawing.Size(247, 25);
+            this.taskNameTextBox.Size = new System.Drawing.Size(259, 25);
             this.taskNameTextBox.TabIndex = 10005;
             // 
             // filePathTextBox
@@ -72,13 +74,13 @@
             this.filePathTextBox.Location = new System.Drawing.Point(103, 84);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(247, 25);
+            this.filePathTextBox.Size = new System.Drawing.Size(259, 25);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(363, 85);
+            this.browserButton.Location = new System.Drawing.Point(383, 85);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(59, 23);
             this.browserButton.TabIndex = 10007;
@@ -101,12 +103,38 @@
             // 
             this.ofd.Filter = "数据文件|*.txt;*.bcp;*.csv;*.tsv|所有文件|*.*";
             // 
+            // md5TextBox
+            // 
+            this.md5TextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.md5TextBox.Location = new System.Drawing.Point(103, 137);
+            this.md5TextBox.Multiline = true;
+            this.md5TextBox.Name = "md5TextBox";
+            this.md5TextBox.ReadOnly = true;
+            this.md5TextBox.Size = new System.Drawing.Size(259, 126);
+            this.md5TextBox.TabIndex = 10013;
+            this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V内容后创建任务,施工中...";
+            this.md5TextBox.WordWrap = false;
+            // 
+            // pasteModeCB
+            // 
+            this.pasteModeCB.AutoSize = true;
+            this.pasteModeCB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.pasteModeCB.Location = new System.Drawing.Point(12, 136);
+            this.pasteModeCB.Name = "pasteModeCB";
+            this.pasteModeCB.Size = new System.Drawing.Size(75, 21);
+            this.pasteModeCB.TabIndex = 10014;
+            this.pasteModeCB.Text = "粘贴模式";
+            this.pasteModeCB.UseVisualStyleBackColor = true;
+            this.pasteModeCB.CheckedChanged += new System.EventHandler(this.PasteModeCB_CheckedChanged);
+            // 
             // AddWFDTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(434, 207);
+            this.ClientSize = new System.Drawing.Size(470, 318);
+            this.Controls.Add(this.pasteModeCB);
+            this.Controls.Add(this.md5TextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.browserButton);
             this.Controls.Add(this.filePathTextBox);
@@ -123,6 +151,8 @@
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.browserButton, 0);
             this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.md5TextBox, 0);
+            this.Controls.SetChildIndex(this.pasteModeCB, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,5 +167,7 @@
         private System.Windows.Forms.Button browserButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.OpenFileDialog ofd;
+        private System.Windows.Forms.TextBox md5TextBox;
+        private System.Windows.Forms.CheckBox pasteModeCB;
     }
 }
