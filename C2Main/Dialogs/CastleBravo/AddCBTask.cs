@@ -40,7 +40,11 @@ namespace C2.Dialogs.CastleBravo
             TaskName = TaskName.Trim();//去掉首尾空白符
 
             if (this.pasteModeCB.Checked)
+            {
+                if (this.md5TextBox.Text.Trim().IsEmpty())
+                    return false;
                 GenPasteCBFile();
+            }
 
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;

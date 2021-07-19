@@ -33,7 +33,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             TaskName = TaskName.Trim();//去掉首尾空白符
 
             if (this.pasteModeCB.Checked)
+            {
+                if (this.md5TextBox.Text.Trim().IsEmpty())
+                    return false;
                 GenPasteWFDFile();
+            }
 
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;
