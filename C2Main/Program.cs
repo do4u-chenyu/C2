@@ -36,9 +36,9 @@ namespace C2
         [STAThread]
         static void Main(params string[] args)
         {
-            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021071700000000") > 0)
+            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021081700000000") > 0)
             {
-                MessageBox.Show("产品可用时间截止到2021年7月17号");
+                MessageBox.Show("产品可用时间截止到2021年8月17号");
                 return;
             }
             #region

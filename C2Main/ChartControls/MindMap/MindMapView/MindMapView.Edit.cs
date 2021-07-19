@@ -208,6 +208,12 @@ namespace C2.Controls.MapViews
                     if (atw == null)
                     {
                         hitTopic.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { fd.FileName} });
+                        /*
+                        AttachmentWidget a = new AttachmentWidget();
+                        List<string> l = new List<string>() { fd.FileName };
+                        a.AttachmentPaths = l;
+                        */
+
                         return;
                     }
                     if (atw.AttachmentPaths.Find(x => x.Equals(fd.FileName)) == null)
