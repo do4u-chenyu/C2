@@ -38,6 +38,10 @@ namespace C2.Dialogs.CastleBravo
         protected override bool OnOKButtonClick()
         {
             TaskName = TaskName.Trim();//去掉首尾空白符
+
+            if (this.pasteModeCB.Checked)
+                GenPasteCBFile();
+
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;
 
@@ -73,6 +77,11 @@ namespace C2.Dialogs.CastleBravo
                                                CastleBravoTaskStatus.Null);
 
             return base.OnOKButtonClick();
+        }
+
+        private void GenPasteCBFile()
+        {
+            FileUtil.FileWriteToEnd(FilePath, this.md5TextBox.Text);
         }
         private List<string> GetUrlsFromFile(string filePath)
         {
@@ -159,6 +168,10 @@ namespace C2.Dialogs.CastleBravo
             this.md5TextBox.Clear();
             this.md5TextBox.ReadOnly = !this.pasteModeCB.Checked;
             this.filePathTextBox.ReadOnly = !this.md5TextBox.ReadOnly;
+            if (this.pasteModeCB.Checked)
+                FilePath = Path.Combine(Global.TempDirectory, Guid.NewGuid().ToString("N") + ".txt");
+            else
+                FilePath = String.Empty;
         }
     }
 }

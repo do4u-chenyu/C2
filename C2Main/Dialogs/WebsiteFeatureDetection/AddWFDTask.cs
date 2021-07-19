@@ -31,6 +31,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         protected override bool OnOKButtonClick()
         {
             TaskName = TaskName.Trim();//去掉首尾空白符
+
+            if (this.pasteModeCB.Checked)
+                GenPasteWFDFile();
+
             if (!IsValidityTaskName() || !IsValidityFilePath())
                 return false;
 
@@ -60,6 +64,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             TaskInfo = new WFDTaskInfo(TaskName, result.Datas, FilePath, destFilePath, WFDTaskStatus.Null);
 
             return base.OnOKButtonClick();
+        }
+
+        private void GenPasteWFDFile()
+        {
+            FileUtil.FileWriteToEnd(FilePath, this.md5TextBox.Text);  
         }
         private List<string> GetUrlsFromFile(string filePath)
         {
@@ -136,7 +145,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
         {
-
+            this.md5TextBox.Clear();
+            this.md5TextBox.ReadOnly = !this.pasteModeCB.Checked;
+            this.filePathTextBox.ReadOnly = !this.md5TextBox.ReadOnly;
+            if (this.pasteModeCB.Checked)
+                FilePath = Path.Combine(Global.TempDirectory, Guid.NewGuid().ToString("N") + ".txt");
+            else
+                FilePath = String.Empty;
         }
     }
 }
