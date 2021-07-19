@@ -159,7 +159,7 @@
             this.md5TextBox.ReadOnly = true;
             this.md5TextBox.Size = new System.Drawing.Size(259, 117);
             this.md5TextBox.TabIndex = 10012;
-            this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V,施工中...";
+            this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V内容后创建任务,施工中...";
             this.md5TextBox.WordWrap = false;
             // 
             // pasteModeCB
