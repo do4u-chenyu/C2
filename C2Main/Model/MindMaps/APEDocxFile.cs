@@ -19,23 +19,24 @@ namespace C2.Model.MindMaps
         {
             if (topicNote != null)
             {
-                string relRemark = topicNote.Remark;
-                string tmpRemark = topicNote.Remark.Replace("</p>", @"$</p>");
-                topicNote.Remark = tmpRemark;
-                string[] paragraphs = topicNote.Text.Split('$');
+                ////string relRemark = topicNote.Remark;
+                ////string tmpRemark = topicNote.Remark.Replace("</p>", @"$</p>");
+                //topicNote.Remark = tmpRemark;
+                string tmpNote = topicNote.Text.Replace("\r\n", "\n");
+                string[] paragraphs = tmpNote.Split('\n');
                 foreach (string paragraph in paragraphs)
                 {
                     if (paragraph != string.Empty)
                         WriteParagraph(paragraph, docx, styles);
                 }
-                topicNote.Remark = relRemark;
+                //topicNote.Remark = relRemark;
             }
         }
         private void WriteParagraph(string text, Document docx, StyleCollection styles)
         {
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.MoveToDocumentEnd();
-            text = "      " + text;//段落开头两个空格
+            text = "        " + text;//段落开头两个空格
             builder.Writeln("");
             //builder.Font.Size = 10.5;
             ////builder.Font.Bold = true;
@@ -169,7 +170,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 21;
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["IAO正文"]);
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
-                    title = "      " + title;
+                    title = "        " + title;
                     builder.Write(title);
                     break;
             }
