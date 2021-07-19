@@ -35,6 +35,7 @@ namespace C2.Model.MindMaps
         {
             DocumentBuilder builder = new DocumentBuilder(docx);
             builder.MoveToDocumentEnd();
+            text = "      " + text;//段落开头两个空格
             builder.Writeln("");
             //builder.Font.Size = 10.5;
             ////builder.Font.Bold = true;
@@ -45,7 +46,7 @@ namespace C2.Model.MindMaps
             //builder.Font.Bold = false;
 
             builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
-            builder.ParagraphFormat.FirstLineIndent = 21;
+            //builder.ParagraphFormat.FirstLineIndent = 21;
             builder.Write(text);
            
         }
@@ -168,6 +169,7 @@ namespace C2.Model.MindMaps
                     //builder.ParagraphFormat.FirstLineIndent = 21;
                     builder.ParagraphFormat.Style.Styles.AddCopy(styles["IAO正文"]);
                     builder.ParagraphFormat.Style = builder.ParagraphFormat.Style.Styles["IAO正文"];
+                    title = "      " + title;
                     builder.Write(title);
                     break;
             }
