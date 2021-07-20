@@ -49,6 +49,12 @@ namespace C2.Dialogs
                 MessageBox.Show(inputModelTitle + "，同名文件已存在", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
+
+           
+            
+
+           
+
             NewFormType = FormType.Null;
             if ((NewFormType == FormType.Null && Global.GetMyModelControl().ContainModel(inputModelTitle)))
             {

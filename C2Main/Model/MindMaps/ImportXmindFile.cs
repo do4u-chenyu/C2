@@ -9,6 +9,7 @@ using System.Xml;
 using C2.Model.Widgets;
 using System.Windows.Forms;
 using C2.Globalization;
+using C2.Dialogs;
 
 
 namespace C2.Model.MindMaps
@@ -18,18 +19,18 @@ namespace C2.Model.MindMaps
         public PictureWidget.PictureDesign CurrentObject;
         string firstImgeName;
         string firstFileName;
-        string imgXml;
+        string imgXml = "attachments";
         string tmpDir;
         string fileUrl;
         string filePath;
         string ImgeName;
         string imageUrl;
         string imagePath;
+        string Dpan;
         PictureWidget picutreWidget;
         PictureWidget picutreWidget2;
         OpenFileDialog fd;
         AttachmentWidget atw;
-        string Dpan;
         private static ImportXmindFile C2FileInstance;
 
 
@@ -45,11 +46,13 @@ namespace C2.Model.MindMaps
         public void LoadXml(String path)
         {
             string xmindName = Path.GetFileNameWithoutExtension(path);
-            Dpan = "E:\\c2";
+            CreateNewModelForm createNewModelForm = new CreateNewModelForm();
+            if (createNewModelForm.CheckNameWord(xmindName))
+                return;
+            Dpan = "C:\\c2";
             tmpDir = Path.Combine(Dpan, xmindName);
-            //tmpDir = Path.Combine(Global.TempDirectory, xmindName);
-            //FileUtil.DeleteDirectory(Global.TempDirectory);
-            FileUtil.DeleteDirectory(Dpan);
+            //string tmpDir = Path.Combine(Global.TempDirectory, xmindName);
+            FileUtil.DeleteDirectory(Global.TempDirectory);
             FileUtil.CreateDirectory(tmpDir);
             string zipFilePath = path;
             string errMsg = ZipUtil.UnZipFile(zipFilePath, tmpDir);
@@ -59,7 +62,7 @@ namespace C2.Model.MindMaps
             }
             string pathXml = "content.xml";
             string targetPath = Path.Combine(tmpDir, pathXml);
-     
+
             XmlDocument doc = new XmlDocument();
             doc.Load(targetPath);
             XmlNamespaceManager xmlns = new XmlNamespaceManager(doc.NameTable);
@@ -72,7 +75,7 @@ namespace C2.Model.MindMaps
             Topic xmlRoot = new Topic();
             xmlRoot.Text = firstTitle;
 
-            
+
             // 父主题结点没有图片
             if (firstTopic["xhtml:img"] == null)
             {
@@ -80,14 +83,16 @@ namespace C2.Model.MindMaps
                 //DeleteDir(tmpDir);
                 return;
             }
-            
-            
+
+
 
             //图片挂件
             firstImgeName = firstTopic["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
             imgXml = "attachments";
+            //if (!File.Exists(imgXml))
+                //imgXml = "resources";
             string imageUrl = Path.Combine(imgXml, firstImgeName);
-            string imagePath = Path.Combine(tmpDir, imageUrl);      
+            string imagePath = Path.Combine(tmpDir, imageUrl);
             PictureWidget picutreWidget = new PictureWidget();
             CurrentObject = new PictureWidget.PictureDesign
             {
@@ -97,25 +102,16 @@ namespace C2.Model.MindMaps
                 LimitImageSize = true,
                 Name = Path.GetFileNameWithoutExtension(imagePath),
                 EmbedIn = false
-             };
+            };
             picutreWidget.Image = CurrentObject;
             xmlRoot.Widgets.Add(picutreWidget);
 
 
-            
-
-
-
-
-
-
 
             CreateC2(xmindName, xmlRoot, searchTopic, xmlns, picutreWidget);
-            FileUtil.DeleteDirectory(tmpDir);
             //DeleteDir(tmpDir);  
         }
 
-        
 
 
         public void CreateC2Exception(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns)
@@ -137,7 +133,7 @@ namespace C2.Model.MindMaps
 
 
                 //当前主题只有结点
-                if (node["xhtml:img"] == null)
+                if (node["xhtml:img"] == null && node.Attributes["xlink:href"] == null)
                 {
                     mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
                     RecursionTopic(xmindName, node, newXmlRoot, xmlns);
@@ -149,9 +145,13 @@ namespace C2.Model.MindMaps
                 {
 
                     firstFileName = node.Attributes["xlink:href"].Value.Replace("xap:attachments/", "");
-                    fileUrl = Path.Combine(imgXml, firstFileName);
-                    filePath = Path.Combine(tmpDir, fileUrl);
-                    
+                    string imgXml3 = "attachments";
+                    //if (!File.Exists(imgXml3))
+                        //imgXml3 = "resources";
+                    fileUrl = Path.Combine(imgXml3, firstFileName);
+                    string tmpDir2 = Path.Combine(Dpan, xmindName);
+                    filePath = Path.Combine(tmpDir2, fileUrl);
+
                     fd = new OpenFileDialog
                     {
                         //Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
@@ -170,14 +170,42 @@ namespace C2.Model.MindMaps
                     continue;
                 }
 
-                
+
+                //当前主题有【图片】没有【附件】
+                if (node["xhtml:img"] != null && node.Attributes["xlink:href"] == null)
+                {
+                    //图片挂件
+                    ImgeName = node["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+                    string imgXml4 = "attachments";
+                    //string imgXml = File.Exists("attachments") ? "attachments" : "resources";
+                    imageUrl = Path.Combine(imgXml4, ImgeName);
+                    string tmpDir4 = Path.Combine(Dpan, xmindName);
+                    imagePath = Path.Combine(tmpDir4, imageUrl);
+                    picutreWidget2 = new PictureWidget();
+                    CurrentObject = new PictureWidget.PictureDesign
+                    {
+                        SourceType = PictureSource.File,
+                        Url = imagePath,
+                        AddToLibrary = false,
+                        LimitImageSize = true,
+                        Name = Path.GetFileNameWithoutExtension(imagePath),
+                        EmbedIn = false
+                    };
+                    picutreWidget2.Image = CurrentObject;
+                    newXmlRoot.Widgets.Add(picutreWidget2);
+
+                    mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
+                    RecursionTopic(xmindName, node, newXmlRoot, xmlns);
+                    continue;
+                }
+
 
                 //图片挂件
                 ImgeName = node["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
-                imgXml = "attachments";
+                string imgXml = "attachments";
+                //string imgXml = File.Exists("attachments") ? "attachments" : "resources";
                 imageUrl = Path.Combine(imgXml, ImgeName);
-                tmpDir = Path.Combine(Dpan, xmindName);
-                //tmpDir = Path.Combine(Global.TempDirectory, xmindName);
+                string tmpDir = Path.Combine(Dpan, xmindName);
                 imagePath = Path.Combine(tmpDir, imageUrl);
                 picutreWidget2 = new PictureWidget();
                 CurrentObject = new PictureWidget.PictureDesign
@@ -192,25 +220,38 @@ namespace C2.Model.MindMaps
                 picutreWidget2.Image = CurrentObject;
                 newXmlRoot.Widgets.Add(picutreWidget2);
 
+
                 
+                //附件挂件
+                firstFileName = node.Attributes["xlink:href"].Value.Replace("xap:attachments/", "");
+                string imgXml2 = "attachments";
+                fileUrl = Path.Combine(imgXml2, firstFileName);
+                tmpDir = Path.Combine(Dpan, xmindName);
+                filePath = Path.Combine(tmpDir, fileUrl);
+
+                fd = new OpenFileDialog
+                {
+                    //Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
+                    Filter = null,
+                    Title = Lang._("AddAttachment")
+                };
+
+                atw = newXmlRoot.FindWidget<AttachmentWidget>();
+                if (atw == null)
+                {
+                    newXmlRoot.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { filePath } });
+                }
                 
-
-
-
 
 
                 mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
                 RecursionTopic(xmindName, node, newXmlRoot, xmlns);
-                //DeleteDir(tmpDir);
             }
         }
-        
 
 
 
-
-
-            public void CreateC2(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns, PictureWidget picutreWidget)
+        public void CreateC2(string xmindName, Topic xmlRoot, XmlNodeList SearchTopic, XmlNamespaceManager xmlns, PictureWidget picutreWidget)
         {
             C2.Model.Documents.Document doc = Global.GetMainForm().CreateNewMapForWord(xmindName);
             doc.FileName = xmindName;
@@ -222,7 +263,7 @@ namespace C2.Model.MindMaps
             mindMapRoot.Text = xmlRoot.Text;
             mindMapRoot.Widgets.Add(picutreWidget);
 
-            
+
 
             foreach (XmlNode node in SearchTopic)
             {
@@ -231,7 +272,7 @@ namespace C2.Model.MindMaps
                 newXmlRoot.Text = nodeTitle;
 
 
-                
+
                 //当前主题只有结点
                 if (node["xhtml:img"] == null && node.Attributes["xlink:href"] == null)
                 {
@@ -245,6 +286,8 @@ namespace C2.Model.MindMaps
                 {
 
                     firstFileName = node.Attributes["xlink:href"].Value.Replace("xap:attachments/", "");
+                    //if (!File.Exists(imgXml))
+                        //imgXml = "resources";
                     fileUrl = Path.Combine(imgXml, firstFileName);
                     filePath = Path.Combine(tmpDir, fileUrl);
                     fd = new OpenFileDialog
@@ -267,11 +310,12 @@ namespace C2.Model.MindMaps
                 //当前主题有【图片】没有【附件】
                 if (node["xhtml:img"] != null && node.Attributes["xlink:href"] == null)
                 {
-                    
+
                     ImgeName = node["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+                    //if (!File.Exists(imgXml))
+                        //imgXml = "resources";
                     imageUrl = Path.Combine(imgXml, ImgeName);
                     tmpDir = Path.Combine(Dpan, xmindName);
-                    //tmpDir = Path.Combine(Global.TempDirectory, xmindName);
                     imagePath = Path.Combine(tmpDir, imageUrl);
                     picutreWidget2 = new PictureWidget();
                     CurrentObject = new PictureWidget.PictureDesign
@@ -290,14 +334,52 @@ namespace C2.Model.MindMaps
                     continue;
                 }
 
+
+                
+                //图片挂件
+                ImgeName = node["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+                //if (!File.Exists(imgXml))
+                    //imgXml = "resources";
+                imageUrl = Path.Combine(imgXml, ImgeName);
+                tmpDir = Path.Combine(Dpan, xmindName);
+                imagePath = Path.Combine(tmpDir, imageUrl);
+                picutreWidget2 = new PictureWidget();
+                CurrentObject = new PictureWidget.PictureDesign
+                {
+                    SourceType = PictureSource.File,
+                    Url = imagePath,
+                    AddToLibrary = false,
+                    LimitImageSize = true,
+                    Name = Path.GetFileNameWithoutExtension(imagePath),
+                    EmbedIn = false
+                };
+                picutreWidget2.Image = CurrentObject;
+                newXmlRoot.Widgets.Add(picutreWidget2);
+
+
+                //附件挂件 
+                firstFileName = node.Attributes["xlink:href"].Value.Replace("xap:attachments/", "");
+                //if (!File.Exists(imgXml))
+                    //imgXml = "resources";
+                fileUrl = Path.Combine(imgXml, firstFileName);
+                filePath = Path.Combine(tmpDir, fileUrl);
+                fd = new OpenFileDialog
+                {
+                    //Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
+                    Filter = null,
+                    Title = Lang._("AddAttachment")
+                };
+                atw = newXmlRoot.FindWidget<AttachmentWidget>();
+                if (atw == null)
+                {
+                   newXmlRoot.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { filePath } });
+                }
+                
+
                 mindMapRoot.Children.Insert(mindMapRoot.Children.Count, newXmlRoot);
                 RecursionTopic(xmindName, node, newXmlRoot, xmlns);
-                //DeleteDir(tmpDir);
             }
         }
-
-
-
 
 
 
@@ -325,7 +407,10 @@ namespace C2.Model.MindMaps
                 {
 
                     firstFileName = nodeSingle.Attributes["xlink:href"].Value.Replace("xap:attachments/", "");
+                    //if (!File.Exists(imgXml))
+                        //imgXml = "resources";
                     fileUrl = Path.Combine(imgXml, firstFileName);
+                    tmpDir = Path.Combine(Dpan, xmindName);
                     filePath = Path.Combine(tmpDir, fileUrl);
                     fd = new OpenFileDialog
                     {
@@ -350,9 +435,10 @@ namespace C2.Model.MindMaps
 
                     ImgeName = nodeSingle["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
                     imgXml = "attachments";
+                    //if (!File.Exists(imgXml))
+                        //imgXml = "resources";
                     imageUrl = Path.Combine(imgXml, ImgeName);
                     tmpDir = Path.Combine(Dpan, xmindName);
-                    //tmpDir = Path.Combine(Global.TempDirectory, xmindName);
                     imagePath = Path.Combine(tmpDir, imageUrl);
                     picutreWidget = new PictureWidget();
                     CurrentObject = new PictureWidget.PictureDesign
@@ -373,9 +459,50 @@ namespace C2.Model.MindMaps
                 }
 
 
+
+                //图片挂件
+                ImgeName = nodeSingle["xhtml:img"].GetAttribute("xhtml:src").Replace("xap:attachments/", "");
+                imgXml = "attachments";
+                //if (!File.Exists(imgXml))
+                    //imgXml = "resources";
+                imageUrl = Path.Combine(imgXml, ImgeName);
+                tmpDir = Path.Combine(Dpan, xmindName);
+                imagePath = Path.Combine(tmpDir, imageUrl);
+                picutreWidget = new PictureWidget();
+                CurrentObject = new PictureWidget.PictureDesign
+                {
+                    SourceType = PictureSource.File,
+                    Url = imagePath,
+                    AddToLibrary = false,
+                    LimitImageSize = true,
+                    Name = Path.GetFileNameWithoutExtension(imagePath),
+                    EmbedIn = false
+                };
+                picutreWidget.Image = CurrentObject;
+                xmlRoot.Widgets.Add(picutreWidget);
+
+
+                //附件挂件 
+                firstFileName = nodeSingle.Attributes["xlink:href"].Value.Replace("xap:attachments/", "");
+                //if (!File.Exists(imgXml))
+                    //imgXml = "resources";
+                fileUrl = Path.Combine(imgXml, firstFileName);
+                filePath = Path.Combine(tmpDir, fileUrl);
+                fd = new OpenFileDialog
+                {
+                    //Filter = "文件|*.docx;*.xlsx;*.doc;*.xls;*.pdf;*.txt;*.bcp;*.xmind",
+                    Filter = null,
+                    Title = Lang._("AddAttachment")
+                };
+                atw = xmlRoot.FindWidget<AttachmentWidget>();
+                if (atw == null)
+                {
+                    xmlRoot.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { filePath } });
+                }
+                
+
                 mindMap_root.Children.Insert(mindMap_root.Children.Count, xmlRoot);
                 RecursionTopic(xmindName, nodeSingle, xmlRoot, xmlns);
-                //DeleteDir(tmpDir);
             }
         }
 
