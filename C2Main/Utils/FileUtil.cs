@@ -116,6 +116,16 @@ namespace C2.Utils
             return String.Empty;
         }
 
+        public static void FileWriteToEnd(String ffp, String content)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(ffp, false))
+                    sw.Write(content);
+            }
+            catch { }
+        }
+
         public static byte[] FileReadBytesToEnd(String ffp)
         {
             try

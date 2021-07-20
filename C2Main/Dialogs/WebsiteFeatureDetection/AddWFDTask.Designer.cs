@@ -64,7 +64,7 @@
             this.taskNameTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.taskNameTextBox.Location = new System.Drawing.Point(103, 36);
             this.taskNameTextBox.Name = "taskNameTextBox";
-            this.taskNameTextBox.Size = new System.Drawing.Size(259, 25);
+            this.taskNameTextBox.Size = new System.Drawing.Size(272, 25);
             this.taskNameTextBox.TabIndex = 10005;
             // 
             // filePathTextBox
@@ -74,13 +74,13 @@
             this.filePathTextBox.Location = new System.Drawing.Point(103, 84);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(259, 25);
+            this.filePathTextBox.Size = new System.Drawing.Size(272, 25);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(383, 85);
+            this.browserButton.Location = new System.Drawing.Point(393, 85);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(59, 23);
             this.browserButton.TabIndex = 10007;
@@ -110,9 +110,9 @@
             this.md5TextBox.Multiline = true;
             this.md5TextBox.Name = "md5TextBox";
             this.md5TextBox.ReadOnly = true;
-            this.md5TextBox.Size = new System.Drawing.Size(259, 126);
+            this.md5TextBox.Size = new System.Drawing.Size(272, 126);
             this.md5TextBox.TabIndex = 10013;
-            this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V内容后创建任务,施工中...";
+            this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V内容后创建任务";
             this.md5TextBox.WordWrap = false;
             // 
             // pasteModeCB
