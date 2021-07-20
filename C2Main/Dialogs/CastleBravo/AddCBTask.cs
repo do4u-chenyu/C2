@@ -170,8 +170,12 @@ namespace C2.Dialogs.CastleBravo
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
         {
             this.md5TextBox.Clear();
-            this.md5TextBox.ReadOnly = !this.pasteModeCB.Checked;
-            this.filePathTextBox.ReadOnly = !this.md5TextBox.ReadOnly;
+            this.filePathTextBox.Clear();
+
+            this.md5TextBox.ReadOnly      = !this.pasteModeCB.Checked;
+            this.browserButton.Enabled    = !this.pasteModeCB.Checked;
+            this.filePathTextBox.ReadOnly =  this.pasteModeCB.Checked;
+
             if (this.pasteModeCB.Checked)
                 FilePath = Path.Combine(Global.TempDirectory, Guid.NewGuid().ToString("N") + ".txt");
             else
