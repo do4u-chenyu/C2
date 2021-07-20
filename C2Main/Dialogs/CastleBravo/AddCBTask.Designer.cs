@@ -66,22 +66,22 @@
             // 
             this.taskNameTextBox.Location = new System.Drawing.Point(96, 56);
             this.taskNameTextBox.Name = "taskNameTextBox";
-            this.taskNameTextBox.Size = new System.Drawing.Size(259, 21);
+            this.taskNameTextBox.Size = new System.Drawing.Size(279, 21);
             this.taskNameTextBox.TabIndex = 10005;
             // 
             // filePathTextBox
             // 
             this.filePathTextBox.Location = new System.Drawing.Point(96, 100);
             this.filePathTextBox.Name = "filePathTextBox";
-            this.filePathTextBox.Size = new System.Drawing.Size(259, 21);
+            this.filePathTextBox.Size = new System.Drawing.Size(279, 21);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(366, 100);
+            this.browserButton.Location = new System.Drawing.Point(383, 100);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(90, 24);
+            this.browserButton.Size = new System.Drawing.Size(73, 24);
             this.browserButton.TabIndex = 10007;
             this.browserButton.Text = "+浏览";
             this.browserButton.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             "目标侦察(施工中...)"});
             this.taskComboBox.Location = new System.Drawing.Point(96, 13);
             this.taskComboBox.Name = "taskComboBox";
-            this.taskComboBox.Size = new System.Drawing.Size(259, 20);
+            this.taskComboBox.Size = new System.Drawing.Size(279, 20);
             this.taskComboBox.TabIndex = 10010;
             this.taskComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskComboBox_SelectedIndexChanged);
             // 
@@ -145,9 +145,9 @@
             "SHA256",
             "SHA512",
             "宝塔面板"});
-            this.modeComboBox.Location = new System.Drawing.Point(366, 57);
+            this.modeComboBox.Location = new System.Drawing.Point(383, 57);
             this.modeComboBox.Name = "modeComboBox";
-            this.modeComboBox.Size = new System.Drawing.Size(90, 20);
+            this.modeComboBox.Size = new System.Drawing.Size(73, 20);
             this.modeComboBox.TabIndex = 10011;
             // 
             // md5TextBox
@@ -157,7 +157,7 @@
             this.md5TextBox.Multiline = true;
             this.md5TextBox.Name = "md5TextBox";
             this.md5TextBox.ReadOnly = true;
-            this.md5TextBox.Size = new System.Drawing.Size(259, 117);
+            this.md5TextBox.Size = new System.Drawing.Size(279, 117);
             this.md5TextBox.TabIndex = 10012;
             this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V内容后创建任务";
             this.md5TextBox.WordWrap = false;
