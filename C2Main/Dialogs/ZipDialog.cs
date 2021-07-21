@@ -96,7 +96,8 @@ namespace C2.Dialogs
         {
             fd = new OpenFileDialog
             {
-                Filter = "业务视图文件(*.c2)|*.c2|zip压缩包(*.zip)|*.zip|Word文件(*.docx;*.doc)|*.docx;*.doc|xmind文件(*.xmind)|*.xmind",
+                // Filter = "业务视图文件(*.c2)|*.c2|zip压缩包(*.zip)|*.zip|Word文件(*.docx;*.doc)|*.docx;*.doc|xmind文件(*.xmind)|*.xmind",
+                Filter = "文件类型|*.c2;*.docx;*.doc;*.xmind|zip压缩包(*.zip)|*.zip",
                 Title = "导入业务视图",
                 AddExtension = true
             };
