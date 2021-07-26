@@ -3203,7 +3203,9 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py.zip" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
