@@ -185,7 +185,7 @@ class Airport:
             ls = ["Path", "sites_path", "serverType", "distribution", "memSize", "backup_path"]
             for j in ls:
                 data[j] = cookie_dict.get(j, "")
-            data["sites_path"] = data["Path"].replace(data["sites_path"],"")
+            data["sites_path"] = data["Path"].replace(data["sites_path"],"") if data["sites_path"] else ""
             data["Phone"] = self.get_phone(cookie_dict.get("bt_user_info",""))
     
         if model == "sf":
