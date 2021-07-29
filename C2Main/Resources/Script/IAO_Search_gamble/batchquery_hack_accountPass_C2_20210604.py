@@ -33,7 +33,7 @@ class Airport:
                 "key" : ["eval AND _POST","assert AND _POST","base64_decode AND _POST","Ba”.”SE6”.”4_dEc”.”OdE OR @ev”.”al","Response.Write OR Response.End OR _USERAGENT:antSword","@ini_set “display_errors”,”0″","_HOST:www.mtqyz.com","_HOST:www.hebeilvteng.com","_HOST:www.33ddos.com","_HOST:www.33ddos.cn","_HOST:www.33ddos.org","_HOST:www.33ddos.cc OR _HOST:www.33ddos.net OR _HOST:v1.dr-yun.org OR _HOST:v2.dr-yun.org OR _HOST:v3.dr-yun.org OR _HOST:www.360zs.cn OR _HOST:www2.360zs.cn","_HOST:www.999yingjia.com"]
             },
             "ddos" : {
-                "col" : self.all_items + ['USERNAME', 'PASSWORD', 'keyWords'],
+                "col" : self.all_items + ['USERNAME', 'PASSWORD', 'keyWords', 'post_last_line'],
                 "key" : ["register.php AND username AND email AND password AND password_r AND checkcode AND tos AND register"," login.php AND username AND password AND checkcode AND login"," ajax.php  AND reateorder AND tradeno AND gid AND allprice AND price AND qq AND type AND number AND paypass AND coupon AND phone AND email"," activation.php AND value"," ajax AND login.php AND register AND username AND password AND rpassword AND scode AND email AND question AND answer"," ajax AND login.php AND login AND username AND password"," ajax.php createorder AND tradeno AND gid AND allprice AND price AND qq AND type AND number AND paypass AND coupon AND phone AND email"," user AND code.php AND code AND jihuo"," home AND login.php AND username AND email AND qq AND scode AND password AND password2 AND geetest_challenge AND geetest_validate AND geetest_seccode AND agree AND register"," home AND login.php AND username AND password AND Login"," home AND code.php AND code AND jihuo"," ajax.php AND create AND out_trade_no AND gid AND money AND rel AND type"," Register AND user_name AND user_pass AND email_code AND token"," Login AND user_name AND user_pass AND code AND token"," Attack AND ip AND port AND type AND time"," api.php AND username AND password AND host AND port AND time AND method"]
             },
             "apk" : {
@@ -41,7 +41,7 @@ class Airport:
                 "key" : ["_RELATIVEURL:apk"," apk"," api.tw06.xlmc.sec.miui.com PackageName apk /api/ad/fetch/download"," adfilter.imtt.qq.com TURL=http apk"]
             },
             "xss" : {
-                "col" : self.all_items + ['USERNAME', 'PASSWORD','_COOKIE', '_MAINFILE', '_TITLE', '_TEXT', 'keyWords'],
+                "col" : self.all_items + ['USERNAME', 'PASSWORD','_COOKIE', '_MAINFILE', '_TITLE', '_TEXT', 'keyWords', 'post_last_line'],
                 "key" : ["_RELATIVEURL:do=register&act=submit AND key AND user AND email AND phone AND pwd AND pwd2","_RELATIVEURL:do=login&act=submit AND user AND pwd","_RELATIVEURL:do=project&act=create_submit AND token AND title AND description","_RELATIVEURL:do=project&act=setcode_submit AND token AND id AND ty AND setkey_1_keepsession AND modules AND setkey_15_info AND code","_RELATIVEURL:do=project&act=delcontent&r AND id AND token","_RELATIVEURL:index/user/doregister.html AND __token__ AND invitecode AND username AND email AND password AND password2","_RELATIVEURL:index/user/dologin.html AND username AND password"]
             },
             "sf" : {
@@ -49,7 +49,7 @@ class Airport:
                 "key" : ["pay_callbackurl"]
             },
             "vps" : {
-                "col" : self.all_items + ['USERNAME', 'PASSWORD','_MAINFILE', '_QUERY_CONTENT', 'keyWords'],
+                "col" : self.all_items + ['USERNAME', 'PASSWORD','_MAINFILE', '_QUERY_CONTENT', 'keyWords', 'post_last_line'],
                 "key" : ["_HOST:www.sunnet365.com","_HOST:chm666.com","_HOST:www.beijiacloud.com","_HOST:www.zhekou5.com","_HOST:www.tiebavps.com","_HOST:www.lantuvps.com","_HOST:www.cbvpa.com","_HOST:www.jzvps.net","_HOST:www.5jwl.com","_HOST:www.mayivps.com","_HOST:7sensen.com","_HOST:www.idc789.com","_HOST:e8088.com","_HOST:263vps.com","_HOST:chenxunyun.com","_HOST:scvps.cn","_HOST:yh168.com","_HOST:plaidc.com","_HOST:leidianvps.com","_HOST:maini168.com","_HOST:91vps.com","_HOST:wanbianyun.com","_HOST:09vps.com","_HOST:chm666.com","_HOST:diyavps.com","_HOST:yunlifang.cn","_HOST:hunbovps.com","_HOST:30vps.com","_HOST:miandns.com","_HOST:nuobin.com","_HOST:cbvps.com","_HOST:74dns.com","_HOST:lsjvps.com","_HOST:zhimaruanjian.com","_HOST:xiziyun.cn","_HOST:taiyangruanjian.com","_HOST:idcbest.com","_HOST:zu029.com","_HOST:qgvps.com","_HOST:ygvps.com","_HOST:988vps.com"]
             },
             "qg" : {
@@ -157,7 +157,19 @@ class Airport:
             for x in kv:
                 if x[0] == 'pay_callbackurl':
                     return x[1]
-                    
+             
+    def ext_mainfile(self, file_url):
+        try:
+            req = urllib2.Request(file_url)
+            response = urllib2.urlopen(req, timeout=2)
+            content = response.read().decode()
+            pload = content.split('\n')[-1].replace('\t','').replace('\r','').replace('\n','').strip()
+            if len(pload)>0:
+                return pload.strip()
+
+        except Exception, e:
+            return ''
+            
     def deal(self, data, model):
         if model == "bt":
             if data['_RELATIVEURL'] != "/login":
@@ -199,7 +211,11 @@ class Airport:
                 p_num = self.re_verify(tmp)
                 if p_num >= 2:
                     data['p_num'] = str(p_num)
-                
+        if model == "vps" or model == "ddos" or model == "xss":
+            post_last_line= self.ext_mainfile(data.get('_MAINFILE',''))
+            if post_last_line:
+                data['post_last_line'] = post_last_line
+        
         return data
         
     def run(self, model):
