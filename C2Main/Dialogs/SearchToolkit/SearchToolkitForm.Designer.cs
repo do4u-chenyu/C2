@@ -62,12 +62,14 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.taskInfoGB.SuspendLayout();
             this.panelCenter.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -269,6 +271,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.taskInfoGB);
             this.groupBox1.Controls.Add(this.taskNameTB);
             this.groupBox1.Controls.Add(this.label5);
@@ -289,9 +292,9 @@
             // taskInfoGB
             // 
             this.taskInfoGB.Controls.Add(this.taskStatusLabel);
-            this.taskInfoGB.Location = new System.Drawing.Point(316, 24);
+            this.taskInfoGB.Location = new System.Drawing.Point(321, 24);
             this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(287, 84);
+            this.taskInfoGB.Size = new System.Drawing.Size(282, 84);
             this.taskInfoGB.TabIndex = 45;
             this.taskInfoGB.TabStop = false;
             this.taskInfoGB.Text = "任务状态";
@@ -453,6 +456,20 @@
             this.saveFileDialog.Filter = "tgz压缩包 (*.tgz)|*.tgz|tar.gz压缩包|*.tar.gz|zip压缩包|*.zip|所有文件|*.*";
             this.saveFileDialog.Title = "全文模型结果下载";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox1.Image = global::C2.Properties.Resources.designer;
+            this.pictureBox1.InitialImage = global::C2.Properties.Resources.designer;
+            this.pictureBox1.Location = new System.Drawing.Point(294, 36);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 46;
+            this.pictureBox1.TabStop = false;
+            // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -477,6 +494,7 @@
             this.panelCenter.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -517,5 +535,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox interfaceIPTB;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

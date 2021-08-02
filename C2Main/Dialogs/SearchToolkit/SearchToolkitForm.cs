@@ -12,7 +12,7 @@ namespace C2.SearchToolkit
         private SearchTaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
-        private static readonly LogUtil log = LogUtil.GetInstance("SearchToolkitForm");
+        private static readonly LogUtil log = LogUtil.GetInstance("SearchToolkit");
         public SearchToolkitForm()
         {
             InitializeComponent();
@@ -277,7 +277,7 @@ namespace C2.SearchToolkit
             if (ValidateInputControls())
             {
                 SearchTaskInfo task = this.GenTaskInfo();
-
+                log.Info(String.Format("=========== 任务:{0} 开始连接测试 ===========", task.TaskName));
                 using (GuarderUtil.WaitCursor)
                     if (new BastionAPI(task).TestConn())
                         HelpUtil.ShowMessageBox("登陆堡垒机测试成功");

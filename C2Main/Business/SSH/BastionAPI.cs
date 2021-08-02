@@ -32,6 +32,8 @@ namespace C2.Business.SSH
 
         private bool downloadCancel = false;
 
+        private static readonly LogUtil log = LogUtil.GetInstance("SearchToolkit");
+
 
         private String TargetScript { get => task.TargetScript; }
         // {workspace}/pid_taskcreatetime
@@ -78,6 +80,7 @@ namespace C2.Business.SSH
             catch (Exception ex)
             {
                 task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
+                log.Warn(task.LastErrorMsg);
             }
 
             try
@@ -90,6 +93,7 @@ namespace C2.Business.SSH
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
+                log.Warn(task.LastErrorMsg);
             }
 
             try
@@ -104,11 +108,15 @@ namespace C2.Business.SSH
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
+                log.Warn(task.LastErrorMsg);
             }
 
             // 登陆堡垒机成功了，但是在跳转全文机的过程中出现了问题
             if (!Oops() && !CheckJumpOK())
+            {
                 task.LastErrorMsg = "登陆堡垒机成功了，但是在跳转全文机的过程中出现了问题";
+                log.Warn(task.LastErrorMsg);
+            }
 
             return this;
         }
@@ -204,6 +212,7 @@ namespace C2.Business.SSH
                 if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
+                    log.Warn(task.LastErrorMsg);
                     return false;
                 }
                 // 读缓存起始位置, 0 或 1(情况3时)
@@ -219,6 +228,7 @@ namespace C2.Business.SSH
                     if (bytesRead == 0) // 超时
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
+                        log.Warn(task.LastErrorMsg);
                         return false;
                     }
 
@@ -245,6 +255,7 @@ namespace C2.Business.SSH
                     if (!shell.ReadByte(ref one, Timeout))
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：远端读错误", task.TaskName);
+                        log.Warn(task.LastErrorMsg);
                         return false;
                     }
 
@@ -309,6 +320,7 @@ namespace C2.Business.SSH
             if (len <= 0)
             {
                 task.LastErrorMsg = String.Format("任务【{0}】: 文件不存在或空文件", task.TaskName);
+                log.Warn(task.LastErrorMsg);
                 return false;
             }
 
@@ -322,6 +334,7 @@ namespace C2.Business.SSH
             catch (Exception ex)
             {
                 task.LastErrorMsg = ex.Message;
+                log.Warn(task.LastErrorMsg);
                 ret = false;
             }
 
@@ -345,6 +358,7 @@ namespace C2.Business.SSH
             if (!File.Exists(ffp))
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败, 脚本丢失{1}", task.SearchAgentIP, ffp);
+                log.Warn(task.LastErrorMsg);
                 return this;
             }
 
@@ -362,7 +376,11 @@ namespace C2.Business.SSH
             // 解码，解压
             String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
             if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+            {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+                log.Warn(task.LastErrorMsg);
+            }
+                
 
             return this;
         }
@@ -377,7 +395,11 @@ namespace C2.Business.SSH
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
                 if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+                {
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+                    log.Warn(task.LastErrorMsg);
+                }
+                    
             }
 
             return this;
@@ -401,7 +423,11 @@ namespace C2.Business.SSH
             String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
             if (pid.IsEmpty())
+            {
                 task.LastErrorMsg = String.Format("全文机已连接但执行脚本失败:{0}", TargetScript);
+                log.Warn(task.LastErrorMsg);
+            }
+                
             return pid;
         }
 
@@ -410,7 +436,12 @@ namespace C2.Business.SSH
             if (Oops()) return this;
 
             String command = String.Format("cd {0}", TaskDirectory);
-            task.LastErrorMsg = RunCommand(command, shell).IsEmpty() ? "全文机创建工作目录失败" : String.Empty;
+            task.LastErrorMsg = String.Empty;
+            if (RunCommand(command, shell).IsEmpty())
+            {
+                task.LastErrorMsg = "全文机创建工作目录失败";
+                log.Warn(task.LastErrorMsg);
+            }
             return this;
         }
 
