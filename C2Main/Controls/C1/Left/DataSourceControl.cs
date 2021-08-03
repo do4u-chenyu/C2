@@ -448,7 +448,7 @@ namespace C2.Controls.Left
             {
                 this.schemaComboBox.Text = defaultSchema;
                 this.schemaComboBox.Enabled = false;
-            }
+            } 
             else
             {
                 this.schemaComboBox.Text = users.Contains(loginUser.ToUpper()) ? defaultSchema : "选择架构";

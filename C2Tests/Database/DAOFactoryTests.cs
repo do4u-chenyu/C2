@@ -11,6 +11,7 @@ namespace C2.Database.Tests
     {
         private DatabaseItem oralcDBI = new DatabaseItem(DatabaseType.Oracle, "114.55.248.85", "orcl", String.Empty, "1521", "test", "test", table: new Table("test", "TEST_100W"));
         private DatabaseItem hiveDBI = new DatabaseItem(DatabaseType.Hive, "10.1.126.4", String.Empty, String.Empty, "10000", "root", "123456", table: new Table("default", "hive1"));
+        private DatabaseItem MysqlDBI = new DatabaseItem(DatabaseType.Mysql, "10.1.126.4", String.Empty, String.Empty, "3306", "root", "123456", table: new Table("mysql", "sys"));
         List<DatabaseItem> dbis;
         List<IDAO> daos;
         private string[] userOrDb;
@@ -18,11 +19,13 @@ namespace C2.Database.Tests
         {
             dbis = new List<DatabaseItem>() {
                 oralcDBI,
-                hiveDBI 
+                hiveDBI ,
+                MysqlDBI
             };
             userOrDb = new string[]
             {
                 oralcDBI.User,
+                MysqlDBI.User,
                 "default"
             };
             daos = new List<IDAO>();
@@ -50,8 +53,10 @@ namespace C2.Database.Tests
         {
             IDAO oracleDAO = DAOFactory.CreateDAO(oralcDBI);
             IDAO hiveDAO = DAOFactory.CreateDAO(hiveDBI);
+            IDAO MysqlDAO = DAOFactory.CreateDAO(MysqlDBI);
             Assert.IsNotNull(oracleDAO);
             Assert.IsNotNull(hiveDAO);
+            Assert.IsNotNull(MysqlDAO);
         }
         [TestMethod()]
         public void TestConnTest()

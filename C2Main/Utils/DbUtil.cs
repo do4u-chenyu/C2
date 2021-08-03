@@ -70,6 +70,8 @@ namespace C2.Utils
                     return HiveDeaultSchema;
                 case DatabaseType.Postgre:
                     return PostgreDeaultSchema;
+                case DatabaseType.Mysql:
+                    return user;
                 default:
                     return String.Empty;
             }
