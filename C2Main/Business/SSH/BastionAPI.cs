@@ -75,6 +75,7 @@ namespace C2.Business.SSH
         {
             try
             {
+                log.Info(String.Format("任务:{0} 登陆堡垒机 {1}@{2}", task.TaskName, task.BastionIP, task.Username));
                 ssh.Connect();  // 登陆堡垒
             }
             catch (Exception ex)
@@ -85,6 +86,7 @@ namespace C2.Business.SSH
 
             try
             {
+                log.Info(String.Format("任务:{0} 开始1阶跳转", task.TaskName));
                 Jump();         // 跳转
             }
             catch (Exception ex)
@@ -100,7 +102,11 @@ namespace C2.Business.SSH
             {
                 // 有些地方需要二次跳转
                 if (!task.InterfaceIP.IsEmpty())
+                {
+                    log.Info(String.Format("任务:{0} 开始2阶跳转", task.TaskName));
                     SSHJump();
+                }
+                    
             }
             catch (Exception ex)
             {
@@ -349,6 +355,8 @@ namespace C2.Business.SSH
         public BastionAPI UploadTaskScript()
         {
             if (Oops()) return this;
+            log.Info(String.Format("任务:{0} 开始上传模型脚本 {1}", task.TaskName, TargetScript));
+
             String d = TaskDirectory + "/" + TargetScript;
             return UploadScript(task.LocalPyZipPath, d);
         }
@@ -413,11 +421,19 @@ namespace C2.Business.SSH
             return String.Empty;
         }
 
+        private String ConstructTaskCommand()
+        {
+            return String.Format("python {0}", TargetScript);
+        }
+
         public String RunTask()
         {
             if (Oops()) return String.Empty;
+            String command = ConstructTaskCommand();
 
-            String command = String.Format("python {0}", TargetScript);
+            log.Info(String.Format("任务【{0}】: 全文主节点执行任务命令 {1}", task.TaskName, command));
+
+            
             //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
             String pid = GetPID(ret);
@@ -434,7 +450,8 @@ namespace C2.Business.SSH
         public BastionAPI EnterTaskDirectory()
         {
             if (Oops()) return this;
-
+            log.Info(String.Format("任务:{0} cd 进入工作目录{1}", task.TaskName, TaskDirectory));
+            
             String command = String.Format("cd {0}", TaskDirectory);
             task.LastErrorMsg = String.Empty;
             if (RunCommand(command, shell).IsEmpty())
@@ -448,6 +465,7 @@ namespace C2.Business.SSH
         public BastionAPI DeleteTaskDirectory()
         {
             if (Oops()) return this;
+            log.Info(String.Format("任务【{0}】: 删除 TaskDirectory", task.TaskName));
             // 删除 临时目录
             if (IsSafePath(TaskDirectory))
                 RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
@@ -457,6 +475,8 @@ namespace C2.Business.SSH
         public BastionAPI CreateTaskDirectory()
         {
             if (Oops()) return this;
+            log.Info(String.Format("任务【{0}】: 创建 TaskDirectory : {1}", task.TaskName, TaskDirectory));
+            
             String command = String.Format("mkdir -p {0}", TaskDirectory);
             RunCommand(command, shell);
             return this;
