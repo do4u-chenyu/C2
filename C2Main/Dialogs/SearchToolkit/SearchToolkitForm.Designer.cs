@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.interfaceIPTB = new System.Windows.Forms.TextBox();
@@ -47,6 +48,7 @@
             this.passwordTB = new System.Windows.Forms.TextBox();
             this.usernameTB = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TaskConfigPB = new System.Windows.Forms.PictureBox();
             this.taskInfoGB = new System.Windows.Forms.GroupBox();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.taskNameTB = new System.Windows.Forms.TextBox();
@@ -62,8 +64,10 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TaskConfigPB)).BeginInit();
             this.taskInfoGB.SuspendLayout();
             this.panelCenter.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -116,16 +120,16 @@
             this.interfaceIPTB.Location = new System.Drawing.Point(296, 75);
             this.interfaceIPTB.Name = "interfaceIPTB";
             this.interfaceIPTB.Size = new System.Drawing.Size(136, 25);
-            this.interfaceIPTB.TabIndex = 49;
+            this.interfaceIPTB.TabIndex = 7;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(244, 77);
+            this.label9.Location = new System.Drawing.Point(235, 77);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 19);
+            this.label9.Size = new System.Drawing.Size(61, 19);
             this.label9.TabIndex = 48;
-            this.label9.Text = "界面机";
+            this.label9.Text = "界面机IP";
             // 
             // connectTestButton
             // 
@@ -134,7 +138,7 @@
             this.connectTestButton.Location = new System.Drawing.Point(247, 115);
             this.connectTestButton.Name = "connectTestButton";
             this.connectTestButton.Size = new System.Drawing.Size(68, 27);
-            this.connectTestButton.TabIndex = 46;
+            this.connectTestButton.TabIndex = 9;
             this.connectTestButton.Text = "测试连通";
             this.connectTestButton.UseVisualStyleBackColor = true;
             this.connectTestButton.Click += new System.EventHandler(this.ConnectTestButton_Click);
@@ -212,7 +216,7 @@
             this.searchAgentIPTB.Location = new System.Drawing.Point(81, 116);
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
-            this.searchAgentIPTB.TabIndex = 6;
+            this.searchAgentIPTB.TabIndex = 8;
             this.searchAgentIPTB.Text = "15.1.1.1";
             // 
             // label15
@@ -227,27 +231,27 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(257, 35);
+            this.label16.Location = new System.Drawing.Point(235, 36);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(35, 19);
+            this.label16.Size = new System.Drawing.Size(61, 19);
             this.label16.TabIndex = 4;
-            this.label16.Text = "密码";
+            this.label16.Text = "堡垒密码";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(29, 35);
+            this.label17.Location = new System.Drawing.Point(5, 36);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(48, 19);
+            this.label17.Size = new System.Drawing.Size(74, 19);
             this.label17.TabIndex = 3;
-            this.label17.Text = "用户名";
+            this.label17.Text = "堡垒用户名";
             // 
             // bastionIPTB
             // 
             this.bastionIPTB.Location = new System.Drawing.Point(81, 75);
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
-            this.bastionIPTB.TabIndex = 2;
+            this.bastionIPTB.TabIndex = 6;
             this.bastionIPTB.Text = "15.0.0.1:22";
             // 
             // passwordTB
@@ -256,19 +260,20 @@
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.PasswordChar = '*';
             this.passwordTB.Size = new System.Drawing.Size(136, 25);
-            this.passwordTB.TabIndex = 1;
+            this.passwordTB.TabIndex = 5;
             // 
             // usernameTB
             // 
             this.usernameTB.Location = new System.Drawing.Point(81, 34);
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(137, 25);
-            this.usernameTB.TabIndex = 0;
+            this.usernameTB.TabIndex = 4;
             this.usernameTB.Text = "X1587";
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.TaskConfigPB);
             this.groupBox1.Controls.Add(this.taskInfoGB);
             this.groupBox1.Controls.Add(this.taskNameTB);
             this.groupBox1.Controls.Add(this.label5);
@@ -286,12 +291,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模型配置";
             // 
+            // TaskConfigPB
+            // 
+            this.TaskConfigPB.BackColor = System.Drawing.Color.Transparent;
+            this.TaskConfigPB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.TaskConfigPB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TaskConfigPB.Image = global::C2.Properties.Resources.designer;
+            this.TaskConfigPB.InitialImage = global::C2.Properties.Resources.designer;
+            this.TaskConfigPB.Location = new System.Drawing.Point(294, 36);
+            this.TaskConfigPB.Margin = new System.Windows.Forms.Padding(0);
+            this.TaskConfigPB.Name = "TaskConfigPB";
+            this.TaskConfigPB.Size = new System.Drawing.Size(24, 24);
+            this.TaskConfigPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.TaskConfigPB.TabIndex = 46;
+            this.TaskConfigPB.TabStop = false;
+            this.toolTip1.SetToolTip(this.TaskConfigPB, "自定义模型参数");
+            this.TaskConfigPB.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TaskConfigPB_MouseClick);
+            this.TaskConfigPB.MouseEnter += new System.EventHandler(this.TaskConfigPB_MouseEnter);
+            this.TaskConfigPB.MouseLeave += new System.EventHandler(this.TaskConfigPB_MouseLeave);
+            // 
             // taskInfoGB
             // 
             this.taskInfoGB.Controls.Add(this.taskStatusLabel);
-            this.taskInfoGB.Location = new System.Drawing.Point(316, 24);
+            this.taskInfoGB.Location = new System.Drawing.Point(321, 24);
             this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(287, 84);
+            this.taskInfoGB.Size = new System.Drawing.Size(282, 84);
             this.taskInfoGB.TabIndex = 45;
             this.taskInfoGB.TabStop = false;
             this.taskInfoGB.Text = "任务状态";
@@ -302,7 +326,7 @@
             this.taskStatusLabel.AutoSize = true;
             this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskStatusLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.taskStatusLabel.Location = new System.Drawing.Point(66, 28);
+            this.taskStatusLabel.Location = new System.Drawing.Point(70, 28);
             this.taskStatusLabel.Name = "taskStatusLabel";
             this.taskStatusLabel.Size = new System.Drawing.Size(0, 36);
             this.taskStatusLabel.TabIndex = 0;
@@ -357,7 +381,7 @@
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
-            this.taskModelComboBox.TabIndex = 41;
+            this.taskModelComboBox.TabIndex = 1;
             this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // downloadButton
@@ -381,7 +405,7 @@
             this.remoteWorkspaceTB.Name = "remoteWorkspaceTB";
             this.remoteWorkspaceTB.ReadOnly = true;
             this.remoteWorkspaceTB.Size = new System.Drawing.Size(448, 25);
-            this.remoteWorkspaceTB.TabIndex = 36;
+            this.remoteWorkspaceTB.TabIndex = 2;
             this.remoteWorkspaceTB.Text = "/tmp/iao/search_toolkit/gamble";
             // 
             // label4
@@ -392,6 +416,7 @@
             this.label4.Size = new System.Drawing.Size(61, 19);
             this.label4.TabIndex = 35;
             this.label4.Text = "远程目录";
+            this.toolTip1.SetToolTip(this.label4, "双击复制远程目录到剪切板");
             this.label4.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Label4_MouseDoubleClick);
             // 
             // panelCenter
@@ -421,7 +446,7 @@
             this.cancelButton.Location = new System.Drawing.Point(533, 12);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(60, 27);
-            this.cancelButton.TabIndex = 40;
+            this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -433,7 +458,7 @@
             this.confirmButton.Location = new System.Drawing.Point(417, 12);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 39;
+            this.confirmButton.TabIndex = 10;
             this.confirmButton.Text = "创建";
             this.confirmButton.UseVisualStyleBackColor = false;
             this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
@@ -472,6 +497,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TaskConfigPB)).EndInit();
             this.taskInfoGB.ResumeLayout(false);
             this.taskInfoGB.PerformLayout();
             this.panelCenter.ResumeLayout(false);
@@ -517,5 +543,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox interfaceIPTB;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox TaskConfigPB;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

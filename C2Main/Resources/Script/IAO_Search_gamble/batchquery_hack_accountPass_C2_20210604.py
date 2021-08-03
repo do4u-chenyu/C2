@@ -18,10 +18,11 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 class Airport:
-    def __init__(self,data_path,startTime,endTime):
+    def __init__(self,data_path,startTime,endTime,LOGGER):
         self.data_path = data_path
         self.startTime = startTime
         self.endTime   = endTime
+        self.LOGGER    = LOGGER
         self.all_items = ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER']
         self.model_key_dict = {
             "bt" : {
@@ -33,7 +34,7 @@ class Airport:
                 "key" : ["eval AND _POST","assert AND _POST","base64_decode AND _POST","Ba”.”SE6”.”4_dEc”.”OdE OR @ev”.”al","Response.Write OR Response.End OR _USERAGENT:antSword","@ini_set “display_errors”,”0″","_HOST:www.mtqyz.com","_HOST:www.hebeilvteng.com","_HOST:www.33ddos.com","_HOST:www.33ddos.cn","_HOST:www.33ddos.org","_HOST:www.33ddos.cc OR _HOST:www.33ddos.net OR _HOST:v1.dr-yun.org OR _HOST:v2.dr-yun.org OR _HOST:v3.dr-yun.org OR _HOST:www.360zs.cn OR _HOST:www2.360zs.cn","_HOST:www.999yingjia.com"]
             },
             "ddos" : {
-                "col" : self.all_items + ['USERNAME', 'PASSWORD', 'keyWords'],
+                "col" : self.all_items + ['USERNAME', 'PASSWORD', 'keyWords', 'post_last_line'],
                 "key" : ["register.php AND username AND email AND password AND password_r AND checkcode AND tos AND register"," login.php AND username AND password AND checkcode AND login"," ajax.php  AND reateorder AND tradeno AND gid AND allprice AND price AND qq AND type AND number AND paypass AND coupon AND phone AND email"," activation.php AND value"," ajax AND login.php AND register AND username AND password AND rpassword AND scode AND email AND question AND answer"," ajax AND login.php AND login AND username AND password"," ajax.php createorder AND tradeno AND gid AND allprice AND price AND qq AND type AND number AND paypass AND coupon AND phone AND email"," user AND code.php AND code AND jihuo"," home AND login.php AND username AND email AND qq AND scode AND password AND password2 AND geetest_challenge AND geetest_validate AND geetest_seccode AND agree AND register"," home AND login.php AND username AND password AND Login"," home AND code.php AND code AND jihuo"," ajax.php AND create AND out_trade_no AND gid AND money AND rel AND type"," Register AND user_name AND user_pass AND email_code AND token"," Login AND user_name AND user_pass AND code AND token"," Attack AND ip AND port AND type AND time"," api.php AND username AND password AND host AND port AND time AND method"]
             },
             "apk" : {
@@ -41,7 +42,7 @@ class Airport:
                 "key" : ["_RELATIVEURL:apk"," apk"," api.tw06.xlmc.sec.miui.com PackageName apk /api/ad/fetch/download"," adfilter.imtt.qq.com TURL=http apk"]
             },
             "xss" : {
-                "col" : self.all_items + ['USERNAME', 'PASSWORD','_COOKIE', '_MAINFILE', '_TITLE', '_TEXT', 'keyWords'],
+                "col" : self.all_items + ['USERNAME', 'PASSWORD','_COOKIE', '_MAINFILE', '_TITLE', '_TEXT', 'keyWords', 'post_last_line'],
                 "key" : ["_RELATIVEURL:do=register&act=submit AND key AND user AND email AND phone AND pwd AND pwd2","_RELATIVEURL:do=login&act=submit AND user AND pwd","_RELATIVEURL:do=project&act=create_submit AND token AND title AND description","_RELATIVEURL:do=project&act=setcode_submit AND token AND id AND ty AND setkey_1_keepsession AND modules AND setkey_15_info AND code","_RELATIVEURL:do=project&act=delcontent&r AND id AND token","_RELATIVEURL:index/user/doregister.html AND __token__ AND invitecode AND username AND email AND password AND password2","_RELATIVEURL:index/user/dologin.html AND username AND password"]
             },
             "sf" : {
@@ -49,7 +50,7 @@ class Airport:
                 "key" : ["pay_callbackurl"]
             },
             "vps" : {
-                "col" : self.all_items + ['USERNAME', 'PASSWORD','_MAINFILE', '_QUERY_CONTENT', 'keyWords'],
+                "col" : self.all_items + ['USERNAME', 'PASSWORD','_MAINFILE', '_QUERY_CONTENT', 'keyWords', 'post_last_line'],
                 "key" : ["_HOST:www.sunnet365.com","_HOST:chm666.com","_HOST:www.beijiacloud.com","_HOST:www.zhekou5.com","_HOST:www.tiebavps.com","_HOST:www.lantuvps.com","_HOST:www.cbvpa.com","_HOST:www.jzvps.net","_HOST:www.5jwl.com","_HOST:www.mayivps.com","_HOST:7sensen.com","_HOST:www.idc789.com","_HOST:e8088.com","_HOST:263vps.com","_HOST:chenxunyun.com","_HOST:scvps.cn","_HOST:yh168.com","_HOST:plaidc.com","_HOST:leidianvps.com","_HOST:maini168.com","_HOST:91vps.com","_HOST:wanbianyun.com","_HOST:09vps.com","_HOST:chm666.com","_HOST:diyavps.com","_HOST:yunlifang.cn","_HOST:hunbovps.com","_HOST:30vps.com","_HOST:miandns.com","_HOST:nuobin.com","_HOST:cbvps.com","_HOST:74dns.com","_HOST:lsjvps.com","_HOST:zhimaruanjian.com","_HOST:xiziyun.cn","_HOST:taiyangruanjian.com","_HOST:idcbest.com","_HOST:zu029.com","_HOST:qgvps.com","_HOST:ygvps.com","_HOST:988vps.com"]
             },
             "qg" : {
@@ -78,7 +79,7 @@ class Airport:
         ]
         req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
         print ". /home/search/search_profile && {0}".format(" ".join(cmd))
-        LOGGER.info('QUERYTIME:{0}_{1} {2} ...wait...'.format(self.startTime, self.endTime, keyWords)) 
+        self.LOGGER.info('QUERYTIME:{0}_{1} {2} ...wait...'.format(self.startTime, self.endTime, keyWords)) 
         
         for line in req.stdout:
             line  = line.replace('\x1a','')
@@ -157,7 +158,19 @@ class Airport:
             for x in kv:
                 if x[0] == 'pay_callbackurl':
                     return x[1]
-                    
+             
+    def ext_mainfile(self, file_url):
+        try:
+            req = urllib2.Request(file_url)
+            response = urllib2.urlopen(req, timeout=2)
+            content = response.read().decode()
+            pload = content.split('\n')[-1].replace('\t','').replace('\r','').replace('\n','').strip()
+            if len(pload)>0:
+                return pload.strip()
+
+        except Exception, e:
+            return ''
+            
     def deal(self, data, model):
         if model == "bt":
             if data['_RELATIVEURL'] != "/login":
@@ -185,7 +198,7 @@ class Airport:
             ls = ["Path", "sites_path", "serverType", "distribution", "memSize", "backup_path"]
             for j in ls:
                 data[j] = cookie_dict.get(j, "")
-            data["sites_path"] = data["Path"].replace(data["sites_path"],"")
+            data["sites_path"] = data["Path"].replace(data["sites_path"],"") if data["sites_path"] else ""
             data["Phone"] = self.get_phone(cookie_dict.get("bt_user_info",""))
     
         if model == "sf":
@@ -199,7 +212,11 @@ class Airport:
                 p_num = self.re_verify(tmp)
                 if p_num >= 2:
                     data['p_num'] = str(p_num)
-                
+        if model == "vps" or model == "ddos" or model == "xss":
+            post_last_line= self.ext_mainfile(data.get('_MAINFILE',''))
+            if post_last_line:
+                data['post_last_line'] = post_last_line
+        
         return data
         
     def run(self, model):
@@ -217,7 +234,7 @@ class Airport:
                         if data:
                             f.write('\t'.join([data.get(item, '').replace("\r","").replace("\t","") for item in items]) + '\n')
                 except Exception, e:
-                    LOGGER.info('QUERY_ERROR-{0}'.format(e)) 
+                    self.LOGGER.info('QUERY_ERROR-{0}'.format(e)) 
 
 ##日志文件打印
 def init_logger(logname,filename,logger_level = logging.INFO):
@@ -234,7 +251,7 @@ def init_logger(logname,filename,logger_level = logging.INFO):
     logger.addHandler(ch)
     return logger
 
-def zip_result(DATA_PATH,ZIP_PATH):
+def zip_result(DATA_PATH,ZIP_PATH, LOGGER):
     pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
     if pipe.returncode:
@@ -247,39 +264,38 @@ def init_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
         
-def run_model(model):
-    LOGGER.info('START ' + model + ' QUERY BATCH....')
-    ap_path = os.path.join(DATA_PATH,"_result_" + model + "_" + areacode)
-    init_path(ap_path)
-    ap = Airport(ap_path,startTime,endTime)
-    ap.run(model)
-    zip_result(ap_path,ap_path+'.tgz')
-    LOGGER.info('END ' + model + ' QUERY BATCH')
-
 def main():
-    model_list = ['bt', 'hk', 'ddos', 'apk', 'xss', 'sf', 'vps', 'qg']
     for model in model_list:
-        run_model(model)
-
-    overTime = datetime.datetime.now()
-    ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S") + '_' + overTime.strftime("%Y%m%d%H%M%S") + '.tgz.tmp'
-    zip_result(DATA_PATH, ZIP_PATH)
-    ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
-    os.rename(ZIP_PATH, ZIP_SUCCEED)
+        DATA_PATH = './_queryResult_' + model + '_'
+        init_path(DATA_PATH)
+        LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
+        LOGGER.info('START ' + model + ' QUERY BATCH....')
+        ap = Airport(DATA_PATH,startTime,endTime,LOGGER)
+        ap.run(model)
+        LOGGER.info('END ' + model + ' QUERY BATCH')
+    
+        overTime = datetime.datetime.now()
+        ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S") + '_' + overTime.strftime("%Y%m%d%H%M%S") + '.tgz.tmp'
+        zip_result(DATA_PATH, ZIP_PATH, LOGGER)
+        ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
+        os.rename(ZIP_PATH, ZIP_SUCCEED)
 
 
 if __name__ == '__main__':
 
-    usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'
+    usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode] --model [modelType]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
+    modelformat = '<modelType> eg:bt'
     
     parser = OptionParser(usage)
     parser.add_option('--start',dest = 'startTime',help = dataformat)
     parser.add_option('--end',dest = 'endTime',help = dataformat)
     parser.add_option('--areacode',dest = 'areacode',help = areaformat)
+    parser.add_option('--model',dest = 'modelType',help = modelformat)
     option,args = parser.parse_args()
     
+    modelType = option.modelType
     startTime = option.startTime
     endTime = option.endTime
     areacode = option.areacode
@@ -293,9 +309,11 @@ if __name__ == '__main__':
         endTime = defaultEnd
     if areacode is None or len(areacode) != 6:
         areacode = '000000'
-    
-    DATA_PATH = './_queryResult_hack_'
-    init_path(DATA_PATH)
-    LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
+        
+    model_list = ['bt', 'hk', 'ddos', 'apk', 'xss', 'sf', 'vps', 'qg']
+    if modelType is None or modelType not in model_list:
+        pass
+    else:
+        model_list = [modelType]
     
     main()
