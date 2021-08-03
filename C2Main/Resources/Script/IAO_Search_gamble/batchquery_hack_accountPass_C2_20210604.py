@@ -18,10 +18,11 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 class Airport:
-    def __init__(self,data_path,startTime,endTime):
+    def __init__(self,data_path,startTime,endTime,LOGGER):
         self.data_path = data_path
         self.startTime = startTime
         self.endTime   = endTime
+        self.LOGGER    = LOGGER
         self.all_items = ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER']
         self.model_key_dict = {
             "bt" : {
@@ -78,7 +79,7 @@ class Airport:
         ]
         req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
         print ". /home/search/search_profile && {0}".format(" ".join(cmd))
-        LOGGER.info('QUERYTIME:{0}_{1} {2} ...wait...'.format(self.startTime, self.endTime, keyWords)) 
+        self.LOGGER.info('QUERYTIME:{0}_{1} {2} ...wait...'.format(self.startTime, self.endTime, keyWords)) 
         
         for line in req.stdout:
             line  = line.replace('\x1a','')
@@ -233,7 +234,7 @@ class Airport:
                         if data:
                             f.write('\t'.join([data.get(item, '').replace("\r","").replace("\t","") for item in items]) + '\n')
                 except Exception, e:
-                    LOGGER.info('QUERY_ERROR-{0}'.format(e)) 
+                    self.LOGGER.info('QUERY_ERROR-{0}'.format(e)) 
 
 ##日志文件打印
 def init_logger(logname,filename,logger_level = logging.INFO):
@@ -250,7 +251,7 @@ def init_logger(logname,filename,logger_level = logging.INFO):
     logger.addHandler(ch)
     return logger
 
-def zip_result(DATA_PATH,ZIP_PATH):
+def zip_result(DATA_PATH,ZIP_PATH, LOGGER):
     pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
     if pipe.returncode:
@@ -263,39 +264,38 @@ def init_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
         
-def run_model(model):
-    LOGGER.info('START ' + model + ' QUERY BATCH....')
-    ap_path = os.path.join(DATA_PATH,"_result_" + model + "_" + areacode)
-    init_path(ap_path)
-    ap = Airport(ap_path,startTime,endTime)
-    ap.run(model)
-    zip_result(ap_path,ap_path+'.tgz')
-    LOGGER.info('END ' + model + ' QUERY BATCH')
-
 def main():
-    model_list = ['bt', 'hk', 'ddos', 'apk', 'xss', 'sf', 'vps', 'qg']
     for model in model_list:
-        run_model(model)
-
-    overTime = datetime.datetime.now()
-    ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S") + '_' + overTime.strftime("%Y%m%d%H%M%S") + '.tgz.tmp'
-    zip_result(DATA_PATH, ZIP_PATH)
-    ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
-    os.rename(ZIP_PATH, ZIP_SUCCEED)
+        DATA_PATH = './_queryResult_' + model + '_'
+        init_path(DATA_PATH)
+        LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
+        LOGGER.info('START ' + model + ' QUERY BATCH....')
+        ap = Airport(DATA_PATH,startTime,endTime,LOGGER)
+        ap.run(model)
+        LOGGER.info('END ' + model + ' QUERY BATCH')
+    
+        overTime = datetime.datetime.now()
+        ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S") + '_' + overTime.strftime("%Y%m%d%H%M%S") + '.tgz.tmp'
+        zip_result(DATA_PATH, ZIP_PATH, LOGGER)
+        ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
+        os.rename(ZIP_PATH, ZIP_SUCCEED)
 
 
 if __name__ == '__main__':
 
-    usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'
+    usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode] --model [modelType]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
+    modelformat = '<modelType> eg:bt'
     
     parser = OptionParser(usage)
     parser.add_option('--start',dest = 'startTime',help = dataformat)
     parser.add_option('--end',dest = 'endTime',help = dataformat)
     parser.add_option('--areacode',dest = 'areacode',help = areaformat)
+    parser.add_option('--model',dest = 'modelType',help = modelformat)
     option,args = parser.parse_args()
     
+    modelType = option.modelType
     startTime = option.startTime
     endTime = option.endTime
     areacode = option.areacode
@@ -309,9 +309,11 @@ if __name__ == '__main__':
         endTime = defaultEnd
     if areacode is None or len(areacode) != 6:
         areacode = '000000'
-    
-    DATA_PATH = './_queryResult_hack_'
-    init_path(DATA_PATH)
-    LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
+        
+    model_list = ['bt', 'hk', 'ddos', 'apk', 'xss', 'sf', 'vps', 'qg']
+    if modelType is None or modelType not in model_list:
+        pass
+    else:
+        model_list = [modelType]
     
     main()
