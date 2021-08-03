@@ -127,7 +127,12 @@ namespace C2.Dialogs
                 this.schemaTextBox.Text = string.IsNullOrEmpty(this.schemaTextBox.Text) ? "postgres" : this.schemaTextBox.Text;
                 return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
             }
-
+            if (this.databaseTypeComboBox.Text.Contains("Mysql"))
+            {
+                this.userTextBox.Text = string.IsNullOrEmpty(this.userTextBox.Text) ? "None" : this.userTextBox.Text;
+                this.passwordTextBox.Text = string.IsNullOrEmpty(this.passwordTextBox.Text) ? "None" : this.passwordTextBox.Text;
+                return (string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text));
+            }
             return (databaseTypeComboBox.SelectedIndex == -1) || string.IsNullOrEmpty(this.serverTextBox.Text) || string.IsNullOrEmpty(this.portTextBox.Text) ||
                 (this.sidRadiobutton.Checked ? string.IsNullOrEmpty(this.sidTextBox.Text) : string.IsNullOrEmpty(this.serviceTextBox.Text)) ||
                 string.IsNullOrEmpty(this.userTextBox.Text) || string.IsNullOrEmpty(this.passwordTextBox.Text);
@@ -137,6 +142,7 @@ namespace C2.Dialogs
         {
             if (databaseTypeComboBox.SelectedItem == null)
                 return;
+
             if(databaseTypeComboBox.SelectedItem.ToString().Contains( "Oracle"))
             {
                 this.portTextBox.Text = "1521";
@@ -191,6 +197,25 @@ namespace C2.Dialogs
                 this.serviceTextBox.Visible = true;
                 this.schemaLabel.Visible = false;
                 this.schemaTextBox.Visible = false;
+            }
+
+            if (databaseTypeComboBox.SelectedItem.ToString().Contains("Mysql"))
+            {
+                this.portTextBox.Text = "3306";
+                this.portTextBox.ForeColor = Color.Black;
+                this.serviceTextBox.Enabled = false;
+                this.sidTextBox.Enabled = false;
+                this.schemaTextBox.Enabled = false;
+                this.sidTextBox.Text = "";//SID
+                this.serverTextBox.Text = "";//服务器
+                this.serviceRadiobutton.Enabled = false;
+                this.sidRadiobutton.Enabled = false;
+                this.schemaLabel.Visible = false;
+                this.schemaTextBox.Visible = false;
+                this.serviceRadiobutton.Visible = true;
+                this.serviceTextBox.Visible = true;
+                this.userTextBox.Text = ""; //用户名
+                this.passwordTextBox.Text = "";//密码
             }
 
         }

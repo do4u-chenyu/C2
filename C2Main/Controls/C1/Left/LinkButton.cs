@@ -61,6 +61,8 @@ namespace C2.Controls.Left
                 this.leftPictureBox.Image = global::C2.Properties.Resources.Hive;
             if (item.Type == DatabaseType.Postgre)
                 this.leftPictureBox.Image = global::C2.Properties.Resources.PostgreSQL;
+            if (item.Type == DatabaseType.Mysql)
+                this.leftPictureBox.Image = global::C2.Properties.Resources.Mysql;
 
             toolTip1.SetToolTip(this.txtButton, item.PrettyDatabaseInfo);
         }
@@ -93,6 +95,8 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.oracle;
                 else if (dialog.DatabaseInfo.Type == DatabaseType.Postgre)
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PostgreSQL;
+                else if (dialog.DatabaseInfo.Type == DatabaseType.Mysql)
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.Mysql;
                 else
                 { };
                 DatabaseItem = dialog.DatabaseInfo;

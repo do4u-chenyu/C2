@@ -13,7 +13,8 @@ namespace C2.Model
         Null,
         Oracle,
         Hive,
-        Postgre
+        Postgre,
+        Mysql
     }
     public class DatabaseItem
     {

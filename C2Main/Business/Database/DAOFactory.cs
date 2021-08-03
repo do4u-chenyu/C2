@@ -14,6 +14,8 @@ namespace C2.Database
                     return new HiveDAOImpl(dbi);
                 case DatabaseType.Postgre:
                     return new PostgreDAOImpl(dbi);
+                case DatabaseType.Mysql:
+                    return new MysqlDAOImpl(dbi);
                 default:
                     return new EmptyDAOImpl();
             }
