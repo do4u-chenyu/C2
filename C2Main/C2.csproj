@@ -200,6 +200,7 @@
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
+    <Compile Include="Business\SearchToolkit\SearchModelSettingsInfo.cs" />
     <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
     <Compile Include="Business\SearchToolkit\SearchTaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
@@ -336,6 +337,12 @@
     </Compile>
     <Compile Include="Dialogs\IAOLab\BigAPKForm.Designer.cs">
       <DependentUpon>BigAPKForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.Designer.cs">
+      <DependentUpon>SearchToolkitModelSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\UpdateProgressBar.cs">
       <SubType>Form</SubType>
@@ -1899,6 +1906,9 @@
     <EmbeddedResource Include="Dialogs\SaveTabsDialog.resx">
       <DependentUpon>SaveTabsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.resx">
+      <DependentUpon>SearchToolkitModelSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SortTopicDialog.resx">
       <DependentUpon>SortTopicDialog.cs</DependentUpon>

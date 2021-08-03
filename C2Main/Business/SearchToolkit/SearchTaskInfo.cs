@@ -72,6 +72,7 @@ namespace C2.SearchToolkit
                 return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
             }
         }
+        private SearchTaskInfo() { }
 
         public String LocalPyZipPath { get => LocalPyScriptPath + ".zip"; }
 
@@ -112,7 +113,9 @@ namespace C2.SearchToolkit
             "BastionIP",
             "SearchAgentIP",
             "RemoteWorkspace",
-            "InterfaceIP"
+            "InterfaceIP",
+            "Settings.StartTime",
+            "Settings.EndTime"
         });
 
         public String Username { get; private set; }
@@ -146,6 +149,8 @@ namespace C2.SearchToolkit
                 InterfaceIP);
         }
 
+        public SearchModelSettingsInfo Settings { get; private set; } = SearchModelSettingsInfo.Empty;
+
 
         public override String ToString()
         {
@@ -165,7 +170,9 @@ namespace C2.SearchToolkit
                 BastionIP,
                 SearchAgentIP,
                 RemoteWorkspace,
-                InterfaceIP
+                InterfaceIP,
+                Settings.StartTime,
+                Settings.EndTime
             });
         }
 
@@ -205,9 +212,9 @@ namespace C2.SearchToolkit
                 BastionIP = buf[7],
                 SearchAgentIP = buf[8],
                 RemoteWorkspace = buf[9],
-                InterfaceIP = buf.Length < 11 ? String.Empty : buf[10]  // 兼容早期版本
+                InterfaceIP = buf.Length < 11 ? String.Empty : buf[10],         // 兼容早期版本
+                Settings    = buf.Length < 13 ? SearchModelSettingsInfo.Empty : new SearchModelSettingsInfo(buf[11], buf[12])
             };
-
             return taskInfo;
         }
 
