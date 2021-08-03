@@ -2,6 +2,7 @@
 using C2.Dialogs;
 using C2.Utils;
 using System;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -292,6 +293,22 @@ namespace C2.SearchToolkit
         {
             if (FileUtil.TryClipboardSetText(this.remoteWorkspaceTB.Text))
                 HelpUtil.ShowMessageBox(String.Format("[{0}] 已复制到剪切板", this.remoteWorkspaceTB.Text));
+        }
+
+        private void TaskConfigPB_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+        }
+
+        private void TaskConfigPB_MouseEnter(object sender, EventArgs e)
+        {
+            this.TaskConfigPB.BackColor = SystemColors.InactiveCaption;
+        }
+
+        private void TaskConfigPB_MouseLeave(object sender, EventArgs e)
+        {
+            this.TaskConfigPB.BackColor = Color.Transparent;
         }
     }
 }
