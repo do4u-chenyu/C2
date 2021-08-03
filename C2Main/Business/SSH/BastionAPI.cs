@@ -50,7 +50,7 @@ namespace C2.Business.SSH
 
         private static String FuzzWrap(String command)
         {
-            return Wrap(command);
+            return Wrap(command.Replace(OpUtil.StringBlank, @"\s*"));
         }
         public BastionAPI(SearchTaskInfo task)
         {
@@ -428,7 +428,13 @@ namespace C2.Business.SSH
 
         private String ConstructTaskCommand()
         {
-            return String.Format("python {0}", TargetScript);
+            if (task.Settings.IsEmpty())
+                return String.Format("python {0}", TargetScript);
+            else
+                return String.Format("python {0} --start {1} --end {2}", 
+                    TargetScript, 
+                    task.Settings.StartTime, 
+                    task.Settings.EndTime);
         }
 
         public String RunTask()
@@ -491,7 +497,7 @@ namespace C2.Business.SSH
         private bool IsAliveTask()
         {
             String result = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
-            return Regex.IsMatch(result, FuzzWrap(@"python\s+" + TargetScript));
+            return Regex.IsMatch(result, FuzzWrap(ConstructTaskCommand()));
         }
 
         private bool IsResultFileReady()

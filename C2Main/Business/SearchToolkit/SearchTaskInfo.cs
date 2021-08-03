@@ -149,7 +149,7 @@ namespace C2.SearchToolkit
                 InterfaceIP);
         }
 
-        public SearchModelSettingsInfo Settings { get; private set; } = SearchModelSettingsInfo.Empty;
+        public SearchModelSettingsInfo Settings { get; private set; } = new SearchModelSettingsInfo();
 
 
         public override String ToString()
@@ -213,7 +213,7 @@ namespace C2.SearchToolkit
                 SearchAgentIP = buf[8],
                 RemoteWorkspace = buf[9],
                 InterfaceIP = buf.Length < 11 ? String.Empty : buf[10],         // 兼容早期版本
-                Settings    = buf.Length < 13 ? SearchModelSettingsInfo.Empty : new SearchModelSettingsInfo(buf[11], buf[12])
+                Settings    = buf.Length < 13 ? new SearchModelSettingsInfo() : new SearchModelSettingsInfo(buf[11], buf[12])
             };
             return taskInfo;
         }

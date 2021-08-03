@@ -6,7 +6,6 @@ namespace C2.SearchToolkit
     {
         public String StartTime;
         public String EndTime;
-        public static readonly SearchModelSettingsInfo Empty = new SearchModelSettingsInfo();
 
         public SearchModelSettingsInfo() : this(String.Empty, String.Empty)
         { }
@@ -15,6 +14,12 @@ namespace C2.SearchToolkit
         {
             StartTime = startTime;
             EndTime = endTime;
+        }
+
+        public bool IsEmpty()
+        {
+            // 限制条件从严
+            return String.IsNullOrEmpty(StartTime) || String.IsNullOrEmpty(EndTime);
         }
     }
 }
