@@ -16,10 +16,15 @@ namespace C2.SearchToolkit
 
         private bool ValidateInputControls()
         {
+            this.startTimeTB.Text = this.startTimeTB.Text.Trim();
+            this.endTimeTB.Text   = this.endTimeTB.Text.Trim();
             validateMessage = String.Empty;
+
             // 从后往前验证
+            validateMessage = startTimeTB.Text.CompareTo(endTimeTB.Text) <= 0 ? validateMessage : "查询【结束时间】应当晚于【开始时间】";
             validateMessage = ValidateEndTime()   ? validateMessage : "查询【结束时间】格式不对,例如: 19831221235959";
-            validateMessage = ValidateStartTime() ? validateMessage : "查询【开始时间】格式不对,例如: 20211213235959";   
+            validateMessage = ValidateStartTime() ? validateMessage : "查询【开始时间】格式不对,例如: 20211213235959";
+            
             return String.IsNullOrEmpty(validateMessage);
         }
 
@@ -28,7 +33,7 @@ namespace C2.SearchToolkit
             // 开始结束时间同时为空 视为 删除旧数据
             return String.IsNullOrEmpty(this.endTimeTB.Text)   && 
                    String.IsNullOrEmpty(this.startTimeTB.Text) || 
-                   Regex.IsMatch(value, @"^\s*(19|20)\d\d[0-1]\d[0-3]\d[0-2]\d[0-5]\d[0-5]\d\s*$");
+                   Regex.IsMatch(value, @"^\s*[1-3]\d\d\d[0-1]\d[0-3]\d[0-2]\d[0-5]\d[0-5]\d\s*$");
         }
 
         private bool ValidateEndTime()
@@ -63,8 +68,8 @@ namespace C2.SearchToolkit
 
         private void ApplySettings()
         {
-            task.Settings.StartTime = this.startTimeTB.Text.Trim();
-            task.Settings.EndTime = this.endTimeTB.Text.Trim();
+            task.Settings.StartTime = this.startTimeTB.Text;
+            task.Settings.EndTime = this.endTimeTB.Text;
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
