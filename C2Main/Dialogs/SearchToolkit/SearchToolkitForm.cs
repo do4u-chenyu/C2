@@ -221,11 +221,11 @@ namespace C2.SearchToolkit
             validateMessage = String.Empty;
             // 从后往前验证
             validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机【IP】格式不对";
-            validateMessage = ValidateInterfaceIP() ? validateMessage : "界面机【IP】格式不对";
-            validateMessage = ValidateBastionIP() ? validateMessage : "堡垒机【IP:Port】格式不对";
-            validateMessage = ValidatePassword() ? validateMessage : "堡垒机 【密码】  不能为空, 不能超过128个字符";
-            validateMessage = ValidateUsername() ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
-            validateMessage = ValidateTaskName() ? validateMessage : "任务名称 不能为空,不能超过128个字符,不能含有特殊字符";
+            validateMessage = ValidateInterfaceIP()   ? validateMessage : "界面机【IP】格式不对";
+            validateMessage = ValidateBastionIP()     ? validateMessage : "堡垒机【IP:Port】格式不对";
+            validateMessage = ValidatePassword()      ? validateMessage : "堡垒机 【密码】  不能为空, 不能超过128个字符";
+            validateMessage = ValidateUsername()      ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
+            validateMessage = ValidateTaskName()      ? validateMessage : "任务名称 不能为空,不能超过128个字符,不能含有特殊字符";
             
             return String.IsNullOrEmpty(validateMessage);
         }
@@ -299,6 +299,7 @@ namespace C2.SearchToolkit
         {
             if (e.Button != MouseButtons.Left)
                 return;
+            new SearchToolkitModelSettingsForm().ShowDialog(task);
         }
 
         private void TaskConfigPB_MouseEnter(object sender, EventArgs e)
