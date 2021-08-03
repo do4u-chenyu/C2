@@ -35,6 +35,7 @@
             this.endTimeTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             this.panelBottom.Controls.Add(this.cancelButton);
             this.panelBottom.Controls.Add(this.confirmButton);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 136);
+            this.panelBottom.Location = new System.Drawing.Point(0, 97);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(550, 50);
             this.panelBottom.TabIndex = 5;
@@ -56,7 +57,7 @@
             this.cancelButton.Location = new System.Drawing.Point(476, 12);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(60, 27);
-            this.cancelButton.TabIndex = 40;
+            this.cancelButton.TabIndex = 100;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -68,24 +69,28 @@
             this.confirmButton.Location = new System.Drawing.Point(385, 12);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 39;
+            this.confirmButton.TabIndex = 99;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
             this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // startTimeTB
             // 
+            this.startTimeTB.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.startTimeTB.ForeColor = System.Drawing.SystemColors.WindowText;
             this.startTimeTB.Location = new System.Drawing.Point(93, 26);
             this.startTimeTB.Name = "startTimeTB";
-            this.startTimeTB.Size = new System.Drawing.Size(200, 25);
-            this.startTimeTB.TabIndex = 6;
+            this.startTimeTB.Size = new System.Drawing.Size(200, 26);
+            this.startTimeTB.TabIndex = 1;
             // 
             // endTimeTB
             // 
+            this.endTimeTB.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.endTimeTB.ForeColor = System.Drawing.SystemColors.WindowText;
             this.endTimeTB.Location = new System.Drawing.Point(339, 26);
             this.endTimeTB.Name = "endTimeTB";
-            this.endTimeTB.Size = new System.Drawing.Size(200, 25);
-            this.endTimeTB.TabIndex = 7;
+            this.endTimeTB.Size = new System.Drawing.Size(200, 26);
+            this.endTimeTB.TabIndex = 2;
             // 
             // label1
             // 
@@ -105,12 +110,23 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "----";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label3.Location = new System.Drawing.Point(87, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(155, 19);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "例如: 19931213235959";
+            // 
             // SearchToolkitModelSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(550, 186);
+            this.ClientSize = new System.Drawing.Size(550, 147);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.endTimeTB);
@@ -141,5 +157,6 @@
         private System.Windows.Forms.TextBox endTimeTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

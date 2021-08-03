@@ -259,6 +259,10 @@ namespace C2.SearchToolkit
             this.taskStatusLabel.Text = task.TaskStatus;
             this.downloadButton.Enabled = task.TaskStatus == "DONE";
         }
+        private bool IsReadOnly()
+        {
+            return taskInfoGB.Visible && !confirmButton.Enabled;
+        }
 
         public DialogResult ShowTaskInfoDialog(SearchTaskInfo task)
         {
@@ -299,7 +303,7 @@ namespace C2.SearchToolkit
         {
             if (e.Button != MouseButtons.Left)
                 return;
-            new SearchToolkitModelSettingsForm().ShowDialog(task);
+            new SearchToolkitModelSettingsForm().ShowDialog(task, IsReadOnly());
         }
 
         private void TaskConfigPB_MouseEnter(object sender, EventArgs e)

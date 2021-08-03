@@ -120,7 +120,7 @@
             this.interfaceIPTB.Location = new System.Drawing.Point(296, 75);
             this.interfaceIPTB.Name = "interfaceIPTB";
             this.interfaceIPTB.Size = new System.Drawing.Size(136, 25);
-            this.interfaceIPTB.TabIndex = 49;
+            this.interfaceIPTB.TabIndex = 7;
             // 
             // label9
             // 
@@ -138,7 +138,7 @@
             this.connectTestButton.Location = new System.Drawing.Point(247, 115);
             this.connectTestButton.Name = "connectTestButton";
             this.connectTestButton.Size = new System.Drawing.Size(68, 27);
-            this.connectTestButton.TabIndex = 46;
+            this.connectTestButton.TabIndex = 9;
             this.connectTestButton.Text = "测试连通";
             this.connectTestButton.UseVisualStyleBackColor = true;
             this.connectTestButton.Click += new System.EventHandler(this.ConnectTestButton_Click);
@@ -216,7 +216,7 @@
             this.searchAgentIPTB.Location = new System.Drawing.Point(81, 116);
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
-            this.searchAgentIPTB.TabIndex = 6;
+            this.searchAgentIPTB.TabIndex = 8;
             this.searchAgentIPTB.Text = "15.1.1.1";
             // 
             // label15
@@ -251,7 +251,7 @@
             this.bastionIPTB.Location = new System.Drawing.Point(81, 75);
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
-            this.bastionIPTB.TabIndex = 2;
+            this.bastionIPTB.TabIndex = 6;
             this.bastionIPTB.Text = "15.0.0.1:22";
             // 
             // passwordTB
@@ -260,14 +260,14 @@
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.PasswordChar = '*';
             this.passwordTB.Size = new System.Drawing.Size(136, 25);
-            this.passwordTB.TabIndex = 1;
+            this.passwordTB.TabIndex = 5;
             // 
             // usernameTB
             // 
             this.usernameTB.Location = new System.Drawing.Point(81, 34);
             this.usernameTB.Name = "usernameTB";
             this.usernameTB.Size = new System.Drawing.Size(137, 25);
-            this.usernameTB.TabIndex = 0;
+            this.usernameTB.TabIndex = 4;
             this.usernameTB.Text = "X1587";
             // 
             // groupBox1
@@ -381,7 +381,7 @@
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
-            this.taskModelComboBox.TabIndex = 41;
+            this.taskModelComboBox.TabIndex = 1;
             this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // downloadButton
@@ -405,7 +405,7 @@
             this.remoteWorkspaceTB.Name = "remoteWorkspaceTB";
             this.remoteWorkspaceTB.ReadOnly = true;
             this.remoteWorkspaceTB.Size = new System.Drawing.Size(448, 25);
-            this.remoteWorkspaceTB.TabIndex = 36;
+            this.remoteWorkspaceTB.TabIndex = 2;
             this.remoteWorkspaceTB.Text = "/tmp/iao/search_toolkit/gamble";
             // 
             // label4
@@ -446,7 +446,7 @@
             this.cancelButton.Location = new System.Drawing.Point(533, 12);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(60, 27);
-            this.cancelButton.TabIndex = 40;
+            this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -458,7 +458,7 @@
             this.confirmButton.Location = new System.Drawing.Point(417, 12);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 39;
+            this.confirmButton.TabIndex = 10;
             this.confirmButton.Text = "创建";
             this.confirmButton.UseVisualStyleBackColor = false;
             this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
