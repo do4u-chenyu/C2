@@ -7,6 +7,7 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitModelSettingsForm : Form
     {
+        private int showDialogCount = 0; // 记录Form的show次数
         public String StartTime { get => this.startTimeTB.Text.Trim(); set => this.startTimeTB.Text = value; }
         public String EndTime { get => this.endTimeTB.Text.Trim(); set => this.endTimeTB.Text = value; }
 
@@ -21,6 +22,14 @@ namespace C2.SearchToolkit
         {
             this.startTimeTB.Text = String.Empty;
             this.endTimeTB.Text   = String.Empty;
+        }
+
+        private void InitializeQueryDefaultTime(int days = 90)
+        {
+            DateTime e = DateTime.Now;
+            DateTime s = e.AddDays( 0 - days);
+            this.startTimeTB.Text = s.ToString("yyyyMMddHHmmss");
+            this.endTimeTB.Text = e.ToString("yyyyMMddHHmmss");
         }
 
         private bool ValidateInputControls()
@@ -60,7 +69,11 @@ namespace C2.SearchToolkit
             this.confirmButton.Enabled = !readOnly;
             this.startTimeTB.Enabled   = !readOnly;
             this.endTimeTB.Enabled     = !readOnly;
-           
+
+            if (!readOnly && showDialogCount == 0)
+                InitializeQueryDefaultTime();  // 第一次给个默认90天的事件范围
+
+            showDialogCount++;
             return base.ShowDialog();
         }
 
