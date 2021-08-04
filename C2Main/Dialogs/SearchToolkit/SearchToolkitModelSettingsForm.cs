@@ -27,7 +27,7 @@ namespace C2.SearchToolkit
         private void InitializeQueryDefaultTime(int days = 90)
         {
             DateTime e = DateTime.Now;
-            DateTime s = e.AddDays( 0 - days);
+            DateTime s = e.AddDays(0 - days);
             this.startTimeTB.Text = s.ToString("yyyyMMddHHmmss");
             this.endTimeTB.Text = e.ToString("yyyyMMddHHmmss");
         }
