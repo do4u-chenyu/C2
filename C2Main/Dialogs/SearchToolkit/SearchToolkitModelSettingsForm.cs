@@ -7,11 +7,20 @@ namespace C2.SearchToolkit
 {
     public partial class SearchToolkitModelSettingsForm : Form
     {
-        private SearchTaskInfo task;
+        public String StartTime { get => this.startTimeTB.Text.Trim(); set => this.startTimeTB.Text = value; }
+        public String EndTime { get => this.endTimeTB.Text.Trim(); set => this.endTimeTB.Text = value; }
+
         private String validateMessage;
         public SearchToolkitModelSettingsForm()
         {
             InitializeComponent();
+            InitializeInputControls();
+        }
+
+        private void InitializeInputControls()
+        {
+            this.startTimeTB.Text = String.Empty;
+            this.endTimeTB.Text   = String.Empty;
         }
 
         private bool ValidateInputControls()
@@ -46,18 +55,13 @@ namespace C2.SearchToolkit
             return ValidateDateTimeYYYYMMDDHHmmSS(this.startTimeTB.Text);
         }
 
-        public DialogResult ShowDialog(SearchTaskInfo task, bool readOnly = true)
+        public DialogResult ShowDialog(bool readOnly = true)
         {
             this.confirmButton.Enabled = !readOnly;
             this.startTimeTB.Enabled   = !readOnly;
             this.endTimeTB.Enabled     = !readOnly;
-
-            this.task = task;
-            this.startTimeTB.Text = task.Settings.StartTime;
-            this.endTimeTB.Text   = task.Settings.EndTime;
-            
-
-            return this.ShowDialog();
+           
+            return base.ShowDialog();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -66,18 +70,11 @@ namespace C2.SearchToolkit
             this.Close();
         }
 
-        private void ApplySettings()
-        {
-            task.Settings.StartTime = this.startTimeTB.Text;
-            task.Settings.EndTime = this.endTimeTB.Text;
-        }
-
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             if (ValidateInputControls())
             {
                 this.DialogResult = DialogResult.OK;
-                this.ApplySettings();
                 this.Close();
             }
             else

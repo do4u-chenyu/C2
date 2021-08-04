@@ -13,11 +13,19 @@ namespace C2.SearchToolkit
         private SearchTaskInfo task;
         private String validateMessage;
         private Control[] inputControls;
+        private SearchToolkitModelSettingsForm modelSettingsForm;
+
         private static readonly LogUtil log = LogUtil.GetInstance("SearchToolkit");
         public SearchToolkitForm()
         {
             InitializeComponent();
             InitializeInputControls();
+            InitializeModelSettingForm();
+        }
+
+        private void InitializeModelSettingForm()
+        {
+            modelSettingsForm = new SearchToolkitModelSettingsForm();
         }
 
         private void InitializeInputControls()
@@ -66,7 +74,9 @@ namespace C2.SearchToolkit
                                             this.bastionIPTB.Text,
                                             this.searchAgentIPTB.Text,
                                             this.remoteWorkspaceTB.Text,
-                                            this.interfaceIPTB.Text
+                                            this.interfaceIPTB.Text,
+                                            this.modelSettingsForm.StartTime,
+                                            this.modelSettingsForm.EndTime
             }) ;
 
             return SearchTaskInfo.StringToTaskInfo(value);
@@ -248,16 +258,18 @@ namespace C2.SearchToolkit
             }
                
             // 更新界面元素    
-            this.usernameTB.Text = task.Username;
-            this.passwordTB.Text = task.Password;
-            this.taskNameTB.Text = task.TaskName;
-            this.bastionIPTB.Text = task.BastionIP;
-            this.taskModelComboBox.Text = task.TaskModel;
-            this.interfaceIPTB.Text = task.InterfaceIP;
-            this.searchAgentIPTB.Text = task.SearchAgentIP;
-            this.remoteWorkspaceTB.Text = String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime);
-            this.taskStatusLabel.Text = task.TaskStatus;
-            this.downloadButton.Enabled = task.TaskStatus == "DONE";
+            this.usernameTB.Text             = task.Username;
+            this.passwordTB.Text             = task.Password;
+            this.taskNameTB.Text             = task.TaskName;
+            this.bastionIPTB.Text            = task.BastionIP;
+            this.taskModelComboBox.Text      = task.TaskModel;
+            this.interfaceIPTB.Text          = task.InterfaceIP;
+            this.searchAgentIPTB.Text        = task.SearchAgentIP;
+            this.remoteWorkspaceTB.Text      = String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime);
+            this.taskStatusLabel.Text        = task.TaskStatus;
+            this.downloadButton.Enabled      = task.TaskStatus == "DONE";
+            this.modelSettingsForm.StartTime = task.Settings.StartTime;
+            this.modelSettingsForm.EndTime   = task.Settings.EndTime;
         }
         private bool IsReadOnly()
         {
@@ -303,7 +315,7 @@ namespace C2.SearchToolkit
         {
             if (e.Button != MouseButtons.Left)
                 return;
-            new SearchToolkitModelSettingsForm().ShowDialog(task, IsReadOnly());
+            modelSettingsForm.ShowDialog(IsReadOnly());
         }
 
         private void TaskConfigPB_MouseEnter(object sender, EventArgs e)
