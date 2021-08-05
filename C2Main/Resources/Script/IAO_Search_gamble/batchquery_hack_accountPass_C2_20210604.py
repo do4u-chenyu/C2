@@ -29,7 +29,7 @@ class Airport:
                 "col" : self.all_items + ['USERNAME', 'PASSWORD', '_COOKIE', '_MAINFILE', '_QUERY_CONTENT', 'keyWords', 'Path', 'Phone', 'sites_path', 'serverType', 'distribution', 'memSize', 'backup_path'],
                 "key" : ["DST_PORT:8888 AND login AND username AND password AND code"]
             },
-            "hk" : {
+            "hack" : {
                 "col" : self.all_items + ['USERNAME', 'PASSWORD', '_MAINFILE', '_QUERY_CONTENT', '_QUERY_MATCHTERMS','keyWords'],
                 "key" : ["eval AND _POST","assert AND _POST","base64_decode AND _POST","Ba”.”SE6”.”4_dEc”.”OdE OR @ev”.”al","Response.Write OR Response.End OR _USERAGENT:antSword","@ini_set “display_errors”,”0″","_HOST:www.mtqyz.com","_HOST:www.hebeilvteng.com","_HOST:www.33ddos.com","_HOST:www.33ddos.cn","_HOST:www.33ddos.org","_HOST:www.33ddos.cc OR _HOST:www.33ddos.net OR _HOST:v1.dr-yun.org OR _HOST:v2.dr-yun.org OR _HOST:v3.dr-yun.org OR _HOST:www.360zs.cn OR _HOST:www2.360zs.cn","_HOST:www.999yingjia.com"]
             },
@@ -310,7 +310,7 @@ if __name__ == '__main__':
     if areacode is None or len(areacode) != 6:
         areacode = '000000'
         
-    model_list = ['bt', 'hk', 'ddos', 'apk', 'xss', 'sf', 'vps', 'qg']
+    model_list = ['bt', 'hack', 'ddos', 'apk', 'xss', 'sf', 'vps', 'qg']
     if modelType is None or modelType not in model_list:
         pass
     else:

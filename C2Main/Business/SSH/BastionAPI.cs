@@ -430,7 +430,7 @@ namespace C2.Business.SSH
         private String ConstructTaskCommand()
         {
             string taskType = SearchTaskInfo.TaskDescriptionTable[task.TaskModel];
-            List<string> illegalTypeList = new List<string>() { "hk", "bt", "apk", "ddos", "xss", "qg", "sf", "vps" };
+            List<string> illegalTypeList = new List<string>() { "hack", "bt", "apk", "ddos", "xss", "qg", "sf", "vps" };
 
             string parserTime = task.Settings.IsEmpty() ? string.Empty : String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime);
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;
@@ -507,7 +507,7 @@ namespace C2.Business.SSH
         private bool IsResultFileReady()
         {
             String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hk|bt|apk|ddos|xss|qg|sf|vps|code)_\d+_\d+.tgz\r?\n");
+            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|code)_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()
