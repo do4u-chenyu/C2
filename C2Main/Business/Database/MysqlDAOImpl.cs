@@ -6,21 +6,18 @@ using C2.Utils;
 using System.IO;
 using MySql.Data.MySqlClient;
 
-
-
 namespace C2.Database
 {
     public class MysqlDAOImpl : BaseDAOImpl
     {
 
         private static readonly LogUtil log = LogUtil.GetInstance("MysqlDAOImpl");
-
-        private readonly string getUserSQL = @"SELECT SCHEMA_NAME FROM information_schema.SCHEMATA;";
+        private readonly string getUserSQL = @"SELECT SCHEMA_NAME FROM information_schema.SCHEMATA";
         private readonly string getTablesSQL = @"select table_name from information_schema.tables where table_schema='{0}'order by table_name";
         private readonly string getTableContentSQL = @"use {0};select * from {1}";
         private readonly string getColNameBySchemaSQL = @"select TABLE_NAME, COLUMN_NAME from information_schema.COLUMNS where TABLE_NAME in {0}";
         private readonly string getColNameByTablesSQL = @"select TABLE_NAME, COLUMN_NAME from information_schema.COLUMNS where TABLE_NAME in ('{0}')";
-
+        
 
         public MysqlDAOImpl(DatabaseItem dbi) : base(dbi) { }
 
@@ -64,7 +61,6 @@ namespace C2.Database
             try
             {
                 con.Open();
-                // 20210204 由于没有SQL语法解析，所以无法处理分隔符带来歧义等各种语法问题，因此目前支持一行SQL
                 result = this.ExecuteQuery(sql, con, header, returnNum);
             }
             catch (Exception ex)
@@ -119,14 +115,13 @@ namespace C2.Database
             }
         }
 
-
+        
         public override string GetTablesSQL(string schema)
         {
             //this.Schema = schema;
             return String.Format(this.getTablesSQL, schema);
             //return String.Format(this.getTablesSQL, this.Schema);
         }
-
 
         public override string GetColNameBySchemaSQL(string schema)
         {
@@ -135,7 +130,6 @@ namespace C2.Database
                 String.Format(@"(select table_name from information_schema.tables where table_schema='{0}') order by table_name", schema)
                    );
         }
-
 
         public override string GetColNameByTablesSQL(List<Table> tables)
         {
@@ -150,19 +144,21 @@ namespace C2.Database
         {
             return String.Format(this.getTableContentSQL, this.Schema,table.Name);
         }
+        
         public override string GetUserSQL()
         {
             return this.getUserSQL;
         }
-
+        
         public override string GetColNameByTableSQL(Table table)
         {
             return this.GetColNameByTablesSQL(new List<Table>() { table });
         }
-
+        // 刷新返回指定数据库：information_schema
         public override string DefaultSchema()
         {
-            return String.IsNullOrEmpty(this.Schema) ? this.User.ToUpper() : this.Schema.ToUpper();
+            return "information_schema";
+            //return String.IsNullOrEmpty(this.Schema) ? this.User : "information_schema";
         }
 
         public override bool ExecuteSQL(string sqlText, string outPutPath, int maxReturnNum = int.MaxValue)
