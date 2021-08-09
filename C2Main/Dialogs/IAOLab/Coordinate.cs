@@ -86,7 +86,7 @@ namespace C2.Dialogs.IAOLab
                     continue;
                 foreach (string locationorigin in inputArray)
                 {
-                    string location = locationorigin.Replace(" 输入格式有误", "");
+                    string location = locationorigin.Replace(" 输入格式有误", "").Split('\t')[0];
                     if (string.IsNullOrEmpty(location))
                         continue;
                     tmpResult.Append(GPSTransform.GetInstance(location).CoordinateConversion(button.Name));
@@ -99,7 +99,7 @@ namespace C2.Dialogs.IAOLab
         {
             foreach (string inputorigin in inputArray)
             {
-                string input = inputorigin.Replace(" 输入格式有误", "");
+                string input = inputorigin.Replace(" 输入格式有误", "").Split('\t')[0];
                 if (!String.IsNullOrEmpty(input))
                 {
                     tmpResult.Append(GPSTransform.GetInstance(input).ComputeDistance());
@@ -117,7 +117,7 @@ namespace C2.Dialogs.IAOLab
                     continue;
                 foreach (string inputorigin in inputArray)
                 {
-                    string input = inputorigin.Replace(" 输入有误","");
+                    string input = inputorigin.Replace(" 输入有误","").Split('\t')[0];
                     if (string.IsNullOrEmpty(input))
                         continue;
                     tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
@@ -136,7 +136,7 @@ namespace C2.Dialogs.IAOLab
                     continue;
                 foreach (string inputorigin in inputArray)
                 {
-                    string input = inputorigin.Replace(" 输入有误", "");
+                    string input = inputorigin.Replace(" 输入有误", "").Split('\t')[0];
                     if (string.IsNullOrEmpty(input))
                         continue;
                     tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));

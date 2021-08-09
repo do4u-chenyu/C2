@@ -42,7 +42,7 @@ namespace C2.IAOLab.Transform
                     result = wrong;
                     break;
             }
-            return string.Join(" ", input, result);
+            return string.Join("\t", input, result);
         }
 
         #region 时间转换

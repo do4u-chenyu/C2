@@ -169,26 +169,28 @@ namespace C2.Dialogs.IAOLab
         {
             OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
             OpenFileDialog1.Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv";
-            OpenFileDialog1.ShowDialog();
             string path = OpenFileDialog1.FileName;
-            try
+            if (OpenFileDialog1.ShowDialog()==DialogResult.OK)
             {
-                using (StreamReader sr = new StreamReader(path))
+                try
                 {
-                    string line;
-                    StringBuilder sb = new StringBuilder();
-                    // 从文件读取并显示行，直到文件的末尾 
-                    while ((line = sr.ReadLine()) != null)
+                    using (StreamReader sr = new StreamReader(path))
                     {
-                        sb.Append(line);
-                        sb.Append("\n");
+                        string line;
+                        StringBuilder sb = new StringBuilder();
+                        // 从文件读取并显示行，直到文件的末尾 
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            sb.Append(line);
+                            sb.Append("\n");
+                        }
+                        inputAndResult.Text = sb.TrimEndN().ToString();
                     }
-                    inputAndResult.Text = sb.TrimEndN().ToString();
                 }
-            }
-            catch(Exception ex) 
-            {
-                MessageBox.Show(ex.Message, "ERROR");
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR");
+                }
             }
         }
         private void ExportData() 
