@@ -448,14 +448,17 @@ namespace C2.Controls.Left
             {
                 this.schemaComboBox.Text = defaultSchema;
                 this.schemaComboBox.Enabled = false;
-            } 
+            }
+            else if (dbi.Type == DatabaseType.Mysql)
+            {
+                this.schemaComboBox.Text = users.Contains(defaultSchema) ? defaultSchema : "选择架构";
+                this.schemaComboBox.Enabled = true;
+            }
             else
             {
                 this.schemaComboBox.Text = users.Contains(loginUser.ToUpper()) ? defaultSchema : "选择架构";
                 this.schemaComboBox.Enabled = true;
             }
-
-
             users.ForEach(x => schemaComboBox.Items.Add(x.ToString()));
         }
         private void UpdateTables(List<Table> tables, DatabaseItem databaseInfo, Dictionary<string, List<string>> tableColDict)

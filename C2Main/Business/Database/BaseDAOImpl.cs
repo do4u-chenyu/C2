@@ -78,6 +78,7 @@ namespace C2.Database
         public List<string> GetUsers()
         {
             string result = this.Query(this.GetUserSQL(), false);
+            result = result.Trim('\n');
             return String.IsNullOrEmpty(result) ? new List<String>() : new List<string>(result.Split(OpUtil.LineSeparator));
         }
 
