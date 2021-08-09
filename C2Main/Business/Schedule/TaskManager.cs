@@ -469,8 +469,8 @@ namespace C2.Business.Schedule
                         p.StandardInput.WriteLine(cmd);
                     }
 
-                    //多线程下异步读取
-                    //p.ErrorDataReceived += new DataReceivedEventHandler(p_ErrorDataReceived);
+                    //多线程下异步读取 
+                    p.ErrorDataReceived += new DataReceivedEventHandler(p_ErrorDataReceived);
 
                     p.BeginErrorReadLine();
                     p.BeginOutputReadLine();
