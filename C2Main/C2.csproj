@@ -174,9 +174,24 @@
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
     <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
+    <Compile Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.Designer.cs">
+      <DependentUpon>SettingChartDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\IAOLab\Visualization\Dialogs\ShowChartDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\IAOLab\Visualization\Dialogs\ShowChartDialog.Designer.cs">
+      <DependentUpon>ShowChartDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\IAOLab\WebEngine\Boss\BossTemplateCollection.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Bar\PictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\GradientLineChart.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\Organization.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\WordCloud.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\GenVisualHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
@@ -1648,6 +1663,12 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
+      <DependentUpon>SettingChartDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\ShowChartDialog.resx">
+      <DependentUpon>ShowChartDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.resx">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -3392,6 +3413,8 @@
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Resources\词云样例.png" />
+    <None Include="Resources\社交关系图样例.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
