@@ -22,20 +22,23 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
     {
         private WebBrowser webBrowser;
         public string WebUrl;
-        public Dictionary<string, string> Options;
+        public Dictionary<string, string[]> Options;
         //type,各种idx
 
         private BcpInfo bcpInfo;
         private string dataFullPath;
+        private List<string> chartTypeList;
+
         public SettingChartDialog()
         {
             InitializeComponent();
-            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html\\BossIndex1.html");
-            Options = new Dictionary<string, string>();
+            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html\\Visual.html");
+            Options = new Dictionary<string, string[]>();
             this.chartType.SelectedIndex = 0;
+            chartTypeList = new List<string> { "Organization", "WordCloud" };
         }
 
-        public SettingChartDialog(Dictionary<string, string> options, WebBrowser browser) : this()
+        public SettingChartDialog(Dictionary<string, string[]> options, WebBrowser browser) : this()
         {
             Options = options;
             webBrowser = browser;
@@ -61,15 +64,18 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void SavaOption()
         {
-            Options["DataSource"] = dataFullPath;
-            Options["ChartType"] = this.chartType.SelectedIndex.ToString();
+            Options["DataSourcePath"] = new string[] { this.dataSourcePath.Text };
+            Options["ChartType"] = new string[] { chartTypeList[this.chartType.SelectedIndex] };
             //配置参数信息
-            Options["Organization"] = string.Join("\t",new string[] { this.userCombox.SelectedIndex.ToString(), 
-                                                                      this.superiorCombox.SelectedIndex.ToString(),
-                                                                    });
+            List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
+            Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
         }
 
-
+        private string[] TransListStringToInt(List<string> t, List<int> listInt)
+        {
+            listInt.ForEach(c => t.Add(c.ToString()));
+            return t.ToArray();
+        }
 
         private void BrowserButton_Click(object sender, EventArgs e)
         {
@@ -84,7 +90,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             this.bcpInfo = new BcpInfo(dataFullPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
 
             ChangeControlContent();
-            Options = new Dictionary<string, string>();                
+            Options = new Dictionary<string, string[]>();                
         }
 
         private void ChangeControlContent()
@@ -175,11 +181,11 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         {
             //初始化大屏类型
             if (Options.ContainsKey("ChartType") && Options["ChartType"].Length > 0)
-                chartType.SelectedIndex = int.Parse(Options["ChartType"]);
+                chartType.SelectedIndex = int.Parse(Options["ChartType"][0]);
 
             //初始化数据源
-            if ( Options.ContainsKey("DataSourcePath") && Options["DataSourcePath"].Length > 0 && File.Exists(Options["DataSourcePath"]))
-                dataSourcePath.Text = Options["DataSourcePath"];
+            if ( Options.ContainsKey("DataSourcePath") && Options["DataSourcePath"].Length > 0 && File.Exists(Options["DataSourcePath"][0]))
+                dataSourcePath.Text = Options["DataSourcePath"][0];
             else
             {
                 dataSourcePath.Text = string.Empty;

@@ -16,14 +16,14 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
     partial class ShowChartDialog : StandardDialog
     {
         SettingChartDialog settingChartDialog;
-        public Dictionary<string, string> ChartOptions;
+        public Dictionary<string, string[]> ChartOptions;
         public string WebUrl;
 
         public ShowChartDialog()
         {
             InitializeComponent();
             WebUrl = string.Empty;
-            ChartOptions = new Dictionary<string, string>();
+            ChartOptions = new Dictionary<string, string[]>();
 
         }
 
@@ -55,5 +55,13 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 ChartOptions = settingChartDialog.Options;
             }
         }
+
+        private void ShowChartDialog_Load(object sender, EventArgs e)
+        {
+            WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
+            webBrowser1.Navigate(WebUrl);
+            OpenShowChartDialog();
+        }
+
     }
 }

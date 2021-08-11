@@ -62,6 +62,27 @@ namespace C2.IAOLab.WebEngine.Boss
             return tempName;            
         }
 
+        public string ShowVisual()
+        {
+            string htmlContent = string.Empty;
+
+            htmlContent += "$(function () {" ;
+
+            foreach (var option in optionScript)
+            {
+                if (option.Value != null)
+                {
+                    htmlContent += "echart_" + option.Key + "();" + Environment.NewLine + GetScriptNode(option.Key, option.Value);
+                }
+            }
+
+            htmlContent += "});";
+
+            string tempName = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\JS", "VisualOptions.js");
+            File.WriteAllText(tempName, htmlContent);
+            return tempName;
+        }
+
         //增加主题 CSS JS 自定义节点
         public void AddTheme(string themeName, Theme theme)
         {

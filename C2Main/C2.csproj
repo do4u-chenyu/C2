@@ -2131,6 +2131,9 @@
     <Content Include="Business\IAOLab\WebEngine\css\style_9.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\css\style_visual.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\Html\BossIndex1.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2197,6 +2200,9 @@
     <None Include="Business\IAOLab\WebEngine\img\BossStyle13.jpg" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle14.jpg" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle15.jpg" />
+    <Content Include="Business\IAOLab\WebEngine\Html\Visual.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img10\back.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

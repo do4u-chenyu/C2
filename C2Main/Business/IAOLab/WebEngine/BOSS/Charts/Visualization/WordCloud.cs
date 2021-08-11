@@ -13,12 +13,12 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
 {
     class WordCloud : BaseCharts
     {
-        public WordCloud(DataTable dataTable, CompleteOption option, Dictionary<string, string> chartOptionDict)
+        public WordCloud(DataTable dataTable, CompleteOption option, Dictionary<string, string[]> chartOptionDict)
         {
             if (!chartOptionDict.ContainsKey("WordCloud") || chartOptionDict["WordCloud"].Length == 0)
                 return;
 
-            string chartOptions = chartOptionDict["WordCloud"];
+            string[] chartOptions = chartOptionDict["WordCloud"];
             option.xAxis = new XAxis()
             {
 
@@ -38,8 +38,8 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
             {
                 series.Add(new SeriesBar()
                 {
-                    name = Common.FormatString(dataTable.Columns[int.Parse(chartOptions)].ToString()),
-                    data = Common.GetDataByIdx(dataTable, int.Parse(chartOptions))
+                    name = Common.FormatString(dataTable.Columns[int.Parse(chartOptions[i])].ToString()),
+                    data = Common.GetDataByIdx(dataTable, int.Parse(chartOptions[i]))
                 });
             }
             option.series = new Series(series.ToArray());
