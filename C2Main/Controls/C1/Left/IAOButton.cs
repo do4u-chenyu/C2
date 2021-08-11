@@ -1,4 +1,5 @@
-﻿using C2.Dialogs.IAOLab;
+﻿using C2.Business.IAOLab.Visualization.Dialogs;
+using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
 using C2.Utils;
@@ -114,6 +115,7 @@ namespace C2.Controls.Left
 
         private Form BigAPKForm()
         {
+            //return new ShowChartDialog();
             return new BigAPKForm() { WindowState = FormWindowState.Maximized };
         }
         #endregion

@@ -2097,4 +2097,10 @@
   <data name="城堡" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\城堡.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="社交关系图样例" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\社交关系图样例.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="词云样例" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\词云样例.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
