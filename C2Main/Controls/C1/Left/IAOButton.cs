@@ -40,10 +40,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ApkToolFormHelpInfo);
                     break;
-                case "BaseStation":
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BaseStationFormHelpInfo);
-                    break;
+                //case "BaseStation":
+                //    this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
+                //    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BaseStationFormHelpInfo);
+                //    break;
                 case "Wifi":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
@@ -70,11 +70,10 @@ namespace C2.Controls.Left
         #region 定义弹窗
         private Form BaseStationForm(string formType)
         {
-           return new WifiLocation()
+            return new WifiLocation()
             {
-                Text = "基站查询",
-                InputLable = "请在下方输入基站号码",
-                Tip = HelpUtil.BaseStationHelpInfo,
+                TabControlVisible = true,
+                TipBS = HelpUtil.BaseStationHelpInfo,
                 FormType = formType
             };
 
@@ -83,9 +82,9 @@ namespace C2.Controls.Left
         {
             return new WifiLocation()
             {
+                TabControlVisible = false,
                 Text = "银行卡信息查询",
-                InputLable = "请在下方输入银行卡",
-                Tip = HelpUtil.BankToolHelpInfo,
+                TipBank = HelpUtil.BankToolHelpInfo,
                 FormType = formType
             };
 

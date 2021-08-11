@@ -19,9 +19,14 @@ namespace C2.Dialogs.IAOLab
         public WifiLocation()
         {
             InitializeComponent();
+            tabControl1.Visible = true;
         }
 
         public string Tip { set { this.tipLable.Text = value; } }
+        public string TipBS { set { this.label4.Text = value; } }
+        public string TipBank { set { this.label6.Text = value; } }
+
+        public bool TabControlVisible { set { this.tabControl1.Visible = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
       
 
@@ -35,79 +40,58 @@ namespace C2.Dialogs.IAOLab
             string[] inputArray = this.inputAndResult.Text.Split('\n');
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
-            switch (FormType)
+            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true) 
             {
-               
-                case "BaseStation":
-                    
-                    progressBar1.Value = 0;
-                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
-                    progressBar1.Minimum = 0;
-                    firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\n";
-                    tmpResult.Append(firstLine);
-                    foreach (string baseStation in inputArray)
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
+                tmpResult.Append(firstLine);
+                foreach (string mac in inputArray)
+                {
+                    ShowResult(mac, "mac", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
-                        ShowResult(baseStation, "baseStation", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum !=0)
-                        {
-                            MessageBox.Show("查询完成");
-                            progressBar1.Value = 0;
-                        }
+                        MessageBox.Show("查询完成");
+                        progressBar1.Value = 0;
+                    }
 
+                }
+            }
+            if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true) 
+            {
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\n";
+                tmpResult.Append(firstLine);
+                foreach (string baseStation in inputArray)
+                {
+                    ShowResult(baseStation, "baseStation", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成");
+                        progressBar1.Value = 0;
                     }
-                    
-                    break;
-                case "Webbrowser":
 
-                    progressBar1.Value = 0;
-                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
-                    progressBar1.Minimum = 0;
-                    foreach (string baseStation in inputArray)
+                }
+            }
+            if (tabControl1.Visible == false) 
+            {
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
+                tmpResult.Append(firstLine);
+                foreach (string bankCard in inputArray)
+                {
+                    ShowResult(bankCard, "bankCard", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
-                        ShowResult(baseStation, "baseStation", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
-                        {
-                            MessageBox.Show("查询完成");
-                            progressBar1.Value = 0;
-                        }
+                        MessageBox.Show("查询完成");
+                        progressBar1.Value = 0;
                     }
-                    break;
-                case "Wifi":
-                    progressBar1.Value = 0;
-                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
-                    progressBar1.Minimum = 0;
-                    firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
-                    tmpResult.Append(firstLine);
-                    foreach (string mac in inputArray)
-                    {
-                        ShowResult(mac, "mac", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
-                        {
-                            MessageBox.Show("查询完成");
-                            progressBar1.Value = 0;
-                        }
-
-                    }
-                    break;
-                case "Card":
-                    
-                    progressBar1.Value = 0;
-                    progressBar1.Maximum = GetRelLengthOfArry(inputArray);
-                    progressBar1.Minimum = 0;
-                    firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
-                    tmpResult.Append(firstLine);
-                    foreach (string bankCard in inputArray)
-                    {
-                        ShowResult(bankCard, "bankCard", tmpResult);
-                        if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
-                        {
-                            MessageBox.Show("查询完成");
-                            progressBar1.Value = 0;
-                        }
-                    }
-                    break;             
-                default:
-                    break;
+                }
             }
             this.Cursor = Cursors.Arrow;
         }
