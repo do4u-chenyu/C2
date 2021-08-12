@@ -77,6 +77,7 @@
             this.zoomInBtn.Size = new System.Drawing.Size(25, 23);
             this.zoomInBtn.TabIndex = 10087;
             this.zoomInBtn.UseVisualStyleBackColor = false;
+            this.zoomInBtn.Click += new System.EventHandler(this.ZoomInBtn_Click);
             // 
             // infoList
             // 
@@ -120,6 +121,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10083;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // chartType
             // 
@@ -128,7 +130,7 @@
             this.chartType.FormattingEnabled = true;
             this.chartType.Items.AddRange(new object[] {
             "组织架构图",
-            "词云"});
+            "词云（敬请期待）"});
             this.chartType.Location = new System.Drawing.Point(101, 65);
             this.chartType.Name = "chartType";
             this.chartType.Size = new System.Drawing.Size(242, 25);

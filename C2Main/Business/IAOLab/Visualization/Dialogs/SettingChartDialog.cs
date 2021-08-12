@@ -48,10 +48,23 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         protected override bool OnOKButtonClick()
         {
-
+            if (OptionsHaveBlank())
+            {
+                HelpUtil.ShowMessageBox("有未配置的参数，请重新配置后再确定。");
+                return false;
+            }
             //所有列的数据生成datatable、图表配置项生成chartOptions、生成js
             TranDataToHtml();
             return base.OnOKButtonClick();
+        }
+
+        private bool OptionsHaveBlank()
+        {
+            if(this.chartType.Text == "组织架构图")
+                return this.userCombox.SelectedIndex == -1 || this.superiorCombox.SelectedIndex == -1;
+
+            //TODO 其他类别
+            return true ;
         }
 
         private void TranDataToHtml()
@@ -216,6 +229,31 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 this.pictureBox1.Image = C2.Properties.Resources.词云样例;
             }
                 
+        }
+
+        private void ZoomInBtn_Click(object sender, EventArgs e)
+        {
+            Enlarge();
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            Enlarge();
+        }
+
+
+        void Enlarge()
+        {
+            var image = this.pictureBox1.Image;
+            if (image == null)
+                return;
+
+            Icon icon = Properties.Resources.logo;
+            var dialog = new C2.Dialogs.PictureViewDialog(image, icon);
+            dialog.ImageName = this.chartType.Text;
+            dialog.SetZoomType(ZoomType.FitPage);
+            dialog.ShowDialog();
+
         }
     }
 }
