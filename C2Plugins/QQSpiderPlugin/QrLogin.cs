@@ -12,7 +12,7 @@ namespace QQSpiderPlugin
 {
     class QrLogin
     {
-        private string jsVersion = "10226";
+        private string jsVersion = "21073010";
         private string sourceURL = "http://find.qq.com/index.html?version=1&im_version=5533&width=910&height=610&search_target=0";
         Session session;
         public Session Session
@@ -38,12 +38,16 @@ namespace QQSpiderPlugin
             Response resp = Response.Empty;
             try
             {
+                Dictionary<string, string> param = new Dictionary<string, string>();
+                
                 string url = "http://ui.ptlogin2.qq.com/cgi-bin/login";
-                Dictionary<string, string> param = new Dictionary<string, string>(); 
+                //param.Add("id", "2732844");
+                
                 param.Add("appid", "715030901");
                 param.Add("daid", "73");
                 param.Add("pt_no_auth", "1");
-                param.Add("s_url", this.sourceURL);
+                param.Add("s_url", "https://qun.qq.com/member.html");
+                
 
                 resp = this.session.Get(url, param);
 
@@ -53,8 +57,10 @@ namespace QQSpiderPlugin
                     this.jsVersion = matches[1].Value;
 
                 this.session.UpdateHeaders("Referer", url);
-
-                url = "http://ptlogin2.qq.com/ptqrshow";
+                //获取二维码
+                //https://ssl.ptlogin2.qq.com/ptqrshow?appid=715030901&e=2&l=M&s=3&d=72&v=4&t=0.12108830293255246&daid=73&pt_3rd_aid=0
+                url = "https://ssl.ptlogin2.qq.com/ptqrshow";
+               
                 param = new Dictionary<string, string>
                        {
                            {"appid", "715030901" },
@@ -64,7 +70,8 @@ namespace QQSpiderPlugin
                            {"d", "72" },
                            {"v", "4" },
                            {"t", String.Format("{0:%.17f}", new Random().Next(0, 1)) },
-                           {"daid", "73" }
+                           {"daid", "73" },
+                           {"pt_3rd_aid", "0" },
                        };
                 resp = this.session.Get(url, param);
                 this.session.UpdateHeaders("Content-Type", "image/png");
@@ -88,15 +95,36 @@ namespace QQSpiderPlugin
 
             if (!String.IsNullOrEmpty(loginSig) && !String.IsNullOrEmpty(qrSig))
             {
-                string url = "http://ptlogin2.qq.com/ptqrlogin";
+                /*
+                QQ登录接口
+                https://qun.qq.com/member.html#
+                &ptqrtoken=664235145&
+                ptredirect=1&
+                h=1&
+                t=1&
+                g=1&
+                from_ui=1&
+                ptlang=2052&
+                action=0-0-1628671582481&
+                js_ver=21073010&
+                js_type=1&
+                login_sig=LXzAxTeoAQNIPbr-G*fTMIyn84RHXI73iHOrJ-YXscgWZr3vTBeo*qfVB1Pbd4Cp&
+                pt_uistyle=40&
+                aid=715030901&
+                daid=73&
+                has_onekey=1&
+                */
+                string url = "https://ssl.ptlogin2.qq.com/ptqrlogin";
                 Dictionary<string, string> param = new Dictionary<string, string>
                        {
-                           {"u1", this.sourceURL },
+                           {"u1","https://qun.qq.com/member.html" },
                            {"ptqrtoken", Util.GenQrToken(qrSig) },
                            {"ptredirect", "1" },
                            {"h", "1" },
                            {"t", "1" },
+                           {"g", "1" },
                            {"from_ui", "1" },
+                           {"ptlang", "2052" },
                            {"action", String.Format("0-0-{0:%d}", Util.GetTimeStamp() * 1000) },
                            {"js_ver", this.jsVersion.ToString() },
                            {"js_type", "1" },
@@ -104,6 +132,7 @@ namespace QQSpiderPlugin
                            {"pt_uistyle", "40" },
                            {"aid", "715030901" },
                            {"daid", "73" },
+                           {"has_onekey", "1" }
                        };
 
                 Response resp = null;

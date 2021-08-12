@@ -384,7 +384,13 @@ namespace QQSpiderPlugin
                 return;
             }
             this.session = login.Session;
+            Uri a = new Uri("https://ui.ptlogin2.qq.com");
+            //this.session.Cookies.SetCookies(a, "uin=o2420184549,skey=ZrThhhlK7g;RK=mbQAn+n77X,ptcz=21c6e274ea3e69c79df51e2df9a1e75901027b004996e87a1fe0d2e7f3f2e985,p_skey=1dHPok65JUsRVfqVu*M7BGiUtS5DVlH1vpOpsxn6RKs_,p_uin=o2420184549");
+            this.session.Cookies.SetCookies(a, "p_skey=1dHPok65JUsRVfqVu*M7BGiUtS5DVlH1vpOpsxn6RKs_,p_uin=o2420184549");
             string skey = this.session.Cookies.GetCookieValue("skey");
+            string RK = this.session.Cookies.GetCookieValue("RK");
+            string uin = this.session.Cookies.GetCookieValue("uin");
+            string ptcz = this.session.Cookies.GetCookieValue("ptcz");
             if (String.IsNullOrEmpty(skey))
                 return;
             this.session.Ldw = Util.GenBkn(skey);
