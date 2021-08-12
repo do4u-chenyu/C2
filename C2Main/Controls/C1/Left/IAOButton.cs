@@ -41,10 +41,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ApkToolFormHelpInfo);
                     break;
-                //case "BaseStation":
-                //    this.leftPictureBox.Image = global::C2.Properties.Resources.BaseStation;
-                //    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BaseStationFormHelpInfo);
-                //    break;
+                case "Visualization":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.Visualization;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.VisualizationFormHelpInfo);
+                    break;
                 case "Wifi":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
@@ -115,7 +115,6 @@ namespace C2.Controls.Left
 
         private Form BigAPKForm()
         {
-            //return new ShowChartDialog();
             return new BigAPKForm() { WindowState = FormWindowState.Maximized };
         }
         #endregion
@@ -136,8 +135,8 @@ namespace C2.Controls.Left
                 case "APK":
                     new ApkTool().ShowDialog();
                     break;
-                case "BaseStation":
-                    BaseStationForm(buttonType).ShowDialog();
+                case "Visualization":
+                    new ShowChartDialog().ShowDialog();
                     break;
                 case "Wifi":
                     new WifiLocation() { FormType = buttonType }.ShowDialog();

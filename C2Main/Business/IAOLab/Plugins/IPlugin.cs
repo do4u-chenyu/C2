@@ -99,21 +99,21 @@ namespace C2.IAOLab.Plugins
         }
     }
 
-    class BaseStationPlugin : IPlugin
+    class VisualizationPlugin : IPlugin
     {
         public string GetPluginDescription()
         {
-            return HelpUtil.BaseStationFormHelpInfo;
+            return HelpUtil.VisualizationFormHelpInfo;
         }
 
         public string GetPluginName()
         {
-            return "基站查询";
+            return "数据可视化";
         }
 
         public string GetPluginVersion()
         {
-            return "2.4.11";
+            return "1.5.11";
         }
         public Image GetPluginImage()
         {
