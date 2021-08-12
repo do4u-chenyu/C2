@@ -15,7 +15,7 @@ namespace C2.IAOLab.BaseStation
         public String BaseStationLocate(String input)
         {
             string url = "http://218.94.117.234:8484/Test01/station.do";
-            if (input == "基站号")
+            if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号")
                 return null;
             string location = WifiMac.WifiMac.GetInstance().GetInfo(url, input,"station");
             location = location.Replace("\"", String.Empty);
