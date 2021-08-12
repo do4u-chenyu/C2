@@ -108,36 +108,37 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void ChangeControlContent()
         {
-            if(this.chartType.SelectedIndex == 0)
+
+            foreach (Control ct in this.panel1.Controls)
             {
-                foreach (Control ct in this.panel1.Controls)
+                if (ct is ComboBox)
                 {
-                    if (ct is ComboBox)
-                    {
-                        (ct as ComboBox).Text = string.Empty;
-                        (ct as ComboBox).Items.Clear();
-                        (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-                    }
-                    else if (ct is ComCheckBoxList)
-                    {
-                        (ct as ComCheckBoxList).ClearText();
-                        (ct as ComCheckBoxList).Items.Clear();
-                        (ct as ComCheckBoxList).Items.AddRange(bcpInfo.ColumnArray);
-                    }
+                    (ct as ComboBox).Text = string.Empty;
+                    (ct as ComboBox).Items.Clear();
+                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+                }
+                else if (ct is ComCheckBoxList)
+                {
+                    (ct as ComCheckBoxList).ClearText();
+                    (ct as ComCheckBoxList).Items.Clear();
+                    (ct as ComCheckBoxList).Items.AddRange(bcpInfo.ColumnArray);
                 }
             }
-            else
-            {
-                foreach (Control ct in this.panel2.Controls)
-                {
-                    if (ct is ComboBox )
-                    {
-                        (ct as ComboBox).Text = string.Empty;
-                        (ct as ComboBox).Items.Clear();
-                        (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-                    }
-                }
-            }
+
+
+            //TODO 暂时先不对其他类型的配置下拉列表填字段
+            //else
+            //{
+            //    foreach (Control ct in this.panel2.Controls)
+            //    {
+            //        if (ct is ComboBox )
+            //        {
+            //            (ct as ComboBox).Text = string.Empty;
+            //            (ct as ComboBox).Items.Clear();
+            //            (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+            //        }
+            //    }
+            //}
 
         }
 
