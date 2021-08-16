@@ -57,10 +57,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GPSTransformFormHelpInfo);
                     break;
-                case "Ip":
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.Ip;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TimeAndIPTransformFormHelpInfo);
-                    break;
+                //case "Ip":
+                //    this.leftPictureBox.Image = global::C2.Properties.Resources.Ip;
+                //    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TimeAndIPTransformFormHelpInfo);
+                //    break;
                 case "BigAPK":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
@@ -69,16 +69,16 @@ namespace C2.Controls.Left
 
         }
         #region 定义弹窗
-        private Form BaseStationForm(string formType)
-        {
-            return new WifiLocation()
-            {
-                TabControlVisible = true,
-                TipBS = HelpUtil.BaseStationHelpInfo,
-                FormType = formType
-            };
+        //private Form BaseStationForm(string formType)
+        //{
+        //    return new WifiLocation()
+        //    {
+        //        TabControlVisible = true,
+        //        TipBS = HelpUtil.BaseStationHelpInfo,
+        //        FormType = formType
+        //    };
 
-        }
+        //}
         private Form BankToolForm(string formType)
         {
             return new WifiLocation()
@@ -96,22 +96,13 @@ namespace C2.Controls.Left
             {
                 Tab0Tip = HelpUtil.GPSTransformHelpInfo,
                 Tib1Tip = HelpUtil.GPSDistanceHelpInfo,
+                IPTip = HelpUtil.IPTransformHelpInfo,
+                TimeTip = HelpUtil.TimeTransformHelpInfo,
                 FormType = formType
             };
 
         }
-        private Form TimeAndIPTransformForm(string formType)
-        {
-            CoordinateConversion form = new CoordinateConversion()
-            {
-                Tab0Tip = HelpUtil.IPTransformHelpInfo,
-                Tib1Tip = HelpUtil.TimeTransformHelpInfo,
-                FormType = formType
-            };
-            form.ReLayoutForm();
-            return form;
-
-        }
+       
 
         private Form BigAPKForm()
         {
@@ -146,9 +137,6 @@ namespace C2.Controls.Left
                     break;
                 case "Tude":
                     GPSTransformForm(buttonType).ShowDialog();
-                    break;
-                case "Ip":
-                    TimeAndIPTransformForm(buttonType).ShowDialog();
                     break;
                 case "BigAPK":
                     BigAPKForm().ShowDialog();
