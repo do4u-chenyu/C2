@@ -84,9 +84,6 @@
     <Reference Include="AxMSTSCLib">
       <HintPath>..\ThirdPartyLibrary\Cracker\rdp_win7\AxMSTSCLib.dll</HintPath>
     </Reference>
-    <Reference Include="ChilkatDotNet45">
-      <HintPath>..\ThirdPartyLibrary\Cracker\ChilkatDotNet45.dll</HintPath>
-    </Reference>
     <Reference Include="ConsoleControl">
       <HintPath>..\ThirdPartyLibrary\ConsoleControl.1.2.1\lib\net40-client\ConsoleControl.dll</HintPath>
     </Reference>
@@ -161,6 +158,12 @@
     </Reference>
     <Reference Include="Rebex.Networking">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Sftp">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Sftp.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.SshShell">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.SshShell.dll</HintPath>
     </Reference>
     <Reference Include="Rebex.Telnet">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Telnet.dll</HintPath>
