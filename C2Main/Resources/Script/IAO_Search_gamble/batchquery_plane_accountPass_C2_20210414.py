@@ -275,6 +275,7 @@ class Saver(Thread):
             queryclient_result= self.queryclient_resultQueue.get()  # ret
             self.save(queryclient_result)
             self.queryclient_resultQueue.task_done()
+
     def save(self, info):
         self.writer.write(info.replace('\r','')+"\n")
         self.done_sum +=  1
@@ -406,13 +407,8 @@ def init_logger(logname,filename,logger_level = logging.INFO):
     logger.addHandler(ch)
     return logger
 
-def zip_result(DATA_PATH,ZIP_PATH,type='no'):
-    if type == 'yes':
-        cmd = ['tar', '-zcvf -', DATA_PATH[2:], '--remove-files |openssl des3 -salt -k', PASSWORD, '|dd of={0}'.format(ZIP_PATH[2:])]
-        LOGGER.info('cmd:{0}'.format(' '.join(cmd)))
-        pipe = Popen(' '.join(cmd),shell=True,stdout=PIPE)
-    else:
-        pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
+def zip_result(DATA_PATH,ZIP_PATH):
+    pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
     if pipe.returncode:
         LOGGER.warning("Compress dirs failed with error code: {0}".format(pipe.returncode))
@@ -430,7 +426,7 @@ def init_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
-##cquey FULLTEXT 
+#cquey FULLTEXT 
 def queryBatch(keyWords):
     tempFilename   = "_result_password_" + startTime + '_' + endTime 
     sch = Scheduler(startTime, endTime, tempFilename,keyWords)
@@ -456,18 +452,18 @@ def main():
     ap.run_query()
     LOGGER.info('END AIRPORT QUERY BATCH')
     
-    zip_result(ap_path,ap_path+'.tgz.tmp')
-    ZIP_SUCCEED =ap_path + '.tgz'
-    os.rename(ap_path+'.tgz.tmp',ZIP_SUCCEED)
+    # zip_result(ap_path,ap_path+'.tgz.tmp')
+    # ZIP_SUCCEED =ap_path + '.tgz'
+    # os.rename(ap_path+'.tgz.tmp',ZIP_SUCCEED)
 
     ZIP_PATH = DATA_PATH + startTime + '_' + endTime +  '.tgz.tmp'
+    logger = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     zip_result(DATA_PATH,ZIP_PATH)
     #encrypTion(ZIP_PATH)
     ZIP_SUCCEED = areacode +  ZIP_PATH[2:].replace('.tmp','')
     os.rename(ZIP_PATH,ZIP_SUCCEED)
 
 if __name__ == '__main__':
-    ##Program description
     usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
