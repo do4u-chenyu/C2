@@ -313,6 +313,7 @@
             // 
             // tabPage2
             // 
+            /*
             this.tabPage2.Controls.Add(this.panel6);
             this.tabPage2.Controls.Add(this.panel5);
             this.tabPage2.Controls.Add(this.panel4);
@@ -323,6 +324,7 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "QQ群爬虫";
             this.tabPage2.UseVisualStyleBackColor = true;
+            */
             // 
             // panel6
             // 
@@ -513,6 +515,7 @@
             // 
             // tabPage3
             // 
+            /*
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.label10);
@@ -530,6 +533,7 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "WXID查头像昵称";
             this.tabPage3.UseVisualStyleBackColor = true;
+            */
             // 
             // label11
             // 
