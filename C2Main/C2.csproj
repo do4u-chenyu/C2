@@ -81,6 +81,12 @@
     <Reference Include="Aspose.Words">
       <HintPath>..\ThirdPartyLibrary\Aspose18.4\Aspose.Words.dll</HintPath>
     </Reference>
+    <Reference Include="AxMSTSCLib">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rdp_win7\AxMSTSCLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ChilkatDotNet45">
+      <HintPath>..\ThirdPartyLibrary\Cracker\ChilkatDotNet45.dll</HintPath>
+    </Reference>
     <Reference Include="ConsoleControl">
       <HintPath>..\ThirdPartyLibrary\ConsoleControl.1.2.1\lib\net40-client\ConsoleControl.dll</HintPath>
     </Reference>
@@ -107,6 +113,14 @@
       <HintPath>..\ThirdPartyLibrary\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyLibrary\Cracker\postgresql\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTSCLib">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rdp_win7\MSTSCLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.26.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\Mysql\MySql.Data.dll</HintPath>
@@ -136,6 +150,24 @@
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>..\ThirdPartyLibrary\Oracle.ManagedDataAccess.19.10.0\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="Rebex.Common">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.FileServer">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.FileServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.FileSystem">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Networking">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Telnet">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Telnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Terminal">
+      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Terminal.dll</HintPath>
+    </Reference>
     <Reference Include="Renci.SshNet">
       <HintPath>..\ThirdPartyLibrary\SSH.NET.2020.0.1\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
@@ -143,6 +175,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
@@ -162,6 +195,49 @@
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
+    <Compile Include="Business\Cracker\Dialogs\CrackerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\Cracker\Dialogs\CrackerForm.Designer.cs">
+      <DependentUpon>CrackerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Cracker\Exception\IPBreakException.cs" />
+    <Compile Include="Business\Cracker\Exception\IPUserBreakException.cs" />
+    <Compile Include="Business\Cracker\Model\CrackService.cs" />
+    <Compile Include="Business\Cracker\Model\CrackSSH.cs" />
+    <Compile Include="Business\Cracker\Model\Server.cs" />
+    <Compile Include="Business\Cracker\Model\ServiceModel.cs" />
+    <Compile Include="Business\Cracker\rdp\RdpClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Business\Cracker\rdp\ResponseType.cs" />
+    <Compile Include="Business\Cracker\SmartThread\CallerThreadContext.cs" />
+    <Compile Include="Business\Cracker\SmartThread\CanceledWorkItemsGroup.cs" />
+    <Compile Include="Business\Cracker\SmartThread\EventWaitHandle.cs" />
+    <Compile Include="Business\Cracker\SmartThread\EventWaitHandleFactory.cs" />
+    <Compile Include="Business\Cracker\SmartThread\Exceptions.cs" />
+    <Compile Include="Business\Cracker\SmartThread\Interfaces.cs" />
+    <Compile Include="Business\Cracker\SmartThread\InternalInterfaces.cs" />
+    <Compile Include="Business\Cracker\SmartThread\PriorityQueue.cs" />
+    <Compile Include="Business\Cracker\SmartThread\SLExt.cs" />
+    <Compile Include="Business\Cracker\SmartThread\SmartThreadPool.cs" />
+    <Compile Include="Business\Cracker\SmartThread\SmartThreadPool.ThreadEntry.cs" />
+    <Compile Include="Business\Cracker\SmartThread\Stopwatch.cs" />
+    <Compile Include="Business\Cracker\SmartThread\STPEventWaitHandle.cs" />
+    <Compile Include="Business\Cracker\SmartThread\STPPerformanceCounter.cs" />
+    <Compile Include="Business\Cracker\SmartThread\STPStartInfo.cs" />
+    <Compile Include="Business\Cracker\SmartThread\SynchronizedDictionary.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WIGStartInfo.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItem.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItem.WorkItemResult.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItemFactory.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItemInfo.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItemResultTWrapper.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItemsGroup.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItemsGroupBase.cs" />
+    <Compile Include="Business\Cracker\SmartThread\WorkItemsQueue.cs" />
+    <Compile Include="Business\Cracker\Tools\FileTool.cs" />
+    <Compile Include="Business\Cracker\Tools\Tool.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HTTP\HttpHandler.cs" />
@@ -2410,6 +2486,18 @@
     <Content Include="Resources\C1\toolbox\flow.png" />
     <Content Include="Resources\C1\toolbox\relate.png" />
     <Content Include="Resources\C1\toolbox\stop.png" />
+    <Content Include="Resources\CrackerDict\dic_password_ftp.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrackerDict\dic_password_ssh.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrackerDict\dic_username_ftp.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrackerDict\dic_username_ssh.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\flow_back.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
@@ -3529,7 +3617,9 @@
   <ItemGroup>
     <Folder Include="Business\IAOLab\Webbrowser\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md plugins

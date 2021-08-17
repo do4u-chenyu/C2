@@ -36,6 +36,15 @@
             // 
             this.titleLabel.Text = "喝彩城堡";
             // 
+            // backPanel
+            // 
+            this.backPanel.Location = new System.Drawing.Point(3, 85);
+            this.backPanel.Size = new System.Drawing.Size(179, 571);
+            // 
+            // manageButtonPanel
+            // 
+            this.manageButtonPanel.Size = new System.Drawing.Size(177, 537);
+            // 
             // helpInfoLable
             // 
             this.helpInfoLable.Click += new System.EventHandler(this.HelpInfoLable_Click);
