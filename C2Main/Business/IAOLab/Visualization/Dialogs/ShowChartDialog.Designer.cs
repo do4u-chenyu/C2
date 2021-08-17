@@ -32,6 +32,7 @@
             this.settingButton = new System.Windows.Forms.ToolStripButton();
             this.picSaveButton = new System.Windows.Forms.ToolStripButton();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             this.picSaveButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(829, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1113, 31);
             this.toolStrip1.TabIndex = 10003;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -54,7 +55,7 @@
             this.settingButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.settingButton.Name = "settingButton";
             this.settingButton.Size = new System.Drawing.Size(23, 28);
-            this.settingButton.Text = "settingButton";
+            this.settingButton.Text = "参数配置";
             this.settingButton.Click += new System.EventHandler(this.SettingButton_Click);
             // 
             // picSaveButton
@@ -64,7 +65,7 @@
             this.picSaveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.picSaveButton.Name = "picSaveButton";
             this.picSaveButton.Size = new System.Drawing.Size(23, 28);
-            this.picSaveButton.Text = "picSaveButton";
+            this.picSaveButton.Text = "保存图片";
             this.picSaveButton.Click += new System.EventHandler(this.PicSaveButton_Click);
             // 
             // webBrowser1
@@ -75,23 +76,35 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 34);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(829, 312);
+            this.webBrowser1.Size = new System.Drawing.Size(1113, 552);
             this.webBrowser1.TabIndex = 10004;
+            // 
+            // saveBtn
+            // 
+            this.saveBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.saveBtn.Location = new System.Drawing.Point(854, 592);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 27);
+            this.saveBtn.TabIndex = 10077;
+            this.saveBtn.Text = "保存";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // ShowChartDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 391);
+            this.ClientSize = new System.Drawing.Size(1113, 631);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ShowChartDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据可视化";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.ShowChartDialog_Load);
+            this.Shown += new System.EventHandler(this.ShowChartDialog_Shown);
             this.Controls.SetChildIndex(this.toolStrip1, 0);
             this.Controls.SetChildIndex(this.webBrowser1, 0);
+            this.Controls.SetChildIndex(this.saveBtn, 0);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -104,5 +117,6 @@
         private System.Windows.Forms.ToolStripButton settingButton;
         private System.Windows.Forms.ToolStripButton picSaveButton;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button saveBtn;
     }
 }

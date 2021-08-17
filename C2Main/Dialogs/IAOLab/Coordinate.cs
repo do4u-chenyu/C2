@@ -19,6 +19,8 @@ namespace C2.Dialogs.IAOLab
         public string FormType { get { return this.formType; } set { this.formType = value; } }
         public string Tab0Tip {  set { this.tip0.Text = value; } }
         public string Tib1Tip { set { this.tip1.Text = value; } }
+        public string IPTip { set { this.label1.Text = value; } }
+        public string TimeTip { set { this.label2.Text = value; } }
         public CoordinateConversion()
         {
             InitializeComponent();
@@ -111,7 +113,7 @@ namespace C2.Dialogs.IAOLab
         }
         private void IPTransform(string[] inputArray, StringBuilder tmpResult)
         {
-            foreach(Control button in tabPage1.Controls)
+            foreach(Control button in tabPage3.Controls)
             {
                 if (!(button is RadioButton && (button as RadioButton).Checked))
                     continue;
@@ -121,7 +123,7 @@ namespace C2.Dialogs.IAOLab
                     if (string.IsNullOrEmpty(input))
                         continue;
                     tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
-                    inputAndResult.Text = tmpResult.ToString();
+                    richTextBox1.Text = tmpResult.ToString();
                 }
                 return;
 
@@ -130,7 +132,7 @@ namespace C2.Dialogs.IAOLab
         private void TimeTransform(string[] inputArray, StringBuilder tmpResult)
         {
 
-            foreach (Control button in tabPage2.Controls)
+            foreach (Control button in tabPage4.Controls)
             {
                 if (!(button is RadioButton && (button as RadioButton).Checked))
                     continue;
@@ -140,7 +142,7 @@ namespace C2.Dialogs.IAOLab
                     if (string.IsNullOrEmpty(input))
                         continue;
                     tmpResult.Append(TimeAndIPTransform.GetInstance(input).TimeIPTransform(button.Text));
-                    inputAndResult1.Text = tmpResult.ToString();
+                    richTextBox2.Text = tmpResult.ToString();
                 }
                 return;
             }
@@ -151,25 +153,14 @@ namespace C2.Dialogs.IAOLab
         {
             StringBuilder tmpResult = new StringBuilder();
             this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            switch (FormType)
-            {
-
-                case "Tude":
-                    if (this.tabControl.SelectedIndex == 0)
-                        ComputeXYTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
-                    else
-                        ComputeDistance(this.inputAndResult1.Text.Split('\n'), tmpResult);
-
-                    break;
-                case "Ip":
-                    if (this.tabControl.SelectedIndex == 0)
-                        IPTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
-                    else
-                        TimeTransform(this.inputAndResult1.Text.Split('\n'), tmpResult);
-                    break;
-                default:
-                    break;
-            }
+            if (this.tabControl.SelectedIndex == 0)
+                ComputeXYTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
+            if (this.tabControl.SelectedIndex == 1)
+                ComputeDistance(this.inputAndResult1.Text.Split('\n'), tmpResult);
+            if (this.tabControl.SelectedIndex == 2)
+                IPTransform(this.richTextBox1.Text.Split('\n'), tmpResult);
+            if (this.tabControl.SelectedIndex == 3)
+                TimeTransform(this.richTextBox2.Text.Split('\n'), tmpResult);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
         }
 
@@ -189,6 +180,8 @@ namespace C2.Dialogs.IAOLab
         {
             this.inputAndResult.Clear();
             this.inputAndResult1.Clear();
+            this.richTextBox1.Clear();
+            this.richTextBox2.Clear();
         }
     }
 }

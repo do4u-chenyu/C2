@@ -383,6 +383,8 @@ namespace C2.Controls.MapViews
                 MenuRefresh.Text = "刷新";           //刷新
                 MenuRefresh.Tag = dataItem;
                 MenuRefresh.Click += MenuRefresh_Click;
+                if (dataItem.IsDatabase())  // 外部数据源不存在刷新的概念
+                    MenuRefresh.Enabled = false;
 
                 MenuExploreDirectory.Image = Properties.Resources.dataDirectory;
                 MenuExploreDirectory.Text = Lang._("ExploreDirectory");

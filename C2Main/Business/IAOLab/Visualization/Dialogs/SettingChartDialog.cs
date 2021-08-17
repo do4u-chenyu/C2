@@ -48,10 +48,23 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         protected override bool OnOKButtonClick()
         {
-
+            if (OptionsHaveBlank())
+            {
+                HelpUtil.ShowMessageBox("有未配置的参数，请重新配置后再确定。");
+                return false;
+            }
             //所有列的数据生成datatable、图表配置项生成chartOptions、生成js
             TranDataToHtml();
             return base.OnOKButtonClick();
+        }
+
+        private bool OptionsHaveBlank()
+        {
+            if(this.chartType.Text == "组织架构图")
+                return this.userCombox.SelectedIndex == -1 || this.superiorCombox.SelectedIndex == -1;
+
+            //TODO 其他类别
+            return true ;
         }
 
         private void TranDataToHtml()
@@ -95,36 +108,37 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void ChangeControlContent()
         {
-            if(this.chartType.SelectedIndex == 0)
+
+            foreach (Control ct in this.panel1.Controls)
             {
-                foreach (Control ct in this.panel1.Controls)
+                if (ct is ComboBox)
                 {
-                    if (ct is ComboBox)
-                    {
-                        (ct as ComboBox).Text = string.Empty;
-                        (ct as ComboBox).Items.Clear();
-                        (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-                    }
-                    else if (ct is ComCheckBoxList)
-                    {
-                        (ct as ComCheckBoxList).ClearText();
-                        (ct as ComCheckBoxList).Items.Clear();
-                        (ct as ComCheckBoxList).Items.AddRange(bcpInfo.ColumnArray);
-                    }
+                    (ct as ComboBox).Text = string.Empty;
+                    (ct as ComboBox).Items.Clear();
+                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+                }
+                else if (ct is ComCheckBoxList)
+                {
+                    (ct as ComCheckBoxList).ClearText();
+                    (ct as ComCheckBoxList).Items.Clear();
+                    (ct as ComCheckBoxList).Items.AddRange(bcpInfo.ColumnArray);
                 }
             }
-            else
-            {
-                foreach (Control ct in this.panel2.Controls)
-                {
-                    if (ct is ComboBox )
-                    {
-                        (ct as ComboBox).Text = string.Empty;
-                        (ct as ComboBox).Items.Clear();
-                        (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-                    }
-                }
-            }
+
+
+            //TODO 暂时先不对其他类型的配置下拉列表填字段
+            //else
+            //{
+            //    foreach (Control ct in this.panel2.Controls)
+            //    {
+            //        if (ct is ComboBox )
+            //        {
+            //            (ct as ComboBox).Text = string.Empty;
+            //            (ct as ComboBox).Items.Clear();
+            //            (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+            //        }
+            //    }
+            //}
 
         }
 
@@ -216,6 +230,31 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 this.pictureBox1.Image = C2.Properties.Resources.词云样例;
             }
                 
+        }
+
+        private void ZoomInBtn_Click(object sender, EventArgs e)
+        {
+            Enlarge();
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            Enlarge();
+        }
+
+
+        void Enlarge()
+        {
+            var image = this.pictureBox1.Image;
+            if (image == null)
+                return;
+
+            Icon icon = Properties.Resources.logo;
+            var dialog = new C2.Dialogs.PictureViewDialog(image, icon);
+            dialog.ImageName = this.chartType.Text;
+            dialog.SetZoomType(ZoomType.FitPage);
+            dialog.ShowDialog();
+
         }
     }
 }
