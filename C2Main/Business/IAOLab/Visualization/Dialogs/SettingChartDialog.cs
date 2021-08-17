@@ -177,7 +177,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 List<string> tmpRowList = new List<string>();
                 for (int j = 0; j < bcpInfo.ColumnArray.Length; j++)
                 {
-                    string cellValue = j < rowList.Length ? rowList[j] : "0";
+                    string cellValue = j < rowList.Length ? rowList[j] : "";
                     tmpRowList.Add(cellValue);
                 }
                 dataTable.Rows.Add(tmpRowList.ToArray());
