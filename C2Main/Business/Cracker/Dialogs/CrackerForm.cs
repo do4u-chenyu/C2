@@ -39,7 +39,7 @@ namespace C2.Business.Cracker.Dialogs
         public int successCount = 0;
         public long creackerSumCount = 0;
         public long allCrackCount = 0;
-        private Boolean notAutoSelectDic = true;
+        private Boolean notAutoSelectDic = false;
         public string[] servicesName = { };
         public string[] servicesPort = { };
 
@@ -219,7 +219,7 @@ namespace C2.Business.Cracker.Dialogs
                 else
                 {
 
-                    //LogWarning(ip + " port " + port + " 连接超时！");
+                    LogWarning(ip + " port " + port + " 连接超时！");
                 }
             }
             catch (SocketException e)
@@ -347,10 +347,10 @@ namespace C2.Business.Cracker.Dialogs
                         {
                             continue;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
-                            string logInfo = "检查" + ip + ":" + serviceName + "登录发生异常！" + e.Message;
-                            LogWarning(logInfo);
+                            //string logInfo = "检查" + ip + ":" + serviceName + "登录发生异常！" + e.Message;
+                            //LogWarning(logInfo);
                             //FileTool.log(logInfo + e.StackTrace);
                         }
                         break;
@@ -393,7 +393,7 @@ namespace C2.Business.Cracker.Dialogs
                     }
                     else
                     {
-                        //LogWarning(ip + "-----" + serviceName + "----" + username + "----" + password + "失败！");
+                        LogWarning(ip + "-----" + serviceName + "----" + username + "----" + password + "----失败！");
                     }
 
                 }
@@ -436,7 +436,7 @@ namespace C2.Business.Cracker.Dialogs
                 //清空跳过列表
                 this.list_ip_break.Clear();
                 this.list_ip_user_break.Clear();
-                Boolean isScanport = this.chk_isScanPort.Checked;
+                Boolean isScanport = true;//扫描端口
                 stp = new SmartThreadPool();
                 stp.MaxThreads = maxThread;
                 creackerSumCount = 0;
@@ -516,7 +516,7 @@ namespace C2.Business.Cracker.Dialogs
                     foreach (string user in clist_username)
                     {
                         //替换变量密码
-                        string username = user + this.txt_username_ext.Text;
+                        string username = user;
                         HashSet<string> list_current_password = new HashSet<string>();
 
                         //redis不需要破解账户
@@ -695,75 +695,33 @@ namespace C2.Business.Cracker.Dialogs
                 }
 
             }
-            //加载自定义字典字典
-            if (notAutoSelectDic)
+
+            //如果默认字典没有数据则加载默认字典  notAutoSelectDic必为false,自动选择字典
+            if (dics.Count <= 0)
             {
-                if (this.txt_username.Text.EndsWith(".txt"))
+                LogMessage("根据选择检查的服务自动加载字典......");
+
+                foreach (string serviceName in this.services_list.CheckedItems)
                 {
-                    this.list_username = FileTool.readFileToList(this.txt_username.Text);
-                }
-                else
-                {
-                    if (this.txt_username.Text.Length > 0)
+                    ServiceModel sm = this.services[serviceName];
+                    sm.ListUserName = FileTool.readFileToList(Directory.GetCurrentDirectory() + sm.DicUserNamePath);
+                    sm.ListPassword = FileTool.readFileToList(Directory.GetCurrentDirectory() + sm.DicPasswordPath);
+                    if (sm.ListUserName.Count <= 0)
                     {
-                        this.list_username.Clear();
-                        this.list_username.Add(this.txt_username.Text);
+                        LogWarning("加载" + serviceName + "用户名字典未发现数据！");
+                    }
+                    else if (sm.ListPassword.Count <= 0)
+                    {
+                        LogWarning("加载" + serviceName + "密码字典未发现数据！");
+                    }
+                    else
+                    {
+                        LogWarning("加载" + serviceName + "字典成功，用户名" + sm.ListUserName.Count + "个，密码" + sm.ListPassword.Count + "个！");
                     }
                 }
-
-                if (this.txt_password.Text.EndsWith(".txt"))
-                {
-                    this.list_password = FileTool.readFileToList(this.txt_password.Text);
-                }
-                else
-                {
-                    if (this.txt_password.Text.Length > 0)
-                    {
-                        this.list_password.Clear();
-                        this.list_password.Add(this.txt_password.Text);
-                    }
-                }
-
-                if (this.list_username.Count <= 0)
-                {
-                    MessageBox.Show("请设置需要检查的用户名！");
-                    return false;
-                }
-                else if (this.list_password.Count <= 0)
-                {
-                    MessageBox.Show("请设置检查的密码！");
-                    return false;
-                }
+                LogMessage("根据选择检查的服务自动加载字典完成！");
             }
-            else
-            {
-                //如果默认字典没有数据则加载默认字典
-
-                if (dics.Count <= 0)
-                {
-                    LogMessage("根据选择检查的服务自动加载字典......");
-
-                    foreach (string serviceName in this.services_list.CheckedItems)
-                    {
-                        ServiceModel sm = this.services[serviceName];
-                        sm.ListUserName = FileTool.readFileToList(Directory.GetCurrentDirectory() + sm.DicUserNamePath);
-                        sm.ListPassword = FileTool.readFileToList(Directory.GetCurrentDirectory() + sm.DicPasswordPath);
-                        if (sm.ListUserName.Count <= 0)
-                        {
-                            LogWarning("加载" + serviceName + "用户名字典未发现数据！");
-                        }
-                        else if (sm.ListPassword.Count <= 0)
-                        {
-                            LogWarning("加载" + serviceName + "密码字典未发现数据！");
-                        }
-                        else
-                        {
-                            LogWarning("加载" + serviceName + "字典成功，用户名" + sm.ListUserName.Count + "个，密码" + sm.ListPassword.Count + "个！");
-                        }
-                    }
-                    LogMessage("根据选择检查的服务自动加载字典完成！");
-                }
-            }
+            
             return true;
 
         }
@@ -896,10 +854,8 @@ namespace C2.Business.Cracker.Dialogs
 
         private void Main_Shown(object sender, EventArgs e)
         {
-            this.Text += " " + CrackerForm.version + "";
-
             this.cbox_reTry.SelectedIndex = 0;
-            this.cbox_threadSize.SelectedIndex = 10;
+            this.cbox_threadSize.SelectedIndex = 2;
             this.cbox_timeOut.SelectedIndex = 2;
 
             //加载默认配置
@@ -908,41 +864,12 @@ namespace C2.Business.Cracker.Dialogs
             foreach (string key in services.Keys)
             {
                 this.services_list.Items.Add(key);
-            }
-            Thread th = new Thread(checkUpdate);
-            th.Start();
-        }
-
-        private void btn_importUername_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog { Filter = "文本文件(*.txt)|*.txt" };
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                if (!string.IsNullOrEmpty(ofd.FileName))
-                {
-                    this.txt_username.Text = ofd.FileName;
-                    LogInfo("导入用户名成功！");
-                }
-            }
-        }
-
-        private void btn_importPassword_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog { Filter = "文本文件(*.txt)|*.txt" };
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-
-                if (!string.IsNullOrEmpty(ofd.FileName))
-                {
-                    this.txt_password.Text = ofd.FileName;
-                    LogInfo("导入密码字典成功！");
-                }
+                this.services_list.SetItemChecked(this.services_list.Items.Count-1, true);//默认协议全选
             }
         }
 
         private void updateThreadSize()
         {
-
             this.maxThread = int.Parse(this.cbox_threadSize.Text);
             if (stp != null)
             {
@@ -965,39 +892,6 @@ namespace C2.Business.Cracker.Dialogs
             th.Start();
         }
 
-        private void chk_notAutoSelectDic_CheckedChanged(object sender, EventArgs e)
-        {
-            this.notAutoSelectDic = this.chk_notAutoSelectDic.Checked;
-            this.txt_username.Enabled = this.notAutoSelectDic;
-            this.txt_password.Enabled = this.notAutoSelectDic;
-            this.btn_importUername.Enabled = this.notAutoSelectDic;
-            this.btn_importPassword.Enabled = this.notAutoSelectDic;
-        }
-
-        private void chk_crackerOneCount_CheckedChanged(object sender, EventArgs e)
-        {
-            this.crackerOneCount = this.chk_crackerOneCount.Checked;
-        }
-        private void readListFile(Object path)
-        {
-            this.list_import_target = FileTool.readFileToList(path.ToString());
-            LogInfo("读取检查列表完成,导入地址：" + this.list_import_target.Count + "条！");
-            this.btn_cracker.Enabled = true;
-        }
-        private void btn_importList_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog { Filter = "文本文件(*.txt)|*.txt" };
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = ofd.FileName;
-                this.txt_target.Text = filePath;
-                this.btn_cracker.Enabled = false;
-                Thread th = new Thread(readListFile);
-                th.Start(ofd.FileName);
-                LogInfo("正在读取检查列表！");
-
-            }
-        }
         private void exportResult()
         {
 
@@ -1035,10 +929,6 @@ namespace C2.Business.Cracker.Dialogs
                     MessageBox.Show("导出数据发生异常！");
                 }
             }
-        }
-        private void tsmi_options_export_Click(object sender, EventArgs e)
-        {
-            exportResult();
         }
 
         private void tsmi_export_Click(object sender, EventArgs e)
@@ -1097,92 +987,14 @@ namespace C2.Business.Cracker.Dialogs
         }
 
 
-
-        private static int version = 20190715;
-        public static string versionURL = "http://www.shack2.org/soft/getNewVersion?ENNAME=SNETCracker&NO=" + Uri.EscapeDataString(Tool.getSystemSid()) + "&VERSION=" + version;
-        private void tsmi_help_version_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("V1.0 测试版----" + version);
-        }
-        public void checkUpdate()
-        {
-            try
-            {
-                string[] result = Tool.getHtml(versionURL, 30).Split('-');
-                string versionText = result[0];
-                int cversion = int.Parse(result[1]);
-                string versionUpdateURL = result[2];
-                if (cversion > version)
-                {
-                    DialogResult dr = MessageBox.Show("发现新版本：" + versionText + "，更新日期：" + cversion + "，立即更新吗？", "提示", MessageBoxButtons.OKCancel);
-
-                    if (DialogResult.OK.Equals(dr))
-                    {
-                        try
-                        {
-                            int index = versionUpdateURL.LastIndexOf("/");
-                            string filename = "/update.rar";
-                            if (index != -1)
-                            {
-                                filename = versionUpdateURL.Substring(index);
-                            }
-                            Tool.HttpDownloadFile(versionUpdateURL, Directory.GetCurrentDirectory() + filename);
-                            MessageBox.Show("更新成功，请将解压后运行！");
-                        }
-                        catch (Exception other)
-                        {
-                            MessageBox.Show("更新失败，请访问官网更新！" + other.GetBaseException());
-                        }
-                    }
-                }
-                else
-                {
-                    LogMessage("自动检查更新，没有发现新版本！");
-                }
-            }
-            catch (Exception e)
-            {
-                LogMessage("检查更新，联网失败！" + e.Message);
-            }
-        }
-
-        private void tsmi_help_support_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("请将建议或程序BUG发送邮件到1341413415@qq.com，谢谢!");
-        }
-
-        private void tsmi_options_import_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsmi_help_about_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("此工具为常见服务弱口令检查工具，提供给企业、运维人员、安全工程师进行企业内部弱口令检查使用，请勿非法使用！");
-        }
-
-        private void tsmi_help_update_Click(object sender, EventArgs e)
-        {
-            checkUpdate();
-        }
-        private void tsmi_set_Click(object sender, EventArgs e)
-        {
-            //Seting set = new Seting();
-            //set.ShowDialog();
-        }
-
         private void cbox_threadSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateThreadSize();
         }
 
-        private void tsmi_reloadConfig_Click(object sender, EventArgs e)
+        private void btn_export_Click(object sender, EventArgs e)
         {
-            initServices();
-            MessageBox.Show("ok");
-
+            exportResult();
         }
-
-
     }
 }

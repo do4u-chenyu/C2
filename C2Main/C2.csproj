@@ -94,6 +94,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\EPPlus.5.2.0\lib\net45\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="FluentFTP">
+      <HintPath>..\ThirdPartyLibrary\Cracker\FluentFTP.dll</HintPath>
+    </Reference>
     <Reference Include="HiveThrift, Version=0.1.2.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\HiveThrift.0.1.2.1\lib\net45\HiveThrift.dll</HintPath>
@@ -206,6 +209,7 @@
     </Compile>
     <Compile Include="Business\Cracker\Exception\IPBreakException.cs" />
     <Compile Include="Business\Cracker\Exception\IPUserBreakException.cs" />
+    <Compile Include="Business\Cracker\Model\CrackFTP.cs" />
     <Compile Include="Business\Cracker\Model\CrackService.cs" />
     <Compile Include="Business\Cracker\Model\CrackSSH.cs" />
     <Compile Include="Business\Cracker\Model\Server.cs" />
@@ -1743,6 +1747,9 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
+    <EmbeddedResource Include="Business\Cracker\Dialogs\CrackerForm.resx">
+      <DependentUpon>CrackerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
       <DependentUpon>SettingChartDialog.cs</DependentUpon>
     </EmbeddedResource>
