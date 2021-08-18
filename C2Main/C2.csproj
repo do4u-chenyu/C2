@@ -2569,6 +2569,7 @@
     <Content Include="Resources\Images\copy.png" />
     <None Include="Resources\Images\cur_style_brush.cur" />
     <None Include="Resources\Images\cursor.png" />
+    <None Include="Resources\Images\cracker.png" />
     <Content Include="Resources\Images\cut.png" />
     <None Include="Resources\Images\delete.png" />
     <None Include="Resources\Images\document.png" />

@@ -131,7 +131,7 @@ namespace C2.Controls.C1.Left
                 switch (this.pluginType)
                 {
                     case "Cracker":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.CrackerFormHelpInfo);
                         break;
                 }

@@ -52,8 +52,8 @@ namespace C2.Business.Cracker.Dialogs
         {
             try
             {
-                this.servicesName = "SSH:FTP".Split(':');
-                this.servicesPort = "22:21".Split(':');
+                this.servicesName = "SSH:FTP:RDP".Split(':');
+                this.servicesPort = "22:21:3389".Split(':');
             }
             catch (Exception e)
             {
