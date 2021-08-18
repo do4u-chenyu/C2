@@ -249,6 +249,7 @@ class Saver(Thread):
             queryclient_result= self.queryclient_resultQueue.get()  # ret
             self.save(queryclient_result)
             self.queryclient_resultQueue.task_done()
+
     def save(self, info):
         self.writer.write(info.replace('\r','')+"\n")
         self.done_sum +=  1
@@ -306,7 +307,7 @@ def queryBatch(keyWords):
     succeedFilename = tempFilename.strip('_') + '.txt'
     os.rename(os.path.join(DATA_PATH,tempFilename), os.path.join(DATA_PATH,succeedFilename))
     ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','tgz')
-    zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
+    #zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
 
 def encrypTion(path):
     with open(path,'rb') as f:
