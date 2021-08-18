@@ -46,6 +46,8 @@ namespace C2.Core
         public static CastleBravoControl GetCastleBravoControl() { return castleBravoControl; }
         public static SearchToolkitControl GetSearchToolkitControl() { return searchToolkitControl; }
         public static IAOLabControl GetIAOLabControl() { return iaoLabControl; }
+
+        public static IAOLabControl GetHIBUControl() { return HIBUControl; }
         public static BottomLogControl GetLogView() { return logView; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
         public static Control GetWorkSpacePanel() { return workSpacePanel; }

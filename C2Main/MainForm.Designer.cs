@@ -63,7 +63,7 @@ namespace C2
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
-            this.HIBUControl = new C2.Controls.Left.IAOLabControl();
+            this.HIBUControl = new C2.Controls.Left.IAOLabControl("HI部实验室");
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -438,6 +438,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.mindMapControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoLabControl);
+            this.leftToolBoxPanel.Controls.Add(this.HIBUControl);
             this.leftToolBoxPanel.Controls.Add(this.modelMarketControl);
             this.leftToolBoxPanel.Controls.Add(this.websiteFeatureDetectionControl);
             this.leftToolBoxPanel.Controls.Add(this.searchToolkitControl);
@@ -553,6 +554,7 @@ namespace C2
             this.HIBUControl.Name = "HIBUControl";
             this.HIBUControl.Size = new System.Drawing.Size(185, 558);
             this.HIBUControl.TabIndex = 0;
+            this.HIBUControl.Visible = false;
             // 
             // leftFoldButton
             // 

@@ -1,5 +1,4 @@
-﻿using C2.IAOLab.Plugins;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Controls.Left
@@ -11,6 +10,11 @@ namespace C2.Controls.Left
             InitializeComponent();
             startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
             startPoint.Y -= 12;
+        }
+
+        public IAOLabControl(string title) : this()
+        {
+            this.ItemLabel.Text = title;
         }
       
         private static readonly int ButtonLeftX = 18;

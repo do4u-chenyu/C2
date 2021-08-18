@@ -281,7 +281,7 @@ namespace C2
 
         private void HIBUButton_Click(object sender, EventArgs e)
         {
-            if (!iaoLabControl.Visible || isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
+            if (!HIBUControl.Visible || isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
                 ShowLeftPanel(HIBUButton, HIBUControl);
         }
 
