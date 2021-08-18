@@ -103,7 +103,8 @@ namespace C2
                 this.iaoLabButton,
                 this.detectionButton,
                 this.searchToolkitButton,
-                this.castleBravoButton
+                this.castleBravoButton,
+                this.HIBUButton
             };
 
             // 注册左侧二级面板
@@ -113,7 +114,8 @@ namespace C2
                 this.iaoLabControl,
                 this.websiteFeatureDetectionControl,
                 this.searchToolkitControl,
-                this.castleBravoControl
+                this.castleBravoControl,
+                this.HIBUControl,
             };
             // 默认业务视图为初始选中状态
             this.mindMapButton.BackColor = LeftFocusColor;
@@ -194,6 +196,7 @@ namespace C2
             Global.SetWorkSpacePanel(this.workSpacePanel);
             Global.SetMindMapModelControl(this.mindMapControl);
             Global.SetIAOLabControl (this.iaoLabControl);
+            Global.SetHIBUControl(this.HIBUControl);
         }
         void InitializeMdiClient()
         {
@@ -274,6 +277,12 @@ namespace C2
         {
             if (!iaoLabControl.Visible || isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
                 ShowLeftPanel(iaoLabButton, iaoLabControl);
+        }
+
+        private void HIBUButton_Click(object sender, EventArgs e)
+        {
+            if (!iaoLabControl.Visible || isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
+                ShowLeftPanel(HIBUButton, HIBUControl);
         }
 
         private void DetectionButton_Click(object sender, EventArgs e)

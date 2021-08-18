@@ -39,6 +39,8 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
+            this.HIBUButton = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.castleBravoButton = new C2.Controls.Common.NoFocusButton();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.searchToolkitButton = new C2.Controls.Common.NoFocusButton();
@@ -61,6 +63,7 @@ namespace C2
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
+            this.HIBUControl = new C2.Controls.Left.IAOLabControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -91,6 +94,8 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
+            this.HIBUButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.castleBravoButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.searchToolkitButton.SuspendLayout();
@@ -188,6 +193,7 @@ namespace C2
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
+            this.leftMainMenuPanel.Controls.Add(this.HIBUButton);
             this.leftMainMenuPanel.Controls.Add(this.castleBravoButton);
             this.leftMainMenuPanel.Controls.Add(this.searchToolkitButton);
             this.leftMainMenuPanel.Controls.Add(this.detectionButton);
@@ -200,6 +206,34 @@ namespace C2
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
+            // 
+            // HIBUButton
+            // 
+            this.HIBUButton.Controls.Add(this.pictureBox4);
+            this.HIBUButton.FlatAppearance.BorderSize = 0;
+            this.HIBUButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.HIBUButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.HIBUButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.HIBUButton.Location = new System.Drawing.Point(0, 422);
+            this.HIBUButton.Name = "HIBUButton";
+            this.HIBUButton.Size = new System.Drawing.Size(151, 42);
+            this.HIBUButton.TabIndex = 7;
+            this.HIBUButton.TabStop = false;
+            this.HIBUButton.Text = "HIBU";
+            this.toolTip1.SetToolTip(this.HIBUButton, "各种HI工具");
+            this.HIBUButton.UseVisualStyleBackColor = true;
+            this.HIBUButton.Click += new System.EventHandler(this.HIBUButton_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox4.Image = global::C2.Properties.Resources.城堡;
+            this.pictureBox4.Location = new System.Drawing.Point(12, 10);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox4.TabIndex = 16;
+            this.pictureBox4.TabStop = false;
             // 
             // castleBravoButton
             // 
@@ -507,6 +541,19 @@ namespace C2
             this.searchToolkitControl.TabIndex = 0;
             this.searchToolkitControl.Visible = false;
             // 
+            // HIBUControl
+            // 
+            this.HIBUControl.AllowDrop = true;
+            this.HIBUControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.HIBUControl.BackColor = System.Drawing.Color.White;
+            this.HIBUControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.HIBUControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HIBUControl.Location = new System.Drawing.Point(0, 0);
+            this.HIBUControl.Margin = new System.Windows.Forms.Padding(4);
+            this.HIBUControl.Name = "HIBUControl";
+            this.HIBUControl.Size = new System.Drawing.Size(185, 558);
+            this.HIBUControl.TabIndex = 0;
+            // 
             // leftFoldButton
             // 
             this.leftFoldButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(195)))), ((int)(((byte)(195)))));
@@ -766,6 +813,8 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
+            this.HIBUButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.castleBravoButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.searchToolkitButton.ResumeLayout(false);
@@ -811,6 +860,7 @@ namespace C2
         private Controls.Left.MyMindMapControl mindMapControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.IAOLabControl iaoLabControl;
+        private Controls.Left.IAOLabControl HIBUControl;
         private Controls.Left.MyModelControl modelMarketControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
@@ -851,5 +901,7 @@ namespace C2
         private Controls.Common.NoFocusButton castleBravoButton;
         private PictureBox pictureBox3;
         private Controls.C1.Left.CastleBravoControl castleBravoControl;
+        private Controls.Common.NoFocusButton HIBUButton;
+        private PictureBox pictureBox4;
     }
 }

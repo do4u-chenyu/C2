@@ -32,6 +32,7 @@ namespace C2.Core
         private static TaskBar taskBar;
         private static MyMindMapControl mindMapModelControl;
         private static IAOLabControl iaoLabControl;
+        private static IAOLabControl HIBUControl;
 
 
 
@@ -141,6 +142,8 @@ namespace C2.Core
         public static void SetCastleBravoControl(CastleBravoControl cbc) { castleBravoControl = cbc; }
         public static void SetSearchToolkitControl(SearchToolkitControl stc) { searchToolkitControl = stc; }
         public static void SetIAOLabControl(IAOLabControl ilc) { iaoLabControl = ilc; }
+
+        public static void SetHIBUControl(IAOLabControl hbc) { HIBUControl = hbc; }
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
         public static void SetWorkSpacePanel(Panel ws) { workSpacePanel = ws; }
