@@ -120,7 +120,7 @@
             this.btn_export.TabIndex = 12;
             this.btn_export.Text = "导出结果";
             this.btn_export.UseVisualStyleBackColor = true;
-            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
+            this.btn_export.Click += new System.EventHandler(this.Btn_export_Click);
             // 
             // cbox_reTry
             // 
@@ -134,7 +134,7 @@
             this.cbox_reTry.Name = "cbox_reTry";
             this.cbox_reTry.Size = new System.Drawing.Size(61, 20);
             this.cbox_reTry.TabIndex = 11;
-            this.cbox_reTry.TextChanged += new System.EventHandler(this.cbox_reTry_TextChanged);
+            this.cbox_reTry.TextChanged += new System.EventHandler(this.Cbox_reTry_TextChanged);
             // 
             // cbox_timeOut
             // 
@@ -153,7 +153,7 @@
             this.cbox_timeOut.Name = "cbox_timeOut";
             this.cbox_timeOut.Size = new System.Drawing.Size(61, 20);
             this.cbox_timeOut.TabIndex = 4;
-            this.cbox_timeOut.TextChanged += new System.EventHandler(this.cbox_timeOut_TextChanged);
+            this.cbox_timeOut.TextChanged += new System.EventHandler(this.Cbox_timeOut_TextChanged);
             // 
             // cbox_threadSize
             // 
@@ -172,7 +172,7 @@
             this.cbox_threadSize.Name = "cbox_threadSize";
             this.cbox_threadSize.Size = new System.Drawing.Size(61, 20);
             this.cbox_threadSize.TabIndex = 9;
-            this.cbox_threadSize.SelectedIndexChanged += new System.EventHandler(this.cbox_threadSize_SelectedIndexChanged);
+            this.cbox_threadSize.SelectedIndexChanged += new System.EventHandler(this.Cbox_threadSize_SelectedIndexChanged);
             // 
             // btn_stopCracker
             // 
@@ -182,7 +182,7 @@
             this.btn_stopCracker.TabIndex = 2;
             this.btn_stopCracker.Text = "停止检查";
             this.btn_stopCracker.UseVisualStyleBackColor = true;
-            this.btn_stopCracker.Click += new System.EventHandler(this.btn_stopCracker_Click);
+            this.btn_stopCracker.Click += new System.EventHandler(this.Btn_stopCracker_Click);
             // 
             // btn_cracker
             // 
@@ -192,7 +192,7 @@
             this.btn_cracker.TabIndex = 2;
             this.btn_cracker.Text = "开始检查";
             this.btn_cracker.UseVisualStyleBackColor = true;
-            this.btn_cracker.Click += new System.EventHandler(this.btn_cracker_Click);
+            this.btn_cracker.Click += new System.EventHandler(this.Btn_cracker_Click);
             // 
             // txt_target
             // 
@@ -362,35 +362,35 @@
             this.tsmi_export.Name = "tsmi_export";
             this.tsmi_export.Size = new System.Drawing.Size(136, 22);
             this.tsmi_export.Text = "导出结果";
-            this.tsmi_export.Click += new System.EventHandler(this.tsmi_export_Click);
+            this.tsmi_export.Click += new System.EventHandler(this.Tsmi_export_Click);
             // 
             // tsmi_deleteSelectItem
             // 
             this.tsmi_deleteSelectItem.Name = "tsmi_deleteSelectItem";
             this.tsmi_deleteSelectItem.Size = new System.Drawing.Size(136, 22);
             this.tsmi_deleteSelectItem.Text = "删除选中行";
-            this.tsmi_deleteSelectItem.Click += new System.EventHandler(this.tsmi_deleteSelectItem_Click);
+            this.tsmi_deleteSelectItem.Click += new System.EventHandler(this.Tsmi_deleteSelectItem_Click);
             // 
             // tsmi_clearItems
             // 
             this.tsmi_clearItems.Name = "tsmi_clearItems";
             this.tsmi_clearItems.Size = new System.Drawing.Size(136, 22);
             this.tsmi_clearItems.Text = "清空结果";
-            this.tsmi_clearItems.Click += new System.EventHandler(this.tsmi_clearItems_Click);
+            this.tsmi_clearItems.Click += new System.EventHandler(this.Tsmi_clearItems_Click);
             // 
             // tsmi_openURL
             // 
             this.tsmi_openURL.Name = "tsmi_openURL";
             this.tsmi_openURL.Size = new System.Drawing.Size(136, 22);
             this.tsmi_openURL.Text = "打开URL";
-            this.tsmi_openURL.Click += new System.EventHandler(this.tsmi_openURL_Click);
+            this.tsmi_openURL.Click += new System.EventHandler(this.Tsmi_openURL_Click);
             // 
             // tsmi_copyItem
             // 
             this.tsmi_copyItem.Name = "tsmi_copyItem";
             this.tsmi_copyItem.Size = new System.Drawing.Size(136, 22);
             this.tsmi_copyItem.Text = "复 制";
-            this.tsmi_copyItem.Click += new System.EventHandler(this.tsmi_copyItem_Click);
+            this.tsmi_copyItem.Click += new System.EventHandler(this.Tsmi_copyItem_Click);
             // 
             // bt_status
             // 
@@ -508,7 +508,7 @@
             // bt_timer
             // 
             this.bt_timer.Interval = 1000;
-            this.bt_timer.Tick += new System.EventHandler(this.bt_timer_Tick);
+            this.bt_timer.Tick += new System.EventHandler(this.Bt_timer_Tick);
             // 
             // groupBox3
             // 

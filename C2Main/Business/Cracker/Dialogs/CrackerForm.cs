@@ -48,7 +48,7 @@ namespace C2.Business.Cracker.Dialogs
         private Dictionary<string, ServiceModel> services = new Dictionary<string, ServiceModel>();//服务列表
         private Dictionary<string, HashSet<string>> dics = new Dictionary<string, HashSet<string>>();//字典列表
         public ConcurrentBag<string> list_cracker = new ConcurrentBag<string>();
-        public void initServices()
+        public void InitServices()
         {
             try
             {
@@ -63,9 +63,11 @@ namespace C2.Business.Cracker.Dialogs
             services.Clear();
             for (int i = 0; i < servicesName.Length; i++)
             {
-                ServiceModel sm = new ServiceModel();
-                sm.Name = servicesName[i];
-                sm.Port = servicesPort[i];
+                ServiceModel sm = new ServiceModel
+                {
+                    Name = servicesName[i],
+                    Port = servicesPort[i]
+                };
                 //SSL和非SSL采用一个字典
                 string dicname = sm.Name.ToLower().Replace("_ssl", "");
                 sm.DicUserNamePath = "/Resources/CrackerDict/dic_username_" + dicname + ".txt";
@@ -135,7 +137,7 @@ namespace C2.Business.Cracker.Dialogs
 
 
         private long lastCount = 0;
-        private void updateStatus()
+        private void UpdateStatus()
         {
             try
             {
@@ -174,10 +176,10 @@ namespace C2.Business.Cracker.Dialogs
             }
         }
 
-        private void bt_timer_Tick(object sender, EventArgs e)
+        private void Bt_timer_Tick(object sender, EventArgs e)
         {
             runTime++;
-            this.Invoke(new update(updateStatus));
+            this.Invoke(new update(UpdateStatus));
 
         }
 
@@ -186,7 +188,7 @@ namespace C2.Business.Cracker.Dialogs
 
         delegate void DelegateAddItem(ListViewItem lvi);
 
-        private void addItem(ListViewItem lvi)
+        private void AddItem(ListViewItem lvi)
         {
 
             this.list_lvw.Items.Add(lvi);
@@ -235,7 +237,7 @@ namespace C2.Business.Cracker.Dialogs
             Interlocked.Decrement(ref scanPortsSumCount);
         }
 
-        private void crackerService(string crakerstring, string username, string password)
+        private void CrackerService(string crakerstring, string username, string password)
         {
             try
             {
@@ -300,7 +302,7 @@ namespace C2.Business.Cracker.Dialogs
                                 server.port = port;
                                 server.username = username;
                                 server.password = password;
-                                server = creackRDP(server);
+                                server = CreackRDP(server);
                             }
                             else
                             {
@@ -381,7 +383,7 @@ namespace C2.Business.Cracker.Dialogs
                                     list_success_username.Add(ip + serviceName + port + username);
                                 }
                                 Interlocked.Increment(ref successCount);
-                                addItemToListView(successCount, ip, serviceName, port, username, password, server.banner, server.userTime);
+                                AddItemToListView(successCount, ip, serviceName, port, username, password, server.banner, server.userTime);
                                 String sinfo = ip + "-----" + serviceName + "----" + username + "----" + password + "----" + server.banner + "----成功！";
                                 LogInfo(sinfo);
                                 //FileTool.AppendLogToFile(Directory.GetCurrentDirectory() + "/logs/success-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", sinfo);
@@ -406,7 +408,7 @@ namespace C2.Business.Cracker.Dialogs
             Interlocked.Increment(ref allCrackCount);
         }
 
-        private void addItemToListView(int successCount, string ip, String serviceName, int port, String username, String password, String banner, long userTime)
+        private void AddItemToListView(int successCount, string ip, String serviceName, int port, String username, String password, String banner, long userTime)
         {
 
             ListViewItem lvi = new ListViewItem(successCount.ToString());
@@ -417,28 +419,30 @@ namespace C2.Business.Cracker.Dialogs
             lvi.SubItems.Add(password);
             lvi.SubItems.Add(banner);
             lvi.SubItems.Add(userTime + "");
-            this.list_lvw.Invoke(new DelegateAddItem(addItem), lvi);
+            this.list_lvw.Invoke(new DelegateAddItem(AddItem), lvi);
         }
 
         delegate void VoidDelegate();
         private SmartThreadPool stp = null;
-        private void cracker()
+        private void Cracker()
         {
-            crakerKey();
+            CrakerKey();
             this.Invoke(new VoidDelegate(this.bt_timer.Start));
             this.runTime = 0;
-            if (initDic())
+            if (InitDic())
             {
                 //初始化检查次数
-                initStatusCount();
+                InitStatusCount();
                 //清空检查列表
                 this.list_cracker = new ConcurrentBag<string>();
                 //清空跳过列表
                 this.list_ip_break.Clear();
                 this.list_ip_user_break.Clear();
                 Boolean isScanport = true;//扫描端口
-                stp = new SmartThreadPool();
-                stp.MaxThreads = maxThread;
+                stp = new SmartThreadPool
+                {
+                    MaxThreads = maxThread
+                };
                 creackerSumCount = 0;
                 scanPortsSumCount = 0;
 
@@ -453,7 +457,7 @@ namespace C2.Business.Cracker.Dialogs
                     }
                 }
                 //更新状态
-                this.Invoke(new update(updateStatus));
+                this.Invoke(new update(UpdateStatus));
 
                 foreach (string serviceName in this.services_list.CheckedItems)
                 {
@@ -546,7 +550,7 @@ namespace C2.Business.Cracker.Dialogs
                             {
                                 if (cracker.EndsWith(serviceName))
                                 {
-                                    stp.QueueWorkItem<string, string, string>(crackerService, cracker, username, pass);
+                                    stp.QueueWorkItem<string, string, string>(CrackerService, cracker, username, pass);
                                     stp.WaitFor(maxThread);
                                 }
                             }
@@ -564,13 +568,13 @@ namespace C2.Business.Cracker.Dialogs
 
             }
             //更新状态
-            this.Invoke(new update(updateStatus));
+            this.Invoke(new update(UpdateStatus));
             this.btn_cracker.Enabled = true;
             this.services_list.Enabled = true;
             this.Invoke(new VoidDelegate(this.bt_timer.Stop));
         }
 
-        public void stopCraker()
+        public void StopCraker()
         {
             if (stp != null && !stp.IsShuttingdown && this.crackerThread != null)
             {
@@ -583,14 +587,14 @@ namespace C2.Business.Cracker.Dialogs
                 }
 
                 //更新状态
-                this.Invoke(new update(updateStatus));
+                this.Invoke(new update(UpdateStatus));
                 this.btn_cracker.Enabled = true;
                 this.services_list.Enabled = true;
                 this.bt_timer.Stop();
                 LogWarning("全部线程已停止！");
             }
         }
-        private Boolean initDic()
+        private Boolean InitDic()
         {
 
             if ("".Equals(this.txt_target.Text))
@@ -726,7 +730,7 @@ namespace C2.Business.Cracker.Dialogs
 
         }
 
-        private void crakerKey()
+        private void CrakerKey()
         {
             var forBuild = 65535;
             var validTillDate = DateTime.Now.AddDays(64).Subtract(new DateTime(2010, 12, 31)).TotalDays;
@@ -755,7 +759,7 @@ namespace C2.Business.Cracker.Dialogs
             Rebex.Licensing.Key = a;
         }
         Thread crackerThread = null;
-        public void rdpResult(ResponseType type, RdpClient rdp, ref Server server)
+        public void RdpResult(ResponseType type, RdpClient rdp, ref Server server)
         {
 
             //接受事件通知，表示完成后，将当前阻塞线程放过继续执行。
@@ -768,7 +772,7 @@ namespace C2.Business.Cracker.Dialogs
         }
 
         delegate Server addRDPdelegate(Server server);
-        private Server addRDPClient(Server server)
+        private Server AddRDPClient(Server server)
         {
 
             try
@@ -778,7 +782,7 @@ namespace C2.Business.Cracker.Dialogs
                 server.client.server = server;
 
                 this.rdp_panle.Controls.Add(rdp);
-                server.client.OnResponse += rdpResult;
+                server.client.OnResponse += RdpResult;
                 server.client.ConnectServer(server);
 
             }
@@ -814,12 +818,12 @@ namespace C2.Business.Cracker.Dialogs
             }
         }
 
-        private Server creackRDP(Server server)
+        private Server CreackRDP(Server server)
         {
             try
             {
 
-                this.rdp_panle.Invoke(new addRDPdelegate(addRDPClient), server);
+                this.rdp_panle.Invoke(new addRDPdelegate(AddRDPClient), server);
                 server.isEndMRE.WaitOne(server.timeout * 1000, true);
                 this.rdp_panle.Invoke(new deleteClearRDP(ClearRDP), server);
 
@@ -834,18 +838,18 @@ namespace C2.Business.Cracker.Dialogs
 
 
 
-        private void btn_cracker_Click(object sender, EventArgs e)
+        private void Btn_cracker_Click(object sender, EventArgs e)
         {
             this.btn_cracker.Enabled = false;
             this.list_success_username.Clear();
             this.services_list.Enabled = false;
 
-            crackerThread = new Thread(cracker);
+            crackerThread = new Thread(Cracker);
             crackerThread.Start();
 
         }
 
-        private void initStatusCount()
+        private void InitStatusCount()
         {
             successCount = 0;
             allCrackCount = 0;
@@ -859,7 +863,7 @@ namespace C2.Business.Cracker.Dialogs
             this.cbox_timeOut.SelectedIndex = 2;
 
             //加载默认配置
-            initServices();
+            InitServices();
 
             foreach (string key in services.Keys)
             {
@@ -868,7 +872,7 @@ namespace C2.Business.Cracker.Dialogs
             }
         }
 
-        private void updateThreadSize()
+        private void UpdateThreadSize()
         {
             this.maxThread = int.Parse(this.cbox_threadSize.Text);
             if (stp != null)
@@ -877,27 +881,29 @@ namespace C2.Business.Cracker.Dialogs
             }
         }
 
-        private void cbox_timeOut_TextChanged(object sender, EventArgs e)
+        private void Cbox_timeOut_TextChanged(object sender, EventArgs e)
         {
             this.timeOut = int.Parse(this.cbox_timeOut.Text);
         }
 
-        private void cbox_reTry_TextChanged(object sender, EventArgs e)
+        private void Cbox_reTry_TextChanged(object sender, EventArgs e)
         {
             this.retryCount = int.Parse(this.cbox_reTry.Text);
         }
-        private void btn_stopCracker_Click(object sender, EventArgs e)
+        private void Btn_stopCracker_Click(object sender, EventArgs e)
         {
-            Thread th = new Thread(stopCraker);
+            Thread th = new Thread(StopCraker);
             th.Start();
         }
 
-        private void exportResult()
+        private void ExportResult()
         {
 
             //保存文件
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "文本文件|*.csv";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "文本文件|*.csv"
+            };
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -931,12 +937,12 @@ namespace C2.Business.Cracker.Dialogs
             }
         }
 
-        private void tsmi_export_Click(object sender, EventArgs e)
+        private void Tsmi_export_Click(object sender, EventArgs e)
         {
-            exportResult();
+            ExportResult();
         }
 
-        private void tsmi_deleteSelectItem_Click(object sender, EventArgs e)
+        private void Tsmi_deleteSelectItem_Click(object sender, EventArgs e)
         {
             if (this.list_lvw.SelectedItems.Count == 0)
             {
@@ -948,7 +954,7 @@ namespace C2.Business.Cracker.Dialogs
             }
         }
 
-        private void tsmi_copyItem_Click(object sender, EventArgs e)
+        private void Tsmi_copyItem_Click(object sender, EventArgs e)
         {
             if (this.list_lvw.SelectedItems.Count == 0)
             {
@@ -963,12 +969,12 @@ namespace C2.Business.Cracker.Dialogs
             Clipboard.SetText(sb.Remove(0, 4).ToString());
             MessageBox.Show("复制成功！");
         }
-        private void tsmi_clearItems_Click(object sender, EventArgs e)
+        private void Tsmi_clearItems_Click(object sender, EventArgs e)
         {
             this.list_lvw.Items.Clear();
         }
 
-        private void tsmi_openURL_Click(object sender, EventArgs e)
+        private void Tsmi_openURL_Click(object sender, EventArgs e)
         {
             if (this.list_lvw.SelectedItems.Count == 0)
             {
@@ -987,14 +993,14 @@ namespace C2.Business.Cracker.Dialogs
         }
 
 
-        private void cbox_threadSize_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cbox_threadSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updateThreadSize();
+            UpdateThreadSize();
         }
 
-        private void btn_export_Click(object sender, EventArgs e)
+        private void Btn_export_Click(object sender, EventArgs e)
         {
-            exportResult();
+            ExportResult();
         }
     }
 }
