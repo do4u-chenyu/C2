@@ -60,10 +60,10 @@ namespace C2
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
+            this.HIBUControl = new C2.Controls.Left.IAOLabControl("HI部实验室");
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
-            this.HIBUControl = new C2.Controls.Left.IAOLabControl("HI部实验室");
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -219,7 +219,7 @@ namespace C2
             this.HIBUButton.Size = new System.Drawing.Size(151, 42);
             this.HIBUButton.TabIndex = 7;
             this.HIBUButton.TabStop = false;
-            this.HIBUButton.Text = "HIBU";
+            this.HIBUButton.Text = "  HIBU";
             this.toolTip1.SetToolTip(this.HIBUButton, "各种HI工具");
             this.HIBUButton.UseVisualStyleBackColor = true;
             this.HIBUButton.Click += new System.EventHandler(this.HIBUButton_Click);
@@ -228,10 +228,11 @@ namespace C2
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox4.Image = global::C2.Properties.Resources.城堡;
+            this.pictureBox4.Image = global::C2.Properties.Resources.HIBU;
             this.pictureBox4.Location = new System.Drawing.Point(12, 10);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox4.TabIndex = 16;
             this.pictureBox4.TabStop = false;
             // 
@@ -503,6 +504,20 @@ namespace C2
             this.iaoLabControl.TabIndex = 0;
             this.iaoLabControl.Visible = false;
             // 
+            // HIBUControl
+            // 
+            this.HIBUControl.AllowDrop = true;
+            this.HIBUControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.HIBUControl.BackColor = System.Drawing.Color.White;
+            this.HIBUControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.HIBUControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HIBUControl.Location = new System.Drawing.Point(0, 0);
+            this.HIBUControl.Margin = new System.Windows.Forms.Padding(4);
+            this.HIBUControl.Name = "HIBUControl";
+            this.HIBUControl.Size = new System.Drawing.Size(185, 558);
+            this.HIBUControl.TabIndex = 0;
+            this.HIBUControl.Visible = false;
+            // 
             // modelMarketControl
             // 
             this.modelMarketControl.AutoScroll = true;
@@ -541,20 +556,6 @@ namespace C2
             this.searchToolkitControl.Size = new System.Drawing.Size(185, 558);
             this.searchToolkitControl.TabIndex = 0;
             this.searchToolkitControl.Visible = false;
-            // 
-            // HIBUControl
-            // 
-            this.HIBUControl.AllowDrop = true;
-            this.HIBUControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.HIBUControl.BackColor = System.Drawing.Color.White;
-            this.HIBUControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.HIBUControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HIBUControl.Location = new System.Drawing.Point(0, 0);
-            this.HIBUControl.Margin = new System.Windows.Forms.Padding(4);
-            this.HIBUControl.Name = "HIBUControl";
-            this.HIBUControl.Size = new System.Drawing.Size(185, 558);
-            this.HIBUControl.TabIndex = 0;
-            this.HIBUControl.Visible = false;
             // 
             // leftFoldButton
             // 

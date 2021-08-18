@@ -2531,6 +2531,7 @@
     <Content Include="Resources\Help\网站侦察兵帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\HIBU.png" />
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
     <Content Include="Resources\Icons\exclamation.ico" />
