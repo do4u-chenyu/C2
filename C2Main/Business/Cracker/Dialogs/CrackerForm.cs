@@ -2,21 +2,17 @@
 using C2.Business.Cracker.Model;
 using C2.Business.Cracker.rdp;
 using C2.Business.Cracker.Tools;
+using C2.Utils;
 using Mono.Security.Cryptography;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.Cracker.Dialogs
@@ -1001,6 +997,22 @@ namespace C2.Business.Cracker.Dialogs
         private void Btn_export_Click(object sender, EventArgs e)
         {
             ExportResult();
+        }
+
+        private void CrackerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //e.cancel为true表示取消关闭，为false表示可以关闭窗口
+            e.Cancel = !CanFormClose();
+        }
+
+        private bool CanFormClose()
+        {
+            if (!this.btn_cracker.Enabled)
+            {
+                HelpUtil.ShowMessageBox("正在扫描中，请停止检查后再关闭。");
+                return false;
+            }
+            return true;
         }
     }
 }
