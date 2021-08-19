@@ -210,6 +210,7 @@
     <Compile Include="Business\Cracker\Exception\IPBreakException.cs" />
     <Compile Include="Business\Cracker\Exception\IPUserBreakException.cs" />
     <Compile Include="Business\Cracker\Model\CrackFTP.cs" />
+    <Compile Include="Business\Cracker\Model\CrackMySQL.cs" />
     <Compile Include="Business\Cracker\Model\CrackService.cs" />
     <Compile Include="Business\Cracker\Model\CrackSSH.cs" />
     <Compile Include="Business\Cracker\Model\Server.cs" />
@@ -2500,10 +2501,22 @@
     <Content Include="Resources\CrackerDict\dic_password_ftp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CrackerDict\dic_password_mysql.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrackerDict\dic_password_rdp.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\CrackerDict\dic_password_ssh.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CrackerDict\dic_username_ftp.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrackerDict\dic_username_mysql.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrackerDict\dic_username_rdp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CrackerDict\dic_username_ssh.txt">
