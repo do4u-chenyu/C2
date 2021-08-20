@@ -441,6 +441,21 @@ namespace C2.Business.SSH
                     parserType);
         }
 
+        public BastionAPI CheckHomeSearch()
+        {
+            if (Oops()) return this;
+
+            String targetPath = "/home/search/sbin/queryclient";
+            String command = String.Format("ls {0}", targetPath);
+            String ret = RunCommand(command, shell);
+            if (!Regex.IsMatch(ret, Wrap(targetPath)))
+            {
+                task.LastErrorMsg = String.Format("跳转的目标机器上没有找到全文环境 : {0}", targetPath);
+                log.Warn(task.LastErrorMsg);
+            }
+            return this;
+        }
+
         public String RunTask()
         {
             if (Oops()) return String.Empty;

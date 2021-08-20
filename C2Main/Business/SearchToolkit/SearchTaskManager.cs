@@ -29,6 +29,7 @@ namespace C2.SearchToolkit
                               .CreateTaskDirectory()
                               .EnterTaskDirectory()
                               .UploadTaskScript()
+                              .CheckHomeSearch()
                               .RunTask();
                 api.Close();
             }
