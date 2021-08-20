@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.SSH;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,7 @@ namespace C2.SearchToolkit
 
         public String LastErrorMsg { get; set; } = String.Empty;
 
-        public int LastErrorCode { get; set; } = 0;
+        public int LastErrorCode { get; set; } = BastionCodePage.Success;
 
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 

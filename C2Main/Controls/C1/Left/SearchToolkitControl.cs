@@ -1,4 +1,5 @@
-﻿using C2.SearchToolkit;
+﻿using C2.Business.SSH;
+using C2.SearchToolkit;
 using C2.Utils;
 using System;
 using System.IO;
@@ -50,6 +51,9 @@ namespace C2.Controls.C1.Left
             }
             else
                 message = String.Format("创建全文任务【{0}】 失败：{1}", task.TaskName, task.LastErrorMsg);
+
+            if (task.LastErrorCode == BastionCodePage.NoHomeSearch)
+                message += ", 但全文机上并没有找到全文环境 /home/search/sin/queryclient";
 
             HelpUtil.ShowMessageBox(message);
         }

@@ -166,16 +166,14 @@
     <Reference Include="Rebex.Sftp">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Sftp.dll</HintPath>
     </Reference>
-    <Reference Include="Rebex.SshShell">
-      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.SshShell.dll</HintPath>
-    </Reference>
     <Reference Include="Rebex.Telnet">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Telnet.dll</HintPath>
     </Reference>
     <Reference Include="Rebex.Terminal">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Terminal.dll</HintPath>
     </Reference>
-    <Reference Include="Renci.SshNet">
+    <Reference Include="Renci.SshNet, Version=2020.0.1.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\SSH.NET.2020.0.1\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -3537,7 +3535,6 @@
     <None Include="Resources\WebBrowser\map_setting.png" />
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
-    <None Include="Resources\城堡 %281%29.png" />
     <None Include="Resources\可视化数据可视化.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
@@ -3651,9 +3648,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\IAOLab\Webbrowser\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
