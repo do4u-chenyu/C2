@@ -369,6 +369,7 @@ namespace C2.Business.SSH
             return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
+
         public BastionAPI UploadTaskScript()
         {
             if (Oops()) return this;
@@ -464,7 +465,7 @@ namespace C2.Business.SSH
             String ret = RunCommand(command, shell);
             if (!Regex.IsMatch(ret, Wrap(targetPath)))
             {
-                task.LastErrorMsg = String.Format("跳转的目标机器上没有找到全文环境 : {0}", targetPath);
+                // 这里不计入错误信息,只计入错误码
                 task.LastErrorCode = BastionCodePage.NoHomeSearch;
                 log.Warn(task.LastErrorMsg);
             }
