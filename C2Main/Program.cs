@@ -43,10 +43,10 @@ namespace C2
             /// 是否通过关联打开的软件 
             if (args.Length > 0)
             {
-                string path = "";
+                string path = string.Empty;
                 for (int i = 0; i < args.Length; i++)
-                    path += args[i] + " ";
-                path = path.TrimEnd(' ');
+                    path += args[i] + string.Empty;
+                path = path.TrimEnd(OpUtil.Blank);
                 Console.WriteLine(path);
                 Console.ReadKey();
                 //Application.Run(new mainForm(path)); 
