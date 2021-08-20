@@ -26,6 +26,11 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         public string type { get { return _type; } set { FlagDic["type"] = true; _type = value; } }
         public string orient { get { return _orient; } set { FlagDic["orient"] = true; _orient = value; } }
         public string symbol { get { return _symbol; } set { FlagDic["symbol"] = true; _symbol = value; } }
+        public string left { get { return _left; } set { FlagDic["left"] = true; _left = value; } }
+        public string right { get { return _right; } set { FlagDic["right"] = true; _right = value; } }
+        public string top { get { return _top; } set { FlagDic["top"] = true; _top = value; } }
+        public string bottom { get { return _bottom; } set { FlagDic["bottom"] = true; _bottom = value; } }
+        public string symbolSize { get { return _symbolSize; } set { FlagDic["symbolSize"] = true; _symbolSize = value; } }
         public string edgeShape { get { return _edgeShape; } set { FlagDic["edgeShape"] = true; _edgeShape = value; } }
         public string edgeForkPosition { get { return _edgeForkPosition; } set { FlagDic["edgeForkPosition"] = true; _edgeForkPosition = value; } }
         public string expandAndCollapse { get { return _expandAndCollapse; } set { FlagDic["expandAndCollapse"] = true; _expandAndCollapse = value; } }
@@ -41,6 +46,11 @@ namespace C2.IAOLab.WebEngine.Boss.Option.SeriesType
         string _type;
         string _orient;
         string _symbol;
+        string _left;
+        string _right;
+        string _bottom;
+        string _top;
+        string _symbolSize;
         string _edgeShape;
         string _edgeForkPosition;
         int _initialTreeDepth;
