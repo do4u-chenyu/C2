@@ -8,7 +8,7 @@
         public const int JumpOneFail      = 8;  // 一阶跳转时失败
         public const int JumpTwoFail      = 16; // 二阶跳转时失败
         public const int JumpSearchFail   = 32; // 跳转全文机失败
-        public const int FileCorrupted    = 64; // 下载文件损坏
+        public const int DownloadFileCorrupted    = 64; // 下载文件损坏
         public const int DownloadTimeout  = 128;// 下载超时
         public const int DownloadCancel   = 256;// 下载取消
         public const int UploadScriptFail = 512;// 上传脚本到全文机失败
