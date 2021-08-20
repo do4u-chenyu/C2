@@ -564,9 +564,12 @@
             this.Controls.Add(this.bt_status);
             this.Controls.Add(this.groupBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CrackerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "弱口令扫描";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CrackerForm_FormClosing);
             this.Shown += new System.EventHandler(this.Main_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
