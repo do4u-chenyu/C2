@@ -85,10 +85,10 @@
             this.tabPage1.Controls.Add(this.inputAndResult);
             this.tabPage1.Controls.Add(this.tip0);
             this.tabPage1.Controls.Add(this.sixTransform);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(617, 319);
+            this.tabPage1.Size = new System.Drawing.Size(617, 322);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "坐标系经纬度转换";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             this.tip0.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tip0.Location = new System.Drawing.Point(17, 16);
             this.tip0.Name = "tip0";
-            this.tip0.Size = new System.Drawing.Size(458, 36);
+            this.tip0.Size = new System.Drawing.Size(357, 28);
             this.tip0.TabIndex = 10;
             this.tip0.Text = "单次输入格式：40.1 120.2\r\n批量查询格式：多个坐标间用换行分割，最大支持1000条";
             // 
@@ -128,18 +128,18 @@
             this.sixTransform.Location = new System.Drawing.Point(7, 52);
             this.sixTransform.Margin = new System.Windows.Forms.Padding(2);
             this.sixTransform.Name = "sixTransform";
-            this.sixTransform.Size = new System.Drawing.Size(580, 54);
+            this.sixTransform.Size = new System.Drawing.Size(603, 54);
             this.sixTransform.TabIndex = 9;
             // 
             // wgs_gcj
             // 
             this.wgs_gcj.AutoSize = true;
-            this.wgs_gcj.Location = new System.Drawing.Point(371, 28);
+            this.wgs_gcj.Location = new System.Drawing.Point(389, 28);
             this.wgs_gcj.Margin = new System.Windows.Forms.Padding(2);
             this.wgs_gcj.Name = "wgs_gcj";
-            this.wgs_gcj.Size = new System.Drawing.Size(191, 22);
+            this.wgs_gcj.Size = new System.Drawing.Size(193, 18);
             this.wgs_gcj.TabIndex = 5;
-            this.wgs_gcj.Text = "wgs_gcj:国际转火星";
+            this.wgs_gcj.Text = "wgs_gcj:国际转火星(高德)";
             this.wgs_gcj.UseVisualStyleBackColor = true;
             // 
             // bd_gcj
@@ -148,9 +148,9 @@
             this.bd_gcj.Location = new System.Drawing.Point(192, 28);
             this.bd_gcj.Margin = new System.Windows.Forms.Padding(2);
             this.bd_gcj.Name = "bd_gcj";
-            this.bd_gcj.Size = new System.Drawing.Size(182, 22);
+            this.bd_gcj.Size = new System.Drawing.Size(186, 18);
             this.bd_gcj.TabIndex = 4;
-            this.bd_gcj.Text = "bd_gcj:百度转火星";
+            this.bd_gcj.Text = "bd_gcj:百度转火星(高德)";
             this.bd_gcj.UseVisualStyleBackColor = true;
             // 
             // wgs_bd
@@ -159,7 +159,7 @@
             this.wgs_bd.Location = new System.Drawing.Point(13, 28);
             this.wgs_bd.Margin = new System.Windows.Forms.Padding(2);
             this.wgs_bd.Name = "wgs_bd";
-            this.wgs_bd.Size = new System.Drawing.Size(182, 22);
+            this.wgs_bd.Size = new System.Drawing.Size(144, 18);
             this.wgs_bd.TabIndex = 3;
             this.wgs_bd.Text = "wgs_bd:国际转百度";
             this.wgs_bd.UseVisualStyleBackColor = true;
@@ -167,12 +167,12 @@
             // gcj_wgs
             // 
             this.gcj_wgs.AutoSize = true;
-            this.gcj_wgs.Location = new System.Drawing.Point(371, 6);
+            this.gcj_wgs.Location = new System.Drawing.Point(389, 6);
             this.gcj_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.gcj_wgs.Name = "gcj_wgs";
-            this.gcj_wgs.Size = new System.Drawing.Size(191, 22);
+            this.gcj_wgs.Size = new System.Drawing.Size(193, 18);
             this.gcj_wgs.TabIndex = 2;
-            this.gcj_wgs.Text = "gcj_wgs:火星转国际";
+            this.gcj_wgs.Text = "gcj_wgs:火星(高德)转国际";
             this.gcj_wgs.UseVisualStyleBackColor = true;
             // 
             // gcj_bd
@@ -181,9 +181,9 @@
             this.gcj_bd.Location = new System.Drawing.Point(192, 6);
             this.gcj_bd.Margin = new System.Windows.Forms.Padding(2);
             this.gcj_bd.Name = "gcj_bd";
-            this.gcj_bd.Size = new System.Drawing.Size(182, 22);
+            this.gcj_bd.Size = new System.Drawing.Size(186, 18);
             this.gcj_bd.TabIndex = 1;
-            this.gcj_bd.Text = "gcj_bd:火星转百度";
+            this.gcj_bd.Text = "gcj_bd:火星(高德)转百度";
             this.gcj_bd.UseVisualStyleBackColor = true;
             // 
             // bd_wgs
@@ -193,7 +193,7 @@
             this.bd_wgs.Location = new System.Drawing.Point(13, 6);
             this.bd_wgs.Margin = new System.Windows.Forms.Padding(2);
             this.bd_wgs.Name = "bd_wgs";
-            this.bd_wgs.Size = new System.Drawing.Size(182, 22);
+            this.bd_wgs.Size = new System.Drawing.Size(144, 18);
             this.bd_wgs.TabIndex = 0;
             this.bd_wgs.TabStop = true;
             this.bd_wgs.Text = "bd_wgs:百度转国际";
@@ -203,10 +203,10 @@
             // 
             this.tabPage2.Controls.Add(this.tip1);
             this.tabPage2.Controls.Add(this.inputAndResult1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.tabPage2.Size = new System.Drawing.Size(617, 319);
+            this.tabPage2.Size = new System.Drawing.Size(617, 322);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "经纬度距离计算";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -217,7 +217,7 @@
             this.tip1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tip1.Location = new System.Drawing.Point(8, 23);
             this.tip1.Name = "tip1";
-            this.tip1.Size = new System.Drawing.Size(611, 36);
+            this.tip1.Size = new System.Drawing.Size(476, 28);
             this.tip1.TabIndex = 11;
             this.tip1.Text = "单次输入格式：04a1518006c2 或04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最大" +
     "支持1000条";
@@ -240,10 +240,10 @@
             this.tabPage3.Controls.Add(this.radioButton4);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.richTextBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 27);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(617, 319);
+            this.tabPage3.Size = new System.Drawing.Size(617, 322);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "IP格式转换";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -253,7 +253,7 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(214, 71);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(101, 22);
+            this.radioButton3.Size = new System.Drawing.Size(81, 18);
             this.radioButton3.TabIndex = 16;
             this.radioButton3.Text = "整形转IP";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -264,7 +264,7 @@
             this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(9, 69);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(101, 22);
+            this.radioButton4.Size = new System.Drawing.Size(81, 18);
             this.radioButton4.TabIndex = 15;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "IP转整形";
@@ -276,7 +276,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label1.Location = new System.Drawing.Point(6, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(458, 36);
+            this.label1.Size = new System.Drawing.Size(357, 28);
             this.label1.TabIndex = 12;
             this.label1.Text = "单次输入格式：40.1 120.2\r\n批量查询格式：多个坐标间用换行分割，最大支持1000条";
             // 
@@ -298,10 +298,10 @@
             this.tabPage4.Controls.Add(this.radioButton1);
             this.tabPage4.Controls.Add(this.label2);
             this.tabPage4.Controls.Add(this.richTextBox2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 27);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(617, 319);
+            this.tabPage4.Size = new System.Drawing.Size(617, 322);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "时间格式转换";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -311,7 +311,7 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(214, 71);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(173, 22);
+            this.radioButton2.Size = new System.Drawing.Size(137, 18);
             this.radioButton2.TabIndex = 14;
             this.radioButton2.Text = "真实时间转绝对秒";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -322,7 +322,7 @@
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(9, 69);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(173, 22);
+            this.radioButton1.Size = new System.Drawing.Size(137, 18);
             this.radioButton1.TabIndex = 13;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "绝对秒转真实时间";
@@ -334,7 +334,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label2.Location = new System.Drawing.Point(6, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 36);
+            this.label2.Size = new System.Drawing.Size(357, 28);
             this.label2.TabIndex = 12;
             this.label2.Text = "单次输入格式：40.1 120.2\r\n批量查询格式：多个坐标间用换行分割，最大支持1000条";
             // 
