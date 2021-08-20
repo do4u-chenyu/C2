@@ -24,6 +24,20 @@ namespace MD5Plugin
             inputTextBox.Select(0, 0);
         }
 
+        public static String TryGetSysTempDir()
+        {
+            String tempDir;
+            try
+            {
+                tempDir = Path.GetTempPath();
+            }
+            catch (System.Security.SecurityException)
+            {
+                tempDir = String.Empty;
+            }
+            return tempDir;
+        }
+
         public string GetPluginDescription()
         {
             return "将字符串进行常用的加密、解密、编码和解码操作；如MD5加密，Base64，Url编码和解码，UTF8和GBK转码等。";
@@ -91,7 +105,7 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            FileInputButton.Visible = false;
+            //FileInputButton.Visible = false;
             SetDefault1();
         }
 
@@ -156,6 +170,7 @@ namespace MD5Plugin
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里" || inputTextBox.Text == "请输入你要用Base64加密的内容" || inputTextBox.Text == "请输入你要编码的Url" || inputTextBox.Text == "请输入你要编码的内容" || inputTextBox.Text =="请输入你要编码的内容或者需要加密文件的路径")
             {
                 inputTextBox.Text = "";
+                
             }
             inputTextBox.ForeColor = Color.Black;
         }
@@ -262,15 +277,16 @@ namespace MD5Plugin
             outputTextBox.Text = t2;
         }
 
+        //Base64编码：如果输入路径存在则执行文件编码，否则执行文本编码
         public void EncodeBase64(string filePath)
         {
-            if (!filePath.Contains("\\") && !filePath.Contains("\\") && !filePath.Contains("\n") && !filePath.Contains("/ ") && !filePath.Contains("//"))
+            if (inputTextBox.Text == "请输入你要编码的内容或者需要加密文件的路径")
             {
-                byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(filePath);
-                outputTextBox.Text = Convert.ToBase64String(bytes);
+                inputTextBox.Text = "";
+                outputTextBox.Text = "";
             }
-            else
-            {
+            else if (File.Exists(filePath))
+             {
                 string base64Str = string.Empty;
                 using (FileStream filestream = new FileStream(filePath, FileMode.Open))
                 {
@@ -282,10 +298,18 @@ namespace MD5Plugin
                 }
                 outputTextBox.Text = base64Str;
             }
+            else
+            {
+                byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(filePath);
+                outputTextBox.Text = Convert.ToBase64String(bytes);
+            }
         }
 
+        //Base64解密
+        string outPath;
         public void DecodeBase64(string base64Str)
         {
+            DateTime dateTime = DateTime.Now;
             string a = "/9j/";
             string b = "iVBORw";
             string c = "Qk";
@@ -294,90 +318,130 @@ namespace MD5Plugin
             string ee = "UEsDBA";
             string f = "UmFyIR";
             string g = "N3q8rycc";
-
+            
+            
+            while (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要解码的内容")
+            {
+                inputTextBox.Text = "";
+                outputTextBox.Text = "";
+                //MessageBox.Show("请输入解码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                break;
+            }
             if (base64Str.StartsWith(a))
             {
-                string outPath = @"C://1.jpg";
-                //base64Str = base64Str.Replace(a, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                try
                 {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.jpg", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    //base64Str = base64Str.Replace(a, @"");
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch {
+                    MessageBox.Show("请输入正确的JPG解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (base64Str.StartsWith(b))
             {
-                string outPath = @"C://1.png";
-                //base64Str = base64Str.Replace(b, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                try 
                 {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.png", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch
+                {
+                    MessageBox.Show("请输入正确的PNG解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (base64Str.StartsWith(c))
             {
-                string outPath = @"C://1.bmp";
-                //base64Str = base64Str.Replace(c, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                try 
                 {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.bmp", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch
+                {
+                    MessageBox.Show("请输入正确的BMP解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (base64Str.StartsWith(d))
             {
-                string outPath = @"C://1.gif";
-                //base64Str = base64Str.Replace(d, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                try 
                 {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.gif", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch
+                {
+                    MessageBox.Show("请输入正确的GIF解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (base64Str.StartsWith(e) || (base64Str.StartsWith(ee)))
             {
-                string outPath = @"C://1.zip";
-                //base64Str = base64Str.Replace(e, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                try {
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.zip", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch
+                {
+                    MessageBox.Show("请输入正确的ZIP解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (base64Str.StartsWith(f))
             {
-                string outPath = @"C://1.rar";
-                //base64Str = base64Str.Replace(f, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                try {
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.rar", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch
+                {
+                    MessageBox.Show("请输入正确的RAR解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (base64Str.StartsWith(g))
             {
-                string outPath = @"C://1.7z";
-                //base64Str = base64Str.Replace(g, @"");
-                var contents = Convert.FromBase64String(base64Str);
-                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                {
-                    fs.Write(contents, 0, contents.Length);
-                    fs.Flush();
+                try {
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.7z", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    var contents = Convert.FromBase64String(base64Str);
+                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(contents, 0, contents.Length);
+                        fs.Flush();
+                    }
                 }
-                inputTextBox.Text = "文件下载地址为:" + outPath;
+                catch
+                {
+                    MessageBox.Show("请输入正确的7z解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (IsBase64Formatted(base64Str))
             {
@@ -386,9 +450,11 @@ namespace MD5Plugin
             }
             else
             {
-                MessageBox.Show("目前仅支持字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            inputTextBox.Text = "文件解析地址为:" + outPath;
         }
+
         public static bool IsBase64Formatted(string input)
         {
             try
@@ -558,6 +624,26 @@ namespace MD5Plugin
         }
 
         private void inputTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FileInputButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void base64strButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UnicodeToChineseButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UnicodeToAsciiButton_Click(object sender, EventArgs e)
         {
 
         }

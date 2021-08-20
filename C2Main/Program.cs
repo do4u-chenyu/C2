@@ -58,32 +58,31 @@ namespace C2
                 keyName = "WPCFile";
                 keyValue = "资源包文件";
                 RegistryKey isExCommand = null;
-                bool isCreateRegistry = true;
-                
+                //bool isCreateRegistry = true;
                 try
                 {
                     /// 检查 文件关联是否创建 
                     isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
                     if (isExCommand == null)
                     {
-                        isCreateRegistry = true;
+                        //isCreateRegistry = true;
                     }
                     else
                     {
                         if (isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
                         {
-                            isCreateRegistry = false;
+                            //isCreateRegistry = false;
                         }
                         else
                         {
                             Registry.ClassesRoot.DeleteSubKeyTree(keyName);
-                            isCreateRegistry = true;
+                            //isCreateRegistry = true;
                         }
                     }
                 }
                 catch (Exception)
                 {
-                    isCreateRegistry = true;
+                    //isCreateRegistry = true;
                 }
 
                 /// 假如 文件关联 还没有创建，或是关联位置已被改变 
