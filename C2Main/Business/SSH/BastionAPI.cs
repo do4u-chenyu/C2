@@ -87,6 +87,7 @@ namespace C2.Business.SSH
             catch (Exception ex)
             {
                 task.LastErrorMsg = String.Format("登陆【{0}】失败:{1}", ssh.ConnectionInfo.Host, ex.Message);
+                task.LastErrorCode = BastionCodePage.LoginBastionFail;
                 log.Warn(task.LastErrorMsg);
             }
 
@@ -101,6 +102,7 @@ namespace C2.Business.SSH
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
+                task.LastErrorCode = BastionCodePage.JumpOneFail;
                 log.Warn(task.LastErrorMsg);
             }
 
@@ -120,6 +122,7 @@ namespace C2.Business.SSH
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
+                task.LastErrorCode = BastionCodePage.JumpTwoFail;
                 log.Warn(task.LastErrorMsg);
             }
 
@@ -127,6 +130,7 @@ namespace C2.Business.SSH
             if (!Oops() && !CheckJumpOK())
             {
                 task.LastErrorMsg = "登陆堡垒机成功了，但是在跳转全文机的过程中出现了问题";
+                task.LastErrorCode = BastionCodePage.JumpSearchFail;
                 log.Warn(task.LastErrorMsg);
             }
 
@@ -146,6 +150,7 @@ namespace C2.Business.SSH
             String targetIP = task.InterfaceIP.IsEmpty() ? task.SearchAgentIP : task.InterfaceIP;
 
             task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转到下一层目标机器【{1}】", task.BastionIP, targetIP);
+            task.LastErrorCode = BastionCodePage.JumpUnknownFail;
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
@@ -224,6 +229,7 @@ namespace C2.Business.SSH
                 if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
+                    task.LastErrorCode = BastionCodePage.DownloadFileCorrupted;
                     log.Warn(task.LastErrorMsg);
                     return false;
                 }
@@ -240,6 +246,7 @@ namespace C2.Business.SSH
                     if (bytesRead == 0) // 超时
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：网络超时", task.TaskName);
+                        task.LastErrorCode = BastionCodePage.DownloadTimeout;
                         log.Warn(task.LastErrorMsg);
                         return false;
                     }
@@ -247,6 +254,8 @@ namespace C2.Business.SSH
                     if (downloadCancel)
                     {
                         task.LastErrorMsg = String.Format("用户取消任务【{0}】的下载", task.TaskName);
+                        task.LastErrorCode = BastionCodePage.DownloadCancel;
+                        log.Warn(task.LastErrorMsg);
                         return false;
                     }
 
@@ -267,6 +276,7 @@ namespace C2.Business.SSH
                     if (!shell.ReadByte(ref one, Timeout))
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：远端读错误", task.TaskName);
+                        task.LastErrorCode = BastionCodePage.DownloadRemoteReadFail;
                         log.Warn(task.LastErrorMsg);
                         return false;
                     }
@@ -332,6 +342,7 @@ namespace C2.Business.SSH
             if (len <= 0)
             {
                 task.LastErrorMsg = String.Format("任务【{0}】: 文件不存在或空文件", task.TaskName);
+                task.LastErrorCode = BastionCodePage.DownloadFileNotExists;
                 log.Warn(task.LastErrorMsg);
                 return false;
             }
@@ -372,6 +383,7 @@ namespace C2.Business.SSH
             if (!File.Exists(ffp))
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败, 脚本丢失{1}", task.SearchAgentIP, ffp);
+                task.LastErrorCode = BastionCodePage.UploadScriptFail;
                 log.Warn(task.LastErrorMsg);
                 return this;
             }
@@ -392,6 +404,7 @@ namespace C2.Business.SSH
             if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+                task.LastErrorCode = BastionCodePage.UploadScriptFail;
                 log.Warn(task.LastErrorMsg);
             }
                 
@@ -411,6 +424,7 @@ namespace C2.Business.SSH
                 if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                 {
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
+                    task.LastErrorCode = BastionCodePage.UploadScriptFail;
                     log.Warn(task.LastErrorMsg);
                 }
                     
@@ -441,6 +455,22 @@ namespace C2.Business.SSH
                     parserType);
         }
 
+        public BastionAPI CheckHomeSearch()
+        {
+            if (Oops()) return this;
+
+            String targetPath = "/home/search/sbin/queryclient";
+            String command = String.Format("ls {0}", targetPath);
+            String ret = RunCommand(command, shell);
+            if (!Regex.IsMatch(ret, Wrap(targetPath)))
+            {
+                task.LastErrorMsg = String.Format("跳转的目标机器上没有找到全文环境 : {0}", targetPath);
+                task.LastErrorCode = BastionCodePage.NoHomeSearch;
+                log.Warn(task.LastErrorMsg);
+            }
+            return this;
+        }
+
         public String RunTask()
         {
             if (Oops()) return String.Empty;
@@ -456,6 +486,7 @@ namespace C2.Business.SSH
             if (pid.IsEmpty())
             {
                 task.LastErrorMsg = String.Format("全文机已连接但执行脚本失败:{0}", TargetScript);
+                task.LastErrorCode = BastionCodePage.RunTaskFail;
                 log.Warn(task.LastErrorMsg);
             }
                 
@@ -472,6 +503,7 @@ namespace C2.Business.SSH
             if (RunCommand(command, shell).IsEmpty())
             {
                 task.LastErrorMsg = "全文机创建工作目录失败";
+                task.LastErrorCode = BastionCodePage.TaskDirectoryFail;
                 log.Warn(task.LastErrorMsg);
             }
             return this;

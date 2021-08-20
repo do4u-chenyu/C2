@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -315,6 +316,7 @@
     <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
     <Compile Include="Business\SearchToolkit\SearchTaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
+    <Compile Include="Business\SSH\BastionCodePage.cs" />
     <Compile Include="Business\SSH\Shell.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDResult.cs" />

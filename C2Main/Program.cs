@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace C2
 {
@@ -36,6 +37,96 @@ namespace C2
         [STAThread]
         static void Main(params string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            /// 是否通过关联打开的软件 
+            if (args.Length > 0)
+            {
+                string path = string.Empty;
+                for (int i = 0; i < args.Length; i++)
+                    path += args[i] + string.Empty;
+                path = path.TrimEnd(OpUtil.Blank);
+                Console.WriteLine(path);
+                Console.ReadKey();
+                //Application.Run(new mainForm(path)); 
+            }
+            else
+            {
+                string keyName;
+                string keyValue;
+                keyName = "WPCFile";
+                keyValue = "资源包文件";
+                RegistryKey isExCommand = null;
+                bool isCreateRegistry = true;
+                try
+                {
+                    /// 检查 文件关联是否创建 
+                    isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
+                    if (isExCommand == null)
+                    {
+                        isCreateRegistry = true;
+                    }
+                    else
+                    {
+                        if (isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
+                        {
+                            isCreateRegistry = false;
+                        }
+                        else
+                        {
+                            Registry.ClassesRoot.DeleteSubKeyTree(keyName);
+                            //isCreateRegistry = true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    isCreateRegistry = true;
+                }
+
+                /// 假如 文件关联 还没有创建，或是关联位置已被改变 
+                if (isCreateRegistry) 
+                {
+                    try
+                    {
+                        RegistryKey key, keyico;
+                        key = Registry.ClassesRoot.CreateSubKey(keyName);
+                        key.SetValue("Create", Application.ExecutablePath.ToString());//注册表里的名称和数据
+
+                        keyico = key.CreateSubKey("DefaultIcon");
+                        keyico.SetValue("", Application.ExecutablePath + ",0");
+
+                        key.SetValue("", keyValue);
+                        key = key.CreateSubKey("Shell");
+                        key = key.CreateSubKey("Open");
+                        key = key.CreateSubKey("Command");
+
+                        /// 寸照执行文件的位置 
+                        //key.SetValue("", "D:\\ww\\FiberHome\\IAO解决方案\\C2Shell.exe" + @" %1/");
+                        //key.SetValue("", Application.ExecutablePath.ToString() + @" %1");
+                        if (File.Exists(Application.StartupPath + "\\C2Shell.exe"))
+                        {
+                            string exeFile = Application.StartupPath + "\\C2Shell.exe";
+                            key.SetValue("", exeFile + @" %1/");
+                        }
+                        
+                        /// 关联的文件扩展名,  
+                        keyName = ".c2";
+                        keyValue = "WPCFile";
+                        key = Registry.ClassesRoot.CreateSubKey(keyName);
+                        key.SetValue("", keyValue);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                //Application.Run(new mainForm("")); 
+            }
+
+            //Registry.SetValue(@"HKEY_CURRENT_USER\Software\Classes\.c2\shell\open\command", "", "D:\\Program Files\\FiberHome\\分析师解决方案\\C2Shell.exe %1");
+
+
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021091700000000") > 0)
             {
                 MessageBox.Show("产品可用时间截止到2021年9月17号");

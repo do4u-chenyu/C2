@@ -34,10 +34,7 @@
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.encodeButton = new System.Windows.Forms.Button();
             this.decodeButton = new System.Windows.Forms.Button();
-            this.FileInputButton = new System.Windows.Forms.Button();
-            this.base64strButton = new System.Windows.Forms.Button();
-            this.UnicodeToChineseButton = new System.Windows.Forms.Button();
-            this.UnicodeToAsciiButton = new System.Windows.Forms.Button();
+            //this.UnicodeToAsciiButton = new System.Windows.Forms.Button();
             this.md5128RadioButton = new System.Windows.Forms.RadioButton();
             this.base64RadioButton = new System.Windows.Forms.RadioButton();
             this.urlRadioButton = new System.Windows.Forms.RadioButton();
@@ -99,45 +96,15 @@
             this.decodeButton.UseVisualStyleBackColor = true;
             this.decodeButton.Click += new System.EventHandler(this.DecodeButton_Click);
             // 
-            // FileInputButton
-            // 
-            /*
-            this.FileInputButton.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FileInputButton.Location = new System.Drawing.Point(476, 229);
-            this.FileInputButton.Name = "FileInputButton";
-            this.FileInputButton.Size = new System.Drawing.Size(100, 40);
-            this.FileInputButton.TabIndex = 4;
-            this.FileInputButton.Text = "编码 =>";
-            this.FileInputButton.UseVisualStyleBackColor = true;
-            this.FileInputButton.Click += new System.EventHandler(this.FileInputButton_Click);
-            */
-            // 
-            // base64strButton
-            // 
-            /*
-            this.base64strButton.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.base64strButton.Location = new System.Drawing.Point(476, 284);
-            this.base64strButton.Name = "base64strButton";
-            this.base64strButton.Size = new System.Drawing.Size(100, 40);
-            this.base64strButton.TabIndex = 4;
-            this.base64strButton.Text = "<= 解码";
-            this.base64strButton.UseVisualStyleBackColor = true;
-            this.base64strButton.Click += new System.EventHandler(this.base64strButton_Click);
-            */
-            // 
-            // UnicodeToChineseButton
-            // 
-            this.UnicodeToChineseButton.Location = new System.Drawing.Point(0, 0);
-            this.UnicodeToChineseButton.Name = "UnicodeToChineseButton";
-            this.UnicodeToChineseButton.Size = new System.Drawing.Size(75, 23);
-            this.UnicodeToChineseButton.TabIndex = 14;
-            // 
             // UnicodeToAsciiButton
             // 
+            /*
             this.UnicodeToAsciiButton.Location = new System.Drawing.Point(0, 0);
             this.UnicodeToAsciiButton.Name = "UnicodeToAsciiButton";
             this.UnicodeToAsciiButton.Size = new System.Drawing.Size(75, 23);
             this.UnicodeToAsciiButton.TabIndex = 15;
+            this.UnicodeToAsciiButton.Click += new System.EventHandler(this.UnicodeToAsciiButton_Click);
+            */
             // 
             // md5128RadioButton
             // 
@@ -262,10 +229,7 @@
             this.Controls.Add(this.md5128RadioButton);
             this.Controls.Add(this.decodeButton);
             this.Controls.Add(this.encodeButton);
-            this.Controls.Add(this.FileInputButton);
-            this.Controls.Add(this.base64strButton);
-            this.Controls.Add(this.UnicodeToChineseButton);
-            this.Controls.Add(this.UnicodeToAsciiButton);
+            //this.Controls.Add(this.UnicodeToAsciiButton);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -286,10 +250,10 @@
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Button encodeButton;
         private System.Windows.Forms.Button decodeButton;
-        private System.Windows.Forms.Button FileInputButton;
-        private System.Windows.Forms.Button base64strButton;
-        private System.Windows.Forms.Button UnicodeToChineseButton;
-        private System.Windows.Forms.Button UnicodeToAsciiButton;
+        //private System.Windows.Forms.Button FileInputButton;
+        //private System.Windows.Forms.Button base64strButton;
+        //private System.Windows.Forms.Button UnicodeToChineseButton;
+        //private System.Windows.Forms.Button UnicodeToAsciiButton;
         private System.Windows.Forms.RadioButton md5128RadioButton;
         private System.Windows.Forms.RadioButton base64RadioButton;
         private System.Windows.Forms.RadioButton urlRadioButton;

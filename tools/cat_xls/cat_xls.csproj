@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPPlus">
-      <HintPath>..\..\..\..\relate\relate\EPPlus.dll</HintPath>
+      <HintPath>..\..\ThirdPartyLibrary\EPPlus.5.2.0\lib\net45\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>..\..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.dll</HintPath>

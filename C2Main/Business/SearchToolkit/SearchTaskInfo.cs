@@ -86,6 +86,8 @@ namespace C2.SearchToolkit
 
         public String LastErrorMsg { get; set; } = String.Empty;
 
+        public int LastErrorCode { get; set; } = 0;
+
         public bool IsEmpty() { return this == EmptyTaskInfo; }
 
         public String BcpFFP
