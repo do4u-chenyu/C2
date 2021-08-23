@@ -96,7 +96,7 @@ namespace MD5Plugin
             //base64strButton.Visible = false;
             SetDefault1();
         }
-        
+
 
         //md5(64位)
         private void Md564RadioButton_CheckedChanged(object sender, EventArgs e)
@@ -165,10 +165,10 @@ namespace MD5Plugin
 
         private void InputTextBox_MouseDown(object sender, EventArgs e)
         {
-            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里" || inputTextBox.Text == "请输入你要用Base64加密的内容" || inputTextBox.Text == "请输入你要编码的Url" || inputTextBox.Text == "请输入你要编码的内容" || inputTextBox.Text =="请输入你要编码的内容或者需要加密文件的路径")
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里" || inputTextBox.Text == "请输入你要用Base64加密的内容" || inputTextBox.Text == "请输入你要编码的Url" || inputTextBox.Text == "请输入你要编码的内容" || inputTextBox.Text == "请输入你要编码的内容或者需要加密文件的路径")
             {
                 inputTextBox.Text = string.Empty;
-                
+
             }
             inputTextBox.ForeColor = Color.Black;
         }
@@ -180,6 +180,162 @@ namespace MD5Plugin
                 outputTextBox.Text = string.Empty;
             }
             outputTextBox.ForeColor = Color.Black;
+        }
+        public void Md5Code_128(string str)
+        {
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
+            {
+                originInput();
+            }
+            else
+            {
+                MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
+                byte[] data = md5Hasher.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str));
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+
+                }
+                outputTextBox.Text = sBuilder.ToString();
+            }
+        }
+        public void Md5Code_64(string str)
+        {
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
+            {
+                originInput();
+            }
+            else
+            {
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str)), 4, 8);
+                t2 = t2.Replace("-", "");
+                t2 = t2.ToLower();
+                outputTextBox.Text = t2;
+            }
+        }
+        public void originInput()
+        {
+            inputTextBox.Text = string.Empty;
+            outputTextBox.Text = string.Empty;
+            MessageBox.Show("请输入编码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        //Base64编码：如果输入路径存在则执行文件编码，否则执行文本编码
+        public void EncodeBase64(string filePath)
+        {
+            if (inputTextBox.Text == "请输入你要编码的内容或者需要加密文件的路径")
+            {
+                originInput();
+            }
+            else if (File.Exists(filePath))
+            {
+                string base64Str = string.Empty;
+                using (FileStream filestream = new FileStream(filePath, FileMode.Open))
+                {
+                    byte[] bt = new byte[filestream.Length];
+                    //调用read读取方法
+                    filestream.Read(bt, 0, bt.Length);
+                    base64Str = Convert.ToBase64String(bt);
+                    filestream.Close();
+                }
+                outputTextBox.Text = base64Str;
+            }
+            else
+            {
+                byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(filePath);
+                outputTextBox.Text = Convert.ToBase64String(bytes);
+            }
+        }
+        public void UrlEncode(string url)
+        {
+            if (inputTextBox.Text == "请输入你要编码的内容")
+            {
+                originInput();
+            }
+            else
+            {
+                outputTextBox.Text = HttpUtility.UrlEncode(url);
+            }
+        }
+        public void UnicodeChineseEncode(string str)
+        {
+            if (inputTextBox.Text == "请输入你要编码的内容")
+            {
+                inputTextBox.Text = string.Empty;
+                outputTextBox.Text = string.Empty;
+                MessageBox.Show("请输入编码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                byte[] bytes = Encoding.Unicode.GetBytes(str);
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i += 2)
+                {
+                    stringBuilder.AppendFormat("u{0}{1}", bytes[i + 1].ToString("x").PadLeft(2, '0'), bytes[i].ToString("x").PadLeft(2, '0'));
+                }
+                stringBuilder = stringBuilder.Replace(@"u", @"\u");
+
+                outputTextBox.Text = stringBuilder.ToString();
+            }
+        }
+        public void SHA1Encrypt(string str)
+        {
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
+            {
+                originInput();
+            }
+            else
+            {
+                var strRes = Encoding.Default.GetBytes(str);
+                HashAlgorithm iSha = new SHA1CryptoServiceProvider();
+                strRes = iSha.ComputeHash(strRes);
+                var enText = new StringBuilder();
+                foreach (byte iByte in strRes)
+                {
+                    enText.AppendFormat("{0:x2}", iByte);
+                }
+                outputTextBox.Text = enText.ToString();
+            }
+        }
+        public void SHA256Encrypt(string str)
+        {
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
+            {
+                originInput();
+            }
+            else
+            {
+                byte[] bytValue = System.Text.Encoding.UTF8.GetBytes(str);
+                SHA256 sha256 = new SHA256CryptoServiceProvider();
+                byte[] retVal = sha256.ComputeHash(bytValue);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                outputTextBox.Text = sb.ToString();
+            }
+
+        }
+        public void SHA512Encrypt(string str)
+        {
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
+            {
+                originInput();
+            }
+            else
+            {
+                byte[] bytValue = Encoding.UTF8.GetBytes(str);
+                SHA512 sha512 = new SHA512CryptoServiceProvider();
+                byte[] retVal = sha512.ComputeHash(bytValue);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                outputTextBox.Text = sb.ToString();
+            }
         }
 
         //编码或者加密功能
@@ -207,17 +363,14 @@ namespace MD5Plugin
             }
             else if (sha1RadioButton.Checked)
             {
-                //Console.WriteLine("sha1加密");
                 SHA1Encrypt(inputTextBox.Text);
             }
             else if (sha256RadioButton.Checked)
             {
-                //Console.WriteLine("sha256加密");
                 SHA256Encrypt(inputTextBox.Text);
             }
             else if (sha512RadioButton.Checked)
             {
-                //Console.WriteLine("sha512加密");
                 SHA512Encrypt(inputTextBox.Text);
             }
             else
@@ -226,7 +379,7 @@ namespace MD5Plugin
             }
             outputTextBox.ForeColor = Color.Black;
         }
-       
+
 
         //解码功能
         private void DecodeButton_Click(object sender, EventArgs e)
@@ -250,206 +403,131 @@ namespace MD5Plugin
             }
         }
 
-        public void Md5Code_128(string str)
+        public void originOutput()
         {
-            MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
-            //byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(str));
-            byte[] data = md5Hasher.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str));
-            StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-
-            }
-            //return sBuilder.ToString();
-            outputTextBox.Text = sBuilder.ToString();
-
+            inputTextBox.Text = string.Empty;
+            outputTextBox.Text = string.Empty;
+            MessageBox.Show("请输入解码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void Md5Code_64(string str)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str)), 4, 8);
-            t2 = t2.Replace("-", "");
-            t2 = t2.ToLower();
-            outputTextBox.Text = t2;
-        }
-
-        //Base64编码：如果输入路径存在则执行文件编码，否则执行文本编码
-        public void EncodeBase64(string filePath)
-        {
-            if (inputTextBox.Text == "请输入你要编码的内容或者需要加密文件的路径")
-            {
-                inputTextBox.Text = string.Empty;
-                outputTextBox.Text = string.Empty;
-                MessageBox.Show("请输入编码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (File.Exists(filePath))
-             {
-                string base64Str = string.Empty;
-                using (FileStream filestream = new FileStream(filePath, FileMode.Open))
-                {
-                    byte[] bt = new byte[filestream.Length];
-                    //调用read读取方法
-                    filestream.Read(bt, 0, bt.Length);
-                    base64Str = Convert.ToBase64String(bt);
-                    filestream.Close();
-                }
-                outputTextBox.Text = base64Str;
-            }
-            else
-            {
-                byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(filePath);
-                outputTextBox.Text = Convert.ToBase64String(bytes);
-            }
-        }
-
-        //Base64解密
-        string outPath;
         public void DecodeBase64(string base64Str)
         {
             DateTime dateTime = DateTime.Now;
-            string perfixjpg = "/9j/";
-            string perfixpng = "iVBORw";
-            string perfixbmp = "Qk";
-            string perfixgif = "R0lGOD";
-            string perfixzip = "UEsDBB";
-            string perfixzipx = "UEsDBA";
-            string perfixrar = "UmFyIR";
-            string perfix7z = "N3q8rycc";
-            
-            if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要解码的内容")
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            pairs.Add("/9j/", "jpg");
+            pairs.Add("iVBORw", "png");
+            pairs.Add("Qk", "bmp");
+            pairs.Add("R0lGOD", "gif");
+            pairs.Add("UEsDBB", "zip");
+            pairs.Add("UEsDBA", "zip");
+            pairs.Add("UmFyIR", "rar");
+            pairs.Add("N3q8rycc", "7z");
+
+            foreach (string key in pairs.Keys)
             {
-                inputTextBox.Text = string.Empty;
-                outputTextBox.Text = string.Empty;
-                MessageBox.Show("请输入解码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要解码的内容")
+                {
+                    originOutput();
+                    break;
+                }
+                else if (base64Str.StartsWith(key))
+                {
+                    string value;
+                    pairs.TryGetValue(key, out value);
+                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
+                    base64StrToFile(base64Str);
+                    inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
+                    break;
+                }
+                else if (IsBase64Formatted(base64Str))
+                {
+                    byte[] bytes = Convert.FromBase64String(base64Str);
+                    inputTextBox.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+                }
+                else
+                {
+                    inputTextBox.Text = string.Empty;
+                    MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                //inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
             }
-            else if (base64Str.StartsWith(perfixjpg))
+        }
+        public void UrlDecode(string url)
+        {
+            if (outputTextBox.Text == "请输入你要解码的内容")
             {
-                try
-                {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.jpg", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    //base64Str = base64Str.Replace(a, @"");
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch {
-                    MessageBox.Show("请输入正确的JPG解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (base64Str.StartsWith(perfixpng))
-            {
-                try 
-                {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.png", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("请输入正确的PNG解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (base64Str.StartsWith(perfixbmp))
-            {
-                try 
-                {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.bmp", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("请输入正确的BMP解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (base64Str.StartsWith(perfixgif))
-            {
-                try 
-                {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.gif", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("请输入正确的GIF解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (base64Str.StartsWith(perfixzip) || (base64Str.StartsWith(perfixzipx)))
-            {
-                try {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.zip", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("请输入正确的ZIP解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (base64Str.StartsWith(perfixrar))
-            {
-                try {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.rar", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("请输入正确的RAR解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (base64Str.StartsWith(perfix7z))
-            {
-                try {
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.7z", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
-                    var contents = Convert.FromBase64String(base64Str);
-                    using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(contents, 0, contents.Length);
-                        fs.Flush();
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("请输入正确的7z解码格式", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (IsBase64Formatted(base64Str))
-            {
-                byte[] bytes = Convert.FromBase64String(base64Str);
-                inputTextBox.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+                originOutput();
             }
             else
             {
-                MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                inputTextBox.Text = HttpUtility.UrlDecode(url);
             }
-            inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
+        }
+
+        public void dealWithUnicode(string str)
+        {
+            string resultStr = String.Empty;
+            string[] strList = str.Split('u');
+            for (int i = 1; i < strList.Length; i++)
+            {
+                resultStr += (char)int.Parse(strList[i], System.Globalization.NumberStyles.HexNumber);
+            }
+            inputTextBox.Text = resultStr;
+        }
+
+        public void UnicodeChineseDecode(string str)
+        {
+            string a = "&#".ToString();
+            string b = "x".ToString();
+
+            if (outputTextBox.Text == "请输入你要解码的内容")
+            {
+                originOutput();
+            }
+            else if (str.Contains('u'))
+            {
+                str = str.Replace(@"\", @"");
+                dealWithUnicode(str);
+            }
+            else if (str.Contains(a) && str.Contains(b))//十六进制
+            {
+                str = str.Replace(@"&#x", @"u").Replace(@";", @"");
+                dealWithUnicode(str);
+            }
+            else if (str.Contains(a) && !str.Contains(b))//十进制
+            {
+                Regex r = new Regex("\\d+\\.?\\d*");
+                MatchCollection mc = r.Matches(str);
+                string result = string.Empty;
+                for (int i = 0; i < mc.Count; i++)
+                {
+                    int ss = int.Parse(mc[i].ToString());
+                    String strA = ss.ToString("x8");
+                    strA = strA.Replace(@"0000", @"x").Replace(strA, @"&#" + strA + ';');
+                    result += strA;
+                }
+                string newstr = result;
+                newstr = newstr.Replace(@"&#x", @"u").Replace(@";", @"");
+                dealWithUnicode(newstr);
+            }
+            else
+            {
+                MessageBox.Show("输入解码格式错误", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        //Base64解密
+        string outPath;
+        public void base64StrToFile(string base64Str)
+        {
+            var contents = Convert.FromBase64String(base64Str);
+            using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+            {
+                fs.Write(contents, 0, contents.Length);
+                fs.Flush();
+            }
         }
 
         public static bool IsBase64Formatted(string input)
@@ -464,178 +542,6 @@ namespace MD5Plugin
                 return false;
             }
         }
-        public void UrlEncode(string url)
-        {
-            outputTextBox.Text = HttpUtility.UrlEncode(url);
-        }
-
-        //ASCII转换为Unicode
-        public void UnicodetestEncode(string str)
-        {
-            Regex r = new Regex("\\d+\\.?\\d*");
-            //bool ismatch = r.IsMatch(str);
-            MatchCollection mc = r.Matches(str);
-            string result = string.Empty;
-            for (int i = 0; i < mc.Count; i++)
-            {
-                int ss = int.Parse(mc[i].ToString());
-                System.Text.ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
-                byte[] byteArray = new byte[] { (byte)ss };
-                string strCharacter = asciiEncoding.GetString(byteArray);
-                result += strCharacter;//匹配结果是完整的数字，此处可以不做拼接的
-            }
-            outputTextBox.Text = result;
-        }
-
-
-        //中文或者字符串转Unicode
-        public void UnicodeChineseEncode(string str)
-        {
-            if (inputTextBox.Text == "请输入你要编码的内容")
-            {
-                inputTextBox.Text = string.Empty;
-                outputTextBox.Text = string.Empty;
-                MessageBox.Show("请输入编码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else 
-            {
-                byte[] bytes = Encoding.Unicode.GetBytes(str);
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i += 2)
-                {
-                    stringBuilder.AppendFormat("u{0}{1}", bytes[i + 1].ToString("x").PadLeft(2, '0'), bytes[i].ToString("x").PadLeft(2, '0'));
-                }
-                stringBuilder = stringBuilder.Replace(@"u", @"\u");
-
-                outputTextBox.Text = stringBuilder.ToString();
-            }
-        }
-
-
-        public void UrlDecode(string url)
-        {
-            inputTextBox.Text = HttpUtility.UrlDecode(url);
-        }
-
-        // Unicode转换成ASCII
-        public void UnicodetestDecode(string str)
-        {
-            byte[] array = new byte[1];
-            array = System.Text.Encoding.ASCII.GetBytes(str); //把str的每个字符转换成ascii码
-            string asciicode = "&#;";
-            for (int i = 0; i < array.Length; i++)
-            {
-             asciicode += array[i]+ "&#;";//str 的ascii码
-            }
-            inputTextBox.Text = asciicode.Substring(0, asciicode.Length - 3)+";";
-        }    
-
-
-            //Unicode/ASCII转换为中文/字符串
-            public void UnicodeChineseDecode(string str)
-        {
-            string a = "&#".ToString();
-            string b = "x".ToString();
-
-            if (outputTextBox.Text == "请输入你要解码的内容")
-            {
-                inputTextBox.Text = string.Empty;
-                outputTextBox.Text = string.Empty;
-                MessageBox.Show("请输入解码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (str.Contains('u'))
-            {
-                str = str.Replace(@"\", @"");
-                string resultStr = "";
-                string[] strList = str.Split('u');
-                for (int i = 1; i < strList.Length; i++)
-                {
-                    resultStr += (char)int.Parse(strList[i], System.Globalization.NumberStyles.HexNumber);
-                }
-                inputTextBox.Text = resultStr;
-            }
-            else if (str.Contains(a) && str.Contains(b))//十六进制
-            {
-                str = str.Replace(@"&#x", @"u");
-                str = str.Replace(@";", @"");
-                string resultStr = "";
-                string[] strList = str.Split('u');
-                for (int i = 1; i < strList.Length; i++)
-                {
-                    resultStr += (char)int.Parse(strList[i], System.Globalization.NumberStyles.HexNumber);
-                }
-                inputTextBox.Text = resultStr;
-            }
-            else if (str.Contains(a) && !str.Contains(b))//十进制
-            {
-                Regex r = new Regex("\\d+\\.?\\d*");
-                MatchCollection mc = r.Matches(str);
-                string result = string.Empty;
-                for (int i = 0; i < mc.Count; i++)
-                {
-                    int ss = int.Parse(mc[i].ToString());
-                    String strA = ss.ToString("x8");
-                    strA = strA.Replace(@"0000", @"x");
-                    strA = strA.Replace(strA, @"&#" + strA + ';');
-                    result += strA;
-                }
-                string newstr = result;
-                newstr = newstr.Replace(@"&#x", @"u");
-                newstr = newstr.Replace(@";", @"");
-                string resultStr = "";
-                string[] strList = newstr.Split('u');
-                for (int i = 1; i < strList.Length; i++)
-                {
-                    resultStr += (char)int.Parse(strList[i], System.Globalization.NumberStyles.HexNumber);
-                }
-                inputTextBox.Text = resultStr;
-            }
-            else
-            {
-                MessageBox.Show("输入解码格式错误", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void SHA1Encrypt(string str)
-        {
-            var strRes = Encoding.Default.GetBytes(str);
-            HashAlgorithm iSha = new SHA1CryptoServiceProvider();
-            strRes = iSha.ComputeHash(strRes);
-            var enText = new StringBuilder();
-            foreach (byte iByte in strRes)
-            {
-                enText.AppendFormat("{0:x2}", iByte);
-            }
-            outputTextBox.Text = enText.ToString();
-        }
-
-        public void SHA256Encrypt(string str)
-        {
-            byte[] bytValue = System.Text.Encoding.UTF8.GetBytes(str);
-            SHA256 sha256 = new SHA256CryptoServiceProvider();
-            byte[] retVal = sha256.ComputeHash(bytValue);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
-            {
-                sb.Append(retVal[i].ToString("x2"));
-            }
-            outputTextBox.Text = sb.ToString();
-
-        }
-
-        public void SHA512Encrypt(string str)
-        {
-            byte[] bytValue = Encoding.UTF8.GetBytes(str);
-            SHA512 sha512 = new SHA512CryptoServiceProvider();
-            byte[] retVal = sha512.ComputeHash(bytValue);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
-            {
-                sb.Append(retVal[i].ToString("x2"));
-            }
-            outputTextBox.Text = sb.ToString();
-        }
-
         private void inputTextBox_TextChanged(object sender, EventArgs e)
         {
         }

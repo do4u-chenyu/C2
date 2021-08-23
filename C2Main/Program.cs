@@ -40,7 +40,40 @@ namespace C2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            /// 是否通过关联打开的软件 
+
+            string keyName = "C2File";
+            string keyValue = "C2文件";
+            bool isCreateRegistry = true;
+
+            //检查文件关联是否创建 
+            RegistryKey isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
+            if (isExCommand !=null && isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
+            {
+                isCreateRegistry = false;
+            }
+            //假如文件关联 还没有创建，或是关联位置已被改变 
+            else if(isCreateRegistry)
+            {
+                RegistryKey key, keyico, KeyC2;
+                key = Registry.ClassesRoot.CreateSubKey(keyName);
+                key.SetValue("Create", Application.ExecutablePath.ToString());
+                keyico = key.CreateSubKey("DefaultIcon");
+                keyico.SetValue("", Application.ExecutablePath + ",0");
+                key.SetValue("", keyValue);
+                key = key.CreateSubKey("Shell")
+                             .CreateSubKey("Open")
+                                 .CreateSubKey("Command");
+                String exeFile = Path.Combine(Application.StartupPath, "C2Shell.exe");
+                if (File.Exists(exeFile))
+                    key.SetValue(String.Empty, exeFile + @" %1/");
+                string keyC2Name = ".c2";
+                string keyC2Value = "C2File";
+                KeyC2 = Registry.ClassesRoot.CreateSubKey(keyC2Name);
+                KeyC2.SetValue("", keyC2Value);
+            }
+
+
+            // 是否通过关联打开的软件 
             if (args.Length > 0)
             {
                 string path = string.Empty;
@@ -51,81 +84,6 @@ namespace C2
                 Console.ReadKey();
                 //Application.Run(new mainForm(path)); 
             }
-            else
-            {
-                string keyName;
-                string keyValue;
-                keyName = "WPCFile";
-                keyValue = "资源包文件";
-                RegistryKey isExCommand = null;
-                bool isCreateRegistry = true;
-                try
-                {
-                    /// 检查 文件关联是否创建 
-                    isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
-                    if (isExCommand == null)
-                    {
-                        isCreateRegistry = true;
-                    }
-                    else
-                    {
-                        if (isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
-                        {
-                            isCreateRegistry = false;
-                        }
-                        else
-                        {
-                            Registry.ClassesRoot.DeleteSubKeyTree(keyName);
-                            //isCreateRegistry = true;
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    isCreateRegistry = true;
-                }
-
-                /// 假如 文件关联 还没有创建，或是关联位置已被改变 
-                if (isCreateRegistry) 
-                {
-                    try
-                    {
-                        RegistryKey key, keyico;
-                        key = Registry.ClassesRoot.CreateSubKey(keyName);
-                        key.SetValue("Create", Application.ExecutablePath.ToString());//注册表里的名称和数据
-
-                        keyico = key.CreateSubKey("DefaultIcon");
-                        keyico.SetValue("", Application.ExecutablePath + ",0");
-
-                        key.SetValue("", keyValue);
-                        key = key.CreateSubKey("Shell");
-                        key = key.CreateSubKey("Open");
-                        key = key.CreateSubKey("Command");
-
-                        /// 寸照执行文件的位置 
-                        //key.SetValue("", "D:\\ww\\FiberHome\\IAO解决方案\\C2Shell.exe" + @" %1/");
-                        //key.SetValue("", Application.ExecutablePath.ToString() + @" %1");
-                        if (File.Exists(Application.StartupPath + "\\C2Shell.exe"))
-                        {
-                            string exeFile = Application.StartupPath + "\\C2Shell.exe";
-                            key.SetValue("", exeFile + @" %1/");
-                        }
-                        
-                        /// 关联的文件扩展名,  
-                        keyName = ".c2";
-                        keyValue = "WPCFile";
-                        key = Registry.ClassesRoot.CreateSubKey(keyName);
-                        key.SetValue("", keyValue);
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-                //Application.Run(new mainForm("")); 
-            }
-
-            //Registry.SetValue(@"HKEY_CURRENT_USER\Software\Classes\.c2\shell\open\command", "", "D:\\Program Files\\FiberHome\\分析师解决方案\\C2Shell.exe %1");
-
 
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021091700000000") > 0)
             {
@@ -187,7 +145,7 @@ namespace C2
             // 存在workspace配置项,但配置项为空
             if (String.IsNullOrEmpty(workspaceDirectory))
                 workspaceDirectory = ConfigUtil.DefaultWorkspaceDirectory;
-            
+
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
             // 如果硬盘不存在,用程序所在目录
             if (!System.IO.Directory.Exists(root))
