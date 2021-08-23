@@ -63,7 +63,8 @@ namespace C2.Utils
         public static string TimeAndIPTransformFormHelpInfo = "IP和整形IP之间的转换，绝对时间和真实时间之间的转换";
         public static string BigAPKFormHelpInfo = "APK检测系统";
 
-        public static string CrackerFormHelpInfo = "基于ssh、rtd等协议的弱密码口令爆破";
+        public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱口令爆破";
+        public static string PwdGeneratorHelpInfo = "社工密码生成器";
 
         public static string FileNotFoundHelpInfo = "文件不存在";
         public static string InvalidScaleHelpInfo = "输入的缩放比有误。缩放比仅支持大于0且小于20的整数";

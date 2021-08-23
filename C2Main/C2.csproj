@@ -166,16 +166,14 @@
     <Reference Include="Rebex.Sftp">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Sftp.dll</HintPath>
     </Reference>
-    <Reference Include="Rebex.SshShell">
-      <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.SshShell.dll</HintPath>
-    </Reference>
     <Reference Include="Rebex.Telnet">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Telnet.dll</HintPath>
     </Reference>
     <Reference Include="Rebex.Terminal">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Terminal.dll</HintPath>
     </Reference>
-    <Reference Include="Renci.SshNet">
+    <Reference Include="Renci.SshNet, Version=2020.0.1.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\SSH.NET.2020.0.1\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -202,51 +200,57 @@
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
-    <Compile Include="Business\Cracker\Dialogs\CrackerForm.cs">
+    <Compile Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\Cracker\Dialogs\CrackerForm.Designer.cs">
+    <Compile Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.Designer.cs">
       <DependentUpon>CrackerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\Cracker\Exception\IPBreakException.cs" />
-    <Compile Include="Business\Cracker\Exception\IPUserBreakException.cs" />
-    <Compile Include="Business\Cracker\Model\CrackFTP.cs" />
-    <Compile Include="Business\Cracker\Model\CrackMySQL.cs" />
-    <Compile Include="Business\Cracker\Model\CrackService.cs" />
-    <Compile Include="Business\Cracker\Model\CrackSSH.cs" />
-    <Compile Include="Business\Cracker\Model\Server.cs" />
-    <Compile Include="Business\Cracker\Model\ServiceModel.cs" />
-    <Compile Include="Business\Cracker\rdp\RdpClient.cs">
+    <Compile Include="Business\CastleBravo\Cracker\Exception\IPBreakException.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Exception\IPUserBreakException.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Model\CrackFTP.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Model\CrackMySQL.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Model\CrackService.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Model\CrackSSH.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Model\Server.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Model\ServiceModel.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\rdp\RdpClient.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Business\Cracker\rdp\ResponseType.cs" />
-    <Compile Include="Business\Cracker\SmartThread\CallerThreadContext.cs" />
-    <Compile Include="Business\Cracker\SmartThread\CanceledWorkItemsGroup.cs" />
-    <Compile Include="Business\Cracker\SmartThread\EventWaitHandle.cs" />
-    <Compile Include="Business\Cracker\SmartThread\EventWaitHandleFactory.cs" />
-    <Compile Include="Business\Cracker\SmartThread\Exceptions.cs" />
-    <Compile Include="Business\Cracker\SmartThread\Interfaces.cs" />
-    <Compile Include="Business\Cracker\SmartThread\InternalInterfaces.cs" />
-    <Compile Include="Business\Cracker\SmartThread\PriorityQueue.cs" />
-    <Compile Include="Business\Cracker\SmartThread\SLExt.cs" />
-    <Compile Include="Business\Cracker\SmartThread\SmartThreadPool.cs" />
-    <Compile Include="Business\Cracker\SmartThread\SmartThreadPool.ThreadEntry.cs" />
-    <Compile Include="Business\Cracker\SmartThread\Stopwatch.cs" />
-    <Compile Include="Business\Cracker\SmartThread\STPEventWaitHandle.cs" />
-    <Compile Include="Business\Cracker\SmartThread\STPPerformanceCounter.cs" />
-    <Compile Include="Business\Cracker\SmartThread\STPStartInfo.cs" />
-    <Compile Include="Business\Cracker\SmartThread\SynchronizedDictionary.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WIGStartInfo.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItem.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItem.WorkItemResult.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItemFactory.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItemInfo.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItemResultTWrapper.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItemsGroup.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItemsGroupBase.cs" />
-    <Compile Include="Business\Cracker\SmartThread\WorkItemsQueue.cs" />
-    <Compile Include="Business\Cracker\Tools\FileTool.cs" />
-    <Compile Include="Business\Cracker\Tools\Tool.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\rdp\ResponseType.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\CallerThreadContext.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\CanceledWorkItemsGroup.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\EventWaitHandle.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\EventWaitHandleFactory.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\Exceptions.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\Interfaces.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\InternalInterfaces.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\PriorityQueue.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\SLExt.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\SmartThreadPool.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\SmartThreadPool.ThreadEntry.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\Stopwatch.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\STPEventWaitHandle.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\STPPerformanceCounter.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\STPStartInfo.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\SynchronizedDictionary.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WIGStartInfo.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItem.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItem.WorkItemResult.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemFactory.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemInfo.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemResultTWrapper.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemsGroup.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemsGroupBase.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemsQueue.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Tools\FileTool.cs" />
+    <Compile Include="Business\CastleBravo\Cracker\Tools\Tool.cs" />
+    <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
+      <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HTTP\HttpHandler.cs" />
@@ -310,6 +314,7 @@
     <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
     <Compile Include="Business\SearchToolkit\SearchTaskManager.cs" />
     <Compile Include="Business\SSH\BastionAPI.cs" />
+    <Compile Include="Business\SSH\BastionCodePage.cs" />
     <Compile Include="Business\SSH\Shell.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\TOTP.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDResult.cs" />
@@ -1749,7 +1754,7 @@
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <Compile Include="Utils\ZipUtil.cs" />
-    <EmbeddedResource Include="Business\Cracker\Dialogs\CrackerForm.resx">
+    <EmbeddedResource Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.resx">
       <DependentUpon>CrackerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
@@ -2612,6 +2617,7 @@
     <None Include="Resources\Images\format_painter.png" />
     <None Include="Resources\Images\WidgetImage\deletewidget.png" />
     <None Include="Resources\Images\WidgetImage\dealData.png" />
+    <None Include="Resources\Images\dictGenerator.png" />
     <Content Include="Resources\Images\freemind_butterfly.png" />
     <None Include="Resources\Images\full_screen.png" />
     <None Include="Resources\Images\full_screen_exit.png" />
@@ -3529,7 +3535,6 @@
     <None Include="Resources\WebBrowser\map_setting.png" />
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
-    <None Include="Resources\城堡 %281%29.png" />
     <None Include="Resources\可视化数据可视化.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
@@ -3643,9 +3648,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\IAOLab\Webbrowser\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

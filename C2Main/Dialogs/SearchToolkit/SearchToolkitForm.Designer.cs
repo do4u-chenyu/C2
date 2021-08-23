@@ -135,7 +135,7 @@
             // 
             this.connectTestButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.connectTestButton.ForeColor = System.Drawing.Color.Navy;
-            this.connectTestButton.Location = new System.Drawing.Point(247, 115);
+            this.connectTestButton.Location = new System.Drawing.Point(241, 115);
             this.connectTestButton.Name = "connectTestButton";
             this.connectTestButton.Size = new System.Drawing.Size(68, 27);
             this.connectTestButton.TabIndex = 9;

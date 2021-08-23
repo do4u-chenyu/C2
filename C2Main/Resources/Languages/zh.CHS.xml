@@ -449,5 +449,6 @@
 	<item name="Ip">时间、IP转换</item>
 	<item name="BigAPK">APK大眼睛</item>
 	<item name="Cracker">弱口令扫描</item>
+	<item name="PwdGenerator">社工生成器</item>
 </words>
 </dictionary>

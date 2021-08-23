@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrackerForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_export = new System.Windows.Forms.Button();
             this.cbox_reTry = new System.Windows.Forms.ComboBox();
             this.cbox_timeOut = new System.Windows.Forms.ComboBox();
@@ -95,6 +97,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btn_export);
             this.groupBox1.Controls.Add(this.cbox_reTry);
             this.groupBox1.Controls.Add(this.cbox_timeOut);
@@ -111,6 +115,25 @@
             this.groupBox1.Size = new System.Drawing.Size(743, 96);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "秒";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(556, 57);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(72, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "字典目录";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // btn_export
             // 
@@ -129,8 +152,9 @@
             this.cbox_reTry.Items.AddRange(new object[] {
             "0",
             "1",
-            "2"});
-            this.cbox_reTry.Location = new System.Drawing.Point(445, 60);
+            "2",
+            "3"});
+            this.cbox_reTry.Location = new System.Drawing.Point(430, 60);
             this.cbox_reTry.Name = "cbox_reTry";
             this.cbox_reTry.Size = new System.Drawing.Size(61, 20);
             this.cbox_reTry.TabIndex = 11;
@@ -149,7 +173,7 @@
             "40",
             "50",
             "60"});
-            this.cbox_timeOut.Location = new System.Drawing.Point(83, 60);
+            this.cbox_timeOut.Location = new System.Drawing.Point(68, 60);
             this.cbox_timeOut.Name = "cbox_timeOut";
             this.cbox_timeOut.Size = new System.Drawing.Size(61, 20);
             this.cbox_timeOut.TabIndex = 4;
@@ -168,7 +192,7 @@
             "4",
             "5",
             "10"});
-            this.cbox_threadSize.Location = new System.Drawing.Point(264, 60);
+            this.cbox_threadSize.Location = new System.Drawing.Point(249, 60);
             this.cbox_threadSize.Name = "cbox_threadSize";
             this.cbox_threadSize.Size = new System.Drawing.Size(61, 20);
             this.cbox_threadSize.TabIndex = 9;
@@ -196,7 +220,7 @@
             // 
             // txt_target
             // 
-            this.txt_target.Location = new System.Drawing.Point(83, 21);
+            this.txt_target.Location = new System.Drawing.Point(68, 21);
             this.txt_target.Name = "txt_target";
             this.txt_target.Size = new System.Drawing.Size(423, 21);
             this.txt_target.TabIndex = 2;
@@ -204,7 +228,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(398, 63);
+            this.label8.Location = new System.Drawing.Point(383, 63);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 12);
             this.label8.TabIndex = 0;
@@ -213,7 +237,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 63);
+            this.label4.Location = new System.Drawing.Point(21, 63);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 0;
@@ -222,7 +246,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(217, 63);
+            this.label3.Location = new System.Drawing.Point(202, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 0;
@@ -231,11 +255,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 25);
+            this.label1.Location = new System.Drawing.Point(10, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "IP：";
+            this.label1.Text = "目标IP：";
             // 
             // rdp_panle
             // 
@@ -641,5 +665,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btn_export;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

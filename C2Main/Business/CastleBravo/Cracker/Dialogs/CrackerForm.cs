@@ -1014,5 +1014,15 @@ namespace C2.Business.Cracker.Dialogs
             }
             return true;
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (services.ContainsKey("SSH"))
+            {
+                String dictPath = Path.GetDirectoryName(Directory.GetCurrentDirectory() + services["SSH"].DicPasswordPath);
+                ProcessUtil.ProcessOpen(dictPath);
+            }
+                
+        }
     }
 }
