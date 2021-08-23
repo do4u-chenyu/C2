@@ -51,7 +51,6 @@ namespace KnowledgeBase
             if (!string.IsNullOrEmpty(chromePath))
             {
                 System.Diagnostics.Process.Start(chromePath, "15.73.3.241:19001/KnowledgeBase/");
-                System.Diagnostics.Process.Start(chromePath, "172.17.31.4:19001/KnowledgeBase/");
             }
             else
                 MessageBox.Show("未能找到chrome启动路径");
