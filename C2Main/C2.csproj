@@ -1763,6 +1763,9 @@
     <EmbeddedResource Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.resx">
       <DependentUpon>CrackerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
+      <DependentUpon>OCRForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
       <DependentUpon>SettingChartDialog.cs</DependentUpon>
     </EmbeddedResource>

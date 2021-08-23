@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace C2.Business.HIBU.OCR
 {
-    public partial class OCRForm : Form
+    partial class OCRForm : StandardDialog
     {
         public OCRForm()
         {
