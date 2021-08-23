@@ -41,9 +41,9 @@
             this.dataSourcePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.countComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.keyComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -130,7 +130,7 @@
             this.chartType.FormattingEnabled = true;
             this.chartType.Items.AddRange(new object[] {
             "组织架构图",
-            "词云（敬请期待）"});
+            "词云"});
             this.chartType.Location = new System.Drawing.Point(101, 65);
             this.chartType.Name = "chartType";
             this.chartType.Size = new System.Drawing.Size(242, 25);
@@ -192,9 +192,9 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.comboBox3);
+            this.panel2.Controls.Add(this.countComboBox);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.keyComboBox);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 25);
@@ -203,15 +203,15 @@
             this.panel2.TabIndex = 10092;
             this.panel2.Visible = false;
             // 
-            // comboBox3
+            // countComboBox
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(76, 114);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(242, 24);
-            this.comboBox3.TabIndex = 10062;
+            this.countComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countComboBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.countComboBox.FormattingEnabled = true;
+            this.countComboBox.Location = new System.Drawing.Point(76, 114);
+            this.countComboBox.Name = "countComboBox";
+            this.countComboBox.Size = new System.Drawing.Size(242, 24);
+            this.countComboBox.TabIndex = 10062;
             // 
             // label8
             // 
@@ -223,15 +223,15 @@
             this.label8.TabIndex = 10061;
             this.label8.Text = "频次：";
             // 
-            // comboBox2
+            // keyComboBox
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(76, 31);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(242, 24);
-            this.comboBox2.TabIndex = 10060;
+            this.keyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.keyComboBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.keyComboBox.FormattingEnabled = true;
+            this.keyComboBox.Location = new System.Drawing.Point(76, 31);
+            this.keyComboBox.Name = "keyComboBox";
+            this.keyComboBox.Size = new System.Drawing.Size(242, 24);
+            this.keyComboBox.TabIndex = 10060;
             // 
             // label7
             // 
@@ -367,9 +367,9 @@
         private System.Windows.Forms.ComboBox superiorCombox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox countComboBox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox keyComboBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
     }

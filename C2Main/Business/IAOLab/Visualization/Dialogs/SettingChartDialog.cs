@@ -60,8 +60,10 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private bool OptionsHaveBlank()
         {
-            if(this.chartType.Text == "组织架构图")
+            if (this.chartType.Text == "组织架构图")
                 return this.userCombox.SelectedIndex == -1 || this.superiorCombox.SelectedIndex == -1;
+            else if (this.chartType.Text == "词云")
+                return this.keyComboBox.SelectedIndex == -1 || this.countComboBox.SelectedIndex == -1;
 
             //TODO 其他类别
             return true ;
@@ -82,6 +84,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             //配置参数信息
             List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
             Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
+            Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString() };
         }
 
         private string[] TransListStringToInt(List<string> t, List<int> listInt)
@@ -108,7 +111,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void ChangeControlContent()
         {
-
+            //组织架构图下拉列表更新
             foreach (Control ct in this.panel1.Controls)
             {
                 if (ct is ComboBox)
@@ -125,20 +128,17 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
 
+            //词云下拉列表更新
+            foreach (Control ct in this.panel2.Controls)
+            {
+                if (ct is ComboBox)
+                {
+                    (ct as ComboBox).Text = string.Empty;
+                    (ct as ComboBox).Items.Clear();
+                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+                }
+            }
 
-            //TODO 暂时先不对其他类型的配置下拉列表填字段
-            //else
-            //{
-            //    foreach (Control ct in this.panel2.Controls)
-            //    {
-            //        if (ct is ComboBox )
-            //        {
-            //            (ct as ComboBox).Text = string.Empty;
-            //            (ct as ComboBox).Items.Clear();
-            //            (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-            //        }
-            //    }
-            //}
 
         }
 
