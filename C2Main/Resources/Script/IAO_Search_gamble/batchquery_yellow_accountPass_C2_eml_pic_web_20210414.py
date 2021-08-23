@@ -629,18 +629,22 @@ def produceKey(button,value,keyNum):
 
 ##quey FULLTEXT 
 def queryBatch(keyWords):
-    tempFilename   = "_result_password_" + netQueryStart + '_' + defaultEnd 
-    sch = Scheduler(netQueryStart, defaultEnd, tempFilename,keyWords)
+    #tempFilename   = "_result_password_" + netQueryStart + '_' + defaultEnd 
+    tempFilename   = "_result_password_" + startTime + '_' + endTime
+    #sch = Scheduler(netQueryStart, defaultEnd, tempFilename,keyWords)
+    sch = Scheduler(startTime, endTime, tempFilename,keyWords)
     sch.scheduling()
     sch.saver.writer.close()
     succeedFilename = tempFilename.strip('_') + '.txt'
     os.rename(os.path.join(netPath,tempFilename), os.path.join(netPath,succeedFilename))
+    #os.rename(os.path.join(DATA_PATH,tempFilename), os.path.join(DATA_PATH,succeedFilename))
     ZIP_PATH =  os.path.join(netPath,succeedFilename).replace('.txt','.tgz')
+    #ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','tgz')
     zip_result(os.path.join(netPath,succeedFilename),ZIP_PATH)
 
 ##query pic&&Email shehuang
 def queryPicEmail():    
-    emailDicts,picDicts = multi_query(emailQueryStart, defaultEnd, picQueryStart)
+    emailDicts,picDicts = multi_query(startTime, endTime, startTime)
     emailList = emailExact(emailDicts)
     picList   = picExact(picDicts)
     save([emailList,picList])
@@ -670,47 +674,45 @@ def main():
     
     
 if __name__ == '__main__':
-    ##Program description
-    usage = 'python query_yellowWish_v4.py  --server[serverIp]  --netDay[queryNetDays]  --emailDay[queryEmailDays]  --picDay[queryPicDays]  --out[outfilePath]  --area[areaCode]'
-  
+    usage = 'python query_yellowWish_v4.py  --server[serverIp]  --start[start_time]  --end [end_time] --out[outfilePath]  --area[areaCode]'
+    dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     serverInfo = 'the query addr,default 127.0.0.1'
-    netDay     = 'query netData days,default 0.1 days'
-    emailDay   = 'query emailData days,default 90 days'
-    picDay     = 'query picData days,default 90 days'
-    outInfo    = 'Output file directory,default ./'
     areaInfo   = 'area code,default 000000'
+    outInfo    = 'Output file directory,default ./'
 
     parser = OptionParser(usage)
     parser.add_option('--server',dest = 'serverIp', help = serverInfo,default = '127.0.0.1')
-    parser.add_option('--netDay',dest = 'netQueryDay', help = netDay,default = '30')
-    parser.add_option('--emailDay',dest = 'emailQueryDay', help = emailDay,default = '30')
-    parser.add_option('--picDay',dest = 'picQueryDay', help = picDay,default = '15')
+    parser.add_option('--start',dest = 'startTime',help = dataformat)
+    parser.add_option('--end',dest = 'endTime',help = dataformat)
     parser.add_option('--out',dest = 'outfilePath', help = outInfo,default = './result')
     parser.add_option('--area',dest = 'areaCode', help = areaInfo,default = '000000')
     ##get input Time  parameter
     option,args = parser.parse_args()
     #if not os.path.exists(sys.path[0] + '/result'):
         #os.mkdir(sys.path[0] + '/result')
-    #dataPath = option.outfilePath + '/result'
+    dataPath = option.outfilePath + '/result'
     dataPath = option.outfilePath
+    startTime= option.startTime
+    endTime  = option.endTime
     serverIP = option.serverIp
     areacode = option.areaCode
-    netDay   = option.netQueryDay
-    emailDay = option.emailQueryDay
-    picDay   = option.picQueryDay
     
     down_path = join(dataPath,'pic')
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    netQueryStart  = (NowTime - datetime.timedelta(days = float(netDay))).strftime("%Y%m%d%H%M%S")
-    emailQueryStart= (NowTime - datetime.timedelta(days = float(emailDay))).strftime("%Y%m%d%H%M%S")
-    picQueryStart= (NowTime - datetime.timedelta(days = float(picDay))).strftime("%Y%m%d%H%M%S")
+    #netQueryStart  = (NowTime - datetime.timedelta(days = float(netDay))).strftime("%Y%m%d%H%M%S")
+    #emailQueryStart= (NowTime - datetime.timedelta(days = float(emailDay))).strftime("%Y%m%d%H%M%S")
+    #picQueryStart= (NowTime - datetime.timedelta(days = float(picDay))).strftime("%Y%m%d%H%M%S")
 
+    
+    NowTime = datetime.datetime.now()
+    OneYear = datetime.timedelta(days = 30)
+    defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
-    defaultStart = picQueryStart
    
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
     netPath = join(dataPath,'queryResult_net_')
+    #DATA_PATH = './_queryResult_net_'
     KEY_NUM = 13
     LOGIN_BUTTON = ['Account','AccountName','account_name','account_id','accountd',
                     'login_id','login_name','loginid','loginName','Name','user',
@@ -724,7 +726,12 @@ if __name__ == '__main__':
     init_path([dataPath,join(dataPath,"Logs"),netPath,down_path])
     log_path = join(dataPath, "Logs","{0}.log".format(NowTime.strftime("%Y%m%d%H%M%S")))
     LOGGER = init_logger(log_path)
-
+    if startTime is None and endTime is None:
+        startTime = defaultStart
+        endTime   = defaultEnd
+    if len(startTime) !=14  or len(endTime) !=14:
+        LOGGER.info('TimeData error:'+ dataformat)
+        sys.exit(1)
     if  len(areacode) !=6: 
         LOGGER.info('areacode error:'+ areaInfo)
         sys.exit(1)
