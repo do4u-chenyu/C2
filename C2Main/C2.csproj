@@ -253,6 +253,12 @@
     </Compile>
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
+    <Compile Include="Business\HIBU\OCR\OCRForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\OCR\OCRForm.Designer.cs">
+      <DependentUpon>OCRForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HTTP\HttpHandler.cs" />
     <Compile Include="Business\HTTP\Response.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
@@ -2668,6 +2674,7 @@
     <None Include="Resources\Images\note_small.png" />
     <None Include="Resources\Images\notes.png" />
     <None Include="Resources\Images\objects.png" />
+    <None Include="Resources\Images\OCR.png" />
     <Content Include="Resources\Images\open.png" />
     <None Include="Resources\Images\open_24.png" />
     <None Include="Resources\Images\outdent.png" />
