@@ -1024,5 +1024,15 @@ namespace C2.Business.Cracker.Dialogs
             }
                 
         }
+
+        private void services_list_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.CurrentValue == CheckState.Checked) return;//取消选中就不用进行以下操作
+            for (int i = 0; i < ((CheckedListBox)sender).Items.Count; i++)
+            {
+                ((CheckedListBox)sender).SetItemChecked(i, false);//将所有选项设为不选中
+            }
+            e.NewValue = CheckState.Checked;//刷新
+        }
     }
 }

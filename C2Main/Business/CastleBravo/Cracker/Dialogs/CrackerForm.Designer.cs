@@ -279,6 +279,7 @@
             this.services_list.Name = "services_list";
             this.services_list.Size = new System.Drawing.Size(95, 315);
             this.services_list.TabIndex = 1;
+            this.services_list.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.services_list_ItemCheck);
             // 
             // groupBox2
             // 
