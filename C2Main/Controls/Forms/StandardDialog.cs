@@ -73,6 +73,11 @@ namespace C2.Controls
             get { return BtnOK; }
         }
 
+        protected Button CancelBtn
+        {
+            get { return BtnCancel; }
+        }
+
         protected Button ApplyButton
         {
             get { return BtnApply; }
