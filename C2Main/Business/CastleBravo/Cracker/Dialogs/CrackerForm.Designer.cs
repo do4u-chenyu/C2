@@ -272,11 +272,12 @@
             // services_list
             // 
             this.services_list.BackColor = System.Drawing.SystemColors.Window;
+            this.services_list.CheckOnClick = true;
             this.services_list.Dock = System.Windows.Forms.DockStyle.Fill;
             this.services_list.FormattingEnabled = true;
             this.services_list.Location = new System.Drawing.Point(0, 0);
             this.services_list.Name = "services_list";
-            this.services_list.Size = new System.Drawing.Size(95, 408);
+            this.services_list.Size = new System.Drawing.Size(95, 315);
             this.services_list.TabIndex = 1;
             // 
             // groupBox2
@@ -284,9 +285,9 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.txt_log);
-            this.groupBox2.Location = new System.Drawing.Point(8, 446);
+            this.groupBox2.Location = new System.Drawing.Point(8, 348);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(854, 129);
+            this.groupBox2.Size = new System.Drawing.Size(854, 227);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -296,7 +297,7 @@
             this.txt_log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txt_log.Location = new System.Drawing.Point(3, 17);
             this.txt_log.Name = "txt_log";
-            this.txt_log.Size = new System.Drawing.Size(848, 109);
+            this.txt_log.Size = new System.Drawing.Size(848, 207);
             this.txt_log.TabIndex = 1;
             this.txt_log.Text = "";
             // 
@@ -319,7 +320,7 @@
             this.list_lvw.HideSelection = false;
             this.list_lvw.Location = new System.Drawing.Point(3, 17);
             this.list_lvw.Name = "list_lvw";
-            this.list_lvw.Size = new System.Drawing.Size(735, 284);
+            this.list_lvw.Size = new System.Drawing.Size(735, 191);
             this.list_lvw.TabIndex = 0;
             this.list_lvw.UseCompatibleStateImageBehavior = false;
             this.list_lvw.View = System.Windows.Forms.View.Details;
@@ -542,7 +543,7 @@
             this.groupBox3.Controls.Add(this.splitContainer1);
             this.groupBox3.Location = new System.Drawing.Point(8, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(854, 428);
+            this.groupBox3.Size = new System.Drawing.Size(854, 335);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
@@ -562,7 +563,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox5);
             this.splitContainer1.Panel2.Controls.Add(this.rdp_panle);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(848, 408);
+            this.splitContainer1.Size = new System.Drawing.Size(848, 315);
             this.splitContainer1.SplitterDistance = 95;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -574,7 +575,7 @@
             this.groupBox5.Controls.Add(this.list_lvw);
             this.groupBox5.Location = new System.Drawing.Point(5, 102);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(741, 304);
+            this.groupBox5.Size = new System.Drawing.Size(741, 211);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "弱口令列表";
