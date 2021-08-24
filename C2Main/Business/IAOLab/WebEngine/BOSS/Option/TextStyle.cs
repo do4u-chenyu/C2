@@ -1,4 +1,6 @@
-﻿using C2.IAOLab.WebEngine.Boss.Option.BaseOption;
+﻿using C2.Business.IAOLab.WebEngine.Boss.Option.BaseOption;
+using C2.IAOLab.WebEngine.Boss.Option.BaseOption;
+using C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,8 @@ namespace C2.IAOLab.WebEngine.Boss.Option
 
         public string color { get { return _color; } set { FlagDic["color"] = true; _color = value; } }
         public string align { get { return _align; } set { FlagDic["align"] = true; _align = value; } }
+        public Emphasis emphasis { get { return _emphasis; } set { FlagDic["emphasis"] = true; _emphasis = value; } }
+        public Normal normal { get { return _normal; } set { FlagDic["normal"] = true; _normal = value; } }
         public FontStyle fontStyle { get { return _fontStyle; } set { FlagDic["fontStyle"] = true; _fontStyle = value; } }
         public FontWeight fontWeight { get { return _fontWeight; } set { FlagDic["fontWeight"] = true; _fontWeight = value; } }
         public FontFamily fontFamily { get { return _fontFamily; } set { FlagDic["fontFamily"] = true; _fontFamily = value; } }
@@ -35,6 +39,8 @@ namespace C2.IAOLab.WebEngine.Boss.Option
 
         string _align;
         string _color;
+        Emphasis _emphasis;
+        Normal _normal;
         FontStyle _fontStyle;
         FontWeight _fontWeight;
         FontFamily _fontFamily;

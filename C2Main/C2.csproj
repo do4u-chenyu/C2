@@ -281,8 +281,10 @@
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\Organization.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\WordCloud.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\GenVisualHtml.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\Normal.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesTree.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesWordCloud.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </Compile>
@@ -2458,6 +2460,9 @@
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\DrawingManager_min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\JS\echarts-wordcloud.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
