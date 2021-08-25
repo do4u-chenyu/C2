@@ -73,6 +73,7 @@ namespace C2.Controls.Left
             }
 
         }
+        //test
         #region 定义弹窗
         //private Form BaseStationForm(string formType)
         //{
