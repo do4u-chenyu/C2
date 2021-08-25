@@ -70,9 +70,11 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
                     break;
+               // xuxiao
             }
 
         }
+        //test
         #region 定义弹窗
         //private Form BaseStationForm(string formType)
         //{

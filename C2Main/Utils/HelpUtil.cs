@@ -67,6 +67,7 @@ namespace C2.Utils
 
         public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱口令爆破";
         public static string PwdGeneratorHelpInfo = "社工密码生成器";
+        public static string WebScanHelpInfo = "Web目录扫描";
 
         public static string FileNotFoundHelpInfo = "文件不存在";
         public static string InvalidScaleHelpInfo = "输入的缩放比有误。缩放比仅支持大于0且小于20的整数";

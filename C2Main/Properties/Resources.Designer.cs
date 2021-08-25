@@ -2661,6 +2661,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap WebScan {
+            get {
+                object obj = ResourceManager.GetObject("WebScan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap Wifi {
             get {
                 object obj = ResourceManager.GetObject("Wifi", resourceCulture);
