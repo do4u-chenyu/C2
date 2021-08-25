@@ -34,8 +34,10 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             InitializeComponent();
             WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html\\Visual.html");
             Options = new Dictionary<string, string[]>();
+            this.styleComboBox.SelectedIndex = 0;
             this.chartType.SelectedIndex = 0;
             chartTypeList = new List<string> { "Organization", "WordCloud" };
+            
         }
 
         public SettingChartDialog(Dictionary<string, string[]> options, WebBrowser browser) : this()
@@ -62,7 +64,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             if (this.chartType.Text == "组织架构图")
                 return this.userCombox.SelectedIndex == -1 || this.superiorCombox.SelectedIndex == -1;
             else if (this.chartType.Text == "词云")
-                return this.keyComboBox.SelectedIndex == -1 || this.countComboBox.SelectedIndex == -1;
+                return this.keyComboBox.SelectedIndex == -1 || this.countComboBox.SelectedIndex == -1 || this.styleComboBox.SelectedIndex == -1;
 
             //TODO 其他类别
             return true;
@@ -125,7 +127,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             //配置参数信息
             List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
             Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
-            Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString() };
+            Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString(), this.styleComboBox.SelectedIndex.ToString() };
         }
 
         private string[] TransListStringToInt(List<string> t, List<int> listInt)
@@ -177,7 +179,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             //词云下拉列表更新
             foreach (Control ct in this.panel2.Controls)
             {
-                if (ct is ComboBox)
+                if (ct is ComboBox && ct.Name != "styleComboBox")
                 {
                     (ct as ComboBox).Text = string.Empty;
                     (ct as ComboBox).Items.Clear();
@@ -195,13 +197,13 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             {
                 this.panel1.Show();
                 this.panel2.Hide();
-                this.pictureBox1.Image = C2.Properties.Resources.社交关系图样例;
+                this.pictureBox1.Image = C2.Properties.Resources.组织架构图样例;
             }
             else if(this.chartType.SelectedIndex == 1)
             {
                 this.panel1.Hide();
                 this.panel2.Show();
-                this.pictureBox1.Image = C2.Properties.Resources.词云样例;
+                this.pictureBox1.Image = C2.Properties.Resources.词云样例1;
             }
                 
         }
@@ -231,5 +233,25 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         }
         #endregion
+
+        private void styleComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.styleComboBox.SelectedIndex == 0)
+            {
+                this.pictureBox1.Image = C2.Properties.Resources.词云样例1;
+            }
+            if (this.styleComboBox.SelectedIndex == 1)
+            {
+                this.pictureBox1.Image = C2.Properties.Resources.词云样例2;
+            }
+            if (this.styleComboBox.SelectedIndex == 2)
+            {
+                this.pictureBox1.Image = C2.Properties.Resources.词云样例3;
+            }
+            else if (this.styleComboBox.SelectedIndex == 3)
+            {
+                this.pictureBox1.Image = C2.Properties.Resources.词云样例4;
+            }
+        }
     }
 }

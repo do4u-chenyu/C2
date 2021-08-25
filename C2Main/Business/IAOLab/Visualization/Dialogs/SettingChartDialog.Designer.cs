@@ -41,6 +41,8 @@
             this.dataSourcePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.styleComboBox = new System.Windows.Forms.ComboBox();
+            this.styleLabel = new System.Windows.Forms.Label();
             this.countComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.keyComboBox = new System.Windows.Forms.ComboBox();
@@ -91,11 +93,11 @@
             // userCombox
             // 
             this.userCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.userCombox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.userCombox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.userCombox.FormattingEnabled = true;
             this.userCombox.Location = new System.Drawing.Point(71, 18);
             this.userCombox.Name = "userCombox";
-            this.userCombox.Size = new System.Drawing.Size(242, 24);
+            this.userCombox.Size = new System.Drawing.Size(242, 25);
             this.userCombox.TabIndex = 10010;
             // 
             // label16
@@ -192,6 +194,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.styleComboBox);
+            this.panel2.Controls.Add(this.styleLabel);
             this.panel2.Controls.Add(this.countComboBox);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.keyComboBox);
@@ -203,14 +207,41 @@
             this.panel2.TabIndex = 10092;
             this.panel2.Visible = false;
             // 
+            // styleComboBox
+            // 
+            this.styleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.styleComboBox.DropDownWidth = 242;
+            this.styleComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.styleComboBox.FormattingEnabled = true;
+            this.styleComboBox.Items.AddRange(new object[] {
+            "样式1",
+            "样式2",
+            "样式3",
+            "样式4"});
+            this.styleComboBox.Location = new System.Drawing.Point(76, 187);
+            this.styleComboBox.Name = "styleComboBox";
+            this.styleComboBox.Size = new System.Drawing.Size(242, 25);
+            this.styleComboBox.TabIndex = 10064;
+            this.styleComboBox.SelectedIndexChanged += new System.EventHandler(this.styleComboBox_SelectedIndexChanged);
+            // 
+            // styleLabel
+            // 
+            this.styleLabel.AutoSize = true;
+            this.styleLabel.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.styleLabel.Location = new System.Drawing.Point(4, 187);
+            this.styleLabel.Name = "styleLabel";
+            this.styleLabel.Size = new System.Drawing.Size(37, 20);
+            this.styleLabel.TabIndex = 10063;
+            this.styleLabel.Text = "样式";
+            // 
             // countComboBox
             // 
             this.countComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.countComboBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.countComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.countComboBox.FormattingEnabled = true;
             this.countComboBox.Location = new System.Drawing.Point(76, 114);
             this.countComboBox.Name = "countComboBox";
-            this.countComboBox.Size = new System.Drawing.Size(242, 24);
+            this.countComboBox.Size = new System.Drawing.Size(242, 25);
             this.countComboBox.TabIndex = 10062;
             // 
             // label8
@@ -226,11 +257,11 @@
             // keyComboBox
             // 
             this.keyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.keyComboBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.keyComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.keyComboBox.FormattingEnabled = true;
             this.keyComboBox.Location = new System.Drawing.Point(76, 31);
             this.keyComboBox.Name = "keyComboBox";
-            this.keyComboBox.Size = new System.Drawing.Size(242, 24);
+            this.keyComboBox.Size = new System.Drawing.Size(242, 25);
             this.keyComboBox.TabIndex = 10060;
             // 
             // label7
@@ -301,11 +332,11 @@
             // superiorCombox
             // 
             this.superiorCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.superiorCombox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.superiorCombox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.superiorCombox.FormattingEnabled = true;
             this.superiorCombox.Location = new System.Drawing.Point(71, 84);
             this.superiorCombox.Name = "superiorCombox";
-            this.superiorCombox.Size = new System.Drawing.Size(242, 24);
+            this.superiorCombox.Size = new System.Drawing.Size(242, 25);
             this.superiorCombox.TabIndex = 10059;
             // 
             // SettingChartDialog
@@ -372,5 +403,7 @@
         private System.Windows.Forms.ComboBox keyComboBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox styleComboBox;
+        private System.Windows.Forms.Label styleLabel;
     }
 }

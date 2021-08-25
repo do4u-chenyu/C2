@@ -173,12 +173,13 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                             else if (colList[j][i].Length <= infoLength)
                             {
                                 secondList = secondList + colName[j] + ":" + colList[j][i];
+                                infoLength = colList[j][i].Length + colName[j].Length;
                             }
                             else if (colList[j][i].Length > infoLength)
                             {
                                 string infoValue = colList[j][i].Substring(0, infoLength) + "...";
                                 secondList = secondList + "  " + colName[j] + ":" + infoValue;
-                                infoLength = infoValue.Length + colName[j].Length - 2;
+                                infoLength = infoValue.Length + colName[j].Length - 1;
                             }
                             if (j < chartOptions.Length - 1)
                             {
