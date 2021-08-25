@@ -141,7 +141,7 @@ namespace C2.Controls.C1.Left
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
                         break;
                     case "WebScan":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebScanHelpInfo);
                         break;
                 }
