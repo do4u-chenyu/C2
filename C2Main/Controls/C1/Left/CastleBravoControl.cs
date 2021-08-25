@@ -186,9 +186,9 @@ namespace C2.Controls.C1.Left
                     case "PwdGenerator":
                         new PwdGeneratorForm().ShowDialog();
                         break;
-                    case "WebScan":
-                        new WebScanForm().ShowDialog();
-                        break;
+                    //case "WebScan":
+                    //    new WebScanForm().ShowDialog();
+                    //    break;
                 }
             }
         }

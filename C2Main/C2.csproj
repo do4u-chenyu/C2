@@ -257,6 +257,12 @@
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebScan\WebScanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
+      <DependentUpon>WebScanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HIBU\OCR\OCRForm.cs">
@@ -1776,6 +1782,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.resx">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
+      <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
       <DependentUpon>OCRForm.cs</DependentUpon>
