@@ -42,10 +42,9 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         {
             Options = options;
             webBrowser = browser;
-
-            LoadOption();
         }
 
+        #region 生成图表
         protected override bool OnOKButtonClick()
         {
             if (OptionsHaveBlank())
@@ -66,7 +65,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 return this.keyComboBox.SelectedIndex == -1 || this.countComboBox.SelectedIndex == -1;
 
             //TODO 其他类别
-            return true ;
+            return true;
         }
 
         private void TranDataToHtml()
@@ -74,72 +73,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             DataTable dataTable = GenDataTable();
             SavaOption();
             GenVisualHtml.GetInstance().TransDataToHtml(dataTable, Options);
-        }
-
-
-        private void SavaOption()
-        {
-            Options["DataSourcePath"] = new string[] { this.dataSourcePath.Text };
-            Options["ChartType"] = new string[] { chartTypeList[this.chartType.SelectedIndex] };
-            //配置参数信息
-            List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
-            Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
-            Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString() };
-        }
-
-        private string[] TransListStringToInt(List<string> t, List<int> listInt)
-        {
-            listInt.ForEach(c => t.Add(c.ToString()));
-            return t.ToArray();
-        }
-
-        private void BrowserButton_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
-            OpenFileDialog1.Filter = "文本文档 | *.txt;*.bcp";
-            if (OpenFileDialog1.ShowDialog() != DialogResult.OK)
-                return;
-
-            this.dataSourcePath.Text = OpenFileDialog1.FileName;
-            dataFullPath = OpenFileDialog1.FileName;
-            //同时需要把字段读出来data
-            this.bcpInfo = new BcpInfo(dataFullPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
-
-            ChangeControlContent();
-            Options = new Dictionary<string, string[]>();                
-        }
-
-        private void ChangeControlContent()
-        {
-            //组织架构图下拉列表更新
-            foreach (Control ct in this.panel1.Controls)
-            {
-                if (ct is ComboBox)
-                {
-                    (ct as ComboBox).Text = string.Empty;
-                    (ct as ComboBox).Items.Clear();
-                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-                }
-                else if (ct is ComCheckBoxList)
-                {
-                    (ct as ComCheckBoxList).ClearText();
-                    (ct as ComCheckBoxList).Items.Clear();
-                    (ct as ComCheckBoxList).Items.AddRange(bcpInfo.ColumnArray);
-                }
-            }
-
-            //词云下拉列表更新
-            foreach (Control ct in this.panel2.Controls)
-            {
-                if (ct is ComboBox)
-                {
-                    (ct as ComboBox).Text = string.Empty;
-                    (ct as ComboBox).Items.Clear();
-                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
-                }
-            }
-
-
         }
 
         private DataTable GenDataTable()
@@ -185,35 +118,76 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             return dataTable;
         }
 
-        private void LoadOption()
+        private void SavaOption()
         {
-            LoadData();
-            LoadChartOptions();
+            Options["DataSourcePath"] = new string[] { this.dataSourcePath.Text };
+            Options["ChartType"] = new string[] { chartTypeList[this.chartType.SelectedIndex] };
+            //配置参数信息
+            List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
+            Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
+            Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString() };
         }
 
-        private void LoadData()
+        private string[] TransListStringToInt(List<string> t, List<int> listInt)
         {
-            //初始化大屏类型
-            if (Options.ContainsKey("ChartType") && Options["ChartType"].Length > 0)
-                chartType.SelectedIndex = int.Parse(Options["ChartType"][0]);
+            listInt.ForEach(c => t.Add(c.ToString()));
+            return t.ToArray();
+        }
 
-            //初始化数据源
-            if ( Options.ContainsKey("DataSourcePath") && Options["DataSourcePath"].Length > 0 && File.Exists(Options["DataSourcePath"][0]))
-                dataSourcePath.Text = Options["DataSourcePath"][0];
-            else
+        #endregion
+
+        #region 事件
+        private void BrowserButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog
             {
-                dataSourcePath.Text = string.Empty;
-                return;//没有数据，后面全部清空；有数据，再考虑初始化其他的
+                Filter = "文本文档 | *.txt;*.bcp"
+            };
+            if (OpenFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            this.dataSourcePath.Text = OpenFileDialog1.FileName;
+            dataFullPath = OpenFileDialog1.FileName;
+            //同时需要把字段读出来data
+            this.bcpInfo = new BcpInfo(dataFullPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
+
+            ChangeControlContent();
+            Options = new Dictionary<string, string[]>();
+        }
+
+        private void ChangeControlContent()
+        {
+            //组织架构图下拉列表更新
+            foreach (Control ct in this.panel1.Controls)
+            {
+                if (ct is ComboBox)
+                {
+                    (ct as ComboBox).Text = string.Empty;
+                    (ct as ComboBox).Items.Clear();
+                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+                }
+                else if (ct is ComCheckBoxList)
+                {
+                    (ct as ComCheckBoxList).ClearText();
+                    (ct as ComCheckBoxList).Items.Clear();
+                    (ct as ComCheckBoxList).Items.AddRange(bcpInfo.ColumnArray);
+                }
             }
 
-            //初始化参数
+            //词云下拉列表更新
+            foreach (Control ct in this.panel2.Controls)
+            {
+                if (ct is ComboBox)
+                {
+                    (ct as ComboBox).Text = string.Empty;
+                    (ct as ComboBox).Items.Clear();
+                    (ct as ComboBox).Items.AddRange(bcpInfo.ColumnArray);
+                }
+            }
         }
 
-        private void LoadChartOptions()
-        {
-            //加载数据源、类型加载图表配置
 
-        }
+
 
         private void ChartType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -256,5 +230,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             dialog.ShowDialog();
 
         }
+        #endregion
     }
 }
