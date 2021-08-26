@@ -47,8 +47,8 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        ///   重写当前线程的 CurrentUICulture 属性
+        ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -937,7 +937,8 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;Show Line Arrow&quot;&gt;Show Line Arrow Cap&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Add&quot;&gt;+&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Subtract&quot;&gt;-&lt;/item&gt;
-        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/ [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/item&gt;
+        ///		&lt;item na [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string en_US {
             get {
@@ -1273,7 +1274,8 @@ namespace C2.Properties {
         ///            }
         ///		    .clsTextBox 
         ///		    {
-        ///		       [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		        width:100%;
+        ///		  [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string html_content {
             get {
@@ -2654,6 +2656,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap warn {
             get {
                 object obj = ResourceManager.GetObject("warn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap WebScan {
+            get {
+                object obj = ResourceManager.GetObject("WebScan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

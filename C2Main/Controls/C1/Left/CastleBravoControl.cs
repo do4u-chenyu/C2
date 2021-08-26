@@ -141,7 +141,7 @@ namespace C2.Controls.C1.Left
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
                         break;
                     case "WebScan":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebScanHelpInfo);
                         break;
                 }
@@ -186,9 +186,9 @@ namespace C2.Controls.C1.Left
                     case "PwdGenerator":
                         new PwdGeneratorForm().ShowDialog();
                         break;
-                    //case "WebScan":
-                    //    new WebScanForm().ShowDialog();
-                    //    break;
+                    case "WebScan":
+                        new WebScanForm().ShowDialog();
+                        break;
                 }
             }
         }
