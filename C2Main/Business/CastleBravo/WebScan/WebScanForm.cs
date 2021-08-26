@@ -159,7 +159,7 @@ namespace C2.Business.CastleBravo.WebScan
         {
             if (!CheckStartOption())
                 return;
-            this.startBtn.Enabled = false;
+            //this.startBtn.Enabled = false;
 
             this.listView1.Items.Clear();
             this.logTextBox.Text = string.Empty;
@@ -357,7 +357,7 @@ namespace C2.Business.CastleBravo.WebScan
         {
             this.Invoke(new VoidDelegate(this.scanTimer.Stop));
             this.Invoke(new update(UpdateStatus));
-            this.startBtn.Enabled = true;
+            //this.startBtn.Enabled = true;
             LogMessage("扫描结束");
         }
 
