@@ -48,13 +48,13 @@ namespace C2.Business.Cracker.Dialogs
         {
             try
             {
-                this.servicesName = "SSH:FTP:RDP:MySQL".Split(':');
+                this.servicesName = "SSH:FTP:Windows:MySQL".Split(':');
                 this.servicesPort = "22:21:3389:3306".Split(':');
             }
             catch (Exception e)
             {
 
-                LogWarning("加载检查服务配置发生异常！" + e.Message);
+                LogWarning("加载检查服务配置发生异常" + e.Message);
             }
             services.Clear();
             for (int i = 0; i < servicesName.Length; i++)
@@ -211,19 +211,19 @@ namespace C2.Business.Cracker.Dialogs
                         list_cracker.Add(ip + ":" + port + ":" + serviceName);
                     }
                     tc.Close();
-                    LogMessage(ip + " port " + port + " 开放！");
+                    LogMessage(ip + " port " + port + " 开放");
                     //FileTool.AppendLogToFile(Directory.GetCurrentDirectory() + "/logs/portscan-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", ip + ":" + port + ":" + serviceName);
                 }
                 else
                 {
 
-                    LogWarning(ip + " port " + port + " 连接超时！");
+                    LogWarning(ip + " port " + port + " 连接超时");
                 }
             }
             catch (SocketException e)
             {
 
-                LogWarning(ip + " port " + port + " 关闭！" + e.Message);
+                LogWarning(ip + " port " + port + " 关闭" + e.Message);
             }
             finally
             {
@@ -259,7 +259,7 @@ namespace C2.Business.Cracker.Dialogs
                     //跳过已经检查的列表，提高效率
                     if (list_ip_user_break.Contains(ip + port + username))
                     {
-                        LogWarning(ip + "-" + port + "-" + username + "跳过检查!");
+                        LogWarning(ip + "-" + port + "-" + username + "跳过检查");
                         Interlocked.Increment(ref allCrackCount);
                         return;
                     }
@@ -290,11 +290,11 @@ namespace C2.Business.Cracker.Dialogs
                             Stopwatch sw = new Stopwatch();
                             sw.Start();
 
-                            if (serviceName.Equals("RDP"))
+                            if (serviceName.Equals("Windows"))
                             {
                                 server.ip = ip;
                                 server.timeout = timeOut;
-                                server.serverName = "RDP";
+                                server.serverName = "Windows";
                                 server.port = port;
                                 server.username = username;
                                 server.password = password;
@@ -391,7 +391,7 @@ namespace C2.Business.Cracker.Dialogs
                     }
                     else
                     {
-                        LogWarning(ip + "-----" + serviceName + "----" + username + "----" + password + "----失败！");
+                        LogWarning(ip + "-----" + serviceName + "----" + username + "----" + password + "----失败");
                     }
 
                 }
@@ -414,7 +414,7 @@ namespace C2.Business.Cracker.Dialogs
             lvi.SubItems.Add(username);
             lvi.SubItems.Add(password);
             lvi.SubItems.Add(banner);
-            lvi.SubItems.Add(userTime + "");
+            lvi.SubItems.Add(userTime + String.Empty);
             this.list_lvw.Invoke(new DelegateAddItem(AddItem), lvi);
         }
 
@@ -481,7 +481,7 @@ namespace C2.Business.Cracker.Dialogs
                 stp.WaitForIdle();
                 if (isScanport)
                 {
-                    LogMessage("验证端口是否开放完成!");
+                    LogMessage("验证端口是否开放完成");
                 }
                 int c = stp.CurrentWorkItemsCount;
                 LogMessage("开始检查" + this.list_cracker.Count + "个目标," + services_list.CheckedItems.Count + "个服务.......");
@@ -587,7 +587,7 @@ namespace C2.Business.Cracker.Dialogs
                 this.btn_cracker.Enabled = true;
                 this.services_list.Enabled = true;
                 this.bt_timer.Stop();
-                LogWarning("全部线程已停止！");
+                LogWarning("全部线程已停止");
             }
         }
         private Boolean InitDic()
@@ -595,12 +595,12 @@ namespace C2.Business.Cracker.Dialogs
 
             if ("".Equals(this.txt_target.Text))
             {
-                MessageBox.Show("请设置需要检查的目标的IP地址或域名！");
+                MessageBox.Show("请设置需要检查的目标的IP地址");
                 return false;
             }
             else if (this.services_list.CheckedItems.Count <= 0)
             {
-                MessageBox.Show("请选择需要检查服务！");
+                MessageBox.Show("请选择需要检查服务");
                 return false;
             }
             else
@@ -784,8 +784,8 @@ namespace C2.Business.Cracker.Dialogs
             }
             catch (Exception e)
             {
-                FileTool.log(server.ip + ":" + server.port + "-RDP操作异常-" + e.Message);
-                LogWarning(server.ip + ":" + server.port + "-RDP操作异常-" + e.Message);
+                FileTool.log(server.ip + ":" + server.port + "-RDP(Windows)操作异常-" + e.Message);
+                LogWarning(server.ip + ":" + server.port + "-RDP(Windows)操作异常-" + e.Message);
                 server.isDisConnected = true;
                 server.isEndMRE.Set();
             }
@@ -809,8 +809,8 @@ namespace C2.Business.Cracker.Dialogs
             }
             catch (Exception e)
             {
-                FileTool.log("RDP资源清理异常-" + e.Message);
-                LogWarning("RDP资源清理异常-" + e.Message);
+                FileTool.log("RDP(Windows)资源清理异常-" + e.Message);
+                LogWarning("RDP(Windows)资源清理异常-" + e.Message);
             }
         }
 
@@ -826,7 +826,7 @@ namespace C2.Business.Cracker.Dialogs
             }
             catch (Exception e)
             {
-                FileTool.log("创建RDP控件发生错误：" + e.Message);
+                FileTool.log("创建RDP(Windows)控件发生错误：" + e.Message);
             }
             return server;
         }
@@ -863,8 +863,8 @@ namespace C2.Business.Cracker.Dialogs
 
             foreach (string key in services.Keys)
             {
-                this.services_list.Items.Add(key);
-                this.services_list.SetItemChecked(this.services_list.Items.Count-1, true);//默认协议全选
+                this.services_list.Items.Add(key, false);
+                this.services_list.SetItemChecked(0, true);  // 默认选择第一个, 放循环里面安全简洁
             }
         }
 
@@ -923,12 +923,12 @@ namespace C2.Business.Cracker.Dialogs
                         sw.WriteLine(sb.ToString());
                     }
                     sw.Close();
-                    MessageBox.Show("导出完成！");
+                    MessageBox.Show("导出完成");
                 }
                 catch (Exception e)
                 {
-                    FileTool.log("导出数据发生异常！" + e.Message);
-                    MessageBox.Show("导出数据发生异常！");
+                    FileTool.log("导出数据发生异常" + e.Message);
+                    MessageBox.Show("导出数据发生异常");
                 }
             }
         }
@@ -963,7 +963,7 @@ namespace C2.Business.Cracker.Dialogs
                 sb.Append(this.list_lvw.SelectedItems[0].SubItems[i].Text);
             }
             Clipboard.SetText(sb.Remove(0, 4).ToString());
-            MessageBox.Show("复制成功！");
+            MessageBox.Show("复制成功");
         }
         private void Tsmi_clearItems_Click(object sender, EventArgs e)
         {
@@ -1023,6 +1023,16 @@ namespace C2.Business.Cracker.Dialogs
                 ProcessUtil.ProcessOpen(dictPath);
             }
                 
+        }
+
+        private void services_list_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.CurrentValue == CheckState.Checked) return;//取消选中就不用进行以下操作
+            for (int i = 0; i < ((CheckedListBox)sender).Items.Count; i++)
+            {
+                ((CheckedListBox)sender).SetItemChecked(i, false);//将所有选项设为不选中
+            }
+            e.NewValue = CheckState.Checked;//刷新
         }
     }
 }

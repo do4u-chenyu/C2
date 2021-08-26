@@ -333,6 +333,7 @@ namespace C2
                     HelpUtil.ShowMessageBox("导入成功");
                 LoadDataSource();
                 LoadIAOLaboratory();
+                LoadHIBU();
             }
         }
         
@@ -406,6 +407,14 @@ namespace C2
 
                 this.iaoLabControl.GenIAOButton(name, desc, icon).ShowDialogDelegate += delegate () { plugin.ShowFormDialog(); };
             }
+        }
+
+        private void LoadHIBU()
+        {
+            // 加载固定工具
+            string[] HIArr = { "OCR" };
+            foreach (string name in HIArr)
+                this.HIBUControl.GenIAOButton(name.Trim());
         }
 
         private void ShowLeftFold()

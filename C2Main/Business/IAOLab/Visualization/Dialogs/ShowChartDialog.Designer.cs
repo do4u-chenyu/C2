@@ -32,7 +32,6 @@
             this.settingButton = new System.Windows.Forms.ToolStripButton();
             this.picSaveButton = new System.Windows.Forms.ToolStripButton();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.saveBtn = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,32 +78,20 @@
             this.webBrowser1.Size = new System.Drawing.Size(1113, 552);
             this.webBrowser1.TabIndex = 10004;
             // 
-            // saveBtn
-            // 
-            this.saveBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.saveBtn.Location = new System.Drawing.Point(854, 592);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 27);
-            this.saveBtn.TabIndex = 10077;
-            this.saveBtn.Text = "保存";
-            this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
             // ShowChartDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1113, 631);
-            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ShowChartDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据可视化";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.ShowChartDialog_Shown);
             this.Controls.SetChildIndex(this.toolStrip1, 0);
             this.Controls.SetChildIndex(this.webBrowser1, 0);
-            this.Controls.SetChildIndex(this.saveBtn, 0);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -117,6 +104,5 @@
         private System.Windows.Forms.ToolStripButton settingButton;
         private System.Windows.Forms.ToolStripButton picSaveButton;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Button saveBtn;
     }
 }

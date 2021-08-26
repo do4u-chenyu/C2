@@ -450,5 +450,6 @@
 	<item name="BigAPK">APK大眼睛</item>
 	<item name="Cracker">弱口令扫描</item>
 	<item name="PwdGenerator">社工生成器</item>
+	<item name="WebScan">目录扫描</item>
 </words>
 </dictionary>

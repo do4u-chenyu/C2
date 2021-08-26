@@ -1,4 +1,5 @@
 ﻿using C2.Business.IAOLab.Visualization.Dialogs;
+using C2.Business.HIBU.OCR;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -65,9 +66,15 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
                     break;
+                case "OCR":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
+                    break;
+               // xuxiao
             }
 
         }
+        //test
         #region 定义弹窗
         //private Form BaseStationForm(string formType)
         //{
@@ -140,6 +147,9 @@ namespace C2.Controls.Left
                     break;
                 case "BigAPK":
                     BigAPKForm().ShowDialog();
+                    break;
+                case "OCR":
+                    new OCRForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();

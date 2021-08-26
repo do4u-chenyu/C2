@@ -26,6 +26,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         public ShowChartDialog()
         {
             InitializeComponent();
+            this.OKButton.Text = "保存";
             WebUrl = string.Empty;
             ChartOptions = new Dictionary<string, string[]>();
             picPath = Path.Combine(Global.TempDirectory, "visual.png");
@@ -78,16 +79,17 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             }
         }
 
-        private void SaveBtn_Click(object sender, EventArgs e)
-        {
-            SavePic();
-        }
-
         private void ShowChartDialog_Shown(object sender, EventArgs e)
         {
             WebBrowserConfig.SetWebBrowserFeatures(11);//TODO 暂定11，后面需要检测
             webBrowser1.Navigate(WebUrl);
             OpenShowChartDialog();
+        }
+
+        protected override bool OnOKButtonClick()
+        {
+            SavePic();
+            return false;
         }
     }
 }

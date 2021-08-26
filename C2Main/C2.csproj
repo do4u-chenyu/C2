@@ -249,14 +249,32 @@
     <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemsQueue.cs" />
     <Compile Include="Business\CastleBravo\Cracker\Tools\FileTool.cs" />
     <Compile Include="Business\CastleBravo\Cracker\Tools\Tool.cs" />
+    <Compile Include="Business\CastleBravo\PwdGenerator\PwdResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\PwdGenerator\PwdResultForm.Designer.cs">
+      <DependentUpon>PwdResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebScan\WebScanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
+      <DependentUpon>WebScanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
+    <Compile Include="Business\HIBU\OCR\OCRForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\OCR\OCRForm.Designer.cs">
+      <DependentUpon>OCRForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HTTP\HttpHandler.cs" />
     <Compile Include="Business\HTTP\Response.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
@@ -285,8 +303,10 @@
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\Organization.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\WordCloud.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\GenVisualHtml.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\Normal.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesTree.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesWordCloud.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Dialogs\SelectBossDialog.Designer.cs">
       <DependentUpon>SelectBossDialog.cs</DependentUpon>
     </Compile>
@@ -1761,6 +1781,18 @@
     <EmbeddedResource Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.resx">
       <DependentUpon>CrackerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdResultForm.resx">
+      <DependentUpon>PwdResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.resx">
+      <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
+      <DependentUpon>WebScanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
+      <DependentUpon>OCRForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
       <DependentUpon>SettingChartDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -2463,6 +2495,9 @@
     <Content Include="Business\IAOLab\WebEngine\JS\DrawingManager_min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\JS\echarts-wordcloud.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\JS\echarts.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2514,10 +2549,10 @@
     <Content Include="Resources\CrackerDict\dic_password_mysql.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CrackerDict\dic_password_rdp.txt">
+    <Content Include="Resources\CrackerDict\dic_password_ssh.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CrackerDict\dic_password_ssh.txt">
+    <Content Include="Resources\CrackerDict\dic_password_windows.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CrackerDict\dic_username_ftp.txt">
@@ -2526,10 +2561,10 @@
     <Content Include="Resources\CrackerDict\dic_username_mysql.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CrackerDict\dic_username_rdp.txt">
+    <Content Include="Resources\CrackerDict\dic_username_ssh.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CrackerDict\dic_username_ssh.txt">
+    <Content Include="Resources\CrackerDict\dic_username_windows.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\flow_back.png" />
@@ -2672,6 +2707,7 @@
     <None Include="Resources\Images\note_small.png" />
     <None Include="Resources\Images\notes.png" />
     <None Include="Resources\Images\objects.png" />
+    <None Include="Resources\Images\OCR.png" />
     <Content Include="Resources\Images\open.png" />
     <None Include="Resources\Images\open_24.png" />
     <None Include="Resources\Images\outdent.png" />
@@ -2775,6 +2811,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\Images\WebScan.png" />
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -3546,6 +3583,11 @@
     </EmbeddedResource>
     <None Include="Resources\词云样例.png" />
     <None Include="Resources\社交关系图样例.png" />
+    <None Include="Resources\词云样例1.png" />
+    <None Include="Resources\词云样例2.png" />
+    <None Include="Resources\词云样例3.png" />
+    <None Include="Resources\词云样例4.png" />
+    <None Include="Resources\组织架构图样例.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

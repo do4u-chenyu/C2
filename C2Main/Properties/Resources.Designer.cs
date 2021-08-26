@@ -1786,6 +1786,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap OCR {
+            get {
+                object obj = ResourceManager.GetObject("OCR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap opDesign {
             get {
                 object obj = ResourceManager.GetObject("opDesign", resourceCulture);
@@ -2653,6 +2663,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap WebScan {
+            get {
+                object obj = ResourceManager.GetObject("WebScan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap Wifi {
             get {
                 object obj = ResourceManager.GetObject("Wifi", resourceCulture);
@@ -3052,6 +3072,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap 组织架构图样例 {
+            get {
+                object obj = ResourceManager.GetObject("组织架构图样例", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap 结果 {
             get {
                 object obj = ResourceManager.GetObject("结果", resourceCulture);
@@ -3065,6 +3095,46 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap 词云样例 {
             get {
                 object obj = ResourceManager.GetObject("词云样例", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 词云样例1 {
+            get {
+                object obj = ResourceManager.GetObject("词云样例1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 词云样例2 {
+            get {
+                object obj = ResourceManager.GetObject("词云样例2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 词云样例3 {
+            get {
+                object obj = ResourceManager.GetObject("词云样例3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 词云样例4 {
+            get {
+                object obj = ResourceManager.GetObject("词云样例4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
