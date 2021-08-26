@@ -96,7 +96,7 @@ namespace C2.Controls.Left
 
         }
 
-        private void AddMindMapButton_Click(object sender, System.EventArgs e)
+        public void AddMindMapButton_Click(object sender, System.EventArgs e)
         {     
             ZipDialog zipDialog = new ImportZipDialog();
             if (zipDialog.ShowDialog() == DialogResult.OK)

@@ -844,7 +844,6 @@ namespace C2
             this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion

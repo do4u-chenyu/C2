@@ -1,17 +1,36 @@
-﻿namespace C2Shell
+﻿using C2.Utils;
+using C2.Core;
+namespace C2Shell
 {
     class Program
     {
-        static void Main()
+        static void Main(params string[] args)
         {
-            SoftwareUpdate updateInstance = new SoftwareUpdate();
-            if (updateInstance.IsNeedUpdate())
+            if (args.Length > 0)
             {
-                if (!updateInstance.ExecuteUpdate())
-                    updateInstance.Rollback();
-                updateInstance.Clear();
+                string path = string.Empty;
+                for (int i = 0; i < args.Length; i++)
+                    path += args[i] + string.Empty;
+                path = path.TrimEnd(OpUtil.Blank);
+                SoftwareUpdate updateInstance = new SoftwareUpdate();
+                if (updateInstance.IsNeedUpdate())
+                {
+                    if (!updateInstance.ExecuteUpdate())
+                        updateInstance.Rollback();
+                    updateInstance.Clear();
+                }
+                updateInstance.StartCoreProcess(path);
             }
-            updateInstance.StartCoreProcess();    
-        }   
+            else {
+                SoftwareUpdate updateInstance = new SoftwareUpdate();
+                if (updateInstance.IsNeedUpdate())
+                {
+                    if (!updateInstance.ExecuteUpdate())
+                        updateInstance.Rollback();
+                    updateInstance.Clear();
+                }
+                updateInstance.StartCoreProcess();
+            }
+        }
     }
 }
