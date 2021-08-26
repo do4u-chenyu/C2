@@ -48,6 +48,25 @@ namespace C2.Business.Model
             MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
             return true;
         }
+
+        public bool UnZipC2FileSingle(string fullFilePath, string userName, string password = "")
+        {
+            if (!File.Exists(fullFilePath))
+            {
+                //HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
+                return false;
+            }
+            
+            if (!HasUnZipFile(fullFilePath, userName, password, true))
+                return false;
+
+            // 脚本、数据源存储路径
+            string dirs = Path.Combine(this.modelDir, "_datas");
+            // 修改XML文件中数据源路径
+            RenameBmd(dirs, this.modelFilePath);
+            return true;
+        }
+
         public void MindMapControlAddItem(string modelTitle)
         {
             if (Global.GetMindMapModelControl().ContainModel(modelTitle))
@@ -251,8 +270,8 @@ namespace C2.Business.Model
 
         public bool IsSameModelTitle(string modelTitle, bool isC2Model)
         {
-            if (isC2Model)
-                return (Global.GetMindMapModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
+            if (isC2Model)   
+                return (Global.GetMindMapModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));          
             else
                 return (Global.GetMyModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
         }

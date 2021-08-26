@@ -31,60 +31,55 @@ namespace C2
         public const long OPEN_FILES_MESSAGE = 0x0999;
         public static bool IsRunTime { get; private set; }
         public const string Software_Version = "1.4.14";
-        /// <summary>
-        /// 应用程序的主入口点。
-        /// </summary>
-        [STAThread]
-        static void Main(params string[] args)
+
+
+        private static void Regist()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-
             string keyName = "C2File";
             string keyValue = "C2文件";
             bool isCreateRegistry = true;
 
             //检查文件关联是否创建 
             RegistryKey isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
-            if (isExCommand !=null && isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
+            if (isExCommand != null && isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
             {
                 isCreateRegistry = false;
             }
             //假如文件关联 还没有创建，或是关联位置已被改变 
-            else if(isCreateRegistry)
+            else if (isCreateRegistry)
             {
-                RegistryKey key, keyico, KeyC2;
+                RegistryKey key, KeyC2;
                 key = Registry.ClassesRoot.CreateSubKey(keyName);
                 key.SetValue("Create", Application.ExecutablePath.ToString());
-                keyico = key.CreateSubKey("DefaultIcon");
-                keyico.SetValue("", Application.ExecutablePath + ",0");
+                Microsoft.Win32.RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
+                string icoFind = Path.Combine("Resources", "C2", "Icon");
+                string icoFile = Path.Combine(System.Windows.Forms.Application.StartupPath, icoFind, "Icon.ico");
+                iconKey.SetValue(String.Empty, icoFile);
+
                 key.SetValue("", keyValue);
                 key = key.CreateSubKey("Shell")
                              .CreateSubKey("Open")
                                  .CreateSubKey("Command");
-                String exeFile = Path.Combine(Application.StartupPath, "C2Shell.exe");
+
+               
+                string exeFile = Path.Combine(Application.StartupPath, "C2Shell.exe");
                 if (File.Exists(exeFile))
-                    key.SetValue(String.Empty, exeFile + @" %1/");
+                    key.SetValue(String.Empty, exeFile + @" %1");
                 string keyC2Name = ".c2";
                 string keyC2Value = "C2File";
                 KeyC2 = Registry.ClassesRoot.CreateSubKey(keyC2Name);
                 KeyC2.SetValue("", keyC2Value);
             }
+        }
 
-
-            // 是否通过关联打开的软件 
-            if (args.Length > 0)
-            {
-                string path = string.Empty;
-                for (int i = 0; i < args.Length; i++)
-                    path += args[i] + string.Empty;
-                path = path.TrimEnd(OpUtil.Blank);
-                Console.WriteLine(path);
-                Console.ReadKey();
-                //Application.Run(new mainForm(path)); 
-            }
-
+        /// <summary>
+        /// 应用程序的主入口点。
+        /// </summary>
+        [STAThread]
+        static void Main(params string[] args)
+        {
+            Regist();
+      
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021091700000000") > 0)
             {
                 MessageBox.Show("产品可用时间截止到2021年9月17号");
@@ -106,14 +101,11 @@ namespace C2
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
 
-            //D.Message("ProgramEnvironment.RunMode is {0}", ProgramEnvironment.RunMode);
-            //D.Message("ApplicationDataDirectory is {0}", ProgramEnvironment.ApplicationDataDirectory);
-            //D.Message(new string('-', 40));
-
+            
             UIColorThemeManage.Initialize();
-            //D.Message("LanguageManage.Initialize");
             LanguageManage.Initialize();
             RecentFilesManage.Default.Initialize();
+          
 
             Current_OpitonsChanged(null, EventArgs.Empty);
             #endregion
@@ -121,21 +113,34 @@ namespace C2
             ConfigProgram();
             Application.EnableVisualStyles();
             LanguageManage.Initialize();
+            
             Process instance = RunningInstance();
+
+
             if (instance == null)
             {
                 //1.1 没有实例在运行
-                RunByVersion();
-                Application.EnableVisualStyles();
-
+                if (args.Length > 0)
+                {
+                    string path = string.Empty;
+                    for (int i = 0; i < args.Length; i++)
+                    path += args[i] + string.Empty;
+                    path = path.TrimEnd(OpUtil.Blank);
+                    RunByVersion(path);
+                    Application.EnableVisualStyles();
+                }
+                else
+                {
+                    RunByVersionExtend();
+                   Application.EnableVisualStyles();
+                }    
             }
             else
             {
                 //1.2 已经有一个实例在运行
                 HandleRunningInstance(instance);
-            }
+            }      
             C2.Configuration.Options.Current.Save();
-
         }
 
         private static void ConfigProgram()
@@ -164,11 +169,18 @@ namespace C2
                 Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
         }
 
-        private static void RunByVersion()
+        public static void RunByVersion(string path)
+        {
+            Global.SetUsername("IAO");
+            Application.Run(new MainForm(Global.GetUsername(),path));
+        }
+
+        public static void RunByVersionExtend()
         {
             Global.SetUsername("IAO");
             Application.Run(new MainForm(Global.GetUsername()));
         }
+
         #region 确保程序只运行一个实例
         private static Process RunningInstance()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -25,6 +26,8 @@ namespace C2Shell
             zipName = string.Empty;
         }
 
+       
+        
 
         public bool IsNeedUpdate()
         {
@@ -110,28 +113,44 @@ namespace C2Shell
             catch
             { }
         }
-        public void StartCoreProcess()
+        public void StartCoreProcess(string args)
         {
             try
             {
-                // C2Path 不存在
                 if (!File.Exists(C2Path))
                 {
-                    //MessageBox.Show(String.Format("找不到{0}",C2Path)+",无法启动主程序","ERROR");
                     MessageBox.Show(String.Format("找不到{0}", C2Path) + "\n无法启动主程序", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
                 Process process = new Process();
                 process.StartInfo.FileName = C2Path;
+                process.StartInfo.Arguments = args;
                 process.Start();
             }
             catch 
             {
                 //MessageBox.Show("找不到C2Path，无法启动主程序,");
             }
-
         }
+
+        public void StartCoreProcess()
+        {
+            try
+            {
+                if (!File.Exists(C2Path))
+                {
+                    MessageBox.Show(String.Format("找不到{0}", C2Path) + "\n无法启动主程序", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Process process = new Process();
+                process.StartInfo.FileName = C2Path;
+                process.Start();
+            }
+            catch
+            {
+            }
+        }
+
         private bool ExecuteCmdScript(string scriptPath)
         {
             bool success = true;
