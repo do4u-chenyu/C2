@@ -21,6 +21,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Zip;
+
+
 namespace C2
 {
     public enum FormType
@@ -329,7 +332,7 @@ namespace C2
             {
                 LoadHotModel();
                 LoadDocuments();
-                if (ImportModel.GetInstance().UnZipC2FileSingle(fullFilePath, Global.GetMainForm().UserName, password))
+                if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
                     HelpUtil.ShowMessageBox("导入成功");
                 LoadDataSource();
                 LoadIAOLaboratory();
@@ -360,8 +363,12 @@ namespace C2
             foreach (string title in mtTitles)
                 this.modelMarketControl.AddModel(title);
         }
+
+
+
         private void LoadDataSource()
         {
+           
             DataSourceInfo dataSource0 = new DataSourceInfo(this.UserName);
             List<DataButton> dataButtons = dataSource0.LoadDataSourceInfo();
            
@@ -373,6 +380,7 @@ namespace C2
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
         }
+
         private void LoadIAOLaboratory()
         {
             // 加载固定的6个小工具

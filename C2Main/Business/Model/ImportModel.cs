@@ -34,7 +34,7 @@ namespace C2.Business.Model
         {
             if (!File.Exists(fullFilePath))
             {
-                HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
+                //HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
                 return false;
             }
             if (!HasUnZipFile(fullFilePath, userName, password, true))
