@@ -63,26 +63,33 @@
             this.contentType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.length = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.runTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.resultCms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportResults = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressPercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanUseTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanThreadStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.startBtn = new System.Windows.Forms.Button();
             this.stopBtn = new System.Windows.Forms.Button();
             this.exportBtn = new System.Windows.Forms.Button();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.threadPoolStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.resultCms.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -372,6 +379,7 @@
             this.contentType,
             this.length,
             this.runTime});
+            this.listView1.ContextMenuStrip = this.resultCms;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -412,6 +420,36 @@
             this.runTime.Text = "用时[毫秒]";
             this.runTime.Width = 77;
             // 
+            // resultCms
+            // 
+            this.resultCms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openUrl,
+            this.copyUrl,
+            this.exportResults});
+            this.resultCms.Name = "resultCms";
+            this.resultCms.Size = new System.Drawing.Size(137, 70);
+            // 
+            // openUrl
+            // 
+            this.openUrl.Name = "openUrl";
+            this.openUrl.Size = new System.Drawing.Size(136, 22);
+            this.openUrl.Text = "浏览器打开";
+            this.openUrl.Click += new System.EventHandler(this.OpenUrl_Click);
+            // 
+            // copyUrl
+            // 
+            this.copyUrl.Name = "copyUrl";
+            this.copyUrl.Size = new System.Drawing.Size(136, 22);
+            this.copyUrl.Text = "复制url";
+            this.copyUrl.Click += new System.EventHandler(this.CopyUrl_Click);
+            // 
+            // exportResults
+            // 
+            this.exportResults.Name = "exportResults";
+            this.exportResults.Size = new System.Drawing.Size(136, 22);
+            this.exportResults.Text = "导出结果";
+            this.exportResults.Click += new System.EventHandler(this.ExportResults_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.logTextBox);
@@ -434,14 +472,16 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel2,
+            this.progressBar,
+            this.progressPercent,
             this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4,
+            this.scanUseTime,
             this.toolStripStatusLabel5,
-            this.toolStripStatusLabel6,
+            this.scanThreadStatus,
+            this.toolStripStatusLabel2,
+            this.threadPoolStatus,
             this.toolStripStatusLabel7,
-            this.toolStripStatusLabel8});
+            this.scanSpeed});
             this.statusStrip1.Location = new System.Drawing.Point(0, 471);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(819, 22);
@@ -455,16 +495,16 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
             this.toolStripStatusLabel1.Text = "进度";
             // 
-            // toolStripProgressBar1
+            // progressBar
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(150, 16);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
             // 
-            // toolStripStatusLabel2
+            // progressPercent
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(26, 17);
-            this.toolStripStatusLabel2.Text = "0%";
+            this.progressPercent.Name = "progressPercent";
+            this.progressPercent.Size = new System.Drawing.Size(26, 17);
+            this.progressPercent.Text = "0%";
             // 
             // toolStripStatusLabel3
             // 
@@ -472,11 +512,11 @@
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel3.Text = "用时：";
             // 
-            // toolStripStatusLabel4
+            // scanUseTime
             // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(15, 17);
-            this.toolStripStatusLabel4.Text = "0";
+            this.scanUseTime.Name = "scanUseTime";
+            this.scanUseTime.Size = new System.Drawing.Size(15, 17);
+            this.scanUseTime.Text = "0";
             // 
             // toolStripStatusLabel5
             // 
@@ -484,23 +524,23 @@
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel5.Text = "线程：";
             // 
-            // toolStripStatusLabel6
+            // scanThreadStatus
             // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(27, 17);
-            this.toolStripStatusLabel6.Text = "0/0";
+            this.scanThreadStatus.Name = "scanThreadStatus";
+            this.scanThreadStatus.Size = new System.Drawing.Size(27, 17);
+            this.scanThreadStatus.Text = "0/0";
             // 
             // toolStripStatusLabel7
             // 
             this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(80, 17);
-            this.toolStripStatusLabel7.Text = "剩余扫描数：";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel7.Text = "速度：";
             // 
-            // toolStripStatusLabel8
+            // scanSpeed
             // 
-            this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
-            this.toolStripStatusLabel8.Size = new System.Drawing.Size(15, 17);
-            this.toolStripStatusLabel8.Text = "0";
+            this.scanSpeed.Name = "scanSpeed";
+            this.scanSpeed.Size = new System.Drawing.Size(15, 17);
+            this.scanSpeed.Text = "0";
             // 
             // startBtn
             // 
@@ -530,6 +570,24 @@
             this.exportBtn.TabIndex = 8;
             this.exportBtn.Text = "导出结果";
             this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.ExportBtn_Click);
+            // 
+            // scanTimer
+            // 
+            this.scanTimer.Interval = 1000;
+            this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(92, 17);
+            this.toolStripStatusLabel2.Text = "预计检查队列：";
+            // 
+            // threadPoolStatus
+            // 
+            this.threadPoolStatus.Name = "threadPoolStatus";
+            this.threadPoolStatus.Size = new System.Drawing.Size(15, 17);
+            this.threadPoolStatus.Text = "0";
             // 
             // WebScanForm
             // 
@@ -556,6 +614,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.resultCms.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -581,14 +640,14 @@
         private System.Windows.Forms.RichTextBox logTextBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel progressPercent;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel scanUseTime;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel scanThreadStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
+        private System.Windows.Forms.ToolStripStatusLabel scanSpeed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox httpMethodCombo;
         private System.Windows.Forms.Label label3;
@@ -615,5 +674,11 @@
         private System.Windows.Forms.CheckBox crawlerCheckBox;
         private System.Windows.Forms.TextBox statusCodeTextBox;
         private System.Windows.Forms.Timer scanTimer;
+        private System.Windows.Forms.ContextMenuStrip resultCms;
+        private System.Windows.Forms.ToolStripMenuItem openUrl;
+        private System.Windows.Forms.ToolStripMenuItem copyUrl;
+        private System.Windows.Forms.ToolStripMenuItem exportResults;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel threadPoolStatus;
     }
 }
