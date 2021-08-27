@@ -16,14 +16,16 @@ namespace C2.Business.CastleBravo.PwdGenerator
     {
 
         public string richTextBoxText { set { this.richTextBox1.Text = value; } }
-        
+        public string S { set { this.Show_label.Text = value; } }
+
+
 
         public PwdResultForm()
         {
             InitializeComponent();
         }
 
-
+        int count = 0;
         private void ExportDatas()
         {
             SaveFileDialog saveFile = new SaveFileDialog();
@@ -41,10 +43,14 @@ namespace C2.Business.CastleBravo.PwdGenerator
                     {
                         string[] lines = text.Split('\n');
                         foreach (string item in lines)
+                        {
                             file.WriteLine(item);
+                            count++;
+                        }
+                            
 
                         file.Close();
-                        MessageBox.Show("导出成功");
+                        MessageBox.Show("数据导出成功","提示");
                     }
                 }
                 catch
@@ -58,5 +64,6 @@ namespace C2.Business.CastleBravo.PwdGenerator
         {
             ExportDatas();
         }
+ 
     }
 }

@@ -63,28 +63,41 @@
             this.contentType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.length = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.runTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.resultCms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportResults = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressPercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanUseTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanThreadStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.threadPoolStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.startBtn = new System.Windows.Forms.Button();
             this.stopBtn = new System.Windows.Forms.Button();
             this.exportBtn = new System.Windows.Forms.Button();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.resultCms.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -100,7 +113,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(335, 149);
+            this.groupBox1.Size = new System.Drawing.Size(318, 149);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "扫描选项";
@@ -108,7 +121,7 @@
             // crawlerCheckBox
             // 
             this.crawlerCheckBox.AutoSize = true;
-            this.crawlerCheckBox.Location = new System.Drawing.Point(275, 120);
+            this.crawlerCheckBox.Location = new System.Drawing.Point(256, 120);
             this.crawlerCheckBox.Name = "crawlerCheckBox";
             this.crawlerCheckBox.Size = new System.Drawing.Size(48, 16);
             this.crawlerCheckBox.TabIndex = 9;
@@ -119,7 +132,7 @@
             // 
             this.statusCodeTextBox.Location = new System.Drawing.Point(58, 118);
             this.statusCodeTextBox.Name = "statusCodeTextBox";
-            this.statusCodeTextBox.Size = new System.Drawing.Size(192, 21);
+            this.statusCodeTextBox.Size = new System.Drawing.Size(167, 21);
             this.statusCodeTextBox.TabIndex = 7;
             this.statusCodeTextBox.Text = "200,403,404";
             // 
@@ -139,7 +152,7 @@
             this.httpMethodCombo.FormattingEnabled = true;
             this.httpMethodCombo.Items.AddRange(new object[] {
             "GET"});
-            this.httpMethodCombo.Location = new System.Drawing.Point(230, 83);
+            this.httpMethodCombo.Location = new System.Drawing.Point(217, 83);
             this.httpMethodCombo.Name = "httpMethodCombo";
             this.httpMethodCombo.Size = new System.Drawing.Size(87, 20);
             this.httpMethodCombo.TabIndex = 5;
@@ -147,7 +160,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(172, 88);
+            this.label3.Location = new System.Drawing.Point(160, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 4;
@@ -181,7 +194,7 @@
             this.urlTextBox.Location = new System.Drawing.Point(58, 23);
             this.urlTextBox.Multiline = true;
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(259, 48);
+            this.urlTextBox.Size = new System.Drawing.Size(246, 48);
             this.urlTextBox.TabIndex = 1;
             // 
             // label1
@@ -198,7 +211,7 @@
             this.groupBox2.Controls.Add(this.refreshDictBtn);
             this.groupBox2.Controls.Add(this.openDictPathBtn);
             this.groupBox2.Controls.Add(this.dictListView);
-            this.groupBox2.Location = new System.Drawing.Point(357, 23);
+            this.groupBox2.Location = new System.Drawing.Point(337, 23);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(245, 149);
             this.groupBox2.TabIndex = 1;
@@ -271,7 +284,7 @@
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(611, 23);
+            this.groupBox3.Location = new System.Drawing.Point(701, 23);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(119, 149);
             this.groupBox3.TabIndex = 2;
@@ -358,7 +371,7 @@
             this.groupBox4.Controls.Add(this.listView1);
             this.groupBox4.Location = new System.Drawing.Point(12, 171);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(795, 134);
+            this.groupBox4.Size = new System.Drawing.Size(885, 134);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             // 
@@ -372,13 +385,14 @@
             this.contentType,
             this.length,
             this.runTime});
+            this.listView1.ContextMenuStrip = this.resultCms;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 17);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(789, 114);
+            this.listView1.Size = new System.Drawing.Size(879, 114);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -412,12 +426,42 @@
             this.runTime.Text = "用时[毫秒]";
             this.runTime.Width = 77;
             // 
+            // resultCms
+            // 
+            this.resultCms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openUrl,
+            this.copyUrl,
+            this.exportResults});
+            this.resultCms.Name = "resultCms";
+            this.resultCms.Size = new System.Drawing.Size(137, 70);
+            // 
+            // openUrl
+            // 
+            this.openUrl.Name = "openUrl";
+            this.openUrl.Size = new System.Drawing.Size(136, 22);
+            this.openUrl.Text = "浏览器打开";
+            this.openUrl.Click += new System.EventHandler(this.OpenUrl_Click);
+            // 
+            // copyUrl
+            // 
+            this.copyUrl.Name = "copyUrl";
+            this.copyUrl.Size = new System.Drawing.Size(136, 22);
+            this.copyUrl.Text = "复制url";
+            this.copyUrl.Click += new System.EventHandler(this.CopyUrl_Click);
+            // 
+            // exportResults
+            // 
+            this.exportResults.Name = "exportResults";
+            this.exportResults.Size = new System.Drawing.Size(136, 22);
+            this.exportResults.Text = "导出结果";
+            this.exportResults.Click += new System.EventHandler(this.ExportResults_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.logTextBox);
             this.groupBox5.Location = new System.Drawing.Point(12, 302);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(792, 160);
+            this.groupBox5.Size = new System.Drawing.Size(885, 160);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
@@ -426,7 +470,7 @@
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logTextBox.Location = new System.Drawing.Point(3, 17);
             this.logTextBox.Name = "logTextBox";
-            this.logTextBox.Size = new System.Drawing.Size(786, 140);
+            this.logTextBox.Size = new System.Drawing.Size(879, 140);
             this.logTextBox.TabIndex = 0;
             this.logTextBox.Text = "";
             // 
@@ -434,17 +478,19 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel2,
+            this.progressBar,
+            this.progressPercent,
             this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4,
+            this.scanUseTime,
             this.toolStripStatusLabel5,
-            this.toolStripStatusLabel6,
+            this.scanThreadStatus,
+            this.toolStripStatusLabel2,
+            this.threadPoolStatus,
             this.toolStripStatusLabel7,
-            this.toolStripStatusLabel8});
+            this.scanSpeed});
             this.statusStrip1.Location = new System.Drawing.Point(0, 471);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(819, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(909, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
@@ -455,16 +501,16 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
             this.toolStripStatusLabel1.Text = "进度";
             // 
-            // toolStripProgressBar1
+            // progressBar
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(150, 16);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
             // 
-            // toolStripStatusLabel2
+            // progressPercent
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(26, 17);
-            this.toolStripStatusLabel2.Text = "0%";
+            this.progressPercent.Name = "progressPercent";
+            this.progressPercent.Size = new System.Drawing.Size(26, 17);
+            this.progressPercent.Text = "0%";
             // 
             // toolStripStatusLabel3
             // 
@@ -472,11 +518,11 @@
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel3.Text = "用时：";
             // 
-            // toolStripStatusLabel4
+            // scanUseTime
             // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(15, 17);
-            this.toolStripStatusLabel4.Text = "0";
+            this.scanUseTime.Name = "scanUseTime";
+            this.scanUseTime.Size = new System.Drawing.Size(15, 17);
+            this.scanUseTime.Text = "0";
             // 
             // toolStripStatusLabel5
             // 
@@ -484,27 +530,39 @@
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel5.Text = "线程：";
             // 
-            // toolStripStatusLabel6
+            // scanThreadStatus
             // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(27, 17);
-            this.toolStripStatusLabel6.Text = "0/0";
+            this.scanThreadStatus.Name = "scanThreadStatus";
+            this.scanThreadStatus.Size = new System.Drawing.Size(27, 17);
+            this.scanThreadStatus.Text = "0/0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(92, 17);
+            this.toolStripStatusLabel2.Text = "预计检查队列：";
+            // 
+            // threadPoolStatus
+            // 
+            this.threadPoolStatus.Name = "threadPoolStatus";
+            this.threadPoolStatus.Size = new System.Drawing.Size(15, 17);
+            this.threadPoolStatus.Text = "0";
             // 
             // toolStripStatusLabel7
             // 
             this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(80, 17);
-            this.toolStripStatusLabel7.Text = "剩余扫描数：";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel7.Text = "速度：";
             // 
-            // toolStripStatusLabel8
+            // scanSpeed
             // 
-            this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
-            this.toolStripStatusLabel8.Size = new System.Drawing.Size(15, 17);
-            this.toolStripStatusLabel8.Text = "0";
+            this.scanSpeed.Name = "scanSpeed";
+            this.scanSpeed.Size = new System.Drawing.Size(15, 17);
+            this.scanSpeed.Text = "0";
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(741, 44);
+            this.startBtn.Location = new System.Drawing.Point(831, 44);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(66, 23);
             this.startBtn.TabIndex = 6;
@@ -514,7 +572,7 @@
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(741, 89);
+            this.stopBtn.Location = new System.Drawing.Point(831, 89);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(66, 23);
             this.stopBtn.TabIndex = 7;
@@ -524,18 +582,78 @@
             // 
             // exportBtn
             // 
-            this.exportBtn.Location = new System.Drawing.Point(741, 136);
+            this.exportBtn.Location = new System.Drawing.Point(831, 136);
             this.exportBtn.Name = "exportBtn";
             this.exportBtn.Size = new System.Drawing.Size(66, 23);
             this.exportBtn.TabIndex = 8;
             this.exportBtn.Text = "导出结果";
             this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.ExportBtn_Click);
+            // 
+            // scanTimer
+            // 
+            this.scanTimer.Interval = 1000;
+            this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.checkBox4);
+            this.groupBox6.Controls.Add(this.checkBox3);
+            this.groupBox6.Controls.Add(this.checkBox2);
+            this.groupBox6.Controls.Add(this.checkBox1);
+            this.groupBox6.Location = new System.Drawing.Point(589, 23);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(106, 149);
+            this.groupBox6.TabIndex = 9;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "策略(施工中）";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 26);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "路径遍历";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(15, 55);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(72, 16);
+            this.checkBox2.TabIndex = 1;
+            this.checkBox2.Text = "深度优先";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(15, 85);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(72, 16);
+            this.checkBox3.TabIndex = 2;
+            this.checkBox3.Text = "版本扫描";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(15, 113);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(72, 16);
+            this.checkBox4.TabIndex = 3;
+            this.checkBox4.Text = "单元扫描";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // WebScanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 493);
+            this.ClientSize = new System.Drawing.Size(909, 493);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.exportBtn);
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.startBtn);
@@ -549,16 +667,19 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WebScanForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WebScanForm";
+            this.Text = "目录扫描";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.resultCms.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -581,14 +702,14 @@
         private System.Windows.Forms.RichTextBox logTextBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel progressPercent;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel scanUseTime;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel scanThreadStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
+        private System.Windows.Forms.ToolStripStatusLabel scanSpeed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox httpMethodCombo;
         private System.Windows.Forms.Label label3;
@@ -615,5 +736,16 @@
         private System.Windows.Forms.CheckBox crawlerCheckBox;
         private System.Windows.Forms.TextBox statusCodeTextBox;
         private System.Windows.Forms.Timer scanTimer;
+        private System.Windows.Forms.ContextMenuStrip resultCms;
+        private System.Windows.Forms.ToolStripMenuItem openUrl;
+        private System.Windows.Forms.ToolStripMenuItem copyUrl;
+        private System.Windows.Forms.ToolStripMenuItem exportResults;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel threadPoolStatus;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

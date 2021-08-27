@@ -26,9 +26,15 @@ namespace C2.Business.CastleBravo.WebScan
         string dictDirectory;
         Dictionary<string, List<string>> dictContent;
 
-        private string scanURL;
-        private long scanDirCount = 0;//扫描目录总数
+        private List<string> domainList;
+
+        //private string scanURL;
+        private long scanDirCount = 0;
+        private long scanSumCount = 0;//扫描目录总数
         private List<string> selectedDict;
+
+        private long lastCount = 0;
+        private int scanRunTime = 0;//已扫描时间
 
         delegate void VoidDelegate();
         delegate void update();
@@ -39,6 +45,7 @@ namespace C2.Business.CastleBravo.WebScan
             InitializeComponent();
             tools = new Tool();
             config = new Config();
+            domainList = new List<string>();
 
             this.headerCombo.SelectedIndex = 0;
             this.httpMethodCombo.SelectedIndex = 0;
@@ -50,6 +57,7 @@ namespace C2.Business.CastleBravo.WebScan
             RefreshDict();
         }
 
+        #region 字典配置
         private void RefreshDict()
         {
             //TODO 考虑一下把文件内容加入字典，计算行数和放入字典可以写在一起
@@ -86,6 +94,60 @@ namespace C2.Business.CastleBravo.WebScan
 
             return dictPathList;
         }
+        private string GetFileLines(string path)
+        {
+            int lineCount = 0;
+
+            List<string> contentList = new List<string>();
+            FileStream fs_dir = null;
+            StreamReader reader = null;
+            try
+            {
+                fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
+                reader = new StreamReader(fs_dir);
+
+                string lineStr;
+
+                while ((lineStr = reader.ReadLine()) != null)
+                {
+                    if (!lineStr.Equals(""))
+                    {
+                        contentList.Add(lineStr);
+                        lineCount++;
+                    }
+                }
+            }
+            catch { }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                if (fs_dir != null)
+                {
+                    fs_dir.Close();
+                }
+                dictContent.Add(Path.GetFileName(path), contentList);
+            }
+            return lineCount.ToString();
+        }
+        private void DictListView_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            groupBox2.Text = string.Format("字典（激活{0}个）", dictListView.CheckedItems.Count);
+        }
+
+        private void OpenDictPathBtn_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.ProcessOpen(this.dictDirectory);
+        }
+
+        private void RefreshDictBtn_Click(object sender, EventArgs e)
+        {
+            RefreshDict();
+        }
+
+        #endregion
 
         #region 日志
         public delegate void LogAppendDelegate(Color color, string text);
@@ -143,6 +205,7 @@ namespace C2.Business.CastleBravo.WebScan
         }
         #endregion
 
+        #region 其他配置、停止按钮
         private void SetConfig()
         {
             //TODO 其他配置项待加入
@@ -153,109 +216,151 @@ namespace C2.Business.CastleBravo.WebScan
             config.TimeOut = int.Parse(this.timeOutCombo.Text);
             config.SleepTime = int.Parse(this.sleepTimeCombo.Text);
         }
+        private void ExportBtn_Click(object sender, EventArgs e)
+        {
+            ExportResults();
+        }
 
+        private void StopBtn_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(BreakScan);
+            t.Start();
+        }
+
+        public void BreakScan()
+        {
+            if (stp != null && !stp.IsShuttingdown && this.sThread != null)
+            {
+                LogWarning("等待线程结束...");
+                stp.Cancel();
+                this.sThread.Abort();
+                while (stp.InUseThreads > 0)
+                {
+                    Thread.Sleep(50);
+                }
+
+                //更新状态
+                this.Invoke(new VoidDelegate(StopScan));
+            }
+        }
+        #endregion
+
+        #region 开始扫描
+        private bool CheckStartOption()
+        {
+            if (stp.InUseThreads > 0)
+            {
+                HelpUtil.ShowMessageBox("上次任务还没停止，请停止上次任务！");
+                return false;
+            }
+
+            domainList.Clear();
+            foreach (string domain in urlTextBox.Text.Split('\n'))
+            {
+                string tmpDomain = domain.Trim(new char[] { '\r', '\n' });
+                //TODO 这里可以考虑自动拼接一个http头
+                if (!tmpDomain.StartsWith("http"))
+                {
+                    HelpUtil.ShowMessageBox("域名:" + tmpDomain + "未包含http或https");
+                    return false;
+                }
+                domainList.Add(tmpDomain);
+            }
+
+            if (this.dictListView.CheckedItems.Count == 0)
+            {
+                HelpUtil.ShowMessageBox("请选择扫描字典！");
+                return false;
+            }
+            return true;
+        }
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
             if (!CheckStartOption())
                 return;
-            //this.startBtn.Enabled = false;
 
+            this.startBtn.Enabled = false;
             this.listView1.Items.Clear();
             this.logTextBox.Text = string.Empty;
 
-            SetConfig();
-
-            //TODO 先默认单个吧
-            scanURL = tools.UpdateUrl(this.urlTextBox.Text.Trim(), false);
-
+            scanSumCount = 0;
             selectedDict = new List<string>();
-            foreach(ListViewItem name in this.dictListView.CheckedItems)
+            foreach (ListViewItem name in this.dictListView.CheckedItems)
             {
                 selectedDict.Add(name.Tag.ToString());
+                scanSumCount += int.Parse(name.SubItems[2].Text);
             }
+            scanSumCount = scanSumCount * domainList.Count() + domainList.Count();//扫域名本身和其字典目录
+
+            SetConfig();
 
             stp = new SmartThreadPool
             {
                 MaxThreads = config.ThreadSize
             };
 
-            this.scanTimer.Start();
             sThread = new Thread(new ThreadStart(ScanThread));
             sThread.Start();
         }
 
-
-        private bool CheckStartOption()
-        {
-            if(stp.InUseThreads > 0)
-            {
-                HelpUtil.ShowMessageBox("上次任务还没停止，请停止上次任务！");
-                return false;
-            }
-
-            return true;
-        }
-
-
-
         private void ScanThread()
         {
-            scanDirCount = 0;
+            this.scanRunTime = 0;
+            this.Invoke(new VoidDelegate(this.scanTimer.Start));
 
-            ServerInfo tmpSvinfo = new ServerInfo
+            this.scanDirCount = 0;
+            foreach (string domain in domainList)
             {
-                host = tools.UpdateUrl(scanURL, false),
-                id = this.scanDirCount,
-                type = "指纹"  //TODO ?
-            };
-            tmpSvinfo.url = tmpSvinfo.host;
-            stp.WaitFor(1000, 10000);
-            stp.QueueWorkItem<ServerInfo>(ScanUrl, tmpSvinfo);
-            stp.WaitForIdle();
-
-            LogMessage(tmpSvinfo.url + "加载完成，开始扫描目录。");
-            
-            
-
-            
-
-            foreach (string dictName in selectedDict)
-            {
-                if (!this.dictContent.ContainsKey(dictName))
+                this.scanDirCount++;
+                ServerInfo tmpSvinfo = new ServerInfo
                 {
-                    LogError("字典" + dictName + "未加载成功！");
-                    continue;
-                }
+                    host = tools.UpdateUrl(domain, false),
+                    id = scanDirCount,
+                    type = "指纹"  //TODO ?
+                };
+                tmpSvinfo.url = tmpSvinfo.host;
+                stp.WaitFor(1000, 10000);
+                stp.QueueWorkItem<ServerInfo>(ScanDomain, tmpSvinfo);
+                LogMessage(tmpSvinfo.url + "加载完成，开始扫描目录");
+                stp.WaitForIdle();
 
-                this.dictContent.TryGetValue(dictName, out List<string> urlList);
-                foreach(string url in urlList)
+
+                foreach (string dictName in selectedDict)
                 {
-                    this.scanDirCount++;
+                    if (!this.dictContent.ContainsKey(dictName))
+                    {
+                        LogError("字典" + dictName + "未加载成功！");
+                        continue;
+                    }
 
-                    ServerInfo svinfo = new ServerInfo();
-                    svinfo.target = scanURL;
-                    svinfo.host = tools.UpdateUrl(scanURL, true);
-                    svinfo.id = this.scanDirCount;
-                    svinfo.type = "目录";
-                    svinfo.path = url;
-                    svinfo.url = svinfo.host + url;
+                    this.dictContent.TryGetValue(dictName, out List<string> urlList);
+                    foreach (string url in urlList)
+                    {
+                        this.scanDirCount++;
 
-                    stp.WaitFor(1000, 10000);
-                    stp.QueueWorkItem<ServerInfo>(ScanExistsDirs, svinfo);
+                        ServerInfo svinfo = new ServerInfo();
+                        svinfo.target = domain;
+                        svinfo.host = tools.UpdateUrl(domain, true);
+                        svinfo.id = this.scanDirCount;
+                        svinfo.type = "目录";
+                        svinfo.path = url;
+                        svinfo.url = svinfo.host + url;
+
+                        stp.WaitFor(1000, 10000);
+                        stp.QueueWorkItem<ServerInfo>(ScanExistsDirs, svinfo);
+                    }
                 }
             }
 
             stp.WaitForIdle();
             stp.Shutdown();
-            StopScan();
+            this.Invoke(new VoidDelegate(StopScan));
 
         }
 
-        private void ScanUrl(Object obj)
+        private void ScanDomain(ServerInfo svinfo)
         {
-            ServerInfo svinfo = (ServerInfo)obj;
-
             ServerInfo result = HttpRequest.SendRequestGetHeader(config, svinfo.url, config.TimeOut, config.keeAlive);
             svinfo.code = result.code;
             svinfo.ip = tools.GetIP(svinfo.host);
@@ -264,7 +369,7 @@ namespace C2.Business.CastleBravo.WebScan
             svinfo.server = result.server;
             svinfo.powerBy = result.powerBy;
             svinfo.runTime = result.runTime;
-            //this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+            this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
             //Thread.Sleep(config.SleepTime * 1000);
         }
 
@@ -357,50 +462,12 @@ namespace C2.Business.CastleBravo.WebScan
         {
             this.Invoke(new VoidDelegate(this.scanTimer.Stop));
             this.Invoke(new update(UpdateStatus));
-            //this.startBtn.Enabled = true;
+            this.startBtn.Enabled = true;
             LogMessage("扫描结束");
         }
+        #endregion
 
-        private void UpdateStatus()
-        {
-            //try
-            //{
-            //    if (stp != null)
-            //    {
-            //        long workCount = allCrackCount;
-
-            //        this.stxt_speed.Text = (workCount - this.lastCount) + "";
-            //        this.lastCount = workCount;
-            //        this.stxt_threadStatus.Text = stp.InUseThreads + "/" + stp.Concurrency;
-
-            //        int c = 0;
-            //        if (this.creackerSumCount != 0)
-            //        {
-            //            c = (int)Math.Floor((workCount * 100 / (double)this.creackerSumCount));
-            //            this.stxt_threadPoolStatus.Text = allCrackCount + "/" + this.creackerSumCount;
-            //        }
-            //        if (c <= 0)
-            //        {
-            //            c = 0;
-            //        }
-            //        if (c >= 100)
-            //        {
-            //            c = 100;
-            //        }
-            //        this.stxt_percent.Text = c + "%";
-            //        this.tools_proBar.Value = c;
-            //    }
-            //    this.stxt_crackerSuccessCount.Text = successCount + "";
-            //    this.stxt_useTime.Text = runTime + "";
-            //    this.tssl_notScanPortsSumCount.Text = this.scanPortsSumCount + "";
-            //}
-            //catch (Exception e)
-            //{
-            //    LogWarning(e.Message);
-            //}
-        }
-
-
+        #region 结果展示相关
         public void AddItemToListView(ServerInfo svinfo)
         {
             //过滤类型不符合的
@@ -442,6 +509,7 @@ namespace C2.Business.CastleBravo.WebScan
             {
                 return;
             }
+
             ListViewItem lvi = new ListViewItem(svinfo.id + "");
             lvi.Tag = svinfo.type;
             lvi.SubItems.Add(svinfo.url);
@@ -451,8 +519,6 @@ namespace C2.Business.CastleBravo.WebScan
             lvi.SubItems.Add(svinfo.server + "");
             lvi.SubItems.Add(svinfo.runTime + "");
             //lvi.SubItems.Add(svinfo.ip + "");
-            String result = svinfo.url + "----" + svinfo.code;
-            lvi.Tag = svinfo.type;
             if (svinfo.code.ToString().StartsWith("2"))
             {
                 lvi.ForeColor = Color.Green;
@@ -469,87 +535,121 @@ namespace C2.Business.CastleBravo.WebScan
             {
                 lvi.ForeColor = Color.Red;
             }
-            //FileTool.AppendLogToFile("logs/scan_" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", result);
             this.listView1.Items.Add(lvi);
         }
 
-        private void DictListView_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private void OpenUrl_Click(object sender, EventArgs e)
         {
-            groupBox2.Text = string.Format("字典（激活{0}个）", dictListView.CheckedItems.Count);
-        }
-
-        private void OpenDictPathBtn_Click(object sender, EventArgs e)
-        {
-            ProcessUtil.ProcessOpen(this.dictDirectory);
-        }
-
-        private void RefreshDictBtn_Click(object sender, EventArgs e)
-        {
-            RefreshDict();
-        }
-
-        private string GetFileLines(string path)
-        {
-            int lineCount = 0;
-
-            List<string> contentList = new List<string>();
-            FileStream fs_dir = null;
-            StreamReader reader = null;
+            if (this.listView1.SelectedItems.Count == 0)
+            {
+                return;
+            }
             try
             {
-                fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
-                reader = new StreamReader(fs_dir);
+                System.Diagnostics.Process.Start("IEXPLORE.EXE", this.listView1.SelectedItems[0].SubItems[1].Text);
+            }
+            catch (Exception oe)
+            {
+                MessageBox.Show("打开URL发生异常---" + oe.Message);
+            }
+        }
 
-                string lineStr;
+        private void CopyUrl_Click(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            Clipboard.SetText(this.listView1.SelectedItems[0].SubItems[1].Text);
+            MessageBox.Show("复制成功");
+        }
 
-                while ((lineStr = reader.ReadLine()) != null)
+        private void ExportResults_Click(object sender, EventArgs e)
+        {
+            ExportResults();
+        }
+
+
+        private void ExportResults()
+        {
+            //保存文件
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "文本文件|*.txt"
+            };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
                 {
-                    if (!lineStr.Equals(""))
+                    FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, System.IO.FileAccess.Write);
+                    StreamWriter sw = new StreamWriter(fs);
+                    string columns = "";
+                    foreach (ColumnHeader dc in this.listView1.Columns)
                     {
-                        contentList.Add(lineStr);
-                        lineCount++;
+                        columns += (dc.Text + "\t");
                     }
+                    sw.WriteLine(columns.Substring(0, columns.Length - 1));
+                    foreach (ListViewItem sv in this.listView1.Items)
+                    {
+                        List<string> tmpRow = new List<string>();
+                        foreach (ListViewItem.ListViewSubItem subv in sv.SubItems)
+                        {
+                            tmpRow.Add(subv.Text);
+                        }
+                        //TODO 似乎多出最后一列
+                        tmpRow.Remove(tmpRow.Last());
+                        sw.WriteLine(string.Join("\t", tmpRow));
+                    }
+                    sw.Close();
+                    MessageBox.Show("导出完成");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("导出数据发生异常" + e.Message);
                 }
             }
-            catch {  }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-                if (fs_dir != null)
-                {
-                    fs_dir.Close();
-                }
-                dictContent.Add(Path.GetFileName(path), contentList);
-            }
 
-
-            return lineCount.ToString();
         }
+        #endregion
 
-        private void StopBtn_Click(object sender, EventArgs e)
+        #region 底部进度
+        private void ScanTimer_Tick(object sender, EventArgs e)
         {
-            Thread t = new Thread(BreakScan);
-            t.Start();
+            this.scanRunTime++;
+            this.Invoke(new update(UpdateStatus));
         }
 
-        public void BreakScan()
+        private void UpdateStatus()
         {
-            if (stp != null && !stp.IsShuttingdown && this.sThread != null)
+            try
             {
-                LogWarning("等待线程结束...");
-                stp.Cancel();
-                this.sThread.Abort();
-                while (stp.InUseThreads > 0)
+                if (stp != null)
                 {
-                    Thread.Sleep(50);
+                    long processedCount = stp.WorkItemsProcessedCount;
+                    this.scanSpeed.Text = (processedCount - this.lastCount) + "";
+                    this.lastCount = processedCount;
+
+                    this.scanThreadStatus.Text = stp.InUseThreads + "/" + stp.Concurrency;
+                    this.threadPoolStatus.Text = processedCount.ToString() + "/" + scanSumCount;
+
+                    int c = 0;
+                    if (this.scanSumCount != 0)
+                    {
+                        c = (int)Math.Floor((processedCount * 100 / (double)this.scanSumCount));
+                        c = c >= 100 ? 100 : c;
+                    }
+                    this.progressPercent.Text = c + "%";
+                    this.progressBar.Value = c;
                 }
 
-                //更新状态
-                StopScan();
+                this.scanUseTime.Text = this.scanRunTime + "";
+            }
+            catch (Exception e)
+            {
+                LogWarning(e.Message);
             }
         }
+
+        #endregion
     }
 }
