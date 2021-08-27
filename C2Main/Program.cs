@@ -31,7 +31,6 @@ namespace C2
         public const long OPEN_FILES_MESSAGE = 0x0999;
         public static bool IsRunTime { get; private set; }
         public const string Software_Version = "1.4.14";
-
         [DllImport("shell32.dll")]
         public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
@@ -53,8 +52,13 @@ namespace C2
                 RegistryKey key, KeyC2;
                 key = Registry.ClassesRoot.CreateSubKey(keyName);
                 key.SetValue("Create", Application.ExecutablePath.ToString());
+                
                 Microsoft.Win32.RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
-                iconKey.SetValue("", Application.ExecutablePath);
+                //iconKey.SetValue("", Application.ExecutablePath);
+                string icoFind = Path.Combine("Resources", "C2", "Icon");
+                string icoFile = Path.Combine(System.Windows.Forms.Application.StartupPath, icoFind, "Icon.ico");
+                iconKey.SetValue(String.Empty, icoFile);
+
                 SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
                 key.SetValue("", keyValue);
                 key = key.CreateSubKey("Shell")
