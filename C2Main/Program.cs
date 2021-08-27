@@ -32,6 +32,8 @@ namespace C2
         public static bool IsRunTime { get; private set; }
         public const string Software_Version = "1.4.14";
 
+        [DllImport("shell32.dll")]
+        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
         private static void Regist()
         {
@@ -52,16 +54,12 @@ namespace C2
                 key = Registry.ClassesRoot.CreateSubKey(keyName);
                 key.SetValue("Create", Application.ExecutablePath.ToString());
                 Microsoft.Win32.RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
-                string icoFind = Path.Combine("Resources", "C2", "Icon");
-                string icoFile = Path.Combine(System.Windows.Forms.Application.StartupPath, icoFind, "Icon.ico");
-                iconKey.SetValue(String.Empty, icoFile);
-
+                iconKey.SetValue("", Application.ExecutablePath);
+                SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
                 key.SetValue("", keyValue);
                 key = key.CreateSubKey("Shell")
                              .CreateSubKey("Open")
                                  .CreateSubKey("Command");
-
-               
                 string exeFile = Path.Combine(Application.StartupPath, "C2Shell.exe");
                 if (File.Exists(exeFile))
                     key.SetValue(String.Empty, exeFile + @" %1");
