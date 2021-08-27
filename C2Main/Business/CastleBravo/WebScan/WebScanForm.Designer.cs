@@ -28,27 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebScanForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.crawlerCheckBox = new System.Windows.Forms.CheckBox();
+            this.statusCodeTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.httpMethodCombo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.headerCombo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.refreshDictBtn = new System.Windows.Forms.Button();
+            this.openDictPathBtn = new System.Windows.Forms.Button();
+            this.dictListView = new System.Windows.Forms.ListView();
             this.dictID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dictName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dictRows = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dictSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.sleepTimeCombo = new System.Windows.Forms.ComboBox();
+            this.timeOutCombo = new System.Windows.Forms.ComboBox();
+            this.threadSizeCombo = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,7 +64,7 @@
             this.length = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.runTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
@@ -72,11 +75,10 @@
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.startBtn = new System.Windows.Forms.Button();
+            this.stopBtn = new System.Windows.Forms.Button();
+            this.exportBtn = new System.Windows.Forms.Button();
+            this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -87,14 +89,14 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.crawlerCheckBox);
+            this.groupBox1.Controls.Add(this.statusCodeTextBox);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.httpMethodCombo);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.headerCombo);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.urlTextBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 23);
             this.groupBox1.Name = "groupBox1";
@@ -102,6 +104,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "扫描选项";
+            // 
+            // crawlerCheckBox
+            // 
+            this.crawlerCheckBox.AutoSize = true;
+            this.crawlerCheckBox.Location = new System.Drawing.Point(275, 120);
+            this.crawlerCheckBox.Name = "crawlerCheckBox";
+            this.crawlerCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.crawlerCheckBox.TabIndex = 9;
+            this.crawlerCheckBox.Text = "爬虫";
+            this.crawlerCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // statusCodeTextBox
+            // 
+            this.statusCodeTextBox.Location = new System.Drawing.Point(58, 118);
+            this.statusCodeTextBox.Name = "statusCodeTextBox";
+            this.statusCodeTextBox.Size = new System.Drawing.Size(192, 21);
+            this.statusCodeTextBox.TabIndex = 7;
+            this.statusCodeTextBox.Text = "200,403,404";
             // 
             // label4
             // 
@@ -112,16 +132,17 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "状态码：";
             // 
-            // comboBox2
+            // httpMethodCombo
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.httpMethodCombo.BackColor = System.Drawing.Color.White;
+            this.httpMethodCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.httpMethodCombo.FormattingEnabled = true;
+            this.httpMethodCombo.Items.AddRange(new object[] {
             "GET"});
-            this.comboBox2.Location = new System.Drawing.Point(230, 83);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(87, 20);
-            this.comboBox2.TabIndex = 5;
+            this.httpMethodCombo.Location = new System.Drawing.Point(230, 83);
+            this.httpMethodCombo.Name = "httpMethodCombo";
+            this.httpMethodCombo.Size = new System.Drawing.Size(87, 20);
+            this.httpMethodCombo.TabIndex = 5;
             // 
             // label3
             // 
@@ -132,18 +153,19 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "http方法：";
             // 
-            // comboBox1
+            // headerCombo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.headerCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.headerCombo.FormattingEnabled = true;
+            this.headerCombo.Items.AddRange(new object[] {
             "谷歌",
             "IE10",
             "IE9",
             "火狐"});
-            this.comboBox1.Location = new System.Drawing.Point(58, 83);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(87, 20);
-            this.comboBox1.TabIndex = 3;
+            this.headerCombo.Location = new System.Drawing.Point(58, 83);
+            this.headerCombo.Name = "headerCombo";
+            this.headerCombo.Size = new System.Drawing.Size(87, 20);
+            this.headerCombo.TabIndex = 3;
             // 
             // label2
             // 
@@ -154,13 +176,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Header：";
             // 
-            // textBox1
+            // urlTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(58, 23);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(259, 48);
-            this.textBox1.TabIndex = 1;
+            this.urlTextBox.Location = new System.Drawing.Point(58, 23);
+            this.urlTextBox.Multiline = true;
+            this.urlTextBox.Name = "urlTextBox";
+            this.urlTextBox.Size = new System.Drawing.Size(259, 48);
+            this.urlTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -173,9 +195,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.listView2);
+            this.groupBox2.Controls.Add(this.refreshDictBtn);
+            this.groupBox2.Controls.Add(this.openDictPathBtn);
+            this.groupBox2.Controls.Add(this.dictListView);
             this.groupBox2.Location = new System.Drawing.Point(357, 23);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(245, 149);
@@ -183,39 +205,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
             // 
-            // button2
+            // refreshDictBtn
             // 
-            this.button2.Location = new System.Drawing.Point(84, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "刷新字典";
-            this.button2.UseVisualStyleBackColor = true;
+            this.refreshDictBtn.Location = new System.Drawing.Point(84, 15);
+            this.refreshDictBtn.Name = "refreshDictBtn";
+            this.refreshDictBtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshDictBtn.TabIndex = 2;
+            this.refreshDictBtn.Text = "刷新字典";
+            this.refreshDictBtn.UseVisualStyleBackColor = true;
+            this.refreshDictBtn.Click += new System.EventHandler(this.RefreshDictBtn_Click);
             // 
-            // button1
+            // openDictPathBtn
             // 
-            this.button1.Location = new System.Drawing.Point(3, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "字典目录";
-            this.button1.UseVisualStyleBackColor = true;
+            this.openDictPathBtn.Location = new System.Drawing.Point(3, 15);
+            this.openDictPathBtn.Name = "openDictPathBtn";
+            this.openDictPathBtn.Size = new System.Drawing.Size(75, 23);
+            this.openDictPathBtn.TabIndex = 1;
+            this.openDictPathBtn.Text = "字典目录";
+            this.openDictPathBtn.UseVisualStyleBackColor = true;
+            this.openDictPathBtn.Click += new System.EventHandler(this.OpenDictPathBtn_Click);
             // 
-            // listView2
+            // dictListView
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dictListView.CheckBoxes = true;
+            this.dictListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.dictID,
             this.dictName,
             this.dictRows,
             this.dictSize});
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(3, 44);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(239, 102);
-            this.listView2.TabIndex = 0;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.dictListView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dictListView.FullRowSelect = true;
+            this.dictListView.HideSelection = false;
+            this.dictListView.Location = new System.Drawing.Point(3, 44);
+            this.dictListView.Name = "dictListView";
+            this.dictListView.Size = new System.Drawing.Size(239, 102);
+            this.dictListView.TabIndex = 0;
+            this.dictListView.UseCompatibleStateImageBehavior = false;
+            this.dictListView.View = System.Windows.Forms.View.Details;
+            this.dictListView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.DictListView_ItemChecked);
             // 
             // dictID
             // 
@@ -238,9 +265,9 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.comboBox5);
-            this.groupBox3.Controls.Add(this.comboBox4);
-            this.groupBox3.Controls.Add(this.comboBox3);
+            this.groupBox3.Controls.Add(this.sleepTimeCombo);
+            this.groupBox3.Controls.Add(this.timeOutCombo);
+            this.groupBox3.Controls.Add(this.threadSizeCombo);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
@@ -251,23 +278,26 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "配置参数";
             // 
-            // comboBox5
+            // sleepTimeCombo
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
+            this.sleepTimeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sleepTimeCombo.FormattingEnabled = true;
+            this.sleepTimeCombo.Items.AddRange(new object[] {
+            "0",
             "60",
             "120",
             "180",
             "240"});
-            this.comboBox5.Location = new System.Drawing.Point(54, 114);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(59, 20);
-            this.comboBox5.TabIndex = 5;
+            this.sleepTimeCombo.Location = new System.Drawing.Point(54, 114);
+            this.sleepTimeCombo.Name = "sleepTimeCombo";
+            this.sleepTimeCombo.Size = new System.Drawing.Size(59, 20);
+            this.sleepTimeCombo.TabIndex = 5;
             // 
-            // comboBox4
+            // timeOutCombo
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
+            this.timeOutCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.timeOutCombo.FormattingEnabled = true;
+            this.timeOutCombo.Items.AddRange(new object[] {
             "5",
             "10",
             "15",
@@ -276,24 +306,25 @@
             "40",
             "50",
             "60"});
-            this.comboBox4.Location = new System.Drawing.Point(54, 68);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(58, 20);
-            this.comboBox4.TabIndex = 4;
+            this.timeOutCombo.Location = new System.Drawing.Point(54, 68);
+            this.timeOutCombo.Name = "timeOutCombo";
+            this.timeOutCombo.Size = new System.Drawing.Size(58, 20);
+            this.timeOutCombo.TabIndex = 4;
             // 
-            // comboBox3
+            // threadSizeCombo
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.threadSizeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.threadSizeCombo.FormattingEnabled = true;
+            this.threadSizeCombo.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
             "5",
             "10"});
-            this.comboBox3.Location = new System.Drawing.Point(54, 21);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(58, 20);
-            this.comboBox3.TabIndex = 3;
+            this.threadSizeCombo.Location = new System.Drawing.Point(54, 21);
+            this.threadSizeCombo.Name = "threadSizeCombo";
+            this.threadSizeCombo.Size = new System.Drawing.Size(58, 20);
+            this.threadSizeCombo.TabIndex = 3;
             // 
             // label7
             // 
@@ -383,21 +414,21 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.richTextBox1);
+            this.groupBox5.Controls.Add(this.logTextBox);
             this.groupBox5.Location = new System.Drawing.Point(12, 302);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(792, 160);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
-            // richTextBox1
+            // logTextBox
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 17);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(786, 140);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.logTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logTextBox.Location = new System.Drawing.Point(3, 17);
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.Size = new System.Drawing.Size(786, 140);
+            this.logTextBox.TabIndex = 0;
+            this.logTextBox.Text = "";
             // 
             // statusStrip1
             // 
@@ -471,59 +502,43 @@
             this.toolStripStatusLabel8.Size = new System.Drawing.Size(15, 17);
             this.toolStripStatusLabel8.Text = "0";
             // 
-            // button3
+            // startBtn
             // 
-            this.button3.Location = new System.Drawing.Point(741, 44);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(66, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "开始扫描";
-            this.button3.UseVisualStyleBackColor = true;
+            this.startBtn.Location = new System.Drawing.Point(741, 44);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(66, 23);
+            this.startBtn.TabIndex = 6;
+            this.startBtn.Text = "开始扫描";
+            this.startBtn.UseVisualStyleBackColor = true;
+            this.startBtn.Click += new System.EventHandler(this.StartBtn_Click);
             // 
-            // button4
+            // stopBtn
             // 
-            this.button4.Location = new System.Drawing.Point(741, 89);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(66, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "停止扫描";
-            this.button4.UseVisualStyleBackColor = true;
+            this.stopBtn.Location = new System.Drawing.Point(741, 89);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(66, 23);
+            this.stopBtn.TabIndex = 7;
+            this.stopBtn.Text = "停止扫描";
+            this.stopBtn.UseVisualStyleBackColor = true;
+            this.stopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
-            // button5
+            // exportBtn
             // 
-            this.button5.Location = new System.Drawing.Point(741, 136);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(66, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "导出结果";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(58, 118);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(192, 21);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.Text = "200,403,404";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(275, 120);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(48, 16);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "爬虫";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.exportBtn.Location = new System.Drawing.Point(741, 136);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(66, 23);
+            this.exportBtn.TabIndex = 8;
+            this.exportBtn.Text = "导出结果";
+            this.exportBtn.UseVisualStyleBackColor = true;
             // 
             // WebScanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 493);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.exportBtn);
+            this.Controls.Add(this.stopBtn);
+            this.Controls.Add(this.startBtn);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -563,7 +578,7 @@
         private System.Windows.Forms.ColumnHeader length;
         private System.Windows.Forms.ColumnHeader runTime;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox logTextBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
@@ -575,15 +590,15 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox httpMethodCombo;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox headerCombo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox urlTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.Button refreshDictBtn;
+        private System.Windows.Forms.Button openDictPathBtn;
+        private System.Windows.Forms.ListView dictListView;
         private System.Windows.Forms.ColumnHeader dictID;
         private System.Windows.Forms.ColumnHeader dictName;
         private System.Windows.Forms.ColumnHeader dictRows;
@@ -591,13 +606,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button startBtn;
+        private System.Windows.Forms.Button stopBtn;
+        private System.Windows.Forms.Button exportBtn;
+        private System.Windows.Forms.ComboBox sleepTimeCombo;
+        private System.Windows.Forms.ComboBox timeOutCombo;
+        private System.Windows.Forms.ComboBox threadSizeCombo;
+        private System.Windows.Forms.CheckBox crawlerCheckBox;
+        private System.Windows.Forms.TextBox statusCodeTextBox;
+        private System.Windows.Forms.Timer scanTimer;
     }
 }

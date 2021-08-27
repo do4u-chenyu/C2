@@ -133,35 +133,40 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.tBSpecial.Name = "tBSpecial";
             this.tBSpecial.Size = new System.Drawing.Size(170, 26);
             this.tBSpecial.TabIndex = 7;
-            this.tBSpecial.Text = "特殊数字 \"|\" 分隔";
+            this.tBSpecial.Text = "特殊数字 \'|\' 分隔";
             // 
             // tBBirth
             // 
             this.tBBirth.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.tBBirth.Location = new System.Drawing.Point(411, 124);
+            this.tBBirth.MaxLength = 10;
             this.tBBirth.Name = "tBBirth";
             this.tBBirth.Size = new System.Drawing.Size(170, 26);
             this.tBBirth.TabIndex = 3;
             this.tBBirth.Text = "出生日期";
-            
+            this.tBBirth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Birth_KeyPress);
             // 
             // tBQQ
             // 
             this.tBQQ.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.tBQQ.Location = new System.Drawing.Point(100, 124);
+            this.tBQQ.MaxLength = 12;
             this.tBQQ.Name = "tBQQ";
             this.tBQQ.Size = new System.Drawing.Size(170, 26);
             this.tBQQ.TabIndex = 2;
             this.tBQQ.Text = "QQ号";
+            this.tBQQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.QQ_KeyPress);
             // 
             // tBPhone
             // 
             this.tBPhone.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.tBPhone.Location = new System.Drawing.Point(100, 169);
+            this.tBPhone.MaxLength = 11;
             this.tBPhone.Name = "tBPhone";
             this.tBPhone.Size = new System.Drawing.Size(170, 26);
             this.tBPhone.TabIndex = 4;
             this.tBPhone.Text = "手机号";
+            this.tBPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Phone_KeyPress);
             // 
             // tBOname
             // 
@@ -188,7 +193,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.tBWname.Name = "tBWname";
             this.tBWname.Size = new System.Drawing.Size(170, 26);
             this.tBWname.TabIndex = 1;
-            this.tBWname.Text = "姓名全拼  \"|\"分隔";
+            this.tBWname.Text = "姓名全拼  \'|\'分隔";
             // 
             // tBMail
             // 
@@ -206,7 +211,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.tBOldpass.Name = "tBOldpass";
             this.tBOldpass.Size = new System.Drawing.Size(170, 26);
             this.tBOldpass.TabIndex = 9;
-            this.tBOldpass.Text = "历史密码 \"|\" 分隔";
+            this.tBOldpass.Text = "历史密码 \'|\'分隔";
             // 
             // tBWifename
             // 
@@ -224,7 +229,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.tBWifeWname.Name = "tBWifeWname";
             this.tBWifeWname.Size = new System.Drawing.Size(170, 26);
             this.tBWifeWname.TabIndex = 11;
-            this.tBWifeWname.Text = "伴侣姓名全拼 |分隔";
+            this.tBWifeWname.Text = "伴侣姓名全拼 \'|\'分隔";
             // 
             // label23
             // 
@@ -236,7 +241,6 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.label23.Size = new System.Drawing.Size(220, 31);
             this.label23.TabIndex = 25;
             this.label23.Text = "利用习惯  精准分析";
-            
             // 
             // panel1
             // 
@@ -281,10 +285,12 @@ namespace C2.Business.CastleBravo.PwdGenerator
             // 
             this.tBWifePhone.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.tBWifePhone.Location = new System.Drawing.Point(80, 73);
+            this.tBWifePhone.MaxLength = 11;
             this.tBWifePhone.Name = "tBWifePhone";
             this.tBWifePhone.Size = new System.Drawing.Size(170, 26);
             this.tBWifePhone.TabIndex = 12;
             this.tBWifePhone.Text = "伴侣手机号";
+            this.tBWifePhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Wphone_KeyPress);
             // 
             // label17
             // 
@@ -526,7 +532,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             // 
             // PwdGeneratorForm
             // 
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(728, 525);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
@@ -567,11 +573,11 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "PwdGeneratorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "社工生成";
-            
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

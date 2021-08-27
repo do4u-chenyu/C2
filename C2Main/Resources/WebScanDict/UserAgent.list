@@ -1,0 +1,12 @@
+﻿Win10 Chrome	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36
+Win7 Chrome	Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1
+Win7 Firefox	Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0
+Win7 Safari	Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50
+Win7 Opera	Opera/9.80 (Windows NT 6.1; U; zh-cn) Presto/2.9.168 Version/11.50
+Win7 IE9	Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; Tablet PC 2.0; .NET4.0E)
+谷歌		Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+百度		Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)
+雅虎		Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+微软		Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
+搜搜		Sosospider (+http://help.soso.com/webspider.htm)
+搜狗		Sogou web spider/4.0(+http://www.sogou.com/docs/help/webmasters.htm)

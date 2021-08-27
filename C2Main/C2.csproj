@@ -261,6 +261,10 @@
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebScan\Model\HttpRequest.cs" />
+    <Compile Include="Business\CastleBravo\WebScan\Model\ServerInfo.cs" />
+    <Compile Include="Business\CastleBravo\WebScan\Tools\Config.cs" />
+    <Compile Include="Business\CastleBravo\WebScan\Tools\Tool.cs" />
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3543,6 +3547,9 @@
     <Content Include="Resources\UIThemes\Thin Green.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\WebScanDict\UserAgent.list">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\windows_themes.xml" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />
@@ -3577,6 +3584,18 @@
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
     <None Include="Resources\可视化数据可视化.png" />
+    <Content Include="Resources\WebScanDict\aspx.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\dir.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\php.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

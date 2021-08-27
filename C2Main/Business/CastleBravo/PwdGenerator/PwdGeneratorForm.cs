@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace C2.Business.CastleBravo.PwdGenerator
 {
@@ -19,106 +20,152 @@ namespace C2.Business.CastleBravo.PwdGenerator
         }
 
         public List<string> birthday = new List<string>();  //birthday存入所有被排序的值
-        
-
-        public List<string> GetBirth(string tbbirth)     //birth
+        public List<string> GetBirth(string tbBirth)     //birth
         {
+            if (tbBirth == "出生日期" || tbBirth == string.Empty)
+            {
+                return null;
+            }
+            else
+            {
+                int start = 2;
+                //string birth = "19980405";
+                string day = tbBirth.Substring(tbBirth.Length - start);
+                string month = tbBirth.Substring(4, 2);
+                string year = tbBirth.Substring(0, 4);
+                string year1 = tbBirth.Substring(2, 2);
+                birthday.Add(year + month + day);
+                birthday.Add(year);
+                birthday.Add(day);
+                birthday.Add(month + day);
+                birthday.Add(year1);
+                birthday.Add(year1 + month + day);
 
-            int start = 2;
-            //string birth = "19980405";
-            string day = tbbirth.Substring(tbbirth.Length - start);
-            string month = tbbirth.Substring(0, 4);
-            string year = tbbirth.Substring(4, 2);
-            string year1 = tbbirth.Substring(2, 2);
-            List<string> birthday = new List<string>();
-            birthday.Add(year + month + day);
-            birthday.Add(year);
-            birthday.Add(day);
-            birthday.Add(month + day);
-            birthday.Add(year1);
-            birthday.Add(year1 + month + day);
-
-            return birthday;
+                return birthday;
+            }
 
         }
+
 
 
 
         public List<string> GetRepeat(List<string> li)    //较短字符重复
         {
             //List<string> repeat = new List<string>();
-            for (int i = 0; i < li.Count; i++)
+            try
             {
-                if (li[i].Length <= 3)
+                for (int i = 0; i < li.Count; i++)
                 {
-                    birthday.Add(li[i] + li[i]);
-                }
+                    if (li[i].Length < 2)
+                    {
+                        birthday.Add(li[i] + li[i]);
 
+                    }
+
+                }
+                return birthday;
             }
-            return birthday;
+            catch
+            {
+                return null;
+            }
         }
 
         public List<string> GetSpecial(string tbSpecial)     //special number
         {
 
-            List<string> numList = new List<string>() { "520", "5201314", "1314", "iloveu", "iloveyou", "123456", "123123", "1314", "123", "321", "52" };
-            for (int i = 0; i < numList.Count; i++)
+            if (tbSpecial == "特殊数字 '|' 分隔" || tbSpecial == string.Empty)
             {
-                birthday.Add(numList[i]);
+                List<string> numList = new List<string>() { "520", "5201314", "1314", "123456", "123123", "1314", "123", "321", "52" };
+                for (int i = 0; i < numList.Count; i++)
+                {
+                    birthday.Add(numList[i]);
+                }
+                return birthday;
             }
-            birthday.Add(tbSpecial);
-
-            return birthday;
+            else
+            {
+                birthday.Add(tbSpecial);
+                return birthday;
+            }
 
         }
 
         public List<string> GetEmail(string tbemail)
         {
-            //string tbemail = "1037538120@qq.com";
-            string num = tbemail.Split('@')[0];
-            if (num.Length > 7)
+            if (tbemail == "邮箱" || tbemail == string.Empty)
             {
-                birthday.Add(num.Substring(0, 3));
-                birthday.Add(num.Substring(3, 4));
-                birthday.Add(num.Substring(6, num.Length - 6));
+                return null;
             }
             else
             {
-                birthday.Add(num);
+                //string tbemail = "1037538120@qq.com";
+                string[] num = tbemail.Split('@');
+                if (num[0] == string.Empty)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (num.Length > 7)
+                    {
+                        birthday.Add(num[0].Substring(0, 3));
+                        birthday.Add(num[0].Substring(3, 4));
+                        birthday.Add(num[0].Substring(6, num.Length - 6));
+                    }
+                    else
+                    {
+                        birthday.Add(num[0]);
+                    }
+
+                    return birthday;
+                }
+                
             }
-
-
-            return birthday;
         }
         public List<string> Getht(int l, string s)  //获得输入的前几位和后几位
         {
-            if (s.Length > l)
-            {
-                birthday.Add(s.Substring(0, l));
-                birthday.Add(s.Substring(s.Length - l, l));
-            }
 
-            return birthday;
+            if (s == "伴侣手机号" || s == string.Empty ||s== "历史密码 '|'分隔" )
+            {
+                return null;
+            }
+            else
+            {
+                if (s.Length > l)
+                {
+                    birthday.Add(s.Substring(0, l));
+                    birthday.Add(s.Substring(s.Length - l, l));
+                }
+
+                return birthday;
+            }
         }
 
 
         public List<string> ShortName(string tbName)  //tBName
         {
-            //string fullName = "xuxiao";
-            //string name = "xx";
-            string Name = tbName.ToUpper();
-            for (int i = 0; i < tbName.Length; i++)
+            if (tbName == "伴侣姓名简拼" || tbName == string.Empty)
             {
-                birthday.Add(Name.Substring(i, 1));  //
-                birthday.Add(tbName.Substring(i, 1));
+                return null;
             }
-            birthday.Add(tbName);
-            birthday.Add(Name);
-            return birthday;
+            else
+            {
+                //string fullName = "xuxiao";
+                //string name = "xx";
+                string Name = tbName.ToUpper();
+                for (int i = 0; i < tbName.Length; i++)
+                {
+                    birthday.Add(Name.Substring(i, 1));  //
+                    birthday.Add(tbName.Substring(i, 1));
+                }
+                birthday.Add(tbName);
+                birthday.Add(Name);
+                return birthday;
+            }
         }
 
-        
-        public List<string> Distinct(List<string> ll)
+        public List<string> Distinct(List<string> ll)     //去重
         {
             for (int i = 0; i < ll.Count; i++)
             {
@@ -134,67 +181,114 @@ namespace C2.Business.CastleBravo.PwdGenerator
 
         public List<string> GetFullname(string[] tbFullName)
         {
-            string Xing = tbFullName[0];
-            birthday.Add(Xing.ToUpper());
-            string Ming = tbFullName[1];
-            birthday.Add(Xing);
-            birthday.Add(Xing.Substring(0, 1).ToUpper() + Xing.Substring(1));
-            birthday.Add(Ming);
+            if (tbFullName.ToString() == "伴侣姓名全拼 '|'分隔" || tbFullName.ToString() == string.Empty || tbFullName.ToString() == "")
+            {
+                return null;
+            }
+            else if (tbFullName.Length > 1)
+            {
 
-            return birthday;
+                string Xing = tbFullName[0];
+                if (Xing.Length > 1)
+                {
+                    birthday.Add(Xing.ToUpper());
+                    string Ming = tbFullName[1];
+                    birthday.Add(Xing);
+                    birthday.Add(Xing.Substring(0, 1).ToUpper() + Xing.Substring(1));
+                    birthday.Add(Ming);
+                    return birthday;
+                }
+                else
+                {
+                    return null;
+                }
+                    
+            }
+
+            else if (tbFullName.Length == 1)
+            {
+                birthday.Add(tbFullName[0]);
+                return birthday;
+            }
+            else 
+            {
+                return null;
+            }
 
         }
 
-        private List<string> Group(List<string> list)
+        public List<string> Filter(List<string> list)   //过滤掉汉字，并且将特殊字符不放在开头
         {
-            List<string> tmpList = new List<string>();
-            int j = list.Count();
+            List<string> result1 = new List<string>();
             foreach (string item in list)
             {
-                for (int i = 0; i < j; i++)
-                {
-                    if (item == list[i])
-                        continue;
-                    string newItem = item + list[i] + "\n";
-                    if(newItem.Length >= 6)
-                        tmpList.Add(newItem);
 
+                string pattern = @"^[a-zA-Z0-9_][A-Za-z0-9@+#_]*$";
+                string match = (Regex.Match(item, pattern).Value);
+                if(match.Length>0)
+
+                    result1.Add(match);
+            }
+            return result1;
+        }
+
+
+
+        private List<string> Group(List<string> list)    //组合元素
+        {
+            List<string> tmpList = new List<string>();
+            foreach (string item in list)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (item != list[i])
+                    {
+                        string newitem = item + list[i];
+                        if (newitem.Length > 6)
+                        {
+                            tmpList.Add(newitem);
+                        }
+
+                    }
 
                 }
-
             }
             return tmpList;
         }
 
 
-      
-
         private void button2_Click(object sender, EventArgs e)
         {
+
+            if (tBName.Text == "姓名简拼" || tBName.Text == string.Empty || tBWname.Text == "姓名全拼  '|'分隔" || tBWname.Text == string.Empty || tBWname.Text == null || tBPhone.Text == "手机号" || tBPhone.Text == string.Empty || tBPhone.Text.Length!=11)
+            {
+                MessageBox.Show("请正确输入必填信息");
+                return;
+            }
 
             string tbName = tBName.Text;
             string tbeName = tBEname.Text;
             string tbQq = tBQQ.Text;
             string tbBirth = tBBirth.Text;
             string tbEmail = tBMail.Text;
+
             string[] tbFullName = tBWname.Text.Split('|');
             string[] tbWfName = tBWifeWname.Text.Split('|');
             string tbPhone = tBPhone.Text;
+           
             string tbWifeName = tBWifename.Text;
             string[] tbOldPass = tBOldpass.Text.Split('|');
             string tbSpecial = tBSpecial.Text;
-            string tbwPhone = tBWifePhone.Text;
-            string[] tbself = tBSelf.Text.Split('|');
+            string tbWPhone = tBWifePhone.Text;
+            
+            string[] tbSelf = tBSelf.Text.Split('|');
             for (int i = 0; i < tbOldPass.Length; i++)
             {
                 Getht(3, tbOldPass[i]);
                 Getht(4, tbOldPass[i]);
             }
-            for (int i = 0; i < tbself.Length; i++)
-            {
-                birthday.Add(tbself[i]);
-            }
-            birthday.Add(tbeName);
+            if (tbeName != null || tbeName != "英文名")
+                birthday.Add(tbeName);
             GetFullname(tbFullName);
             GetFullname(tbWfName);
             GetBirth(tbBirth);
@@ -204,21 +298,91 @@ namespace C2.Business.CastleBravo.PwdGenerator
             GetEmail(tbEmail);
             GetEmail(tbQq);
             Getht(3, tbPhone);
-            Getht(3, tbwPhone);
+            Getht(3, tbWPhone);
             Getht(4, tbPhone);
             Getht(5, tbPhone);
             GetRepeat(ShortName(tbName));
+
+
+            try
+            {
+                for (int i = 0; i < tbSelf.Length; i++)
+                {
+                    birthday.Add(tbSelf[i]);
+                }
+            }
+            catch
+            {
+                return;
+            }
             Distinct(birthday);
+            List<string> small = new List<string>();  //small存放较短数据
+            List<string> big = new List<string>();  //big存放较长数据
 
-            List<string> tmpList = Group(birthday);
+            foreach (string item in birthday)   //将较短数据取出，放置在最后
+            {
+                if (item.Length <= 2)
+                {
+                    small.Add(item);
+                }
+                else if (item.Length >= 4)
+                {
+                    big.Add(item);
+                }
+            }
 
-            string s = string.Join(",", birthday.ToArray());
-            string t = string.Join("", tmpList.ToArray());
+            List<string> tmpList = Group(birthday);   //tmpList存放组合后的数据
+
+            foreach (string item in big)
+            {
+                foreach (string item1 in small)
+                    tmpList.Add(item + '@' + item1);
+
+            }
+
             
-            PwdResultForm form1 = new PwdResultForm();
-            form1.richTextBoxText = t;
-            form1.ShowDialog();
 
+            List<string> result = new List<string>();  //result存放
+
+            string t = string.Join("\n", Filter(tmpList).ToArray()); ;
+
+            PwdResultForm form2 = new PwdResultForm();
+            form2.richTextBoxText = t;
+            form2.ShowDialog();
+
+
+        }
+
+        private void QQ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Phone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Birth_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Wphone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
