@@ -40,6 +40,28 @@
             this.browserButton = new System.Windows.Forms.Button();
             this.dataSourcePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.edgeSetting = new System.Windows.Forms.TabPage();
+            this.targetComboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.sourceComboBox = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.edgeInputBotton = new System.Windows.Forms.Button();
+            this.edgeDataSource = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nodeSetting = new System.Windows.Forms.TabPage();
+            this.nodeComboBox = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nodeInputButton = new System.Windows.Forms.Button();
+            this.nodeDataSource = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.superiorCombox = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.styleComboBox = new System.Windows.Forms.ComboBox();
             this.styleLabel = new System.Windows.Forms.Label();
@@ -47,16 +69,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.keyComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.superiorCombox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.edgeSetting.SuspendLayout();
+            this.nodeSetting.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label19
@@ -132,7 +152,8 @@
             this.chartType.FormattingEnabled = true;
             this.chartType.Items.AddRange(new object[] {
             "组织架构图",
-            "词云"});
+            "词云",
+            "社交关系图"});
             this.chartType.Location = new System.Drawing.Point(101, 65);
             this.chartType.Name = "chartType";
             this.chartType.Size = new System.Drawing.Size(242, 25);
@@ -182,8 +203,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panel2);
+            this.groupBox1.Controls.Add(this.panel3);
             this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(22, 112);
             this.groupBox1.Name = "groupBox1";
@@ -192,87 +214,174 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "参数配置：";
             // 
-            // panel2
+            // panel3
             // 
-            this.panel2.Controls.Add(this.styleComboBox);
-            this.panel2.Controls.Add(this.styleLabel);
-            this.panel2.Controls.Add(this.countComboBox);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.keyComboBox);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(325, 233);
-            this.panel2.TabIndex = 10092;
-            this.panel2.Visible = false;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.tabControl1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 25);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(325, 233);
+            this.panel3.TabIndex = 10065;
             // 
-            // styleComboBox
+            // tabControl1
             // 
-            this.styleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.styleComboBox.DropDownWidth = 242;
-            this.styleComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.styleComboBox.FormattingEnabled = true;
-            this.styleComboBox.Items.AddRange(new object[] {
-            "样式1",
-            "样式2",
-            "样式3",
-            "样式4"});
-            this.styleComboBox.Location = new System.Drawing.Point(76, 187);
-            this.styleComboBox.Name = "styleComboBox";
-            this.styleComboBox.Size = new System.Drawing.Size(242, 25);
-            this.styleComboBox.TabIndex = 10064;
-            this.styleComboBox.SelectedIndexChanged += new System.EventHandler(this.styleComboBox_SelectedIndexChanged);
+            this.tabControl1.Controls.Add(this.edgeSetting);
+            this.tabControl1.Controls.Add(this.nodeSetting);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(321, 229);
+            this.tabControl1.TabIndex = 0;
             // 
-            // styleLabel
+            // edgeSetting
             // 
-            this.styleLabel.AutoSize = true;
-            this.styleLabel.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.styleLabel.Location = new System.Drawing.Point(4, 187);
-            this.styleLabel.Name = "styleLabel";
-            this.styleLabel.Size = new System.Drawing.Size(37, 20);
-            this.styleLabel.TabIndex = 10063;
-            this.styleLabel.Text = "样式";
+            this.edgeSetting.Controls.Add(this.targetComboBox);
+            this.edgeSetting.Controls.Add(this.label11);
+            this.edgeSetting.Controls.Add(this.sourceComboBox);
+            this.edgeSetting.Controls.Add(this.label10);
+            this.edgeSetting.Controls.Add(this.edgeInputBotton);
+            this.edgeSetting.Controls.Add(this.edgeDataSource);
+            this.edgeSetting.Controls.Add(this.label9);
+            this.edgeSetting.Location = new System.Drawing.Point(4, 29);
+            this.edgeSetting.Name = "edgeSetting";
+            this.edgeSetting.Padding = new System.Windows.Forms.Padding(3);
+            this.edgeSetting.Size = new System.Drawing.Size(313, 196);
+            this.edgeSetting.TabIndex = 0;
+            this.edgeSetting.Text = "边设置";
+            this.edgeSetting.UseVisualStyleBackColor = true;
             // 
-            // countComboBox
+            // targetComboBox
             // 
-            this.countComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.countComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.countComboBox.FormattingEnabled = true;
-            this.countComboBox.Location = new System.Drawing.Point(76, 114);
-            this.countComboBox.Name = "countComboBox";
-            this.countComboBox.Size = new System.Drawing.Size(242, 25);
-            this.countComboBox.TabIndex = 10062;
+            this.targetComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.targetComboBox.FormattingEnabled = true;
+            this.targetComboBox.Location = new System.Drawing.Point(72, 123);
+            this.targetComboBox.Name = "targetComboBox";
+            this.targetComboBox.Size = new System.Drawing.Size(240, 25);
+            this.targetComboBox.TabIndex = 6;
             // 
-            // label8
+            // label11
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(3, 115);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 20);
-            this.label8.TabIndex = 10061;
-            this.label8.Text = "频次：";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.label11.Location = new System.Drawing.Point(0, 123);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 20);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "目标节点：";
             // 
-            // keyComboBox
+            // sourceComboBox
             // 
-            this.keyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.keyComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.keyComboBox.FormattingEnabled = true;
-            this.keyComboBox.Location = new System.Drawing.Point(76, 31);
-            this.keyComboBox.Name = "keyComboBox";
-            this.keyComboBox.Size = new System.Drawing.Size(242, 25);
-            this.keyComboBox.TabIndex = 10060;
+            this.sourceComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sourceComboBox.FormattingEnabled = true;
+            this.sourceComboBox.Location = new System.Drawing.Point(72, 66);
+            this.sourceComboBox.Name = "sourceComboBox";
+            this.sourceComboBox.Size = new System.Drawing.Size(240, 25);
+            this.sourceComboBox.TabIndex = 4;
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(4, 35);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 20);
-            this.label7.TabIndex = 10059;
-            this.label7.Text = "关键词：";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.label10.Location = new System.Drawing.Point(0, 66);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 20);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "源节点：";
+            // 
+            // edgeInputBotton
+            // 
+            this.edgeInputBotton.BackColor = System.Drawing.Color.Transparent;
+            this.edgeInputBotton.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.edgeInputBotton.Location = new System.Drawing.Point(265, 12);
+            this.edgeInputBotton.Name = "edgeInputBotton";
+            this.edgeInputBotton.Size = new System.Drawing.Size(47, 23);
+            this.edgeInputBotton.TabIndex = 2;
+            this.edgeInputBotton.Text = "导入";
+            this.edgeInputBotton.UseVisualStyleBackColor = false;
+            this.edgeInputBotton.Click += new System.EventHandler(this.EdgeInputBotton_Click);
+            // 
+            // edgeDataSource
+            // 
+            this.edgeDataSource.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.edgeDataSource.Location = new System.Drawing.Point(72, 12);
+            this.edgeDataSource.Name = "edgeDataSource";
+            this.edgeDataSource.Size = new System.Drawing.Size(187, 23);
+            this.edgeDataSource.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(0, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 20);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "边数据源：";
+            // 
+            // nodeSetting
+            // 
+            this.nodeSetting.Controls.Add(this.nodeComboBox);
+            this.nodeSetting.Controls.Add(this.label13);
+            this.nodeSetting.Controls.Add(this.nodeInputButton);
+            this.nodeSetting.Controls.Add(this.nodeDataSource);
+            this.nodeSetting.Controls.Add(this.label12);
+            this.nodeSetting.Location = new System.Drawing.Point(4, 29);
+            this.nodeSetting.Name = "nodeSetting";
+            this.nodeSetting.Padding = new System.Windows.Forms.Padding(3);
+            this.nodeSetting.Size = new System.Drawing.Size(313, 196);
+            this.nodeSetting.TabIndex = 1;
+            this.nodeSetting.Text = "节点设置";
+            this.nodeSetting.UseVisualStyleBackColor = true;
+            // 
+            // nodeComboBox
+            // 
+            this.nodeComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nodeComboBox.FormattingEnabled = true;
+            this.nodeComboBox.Location = new System.Drawing.Point(70, 80);
+            this.nodeComboBox.Name = "nodeComboBox";
+            this.nodeComboBox.Size = new System.Drawing.Size(242, 25);
+            this.nodeComboBox.TabIndex = 5;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.label13.Location = new System.Drawing.Point(3, 85);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 20);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "节点：";
+            // 
+            // nodeInputButton
+            // 
+            this.nodeInputButton.BackColor = System.Drawing.Color.Transparent;
+            this.nodeInputButton.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.nodeInputButton.Location = new System.Drawing.Point(263, 17);
+            this.nodeInputButton.Name = "nodeInputButton";
+            this.nodeInputButton.Size = new System.Drawing.Size(49, 23);
+            this.nodeInputButton.TabIndex = 3;
+            this.nodeInputButton.Text = "导入";
+            this.nodeInputButton.UseVisualStyleBackColor = false;
+            this.nodeInputButton.Click += new System.EventHandler(this.NodeInputButton_Click);
+            // 
+            // nodeDataSource
+            // 
+            this.nodeDataSource.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nodeDataSource.Location = new System.Drawing.Point(72, 17);
+            this.nodeDataSource.Name = "nodeDataSource";
+            this.nodeDataSource.Size = new System.Drawing.Size(187, 23);
+            this.nodeDataSource.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 17);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(79, 20);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "点数据源：";
             // 
             // panel1
             // 
@@ -339,6 +448,88 @@
             this.superiorCombox.Size = new System.Drawing.Size(242, 25);
             this.superiorCombox.TabIndex = 10059;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.styleComboBox);
+            this.panel2.Controls.Add(this.styleLabel);
+            this.panel2.Controls.Add(this.countComboBox);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.keyComboBox);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(325, 233);
+            this.panel2.TabIndex = 10092;
+            this.panel2.Visible = false;
+            // 
+            // styleComboBox
+            // 
+            this.styleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.styleComboBox.DropDownWidth = 242;
+            this.styleComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.styleComboBox.FormattingEnabled = true;
+            this.styleComboBox.Items.AddRange(new object[] {
+            "样式1",
+            "样式2",
+            "样式3",
+            "样式4"});
+            this.styleComboBox.Location = new System.Drawing.Point(76, 187);
+            this.styleComboBox.Name = "styleComboBox";
+            this.styleComboBox.Size = new System.Drawing.Size(242, 25);
+            this.styleComboBox.TabIndex = 10064;
+            this.styleComboBox.SelectedIndexChanged += new System.EventHandler(this.StyleComboBox_SelectedIndexChanged);
+            // 
+            // styleLabel
+            // 
+            this.styleLabel.AutoSize = true;
+            this.styleLabel.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.styleLabel.Location = new System.Drawing.Point(4, 187);
+            this.styleLabel.Name = "styleLabel";
+            this.styleLabel.Size = new System.Drawing.Size(37, 20);
+            this.styleLabel.TabIndex = 10063;
+            this.styleLabel.Text = "样式";
+            // 
+            // countComboBox
+            // 
+            this.countComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.countComboBox.FormattingEnabled = true;
+            this.countComboBox.Location = new System.Drawing.Point(76, 114);
+            this.countComboBox.Name = "countComboBox";
+            this.countComboBox.Size = new System.Drawing.Size(242, 25);
+            this.countComboBox.TabIndex = 10062;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(3, 115);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 20);
+            this.label8.TabIndex = 10061;
+            this.label8.Text = "频次：";
+            // 
+            // keyComboBox
+            // 
+            this.keyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.keyComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.keyComboBox.FormattingEnabled = true;
+            this.keyComboBox.Location = new System.Drawing.Point(76, 31);
+            this.keyComboBox.Name = "keyComboBox";
+            this.keyComboBox.Size = new System.Drawing.Size(242, 25);
+            this.keyComboBox.TabIndex = 10060;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(4, 35);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 20);
+            this.label7.TabIndex = 10059;
+            this.label7.Text = "关键词：";
+            // 
             // SettingChartDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -369,10 +560,16 @@
             this.Controls.SetChildIndex(this.groupBox1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.edgeSetting.ResumeLayout(false);
+            this.edgeSetting.PerformLayout();
+            this.nodeSetting.ResumeLayout(false);
+            this.nodeSetting.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -405,5 +602,21 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox styleComboBox;
         private System.Windows.Forms.Label styleLabel;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage edgeSetting;
+        private System.Windows.Forms.TabPage nodeSetting;
+        private System.Windows.Forms.ComboBox targetComboBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox sourceComboBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button edgeInputBotton;
+        private System.Windows.Forms.TextBox edgeDataSource;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox nodeComboBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button nodeInputButton;
+        private System.Windows.Forms.TextBox nodeDataSource;
+        private System.Windows.Forms.Label label12;
     }
 }

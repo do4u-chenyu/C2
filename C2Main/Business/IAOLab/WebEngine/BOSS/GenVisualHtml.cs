@@ -24,29 +24,28 @@ namespace C2.Business.IAOLab.WebEngine.Boss
         }
 
 
-        public string TransDataToHtml(DataTable dataTable, Dictionary<string, string[]> chartOptions)
+        public string TransDataToHtml(List<DataTable> dataList, Dictionary<string, string[]> chartOptions)
         {
             //创建布局，增加图，Show()显示图 
-            Echarts echarts = new Echarts
-            {
-                dataTable = dataTable
-            };
+            Echarts echarts = new Echarts();
             echarts.AddTheme(Theme.phx);
 
-            echarts[1] = GenChartByType(dataTable, chartOptions);
+            echarts[1] = GenChartByType(dataList, chartOptions);
             return echarts.ShowVisual();
         }
 
-        private BaseCharts GenChartByType(DataTable dataTable, Dictionary<string, string[]> chartOptions)
+        private BaseCharts GenChartByType(List<DataTable> dataList, Dictionary<string, string[]> chartOptions)
         {
             switch (chartOptions["ChartType"][0])
             {
                 case "Organization":
-                    return new Organization(dataTable, new CompleteOption(), chartOptions);
+                    return new Organization(dataList[0], new CompleteOption(), chartOptions);
                 case "WordCloud":
-                    return new WordCloud(dataTable, new CompleteOption(), chartOptions);
+                    return new WordCloud(dataList[0], new CompleteOption(), chartOptions);
+                case "Graph":
+                    return new Graph(dataList, new CompleteOption(), chartOptions);
                 default:
-                    return new Organization(dataTable, new CompleteOption(), chartOptions);
+                    return new Organization(dataList[0], new CompleteOption(), chartOptions);
             }
         }
 

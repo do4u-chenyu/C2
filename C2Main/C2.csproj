@@ -296,10 +296,12 @@
     <Compile Include="Business\IAOLab\WebEngine\Boss\BossTemplateCollection.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Bar\PictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Line\GradientLineChart.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\Graph.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\Organization.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\WordCloud.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\GenVisualHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\Normal.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesGraph.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesTree.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesWordCloud.cs" />

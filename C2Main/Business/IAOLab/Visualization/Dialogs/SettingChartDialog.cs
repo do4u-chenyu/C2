@@ -26,7 +26,11 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         //type,各种idx
 
         private BcpInfo bcpInfo;
+        private BcpInfo bcpInfo1;
+        private BcpInfo bcpInfo2;
         private string dataFullPath;
+        private string edgeDataPath;
+        private string nodeDataPath;
         private List<string> chartTypeList;
 
         public SettingChartDialog()
@@ -36,8 +40,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             Options = new Dictionary<string, string[]>();
             this.styleComboBox.SelectedIndex = 0;
             this.chartType.SelectedIndex = 0;
-            chartTypeList = new List<string> { "Organization", "WordCloud" };
-            
+            chartTypeList = new List<string> { "Organization", "WordCloud","Graph"}; 
         }
 
         public SettingChartDialog(Dictionary<string, string[]> options, WebBrowser browser) : this()
@@ -55,7 +58,14 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 return false;
             }
             //所有列的数据生成datatable、图表配置项生成chartOptions、生成js
-            TranDataToHtml();
+            if (this.chartType.SelectedIndex == 0 || this.chartType.SelectedIndex == 1)
+            {
+                TranDataToHtml();
+            }
+            else if (this.chartType.SelectedIndex == 2)
+            {
+                TranDataToHtml1();
+            }
             return base.OnOKButtonClick();
         }
 
@@ -63,8 +73,10 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         {
             if (this.chartType.Text == "组织架构图")
                 return this.userCombox.SelectedIndex == -1 || this.superiorCombox.SelectedIndex == -1;
-            else if (this.chartType.Text == "词云")
+            if (this.chartType.Text == "词云")
                 return this.keyComboBox.SelectedIndex == -1 || this.countComboBox.SelectedIndex == -1 || this.styleComboBox.SelectedIndex == -1;
+            else if (this.chartType.Text == "社交关系图")
+                return this.sourceComboBox.SelectedIndex == -1 || this.targetComboBox.SelectedIndex == -1 || this.nodeComboBox.SelectedIndex == -1;
 
             //TODO 其他类别
             return true;
@@ -72,15 +84,23 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void TranDataToHtml()
         {
-            DataTable dataTable = GenDataTable();
+            DataTable dataTable = GenDataTable(dataFullPath);
             SavaOption();
-            GenVisualHtml.GetInstance().TransDataToHtml(dataTable, Options);
+            GenVisualHtml.GetInstance().TransDataToHtml(new List<DataTable>() { dataTable }, Options);
         }
 
-        private DataTable GenDataTable()
+        private void TranDataToHtml1()
+        {
+            DataTable dataTable1 = GenDataTable1(edgeDataPath);
+            DataTable dataTable2 = GenDataTable2(nodeDataPath);
+            SavaOption();
+            GenVisualHtml.GetInstance().TransDataToHtml(new List<DataTable>() { dataTable1, dataTable2 }, Options);
+        }
+
+        private DataTable GenDataTable(string path)
         {
             string fileContent;
-            DataTable dataTable = new DataTable("temp");
+            DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
             if (bcpInfo == null || bcpInfo.ColumnArray.IsEmpty())
                 return dataTable;
@@ -102,7 +122,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
 
-            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(dataFullPath, OpUtil.Encoding.UTF8);
+            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, OpUtil.Encoding.UTF8);
             List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
             //int maxLine = Math.Min(rows.Count, MaxLine);
 
@@ -120,6 +140,90 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             return dataTable;
         }
 
+        private DataTable GenDataTable1(string path)
+        {
+            string fileContent;
+            DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
+
+            if (bcpInfo1 == null || bcpInfo1.ColumnArray.IsEmpty())
+                return dataTable;
+
+
+            // 可能有同名列，这里需要重命名一下
+            Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
+            foreach (string col in bcpInfo1.ColumnArray)
+            {
+                if (!induplicatedName.ContainsKey(col))
+                {
+                    induplicatedName.Add(col, 0);
+                    dataTable.Columns.Add(col);
+                }
+                else
+                {
+                    induplicatedName[col] += 1;
+                    dataTable.Columns.Add(col + "_" + induplicatedName[col]);
+                }
+            }
+
+            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, OpUtil.Encoding.UTF8);
+            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
+            //int maxLine = Math.Min(rows.Count, MaxLine);
+
+            for (int i = 1; i < rows.Count; i++)
+            {
+                string[] rowList = rows[i].TrimEnd('\r').Split('\t');
+                List<string> tmpRowList = new List<string>();
+                for (int j = 0; j < bcpInfo1.ColumnArray.Length; j++)
+                {
+                    string cellValue = j < rowList.Length ? rowList[j] : "";
+                    tmpRowList.Add(cellValue);
+                }
+                dataTable.Rows.Add(tmpRowList.ToArray());
+            }
+            return dataTable;
+        }
+        private DataTable GenDataTable2(string path)
+        {
+            string fileContent;
+            DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
+
+            if (bcpInfo2 == null || bcpInfo2.ColumnArray.IsEmpty())
+                return dataTable;
+
+
+            // 可能有同名列，这里需要重命名一下
+            Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
+            foreach (string col in bcpInfo2.ColumnArray)
+            {
+                if (!induplicatedName.ContainsKey(col))
+                {
+                    induplicatedName.Add(col, 0);
+                    dataTable.Columns.Add(col);
+                }
+                else
+                {
+                    induplicatedName[col] += 1;
+                    dataTable.Columns.Add(col + "_" + induplicatedName[col]);
+                }
+            }
+
+            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, OpUtil.Encoding.UTF8);
+            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
+            //int maxLine = Math.Min(rows.Count, MaxLine);
+
+            for (int i = 1; i < rows.Count; i++)
+            {
+                string[] rowList = rows[i].TrimEnd('\r').Split('\t');
+                List<string> tmpRowList = new List<string>();
+                for (int j = 0; j < bcpInfo2.ColumnArray.Length; j++)
+                {
+                    string cellValue = j < rowList.Length ? rowList[j] : "";
+                    tmpRowList.Add(cellValue);
+                }
+                dataTable.Rows.Add(tmpRowList.ToArray());
+            }
+            return dataTable;
+        }
         private void SavaOption()
         {
             Options["DataSourcePath"] = new string[] { this.dataSourcePath.Text };
@@ -128,6 +232,8 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
             Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
             Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString(), this.styleComboBox.SelectedIndex.ToString() };
+            Options["Graph"] = new string[] { this.sourceComboBox.SelectedIndex.ToString(), this.targetComboBox.SelectedIndex.ToString(), this.nodeComboBox.SelectedIndex.ToString() };
+           
         }
 
         private string[] TransListStringToInt(List<string> t, List<int> listInt)
@@ -157,6 +263,41 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             Options = new Dictionary<string, string[]>();
         }
 
+        private void EdgeInputBotton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog
+            {
+                Filter = "文本文档 | *.txt;*.bcp"
+            };
+            if (OpenFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            this.edgeDataSource.Text = OpenFileDialog1.FileName;
+            edgeDataPath = OpenFileDialog1.FileName;
+            //同时需要把字段读出来data
+            this.bcpInfo1 = new BcpInfo(edgeDataPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
+
+            ChangeControlContent1();
+            Options = new Dictionary<string, string[]>();
+        }
+
+        private void NodeInputButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog
+            {
+                Filter = "文本文档 | *.txt;*.bcp"
+            };
+            if (OpenFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            this.nodeDataSource.Text = OpenFileDialog1.FileName;
+            nodeDataPath = OpenFileDialog1.FileName;
+            //同时需要把字段读出来data
+            this.bcpInfo2 = new BcpInfo(nodeDataPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
+
+            ChangeControlContent2();
+            Options = new Dictionary<string, string[]>();
+        }
         private void ChangeControlContent()
         {
             //组织架构图下拉列表更新
@@ -187,8 +328,35 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
         }
-
-
+        private void ChangeControlContent1()
+        {
+            //社交关系图边设置列表更新
+            //foreach (Control ct in this.edgeSetting.Controls)
+            //{
+            //    if (ct is ComboBox)
+            //    {
+                    sourceComboBox.Text = string.Empty;
+                    sourceComboBox.Items.Clear();
+                    sourceComboBox.Items.AddRange(bcpInfo1.ColumnArray);
+                    targetComboBox.Text = string.Empty;
+                    targetComboBox.Items.Clear();
+                    targetComboBox.Items.AddRange(bcpInfo1.ColumnArray);
+            //    }
+            //}
+        }
+        private void ChangeControlContent2()
+        {
+            //社交关系图节点设置列表更新
+            //foreach (Control ct in this.nodeSetting.Controls)
+            //{
+            //    if (ct is ComboBox)
+            //    {
+                    nodeComboBox.Text = string.Empty;
+                    nodeComboBox.Items.Clear();
+                    nodeComboBox.Items.AddRange(bcpInfo2.ColumnArray);
+            //    }
+            //}
+        }
 
 
         private void ChartType_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,15 +365,27 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             {
                 this.panel1.Show();
                 this.panel2.Hide();
+                this.panel3.Hide();
+                this.browserButton.Enabled = true;
                 this.pictureBox1.Image = C2.Properties.Resources.组织架构图样例;
             }
-            else if(this.chartType.SelectedIndex == 1)
+            if(this.chartType.SelectedIndex == 1)
             {
                 this.panel1.Hide();
+                this.panel3.Hide();
                 this.panel2.Show();
+                this.browserButton.Enabled = true;
                 this.pictureBox1.Image = C2.Properties.Resources.词云样例1;
             }
-                
+            else if (this.chartType.SelectedIndex == 2)
+            {
+                this.panel1.Hide();
+                this.panel2.Hide();
+                this.panel3.Show();
+                this.browserButton.Enabled = false;
+                this.pictureBox1.Image = C2.Properties.Resources.社交关系图样例;
+            }
+
         }
 
         private void ZoomInBtn_Click(object sender, EventArgs e)
@@ -234,7 +414,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         }
         #endregion
 
-        private void styleComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void StyleComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.styleComboBox.SelectedIndex == 0)
             {
