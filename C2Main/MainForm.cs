@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Zip;
+
 
 namespace C2
 {
@@ -31,7 +33,7 @@ namespace C2
         CanvasForm,
         StartForm
     }
-    public partial class MainForm : DocumentManageForm
+    public partial class MainForm: DocumentManageForm
     {
         public string UserName { get; set; }
 
@@ -54,21 +56,37 @@ namespace C2
 
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
+        string fullFilePath;
+        string password;
 
-        public MainForm(string userName)
+        public MainForm(string userName, string path)
         {
-
             InitializeComponent();
             InitializeUserName(userName);
-
             InitializeInputDataForm();
             InitializeBottomPrviewPanel();
             InitializeLeftToolPanel();
-
             InitializeTaskBar();
             InitializeShortcutKeys();
             InitializeGlobalVariable();
-
+            InitializeMdiClient();
+            InitializeStartForm();
+            if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
+                OpenSavedTabs();
+            fullFilePath = path;
+            password = String.Empty;
+        }
+        
+        public MainForm(string userName)
+        {
+            InitializeComponent();
+            InitializeUserName(userName);
+            InitializeInputDataForm();
+            InitializeBottomPrviewPanel();
+            InitializeLeftToolPanel();
+            InitializeTaskBar();
+            InitializeShortcutKeys();
+            InitializeGlobalVariable();
             InitializeMdiClient();
             InitializeStartForm();
             if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
@@ -204,7 +222,7 @@ namespace C2
         }
         void InitializeStartForm()
         {
-            this.NewForm(FormType.StartForm);
+            this.NewForm(FormType.StartForm); 
         }
         #endregion
         void SetAGoodLocation()
@@ -314,12 +332,14 @@ namespace C2
             {
                 LoadHotModel();
                 LoadDocuments();
+                if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
+                    HelpUtil.ShowMessageBox("导入成功");
                 LoadDataSource();
                 LoadIAOLaboratory();
                 LoadHIBU();
             }
         }
-
+        
         private void LoadHotModel()
         {
 
@@ -343,8 +363,12 @@ namespace C2
             foreach (string title in mtTitles)
                 this.modelMarketControl.AddModel(title);
         }
+
+
+
         private void LoadDataSource()
         {
+           
             DataSourceInfo dataSource0 = new DataSourceInfo(this.UserName);
             List<DataButton> dataButtons = dataSource0.LoadDataSourceInfo();
            
@@ -356,6 +380,7 @@ namespace C2
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
         }
+
         private void LoadIAOLaboratory()
         {
             // 加载固定的6个小工具

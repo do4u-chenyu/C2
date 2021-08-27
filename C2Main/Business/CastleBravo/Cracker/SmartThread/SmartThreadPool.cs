@@ -610,6 +610,23 @@ namespace Amib.Threading
             }
         }
 
+		public void WaitFor(int minWaitingCallbacks, int maxWaitingCallbacks)
+		{
+			if (WaitingCallbacks > maxWaitingCallbacks)
+			{
+				while (true)
+				{
+					if (WaitingCallbacks < minWaitingCallbacks)
+					{
+						break;
+					}
+					else
+					{
+						Thread.Sleep(10);
+					}
+				}
+			}
+		}
 		private void IncrementWorkItemsCount()
 		{
 			_windowsPCs.SampleWorkItems(_workItemsQueue.Count, _workItemsProcessed);

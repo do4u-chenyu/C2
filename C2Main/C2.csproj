@@ -31,7 +31,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -62,9 +62,7 @@
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '开发调试|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\开发调试\</OutputPath>
@@ -77,6 +75,12 @@
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Words">
@@ -197,6 +201,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddMindMapButton_Click.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
@@ -257,6 +264,10 @@
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebScan\Model\HttpRequest.cs" />
+    <Compile Include="Business\CastleBravo\WebScan\Model\ServerInfo.cs" />
+    <Compile Include="Business\CastleBravo\WebScan\Tools\Config.cs" />
+    <Compile Include="Business\CastleBravo\WebScan\Tools\Tool.cs" />
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2208,6 +2219,7 @@
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
+    <Content Include="2.ico" />
     <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2525,6 +2537,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Block.png" />
+    <Content Include="logo.ico" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
@@ -3541,6 +3554,9 @@
     <Content Include="Resources\UIThemes\Thin Green.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\WebScanDict\UserAgent.list">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\windows_themes.xml" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />
@@ -3575,6 +3591,18 @@
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
     <None Include="Resources\可视化数据可视化.png" />
+    <Content Include="Resources\WebScanDict\aspx.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\dir.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\php.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
