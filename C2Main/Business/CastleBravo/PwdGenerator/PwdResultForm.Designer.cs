@@ -34,6 +34,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Show_label = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -42,9 +43,9 @@ namespace C2.Business.CastleBravo.PwdGenerator
             // 
             this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 25);
+            this.richTextBox1.Location = new System.Drawing.Point(0, 50);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(448, 357);
+            this.richTextBox1.Size = new System.Drawing.Size(448, 332);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -70,6 +71,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.Show_label);
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 12);
@@ -78,6 +80,14 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "预览";
+            // 
+            // Show_label
+            // 
+            this.Show_label.AutoSize = true;
+            this.Show_label.Location = new System.Drawing.Point(12, 27);
+            this.Show_label.Name = "Show_label";
+            this.Show_label.Size = new System.Drawing.Size(0, 20);
+            this.Show_label.TabIndex = 1;
             // 
             // PwdResultForm
             // 
@@ -91,9 +101,10 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.MaximizeBox = false;
             this.Name = "PwdResultForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "社工生成";
+            this.Text = "社工生成器";
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -104,5 +115,6 @@ namespace C2.Business.CastleBravo.PwdGenerator
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label Show_label;
     }
 }
