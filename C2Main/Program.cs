@@ -80,7 +80,7 @@ namespace C2
         [STAThread]
         static void Main(params string[] args)
         {
-            Regist();
+            //Regist();
       
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021091700000000") > 0)
             {

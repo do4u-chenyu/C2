@@ -8,6 +8,8 @@
 #define MyAppPkgDir "C:\Program Files\FiberHome\IAO解决方案"
 
 #define MyAppExeName "C2Shell.exe"
+#define AppIconName "\Resources\C2\Icon\Icon.ico"
+
 ; 生成 目录setup.exe 所在文件夹
 #define MySetupOutDir ".\output"
 ;生成安装包的名称
@@ -97,6 +99,15 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 
 [Registry]
 Root:HKCU;Subkey: "{#MyRegInstallPath_sk}" ; ValueType:string; ValueName:"{#MyRegInstallPath_vn}"; ValueData:"{app}";Flags:uninsdeletekeyifempty
+Root: HKCR; Subkey: ".c2"; Flags: uninsdeletekey
+Root: HKCR; Subkey: ".c2"; ValueType: string; ValueName: ""; ValueData: "C2File"
+Root: HKCR; Subkey: "C2File"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "C2File\DefaultIcon"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "C2File\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#AppIconName}"; Flags: 
+Root: HKCR; Subkey: "C2File\shell"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "C2File\shell\open"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "C2File\shell\open\command"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "C2File\shell\open\command"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName} ""%1"""; Flags:
 
 [Code]
 #include "DllsImport.iss"  
