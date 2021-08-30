@@ -165,11 +165,18 @@ namespace C2.Business.HIBU.OCR
         {
             List<String> resultList = new List<string>();
 
-            JArray json = JArray.Parse(data);
-            foreach (JValue item in json)
+            if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
+                return string.Empty;
+            try
             {
-                resultList.Add(item.ToString());
+                JArray json = JArray.Parse(data);
+                foreach (JValue item in json)
+                {
+                    resultList.Add(item.ToString());
+                }
             }
+            catch { return "解析出错，可尝试重新识别。"; }
+
 
             return string.Join("\n", resultList);
         }
