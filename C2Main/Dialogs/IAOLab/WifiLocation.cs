@@ -44,7 +44,7 @@ namespace C2.Dialogs.IAOLab
             {
                 fileType = "BaseStation";
             }
-            if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
+            else if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
             {
                 fileType = "BaseAddress";
             }
@@ -74,7 +74,6 @@ namespace C2.Dialogs.IAOLab
                         MessageBox.Show("查询完成");
                         progressBar1.Value = 0;
                     }
-
                 }
             }
 
@@ -111,7 +110,6 @@ namespace C2.Dialogs.IAOLab
                         MessageBox.Show("查询完成");
                         progressBar1.Value = 0;
                     }
-
                 }
             }
 
@@ -137,7 +135,6 @@ namespace C2.Dialogs.IAOLab
         }
         private void ShowResult(string input, string type, StringBuilder tmpResult)
         {
-
             if (!string.IsNullOrEmpty(input) && progressBar1.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
 
@@ -151,8 +148,8 @@ namespace C2.Dialogs.IAOLab
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
                             break;
                         case "baseAddress":
-                        tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
-                        break;
+                            tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
+                            break;
                         case "mac":
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
                             break;
@@ -292,9 +289,7 @@ namespace C2.Dialogs.IAOLab
             else
             {
                 ExportData();
-                
             }
-
         }
     }
 }

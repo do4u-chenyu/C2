@@ -25,8 +25,8 @@ namespace C2.IAOLab.BaseAddress
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号")
                 return null;
 
-            string jsonLat;
-            string jsonLng;
+            string jsonLat = string.Empty;
+            string jsonLng = string.Empty;
             int index = 0;
             string currentkey = "sxv5P7yMawt6vFIG0Gv5Lhps5Cefk0C7";
             MatchCollection matches = Regex.Matches(input, "市");
@@ -44,11 +44,15 @@ namespace C2.IAOLab.BaseAddress
 
                 
             JObject jo = ((JObject)JsonConvert.DeserializeObject(client.DownloadString(url)));
-            string status = jo["status"].ToString();
-            {
-                jsonLat = jo["result"]["location"]["lat"].ToString();
-                jsonLng = jo["result"]["location"]["lng"].ToString();
-            }
+            //string status = jo["status"].ToString();
+                try
+                {
+                    jsonLat = jo["result"]["location"]["lat"].ToString();
+                    jsonLng = jo["result"]["location"]["lng"].ToString();
+                }
+                catch {
+                    input = String.Empty;   
+                }
             return string.Format("{0}\t{1}\t{2}\n", input, jsonLat, jsonLng);
         }
     }
