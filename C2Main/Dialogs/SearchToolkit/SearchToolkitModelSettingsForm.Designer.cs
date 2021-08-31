@@ -36,6 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.queryTB = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +48,7 @@
             this.panelBottom.Controls.Add(this.cancelButton);
             this.panelBottom.Controls.Add(this.confirmButton);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 97);
+            this.panelBottom.Location = new System.Drawing.Point(0, 142);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(550, 50);
             this.panelBottom.TabIndex = 5;
@@ -120,12 +123,43 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "例如: 19931213235959";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(5, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 19);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "自定义关键字";
+            // 
+            // queryTB
+            // 
+            this.queryTB.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.queryTB.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.queryTB.Location = new System.Drawing.Point(91, 88);
+            this.queryTB.Name = "queryTB";
+            this.queryTB.Size = new System.Drawing.Size(448, 26);
+            this.queryTB.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label5.Location = new System.Drawing.Point(87, 117);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(444, 19);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "例如: tel AND pwd OR 你好 AND _TEXT:log OR _HOST:www.jd.com";
+            // 
             // SearchToolkitModelSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(550, 147);
+            this.ClientSize = new System.Drawing.Size(550, 192);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.queryTB);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -158,5 +192,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox queryTB;
+        private System.Windows.Forms.Label label5;
     }
 }
