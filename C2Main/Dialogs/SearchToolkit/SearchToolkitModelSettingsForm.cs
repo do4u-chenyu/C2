@@ -70,7 +70,7 @@ namespace C2.SearchToolkit
 
         private bool ValidateQueryStr()
         {
-            return this.queryTB.ReadOnly || String.IsNullOrEmpty(this.queryTB.Text.Trim());
+            return !this.queryTB.Enabled || !String.IsNullOrEmpty(this.queryTB.Text.Trim());
         }
 
         public DialogResult ShowDialog(bool readOnly = true, bool queryReadOnly = true)
