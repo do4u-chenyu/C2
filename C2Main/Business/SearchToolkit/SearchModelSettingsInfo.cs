@@ -27,5 +27,10 @@ namespace C2.SearchToolkit
             // 限制条件从严
             return String.IsNullOrEmpty(StartTime) || String.IsNullOrEmpty(EndTime);
         }
+        
+        public bool IsSetQueryStr()
+        {
+            return !String.IsNullOrEmpty(QueryStr);
+        }
     }
 }
