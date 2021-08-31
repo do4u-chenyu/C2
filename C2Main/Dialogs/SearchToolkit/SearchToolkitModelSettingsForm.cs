@@ -11,6 +11,8 @@ namespace C2.SearchToolkit
         public String StartTime { get => this.startTimeTB.Text.Trim(); set => this.startTimeTB.Text = value; }
         public String EndTime { get => this.endTimeTB.Text.Trim(); set => this.endTimeTB.Text = value; }
 
+        public String QueryStr { get => this.queryTB.Text.Trim(); set => this.queryTB.Text = value; }
+
         private String validateMessage;
         public SearchToolkitModelSettingsForm()
         {
@@ -22,6 +24,7 @@ namespace C2.SearchToolkit
         {
             this.startTimeTB.Text = String.Empty;
             this.endTimeTB.Text   = String.Empty;
+            this.queryTB.Text     = String.Empty;
         }
 
         private void InitializeQueryDefaultTime(int days = 90)
@@ -42,7 +45,8 @@ namespace C2.SearchToolkit
             validateMessage = startTimeTB.Text.CompareTo(endTimeTB.Text) <= 0 ? validateMessage : "查询【结束时间】应当晚于【开始时间】";
             validateMessage = ValidateEndTime()   ? validateMessage : "查询【结束时间】格式不对,例如: 19831221235959";
             validateMessage = ValidateStartTime() ? validateMessage : "查询【开始时间】格式不对,例如: 20211213235959";
-            
+            validateMessage = ValidateQueryStr()  ? validateMessage : "查询字符串不能为空";
+
             return String.IsNullOrEmpty(validateMessage);
         }
 
@@ -64,18 +68,25 @@ namespace C2.SearchToolkit
             return ValidateDateTimeYYYYMMDDHHmmSS(this.startTimeTB.Text);
         }
 
-        public DialogResult ShowDialog(bool readOnly = true)
+        private bool ValidateQueryStr()
+        {
+            return this.queryTB.ReadOnly || String.IsNullOrEmpty(this.queryTB.Text.Trim());
+        }
+
+        public DialogResult ShowDialog(bool readOnly = true, bool queryReadOnly = true)
         {
             this.confirmButton.Enabled = !readOnly;
             this.startTimeTB.Enabled   = !readOnly;
             this.endTimeTB.Enabled     = !readOnly;
-
+            this.queryTB.Enabled       = !readOnly && !queryReadOnly;
+           
             if (!readOnly && showDialogCount == 0)
                 InitializeQueryDefaultTime();  // 第一次给个默认90天的事件范围
 
             showDialogCount++;
             return base.ShowDialog();
         }
+
 
         private void CancelButton_Click(object sender, EventArgs e)
         {

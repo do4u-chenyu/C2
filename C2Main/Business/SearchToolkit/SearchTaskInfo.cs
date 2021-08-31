@@ -25,7 +25,8 @@ namespace C2.SearchToolkit
             ["四方模型"] = "sf",
             ["秒播vps"] = "vps",
             ["测试模型"] = "test",
-            ["md5逆向"] = "md5"
+            ["md5逆向"] = "md5",
+            ["自定义查询"] = "custom",
         };
 
         private static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -44,7 +45,7 @@ namespace C2.SearchToolkit
             ["秒播vps"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py",
             ["md5逆向"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
-            
+            ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -63,6 +64,7 @@ namespace C2.SearchToolkit
             ["秒播vps"] = @"([^\n\r]+000000_queryResult_vps_\d+_\d+.tgz)",
             ["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
             ["md5逆向"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
+            ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
         };
 
         public String LocalPyScriptPath
@@ -175,7 +177,8 @@ namespace C2.SearchToolkit
                 RemoteWorkspace,
                 InterfaceIP,
                 Settings.StartTime,
-                Settings.EndTime
+                Settings.EndTime,
+                Settings.QueryStr
             });
         }
 
@@ -216,7 +219,8 @@ namespace C2.SearchToolkit
                 SearchAgentIP = buf[8],
                 RemoteWorkspace = buf[9],
                 InterfaceIP = buf.Length < 11 ? String.Empty : buf[10],         // 兼容早期版本
-                Settings    = buf.Length < 13 ? new SearchModelSettingsInfo() : new SearchModelSettingsInfo(buf[11], buf[12])
+                Settings    = buf.Length < 13 ? new SearchModelSettingsInfo() : 
+                              buf.Length < 14 ? new SearchModelSettingsInfo(buf[11], buf[12]) : new SearchModelSettingsInfo(buf[11], buf[12], buf[13])
             };
             return taskInfo;
         }

@@ -377,7 +377,8 @@
             "侵公模型",
             "四方模型",
             "秒播vps",
-            "md5逆向"});
+            "md5逆向",
+            "自定义查询"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);

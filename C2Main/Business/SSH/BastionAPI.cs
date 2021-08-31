@@ -447,7 +447,7 @@ namespace C2.Business.SSH
             string taskType = SearchTaskInfo.TaskDescriptionTable[task.TaskModel];
             List<string> illegalTypeList = new List<string>() { "hack", "bt", "apk", "ddos", "xss", "qg", "sf", "vps" };
 
-            string parserTime = task.Settings.IsEmpty() ? string.Empty : String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime);
+            string parserTime = task.Settings.IsSetQueryTime() ? string.Empty : String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime);
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;
 
             return String.Format("python {0} {1} {2}",
