@@ -286,6 +286,7 @@
     <Compile Include="Business\HTTP\Response.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
     <Compile Include="Business\IAOLab\BankTool\BankTool.cs" />
+    <Compile Include="Business\IAOLab\BaseAddress\BaseAddress.cs" />
     <Compile Include="Business\IAOLab\BaseStation\BaseStation.cs" />
     <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />

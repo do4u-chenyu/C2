@@ -1,6 +1,7 @@
 ﻿using C2.Controls;
 using C2.IAOLab.BankTool;
 using C2.IAOLab.BaseStation;
+using C2.IAOLab.BaseAddress;
 using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WifiMac;
 using C2.Utils;
@@ -32,6 +33,23 @@ namespace C2.Dialogs.IAOLab
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
 
+        public string FormClass()
+        {
+            string fileType = String.Empty;
+            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+            {
+                fileType = "mac";
+            }
+            else if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true)
+            {
+                fileType = "BaseStation";
+            }
+            if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
+            {
+                fileType = "BaseAddress";
+            }
+            return fileType;
+        }
 
 
         private void Search_Click(object sender, EventArgs e)
@@ -40,6 +58,7 @@ namespace C2.Dialogs.IAOLab
             string[] inputArray = this.inputAndResult.Text.Split('\n');
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
+
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true) 
             {
                 progressBar1.Value = 0;
@@ -58,6 +77,7 @@ namespace C2.Dialogs.IAOLab
 
                 }
             }
+
             if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true) 
             {
                 progressBar1.Value = 0;
@@ -73,9 +93,28 @@ namespace C2.Dialogs.IAOLab
                         MessageBox.Show("查询完成");
                         progressBar1.Value = 0;
                     }
+                }
+            }
+
+            if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
+            {
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "地址\t纬度\t经度\n";
+                tmpResult.Append(firstLine);
+                foreach (string baseAddress in inputArray)
+                {
+                    ShowResult(baseAddress, "baseAddress", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成");
+                        progressBar1.Value = 0;
+                    }
 
                 }
             }
+
             if (tabControl1.Visible == false) 
             {
                 progressBar1.Value = 0;
@@ -93,6 +132,7 @@ namespace C2.Dialogs.IAOLab
                     }
                 }
             }
+
             this.Cursor = Cursors.Arrow;
         }
         private void ShowResult(string input, string type, StringBuilder tmpResult)
@@ -110,6 +150,9 @@ namespace C2.Dialogs.IAOLab
                         case "baseStation":
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
                             break;
+                        case "baseAddress":
+                        tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
+                        break;
                         case "mac":
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
                             break;
@@ -151,13 +194,15 @@ namespace C2.Dialogs.IAOLab
 
         private void Import_Click(object sender, EventArgs e)
         {
-            OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
-            OpenFileDialog1.Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv";
-            string path = OpenFileDialog1.FileName;
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog
+            {
+                Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv"
+            };
             if (OpenFileDialog1.ShowDialog()==DialogResult.OK)
             {
                 try
                 {
+                    string path = OpenFileDialog1.FileName;
                     using (StreamReader sr = new StreamReader(path))
                     {
                         string line;
@@ -177,27 +222,33 @@ namespace C2.Dialogs.IAOLab
                 }
             }
         }
+
         private void ExportData() 
         {
             
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Title = "请选择要导出的位置";
             saveDialog.Filter = "文本文件|*.txt";
-            saveDialog.FileName = FormType + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+            string formclass = FormClass();
+            saveDialog.FileName = formclass + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
             //saveDialog.ShowDialog();
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 string firstLine = null;
-                switch (FormType)
+               
+                switch (formclass)
                 {
                     case "BaseStation":
-                        firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\n";
+                        firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\r\n";
                         break;
-                    case "Wifi":
-                        firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
+                    case "BaseAddress":
+                        firstLine = "地址\t纬度\t经度\r\n";
+                        break;
+                    case "mac":
+                        firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\r\n";
                         break;
                     case "Card":
-                        firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
+                        firstLine = "银行卡号\t银行名称\t卡种\t归属地\r\n";
                         break;
                 }
                 string path = saveDialog.FileName;
@@ -214,6 +265,8 @@ namespace C2.Dialogs.IAOLab
                                 continue;
                             if (line.Contains("基站号"))
                                 continue;
+                            if (line.Contains("地址"))
+                                continue;
                             if (line.Contains("WiFiMac号"))
                                 continue;
                             fs.WriteLine(line);
@@ -229,6 +282,7 @@ namespace C2.Dialogs.IAOLab
                 }
             }
         }
+
         private void Export_Click(object sender, EventArgs e)
         {
             if (inputAndResult.Text == string.Empty)
