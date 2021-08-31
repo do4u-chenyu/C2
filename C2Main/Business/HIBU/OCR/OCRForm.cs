@@ -116,7 +116,7 @@ namespace C2.Business.HIBU.OCR
 
             try
             {
-                Response resp = httpHandler.PostCode(OCRUrl, "imageBase64="+ HttpUtility.UrlEncode(base64Str));
+                Response resp = httpHandler.PostCode(OCRUrl, "imageBase64="+ HttpUtility.UrlEncode(base64Str), 60000);
 
                 HttpStatusCode statusCode = resp.StatusCode;
 
@@ -213,6 +213,8 @@ namespace C2.Business.HIBU.OCR
                     {
                         sw = new StreamWriter(Path.Combine(path, row.Cells[0].Value.ToString() + ".txt"));
                         sw.Write(row.Cells[1].Value.ToString());
+                        if (sw != null)
+                            sw.Close();
                     }
                 }
             }
