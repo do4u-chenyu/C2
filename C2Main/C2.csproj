@@ -202,9 +202,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddMindMapButton_Click.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
