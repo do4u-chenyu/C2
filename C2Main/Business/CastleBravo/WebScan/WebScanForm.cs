@@ -4,14 +4,10 @@ using C2.Business.CastleBravo.WebScan.Tools;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebScan
@@ -51,7 +47,7 @@ namespace C2.Business.CastleBravo.WebScan
             this.httpMethodCombo.SelectedIndex = 0;
             this.threadSizeCombo.SelectedIndex = 2;
             this.timeOutCombo.SelectedIndex = 2;
-            this.sleepTimeCombo.SelectedIndex = 0;
+            this.sleepTimeCombo.SelectedIndex = 2;
 
             this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "WebScanDict");
             RefreshDict();
