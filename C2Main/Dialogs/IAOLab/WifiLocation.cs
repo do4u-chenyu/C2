@@ -100,7 +100,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "地址\t纬度\t经度\n";
+                firstLine = "地址\t纬度\t经度\t反查地址\n";
                 tmpResult.Append(firstLine);
                 foreach (string baseAddress in inputArray)
                 {
@@ -239,7 +239,7 @@ namespace C2.Dialogs.IAOLab
                         firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\r\n";
                         break;
                     case "BaseAddress":
-                        firstLine = "地址\t纬度\t经度\r\n";
+                        firstLine = "地址\t纬度\t经度\t反查地址\r\n";
                         break;
                     case "mac":
                         firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\r\n";

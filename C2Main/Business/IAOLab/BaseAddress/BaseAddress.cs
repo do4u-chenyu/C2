@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Net;
-using System.IO;
-using C2.Business.IAOLab.WifiMac;
 using Newtonsoft.Json;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
+using System.Net.Http;
 
 namespace C2.IAOLab.BaseAddress
 {
@@ -27,6 +25,7 @@ namespace C2.IAOLab.BaseAddress
 
             string jsonLat = string.Empty;
             string jsonLng = string.Empty;
+            string reverseAddress = string.Empty;
             int index = 0;
             string currentkey = "sxv5P7yMawt6vFIG0Gv5Lhps5Cefk0C7";
             MatchCollection matches = Regex.Matches(input, "市");
@@ -47,13 +46,30 @@ namespace C2.IAOLab.BaseAddress
             //string status = jo["status"].ToString();
                 try
                 {
-                    jsonLat = jo["result"]["location"]["lat"].ToString();
-                    jsonLng = jo["result"]["location"]["lng"].ToString();
+                    jsonLat = Convert.ToDouble(jo["result"]["location"]["lat"]).ToString("0.00000");
+                    jsonLng = Convert.ToDouble(jo["result"]["location"]["lng"]).ToString("0.00000");
+                    reverseAddress = GetLocation(currentkey, jsonLat, jsonLng);
                 }
                 catch {
                     input = String.Empty;   
                 }
-            return string.Format("{0}\t{1}\t{2}\n", input, jsonLat, jsonLng);
+            return string.Format("{0}\t{1}\t{2}\t{3}\n", input, jsonLat, jsonLng, reverseAddress);
+        }
+
+        public static string GetLocation(string currentkey,string lng, string lat)
+        {
+            HttpClient client = new HttpClient();
+            string bdUrl = string.Format("http://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1},{2}", currentkey,lng, lat);
+        
+            string result = client.GetStringAsync(bdUrl).Result;
+            var locationResult = (JObject)JsonConvert.DeserializeObject(result);
+
+            if (locationResult == null || locationResult["result"] == null || locationResult["result"]["formatted_address"] == null)
+                return string.Empty;
+            var address = Convert.ToString(locationResult["result"]["formatted_address"]);
+            if (locationResult["result"]["sematic_description"] != null)
+                address += " " + Convert.ToString(locationResult["result"]["sematic_description"]);
+            return address;
         }
     }
 }
