@@ -242,7 +242,7 @@
 /oa/admin_login.php
 /coon.php
 /ma.php
-/phpÄ¾Âí.php
+/phpæœ¨é©¬.php
 /php.php
 /ll.php
 /xx.php

@@ -393,66 +393,11 @@ namespace C2.Business.CastleBravo.WebScan
             {
                 String location = result.location;
                 svinfo.contentType = result.contentType;
-                svinfo.length = result.length;
+                svinfo.length = result.length == -1 ? result.body.Length : result.length;
                 svinfo.server = result.server;
                 svinfo.powerBy = result.powerBy;
                 svinfo.runTime = result.runTime;
-                //关键字扫描
-                if (config.scanMode >= 1)
-                {
-                    if (svinfo.code == 302 && location.IndexOf(svinfo.path) != -1)
-                    {
-                        svinfo.code = 301;
-                    }
-
-                    else if (config.scanMode == 2 && result.body != null)
-                    {
-                        String[] keys404 = config.key.Split(',');
-                        if (keys404.Count() > 0)
-                        {
-                            foreach (String key in keys404)
-                            {
-                                //TODO 这个逻辑得再整理一下
-                                if(svinfo.code == 404)
-                                {
-                                    break;
-                                }
-                                if (result.body.IndexOf(key) != -1 && config.isExists == 1)
-                                {
-                                    svinfo.code = 404;
-                                    break;
-                                }
-                                if (result.body.IndexOf(key) == -1 && config.isExists == 0 && svinfo.code == 200)
-                                {
-                                    svinfo.code = 404;
-                                    break;
-                                }
-
-                                if (result.body.IndexOf(key) != -1 && config.isExists == 0)
-                                {
-                                    svinfo.code = 200;
-                                    break;
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                if (config.show == 0)
-                {
-                    if (config.ShowCodes.IndexOf(svinfo.code.ToString()) != -1)
-                    {
-                        this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
-                    }
-                }
-                else
-                {
-                    if (config.ShowCodes.IndexOf(svinfo.code.ToString()) == -1)
-                    {
-                        this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
-                    }
-                }
+                this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
             }
             Thread.Sleep(config.SleepTime * 1000);
         }
@@ -475,41 +420,7 @@ namespace C2.Business.CastleBravo.WebScan
             {
                 return;
             }
-            //过滤长度不符合的
-            bool filter = false;
-            if (config.contentLength > -2)
-            {
-
-                switch (config.contentSelect)
-                {
-                    case 0:
-                        if (svinfo.length < config.contentLength)
-                        {
-                            filter = true;
-                        }
-
-                        break;
-                    case 1:
-                        if (svinfo.length == config.contentLength)
-                        {
-                            filter = true;
-                        }
-
-                        break;
-                    case 2:
-                        if (svinfo.length > config.contentLength)
-                        {
-                            filter = true;
-                        }
-                        break;
-                }
-
-            }
-            if (filter)
-            {
-                return;
-            }
-
+            
             ListViewItem lvi = new ListViewItem(svinfo.id + "");
             lvi.Tag = svinfo.type;
             lvi.SubItems.Add(svinfo.url);
