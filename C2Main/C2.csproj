@@ -3589,16 +3589,16 @@
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
     <None Include="Resources\可视化数据可视化.png" />
-    <Content Include="Resources\WebScanDict\aspx.txt">
+    <Content Include="Resources\WebScanDict\PHP一级目录.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\WebScanDict\dir.txt">
+    <Content Include="Resources\WebScanDict\敏感文件.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\WebScanDict\php.txt">
+    <Content Include="Resources\WebScanDict\通用PHP字典.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\WebScanDict\test.txt">
+    <Content Include="Resources\WebScanDict\通用目录字典.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\提示1.png" />
