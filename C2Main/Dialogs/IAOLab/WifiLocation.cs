@@ -71,7 +71,7 @@ namespace C2.Dialogs.IAOLab
                     ShowResult(mac, "mac", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
-                        MessageBox.Show("查询完成");
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
@@ -89,7 +89,7 @@ namespace C2.Dialogs.IAOLab
                     ShowResult(baseStation, "baseStation", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
-                        MessageBox.Show("查询完成");
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
@@ -107,7 +107,7 @@ namespace C2.Dialogs.IAOLab
                     ShowResult(baseAddress, "baseAddress", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
-                        MessageBox.Show("查询完成");
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
@@ -125,7 +125,7 @@ namespace C2.Dialogs.IAOLab
                     ShowResult(bankCard, "bankCard", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
-                        MessageBox.Show("查询完成");
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
@@ -148,6 +148,8 @@ namespace C2.Dialogs.IAOLab
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
                             break;
                         case "baseAddress":
+                            if (input.Contains("地址"))
+                                input = String.Empty;
                             tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
                             break;
                         case "mac":
@@ -157,10 +159,8 @@ namespace C2.Dialogs.IAOLab
                             tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
                             break;
                     }
-
                     inputAndResult.Text = tmpResult.ToString();
                     progressBar1.Value += 1;
-
             }
         }
             
@@ -169,11 +169,9 @@ namespace C2.Dialogs.IAOLab
         {
             int relLength = 0;
             foreach(string i in arry)
-            {
-                
+            {   
                 if (!string.IsNullOrEmpty(i.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
                     relLength++;
-               
             }
             return relLength;
         }

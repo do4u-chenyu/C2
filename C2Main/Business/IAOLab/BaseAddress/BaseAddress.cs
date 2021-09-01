@@ -2,6 +2,7 @@
 using System.Net;
 using Newtonsoft.Json;
 using System.Text;
+using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Net.Http;
@@ -33,26 +34,45 @@ namespace C2.IAOLab.BaseAddress
             {
                 index = item.Index;
             }
-            string city = input.Substring(0, index + 1);
-            string address = input.Substring(index+1, input.Length-index-1);
-
+            string city;
+            string address;
+            JObject jo;
+            try
+            {
+                city = input.Substring(0, index + 1);
+                address = input.Substring(index + 1, input.Length - index - 1);
+            }
+            catch 
+            {
+                city = String.Empty;
+                address = String.Empty;
+            }
             
             WebClient client = new WebClient();
             client.Encoding = Encoding.UTF8;
             string url = String.Format("http://api.map.baidu.com/geocoding/v3/?ak={0}&address={1}&city={2}&output=json", currentkey, address, city);
-
-                
-            JObject jo = ((JObject)JsonConvert.DeserializeObject(client.DownloadString(url)));
-            //string status = jo["status"].ToString();
-                try
+            try
+            {
+                jo = ((JObject)JsonConvert.DeserializeObject(client.DownloadString(url)));
+            }
+            catch 
+            {
+                jo = null;
+            }
+            try
+            {
+                jsonLat = Convert.ToDouble(jo["result"]["location"]["lat"]).ToString("0.00000");
+                jsonLng = Convert.ToDouble(jo["result"]["location"]["lng"]).ToString("0.00000");
+                reverseAddress = GetLocation(currentkey, jsonLat, jsonLng);
+            }
+            catch 
+            {
+                if (input == String.Empty)
                 {
-                    jsonLat = Convert.ToDouble(jo["result"]["location"]["lat"]).ToString("0.00000");
-                    jsonLng = Convert.ToDouble(jo["result"]["location"]["lng"]).ToString("0.00000");
-                    reverseAddress = GetLocation(currentkey, jsonLat, jsonLng);
+                    return String.Empty;
                 }
-                catch {
-                    input = String.Empty;   
-                }
+                return string.Format("{0}\t{1}\n", input, "查询失败");
+            }
             return string.Format("{0}\t{1}\t{2}\t{3}\n", input, jsonLat, jsonLng, reverseAddress);
         }
 

@@ -41,13 +41,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -198,17 +199,16 @@
             this.tabPage2.Text = "基站查询";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // label4
             // 
-            this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(593, 105);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "地址查询";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label4.Location = new System.Drawing.Point(6, 61);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(463, 30);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G)\r\n 或 37b900018bd0(电信2G) 最大支持200" +
+    "0条";
             // 
             // label3
             // 
@@ -221,16 +221,49 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "请在下方输入基站号";
             // 
-            // label4
+            // tabPage3
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.Location = new System.Drawing.Point(6, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(463, 30);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G)\r\n 或 37b900018bd0(电信2G) 最大支持200" +
-    "0条";
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(593, 105);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "地址查询";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 11F);
+            this.label7.Location = new System.Drawing.Point(5, 13);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(172, 15);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "请在下方输入待查询地址";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label8.Location = new System.Drawing.Point(6, 61);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(416, 15);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "输入格式:南京市鼓楼区汉口路22号南京大学(xx市+具体地址)";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(6, 81);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(521, 15);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "注意:地址中涉及到城市名称必须含有[市]（比如[南京市],不能只写[南京]）";
             // 
             // label5
             // 
@@ -254,27 +287,6 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
     "大支持5000条";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 11F);
-            this.label7.Location = new System.Drawing.Point(5, 13);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(142, 15);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "请在下方输入待查询地址";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label8.Location = new System.Drawing.Point(6, 61);
-            this.label8.Name = "label4";
-            this.label8.Size = new System.Drawing.Size(463, 30);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "输入格式:南京市鼓楼区汉口路22号南京大学(xx市+具体地址)";
             // 
             // WifiLocation
             // 
@@ -329,5 +341,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
