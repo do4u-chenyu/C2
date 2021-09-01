@@ -432,7 +432,7 @@
 	<item name="RESULT">结果挂件</item>
 	<item name="ATTACHMENT">附件挂件</item>
 	<item name="AddAttachment">附件</item>
-	<item name="AddMap">图上作战</item>
+	<item name="AddMap">图上作战(网)</item>
 	<item name="AddBoss">数据大屏</item>
 	<item name="OpenAttachment">打开</item>
 	<item name="DeleteAttachment">删除</item>
@@ -447,9 +447,10 @@
 	<item name="Card">(网)银行卡信息查询</item>
 	<item name="Tude">转换工具</item>
 	<item name="Ip">时间、IP转换</item>
-	<item name="BigAPK">APK大眼睛</item>
-	<item name="Cracker">弱口令扫描</item>
+	<item name="BigAPK">(网)APK大眼睛</item>
+	<item name="Cracker">(网)弱口令扫描</item>
 	<item name="PwdGenerator">社工生成器</item>
-	<item name="WebScan">目录扫描</item>
+	<item name="WebScan">(网)目录扫描</item>
+  <item name="OCR">(网)OCR</item>
 </words>
 </dictionary>

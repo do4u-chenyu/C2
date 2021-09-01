@@ -51,7 +51,7 @@ namespace QQSpiderPlugin
 
         public string GetPluginName()
         {
-            return "QQ爬虫";
+            return "(网)QQ爬虫";
         }
 
         public string GetPluginVersion()
