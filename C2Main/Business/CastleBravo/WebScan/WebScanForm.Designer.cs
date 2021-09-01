@@ -86,10 +86,11 @@
             this.exportBtn = new System.Windows.Forms.Button();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -113,7 +114,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(318, 149);
+            this.groupBox1.Size = new System.Drawing.Size(318, 155);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "扫描选项";
@@ -121,25 +122,25 @@
             // crawlerCheckBox
             // 
             this.crawlerCheckBox.AutoSize = true;
-            this.crawlerCheckBox.Location = new System.Drawing.Point(256, 120);
+            this.crawlerCheckBox.Location = new System.Drawing.Point(240, 130);
             this.crawlerCheckBox.Name = "crawlerCheckBox";
-            this.crawlerCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.crawlerCheckBox.Size = new System.Drawing.Size(72, 16);
             this.crawlerCheckBox.TabIndex = 9;
-            this.crawlerCheckBox.Text = "爬虫";
+            this.crawlerCheckBox.Text = "爬虫模式";
             this.crawlerCheckBox.UseVisualStyleBackColor = true;
             // 
             // statusCodeTextBox
             // 
-            this.statusCodeTextBox.Location = new System.Drawing.Point(58, 118);
+            this.statusCodeTextBox.Location = new System.Drawing.Point(58, 128);
             this.statusCodeTextBox.Name = "statusCodeTextBox";
-            this.statusCodeTextBox.Size = new System.Drawing.Size(167, 21);
+            this.statusCodeTextBox.Size = new System.Drawing.Size(174, 21);
             this.statusCodeTextBox.TabIndex = 7;
-            this.statusCodeTextBox.Text = "200,403,404";
+            this.statusCodeTextBox.Text = "200,301,302,303,403,404";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 124);
+            this.label4.Location = new System.Drawing.Point(3, 131);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 6;
@@ -152,15 +153,15 @@
             this.httpMethodCombo.FormattingEnabled = true;
             this.httpMethodCombo.Items.AddRange(new object[] {
             "GET"});
-            this.httpMethodCombo.Location = new System.Drawing.Point(217, 83);
+            this.httpMethodCombo.Location = new System.Drawing.Point(230, 98);
             this.httpMethodCombo.Name = "httpMethodCombo";
-            this.httpMethodCombo.Size = new System.Drawing.Size(87, 20);
+            this.httpMethodCombo.Size = new System.Drawing.Size(81, 20);
             this.httpMethodCombo.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(160, 88);
+            this.label3.Location = new System.Drawing.Point(167, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 4;
@@ -175,7 +176,7 @@
             "IE10",
             "IE9",
             "火狐"});
-            this.headerCombo.Location = new System.Drawing.Point(58, 83);
+            this.headerCombo.Location = new System.Drawing.Point(58, 98);
             this.headerCombo.Name = "headerCombo";
             this.headerCombo.Size = new System.Drawing.Size(87, 20);
             this.headerCombo.TabIndex = 3;
@@ -183,7 +184,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 88);
+            this.label2.Location = new System.Drawing.Point(3, 103);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 2;
@@ -191,20 +192,20 @@
             // 
             // urlTextBox
             // 
-            this.urlTextBox.Location = new System.Drawing.Point(58, 23);
+            this.urlTextBox.Location = new System.Drawing.Point(58, 15);
             this.urlTextBox.Multiline = true;
             this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(246, 48);
+            this.urlTextBox.Size = new System.Drawing.Size(254, 73);
             this.urlTextBox.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 26);
+            this.label1.Location = new System.Drawing.Point(15, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "域名：";
+            this.label1.Text = "地址：";
             // 
             // groupBox2
             // 
@@ -213,7 +214,7 @@
             this.groupBox2.Controls.Add(this.dictListView);
             this.groupBox2.Location = new System.Drawing.Point(337, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(245, 149);
+            this.groupBox2.Size = new System.Drawing.Size(289, 155);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
@@ -249,9 +250,9 @@
             this.dictListView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dictListView.FullRowSelect = true;
             this.dictListView.HideSelection = false;
-            this.dictListView.Location = new System.Drawing.Point(3, 44);
+            this.dictListView.Location = new System.Drawing.Point(3, 50);
             this.dictListView.Name = "dictListView";
-            this.dictListView.Size = new System.Drawing.Size(239, 102);
+            this.dictListView.Size = new System.Drawing.Size(283, 102);
             this.dictListView.TabIndex = 0;
             this.dictListView.UseCompatibleStateImageBehavior = false;
             this.dictListView.View = System.Windows.Forms.View.Details;
@@ -265,16 +266,17 @@
             // dictName
             // 
             this.dictName.Text = "字典名称";
-            this.dictName.Width = 66;
+            this.dictName.Width = 115;
             // 
             // dictRows
             // 
             this.dictRows.Text = "行数";
-            this.dictRows.Width = 73;
+            this.dictRows.Width = 55;
             // 
             // dictSize
             // 
             this.dictSize.Text = "大小";
+            this.dictSize.Width = 75;
             // 
             // groupBox3
             // 
@@ -284,9 +286,9 @@
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(701, 23);
+            this.groupBox3.Location = new System.Drawing.Point(735, 23);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(119, 149);
+            this.groupBox3.Size = new System.Drawing.Size(119, 155);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "配置参数";
@@ -296,7 +298,11 @@
             this.sleepTimeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sleepTimeCombo.FormattingEnabled = true;
             this.sleepTimeCombo.Items.AddRange(new object[] {
-            "0",
+            "1",
+            "5",
+            "10",
+            "20",
+            "30",
             "60",
             "120",
             "180",
@@ -342,7 +348,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 118);
+            this.label7.Location = new System.Drawing.Point(9, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 2;
@@ -351,7 +357,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 71);
+            this.label6.Location = new System.Drawing.Point(9, 71);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 1;
@@ -360,18 +366,18 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 26);
+            this.label5.Location = new System.Drawing.Point(9, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 0;
-            this.label5.Text = "线程";
+            this.label5.Text = "线程数";
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.listView1);
-            this.groupBox4.Location = new System.Drawing.Point(12, 171);
+            this.groupBox4.Location = new System.Drawing.Point(12, 180);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(885, 134);
+            this.groupBox4.Size = new System.Drawing.Size(920, 178);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             // 
@@ -392,7 +398,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 17);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(879, 114);
+            this.listView1.Size = new System.Drawing.Size(914, 158);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -404,7 +410,7 @@
             // url
             // 
             this.url.Text = "网页地址";
-            this.url.Width = 314;
+            this.url.Width = 450;
             // 
             // webStatus
             // 
@@ -419,12 +425,12 @@
             // length
             // 
             this.length.Text = "返回长度";
-            this.length.Width = 107;
+            this.length.Width = 99;
             // 
             // runTime
             // 
             this.runTime.Text = "用时[毫秒]";
-            this.runTime.Width = 77;
+            this.runTime.Width = 100;
             // 
             // resultCms
             // 
@@ -459,9 +465,9 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.logTextBox);
-            this.groupBox5.Location = new System.Drawing.Point(12, 302);
+            this.groupBox5.Location = new System.Drawing.Point(13, 355);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(885, 160);
+            this.groupBox5.Size = new System.Drawing.Size(920, 160);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
@@ -470,7 +476,7 @@
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logTextBox.Location = new System.Drawing.Point(3, 17);
             this.logTextBox.Name = "logTextBox";
-            this.logTextBox.Size = new System.Drawing.Size(879, 140);
+            this.logTextBox.Size = new System.Drawing.Size(914, 140);
             this.logTextBox.TabIndex = 0;
             this.logTextBox.Text = "";
             // 
@@ -488,9 +494,9 @@
             this.threadPoolStatus,
             this.toolStripStatusLabel7,
             this.scanSpeed});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 471);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 518);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(909, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(939, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
@@ -562,7 +568,7 @@
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(831, 44);
+            this.startBtn.Location = new System.Drawing.Point(865, 44);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(66, 23);
             this.startBtn.TabIndex = 6;
@@ -572,7 +578,7 @@
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(831, 89);
+            this.stopBtn.Location = new System.Drawing.Point(865, 89);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(66, 23);
             this.stopBtn.TabIndex = 7;
@@ -582,7 +588,7 @@
             // 
             // exportBtn
             // 
-            this.exportBtn.Location = new System.Drawing.Point(831, 136);
+            this.exportBtn.Location = new System.Drawing.Point(865, 136);
             this.exportBtn.Name = "exportBtn";
             this.exportBtn.Size = new System.Drawing.Size(66, 23);
             this.exportBtn.TabIndex = 8;
@@ -601,42 +607,12 @@
             this.groupBox6.Controls.Add(this.checkBox3);
             this.groupBox6.Controls.Add(this.checkBox2);
             this.groupBox6.Controls.Add(this.checkBox1);
-            this.groupBox6.Location = new System.Drawing.Point(589, 23);
+            this.groupBox6.Location = new System.Drawing.Point(632, 23);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(106, 149);
+            this.groupBox6.Size = new System.Drawing.Size(97, 155);
             this.groupBox6.TabIndex = 9;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "策略(施工中）";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 26);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "路径遍历";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(15, 55);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 16);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "深度优先";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(15, 85);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(72, 16);
-            this.checkBox3.TabIndex = 2;
-            this.checkBox3.Text = "版本扫描";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.groupBox6.Text = "扫描策略_TODO";
             // 
             // checkBox4
             // 
@@ -645,14 +621,48 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(72, 16);
             this.checkBox4.TabIndex = 3;
-            this.checkBox4.Text = "单元扫描";
+            this.checkBox4.Text = "入口扫描";
+            this.toolTip1.SetToolTip(this.checkBox4, "扫描各种等级的登录入口");
             this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(15, 85);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(72, 16);
+            this.checkBox3.TabIndex = 2;
+            this.checkBox3.Text = "指纹扫描";
+            this.toolTip1.SetToolTip(this.checkBox3, "cms，thinkphp，wp等模板指纹探测");
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(15, 55);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(72, 16);
+            this.checkBox2.TabIndex = 1;
+            this.checkBox2.Text = "Edit扫描";
+            this.toolTip1.SetToolTip(this.checkBox2, "探测网站所用的Edit控件，经常会被用来后续的文件上传漏洞检测。");
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 26);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(66, 16);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "403遍历";
+            this.toolTip1.SetToolTip(this.checkBox1, "利用403返回码和专用字典，高效遍历网站目录。");
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // WebScanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(909, 493);
+            this.ClientSize = new System.Drawing.Size(939, 540);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.exportBtn);
             this.Controls.Add(this.stopBtn);
@@ -747,5 +757,6 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
