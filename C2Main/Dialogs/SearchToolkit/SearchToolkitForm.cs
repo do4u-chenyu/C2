@@ -76,7 +76,10 @@ namespace C2.SearchToolkit
                                             this.remoteWorkspaceTB.Text,
                                             this.interfaceIPTB.Text,
                                             this.modelSettingsForm.StartTime,
-                                            this.modelSettingsForm.EndTime
+                                            this.modelSettingsForm.EndTime,
+                                            this.modelSettingsForm.QueryStr
+                                           
+                                           
             }) ;
 
             return SearchTaskInfo.StringToTaskInfo(value);

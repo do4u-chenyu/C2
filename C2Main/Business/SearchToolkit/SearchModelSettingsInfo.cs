@@ -30,7 +30,7 @@ namespace C2.SearchToolkit
         
         public bool IsSetQueryStr()
         {
-            return !String.IsNullOrEmpty(QueryStr);
+            return String.IsNullOrEmpty(QueryStr);
         }
     }
 }

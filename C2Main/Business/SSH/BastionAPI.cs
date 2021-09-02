@@ -334,6 +334,7 @@ namespace C2.Business.SSH
         {
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = TaskDirectory + "/" + TaskResultShellPattern;
+            //String s = TaskDirectory + "/" + "000000_queryResult_plane_20210604094525_20210902094525.tgz";
 
             if (Oops()) return false;
 

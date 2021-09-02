@@ -120,7 +120,8 @@ namespace C2.SearchToolkit
             "RemoteWorkspace",
             "InterfaceIP",
             "Settings.StartTime",
-            "Settings.EndTime"
+            "Settings.EndTime",
+             "Settings.QueryStr"
         });
 
         public String Username { get; private set; }
