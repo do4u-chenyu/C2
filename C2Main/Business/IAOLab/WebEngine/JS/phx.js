@@ -125,27 +125,23 @@
                 "borderWidth": 0,
                 "borderColor": "#ccc"
             },
-            "lineStyle": {
-                "width": 1,
-                "color": "#aaa"
-            },
-            "symbolSize": 4,
-            "symbol": "emptyCircle",
-            "smooth": false,
             "color": [
-                "#6192f3",
-                "#9480f3",
-                "#66dfbf",
-                "#f3a3ec",
-                "rgba(248,171,146,0.98)",
-                "#3ba272",
-                "#fc8452",
-                "#9a60b4",
-                "#ea7ccc"
+                "#c1232b",
+                "#27727b",
+                "#fcce10",
+                "#e87c25",
+                "#b5c334",
+                "#fe8463",
+                "#9bca63",
+                "#fad860",
+                "#f3a43b",
+                "#60c0dd",
+                "#d7504b",
+                "#c6e579",
+                "#f4e001",
+                "#f0805a",
+                "#26c0c0"
             ],
-            "label": {
-                "color": "#eee"
-            }
         },
         "map": {
             "itemStyle": {

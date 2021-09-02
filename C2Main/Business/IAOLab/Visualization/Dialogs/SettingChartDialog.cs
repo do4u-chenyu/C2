@@ -76,7 +76,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             if (this.chartType.Text == "词云")
                 return this.keyComboBox.SelectedIndex == -1 || this.countComboBox.SelectedIndex == -1 || this.styleComboBox.SelectedIndex == -1;
             else if (this.chartType.Text == "社交关系图")
-                return this.sourceComboBox.SelectedIndex == -1 || this.targetComboBox.SelectedIndex == -1 || this.nodeComboBox.SelectedIndex == -1;
+                return this.sourceComboBox.SelectedIndex == -1 || this.targetComboBox.SelectedIndex == -1;
 
             //TODO 其他类别
             return true;
@@ -232,7 +232,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             List<string> t = new List<string> { this.userCombox.SelectedIndex.ToString(), this.superiorCombox.SelectedIndex.ToString() };
             Options["Organization"] = TransListStringToInt(t, this.infoList.GetItemCheckIndex());
             Options["WordCloud"] = new string[] { this.keyComboBox.SelectedIndex.ToString(), this.countComboBox.SelectedIndex.ToString(), this.styleComboBox.SelectedIndex.ToString() };
-            Options["Graph"] = new string[] { this.sourceComboBox.SelectedIndex.ToString(), this.targetComboBox.SelectedIndex.ToString(), this.nodeComboBox.SelectedIndex.ToString() };
+            Options["Graph"] = new string[] { this.sourceComboBox.SelectedIndex.ToString(), this.targetComboBox.SelectedIndex.ToString(), this.weightComboBox.SelectedIndex.ToString(), this.nodeComboBox.SelectedIndex.ToString(), this.categoriesComboBox.SelectedIndex.ToString() };
            
         }
 
@@ -335,27 +335,27 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             //{
             //    if (ct is ComboBox)
             //    {
-                    sourceComboBox.Text = string.Empty;
-                    sourceComboBox.Items.Clear();
-                    sourceComboBox.Items.AddRange(bcpInfo1.ColumnArray);
-                    targetComboBox.Text = string.Empty;
-                    targetComboBox.Items.Clear();
-                    targetComboBox.Items.AddRange(bcpInfo1.ColumnArray);
+            sourceComboBox.Text = string.Empty;
+            sourceComboBox.Items.Clear();
+            sourceComboBox.Items.AddRange(bcpInfo1.ColumnArray);
+            targetComboBox.Text = string.Empty;
+            targetComboBox.Items.Clear();
+            targetComboBox.Items.AddRange(bcpInfo1.ColumnArray);
+            weightComboBox.Text = string.Empty;
+            weightComboBox.Items.Clear();
+            weightComboBox.Items.AddRange(bcpInfo1.ColumnArray);
             //    }
             //}
         }
         private void ChangeControlContent2()
         {
             //社交关系图节点设置列表更新
-            //foreach (Control ct in this.nodeSetting.Controls)
-            //{
-            //    if (ct is ComboBox)
-            //    {
-                    nodeComboBox.Text = string.Empty;
-                    nodeComboBox.Items.Clear();
-                    nodeComboBox.Items.AddRange(bcpInfo2.ColumnArray);
-            //    }
-            //}
+            nodeComboBox.Text = string.Empty;
+            nodeComboBox.Items.Clear();
+            nodeComboBox.Items.AddRange(bcpInfo2.ColumnArray);
+            categoriesComboBox.Text = string.Empty;
+            categoriesComboBox.Items.Clear();
+            categoriesComboBox.Items.AddRange(bcpInfo2.ColumnArray);
         }
 
 

@@ -55,12 +55,13 @@ namespace C2.Dialogs.IAOLab
         private void Search_Click(object sender, EventArgs e)
         {
             StringBuilder tmpResult = new StringBuilder();
-            string[] inputArray = this.inputAndResult.Text.Split('\n');
+            
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
 
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true) 
             {
+                string[] inputArray = this.wifiMacIR.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
@@ -79,6 +80,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true) 
             {
+                string[] inputArray = this.baseStationIR.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
@@ -97,6 +99,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
             {
+                string[] inputArray = this.baseAddressIR.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
@@ -115,6 +118,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.Visible == false) 
             {
+                string[] inputArray = this.bankCardIR.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
@@ -146,20 +150,24 @@ namespace C2.Dialogs.IAOLab
                     {
                         case "baseStation":
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
-                            break;
+                            baseStationIR.Text = tmpResult.ToString();
+                        break;
                         case "baseAddress":
                             if (input.Contains("地址"))
                                 input = String.Empty;
                             tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
-                            break;
+                            baseAddressIR.Text = tmpResult.ToString();
+;                            break;
                         case "mac":
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
-                            break;
+                            wifiMacIR.Text = tmpResult.ToString();
+                        break;
                         case "bankCard":
                             tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
-                            break;
+                            bankCardIR.Text = tmpResult.ToString();
+                        break;
                     }
-                    inputAndResult.Text = tmpResult.ToString();
+                   
                     progressBar1.Value += 1;
             }
         }
@@ -184,7 +192,7 @@ namespace C2.Dialogs.IAOLab
         private void WifiLocation_FormClosed(object sender, FormClosedEventArgs e)
         {
             progressBar1.Value = 0;
-            this.inputAndResult.Clear();
+            this.wifiMacIR.Clear();
         }
 
         private void Import_Click(object sender, EventArgs e)
@@ -208,7 +216,14 @@ namespace C2.Dialogs.IAOLab
                             sb.Append(line);
                             sb.Append("\n");
                         }
-                        inputAndResult.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+                            wifiMacIR.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true)
+                            baseStationIR.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
+                            baseAddressIR.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.Visible == false)
+                            bankCardIR.Text = sb.TrimEndN().ToString();
                     }
                 }
                 catch (Exception ex)
@@ -220,7 +235,6 @@ namespace C2.Dialogs.IAOLab
 
         private void ExportData() 
         {
-            
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Title = "请选择要导出的位置";
             saveDialog.Filter = "文本文件|*.txt";
@@ -230,28 +244,34 @@ namespace C2.Dialogs.IAOLab
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 string firstLine = null;
-               
+                string text = string.Empty;
                 switch (formclass)
                 {
                     case "BaseStation":
                         firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\r\n";
+                        text = baseStationIR.Text;
                         break;
                     case "BaseAddress":
                         firstLine = "地址\t纬度\t经度\t反查地址\r\n";
+                        text = baseAddressIR.Text;
                         break;
                     case "mac":
                         firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\r\n";
+                        text = wifiMacIR.Text;
                         break;
                     case "Card":
                         firstLine = "银行卡号\t银行名称\t卡种\t归属地\r\n";
+                        text = bankCardIR.Text;
                         break;
                 }
                 string path = saveDialog.FileName;
-                string text = inputAndResult.Text;
+                
                 try
                 {
                     using (StreamWriter fs = new StreamWriter(path))
                     {
+                        if (text == string.Empty)
+                            return;
                         string[] lines = text.Split('\n');
                         fs.Write(firstLine);
                         foreach (string line in lines)
@@ -280,7 +300,10 @@ namespace C2.Dialogs.IAOLab
 
         private void Export_Click(object sender, EventArgs e)
         {
-            if (inputAndResult.Text == string.Empty)
+            if ((tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && wifiMacIR.Text == string.Empty) || 
+                (tabControl1.Visible == false && bankCardIR.Text == string.Empty) || 
+                (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true && baseAddressIR.Text == string.Empty) ||
+                (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true && baseStationIR.Text == string.Empty))
             {
                 MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
