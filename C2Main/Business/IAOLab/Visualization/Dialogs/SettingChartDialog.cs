@@ -249,7 +249,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         {
             OpenFileDialog OpenFileDialog1 = new OpenFileDialog
             {
-                Filter = "文本文档 | *.txt;*.bcp"
+                Filter = "文本文档 | *.txt;*.bcp;*.xlsx"
             };
             if (OpenFileDialog1.ShowDialog() != DialogResult.OK)
                 return;

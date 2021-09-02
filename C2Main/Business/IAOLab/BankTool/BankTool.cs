@@ -67,7 +67,10 @@ namespace C2.IAOLab.BankTool
             Stream s;
             try
             {
+                if(response == null)
+                    return "网络连接中断";
                 s = response.GetResponseStream();
+  
             }
             catch
             {

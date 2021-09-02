@@ -50,6 +50,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
                     break;
+                case "Address":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
+                    break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
@@ -74,18 +78,19 @@ namespace C2.Controls.Left
             }
 
         }
-        //test
+        
         #region 定义弹窗
-        //private Form BaseStationForm(string formType)
-        //{
-        //    return new WifiLocation()
-        //    {
-        //        TabControlVisible = true,
-        //        TipBS = HelpUtil.BaseStationHelpInfo,
-        //        FormType = formType
-        //    };
+        private Form BaseStationForm(string formType)
+        {
+            return new WifiLocation()
+            {
+                TabControlVisible = true,
+                TipBS = HelpUtil.BaseStationHelpInfo,
+                FormType = formType
+            };
 
-        //}
+        }
+
         private Form BankToolForm(string formType)
         {
             return new WifiLocation()
@@ -138,6 +143,7 @@ namespace C2.Controls.Left
                     break;
                 case "Wifi":
                     new WifiLocation() { FormType = buttonType }.ShowDialog();
+                    //new WifiLocation().ShowDialog();
                     break;
                 case "Card":
                     BankToolForm(buttonType).ShowDialog();

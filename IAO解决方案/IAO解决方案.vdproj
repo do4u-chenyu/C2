@@ -537,6 +537,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1024,6 +1030,12 @@
         "Entry"
         {
         "MsmKey" = "8:_65CF41F8D92C47C6809BA19E13392112"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_65E6342D0A0D48799CB4D2E0148F3D69"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1552,6 +1564,12 @@
         "Entry"
         {
         "MsmKey" = "8:_A0A0999DC14345A99E0AF6B8C58993FA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A2593A27B6AC4EB9A5FF27B22B7FC764"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2355,6 +2373,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_ED63AF81A5E94616A000845A6B8E84F9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EE688AC407E24D689B12E11ACB32ED87"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2470,6 +2494,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F6E84130694041D3A35E253A66D8C6B4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F6FE5DFCE7B2426F919166496A1B6517"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -6253,6 +6283,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_65E6342D0A0D48799CB4D2E0148F3D69"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\敏感文件.txt"
+            "TargetName" = "8:敏感文件.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6617F03D751B7C30EB3EC812BD9E2C31"
             {
             "AssemblyRegister" = "3:1"
@@ -7950,6 +8000,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2593A27B6AC4EB9A5FF27B22B7FC764"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\通用PHP字典.txt"
+            "TargetName" = "8:通用PHP字典.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4704107782F46D39F47A8237BD9A391"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\44_地下钱庄.png"
@@ -9387,6 +9457,11 @@
             "AssemblyAsmDisplayName" = "8:QQSpiderPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_D3BB07EC2FD446F6B7F7BB4CC79EE179"
+                    {
+                    "Name" = "8:QQSpiderPlugin.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:..\\C2Main\\bin\\开发调试\\plugins\\QQSpiderPlugin.dll"
             "TargetName" = "8:"
@@ -10592,6 +10667,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED63AF81A5E94616A000845A6B8E84F9"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\PHP一级目录.txt"
+            "TargetName" = "8:PHP一级目录.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE688AC407E24D689B12E11ACB32ED87"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\82_skype.png"
@@ -10940,6 +11035,26 @@
             "TargetName" = "8:back.jpg"
             "Tag" = "8:"
             "Folder" = "8:_7F0B509E0F0F4A94A2F276568FCC793F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F6FE5DFCE7B2426F919166496A1B6517"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\通用目录字典.txt"
+            "TargetName" = "8:通用目录字典.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -11718,6 +11833,17 @@
                                         {
                                         }
                                     }
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_B12BD8E665B44C348D39B551C4393C0C"
+                            {
+                            "Name" = "8:WebScanDict"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_6D2F05475B04452F91B203F4A0ECC99E"
+                                "Folders"
+                                {
                                 }
                             }
                             "{9EF0B969-E518-4E46-987F-47570745A589}:_BF2CFE4DA3214F738046A1B79D73AD19"

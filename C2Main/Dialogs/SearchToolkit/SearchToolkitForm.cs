@@ -270,6 +270,7 @@ namespace C2.SearchToolkit
             this.downloadButton.Enabled      = task.TaskStatus == "DONE";
             this.modelSettingsForm.StartTime = task.Settings.StartTime;
             this.modelSettingsForm.EndTime   = task.Settings.EndTime;
+            this.modelSettingsForm.QueryStr  = task.Settings.QueryStr;
         }
         private bool IsReadOnly()
         {
@@ -315,7 +316,8 @@ namespace C2.SearchToolkit
         {
             if (e.Button != MouseButtons.Left)
                 return;
-            modelSettingsForm.ShowDialog(IsReadOnly());
+
+            modelSettingsForm.ShowDialog(IsReadOnly(), this.taskModelComboBox.Text != "自定义查询");
         }
 
         private void TaskConfigPB_MouseEnter(object sender, EventArgs e)
