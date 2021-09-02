@@ -542,7 +542,7 @@ namespace C2.Business.SSH
         private bool IsResultFileReady()
         {
             String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|code)_\d+_\d+.tgz\r?\n");
+            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|code|custom)_\d+_\d+.tgz\r?\n");
         }
 
         private bool IsTaskTimeout()
