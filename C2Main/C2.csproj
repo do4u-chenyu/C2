@@ -3734,8 +3734,6 @@
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)tools\zip\zip.exe  -j -u $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py
 
-$(SolutionDir)tools\zip\zip.exe  -j -u $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py
-
 
 $(SolutionDir)tools\zip\zip.exe  -j -u $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py  
 
