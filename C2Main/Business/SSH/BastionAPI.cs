@@ -448,14 +448,14 @@ namespace C2.Business.SSH
             string taskType = SearchTaskInfo.TaskDescriptionTable[task.TaskModel];
             List<string> illegalTypeList = new List<string>() { "hack", "bt", "apk", "ddos", "xss", "qg", "sf", "vps" };
 
-            string parserTime = task.Settings.IsSetQueryTime() ? String.Empty : String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime);
+            string parserTime = task.Settings.IsSetQueryTime() ? String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime) : String.Empty;
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;
-            string parserQueryStr = task.Settings.IsSetQueryStr() ? String.Empty : String.Format("--query '{0}'", task.Settings.QueryStr);
-            return Regex.Escape(String.Format("python {0} {1} {2} {3}",
+            string parserQueryStr = task.Settings.IsSetQueryStr() ?  String.Format("--query '{0}'", Regex.Escape(task.Settings.QueryStr)) : String.Empty;
+            return String.Format("python {0} {1} {2} {3}",
                     TargetScript,
                     parserTime,
                     parserType,
-                    parserQueryStr));
+                    parserQueryStr);
         }
 
         public BastionAPI CheckHomeSearch()

@@ -25,12 +25,12 @@ namespace C2.SearchToolkit
         public bool IsSetQueryTime()
         {
             // 限制条件从严
-            return String.IsNullOrEmpty(StartTime) || String.IsNullOrEmpty(EndTime);
+            return !(String.IsNullOrEmpty(StartTime) || String.IsNullOrEmpty(EndTime));
         }
         
         public bool IsSetQueryStr()
         {
-            return String.IsNullOrEmpty(QueryStr);
+            return !String.IsNullOrEmpty(QueryStr);
         }
     }
 }
