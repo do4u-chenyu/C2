@@ -451,11 +451,11 @@ namespace C2.Business.SSH
             string parserTime = task.Settings.IsSetQueryTime() ? String.Empty : String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime);
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;
             string parserQueryStr = task.Settings.IsSetQueryStr() ? String.Empty : String.Format("--query '{0}'", task.Settings.QueryStr);
-            return String.Format("python {0} {1} {2} {3}",
+            return Regex.Escape(String.Format("python {0} {1} {2} {3}",
                     TargetScript,
                     parserTime,
                     parserType,
-                    parserQueryStr);
+                    parserQueryStr));
         }
 
         public BastionAPI CheckHomeSearch()
