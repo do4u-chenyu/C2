@@ -312,6 +312,7 @@
     <Compile Include="Business\IAOLab\WebEngine\Boss\Charts\Visualization\WordCloud.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\GenVisualHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\BaseOption\Normal.cs" />
+    <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesBaseOption\Force.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesGraph.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesPictorialBar.cs" />
     <Compile Include="Business\IAOLab\WebEngine\Boss\Option\SeriesType\SeriesTree.cs" />
