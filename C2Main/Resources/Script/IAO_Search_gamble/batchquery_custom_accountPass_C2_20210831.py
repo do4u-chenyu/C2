@@ -476,7 +476,7 @@ if __name__ == '__main__':
     IS_TEST_MODE        = option.test
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 300)
+    OneYear = datetime.timedelta(days = 90)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
    
