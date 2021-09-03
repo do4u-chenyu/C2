@@ -352,7 +352,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 2;
-            this.label7.Text = "控速/s";
+            this.label7.Text = "延迟/s";
             // 
             // label6
             // 

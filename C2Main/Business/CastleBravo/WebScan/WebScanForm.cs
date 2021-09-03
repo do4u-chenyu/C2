@@ -45,9 +45,9 @@ namespace C2.Business.CastleBravo.WebScan
 
             this.headerCombo.SelectedIndex = 0;
             this.httpMethodCombo.SelectedIndex = 0;
-            this.threadSizeCombo.SelectedIndex = 2;
+            this.threadSizeCombo.SelectedIndex = 4;
             this.timeOutCombo.SelectedIndex = 2;
-            this.sleepTimeCombo.SelectedIndex = 2;
+            this.sleepTimeCombo.SelectedIndex = 0;
 
             this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "WebScanDict");
             RefreshDict();
@@ -357,15 +357,22 @@ namespace C2.Business.CastleBravo.WebScan
 
         private void ScanDomain(ServerInfo svinfo)
         {
-            ServerInfo result = HttpRequest.SendRequestGetHeader(config, svinfo.url, config.TimeOut, config.keeAlive);
-            svinfo.code = result.code;
-            svinfo.ip = tools.GetIP(svinfo.host);
-            svinfo.contentType = result.contentType;
-            svinfo.length = result.length;
-            svinfo.server = result.server;
-            svinfo.powerBy = result.powerBy;
-            svinfo.runTime = result.runTime;
-            this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut, config.keeAlive);
+
+            if(result.code != 0)
+            {
+                svinfo.code = result.code;
+                svinfo.ip = tools.GetIP(svinfo.host);
+                svinfo.contentType = result.contentType;
+                svinfo.length = result.length;
+                svinfo.server = result.server;
+                svinfo.powerBy = result.powerBy;
+                svinfo.runTime = result.runTime;
+                this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+            }
+            else
+                LogError(svinfo.url + "-----" + result.contentType);
+
             //Thread.Sleep(config.SleepTime * 1000);
         }
 
@@ -393,8 +400,15 @@ namespace C2.Business.CastleBravo.WebScan
                 svinfo.server = result.server;
                 svinfo.powerBy = result.powerBy;
                 svinfo.runTime = result.runTime;
-                this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+
+                if(config.ShowCodes.Contains(svinfo.code.ToString()))
+                    this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+
+                //LogInfo("扫描完成-----" + svinfo.url + "-----" + "状态码：" + svinfo.code);
             }
+            else
+                LogError("扫描失败-----" + svinfo.url + "-----" + result.contentType);
+
             Thread.Sleep(config.SleepTime * 1000);
         }
 
@@ -423,7 +437,6 @@ namespace C2.Business.CastleBravo.WebScan
             lvi.SubItems.Add(svinfo.code + "");
             lvi.SubItems.Add(svinfo.contentType + "");
             lvi.SubItems.Add(svinfo.length + "");
-            lvi.SubItems.Add(svinfo.server + "");
             lvi.SubItems.Add(svinfo.runTime + "");
             //lvi.SubItems.Add(svinfo.ip + "");
             if (svinfo.code.ToString().StartsWith("2"))

@@ -25,7 +25,7 @@ namespace C2.Business.HIBU.OCR
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:8970/HI_CV/OCR";
+            OCRUrl = "http://10.1.126.186:9000/HI_CV/OCR";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -110,8 +110,6 @@ namespace C2.Business.HIBU.OCR
 
         public string StartTask(string base64Str)
         {
-
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "imageBase64", base64Str } };
             string data = string.Empty;
 
             try
@@ -122,8 +120,7 @@ namespace C2.Business.HIBU.OCR
 
                 if (statusCode != HttpStatusCode.OK)
                 {
-                    HelpUtil.ShowMessageBox(string.Format("http 状态码：{0}.", statusCode));
-                    return data;
+                    return string.Format("查询失败! http状态码为：{0}.", statusCode);
                 }
                     
 
@@ -132,16 +129,14 @@ namespace C2.Business.HIBU.OCR
                 if (resDict.TryGetValue("status", out string status))
                 {
                     resDict.TryGetValue("results", out string datas);
-                    data = datas;
-                    if(status != "200")
-                        HelpUtil.ShowMessageBox("状态码非200");
+                    data = status == "200" ? DealData(datas) : datas;
                 }
                 else
-                    HelpUtil.ShowMessageBox("查询失败");
+                    data = "查询失败! status不存在。"; 
             }
             catch (Exception e)
             {
-                HelpUtil.ShowMessageBox(e.Message);
+                data = "查询失败!" + e.Message;
             }
             return data;
         }
@@ -155,7 +150,7 @@ namespace C2.Business.HIBU.OCR
             dr.Cells.Add(textCell0);
 
             DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-            textCell1.Value = DealData(result);
+            textCell1.Value = result;
             dr.Cells.Add(textCell1);
 
             dataGridView1.Rows.Add(dr);

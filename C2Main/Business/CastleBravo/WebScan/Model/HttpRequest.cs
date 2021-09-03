@@ -128,6 +128,9 @@ namespace C2.Business.CastleBravo.WebScan.Model
 
         public static ServerInfo SendRequestGetBody(Config config, String url, int timeout, bool keeAlive)
         {
+            Stopwatch st = new Stopwatch();
+            st.Start();
+
             HttpWebRequest request = null;
             HttpWebResponse response = null;
             ServerInfo res = new ServerInfo();
@@ -162,26 +165,30 @@ namespace C2.Business.CastleBravo.WebScan.Model
                 }
                 catch (WebException e)
                 {
-                    response = (HttpWebResponse)e.Response;
+                    res.contentType = e.Message;
+                    if (e.Response != null)
+                        response = (HttpWebResponse)e.Response;
                 }
-                res.contentType = response.ContentType;
-                res.powerBy = response.Headers["powerby"];
-                res.location = response.Headers["location"];
-                res.length = response.ContentLength;
-                res.code = (int)(response.StatusCode);
-                res.server = response.Server;
-                rs = response.GetResponseStream();
-                sr = new StreamReader(rs, Encoding.GetEncoding("UTF-8"));
-                res.body = sr.ReadToEnd();
-                String encoding = getHTMLEncoding(response.ContentType, res.body);
-
-                if (!"".Equals(encoding) && !"UTF-8".Equals(encoding, StringComparison.OrdinalIgnoreCase))
+                if (response != null)
                 {
+                    res.contentType = response.ContentType;
+                    res.powerBy = response.Headers["powerby"];
+                    res.location = response.Headers["location"];
+                    res.length = response.ContentLength;
+                    res.code = (int)(response.StatusCode);
+                    res.server = response.Server;
                     rs = response.GetResponseStream();
-                    sr = new StreamReader(rs, Encoding.GetEncoding(encoding));
+                    sr = new StreamReader(rs, Encoding.GetEncoding("UTF-8"));
                     res.body = sr.ReadToEnd();
-                };
+                    String encoding = getHTMLEncoding(response.ContentType, res.body);
 
+                    if (!"".Equals(encoding) && !"UTF-8".Equals(encoding, StringComparison.OrdinalIgnoreCase))
+                    {
+                        rs = response.GetResponseStream();
+                        sr = new StreamReader(rs, Encoding.GetEncoding(encoding));
+                        res.body = sr.ReadToEnd();
+                    };
+                }
             }
             catch
             {
@@ -206,6 +213,9 @@ namespace C2.Business.CastleBravo.WebScan.Model
                     request.Abort();
                 }
             }
+            st.Stop();
+            res.runTime = st.ElapsedMilliseconds;
+
             return res;
         }
 
