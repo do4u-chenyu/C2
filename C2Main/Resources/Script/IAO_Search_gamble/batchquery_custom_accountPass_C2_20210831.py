@@ -12,7 +12,14 @@ import itertools
 import logging
 from optparse import OptionParser
 reload(sys)
+import sys
+import io
+import codecs
+import json
+
 sys.setdefaultencoding('utf-8')
+
+
 #################
 class Scheduler:
     def __init__(self,startTime,endTime,filename,queryWords):
@@ -287,6 +294,8 @@ class Airport:
         content = ''
         end_item = '_QUERY_MATCHTERMS'
         with open(os.path.join(self.data_path,'result.log'),'a+') as f:
+            keyWords = keyWords.decode('utf-8')
+            keyWords = keyWords.encode('GBK')
             cmd = [
                 '/home/search/sbin/queryclient',
                 '--server', '127.0.0.1',
@@ -295,7 +304,8 @@ class Airport:
                 '--start', self.startTime,
                 '--end', self.endTime,
                 '--contextlen', '1000',
-                '--maxcount', '1000000'
+                '--maxcount', '1000000',
+                #'|','iconv -f utf8 -t gbk'
             ]
             req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)
             print ". /home/search/search_profile && {0}".format(" ".join(cmd))
@@ -361,19 +371,18 @@ class Airport:
         self.all_items += ['USERNAME', 'PASSWORD']
         out_file = 'custom_out.txt'
         
-        with open(os.path.join(self.data_path, out_file), 'a+') as f:
-            f.write('\t'.join(ALL_ITEMS) + '\n')
+        with io.open(os.path.join(self.data_path, out_file), 'a+',encoding = 'utf-8') as f:
+            #f.write('\t'.join(ALL_ITEMS) + '\n')
             try:
                 LOGGER.info('OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(self.all_items, KEY_WORDS, self.startTime, self.endTime))
             except Exception, e:
                 LOGGER.info('QUERY_ERROR-{0}'.format(e))
             for data in self.queryclient(KEY_WORDS,QUREY_TYPE):
-                if data.get('_HOST', ''):
-                    try:
-                        f.write('\t'.join([data.get(item, '') for item in self.all_items]) + '\n')
-                    except:
-                        pass
+                #f.write(unicode(data)+'\n')
+                data = json.dumps(data, ensure_ascii=False)
 
+                f.write(unicode(data)+'\n')
+                
              
 ##日志文件打印
 def init_logger(logname,filename,logger_level = logging.INFO):
@@ -467,7 +476,7 @@ if __name__ == '__main__':
     IS_TEST_MODE        = option.test
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 90)
+    OneYear = datetime.timedelta(days = 300)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
    
