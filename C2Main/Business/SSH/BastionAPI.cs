@@ -56,17 +56,9 @@ namespace C2.Business.SSH
         public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
-            if (task.BastionIP.Contains(":"))
-            {
-                string[] serverInfo = task.BastionIP.Split(':');
-                string ip = serverInfo[0].Trim();
-                int port = ConvertUtil.TryParseInt(serverInfo[1].Trim(), 22);
-                this.ssh = new SshClient(ip, port, task.Username, task.Password);
-            }
-            else
-            {
-                this.ssh = new SshClient(task.BastionIP, task.Username, task.Password);
-            }
+            string ip   = ConvertUtil.GetIP(task.BastionIP);
+            string port = ConvertUtil.GetPort(task.BastionIP); // 没有端口默认22
+            this.ssh = new SshClient(ip, ConvertUtil.TryParseInt(port, 22), task.Username, task.Password);
             this.ssh.ConnectionInfo.Timeout = Timeout;
             this.ssh.ConnectionInfo.Encoding = Encoding.UTF8;
         }
@@ -147,21 +139,22 @@ namespace C2.Business.SSH
                 return;
 
             // 跳转的目标机器，如果是2次跳转的情况，第一层应该是界面机
-            String targetIP = task.InterfaceIP.IsEmpty() ? task.SearchAgentIP : task.InterfaceIP;
+            String targetAddress = task.InterfaceIP.IsEmpty() ? task.SearchAgentIP : task.InterfaceIP;
+            String ip   = ConvertUtil.GetIP(targetAddress);
 
-            task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转到下一层目标机器【{1}】", task.BastionIP, targetIP);
+            task.LastErrorMsg = String.Format("登陆堡垒机【{0}】成功，但未能跳转到下一层目标机器【{1}】", task.BastionIP, targetAddress);
             task.LastErrorCode = BastionCodePage.JumpUnknownFail;
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
             _ = shell.ReadLine(Timeout);
 
             // 跳转到目标机器
-            shell.WriteLine(targetIP);
+            shell.WriteLine(ip);
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(10)))
             {   // 修复bug:某些机器改了shell提示, 这里如果也不是ifconfig的话才认为失败 
                 String ret = RunCommand("ifconfig", shell); // TODO ifconfig在7u4下居然被干掉了，唉
-                if (!ret.Contains(targetIP))                // TODO 要找一种 6u3 和 7u4 统一的查看本机IP的方法
+                if (!ret.Contains(ip))                // TODO 要找一种 6u3 和 7u4 统一的查看本机IP的方法
                     return;
             }
             task.LastErrorMsg = String.Empty;
@@ -172,8 +165,9 @@ namespace C2.Business.SSH
         {
             if (Oops())
                 return;
-            String targetIP = task.SearchAgentIP;
-            String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0}", targetIP);
+            String ip   = ConvertUtil.GetIP(task.SearchAgentIP);
+            String port = ConvertUtil.GetPort(task.SearchAgentIP);
+            String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0} -p {1}", ip, port);
             RunCommand(command, shell);
         }
 

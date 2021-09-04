@@ -217,7 +217,7 @@
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
             this.searchAgentIPTB.TabIndex = 8;
-            this.searchAgentIPTB.Text = "15.1.1.1";
+            this.searchAgentIPTB.Text = "15.1.1.1:22";
             // 
             // label15
             // 

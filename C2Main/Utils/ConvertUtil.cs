@@ -169,5 +169,14 @@ namespace C2.Utils
         {
             return ((time.ToUniversalTime().Ticks - 621355968000000000) / 10000000).ToString();
         }
+
+        public static string GetIP(string address)
+        {
+            return address.IndexOf(':') == -1 ? address : address.Remove(address.IndexOf(':')); 
+        }
+        public static string GetPort(string address, string defaultPort = "22")
+        {
+            return address.IndexOf(':') == -1 ? defaultPort : address.Substring(address.IndexOf(':'));   
+        }
     }
 }
