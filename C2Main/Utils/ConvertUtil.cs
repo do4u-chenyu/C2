@@ -176,7 +176,7 @@ namespace C2.Utils
         }
         public static string GetPort(string address, string defaultPort = "22")
         {
-            return address.IndexOf(':') == -1 ? defaultPort : address.Substring(address.IndexOf(':'));   
+            return address.IndexOf(':') == -1 ? defaultPort : address.Substring(address.IndexOf(':')).Trim(':');   
         }
     }
 }
