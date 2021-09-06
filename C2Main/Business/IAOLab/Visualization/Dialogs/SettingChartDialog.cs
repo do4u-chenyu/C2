@@ -99,7 +99,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private DataTable GenDataTable(string path)
         {
-            string fileContent;
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
             if (bcpInfo == null || bcpInfo.ColumnArray.IsEmpty())
@@ -122,8 +121,8 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
 
-            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, OpUtil.Encoding.UTF8);
-            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
+            
+            List<string> rows = GetFileLines(path);
             //int maxLine = Math.Min(rows.Count, MaxLine);
 
             for (int i = 1; i < rows.Count; i++)
@@ -139,10 +138,44 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             }
             return dataTable;
         }
+        
+        private List<string> GetFileLines(string path)
+        {
+            int lineCount = 0;
+            List<string> contentList = new List<string>();
+            FileStream fs_dir = null;
+            StreamReader reader = null;
+            try
+            {
+                fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
+                reader = new StreamReader(fs_dir);
+                string lineStr;
+                while ((lineStr = reader.ReadLine()) != null && lineCount < 1001)
+                {
+                    if (!lineStr.Equals(""))
+                    {
+                        contentList.Add(lineStr);
+                        lineCount++;
+                    }
+                }
+            }
+            catch { }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                if (fs_dir != null)
+                {
+                    fs_dir.Close();
+                }
+            }
+            return contentList;
+        }
 
         private DataTable GenDataTable1(string path)
         {
-            string fileContent;
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
             if (bcpInfo1 == null || bcpInfo1.ColumnArray.IsEmpty())
@@ -165,9 +198,8 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
 
-            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, OpUtil.Encoding.UTF8);
-            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
-            //int maxLine = Math.Min(rows.Count, MaxLine);
+            List<string> rows = GetFileLines(path);
+            
 
             for (int i = 1; i < rows.Count; i++)
             {
@@ -184,7 +216,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         }
         private DataTable GenDataTable2(string path)
         {
-            string fileContent;
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
             if (bcpInfo2 == null || bcpInfo2.ColumnArray.IsEmpty())
@@ -207,8 +238,8 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
 
-            fileContent = BCPBuffer.GetInstance().GetCachePreviewBcpContent(path, OpUtil.Encoding.UTF8);
-            List<string> rows = new List<string>(fileContent.TrimEnd('\r').TrimEnd('\n').Split('\n'));
+           
+            List<string> rows = GetFileLines(path);
             //int maxLine = Math.Min(rows.Count, MaxLine);
 
             for (int i = 1; i < rows.Count; i++)
