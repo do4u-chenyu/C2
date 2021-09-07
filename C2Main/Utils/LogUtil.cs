@@ -42,6 +42,14 @@ namespace C2.Utils
             return this;
         }
 
+        public LogUtil Debug(string content)
+        {
+            log.DebugFormat("{0}:{1}", this.ModuleName, content);
+            if (Global.GetLogView() != null)
+                Global.GetLogView().LogUpdate(content);
+            return this;
+        }
+
         public LogUtil Error(string content)
         {
             log.ErrorFormat("{0}:{1}", this.ModuleName, content);

@@ -127,7 +127,13 @@ namespace C2.Business.SSH
 
         private bool CheckJumpOK()
         {
-            return true; // 目前没有特别好的方法能够检测真正跳转成功
+            String ip = ConvertUtil.GetIP(task.SearchAgentIP);
+            return CheckHostIP(ip); // 目前没有特别好的方法能够检测真正跳转成功
+        }
+
+        private bool CheckHostIP(String ip)
+        {
+            return RunCommand("ifconfig", shell).Contains(ip) || RunCommand("ip addr", shell).Contains(ip);
         }
         private void Jump()
         {
@@ -149,8 +155,7 @@ namespace C2.Business.SSH
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(10)))
             {   // 修复bug:某些机器改了shell提示, 这里如果也不是ifconfig的话才认为失败 
-                String ret = RunCommand("ifconfig", shell); // TODO ifconfig在7u4下居然被干掉了，唉
-                if (!ret.Contains(ip))                // TODO 要找一种 6u3 和 7u4 统一的查看本机IP的方法
+                if (!CheckHostIP(ip)) 
                     return;
             }
             task.LastErrorMsg = String.Empty;
@@ -191,8 +196,13 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 // 根据分隔符和timeout确定任务输出结束
                 String ret = ssm.Expect(SeparatorRegex, TimeSpan.FromSeconds(timeout));
+
                 if (ret != null)
+                {
+                    log.Debug(ret);  // 提高打印级别
                     return ret;
+                }
+                    
             }
             catch { }
 
