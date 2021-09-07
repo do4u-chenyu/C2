@@ -49,9 +49,9 @@ namespace C2.Business.SSH
             return String.Format(@"\r?\n{0}\r?\n", pattern);
         }
 
-        private static String FuzzWrap(String command)
+        private static String PrefixWrap(String command)
         {
-            return Wrap(command.Replace(OpUtil.StringBlank, @"\s*"));
+            return String.Format(@"\r?\n{0}", command.Replace(OpUtil.StringBlank, @"\s*"));
         }
         public BastionAPI(SearchTaskInfo task)
         {
@@ -444,12 +444,17 @@ namespace C2.Business.SSH
 
             string parserTime = task.Settings.IsSetQueryTime() ? String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime) : String.Empty;
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;
-            string parserQueryStr = task.Settings.IsSetQueryStr() ?  String.Format("--query '{0}'", Regex.Escape(task.Settings.QueryStr)) : String.Empty;
+            string parserQueryStr = task.Settings.IsSetQueryStr() ?  String.Format("--query '{0}'",task.Settings.QueryStr) : String.Empty;
             return String.Format("python {0} {1} {2} {3}",
                     TargetScript,
                     parserTime,
                     parserType,
                     parserQueryStr);
+        }
+
+        private String ConstructTaskAlive()
+        {
+            return String.Format("python {0}", TargetScript);
         }
 
         public BastionAPI CheckHomeSearch()
@@ -530,7 +535,7 @@ namespace C2.Business.SSH
         private bool IsAliveTask()
         {
             String result = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
-            return Regex.IsMatch(result, FuzzWrap(ConstructTaskCommand()));
+            return result.Contains(ConstructTaskAlive());
         }
 
         private bool IsResultFileReady()
