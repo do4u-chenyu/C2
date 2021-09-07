@@ -49,10 +49,6 @@ namespace C2.Business.SSH
             return String.Format(@"\r?\n{0}\r?\n", pattern);
         }
 
-        private static String FuzzWrap(String command)
-        {
-            return Wrap(command.Replace(OpUtil.StringBlank, @"\s*"));
-        }
         public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
@@ -444,7 +440,7 @@ namespace C2.Business.SSH
 
             string parserTime = task.Settings.IsSetQueryTime() ? String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime) : String.Empty;
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;
-            string parserQueryStr = task.Settings.IsSetQueryStr() ?  String.Format("--query '{0}'", Regex.Escape(task.Settings.QueryStr)) : String.Empty;
+            string parserQueryStr = task.Settings.IsSetQueryStr() ?  String.Format("--query '{0}'",task.Settings.QueryStr) : String.Empty;
             return String.Format("python {0} {1} {2} {3}",
                     TargetScript,
                     parserTime,
@@ -457,7 +453,8 @@ namespace C2.Business.SSH
             if (Oops()) return this;
 
             String targetPath = "/home/search/sbin/queryclient";
-            String command = String.Format("ls {0}", targetPath);
+            // 不同的linux下alias不同导致会有颜色控制符,关闭颜色控制符
+            String command = String.Format("ls --color=never {0}", targetPath);
             String ret = RunCommand(command, shell);
             if (!Regex.IsMatch(ret, Wrap(targetPath)))
             {
@@ -475,8 +472,6 @@ namespace C2.Business.SSH
 
             log.Info(String.Format("任务【{0}】: 全文主节点执行任务命令 {1}", task.TaskName, command));
 
-            
-            //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
             String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
@@ -529,8 +524,8 @@ namespace C2.Business.SSH
 
         private bool IsAliveTask()
         {
-            String result = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
-            return Regex.IsMatch(result, FuzzWrap(ConstructTaskCommand()));
+            String ret = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
+            return Regex.IsMatch(ret, String.Format(@"python\s+{0}", TargetScript));
         }
 
         private bool IsResultFileReady()
