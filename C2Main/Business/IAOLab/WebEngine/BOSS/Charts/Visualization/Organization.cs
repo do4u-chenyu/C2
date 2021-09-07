@@ -38,10 +38,10 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                 }
             }
             //option.dataset = Common.FormatDatas;
-            string data = Trans(dataTable, chartOptions)[0];
+            List<string> returnList = Trans(dataTable, chartOptions);
+            string data = returnList[0];
+            string tooltipHeight = returnList[1];
 
-            string tooltipHeight = Trans(dataTable, chartOptions)[1];
-            //string toolFormatter = Trans(dataTable, chartOptions)[1];
             List<ISeries> series = new List<ISeries>();
             option.tooltip = new Tooltip()
             {

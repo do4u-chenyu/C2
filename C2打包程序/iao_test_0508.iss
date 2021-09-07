@@ -345,7 +345,7 @@ begin
 '    <add key="workspace" value="' + edtSelectDir2.Text + '"/>' + #13#10 +
 '    <add key="RunLevel" value="NoLogin" />' + #13#10 + 
 '    <add key="EPPlus:ExcelPackage.LicenseContext" value="NonCommercial" />' + #13#10 + 
-'    <add key="IAOLab" value=" BigAPK, APK, BaseStation, Wifi, Card, Tude, Ip " />' + #13#10 + 
+'    <add key="IAOLab" value=" BigAPK, APK, Visualization, Wifi, Card, Tude" />' + #13#10 + 
 '    <add key="version" value="1.4.14" />' + #13#10 + 
 '    <add key="ClientSettingsProvider.ServiceUri" value="" />' + #13#10 + 
 '  </appSettings>' + #13#10 + 

@@ -43,6 +43,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.edgeSetting = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.weightComboBox = new System.Windows.Forms.ComboBox();
             this.weight = new System.Windows.Forms.Label();
             this.targetComboBox = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -72,8 +74,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.keyComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.weightComboBox = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -261,6 +261,25 @@
             this.edgeSetting.Text = "边设置";
             this.edgeSetting.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(233, 168);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(79, 20);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "（非必选）";
+            // 
+            // weightComboBox
+            // 
+            this.weightComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.weightComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.weightComboBox.FormattingEnabled = true;
+            this.weightComboBox.Location = new System.Drawing.Point(72, 168);
+            this.weightComboBox.Name = "weightComboBox";
+            this.weightComboBox.Size = new System.Drawing.Size(155, 25);
+            this.weightComboBox.TabIndex = 8;
+            // 
             // weight
             // 
             this.weight.AutoSize = true;
@@ -272,6 +291,7 @@
             // 
             // targetComboBox
             // 
+            this.targetComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.targetComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.targetComboBox.FormattingEnabled = true;
             this.targetComboBox.Location = new System.Drawing.Point(72, 114);
@@ -291,6 +311,7 @@
             // 
             // sourceComboBox
             // 
+            this.sourceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sourceComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.sourceComboBox.FormattingEnabled = true;
             this.sourceComboBox.Location = new System.Drawing.Point(72, 61);
@@ -356,6 +377,7 @@
             // 
             // categoriesComboBox
             // 
+            this.categoriesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoriesComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.categoriesComboBox.FormattingEnabled = true;
             this.categoriesComboBox.Location = new System.Drawing.Point(70, 124);
@@ -375,6 +397,7 @@
             // 
             // nodeComboBox
             // 
+            this.nodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nodeComboBox.FormattingEnabled = true;
             this.nodeComboBox.Location = new System.Drawing.Point(70, 75);
@@ -567,24 +590,6 @@
             this.label7.Size = new System.Drawing.Size(65, 20);
             this.label7.TabIndex = 10059;
             this.label7.Text = "关键词：";
-            // 
-            // weightComboBox
-            // 
-            this.weightComboBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.weightComboBox.FormattingEnabled = true;
-            this.weightComboBox.Location = new System.Drawing.Point(72, 168);
-            this.weightComboBox.Name = "weightComboBox";
-            this.weightComboBox.Size = new System.Drawing.Size(155, 25);
-            this.weightComboBox.TabIndex = 8;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(233, 168);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(79, 20);
-            this.label14.TabIndex = 9;
-            this.label14.Text = "（非必选）";
             // 
             // SettingChartDialog
             // 

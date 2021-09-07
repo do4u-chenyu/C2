@@ -9,6 +9,8 @@ using System.Web.Script.Serialization;
 using Label = C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption.Label;
 using C2.Business.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System;
 
 namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
 {
@@ -21,42 +23,24 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
            
             string[] chartOptions = chartOptionDict["Graph"];
 
-            string link = Trans(dataList, chartOptions)[0] as string;
-            string data = Trans(dataList, chartOptions)[1];
-            
-            string category = string.Empty;
-            List<string> categoriesList = new List<string>() { };
-            
-            if (chartOptions[3] != "-1" && chartOptions[4] != "-1")//有节点数据和类型时
-            {
-                category = Trans(dataList, chartOptions)[2];
-                for (int i = 0; i < dataList[1].Rows.Count; i++)
-                {
-                    string categories = dataList[1].Rows[i][int.Parse(chartOptions[4])].ToString();
-                    if (categories != "" && categoriesList.Contains(categories) == false)
-                    {
-                        categoriesList.Add(categories);
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    Dictionary<string, string> categorieDictionary = new Dictionary<string, string>();
-                    categorieDictionary.Add("name", dataList[0].Columns[int.Parse(chartOptions[i])].ColumnName.ToString());
-                    categoriesList.Add(dataList[0].Columns[int.Parse(chartOptions[i])].ColumnName.ToString());
-                    JavaScriptSerializer jss = new JavaScriptSerializer();
-                    string categorieData = jss.Serialize(categorieDictionary);
-                    category = category + categorieData + ",";
-                };
-                category = '['+ category + ']';
-            }
+            List<string> returnList = Trans(dataList, chartOptions);
+            string link = returnList[0];
+            string data = returnList[1];
+            string category = returnList[2];
 
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string categorie = category.Remove(category.Length - 2, 1);
+            List<Dictionary<string, string>> categoriesList = jss.Deserialize<List<Dictionary<string, string>>>(categorie);
+            float a = dataList[0].Rows.Count;
+            float b = 1250;
+            float gravities = a/b;
+
+            int edgeLen = Math.Min(5000 / dataList[0].Rows.Count + 25, 125);
+            int symbolSizes =11-dataList[0].Rows.Count/250;
             string lengendList = string.Empty;
             for (int i=0; i < categoriesList.Count; i++)
             {
-                lengendList = lengendList + "'"+ categoriesList[i]+ "',";
+                lengendList = lengendList + "'"+ categoriesList[i]["name"]+ "',";
             }
 
             List <ISeries> series = new List<ISeries>();
@@ -68,7 +52,6 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                     color = "'#333'",
                 }
             };
-
             option.tooltip = new Tooltip()
             {
                 trigger = "'item'",
@@ -76,23 +59,33 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
             };
             series.Add(new SeriesGraph()
             {
-                symbolSize = "4",
-                symbol = "'emptyCircle'",
+                symbolSize = symbolSizes.ToString(),
+                symbol = "'circle'",
                 smooth = "false",
                 type = "'graph'",
                 layout = "'force'",
                 draggable = "true",
+                left = "'5%'",
+                right = "'5%'",
+                top ="'10%'",
+                bottom ="'5%'",
                 links = link,
                 categories = category,
                 roam = "true",
-                lineStyle=new LineStyle() 
+                animationDuration = 100,
+                animationDurationUpdate = 100,
+                animationEasing = "'cubicOut'",
+                animationDelay= "0",
+                animationEasingUpdate= "'cubicInOut'",
+                animationDelayUpdate = "0",
+                lineStyle =new LineStyle() 
                 {
                     width = 1,
                     color= "'#aaa'",
                 },
                 label = new Label()
                 {
-                    show = "true",
+                    show = "false",
                     position = C2.IAOLab.WebEngine.Boss.Option.SeriesType.SeriesBaseOption.Position.right,
                     formatter = "'{b}'",
                     //color = "'#333'",
@@ -100,9 +93,9 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                 
                 force = new Force() 
                 {
-                    edgeLength = 50,
-                    repulsion = 100,
-                    gravity = "0.05",
+                    edgeLength = edgeLen,
+                    repulsion = 50,
+                    gravity = gravities.ToString(),
                     layoutAnimation = "true",
                 },
                 data = data,
@@ -113,8 +106,16 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
     
         public List<string> Trans(List<DataTable> dataList, string[] chartOptions)
         {
+            string sourceColName = dataList[0].Columns[int.Parse(chartOptions[0])].ColumnName;
+            string targetColName = dataList[0].Columns[int.Parse(chartOptions[1])].ColumnName;
+            string[] source = dataList[0].AsEnumerable().Select(peo => peo.Field<string>(sourceColName)).ToArray();
+            string[] target = dataList[0].AsEnumerable().Select(peo => peo.Field<string>(targetColName)).ToArray();
+            var edgeUnionList = source.Union(target);
+
             string edgeData = string.Empty;
             string nodeData = string.Empty;
+            string categories = string.Empty;
+            List<string> categoryList = new List<string>() { };
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string linewidth = "1";
             List<string> returnList = new List<string>() { };
@@ -124,87 +125,169 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                 edgeDictionary.Add("source", dataList[0].Rows[i][int.Parse(chartOptions[0])].ToString());
                 edgeDictionary.Add("target", dataList[0].Rows[i][int.Parse(chartOptions[1])].ToString());
                 //添加权重，默认为1
+                Dictionary<string, string> lineStyleDictionary = new Dictionary<string, string>();
                 if (int.Parse(chartOptions[2]) != -1)
                 {
-                    linewidth = dataList[0].Rows[i][int.Parse(chartOptions[2])].ToString();
-                }
-                Dictionary<string, string> lineStyleDictionary = new Dictionary<string, string>();
+                    string weight = dataList[0].Rows[i][int.Parse(chartOptions[2])].ToString();
+                    Regex rx = new Regex("^\\d+(\\.\\d+)?$");
+                    if (rx.IsMatch(weight))
+                    {
+                        linewidth = weight;
+                    }
+                    else
+                    {
+                        linewidth = "1";
+                    }
+                }         
                 lineStyleDictionary.Add("width", linewidth);
-
                 edgeDictionary.Add("lineStyle", lineStyleDictionary);
                 string strEdgeData = jss.Serialize(edgeDictionary);
                 edgeData = edgeData + strEdgeData + ",";
             }
-            if (int.Parse(chartOptions[3]) != -1)//有节点数据
+           
+            if (int.Parse(chartOptions[3]) == -1) //无节点数据
             {
-                List<string> categoryList = new List<string>() { };
-                string categories = string.Empty;
-                for (int i = 0; i < dataList[1].Rows.Count; i++)
-                {
-                    Dictionary<string, object> nodeDictionary = new Dictionary<string, object>();
-                    nodeDictionary.Add("id", dataList[1].Rows[i][int.Parse(chartOptions[3])].ToString());
-                    nodeDictionary.Add("name", dataList[1].Rows[i][int.Parse(chartOptions[3])].ToString());
-                    if (int.Parse(chartOptions[4]) != -1)//有节点类型
-                    {
-                        string category = dataList[1].Rows[i][int.Parse(chartOptions[4])].ToString();
-                        if (category != "" && categoryList.Contains(category) == false)
-                        {
-                            categoryList.Add(category);
-                            Dictionary<string, string> categorieDictionary = new Dictionary<string, string>();
-                            categorieDictionary.Add("name", category);
-                            string categorieData = jss.Serialize(categorieDictionary);
-                            categories = categories + categorieData + ',';
-                        }
-                        for (int j = 0; j < categoryList.Count; j++)
-                        {
-                            if (category == categoryList[j])
-                            {
-                                nodeDictionary.Add("category", j);
-                            }
-                        }
-                    }
-                    else //有节点无类型
-                    {
-                        string sourceColName = dataList[0].Columns[int.Parse(chartOptions[0])].ColumnName;
-                        string[] source = dataList[0].AsEnumerable().Select(peo => peo.Field<string>(sourceColName)).ToArray();
-                        if (source.Contains(dataList[1].Rows[i][int.Parse(chartOptions[3])].ToString()))
-                        {
-                            nodeDictionary.Add("category", 0);
-                        }
-                        else
-                        {
-                            nodeDictionary.Add("category", 1);
-                        }
-                    }
-                    string strNodeData = jss.Serialize(nodeDictionary);
-                    nodeData = nodeData + strNodeData + ",";
-                }
-                returnList = new List<string>() { '[' + edgeData + ']', '[' + nodeData + ']', '[' + categories + ']' };
-            }
-            else //无节点数据
-            {
-                List<string> nodeList = new List<string>() { };
+                List<string> edgeNodeList = new List<string>() { };
                 for (int i = 0; i < dataList[0].Rows.Count; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
-                        if (nodeList.Contains(dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString()) == false)
+                        string edgeNode = dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString();
+                        if (!edgeNodeList.Contains(edgeNode) && edgeNode != "")
                         {
-                            nodeList.Add(dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString());
+                            edgeNodeList.Add(edgeNode);
                             Dictionary<string, object> nodeDictionary = new Dictionary<string, object>();
-                            nodeDictionary.Add("id", dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString());
-                            nodeDictionary.Add("name", dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString());
-                            //string sourceColName = dataList[0].Columns[int.Parse(chartOptions[0])].ColumnName;
-                            //string[] source = dataList[0].AsEnumerable().Select(peo => peo.Field<string>(sourceColName)).ToArray();
-                            //if (source.Contains(dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString()))
+                            nodeDictionary.Add("id", edgeNode);
+                            nodeDictionary.Add("name", edgeNode);
                             nodeDictionary.Add("category", j);
                             string strNodeData = jss.Serialize(nodeDictionary);
                             nodeData = nodeData + strNodeData + ",";
+
+                            Dictionary<string, string> categorieDictionary = new Dictionary<string, string>();
+                            if (!categoryList.Contains(dataList[0].Columns[int.Parse(chartOptions[j])].ColumnName.ToString()))
+                            {
+                                categoryList.Add(dataList[0].Columns[int.Parse(chartOptions[j])].ColumnName.ToString());
+                                categorieDictionary.Add("name", dataList[0].Columns[int.Parse(chartOptions[j])].ColumnName.ToString());
+                                string categorieData = jss.Serialize(categorieDictionary);
+                                categories = categories + categorieData + ",";
+                            }
                         }
                     }
                 }
-                returnList = new List<string>() { '[' + edgeData + ']', '[' + nodeData + ']' };
             }
+            else//有节点数据
+            {
+                
+                string nodeColName = dataList[1].Columns[int.Parse(chartOptions[3])].ColumnName;
+                string[] nodeList = dataList[1].AsEnumerable().Select(peo => peo.Field<string>(nodeColName)).ToArray();
+                List<string> allNodeList = new List<string>();
+                foreach(string item in edgeUnionList.Union(nodeList))
+                {
+                    if(item != "")
+                    {
+                        allNodeList.Add(item);
+                    }   
+                }
+                if (int.Parse(chartOptions[4]) == -1)//有节点无类型
+                {
+                    for (int i = 0; i < allNodeList.Count; i++)
+                    {
+                        Dictionary<string, object> nodeDictionary = new Dictionary<string, object>();
+                        if (source.Contains(allNodeList[i]))
+                        {
+                            nodeDictionary.Add("category", 0);         
+                        }
+                        else if (target.Contains(allNodeList[i]))
+                        {
+                            nodeDictionary.Add("category", 1);                
+                        }
+                        else
+                        {
+                            nodeDictionary.Add("category", 2); 
+                        }
+                        nodeDictionary.Add("id", allNodeList[i]);
+                        nodeDictionary.Add("name", allNodeList[i]);
+                        string strNodeData = jss.Serialize(nodeDictionary);
+                        nodeData = nodeData + strNodeData + ",";
+                        
+                    }
+                    for (int i = 0; i < allNodeList.Count; i++)
+                    {
+                        Dictionary<string, string> categorieDictionary = new Dictionary<string, string>();
+                        string categoryName = string.Empty;
+                        if (!categoryList.Contains(sourceColName))
+                        {
+                            categoryList.Add(sourceColName);
+                            categorieDictionary.Add("name", sourceColName);
+                            string categorieData = jss.Serialize(categorieDictionary);
+                            categories = categories + categorieData + ",";
+                        }
+                        else if (!categoryList.Contains(targetColName))
+                        {
+                            categoryList.Add(targetColName);
+                            categorieDictionary.Add("name", targetColName);
+                            string categorieData = jss.Serialize(categorieDictionary);
+                            categories = categories + categorieData + ",";
+                        }
+                        else if (!categoryList.Contains("其他"))
+                        {
+                            categoryList.Add("其他");
+                            categorieDictionary.Add("name", "其他");
+                            string categorieData = jss.Serialize(categorieDictionary);
+                            categories = categories + categorieData + ",";
+                        }
+                    }
+                }
+                else //有节点类型
+                {
+                    for (int i = 0; i < allNodeList.Count; i++)
+                    {
+                        Dictionary<string, object> nodeDictionary = new Dictionary<string, object>();
+                        nodeDictionary.Add("id", allNodeList[i]);
+                        nodeDictionary.Add("name", allNodeList[i]);
+                        Dictionary<string, string> categorieDictionary = new Dictionary<string, string>();
+                        if (nodeList.Contains(allNodeList[i]))
+                        {
+                            for (int j = 0; j < dataList[1].Rows.Count; j++)
+                            {
+                                if (nodeList[j] == allNodeList[i])
+                                {
+                                    string category = dataList[1].Rows[j][int.Parse(chartOptions[4])].ToString();
+                                    if (category == "")
+                                    {
+                                        category = "其他";
+                                    }
+                                    nodeDictionary.Add("category", category);
+                                    if (!categoryList.Contains(category))
+                                    {
+                                        categoryList.Add(category);
+                                        categorieDictionary.Add("name", category);
+                                        string categorieData = jss.Serialize(categorieDictionary);
+                                        categories = categories + categorieData + ',';
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            nodeDictionary.Add("category", "其他");
+                            if (!categoryList.Contains("其他"))
+                            {
+                                categoryList.Add("其他");
+                                categorieDictionary.Add("name", "其他");
+                                string categorieData = jss.Serialize(categorieDictionary);
+                                categories = categories + categorieData + ',';
+                            }
+                        }
+                        string strNodeData = jss.Serialize(nodeDictionary);
+                        nodeData = nodeData + strNodeData + ",";
+                        
+                    }
+
+                }
+            }
+            returnList = new List<string>() { '[' + edgeData + ']', '[' + nodeData + ']', '[' + categories + ']' };
             return returnList;
         }
     }
