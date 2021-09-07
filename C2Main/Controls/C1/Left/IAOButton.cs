@@ -1,5 +1,6 @@
 ﻿using C2.Business.IAOLab.Visualization.Dialogs;
 using C2.Business.HIBU.OCR;
+using C2.Business.HIBU.NER;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -74,7 +75,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
                     break;
-               // xuxiao
+                case "命名实体识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.NER;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.NERFormHelpInfo);
+                    break;
             }
 
         }
@@ -156,6 +160,9 @@ namespace C2.Controls.Left
                     break;
                 case "OCR":
                     new OCRForm().ShowDialog();
+                    break;
+                case "命名实体识别":
+                    new NERForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
