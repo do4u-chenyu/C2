@@ -49,10 +49,6 @@ namespace C2.Business.SSH
             return String.Format(@"\r?\n{0}\r?\n", pattern);
         }
 
-        private static String PrefixWrap(String command)
-        {
-            return String.Format(@"\r?\n{0}", command.Replace(OpUtil.StringBlank, @"\s*"));
-        }
         public BastionAPI(SearchTaskInfo task)
         {
             this.task = task;
@@ -452,17 +448,13 @@ namespace C2.Business.SSH
                     parserQueryStr);
         }
 
-        private String ConstructTaskAlive()
-        {
-            return String.Format("python {0}", TargetScript);
-        }
-
         public BastionAPI CheckHomeSearch()
         {
             if (Oops()) return this;
 
             String targetPath = "/home/search/sbin/queryclient";
-            String command = String.Format("ls {0}", targetPath);
+            // 不同的linux下alias不同导致会有颜色控制符,关闭颜色控制符
+            String command = String.Format("ls --color=never {0}", targetPath);
             String ret = RunCommand(command, shell);
             if (!Regex.IsMatch(ret, Wrap(targetPath)))
             {
@@ -480,8 +472,6 @@ namespace C2.Business.SSH
 
             log.Info(String.Format("任务【{0}】: 全文主节点执行任务命令 {1}", task.TaskName, command));
 
-            
-            //String command = "sleep 3600";
             String ret = RunCommand(String.Format("{0} & disown -a", command), shell);
             String pid = GetPID(ret);
             // 未获取到pid，当作模型脚本执行失败
@@ -534,8 +524,8 @@ namespace C2.Business.SSH
 
         private bool IsAliveTask()
         {
-            String result = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
-            return result.Contains(ConstructTaskAlive());
+            String ret = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
+            return Regex.IsMatch(ret, String.Format(@"python\s+{0}", TargetScript));
         }
 
         private bool IsResultFileReady()
