@@ -102,7 +102,7 @@ class Query(Thread):
                 '--querystring', "'" + key_word + "'",
                 '--start', startTime,
                 '--end', endTime,
-                '--contextlen', '1000',
+                '--contextlen', '1000000',
                 '--maxcount', '2147483647'
             ]
             if '=' not in key_word:
@@ -303,7 +303,7 @@ class Airport:
                 '--querystring', '"{0}"'.format(keyWords),
                 '--start', self.startTime,
                 '--end', self.endTime,
-                '--contextlen', '1000',
+                '--contextlen', '1000000',
                 '--maxcount', '1000000',
                 #'|','iconv -f utf8 -t gbk'
             ]

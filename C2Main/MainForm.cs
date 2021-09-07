@@ -420,7 +420,7 @@ namespace C2
         private void LoadHIBU()
         {
             // 加载固定工具
-            string[] HIArr = { "OCR" };
+            string[] HIArr = { "OCR", "命名实体识别" };
             foreach (string name in HIArr)
                 this.HIBUControl.GenIAOButton(name.Trim());
         }

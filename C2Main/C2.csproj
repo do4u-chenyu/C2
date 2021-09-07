@@ -274,6 +274,12 @@
     </Compile>
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
+    <Compile Include="Business\HIBU\NER\NERForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\NER\NERForm.Designer.cs">
+      <DependentUpon>NERForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\OCR\OCRForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1799,6 +1805,9 @@
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\NER\NERForm.resx">
+      <DependentUpon>NERForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
       <DependentUpon>OCRForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2709,6 +2718,7 @@
     <None Include="Resources\Images\nav_small_last_white.png" />
     <None Include="Resources\Images\nav_small_next_white.png" />
     <None Include="Resources\Images\nav_small_prev_white.png" />
+    <None Include="Resources\Images\NER.png" />
     <Content Include="Resources\Images\new.png" />
     <None Include="Resources\Images\new_24.png" />
     <None Include="Resources\Images\next.png" />
