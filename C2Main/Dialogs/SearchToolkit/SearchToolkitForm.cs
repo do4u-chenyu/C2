@@ -332,5 +332,10 @@ namespace C2.SearchToolkit
         {
             this.TaskConfigPB.BackColor = Color.Transparent;
         }
+
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            passwordTB.UseSystemPasswordChar = !checkBox1.Checked;
+        }
     }
 }
