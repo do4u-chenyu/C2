@@ -12,6 +12,8 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using C2.Business.HIBU.InfoExtraction;
+
 namespace C2.Controls.Left
 {
     public delegate void OpenToolFormDelegate();
@@ -90,9 +92,14 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.QRCode;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeFormHelpInfo);
                     break;
+                    
                 case "人脸年龄性别识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
+                    break;
+                case "InfoExtraction":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.InfoExtraction;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.InfoExtractionFormHelpInfo);
                     break;
             }
 
@@ -187,6 +194,9 @@ namespace C2.Controls.Left
                     break;
                 case "人脸年龄性别识别":
                     new FaceAgeGenderForm().ShowDialog();
+                    break;
+                case "InfoExtraction":
+                    new InfoExtractionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();

@@ -286,6 +286,12 @@
     <Compile Include="Business\HIBU\FaceAgeGender\FaceAgeGenderForm.Designer.cs">
       <DependentUpon>FaceAgeGenderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\InfoExtraction\InfoExtractionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\InfoExtraction\InfoExtractionForm.Designer.cs">
+      <DependentUpon>InfoExtractionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\NER\NERForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1823,6 +1829,9 @@
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\InfoExtraction\InfoExtractionForm.resx">
+      <DependentUpon>InfoExtractionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\NER\NERForm.resx">
       <DependentUpon>NERForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2652,6 +2661,7 @@
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\Images\arrow_query.png" />
+    <Content Include="Resources\Images\ASR.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />
@@ -2694,6 +2704,7 @@
     <None Include="Resources\Images\WidgetImage\deletewidget.png" />
     <None Include="Resources\Images\WidgetImage\dealData.png" />
     <None Include="Resources\Images\dictGenerator.png" />
+    <Content Include="Resources\Images\FaceAgeGender.png" />
     <Content Include="Resources\Images\freemind_butterfly.png" />
     <None Include="Resources\Images\full_screen.png" />
     <None Include="Resources\Images\full_screen_exit.png" />
@@ -2712,6 +2723,7 @@
     <None Include="Resources\Images\internet.png" />
     <None Include="Resources\Images\italic.png" />
     <None Include="Resources\Images\WidgetImage\joinPool.png" />
+    <Content Include="Resources\Images\InfoExtraction.png" />
     <Content Include="Resources\Images\keyboard.png" />
     <None Include="Resources\Images\languages.png" />
     <None Include="Resources\Images\last.png" />
@@ -2850,6 +2862,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Resources\Images\WebScan.png" />
+    <None Include="Resources\InfoExtraction.png" />
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
