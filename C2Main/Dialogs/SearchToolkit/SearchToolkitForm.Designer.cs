@@ -224,7 +224,7 @@
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
             this.searchAgentIPTB.TabIndex = 8;
-            this.searchAgentIPTB.Text = "15.1.1.1:22";
+            this.searchAgentIPTB.Text = "10.1.126.4:22";
             // 
             // label15
             // 
@@ -259,7 +259,7 @@
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
             this.bastionIPTB.TabIndex = 6;
-            this.bastionIPTB.Text = "15.0.0.1:22";
+            this.bastionIPTB.Text = "10.1.126.4:22";
             // 
             // passwordTB
             // 
