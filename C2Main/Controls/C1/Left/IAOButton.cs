@@ -8,6 +8,7 @@ using C2.Business.HIBU.LanguageDetect;
 using C2.Business.HIBU.DrugTextRecognition;
 using C2.Business.HIBU.PoliticsTextRecognition;
 using C2.Business.HIBU.PornRecognition;
+using C2.Business.HIBU.TrackRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -119,7 +120,11 @@ namespace C2.Controls.Left
                     break;
                 case "涉黄图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PornRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PornRecognitionFormHelpInfo);
+                    break;
+                case "轨迹联通类图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PornRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TrackRecognitionFormHelpInfo);
                     break;
             }
 
@@ -229,6 +234,9 @@ namespace C2.Controls.Left
                     break;
                 case "涉黄图像识别":
                     new PornRecognitionForm().ShowDialog();
+                    break;
+                case "轨迹联通类图像识别":
+                    new TrackRecognitionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
