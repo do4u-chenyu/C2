@@ -74,6 +74,7 @@ namespace C2.Utils
         public static string PoliticsTextRecognitionFormHelpInfo = "涉政文本识别";
         public static string PornRecognitionFormHelpInfo = "涉黄图像识别";
         public static string TrackRecognitionFormHelpInfo = "轨迹联通类图像识别";
+        public static string RedPocketRecognitionFormHelpInfo = "红包转账图像识别";
 
 
 

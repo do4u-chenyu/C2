@@ -9,6 +9,7 @@ using C2.Business.HIBU.DrugTextRecognition;
 using C2.Business.HIBU.PoliticsTextRecognition;
 using C2.Business.HIBU.PornRecognition;
 using C2.Business.HIBU.TrackRecognition;
+using C2.Business.HIBU.RedPocketRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -123,8 +124,12 @@ namespace C2.Controls.Left
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PornRecognitionFormHelpInfo);
                     break;
                 case "轨迹联通类图像识别":
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.PornRecognition;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.TrackRecognition;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TrackRecognitionFormHelpInfo);
+                    break;
+                case "红包转账图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.RedPocketRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedPocketRecognitionFormHelpInfo);
                     break;
             }
 
@@ -237,6 +242,9 @@ namespace C2.Controls.Left
                     break;
                 case "轨迹联通类图像识别":
                     new TrackRecognitionForm().ShowDialog();
+                    break;
+                case "红包转账图像识别":
+                    new RedPocketRecognitionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
