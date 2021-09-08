@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.interfaceIPTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.searchAgentIPTB = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -77,6 +77,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.interfaceIPTB);
             this.groupBox2.Controls.Add(this.label9);
@@ -85,7 +86,6 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.searchAgentIPTB);
             this.groupBox2.Controls.Add(this.label15);
@@ -102,6 +102,18 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "堡垒机配置";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.checkBox1.Location = new System.Drawing.Point(449, 35);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(88, 23);
+            this.checkBox1.TabIndex = 51;
+            this.checkBox1.Text = "显示密码  ";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // label10
             // 
@@ -191,17 +203,6 @@
             this.label3.TabIndex = 44;
             this.label3.Text = "*";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label2.Location = new System.Drawing.Point(472, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 19);
-            this.label2.TabIndex = 43;
-            this.label2.Text = "堡垒机用户名和密码";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -258,9 +259,9 @@
             // 
             this.passwordTB.Location = new System.Drawing.Point(296, 34);
             this.passwordTB.Name = "passwordTB";
-            this.passwordTB.PasswordChar = '*';
             this.passwordTB.Size = new System.Drawing.Size(136, 25);
             this.passwordTB.TabIndex = 5;
+            this.passwordTB.UseSystemPasswordChar = true;
             // 
             // usernameTB
             // 
@@ -528,7 +529,6 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox taskModelComboBox;
         private System.Windows.Forms.TextBox taskNameTB;
@@ -546,5 +546,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox TaskConfigPB;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

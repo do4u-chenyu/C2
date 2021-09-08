@@ -260,7 +260,7 @@ namespace C2.Business.CastleBravo.WebScan
                     HelpUtil.ShowMessageBox("域名:" + tmpDomain + "未包含http或https");
                     return false;
                 }
-                domainList.Add(tmpDomain);
+                domainList.Add(tmpDomain.Split('#')[0]);
             }
 
             if (this.dictListView.CheckedItems.Count == 0)
