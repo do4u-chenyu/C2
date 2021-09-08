@@ -98,6 +98,14 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
                     break;
+                case "InfoExtraction":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.InfoExtraction;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.InfoExtractionFormHelpInfo);
+                    break;
+                case "语种识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.LanguageDetect;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.LanguageDetectFormHelpInfo);
+                    break;
             }
 
         }
@@ -191,6 +199,12 @@ namespace C2.Controls.Left
                     break;
                 case "人脸年龄性别识别":
                     new FaceAgeGenderForm().ShowDialog();
+                    break;
+                case "InfoExtraction":
+                    new InfoExtractionForm().ShowDialog();
+                    break;
+                case "语种识别":
+                    new LanguageDetectForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
