@@ -65,6 +65,7 @@ namespace C2.Utils
         
         public static string OCRFormHelpInfo = "OCR图片检测文字";
         public static string NERFormHelpInfo = "命名实体识别";
+        public static string ASRFormHelpInfo = "语音转文本";
 
         public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱口令爆破";
         public static string PwdGeneratorHelpInfo = "社工生成器，输入目标信息，猜测可能使用的数字字符组合";
