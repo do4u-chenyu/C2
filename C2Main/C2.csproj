@@ -280,11 +280,23 @@
     <Compile Include="Business\HIBU\ASR\ASRForm.Designer.cs">
       <DependentUpon>ASRForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\DrugTextRecognition\DrugTextRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\DrugTextRecognition\DrugTextRecognitionForm.Designer.cs">
+      <DependentUpon>DrugTextRecognitionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\FaceAgeGender\FaceAgeGenderForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\HIBU\FaceAgeGender\FaceAgeGenderForm.Designer.cs">
       <DependentUpon>FaceAgeGenderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\HIBU\LanguageDetect\LanguageDetectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\LanguageDetect\LanguageDetectForm.Designer.cs">
+      <DependentUpon>LanguageDetectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\HIBU\NER\NERForm.cs">
       <SubType>Form</SubType>
@@ -297,6 +309,12 @@
     </Compile>
     <Compile Include="Business\HIBU\OCR\OCRForm.Designer.cs">
       <DependentUpon>OCRForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\HIBU\PoliticsTextRecognition\PoliticsTextRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\PoliticsTextRecognition\PoliticsTextRecognitionForm.Designer.cs">
+      <DependentUpon>PoliticsTextRecognitionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\HIBU\QRCode\QRCodeForm.cs">
       <SubType>Form</SubType>
