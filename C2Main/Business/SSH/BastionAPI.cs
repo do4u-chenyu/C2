@@ -81,12 +81,12 @@ namespace C2.Business.SSH
 
             try
             {
-                log.Info(String.Format("任务:{0} 开始1阶跳转", task.TaskName));
-                Jump();         // 跳转
+                log.Info(String.Format("任务:{0} 开始通过堡垒机跳转到下一层", task.TaskName));
+                BastionJump();         // 跳转
             }
             catch (Exception ex)
             {
-                task.LastErrorMsg = String.Format("登陆【{0}】成功，1阶跳转全文机【{1}】失败：{2}",
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，通过堡垒机跳转到下一层【{1}】失败：{2}",
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
@@ -99,14 +99,14 @@ namespace C2.Business.SSH
                 // 有些地方需要二次跳转
                 if (!task.InterfaceIP.IsEmpty())
                 {
-                    log.Info(String.Format("任务:{0} 开始2阶跳转", task.TaskName));
+                    log.Info(String.Format("任务:{0} 界面机SSH跳转 【{1}】", task.TaskName, task.InterfaceIP));
                     SSHJump();
                 }
                     
             }
             catch (Exception ex)
             {
-                task.LastErrorMsg = String.Format("登陆【{0}】成功，2阶跳转全文机【{1}】失败：{2}",
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，界面机SSH跳转全文机【{1}】失败：{2}",
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
@@ -135,7 +135,7 @@ namespace C2.Business.SSH
         {
             return RunCommand("ifconfig", shell).Contains(ip) || RunCommand("ip addr", shell).Contains(ip);
         }
-        private void Jump()
+        private void BastionJump()
         {
             if (Oops())
                 return;
@@ -169,6 +169,9 @@ namespace C2.Business.SSH
             String ip   = ConvertUtil.GetIP(task.SearchAgentIP);
             String port = ConvertUtil.GetPort(task.SearchAgentIP);
             String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0} -p {1}", ip, port);
+
+            log.Info(String.Format("开始ssh跳转: {0}", command));
+            
             RunCommand(command, shell);
         }
 
@@ -184,7 +187,7 @@ namespace C2.Business.SSH
         }
 
 
-        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)
+        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout, bool writeLog = true)
         {
             try
             {
@@ -199,7 +202,8 @@ namespace C2.Business.SSH
 
                 if (ret != null)
                 {
-                    log.Debug(ret);  // 提高打印级别
+                    if (writeLog)
+                        log.Info(Shell.Format(ret)); 
                     return ret;
                 }
                     
@@ -403,7 +407,7 @@ namespace C2.Business.SSH
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
             String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
-            if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+            if (RunCommand(command, shell, SecondsTimeout * 2, false).IsEmpty())  // 上传脚本会回显内容，超时时间要长
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
                 task.LastErrorCode = BastionCodePage.UploadScriptFail;
@@ -423,15 +427,13 @@ namespace C2.Business.SSH
                 String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
-                if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+                if (RunCommand(command, shell, SecondsTimeout * 2, false).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                 {
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
                     task.LastErrorCode = BastionCodePage.UploadScriptFail;
                     log.Warn(task.LastErrorMsg);
-                }
-                    
+                }        
             }
-
             return this;
         }
 

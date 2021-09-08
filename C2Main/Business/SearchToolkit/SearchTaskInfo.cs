@@ -207,17 +207,20 @@ namespace C2.SearchToolkit
             if (buf.Length < 10)
                 return SearchTaskInfo.EmptyTaskInfo;
 
+            for (int i = 0; i < buf.Length; i++)
+                buf[i] = buf[i].Trim();
+
             SearchTaskInfo taskInfo = new SearchTaskInfo()
             {
-                PID = buf[0],
+                PID      = buf[0],
                 TaskName = buf[1],
                 TaskCreateTime = buf[2],
-                TaskModel = buf[3],
+                TaskModel  = buf[3],
                 TaskStatus = buf[4],
-                Username = buf[5],
-                Password = needDecryptPass ? DecryptPassword(buf[6]) : buf[6],  // 堡垒机密码加密保存,反序列化时解密
-                BastionIP = buf[7],
-                SearchAgentIP = buf[8],
+                Username   = buf[5],
+                Password   = needDecryptPass ? DecryptPassword(buf[6]) : buf[6],  // 堡垒机密码加密保存,反序列化时解密
+                BastionIP  = buf[7],
+                SearchAgentIP   = buf[8],
                 RemoteWorkspace = buf[9],
                 InterfaceIP = buf.Length < 11 ? String.Empty : buf[10],         // 兼容早期版本
                 Settings    = buf.Length < 13 ? new SearchModelSettingsInfo() : 
