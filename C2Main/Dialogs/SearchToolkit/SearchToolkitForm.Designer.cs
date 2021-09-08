@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.interfaceIPTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.searchAgentIPTB = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -65,6 +65,9 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.searchPwdTB = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TaskConfigPB)).BeginInit();
@@ -77,6 +80,10 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.searchPwdTB);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.interfaceIPTB);
             this.groupBox2.Controls.Add(this.label9);
@@ -85,7 +92,6 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.searchAgentIPTB);
             this.groupBox2.Controls.Add(this.label15);
@@ -98,26 +104,38 @@
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(613, 165);
+            this.groupBox2.Size = new System.Drawing.Size(623, 165);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "堡垒机配置";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.checkBox1.Location = new System.Drawing.Point(470, 35);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(54, 23);
+            this.checkBox1.TabIndex = 51;
+            this.checkBox1.Text = "显密";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label10.Location = new System.Drawing.Point(434, 78);
+            this.label10.Location = new System.Drawing.Point(451, 78);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(164, 19);
+            this.label10.Size = new System.Drawing.Size(170, 19);
             this.label10.TabIndex = 50;
-            this.label10.Text = "选填,需从界面机2次跳转时";
+            this.label10.Text = "选填,需从界面机SSH跳转时";
             // 
             // interfaceIPTB
             // 
-            this.interfaceIPTB.Location = new System.Drawing.Point(296, 75);
+            this.interfaceIPTB.Location = new System.Drawing.Point(313, 75);
             this.interfaceIPTB.Name = "interfaceIPTB";
             this.interfaceIPTB.Size = new System.Drawing.Size(136, 25);
             this.interfaceIPTB.TabIndex = 7;
@@ -125,7 +143,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(235, 77);
+            this.label9.Location = new System.Drawing.Point(249, 77);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 19);
             this.label9.TabIndex = 48;
@@ -135,7 +153,7 @@
             // 
             this.connectTestButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.connectTestButton.ForeColor = System.Drawing.Color.Navy;
-            this.connectTestButton.Location = new System.Drawing.Point(241, 115);
+            this.connectTestButton.Location = new System.Drawing.Point(535, 32);
             this.connectTestButton.Name = "connectTestButton";
             this.connectTestButton.Size = new System.Drawing.Size(68, 27);
             this.connectTestButton.TabIndex = 9;
@@ -149,7 +167,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("宋体", 8F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(435, 40);
+            this.label8.Location = new System.Drawing.Point(454, 40);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(11, 11);
             this.label8.TabIndex = 47;
@@ -191,17 +209,6 @@
             this.label3.TabIndex = 44;
             this.label3.Text = "*";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label2.Location = new System.Drawing.Point(472, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 19);
-            this.label2.TabIndex = 43;
-            this.label2.Text = "堡垒机用户名和密码";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -217,7 +224,7 @@
             this.searchAgentIPTB.Name = "searchAgentIPTB";
             this.searchAgentIPTB.Size = new System.Drawing.Size(137, 25);
             this.searchAgentIPTB.TabIndex = 8;
-            this.searchAgentIPTB.Text = "15.1.1.1:22";
+            this.searchAgentIPTB.Text = "10.1.126.4:22";
             // 
             // label15
             // 
@@ -231,7 +238,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(235, 36);
+            this.label16.Location = new System.Drawing.Point(249, 36);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(61, 19);
             this.label16.TabIndex = 4;
@@ -252,15 +259,15 @@
             this.bastionIPTB.Name = "bastionIPTB";
             this.bastionIPTB.Size = new System.Drawing.Size(137, 25);
             this.bastionIPTB.TabIndex = 6;
-            this.bastionIPTB.Text = "15.0.0.1:22";
+            this.bastionIPTB.Text = "10.1.126.4:22";
             // 
             // passwordTB
             // 
-            this.passwordTB.Location = new System.Drawing.Point(296, 34);
+            this.passwordTB.Location = new System.Drawing.Point(313, 34);
             this.passwordTB.Name = "passwordTB";
-            this.passwordTB.PasswordChar = '*';
             this.passwordTB.Size = new System.Drawing.Size(136, 25);
             this.passwordTB.TabIndex = 5;
+            this.passwordTB.UseSystemPasswordChar = true;
             // 
             // usernameTB
             // 
@@ -286,7 +293,7 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(613, 169);
+            this.groupBox1.Size = new System.Drawing.Size(623, 169);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模型配置";
@@ -426,7 +433,7 @@
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelCenter.Location = new System.Drawing.Point(0, 169);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(613, 165);
+            this.panelCenter.Size = new System.Drawing.Size(623, 165);
             this.panelCenter.TabIndex = 3;
             // 
             // panelBottom
@@ -437,7 +444,7 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 334);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(613, 50);
+            this.panelBottom.Size = new System.Drawing.Size(623, 50);
             this.panelBottom.TabIndex = 4;
             // 
             // cancelButton
@@ -470,7 +477,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(613, 169);
+            this.panelTop.Size = new System.Drawing.Size(623, 169);
             this.panelTop.TabIndex = 2;
             // 
             // saveFileDialog
@@ -479,11 +486,40 @@
             this.saveFileDialog.Filter = "tgz压缩包 (*.tgz)|*.tgz|tar.gz压缩包|*.tar.gz|zip压缩包|*.zip|所有文件|*.*";
             this.saveFileDialog.Title = "全文模型结果下载";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(236, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 19);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "全文机密码";
+            // 
+            // searchPwdTB
+            // 
+            this.searchPwdTB.Location = new System.Drawing.Point(313, 116);
+            this.searchPwdTB.Name = "searchPwdTB";
+            this.searchPwdTB.Size = new System.Drawing.Size(136, 25);
+            this.searchPwdTB.TabIndex = 53;
+            this.searchPwdTB.UseSystemPasswordChar = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label11.Location = new System.Drawing.Point(452, 119);
+            this.label11.Margin = new System.Windows.Forms.Padding(0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(169, 19);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "选填,界面机没打信任关系时";
+            // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 384);
+            this.ClientSize = new System.Drawing.Size(623, 384);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panelBottom);
@@ -528,7 +564,6 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox taskModelComboBox;
         private System.Windows.Forms.TextBox taskNameTB;
@@ -546,5 +581,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox TaskConfigPB;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox searchPwdTB;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label11;
     }
 }

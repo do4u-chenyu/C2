@@ -81,12 +81,12 @@ namespace C2.Business.SSH
 
             try
             {
-                log.Info(String.Format("任务:{0} 开始1阶跳转", task.TaskName));
-                Jump();         // 跳转
+                log.Info(String.Format("任务:{0} 开始通过堡垒机跳转到下一层", task.TaskName));
+                BastionJump();         // 跳转
             }
             catch (Exception ex)
             {
-                task.LastErrorMsg = String.Format("登陆【{0}】成功，1阶跳转全文机【{1}】失败：{2}",
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，通过堡垒机跳转到下一层【{1}】失败：{2}",
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
@@ -99,14 +99,14 @@ namespace C2.Business.SSH
                 // 有些地方需要二次跳转
                 if (!task.InterfaceIP.IsEmpty())
                 {
-                    log.Info(String.Format("任务:{0} 开始2阶跳转", task.TaskName));
+                    log.Info(String.Format("任务:{0} 界面机SSH跳转 【{1}】", task.TaskName, task.InterfaceIP));
                     SSHJump();
                 }
                     
             }
             catch (Exception ex)
             {
-                task.LastErrorMsg = String.Format("登陆【{0}】成功，2阶跳转全文机【{1}】失败：{2}",
+                task.LastErrorMsg = String.Format("登陆【{0}】成功，界面机SSH跳转全文机【{1}】失败：{2}",
                     ssh.ConnectionInfo.Host,
                     task.SearchAgentIP,
                     ex.Message);
@@ -127,9 +127,15 @@ namespace C2.Business.SSH
 
         private bool CheckJumpOK()
         {
-            return true; // 目前没有特别好的方法能够检测真正跳转成功
+            String ip = ConvertUtil.GetIP(task.SearchAgentIP);
+            return CheckHostIP(ip); // 目前没有特别好的方法能够检测真正跳转成功
         }
-        private void Jump()
+
+        private bool CheckHostIP(String ip)
+        {
+            return RunCommand("ifconfig", shell).Contains(ip) || RunCommand("ip addr", shell).Contains(ip);
+        }
+        private void BastionJump()
         {
             if (Oops())
                 return;
@@ -149,8 +155,7 @@ namespace C2.Business.SSH
             // 等待跳转成功,出现root用户提示符
             if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(10)))
             {   // 修复bug:某些机器改了shell提示, 这里如果也不是ifconfig的话才认为失败 
-                String ret = RunCommand("ifconfig", shell); // TODO ifconfig在7u4下居然被干掉了，唉
-                if (!ret.Contains(ip))                // TODO 要找一种 6u3 和 7u4 统一的查看本机IP的方法
+                if (!CheckHostIP(ip)) 
                     return;
             }
             task.LastErrorMsg = String.Empty;
@@ -164,6 +169,9 @@ namespace C2.Business.SSH
             String ip   = ConvertUtil.GetIP(task.SearchAgentIP);
             String port = ConvertUtil.GetPort(task.SearchAgentIP);
             String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0} -p {1}", ip, port);
+
+            log.Info(String.Format("开始ssh跳转: {0}", command));
+            
             RunCommand(command, shell);
         }
 
@@ -179,7 +187,7 @@ namespace C2.Business.SSH
         }
 
 
-        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout)
+        private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout, bool writeLog = true)
         {
             try
             {
@@ -191,8 +199,14 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 // 根据分隔符和timeout确定任务输出结束
                 String ret = ssm.Expect(SeparatorRegex, TimeSpan.FromSeconds(timeout));
+
                 if (ret != null)
+                {
+                    if (writeLog)
+                        log.Info(Shell.Format(ret)); 
                     return ret;
+                }
+                    
             }
             catch { }
 
@@ -393,7 +407,7 @@ namespace C2.Business.SSH
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
             String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
-            if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+            if (RunCommand(command, shell, SecondsTimeout * 2, false).IsEmpty())  // 上传脚本会回显内容，超时时间要长
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
                 task.LastErrorCode = BastionCodePage.UploadScriptFail;
@@ -413,15 +427,13 @@ namespace C2.Business.SSH
                 String b64 = ST.EncodeBase64(s);        // Base64果然比shell硬转码好用多了
                 // 这里可能还有超出shell缓冲区的问题
                 String command = String.Format("echo -e \"{0}\" | base64 -di > {1}", b64, d);
-                if (RunCommand(command, shell, SecondsTimeout * 2).IsEmpty())  // 上传脚本会回显内容，超时时间要长
+                if (RunCommand(command, shell, SecondsTimeout * 2, false).IsEmpty())  // 上传脚本会回显内容，超时时间要长
                 {
                     task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
                     task.LastErrorCode = BastionCodePage.UploadScriptFail;
                     log.Warn(task.LastErrorMsg);
-                }
-                    
+                }        
             }
-
             return this;
         }
 

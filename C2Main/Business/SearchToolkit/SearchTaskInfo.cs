@@ -121,7 +121,8 @@ namespace C2.SearchToolkit
             "InterfaceIP",
             "Settings.StartTime",
             "Settings.EndTime",
-             "Settings.QueryStr"
+            "Settings.QueryStr",
+            "SearchPassword"
         });
 
         public String Username { get; private set; }
@@ -132,6 +133,8 @@ namespace C2.SearchToolkit
         public String RemoteWorkspace { get; private set; }
 
         public String InterfaceIP { get; private set; }  // 这个是后期加的,为了兼容性只能追到屁股后面
+
+        public String SearchPassword { get; private set; }  // 这个是后期加的,为了兼容性只能追到屁股后面
 
         public String TaskModel { get; private set; }
 
@@ -172,14 +175,15 @@ namespace C2.SearchToolkit
                 TaskModel,
                 TaskStatus,
                 Username,
-                EncryptPassword(Password),  // 密码要加密保存
+                EncryptPassword(Password),     // 密码要加密保存
                 BastionIP,
                 SearchAgentIP,
                 RemoteWorkspace,
                 InterfaceIP,
                 Settings.StartTime,
                 Settings.EndTime,
-                Settings.QueryStr
+                Settings.QueryStr,
+                EncryptPassword(SearchPassword) // 密码要加密保存
             });
         }
 
@@ -207,21 +211,26 @@ namespace C2.SearchToolkit
             if (buf.Length < 10)
                 return SearchTaskInfo.EmptyTaskInfo;
 
+            for (int i = 0; i < buf.Length; i++)
+                buf[i] = buf[i].Trim();
+
             SearchTaskInfo taskInfo = new SearchTaskInfo()
             {
-                PID = buf[0],
+                PID      = buf[0],
                 TaskName = buf[1],
                 TaskCreateTime = buf[2],
-                TaskModel = buf[3],
+                TaskModel  = buf[3],
                 TaskStatus = buf[4],
-                Username = buf[5],
-                Password = needDecryptPass ? DecryptPassword(buf[6]) : buf[6],  // 堡垒机密码加密保存,反序列化时解密
-                BastionIP = buf[7],
-                SearchAgentIP = buf[8],
+                Username   = buf[5],
+                Password   = needDecryptPass ? DecryptPassword(buf[6]) : buf[6],  // 堡垒机密码加密保存,反序列化时解密
+                BastionIP  = buf[7],
+                SearchAgentIP   = buf[8],
                 RemoteWorkspace = buf[9],
-                InterfaceIP = buf.Length < 11 ? String.Empty : buf[10],         // 兼容早期版本
+                InterfaceIP = buf.Length < 11 ? String.Empty : buf[10],           // 兼容早期版本
                 Settings    = buf.Length < 13 ? new SearchModelSettingsInfo() : 
-                              buf.Length < 14 ? new SearchModelSettingsInfo(buf[11], buf[12]) : new SearchModelSettingsInfo(buf[11], buf[12], buf[13])
+                              buf.Length < 14 ? new SearchModelSettingsInfo(buf[11], buf[12]) : new SearchModelSettingsInfo(buf[11], buf[12], buf[13]),
+                SearchPassword = buf.Length < 15 ? String.Empty : 
+                                 needDecryptPass ? DecryptPassword(buf[14]) : buf[14]        // 兼容早期版本
             };
             return taskInfo;
         }

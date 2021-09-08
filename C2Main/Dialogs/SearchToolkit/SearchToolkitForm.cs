@@ -42,7 +42,8 @@ namespace C2.SearchToolkit
                 this.taskModelComboBox,
                 this.taskNameTB,
                 this.connectTestButton,
-                this.interfaceIPTB
+                this.interfaceIPTB,
+                this.searchPwdTB
             };
        
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
@@ -77,9 +78,8 @@ namespace C2.SearchToolkit
                                             this.interfaceIPTB.Text,
                                             this.modelSettingsForm.StartTime,
                                             this.modelSettingsForm.EndTime,
-                                            this.modelSettingsForm.QueryStr
-                                           
-                                           
+                                            this.modelSettingsForm.QueryStr,
+                                            this.searchPwdTB.Text
             }) ;
 
             return SearchTaskInfo.StringToTaskInfo(value);
@@ -274,6 +274,7 @@ namespace C2.SearchToolkit
             this.modelSettingsForm.StartTime = task.Settings.StartTime;
             this.modelSettingsForm.EndTime   = task.Settings.EndTime;
             this.modelSettingsForm.QueryStr  = task.Settings.QueryStr;
+            this.searchPwdTB.Text            = task.SearchPassword;
         }
         private bool IsReadOnly()
         {
@@ -331,6 +332,12 @@ namespace C2.SearchToolkit
         private void TaskConfigPB_MouseLeave(object sender, EventArgs e)
         {
             this.TaskConfigPB.BackColor = Color.Transparent;
+        }
+
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            passwordTB.UseSystemPasswordChar  = !checkBox1.Checked;
+            searchPwdTB.UseSystemPasswordChar = !checkBox1.Checked;
         }
     }
 }

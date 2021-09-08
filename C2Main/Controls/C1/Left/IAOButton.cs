@@ -1,6 +1,8 @@
 ﻿using C2.Business.IAOLab.Visualization.Dialogs;
 using C2.Business.HIBU.OCR;
 using C2.Business.HIBU.NER;
+using C2.Business.HIBU.ASR;
+using C2.Business.HIBU.QRCode;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -78,6 +80,14 @@ namespace C2.Controls.Left
                 case "命名实体识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.NER;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.NERFormHelpInfo);
+                    break;
+                case "语音转文本":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.ASR;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ASRFormHelpInfo);
+                    break;
+                case "二维码识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.QRCode;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeFormHelpInfo);
                     break;
             }
 
@@ -163,6 +173,12 @@ namespace C2.Controls.Left
                     break;
                 case "命名实体识别":
                     new NERForm().ShowDialog();
+                    break;
+                case "语音转文本":
+                    new ASRForm().ShowDialog();
+                    break;
+                case "二维码识别":
+                    new QRCodeForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
