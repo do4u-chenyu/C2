@@ -5,6 +5,8 @@ using C2.Business.HIBU.ASR;
 using C2.Business.HIBU.QRCode;
 using C2.Business.HIBU.FaceAgeGender;
 using C2.Business.HIBU.LanguageDetect;
+using C2.Business.HIBU.DrugTextRecognition;
+using C2.Business.HIBU.PoliticsTextRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -106,6 +108,14 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.LanguageDetect;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.LanguageDetectFormHelpInfo);
                     break;
+                case "涉赌文本识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.DrugTextRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.DrugTextRecognitionFormHelpInfo);
+                    break;
+                case "涉政文本识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PoliticsTextRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
+                    break;
             }
 
         }
@@ -205,6 +215,12 @@ namespace C2.Controls.Left
                     break;
                 case "语种识别":
                     new LanguageDetectForm().ShowDialog();
+                    break;
+                case "涉赌文本识别":
+                    new DrugTextRecognitionForm().ShowDialog();
+                    break;
+                case "涉政文本识别":
+                    new PoliticsTextRecognitionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();

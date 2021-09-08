@@ -873,6 +873,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap DrugTextRecognition {
+            get {
+                object obj = ResourceManager.GetObject("DrugTextRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
@@ -1999,6 +2009,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap pdfData {
             get {
                 object obj = ResourceManager.GetObject("pdfData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap PoliticsTextRecognition {
+            get {
+                object obj = ResourceManager.GetObject("PoliticsTextRecognition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

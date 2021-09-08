@@ -203,10 +203,9 @@ namespace C2.Business.SSH
                 if (ret != null)
                 {
                     if (writeLog)
-                        log.Info(Shell.Format(ret)); 
+                        log.Info(Shell.Format(ret));   
                     return ret;
                 }
-                    
             }
             catch { }
 
