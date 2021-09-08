@@ -183,6 +183,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap ASR {
+            get {
+                object obj = ResourceManager.GetObject("ASR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap autoFilter {
             get {
                 object obj = ResourceManager.GetObject("autoFilter", resourceCulture);
@@ -2119,6 +2129,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap pythonHelper5 {
             get {
                 object obj = ResourceManager.GetObject("pythonHelper5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap QRCode {
+            get {
+                object obj = ResourceManager.GetObject("QRCode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
