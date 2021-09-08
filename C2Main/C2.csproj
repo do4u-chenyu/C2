@@ -328,6 +328,12 @@
     <Compile Include="Business\HIBU\PornRecognition\PornRecognitionForm.Designer.cs">
       <DependentUpon>PornRecognitionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\QRCodeRecognition\QRCodeRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\QRCodeRecognition\QRCodeRecognitionForm.Designer.cs">
+      <DependentUpon>QRCodeRecognitionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\QRCode\QRCodeForm.cs">
       <SubType>Form</SubType>
     </Compile>

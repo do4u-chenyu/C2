@@ -10,6 +10,7 @@ using C2.Business.HIBU.PoliticsTextRecognition;
 using C2.Business.HIBU.PornRecognition;
 using C2.Business.HIBU.TrackRecognition;
 using C2.Business.HIBU.RedPocketRecognition;
+using C2.Business.HIBU.QRCodeRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -131,6 +132,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.RedPocketRecognition;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedPocketRecognitionFormHelpInfo);
                     break;
+                case "二维码图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.QRCodeRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeRecognitionFormHelpInfo);
+                    break;
             }
 
         }
@@ -245,6 +250,9 @@ namespace C2.Controls.Left
                     break;
                 case "红包转账图像识别":
                     new RedPocketRecognitionForm().ShowDialog();
+                    break;
+                case "二维码图像识别":
+                    new QRCodeRecognitionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
