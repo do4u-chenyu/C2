@@ -292,6 +292,12 @@
     <Compile Include="Business\HIBU\OCR\OCRForm.Designer.cs">
       <DependentUpon>OCRForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\QRCode\QRCodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\QRCode\QRCodeForm.Designer.cs">
+      <DependentUpon>QRCodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HTTP\HttpHandler.cs" />
     <Compile Include="Business\HTTP\Response.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />

@@ -2136,6 +2136,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap QRCode {
+            get {
+                object obj = ResourceManager.GetObject("QRCode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap question_large {
             get {
                 object obj = ResourceManager.GetObject("question_large", resourceCulture);
