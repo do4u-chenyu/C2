@@ -335,7 +335,8 @@ namespace C2.SearchToolkit
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            passwordTB.UseSystemPasswordChar = !checkBox1.Checked;
+            passwordTB.UseSystemPasswordChar  = !checkBox1.Checked;
+            searchPwdTB.UseSystemPasswordChar = !checkBox1.Checked;
         }
     }
 }
