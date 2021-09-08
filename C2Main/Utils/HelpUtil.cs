@@ -72,6 +72,7 @@ namespace C2.Utils
         public static string LanguageDetectFormHelpInfo = "语种识别";
         public static string DrugTextRecognitionFormHelpInfo = "涉赌文本识别";
         public static string PoliticsTextRecognitionFormHelpInfo = "涉政文本识别";
+        public static string PornRecognitionFormHelpInfo = "涉黄图像识别";
 
         public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱口令爆破";
         public static string PwdGeneratorHelpInfo = "社工生成器，输入目标信息，猜测可能使用的数字字符组合";

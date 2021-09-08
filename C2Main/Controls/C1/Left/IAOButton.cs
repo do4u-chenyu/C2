@@ -7,6 +7,7 @@ using C2.Business.HIBU.FaceAgeGender;
 using C2.Business.HIBU.LanguageDetect;
 using C2.Business.HIBU.DrugTextRecognition;
 using C2.Business.HIBU.PoliticsTextRecognition;
+using C2.Business.HIBU.PornRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -116,6 +117,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PoliticsTextRecognition;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
                     break;
+                case "涉黄图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PornRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
+                    break;
             }
 
         }
@@ -221,6 +226,9 @@ namespace C2.Controls.Left
                     break;
                 case "涉政文本识别":
                     new PoliticsTextRecognitionForm().ShowDialog();
+                    break;
+                case "涉黄图像识别":
+                    new PornRecognitionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
