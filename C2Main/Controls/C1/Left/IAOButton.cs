@@ -4,6 +4,7 @@ using C2.Business.HIBU.NER;
 using C2.Business.HIBU.ASR;
 using C2.Business.HIBU.QRCode;
 using C2.Business.HIBU.FaceAgeGender;
+using C2.Business.HIBU.LanguageDetect;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -93,6 +94,10 @@ namespace C2.Controls.Left
                 case "人脸年龄性别识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
+                    break;
+                case "语种识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.LanguageDetect;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.LanguageDetectFormHelpInfo);
                     break;
             }
 
@@ -187,6 +192,9 @@ namespace C2.Controls.Left
                     break;
                 case "人脸年龄性别识别":
                     new FaceAgeGenderForm().ShowDialog();
+                    break;
+                case "语种识别":
+                    new LanguageDetectForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
