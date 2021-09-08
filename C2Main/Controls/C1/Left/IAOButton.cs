@@ -13,11 +13,9 @@ using C2.Business.HIBU.RedPocketRecognition;
 using C2.Business.HIBU.QRCodeRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
-using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using C2.Business.HIBU.InfoExtraction;
 
