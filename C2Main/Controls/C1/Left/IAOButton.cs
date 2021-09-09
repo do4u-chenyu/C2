@@ -12,6 +12,7 @@ using C2.Business.HIBU.TrackRecognition;
 using C2.Business.HIBU.RedPocketRecognition;
 using C2.Business.HIBU.QRCodeRecognition;
 using C2.Business.HIBU.BankCardRecognition;
+using C2.Business.HIBU.CardRecognition;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.Utils;
@@ -139,6 +140,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BankCardRecognition;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankCardRecognitionFormHelpInfo);
                     break;
+                case "卡证识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.CardRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.CardRecognitionFormHelpInfo);
+                    break;
             }
 
         }
@@ -259,6 +264,9 @@ namespace C2.Controls.Left
                     break;
                 case "银行卡图像识别":
                     new BankCardRecognitionForm().ShowDialog();
+                    break;
+                case "卡证识别":
+                    new CardRecognitionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();

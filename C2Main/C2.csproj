@@ -286,6 +286,12 @@
     <Compile Include="Business\HIBU\BankCardRecognition\BankCardRecognitionForm.Designer.cs">
       <DependentUpon>BankCardRecognitionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\CardRecognition\CardRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\CardRecognition\CardRecognitionForm.Designer.cs">
+      <DependentUpon>CardRecognitionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\DrugTextRecognition\DrugTextRecognitionForm.cs">
       <SubType>Form</SubType>
     </Compile>

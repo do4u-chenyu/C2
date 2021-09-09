@@ -77,6 +77,7 @@ namespace C2.Utils
         public static string RedPocketRecognitionFormHelpInfo = "红包转账图像识别";
         public static string QRCodeRecognitionFormHelpInfo = "二维码图像识别";
         public static string BankCardRecognitionFormHelpInfo = "银行卡图像识别";
+        public static string CardRecognitionFormHelpInfo = "卡证识别";
 
 
 
