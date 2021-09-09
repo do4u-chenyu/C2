@@ -352,6 +352,12 @@
     <Compile Include="Business\HIBU\QRCode\QRCodeForm.Designer.cs">
       <DependentUpon>QRCodeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\RedHeaderRecognition\RedHeaderRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\RedHeaderRecognition\RedHeaderRecognitionForm.Designer.cs">
+      <DependentUpon>RedHeaderRecognitionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\RedPocketRecognition\RedPocketRecognitionForm.cs">
       <SubType>Form</SubType>
     </Compile>
