@@ -420,7 +420,7 @@ namespace C2
         private void LoadHIBU()
         {
             // 加载固定工具
-            string[] HIArr = { "OCR", "命名实体识别","语音转文本","二维码识别","人脸年龄性别识别","语种识别","涉赌文本识别","涉政文本识别", "InfoExtraction" };
+            string[] HIArr = { "OCR", "命名实体识别","语音转文本","二维码识别","人脸年龄性别识别","语种识别","涉赌文本识别","涉政文本识别", "InfoExtraction" , "FaceDetector", "FaceBeauty" };
             foreach (string name in HIArr)
                 this.HIBUControl.GenIAOButton(name.Trim());
         }

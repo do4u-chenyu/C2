@@ -46,7 +46,7 @@ namespace C2.Business.HIBU.InfoExtraction
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Location = new System.Drawing.Point(14, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 10005;
@@ -56,19 +56,21 @@ namespace C2.Business.HIBU.InfoExtraction
             // 
             this.textPathTextBox.BackColor = System.Drawing.Color.White;
             this.textPathTextBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textPathTextBox.Location = new System.Drawing.Point(86, 9);
+            this.textPathTextBox.Location = new System.Drawing.Point(100, 13);
+            this.textPathTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textPathTextBox.Name = "textPathTextBox";
             this.textPathTextBox.ReadOnly = true;
-            this.textPathTextBox.Size = new System.Drawing.Size(393, 26);
+            this.textPathTextBox.Size = new System.Drawing.Size(458, 26);
             this.textPathTextBox.TabIndex = 10006;
             // 
             // singleButton
             // 
             this.singleButton.BackColor = System.Drawing.Color.Transparent;
             this.singleButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.singleButton.Location = new System.Drawing.Point(501, 9);
+            this.singleButton.Location = new System.Drawing.Point(579, 13);
+            this.singleButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.singleButton.Name = "singleButton";
-            this.singleButton.Size = new System.Drawing.Size(59, 26);
+            this.singleButton.Size = new System.Drawing.Size(62, 26);
             this.singleButton.TabIndex = 10008;
             this.singleButton.Text = "单文本";
             this.singleButton.UseVisualStyleBackColor = false;
@@ -78,9 +80,10 @@ namespace C2.Business.HIBU.InfoExtraction
             // 
             this.folderButton.BackColor = System.Drawing.Color.Transparent;
             this.folderButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderButton.Location = new System.Drawing.Point(583, 10);
+            this.folderButton.Location = new System.Drawing.Point(663, 12);
+            this.folderButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.folderButton.Name = "folderButton";
-            this.folderButton.Size = new System.Drawing.Size(59, 26);
+            this.folderButton.Size = new System.Drawing.Size(63, 25);
             this.folderButton.TabIndex = 10009;
             this.folderButton.Text = "多文本";
             this.folderButton.UseVisualStyleBackColor = false;
@@ -90,9 +93,10 @@ namespace C2.Business.HIBU.InfoExtraction
             // 
             this.extractButton.BackColor = System.Drawing.Color.Transparent;
             this.extractButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.extractButton.Location = new System.Drawing.Point(673, 10);
+            this.extractButton.Location = new System.Drawing.Point(753, 12);
+            this.extractButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.extractButton.Name = "extractButton";
-            this.extractButton.Size = new System.Drawing.Size(75, 26);
+            this.extractButton.Size = new System.Drawing.Size(68, 25);
             this.extractButton.TabIndex = 10010;
             this.extractButton.Text = "开始抽取";
             this.extractButton.UseVisualStyleBackColor = false;
@@ -102,7 +106,7 @@ namespace C2.Business.HIBU.InfoExtraction
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 62);
+            this.label2.Location = new System.Drawing.Point(14, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 10011;
@@ -141,19 +145,21 @@ namespace C2.Business.HIBU.InfoExtraction
             this.textName,
             this.local,
             this.name});
-            this.dataGridView1.Location = new System.Drawing.Point(86, 62);
+            this.dataGridView1.Location = new System.Drawing.Point(100, 77);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(686, 309);
+            this.dataGridView1.Size = new System.Drawing.Size(721, 338);
             this.dataGridView1.TabIndex = 10012;
             // 
             // InfoExtractionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 429);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(833, 472);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.extractButton);
@@ -161,6 +167,8 @@ namespace C2.Business.HIBU.InfoExtraction
             this.Controls.Add(this.singleButton);
             this.Controls.Add(this.textPathTextBox);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "InfoExtractionForm";
             this.Text = "InfoExtractionForm";
             this.Controls.SetChildIndex(this.label1, 0);

@@ -16,6 +16,8 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using C2.Business.HIBU.InfoExtraction;
+using C2.Business.HIBU.FaceDetector;
+using C2.Business.HIBU.FaceBeauty;
 
 namespace C2.Controls.Left
 {
@@ -116,6 +118,15 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PoliticsTextRecognition;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
                     break;
+                case "FaceDetector":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceDetector;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceDetectorFormHelpInfo);
+                    break;
+                case "FaceBeauty":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceBeauty;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceBeautyFormHelpInfo);
+                    break;
+                    
             }
 
         }
@@ -221,6 +232,12 @@ namespace C2.Controls.Left
                     break;
                 case "涉政文本识别":
                     new PoliticsTextRecognitionForm().ShowDialog();
+                    break;
+                case "FaceDetector":
+                    new FaceDetectorForm().ShowDialog();
+                    break;
+                case "FaceBeauty":
+                    new FaceBeautyForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();
