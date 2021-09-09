@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -419,7 +420,8 @@ namespace QQSpiderPlugin
             List<string> input = new List<string>();
             try
             {
-                input = new List<string>(this.richTextBox1.Text
+                string trim_space = Regex.Replace(this.richTextBox1.Text, " ", string.Empty);
+                input = new List<string>(trim_space
                     .Trim(Environment.NewLine.ToCharArray())
                     .Split(Environment.NewLine.ToCharArray())
                     );
