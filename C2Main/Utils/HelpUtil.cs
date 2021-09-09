@@ -81,6 +81,7 @@ namespace C2.Utils
         public static string RedHeaderRecognitionFormHelpInfo = "红头文件识别";
         public static string GunDetectionFormHelpInfo = "枪支检测";
         public static string TerrorismDetectionFormHelpInfo = "涉恐图像识别";
+        public static string TibetanDetectionFormHelpInfo = "涉藏图像检测";
 
 
 

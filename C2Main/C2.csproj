@@ -376,6 +376,12 @@
     <Compile Include="Business\HIBU\TerrorismDetection\TerrorismDetectionForm.Designer.cs">
       <DependentUpon>TerrorismDetectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\TibetanDetection\TibetanDetectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\TibetanDetection\TibetanDetectionForm.Designer.cs">
+      <DependentUpon>TibetanDetectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\TrackRecognition\TrackRecognitionForm.cs">
       <SubType>Form</SubType>
     </Compile>

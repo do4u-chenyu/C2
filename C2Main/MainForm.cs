@@ -422,7 +422,7 @@ namespace C2
             // 加载固定工具
             string[] HIArr = { "OCR", "命名实体识别","语音转文本","二维码识别","人脸年龄性别识别","语种识别","涉赌文本识别","涉政文本识别", "InfoExtraction",
                                "涉黄图像识别","轨迹联通类图像识别","红包转账图像识别","二维码图像识别","银行卡图像识别","卡证识别","红头文件识别",
-                                "枪支检测","涉恐图像识别"};
+                                "枪支检测","涉恐图像识别","涉藏图像检测"};
             foreach (string name in HIArr)
                 this.HIBUControl.GenIAOButton(name.Trim());
         }
