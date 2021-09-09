@@ -79,6 +79,7 @@ namespace C2.Utils
         public static string BankCardRecognitionFormHelpInfo = "银行卡图像识别";
         public static string CardRecognitionFormHelpInfo = "卡证识别";
         public static string RedHeaderRecognitionFormHelpInfo = "红头文件识别";
+        public static string GunDetectionFormHelpInfo = "枪支检测";
 
 
 

@@ -304,6 +304,12 @@
     <Compile Include="Business\HIBU\FaceAgeGender\FaceAgeGenderForm.Designer.cs">
       <DependentUpon>FaceAgeGenderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\GunDetection\GunDetectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\GunDetection\GunDetectionForm.Designer.cs">
+      <DependentUpon>GunDetectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\InfoExtraction\InfoExtractionForm.cs">
       <SubType>Form</SubType>
     </Compile>
