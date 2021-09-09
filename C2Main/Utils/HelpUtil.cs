@@ -72,6 +72,18 @@ namespace C2.Utils
         public static string LanguageDetectFormHelpInfo = "语种识别";
         public static string DrugTextRecognitionFormHelpInfo = "涉赌文本识别";
         public static string PoliticsTextRecognitionFormHelpInfo = "涉政文本识别";
+        public static string PornRecognitionFormHelpInfo = "涉黄图像识别";
+        public static string TrackRecognitionFormHelpInfo = "轨迹联通类图像识别";
+        public static string RedPocketRecognitionFormHelpInfo = "红包转账图像识别";
+        public static string QRCodeRecognitionFormHelpInfo = "二维码图像识别";
+        public static string BankCardRecognitionFormHelpInfo = "银行卡图像识别";
+        public static string CardRecognitionFormHelpInfo = "卡证识别";
+        public static string RedHeaderRecognitionFormHelpInfo = "红头文件识别";
+        public static string GunDetectionFormHelpInfo = "枪支检测";
+        public static string TerrorismDetectionFormHelpInfo = "涉恐图像识别";
+
+
+
         public static string FaceDetectorFormHelpInfo = "FaceDetector人脸检测";
         public static string FaceBeautyFormHelpInfo = "FaceBeauty女性人脸颜值得分判别";
 
