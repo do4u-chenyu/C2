@@ -243,6 +243,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap BankCardRecognition {
+            get {
+                object obj = ResourceManager.GetObject("BankCardRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap BaseStation {
             get {
                 object obj = ResourceManager.GetObject("BaseStation", resourceCulture);

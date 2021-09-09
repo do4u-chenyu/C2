@@ -280,6 +280,12 @@
     <Compile Include="Business\HIBU\ASR\ASRForm.Designer.cs">
       <DependentUpon>ASRForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\BankCardRecognition\BankCardRecognitionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\BankCardRecognition\BankCardRecognitionForm.Designer.cs">
+      <DependentUpon>BankCardRecognitionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\DrugTextRecognition\DrugTextRecognitionForm.cs">
       <SubType>Form</SubType>
     </Compile>
