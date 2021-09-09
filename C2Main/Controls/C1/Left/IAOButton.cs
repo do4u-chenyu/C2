@@ -15,6 +15,7 @@ using C2.Business.HIBU.BankCardRecognition;
 using C2.Business.HIBU.CardRecognition;
 using C2.Business.HIBU.RedHeaderRecognition;
 using C2.Business.HIBU.GunDetection;
+using C2.Business.HIBU.TerrorismDetection;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.Utils;
@@ -154,6 +155,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.GunDetection;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GunDetectionFormHelpInfo);
                     break;
+                case "涉恐图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.TerrorismDetection;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TerrorismDetectionFormHelpInfo);
+                    break;
             }
 
         }
@@ -283,6 +288,9 @@ namespace C2.Controls.Left
                     break;
                 case "枪支检测":
                     new GunDetectionForm().ShowDialog();
+                    break;
+                case "涉恐图像识别":
+                    new TerrorismDetectionForm().ShowDialog();
                     break;
                 default:
                     openToolForm?.Invoke();

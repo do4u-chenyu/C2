@@ -370,6 +370,12 @@
     <Compile Include="Business\HIBU\RedPocketRecognition\RedPocketRecognitionForm.Designer.cs">
       <DependentUpon>RedPocketRecognitionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\TerrorismDetection\TerrorismDetectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\TerrorismDetection\TerrorismDetectionForm.Designer.cs">
+      <DependentUpon>TerrorismDetectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\TrackRecognition\TrackRecognitionForm.cs">
       <SubType>Form</SubType>
     </Compile>

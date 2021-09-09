@@ -2594,6 +2594,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap TerrorismDetection {
+            get {
+                object obj = ResourceManager.GetObject("TerrorismDetection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;thanks&gt;
         ///  &lt;people name=&quot;Yusuke Kamiyamane&quot; jobs=&quot;Icon&quot; email=&quot;&quot;/&gt;
