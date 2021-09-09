@@ -16,6 +16,7 @@ using C2.Business.HIBU.CardRecognition;
 using C2.Business.HIBU.RedHeaderRecognition;
 using C2.Business.HIBU.GunDetection;
 using C2.Business.HIBU.TerrorismDetection;
+using C2.Business.HIBU.TibetanDetection;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.Utils;
@@ -104,7 +105,6 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.QRCode;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeFormHelpInfo);
                     break;
-                    
                 case "人脸年龄性别识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
@@ -160,6 +160,10 @@ namespace C2.Controls.Left
                 case "涉恐图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.TerrorismDetection;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TerrorismDetectionFormHelpInfo);
+                    break;
+                case "涉藏图像检测":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.TibetanDetection;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TibetanDetectionFormHelpInfo);
                     break;
                 case "FaceDetector":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceDetector;
@@ -302,6 +306,9 @@ namespace C2.Controls.Left
                     break;
                 case "涉恐图像识别":
                     new TerrorismDetectionForm().ShowDialog();
+                    break;
+                case "涉藏图像检测":
+                    new TibetanDetectionForm().ShowDialog();
                     break;
                 case "FaceDetector":
                     new FaceDetectorForm().ShowDialog();
