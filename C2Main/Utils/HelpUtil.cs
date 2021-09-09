@@ -83,6 +83,7 @@ namespace C2.Utils
         public static string TerrorismDetectionFormHelpInfo = "涉恐图像识别";
         public static string TibetanDetectionFormHelpInfo = "涉藏图像检测";
         public static string FaceExpressionFormHelpInfo = "FaceExpression人脸表情识别";
+        public static string FaceRecognizerFormHelpInfo = "FaceRecognizer人脸识别编码生成";
 
 
 

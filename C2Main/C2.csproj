@@ -310,6 +310,12 @@
     <Compile Include="Business\HIBU\FaceExpression\FaceExpressionForm.Designer.cs">
       <DependentUpon>FaceExpressionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\HIBU\FaceRecognizer\FaceRecognizerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\HIBU\FaceRecognizer\FaceRecognizerForm.Designer.cs">
+      <DependentUpon>FaceRecognizerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\GunDetection\GunDetectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1934,6 +1940,9 @@
     <EmbeddedResource Include="Business\HIBU\FaceExpression\FaceExpressionForm.resx">
       <DependentUpon>FaceExpressionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\FaceRecognizer\FaceRecognizerForm.resx">
+      <DependentUpon>FaceRecognizerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\InfoExtraction\InfoExtractionForm.resx">
       <DependentUpon>InfoExtractionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2721,6 +2730,7 @@
     <None Include="Resources\FaceDetector.png" />
     <None Include="Resources\FaceBeauty.png" />
     <None Include="Resources\FaceExpression.png" />
+    <None Include="Resources\FaceRecognizer.png" />
     <Content Include="Resources\flow_back.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
@@ -2770,12 +2780,14 @@
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\Images\arrow_query.png" />
     <Content Include="Resources\Images\ASR.png" />
+    <Content Include="Resources\Images\BankCardRecognition.png" />
     <Content Include="Resources\Images\bar.png" />
     <None Include="Resources\Images\bold.png" />
     <None Include="Resources\Images\calculator.png" />
     <None Include="Resources\Images\chain_small.png" />
     <None Include="Resources\Images\chart.png" />
     <None Include="Resources\Images\check_update.png" />
+    <Content Include="Resources\Images\CardRecognition.png" />
     <Content Include="Resources\Images\chevron.png" />
     <None Include="Resources\Images\close.png" />
     <Content Include="Resources\Images\close_button.png" />
@@ -2812,16 +2824,19 @@
     <None Include="Resources\Images\WidgetImage\deletewidget.png" />
     <None Include="Resources\Images\WidgetImage\dealData.png" />
     <None Include="Resources\Images\dictGenerator.png" />
+    <Content Include="Resources\Images\DrugTextRecognition.png" />
     <Content Include="Resources\Images\FaceAgeGender.png" />
     <Content Include="Resources\Images\FaceBeauty.png" />
     <Content Include="Resources\Images\FaceDetector.png" />
     <Content Include="Resources\Images\FaceExpression.png" />
+    <Content Include="Resources\Images\FaceRecognizer.png" />
     <Content Include="Resources\Images\freemind_butterfly.png" />
     <None Include="Resources\Images\full_screen.png" />
     <None Include="Resources\Images\full_screen_exit.png" />
     <None Include="Resources\Images\hand.png" />
     <None Include="Resources\Images\hand_cur.cur" />
     <None Include="Resources\Images\WidgetImage\getchart.png" />
+    <Content Include="Resources\Images\GunDetection.png" />
     <Content Include="Resources\Images\help.png" />
     <None Include="Resources\Images\hourglass.png" />
     <None Include="Resources\Images\html_content.htm" />
@@ -2847,6 +2862,7 @@
     <None Include="Resources\Images\layout_tree_right.png" />
     <None Include="Resources\Images\list_bullets.png" />
     <None Include="Resources\Images\list_numbered.png" />
+    <Content Include="Resources\Images\LanguageDetect.png" />
     <Content Include="Resources\Images\mail.png" />
     <None Include="Resources\Images\mask.png" />
     <None Include="Resources\Images\menu.png" />
@@ -2877,6 +2893,8 @@
     <None Include="Resources\Images\paste_as_image.png" />
     <None Include="Resources\Images\paste_as_remark.png" />
     <None Include="Resources\Images\plus.png" />
+    <Content Include="Resources\Images\PoliticsTextRecognition.png" />
+    <Content Include="Resources\Images\PornRecognition.png" />
     <Content Include="Resources\Images\preferences.png" />
     <None Include="Resources\Images\preferences_24.png" />
     <None Include="Resources\Images\preview.png" />
@@ -2890,12 +2908,16 @@
     <None Include="Resources\Images\progress_bar.png" />
     <None Include="Resources\Images\property.png" />
     <None Include="Resources\Images\question_large.png" />
+    <Content Include="Resources\Images\QRCode.png" />
+    <Content Include="Resources\Images\QRCodeRecognition.png" />
+    <Content Include="Resources\Images\RedHeaderRecognition.png" />
     <Content Include="Resources\Images\redo.png" />
     <None Include="Resources\Images\refresh.png" />
     <None Include="Resources\Images\replace.png" />
     <None Include="Resources\Images\reset.png" />
     <None Include="Resources\Images\rotate_left.png" />
     <None Include="Resources\Images\rotate_right.png" />
+    <Content Include="Resources\Images\RedPocketRecognition.png" />
     <Content Include="Resources\Images\save.png" />
     <None Include="Resources\Images\sidebar.png" />
     <None Include="Resources\Images\sort.png" />
@@ -2941,9 +2963,12 @@
     <None Include="Resources\Images\tick_small.png" />
     <None Include="Resources\Images\ToolImage\open.png" />
     <None Include="Resources\Images\ToolImage\openDataFile.png" />
+    <Content Include="Resources\Images\TerrorismDetection.png" />
+    <Content Include="Resources\Images\TibetanDetection.png" />
     <Content Include="Resources\Images\tool_button.png" />
     <Content Include="Resources\Images\topic.png" />
     <None Include="Resources\Images\underline.png" />
+    <Content Include="Resources\Images\TrackRecognition.png" />
     <Content Include="Resources\Images\undo.png" />
     <None Include="Resources\Images\up.png" />
     <None Include="Resources\Images\web.png" />
@@ -2972,6 +2997,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\Images\webkit.png" />
     <Content Include="Resources\Images\WebScan.png" />
     <None Include="Resources\InfoExtraction.png" />
     <Content Include="Resources\Languages\_Template.xml">

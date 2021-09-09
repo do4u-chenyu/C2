@@ -27,6 +27,7 @@ using C2.Business.HIBU.InfoExtraction;
 using C2.Business.HIBU.FaceDetector;
 using C2.Business.HIBU.FaceBeauty;
 using C2.Business.HIBU.FaceExpression;
+using C2.Business.HIBU.FaceRecognizer;
 
 namespace C2.Controls.Left
 {
@@ -178,7 +179,11 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceExpression;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceExpressionFormHelpInfo);
                     break;
-                    
+                case "FaceRecognizer":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceRecognizer;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceRecognizerFormHelpInfo);
+                    break;
+
 
 
             }
@@ -327,6 +332,10 @@ namespace C2.Controls.Left
                 case "FaceExpression":
                     new FaceExpressionForm().ShowDialog();  
                     break;
+                case "FaceRecognizer":
+                    new FaceRecognizerForm().ShowDialog();
+                    break;
+                    
 
                 default:
                     openToolForm?.Invoke();

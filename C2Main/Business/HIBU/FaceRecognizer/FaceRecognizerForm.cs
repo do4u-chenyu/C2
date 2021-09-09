@@ -9,24 +9,24 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
-namespace C2.Business.HIBU.FaceAgeGender
+namespace C2.Business.HIBU.FaceRecognizer
 {
-    partial class FaceAgeGenderForm : StandardDialog
+    partial class FaceRecognizerForm : StandardDialog
     {
         private string picPath;
         readonly HttpHandler httpHandler;
-        private readonly string OCRUrl;
-
-        public FaceAgeGenderForm()
+        private readonly string FaceRecognizerUrl;
+        public FaceRecognizerForm()
         {
             InitializeComponent();
             this.OKButton.Text = "保存结果";
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9000/HI_CV/FaceAgeGender";
+            FaceRecognizerUrl = "http://10.1.126.186:9000/HI_CV/FaceRecognizer";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -37,6 +37,7 @@ namespace C2.Business.HIBU.FaceAgeGender
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
+
             this.filePathTextBox.Text = OpenFileDialog.FileName;
             picPath = OpenFileDialog.FileName;
         }
@@ -53,7 +54,6 @@ namespace C2.Business.HIBU.FaceAgeGender
 
         private void TransBtn_Click(object sender, EventArgs e)
         {
-            //清空上一次的查询结果
             this.dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)
@@ -66,7 +66,7 @@ namespace C2.Business.HIBU.FaceAgeGender
                     FillDGV(singlePicPath, result);
                 }
             }
-            HelpUtil.ShowMessageBox("命名实体识别完成。");
+            HelpUtil.ShowMessageBox("识别完成。");
         }
 
         private List<string> GetPicsByPath(string path)
@@ -85,8 +85,10 @@ namespace C2.Business.HIBU.FaceAgeGender
             {
                 picPathList.Add(path);
             }
+
             return picPathList;
         }
+
 
         private string TransBase64(string singlePicPath)
         {
@@ -100,20 +102,24 @@ namespace C2.Business.HIBU.FaceAgeGender
                 base64Str = Convert.ToBase64String(bt);
                 filestream.Close();
             }
+
             return base64Str;
         }
 
         public string StartTask(string base64Str)
         {
             string data = string.Empty;
+            List<string> returnList = new List<string>();
             try
             {
-                Response resp = httpHandler.PostCode(OCRUrl, "imageBase64=" + HttpUtility.UrlEncode(base64Str), 60000);
+                Response resp = httpHandler.PostCode(FaceRecognizerUrl, "imageBase64=" + HttpUtility.UrlEncode(base64Str), 60000);
+
                 HttpStatusCode statusCode = resp.StatusCode;
                 if (statusCode != HttpStatusCode.OK)
                 {
-                    return string.Format("查询失败! http状态码为：{0}.", statusCode);
+                    returnList.Add(string.Format("查询失败! http状态码为：{0}.", statusCode));
                 }
+
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("status", out string status))
@@ -122,7 +128,9 @@ namespace C2.Business.HIBU.FaceAgeGender
                     data = status == "200" ? DealData(datas) : datas;
                 }
                 else
+                {
                     data = "查询失败! status不存在。";
+                }
             }
             catch (Exception e)
             {
@@ -137,17 +145,7 @@ namespace C2.Business.HIBU.FaceAgeGender
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
-            if (result == "解析出错，可尝试重新识别。")
-            {
-                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = String.Empty;
-                dr.Cells.Add(textCell1);
-
-                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-                textCell2.Value = String.Empty;
-                dr.Cells.Add(textCell2);
-            }
-            else
+            try
             {
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
                 textCell1.Value = listRealData[0];
@@ -157,9 +155,11 @@ namespace C2.Business.HIBU.FaceAgeGender
                 textCell2.Value = listRealData[1];
                 dr.Cells.Add(textCell2);
             }
+            catch
+            {
+            }
             dataGridView1.Rows.Add(dr);
         }
-
         List<String> listRealData = new List<string>();
         private string DealData(string data)
         {
@@ -168,13 +168,21 @@ namespace C2.Business.HIBU.FaceAgeGender
                 return string.Empty;
             try
             {
+                string embeddings = string.Empty;
+                string notice = string.Empty;
                 data = "[" + data + "]";
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                string age = Convert.ToDouble(ja[0]["age"].ToString().Replace("[", "").Replace("]", "").Replace("'", "")).ToString("0");
-                string gender = ja[0]["gender"].ToString().Replace("[", "").Replace("]", "").Replace("'", "");
-                string transGender = gender == "0" ? "男" : gender == "1" ? "女" : "未知";
-                resultList.Add(age);
-                resultList.Add(transGender);
+                if (ja[0]["embeddings"].ToString() != "[]")
+                {
+                    embeddings = ja[0]["embeddings"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                }
+                if (ja[0]["_notice"].ToString() != "")
+                {
+                    notice = ja[0]["_notice"].ToString();
+                }
+                resultList.Add(embeddings);
+                resultList.Add(notice);
+
                 listRealData = listData(resultList);
             }
             catch { return "解析出错，可尝试重新识别。"; }
@@ -194,15 +202,14 @@ namespace C2.Business.HIBU.FaceAgeGender
                 HelpUtil.ShowMessageBox("结果为空，无法保存。");
                 return false;
             }
-            var dialog = new OpenFileDialog();
 
-
+            var dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
             using (GuarderUtil.WaitCursor)
             {
-                SaveResultToLocal(dialog.FileName);
+                SaveResultToLocal(dialog.SelectedPath);
             }
             HelpUtil.ShowMessageBox("保存完毕。");
 
@@ -211,15 +218,16 @@ namespace C2.Business.HIBU.FaceAgeGender
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "年龄" + " " + "性别" + "\r\n");
+            StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸识别编码生成结果.txt"));
+            sw.Write("图片名" + "\t" + "编码" + "\t" + "注意事项" + "\n");
             try
             {
+
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
-                    if (row.Cells[0].Value != null)
+                    if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[2].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() +" " + row.Cells[2].Value.ToString() + "\r\n");
+                        sw.Write(row.Cells[0].Value.ToString() + "\t" + row.Cells[1].Value.ToString() + "\t" + row.Cells[2].Value.ToString() + "\n");
                     }
                 }
                 if (sw != null)
