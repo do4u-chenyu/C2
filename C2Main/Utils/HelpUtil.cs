@@ -64,31 +64,28 @@ namespace C2.Utils
         public static string BigAPKFormHelpInfo = "APK检测系统";
         
         public static string OCRFormHelpInfo = "OCR图片检测文字";
-        public static string NERFormHelpInfo = "命名实体识别";
-        public static string ASRFormHelpInfo = "语音转文本";
-        public static string QRCodeFormHelpInfo = "二维码识别与解析";
-        public static string FaceAgeGenderFormHelpInfo = "人脸年龄性别识别";
-        public static string InfoExtractionFormHelpInfo = "InfoExtraction文本信息抽取";
-        public static string LanguageDetectFormHelpInfo = "语种识别";
-        public static string DrugTextRecognitionFormHelpInfo = "涉赌文本识别";
-        public static string PoliticsTextRecognitionFormHelpInfo = "涉政文本识别";
-        public static string PornRecognitionFormHelpInfo = "涉黄图像识别";
-        public static string TrackRecognitionFormHelpInfo = "轨迹联通类图像识别";
-        public static string RedPocketRecognitionFormHelpInfo = "红包转账图像识别";
-        public static string QRCodeRecognitionFormHelpInfo = "二维码图像识别";
-        public static string BankCardRecognitionFormHelpInfo = "银行卡图像识别";
-        public static string CardRecognitionFormHelpInfo = "卡证识别";
-        public static string RedHeaderRecognitionFormHelpInfo = "红头文件识别";
-        public static string GunDetectionFormHelpInfo = "枪支检测";
-        public static string TerrorismDetectionFormHelpInfo = "涉恐图像识别";
-        public static string TibetanDetectionFormHelpInfo = "涉藏图像检测";
-        public static string FaceExpressionFormHelpInfo = "FaceExpression人脸表情识别";
-        public static string FaceRecognizerFormHelpInfo = "FaceRecognizer人脸识别编码生成";
-
-
-
-        public static string FaceDetectorFormHelpInfo = "FaceDetector人脸检测";
-        public static string FaceBeautyFormHelpInfo = "FaceBeauty女性人脸颜值得分判别";
+        public static string NERFormHelpInfo = "将输入句子中的人名、地点、机构识别并定位";
+        public static string ASRFormHelpInfo = "将语音文件转换为文本信息";
+        public static string QRCodeFormHelpInfo = "对二维码进行定位与解析";
+        public static string FaceAgeGenderFormHelpInfo = "识别人脸的年龄和性别";
+        public static string InfoExtractionFormHelpInfo = "对微信号，手机号，网址，微信ID，QQ号，身份证号，姓名，微信群名，微信群号，IP地址，QQ群名，APP名，银行卡号、支付宝、邮箱、短地址、MAC地址等多个字段进行抽取";
+        public static string LanguageDetectFormHelpInfo = "判断输入文本的语言种类";
+        public static string DrugTextRecognitionFormHelpInfo = "判断输入语句是否涉赌";
+        public static string PoliticsTextRecognitionFormHelpInfo = "判断输入语句是否涉政";
+        public static string PornRecognitionFormHelpInfo = "判断输入图片是否涉黄";
+        public static string TrackRecognitionFormHelpInfo = "对导航截图、登机牌、火车票、快递单、常规聊天截图、朋友圈截图等内容进行识别";
+        public static string RedPocketRecognitionFormHelpInfo = "判断输入图像是否为红包截图和转账截图";
+        public static string QRCodeRecognitionFormHelpInfo = "判断图片中是否存在二维码";
+        public static string BankCardRecognitionFormHelpInfo = "判断图像中是否含有银行卡";
+        public static string CardRecognitionFormHelpInfo = "对银行卡、营业执照、驾驶证、毕业证、房产证、身份证、结婚证、护照、居住证等九大证件类图像进行识别";
+        public static string RedHeaderRecognitionFormHelpInfo = "对政府机关抄送的红头文件进行识别";
+        public static string GunDetectionFormHelpInfo = "检测输入图像中是否含有枪支，并输出位置信息";
+        public static string TerrorismDetectionFormHelpInfo = "判断输入图片是否包含社恐信息";
+        public static string TibetanDetectionFormHelpInfo = "检测输入图片是否含有藏僧、藏旗，并输出具体位置信息";
+        public static string FaceExpressionFormHelpInfo = "包含生气、失望、惊恐、害怕、开心、沮丧、惊喜、自然等表情";
+        public static string FaceRecognizerFormHelpInfo = "对人脸进行编码，输出512维人脸编码";
+        public static string FaceDetectorFormHelpInfo = "检测图片中是否包含人脸，并返回人脸位置、关键点信息";
+        public static string FaceBeautyFormHelpInfo = "颜值打分(0-5分)";
 
         public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱口令爆破";
         public static string PwdGeneratorHelpInfo = "社工生成器，输入目标信息，猜测可能使用的数字字符组合";
