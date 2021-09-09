@@ -12,22 +12,22 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
-namespace C2.Business.HIBU.FaceDetector
+namespace C2.Business.HIBU.FaceExpression
 {
-    partial class FaceDetectorForm : StandardDialog
+    partial class FaceExpressionForm : StandardDialog
     {
         private string picPath;
         readonly HttpHandler httpHandler;
-        private readonly string FaceDetectorUrl;
-
-        public FaceDetectorForm()
+        private readonly string FaceExpressionUrl;
+        public FaceExpressionForm()
         {
+            InitializeComponent();
             InitializeComponent();
             this.OKButton.Text = "保存结果";
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            FaceDetectorUrl = "http://10.1.126.186:9001/HI_CV/FaceDetector";
+            FaceExpressionUrl = "http://10.1.126.186:9000/HI_CV/FaceExpression";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -55,7 +55,6 @@ namespace C2.Business.HIBU.FaceDetector
 
         private void TransBtn_Click(object sender, EventArgs e)
         {
-            //清空上一次的查询结果
             this.dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)
@@ -70,6 +69,7 @@ namespace C2.Business.HIBU.FaceDetector
             }
             HelpUtil.ShowMessageBox("识别完成。");
         }
+
         private List<string> GetPicsByPath(string path)
         {
             string[] picSuffix = new string[] { ".png", ".jpg", ".jpeg" };
@@ -113,7 +113,7 @@ namespace C2.Business.HIBU.FaceDetector
             List<string> returnList = new List<string>();
             try
             {
-                Response resp = httpHandler.PostCode(FaceDetectorUrl, "imageBase64=" + HttpUtility.UrlEncode(base64Str), 60000);
+                Response resp = httpHandler.PostCode(FaceExpressionUrl, "imageBase64=" + HttpUtility.UrlEncode(base64Str), 60000);
 
                 HttpStatusCode statusCode = resp.StatusCode;
                 if (statusCode != HttpStatusCode.OK)
@@ -130,7 +130,7 @@ namespace C2.Business.HIBU.FaceDetector
                 }
                 else
                 {
-                    data= "查询失败! status不存在。";
+                    data = "查询失败! status不存在。";
                 }
             }
             catch (Exception e)
@@ -155,10 +155,6 @@ namespace C2.Business.HIBU.FaceDetector
                 DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
                 textCell2.Value = listRealData[1];
                 dr.Cells.Add(textCell2);
-
-                DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
-                textCell3.Value = listRealData[2];
-                dr.Cells.Add(textCell3);
             }
             catch
             {
@@ -173,27 +169,20 @@ namespace C2.Business.HIBU.FaceDetector
                 return string.Empty;
             try
             {
-                string points = string.Empty;
-                string confidences = string.Empty;
-                string landmarks = string.Empty;
+                string expression = string.Empty;
+                string prob = string.Empty;
                 data = "[" + data + "]";
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                if (ja[0]["points"].ToString() != "[]")
+                if(ja[0]["expression"].ToString() != "[]")
                 {
-                    points = ja[0]["points"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    expression = ja[0]["expression"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[0].Replace("'", "");
                 }
-                if (ja[0]["landmarks"].ToString() != "[]")
+                if (ja[0]["prob"].ToString() != "[]")
                 {
-                    landmarks = ja[0]["landmarks"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    prob = ja[0]["prob"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[0].Replace("'", "");
                 }
-                if (ja[0]["confidences"].ToString() != "[]")
-                {
-                    confidences = ja[0]["confidences"].ToString().Split(new string[] { "['", "']" }, StringSplitOptions.RemoveEmptyEntries)[0];
-                }
-                
-                resultList.Add(points);
-                resultList.Add(landmarks);
-                resultList.Add(confidences);
+                resultList.Add(expression);
+                resultList.Add(prob);
 
                 listRealData = listData(resultList);
             }
@@ -230,8 +219,8 @@ namespace C2.Business.HIBU.FaceDetector
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸检测结果.txt"));
-            sw.Write("图片名" + "\t" + "points" + "\t" + "landmarks" + "\t" + "confidences" + "\n");
+            StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸表情识别结果.txt"));
+            sw.Write("图片名" + "\t" + "表情" + "\t" + "可靠度" + "\n");
             try
             {
 
@@ -239,7 +228,7 @@ namespace C2.Business.HIBU.FaceDetector
                 {
                     if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[2].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + "\t" + row.Cells[1].Value.ToString() + "\t" + row.Cells[2].Value.ToString() +"\t"+row.Cells[3].Value.ToString() + "\t" + "\n");
+                        sw.Write(row.Cells[0].Value.ToString() + "\t" + row.Cells[1].Value.ToString() + "\t" + row.Cells[2].Value.ToString() + "\n");
                     }
                 }
                 if (sw != null)

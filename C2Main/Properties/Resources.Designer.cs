@@ -47,8 +47,8 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -1042,6 +1042,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap FaceDetector {
             get {
                 object obj = ResourceManager.GetObject("FaceDetector", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap FaceExpression {
+            get {
+                object obj = ResourceManager.GetObject("FaceExpression", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
