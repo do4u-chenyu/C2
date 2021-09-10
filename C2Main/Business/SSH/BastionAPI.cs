@@ -168,11 +168,35 @@ namespace C2.Business.SSH
                 return;
             String ip   = ConvertUtil.GetIP(task.SearchAgentIP);
             String port = ConvertUtil.GetPort(task.SearchAgentIP);
+            String pwd = task.SearchPassword;
             String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0} -p {1}", ip, port);
 
             log.Info(String.Format("开始ssh跳转: {0}", command));
             
-            RunCommand(command, shell);
+            //密码不存在，正常执行
+            _ = string.IsNullOrEmpty(pwd) ? RunCommand(command, shell) : SSHJumpPwd(command, pwd, shell);
+        }
+
+        private String SSHJumpPwd(String command, String pwd, ShellStream ssm)
+        {
+            try
+            {
+                // 清理缓存
+                _ = ssm.Read();
+                // 执行命令
+                ssm.WriteLine(command);
+                String ret = ssm.Expect(":", TimeSpan.FromSeconds(SecondsTimeout));
+
+                if (ret != null)
+                {
+                    ssm.WriteLine(pwd);
+                    log.Info(Shell.Format(pwd));
+                    return ret;
+                }
+            }
+            catch { }
+
+            return String.Empty;
         }
 
         public void Close()
