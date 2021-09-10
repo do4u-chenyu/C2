@@ -203,7 +203,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FaceAgeGenderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "人脸年龄性别识别";
+            this.Text = "银行卡图像识别";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.HITab.ResumeLayout(false);
             this.HITab.PerformLayout();

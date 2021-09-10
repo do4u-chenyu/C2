@@ -170,7 +170,7 @@ namespace C2.Business.HIBU.InfoExtraction
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "InfoExtractionForm";
-            this.Text = "InfoExtractionForm";
+            this.Text = "信息抽取";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.textPathTextBox, 0);
             this.Controls.SetChildIndex(this.singleButton, 0);

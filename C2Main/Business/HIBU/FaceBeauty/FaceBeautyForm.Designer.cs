@@ -177,7 +177,7 @@ namespace C2.Business.HIBU.FaceBeauty
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FaceBeautyForm";
-            this.Text = "FaceBeauty女性人脸颜值判别";
+            this.Text = "女性人脸颜值判别";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

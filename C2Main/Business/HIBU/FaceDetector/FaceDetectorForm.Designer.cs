@@ -196,7 +196,7 @@ namespace C2.Business.HIBU.FaceDetector
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
             this.Name = "FaceDetectorForm";
-            this.Text = "FaceDetector人脸检测";
+            this.Text = "人脸检测";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

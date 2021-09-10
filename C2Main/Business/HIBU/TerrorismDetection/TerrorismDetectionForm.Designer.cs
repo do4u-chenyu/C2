@@ -65,7 +65,7 @@
             this.HITab.Padding = new System.Windows.Forms.Padding(3);
             this.HITab.Size = new System.Drawing.Size(772, 337);
             this.HITab.TabIndex = 0;
-            this.HITab.Text = "HI-NER";
+            this.HITab.Text = "HI-TerrorismDetection";
             this.HITab.UseVisualStyleBackColor = true;
             // 
             // filePathTextBox
@@ -224,7 +224,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "NERForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "命名实体识别";
+            this.Text = "涉恐图像识别";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.HITab.ResumeLayout(false);
             this.HITab.PerformLayout();
