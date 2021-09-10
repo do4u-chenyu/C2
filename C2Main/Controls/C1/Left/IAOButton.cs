@@ -3,14 +3,32 @@ using C2.Business.HIBU.OCR;
 using C2.Business.HIBU.NER;
 using C2.Business.HIBU.ASR;
 using C2.Business.HIBU.QRCode;
+using C2.Business.HIBU.FaceAgeGender;
+using C2.Business.HIBU.LanguageDetect;
+using C2.Business.HIBU.DrugTextRecognition;
+using C2.Business.HIBU.PoliticsTextRecognition;
+using C2.Business.HIBU.PornRecognition;
+using C2.Business.HIBU.TrackRecognition;
+using C2.Business.HIBU.RedPocketRecognition;
+using C2.Business.HIBU.QRCodeRecognition;
+using C2.Business.HIBU.BankCardRecognition;
+using C2.Business.HIBU.CardRecognition;
+using C2.Business.HIBU.RedHeaderRecognition;
+using C2.Business.HIBU.GunDetection;
+using C2.Business.HIBU.TerrorismDetection;
+using C2.Business.HIBU.TibetanDetection;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
-using C2.IAOLab.Plugins;
 using C2.Utils;
 using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
+using C2.Business.HIBU.InfoExtraction;
+using C2.Business.HIBU.FaceDetector;
+using C2.Business.HIBU.FaceBeauty;
+using C2.Business.HIBU.FaceExpression;
+using C2.Business.HIBU.FaceRecognizer;
+
 namespace C2.Controls.Left
 {
     public delegate void OpenToolFormDelegate();
@@ -89,6 +107,85 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.QRCode;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeFormHelpInfo);
                     break;
+                case "人脸年龄性别识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
+                    break;
+                case "InfoExtraction":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.InfoExtraction;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.InfoExtractionFormHelpInfo);
+                    break;
+                case "语种识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.LanguageDetect;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.LanguageDetectFormHelpInfo);
+                    break;
+                case "涉赌文本识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.DrugTextRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.DrugTextRecognitionFormHelpInfo);
+                    break;
+                case "涉政文本识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PoliticsTextRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
+                    break;
+                case "涉黄图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PornRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PornRecognitionFormHelpInfo);
+                    break;
+                case "轨迹联通类图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.TrackRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TrackRecognitionFormHelpInfo);
+                    break;
+                case "红包转账图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.RedPocketRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedPocketRecognitionFormHelpInfo);
+                    break;
+                case "二维码图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.QRCodeRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeRecognitionFormHelpInfo);
+                    break;
+                case "银行卡图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.BankCardRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankCardRecognitionFormHelpInfo);
+                    break;
+                case "卡证识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.CardRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.CardRecognitionFormHelpInfo);
+                    break;
+                case "红头文件识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.RedHeaderRecognition;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedHeaderRecognitionFormHelpInfo);
+                    break;
+                case "枪支检测":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.GunDetection;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GunDetectionFormHelpInfo);
+                    break;
+                case "涉恐图像识别":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.TerrorismDetection;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TerrorismDetectionFormHelpInfo);
+                    break;
+                case "涉藏图像检测":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.TibetanDetection;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TibetanDetectionFormHelpInfo);
+                    break;
+                case "FaceDetector":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceDetector;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceDetectorFormHelpInfo);
+                    break;
+                case "FaceBeauty":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceBeauty;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceBeautyFormHelpInfo);
+                    break;
+                case "FaceExpression":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceExpression;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceExpressionFormHelpInfo);
+                    break;
+                case "FaceRecognizer":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.FaceRecognizer;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceRecognizerFormHelpInfo);
+                    break;
+
+
+
             }
 
         }
@@ -180,6 +277,66 @@ namespace C2.Controls.Left
                 case "二维码识别":
                     new QRCodeForm().ShowDialog();
                     break;
+                case "人脸年龄性别识别":
+                    new FaceAgeGenderForm().ShowDialog();
+                    break;
+                case "InfoExtraction":
+                    new InfoExtractionForm().ShowDialog();
+                    break;
+                case "语种识别":
+                    new LanguageDetectForm().ShowDialog();
+                    break;
+                case "涉赌文本识别":
+                    new DrugTextRecognitionForm().ShowDialog();
+                    break;
+                case "涉政文本识别":
+                    new PoliticsTextRecognitionForm().ShowDialog();
+                    break;
+                case "涉黄图像识别":
+                    new PornRecognitionForm().ShowDialog();
+                    break;
+                case "轨迹联通类图像识别":
+                    new TrackRecognitionForm().ShowDialog();
+                    break;
+                case "红包转账图像识别":
+                    new RedPocketRecognitionForm().ShowDialog();
+                    break;
+                case "二维码图像识别":
+                    new QRCodeRecognitionForm().ShowDialog();
+                    break;
+                case "银行卡图像识别":
+                    new BankCardRecognitionForm().ShowDialog();
+                    break;
+                case "卡证识别":
+                    new CardRecognitionForm().ShowDialog();
+                    break;
+                case "红头文件识别":
+                    new RedHeaderRecognitionForm().ShowDialog();
+                    break;
+                case "枪支检测":
+                    new GunDetectionForm().ShowDialog();
+                    break;
+                case "涉恐图像识别":
+                    new TerrorismDetectionForm().ShowDialog();
+                    break;
+                case "涉藏图像检测":
+                    new TibetanDetectionForm().ShowDialog();
+                    break;
+                case "FaceDetector":
+                    new FaceDetectorForm().ShowDialog();
+                    break;
+                case "FaceBeauty":
+                    new FaceBeautyForm().ShowDialog();
+                    break;
+
+                case "FaceExpression":
+                    new FaceExpressionForm().ShowDialog();  
+                    break;
+                case "FaceRecognizer":
+                    new FaceRecognizerForm().ShowDialog();
+                    break;
+                    
+
                 default:
                     openToolForm?.Invoke();
                     break;

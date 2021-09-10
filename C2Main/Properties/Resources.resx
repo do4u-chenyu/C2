@@ -2122,10 +2122,52 @@
     <value>..\Resources\Images\NER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ASR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\Resources\Images\ASR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Images\ASR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QRCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\Resources\Images\QRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\Images\QRCode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceAgeGender" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\FaceAgeGender.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LanguageDetect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\LanguageDetect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DrugTextRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\DrugTextRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PoliticsTextRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\PoliticsTextRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PornRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\PornRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TrackRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TrackRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPocketRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\RedPocketRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QRCodeRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\QRCodeRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BankCardRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\BankCardRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CardRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\CardRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedHeaderRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\RedHeaderRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunDetection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\GunDetection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TerrorismDetection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TerrorismDetection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TibetanDetection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TibetanDetection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="词云样例1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\词云样例1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -2144,5 +2186,20 @@
   </data>
   <data name="WebScan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WebScan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="InfoExtraction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\InfoExtraction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceDetector" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceDetector.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceBeauty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceBeauty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceExpression" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceExpression.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FaceRecognizer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FaceRecognizer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -330,54 +330,7 @@ end;
 
 procedure ReWriteAppConfig();
 begin
-  SaveStringToFile( WizardForm.DirEdit.Text + '\C2.exe.config', 
-        '<?xml version="1.0" encoding="utf-8"?>' + #13#10 + 
-'<configuration>' + #13#10 + 
-'  <configSections>' + #13#10 + 
-'    <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">' + #13#10 + 
-'      <section name="C2.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />' + #13#10 + 
-'    </sectionGroup>' + #13#10 + 
-'  </configSections>' + #13#10 + 
-'  <startup>' + #13#10 + 
-'    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />' + #13#10 + 
-'  </startup>' + #13#10 + 
-'  <appSettings>' + #13#10 + 
-'    <add key="workspace" value="' + edtSelectDir2.Text + '"/>' + #13#10 +
-'    <add key="RunLevel" value="NoLogin" />' + #13#10 + 
-'    <add key="EPPlus:ExcelPackage.LicenseContext" value="NonCommercial" />' + #13#10 + 
-'    <add key="IAOLab" value=" BigAPK, APK, Visualization, Wifi, Card, Tude" />' + #13#10 + 
-'    <add key="version" value="1.4.14" />' + #13#10 + 
-'    <add key="ClientSettingsProvider.ServiceUri" value="" />' + #13#10 + 
-'  </appSettings>' + #13#10 + 
-'  <userSettings>' + #13#10 + 
-'    <C2.Properties.Settings>' + #13#10 + 
-'      <setting name="scale" serializeAs="String">' + #13#10 + 
-'        <value>19</value>' + #13#10 + 
-'      </setting>' + #13#10 + 
-'      <setting name="baiduAPIKey" serializeAs="String">' + #13#10 + 
-'        <value>FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9</value>' + #13#10 + 
-'      </setting>' + #13#10 + 
-'      <setting name="longitude" serializeAs="String">' + #13#10 + 
-'        <value>118.744288</value>' + #13#10 + 
-'      </setting>' + #13#10 + 
-'      <setting name="latitude" serializeAs="String">' + #13#10 + 
-'        <value>31.996022</value>' + #13#10 + 
-'      </setting>' + #13#10 + 
-'    </C2.Properties.Settings>' + #13#10 + 
-'  </userSettings>' + #13#10 + 
-'  <system.web>' + #13#10 + 
-'    <membership defaultProvider="ClientAuthenticationMembershipProvider">' + #13#10 + 
-'      <providers>' + #13#10 + 
-'        <add name="ClientAuthenticationMembershipProvider" type="System.Web.ClientServices.Providers.ClientFormsAuthenticationMembershipProvider, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" serviceUri="" />' + #13#10 + 
-'      </providers>' + #13#10 + 
-'    </membership>' + #13#10 + 
-'    <roleManager defaultProvider="ClientRoleProvider" enabled="true">' + #13#10 + 
-'      <providers>' + #13#10 + 
-'        <add name="ClientRoleProvider" type="System.Web.ClientServices.Providers.ClientRoleProvider, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" serviceUri="" cacheTimeout="86400" />' + #13#10 + 
-'      </providers>' + #13#10 + 
-'    </roleManager>' + #13#10 + 
-'  </system.web>' + #13#10 + 
-'</configuration>', false);
+  FileCopy('C:\Program Files\FiberHome\IAO解决方案\C2.exe.config', WizardForm.DirEdit.Text + '\C2.exe.config', False);
 end;
 
 //点击关闭按钮事件

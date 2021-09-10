@@ -451,6 +451,28 @@
 	<item name="Cracker">(网)弱口令扫描</item>
 	<item name="PwdGenerator">社工生成器</item>
 	<item name="WebScan">(网)目录扫描</item>
-  <item name="OCR">(网)OCR</item>
+        <item name="OCR">(网)OCR</item>
+	    <item name="命名实体识别">(网)命名实体识别</item>
+		<item name="语音转文本">(网)语音转文本</item>
+		<item name="二维码识别">(网)二维码识别</item>
+		<item name="人脸年龄性别识别">(网)人脸年龄性别识别</item>
+		<item name="语种识别">(网)语种识别</item>
+		<item name="涉赌文本识别">(网)涉赌文本识别</item>
+		<item name="涉政文本识别">(网)涉政文本识别</item>
+		<item name="InfoExtraction">(网)InfoExtraction</item>
+		<item name="涉黄图像识别">(网)涉黄图像识别</item>
+		<item name="轨迹联通类图像识别">(网)轨迹联通类图像识别</item>
+		<item name="红包转账图像识别">(网)红包转账图像识别</item>
+		<item name="二维码图像识别">(网)二维码图像识别</item>
+		<item name="银行卡图像识别">(网)银行卡图像识别</item>
+		<item name="卡证识别">(网)卡证识别</item>
+		<item name="枪支检测">(网)枪支检测</item>
+		<item name="涉恐图像识别">(网)涉恐图像识别</item>
+		<item name="涉藏图像检测">(网)涉藏图像检测</item>
+		<item name="FaceDetector">(网)FaceDetector</item>
+		<item name="FaceBeauty">(网)FaceBeauty</item>
+		<item name="FaceExpression">(网)FaceExpression</item>
+		<item name="FaceRecognizer">(网)FaceRecognizer</item>
+		<item name="红头文件识别">(网)红头文件识别</item>
 </words>
 </dictionary>

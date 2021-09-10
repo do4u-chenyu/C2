@@ -47,8 +47,8 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -236,6 +236,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap bank {
             get {
                 object obj = ResourceManager.GetObject("bank", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap BankCardRecognition {
+            get {
+                object obj = ResourceManager.GetObject("BankCardRecognition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -496,6 +506,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap Card {
             get {
                 object obj = ResourceManager.GetObject("Card", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap CardRecognition {
+            get {
+                object obj = ResourceManager.GetObject("CardRecognition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -873,6 +893,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap DrugTextRecognition {
+            get {
+                object obj = ResourceManager.GetObject("DrugTextRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
@@ -982,6 +1012,56 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap external {
             get {
                 object obj = ResourceManager.GetObject("external", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap FaceAgeGender {
+            get {
+                object obj = ResourceManager.GetObject("FaceAgeGender", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap FaceBeauty {
+            get {
+                object obj = ResourceManager.GetObject("FaceBeauty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap FaceDetector {
+            get {
+                object obj = ResourceManager.GetObject("FaceDetector", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap FaceExpression {
+            get {
+                object obj = ResourceManager.GetObject("FaceExpression", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap FaceRecognizer {
+            get {
+                object obj = ResourceManager.GetObject("FaceRecognizer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1179,6 +1259,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap GunDetection {
+            get {
+                object obj = ResourceManager.GetObject("GunDetection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap gunLuntan {
             get {
                 object obj = ResourceManager.GetObject("gunLuntan", resourceCulture);
@@ -1356,6 +1446,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap InfoExtraction {
+            get {
+                object obj = ResourceManager.GetObject("InfoExtraction", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap internet {
             get {
                 object obj = ResourceManager.GetObject("internet", resourceCulture);
@@ -1410,6 +1510,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("keyword_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap LanguageDetect {
+            get {
+                object obj = ResourceManager.GetObject("LanguageDetect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1976,6 +2086,26 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap PoliticsTextRecognition {
+            get {
+                object obj = ResourceManager.GetObject("PoliticsTextRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap PornRecognition {
+            get {
+                object obj = ResourceManager.GetObject("PornRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap PostgreSQL {
             get {
                 object obj = ResourceManager.GetObject("PostgreSQL", resourceCulture);
@@ -2146,6 +2276,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap QRCodeRecognition {
+            get {
+                object obj = ResourceManager.GetObject("QRCodeRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap question_large {
             get {
                 object obj = ResourceManager.GetObject("question_large", resourceCulture);
@@ -2176,9 +2316,29 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap RedHeaderRecognition {
+            get {
+                object obj = ResourceManager.GetObject("RedHeaderRecognition", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap redo {
             get {
                 object obj = ResourceManager.GetObject("redo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap RedPocketRecognition {
+            get {
+                object obj = ResourceManager.GetObject("RedPocketRecognition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2474,6 +2634,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap TerrorismDetection {
+            get {
+                object obj = ResourceManager.GetObject("TerrorismDetection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;thanks&gt;
         ///  &lt;people name=&quot;Yusuke Kamiyamane&quot; jobs=&quot;Icon&quot; email=&quot;&quot;/&gt;
@@ -2533,6 +2703,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap TibetanDetection {
+            get {
+                object obj = ResourceManager.GetObject("TibetanDetection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap tick {
             get {
                 object obj = ResourceManager.GetObject("tick", resourceCulture);
@@ -2576,6 +2756,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap topic {
             get {
                 object obj = ResourceManager.GetObject("topic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap TrackRecognition {
+            get {
+                object obj = ResourceManager.GetObject("TrackRecognition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

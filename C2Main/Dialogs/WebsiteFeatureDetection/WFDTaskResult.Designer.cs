@@ -38,13 +38,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.browserButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ipAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskNameLabel = new System.Windows.Forms.Label();
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskStatusLabel = new System.Windows.Forms.Label();
@@ -58,6 +51,13 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.screenShot = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ipAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.screenShotGroupBox.SuspendLayout();
@@ -172,78 +172,9 @@
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(932, 428);
+            this.dataGridView.Size = new System.Drawing.Size(999, 428);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
-            // 
-            // url
-            // 
-            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.url.FillWeight = 17F;
-            this.url.HeaderText = "url";
-            this.url.Name = "url";
-            this.url.ReadOnly = true;
-            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // prediction
-            // 
-            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.prediction.FillWeight = 11F;
-            this.prediction.HeaderText = "分类情况";
-            this.prediction.Name = "prediction";
-            this.prediction.ReadOnly = true;
-            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // title
-            // 
-            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.FillWeight = 14F;
-            this.title.HeaderText = "网站标题";
-            this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // screenShot
-            // 
-            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.screenShot.FillWeight = 10F;
-            this.screenShot.HeaderText = "网站截图";
-            this.screenShot.Name = "screenShot";
-            this.screenShot.ReadOnly = true;
-            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // webContent
-            // 
-            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.webContent.FillWeight = 26F;
-            this.webContent.HeaderText = "网页文本";
-            this.webContent.Name = "webContent";
-            this.webContent.ReadOnly = true;
-            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ip
-            // 
-            this.ip.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ip.FillWeight = 13F;
-            this.ip.HeaderText = "ip";
-            this.ip.Name = "ip";
-            this.ip.ReadOnly = true;
-            this.ip.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ipAddress
-            // 
-            this.ipAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ipAddress.FillWeight = 9F;
-            this.ipAddress.HeaderText = "归属地";
-            this.ipAddress.Name = "ipAddress";
-            this.ipAddress.ReadOnly = true;
-            this.ipAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ipAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // taskNameLabel
             // 
@@ -295,7 +226,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(932, 152);
+            this.panel1.Size = new System.Drawing.Size(999, 152);
             this.panel1.TabIndex = 10012;
             // 
             // statusInfoLabel
@@ -313,7 +244,7 @@
             this.screenShotGroupBox.Controls.Add(this.label6);
             this.screenShotGroupBox.Controls.Add(this.label5);
             this.screenShotGroupBox.Controls.Add(this.progressBar1);
-            this.screenShotGroupBox.Location = new System.Drawing.Point(621, 19);
+            this.screenShotGroupBox.Location = new System.Drawing.Point(693, 19);
             this.screenShotGroupBox.Name = "screenShotGroupBox";
             this.screenShotGroupBox.Size = new System.Drawing.Size(299, 89);
             this.screenShotGroupBox.TabIndex = 10014;
@@ -368,7 +299,7 @@
             // 
             this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.downloadPicsButton.Location = new System.Drawing.Point(813, 114);
+            this.downloadPicsButton.Location = new System.Drawing.Point(885, 114);
             this.downloadPicsButton.Name = "downloadPicsButton";
             this.downloadPicsButton.Size = new System.Drawing.Size(107, 28);
             this.downloadPicsButton.TabIndex = 10012;
@@ -382,15 +313,84 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 152);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(932, 428);
+            this.panel2.Size = new System.Drawing.Size(999, 428);
             this.panel2.TabIndex = 10013;
+            // 
+            // url
+            // 
+            this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.url.FillWeight = 18F;
+            this.url.HeaderText = "url";
+            this.url.Name = "url";
+            this.url.ReadOnly = true;
+            this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // prediction
+            // 
+            this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.prediction.FillWeight = 11F;
+            this.prediction.HeaderText = "分类情况";
+            this.prediction.Name = "prediction";
+            this.prediction.ReadOnly = true;
+            this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.prediction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // title
+            // 
+            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.title.FillWeight = 14F;
+            this.title.HeaderText = "网站标题";
+            this.title.Name = "title";
+            this.title.ReadOnly = true;
+            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // screenShot
+            // 
+            this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.screenShot.FillWeight = 10F;
+            this.screenShot.HeaderText = "网站截图";
+            this.screenShot.Name = "screenShot";
+            this.screenShot.ReadOnly = true;
+            this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // webContent
+            // 
+            this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.webContent.FillWeight = 26F;
+            this.webContent.HeaderText = "网页文本";
+            this.webContent.Name = "webContent";
+            this.webContent.ReadOnly = true;
+            this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.webContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ip
+            // 
+            this.ip.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ip.FillWeight = 12F;
+            this.ip.HeaderText = "ip";
+            this.ip.Name = "ip";
+            this.ip.ReadOnly = true;
+            this.ip.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ipAddress
+            // 
+            this.ipAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ipAddress.FillWeight = 17F;
+            this.ipAddress.HeaderText = "归属地";
+            this.ipAddress.Name = "ipAddress";
+            this.ipAddress.ReadOnly = true;
+            this.ipAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ipAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WFDTaskResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(932, 580);
+            this.ClientSize = new System.Drawing.Size(999, 580);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
