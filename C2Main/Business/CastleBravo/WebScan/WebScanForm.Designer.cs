@@ -402,6 +402,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListView1_ColumnClick);
             // 
             // ID
             // 
@@ -452,7 +453,7 @@
             // 
             this.copyUrl.Name = "copyUrl";
             this.copyUrl.Size = new System.Drawing.Size(136, 22);
-            this.copyUrl.Text = "复制url";
+            this.copyUrl.Text = "复制选中url";
             this.copyUrl.Click += new System.EventHandler(this.CopyUrl_Click);
             // 
             // exportResults
