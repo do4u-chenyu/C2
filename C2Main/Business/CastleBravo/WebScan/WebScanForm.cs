@@ -477,17 +477,21 @@ namespace C2.Business.CastleBravo.WebScan
 
         private void CopyUrl_Click(object sender, EventArgs e)
         {
+            CopyUrls();
+        }
+
+        private void CopyUrls()
+        {
             if (this.listView1.SelectedItems.Count == 0)
-            {
                 return;
-            }
 
             List<string> copyUrls = new List<string>();
-            foreach(ListViewItem lvi in this.listView1.SelectedItems)
+            foreach (ListViewItem lvi in this.listView1.SelectedItems)
                 copyUrls.Add(lvi.SubItems[1].Text);
 
-            Clipboard.SetText(string.Join("\n",copyUrls));
-            MessageBox.Show("复制成功");
+            //顺序反过来会导致剪贴板里面是messagebox内容
+            MessageBox.Show("复制选中url成功");
+            Clipboard.SetDataObject(string.Join("\n", copyUrls));
         }
 
         private void ExportResults_Click(object sender, EventArgs e)
@@ -624,6 +628,12 @@ namespace C2.Business.CastleBravo.WebScan
                     return tempInt;
                 }
             }
+        }
+
+        private void ListView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+                CopyUrls();
         }
     }
 }
