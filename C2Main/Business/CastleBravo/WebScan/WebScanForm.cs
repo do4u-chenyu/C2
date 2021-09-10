@@ -3,6 +3,7 @@ using C2.Business.CastleBravo.WebScan.Model;
 using C2.Business.CastleBravo.WebScan.Tools;
 using C2.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -62,7 +63,7 @@ namespace C2.Business.CastleBravo.WebScan
 
             int dictCount = 0;
 
-            foreach(string dictPath in GetDictByPath(this.dictDirectory))
+            foreach (string dictPath in GetDictByPath(this.dictDirectory))
             {
                 dictCount++;
 
@@ -359,7 +360,7 @@ namespace C2.Business.CastleBravo.WebScan
         {
             ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut, config.keeAlive);
 
-            if(result.code != 0)
+            if (result.code != 0)
             {
                 svinfo.code = result.code;
                 svinfo.ip = tools.GetIP(svinfo.host);
@@ -401,7 +402,7 @@ namespace C2.Business.CastleBravo.WebScan
                 svinfo.powerBy = result.powerBy;
                 svinfo.runTime = result.runTime;
 
-                if(config.ShowCodes.Contains(svinfo.code.ToString()))
+                if (config.ShowCodes.Contains(svinfo.code.ToString()))
                     this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
 
                 //LogInfo("扫描完成-----" + svinfo.url + "-----" + "状态码：" + svinfo.code);
@@ -430,7 +431,7 @@ namespace C2.Business.CastleBravo.WebScan
             {
                 return;
             }
-            
+
             ListViewItem lvi = new ListViewItem(svinfo.id + "");
             lvi.Tag = svinfo.type;
             lvi.SubItems.Add(svinfo.url);
@@ -476,12 +477,21 @@ namespace C2.Business.CastleBravo.WebScan
 
         private void CopyUrl_Click(object sender, EventArgs e)
         {
+            CopyUrls();
+        }
+
+        private void CopyUrls()
+        {
             if (this.listView1.SelectedItems.Count == 0)
-            {
                 return;
-            }
-            Clipboard.SetText(this.listView1.SelectedItems[0].SubItems[1].Text);
-            MessageBox.Show("复制成功");
+
+            List<string> copyUrls = new List<string>();
+            foreach (ListViewItem lvi in this.listView1.SelectedItems)
+                copyUrls.Add(lvi.SubItems[1].Text);
+
+            //顺序反过来会导致剪贴板里面是messagebox内容
+            MessageBox.Show("复制选中url成功");
+            Clipboard.SetDataObject(string.Join("\n", copyUrls));
         }
 
         private void ExportResults_Click(object sender, EventArgs e)
@@ -571,5 +581,59 @@ namespace C2.Business.CastleBravo.WebScan
         }
 
         #endregion
+
+        private void ListView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (listView1.Columns[e.Column].Tag == null)
+            {
+                listView1.Columns[e.Column].Tag = true;
+            }
+            bool tabK = (bool)listView1.Columns[e.Column].Tag;
+            if (tabK)
+            {
+                listView1.Columns[e.Column].Tag = false;
+            }
+            else
+            {
+                listView1.Columns[e.Column].Tag = true;
+            }
+            listView1.ListViewItemSorter = new ListViewSort(e.Column, listView1.Columns[e.Column].Tag);
+            // 指定排序器并传送列索引与升序降序关键字
+            listView1.Sort(); // 对列表进行自定义排序
+        }
+
+        public class ListViewSort : IComparer
+        {
+            private int col;
+            private bool descK;
+
+            public ListViewSort()
+            {
+                col = 0;
+            }
+            public ListViewSort(int column, object Desc)
+            {
+                descK = (bool)Desc;
+                col = column;  // 当前列,0,1,2...,参数由ListView控件的ColumnClick事件传递
+            }
+            public int Compare(object x, object y)
+            {
+                int tempInt = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                if (descK)
+                {
+                    return -tempInt;
+                }
+                else
+                {
+                    return tempInt;
+                }
+            }
+        }
+
+        private void ListView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+                CopyUrls();
+        }
     }
 }

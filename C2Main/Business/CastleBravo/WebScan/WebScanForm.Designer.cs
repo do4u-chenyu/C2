@@ -402,6 +402,8 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListView1_ColumnClick);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListView1_KeyDown);
             // 
             // ID
             // 
@@ -439,26 +441,26 @@
             this.copyUrl,
             this.exportResults});
             this.resultCms.Name = "resultCms";
-            this.resultCms.Size = new System.Drawing.Size(137, 70);
+            this.resultCms.Size = new System.Drawing.Size(140, 70);
             // 
             // openUrl
             // 
             this.openUrl.Name = "openUrl";
-            this.openUrl.Size = new System.Drawing.Size(136, 22);
+            this.openUrl.Size = new System.Drawing.Size(139, 22);
             this.openUrl.Text = "浏览器打开";
             this.openUrl.Click += new System.EventHandler(this.OpenUrl_Click);
             // 
             // copyUrl
             // 
             this.copyUrl.Name = "copyUrl";
-            this.copyUrl.Size = new System.Drawing.Size(136, 22);
-            this.copyUrl.Text = "复制url";
+            this.copyUrl.Size = new System.Drawing.Size(139, 22);
+            this.copyUrl.Text = "复制选中url";
             this.copyUrl.Click += new System.EventHandler(this.CopyUrl_Click);
             // 
             // exportResults
             // 
             this.exportResults.Name = "exportResults";
-            this.exportResults.Size = new System.Drawing.Size(136, 22);
+            this.exportResults.Size = new System.Drawing.Size(139, 22);
             this.exportResults.Text = "导出结果";
             this.exportResults.Click += new System.EventHandler(this.ExportResults_Click);
             // 
