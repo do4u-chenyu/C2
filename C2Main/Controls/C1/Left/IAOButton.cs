@@ -111,7 +111,7 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
                     break;
-                case "InfoExtraction":
+                case "信息抽取":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.InfoExtraction;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.InfoExtractionFormHelpInfo);
                     break;
@@ -167,19 +167,19 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.TibetanDetection;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TibetanDetectionFormHelpInfo);
                     break;
-                case "FaceDetector":
+                case "人脸检测":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceDetector;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceDetectorFormHelpInfo);
                     break;
-                case "FaceBeauty":
+                case "颜值打分":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceBeauty;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceBeautyFormHelpInfo);
                     break;
-                case "FaceExpression":
+                case "表情识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceExpression;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceExpressionFormHelpInfo);
                     break;
-                case "FaceRecognizer":
+                case "人脸识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceRecognizer;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceRecognizerFormHelpInfo);
                     break;
@@ -280,7 +280,7 @@ namespace C2.Controls.Left
                 case "人脸年龄性别识别":
                     new FaceAgeGenderForm().ShowDialog();
                     break;
-                case "InfoExtraction":
+                case "信息抽取":
                     new InfoExtractionForm().ShowDialog();
                     break;
                 case "语种识别":
@@ -322,17 +322,17 @@ namespace C2.Controls.Left
                 case "涉藏图像检测":
                     new TibetanDetectionForm().ShowDialog();
                     break;
-                case "FaceDetector":
+                case "人脸检测":
                     new FaceDetectorForm().ShowDialog();
                     break;
-                case "FaceBeauty":
+                case "颜值打分":
                     new FaceBeautyForm().ShowDialog();
                     break;
 
-                case "FaceExpression":
+                case "表情识别":
                     new FaceExpressionForm().ShowDialog();  
                     break;
-                case "FaceRecognizer":
+                case "人脸识别":
                     new FaceRecognizerForm().ShowDialog();
                     break;
                     

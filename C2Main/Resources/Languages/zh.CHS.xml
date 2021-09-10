@@ -459,7 +459,7 @@
 		<item name="语种识别">(网)语种识别</item>
 		<item name="涉赌文本识别">(网)涉赌文本识别</item>
 		<item name="涉政文本识别">(网)涉政文本识别</item>
-		<item name="InfoExtraction">(网)InfoExtraction</item>
+		<item name="信息抽取">(网)信息抽取</item>
 		<item name="涉黄图像识别">(网)涉黄图像识别</item>
 		<item name="轨迹联通类图像识别">(网)轨迹联通类图像识别</item>
 		<item name="红包转账图像识别">(网)红包转账图像识别</item>
@@ -469,10 +469,10 @@
 		<item name="枪支检测">(网)枪支检测</item>
 		<item name="涉恐图像识别">(网)涉恐图像识别</item>
 		<item name="涉藏图像检测">(网)涉藏图像检测</item>
-		<item name="FaceDetector">(网)FaceDetector</item>
-		<item name="FaceBeauty">(网)FaceBeauty</item>
-		<item name="FaceExpression">(网)FaceExpression</item>
-		<item name="FaceRecognizer">(网)FaceRecognizer</item>
+		<item name="人脸检测">(网)人脸检测</item>
+		<item name="颜值打分">(网)颜值打分</item>
+		<item name="表情识别">(网)表情识别</item>
+		<item name="人脸识别">(网)人脸识别</item>
 		<item name="红头文件识别">(网)红头文件识别</item>
 </words>
 </dictionary>
