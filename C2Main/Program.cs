@@ -82,9 +82,9 @@ namespace C2
         {
             //Regist();
       
-            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021091700000000") > 0)
+            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021101700000000") > 0)
             {
-                MessageBox.Show("产品可用时间截止到2021年9月17号");
+                MessageBox.Show("产品可用时间截止到2021年10月17号");
                 return;
             }
             #region

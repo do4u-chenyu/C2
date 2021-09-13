@@ -200,7 +200,7 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FaceRecognizerForm";
-            this.Text = "FaceRecognizer人脸识别编码生成";
+            this.Text = "人脸识别编码生成";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

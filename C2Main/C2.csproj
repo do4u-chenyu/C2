@@ -262,6 +262,12 @@
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\RobotsScan\MainWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\RobotsScan\MainWin.Designer.cs">
+      <DependentUpon>MainWin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebScan\Model\HttpRequest.cs" />
     <Compile Include="Business\CastleBravo\WebScan\Model\ServerInfo.cs" />
     <Compile Include="Business\CastleBravo\WebScan\Tools\Config.cs" />
@@ -1928,6 +1934,9 @@
     <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.resx">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\RobotsScan\MainWin.resx">
+      <DependentUpon>MainWin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2918,6 +2927,7 @@
     <None Include="Resources\Images\rotate_left.png" />
     <None Include="Resources\Images\rotate_right.png" />
     <Content Include="Resources\Images\RedPocketRecognition.png" />
+    <Content Include="Resources\Images\Robots.png" />
     <Content Include="Resources\Images\save.png" />
     <None Include="Resources\Images\sidebar.png" />
     <None Include="Resources\Images\sort.png" />
@@ -3608,6 +3618,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\tab_button.png" />
+    <None Include="Resources\Robots.png" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

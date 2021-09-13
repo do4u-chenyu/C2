@@ -62,7 +62,7 @@
             this.HITab.Padding = new System.Windows.Forms.Padding(3);
             this.HITab.Size = new System.Drawing.Size(772, 337);
             this.HITab.TabIndex = 0;
-            this.HITab.Text = "HI-BankCardRecognition";
+            this.HITab.Text = "HI-CardRecognition";
             this.HITab.UseVisualStyleBackColor = true;
             // 
             // filePathTextBox
@@ -203,7 +203,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FaceAgeGenderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "人脸年龄性别识别";
+            this.Text = "卡证识别";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.HITab.ResumeLayout(false);
             this.HITab.PerformLayout();
