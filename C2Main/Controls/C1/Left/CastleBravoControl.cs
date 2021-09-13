@@ -1,5 +1,6 @@
 ﻿using C2.Business.CastleBravo;
 using C2.Business.CastleBravo.PwdGenerator;
+using C2.Business.CastleBravo.RobotsScan;
 using C2.Business.CastleBravo.WebScan;
 using C2.Business.Cracker.Dialogs;
 using C2.Business.Model;
@@ -192,6 +193,9 @@ namespace C2.Controls.C1.Left
                         break;
                     case "WebScan":
                         new WebScanForm().ShowDialog();
+                        break;
+                    case "RobotsScan":
+                        new RobotsScan().ShowDialog();
                         break;
                 }
             }
