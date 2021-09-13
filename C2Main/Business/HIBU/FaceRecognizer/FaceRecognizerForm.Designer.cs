@@ -53,7 +53,7 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(826, 378);
+            this.tabControl1.Size = new System.Drawing.Size(826, 392);
             this.tabControl1.TabIndex = 10003;
             // 
             // tabPage1
@@ -69,7 +69,7 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(818, 348);
+            this.tabPage1.Size = new System.Drawing.Size(818, 362);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "HI-FaceRecognizer";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -81,9 +81,9 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.label3.Location = new System.Drawing.Point(82, 33);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.Size = new System.Drawing.Size(334, 19);
             this.label3.TabIndex = 10027;
-            this.label3.Text = "支持识别单个图片或一个目录里所有图片的人脸表情";
+            this.label3.Text = "支持生成单个图片或一个目录里所有图片的人脸识别编码";
             // 
             // label1
             // 
@@ -109,7 +109,7 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(723, 283);
+            this.dataGridView1.Size = new System.Drawing.Size(723, 297);
             this.dataGridView1.TabIndex = 10025;
             // 
             // picName
@@ -139,11 +139,11 @@ namespace C2.Business.HIBU.FaceRecognizer
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(667, 5);
+            this.folderBtn.Location = new System.Drawing.Point(647, 5);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(42, 26);
+            this.folderBtn.Size = new System.Drawing.Size(83, 26);
             this.folderBtn.TabIndex = 10026;
-            this.folderBtn.Text = "批量";
+            this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -175,18 +175,18 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.filePathTextBox.Location = new System.Drawing.Point(83, 4);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(479, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(463, 26);
             this.filePathTextBox.TabIndex = 10020;
             // 
             // browserBtn
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(599, 5);
+            this.browserBtn.Location = new System.Drawing.Point(577, 5);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(42, 26);
+            this.browserBtn.Size = new System.Drawing.Size(64, 26);
             this.browserBtn.TabIndex = 10023;
-            this.browserBtn.Text = "单张";
+            this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
@@ -194,6 +194,7 @@ namespace C2.Business.HIBU.FaceRecognizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(833, 438);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

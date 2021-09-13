@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.HITab = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.folderBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.transBtn = new System.Windows.Forms.Button();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.browserBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
             this.HITab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -63,6 +63,17 @@
             this.HITab.TabIndex = 0;
             this.HITab.Text = "HI-OCR";
             this.HITab.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
+            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label3.Location = new System.Drawing.Point(79, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.TabIndex = 10011;
+            this.label3.Text = "支持识别单个图片或一个目录里所有图片的文字内容";
             // 
             // label1
             // 
@@ -90,6 +101,22 @@
             this.dataGridView1.Size = new System.Drawing.Size(686, 258);
             this.dataGridView1.TabIndex = 10009;
             // 
+            // picName
+            // 
+            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.picName.FillWeight = 40F;
+            this.picName.HeaderText = "图片路径";
+            this.picName.Name = "picName";
+            this.picName.ReadOnly = true;
+            // 
+            // transContent
+            // 
+            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.transContent.FillWeight = 60F;
+            this.transContent.HeaderText = "识别内容";
+            this.transContent.Name = "transContent";
+            this.transContent.ReadOnly = true;
+            // 
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -97,7 +124,7 @@
             this.folderBtn.Name = "folderBtn";
             this.folderBtn.Size = new System.Drawing.Size(42, 26);
             this.folderBtn.TabIndex = 10010;
-            this.folderBtn.Text = "批量";
+            this.folderBtn.Text = "多图";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -140,7 +167,7 @@
             this.browserBtn.Name = "browserBtn";
             this.browserBtn.Size = new System.Drawing.Size(42, 26);
             this.browserBtn.TabIndex = 10007;
-            this.browserBtn.Text = "单张";
+            this.browserBtn.Text = "单图";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
@@ -153,33 +180,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(780, 367);
             this.tabControl1.TabIndex = 10011;
-            // 
-            // picName
-            // 
-            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.picName.FillWeight = 40F;
-            this.picName.HeaderText = "图片路径";
-            this.picName.Name = "picName";
-            this.picName.ReadOnly = true;
-            // 
-            // transContent
-            // 
-            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.transContent.FillWeight = 60F;
-            this.transContent.HeaderText = "识别内容";
-            this.transContent.Name = "transContent";
-            this.transContent.ReadOnly = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label3.Location = new System.Drawing.Point(79, 46);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
-            this.label3.TabIndex = 10011;
-            this.label3.Text = "支持识别单个图片或一个目录里所有图片的文字内容";
             // 
             // OCRForm
             // 

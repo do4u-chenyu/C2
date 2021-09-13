@@ -34,14 +34,14 @@ namespace C2.Business.HIBU.FaceExpression
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prob = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.folderBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.transBtn = new System.Windows.Forms.Button();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.browserBtn = new System.Windows.Forms.Button();
-            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prob = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -53,7 +53,7 @@ namespace C2.Business.HIBU.FaceExpression
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(824, 387);
+            this.tabControl1.Size = new System.Drawing.Size(824, 401);
             this.tabControl1.TabIndex = 10003;
             // 
             // tabPage1
@@ -69,7 +69,7 @@ namespace C2.Business.HIBU.FaceExpression
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(816, 357);
+            this.tabPage1.Size = new System.Drawing.Size(816, 371);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "HI-FaceExpression";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -109,17 +109,41 @@ namespace C2.Business.HIBU.FaceExpression
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(726, 286);
+            this.dataGridView1.Size = new System.Drawing.Size(726, 303);
             this.dataGridView1.TabIndex = 10017;
+            // 
+            // picName
+            // 
+            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.picName.FillWeight = 30F;
+            this.picName.HeaderText = "图片名";
+            this.picName.Name = "picName";
+            this.picName.ReadOnly = true;
+            // 
+            // transContent
+            // 
+            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.transContent.FillWeight = 30F;
+            this.transContent.HeaderText = "表情类别";
+            this.transContent.Name = "transContent";
+            this.transContent.ReadOnly = true;
+            // 
+            // prob
+            // 
+            this.prob.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.prob.FillWeight = 40F;
+            this.prob.HeaderText = "可靠度";
+            this.prob.Name = "prob";
+            this.prob.ReadOnly = true;
             // 
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(668, 8);
+            this.folderBtn.Location = new System.Drawing.Point(641, 8);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(42, 26);
+            this.folderBtn.Size = new System.Drawing.Size(71, 26);
             this.folderBtn.TabIndex = 10018;
-            this.folderBtn.Text = "批量";
+            this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -151,44 +175,20 @@ namespace C2.Business.HIBU.FaceExpression
             this.filePathTextBox.Location = new System.Drawing.Point(84, 7);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(479, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(457, 26);
             this.filePathTextBox.TabIndex = 10012;
             // 
             // browserBtn
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(600, 8);
+            this.browserBtn.Location = new System.Drawing.Point(557, 8);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(42, 26);
+            this.browserBtn.Size = new System.Drawing.Size(66, 26);
             this.browserBtn.TabIndex = 10015;
-            this.browserBtn.Text = "单张";
+            this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
-            // 
-            // picName
-            // 
-            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.picName.FillWeight = 30F;
-            this.picName.HeaderText = "图片名";
-            this.picName.Name = "picName";
-            this.picName.ReadOnly = true;
-            // 
-            // transContent
-            // 
-            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.transContent.FillWeight = 30F;
-            this.transContent.HeaderText = "表情类别";
-            this.transContent.Name = "transContent";
-            this.transContent.ReadOnly = true;
-            // 
-            // prob
-            // 
-            this.prob.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.prob.FillWeight = 40F;
-            this.prob.HeaderText = "可靠度";
-            this.prob.Name = "prob";
-            this.prob.ReadOnly = true;
             // 
             // FaceExpressionForm
             // 

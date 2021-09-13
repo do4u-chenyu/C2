@@ -10,6 +10,7 @@ using System.Net;
 using System.Web;
 using System.Linq;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace C2.Business.HIBU.InfoExtraction
 {
@@ -25,7 +26,7 @@ namespace C2.Business.HIBU.InfoExtraction
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            InfoExtractionUrl = "http://10.1.126.186:9000/HI_NLP/InformationExtraction";
+            InfoExtractionUrl = "http://218.94.117.234:8970/HI_NLP/InformationExtraction";
         }
 
         private void SingleButton_Click(object sender, EventArgs e)
@@ -59,17 +60,15 @@ namespace C2.Business.HIBU.InfoExtraction
                 List<string> textPathList = GetPicsByPath(textPath);
                 foreach (string singleTextPath in textPathList)
                 {
-                    List<string> contentList = GetFileLines(singleTextPath);
-
-                    for (int i = 0; i < contentList.Count; i++)
+                    List<string> contentPathList = GetFileLines(singleTextPath);
+                    for (int i = 0; i < contentPathList.Count; i++)
                     {
-                        List<string> returnList = StartTask(contentList[i]);
-                        string result1 = returnList[0];
-                        string result2 = returnList[1];
-                        FillDGV(singleTextPath, result1, result2);
+                        string result = StartTask(contentPathList[i]);
+                        FillDGV(singleTextPath, result);
                     }
                 }
             }
+            HelpUtil.ShowMessageBox("信息抽取完成。");
         }
 
         private List<string> GetPicsByPath(string path)
@@ -91,14 +90,13 @@ namespace C2.Business.HIBU.InfoExtraction
 
             return textPathList;
         }
-        public List<string> StartTask(string strContent)
+        public string StartTask(string base64Str)
         {
-            string data1 = string.Empty;
-            string data2 = string.Empty;
+            string data = string.Empty;
             List<string> returnList = new List<string>();
             try
             {
-                Response resp = httpHandler.PostCode(InfoExtractionUrl, "sentence=" + HttpUtility.UrlEncode(strContent), 60000);
+                Response resp = httpHandler.PostCode(InfoExtractionUrl, "sentence= " + HttpUtility.UrlEncode(base64Str), 60000);
 
                 HttpStatusCode statusCode = resp.StatusCode;
                 if (statusCode != HttpStatusCode.OK)
@@ -111,23 +109,68 @@ namespace C2.Business.HIBU.InfoExtraction
                 if (resDict.TryGetValue("status", out string status))
                 {
                     resDict.TryGetValue("results", out string datas);
-                    data1 = status == "200" ? DealData(datas)[0] : datas;
-                    data2 = status == "200" ? DealData(datas)[1] : datas;
+                    data = status == "200" ? DealData(datas) : datas;
                 }
                 else
                 {
-                    data1 = "查询失败! status不存在。";
-                    data2 = "查询失败! status不存在。";
+                    data = "查询失败! status不存在。";
                 }
             }
             catch (Exception e)
             {
-                data1 = "查询失败!" + e.Message;
-                data2 = "查询失败!" + e.Message;
+                data = "查询失败!" + e.Message;
             }
-            returnList.Add(data1);
-            returnList.Add(data2);
-            return returnList;
+            return data;
+        }
+
+        private void FillDGV(string singlePicPath, string result)
+        {
+            DataGridViewRow dr = new DataGridViewRow();
+            DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
+            textCell0.Value = Path.GetFileName(singlePicPath);
+            dr.Cells.Add(textCell0);
+            try
+            {
+                for (int i = 0; i < contentList.Count; i++)
+                {
+                    DataGridViewTextBoxCell textCell = new DataGridViewTextBoxCell();
+                    textCell.Value = listRealData[i];
+                    dr.Cells.Add(textCell);
+                }
+            }
+            catch
+            {
+            }
+            dataGridView1.Rows.Add(dr);
+        }
+        List<String> listRealData = new List<string>();
+        List<string> contentList = new List<string>() { "人名", "地点",  "手机号", "支付宝", "银行卡", "邮箱", "网址", "ip", "QQ号码", "QQ群名", "微信群名", "微信账号", "微信群号", "APP", "机构", "短链接" };
+
+        private string DealData(string data)
+        {
+            List<String> resultList = new List<string>();
+            if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
+                return string.Empty;
+            try
+            {
+                data = "[" + data + "]";
+                JArray ja = (JArray)JsonConvert.DeserializeObject(data);
+                for (int i =0; i < contentList.Count; i++)
+                {
+                    if (ja[0].ToString().Contains(contentList[i]) && ja[0][contentList[i]].ToString() != "[]")
+                    {
+                        string content = ja[0][contentList[i]].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[0].Replace("'", "");
+                        resultList.Add(content);
+                    }
+                    else
+                        resultList.Add(string.Empty);
+                }
+
+                listRealData = listData(resultList);
+            }
+            catch { return "解析出错，可尝试重新识别。"; }
+
+            return string.Join("\n", resultList);
         }
 
         private List<string> GetFileLines(string path)
@@ -164,72 +207,9 @@ namespace C2.Business.HIBU.InfoExtraction
             }
             return contentList;
         }
-        private List<string> DealData(string data)
+        public List<String> listData(List<string> resultList)
         {
-            List<String> resultList = new List<string>();
-
-            if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
-            {
-                resultList.Add(string.Empty);
-                resultList.Add(string.Empty);
-                return resultList;
-            }
-            try
-            {
-                JavaScriptSerializer jss = new JavaScriptSerializer();
-                Dictionary<string, string> json = jss.Deserialize<Dictionary<string, string>>(data);
-                if (json.Count == 0)
-                {
-                    resultList.Add("");
-                    resultList.Add("");
-                    return resultList;
-                }
-
-                List<string> keyList = new List<string>();
-                foreach (string item in json.Keys)
-                {
-                    keyList.Add(item);
-                }
-                for (int i = 0; i < json.Count; i++)
-                {
-                    JArray js = JArray.Parse(json[keyList[i]]);
-                    string joint = string.Empty;
-                    foreach (JValue item in js)
-                    {
-                        joint = joint + item.ToString();
-                    }
-                    resultList.Add(joint);
-                }
-                if (resultList.Count == 1)
-                {
-                    resultList.Add("");
-                }
-            }
-            catch
-            {
-                resultList.Add("解析出错，可尝试重新识别。");
-                resultList.Add("");
-                return resultList;
-            }
             return resultList;
-        }
-        private void FillDGV(string singleTextPath, string result1, string result2)
-        {
-            DataGridViewRow dr = new DataGridViewRow();
-
-            DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
-            textCell0.Value = Path.GetFileName(singleTextPath);
-            dr.Cells.Add(textCell0);
-
-            DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-            textCell1.Value = result1;
-            dr.Cells.Add(textCell1);
-
-            DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-            textCell2.Value = result2;
-            dr.Cells.Add(textCell2);
-
-            dataGridView1.Rows.Add(dr);
         }
 
         protected override bool OnOKButtonClick()
@@ -255,17 +235,33 @@ namespace C2.Business.HIBU.InfoExtraction
 
         private void SaveResultToLocal(string path)
         {
+            string write = string.Empty;
+            for (int i = 0; i < contentList.Count; i++)
+            {
+                write = write + contentList[i]+"\t";
+            }
             StreamWriter sw = new StreamWriter(Path.Combine(path, "信息抽取结果.txt"));
-            sw.Write("文件名" + "\t" + "地址" + "\t" + "姓名" + "\n");
+            sw.Write("文件名" + "\t" + write + "\n");
             try
             {
 
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
-                    if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[2].Value != null)
+                    string cellContent = string.Empty;
+                    for (int i =0; i< row.Cells.Count; i++)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + "\t" + row.Cells[1].Value.ToString() + "\t" + row.Cells[2].Value.ToString() + "\n");
+                        
+                        if (row.Cells[i].Value == null)
+                        {
+                            cellContent = cellContent + "\t";
+                            sw.Close();
+                        }
+                        else
+                        {
+                            cellContent = cellContent + row.Cells[i].Value.ToString() + "\t";
+                        }
                     }
+                   sw.Write(cellContent + "\n");
                 }
                 if (sw != null)
                     sw.Close();

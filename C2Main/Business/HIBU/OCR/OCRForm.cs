@@ -25,7 +25,7 @@ namespace C2.Business.HIBU.OCR
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9000/HI_CV/OCR";
+            OCRUrl = "http://218.94.117.234:8970/HI_CV/OCR";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)

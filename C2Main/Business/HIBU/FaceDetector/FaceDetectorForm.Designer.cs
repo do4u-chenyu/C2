@@ -31,6 +31,7 @@ namespace C2.Business.HIBU.FaceDetector
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,11 +54,12 @@ namespace C2.Business.HIBU.FaceDetector
             this.tabControl1.Location = new System.Drawing.Point(3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(791, 392);
+            this.tabControl1.Size = new System.Drawing.Size(791, 403);
             this.tabControl1.TabIndex = 10003;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.transBtn);
@@ -69,10 +71,21 @@ namespace C2.Business.HIBU.FaceDetector
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(783, 366);
+            this.tabPage1.Size = new System.Drawing.Size(783, 377);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "HI-FaceDetector";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
+            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label3.Location = new System.Drawing.Point(76, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(282, 19);
+            this.label3.TabIndex = 10029;
+            this.label3.Text = "支持单个图片或一个目录里所有图片的人脸检测";
             // 
             // dataGridView1
             // 
@@ -84,19 +97,19 @@ namespace C2.Business.HIBU.FaceDetector
             this.transContent,
             this.landmarks,
             this.confidences});
-            this.dataGridView1.Location = new System.Drawing.Point(79, 57);
+            this.dataGridView1.Location = new System.Drawing.Point(79, 75);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(698, 303);
+            this.dataGridView1.Size = new System.Drawing.Size(698, 299);
             this.dataGridView1.TabIndex = 10014;
             // 
             // picName
             // 
             this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.picName.FillWeight = 20F;
-            this.picName.HeaderText = "图片路径";
+            this.picName.HeaderText = "图片名";
             this.picName.Name = "picName";
             this.picName.ReadOnly = true;
             // 
@@ -104,7 +117,7 @@ namespace C2.Business.HIBU.FaceDetector
             // 
             this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.transContent.FillWeight = 20F;
-            this.transContent.HeaderText = "points";
+            this.transContent.HeaderText = "关键点";
             this.transContent.Name = "transContent";
             this.transContent.ReadOnly = true;
             // 
@@ -112,7 +125,7 @@ namespace C2.Business.HIBU.FaceDetector
             // 
             this.landmarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.landmarks.FillWeight = 40F;
-            this.landmarks.HeaderText = "landmarks";
+            this.landmarks.HeaderText = "人脸位置";
             this.landmarks.Name = "landmarks";
             this.landmarks.ReadOnly = true;
             // 
@@ -120,7 +133,7 @@ namespace C2.Business.HIBU.FaceDetector
             // 
             this.confidences.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.confidences.FillWeight = 20F;
-            this.confidences.HeaderText = "confidences";
+            this.confidences.HeaderText = "可靠度";
             this.confidences.Name = "confidences";
             this.confidences.ReadOnly = true;
             // 
@@ -128,7 +141,7 @@ namespace C2.Business.HIBU.FaceDetector
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 57);
+            this.label2.Location = new System.Drawing.Point(3, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 20);
             this.label2.TabIndex = 10013;
@@ -148,11 +161,11 @@ namespace C2.Business.HIBU.FaceDetector
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(636, 15);
+            this.folderBtn.Location = new System.Drawing.Point(612, 15);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(42, 26);
+            this.folderBtn.Size = new System.Drawing.Size(75, 26);
             this.folderBtn.TabIndex = 10011;
-            this.folderBtn.Text = "批量";
+            this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -160,11 +173,11 @@ namespace C2.Business.HIBU.FaceDetector
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(557, 15);
+            this.browserBtn.Location = new System.Drawing.Point(535, 14);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(42, 26);
+            this.browserBtn.Size = new System.Drawing.Size(71, 26);
             this.browserBtn.TabIndex = 10008;
-            this.browserBtn.Text = "单张";
+            this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
@@ -175,7 +188,7 @@ namespace C2.Business.HIBU.FaceDetector
             this.filePathTextBox.Location = new System.Drawing.Point(80, 14);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(460, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(430, 26);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // label1
@@ -217,6 +230,7 @@ namespace C2.Business.HIBU.FaceDetector
         private System.Windows.Forms.Button transBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn picName;
         private System.Windows.Forms.DataGridViewTextBoxColumn transContent;
         private System.Windows.Forms.DataGridViewTextBoxColumn landmarks;

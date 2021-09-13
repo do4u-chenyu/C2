@@ -27,7 +27,7 @@ namespace C2.Business.HIBU.FaceDetector
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            FaceDetectorUrl = "http://10.1.126.186:9001/HI_CV/FaceDetector";
+            FaceDetectorUrl = "http://218.94.117.234:8970/HI_CV/FaceDetector";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
