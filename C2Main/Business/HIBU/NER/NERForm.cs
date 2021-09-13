@@ -28,7 +28,7 @@ namespace C2.Business.HIBU.NER
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9000/HI_NLP/NER";
+            OCRUrl = "http://218.94.117.234:8970/HI_NLP/NER";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace C2.Business.HIBU.NER
 
             using (FileStream filestream = new FileStream(singlePicPath, FileMode.Open))
             {
-                StreamReader read = new StreamReader(filestream, Encoding.Default);
+                StreamReader read = new StreamReader(filestream,Encoding.UTF8);
                 base64Str = read.ReadLine();
             }
 
@@ -143,18 +143,35 @@ namespace C2.Business.HIBU.NER
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
+            if (result == "解析出错，可尝试重新识别。")
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
+                dr.Cells.Add(textCell1);
 
-            DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-            textCell1.Value = listRealData[0];
-            dr.Cells.Add(textCell1);
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = String.Empty;
+                dr.Cells.Add(textCell2);
 
-            DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-            textCell2.Value = listRealData[1];
-            dr.Cells.Add(textCell2);
+                DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
+                textCell3.Value = String.Empty;
+                dr.Cells.Add(textCell3);
+            }
+            else
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = listRealData[0];
+                dr.Cells.Add(textCell1);
 
-            DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
-            textCell3.Value = listRealData[2];
-            dr.Cells.Add(textCell3);
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = listRealData[1];
+                dr.Cells.Add(textCell2);
+
+                DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
+                textCell3.Value = listRealData[2];
+                dr.Cells.Add(textCell3);
+            }
+            
 
             dataGridView1.Rows.Add(dr);
             
@@ -198,9 +215,11 @@ namespace C2.Business.HIBU.NER
                 return false;
             }
 
-            var dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "命名实体识别结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
-            
+
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 

@@ -209,9 +209,9 @@ namespace C2.Business.HIBU.InfoExtraction
             this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.label3.Location = new System.Drawing.Point(82, 41);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.Size = new System.Drawing.Size(457, 19);
             this.label3.TabIndex = 10027;
-            this.label3.Text = "支持抽取单个文本或一个目录里所有文件的目标信息";
+            this.label3.Text = "支持抽取单个文本或一个目录里所有文件的目标信息，仅支持utf-8格式的文本";
             // 
             // label1
             // 

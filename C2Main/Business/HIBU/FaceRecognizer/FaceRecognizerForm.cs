@@ -203,13 +203,16 @@ namespace C2.Business.HIBU.FaceRecognizer
                 return false;
             }
 
-            var dialog = new FolderBrowserDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "人脸识别编码生成结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
             using (GuarderUtil.WaitCursor)
             {
-                SaveResultToLocal(dialog.SelectedPath);
+                SaveResultToLocal(dialog.FileName);
             }
             HelpUtil.ShowMessageBox("保存完毕。");
 
@@ -218,7 +221,7 @@ namespace C2.Business.HIBU.FaceRecognizer
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸识别编码生成结果.txt"));
+            StreamWriter sw = new StreamWriter(path, true);
             sw.Write("图片名" + "\t" + "编码" + "\t" + "注意事项" + "\n");
             try
             {

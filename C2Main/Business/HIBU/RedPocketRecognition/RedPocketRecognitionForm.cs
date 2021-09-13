@@ -27,7 +27,7 @@ namespace C2.Business.HIBU.RedPocketRecognition
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9001/HI_CV/RedPocketRecognition";
+            OCRUrl = "http://218.94.117.234:8970/HI_CV/RedPocketRecognition";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -137,7 +137,17 @@ namespace C2.Business.HIBU.RedPocketRecognition
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
-            try
+            if (result == "解析出错，可尝试重新识别。")
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
+                dr.Cells.Add(textCell1);
+
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = String.Empty;
+                dr.Cells.Add(textCell2);
+            }
+            else
             {
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
                 textCell1.Value = listRealData[0];
@@ -146,9 +156,6 @@ namespace C2.Business.HIBU.RedPocketRecognition
                 DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
                 textCell2.Value = listRealData[1];
                 dr.Cells.Add(textCell2);
-            }
-            catch
-            {
             }
             dataGridView1.Rows.Add(dr);
         }
@@ -185,7 +192,9 @@ namespace C2.Business.HIBU.RedPocketRecognition
                 HelpUtil.ShowMessageBox("结果为空，无法保存。");
                 return false;
             }
-            var dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "红包转账图像识别结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)

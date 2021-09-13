@@ -220,13 +220,16 @@ namespace C2.Business.HIBU.InfoExtraction
                 return false;
             }
 
-            var dialog = new FolderBrowserDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "文本信息抽取结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
             using (GuarderUtil.WaitCursor)
             {
-                SaveResultToLocal(dialog.SelectedPath);
+                SaveResultToLocal(dialog.FileName);
             }
             HelpUtil.ShowMessageBox("保存完毕。");
 
@@ -240,7 +243,7 @@ namespace C2.Business.HIBU.InfoExtraction
             {
                 write = write + contentList[i]+"\t";
             }
-            StreamWriter sw = new StreamWriter(Path.Combine(path, "信息抽取结果.txt"));
+            StreamWriter sw = new StreamWriter(path, true);
             sw.Write("文件名" + "\t" + write + "\n");
             try
             {

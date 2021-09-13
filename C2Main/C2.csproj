@@ -1961,6 +1961,18 @@
     <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
       <DependentUpon>OCRForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\RedPocketRecognition\RedPocketRecognitionForm.resx">
+      <DependentUpon>RedPocketRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\TerrorismDetection\TerrorismDetectionForm.resx">
+      <DependentUpon>TerrorismDetectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\TibetanDetection\TibetanDetectionForm.resx">
+      <DependentUpon>TibetanDetectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\TrackRecognition\TrackRecognitionForm.resx">
+      <DependentUpon>TrackRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
       <DependentUpon>SettingChartDialog.cs</DependentUpon>
     </EmbeddedResource>

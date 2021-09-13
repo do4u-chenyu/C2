@@ -182,13 +182,15 @@ namespace C2.Business.HIBU.FaceBeauty
                 return false;
             }
 
-            var dialog = new FolderBrowserDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "人脸识别颜值判别结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
             using (GuarderUtil.WaitCursor)
             {
-                SaveResultToLocal(dialog.SelectedPath);
+                SaveResultToLocal(dialog.FileName);
             }
             HelpUtil.ShowMessageBox("保存完毕。");
 
@@ -197,7 +199,7 @@ namespace C2.Business.HIBU.FaceBeauty
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸颜值得分判别结果.txt"));
+            StreamWriter sw = new StreamWriter(path, true);
             sw.Write("图片名" + "\t" + "颜值得分" + "\n");
             try
             {
