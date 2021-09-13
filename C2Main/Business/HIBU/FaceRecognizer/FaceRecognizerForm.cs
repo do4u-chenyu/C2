@@ -174,7 +174,7 @@ namespace C2.Business.HIBU.FaceRecognizer
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
                 if (ja[0]["embeddings"].ToString() != "[]")
                 {
-                    embeddings = ja[0]["embeddings"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    embeddings = ja[0]["embeddings"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("'", "");
                 }
                 if (ja[0]["_notice"].ToString() != "")
                 {

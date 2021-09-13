@@ -180,11 +180,11 @@ namespace C2.Business.HIBU.FaceDetector
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
                 if (ja[0]["points"].ToString() != "[]")
                 {
-                    points = ja[0]["points"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    points = ja[0]["points"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("'", "");
                 }
                 if (ja[0]["landmarks"].ToString() != "[]")
                 {
-                    landmarks = ja[0]["landmarks"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    landmarks = ja[0]["landmarks"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("'", "");
                 }
                 if (ja[0]["confidences"].ToString() != "[]")
                 {
@@ -231,7 +231,7 @@ namespace C2.Business.HIBU.FaceDetector
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸检测结果.txt"));
-            sw.Write("图片名" + "\t" + "points" + "\t" + "landmarks" + "\t" + "confidences" + "\n");
+            sw.Write("图片名" + "\t" + "关键点" + "\t" + "人脸位置" + "\t" + "可靠度" + "\n");
             try
             {
 
