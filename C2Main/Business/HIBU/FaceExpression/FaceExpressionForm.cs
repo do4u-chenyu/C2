@@ -27,7 +27,7 @@ namespace C2.Business.HIBU.FaceExpression
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            FaceExpressionUrl = "http://10.1.126.186:9000/HI_CV/FaceExpression";
+            FaceExpressionUrl = "http://218.94.117.234:8970/HI_CV/FaceExpression";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)

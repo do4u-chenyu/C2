@@ -26,7 +26,7 @@ namespace C2.Business.HIBU.FaceRecognizer
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            FaceRecognizerUrl = "http://10.1.126.186:9000/HI_CV/FaceRecognizer";
+            FaceRecognizerUrl = "http://218.94.117.234:8970/HI_CV/FaceRecognizer";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -174,7 +174,7 @@ namespace C2.Business.HIBU.FaceRecognizer
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
                 if (ja[0]["embeddings"].ToString() != "[]")
                 {
-                    embeddings = ja[0]["embeddings"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    embeddings = ja[0]["embeddings"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("'", "");
                 }
                 if (ja[0]["_notice"].ToString() != "")
                 {
