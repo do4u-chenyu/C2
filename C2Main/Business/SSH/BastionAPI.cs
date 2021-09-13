@@ -189,8 +189,12 @@ namespace C2.Business.SSH
 
                 if (ret != null)
                 {
-                    ssm.WriteLine(pwd);
-                    log.Info(Shell.Format(pwd));
+                    log.Info(Shell.Format(ret));
+
+                    ssm.WriteLine(pwd);   //输入密码
+                    ssm.Flush();
+                    log.Info(ssm.Read()); //打印登陆界面
+                    
                     return ret;
                 }
             }
