@@ -60,7 +60,7 @@ namespace C2
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
-            this.HIBUControl = new C2.Controls.Left.IAOLabControl("HI部实验室");
+            this.HIBUControl = new C2.Controls.Left.IAOLabControl("HI部实验室（网）");
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
