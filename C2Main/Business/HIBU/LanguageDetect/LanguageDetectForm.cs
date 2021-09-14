@@ -67,7 +67,7 @@ namespace C2.Business.HIBU.LanguageDetect
                     FillDGV(singlePicPath, result);
                 }
             }
-            HelpUtil.ShowMessageBox("命名实体识别完成。");
+            HelpUtil.ShowMessageBox("识别完成。");
         }
 
         private List<string> GetPicsByPath(string path)

@@ -91,7 +91,7 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
                     break;
-                case "OCR":
+                case "图片文本识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
                     break;
@@ -155,7 +155,7 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.RedHeaderRecognition;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedHeaderRecognitionFormHelpInfo);
                     break;
-                case "枪支检测":
+                case "涉枪图像检测":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.GunDetection;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GunDetectionFormHelpInfo);
                     break;
@@ -265,7 +265,7 @@ namespace C2.Controls.Left
                 case "BigAPK":
                     BigAPKForm().ShowDialog();
                     break;
-                case "OCR":
+                case "图片文本识别":
                     new OCRForm().ShowDialog();
                     break;
                 case "命名实体识别":
@@ -313,7 +313,7 @@ namespace C2.Controls.Left
                 case "红头文件识别":
                     new RedHeaderRecognitionForm().ShowDialog();
                     break;
-                case "枪支检测":
+                case "涉枪图像检测":
                     new GunDetectionForm().ShowDialog();
                     break;
                 case "涉恐图像识别":
