@@ -85,7 +85,7 @@
             this.browserBtn.Name = "browserBtn";
             this.browserBtn.Size = new System.Drawing.Size(55, 26);
             this.browserBtn.TabIndex = 10007;
-            this.browserBtn.Text = "单文本";
+            this.browserBtn.Text = "单语音";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
@@ -96,7 +96,7 @@
             this.folderBtn.Name = "folderBtn";
             this.folderBtn.Size = new System.Drawing.Size(55, 26);
             this.folderBtn.TabIndex = 10010;
-            this.folderBtn.Text = "多文本";
+            this.folderBtn.Text = "多语音";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 

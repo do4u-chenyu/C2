@@ -27,7 +27,7 @@ namespace C2.Business.HIBU.DrugTextRecognition
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9001/HI_NLP/DrugTextRecognition";
+            OCRUrl = "http://218.94.117.234:8970/HI_NLP/DrugTextRecognition";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -184,6 +184,8 @@ namespace C2.Business.HIBU.DrugTextRecognition
                 return false;
             }
             var dialog = new OpenFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "涉赌文本识别" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)
