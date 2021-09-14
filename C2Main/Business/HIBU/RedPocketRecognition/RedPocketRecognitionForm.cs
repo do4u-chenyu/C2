@@ -137,7 +137,7 @@ namespace C2.Business.HIBU.RedPocketRecognition
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
-            if (result == "解析出错，可尝试重新识别。")
+            if (result == "解析出错，可尝试重新识别。" || result == "FAILED, Image size too large(over 2048).")
             {
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
                 textCell1.Value = String.Empty;

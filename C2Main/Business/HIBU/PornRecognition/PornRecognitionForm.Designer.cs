@@ -156,7 +156,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(308, 19);
             this.label3.TabIndex = 10011;
-            this.label3.Text = "支持识别单张图片或一个目录里所有图片的内容";
+            this.label3.Text = "支持识别单张图片或一个目录里所有图片";
             // 
             // tabControl1
             // 
