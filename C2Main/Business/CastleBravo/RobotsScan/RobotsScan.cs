@@ -27,7 +27,7 @@ namespace C2.Business.CastleBravo.RobotsScan
         //读取json文件
         public static JObject Readjson()
         {
-            string jsonfile = "C://Users//FH//Desktop//Robots.json"; //JSON文件路径
+            string jsonfile = Path.Combine(Application.StartupPath, "Resources/Templates/WebRobots.json"); //JSON文件路径
 
             using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
             {

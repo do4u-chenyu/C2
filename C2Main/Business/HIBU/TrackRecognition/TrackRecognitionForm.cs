@@ -27,14 +27,14 @@ namespace C2.Business.HIBU.TrackRecognition
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9001/HI_CV/TrackRecognition";
+            OCRUrl = "http://218.94.117.234:8970/HI_CV/TrackRecognition";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -67,7 +67,7 @@ namespace C2.Business.HIBU.TrackRecognition
                     FillDGV(singlePicPath, result);
                 }
             }
-            HelpUtil.ShowMessageBox("命名实体识别完成。");
+            HelpUtil.ShowMessageBox("轨迹通联类图像识别完成。");
         }
 
         private List<string> GetPicsByPath(string path)
@@ -137,7 +137,17 @@ namespace C2.Business.HIBU.TrackRecognition
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
-            try
+            if (result == "解析出错，可尝试重新识别。")
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
+                dr.Cells.Add(textCell1);
+
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = String.Empty;
+                dr.Cells.Add(textCell2);
+            }
+            else
             {
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
                 textCell1.Value = listRealData[0];
@@ -147,9 +157,7 @@ namespace C2.Business.HIBU.TrackRecognition
                 textCell2.Value = listRealData[1];
                 dr.Cells.Add(textCell2);
             }
-            catch
-            {
-            }
+            
             dataGridView1.Rows.Add(dr);
         }
 
@@ -185,7 +193,9 @@ namespace C2.Business.HIBU.TrackRecognition
                 HelpUtil.ShowMessageBox("结果为空，无法保存。");
                 return false;
             }
-            var dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "轨迹通联类图像识别结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)

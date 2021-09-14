@@ -24,7 +24,7 @@ namespace C2.Business.HIBU.ASR
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9001/HI_AUDIO/ASR";
+            OCRUrl = "http://218.94.117.234:8970/HI_AUDIO/ASR";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
@@ -169,7 +169,10 @@ namespace C2.Business.HIBU.ASR
                 HelpUtil.ShowMessageBox("结果为空，无法保存。");
                 return false;
             }
-            var dialog = new OpenFileDialog();
+  
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "语音转文本" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)

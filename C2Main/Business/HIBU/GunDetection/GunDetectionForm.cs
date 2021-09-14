@@ -28,14 +28,14 @@ namespace C2.Business.HIBU.GunDetection
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9001/HI_CV/GunDetection";
+            OCRUrl = "http://218.94.117.234:8970/HI_CV/GunDetection";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -142,19 +142,30 @@ namespace C2.Business.HIBU.GunDetection
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
 
-            DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-            textCell1.Value = listRealData[0];
-            dr.Cells.Add(textCell1);
-
-            DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-            textCell2.Value = listRealData[1];
-            dr.Cells.Add(textCell2);
-
-            DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
-            textCell3.Value = listRealData[2];
-            dr.Cells.Add(textCell3);
-            
-
+            if (result == "解析出错，可尝试重新识别。")
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
+                dr.Cells.Add(textCell1);
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = String.Empty;
+                dr.Cells.Add(textCell2);
+                DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
+                textCell3.Value = String.Empty;
+                dr.Cells.Add(textCell3);
+            }
+            else
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = listRealData[0];
+                dr.Cells.Add(textCell1);
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = listRealData[1];
+                dr.Cells.Add(textCell2);
+                DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
+                textCell3.Value = listRealData[2];
+                dr.Cells.Add(textCell3);
+            }
             dataGridView1.Rows.Add(dr);
 
         }
@@ -170,7 +181,8 @@ namespace C2.Business.HIBU.GunDetection
                 data = data.ToString().Replace(@"\","").Replace(@"""", "").Replace("'[","[").Replace("]'", "]");
                 data = "[" + data + "]";
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                string boxes = ja[0]["boxes"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string box = ja[0]["boxes"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string boxes = box =="[]" ?string.Empty:box;
                 string confidence = ja[0]["confidence"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
                 string categories = ja[0]["categories"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
                 resultList.Add(boxes);
@@ -196,7 +208,9 @@ namespace C2.Business.HIBU.GunDetection
                 return false;
             }
 
-            var dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "枪支检测" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)
@@ -207,7 +221,6 @@ namespace C2.Business.HIBU.GunDetection
                 SaveResultToLocal(dialog.FileName);
             }
 
-
             HelpUtil.ShowMessageBox("保存完毕。");
 
             return false;
@@ -216,7 +229,7 @@ namespace C2.Business.HIBU.GunDetection
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "boxes" + " " + "准确率" + " " + "种类" + "\r\n");
+            sw.Write("文件名称" + " " + "图片位置" + " " + "准确率" + " " + "种类" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)

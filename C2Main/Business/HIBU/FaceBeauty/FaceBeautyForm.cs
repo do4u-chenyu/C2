@@ -34,7 +34,7 @@ namespace C2.Business.HIBU.FaceBeauty
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -148,10 +148,18 @@ namespace C2.Business.HIBU.FaceBeauty
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
 
-            DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-            textCell1.Value = result;
-            dr.Cells.Add(textCell1);
-
+            if (result == "解析出错，可尝试重新识别。")
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
+                dr.Cells.Add(textCell1);
+            }
+            else
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = result;
+                dr.Cells.Add(textCell1);
+            }
             dataGridView1.Rows.Add(dr);
         }
 
@@ -182,13 +190,15 @@ namespace C2.Business.HIBU.FaceBeauty
                 return false;
             }
 
-            var dialog = new FolderBrowserDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "人脸识别颜值判别结果" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
             using (GuarderUtil.WaitCursor)
             {
-                SaveResultToLocal(dialog.SelectedPath);
+                SaveResultToLocal(dialog.FileName);
             }
             HelpUtil.ShowMessageBox("保存完毕。");
 
@@ -197,7 +207,7 @@ namespace C2.Business.HIBU.FaceBeauty
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(Path.Combine(path, "人脸颜值得分判别结果.txt"));
+            StreamWriter sw = new StreamWriter(path, true);
             sw.Write("图片名" + "\t" + "颜值得分" + "\n");
             try
             {

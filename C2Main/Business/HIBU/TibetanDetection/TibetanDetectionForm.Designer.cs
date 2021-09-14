@@ -34,15 +34,15 @@
             this.folderBtn = new System.Windows.Forms.Button();
             this.transBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.organizationContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.personContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.地址 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.organizationContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.personContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HITab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -74,29 +74,29 @@
             this.filePathTextBox.Location = new System.Drawing.Point(80, 17);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(460, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(429, 26);
             this.filePathTextBox.TabIndex = 10003;
             // 
             // browserBtn
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(557, 17);
+            this.browserBtn.Location = new System.Drawing.Point(528, 17);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(55, 26);
+            this.browserBtn.Size = new System.Drawing.Size(67, 26);
             this.browserBtn.TabIndex = 10007;
-            this.browserBtn.Text = "单文本";
+            this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(620, 17);
+            this.folderBtn.Location = new System.Drawing.Point(608, 17);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(55, 26);
+            this.folderBtn.Size = new System.Drawing.Size(67, 26);
             this.folderBtn.TabIndex = 10010;
-            this.folderBtn.Text = "多文本";
+            this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -120,8 +120,7 @@
             this.picName,
             this.addressContent,
             this.organizationContent,
-            this.personContent
-            });
+            this.personContent});
             this.dataGridView1.Location = new System.Drawing.Point(80, 75);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -130,52 +129,11 @@
             this.dataGridView1.Size = new System.Drawing.Size(686, 258);
             this.dataGridView1.TabIndex = 10009;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
-            this.label1.TabIndex = 10004;
-            this.label1.Text = "文件路径:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(7, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 20);
-            this.label2.TabIndex = 10005;
-            this.label2.Text = "识别结果:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label3.Location = new System.Drawing.Point(82, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
-            this.label3.TabIndex = 10011;
-            this.label3.Text = "支持识别单个文件或一个目录里所有文件的文字内容";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.HITab);
-            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl1.Location = new System.Drawing.Point(4, 5);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(780, 367);
-            this.tabControl1.TabIndex = 10011;
-            // 
             // picName
             // 
             this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.picName.FillWeight = 40F;
-            this.picName.HeaderText = "文件路径";
+            this.picName.HeaderText = "图片路径";
             this.picName.Name = "picName";
             this.picName.ReadOnly = true;
             // 
@@ -203,7 +161,52 @@
             this.personContent.Name = "personContent";
             this.personContent.ReadOnly = true;
             // 
-            // NERForm
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.TabIndex = 10004;
+            this.label1.Text = "图片路径:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(7, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 20);
+            this.label2.TabIndex = 10005;
+            this.label2.Text = "识别结果:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
+            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label3.Location = new System.Drawing.Point(82, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.TabIndex = 10011;
+            this.label3.Text = "支持识别单个图片或一个目录里所有图片的涉藏信息";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.HITab);
+            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabControl1.Location = new System.Drawing.Point(4, 5);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(780, 367);
+            this.tabControl1.TabIndex = 10011;
+            // 
+            // 地址
+            // 
+            this.地址.Name = "地址";
+            // 
+            // TibetanDetectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -212,7 +215,7 @@
             this.ClientSize = new System.Drawing.Size(786, 424);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "NERForm";
+            this.Name = "TibetanDetectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "涉藏图像检测";
             this.Controls.SetChildIndex(this.tabControl1, 0);
@@ -235,10 +238,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn picName;
         private System.Windows.Forms.DataGridViewTextBoxColumn 地址;
-        private System.Windows.Forms.DataGridViewTextBoxColumn organizationContent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn picName;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressContent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn organizationContent;
         private System.Windows.Forms.DataGridViewTextBoxColumn personContent;
     }
 }

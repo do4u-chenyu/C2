@@ -83,7 +83,7 @@
             this.browserBtn.Name = "browserBtn";
             this.browserBtn.Size = new System.Drawing.Size(55, 26);
             this.browserBtn.TabIndex = 10007;
-            this.browserBtn.Text = "单文本";
+            this.browserBtn.Text = "单图";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
@@ -94,7 +94,7 @@
             this.folderBtn.Name = "folderBtn";
             this.folderBtn.Size = new System.Drawing.Size(55, 26);
             this.folderBtn.TabIndex = 10010;
-            this.folderBtn.Text = "多文本";
+            this.folderBtn.Text = "多图";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -156,7 +156,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(308, 19);
             this.label3.TabIndex = 10011;
-            this.label3.Text = "支持识别单个文件或一个目录里所有文件的内容";
+            this.label3.Text = "支持识别单张图片或一个目录里的所有图片";
             // 
             // tabControl1
             // 

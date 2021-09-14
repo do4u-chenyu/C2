@@ -27,14 +27,14 @@ namespace C2.Business.HIBU.CardRecognition
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9001/HI_CV/CardRecognition";
+            OCRUrl = "http://218.94.117.234:8970/HI_CV/CardRecognition";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -186,6 +186,8 @@ namespace C2.Business.HIBU.CardRecognition
                 return false;
             }
             var dialog = new OpenFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "卡证识别" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)
