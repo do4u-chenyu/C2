@@ -107,11 +107,15 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.Controls.Add(this.resultBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "RobotsScan";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Robots模板匹配";
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.resultBox, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.inputBox, 0);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
