@@ -192,7 +192,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "OCRForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OCR文字识别";
+            this.Text = "光学文本识别";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.HITab.ResumeLayout(false);
             this.HITab.PerformLayout();
