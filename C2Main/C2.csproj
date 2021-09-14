@@ -1961,6 +1961,15 @@
     <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
       <DependentUpon>OCRForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\QRCodeRecognition\QRCodeRecognitionForm.resx">
+      <DependentUpon>QRCodeRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\QRCode\QRCodeForm.resx">
+      <DependentUpon>QRCodeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\RedHeaderRecognition\RedHeaderRecognitionForm.resx">
+      <DependentUpon>RedHeaderRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\RedPocketRecognition\RedPocketRecognitionForm.resx">
       <DependentUpon>RedPocketRecognitionForm.cs</DependentUpon>
     </EmbeddedResource>

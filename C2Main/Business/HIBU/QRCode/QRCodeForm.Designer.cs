@@ -71,29 +71,29 @@
             this.filePathTextBox.Location = new System.Drawing.Point(80, 17);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(460, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(432, 26);
             this.filePathTextBox.TabIndex = 10003;
             // 
             // browserBtn
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(557, 17);
+            this.browserBtn.Location = new System.Drawing.Point(533, 17);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(55, 26);
+            this.browserBtn.Size = new System.Drawing.Size(67, 26);
             this.browserBtn.TabIndex = 10007;
-            this.browserBtn.Text = "单文本";
+            this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(620, 17);
+            this.folderBtn.Location = new System.Drawing.Point(608, 17);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(55, 26);
+            this.folderBtn.Size = new System.Drawing.Size(67, 26);
             this.folderBtn.TabIndex = 10010;
-            this.folderBtn.Text = "多文本";
+            this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
             this.folderBtn.Click += new System.EventHandler(this.FolderBtn_Click);
             // 
@@ -115,8 +115,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.picName,
-            this.recogniseContent,
-            });
+            this.recogniseContent});
             this.dataGridView1.Location = new System.Drawing.Point(80, 75);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -133,7 +132,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 10004;
-            this.label1.Text = "文件路径:";
+            this.label1.Text = "图片路径:";
             // 
             // label2
             // 
@@ -152,9 +151,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.label3.Location = new System.Drawing.Point(82, 49);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.Size = new System.Drawing.Size(386, 19);
             this.label3.TabIndex = 10011;
-            this.label3.Text = "支持识别单个语音文件或一个目录里所有语音文件的内容";
+            this.label3.Text = "支持单个图片文件或一个目录里所有图片文件的二维码识别与解析";
             // 
             // tabControl1
             // 
@@ -170,7 +169,7 @@
             // 
             this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.picName.FillWeight = 40F;
-            this.picName.HeaderText = "文件路径";
+            this.picName.HeaderText = "图片名";
             this.picName.Name = "picName";
             this.picName.ReadOnly = true;
             // 
@@ -182,7 +181,7 @@
             this.recogniseContent.Name = "recogniseContent";
             this.recogniseContent.ReadOnly = true;
             // 
-            // NERForm
+            // QRCodeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +192,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "QRCodeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "二维码识别";
+            this.Text = "二维码识别与解析";
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.HITab.ResumeLayout(false);
             this.HITab.PerformLayout();

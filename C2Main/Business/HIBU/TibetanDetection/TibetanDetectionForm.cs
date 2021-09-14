@@ -35,7 +35,7 @@ namespace C2.Business.HIBU.TibetanDetection
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -68,7 +68,7 @@ namespace C2.Business.HIBU.TibetanDetection
                     FillDGV(singlePicPath, result);
                 }
             }
-            HelpUtil.ShowMessageBox("命名实体识别完成。");
+            HelpUtil.ShowMessageBox("涉藏图片识别完成。");
         }
 
         private List<string> GetPicsByPath(string path)
