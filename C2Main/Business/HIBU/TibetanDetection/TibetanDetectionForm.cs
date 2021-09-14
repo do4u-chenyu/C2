@@ -185,6 +185,8 @@ namespace C2.Business.HIBU.TibetanDetection
                 data = "[" + data + "]";
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
                 string boxes = ja[0]["boxes"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                if (boxes == "[]")
+                    boxes = "";
                 string confidence = ja[0]["confidence"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
                 string categories = ja[0]["categories"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
                 resultList.Add(boxes);
