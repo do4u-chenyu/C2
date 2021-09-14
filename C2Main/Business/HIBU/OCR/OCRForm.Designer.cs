@@ -156,7 +156,7 @@
             this.filePathTextBox.Location = new System.Drawing.Point(80, 17);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(436, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(460, 26);
             this.filePathTextBox.TabIndex = 10003;
             // 
             // browserBtn
