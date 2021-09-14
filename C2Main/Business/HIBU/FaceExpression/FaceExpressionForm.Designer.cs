@@ -34,14 +34,14 @@ namespace C2.Business.HIBU.FaceExpression
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prob = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.folderBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.transBtn = new System.Windows.Forms.Button();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.browserBtn = new System.Windows.Forms.Button();
+            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prob = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -112,30 +112,6 @@ namespace C2.Business.HIBU.FaceExpression
             this.dataGridView1.Size = new System.Drawing.Size(726, 303);
             this.dataGridView1.TabIndex = 10017;
             // 
-            // picName
-            // 
-            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.picName.FillWeight = 30F;
-            this.picName.HeaderText = "图片名";
-            this.picName.Name = "picName";
-            this.picName.ReadOnly = true;
-            // 
-            // transContent
-            // 
-            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.transContent.FillWeight = 30F;
-            this.transContent.HeaderText = "表情类别";
-            this.transContent.Name = "transContent";
-            this.transContent.ReadOnly = true;
-            // 
-            // prob
-            // 
-            this.prob.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.prob.FillWeight = 40F;
-            this.prob.HeaderText = "可靠度";
-            this.prob.Name = "prob";
-            this.prob.ReadOnly = true;
-            // 
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -190,6 +166,30 @@ namespace C2.Business.HIBU.FaceExpression
             this.browserBtn.UseVisualStyleBackColor = false;
             this.browserBtn.Click += new System.EventHandler(this.BrowserBtn_Click);
             // 
+            // picName
+            // 
+            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.picName.FillWeight = 30F;
+            this.picName.HeaderText = "图片名";
+            this.picName.Name = "picName";
+            this.picName.ReadOnly = true;
+            // 
+            // transContent
+            // 
+            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.transContent.FillWeight = 30F;
+            this.transContent.HeaderText = "表情类别";
+            this.transContent.Name = "transContent";
+            this.transContent.ReadOnly = true;
+            // 
+            // prob
+            // 
+            this.prob.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.prob.FillWeight = 40F;
+            this.prob.HeaderText = "准确率";
+            this.prob.Name = "prob";
+            this.prob.ReadOnly = true;
+            // 
             // FaceExpressionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -198,6 +198,7 @@ namespace C2.Business.HIBU.FaceExpression
             this.ClientSize = new System.Drawing.Size(831, 449);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FaceExpressionForm";
             this.Text = "人脸表情识别";

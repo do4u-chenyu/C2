@@ -233,7 +233,7 @@ namespace C2.Business.HIBU.FaceDetector
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("图片名" + "\t" + "关键点" + "\t" + "人脸位置" + "\t" + "可靠度" + "\n");
+            sw.Write("图片名" + "\t" + "关键点" + "\t" + "人脸位置" + "\t" + "准确率" + "\n");
             try
             {
 

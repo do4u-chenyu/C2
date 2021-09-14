@@ -223,7 +223,7 @@ namespace C2.Business.HIBU.FaceExpression
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("图片名" + "\t" + "表情" + "\t" + "可靠度" + "\n");
+            sw.Write("图片名" + "\t" + "表情" + "\t" + "准确率" + "\n");
             try
             {
 

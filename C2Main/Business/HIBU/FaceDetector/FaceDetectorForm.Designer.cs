@@ -33,16 +33,16 @@ namespace C2.Business.HIBU.FaceDetector
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.landmarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.confidences = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.transBtn = new System.Windows.Forms.Button();
             this.folderBtn = new System.Windows.Forms.Button();
             this.browserBtn = new System.Windows.Forms.Button();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.landmarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.confidences = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -104,38 +104,6 @@ namespace C2.Business.HIBU.FaceDetector
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(698, 299);
             this.dataGridView1.TabIndex = 10014;
-            // 
-            // picName
-            // 
-            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.picName.FillWeight = 20F;
-            this.picName.HeaderText = "图片名";
-            this.picName.Name = "picName";
-            this.picName.ReadOnly = true;
-            // 
-            // transContent
-            // 
-            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.transContent.FillWeight = 20F;
-            this.transContent.HeaderText = "关键点";
-            this.transContent.Name = "transContent";
-            this.transContent.ReadOnly = true;
-            // 
-            // landmarks
-            // 
-            this.landmarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.landmarks.FillWeight = 40F;
-            this.landmarks.HeaderText = "人脸位置";
-            this.landmarks.Name = "landmarks";
-            this.landmarks.ReadOnly = true;
-            // 
-            // confidences
-            // 
-            this.confidences.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.confidences.FillWeight = 20F;
-            this.confidences.HeaderText = "可靠度";
-            this.confidences.Name = "confidences";
-            this.confidences.ReadOnly = true;
             // 
             // label2
             // 
@@ -201,6 +169,38 @@ namespace C2.Business.HIBU.FaceDetector
             this.label1.TabIndex = 10005;
             this.label1.Text = "图片路径:";
             // 
+            // picName
+            // 
+            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.picName.FillWeight = 20F;
+            this.picName.HeaderText = "图片名";
+            this.picName.Name = "picName";
+            this.picName.ReadOnly = true;
+            // 
+            // transContent
+            // 
+            this.transContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.transContent.FillWeight = 20F;
+            this.transContent.HeaderText = "关键点";
+            this.transContent.Name = "transContent";
+            this.transContent.ReadOnly = true;
+            // 
+            // landmarks
+            // 
+            this.landmarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.landmarks.FillWeight = 40F;
+            this.landmarks.HeaderText = "人脸位置";
+            this.landmarks.Name = "landmarks";
+            this.landmarks.ReadOnly = true;
+            // 
+            // confidences
+            // 
+            this.confidences.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.confidences.FillWeight = 20F;
+            this.confidences.HeaderText = "准确率";
+            this.confidences.Name = "confidences";
+            this.confidences.ReadOnly = true;
+            // 
             // FaceDetectorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -208,6 +208,7 @@ namespace C2.Business.HIBU.FaceDetector
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FaceDetectorForm";
             this.Text = "人脸检测";
             this.Controls.SetChildIndex(this.tabControl1, 0);

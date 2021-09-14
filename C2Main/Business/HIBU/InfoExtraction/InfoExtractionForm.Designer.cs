@@ -32,6 +32,13 @@ namespace C2.Business.HIBU.InfoExtraction
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.folderButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.extractButton = new System.Windows.Forms.Button();
+            this.textPathTextBox = new System.Windows.Forms.TextBox();
+            this.singleButton = new System.Windows.Forms.Button();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,13 +56,6 @@ namespace C2.Business.HIBU.InfoExtraction
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.folderButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.extractButton = new System.Windows.Forms.Button();
-            this.textPathTextBox = new System.Windows.Forms.TextBox();
-            this.singleButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -117,9 +117,84 @@ namespace C2.Business.HIBU.InfoExtraction
             this.dataGridView1.Size = new System.Drawing.Size(823, 330);
             this.dataGridView1.TabIndex = 10028;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
+            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label3.Location = new System.Drawing.Point(82, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(457, 19);
+            this.label3.TabIndex = 10027;
+            this.label3.Text = "支持抽取单个文本或一个目录里所有文件的目标信息，仅支持utf-8格式的文本";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(7, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 20);
+            this.label1.TabIndex = 10021;
+            this.label1.Text = "文本路径:";
+            // 
+            // folderButton
+            // 
+            this.folderButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.folderButton.Location = new System.Drawing.Point(750, 13);
+            this.folderButton.Name = "folderButton";
+            this.folderButton.Size = new System.Drawing.Size(66, 26);
+            this.folderButton.TabIndex = 10026;
+            this.folderButton.Text = "多文本";
+            this.folderButton.UseVisualStyleBackColor = true;
+            this.folderButton.Click += new System.EventHandler(this.FolderButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(7, 70);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 20);
+            this.label2.TabIndex = 10022;
+            this.label2.Text = "抽取结果:";
+            // 
+            // extractButton
+            // 
+            this.extractButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.extractButton.Location = new System.Drawing.Point(833, 13);
+            this.extractButton.Name = "extractButton";
+            this.extractButton.Size = new System.Drawing.Size(73, 26);
+            this.extractButton.TabIndex = 10024;
+            this.extractButton.Text = "开始抽取";
+            this.extractButton.UseVisualStyleBackColor = true;
+            this.extractButton.Click += new System.EventHandler(this.ExtractButton_Click);
+            // 
+            // textPathTextBox
+            // 
+            this.textPathTextBox.BackColor = System.Drawing.Color.White;
+            this.textPathTextBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textPathTextBox.Location = new System.Drawing.Point(83, 12);
+            this.textPathTextBox.Name = "textPathTextBox";
+            this.textPathTextBox.ReadOnly = true;
+            this.textPathTextBox.Size = new System.Drawing.Size(562, 26);
+            this.textPathTextBox.TabIndex = 10020;
+            // 
+            // singleButton
+            // 
+            this.singleButton.BackColor = System.Drawing.Color.Transparent;
+            this.singleButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.singleButton.Location = new System.Drawing.Point(673, 13);
+            this.singleButton.Name = "singleButton";
+            this.singleButton.Size = new System.Drawing.Size(59, 26);
+            this.singleButton.TabIndex = 10023;
+            this.singleButton.Text = "单文本";
+            this.singleButton.UseVisualStyleBackColor = false;
+            this.singleButton.Click += new System.EventHandler(this.SingleButton_Click);
+            // 
             // Column1
             // 
-            this.Column1.HeaderText = "图片名";
+            this.Column1.HeaderText = "文件名";
             this.Column1.Name = "Column1";
             // 
             // Column2
@@ -201,81 +276,6 @@ namespace C2.Business.HIBU.InfoExtraction
             // 
             this.Column17.HeaderText = "短链接";
             this.Column17.Name = "Column17";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label3.Location = new System.Drawing.Point(82, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(457, 19);
-            this.label3.TabIndex = 10027;
-            this.label3.Text = "支持抽取单个文本或一个目录里所有文件的目标信息，仅支持utf-8格式的文本";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(7, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
-            this.label1.TabIndex = 10021;
-            this.label1.Text = "文本路径:";
-            // 
-            // folderButton
-            // 
-            this.folderButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderButton.Location = new System.Drawing.Point(750, 13);
-            this.folderButton.Name = "folderButton";
-            this.folderButton.Size = new System.Drawing.Size(66, 26);
-            this.folderButton.TabIndex = 10026;
-            this.folderButton.Text = "多文本";
-            this.folderButton.UseVisualStyleBackColor = true;
-            this.folderButton.Click += new System.EventHandler(this.FolderButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(7, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 20);
-            this.label2.TabIndex = 10022;
-            this.label2.Text = "抽取结果:";
-            // 
-            // extractButton
-            // 
-            this.extractButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.extractButton.Location = new System.Drawing.Point(833, 13);
-            this.extractButton.Name = "extractButton";
-            this.extractButton.Size = new System.Drawing.Size(73, 26);
-            this.extractButton.TabIndex = 10024;
-            this.extractButton.Text = "开始抽取";
-            this.extractButton.UseVisualStyleBackColor = true;
-            this.extractButton.Click += new System.EventHandler(this.ExtractButton_Click);
-            // 
-            // textPathTextBox
-            // 
-            this.textPathTextBox.BackColor = System.Drawing.Color.White;
-            this.textPathTextBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textPathTextBox.Location = new System.Drawing.Point(83, 12);
-            this.textPathTextBox.Name = "textPathTextBox";
-            this.textPathTextBox.ReadOnly = true;
-            this.textPathTextBox.Size = new System.Drawing.Size(562, 26);
-            this.textPathTextBox.TabIndex = 10020;
-            // 
-            // singleButton
-            // 
-            this.singleButton.BackColor = System.Drawing.Color.Transparent;
-            this.singleButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.singleButton.Location = new System.Drawing.Point(673, 13);
-            this.singleButton.Name = "singleButton";
-            this.singleButton.Size = new System.Drawing.Size(59, 26);
-            this.singleButton.TabIndex = 10023;
-            this.singleButton.Text = "单文本";
-            this.singleButton.UseVisualStyleBackColor = false;
-            this.singleButton.Click += new System.EventHandler(this.SingleButton_Click);
             // 
             // InfoExtractionForm
             // 
