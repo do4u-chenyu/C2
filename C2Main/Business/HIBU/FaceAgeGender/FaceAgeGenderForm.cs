@@ -26,14 +26,14 @@ namespace C2.Business.HIBU.FaceAgeGender
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://10.1.126.186:9000/HI_CV/FaceAgeGender";
+            OCRUrl = "http://218.94.117.234:8970/HI_CV/FaceAgeGender";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -194,7 +194,9 @@ namespace C2.Business.HIBU.FaceAgeGender
                 HelpUtil.ShowMessageBox("结果为空，无法保存。");
                 return false;
             }
-            var dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "人脸年龄性别识别" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
 
 
             if (dialog.ShowDialog() != DialogResult.OK)

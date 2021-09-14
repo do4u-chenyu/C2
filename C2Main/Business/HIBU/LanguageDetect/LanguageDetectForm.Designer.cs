@@ -188,7 +188,7 @@
             // 
             this.sexContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sexContent.FillWeight = 60F;
-            this.sexContent.HeaderText = "confidence";
+            this.sexContent.HeaderText = "准确率";
             this.sexContent.Name = "sexContent";
             this.sexContent.ReadOnly = true;
             // 

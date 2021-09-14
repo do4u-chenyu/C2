@@ -148,10 +148,18 @@ namespace C2.Business.HIBU.FaceBeauty
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
 
-            DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-            textCell1.Value = result;
-            dr.Cells.Add(textCell1);
-
+            if (result == "解析出错，可尝试重新识别。")
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
+                dr.Cells.Add(textCell1);
+            }
+            else
+            {
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = result;
+                dr.Cells.Add(textCell1);
+            }
             dataGridView1.Rows.Add(dr);
         }
 

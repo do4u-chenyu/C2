@@ -95,7 +95,6 @@ namespace C2.Business.HIBU.OCR
         private string TransBase64(string singlePicPath)
         {
             string base64Str = string.Empty;
-
             using (FileStream filestream = new FileStream(singlePicPath, FileMode.Open))
             {
                 byte[] bt = new byte[filestream.Length];
@@ -104,14 +103,12 @@ namespace C2.Business.HIBU.OCR
                 base64Str = Convert.ToBase64String(bt);
                 filestream.Close();
             }
-
             return base64Str;
         }
 
         public string StartTask(string base64Str)
         {
             string data = string.Empty;
-
             try
             {
                 Response resp = httpHandler.PostCode(OCRUrl, "imageBase64="+ HttpUtility.UrlEncode(base64Str), 60000);
@@ -122,8 +119,6 @@ namespace C2.Business.HIBU.OCR
                 {
                     return string.Format("查询失败! http状态码为：{0}.", statusCode);
                 }
-                    
-
                 Dictionary<string, string> resDict = resp.ResDict;
 
                 if (resDict.TryGetValue("status", out string status))
@@ -144,7 +139,6 @@ namespace C2.Business.HIBU.OCR
         private void FillDGV(string singlePicPath, string result)
         {
             DataGridViewRow dr = new DataGridViewRow();
-
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
@@ -159,7 +153,6 @@ namespace C2.Business.HIBU.OCR
         private string DealData(string data)
         {
             List<String> resultList = new List<string>();
-
             if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
                 return string.Empty;
             try
@@ -171,8 +164,6 @@ namespace C2.Business.HIBU.OCR
                 }
             }
             catch { return "解析出错，可尝试重新识别。"; }
-
-
             return string.Join("\n", resultList);
         }
 
