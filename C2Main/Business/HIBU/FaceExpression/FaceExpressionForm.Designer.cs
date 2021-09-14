@@ -115,9 +115,9 @@ namespace C2.Business.HIBU.FaceExpression
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(641, 8);
+            this.folderBtn.Location = new System.Drawing.Point(622, 8);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(71, 26);
+            this.folderBtn.Size = new System.Drawing.Size(66, 26);
             this.folderBtn.TabIndex = 10018;
             this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@ namespace C2.Business.HIBU.FaceExpression
             // transBtn
             // 
             this.transBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.transBtn.Location = new System.Drawing.Point(737, 8);
+            this.transBtn.Location = new System.Drawing.Point(691, 8);
             this.transBtn.Name = "transBtn";
             this.transBtn.Size = new System.Drawing.Size(73, 26);
             this.transBtn.TabIndex = 10016;
@@ -151,16 +151,16 @@ namespace C2.Business.HIBU.FaceExpression
             this.filePathTextBox.Location = new System.Drawing.Point(84, 7);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(457, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(460, 26);
             this.filePathTextBox.TabIndex = 10012;
             // 
             // browserBtn
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(557, 8);
+            this.browserBtn.Location = new System.Drawing.Point(555, 8);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(66, 26);
+            this.browserBtn.Size = new System.Drawing.Size(64, 26);
             this.browserBtn.TabIndex = 10015;
             this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;

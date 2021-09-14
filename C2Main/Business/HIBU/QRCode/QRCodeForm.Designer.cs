@@ -71,16 +71,16 @@
             this.filePathTextBox.Location = new System.Drawing.Point(80, 17);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(432, 26);
+            this.filePathTextBox.Size = new System.Drawing.Size(460, 26);
             this.filePathTextBox.TabIndex = 10003;
             // 
             // browserBtn
             // 
             this.browserBtn.BackColor = System.Drawing.Color.Transparent;
             this.browserBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserBtn.Location = new System.Drawing.Point(533, 17);
+            this.browserBtn.Location = new System.Drawing.Point(555, 17);
             this.browserBtn.Name = "browserBtn";
-            this.browserBtn.Size = new System.Drawing.Size(67, 26);
+            this.browserBtn.Size = new System.Drawing.Size(64, 26);
             this.browserBtn.TabIndex = 10007;
             this.browserBtn.Text = "单张图片";
             this.browserBtn.UseVisualStyleBackColor = false;
@@ -89,9 +89,9 @@
             // folderBtn
             // 
             this.folderBtn.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.folderBtn.Location = new System.Drawing.Point(608, 17);
+            this.folderBtn.Location = new System.Drawing.Point(622, 17);
             this.folderBtn.Name = "folderBtn";
-            this.folderBtn.Size = new System.Drawing.Size(67, 26);
+            this.folderBtn.Size = new System.Drawing.Size(66, 26);
             this.folderBtn.TabIndex = 10010;
             this.folderBtn.Text = "多张图片";
             this.folderBtn.UseVisualStyleBackColor = true;
