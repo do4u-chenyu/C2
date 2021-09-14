@@ -1961,6 +1961,15 @@
     <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
       <DependentUpon>OCRForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\QRCodeRecognition\QRCodeRecognitionForm.resx">
+      <DependentUpon>QRCodeRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\QRCode\QRCodeForm.resx">
+      <DependentUpon>QRCodeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\RedHeaderRecognition\RedHeaderRecognitionForm.resx">
+      <DependentUpon>RedHeaderRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\RedPocketRecognition\RedPocketRecognitionForm.resx">
       <DependentUpon>RedPocketRecognitionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2748,10 +2757,6 @@
     <Content Include="Resources\CrackerDict\dic_username_windows.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\FaceDetector.png" />
-    <None Include="Resources\FaceBeauty.png" />
-    <None Include="Resources\FaceExpression.png" />
-    <None Include="Resources\FaceRecognizer.png" />
     <Content Include="Resources\flow_back.png" />
     <Content Include="Resources\hand.cur" />
     <None Include="Resources\hand_cur.cur" />
@@ -3021,7 +3026,6 @@
     </None>
     <Content Include="Resources\Images\webkit.png" />
     <Content Include="Resources\Images\WebScan.png" />
-    <None Include="Resources\InfoExtraction.png" />
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

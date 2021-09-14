@@ -34,7 +34,7 @@ namespace C2.Business.HIBU.TrackRecognition
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "图片 | *.png;*.jpg"
+                Filter = "图片 | *.png;*.jpg;*.jpeg"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -67,7 +67,7 @@ namespace C2.Business.HIBU.TrackRecognition
                     FillDGV(singlePicPath, result);
                 }
             }
-            HelpUtil.ShowMessageBox("命名实体识别完成。");
+            HelpUtil.ShowMessageBox("轨迹通联类图像识别完成。");
         }
 
         private List<string> GetPicsByPath(string path)
