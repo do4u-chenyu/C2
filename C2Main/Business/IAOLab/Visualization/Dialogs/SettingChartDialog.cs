@@ -406,6 +406,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 this.panel3.Hide();
                 this.panel2.Show();
                 this.browserButton.Enabled = true;
+                this.styleComboBox.SelectedIndex = 0;
                 this.pictureBox1.Image = C2.Properties.Resources.词云样例1;
             }
             else if (this.chartType.SelectedIndex == 2)
@@ -462,6 +463,25 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             else if (this.styleComboBox.SelectedIndex == 3)
             {
                 this.pictureBox1.Image = C2.Properties.Resources.词云样例4;
+            }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            if (this.chartType.SelectedIndex == 2)
+            {
+                edgeDataSource.Text = string.Empty;
+                nodeDataSource.Text = string.Empty;
+                sourceComboBox.Text = string.Empty;
+                sourceComboBox.Items.Clear();
+                targetComboBox.Text = string.Empty;
+                targetComboBox.Items.Clear();
+                weightComboBox.Text = string.Empty;
+                weightComboBox.Items.Clear();
+                nodeComboBox.Text = string.Empty;
+                nodeComboBox.Items.Clear();
+                categoriesComboBox.Text = string.Empty;
+                categoriesComboBox.Items.Clear();
             }
         }
     }
