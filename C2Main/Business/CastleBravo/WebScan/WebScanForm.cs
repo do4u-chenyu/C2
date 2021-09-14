@@ -255,6 +255,9 @@ namespace C2.Business.CastleBravo.WebScan
             foreach (string domain in urlTextBox.Text.Split('\n'))
             {
                 string tmpDomain = domain.Trim(new char[] { '\r', '\n' });
+                if (string.IsNullOrEmpty(tmpDomain))
+                    continue;
+
                 //TODO 这里可以考虑自动拼接一个http头
                 if (!tmpDomain.StartsWith("http"))
                 {

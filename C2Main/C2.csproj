@@ -262,11 +262,11 @@
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\RobotsScan\MainWin.cs">
+    <Compile Include="Business\CastleBravo\RobotsScan\RobotsScan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\RobotsScan\MainWin.Designer.cs">
-      <DependentUpon>MainWin.cs</DependentUpon>
+    <Compile Include="Business\CastleBravo\RobotsScan\RobotsScan.Designer.cs">
+      <DependentUpon>RobotsScan.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebScan\Model\HttpRequest.cs" />
     <Compile Include="Business\CastleBravo\WebScan\Model\ServerInfo.cs" />
@@ -1934,8 +1934,8 @@
     <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.resx">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\RobotsScan\MainWin.resx">
-      <DependentUpon>MainWin.cs</DependentUpon>
+    <EmbeddedResource Include="Business\CastleBravo\RobotsScan\RobotsScan.resx">
+      <DependentUpon>RobotsScan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
@@ -1960,6 +1960,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\OCR\OCRForm.resx">
       <DependentUpon>OCRForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\RedPocketRecognition\RedPocketRecognitionForm.resx">
+      <DependentUpon>RedPocketRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\TerrorismDetection\TerrorismDetectionForm.resx">
+      <DependentUpon>TerrorismDetectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\TibetanDetection\TibetanDetectionForm.resx">
+      <DependentUpon>TibetanDetectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\HIBU\TrackRecognition\TrackRecognitionForm.resx">
+      <DependentUpon>TrackRecognitionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
       <DependentUpon>SettingChartDialog.cs</DependentUpon>
