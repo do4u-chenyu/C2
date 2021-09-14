@@ -3675,6 +3675,9 @@
     <None Include="Resources\Templates\JS自动化过滤流程.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Templates\WebRobots.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />

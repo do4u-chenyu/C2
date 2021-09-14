@@ -1071,12 +1071,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5CEB3349692B2DBC4DA656D78EF2BE74"
-        "OwnerKey" = "8:_3F564A048A4B05FA808B0CAC2010E329"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5D2A76197FD84753965AE53E35A35200"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1229,6 +1223,12 @@
         {
         "MsmKey" = "8:_6CFD3FEC8CA9437AB7D836E7ABF52A75"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D3F70BF0219EF00209FC914348487A5"
+        "OwnerKey" = "8:_3F564A048A4B05FA808B0CAC2010E329"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1696,6 +1696,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9B238849467A405E9949FC4921F0691F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9B57856F7C3F46C490219C30E4DC5C46"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -6360,26 +6366,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5CEB3349692B2DBC4DA656D78EF2BE74"
-            {
-            "SourcePath" = "8:mstscax.dll"
-            "TargetName" = "8:mstscax.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D2A76197FD84753965AE53E35A35200"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_code_accountPass_C2_20210624.py.zip"
@@ -6820,6 +6806,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D3F70BF0219EF00209FC914348487A5"
+            {
+            "SourcePath" = "8:mstscax.dll"
+            "TargetName" = "8:mstscax.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D48E6D64E2B461C951FEC96546E7305"
@@ -8183,6 +8189,26 @@
             "TargetName" = "8:444_方向 .png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B57856F7C3F46C490219C30E4DC5C46"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\WebRobots.json"
+            "TargetName" = "8:WebRobots.json"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -13187,7 +13213,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\Release\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -13215,7 +13241,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\Debug\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\Release\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
