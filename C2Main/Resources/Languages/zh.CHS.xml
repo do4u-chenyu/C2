@@ -450,7 +450,7 @@
 	<item name="BigAPK">(网)APK大眼睛</item>
 	<item name="Cracker">(网)弱口令扫描</item>
 	<item name="PwdGenerator">社工生成器</item>
-	<item name="RobotsScan">(网)网站指纹扫描</item>	
+	<item name="RobotsScan">(网)robots扫描</item>	
 	<item name="WebScan">(网)目录扫描</item>
         <item name="OCR">OCR</item>
 	    <item name="命名实体识别">命名实体识别</item>
