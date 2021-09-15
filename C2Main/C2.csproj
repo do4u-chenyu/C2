@@ -3810,7 +3810,9 @@
     <Content Include="Resources\WebScanDict\敏感文件.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\WebScanDict\管理员后台.txt" />
+    <Content Include="Resources\WebScanDict\管理员后台.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WebScanDict\通用PHP字典.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
