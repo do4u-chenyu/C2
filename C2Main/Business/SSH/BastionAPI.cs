@@ -24,8 +24,8 @@ namespace C2.Business.SSH
         private const String SeparatorString = "5peg5L2g5L2Z55Sf5aaC5LiH5Y+k6ZW/5aSc";
 
         private static readonly Regex SeparatorRegex = new Regex(Wrap(Regex.Escape(SeparatorString)));
-        private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(SecondsTimeout);
-
+        private static readonly TimeSpan StandTimeout = TimeSpan.FromSeconds(SecondsTimeout);
+        private static readonly TimeSpan HalfTimeout  = TimeSpan.FromSeconds(SecondsTimeout / 2);
         private readonly SearchTaskInfo task;
 
         private readonly SshClient ssh;
@@ -55,7 +55,7 @@ namespace C2.Business.SSH
             string ip   = ConvertUtil.GetIP(task.BastionIP);
             string port = ConvertUtil.GetPort(task.BastionIP); // 没有端口默认22
             this.ssh = new SshClient(ip, ConvertUtil.TryParseInt(port, 22), task.Username, task.Password);
-            this.ssh.ConnectionInfo.Timeout = Timeout;
+            this.ssh.ConnectionInfo.Timeout = StandTimeout;
             this.ssh.ConnectionInfo.Encoding = Encoding.UTF8;
         }
 
@@ -148,12 +148,17 @@ namespace C2.Business.SSH
             task.LastErrorCode = BastionCodePage.JumpUnknownFail;
             shell = ssh.CreateShellStream(String.Empty, 0, 0, 0, 0, 4096);
             // 等待目标机准备好
-            _ = shell.ReadLine(Timeout);
-
+            _ = shell.Expect(@"Opt or ID>:", HalfTimeout);
+            _ = shell.Read();
+            // 打印机器列表
+            shell.WriteLine("p");
+            shell.Flush();
+            // 计时等待机器列表
+            String ret = shell.Expect(@"Opt or ID>:", HalfTimeout);
             // 跳转到目标机器
-            shell.WriteLine(ip);
+            shell.WriteLine(FindID(ip, ret ?? String.Empty));
             // 等待跳转成功,出现root用户提示符
-            if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(10)))
+            if (null == shell.Expect(new Regex(@"\[root@[^\]]+\]#"), HalfTimeout))
             {   // 修复bug:某些机器改了shell提示, 这里如果也不是ifconfig的话才认为失败 
                 if (!CheckHostIP(ip)) 
                     return;
@@ -168,7 +173,7 @@ namespace C2.Business.SSH
                 return;
             String ip   = ConvertUtil.GetIP(task.SearchAgentIP);
             String port = ConvertUtil.GetPort(task.SearchAgentIP);
-            String pwd = task.SearchPassword;
+            String pwd  = task.SearchPassword;
             String command = String.Format(@"ssh -o ""StrictHostKeyChecking no"" root@{0} -p {1}", ip, port);
 
             log.Info(String.Format("开始ssh跳转: {0}", command));
@@ -213,8 +218,13 @@ namespace C2.Business.SSH
             catch { }
 
         }
-
-
+        
+        private String FindID(String ip, String list)
+        {
+            String pattern = String.Format(@"\[(a\d+)\]\s+{0}\b", ip);
+            Match mat = Regex.Match(list, pattern);
+            return mat.Success ? mat.Groups[1].Value : ip;
+        }
         private String RunCommand(String command, ShellStream ssm, int timeout = SecondsTimeout, bool writeLog = true)
         {
             try
@@ -256,7 +266,7 @@ namespace C2.Business.SSH
                 byte[] buffer = new byte[bufferSize + 1];        // 预留一个空白位用来存储预读字节
 
                 Shell shell = new Shell(ssm);
-                long left = fileLength - shell.ExpectTGZ(buffer, fs, Timeout, K32);
+                long left = fileLength - shell.ExpectTGZ(buffer, fs, StandTimeout, K32);
                 if (left >= fileLength)  // Expect过程中没有写入任何数据,说明没遇到TGZ头
                 {
                     task.LastErrorMsg = String.Format("任务【{0}】下载失败;文件格式损坏", task.TaskName);
@@ -272,7 +282,7 @@ namespace C2.Business.SSH
                     String progressValue = ((fileLength - left * 1.0f) / fileLength).ToString("P0");
                     DownloadProgressEvent?.Invoke(progressValue, left, fileLength);
 
-                    int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), Timeout);
+                    int bytesRead = shell.Read(buffer, offset, (int)Math.Min(bufferSize, left), StandTimeout);
 
                     if (bytesRead == 0) // 超时
                     {
@@ -304,7 +314,7 @@ namespace C2.Business.SSH
                     }
 
                     byte one = 0;
-                    if (!shell.ReadByte(ref one, Timeout))
+                    if (!shell.ReadByte(ref one, StandTimeout))
                     {
                         task.LastErrorMsg = String.Format("任务【{0}】下载失败：远端读错误", task.TaskName);
                         task.LastErrorCode = BastionCodePage.DownloadRemoteReadFail;
