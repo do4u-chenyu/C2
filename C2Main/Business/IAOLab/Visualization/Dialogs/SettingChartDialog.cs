@@ -64,7 +64,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             }
             else if (this.chartType.SelectedIndex == 2)
             {
-                TranDataToHtml1();
+                TranGraphDataToHtml();
             }
             return base.OnOKButtonClick();
         }
@@ -84,20 +84,20 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void TranDataToHtml()
         {
-            DataTable dataTable = GenDataTable(dataFullPath);
+            DataTable dataTable = GenDataTable(dataFullPath, bcpInfo);
             SavaOption();
             GenVisualHtml.GetInstance().TransDataToHtml(new List<DataTable>() { dataTable }, Options);
         }
 
-        private void TranDataToHtml1()
+        private void TranGraphDataToHtml()
         {
-            DataTable dataTable1 = GenDataTable1(edgeDataPath);
-            DataTable dataTable2 = GenDataTable2(nodeDataPath);
+            DataTable dataTable1 = GenDataTable(edgeDataPath, bcpInfo1);
+            DataTable dataTable2 = GenDataTable(nodeDataPath, bcpInfo2);
             SavaOption();
             GenVisualHtml.GetInstance().TransDataToHtml(new List<DataTable>() { dataTable1, dataTable2 }, Options);
         }
 
-        private DataTable GenDataTable(string path)
+        private DataTable GenDataTable(string path, BcpInfo bcpInfo)
         {
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
@@ -174,87 +174,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             return contentList;
         }
 
-        private DataTable GenDataTable1(string path)
-        {
-            DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
-
-            if (bcpInfo1 == null || bcpInfo1.ColumnArray.IsEmpty())
-                return dataTable;
-
-
-            // 可能有同名列，这里需要重命名一下
-            Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
-            foreach (string col in bcpInfo1.ColumnArray)
-            {
-                if (!induplicatedName.ContainsKey(col))
-                {
-                    induplicatedName.Add(col, 0);
-                    dataTable.Columns.Add(col);
-                }
-                else
-                {
-                    induplicatedName[col] += 1;
-                    dataTable.Columns.Add(col + "_" + induplicatedName[col]);
-                }
-            }
-
-            List<string> rows = GetFileLines(path);
-            
-
-            for (int i = 1; i < rows.Count; i++)
-            {
-                string[] rowList = rows[i].TrimEnd('\r').Split('\t');
-                List<string> tmpRowList = new List<string>();
-                for (int j = 0; j < bcpInfo1.ColumnArray.Length; j++)
-                {
-                    string cellValue = j < rowList.Length ? rowList[j] : "";
-                    tmpRowList.Add(cellValue);
-                }
-                dataTable.Rows.Add(tmpRowList.ToArray());
-            }
-            return dataTable;
-        }
-        private DataTable GenDataTable2(string path)
-        {
-            DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
-
-            if (bcpInfo2 == null || bcpInfo2.ColumnArray.IsEmpty())
-                return dataTable;
-
-
-            // 可能有同名列，这里需要重命名一下
-            Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
-            foreach (string col in bcpInfo2.ColumnArray)
-            {
-                if (!induplicatedName.ContainsKey(col))
-                {
-                    induplicatedName.Add(col, 0);
-                    dataTable.Columns.Add(col);
-                }
-                else
-                {
-                    induplicatedName[col] += 1;
-                    dataTable.Columns.Add(col + "_" + induplicatedName[col]);
-                }
-            }
-
-           
-            List<string> rows = GetFileLines(path);
-            //int maxLine = Math.Min(rows.Count, MaxLine);
-
-            for (int i = 1; i < rows.Count; i++)
-            {
-                string[] rowList = rows[i].TrimEnd('\r').Split('\t');
-                List<string> tmpRowList = new List<string>();
-                for (int j = 0; j < bcpInfo2.ColumnArray.Length; j++)
-                {
-                    string cellValue = j < rowList.Length ? rowList[j] : "";
-                    tmpRowList.Add(cellValue);
-                }
-                dataTable.Rows.Add(tmpRowList.ToArray());
-            }
-            return dataTable;
-        }
         private void SavaOption()
         {
             Options["DataSourcePath"] = new string[] { this.dataSourcePath.Text };
@@ -308,7 +227,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             //同时需要把字段读出来data
             this.bcpInfo1 = new BcpInfo(edgeDataPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
 
-            ChangeControlContent1();
+            ChangeEdgeTab();
             Options = new Dictionary<string, string[]>();
         }
 
@@ -326,7 +245,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             //同时需要把字段读出来data
             this.bcpInfo2 = new BcpInfo(nodeDataPath, OpUtil.Encoding.UTF8, new char[] { '\t' });
 
-            ChangeControlContent2();
+            ChangeNodeTab();
             Options = new Dictionary<string, string[]>();
         }
         private void ChangeControlContent()
@@ -359,13 +278,9 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 }
             }
         }
-        private void ChangeControlContent1()
+        private void ChangeEdgeTab()
         {
-            //社交关系图边设置列表更新
-            //foreach (Control ct in this.edgeSetting.Controls)
-            //{
-            //    if (ct is ComboBox)
-            //    {
+            //社交关系图边设置列表更新          
             sourceComboBox.Text = string.Empty;
             sourceComboBox.Items.Clear();
             sourceComboBox.Items.AddRange(bcpInfo1.ColumnArray);
@@ -375,10 +290,8 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
             weightComboBox.Text = string.Empty;
             weightComboBox.Items.Clear();
             weightComboBox.Items.AddRange(bcpInfo1.ColumnArray);
-            //    }
-            //}
         }
-        private void ChangeControlContent2()
+        private void ChangeNodeTab()
         {
             //社交关系图节点设置列表更新
             nodeComboBox.Text = string.Empty;
@@ -414,6 +327,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 this.panel1.Hide();
                 this.panel2.Hide();
                 this.panel3.Show();
+                this.dataSourcePath.Text = string.Empty;
                 this.browserButton.Enabled = false;
                 this.pictureBox1.Image = C2.Properties.Resources.社交关系图样例;
             }
