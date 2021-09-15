@@ -22,19 +22,14 @@ namespace C2.Business.CastleBravo.RobotsScan
         public RobotsScan()
         {
             InitializeComponent();
-
             this.OKButton.Text = "查找";
             this.CancelBtn.Text = "退出";
         }
-
-
-
 
         //读取json文件
         public static JObject ReadJson()
         {
             string jsonfile = Path.Combine(Application.StartupPath, "Resources/Templates/WebRobots.json"); //JSON文件路径
-
             using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
             {
                 using (JsonTextReader reader = new JsonTextReader(file))
