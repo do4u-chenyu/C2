@@ -207,6 +207,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1365F7DD851D48ADAE42C56B88F5CA25"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1444C5E62D564174B36D2D9C04D1D6A3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2373,6 +2379,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DF0B0337B8F64A7C8D85A4E45812A51C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DF27A99D8DF045CCAAE6F0F413D1F6DE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3942,6 +3954,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1365F7DD851D48ADAE42C56B88F5CA25"
+            {
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\Visual.html"
+            "TargetName" = "8:Visual.html"
+            "Tag" = "8:"
+            "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1444C5E62D564174B36D2D9C04D1D6A3"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Script\\IAO_Search_gamble\\batchquery_gun_accountPass_C2_20200908.py.zip"
@@ -4448,7 +4480,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:C2, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:C2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_22A26DB9DB3C6B0E66B26C838C735E25"
@@ -10414,6 +10446,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF0B0337B8F64A7C8D85A4E45812A51C"
+            {
+            "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\JS\\echarts-wordcloud.min.js"
+            "TargetName" = "8:echarts-wordcloud.min.js"
+            "Tag" = "8:"
+            "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF27A99D8DF045CCAAE6F0F413D1F6DE"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\440_方向 .png"
@@ -12446,7 +12498,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{D3116C92-8EB6-4E00-99F0-62F4510FFB92}"
+        "PackageCode" = "8:{0854EE25-9487-42DA-9BBE-0CEB53586098}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
