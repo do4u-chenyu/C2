@@ -3813,7 +3813,9 @@
     <Content Include="Resources\WebScanDict\管理员后台-LiLi版.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\WebScanDict\管理员后台-Wx版.txt" />
+    <Content Include="Resources\WebScanDict\管理员后台-Wx版.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WebScanDict\通用PHP字典.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
