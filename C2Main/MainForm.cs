@@ -335,7 +335,7 @@ namespace C2
                 LoadHotModel();
                 LoadDocuments();
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox(filename + "导入成功");
+                    HelpUtil.ShowMessageBox(String.Format("[{0}]导入[业务视图]成功", filename));
                 LoadDataSource();
                 LoadIAOLaboratory();
                 LoadHIBU();

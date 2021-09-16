@@ -3,6 +3,7 @@ using C2.Core;
 using C2.Dialogs;
 using C2.Model.MindMaps;
 using C2.Utils;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -115,7 +116,7 @@ namespace C2.Controls.Left
                     return;
                 }
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox(filename + "导入成功");
+                    HelpUtil.ShowMessageBox(String.Format("[{0}]导入[业务视图]成功", filename));
             }
         }
     }
