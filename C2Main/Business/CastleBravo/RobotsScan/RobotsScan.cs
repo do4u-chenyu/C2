@@ -58,6 +58,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                 }
                 catch (Exception e)
                 {
+                    MessageBox.Show(e.Message);
                     if (e.Message.Contains("SSL"))
                     {
                         try
@@ -66,7 +67,10 @@ namespace C2.Business.CastleBravo.RobotsScan
                                                                              | SecurityProtocolType.Tls11 
                                                                              | SecurityProtocolType.Ssl3
                                                                              | SecurityProtocolType.Tls;
-                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                            //忽略ssl证书验证
+                            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+                            HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                             request.Method = "GET";
                             request.Timeout = 8 * 1000;
                             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -87,7 +91,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                         MessageBox.Show("网络连接超时，请检查输入网站是否可以打开");
                         return null;
                     }
-                    else if (e.Message.Contains("404"))
+                    else if (e.Message.Contains("404") || e.Message.Contains("500"))
                     {
                         MessageBox.Show("无法获得该网站的robots.txt文件");
                         return null;
@@ -169,7 +173,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             }
             return false;            
         }
-
     }
  }
 
