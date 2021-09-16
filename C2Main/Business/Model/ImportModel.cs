@@ -46,6 +46,7 @@ namespace C2.Business.Model
             RenameBmd(dirs, this.modelFilePath);
             // 将导入模型添加到左侧模型面板
             MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
+            Global.GetMainForm().OpenDocument(this.modelFilePath);
             return true;
         }
 

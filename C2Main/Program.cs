@@ -81,7 +81,6 @@ namespace C2
         static void Main(params string[] args)
         {
             //Regist();
-      
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021101700000000") > 0)
             {
                 MessageBox.Show("产品可用时间截止到2021年10月17号");

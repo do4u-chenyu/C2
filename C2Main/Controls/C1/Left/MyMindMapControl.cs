@@ -102,6 +102,7 @@ namespace C2.Controls.Left
             if (zipDialog.ShowDialog() == DialogResult.OK)
             {
                 string fullFilePath = zipDialog.ModelPath;
+                string filename = fullFilePath.Substring(fullFilePath.LastIndexOf("\\") + 1, fullFilePath.Length-fullFilePath.LastIndexOf("\\") - 1).Replace(".c2",string.Empty);
                 string password = zipDialog.Password;
                 if (Path.GetExtension(fullFilePath) == ".doc" || Path.GetExtension(fullFilePath) == ".docx")
                 {
@@ -114,7 +115,7 @@ namespace C2.Controls.Left
                     return;
                 }
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox("导入成功");
+                    HelpUtil.ShowMessageBox(filename + "导入成功");
             }
         }
     }

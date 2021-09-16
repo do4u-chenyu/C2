@@ -57,6 +57,7 @@ namespace C2
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
         string fullFilePath;
+        string filename;
         string password;
 
         public MainForm(string userName, string path)
@@ -74,6 +75,7 @@ namespace C2
             if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
                 OpenSavedTabs();
             fullFilePath = path;
+            filename = fullFilePath.Substring(fullFilePath.LastIndexOf("\\") + 1, fullFilePath.Length - fullFilePath.LastIndexOf("\\") - 1).Replace(".c2", string.Empty);
             password = String.Empty;
         }
         
@@ -333,7 +335,7 @@ namespace C2
                 LoadHotModel();
                 LoadDocuments();
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox("导入成功");
+                    HelpUtil.ShowMessageBox(filename + "导入成功");
                 LoadDataSource();
                 LoadIAOLaboratory();
                 LoadHIBU();

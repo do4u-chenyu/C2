@@ -98,7 +98,6 @@ namespace C2.Controls.Left
             {
                 Global.GetMainForm().OpenDocument(FullFilePath);
             }
-           
         }
 
 
