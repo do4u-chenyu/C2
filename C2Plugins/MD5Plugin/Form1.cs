@@ -480,38 +480,44 @@ namespace MD5Plugin
         {
             string a = "&#".ToString();
             string b = "x".ToString();
-
-            if (outputTextBox.Text == "请输入你要解码的内容")
+            try
             {
-                originOutput();
-            }
-            else if (str.Contains('u'))
-            {
-                str = str.Replace(@"\", @"");
-                dealWithUnicode(str);
-            }
-            else if (str.Contains(a) && str.Contains(b))//十六进制
-            {
-                str = str.Replace(@"&#x", @"u").Replace(@";", @"");
-                dealWithUnicode(str);
-            }
-            else if (str.Contains(a) && !str.Contains(b))//十进制
-            {
-                Regex r = new Regex("\\d+\\.?\\d*");
-                MatchCollection mc = r.Matches(str);
-                string result = string.Empty;
-                for (int i = 0; i < mc.Count; i++)
+                if (outputTextBox.Text == "请输入你要解码的内容")
                 {
-                    int ss = int.Parse(mc[i].ToString());
-                    String strA = ss.ToString("x8");
-                    strA = strA.Replace(@"0000", @"x").Replace(strA, @"&#" + strA + ';');
-                    result += strA;
+                    originOutput();
                 }
-                string newstr = result;
-                newstr = newstr.Replace(@"&#x", @"u").Replace(@";", @"");
-                dealWithUnicode(newstr);
+                else if (str.Contains('u'))
+                {
+                    str = str.Replace(@"\", @"");
+                    dealWithUnicode(str);
+                }
+                else if (str.Contains(a) && str.Contains(b))//十六进制
+                {
+                    str = str.Replace(@"&#x", @"u").Replace(@";", @"");
+                    dealWithUnicode(str);
+                }
+                else if (str.Contains(a) && !str.Contains(b))//十进制
+                {
+                    Regex r = new Regex("\\d+\\.?\\d*");
+                    MatchCollection mc = r.Matches(str);
+                    string result = string.Empty;
+                    for (int i = 0; i < mc.Count; i++)
+                    {
+                        int ss = int.Parse(mc[i].ToString());
+                        String strA = ss.ToString("x8");
+                        strA = strA.Replace(@"0000", @"x").Replace(strA, @"&#" + strA + ';');
+                        result += strA;
+                    }
+                    string newstr = result;
+                    newstr = newstr.Replace(@"&#x", @"u").Replace(@";", @"");
+                    dealWithUnicode(newstr);
+                }
+                else 
+                {
+                    MessageBox.Show("输入解码格式错误", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch 
             {
                 MessageBox.Show("输入解码格式错误", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
