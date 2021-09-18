@@ -34,7 +34,6 @@
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.encodeButton = new System.Windows.Forms.Button();
             this.decodeButton = new System.Windows.Forms.Button();
-            //this.UnicodeToAsciiButton = new System.Windows.Forms.Button();
             this.md5128RadioButton = new System.Windows.Forms.RadioButton();
             this.base64RadioButton = new System.Windows.Forms.RadioButton();
             this.urlRadioButton = new System.Windows.Forms.RadioButton();
@@ -56,7 +55,6 @@
             this.inputTextBox.Size = new System.Drawing.Size(460, 450);
             this.inputTextBox.TabIndex = 0;
             this.inputTextBox.Text = "请输入你要编码的内容或者需要加密文件的路径";
-            this.inputTextBox.WordWrap = false;
             this.inputTextBox.TextChanged += new System.EventHandler(this.inputTextBox_TextChanged);
             this.inputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
             // 
@@ -95,16 +93,6 @@
             this.decodeButton.Text = "<= 解码";
             this.decodeButton.UseVisualStyleBackColor = true;
             this.decodeButton.Click += new System.EventHandler(this.DecodeButton_Click);
-            // 
-            // UnicodeToAsciiButton
-            // 
-            /*
-            this.UnicodeToAsciiButton.Location = new System.Drawing.Point(0, 0);
-            this.UnicodeToAsciiButton.Name = "UnicodeToAsciiButton";
-            this.UnicodeToAsciiButton.Size = new System.Drawing.Size(75, 23);
-            this.UnicodeToAsciiButton.TabIndex = 15;
-            this.UnicodeToAsciiButton.Click += new System.EventHandler(this.UnicodeToAsciiButton_Click);
-            */
             // 
             // md5128RadioButton
             // 
@@ -229,7 +217,6 @@
             this.Controls.Add(this.md5128RadioButton);
             this.Controls.Add(this.decodeButton);
             this.Controls.Add(this.encodeButton);
-            //this.Controls.Add(this.UnicodeToAsciiButton);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
