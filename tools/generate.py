@@ -51,7 +51,7 @@ def C2_uninstall(product_id):
 
 def C2_install():
     product_path = os.path.abspath(os.path.dirname(os.getcwd())) + "\IAO解决方案\Release"
-    install_cmd = r"chdir /d {} & msiexec /i IAO解决方案C2.msi /qr /l*v msiexec_log.txt".format(product_path)
+    install_cmd = r"chdir /d {} & msiexec /i IAO解决方案C2.msi /qr".format(product_path)
     print(install_cmd)
     if os.system(install_cmd) == 0:
         return 0;
