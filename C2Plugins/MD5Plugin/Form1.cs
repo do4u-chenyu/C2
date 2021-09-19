@@ -1,15 +1,12 @@
 ﻿using C2.IAOLab.Plugins;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 
@@ -423,14 +420,9 @@ namespace MD5Plugin
             pairs.Add("UmFyIR", "rar");
             pairs.Add("N3q8rycc", "7z");
 
-            // base64解码前先进行url解码,反复解码直到解不出来为止
-            int len = base64Str.Length;
-            int cnt = 0;
-            do
-            {
-                base64Str = HttpUtility.UrlDecode(base64Str);
-            } while (len != base64Str.Length && cnt++ < 10);
-            
+            // base64解码前先进行url解码,反复3次
+            // HttpUtility里的urldecode方法会把+号变成空格, 这个不是标准解法, 采用Uri.UnescapeDataString代替
+            base64Str = Uri.UnescapeDataString(Uri.UnescapeDataString(Uri.UnescapeDataString(base64Str)));
 
             foreach (string key in pairs.Keys)
             {
@@ -470,7 +462,7 @@ namespace MD5Plugin
             }
             else
             {
-                inputTextBox.Text = HttpUtility.UrlDecode(url);
+                inputTextBox.Text = Uri.UnescapeDataString(url);
             }
         }
 
