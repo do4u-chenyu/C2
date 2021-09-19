@@ -55,7 +55,7 @@ namespace MD5Plugin
 
         public string GetPluginVersion()
         {
-            return "0.0.2";
+            return "0.0.3";
         }
 
         public DialogResult ShowFormDialog()
@@ -422,6 +422,15 @@ namespace MD5Plugin
             pairs.Add("UEsDBA", "zip");
             pairs.Add("UmFyIR", "rar");
             pairs.Add("N3q8rycc", "7z");
+
+            // base64解码前先进行url解码,反复解码直到解不出来为止
+            int len = base64Str.Length;
+            int cnt = 0;
+            do
+            {
+                base64Str = HttpUtility.UrlDecode(base64Str);
+            } while (len != base64Str.Length && cnt++ < 10);
+            
 
             foreach (string key in pairs.Keys)
             {
