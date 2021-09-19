@@ -1,15 +1,12 @@
 ﻿using C2.IAOLab.Plugins;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 
@@ -55,7 +52,7 @@ namespace MD5Plugin
 
         public string GetPluginVersion()
         {
-            return "0.0.2";
+            return "0.0.3";
         }
 
         public DialogResult ShowFormDialog()
@@ -423,6 +420,10 @@ namespace MD5Plugin
             pairs.Add("UmFyIR", "rar");
             pairs.Add("N3q8rycc", "7z");
 
+            // base64解码前先进行url解码,反复3次
+            // HttpUtility里的urldecode方法会把+号变成空格, 这个不是标准解法, 采用Uri.UnescapeDataString代替
+            base64Str = Uri.UnescapeDataString(Uri.UnescapeDataString(Uri.UnescapeDataString(base64Str)));
+
             foreach (string key in pairs.Keys)
             {
                 if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要解码的内容")
@@ -461,7 +462,7 @@ namespace MD5Plugin
             }
             else
             {
-                inputTextBox.Text = HttpUtility.UrlDecode(url);
+                inputTextBox.Text = Uri.UnescapeDataString(url);
             }
         }
 
@@ -480,38 +481,44 @@ namespace MD5Plugin
         {
             string a = "&#".ToString();
             string b = "x".ToString();
-
-            if (outputTextBox.Text == "请输入你要解码的内容")
+            try
             {
-                originOutput();
-            }
-            else if (str.Contains('u'))
-            {
-                str = str.Replace(@"\", @"");
-                dealWithUnicode(str);
-            }
-            else if (str.Contains(a) && str.Contains(b))//十六进制
-            {
-                str = str.Replace(@"&#x", @"u").Replace(@";", @"");
-                dealWithUnicode(str);
-            }
-            else if (str.Contains(a) && !str.Contains(b))//十进制
-            {
-                Regex r = new Regex("\\d+\\.?\\d*");
-                MatchCollection mc = r.Matches(str);
-                string result = string.Empty;
-                for (int i = 0; i < mc.Count; i++)
+                if (outputTextBox.Text == "请输入你要解码的内容")
                 {
-                    int ss = int.Parse(mc[i].ToString());
-                    String strA = ss.ToString("x8");
-                    strA = strA.Replace(@"0000", @"x").Replace(strA, @"&#" + strA + ';');
-                    result += strA;
+                    originOutput();
                 }
-                string newstr = result;
-                newstr = newstr.Replace(@"&#x", @"u").Replace(@";", @"");
-                dealWithUnicode(newstr);
+                else if (str.Contains('u'))
+                {
+                    str = str.Replace(@"\", @"");
+                    dealWithUnicode(str);
+                }
+                else if (str.Contains(a) && str.Contains(b))//十六进制
+                {
+                    str = str.Replace(@"&#x", @"u").Replace(@";", @"");
+                    dealWithUnicode(str);
+                }
+                else if (str.Contains(a) && !str.Contains(b))//十进制
+                {
+                    Regex r = new Regex("\\d+\\.?\\d*");
+                    MatchCollection mc = r.Matches(str);
+                    string result = string.Empty;
+                    for (int i = 0; i < mc.Count; i++)
+                    {
+                        int ss = int.Parse(mc[i].ToString());
+                        String strA = ss.ToString("x8");
+                        strA = strA.Replace(@"0000", @"x").Replace(strA, @"&#" + strA + ';');
+                        result += strA;
+                    }
+                    string newstr = result;
+                    newstr = newstr.Replace(@"&#x", @"u").Replace(@";", @"");
+                    dealWithUnicode(newstr);
+                }
+                else 
+                {
+                    MessageBox.Show("输入解码格式错误", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch 
             {
                 MessageBox.Show("输入解码格式错误", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
