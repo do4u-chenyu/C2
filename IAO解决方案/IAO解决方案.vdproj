@@ -603,6 +603,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_36A86C4015224662833E00D3BDDDDD89"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1629,6 +1635,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8D0F98110CDE4F87968DEDC699781795"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8E78A62B633C4309AF8DD18CFC101BD9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1888,12 +1900,6 @@
         "Entry"
         {
         "MsmKey" = "8:_AAA9022D03F445B39A3317A2232EDB2C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AABF0A407090451A86317C212AFBD2C4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5316,6 +5322,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_36A86C4015224662833E00D3BDDDDD89"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\181_shell.png"
+            "TargetName" = "8:181_shell.png"
+            "Tag" = "8:"
+            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_37039095DF6C4402A22713B87BCB6EBB"
             {
             "AssemblyRegister" = "3:1"
@@ -8132,6 +8158,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D0F98110CDE4F87968DEDC699781795"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\175_payload.png"
+            "TargetName" = "8:175_payload.png"
+            "Tag" = "8:"
+            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E78A62B633C4309AF8DD18CFC101BD9"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\back.jpg"
@@ -8428,7 +8474,7 @@
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\180_渗透测试.png"
             "TargetName" = "8:180_渗透测试.png"
             "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -8920,26 +8966,6 @@
             "TargetName" = "8:dic_password_windows.txt"
             "Tag" = "8:"
             "Folder" = "8:_30D87A175307459A8BC3E9D16C7F4967"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AABF0A407090451A86317C212AFBD2C4"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\175_playload.png"
-            "TargetName" = "8:175_playload.png"
-            "Tag" = "8:"
-            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -12914,7 +12940,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{DD46F8E1-7ACE-4685-B5C9-7067894F7208}"
+        "PackageCode" = "8:{7A0EBF11-F8C2-4175-9C41-CC93F52636FA}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
