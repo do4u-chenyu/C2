@@ -3350,6 +3350,7 @@
     <Content Include="Resources\PictureIconLib\476_星期六.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\501_蚁剑.png" />
     <Content Include="Resources\PictureIconLib\50_野生动物.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
