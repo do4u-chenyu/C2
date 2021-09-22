@@ -439,7 +439,7 @@ namespace MD5Plugin
                 {
                     originOutput();
                     break;
-                }
+                }         
                 else if (base64Str.StartsWith(key))
                 {
                     string value;
@@ -456,13 +456,35 @@ namespace MD5Plugin
                 }
                 else
                 {
-                    inputTextBox.Text = string.Empty;
-                    MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    int baseLengh = base64Str.Length;
+                    int i;
+                    for (i = 0; i < baseLengh; i++)
+                    {
+                        base64Str = base64Str.Substring(0, baseLengh-i);
+                        if (DecodeNewBase64(base64Str))
+                            break;
+                    }
+                    if (i == baseLengh)
+                    {
+                        inputTextBox.Text = string.Empty;
+                        MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }  
                 }
-                //inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
             }
         }
+
+        public bool DecodeNewBase64(string ExceptionBase64Str)
+        {
+            if (IsBase64Formatted(ExceptionBase64Str))
+            {
+                byte[] bytes = Convert.FromBase64String(ExceptionBase64Str);
+                inputTextBox.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+                return true;
+            }
+            return false;
+        }
+
         public void UrlDecode(string url)
         {
             if (outputTextBox.Text == "请输入你要解码的内容")
