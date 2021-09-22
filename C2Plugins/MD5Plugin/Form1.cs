@@ -244,6 +244,15 @@ namespace MD5Plugin
                 outputTextBox.Text = Convert.ToBase64String(bytes);
             }
         }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                ((TextBox)sender).SelectAll();
+            }
+        }
+
         public void UrlEncode(string url)
         {
             if (inputTextBox.Text == "请输入你要编码的内容")
@@ -435,7 +444,7 @@ namespace MD5Plugin
                 {
                     string value;
                     pairs.TryGetValue(key, out value);
-                    outPath = string.Format(TryGetSysTempDir() + "\\{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
+                    outPath = string.Format(TryGetSysTempDir() + "{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
                     base64StrToFile(base64Str);
                     inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
                     break;

@@ -57,6 +57,7 @@
             this.inputTextBox.Text = "请输入你要编码的内容或者需要加密文件的路径";
             this.inputTextBox.TextChanged += new System.EventHandler(this.inputTextBox_TextChanged);
             this.inputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
+            this.inputTextBox.KeyDown += TextBox_KeyDown;
             // 
             // outputTextBox
             // 
@@ -71,6 +72,7 @@
             this.outputTextBox.TabIndex = 1;
             this.outputTextBox.Text = "加密后的结果";
             this.outputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OutputTextBox_MouseDown);
+            this.outputTextBox.KeyDown += TextBox_KeyDown;
             // 
             // encodeButton
             // 
@@ -228,6 +230,7 @@
             this.Text = "MD5加密";
             this.ResumeLayout(false);
             this.PerformLayout();
+            
 
         }
 
