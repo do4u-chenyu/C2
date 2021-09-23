@@ -14,6 +14,8 @@ namespace MD5Plugin
 {
     public partial class Form1 : Form, IPlugin
     {
+        string languageType;
+        string splitType;
         public Form1()
         {
             InitializeComponent();
@@ -86,11 +88,10 @@ namespace MD5Plugin
         //md5(128位)
         private void Md5128RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            //button1.Visible;
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            //FileInputButton.Visible = false;
-            //base64strButton.Visible = false;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault1();
         }
 
@@ -100,7 +101,8 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            //FileInputButton.Visible = false;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault1();
         }
 
@@ -109,10 +111,10 @@ namespace MD5Plugin
         {
             encodeButton.Text = "编码 =>";
             decodeButton.Text = "<= 解码";
-            //FileInputButton.Text = "编码 =>";
-            //base64strButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault3();
         }
 
@@ -123,6 +125,8 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault2();
         }
 
@@ -133,14 +137,31 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             decodeButton.Visible = true;
             encodeButton.Visible = true;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault2();
         }
+        //Hex编解码
+        private void hexRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            encodeButton.Text = "编码 =>";
+            decodeButton.Text = "<= 解码";
+            decodeButton.Visible = true;
+            encodeButton.Visible = true;
+            languageComboBox.Visible = true;
+            splitComboBox.Visible = true;
+            splitComboBox.Visible = true;
+            SetDefault2();
+        }
+
 
         //使用sha1对字符串进行加密
         private void Sha1RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault1();
         }
 
@@ -149,6 +170,8 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault1();
         }
 
@@ -157,6 +180,8 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
+            languageComboBox.Visible = false;
+            splitComboBox.Visible = false;
             SetDefault1();
         }
 
@@ -165,7 +190,6 @@ namespace MD5Plugin
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里" || inputTextBox.Text == "请输入你要用Base64加密的内容" || inputTextBox.Text == "请输入你要编码的Url" || inputTextBox.Text == "请输入你要编码的内容" || inputTextBox.Text == "请输入你要编码的内容或者需要加密文件的路径")
             {
                 inputTextBox.Text = string.Empty;
-
             }
             inputTextBox.ForeColor = Color.Black;
         }
@@ -285,6 +309,50 @@ namespace MD5Plugin
                 outputTextBox.Text = stringBuilder.ToString();
             }
         }
+        public void HexEncode(string str)
+        {
+            if (inputTextBox.Text == "请输入你要编码的内容")
+            {
+                inputTextBox.Text = string.Empty;
+                outputTextBox.Text = string.Empty;
+                MessageBox.Show("请输入编码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                languageType = languageType != null ? languageType : "UTF-8";
+                string result = string.Empty;
+                byte[] arrByte = System.Text.Encoding.GetEncoding(languageType).GetBytes(str);
+                for (int i = 0; i < arrByte.Length; i++)
+                {
+                    result += "%" + System.Convert.ToString(arrByte[i], 16);
+                }
+                outputTextBox.Text = result;
+            }
+        }
+
+        
+        private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (languageComboBox.SelectedIndex == languageComboBox.Items.IndexOf("UTF-8"))
+                languageType = "UTF-8";
+            else if (languageComboBox.SelectedIndex == languageComboBox.Items.IndexOf("GB2312"))
+                languageType = "GB2312";
+        }
+
+        private void Split_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("无分隔符"))
+                splitType = "无分隔符";
+            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf(@"\X"))
+                splitType = @"\X";
+            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf(@"\x"))
+                splitType = @"\x";
+            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("#"))
+                splitType = "#";
+            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("%"))
+                splitType = "%";
+        }
+
         public void SHA1Encrypt(string str)
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
@@ -367,6 +435,10 @@ namespace MD5Plugin
             {
                 UnicodeChineseEncode(inputTextBox.Text);
             }
+            else if (hexRadioButton.Checked)
+            {
+                HexEncode(inputTextBox.Text);
+            }
             else if (sha1RadioButton.Checked)
             {
                 SHA1Encrypt(inputTextBox.Text);
@@ -403,6 +475,8 @@ namespace MD5Plugin
             {
                 UnicodeChineseDecode(outputTextBox.Text);
             }
+            else if(hexRadioButton.Checked)
+                HexDecode(outputTextBox.Text);
             else
             {
                 DecodeBase64(outputTextBox.Text);
@@ -555,7 +629,27 @@ namespace MD5Plugin
             }
         }
 
-
+        public void HexDecode(string str)
+        {
+            try
+            {
+                if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
+                    str = str.Replace(splitType, string.Empty);
+                string result;
+                byte[] arrByte = new byte[str.Length / 2];
+                int index = 0;
+                for (int i = 0; i < str.Length; i += 2)
+                {
+                    arrByte[index++] = Convert.ToByte(str.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+                }
+                result = languageType == "GB2312" ? System.Text.Encoding.Default.GetString(arrByte) : languageType == "UTF-8" ? System.Text.Encoding.UTF8.GetString(arrByte) : System.Text.Encoding.UTF8.GetString(arrByte);
+                inputTextBox.Text = result;
+            }
+            catch 
+            {
+                MessageBox.Show("请选择正确的分隔符号", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         //Base64解密
         string outPath;
         public void base64StrToFile(string base64Str)
@@ -567,7 +661,6 @@ namespace MD5Plugin
                 fs.Flush();
             }
         }
-
         public static bool IsBase64Formatted(string input)
         {
             try
