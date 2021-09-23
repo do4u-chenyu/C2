@@ -2025,6 +2025,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B42CA555EEB04AB7B0BBB6A1A9F58716"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B44249E4D6BF4E60B3CE93BD82620534"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2787,12 +2793,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EED70A491A7841E9944BBDCA6BD2EC92"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_EF19B9D5FB2944F1B0895F11AD09D000"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2830,6 +2830,12 @@
         "Entry"
         {
         "MsmKey" = "8:_EFC645D218674D168D3CE0A3612EF4E6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EFD2789A13CB4B77AF890A8598D17565"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -9373,6 +9379,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B42CA555EEB04AB7B0BBB6A1A9F58716"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\182_奥特曼.png"
+            "TargetName" = "8:182_奥特曼.png"
+            "Tag" = "8:"
+            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B44249E4D6BF4E60B3CE93BD82620534"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Classic Blue.xml"
@@ -11652,26 +11678,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EED70A491A7841E9944BBDCA6BD2EC92"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\168_冰蝎.png"
-            "TargetName" = "8:168_冰蝎.png"
-            "Tag" = "8:"
-            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EF19B9D5FB2944F1B0895F11AD09D000"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\Html\\BossIndex9.html"
@@ -11747,6 +11753,26 @@
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\33_涉军.png"
             "TargetName" = "8:33_涉军.png"
+            "Tag" = "8:"
+            "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFD2789A13CB4B77AF890A8598D17565"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\168_冰蝎.jpg"
+            "TargetName" = "8:168_冰蝎.jpg"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
             "Condition" = "8:"
@@ -12940,7 +12966,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{7A0EBF11-F8C2-4175-9C41-CC93F52636FA}"
+        "PackageCode" = "8:{68669DDA-833A-4DF5-A5DC-0CD3E67379A1}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
