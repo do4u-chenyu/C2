@@ -3158,7 +3158,7 @@
     <Content Include="Resources\PictureIconLib\167_中国菜刀.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PictureIconLib\168_冰蝎.jpg">
+    <Content Include="Resources\PictureIconLib\168_冰蝎.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PictureIconLib\169_php.png">
