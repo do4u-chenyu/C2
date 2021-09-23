@@ -83,15 +83,11 @@ if __name__ == '__main__':
             print("旧版IAO解决方案卸载成功")
             if C2_install() == 0:
                 print("新版IAO解决方案安装成功")
+                if beauty_product() == 0:
+                    print("美化版安装包生成成功，位于 " + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\output")
+                else:
+                    print("美化版安装包生成失败")
             else:
-                print("新版IAO解决方案安装失败")
+                print("新版IAO解决方案安装失败,无法生成美化版安装包.")
         else:
             print("旧版IAO解决方案卸载失败")
-
-    if C2_install() == 0:
-        if beauty_product() == 0:
-            print("美化版安装包生成成功，位于 " + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\output")
-        else:
-            print("美化版安装包生成失败")
-    else:
-        print("无法生成美化版安装包")
