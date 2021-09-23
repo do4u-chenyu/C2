@@ -635,6 +635,8 @@ namespace MD5Plugin
             {
                 if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
                     str = str.Replace(splitType, string.Empty);
+                if (str.Length % 2 != 0)
+                    str = str.Substring(0, str.Length - 1);
                 string result;
                 byte[] arrByte = new byte[str.Length / 2];
                 int index = 0;
