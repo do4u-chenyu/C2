@@ -90,7 +90,7 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault1();
         }
@@ -101,7 +101,7 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault1();
         }
@@ -113,7 +113,7 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault3();
         }
@@ -125,7 +125,7 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault2();
         }
@@ -137,7 +137,7 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             decodeButton.Visible = true;
             encodeButton.Visible = true;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault2();
         }
@@ -148,7 +148,7 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             decodeButton.Visible = true;
             encodeButton.Visible = true;
-            taskModelComboBox2.Visible = true;
+            languageComboBox.Visible = true;
             splitComboBox.Visible = true;
             splitComboBox.Visible = true;
             SetDefault2();
@@ -160,7 +160,7 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault1();
         }
@@ -170,7 +170,7 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault1();
         }
@@ -180,7 +180,7 @@ namespace MD5Plugin
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            taskModelComboBox2.Visible = false;
+            languageComboBox.Visible = false;
             splitComboBox.Visible = false;
             SetDefault1();
         }
@@ -333,9 +333,9 @@ namespace MD5Plugin
         
         private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (taskModelComboBox2.SelectedIndex == taskModelComboBox2.Items.IndexOf("UTF-8"))
+            if (languageComboBox.SelectedIndex == languageComboBox.Items.IndexOf("UTF-8"))
                 languageType = "UTF-8";
-            else if (taskModelComboBox2.SelectedIndex == taskModelComboBox2.Items.IndexOf("GB2312"))
+            else if (languageComboBox.SelectedIndex == languageComboBox.Items.IndexOf("GB2312"))
                 languageType = "GB2312";
         }
 
@@ -345,6 +345,8 @@ namespace MD5Plugin
                 splitType = "无分隔符";
             else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf(@"\X"))
                 splitType = @"\X";
+            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf(@"\x"))
+                splitType = @"\x";
             else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("#"))
                 splitType = "#";
             else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("%"))
@@ -629,17 +631,24 @@ namespace MD5Plugin
 
         public void HexDecode(string str)
         {
-            if (splitType == @"\X" || splitType == "#" || splitType == "%")
-                str = str.Replace(splitType, string.Empty);
-            string result;
-            byte[] arrByte = new byte[str.Length / 2];
-            int index = 0;
-            for (int i = 0; i < str.Length; i += 2)
+            try
             {
-                arrByte[index++] = Convert.ToByte(str.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+                if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
+                    str = str.Replace(splitType, string.Empty);
+                string result;
+                byte[] arrByte = new byte[str.Length / 2];
+                int index = 0;
+                for (int i = 0; i < str.Length; i += 2)
+                {
+                    arrByte[index++] = Convert.ToByte(str.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+                }
+                result = languageType == "GB2312" ? System.Text.Encoding.Default.GetString(arrByte) : languageType == "UTF-8" ? System.Text.Encoding.UTF8.GetString(arrByte) : System.Text.Encoding.UTF8.GetString(arrByte);
+                inputTextBox.Text = result;
             }
-            result = languageType == "GB2312" ? System.Text.Encoding.Default.GetString(arrByte) : languageType == "UTF-8" ? System.Text.Encoding.UTF8.GetString(arrByte) : System.Text.Encoding.UTF8.GetString(arrByte);
-            inputTextBox.Text = result;
+            catch 
+            {
+                MessageBox.Show("请选择正确的分隔符号", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         //Base64解密
         string outPath;

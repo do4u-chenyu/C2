@@ -44,7 +44,7 @@
             this.sha1RadioButton = new System.Windows.Forms.RadioButton();
             this.sha256RadioButton = new System.Windows.Forms.RadioButton();
             this.sha512RadioButton = new System.Windows.Forms.RadioButton();
-            this.taskModelComboBox2 = new System.Windows.Forms.ComboBox();
+            this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.splitComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -116,7 +116,7 @@
             this.base64RadioButton.AutoSize = true;
             this.base64RadioButton.Checked = true;
             this.splitComboBox.Visible = false;
-            this.taskModelComboBox2.Visible = false;
+            this.languageComboBox.Visible = false;
             this.base64RadioButton.Font = new System.Drawing.Font("宋体", 10F);
             this.base64RadioButton.Location = new System.Drawing.Point(199, 13);
             this.base64RadioButton.Name = "base64RadioButton";
@@ -219,21 +219,21 @@
             this.sha512RadioButton.UseVisualStyleBackColor = true;
             this.sha512RadioButton.CheckedChanged += new System.EventHandler(this.Sha512RadioButton_CheckedChanged);
             // 
-            // taskModelComboBox
+            // languageComboBox
             // 
-            this.taskModelComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.taskModelComboBox2.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskModelComboBox2.FormattingEnabled = true;
-            this.taskModelComboBox2.Items.AddRange(new object[] {
+            this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.languageComboBox.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Items.AddRange(new object[] {
             "UTF-8",
             "GB2312",
             });
-            this.taskModelComboBox2.Location = new System.Drawing.Point(476, 129);
-            this.taskModelComboBox2.Name = "taskModelComboBox";
-            this.taskModelComboBox2.Size = new System.Drawing.Size(75, 30);
-            this.taskModelComboBox2.TabIndex = 12;
-            this.taskModelComboBox2.SelectedIndex = taskModelComboBox2.Items.IndexOf("UTF-8");
-            this.taskModelComboBox2.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
+            this.languageComboBox.Location = new System.Drawing.Point(476, 129);
+            this.languageComboBox.Name = "taskModelComboBox";
+            this.languageComboBox.Size = new System.Drawing.Size(75, 30);
+            this.languageComboBox.TabIndex = 12;
+            this.languageComboBox.SelectedIndex = languageComboBox.Items.IndexOf("UTF-8");
+            this.languageComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // splitComboBox
             // 
@@ -243,6 +243,7 @@
             this.splitComboBox.Items.AddRange(new object[] {
             "无分隔符",
             @"\X",
+            @"\x",
             "#",
             "%"
             });
@@ -273,7 +274,7 @@
             this.Controls.Add(this.encodeButton);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
-            this.Controls.Add(this.taskModelComboBox2);
+            this.Controls.Add(this.languageComboBox);
             this.Controls.Add(this.splitComboBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -288,7 +289,6 @@
         }
 
         #endregion
-
         private System.Windows.Forms.TextBox inputTextBox;
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Button encodeButton;
@@ -303,7 +303,7 @@
         private System.Windows.Forms.RadioButton sha1RadioButton;
         private System.Windows.Forms.RadioButton sha256RadioButton;
         private System.Windows.Forms.RadioButton sha512RadioButton;
-        private System.Windows.Forms.ComboBox taskModelComboBox2;
+        private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.ComboBox splitComboBox;
     }
 }
