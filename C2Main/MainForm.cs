@@ -98,7 +98,7 @@ namespace C2
         private void InitializeUserName(string userName)
         {
             this.UserName = userName;
-            this.usernamelabel.Text = this.UserName;
+            //this.usernamelabel.Text = this.UserName;
         }
         #region 初始化
         void InitializeInputDataForm()
@@ -464,7 +464,7 @@ namespace C2
 
         private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
-            this.toolTip1.SetToolTip(this.usernamelabel, this.UserName + "已登录");
+            this.toolTip1.SetToolTip(this.usernamelabel, this.usernamelabel.Text + "已登录");
         }
     
         private void MainForm_Deactivate(object sender, EventArgs e)

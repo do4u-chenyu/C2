@@ -55,7 +55,7 @@
             this.ItemLabel.Name = "ItemLabel";
             this.ItemLabel.Size = new System.Drawing.Size(187, 30);
             this.ItemLabel.TabIndex = 2;
-            this.ItemLabel.Text = "IAO实验室";
+            this.ItemLabel.Text = "实验楼";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // IAOLabControl
