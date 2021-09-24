@@ -278,12 +278,26 @@
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddWebShell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddWebShell.Designer.cs">
+      <DependentUpon>AddWebShell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShell.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetails.Designer.cs">
+      <DependentUpon>WebShellDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.Designer.cs">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskInfo.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
@@ -1945,6 +1959,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShell.resx">
+      <DependentUpon>AddWebShell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellDetails.resx">
+      <DependentUpon>WebShellDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
