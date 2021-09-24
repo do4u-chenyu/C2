@@ -60,7 +60,7 @@ namespace C2
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
-            this.HIBUControl = new C2.Controls.Left.IAOLabControl("HI部实验室（网）");
+            this.HIBUControl = new C2.Controls.Left.IAOLabControl();
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
@@ -176,7 +176,7 @@ namespace C2
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.usernamelabel.Size = new System.Drawing.Size(40, 22);
             this.usernamelabel.TabIndex = 3;
-            this.usernamelabel.Text = "IAO";
+            this.usernamelabel.Text = "BI";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
             // 
             // label1
@@ -332,7 +332,7 @@ namespace C2
             this.iaoLabButton.Size = new System.Drawing.Size(151, 42);
             this.iaoLabButton.TabIndex = 3;
             this.iaoLabButton.TabStop = false;
-            this.iaoLabButton.Text = "   IAO实验室";
+            this.iaoLabButton.Text = "   实验楼";
             this.toolTip1.SetToolTip(this.iaoLabButton, "分析师的实验台");
             this.iaoLabButton.UseVisualStyleBackColor = true;
             this.iaoLabButton.Click += new System.EventHandler(this.IAOLabButton_Click);
@@ -805,7 +805,7 @@ namespace C2
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = global::C2.Properties.Resources.logo;
             this.Name = "MainForm";
-            this.Text = "烽火FiberHome";
+            this.Text = "烽步楼Febleau";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -844,6 +844,7 @@ namespace C2
             this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
