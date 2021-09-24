@@ -2,6 +2,7 @@
 using C2.Business.CastleBravo.PwdGenerator;
 using C2.Business.CastleBravo.RobotsScan;
 using C2.Business.CastleBravo.WebScan;
+using C2.Business.CastleBravo.WebShellTool;
 using C2.Business.Cracker.Dialogs;
 using C2.Business.Model;
 using C2.Core;
@@ -149,6 +150,10 @@ namespace C2.Controls.C1.Left
                         this.leftPictureBox.Image = global::C2.Properties.Resources.Robots;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RobotsScanHelpInfo);
                         break;
+                    case "WebShell":
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
+                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
+                        break;
                 }
             }
             private void InitButtonMenu()
@@ -196,6 +201,9 @@ namespace C2.Controls.C1.Left
                         break;
                     case "RobotsScan":
                         new RobotsScan().ShowDialog();
+                        break;
+                    case "WebShell":
+                        new WebShellManageForm().ShowDialog();
                         break;
                 }
             }
@@ -320,7 +328,7 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan"};
+            List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan", "WebShell"};
             CBPlugins.ForEach(pname => this.AddCBPlugin(new CastleBravoPlugin(pname)));
         }
 

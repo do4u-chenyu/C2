@@ -91,6 +91,7 @@ namespace C2.Utils
         public static string PwdGeneratorHelpInfo = "社工生成器，输入目标信息，猜测可能使用的数字字符组合";
         public static string WebScanHelpInfo = "Web目录扫描";
         public static string RobotsScanHelpInfo = "基于Robots.txt的网站模板匹配";
+        public static string WebShellHelpInfo = "webshell管理工具";
 
 
 
