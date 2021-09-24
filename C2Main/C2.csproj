@@ -3209,6 +3209,9 @@
     <Content Include="Resources\PictureIconLib\181_shell.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PictureIconLib\182_奥特曼.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PictureIconLib\195_开锁.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
