@@ -23,6 +23,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         pythonEval
     }
 
+    [Serializable]
     public class WebShellTaskInfo
     {
         public static readonly WebShellTaskInfo Empty = new WebShellTaskInfo();

@@ -36,7 +36,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebShellDetails));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -49,6 +48,8 @@
             this.filePathTb = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.messageLog = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -60,14 +61,14 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 450);
+            this.tabControl1.Size = new System.Drawing.Size(800, 242);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
@@ -76,20 +77,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 424);
+            this.tabPage1.Size = new System.Drawing.Size(792, 216);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基础信息";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 424);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ShellCmder";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -97,7 +88,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(792, 424);
+            this.tabPage3.Size = new System.Drawing.Size(792, 216);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "文件管理";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -116,7 +107,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fileManagerListView);
             this.splitContainer1.Panel2.Controls.Add(this.filePathTb);
-            this.splitContainer1.Size = new System.Drawing.Size(786, 418);
+            this.splitContainer1.Size = new System.Drawing.Size(786, 210);
             this.splitContainer1.SplitterDistance = 262;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -134,7 +125,7 @@
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode3});
-            this.treeView1.Size = new System.Drawing.Size(262, 418);
+            this.treeView1.Size = new System.Drawing.Size(262, 210);
             this.treeView1.TabIndex = 0;
             // 
             // fileManagerListView
@@ -149,7 +140,7 @@
             this.fileManagerListView.HideSelection = false;
             this.fileManagerListView.Location = new System.Drawing.Point(0, 21);
             this.fileManagerListView.Name = "fileManagerListView";
-            this.fileManagerListView.Size = new System.Drawing.Size(520, 397);
+            this.fileManagerListView.Size = new System.Drawing.Size(520, 189);
             this.fileManagerListView.TabIndex = 1;
             this.fileManagerListView.UseCompatibleStateImageBehavior = false;
             this.fileManagerListView.View = System.Windows.Forms.View.Details;
@@ -190,7 +181,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(792, 424);
+            this.tabPage4.Size = new System.Drawing.Size(792, 216);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "数据库管理";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -204,11 +195,33 @@
             this.imageList1.Images.SetKeyName(2, "text");
             this.imageList1.Images.SetKeyName(3, "image");
             // 
+            // messageLog
+            // 
+            this.messageLog.BackColor = System.Drawing.Color.White;
+            this.messageLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.messageLog.Location = new System.Drawing.Point(0, 242);
+            this.messageLog.Multiline = true;
+            this.messageLog.Name = "messageLog";
+            this.messageLog.ReadOnly = true;
+            this.messageLog.Size = new System.Drawing.Size(800, 208);
+            this.messageLog.TabIndex = 1;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 216);
+            this.tabPage2.TabIndex = 4;
+            this.tabPage2.Text = "ShellCmd";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // WebShellDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.messageLog);
             this.Controls.Add(this.tabControl1);
             this.Name = "WebShellDetails";
             this.Text = "WebShellDetails";
@@ -220,6 +233,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -227,7 +241,6 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -240,5 +253,7 @@
         private System.Windows.Forms.ColumnHeader flvChmod;
         private System.Windows.Forms.TextBox filePathTb;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TextBox messageLog;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
