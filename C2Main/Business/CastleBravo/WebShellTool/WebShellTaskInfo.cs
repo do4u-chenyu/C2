@@ -10,17 +10,7 @@ namespace C2.Business.CastleBravo.WebShellTool
     public enum WebShellTaskType
     {
         Null,
-        aspEval,
-        aspEval_Cookie,
-        aspxEval,
-        aspxEval_Cookie,
-        jspBig,
-        phpAssert,
-        phpAssert_Base64,
-        phpEval,
-        phpEval_Base64,
-        phpEval_Cookie,
-        pythonEval
+        phpEval
     }
 
     [Serializable]

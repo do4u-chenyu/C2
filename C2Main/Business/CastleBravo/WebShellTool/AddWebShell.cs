@@ -17,10 +17,32 @@ namespace C2.Business.CastleBravo.WebShellTool
         public WebShellTaskInfo WebShellTask;
 
         private string taskId;
-        public AddWebShell(string id)
+
+        public AddWebShell()
         {
             InitializeComponent();
+            this.typeCombo.SelectedIndex = 0;
+        }
+
+        public AddWebShell(string id) : this()
+        {
             taskId = id;
+        }
+
+        public AddWebShell(WebShellTaskInfo webShellTaskInfo) : this()
+        {
+            WebShellTask = webShellTaskInfo;
+            UpdateSetting();
+        }
+
+        private void UpdateSetting()
+        {
+            taskId = WebShellTask.TaskID;
+            this.NameTextBox.Text = WebShellTask.TaskName;
+            this.urlTextBox.Text = WebShellTask.TaskUrl;
+            this.pwdTextBox.Text = WebShellTask.TaskPwd;
+            this.remarkTextBox.Text = WebShellTask.TaskRemark;
+            this.advancedTextBox.Text = WebShellTask.TaskAdvanced;
         }
 
         protected override bool OnOKButtonClick()

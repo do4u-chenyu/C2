@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("C:");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("work");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("D:", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("C:");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("work");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("D:", new System.Windows.Forms.TreeNode[] {
+            treeNode5});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebShellDetails));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -47,9 +47,9 @@
             this.flvChmod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.filePathTb = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.messageLog = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -116,15 +116,15 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "节点0";
-            treeNode1.Text = "C:";
-            treeNode2.Name = "节点2";
-            treeNode2.Text = "work";
-            treeNode3.Name = "节点1";
-            treeNode3.Text = "D:";
+            treeNode4.Name = "节点0";
+            treeNode4.Text = "C:";
+            treeNode5.Name = "节点2";
+            treeNode5.Text = "work";
+            treeNode6.Name = "节点1";
+            treeNode6.Text = "D:";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode3});
+            treeNode4,
+            treeNode6});
             this.treeView1.Size = new System.Drawing.Size(262, 210);
             this.treeView1.TabIndex = 0;
             // 
@@ -186,6 +186,16 @@
             this.tabPage4.Text = "数据库管理";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 216);
+            this.tabPage2.TabIndex = 4;
+            this.tabPage2.Text = "ShellCmd";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -206,16 +216,6 @@
             this.messageLog.Size = new System.Drawing.Size(800, 208);
             this.messageLog.TabIndex = 1;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 216);
-            this.tabPage2.TabIndex = 4;
-            this.tabPage2.Text = "ShellCmd";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // WebShellDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -224,7 +224,8 @@
             this.Controls.Add(this.messageLog);
             this.Controls.Add(this.tabControl1);
             this.Name = "WebShellDetails";
-            this.Text = "WebShellDetails";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "WebShell详情";
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

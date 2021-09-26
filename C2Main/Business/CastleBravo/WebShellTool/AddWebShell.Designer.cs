@@ -117,10 +117,10 @@
             // 
             // typeCombo
             // 
+            this.typeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCombo.FormattingEnabled = true;
             this.typeCombo.Items.AddRange(new object[] {
-            "phpEval",
-            "phpAssert"});
+            "phpEval"});
             this.typeCombo.Location = new System.Drawing.Point(87, 105);
             this.typeCombo.Name = "typeCombo";
             this.typeCombo.Size = new System.Drawing.Size(270, 20);
@@ -162,6 +162,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.NameTextBox);
             this.Name = "AddWebShell";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell Setting";
             this.Controls.SetChildIndex(this.NameTextBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
