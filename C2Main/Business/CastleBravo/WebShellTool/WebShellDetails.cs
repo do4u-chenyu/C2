@@ -128,6 +128,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
 
             root.ExpandAll();
+
+            this.messageLog.Text = string.Join("\r\n",webShell.PayloadLog);
+            webShell.PayloadLog.Clear();
         }
 
         private void TreeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

@@ -35,12 +35,12 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.fileManagerListView = new System.Windows.Forms.ListView();
             this.flvName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flvTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flvSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flvChmod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.filePathTb = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -118,6 +118,16 @@
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1_NodeMouseClick);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder");
+            this.imageList1.Images.SetKeyName(1, "file");
+            this.imageList1.Images.SetKeyName(2, "text");
+            this.imageList1.Images.SetKeyName(3, "image");
+            this.imageList1.Images.SetKeyName(4, "driver");
+            // 
             // fileManagerListView
             // 
             this.fileManagerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -156,16 +166,6 @@
             // 
             this.flvChmod.Text = "属性";
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folder");
-            this.imageList1.Images.SetKeyName(1, "file");
-            this.imageList1.Images.SetKeyName(2, "text");
-            this.imageList1.Images.SetKeyName(3, "image");
-            this.imageList1.Images.SetKeyName(4, "driver");
-            // 
             // filePathTb
             // 
             this.filePathTb.Dock = System.Windows.Forms.DockStyle.Top;
@@ -203,6 +203,7 @@
             this.messageLog.Multiline = true;
             this.messageLog.Name = "messageLog";
             this.messageLog.ReadOnly = true;
+            this.messageLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.messageLog.Size = new System.Drawing.Size(800, 208);
             this.messageLog.TabIndex = 1;
             // 
