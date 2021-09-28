@@ -454,6 +454,12 @@
     <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\PostAndGetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\IAOLab\PostAndGet\PostAndGetForm.Designer.cs">
+      <DependentUpon>PostAndGetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
     <Compile Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.cs">
@@ -2020,6 +2026,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\TrackRecognition\TrackRecognitionForm.resx">
       <DependentUpon>TrackRecognitionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\IAOLab\PostAndGet\PostAndGetForm.resx">
+      <DependentUpon>PostAndGetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.resx">
       <DependentUpon>SettingChartDialog.cs</DependentUpon>

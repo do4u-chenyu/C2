@@ -17,6 +17,7 @@ using C2.Business.HIBU.RedHeaderRecognition;
 using C2.Business.HIBU.GunDetection;
 using C2.Business.HIBU.TerrorismDetection;
 using C2.Business.HIBU.TibetanDetection;
+using C2.Business.IAOLab.PostAndGet;
 using C2.Dialogs.IAOLab;
 using C2.Globalization;
 using C2.Utils;
@@ -74,6 +75,10 @@ namespace C2.Controls.Left
                 case "Address":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
+                    break;
+                case "PostAndGet":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.PostAndGet;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PostAndGetFormHelpInfo);
                     break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
@@ -261,6 +266,10 @@ namespace C2.Controls.Left
                     break;
                 case "Tude":
                     GPSTransformForm(buttonType).ShowDialog();
+                    break;
+                case "PostAndGet":
+                    
+                     new PostAndGetForm().ShowDialog();
                     break;
                 case "BigAPK":
                     BigAPKForm().ShowDialog();

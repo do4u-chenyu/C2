@@ -393,7 +393,7 @@ namespace C2
 
         private void LoadInnerPlugins()
         {
-            string[] IAOLabArr = { "BigAPK", "APK", "Visualization", "Wifi", "Card", "Tude", "Ip" };
+            string[] IAOLabArr = { "BigAPK", "APK", "Visualization", "Wifi", "Card", "Tude", "Ip" , "PostAndGet" };
             string IAOLabPlugins = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
             foreach (string name in IAOLabPlugins.Split(','))
             {
@@ -401,7 +401,6 @@ namespace C2
                 {
                     this.iaoLabControl.GenIAOButton(name.Trim());
                 }
-
             }
         }
 
