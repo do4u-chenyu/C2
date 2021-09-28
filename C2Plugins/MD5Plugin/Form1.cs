@@ -492,7 +492,7 @@ namespace MD5Plugin
 
         public void DecodeBase64(string base64Str)
         {
-            DateTime dateTime = DateTime.Now;
+            //DateTime dateTime = DateTime.Now;
             Dictionary<string, string> pairs = new Dictionary<string, string>();
             pairs.Add("/9j/", "jpg");
             pairs.Add("iVBORw", "png");
@@ -518,9 +518,9 @@ namespace MD5Plugin
                 {
                     string value;
                     pairs.TryGetValue(key, out value);
-                    outPath = string.Format(TryGetSysTempDir() + "{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
-                    base64StrToFile(base64Str);
-                    inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
+                    //outPath = string.Format(TryGetSysTempDir() + "{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
+                    base64StrToFile(base64Str,value);
+                    //inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
                     break;
                 }
                 else if (IsBase64Formatted(base64Str))
@@ -654,13 +654,23 @@ namespace MD5Plugin
         }
         //Base64解密
         string outPath;
-        public void base64StrToFile(string base64Str)
+        public void base64StrToFile(string base64Str,string value)
         {
-            var contents = Convert.FromBase64String(base64Str);
-            using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+            DateTime dateTime = DateTime.Now;
+            try
             {
-                fs.Write(contents, 0, contents.Length);
-                fs.Flush();
+                outPath = string.Format(TryGetSysTempDir() + "{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
+                var contents = Convert.FromBase64String(base64Str);
+                using (var fs = new FileStream(outPath, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(contents, 0, contents.Length);
+                    fs.Flush();
+                }
+                inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
+            }
+            catch 
+            {
+                MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public static bool IsBase64Formatted(string input)

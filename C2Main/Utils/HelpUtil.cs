@@ -62,7 +62,8 @@ namespace C2.Utils
         public static string GPSTransformFormHelpInfo = "经纬度坐标系转换(百度、火星和WGS);计算两经纬度坐标之间的距离";
         public static string TimeAndIPTransformFormHelpInfo = "IP和整形IP之间的转换，绝对时间和真实时间之间的转换";
         public static string BigAPKFormHelpInfo = "APK检测系统";
-        
+        public static string PostAndGetFormHelpInfo = "在线Post和Get";
+
         public static string OCRFormHelpInfo = "OCR图片检测文字";
         public static string NERFormHelpInfo = "将输入句子中的人名、地点、机构识别并定位";
         public static string ASRFormHelpInfo = "将语音文件转换为文本信息";
