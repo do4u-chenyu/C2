@@ -37,6 +37,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addShellMenu = new System.Windows.Forms.ToolStripLabel();
             this.saveShellMenu = new System.Windows.Forms.ToolStripLabel();
+            this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpMenu = new System.Windows.Forms.ToolStripLabel();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -46,7 +47,6 @@
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -109,6 +109,13 @@
             this.saveShellMenu.Text = "保存";
             this.saveShellMenu.Click += new System.EventHandler(this.SaveShellMenu_Click);
             // 
+            // settingMenu
+            // 
+            this.settingMenu.Name = "settingMenu";
+            this.settingMenu.Size = new System.Drawing.Size(56, 22);
+            this.settingMenu.Text = "版本配置";
+            this.settingMenu.Click += new System.EventHandler(this.SettingMenu_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -165,19 +172,12 @@
             // lvRemark
             // 
             this.lvRemark.Text = "备注";
-            this.lvRemark.Width = 128;
+            this.lvRemark.Width = 74;
             // 
             // lvAddTime
             // 
             this.lvAddTime.Text = "创建时间";
-            this.lvAddTime.Width = 121;
-            // 
-            // settingMenu
-            // 
-            this.settingMenu.Name = "settingMenu";
-            this.settingMenu.Size = new System.Drawing.Size(56, 22);
-            this.settingMenu.Text = "版本配置";
-            this.settingMenu.Click += new System.EventHandler(this.SettingMenu_Click);
+            this.lvAddTime.Width = 156;
             // 
             // WebShellManageForm
             // 

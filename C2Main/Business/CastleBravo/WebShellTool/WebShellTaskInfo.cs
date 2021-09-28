@@ -36,7 +36,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             TaskPwd = string.Empty;
             TaskRemark = string.Empty;
             TaskType = WebShellTaskType.Null;
-            TaskAddTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            TaskAddTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             TaskAdvanced = string.Empty;
         }
 
@@ -48,7 +48,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             TaskPwd = taskPwd;
             TaskRemark = taskRemark;
             TaskType = taskType;
-            TaskAddTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            TaskAddTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             TaskAdvanced = taskAdvancedSetting;
         }
     }
