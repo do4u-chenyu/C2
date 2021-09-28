@@ -96,6 +96,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
             byte[] postData = Encoding.UTF8.GetBytes(payload);
+            //TODO  TRY
             byte[] responseData = client.UploadData(url, "POST", postData);//得到返回字符流  
             string result = Encoding.UTF8.GetString(responseData);//解码 
 

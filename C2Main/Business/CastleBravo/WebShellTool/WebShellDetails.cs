@@ -90,27 +90,43 @@ namespace C2.Business.CastleBravo.WebShellTool
              * 2、对path进行解析，用 / 切分，展示为树的一条完整分支
              * 3、该路径下的所有文件夹，添加到子孩子
              */
-            this.treeView1.Nodes.Clear();
+            //this.treeView1.Nodes.Clear();
 
+            TreeNode[] nodes = this.treeView1.Nodes.Find("/", false);
             TreeNode root = new TreeNode();
-            root.Name = "/";
-            root.Text = "/";
-            root.Tag = "/";
-            root.ImageIndex = 4;
-            this.treeView1.Nodes.Add(root);
-
-            TreeNode tmpNode = root;
+            TreeNode tmpNode;
+            if (nodes.Length == 0)
+            {
+                root.Name = "/";
+                root.Text = "/";
+                root.Tag = "/";
+                root.ImageIndex = 4;
+                root.SelectedImageIndex = 4;
+                this.treeView1.Nodes.Add(root);
+                tmpNode = root;
+            }
+            else
+                tmpNode = nodes[0];
 
             foreach (string dir in path.Trim('/').Split('/'))
             {
-                TreeNode dirNode = new TreeNode();
-                dirNode.Name = dir;
-                dirNode.Text = dir;
-                dirNode.Tag = tmpNode.Tag + "/" + dir;
-                dirNode.ImageIndex = 0;
+                if (string.IsNullOrEmpty(dir))
+                    break;
 
-                tmpNode.Nodes.Add(dirNode);
-                tmpNode = dirNode;
+                TreeNode[] nodes2 = tmpNode.Nodes.Find(dir, false);
+
+                TreeNode dirNode = new TreeNode();
+                if (nodes2.Length == 0)
+                {
+                    dirNode.Name = dir;
+                    dirNode.Text = dir;
+                    dirNode.Tag = tmpNode.Tag + dir + "/";
+                    dirNode.ImageIndex = 0;
+                    tmpNode.Nodes.Add(dirNode);
+                    tmpNode = dirNode;
+                }
+                else
+                    tmpNode = nodes2[0];
             }
 
             foreach (WSFile file in files)
@@ -118,13 +134,17 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (file.Type != WebShellFileType.Directory)
                     continue;
 
+                TreeNode[] nodes3 = tmpNode.Nodes.Find(file.FileName, false);
                 TreeNode dirNode = new TreeNode();
-                dirNode.Name = file.FileName;
-                dirNode.Text = file.FileName;
-                dirNode.Tag = tmpNode.Tag + "/" + file.FileName;
-                dirNode.ImageIndex = 0;
-
-                tmpNode.Nodes.Add(dirNode);
+                
+                if (nodes3.Length == 0)
+                {
+                    dirNode.Name = file.FileName;
+                    dirNode.Text = file.FileName;
+                    dirNode.Tag = tmpNode.Tag +  file.FileName + "/";
+                    dirNode.ImageIndex = 0;
+                    tmpNode.Nodes.Add(dirNode);
+                }
             }
 
             root.ExpandAll();
@@ -133,11 +153,48 @@ namespace C2.Business.CastleBravo.WebShellTool
             webShell.PayloadLog.Clear();
         }
 
-        private void TreeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                UpdateFileManager(webShell.PathBrowse(e.Node.Tag.ToString()));
+                
+                UpdateFileManager(webShell.PathBrowse(e.Node.Tag.ToString() == "/" ? e.Node.Tag.ToString() : e.Node.Tag.ToString().TrimEnd('/')));
+            }
+        }
+
+        //曲线救国之双击不展开
+        public int m_MouseClicks = 0;
+
+        private void TreeView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.m_MouseClicks = e.Clicks;
+        }
+
+        private void TreeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            if (this.m_MouseClicks > 1)
+            {
+                //如果是鼠标双击则禁止结点展开
+                e.Cancel = true;
+            }
+            else
+            {
+                //如果是鼠标单击则允许结点展开
+                e.Cancel = false;
+            }
+        }
+
+        private void TreeView1_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            if (this.m_MouseClicks > 1)
+            {
+                //如果是鼠标双击则禁止结点折叠
+                e.Cancel = true;
+            }
+            else
+            {
+                //如果是鼠标单击则允许结点折叠
+                e.Cancel = false;
             }
         }
     }
