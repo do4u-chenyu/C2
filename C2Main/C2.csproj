@@ -284,6 +284,12 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShell.Designer.cs">
       <DependentUpon>AddWebShell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\VersionSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\VersionSettingForm.Designer.cs">
+      <DependentUpon>VersionSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShell.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetails.cs">
       <SubType>Form</SubType>
@@ -298,6 +304,7 @@
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskInfo.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellVersionSetting.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
@@ -1962,6 +1969,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShell.resx">
       <DependentUpon>AddWebShell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\VersionSettingForm.resx">
+      <DependentUpon>VersionSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellDetails.resx">
       <DependentUpon>WebShellDetails.cs</DependentUpon>
@@ -3848,6 +3858,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\WebScanDict\UserAgent.list">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife11_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\WebShellConfig\Cknife16_Config.ini">

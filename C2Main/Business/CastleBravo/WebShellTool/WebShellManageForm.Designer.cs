@@ -46,6 +46,7 @@
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +86,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addShellMenu,
             this.saveShellMenu,
+            this.settingMenu,
             this.toolStripSeparator1,
             this.helpMenu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -170,6 +172,13 @@
             this.lvAddTime.Text = "创建时间";
             this.lvAddTime.Width = 121;
             // 
+            // settingMenu
+            // 
+            this.settingMenu.Name = "settingMenu";
+            this.settingMenu.Size = new System.Drawing.Size(56, 22);
+            this.settingMenu.Text = "版本配置";
+            this.settingMenu.Click += new System.EventHandler(this.SettingMenu_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -208,5 +217,6 @@
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EnterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel settingMenu;
     }
 }

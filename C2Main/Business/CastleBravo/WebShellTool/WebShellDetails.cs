@@ -27,10 +27,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             currentShowPath = string.Empty;
         }
 
-        public WebShellDetails(WebShellTaskInfo taskInfo) : this()
+        public WebShellDetails(WebShellTaskInfo taskInfo, WebShellVersionSetting versionSetting) : this()
         {
             webShellTaskInfo = taskInfo;
-            webShell = new WebShell(taskInfo.TaskUrl, taskInfo.TaskPwd);
+            webShell = new WebShell(taskInfo.TaskUrl, taskInfo.TaskPwd, versionSetting);
         }
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)

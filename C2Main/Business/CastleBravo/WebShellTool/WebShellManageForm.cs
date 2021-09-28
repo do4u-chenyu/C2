@@ -16,12 +16,15 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         List<WebShellTaskInfo> webShellTasks;
         private string webShellFilePath;
+        public WebShellVersionSetting SelectedVersion;
 
         public WebShellManageForm()
         {
             InitializeComponent();
             webShellTasks = new List<WebShellTaskInfo>();
             webShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
+            SelectedVersion = new WebShellVersionSetting();
+            SelectedVersion.LoadSetting("中国菜刀16");
         }
 
         private void AddShellMenu_Click(object sender, EventArgs e)
@@ -102,7 +105,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.listView1.SelectedItems.Count == 0)
                 return;
 
-            new WebShellDetails((WebShellTaskInfo)this.listView1.SelectedItems[0].Tag).ShowDialog();
+            new WebShellDetails((WebShellTaskInfo)this.listView1.SelectedItems[0].Tag, SelectedVersion).ShowDialog();
         }
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -133,6 +136,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             webShellTasks.Remove(webShellTasks.Find(c => c.TaskID == (this.listView1.SelectedItems[0].Tag as WebShellTaskInfo).TaskID));
             this.listView1.SelectedItems[0].Remove();
             SaveDB();
+        }
+
+        private void SettingMenu_Click(object sender, EventArgs e)
+        {
+            VersionSettingForm dialog = new VersionSettingForm();
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            SelectedVersion = dialog.SelectedVersion;
         }
     }
 }
