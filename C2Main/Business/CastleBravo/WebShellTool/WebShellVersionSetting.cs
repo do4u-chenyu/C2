@@ -26,6 +26,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PARAM3;
         public string PHP_BASE64;
         public string PHP_MAKE;
+        public string PHP_INFO;
         public string PHP_INDEX;
         public string PHP_READDICT;
         public string PHP_READFILE;
@@ -61,6 +62,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.PARAM3 = Read(version, "PARAM3", path);
             this.PHP_BASE64 = Read(version, "PHP_BASE64", path);
             this.PHP_MAKE = Read(version, "PHP_MAKE", path);
+            this.PHP_INFO = Read(version, "PHP_INFO", path);
             this.PHP_INDEX = Read(version, "PHP_INDEX", path);
             this.PHP_READDICT = Read(version, "PHP_READDICT", path);
             this.PHP_READFILE = Read(version, "PHP_READFILE", path);

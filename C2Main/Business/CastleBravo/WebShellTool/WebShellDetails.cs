@@ -24,19 +24,31 @@ namespace C2.Business.CastleBravo.WebShellTool
         public WebShellDetails()
         {
             InitializeComponent();
-            currentShowPath = string.Empty;
         }
 
         public WebShellDetails(WebShellTaskInfo taskInfo, WebShellVersionSetting versionSetting) : this()
         {
             webShellTaskInfo = taskInfo;
             webShell = new WebShell(taskInfo.TaskUrl, taskInfo.TaskPwd, versionSetting);
+            currentShowPath = string.Empty;
+            UpdateBaseInfo(webShell.PHPInfo());
         }
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab.Text == "文件管理")
                 UpdateFileManager(webShell.CurrentPathBrowse());
+            if (tabControl1.SelectedTab.Text == "基础信息")
+                UpdateBaseInfo(webShell.PHPInfo());
+        }
+
+        private void UpdateBaseInfo(string result)
+        {
+
+            this.baseInfoWebBrowser.DocumentText = result;
+
+            this.messageLog.Text = string.Join("\r\n", webShell.PayloadLog);
+            webShell.PayloadLog.Clear();
         }
 
         private void FilePathTb_KeyDown(object sender, KeyEventArgs e)

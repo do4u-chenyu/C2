@@ -46,7 +46,9 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.messageLog = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.baseInfoWebBrowser = new System.Windows.Forms.WebBrowser();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,16 +70,17 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 225);
+            this.tabControl1.Size = new System.Drawing.Size(800, 313);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.baseInfoWebBrowser);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 199);
+            this.tabPage1.Size = new System.Drawing.Size(792, 287);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基础信息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -214,7 +217,7 @@
             this.messageLog.Name = "messageLog";
             this.messageLog.ReadOnly = true;
             this.messageLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageLog.Size = new System.Drawing.Size(800, 221);
+            this.messageLog.Size = new System.Drawing.Size(800, 133);
             this.messageLog.TabIndex = 1;
             // 
             // splitContainer2
@@ -232,19 +235,30 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.messageLog);
             this.splitContainer2.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer2.SplitterDistance = 225;
+            this.splitContainer2.SplitterDistance = 313;
             this.splitContainer2.TabIndex = 2;
+            // 
+            // baseInfoWebBrowser
+            // 
+            this.baseInfoWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.baseInfoWebBrowser.Location = new System.Drawing.Point(3, 3);
+            this.baseInfoWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.baseInfoWebBrowser.Name = "baseInfoWebBrowser";
+            this.baseInfoWebBrowser.Size = new System.Drawing.Size(786, 281);
+            this.baseInfoWebBrowser.TabIndex = 0;
             // 
             // WebShellDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer2);
             this.Name = "WebShellDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell详情";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -278,5 +292,6 @@
         private System.Windows.Forms.TextBox messageLog;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.WebBrowser baseInfoWebBrowser;
     }
 }

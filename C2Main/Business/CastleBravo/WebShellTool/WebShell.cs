@@ -36,6 +36,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             return PathBrowse(PHPIndex());
         }
 
+
+        public string PHPInfo()
+        {
+            PayloadLog.Add("========获取php基础信息========");
+            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INFO);
+        }
+
         public Tuple<string, List<WSFile>, List<string>> PathBrowse(List<string> pathList)
         {
             List<WSFile> pathFiles = new List<WSFile>();
@@ -83,7 +90,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            byte[] postData = Encoding.UTF8.GetBytes(payload);
+            byte[] postData = Encoding.Default.GetBytes(payload);
             string result = string.Empty;
 
             try
