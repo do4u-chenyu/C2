@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebShellDetails));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.baseInfoWebBrowser = new System.Windows.Forms.WebBrowser();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -44,9 +45,12 @@
             this.filePathTb = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.outputTextBox = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.excuteBtn = new System.Windows.Forms.Button();
+            this.cmdTextBox = new System.Windows.Forms.TextBox();
             this.messageLog = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.baseInfoWebBrowser = new System.Windows.Forms.WebBrowser();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -54,6 +58,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -85,13 +91,22 @@
             this.tabPage1.Text = "基础信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // baseInfoWebBrowser
+            // 
+            this.baseInfoWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.baseInfoWebBrowser.Location = new System.Drawing.Point(3, 3);
+            this.baseInfoWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.baseInfoWebBrowser.Name = "baseInfoWebBrowser";
+            this.baseInfoWebBrowser.Size = new System.Drawing.Size(786, 281);
+            this.baseInfoWebBrowser.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.splitContainer1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(792, 199);
+            this.tabPage3.Size = new System.Drawing.Size(792, 287);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "文件管理";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -110,7 +125,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fileManagerListView);
             this.splitContainer1.Panel2.Controls.Add(this.filePathTb);
-            this.splitContainer1.Size = new System.Drawing.Size(786, 193);
+            this.splitContainer1.Size = new System.Drawing.Size(786, 281);
             this.splitContainer1.SplitterDistance = 262;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -122,7 +137,7 @@
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(262, 193);
+            this.treeView1.Size = new System.Drawing.Size(262, 281);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeCollapse);
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeExpand);
@@ -151,7 +166,7 @@
             this.fileManagerListView.Location = new System.Drawing.Point(0, 21);
             this.fileManagerListView.MultiSelect = false;
             this.fileManagerListView.Name = "fileManagerListView";
-            this.fileManagerListView.Size = new System.Drawing.Size(520, 172);
+            this.fileManagerListView.Size = new System.Drawing.Size(520, 260);
             this.fileManagerListView.SmallImageList = this.imageList1;
             this.fileManagerListView.TabIndex = 1;
             this.fileManagerListView.UseCompatibleStateImageBehavior = false;
@@ -193,20 +208,65 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(792, 199);
+            this.tabPage4.Size = new System.Drawing.Size(792, 287);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "数据库管理";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.outputTextBox);
+            this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 199);
+            this.tabPage2.Size = new System.Drawing.Size(792, 287);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "虚拟终端";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // outputTextBox
+            // 
+            this.outputTextBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.outputTextBox.Location = new System.Drawing.Point(3, 28);
+            this.outputTextBox.Multiline = true;
+            this.outputTextBox.Name = "outputTextBox";
+            this.outputTextBox.ReadOnly = true;
+            this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.outputTextBox.Size = new System.Drawing.Size(786, 256);
+            this.outputTextBox.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.excuteBtn);
+            this.panel1.Controls.Add(this.cmdTextBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(786, 25);
+            this.panel1.TabIndex = 0;
+            // 
+            // excuteBtn
+            // 
+            this.excuteBtn.Location = new System.Drawing.Point(682, -1);
+            this.excuteBtn.Name = "excuteBtn";
+            this.excuteBtn.Size = new System.Drawing.Size(101, 23);
+            this.excuteBtn.TabIndex = 1;
+            this.excuteBtn.Text = "执行命令";
+            this.excuteBtn.UseVisualStyleBackColor = true;
+            this.excuteBtn.Click += new System.EventHandler(this.ExcuteBtn_Click);
+            // 
+            // cmdTextBox
+            // 
+            this.cmdTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cmdTextBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmdTextBox.Location = new System.Drawing.Point(0, 0);
+            this.cmdTextBox.Name = "cmdTextBox";
+            this.cmdTextBox.Size = new System.Drawing.Size(679, 21);
+            this.cmdTextBox.TabIndex = 0;
+            this.cmdTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CmdTextBox_KeyDown);
             // 
             // messageLog
             // 
@@ -238,15 +298,6 @@
             this.splitContainer2.SplitterDistance = 313;
             this.splitContainer2.TabIndex = 2;
             // 
-            // baseInfoWebBrowser
-            // 
-            this.baseInfoWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.baseInfoWebBrowser.Location = new System.Drawing.Point(3, 3);
-            this.baseInfoWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.baseInfoWebBrowser.Name = "baseInfoWebBrowser";
-            this.baseInfoWebBrowser.Size = new System.Drawing.Size(786, 281);
-            this.baseInfoWebBrowser.TabIndex = 0;
-            // 
             // WebShellDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -265,6 +316,10 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
@@ -293,5 +348,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.WebBrowser baseInfoWebBrowser;
+        private System.Windows.Forms.TextBox outputTextBox;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button excuteBtn;
+        private System.Windows.Forms.TextBox cmdTextBox;
     }
 }

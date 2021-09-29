@@ -20,6 +20,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private WebShell webShell;
 
         private string currentShowPath;
+        private string currentCmdPath;
 
         public WebShellDetails()
         {
@@ -31,6 +32,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             webShellTaskInfo = taskInfo;
             webShell = new WebShell(taskInfo.TaskUrl, taskInfo.TaskPwd, versionSetting);
             currentShowPath = string.Empty;
+            currentCmdPath = string.Empty;
             UpdateBaseInfo(webShell.PHPInfo());
         }
 
@@ -40,6 +42,29 @@ namespace C2.Business.CastleBravo.WebShellTool
                 UpdateFileManager(webShell.CurrentPathBrowse());
             if (tabControl1.SelectedTab.Text == "基础信息")
                 UpdateBaseInfo(webShell.PHPInfo());
+            if (tabControl1.SelectedTab.Text == "虚拟终端")
+            {
+                this.outputTextBox.Text = string.Empty;
+                UpdateCmd(webShell.CurrentCmdExcute());
+            }
+                
+        }
+
+        private void UpdateCmd(Tuple<string, string> excuteResult)
+        {
+            currentCmdPath = excuteResult.Item1;
+            string nextExcutePath = currentCmdPath.StartsWith("/") ? string.Format("[{0}]$", currentCmdPath) : string.Format("{0}>", currentCmdPath);
+            string output = excuteResult.Item2;
+
+            this.outputTextBox.Text = this.outputTextBox.Text + "\r\n" + output + "\r\n\r\n" + nextExcutePath;
+            this.outputTextBox.Focus();//获取焦点
+            this.outputTextBox.Select(this.outputTextBox.TextLength, 0);//光标定位到文本最后
+            this.outputTextBox.ScrollToCaret();//滚动到光标处
+
+            this.cmdTextBox.Text = string.Empty;
+
+            this.messageLog.Text = string.Join("\r\n", webShell.PayloadLog);
+            webShell.PayloadLog.Clear();
         }
 
         private void UpdateBaseInfo(string result)
@@ -233,6 +258,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 //如果是鼠标单击则允许结点折叠
                 e.Cancel = false;
+            }
+        }
+
+        private void ExcuteBtn_Click(object sender, EventArgs e)
+        {
+            this.outputTextBox.Text += this.cmdTextBox.Text;
+            UpdateCmd(webShell.CmdExcute(currentCmdPath, this.cmdTextBox.Text));
+        }
+
+        private void CmdTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                UpdateCmd(webShell.CmdExcute(currentCmdPath, this.cmdTextBox.Text));
             }
         }
     }

