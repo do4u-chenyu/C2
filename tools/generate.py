@@ -41,10 +41,10 @@ def main(file_path: str) -> None:
             return
     print("没有找到vs编译环境, 请将vs目录添加到tools/git-hook-scripts/vs_path")
 
-product_path = os.path.abspath(os.path.dirname(os.getcwd())) + "\IAO解决方案\Release"
-
 def C2_uninstall():
-    uninstall_cmd = "wmic product where Name=\"IAO解决方案\" call uninstall"
+    #uninstall_cmd = "wmic product where Name=\"IAO解决方案\" call uninstall /nointeractive"
+    tmp=(os.popen("wmic product where Name=\"IAO解决方案\" get IdentifyingNumber|awk 'NR==2{print}'")).read()
+    uninstall_cmd = "msiexec /q /x " + tmp;
     print(uninstall_cmd)
     if os.system(uninstall_cmd) == 0:
         return 0;
@@ -52,6 +52,7 @@ def C2_uninstall():
         return -1;
 
 def C2_install():
+    product_path = os.path.abspath(os.path.dirname(os.getcwd())) + "\IAO解决方案\Release"
     install_cmd = r"chdir /d {} & msiexec /i IAO解决方案C2.msi /qr".format(product_path)
     print(install_cmd)
     if os.system(install_cmd) == 0:
@@ -76,6 +77,10 @@ if __name__ == '__main__':
     if tmp == 4:
         if C2_install() == 0:
             print("新版IAO解决方案安装成功")
+            if beauty_product() == 0:
+               print("美化版安装包生成成功，位于 " + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\output")
+            else:
+               print("美化版安装包生成失败")
         else:
             print("新版IAO解决方案安装失败")
     else:
