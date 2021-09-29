@@ -41,10 +41,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void FilePathTb_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                UpdateFileManager(webShell.PathBrowse(this.filePathTb.Text));
-            }
+            //TODO 暂时不支持修改，要判断返回情况
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    UpdateFileManager(webShell.PathBrowse(new List<string>() { this.filePathTb.Text }));
+            //}
         }
 
         private void FileManagerListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -57,13 +58,14 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             //TODO linux和windows拼接不一样，用path.combine拼不了linux路径？
-            UpdateFileManager(webShell.PathBrowse(currentShowPath + "/" + selectedFile.FileName)); 
+            UpdateFileManager(webShell.PathBrowse(new List<string>() { currentShowPath + "/" + selectedFile.FileName })); 
         }
 
-        private void UpdateFileManager(Tuple<string, List<WSFile>> pathFiles)
+        private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
         {
             string path = pathFiles.Item1;
             List<WSFile> files = pathFiles.Item2;
+            List<string> broPaths = pathFiles.Item3;
 
             //更新textbox显示路径
             currentShowPath = this.filePathTb.Text = path;
@@ -84,22 +86,51 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
 
             //更新左侧treeview
-            /*
-             * 更新逻辑【先清空吧，后面再调整】
-             * 1、首先肯定能拿到path
-             * 2、对path进行解析，用 / 切分，展示为树的一条完整分支
-             * 3、该路径下的所有文件夹，添加到子孩子
-             */
-            //this.treeView1.Nodes.Clear();
+            CreateBroNodes(broPaths);//生成兄弟节点，这里仅针对window
+            CreateSelfAndChildrenNodes(path, files);//生成自己和孩子节点
 
-            TreeNode[] nodes = this.treeView1.Nodes.Find("/", false);
+            this.messageLog.Text = string.Join("\r\n",webShell.PayloadLog);
+            webShell.PayloadLog.Clear();
+        }
+
+        private void CreateBroNodes(List<string> broPaths)
+        {
+            foreach (string broPath in broPaths)
+            {
+                if (string.IsNullOrEmpty(broPath))
+                    continue;
+
+                string broName = broPath + ":";
+                TreeNode bro = new TreeNode();
+                TreeNode[] broNodes = this.treeView1.Nodes.Find(broName, false);
+                if (broNodes.Length == 0)
+                {
+                    bro.Name = broName;
+                    bro.Text = broName;
+                    bro.Tag = broName + "/";
+                    bro.ImageIndex = 4;
+                    bro.SelectedImageIndex = 4;
+                    this.treeView1.Nodes.Add(bro);
+                }
+            }
+        }
+
+        private void CreateSelfAndChildrenNodes(string path, List<WSFile> files)
+        {
+            //先遍历生成path的所有节点，再以path最后一个节点扩展其子孩子
+            List<string> pathNodes = path.Split('/').ToList();
+            if (pathNodes.Count == 0)
+                return;
+            string rootNode = string.IsNullOrEmpty(pathNodes[0]) ? "/" : pathNodes[0];
+
+            TreeNode[] nodes = this.treeView1.Nodes.Find(rootNode, false);
             TreeNode root = new TreeNode();
             TreeNode tmpNode;
             if (nodes.Length == 0)
             {
-                root.Name = "/";
-                root.Text = "/";
-                root.Tag = "/";
+                root.Name = rootNode;
+                root.Text = rootNode;
+                root.Tag = rootNode;
                 root.ImageIndex = 4;
                 root.SelectedImageIndex = 4;
                 this.treeView1.Nodes.Add(root);
@@ -108,7 +139,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             else
                 tmpNode = nodes[0];
 
-            foreach (string dir in path.Trim('/').Split('/'))
+            foreach (string dir in pathNodes.Skip(1))
             {
                 if (string.IsNullOrEmpty(dir))
                     break;
@@ -136,29 +167,24 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 TreeNode[] nodes3 = tmpNode.Nodes.Find(file.FileName, false);
                 TreeNode dirNode = new TreeNode();
-                
+
                 if (nodes3.Length == 0)
                 {
                     dirNode.Name = file.FileName;
                     dirNode.Text = file.FileName;
-                    dirNode.Tag = tmpNode.Tag +  file.FileName + "/";
+                    dirNode.Tag = tmpNode.Tag + file.FileName + "/";
                     dirNode.ImageIndex = 0;
                     tmpNode.Nodes.Add(dirNode);
                 }
             }
 
             root.ExpandAll();
-
-            this.messageLog.Text = string.Join("\r\n",webShell.PayloadLog);
-            webShell.PayloadLog.Clear();
         }
-
         private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-            {
-                
-                UpdateFileManager(webShell.PathBrowse(e.Node.Tag.ToString() == "/" ? e.Node.Tag.ToString() : e.Node.Tag.ToString().TrimEnd('/')));
+            { 
+                UpdateFileManager(webShell.PathBrowse(new List<string>() { e.Node.Tag.ToString() == "/" ? e.Node.Tag.ToString() : e.Node.Tag.ToString().TrimEnd('/') }));
             }
         }
 
