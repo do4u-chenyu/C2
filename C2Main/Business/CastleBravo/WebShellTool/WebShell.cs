@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -18,7 +19,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private WebShellVersionSetting versionSetting;
         public List<string> PayloadLog;
 
-        private WebClient client;
+        private WebClientEx client;
 
         public WebShell(string address, string pVariable, WebShellVersionSetting versionSetting)
         {
@@ -27,7 +28,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.versionSetting = versionSetting;
             PayloadLog = new List<string>();
 
-            this.client = new WebClient();
+            this.client = new WebClientEx();
             client.Encoding = Encoding.Default;
         }
 
@@ -136,8 +137,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             try
             {
-                byte[] responseData = client.UploadData(url, "POST", postData);//得到返回字符流  
-                result = Encoding.Default.GetString(responseData);//解码 
+                client.Timeout = 30000;//30秒超时
+                using (GuarderUtil.WaitCursor)
+                {
+                    byte[] responseData = client.UploadData(url, "POST", postData);//得到返回字符流  
+                    result = Encoding.Default.GetString(responseData);//解码 
+                }
 
                 foreach (string kv in payload.Split('&'))
                 {
@@ -199,6 +204,19 @@ namespace C2.Business.CastleBravo.WebShellTool
             CreateTime = createTime;
             FileSize = fileSize;
             LastMod = lastMod;
+        }
+    }
+
+
+    public class WebClientEx : WebClient
+    {
+        public int Timeout { get; set; }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var request = base.GetWebRequest(address);
+            request.Timeout = Timeout;
+            return request;
         }
     }
 }
