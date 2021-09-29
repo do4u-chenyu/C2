@@ -47,9 +47,19 @@ namespace C2.Business.CastleBravo.WebShellTool
             string combineCommand = string.Format(isLinux ? "cd \"{0}\";{1};echo [S];pwd;echo [E]": "cd /d \"{0}\"&{1}&echo [S]&cd&echo [E]", excutePath, command);
             string result = PHPShell(cmdPath, combineCommand, command);
 
+            string output;
+            string newPath;
             string[] tmp = result.Split(new string[] { "[S]" }, StringSplitOptions.None);
-            string output = isLinux ? tmp[0].Replace("\n","\r\n") : tmp[0];
-            string newPath = tmp[1].Split(new string[] { "[E]" }, StringSplitOptions.None)[0].Trim(new char[] { '\n', '\r' });
+            try
+            {
+                output = isLinux ? tmp[0].Replace("\n", "\r\n") : tmp[0];
+                newPath = tmp[1].Split(new string[] { "[E]" }, StringSplitOptions.None)[0].Trim(new char[] { '\n', '\r' });
+            }
+            catch
+            {
+                return Tuple.Create(excutePath, string.Empty) ;
+            }
+
 
             return Tuple.Create(newPath, output);
 
