@@ -72,9 +72,8 @@
             this.textBox.Size = new System.Drawing.Size(631, 44);
             this.textBox.TabIndex = 1;
             this.textBox.Text = "输入你测试的url";
-            this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textbox_MouseDown);
             this.textBox.Leave += new System.EventHandler(this.textbox_Leave);
-
+            this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textbox_MouseDown);
             // 
             // label1
             // 
@@ -101,9 +100,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label2.Location = new System.Drawing.Point(12, 145);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(527, 12);
+            this.label2.Size = new System.Drawing.Size(449, 12);
             this.label2.TabIndex = 4;
-            this.label2.Text = "参数：a=b&c=d&f=e,如果传递参数是 json,请修改高级中header为：Content-Type:application/json";
+            this.label2.Text = "参数：a=b&c=d&f=e,如果传递参数是 json,请修改高级中header为：application/json";
             // 
             // label3
             // 
@@ -152,6 +151,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(631, 48);
             this.textBox3.TabIndex = 9;
+            this.textBox3.Text = "application/x-www-form-urlencoded";
             // 
             // label6
             // 
@@ -198,8 +198,8 @@
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "GET",
             "POST",
+            "GET",
             "HEAD",
             "OPTIONS",
             "PUT"});
@@ -207,7 +207,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(142, 27);
             this.comboBox1.TabIndex = 15;
-            this.comboBox1.SelectedIndex = comboBox1.Items.IndexOf("GET");
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -221,7 +221,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(214, 27);
             this.comboBox2.TabIndex = 16;
-            this.comboBox2.SelectedIndex = comboBox2.Items.IndexOf("UTF-8 --接口输出的编码");
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -231,6 +231,7 @@
             this.button2.TabIndex = 18;
             this.button2.Text = "测试样例";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.example_Click);
             // 
             // button3
             // 
@@ -240,6 +241,8 @@
             this.button3.TabIndex = 19;
             this.button3.Text = "清空表单";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Delete_Click);
+            this.button3.Leave += new System.EventHandler(this.textbox_Leave);
             // 
             // tabControl1
             // 
@@ -322,7 +325,6 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(228, 27);
             this.comboBox3.TabIndex = 21;
-            this.comboBox3.SelectedIndex = comboBox3.Items.IndexOf("自动解压(gzip,deflate,flate)");
             // 
             // button1
             // 
@@ -332,6 +334,7 @@
             this.button1.TabIndex = 22;
             this.button1.Text = "提交";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.submit_ClickAsync);
             // 
             // baseControl1
             // 
