@@ -73,6 +73,7 @@
             this.urlTextBox.Name = "urlTextBox";
             this.urlTextBox.Size = new System.Drawing.Size(270, 21);
             this.urlTextBox.TabIndex = 10003;
+            this.urlTextBox.Text = "http://";
             // 
             // label3
             // 

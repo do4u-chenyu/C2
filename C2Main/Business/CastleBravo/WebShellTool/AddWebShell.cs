@@ -48,6 +48,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         protected override bool OnOKButtonClick()
         {
             //TODO 判断必填是否有值
+            if(string.IsNullOrEmpty(urlTextBox.Text) || string.IsNullOrEmpty(pwdTextBox.Text))
+            {
+                HelpUtil.ShowMessageBox("url和密码不能为空。");
+                return false;
+            }
+
             WebShellTask = new WebShellTaskInfo(taskId, 
                                                 this.NameTextBox.Text, 
                                                 urlTextBox.Text, 

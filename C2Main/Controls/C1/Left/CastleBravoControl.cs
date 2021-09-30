@@ -151,7 +151,7 @@ namespace C2.Controls.C1.Left
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RobotsScanHelpInfo);
                         break;
                     case "WebShell":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
                         break;
                 }
