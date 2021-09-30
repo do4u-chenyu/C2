@@ -55,7 +55,6 @@
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.baseControl1 = new C2.Controls.BaseControl();
             this.tabControl1.SuspendLayout();
             this.格式化Response.SuspendLayout();
             this.原始Response.SuspendLayout();
@@ -66,10 +65,9 @@
             // 
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.textBox.Location = new System.Drawing.Point(12, 29);
-            this.textBox.Multiline = true;
+            this.textBox.Location = new System.Drawing.Point(12, 11);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(631, 44);
+            this.textBox.Size = new System.Drawing.Size(712, 21);
             this.textBox.TabIndex = 1;
             this.textBox.Text = "输入你测试的url";
             this.textBox.Leave += new System.EventHandler(this.textbox_Leave);
@@ -79,7 +77,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10F);
-            this.label1.Location = new System.Drawing.Point(12, 85);
+            this.label1.Location = new System.Drawing.Point(12, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 14);
             this.label1.TabIndex = 2;
@@ -88,17 +86,17 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(14, 100);
+            this.textBox1.Location = new System.Drawing.Point(14, 49);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(629, 42);
+            this.textBox1.Size = new System.Drawing.Size(710, 42);
             this.textBox1.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(12, 145);
+            this.label2.Location = new System.Drawing.Point(12, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(449, 12);
             this.label2.TabIndex = 4;
@@ -108,7 +106,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 10F);
-            this.label3.Location = new System.Drawing.Point(12, 169);
+            this.label3.Location = new System.Drawing.Point(12, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 14);
             this.label3.TabIndex = 5;
@@ -117,17 +115,17 @@
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(14, 184);
+            this.textBox2.Location = new System.Drawing.Point(14, 132);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(631, 51);
+            this.textBox2.Size = new System.Drawing.Size(311, 51);
             this.textBox2.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label4.Location = new System.Drawing.Point(12, 238);
+            this.label4.Location = new System.Drawing.Point(12, 192);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(287, 12);
             this.label4.TabIndex = 7;
@@ -137,7 +135,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 10F);
-            this.label5.Location = new System.Drawing.Point(13, 263);
+            this.label5.Location = new System.Drawing.Point(337, 113);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 14);
             this.label5.TabIndex = 8;
@@ -146,10 +144,10 @@
             // textBox3
             // 
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Location = new System.Drawing.Point(15, 278);
+            this.textBox3.Location = new System.Drawing.Point(340, 132);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(631, 48);
+            this.textBox3.Size = new System.Drawing.Size(382, 51);
             this.textBox3.TabIndex = 9;
             this.textBox3.Text = "application/x-www-form-urlencoded";
             // 
@@ -157,7 +155,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label6.Location = new System.Drawing.Point(13, 329);
+            this.label6.Location = new System.Drawing.Point(338, 192);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(245, 12);
             this.label6.TabIndex = 10;
@@ -167,7 +165,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 10F);
-            this.label7.Location = new System.Drawing.Point(14, 357);
+            this.label7.Location = new System.Drawing.Point(411, 256);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 14);
             this.label7.TabIndex = 11;
@@ -176,17 +174,16 @@
             // textBox4
             // 
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Location = new System.Drawing.Point(16, 372);
-            this.textBox4.Multiline = true;
+            this.textBox4.Location = new System.Drawing.Point(480, 250);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(631, 38);
+            this.textBox4.Size = new System.Drawing.Size(244, 21);
             this.textBox4.TabIndex = 12;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label8.Location = new System.Drawing.Point(14, 413);
+            this.label8.Location = new System.Drawing.Point(413, 274);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(311, 12);
             this.label8.TabIndex = 13;
@@ -203,7 +200,7 @@
             "HEAD",
             "OPTIONS",
             "PUT"});
-            this.comboBox1.Location = new System.Drawing.Point(17, 437);
+            this.comboBox1.Location = new System.Drawing.Point(13, 215);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(142, 27);
             this.comboBox1.TabIndex = 15;
@@ -217,7 +214,7 @@
             this.comboBox2.Items.AddRange(new object[] {
             "UTF-8 --接口输出的编码",
             "GBK   --接口输出的编码"});
-            this.comboBox2.Location = new System.Drawing.Point(179, 437);
+            this.comboBox2.Location = new System.Drawing.Point(175, 215);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(214, 27);
             this.comboBox2.TabIndex = 16;
@@ -225,9 +222,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(253, 484);
+            this.button2.Location = new System.Drawing.Point(146, 250);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 38);
+            this.button2.Size = new System.Drawing.Size(99, 27);
             this.button2.TabIndex = 18;
             this.button2.Text = "测试样例";
             this.button2.UseVisualStyleBackColor = true;
@@ -235,9 +232,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(438, 484);
+            this.button3.Location = new System.Drawing.Point(273, 250);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(209, 38);
+            this.button3.Size = new System.Drawing.Size(116, 27);
             this.button3.TabIndex = 19;
             this.button3.Text = "清空表单";
             this.button3.UseVisualStyleBackColor = true;
@@ -249,11 +246,12 @@
             this.tabControl1.Controls.Add(this.格式化Response);
             this.tabControl1.Controls.Add(this.原始Response);
             this.tabControl1.Controls.Add(this.Headers);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControl1.Font = new System.Drawing.Font("宋体", 10F);
-            this.tabControl1.Location = new System.Drawing.Point(18, 540);
+            this.tabControl1.Location = new System.Drawing.Point(0, 289);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(630, 256);
+            this.tabControl1.Size = new System.Drawing.Size(736, 272);
             this.tabControl1.TabIndex = 20;
             // 
             // 格式化Response
@@ -262,16 +260,17 @@
             this.格式化Response.Location = new System.Drawing.Point(4, 23);
             this.格式化Response.Name = "格式化Response";
             this.格式化Response.Padding = new System.Windows.Forms.Padding(3);
-            this.格式化Response.Size = new System.Drawing.Size(622, 229);
+            this.格式化Response.Size = new System.Drawing.Size(707, 229);
             this.格式化Response.TabIndex = 0;
             this.格式化Response.Text = "格式化Response";
             this.格式化Response.UseVisualStyleBackColor = true;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(621, 229);
+            this.richTextBox1.Size = new System.Drawing.Size(701, 223);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -281,16 +280,17 @@
             this.原始Response.Location = new System.Drawing.Point(4, 23);
             this.原始Response.Name = "原始Response";
             this.原始Response.Padding = new System.Windows.Forms.Padding(3);
-            this.原始Response.Size = new System.Drawing.Size(622, 229);
+            this.原始Response.Size = new System.Drawing.Size(707, 240);
             this.原始Response.TabIndex = 1;
             this.原始Response.Text = "原始Response";
             this.原始Response.UseVisualStyleBackColor = true;
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(0, 3);
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 3);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(619, 226);
+            this.richTextBox2.Size = new System.Drawing.Size(701, 234);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
             // 
@@ -300,16 +300,17 @@
             this.Headers.Location = new System.Drawing.Point(4, 23);
             this.Headers.Name = "Headers";
             this.Headers.Padding = new System.Windows.Forms.Padding(3);
-            this.Headers.Size = new System.Drawing.Size(622, 229);
+            this.Headers.Size = new System.Drawing.Size(728, 245);
             this.Headers.TabIndex = 2;
             this.Headers.Text = "Headers";
             this.Headers.UseVisualStyleBackColor = true;
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(0, 3);
+            this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox3.Location = new System.Drawing.Point(3, 3);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(621, 223);
+            this.richTextBox3.Size = new System.Drawing.Size(722, 239);
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "";
             // 
@@ -321,34 +322,26 @@
             this.comboBox3.Items.AddRange(new object[] {
             "自动解压(gzip,deflate,flate)",
             "不解压"});
-            this.comboBox3.Location = new System.Drawing.Point(418, 437);
+            this.comboBox3.Location = new System.Drawing.Point(414, 215);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(228, 27);
             this.comboBox3.TabIndex = 21;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(17, 484);
+            this.button1.Location = new System.Drawing.Point(13, 250);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(202, 38);
+            this.button1.Size = new System.Drawing.Size(95, 27);
             this.button1.TabIndex = 22;
             this.button1.Text = "提交";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.submit_ClickAsync);
             // 
-            // baseControl1
-            // 
-            this.baseControl1.Location = new System.Drawing.Point(0, 0);
-            this.baseControl1.Name = "baseControl1";
-            this.baseControl1.Size = new System.Drawing.Size(75, 23);
-            this.baseControl1.TabIndex = 14;
-            this.baseControl1.Text = "baseControl1";
-            // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 808);
+            this.ClientSize = new System.Drawing.Size(736, 561);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.tabControl1);
@@ -356,7 +349,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.baseControl1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label7);
@@ -399,7 +391,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label8;
-        private Controls.BaseControl baseControl1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button2;
