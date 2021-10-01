@@ -3013,6 +3013,7 @@
     <None Include="Resources\Images\TabBarImage\Tude.png" />
     <None Include="Resources\Images\TabBarImage\WIFI.png" />
     <None Include="Resources\Images\TabBarImage\Hive.png" />
+    <None Include="Resources\Images\TabBarImage\post.png" />
     <Content Include="Resources\Images\TabBarImage\PostgreSQL.png" />
     <Content Include="Resources\Images\TabBarImage\word.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
