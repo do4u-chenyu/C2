@@ -44,8 +44,9 @@
             this.sha1RadioButton = new System.Windows.Forms.RadioButton();
             this.sha256RadioButton = new System.Windows.Forms.RadioButton();
             this.sha512RadioButton = new System.Windows.Forms.RadioButton();
-            this.languageComboBox = new System.Windows.Forms.ComboBox();
+            this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.splitComboBox = new System.Windows.Forms.ComboBox();
+            this.radixComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // inputTextBox
@@ -58,7 +59,6 @@
             this.inputTextBox.Size = new System.Drawing.Size(460, 450);
             this.inputTextBox.TabIndex = 0;
             this.inputTextBox.Text = "请输入你要编码的内容或者需要加密文件的路径";
-            this.inputTextBox.TextChanged += new System.EventHandler(this.inputTextBox_TextChanged);
             this.inputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
             // 
             // outputTextBox
@@ -78,7 +78,7 @@
             // encodeButton
             // 
             this.encodeButton.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.encodeButton.Location = new System.Drawing.Point(476, 229);
+            this.encodeButton.Location = new System.Drawing.Point(476, 189);
             this.encodeButton.Name = "encodeButton";
             this.encodeButton.Size = new System.Drawing.Size(75, 30);
             this.encodeButton.TabIndex = 2;
@@ -89,7 +89,7 @@
             // decodeButton
             // 
             this.decodeButton.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.decodeButton.Location = new System.Drawing.Point(476, 284);
+            this.decodeButton.Location = new System.Drawing.Point(476, 239);
             this.decodeButton.Name = "decodeButton";
             this.decodeButton.Size = new System.Drawing.Size(75, 30);
             this.decodeButton.TabIndex = 3;
@@ -100,7 +100,6 @@
             // md5128RadioButton
             // 
             this.md5128RadioButton.AutoSize = true;
-            //this.splitComboBox.Visible = true;
             this.md5128RadioButton.Font = new System.Drawing.Font("宋体", 10F);
             this.md5128RadioButton.Location = new System.Drawing.Point(9, 13);
             this.md5128RadioButton.Name = "md5128RadioButton";
@@ -109,14 +108,12 @@
             this.md5128RadioButton.Text = "MD5(128位)";
             this.toolTip1.SetToolTip(this.md5128RadioButton, "使用MD5(128位)编码加密字符串");
             this.md5128RadioButton.UseVisualStyleBackColor = true;
-            this.md5128RadioButton.CheckedChanged += new System.EventHandler(this.Md5128RadioButton_CheckedChanged);
+            this.md5128RadioButton.CheckedChanged += new System.EventHandler(this.MD5_128_RadioButton_CheckedChanged);
             // 
             // base64RadioButton
             // 
             this.base64RadioButton.AutoSize = true;
             this.base64RadioButton.Checked = true;
-            this.splitComboBox.Visible = false;
-            this.languageComboBox.Visible = false;
             this.base64RadioButton.Font = new System.Drawing.Font("宋体", 10F);
             this.base64RadioButton.Location = new System.Drawing.Point(199, 13);
             this.base64RadioButton.Name = "base64RadioButton";
@@ -126,7 +123,7 @@
             this.base64RadioButton.Text = "超级Base64";
             this.toolTip1.SetToolTip(this.base64RadioButton, "使用Base64编码对字符串进行编码解码");
             this.base64RadioButton.UseVisualStyleBackColor = true;
-            this.base64RadioButton.CheckedChanged += new System.EventHandler(this.Base64RadioButton_CheckedChanged);
+            this.base64RadioButton.CheckedChanged += new System.EventHandler(this.Base64_RadioButton_CheckedChanged);
             // 
             // urlRadioButton
             // 
@@ -139,7 +136,7 @@
             this.urlRadioButton.Text = "Url编解码";
             this.toolTip1.SetToolTip(this.urlRadioButton, "使用UrlEncode编码对字符串进行编码解码");
             this.urlRadioButton.UseVisualStyleBackColor = true;
-            this.urlRadioButton.CheckedChanged += new System.EventHandler(this.UrlRadioButton_CheckedChanged);
+            this.urlRadioButton.CheckedChanged += new System.EventHandler(this.Url_RadioButton_CheckedChanged);
             // 
             // unicodeRadioButton
             // 
@@ -152,7 +149,7 @@
             this.unicodeRadioButton.Text = "Unicode编解码";
             this.toolTip1.SetToolTip(this.unicodeRadioButton, "使用Unicode编码对字符串进行编码解码");
             this.unicodeRadioButton.UseVisualStyleBackColor = true;
-            this.unicodeRadioButton.CheckedChanged += new System.EventHandler(this.UnicodeRadioButton_CheckedChanged);
+            this.unicodeRadioButton.CheckedChanged += new System.EventHandler(this.Unicode_RadioButton_CheckedChanged);
             // 
             // md564RadioButton
             // 
@@ -165,7 +162,7 @@
             this.md564RadioButton.Text = "MD5(64位)";
             this.toolTip1.SetToolTip(this.md564RadioButton, "使用MD5(64位)编码加密字符串");
             this.md564RadioButton.UseVisualStyleBackColor = true;
-            this.md564RadioButton.CheckedChanged += new System.EventHandler(this.Md564RadioButton_CheckedChanged);
+            this.md564RadioButton.CheckedChanged += new System.EventHandler(this.MD5_64_RadioButton_CheckedChanged);
             // 
             // hexRadioButton
             // 
@@ -178,7 +175,7 @@
             this.hexRadioButton.Text = "Hex编解码";
             this.toolTip1.SetToolTip(this.hexRadioButton, "使用Hex编码对字符串进行编码解码");
             this.hexRadioButton.UseVisualStyleBackColor = true;
-            this.hexRadioButton.CheckedChanged += new System.EventHandler(this.hexRadioButton_CheckedChanged);
+            this.hexRadioButton.CheckedChanged += new System.EventHandler(this.HEX_RadioButton_CheckedChanged);
             // 
             // sha1RadioButton
             // 
@@ -191,7 +188,7 @@
             this.sha1RadioButton.Text = "sha1";
             this.toolTip1.SetToolTip(this.sha1RadioButton, "使用sha1对字符串进行加密");
             this.sha1RadioButton.UseVisualStyleBackColor = true;
-            this.sha1RadioButton.CheckedChanged += new System.EventHandler(this.Sha1RadioButton_CheckedChanged);
+            this.sha1RadioButton.CheckedChanged += new System.EventHandler(this.SHA1_RadioButton_CheckedChanged);
             // 
             // sha256RadioButton
             // 
@@ -204,7 +201,7 @@
             this.sha256RadioButton.Text = "sha256";
             this.toolTip1.SetToolTip(this.sha256RadioButton, "使用sha256对字符串进行加密");
             this.sha256RadioButton.UseVisualStyleBackColor = true;
-            this.sha256RadioButton.CheckedChanged += new System.EventHandler(this.Sha256RadioButton_CheckedChanged);
+            this.sha256RadioButton.CheckedChanged += new System.EventHandler(this.SHA256_RadioButton_CheckedChanged);
             // 
             // sha512RadioButton
             // 
@@ -217,23 +214,22 @@
             this.sha512RadioButton.Text = "sha512";
             this.toolTip1.SetToolTip(this.sha512RadioButton, "使用sha512对字符串进行加密");
             this.sha512RadioButton.UseVisualStyleBackColor = true;
-            this.sha512RadioButton.CheckedChanged += new System.EventHandler(this.Sha512RadioButton_CheckedChanged);
+            this.sha512RadioButton.CheckedChanged += new System.EventHandler(this.Sha512_RadioButton_CheckedChanged);
             // 
-            // languageComboBox
+            // encodingComboBox
             // 
-            this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.languageComboBox.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.languageComboBox.FormattingEnabled = true;
-            this.languageComboBox.Items.AddRange(new object[] {
+            this.encodingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.encodingComboBox.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.encodingComboBox.FormattingEnabled = true;
+            this.encodingComboBox.Items.AddRange(new object[] {
             "UTF-8",
-            "GB2312",
-            });
-            this.languageComboBox.Location = new System.Drawing.Point(476, 129);
-            this.languageComboBox.Name = "taskModelComboBox";
-            this.languageComboBox.Size = new System.Drawing.Size(75, 30);
-            this.languageComboBox.TabIndex = 12;
-            this.languageComboBox.SelectedIndex = languageComboBox.Items.IndexOf("UTF-8");
-            this.languageComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
+            "GB2312"});
+            this.encodingComboBox.Location = new System.Drawing.Point(476, 336);
+            this.encodingComboBox.Name = "encodingComboBox";
+            this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
+            this.encodingComboBox.TabIndex = 12;
+            this.encodingComboBox.Visible = false;
+            this.encodingComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // splitComboBox
             // 
@@ -242,17 +238,32 @@
             this.splitComboBox.FormattingEnabled = true;
             this.splitComboBox.Items.AddRange(new object[] {
             "无分隔符",
-            @"\X",
-            @"\x",
+            "\\X",
+            "\\x",
             "#",
-            "%"
-            });
-            this.splitComboBox.Location = new System.Drawing.Point(476, 179);
+            "%"});
+            this.splitComboBox.Location = new System.Drawing.Point(476, 383);
             this.splitComboBox.Name = "splitComboBox";
-            this.splitComboBox.Size = new System.Drawing.Size(75, 30);
+            this.splitComboBox.Size = new System.Drawing.Size(75, 27);
             this.splitComboBox.TabIndex = 13;
-            this.splitComboBox.SelectedIndex = splitComboBox.Items.IndexOf("无分隔符");
+            this.splitComboBox.Visible = false;
             this.splitComboBox.SelectedIndexChanged += new System.EventHandler(this.Split_SelectedIndexChanged);
+            // 
+            // radixComboBox
+            // 
+            this.radixComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.radixComboBox.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radixComboBox.FormattingEnabled = true;
+            this.radixComboBox.Items.AddRange(new object[] {
+            "十六进制",
+            "十进制",
+            "八进制"});
+            this.radixComboBox.Location = new System.Drawing.Point(476, 289);
+            this.radixComboBox.Name = "radixComboBox";
+            this.radixComboBox.Size = new System.Drawing.Size(75, 27);
+            this.radixComboBox.TabIndex = 14;
+            this.radixComboBox.Visible = false;
+            this.radixComboBox.SelectedIndexChanged += new System.EventHandler(this.radixComboBox_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -261,6 +272,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1027, 513);
+            this.Controls.Add(this.radixComboBox);
             this.Controls.Add(this.sha512RadioButton);
             this.Controls.Add(this.sha256RadioButton);
             this.Controls.Add(this.sha1RadioButton);
@@ -274,7 +286,7 @@
             this.Controls.Add(this.encodeButton);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
-            this.Controls.Add(this.languageComboBox);
+            this.Controls.Add(this.encodingComboBox);
             this.Controls.Add(this.splitComboBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -303,8 +315,9 @@
         private System.Windows.Forms.RadioButton sha1RadioButton;
         private System.Windows.Forms.RadioButton sha256RadioButton;
         private System.Windows.Forms.RadioButton sha512RadioButton;
-        private System.Windows.Forms.ComboBox languageComboBox;
+        private System.Windows.Forms.ComboBox encodingComboBox;
         private System.Windows.Forms.ComboBox splitComboBox;
+        private System.Windows.Forms.ComboBox radixComboBox;
     }
 }
 

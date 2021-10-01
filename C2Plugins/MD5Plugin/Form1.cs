@@ -14,13 +14,23 @@ namespace MD5Plugin
 {
     public partial class Form1 : Form, IPlugin
     {
-        string languageType;
-        string splitType;
+        string encodingType = "UTF-8";
+        string splitType = "无分隔符";
+        string radixType = "十六进制";
+
         public Form1()
         {
             InitializeComponent();
+            InitializeControls();
+        }
+
+        private void InitializeControls()
+        {
             inputTextBox.Select(inputTextBox.TextLength, 0);
             inputTextBox.Select(0, 0);
+            splitComboBox.SelectedIndex = 0;
+            radixComboBox.SelectedIndex = 0;
+            encodingComboBox.SelectedIndex = 0;
         }
 
         public static String TryGetSysTempDir()
@@ -86,102 +96,110 @@ namespace MD5Plugin
         }
 
         //md5(128位)
-        private void Md5128RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void MD5_128_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault1();
         }
 
 
         //md5(64位)
-        private void Md564RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void MD5_64_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault1();
         }
 
         //Base64
-        private void Base64RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Base64_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "编码 =>";
             decodeButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault3();
         }
 
         //url编解码
-        private void UrlRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Url_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "编码 =>";
             decodeButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault2();
         }
 
         //Unicode编解码
-        private void UnicodeRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Unicode_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "编码 =>";
             decodeButton.Text = "<= 解码";
             decodeButton.Visible = true;
             encodeButton.Visible = true;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault2();
         }
         //Hex编解码
-        private void hexRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void HEX_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "编码 =>";
             decodeButton.Text = "<= 解码";
             decodeButton.Visible = true;
             encodeButton.Visible = true;
-            languageComboBox.Visible = true;
+            encodingComboBox.Visible = true;
             splitComboBox.Visible = true;
-            splitComboBox.Visible = true;
+            radixComboBox.Visible = true;
             SetDefault2();
         }
 
 
         //使用sha1对字符串进行加密
-        private void Sha1RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void SHA1_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault1();
         }
 
         //使用sha256对字符串进行加密
-        private void Sha256RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void SHA256_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault1();
         }
 
         //使用sha512对字符串进行加密
-        private void Sha512RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Sha512_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             encodeButton.Text = "加密 =>";
             decodeButton.Visible = false;
-            languageComboBox.Visible = false;
+            encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
             SetDefault1();
         }
 
@@ -319,9 +337,9 @@ namespace MD5Plugin
             }
             else
             {
-                languageType = languageType != null ? languageType : "UTF-8";
+                encodingType = encodingType != null ? encodingType : "UTF-8";
                 string result = string.Empty;
-                byte[] arrByte = System.Text.Encoding.GetEncoding(languageType).GetBytes(str);
+                byte[] arrByte = System.Text.Encoding.GetEncoding(encodingType).GetBytes(str);
                 for (int i = 0; i < arrByte.Length; i++)
                 {
                     result += "%" + System.Convert.ToString(arrByte[i], 16);
@@ -333,24 +351,17 @@ namespace MD5Plugin
         
         private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (languageComboBox.SelectedIndex == languageComboBox.Items.IndexOf("UTF-8"))
-                languageType = "UTF-8";
-            else if (languageComboBox.SelectedIndex == languageComboBox.Items.IndexOf("GB2312"))
-                languageType = "GB2312";
+            encodingType = encodingComboBox.SelectedItem as string;
         }
 
         private void Split_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("无分隔符"))
-                splitType = "无分隔符";
-            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf(@"\X"))
-                splitType = @"\X";
-            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf(@"\x"))
-                splitType = @"\x";
-            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("#"))
-                splitType = "#";
-            else if (splitComboBox.SelectedIndex == splitComboBox.Items.IndexOf("%"))
-                splitType = "%";
+            splitType = splitComboBox.SelectedItem as string;
+        }
+
+        private void radixComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            radixType = radixComboBox.SelectedItem as string;
         }
 
         public void SHA1Encrypt(string str)
@@ -644,7 +655,7 @@ namespace MD5Plugin
                 {
                     arrByte[index++] = Convert.ToByte(str.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
                 }
-                result = languageType == "GB2312" ? System.Text.Encoding.Default.GetString(arrByte) : languageType == "UTF-8" ? System.Text.Encoding.UTF8.GetString(arrByte) : System.Text.Encoding.UTF8.GetString(arrByte);
+                result = encodingType == "GB2312" ? System.Text.Encoding.Default.GetString(arrByte) : encodingType == "UTF-8" ? System.Text.Encoding.UTF8.GetString(arrByte) : System.Text.Encoding.UTF8.GetString(arrByte);
                 inputTextBox.Text = result;
             }
             catch 
@@ -685,8 +696,7 @@ namespace MD5Plugin
                 return false;
             }
         }
-        private void inputTextBox_TextChanged(object sender, EventArgs e)
-        {
-        }
+
+
     }
 }
