@@ -654,9 +654,6 @@ namespace MD5Plugin
         {
             try
             {
-                if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
-                    str = str.Replace(splitType, string.Empty);
-
                 // 处理十六进制
                 byte[] bytes = new byte[0];
                 switch(radixType)
@@ -664,8 +661,8 @@ namespace MD5Plugin
                     case "八进制":
                         bytes = HexDecode_8(str);
                         break;
-                    case "十进制":
-                        bytes = HexDecode_10(str);
+                    case "十进制":  // 十进制必须有分隔符才能转换
+                        bytes = splitType == "无分隔符" ? new byte[0] : HexDecode_10(str);
                         break;
                     case "十六进制":
                     default:
@@ -684,6 +681,9 @@ namespace MD5Plugin
 
         byte[] HexDecode_16(string str)
         {
+            if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
+                str = str.Replace(splitType, string.Empty);
+
             if (str.Length % 2 != 0)
                 str = str.Substring(0, str.Length - 1);
             byte[] arrByte = new byte[str.Length / 2];
@@ -698,12 +698,31 @@ namespace MD5Plugin
 
         byte[] HexDecode_10(string str)
         {
-            return new byte[0];
+            string[] arr = Regex.Split(str, Regex.Escape(splitType));
+            byte[] arrByte = new byte[arr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arrByte[i] = Convert.ToByte(arr[i], 10); 
+            }
+
+            return arrByte;
         }
 
         byte[] HexDecode_8(string str)
         {
-            return new byte[0];
+            if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
+                str = str.Replace(splitType, string.Empty);
+
+            if (str.Length % 3 != 0)
+                str = str.Substring(0, str.Length - str.Length % 3);
+            byte[] arrByte = new byte[str.Length / 3];
+            int index = 0;
+            for (int i = 0; i < str.Length; i += 3)
+            {
+                arrByte[index++] = Convert.ToByte(str.Substring(i, 3), 8);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+            }
+
+            return arrByte;
         }
 
         public void Base64StrToFile(string base64Str,string value)
