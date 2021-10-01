@@ -263,7 +263,7 @@
             this.radixComboBox.Size = new System.Drawing.Size(75, 27);
             this.radixComboBox.TabIndex = 14;
             this.radixComboBox.Visible = false;
-            this.radixComboBox.SelectedIndexChanged += new System.EventHandler(this.radixComboBox_SelectedIndexChanged);
+            this.radixComboBox.SelectedIndexChanged += new System.EventHandler(this.RadixComboBox_SelectedIndexChanged);
             // 
             // Form1
             // 

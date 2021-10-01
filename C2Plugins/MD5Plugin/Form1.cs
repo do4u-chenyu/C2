@@ -18,6 +18,9 @@ namespace MD5Plugin
         string splitType = "无分隔符";
         string radixType = "十六进制";
 
+        //Base64解密
+        string outPath;
+
         public Form1()
         {
             InitializeComponent();
@@ -224,7 +227,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {
-                originInput();
+                ResetTextBox();
             }
             else
             {
@@ -243,7 +246,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {
-                originInput();
+                ResetTextBox();
             }
             else
             {
@@ -254,7 +257,7 @@ namespace MD5Plugin
                 outputTextBox.Text = t2;
             }
         }
-        public void originInput()
+        public void ResetTextBox()
         {
             inputTextBox.Text = string.Empty;
             outputTextBox.Text = string.Empty;
@@ -265,7 +268,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请输入你要编码的内容或者需要加密文件的路径")
             {
-                originInput();
+                ResetTextBox();
             }
             else if (File.Exists(filePath))
             {
@@ -299,7 +302,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
-                originInput();
+                ResetTextBox();
             }
             else
             {
@@ -337,14 +340,21 @@ namespace MD5Plugin
             }
             else
             {
-                encodingType = encodingType != null ? encodingType : "UTF-8";
-                string result = string.Empty;
-                byte[] arrByte = System.Text.Encoding.GetEncoding(encodingType).GetBytes(str);
+                StringBuilder sb = new StringBuilder();
+                byte[] arrByte = Encoding.GetEncoding(encodingType).GetBytes(str);
+
+                string sep = splitType == "无分隔符" ? "%" : splitType.Trim();
+                int radix = 16;
+                if (radixType == "十进制")
+                    radix = 10;
+                if (radixType == "八进制")
+                    radix = 8;
+
                 for (int i = 0; i < arrByte.Length; i++)
                 {
-                    result += "%" + System.Convert.ToString(arrByte[i], 16);
+                    sb.Append(sep + Convert.ToString(arrByte[i], radix));
                 }
-                outputTextBox.Text = result;
+                outputTextBox.Text = sb.ToString();
             }
         }
 
@@ -359,7 +369,7 @@ namespace MD5Plugin
             splitType = splitComboBox.SelectedItem as string;
         }
 
-        private void radixComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void RadixComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             radixType = radixComboBox.SelectedItem as string;
         }
@@ -368,7 +378,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {
-                originInput();
+                ResetTextBox();
             }
             else
             {
@@ -387,7 +397,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {
-                originInput();
+                ResetTextBox();
             }
             else
             {
@@ -407,7 +417,7 @@ namespace MD5Plugin
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {
-                originInput();
+                ResetTextBox();
             }
             else
             {
@@ -530,7 +540,7 @@ namespace MD5Plugin
                     string value;
                     pairs.TryGetValue(key, out value);
                     //outPath = string.Format(TryGetSysTempDir() + "{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
-                    base64StrToFile(base64Str,value);
+                    Base64StrToFile(base64Str,value);
                     //inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
                     break;
                 }
@@ -646,26 +656,57 @@ namespace MD5Plugin
             {
                 if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
                     str = str.Replace(splitType, string.Empty);
-                if (str.Length % 2 != 0)
-                    str = str.Substring(0, str.Length - 1);
-                string result;
-                byte[] arrByte = new byte[str.Length / 2];
-                int index = 0;
-                for (int i = 0; i < str.Length; i += 2)
+
+                // 处理十六进制
+                byte[] bytes = new byte[0];
+                switch(radixType)
                 {
-                    arrByte[index++] = Convert.ToByte(str.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+                    case "八进制":
+                        bytes = HexDecode_8(str);
+                        break;
+                    case "十进制":
+                        bytes = HexDecode_10(str);
+                        break;
+                    case "十六进制":
+                    default:
+                        bytes = HexDecode_16(str);
+                        break;
                 }
-                result = encodingType == "GB2312" ? System.Text.Encoding.Default.GetString(arrByte) : encodingType == "UTF-8" ? System.Text.Encoding.UTF8.GetString(arrByte) : System.Text.Encoding.UTF8.GetString(arrByte);
-                inputTextBox.Text = result;
+
+                inputTextBox.Text = encodingType == "GB2312" ? Encoding.Default.GetString(bytes) 
+                    : Encoding.UTF8.GetString(bytes);
             }
             catch 
             {
                 MessageBox.Show("请选择正确的分隔符号", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        //Base64解密
-        string outPath;
-        public void base64StrToFile(string base64Str,string value)
+
+        byte[] HexDecode_16(string str)
+        {
+            if (str.Length % 2 != 0)
+                str = str.Substring(0, str.Length - 1);
+            byte[] arrByte = new byte[str.Length / 2];
+            int index = 0;
+            for (int i = 0; i < str.Length; i += 2)
+            {
+                arrByte[index++] = Convert.ToByte(str.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+            }
+
+            return arrByte;
+        }
+
+        byte[] HexDecode_10(string str)
+        {
+            return new byte[0];
+        }
+
+        byte[] HexDecode_8(string str)
+        {
+            return new byte[0];
+        }
+
+        public void Base64StrToFile(string base64Str,string value)
         {
             DateTime dateTime = DateTime.Now;
             try
