@@ -21,6 +21,13 @@ namespace C2.Business.IAOLab.PostAndGet
         public PostAndGetForm()
         {
             InitializeComponent();
+            InitializeSelectedIndex();
+        }
+
+        private void InitializeSelectedIndex()
+        {
+            comboBox1.SelectedIndex = 0; // 默认选 POST 和 UTF-8
+            comboBox2.SelectedIndex = 0;
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -33,41 +40,26 @@ namespace C2.Business.IAOLab.PostAndGet
         }
 
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == comboBox1.Items.IndexOf("POST"))
-                splitType = "POST";
-            else if(comboBox1.SelectedIndex == comboBox1.Items.IndexOf("GET"))
-                splitType = "GET";
-            else if (comboBox1.SelectedIndex == comboBox1.Items.IndexOf("HEAD"))
-                splitType = "HEAD";
-            else if (comboBox1.SelectedIndex == comboBox1.Items.IndexOf("OPTIONS"))
-                splitType = "OPTIONS";
-            else if (comboBox1.SelectedIndex == comboBox1.Items.IndexOf("PUT"))
-                splitType = "PUT";
-
+            splitType = comboBox1.SelectedItem as string;
         }
 
         
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == comboBox2.Items.IndexOf("UTF-8 --接口输出的编码"))
-                encodeoutput = "UTF-8";
-            else if (comboBox2.SelectedIndex == comboBox2.Items.IndexOf("GBK   --接口输出的编码"))
-                encodeoutput = "GBK";
+            encodeoutput = "UTF-8";
+            switch (comboBox2.SelectedIndex)
+            {
+                case 0:
+                    encodeoutput = "UTF-8";
+                    break;
+                case 1:
+                    encodeoutput = "GBK";
+                    break;
+            }       
         }
         
-        
-
-        /*
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox3.SelectedIndex == comboBox3.Items.IndexOf("自动解压(gzip,deflate,flate)"))
-                decompression = "UTF-8 --接口输出的编码";
-            else if (comboBox3.SelectedIndex == comboBox3.Items.IndexOf("不解压"))
-                decompression = "GBK   --接口输出的编码";
-        }
-        */
 
         private string ConvertJsonString(string json)
         {
@@ -93,7 +85,7 @@ namespace C2.Business.IAOLab.PostAndGet
             }
         }
 
-        private void postText(HttpWebRequest req, byte[] bytesToPost, string responseResult)
+        private void PostText(HttpWebRequest req, byte[] bytesToPost, string responseResult)
         {
             req.ContentLength = bytesToPost.Length;
             using (Stream reqStream = req.GetRequestStream())
@@ -111,6 +103,10 @@ namespace C2.Business.IAOLab.PostAndGet
                 sr.Close();
             }
             HttpWebResponse hwr = (HttpWebResponse)req.GetResponse();
+            //StringBuilder sb = new StringBuilder();
+            //foreach (DictionaryEntry head in hwr.Headers)
+            //    sb.AppendLine(String.Format("{0}:{1}", head.Key, head.Value));
+
             WebHeaderCollection head = hwr.Headers;
             IEnumerator iem = head.GetEnumerator();
             ArrayList value = new ArrayList();
@@ -146,7 +142,7 @@ namespace C2.Business.IAOLab.PostAndGet
             }
         }
 
-        public async Task headTextAsync()
+        public async Task HeadTextAsync()
         {
             var client = new HttpClient(new HttpClientHandler { UseProxy = false });
             var request = new HttpRequestMessage(HttpMethod.Head, textBox.Text);
@@ -156,7 +152,7 @@ namespace C2.Business.IAOLab.PostAndGet
             richTextBox1.Text = result;
         }
 
-        public async Task optionsTextAsync()
+        public async Task OptionsTextAsync()
         {
             var client = new HttpClient(new HttpClientHandler { UseProxy = false });
             var request = new HttpRequestMessage(HttpMethod.Options, textBox.Text);
@@ -166,7 +162,7 @@ namespace C2.Business.IAOLab.PostAndGet
             richTextBox1.Text = result;
         }
 
-        public StringBuilder getHeaders(HttpWebResponse resp)
+        public StringBuilder GetHeaders(HttpWebResponse resp)
         {
             WebHeaderCollection head = resp.Headers;
             IEnumerator iem = head.GetEnumerator();
@@ -183,7 +179,7 @@ namespace C2.Business.IAOLab.PostAndGet
             }
             return ss;
         }
-        public string getResultNullParam(HttpWebResponse resp)
+        public string GetResultNullParam(HttpWebResponse resp)
         {
             string getResult = string.Empty;
             Stream stream = resp.GetResponseStream();
@@ -203,12 +199,12 @@ namespace C2.Business.IAOLab.PostAndGet
 
 
         HttpWebRequest req;
-        private async void submit_ClickAsync(object sender, EventArgs e)
+        private async void Submit_ClickAsync(object sender, EventArgs e)
         {
             if (splitType == "POST")
             {
                 string data = textBox1.Text;
-                byte[] bytesToPost = encodeoutput == "GBK" ? System.Text.Encoding.Default.GetBytes(data) : encodeoutput == "UTF-8" ? System.Text.Encoding.UTF8.GetBytes(data) : System.Text.Encoding.UTF8.GetBytes(data);
+                byte[] bytesToPost = encodeoutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.Default.GetBytes(data) ;
                 string responseResult = String.Empty;
                 try
                 {
@@ -220,9 +216,8 @@ namespace C2.Business.IAOLab.PostAndGet
                     {
                         try
                         {
-                            WebProxy wp = new WebProxy(textBox4.Text);
-                            req.Proxy = wp;
-                            postText(req, bytesToPost, responseResult);
+                            req.Proxy = new WebProxy(textBox4.Text);
+                            PostText(req, bytesToPost, responseResult);
                         }
                         catch
                         {
@@ -231,7 +226,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     }
                     else
                     {
-                        postText(req, bytesToPost, responseResult);
+                        PostText(req, bytesToPost, responseResult);
                     }
                 }
                 catch
@@ -250,14 +245,14 @@ namespace C2.Business.IAOLab.PostAndGet
                         req.Method = splitType;
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
                         HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                        StringBuilder headerResult = getHeaders(resp);
+                        StringBuilder headerResult = GetHeaders(resp);
                         if (textBox4.Text != string.Empty)
                         {
                             try
                             {
                                 WebProxy wp = new WebProxy(textBox4.Text);
                                 req.Proxy = wp;
-                                string result = getResultNullParam(resp);
+                                string result = GetResultNullParam(resp);
                                 richTextBox1.Text = result;
                             }
                             catch
@@ -267,7 +262,7 @@ namespace C2.Business.IAOLab.PostAndGet
                         }
                         else
                         {
-                            string result = getResultNullParam(resp);
+                            string result = GetResultNullParam(resp);
                             richTextBox1.Text = result;
                         }
                     }
@@ -383,11 +378,11 @@ namespace C2.Business.IAOLab.PostAndGet
             }
             else if (splitType == "HEAD")
             {
-                await headTextAsync();
+                await HeadTextAsync();
             }
             else if (splitType == "OPTIONS")
             {
-                await optionsTextAsync();
+                await OptionsTextAsync();
             }
         }
     }
