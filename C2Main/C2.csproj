@@ -3005,7 +3005,6 @@
     <None Include="Resources\Images\svg.png" />
     <None Include="Resources\Images\ToolImage\saveAllButton.png" />
     <None Include="Resources\Images\TabBarImage\ORACLE.png" />
-    <None Include="Resources\Images\TabBarImage\Excel.png" />
     <None Include="Resources\Images\TabBarImage\Table.png" />
     <None Include="Resources\Images\TabBarImage\apk.png" />
     <None Include="Resources\Images\TabBarImage\BaseStation.png" />
@@ -3022,21 +3021,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
-    <None Include="Resources\Images\TabBarImage\业务视图2.png" />
-    <None Include="Resources\Images\TabBarImage\业务视图3.png" />
     <Content Include="Resources\Images\TabBarImage\模型视图.png" />
-    <None Include="Resources\Images\TabBarImage\模型视图2.png" />
-    <None Include="Resources\Images\TabBarImage\模型视图3.png" />
     <Content Include="Resources\Images\TabBarImage\首页.png" />
-    <None Include="Resources\Images\TabBarImage\首页2.png" />
-    <None Include="Resources\Images\TabBarImage\首页3.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
     <None Include="Resources\Images\theme.png" />
     <None Include="Resources\Images\theme_manage.png" />
     <None Include="Resources\Images\tick.png" />
     <None Include="Resources\Images\tick_small.png" />
-    <None Include="Resources\Images\ToolImage\open.png" />
     <None Include="Resources\Images\ToolImage\openDataFile.png" />
     <Content Include="Resources\Images\TerrorismDetection.png" />
     <Content Include="Resources\Images\TibetanDetection.png" />
@@ -3882,7 +3874,6 @@
     <Content Include="Resources\C1\datasource\pythonHelper3.png" />
     <Content Include="Resources\C1\datasource\pythonHelper4.png" />
     <Content Include="Resources\C1\datasource\pythonHelper5.png" />
-    <Content Include="Resources\C1\datasource\pythonHelper6.png" />
     <Content Include="Resources\C1\flow\flow.png" />
     <Content Include="Resources\C1\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
