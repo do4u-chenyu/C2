@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Controls;
-using System.Net.Http;
-using System.Net;
-using System.IO;
+﻿using C2.Controls;
 using Newtonsoft.Json;
+using System;
 using System.Collections;
-using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace C2.Business.IAOLab.PostAndGet
 {
@@ -156,7 +150,6 @@ namespace C2.Business.IAOLab.PostAndGet
             cnblogsRespone.Close();
             richTextBox2.Text = responseResult;
             richTextBox1.Text = ConvertJsonString(responseResult);
-            richTextBox3.Text = ss.ToString();
         }
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
@@ -258,7 +251,6 @@ namespace C2.Business.IAOLab.PostAndGet
                         catch
                         {
                             richTextBox2.Text = richTextBox1.Text = "代理不可用，请更换代理";
-                            richTextBox3.Text = string.Empty;
                         }
                     }
                     else
@@ -291,25 +283,21 @@ namespace C2.Business.IAOLab.PostAndGet
                                 req.Proxy = wp;
                                 string result = getResultNullParam(resp);
                                 richTextBox2.Text = richTextBox1.Text = result;
-                                richTextBox3.Text = headerResult.ToString();
                             }
                             catch
                             {
                                 richTextBox2.Text = richTextBox1.Text = "代理不可用，请更换代理";
-                                richTextBox3.Text = string.Empty;
                             }
                         }
                         else
                         {
                             string result = getResultNullParam(resp);
                             richTextBox2.Text = richTextBox1.Text = result;
-                            richTextBox3.Text = headerResult.ToString();
                         }
                     }
                     catch 
                     {
                         richTextBox2.Text = richTextBox1.Text = "请输入正确的接口或参数";
-                        richTextBox3.Text = string.Empty;
                     }
                 }
                 //Get 含有参数
@@ -364,7 +352,6 @@ namespace C2.Business.IAOLab.PostAndGet
                         stream.Close();
                     }
                     richTextBox2.Text = richTextBox1.Text = result;
-                    richTextBox3.Text = ss.ToString();
                 }
             }
             else if (splitType == "PUT")
@@ -426,15 +413,6 @@ namespace C2.Business.IAOLab.PostAndGet
             {
                 await optionsTextAsync();
             }
-        }
-
-        private void example_Click(object sender, EventArgs e)
-        {
-            textBox.Text = "http://218.94.117.234:8970/HI_NLP/NER";
-            textBox1.Text = "sentence=张三，南京人，家住南京市浦口区江浦街道";
-            comboBox1.SelectedIndex = comboBox1.Items.IndexOf("POST");
-            comboBox2.SelectedIndex = comboBox2.Items.IndexOf("UTF-8 --接口输出的编码");
-            comboBox3.SelectedIndex = comboBox3.Items.IndexOf("自动解压(gzip,deflate,flate)");
         }
     }
 }
