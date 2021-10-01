@@ -1,8 +1,8 @@
 ﻿using C2.Controls;
+using C2.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -23,36 +23,13 @@ namespace C2.Business.IAOLab.PostAndGet
             InitializeComponent();
         }
 
-        private void textbox_MouseDown(object sender, EventArgs e)
-        {
-            if (textBox.Text == "输入你测试的url")
-            {
-                textBox.Text = string.Empty;
-                textBox.ForeColor = Color.Black;
-            }
-        }
-       
-        private void textbox_Leave(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(textBox.Text))
-            {
-                textBox.Text = "输入你测试的url";
-                textBox.ForeColor = Color.Gray;
-            }
-        }
-
         private void Delete_Click(object sender, EventArgs e)
         {
-            string defaultHeadText = "application/x-www-form-urlencoded";
-            if(textBox.Text != "输入你测试的url")
-                textBox.Text = string.Empty;
+            textBox.Text = string.Empty;
             textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
-            if (textBox3.Text != defaultHeadText)
-                textBox3.Text = string.Empty;
-            if (String.IsNullOrEmpty(textBox3.Text))
-                textBox3.Text = defaultHeadText;
-                textBox4.Text = string.Empty;
+            textBox3.Text = string.Empty;
+            textBox4.Text = string.Empty;
         }
 
 
@@ -105,7 +82,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     Formatting = Formatting.Indented,
                     Indentation = 4,
-                    IndentChar = ' '
+                    IndentChar = OpUtil.Blank
                 };
                 serializer.Serialize(jsonWriter, obj);
                 return textWriter.ToString();
@@ -148,7 +125,6 @@ namespace C2.Business.IAOLab.PostAndGet
                 ss.Append(s.ToString());
             }
             cnblogsRespone.Close();
-            richTextBox2.Text = responseResult;
             richTextBox1.Text = ConvertJsonString(responseResult);
         }
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
@@ -177,7 +153,7 @@ namespace C2.Business.IAOLab.PostAndGet
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
-            richTextBox2.Text = richTextBox1.Text = result;
+            richTextBox1.Text = result;
         }
 
         public async Task optionsTextAsync()
@@ -187,7 +163,7 @@ namespace C2.Business.IAOLab.PostAndGet
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
-            richTextBox2.Text = richTextBox1.Text = result;
+            richTextBox1.Text = result;
         }
 
         public StringBuilder getHeaders(HttpWebResponse resp)
@@ -250,7 +226,7 @@ namespace C2.Business.IAOLab.PostAndGet
                         }
                         catch
                         {
-                            richTextBox2.Text = richTextBox1.Text = "代理不可用，请更换代理";
+                            richTextBox1.Text = "代理不可用，请更换代理";
                         }
                     }
                     else
@@ -260,7 +236,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 }
                 catch
                 {
-                    richTextBox2.Text = richTextBox1.Text = "请输入正确的接口或参数";
+                    richTextBox1.Text = "请输入正确的接口或参数";
                 }
             }
             else if (splitType == "GET")
@@ -282,22 +258,22 @@ namespace C2.Business.IAOLab.PostAndGet
                                 WebProxy wp = new WebProxy(textBox4.Text);
                                 req.Proxy = wp;
                                 string result = getResultNullParam(resp);
-                                richTextBox2.Text = richTextBox1.Text = result;
+                                richTextBox1.Text = result;
                             }
                             catch
                             {
-                                richTextBox2.Text = richTextBox1.Text = "代理不可用，请更换代理";
+                                richTextBox1.Text = "代理不可用，请更换代理";
                             }
                         }
                         else
                         {
                             string result = getResultNullParam(resp);
-                            richTextBox2.Text = richTextBox1.Text = result;
+                            richTextBox1.Text = result;
                         }
                     }
                     catch 
                     {
-                        richTextBox2.Text = richTextBox1.Text = "请输入正确的接口或参数";
+                        richTextBox1.Text = "请输入正确的接口或参数";
                     }
                 }
                 //Get 含有参数
@@ -351,7 +327,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     {
                         stream.Close();
                     }
-                    richTextBox2.Text = richTextBox1.Text = result;
+                    richTextBox1.Text = result;
                 }
             }
             else if (splitType == "PUT")
@@ -403,7 +379,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     request = null;
                     requestStream = null;
                 }
-                richTextBox2.Text = richTextBox1.Text = responseStr;
+                richTextBox1.Text = responseStr;
             }
             else if (splitType == "HEAD")
             {
