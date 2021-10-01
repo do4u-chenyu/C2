@@ -241,7 +241,9 @@
             "\\X",
             "\\x",
             "#",
-            "%"});
+            "%",
+            "/",
+            "0x"});
             this.splitComboBox.Location = new System.Drawing.Point(476, 383);
             this.splitComboBox.Name = "splitComboBox";
             this.splitComboBox.Size = new System.Drawing.Size(75, 27);

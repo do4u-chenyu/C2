@@ -681,8 +681,7 @@ namespace MD5Plugin
 
         byte[] HexDecode_16(string str)
         {
-            if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
-                str = str.Replace(splitType, string.Empty);
+            str = str.Replace(splitType, string.Empty);
 
             if (str.Length % 2 != 0)
                 str = str.Substring(0, str.Length - 1);
@@ -710,8 +709,7 @@ namespace MD5Plugin
 
         byte[] HexDecode_8(string str)
         {
-            if (splitType == @"\X" || splitType == @"\x" || splitType == "#" || splitType == "%")
-                str = str.Replace(splitType, string.Empty);
+            str = str.Replace(splitType, string.Empty);
 
             if (str.Length % 3 != 0)
                 str = str.Substring(0, str.Length - str.Length % 3);
@@ -719,7 +717,7 @@ namespace MD5Plugin
             int index = 0;
             for (int i = 0; i < str.Length; i += 3)
             {
-                arrByte[index++] = Convert.ToByte(str.Substring(i, 3), 8);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+                arrByte[index++] = Convert.ToByte(str.Substring(i, 3), 8); 
             }
 
             return arrByte;
