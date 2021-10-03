@@ -22,7 +22,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             ListViewItem lvi = new ListViewItem(config.CreateTime);
-            lvi.SubItems.Add(config.Name);
+            lvi.SubItems.Add(config.Remark);
             lvi.SubItems.Add(config.Url);
             lvi.SubItems.Add(config.Password);
             lvi.SubItems.Add(config.TrojanType);
@@ -81,7 +81,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             foreach (WebShellTaskConfig config in tasks)
             {
                 ListViewItem lvi = new ListViewItem(config.CreateTime);
-                lvi.SubItems.Add(config.Name);
+                lvi.SubItems.Add(config.Remark);
                 lvi.SubItems.Add(config.Url);
                 lvi.SubItems.Add(config.Password);
                 lvi.SubItems.Add(config.TrojanType);

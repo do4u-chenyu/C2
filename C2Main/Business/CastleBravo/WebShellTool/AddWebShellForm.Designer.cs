@@ -40,15 +40,14 @@
             this.databaseConfigTextBox = new System.Windows.Forms.TextBox();
             this.versionComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // NameTextBox
+            // nameTextBox
             // 
             this.nameTextBox.Location = new System.Drawing.Point(96, 22);
-            this.nameTextBox.Name = "NameTextBox";
+            this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(285, 21);
             this.nameTextBox.TabIndex = 0;
             // 
@@ -59,7 +58,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "名称：";
+            this.label1.Text = "备注：";
             // 
             // label2
             // 
@@ -87,10 +86,10 @@
             this.label3.TabIndex = 10006;
             this.label3.Text = "密码：";
             // 
-            // pwdTextBox
+            // passwordTextBox
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(96, 92);
-            this.passwordTextBox.Name = "pwdTextBox";
+            this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(285, 21);
             this.passwordTextBox.TabIndex = 10005;
             // 
@@ -103,33 +102,33 @@
             this.label5.TabIndex = 10010;
             this.label5.Text = "类型：";
             // 
-            // typeCombox
+            // trojanTypeCombox
             // 
             this.trojanTypeCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.trojanTypeCombox.FormattingEnabled = true;
             this.trojanTypeCombox.Items.AddRange(new object[] {
             "phpEval"});
             this.trojanTypeCombox.Location = new System.Drawing.Point(96, 127);
-            this.trojanTypeCombox.Name = "typeCombox";
+            this.trojanTypeCombox.Name = "trojanTypeCombox";
             this.trojanTypeCombox.Size = new System.Drawing.Size(285, 20);
             this.trojanTypeCombox.TabIndex = 10011;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 199);
+            this.label6.Location = new System.Drawing.Point(6, 199);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 12);
             this.label6.TabIndex = 10013;
             this.label6.Text = "数据库(可选)：";
             // 
-            // advancedTextBox
+            // databaseConfigTextBox
             // 
             this.databaseConfigTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.databaseConfigTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.databaseConfigTextBox.Location = new System.Drawing.Point(96, 195);
             this.databaseConfigTextBox.Multiline = true;
-            this.databaseConfigTextBox.Name = "advancedTextBox";
+            this.databaseConfigTextBox.Name = "databaseConfigTextBox";
             this.databaseConfigTextBox.Size = new System.Drawing.Size(285, 134);
             this.databaseConfigTextBox.TabIndex = 10014;
             this.databaseConfigTextBox.Text = "TYPE:mysql\r\nHOST:localhost\r\nUSER:root\r\nPASS:root\r\nLANG:UTF-8";
@@ -139,8 +138,13 @@
             this.versionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.versionComboBox.FormattingEnabled = true;
             this.versionComboBox.Items.AddRange(new object[] {
-            "中国菜刀16",
-            "中国菜刀11"});
+            "中国菜刀11_EXE版",
+            "中国菜刀14_EXE版",
+            "中国菜刀16_EXE版",
+            "中国菜刀bypass18版",
+            "中国菜刀16_JAR版",
+            "奥特曼",
+            "蚁剑"});
             this.versionComboBox.Location = new System.Drawing.Point(96, 161);
             this.versionComboBox.Name = "versionComboBox";
             this.versionComboBox.Size = new System.Drawing.Size(164, 20);
@@ -149,21 +153,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 164);
+            this.label7.Location = new System.Drawing.Point(18, 164);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 10015;
-            this.label7.Text = "执行版本：";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(79, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 12);
-            this.label4.TabIndex = 10017;
-            this.label4.Text = "*";
+            this.label7.Text = "客户端版本：";
             // 
             // label8
             // 
@@ -185,7 +179,7 @@
             this.label9.TabIndex = 10019;
             this.label9.Text = "*";
             // 
-            // AddWebShell
+            // AddWebShellForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +187,6 @@
             this.ClientSize = new System.Drawing.Size(397, 392);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.versionComboBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.databaseConfigTextBox);
@@ -206,7 +199,7 @@
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameTextBox);
-            this.Name = "AddWebShell";
+            this.Name = "AddWebShellForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell Setting";
             this.Controls.SetChildIndex(this.nameTextBox, 0);
@@ -221,7 +214,6 @@
             this.Controls.SetChildIndex(this.databaseConfigTextBox, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.versionComboBox, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.label9, 0);
             this.ResumeLayout(false);
@@ -243,7 +235,6 @@
         private System.Windows.Forms.TextBox databaseConfigTextBox;
         private System.Windows.Forms.ComboBox versionComboBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
     }

@@ -37,7 +37,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             //TODO 判断必填是否有值
             if(urlTextBox.Text.IsNullOrEmpty() || passwordTextBox.Text.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox("名称, url, 密码 不能为空。");
+                HelpUtil.ShowMessageBox("【Url】 和 【密码】 不能为空。");
                 return false;
             }
             return base.OnOKButtonClick();

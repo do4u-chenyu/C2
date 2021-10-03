@@ -9,7 +9,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static readonly WebShellTaskConfig Empty = new WebShellTaskConfig();
 
         public string CreateTime;      // 类字段顺序与持久化要求必须保持一致
-        public string Name;             
+        public string Remark;             
         public string Url;
         public string Password;
         public string TrojanType;      // 木马类型, 如 php, asp, jsp
@@ -19,10 +19,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public WebShellTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
-        public WebShellTaskConfig(string cTime, string name, string url, string pass, string trojanType, string cVersion, string dbConfig)
+        public WebShellTaskConfig(string cTime, string remark, string url, string pass, string trojanType, string cVersion, string dbConfig)
         {
             CreateTime = cTime;
-            Name = name;
+            Remark = remark;
             Url = url;
             Password = pass;
             TrojanType = trojanType;

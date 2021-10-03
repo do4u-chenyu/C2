@@ -16,8 +16,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         private static readonly string WebShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
         private static readonly Dictionary<string, string> VersionPathDict = new Dictionary<string, string>
         {
-            { "中国菜刀16", Path.Combine(WebShellFilePath, "Cknife16_Config.ini") },
-            { "中国菜刀11", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") }
+            { "中国菜刀16_JAR版", Path.Combine(WebShellFilePath, "Cknife16_Config.ini") },
+            { "中国菜刀11_EXE版", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") },
+            { "中国菜刀14_EXE版", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") },
+            { "中国菜刀16_EXE版", Path.Combine(WebShellFilePath, "Cknife16_Config.ini") },
+            { "中国菜刀bypass18版", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") },
+            { "奥特曼", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") },
+            { "蚁剑", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") },
         };
 
         public string SPL;

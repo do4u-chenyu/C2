@@ -39,7 +39,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvShellUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvPass = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -79,7 +79,7 @@
             this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1003, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1047, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -108,7 +108,7 @@
             this.LV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvAddTime,
-            this.lvName,
+            this.lvRemark,
             this.lvShellUrl,
             this.lvPass,
             this.lvType,
@@ -126,7 +126,7 @@
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1003, 425);
+            this.LV.Size = new System.Drawing.Size(1047, 425);
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -136,10 +136,10 @@
             this.lvAddTime.Text = "创建时间";
             this.lvAddTime.Width = 130;
             // 
-            // lvName
+            // lvRemark
             // 
-            this.lvName.Text = "名称";
-            this.lvName.Width = 95;
+            this.lvRemark.Text = "备注";
+            this.lvRemark.Width = 95;
             // 
             // lvShellUrl
             // 
@@ -159,7 +159,7 @@
             // lvVersion
             // 
             this.lvVersion.Text = "客户端版本";
-            this.lvVersion.Width = 90;
+            this.lvVersion.Width = 135;
             // 
             // lvDB
             // 
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 450);
+            this.ClientSize = new System.Drawing.Size(1047, 450);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -194,7 +194,7 @@
         private System.Windows.Forms.ToolStripLabel addShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ListView LV;
-        private System.Windows.Forms.ColumnHeader lvName;
+        private System.Windows.Forms.ColumnHeader lvRemark;
         private System.Windows.Forms.ColumnHeader lvShellUrl;
         private System.Windows.Forms.ColumnHeader lvType;
         private System.Windows.Forms.ColumnHeader lvVersion;
