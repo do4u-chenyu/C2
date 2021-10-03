@@ -278,24 +278,18 @@
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\AddWebShell.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\AddWebShell.Designer.cs">
-      <DependentUpon>AddWebShell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\VersionSettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\VersionSettingForm.Designer.cs">
-      <DependentUpon>VersionSettingForm.cs</DependentUpon>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.Designer.cs">
+      <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShell.cs" />
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetails.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetails.Designer.cs">
-      <DependentUpon>WebShellDetails.cs</DependentUpon>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.Designer.cs">
+      <DependentUpon>WebShellDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.cs">
       <SubType>Form</SubType>
@@ -303,7 +297,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.Designer.cs">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskInfo.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskConfig.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellVersionSetting.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
@@ -1973,14 +1967,11 @@
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShell.resx">
-      <DependentUpon>AddWebShell.cs</DependentUpon>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShellForm.resx">
+      <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\VersionSettingForm.resx">
-      <DependentUpon>VersionSettingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellDetails.resx">
-      <DependentUpon>WebShellDetails.cs</DependentUpon>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.resx">
+      <DependentUpon>WebShellDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>

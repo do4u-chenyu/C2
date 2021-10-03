@@ -32,21 +32,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebShellManageForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addShellMenu = new System.Windows.Forms.ToolStripLabel();
-            this.saveShellMenu = new System.Windows.Forms.ToolStripLabel();
             this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.helpMenu = new System.Windows.Forms.ToolStripLabel();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.lvID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LV = new System.Windows.Forms.ListView();
+            this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvShellUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvPass = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,10 +53,9 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EnterToolStripMenuItem,
-            this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
             // 
             // EnterToolStripMenuItem
             // 
@@ -66,13 +63,6 @@
             this.EnterToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.EnterToolStripMenuItem.Text = "进入";
             this.EnterToolStripMenuItem.Click += new System.EventHandler(this.EnterToolStripMenuItem_Click);
-            // 
-            // EditToolStripMenuItem
-            // 
-            this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.EditToolStripMenuItem.Text = "编辑";
-            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
@@ -85,108 +75,107 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addShellMenu,
-            this.saveShellMenu,
             this.settingMenu,
-            this.toolStripSeparator1,
-            this.helpMenu});
+            this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1003, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // addShellMenu
             // 
+            this.addShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addShellMenu.ForeColor = System.Drawing.SystemColors.ControlText;
             this.addShellMenu.Name = "addShellMenu";
             this.addShellMenu.Size = new System.Drawing.Size(32, 22);
             this.addShellMenu.Text = "添加";
             this.addShellMenu.Click += new System.EventHandler(this.AddShellMenu_Click);
             // 
-            // saveShellMenu
-            // 
-            this.saveShellMenu.Name = "saveShellMenu";
-            this.saveShellMenu.Size = new System.Drawing.Size(32, 22);
-            this.saveShellMenu.Text = "保存";
-            this.saveShellMenu.Click += new System.EventHandler(this.SaveShellMenu_Click);
-            // 
             // settingMenu
             // 
             this.settingMenu.Name = "settingMenu";
-            this.settingMenu.Size = new System.Drawing.Size(56, 22);
-            this.settingMenu.Text = "版本配置";
-            this.settingMenu.Click += new System.EventHandler(this.SettingMenu_Click);
+            this.settingMenu.Size = new System.Drawing.Size(0, 22);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // helpMenu
+            // LV
             // 
-            this.helpMenu.Name = "helpMenu";
-            this.helpMenu.Size = new System.Drawing.Size(32, 22);
-            this.helpMenu.Text = "帮助";
-            // 
-            // listView1
-            // 
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvID,
+            this.LV.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.LV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvAddTime,
             this.lvName,
             this.lvShellUrl,
+            this.lvPass,
             this.lvType,
-            this.lvRemark,
-            this.lvAddTime});
-            this.listView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 25);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(800, 425);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // lvID
-            // 
-            this.lvID.Text = "ID";
-            // 
-            // lvName
-            // 
-            this.lvName.Text = "名称";
-            this.lvName.Width = 113;
-            // 
-            // lvShellUrl
-            // 
-            this.lvShellUrl.Text = "ShellUrl";
-            this.lvShellUrl.Width = 289;
-            // 
-            // lvType
-            // 
-            this.lvType.Text = "类型";
-            this.lvType.Width = 79;
-            // 
-            // lvRemark
-            // 
-            this.lvRemark.Text = "备注";
-            this.lvRemark.Width = 74;
+            this.lvVersion,
+            this.lvDB});
+            this.LV.ContextMenuStrip = this.contextMenuStrip1;
+            this.LV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LV.FullRowSelect = true;
+            this.LV.GridLines = true;
+            this.LV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.LV.HideSelection = false;
+            this.LV.HoverSelection = true;
+            this.LV.Location = new System.Drawing.Point(0, 25);
+            this.LV.MultiSelect = false;
+            this.LV.Name = "LV";
+            this.LV.ShowGroups = false;
+            this.LV.ShowItemToolTips = true;
+            this.LV.Size = new System.Drawing.Size(1003, 425);
+            this.LV.TabIndex = 3;
+            this.LV.UseCompatibleStateImageBehavior = false;
+            this.LV.View = System.Windows.Forms.View.Details;
             // 
             // lvAddTime
             // 
             this.lvAddTime.Text = "创建时间";
-            this.lvAddTime.Width = 156;
+            this.lvAddTime.Width = 130;
+            // 
+            // lvName
+            // 
+            this.lvName.Text = "名称";
+            this.lvName.Width = 95;
+            // 
+            // lvShellUrl
+            // 
+            this.lvShellUrl.Text = "目标Url";
+            this.lvShellUrl.Width = 325;
+            // 
+            // lvPass
+            // 
+            this.lvPass.Text = "连接密码";
+            this.lvPass.Width = 100;
+            // 
+            // lvType
+            // 
+            this.lvType.Text = "Trojan类型";
+            this.lvType.Width = 100;
+            // 
+            // lvVersion
+            // 
+            this.lvVersion.Text = "客户端版本";
+            this.lvVersion.Width = 90;
+            // 
+            // lvDB
+            // 
+            this.lvDB.Text = "数据库配置";
+            this.lvDB.Width = 160;
             // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(1003, 450);
+            this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "WebShellManageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell管理";
@@ -204,19 +193,17 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel addShellMenu;
-        private System.Windows.Forms.ToolStripLabel saveShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel helpMenu;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader lvID;
+        private System.Windows.Forms.ListView LV;
         private System.Windows.Forms.ColumnHeader lvName;
         private System.Windows.Forms.ColumnHeader lvShellUrl;
         private System.Windows.Forms.ColumnHeader lvType;
-        private System.Windows.Forms.ColumnHeader lvRemark;
+        private System.Windows.Forms.ColumnHeader lvVersion;
         private System.Windows.Forms.ColumnHeader lvAddTime;
-        private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EnterToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel settingMenu;
+        private System.Windows.Forms.ColumnHeader lvPass;
+        private System.Windows.Forms.ColumnHeader lvDB;
     }
 }

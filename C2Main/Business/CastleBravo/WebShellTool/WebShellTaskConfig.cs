@@ -1,0 +1,33 @@
+﻿using System;
+
+namespace C2.Business.CastleBravo.WebShellTool
+{
+    // 用这个持久化,后面新增字段就困难了
+    [Serializable]
+    public class WebShellTaskConfig
+    {
+        public static readonly WebShellTaskConfig Empty = new WebShellTaskConfig();
+
+        public string CreateTime;      // 类字段顺序与持久化要求必须保持一致
+        public string Name;             
+        public string Url;
+        public string Password;
+        public string TrojanType;      // 木马类型, 如 php, asp, jsp
+        public string ClientVersion;   // 客户端版本, 如 中国菜刀, 奥特曼, 哥斯拉 
+        public string DatabaseConfig;  
+
+
+        public WebShellTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
+
+        public WebShellTaskConfig(string cTime, string name, string url, string pass, string trojanType, string cVersion, string dbConfig)
+        {
+            CreateTime = cTime;
+            Name = name;
+            Url = url;
+            Password = pass;
+            TrojanType = trojanType;
+            ClientVersion = cVersion;
+            DatabaseConfig = dbConfig;
+        }
+    }
+}

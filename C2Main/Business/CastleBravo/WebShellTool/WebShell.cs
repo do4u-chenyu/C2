@@ -1,14 +1,10 @@
 ﻿using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
-using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -21,11 +17,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private WebClientEx client;
 
-        public WebShell(string address, string pVariable, WebShellVersionSetting versionSetting)
+        public WebShell(string address, string pVariable, string version)
         {
             this.url = address;
             this.pwd = pVariable;
-            this.versionSetting = versionSetting;
+            this.versionSetting = WebShellVersionSetting.LoadSetting(version);
             PayloadLog = new List<string>();
 
             this.client = new WebClientEx();

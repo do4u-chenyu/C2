@@ -1,36 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    public partial class WebShellDetails : Form
+    public partial class WebShellDetailsForm : Form
     {
-        private WebShellTaskInfo webShellTaskInfo;
+        private WebShellTaskConfig webShellTaskInfo;
         private WebShell webShell;
 
         private string currentShowPath;
         private string currentCmdPath;
 
-        public WebShellDetails()
+        public WebShellDetailsForm()
         {
             InitializeComponent();
         }
 
-        public WebShellDetails(WebShellTaskInfo taskInfo, WebShellVersionSetting versionSetting) : this()
+        public WebShellDetailsForm(WebShellTaskConfig taskInfo) : this()
         {
             webShellTaskInfo = taskInfo;
-            webShell = new WebShell(taskInfo.TaskUrl, taskInfo.TaskPwd, versionSetting);
+            webShell = new WebShell(taskInfo.Url, taskInfo.Password, taskInfo.ClientVersion);
             currentShowPath = string.Empty;
             currentCmdPath = string.Empty;
             UpdateBaseInfo(webShell.PHPInfo());

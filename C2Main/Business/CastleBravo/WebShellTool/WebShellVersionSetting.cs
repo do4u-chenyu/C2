@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -15,7 +13,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
-        private Dictionary<string, string> versionPathDict;
+        private static readonly string WebShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
+        private static readonly Dictionary<string, string> VersionPathDict = new Dictionary<string, string>
+        {
+            { "中国菜刀16", Path.Combine(WebShellFilePath, "Cknife16_Config.ini") },
+            { "中国菜刀11", Path.Combine(WebShellFilePath, "Cknife11_Config.ini") }
+        };
 
         public string SPL;
         public string SPR;
@@ -41,39 +44,34 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public WebShellVersionSetting()
         {
-            string webShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
-            versionPathDict = new Dictionary<string, string>
-            {
-                { "中国菜刀16", Path.Combine(webShellFilePath, "Cknife16_Config.ini") },
-                { "中国菜刀11", Path.Combine(webShellFilePath, "Cknife11_Config.ini") }
-            };
         }
 
-        public void LoadSetting(string version)
+        public static WebShellVersionSetting LoadSetting(string version)
         {
-            versionPathDict.TryGetValue(version, out string path);
-
-            this.SPL = Read(version, "SPL", path);
-            this.SPR = Read(version, "SPR", path);
-            this.CODE = Read(version, "CODE", path);
-            this.ACTION = Read(version, "ACTION", path);
-            this.PARAM1 = Read(version, "PARAM1", path);
-            this.PARAM2 = Read(version, "PARAM2", path);
-            this.PARAM3 = Read(version, "PARAM3", path);
-            this.PHP_BASE64 = Read(version, "PHP_BASE64", path);
-            this.PHP_MAKE = Read(version, "PHP_MAKE", path);
-            this.PHP_INFO = Read(version, "PHP_INFO", path);
-            this.PHP_INDEX = Read(version, "PHP_INDEX", path);
-            this.PHP_READDICT = Read(version, "PHP_READDICT", path);
-            this.PHP_READFILE = Read(version, "PHP_READFILE", path);
-            this.PHP_SAVEFILE = Read(version, "PHP_SAVEFILE", path);
-            this.PHP_DELETE = Read(version, "PHP_DELETE", path);
-            this.PHP_RENAME = Read(version, "PHP_RENAME", path);
-            this.PHP_RETIME = Read(version, "PHP_RETIME", path);
-            this.PHP_NEWDICT = Read(version, "PHP_NEWDICT", path);
-            this.PHP_UPLOAD = Read(version, "PHP_UPLOAD", path);
-            this.PHP_DOWNLOAD = Read(version, "PHP_DOWNLOAD", path);
-            this.PHP_SHELL = Read(version, "PHP_SHELL", path);
+            string path = VersionPathDict[version];
+            return new WebShellVersionSetting() {
+                SPL = Read(version, "SPL", path),
+                SPR = Read(version, "SPR", path),
+                CODE = Read(version, "CODE", path),
+                ACTION = Read(version, "ACTION", path),
+                PARAM1 = Read(version, "PARAM1", path),
+                PARAM2 = Read(version, "PARAM2", path),
+                PARAM3 = Read(version, "PARAM3", path),
+                PHP_BASE64 = Read(version, "PHP_BASE64", path),
+                PHP_MAKE = Read(version, "PHP_MAKE", path),
+                PHP_INFO = Read(version, "PHP_INFO", path),
+                PHP_INDEX = Read(version, "PHP_INDEX", path),
+                PHP_READDICT = Read(version, "PHP_READDICT", path),
+                PHP_READFILE = Read(version, "PHP_READFILE", path),
+                PHP_SAVEFILE = Read(version, "PHP_SAVEFILE", path),
+                PHP_DELETE = Read(version, "PHP_DELETE", path),
+                PHP_RENAME = Read(version, "PHP_RENAME", path),
+                PHP_RETIME = Read(version, "PHP_RETIME", path),
+                PHP_NEWDICT = Read(version, "PHP_NEWDICT", path),
+                PHP_UPLOAD = Read(version, "PHP_UPLOAD", path),
+                PHP_DOWNLOAD = Read(version, "PHP_DOWNLOAD", path),
+                PHP_SHELL = Read(version, "PHP_SHELL", path),
+            };
         }
 
         /// <summary>
@@ -85,8 +83,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         /// <returns>读取的值</returns>
         public static string Read(string section, string key, string filePath)
         {
-            StringBuilder sb = new StringBuilder(1024);
-            GetPrivateProfileString(section, key, "", sb, 1024, filePath);
+            int nSize = 1024 * 4;
+            StringBuilder sb = new StringBuilder(nSize);
+            GetPrivateProfileString(section, key, String.Empty, sb, nSize, filePath);
             return sb.ToString();
         }
     }

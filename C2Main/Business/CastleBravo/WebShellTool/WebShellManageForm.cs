@@ -1,97 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
     public partial class WebShellManageForm : Form
     {
-        List<WebShellTaskInfo> webShellTasks;
-        private string webShellFilePath;
-        public WebShellVersionSetting SelectedVersion;
-
+        List<WebShellTaskConfig> tasks = new List<WebShellTaskConfig>();
+        readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
         public WebShellManageForm()
         {
             InitializeComponent();
-            webShellTasks = new List<WebShellTaskInfo>();
-            webShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
-            SelectedVersion = new WebShellVersionSetting();
-            SelectedVersion.LoadSetting("中国菜刀16");
         }
 
         private void AddShellMenu_Click(object sender, EventArgs e)
         {
-            string addId = webShellTasks.Count == 0 ? "1" : int.Parse(webShellTasks.Max(c => c.TaskID)) + 1 + "";
-            AddWebShell dialog = new AddWebShell(addId);
-            if (dialog.ShowDialog() != DialogResult.OK)
+            WebShellTaskConfig config = new AddWebShellForm().ShowDialog();
+            if (config == WebShellTaskConfig.Empty)
                 return;
 
-            ListViewItem lvi = new ListViewItem(addId);
-            lvi.Tag = dialog.WebShellTask;
-            lvi.SubItems.Add(dialog.WebShellTask.TaskName);
-            lvi.SubItems.Add(dialog.WebShellTask.TaskUrl);
-            lvi.SubItems.Add(dialog.WebShellTask.TaskType.ToString());
-            lvi.SubItems.Add(dialog.WebShellTask.TaskRemark);
-            lvi.SubItems.Add(dialog.WebShellTask.TaskAddTime);
+            ListViewItem lvi = new ListViewItem(config.CreateTime);
+            lvi.SubItems.Add(config.Name);
+            lvi.SubItems.Add(config.Url);
+            lvi.SubItems.Add(config.Password);
+            lvi.SubItems.Add(config.TrojanType);
+            lvi.SubItems.Add(config.ClientVersion);
+            lvi.SubItems.Add(config.DatabaseConfig);
+            this.LV.Items.Add(lvi);
 
-            this.listView1.Items.Add(lvi);
-
-            webShellTasks.Add(dialog.WebShellTask);
+            tasks.Add(config);
         }
 
-
-
-        private void SaveShellMenu_Click(object sender, EventArgs e)
+        private void RefreshTasks()
         {
-            SaveDB();
-            MessageBox.Show("data saved in webshells.db");
+            tasks.Clear();
+            foreach (ListViewItem lvi in LV.Items)
+                tasks.Add(new WebShellTaskConfig(lvi.SubItems[0].Text,  // 创建时间
+                                                 lvi.SubItems[1].Text,  // 名称
+                                                 lvi.SubItems[2].Text,  // url
+                                                 lvi.SubItems[3].Text,  // 密码
+                                                 lvi.SubItems[4].Text,  // 木马类型
+                                                 lvi.SubItems[5].Text,  // 客户端版本
+                                                 lvi.SubItems[6].Text));// 数据库配置
         }
 
         private void SaveDB()
         {
-            using (Stream stream = File.Open(webShellFilePath + "\\webshells.db", FileMode.Create))
+            try
             {
-                var binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(stream, webShellTasks);
+                using (Stream stream = File.Open(configFFP, FileMode.Create))
+                   new BinaryFormatter().Serialize(stream, tasks);
             }
+            catch { }
         }
 
         private void WebShellManageForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                using (Stream stream = File.Open(webShellFilePath + "\\webshells.db", FileMode.Open))
-                {
-                    var binaryFormatter = new BinaryFormatter();
-                    webShellTasks = (List<WebShellTaskInfo>)binaryFormatter.Deserialize(stream);
-                }
-
-                RefreshListViewInfos();
-            }
-            catch{ }
+            LoadDB();
+            RefreshLV();
         }
 
-        public void RefreshListViewInfos()
+        private void LoadDB()
         {
-            foreach (WebShellTaskInfo ws in webShellTasks)
+            try
             {
-                ListViewItem lvi = new ListViewItem(ws.TaskID);
-                lvi.Tag = ws;
-                lvi.SubItems.Add(ws.TaskName);
-                lvi.SubItems.Add(ws.TaskUrl);
-                lvi.SubItems.Add(ws.TaskType.ToString());
-                lvi.SubItems.Add(ws.TaskRemark);
-                lvi.SubItems.Add(ws.TaskAddTime);
+                using (Stream stream = File.Open(configFFP, FileMode.Open))
+                    tasks = new BinaryFormatter().Deserialize(stream) as List<WebShellTaskConfig>;
+            }
+            catch { }
 
-                listView1.Items.Add(lvi);
+        }
+
+        public void RefreshLV()
+        {
+            LV.Items.Clear();  // 不能删表头的clear方法
+
+            foreach (WebShellTaskConfig config in tasks)
+            {
+                ListViewItem lvi = new ListViewItem(config.CreateTime);
+                lvi.SubItems.Add(config.Name);
+                lvi.SubItems.Add(config.Url);
+                lvi.SubItems.Add(config.Password);
+                lvi.SubItems.Add(config.TrojanType);
+                lvi.SubItems.Add(config.ClientVersion);
+                lvi.SubItems.Add(config.DatabaseConfig);
+
+                LV.Items.Add(lvi);
             }
         }
 
@@ -102,49 +98,19 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void EnterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.listView1.SelectedItems.Count == 0)
+            if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            new WebShellDetails((WebShellTaskInfo)this.listView1.SelectedItems[0].Tag, SelectedVersion).ShowDialog();
-        }
-
-        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.listView1.SelectedItems.Count == 0)
-                return;
-
-            WebShellTaskInfo editTask = webShellTasks.Find(c => c.TaskID == (this.listView1.SelectedItems[0].Tag as WebShellTaskInfo).TaskID);
-
-            AddWebShell dialog = new AddWebShell(editTask);
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            this.listView1.SelectedItems[0].Tag = dialog.WebShellTask;
-            editTask.TaskName = this.listView1.SelectedItems[0].SubItems[1].Text = dialog.WebShellTask.TaskName;
-            editTask.TaskUrl = this.listView1.SelectedItems[0].SubItems[2].Text = dialog.WebShellTask.TaskUrl;
-            editTask.TaskRemark = this.listView1.SelectedItems[0].SubItems[4].Text = dialog.WebShellTask.TaskRemark;
-            editTask.TaskAddTime = this.listView1.SelectedItems[0].SubItems[5].Text = dialog.WebShellTask.TaskAddTime;
-
-            SaveDB();
+            //new WebShellDetailsForm((WebShellTaskConfig)this.listView1.SelectedItems[0].Tag).ShowDialog();
         }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.listView1.SelectedItems.Count == 0)
-                return;
-
-            webShellTasks.Remove(webShellTasks.Find(c => c.TaskID == (this.listView1.SelectedItems[0].Tag as WebShellTaskInfo).TaskID));
-            this.listView1.SelectedItems[0].Remove();
+            foreach (ListViewItem lvi in LV.SelectedItems)
+                lvi.Remove();
+            
+            RefreshTasks();
             SaveDB();
-        }
-
-        private void SettingMenu_Click(object sender, EventArgs e)
-        {
-            VersionSettingForm dialog = new VersionSettingForm();
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            SelectedVersion = dialog.SelectedVersion;
         }
     }
 }
