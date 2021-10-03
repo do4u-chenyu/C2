@@ -179,7 +179,6 @@
             this.Name = "WebShellManageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell管理";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WebShellManageForm_FormClosing);
             this.Load += new System.EventHandler(this.WebShellManageForm_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);

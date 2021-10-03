@@ -31,6 +31,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.LV.Items.Add(lvi);
 
             tasks.Add(config);
+            SaveDB();
         }
 
         private void RefreshTasks()
@@ -89,11 +90,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 LV.Items.Add(lvi);
             }
-        }
-
-        private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveDB();
         }
 
         private void EnterToolStripMenuItem_Click(object sender, EventArgs e)
