@@ -21,16 +21,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (config == WebShellTaskConfig.Empty)
                 return;
 
-            ListViewItem lvi = new ListViewItem(config.CreateTime);
-            lvi.SubItems.Add(config.Remark);
-            lvi.SubItems.Add(config.Url);
-            lvi.SubItems.Add(config.Password);
-            lvi.SubItems.Add(config.TrojanType);
-            lvi.SubItems.Add(config.ClientVersion);
-            lvi.SubItems.Add(config.DatabaseConfig);
-            this.LV.Items.Add(lvi);
-
+            LV.Items.Add(NewLVI(config));
             tasks.Add(config);
+
             SaveDB();
         }
 
@@ -77,19 +70,22 @@ namespace C2.Business.CastleBravo.WebShellTool
         public void RefreshLV()
         {
             LV.Items.Clear();  // 不能删表头的clear方法
-
             foreach (WebShellTaskConfig config in tasks)
-            {
-                ListViewItem lvi = new ListViewItem(config.CreateTime);
-                lvi.SubItems.Add(config.Remark);
-                lvi.SubItems.Add(config.Url);
-                lvi.SubItems.Add(config.Password);
-                lvi.SubItems.Add(config.TrojanType);
-                lvi.SubItems.Add(config.ClientVersion);
-                lvi.SubItems.Add(config.DatabaseConfig);
+                LV.Items.Add(NewLVI(config));
+        }
 
-                LV.Items.Add(lvi);
-            }
+        private static ListViewItem NewLVI(WebShellTaskConfig config)
+        {
+            ListViewItem lvi = new ListViewItem(config.CreateTime);
+            lvi.SubItems.Add(config.Remark);
+            lvi.SubItems.Add(config.Url);
+            lvi.SubItems.Add(config.Password);
+            lvi.SubItems.Add(config.TrojanType);
+            lvi.SubItems.Add(config.ClientVersion);
+            lvi.SubItems.Add(config.DatabaseConfig);
+
+            lvi.Tag = config; // 指针关联
+            return lvi;
         }
 
         private void EnterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -97,7 +93,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            //new WebShellDetailsForm((WebShellTaskConfig)this.listView1.SelectedItems[0].Tag).ShowDialog();
+            new WebShellDetailsForm(LV.SelectedItems[0].Tag as WebShellTaskConfig).ShowDialog();
         }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)

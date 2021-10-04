@@ -284,7 +284,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.Designer.cs">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShell.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,7 +298,7 @@
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskConfig.cs" />
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShellVersionSetting.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellClientSetting.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    public class WebShellVersionSetting
+    public class WebShellClientSetting
     {
 
         [DllImport("kernel32")]
@@ -47,14 +47,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PHP_DOWNLOAD;
         public string PHP_SHELL;
 
-        public WebShellVersionSetting()
+        public WebShellClientSetting()
         {
         }
 
-        public static WebShellVersionSetting LoadSetting(string version)
+        public static WebShellClientSetting LoadSetting(string version)
         {
             string path = VersionPathDict[version];
-            return new WebShellVersionSetting() {
+            return new WebShellClientSetting() {
                 SPL = Read(version, "SPL", path),
                 SPR = Read(version, "SPR", path),
                 CODE = Read(version, "CODE", path),

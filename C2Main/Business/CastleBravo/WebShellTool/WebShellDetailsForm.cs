@@ -7,8 +7,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     public partial class WebShellDetailsForm : Form
     {
-        private WebShellTaskConfig webShellTaskInfo;
-        private WebShell webShell;
+        private WebShellClient webShell;
 
         private string currentShowPath;
         private string currentCmdPath;
@@ -18,10 +17,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeComponent();
         }
 
-        public WebShellDetailsForm(WebShellTaskConfig taskInfo) : this()
+        public WebShellDetailsForm(WebShellTaskConfig info) : this()
         {
-            webShellTaskInfo = taskInfo;
-            webShell = new WebShell(taskInfo.Url, taskInfo.Password, taskInfo.ClientVersion);
+            webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion);
             currentShowPath = string.Empty;
             currentCmdPath = string.Empty;
             UpdateBaseInfo(webShell.PHPInfo());
@@ -34,11 +32,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (tabControl1.SelectedTab.Text == "基础信息")
                 UpdateBaseInfo(webShell.PHPInfo());
             if (tabControl1.SelectedTab.Text == "虚拟终端")
-            {
-                this.outputTextBox.Text = string.Empty;
-                UpdateCmd(webShell.CurrentCmdExcute());
-            }
-                
+                UpdateCmd(webShell.CurrentCmdExcute());        
         }
 
         private void UpdateCmd(Tuple<string, string> excuteResult)
@@ -54,8 +48,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             this.cmdTextBox.Text = string.Empty;
 
-            this.messageLog.Text = string.Join("\r\n", webShell.PayloadLog);
-            webShell.PayloadLog.Clear();
+            this.messageLog.Text = webShell.PayloadLog;
+            webShell.Clear();
         }
 
         private void UpdateBaseInfo(string result)
@@ -63,8 +57,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             this.baseInfoWebBrowser.DocumentText = result;
 
-            this.messageLog.Text = string.Join("\r\n", webShell.PayloadLog);
-            webShell.PayloadLog.Clear();
+            this.messageLog.Text = webShell.PayloadLog;
+            webShell.Clear();
         }
 
         private void FilePathTb_KeyDown(object sender, KeyEventArgs e)
@@ -102,10 +96,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.fileManagerListView.Items.Clear();
             foreach (WSFile file in files)
             {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Tag = file;
-                lvi.Text = file.FileName;
-                lvi.ImageIndex = file.Type == WebShellFileType.Directory ? 0 : 1;
+                ListViewItem lvi = new ListViewItem
+                {
+                    Tag = file,
+                    Text = file.FileName,
+                    ImageIndex = file.Type == WebShellFileType.Directory ? 0 : 1
+                };
                 lvi.SubItems.Add(file.CreateTime);
                 lvi.SubItems.Add(file.FileSize);
                 lvi.SubItems.Add(file.LastMod);
@@ -117,8 +113,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             CreateBroNodes(broPaths);//生成兄弟节点，这里仅针对window
             CreateSelfAndChildrenNodes(path, files);//生成自己和孩子节点
 
-            this.messageLog.Text = string.Join("\r\n",webShell.PayloadLog);
-            webShell.PayloadLog.Clear();
+            this.messageLog.Text = webShell.PayloadLog;
+            webShell.Clear();
         }
 
         private void CreateBroNodes(List<string> broPaths)

