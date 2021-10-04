@@ -13,11 +13,12 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         private readonly string url;
         private readonly string password;
-        private readonly WebShellClientSetting clientSetting;
         private readonly StringBuilder sb;
+        private readonly WebClientEx clientEX;
+        private readonly WebShellClientSetting clientSetting;
         public string PayloadLog { get => sb.ToString(); }
         public void Clear() { sb.Clear(); }
-        private WebClientEx clientEX;
+      
 
         public WebShellClient(string address, string password, string clientSetting)
         {
@@ -26,8 +27,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.clientSetting = WebShellClientSetting.LoadSetting(clientSetting);
             this.sb = new StringBuilder();
 
-            this.clientEX = new WebClientEx();
-            clientEX.Encoding = Encoding.Default;
+            this.clientEX = new WebClientEx
+            {
+                Timeout = 30000,//30秒超时
+                Encoding = Encoding.Default
+            };
+            this.clientEX.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
         }
 
         public Tuple<string, string> CurrentCmdExcute()
@@ -118,57 +123,44 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             sb.AppendLine("========执行命令：" + oriCommand + "========");
             return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + 
-                            clientSetting.ACTION + "=" + clientSetting.PHP_SHELL + "&" + 
-                            clientSetting.PARAM1 + "=" + TransStringToBase64(cmdPath) + "&" +
-                            clientSetting.PARAM2 + "=" + TransStringToBase64(combineCommand));
+                           clientSetting.ACTION + "=" + clientSetting.PHP_SHELL + "&" + 
+                           clientSetting.PARAM1 + "=" + TransStringToBase64(cmdPath) + "&" +
+                           clientSetting.PARAM2 + "=" + TransStringToBase64(combineCommand));
         }
 
         private string PHPPost(string payload)
-        {
-            clientEX.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
-            byte[] postData = Encoding.Default.GetBytes(payload);
-            string result = string.Empty;
-
+        {   
+            byte[] rspBytes  = new byte[0];
+            string rspString = string.Empty;
+            
             try
-            {
-                clientEX.Timeout = 30000;//30秒超时
+            {    
                 using (GuarderUtil.WaitCursor)
-                {
-                    byte[] responseData = clientEX.UploadData(url, "POST", postData);//得到返回字符流  
-                    result = Encoding.Default.GetString(responseData);//解码 
-                }
+                    rspBytes = clientEX.UploadData(url, "POST", Encoding.Default.GetBytes(payload));//得到返回字符流      
 
+                rspString = Encoding.Default.GetString(rspBytes); //解码 
                 foreach (string kv in payload.Split('&'))
-                {
                     sb.AppendLine(kv);
-                }
             }
             catch (Exception ex)
             {
                 sb.AppendLine(ex.Message);
             }
 
-            return MidStrEx(result, clientSetting.SPL, clientSetting.SPR);
+            return MidStrEx(rspString, clientSetting.SPL, clientSetting.SPR);
         }
 
-        private string MidStrEx(string sourse, string startstr, string endstr)
+        private string MidStrEx(string sourse, string spl, string spr)
         {
-            string result = string.Empty;
-            int startindex, endindex;
-            try
-            {
-                startindex = sourse.IndexOf(startstr);
-                if (startindex == -1)
-                    return result;
-                string tmpstr = sourse.Substring(startindex + startstr.Length);
-                endindex = tmpstr.IndexOf(endstr);
-                if (endindex == -1)
-                    return result;
-                result = tmpstr.Remove(endindex);
-            }
-            catch { }
-            return result;
+            int splIndex = sourse.IndexOf(spl);
+            if (splIndex == -1) return string.Empty;
+
+            sourse = sourse.Substring(splIndex + spl.Length);
+
+            int sprIndex = sourse.IndexOf(spr);
+            if (sprIndex == -1) return string.Empty;
+
+            return sourse.Remove(sprIndex);
         }
 
         private string TransStringToBase64(string str)
