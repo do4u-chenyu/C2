@@ -61,6 +61,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             return PathBrowser(PHPIndex());
         }
+        public Tuple<string, List<WSFile>, List<string>> PathBrowser(string path)
+        {
+            return PathBrowser(new List<string>() { path });
+        }
 
         public Tuple<string, List<WSFile>, List<string>> PathBrowser(List<string> paths)
         {

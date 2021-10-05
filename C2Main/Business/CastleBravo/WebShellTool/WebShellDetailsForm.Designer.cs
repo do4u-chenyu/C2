@@ -204,7 +204,6 @@
             this.filePathTb.ReadOnly = true;
             this.filePathTb.Size = new System.Drawing.Size(520, 23);
             this.filePathTb.TabIndex = 0;
-            this.filePathTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FilePathTb_KeyDown);
             // 
             // tabPage4
             // 

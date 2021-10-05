@@ -7,10 +7,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     public partial class WebShellDetailsForm : Form
     {
-        private WebShellClient webShell;
+        private readonly WebShellClient webShell;
 
-        private string currentShowPath;
-        private string currentCmdPath;
+        private string browserDicectory;
+        private string commandDirectory;
 
         public WebShellDetailsForm()
         {
@@ -20,8 +20,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         public WebShellDetailsForm(WebShellTaskConfig info) : this()
         {
             webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion);
-            currentShowPath = string.Empty;
-            currentCmdPath = string.Empty;
+            browserDicectory = string.Empty;
+            commandDirectory = string.Empty;
             UpdateBaseInfo(webShell.PHPInfo());
         }
 
@@ -37,8 +37,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UpdateCmd(Tuple<string, string> excuteResult)
         {
-            currentCmdPath = excuteResult.Item1;
-            string nextExcutePath = currentCmdPath.StartsWith("/") ? string.Format("[{0}]$", currentCmdPath) : string.Format("{0}>", currentCmdPath);
+            commandDirectory = excuteResult.Item1;
+            string nextExcutePath = commandDirectory.StartsWith("/") ? string.Format("[{0}]$", commandDirectory) : string.Format("{0}>", commandDirectory);
             string output = excuteResult.Item2;
 
             this.outputTextBox.Text = this.outputTextBox.Text + "\r\n" + output + "\r\n\r\n" + nextExcutePath;
@@ -56,26 +56,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.messageLog.Text = webShell.FetchLog();
         }
 
-        private void FilePathTb_KeyDown(object sender, KeyEventArgs e)
-        {
-            //TODO 暂时不支持修改，要判断返回情况
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    UpdateFileManager(webShell.PathBrowse(new List<string>() { this.filePathTb.Text }));
-            //}
-        }
-
         private void FileManagerListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.fileManagerListView.SelectedItems.Count == 0)
                 return;
 
-            WSFile selectedFile = (WSFile)this.fileManagerListView.SelectedItems[0].Tag;
+            WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
             if (selectedFile.Type != WebShellFileType.Directory)
                 return;
 
             //TODO linux和windows拼接不一样，用path.combine拼不了linux路径？
-            UpdateFileManager(webShell.PathBrowser(new List<string>() { currentShowPath + "/" + selectedFile.FileName })); 
+            UpdateFileManager(webShell.PathBrowser(browserDicectory + "/" + selectedFile.FileName)); 
         }
 
         private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
@@ -85,7 +76,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             List<string> broPaths = pathFiles.Item3;
 
             //更新textbox显示路径
-            currentShowPath = this.filePathTb.Text = path;
+            browserDicectory = this.filePathTb.Text = path;
 
             //更新右侧listview
             this.fileManagerListView.Items.Clear();
@@ -95,7 +86,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {
                     Tag = file,
                     Text = file.FileName,
-                    ImageIndex = file.Type == WebShellFileType.Directory ? 0 : 1
+                    ImageIndex = (int)file.Type - 1
                 };
                 lvi.SubItems.Add(file.CreateTime);
                 lvi.SubItems.Add(file.FileSize);
@@ -105,7 +96,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
 
             //更新左侧treeview
-            CreateBroNodes(broPaths);//生成兄弟节点，这里仅针对window
+            CreateBroNodes(broPaths);//生成兄弟节点，这里仅针对 windows
             CreateSelfAndChildrenNodes(path, files);//生成自己和孩子节点
 
             this.messageLog.Text = webShell.FetchLog();
@@ -113,23 +104,23 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CreateBroNodes(List<string> broPaths)
         {
-            foreach (string broPath in broPaths)
+            foreach (string bro in broPaths)
             {
-                if (string.IsNullOrEmpty(broPath))
+                if (string.IsNullOrEmpty(bro))
                     continue;
 
-                string broName = broPath + ":";
-                TreeNode bro = new TreeNode();
-                TreeNode[] broNodes = this.treeView1.Nodes.Find(broName, false);
+                string name = bro + ":";
+
+                TreeNode[] broNodes = this.treeView1.Nodes.Find(name, false);
                 if (broNodes.Length == 0)
-                {
-                    bro.Name = broName;
-                    bro.Text = broName;
-                    bro.Tag = broName + "/";
-                    bro.ImageIndex = 4;
-                    bro.SelectedImageIndex = 4;
-                    this.treeView1.Nodes.Add(bro);
-                }
+                    this.treeView1.Nodes.Add(new TreeNode
+                    {
+                        Tag  = name + "/",
+                        Name = name,
+                        Text = name,
+                        ImageIndex = 4,
+                        SelectedImageIndex = 4
+                    });
             }
         }
 
@@ -139,43 +130,41 @@ namespace C2.Business.CastleBravo.WebShellTool
             List<string> pathNodes = path.Split('/').ToList();
             if (pathNodes.Count == 0)
                 return;
-            string rootNode = string.IsNullOrEmpty(pathNodes[0]) ? "/" : pathNodes[0];
+            string rootName = string.IsNullOrEmpty(pathNodes[0]) ? "/" : pathNodes[0];
 
-            TreeNode[] nodes = this.treeView1.Nodes.Find(rootNode, false);
+            TreeNode[] nodes = this.treeView1.Nodes.Find(rootName, false);
             TreeNode root = new TreeNode();
-            TreeNode tmpNode;
+            TreeNode cursorNode = nodes[0];
             if (nodes.Length == 0)
             {
-                root.Name = rootNode;
-                root.Text = rootNode;
-                root.Tag = rootNode;
+                root.Tag  = rootName;
+                root.Name = rootName;
+                root.Text = rootName;
                 root.ImageIndex = 4;
                 root.SelectedImageIndex = 4;
                 this.treeView1.Nodes.Add(root);
-                tmpNode = root;
+                cursorNode = root;
             }
-            else
-                tmpNode = nodes[0];
 
             foreach (string dir in pathNodes.Skip(1))
             {
                 if (string.IsNullOrEmpty(dir))
                     break;
 
-                TreeNode[] nodes2 = tmpNode.Nodes.Find(dir, false);
+                TreeNode[] nodes2 = cursorNode.Nodes.Find(dir, false);
 
-                TreeNode dirNode = new TreeNode();
+                TreeNode child = new TreeNode();
                 if (nodes2.Length == 0)
                 {
-                    dirNode.Name = dir;
-                    dirNode.Text = dir;
-                    dirNode.Tag = tmpNode.Tag + dir + "/";
-                    dirNode.ImageIndex = 0;
-                    tmpNode.Nodes.Add(dirNode);
-                    tmpNode = dirNode;
+                    child.Tag  = cursorNode.Tag + dir + "/";
+                    child.Name = dir;
+                    child.Text = dir;
+                    child.ImageIndex = 0;
+                    cursorNode.Nodes.Add(child);
+                    cursorNode = child;
                 }
                 else
-                    tmpNode = nodes2[0];
+                    cursorNode = nodes2[0];
             }
 
             foreach (WSFile file in files)
@@ -183,17 +172,15 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (file.Type != WebShellFileType.Directory)
                     continue;
 
-                TreeNode[] nodes3 = tmpNode.Nodes.Find(file.FileName, false);
-                TreeNode dirNode = new TreeNode();
-
+                TreeNode[] nodes3 = cursorNode.Nodes.Find(file.FileName, false);
                 if (nodes3.Length == 0)
-                {
-                    dirNode.Name = file.FileName;
-                    dirNode.Text = file.FileName;
-                    dirNode.Tag = tmpNode.Tag + file.FileName + "/";
-                    dirNode.ImageIndex = 0;
-                    tmpNode.Nodes.Add(dirNode);
-                }
+                    cursorNode.Nodes.Add(new TreeNode()
+                    {
+                        Tag  = cursorNode.Tag + file.FileName + "/",
+                        Name = file.FileName,
+                        Text = file.FileName,
+                        ImageIndex = 0
+                    });
             }
 
             root.ExpandAll();
@@ -201,9 +188,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-            { 
-                UpdateFileManager(webShell.PathBrowser(new List<string>() { e.Node.Tag.ToString() == "/" ? e.Node.Tag.ToString() : e.Node.Tag.ToString().TrimEnd('/') }));
-            }
+                UpdateFileManager(webShell.PathBrowser(e.Node.Tag.ToString() == "/" ? "/" : e.Node.Tag.ToString().TrimEnd('/')));
         }
 
         //曲线救国之双击不展开
@@ -216,42 +201,24 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void TreeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            if (this.m_MouseClicks > 1)
-            {
-                //如果是鼠标双击则禁止结点展开
-                e.Cancel = true;
-            }
-            else
-            {
-                //如果是鼠标单击则允许结点展开
-                e.Cancel = false;
-            }
+            e.Cancel = this.m_MouseClicks > 1;
         }
 
         private void TreeView1_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
-            if (this.m_MouseClicks > 1)
-            {
-                //如果是鼠标双击则禁止结点折叠
-                e.Cancel = true;
-            }
-            else
-            {
-                //如果是鼠标单击则允许结点折叠
-                e.Cancel = false;
-            }
+            e.Cancel = this.m_MouseClicks > 1;
         }
 
         private void ExcuteBtn_Click(object sender, EventArgs e)
         {
             this.outputTextBox.Text += this.cmdTextBox.Text;
-            UpdateCmd(webShell.Excute(currentCmdPath, this.cmdTextBox.Text));
+            UpdateCmd(webShell.Excute(commandDirectory, this.cmdTextBox.Text));
         }
 
         private void CmdTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                UpdateCmd(webShell.Excute(currentCmdPath, this.cmdTextBox.Text));
+                UpdateCmd(webShell.Excute(commandDirectory, this.cmdTextBox.Text));
         }
     }
 }
