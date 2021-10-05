@@ -9,8 +9,8 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         private readonly WebShellClient webShell;
 
-        private string browserDicectory;
-        private string commandDirectory;
+        private string browserDicectory = string.Empty;
+        private string commandDirectory = string.Empty;
 
         public WebShellDetailsForm()
         {
@@ -20,8 +20,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         public WebShellDetailsForm(WebShellTaskConfig info) : this()
         {
             webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion);
-            browserDicectory = string.Empty;
-            commandDirectory = string.Empty;
             UpdateBaseInfo(webShell.PHPInfo());
         }
 
@@ -151,10 +149,10 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (string.IsNullOrEmpty(dir))
                     break;
 
-                TreeNode[] nodes2 = cursorNode.Nodes.Find(dir, false);
+                TreeNode[] subNodes = cursorNode.Nodes.Find(dir, false);
 
                 TreeNode child = new TreeNode();
-                if (nodes2.Length == 0)
+                if (subNodes.Length == 0)
                 {
                     child.Tag  = cursorNode.Tag + dir + "/";
                     child.Name = dir;
@@ -164,7 +162,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     cursorNode = child;
                 }
                 else
-                    cursorNode = nodes2[0];
+                    cursorNode = subNodes[0];
             }
 
             foreach (WSFile file in files)
@@ -172,8 +170,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (file.Type != WebShellFileType.Directory)
                     continue;
 
-                TreeNode[] nodes3 = cursorNode.Nodes.Find(file.FileName, false);
-                if (nodes3.Length == 0)
+                TreeNode[] subNodes = cursorNode.Nodes.Find(file.FileName, false);
+                if (subNodes.Length == 0)
                     cursorNode.Nodes.Add(new TreeNode()
                     {
                         Tag  = cursorNode.Tag + file.FileName + "/",
