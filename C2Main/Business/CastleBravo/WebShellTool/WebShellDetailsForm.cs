@@ -132,17 +132,18 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             TreeNode[] nodes = this.treeView1.Nodes.Find(rootName, false);
             TreeNode root = new TreeNode();
-            TreeNode cursorNode = nodes[0];
+            TreeNode cursorNode = root;
             if (nodes.Length == 0)
             {
-                root.Tag  = rootName;
+                root.Tag = rootName;
                 root.Name = rootName;
                 root.Text = rootName;
                 root.ImageIndex = 4;
                 root.SelectedImageIndex = 4;
                 this.treeView1.Nodes.Add(root);
-                cursorNode = root;
             }
+            else
+                cursorNode = nodes[0];
 
             foreach (string dir in pathNodes.Skip(1))
             {

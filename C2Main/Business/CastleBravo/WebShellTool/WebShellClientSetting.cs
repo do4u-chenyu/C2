@@ -20,7 +20,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "中国菜刀16_自定义版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini") },
             { "中国菜刀11_EXE版", Path.Combine(WebShellFilePath, "Cknife11_EXE_Config.ini") },
             { "中国菜刀14_EXE版", Path.Combine(WebShellFilePath, "Cknife14_EXE_Config.ini") },
-            { "中国菜刀16_EXE版", Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini") },
+            //{ "中国菜刀16_EXE版", Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini") },
             { "中国菜刀18_BYPASS版", Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini") },
             { "奥特曼2015版", Path.Combine(WebShellFilePath, "Altman15_Config.ini") },
             { "蚁剑2.1.14版", Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini") },
