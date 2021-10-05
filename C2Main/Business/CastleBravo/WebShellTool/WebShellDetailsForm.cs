@@ -47,16 +47,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.outputTextBox.ScrollToCaret();//滚动到光标处
 
             this.cmdTextBox.Text = string.Empty;
-
-            this.messageLog.Text = webShell.PayloadLog;
-            webShell.Clear();
+            this.messageLog.Text = webShell.FetchLog();
         }
 
         private void UpdateBaseInfo(string result)
         {
             this.baseInfoWebBrowser.DocumentText = result;
-            this.messageLog.Text = webShell.PayloadLog;
-            webShell.Clear();
+            this.messageLog.Text = webShell.FetchLog();
         }
 
         private void FilePathTb_KeyDown(object sender, KeyEventArgs e)
@@ -111,8 +108,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             CreateBroNodes(broPaths);//生成兄弟节点，这里仅针对window
             CreateSelfAndChildrenNodes(path, files);//生成自己和孩子节点
 
-            this.messageLog.Text = webShell.PayloadLog;
-            webShell.Clear();
+            this.messageLog.Text = webShell.FetchLog();
         }
 
         private void CreateBroNodes(List<string> broPaths)

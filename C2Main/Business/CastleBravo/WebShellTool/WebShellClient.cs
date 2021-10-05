@@ -11,19 +11,19 @@ namespace C2.Business.CastleBravo.WebShellTool
     public class WebShellClient
     {
         private readonly string url;
-        private readonly string password;
+        private readonly string prefix;
         private readonly StringBuilder sb;
         private readonly WebClientEx clientEX;
         private readonly WebShellClientSetting clientSetting;
-        public string PayloadLog { get => sb.ToString(); }
-        public void Clear() { sb.Clear(); }
-      
+       
 
-        public WebShellClient(string address, string password, string clientSetting)
+        public string FetchLog() { string ret = sb.ToString(); sb.Clear(); return ret; }
+
+        public WebShellClient(string url, string password, string clientSetting)
         {
-            this.url = address;
-            this.password = password;
+            this.url = url;
             this.clientSetting = WebShellClientSetting.LoadSetting(clientSetting);
+            this.prefix = password + "=" + this.clientSetting.PHP_MAKE + "&" + this.clientSetting.ACTION;
             this.sb = new StringBuilder();
 
             this.clientEX = new WebClientEx
@@ -42,7 +42,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public Tuple<string, string> Excute(string root, string command)
         {
-            sb.AppendLine("========执行命令：" + command + "========");
+            sb.AppendLine("Shell:" + command);
 
             //需要先判断是什么系统
             bool isLinux = root.StartsWith("/");
@@ -102,44 +102,61 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string PHPInfo()
         {
-            sb.AppendLine("========获取php基础信息========");
-            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_INFO);
+            string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INFO);
+
+            sb.AppendLine("phpinfo:")
+              .AppendLine(payload);
+
+            return Post(payload);
         }
 
         private List<string> PHPIndex()
         {
-            sb.AppendLine("========获取当前路径========");
-            string[] result = PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_INDEX).Split('\t');
+            string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INDEX);
+
+            sb.AppendLine("浏览目录:")
+              .AppendLine(payload);
+
+            string[] result = Post(payload).Split('\t');
             return result.Skip(0).Take(result.Length - 1).ToList();
         }
 
         private string PHPReadDict(string path)
         {
-            sb.AppendLine("========获取" + path + "文件========");
-            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_READDICT + "&" + clientSetting.PARAM1 + "=" + Encode(path));
+            string payload = String.Format("{0}={1}&{2}={3}", 
+                prefix, 
+                clientSetting.PHP_READDICT, 
+                clientSetting.PARAM1, 
+                Encode(path));
+
+            return Post(payload);
         }
 
-        private string PHPShell(string shell, string command)
+        private string PHPShell(string shellEnv, string command)
         {
-            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + 
-                           clientSetting.ACTION + "=" + clientSetting.PHP_SHELL + "&" + 
-                           clientSetting.PARAM1 + "=" + Encode(shell) + "&" +
-                           clientSetting.PARAM2 + "=" + Encode(command));
+            string payload = String.Format("{0}={1}&{2}={3}&{4}={5}",
+                prefix,
+                clientSetting.PHP_SHELL,
+                clientSetting.PARAM1,
+                Encode(shellEnv),
+                clientSetting.PARAM2,
+                Encode(command));
+
+            sb.AppendLine(payload);
+
+            return Post(payload);
         }
 
-        private string PHPPost(string payload)
-        {   
-            byte[] rspBytes  = new byte[0];
-            string rspString = string.Empty;
-            
+        private string Post(string payload)
+        {    
+            string rspString = string.Empty;  
             try
-            {    
-                using (GuarderUtil.WaitCursor)
-                    rspBytes = clientEX.UploadData(url, "POST", Encoding.Default.GetBytes(payload));//得到返回字符流      
+            {
+                byte[] rspBytes = new byte[0];
+                using (GuarderUtil.WaitCursor)  
+                    rspBytes = clientEX.UploadData(url, "POST", Encoding.Default.GetBytes(payload));   
 
-                rspString = Encoding.Default.GetString(rspBytes); //解码 
-                foreach (string kv in payload.Split('&'))
-                    sb.AppendLine(kv);
+                rspString = Encoding.Default.GetString(rspBytes); 
             }
             catch (Exception ex)
             {
