@@ -54,9 +54,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UpdateBaseInfo(string result)
         {
-
             this.baseInfoWebBrowser.DocumentText = result;
-
             this.messageLog.Text = webShell.PayloadLog;
             webShell.Clear();
         }
@@ -251,15 +249,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void ExcuteBtn_Click(object sender, EventArgs e)
         {
             this.outputTextBox.Text += this.cmdTextBox.Text;
-            UpdateCmd(webShell.CmdExcute(currentCmdPath, this.cmdTextBox.Text));
+            UpdateCmd(webShell.Excute(currentCmdPath, this.cmdTextBox.Text));
         }
 
         private void CmdTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
-                UpdateCmd(webShell.CmdExcute(currentCmdPath, this.cmdTextBox.Text));
-            }
+                UpdateCmd(webShell.Excute(currentCmdPath, this.cmdTextBox.Text));
         }
     }
 }

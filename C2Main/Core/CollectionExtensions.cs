@@ -215,10 +215,14 @@ namespace C2.Core
         }
 
         public static string ReverseString(this String str)
-        {
+        {   
             char[] cs = str.ToCharArray();
             Array.Reverse(cs);
             return new string(cs);
+        }
+        public static string[] Split(this string str, string separator)
+        {
+            return str.Split(new string[] { separator }, StringSplitOptions.None);
         }
     }
 }
