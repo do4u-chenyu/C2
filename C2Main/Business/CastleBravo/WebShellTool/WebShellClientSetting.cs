@@ -14,7 +14,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         private static readonly string WebShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
-        private static readonly Dictionary<string, string> VersionPathDict = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> VersionPathDict = new Dictionary<string, string>
         {
             { "中国菜刀16_JAR版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Config.ini") },
             { "中国菜刀16_自定义版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini") },

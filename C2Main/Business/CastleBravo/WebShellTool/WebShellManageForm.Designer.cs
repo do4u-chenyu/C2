@@ -178,7 +178,7 @@
             this.MaximizeBox = false;
             this.Name = "WebShellManageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WebShell管理";
+            this.Text = "WebShell模拟器";
             this.Load += new System.EventHandler(this.WebShellManageForm_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);

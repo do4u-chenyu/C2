@@ -137,14 +137,6 @@
             // 
             this.versionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.versionComboBox.FormattingEnabled = true;
-            this.versionComboBox.Items.AddRange(new object[] {
-            "中国菜刀11_EXE版",
-            "中国菜刀14_EXE版",
-            "中国菜刀16_EXE版",
-            "中国菜刀bypass18版",
-            "中国菜刀16_JAR版",
-            "奥特曼",
-            "蚁剑"});
             this.versionComboBox.Location = new System.Drawing.Point(96, 161);
             this.versionComboBox.Name = "versionComboBox";
             this.versionComboBox.Size = new System.Drawing.Size(164, 20);
