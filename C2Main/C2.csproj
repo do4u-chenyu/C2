@@ -3854,10 +3854,28 @@
     <None Include="Resources\WebScanDict\UserAgent.list">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\WebShellConfig\Cknife11_Config.ini">
+    <None Include="Resources\WebShellConfig\Altman15_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\WebShellConfig\Cknife16_Config.ini">
+    <None Include="Resources\WebShellConfig\AntSword_2114_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife11_EXE_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife14_EXE_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife16_EXE_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife16_Jar_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife16_Jar_Custom_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Cknife18_Bypass_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\windows_themes.xml" />
