@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
 using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -13,7 +14,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         private readonly string url;
         private readonly string prefix;
         private readonly StringBuilder sb;
-        private readonly WebClientEx clientEX;
         private readonly WebShellClientSetting clientSetting;
        
 
@@ -25,16 +25,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.clientSetting = WebShellClientSetting.LoadSetting(clientSetting);
             this.prefix = password + "=" + this.clientSetting.PHP_MAKE + "&" + this.clientSetting.ACTION;
             this.sb = new StringBuilder();
-
-            this.clientEX = new WebClientEx
-            {
-                Timeout = 30000,//30秒超时
-                Encoding = Encoding.Default
-            };
-            this.clientEX.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
         }
 
-        public Tuple<string, string> CurrentCmdExcute()
+        public Tuple<string, string> ShellStart()
         {
             List<string> paths = PHPIndex();
             return paths.IsEmpty() ? Tuple.Create(string.Empty, string.Empty) : Tuple.Create(paths[0], string.Empty);
@@ -66,29 +59,29 @@ namespace C2.Business.CastleBravo.WebShellTool
             return Tuple.Create(root, ret[0]);
         }
 
-        public Tuple<string, List<WSFile>, List<string>> CurrentPathBrowse()
+        public Tuple<string, List<WSFile>, List<string>> PathBrowser()
         {
-            return PathBrowse(PHPIndex());
+            return PathBrowser(PHPIndex());
         }
 
-        public Tuple<string, List<WSFile>, List<string>> PathBrowse(List<string> pathList)
+        public Tuple<string, List<WSFile>, List<string>> PathBrowser(List<string> paths)
         {
             List<WSFile> pathFiles = new List<WSFile>();
             List<string> broPaths = new List<string>();
 
-            if (pathList.Count == 0 || string.IsNullOrEmpty(pathList[0]))
+            if (paths.Count == 0 || string.IsNullOrEmpty(paths[0]))
                 return Tuple.Create(string.Empty, pathFiles, broPaths);
 
-            string path = pathList[0];
+            string root = paths[0];
 
             //broPath仅针对window文件系统，内容为c: d: e:
-            if (pathList.Count == 2 && pathList[1].Contains(":"))
-                broPaths = pathList[1].Split(':').ToList();
+            if (paths.Count == 2 && paths[1].Contains(":"))
+                broPaths = paths[1].Split(':').ToList();
 
-            string readDict = PHPReadDict(path);
-            foreach (string item in readDict.Split('\n'))
+            string ret = PHPReadDict(root);
+            foreach (string line in ret.Split('\n'))
             {
-                string[] itemInfo = item.Split('\t');
+                string[] itemInfo = line.Split('\t');
                 if (itemInfo.Length < 4 || itemInfo[0].IsNullOrEmpty() || itemInfo[0] == "./" || itemInfo[0] == "../")
                     continue;
 
@@ -98,7 +91,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                          itemInfo[2],
                                          itemInfo[3]));
             }
-            return Tuple.Create(path, pathFiles, broPaths);
+            return Tuple.Create(root, pathFiles, broPaths);
         }
         public string PHPInfo()
         {
@@ -149,12 +142,13 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string Post(string payload)
         {    
-            string rspString = string.Empty;  
+            string rspString = string.Empty;
             try
             {
                 byte[] rspBytes = new byte[0];
-                using (GuarderUtil.WaitCursor)  
-                    rspBytes = clientEX.UploadData(url, "POST", Encoding.Default.GetBytes(payload));   
+                using (GuarderUtil.WaitCursor)
+                    // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
+                    rspBytes = WebClientEx.Create().UploadData(url, "POST", Encoding.Default.GetBytes(payload));
 
                 rspString = Encoding.Default.GetString(rspBytes); 
             }
@@ -220,6 +214,19 @@ namespace C2.Business.CastleBravo.WebShellTool
             var request = base.GetWebRequest(address);
             request.Timeout = Timeout;
             return request;
+        }
+
+        public static WebClientEx Create()
+        {
+            WebClientEx one = new WebClientEx()
+            {
+                Timeout = 30000,              // 30秒
+                Encoding = Encoding.Default,
+                CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
+            };
+
+            one.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            return one;
         }
     }
 }

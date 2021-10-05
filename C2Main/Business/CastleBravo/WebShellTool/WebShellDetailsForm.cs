@@ -28,11 +28,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab.Text == "文件管理")
-                UpdateFileManager(webShell.CurrentPathBrowse());
+                UpdateFileManager(webShell.PathBrowser());
             if (tabControl1.SelectedTab.Text == "基础信息")
                 UpdateBaseInfo(webShell.PHPInfo());
             if (tabControl1.SelectedTab.Text == "虚拟终端")
-                UpdateCmd(webShell.CurrentCmdExcute());        
+                UpdateCmd(webShell.ShellStart());        
         }
 
         private void UpdateCmd(Tuple<string, string> excuteResult)
@@ -75,7 +75,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             //TODO linux和windows拼接不一样，用path.combine拼不了linux路径？
-            UpdateFileManager(webShell.PathBrowse(new List<string>() { currentShowPath + "/" + selectedFile.FileName })); 
+            UpdateFileManager(webShell.PathBrowser(new List<string>() { currentShowPath + "/" + selectedFile.FileName })); 
         }
 
         private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
@@ -202,7 +202,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (e.Button == MouseButtons.Left)
             { 
-                UpdateFileManager(webShell.PathBrowse(new List<string>() { e.Node.Tag.ToString() == "/" ? e.Node.Tag.ToString() : e.Node.Tag.ToString().TrimEnd('/') }));
+                UpdateFileManager(webShell.PathBrowser(new List<string>() { e.Node.Tag.ToString() == "/" ? e.Node.Tag.ToString() : e.Node.Tag.ToString().TrimEnd('/') }));
             }
         }
 

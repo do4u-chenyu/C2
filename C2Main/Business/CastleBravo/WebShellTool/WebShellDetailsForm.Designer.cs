@@ -313,7 +313,7 @@
             this.splitContainer2.SplitterDistance = 287;
             this.splitContainer2.TabIndex = 2;
             // 
-            // WebShellDetails
+            // WebShellDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -321,7 +321,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "WebShellDetails";
+            this.Name = "WebShellDetailsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell详情";
             this.tabControl1.ResumeLayout(false);
