@@ -122,25 +122,25 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
-        private void CreateSelfAndChildrenNodes(string path, List<WSFile> files)
+        private void CreateSelfAndChildrenNodes(string content, List<WSFile> files)
         {
             //先遍历生成path的所有节点，再以path最后一个节点扩展其子孩子
-            List<string> pathNodes = path.Split('/').ToList();
-            if (pathNodes.Count == 0)
+            string[] pathNodes = content.Split('/');
+            if (pathNodes.Length == 0)
                 return;
-            string rootName = string.IsNullOrEmpty(pathNodes[0]) ? "/" : pathNodes[0];
+            string name = string.IsNullOrEmpty(pathNodes[0]) ? "/" : pathNodes[0];
 
-            TreeNode[] nodes = this.treeView1.Nodes.Find(rootName, false);
-            TreeNode root = new TreeNode();
-            TreeNode cursorNode = root;
+            TreeNode[] nodes = this.treeView1.Nodes.Find(name, false);
+            TreeNode self = new TreeNode();
+            TreeNode cursorNode = self;
             if (nodes.Length == 0)
             {
-                root.Tag = rootName;
-                root.Name = rootName;
-                root.Text = rootName;
-                root.ImageIndex = 4;
-                root.SelectedImageIndex = 4;
-                this.treeView1.Nodes.Add(root);
+                self.Tag  = name;
+                self.Name = name;
+                self.Text = name;
+                self.ImageIndex = 4;
+                self.SelectedImageIndex = 4;
+                this.treeView1.Nodes.Add(self);
             }
             else
                 cursorNode = nodes[0];
@@ -152,13 +152,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 TreeNode[] subNodes = cursorNode.Nodes.Find(dir, false);
 
-                TreeNode child = new TreeNode();
                 if (subNodes.Length == 0)
                 {
-                    child.Tag  = cursorNode.Tag + dir + "/";
-                    child.Name = dir;
-                    child.Text = dir;
-                    child.ImageIndex = 0;
+                    TreeNode child = new TreeNode
+                    {
+                        Tag  = cursorNode.Tag + dir + "/",
+                        Name = dir,
+                        Text = dir,
+                        ImageIndex = 0
+                    };
                     cursorNode.Nodes.Add(child);
                     cursorNode = child;
                 }
@@ -182,7 +184,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     });
             }
 
-            root.ExpandAll();
+            self.ExpandAll();
         }
         private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
