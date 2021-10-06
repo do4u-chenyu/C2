@@ -104,5 +104,70 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshTasks();
             SaveDB();
         }
+
+        private void PHPEvalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("PHP通用型一句话Trojan").ShowDialog();
+        }
+
+        private void BypassToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("凯撒变种Trojan").ShowDialog();
+        }
+
+        private void 变体1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种1").ShowDialog();
+        }
+
+        private void 变种2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种2").ShowDialog();
+        }
+
+        private void 变种3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种3").ShowDialog();
+        }
+
+        private void 变种4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种4").ShowDialog();
+        }
+
+        private void 变种5ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种5").ShowDialog();
+        }
+
+        private void 变种6ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种6").ShowDialog();
+        }
+
+        private void 变种7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种7").ShowDialog();
+        }
+
+        private void 变种8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种8").ShowDialog();
+        }
+
+        private void 变种9ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种9").ShowDialog();
+        }
+
+        private void GodzillaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("哥斯拉配套Trojan").ShowDialog();
+        }
+
+        private void BehinderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("三代Behinder配套Trojan").ShowDialog();
+        }
     }
 }

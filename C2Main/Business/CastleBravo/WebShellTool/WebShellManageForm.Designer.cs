@@ -37,6 +37,21 @@
             this.addShellMenu = new System.Windows.Forms.ToolStripLabel();
             this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.OneWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.behinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BypassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PHPEvalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GodzillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,21 +60,6 @@
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.OneWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.behinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BypassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PHPEvalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GodzillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.变体9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -117,6 +117,131 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OneWordToolStripMenuItem,
+            this.behinderToolStripMenuItem,
+            this.BypassToolStripMenuItem,
+            this.PHPEvalToolStripMenuItem,
+            this.GodzillaToolStripMenuItem});
+            this.toolStripButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(57, 22);
+            this.toolStripButton1.Text = "特洛伊";
+            this.toolStripButton1.ToolTipText = "特洛伊样本集合";
+            // 
+            // OneWordToolStripMenuItem
+            // 
+            this.OneWordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.变种1ToolStripMenuItem,
+            this.变种2ToolStripMenuItem,
+            this.变种3ToolStripMenuItem,
+            this.变种4ToolStripMenuItem,
+            this.变种5ToolStripMenuItem,
+            this.变种6ToolStripMenuItem,
+            this.变种7ToolStripMenuItem,
+            this.变种8ToolStripMenuItem,
+            this.变种9ToolStripMenuItem});
+            this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
+            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OneWordToolStripMenuItem.Text = "一句话变种";
+            // 
+            // 变种1ToolStripMenuItem
+            // 
+            this.变种1ToolStripMenuItem.Name = "变种1ToolStripMenuItem";
+            this.变种1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种1ToolStripMenuItem.Text = "变种1";
+            this.变种1ToolStripMenuItem.Click += new System.EventHandler(this.变体1ToolStripMenuItem_Click);
+            // 
+            // 变种2ToolStripMenuItem
+            // 
+            this.变种2ToolStripMenuItem.Name = "变种2ToolStripMenuItem";
+            this.变种2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种2ToolStripMenuItem.Text = "变种2";
+            this.变种2ToolStripMenuItem.Click += new System.EventHandler(this.变种2ToolStripMenuItem_Click);
+            // 
+            // 变种3ToolStripMenuItem
+            // 
+            this.变种3ToolStripMenuItem.Name = "变种3ToolStripMenuItem";
+            this.变种3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种3ToolStripMenuItem.Text = "变种3";
+            this.变种3ToolStripMenuItem.Click += new System.EventHandler(this.变种3ToolStripMenuItem_Click);
+            // 
+            // 变种4ToolStripMenuItem
+            // 
+            this.变种4ToolStripMenuItem.Name = "变种4ToolStripMenuItem";
+            this.变种4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种4ToolStripMenuItem.Text = "变种4";
+            this.变种4ToolStripMenuItem.Click += new System.EventHandler(this.变种4ToolStripMenuItem_Click);
+            // 
+            // 变种5ToolStripMenuItem
+            // 
+            this.变种5ToolStripMenuItem.Name = "变种5ToolStripMenuItem";
+            this.变种5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种5ToolStripMenuItem.Text = "变种5";
+            this.变种5ToolStripMenuItem.Click += new System.EventHandler(this.变种5ToolStripMenuItem_Click);
+            // 
+            // 变种6ToolStripMenuItem
+            // 
+            this.变种6ToolStripMenuItem.Name = "变种6ToolStripMenuItem";
+            this.变种6ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种6ToolStripMenuItem.Text = "变种6";
+            this.变种6ToolStripMenuItem.Click += new System.EventHandler(this.变种6ToolStripMenuItem_Click);
+            // 
+            // 变种7ToolStripMenuItem
+            // 
+            this.变种7ToolStripMenuItem.Name = "变种7ToolStripMenuItem";
+            this.变种7ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种7ToolStripMenuItem.Text = "变种7";
+            this.变种7ToolStripMenuItem.Click += new System.EventHandler(this.变种7ToolStripMenuItem_Click);
+            // 
+            // 变种8ToolStripMenuItem
+            // 
+            this.变种8ToolStripMenuItem.Name = "变种8ToolStripMenuItem";
+            this.变种8ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种8ToolStripMenuItem.Text = "变种8";
+            this.变种8ToolStripMenuItem.Click += new System.EventHandler(this.变种8ToolStripMenuItem_Click);
+            // 
+            // 变种9ToolStripMenuItem
+            // 
+            this.变种9ToolStripMenuItem.Name = "变种9ToolStripMenuItem";
+            this.变种9ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.变种9ToolStripMenuItem.Text = "变种9";
+            this.变种9ToolStripMenuItem.Click += new System.EventHandler(this.变种9ToolStripMenuItem_Click);
+            // 
+            // behinderToolStripMenuItem
+            // 
+            this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
+            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.behinderToolStripMenuItem.Text = "三代冰蝎";
+            this.behinderToolStripMenuItem.ToolTipText = "与三代冰蝎配套的Trojan";
+            this.behinderToolStripMenuItem.Click += new System.EventHandler(this.BehinderToolStripMenuItem_Click);
+            // 
+            // BypassToolStripMenuItem
+            // 
+            this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
+            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.BypassToolStripMenuItem.Text = "凯撒变种";
+            this.BypassToolStripMenuItem.ToolTipText = "凯撒加密Payload引导段";
+            this.BypassToolStripMenuItem.Click += new System.EventHandler(this.BypassToolStripMenuItem_Click);
+            // 
+            // PHPEvalToolStripMenuItem
+            // 
+            this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
+            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PHPEvalToolStripMenuItem.Text = "通用型";
+            this.PHPEvalToolStripMenuItem.ToolTipText = "最常见的 php eval一句话";
+            this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.PHPEvalToolStripMenuItem_Click);
+            // 
+            // GodzillaToolStripMenuItem
+            // 
+            this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
+            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GodzillaToolStripMenuItem.Text = "哥斯拉";
+            this.GodzillaToolStripMenuItem.ToolTipText = "与Godzilla配套的Trojan";
+            this.GodzillaToolStripMenuItem.Click += new System.EventHandler(this.GodzillaToolStripMenuItem_Click);
             // 
             // LV
             // 
@@ -182,118 +307,6 @@
             this.lvDB.Text = "数据库配置";
             this.lvDB.Width = 160;
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OneWordToolStripMenuItem,
-            this.behinderToolStripMenuItem,
-            this.BypassToolStripMenuItem,
-            this.PHPEvalToolStripMenuItem,
-            this.GodzillaToolStripMenuItem});
-            this.toolStripButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(57, 22);
-            this.toolStripButton1.Text = "特洛伊";
-            this.toolStripButton1.ToolTipText = "特洛伊样本集合";
-            // 
-            // OneWordToolStripMenuItem
-            // 
-            this.OneWordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.变体1ToolStripMenuItem,
-            this.变体2ToolStripMenuItem,
-            this.变体3ToolStripMenuItem,
-            this.变体4ToolStripMenuItem,
-            this.变体5ToolStripMenuItem,
-            this.变体6ToolStripMenuItem,
-            this.变体7ToolStripMenuItem,
-            this.变体8ToolStripMenuItem,
-            this.变体9ToolStripMenuItem});
-            this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
-            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.OneWordToolStripMenuItem.Text = "一句话变种";
-            // 
-            // behinderToolStripMenuItem
-            // 
-            this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
-            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.behinderToolStripMenuItem.Text = "三代冰蝎";
-            this.behinderToolStripMenuItem.ToolTipText = "与三代冰蝎配套的Trojan";
-            // 
-            // BypassToolStripMenuItem
-            // 
-            this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
-            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.BypassToolStripMenuItem.Text = "凯撒变种";
-            this.BypassToolStripMenuItem.ToolTipText = "凯撒加密Payload引导段";
-            // 
-            // PHPEvalToolStripMenuItem
-            // 
-            this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
-            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.PHPEvalToolStripMenuItem.Text = "通用型";
-            this.PHPEvalToolStripMenuItem.ToolTipText = "最常见的 php eval一句话";
-            // 
-            // GodzillaToolStripMenuItem
-            // 
-            this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
-            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.GodzillaToolStripMenuItem.Text = "哥斯拉";
-            this.GodzillaToolStripMenuItem.ToolTipText = "与Godzilla配套的Trojan";
-            // 
-            // 变体1ToolStripMenuItem
-            // 
-            this.变体1ToolStripMenuItem.Name = "变体1ToolStripMenuItem";
-            this.变体1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体1ToolStripMenuItem.Text = "变种1";
-            // 
-            // 变体2ToolStripMenuItem
-            // 
-            this.变体2ToolStripMenuItem.Name = "变体2ToolStripMenuItem";
-            this.变体2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体2ToolStripMenuItem.Text = "变种2";
-            // 
-            // 变体3ToolStripMenuItem
-            // 
-            this.变体3ToolStripMenuItem.Name = "变体3ToolStripMenuItem";
-            this.变体3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体3ToolStripMenuItem.Text = "变种3";
-            // 
-            // 变体4ToolStripMenuItem
-            // 
-            this.变体4ToolStripMenuItem.Name = "变体4ToolStripMenuItem";
-            this.变体4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体4ToolStripMenuItem.Text = "变种4";
-            // 
-            // 变体5ToolStripMenuItem
-            // 
-            this.变体5ToolStripMenuItem.Name = "变体5ToolStripMenuItem";
-            this.变体5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体5ToolStripMenuItem.Text = "变种5";
-            // 
-            // 变体6ToolStripMenuItem
-            // 
-            this.变体6ToolStripMenuItem.Name = "变体6ToolStripMenuItem";
-            this.变体6ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体6ToolStripMenuItem.Text = "变种6";
-            // 
-            // 变体7ToolStripMenuItem
-            // 
-            this.变体7ToolStripMenuItem.Name = "变体7ToolStripMenuItem";
-            this.变体7ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体7ToolStripMenuItem.Text = "变种7";
-            // 
-            // 变体8ToolStripMenuItem
-            // 
-            this.变体8ToolStripMenuItem.Name = "变体8ToolStripMenuItem";
-            this.变体8ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体8ToolStripMenuItem.Text = "变种8";
-            // 
-            // 变体9ToolStripMenuItem
-            // 
-            this.变体9ToolStripMenuItem.Name = "变体9ToolStripMenuItem";
-            this.变体9ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.变体9ToolStripMenuItem.Text = "变种9";
-            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -334,15 +347,15 @@
         private System.Windows.Forms.ColumnHeader lvDB;
         private System.Windows.Forms.ToolStripDropDownButton toolStripButton1;
         private System.Windows.Forms.ToolStripMenuItem OneWordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体3ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体4ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体5ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体6ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体7ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体8ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 变体9ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种6ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种7ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种8ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 变种9ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem behinderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BypassToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PHPEvalToolStripMenuItem;
