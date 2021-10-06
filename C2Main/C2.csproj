@@ -284,6 +284,12 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.Designer.cs">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
+      <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
@@ -1969,6 +1975,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShellForm.resx">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.resx">
+      <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.resx">
       <DependentUpon>WebShellDetailsForm.cs</DependentUpon>
