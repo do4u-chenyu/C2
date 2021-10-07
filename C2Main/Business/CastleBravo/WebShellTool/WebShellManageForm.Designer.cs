@@ -186,7 +186,7 @@
             this.变种5ToolStripMenuItem.Name = "变种5ToolStripMenuItem";
             this.变种5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种5ToolStripMenuItem.Text = "变种5";
-            this.变种5ToolStripMenuItem.ToolTipText = "凯撒变形assert 和 Request代替POST";
+            this.变种5ToolStripMenuItem.ToolTipText = "凯撒变形assert和Request代替POST";
             this.变种5ToolStripMenuItem.Click += new System.EventHandler(this.变种5ToolStripMenuItem_Click);
             // 
             // 变种6ToolStripMenuItem
@@ -202,7 +202,7 @@
             this.变种7ToolStripMenuItem.Name = "变种7ToolStripMenuItem";
             this.变种7ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种7ToolStripMenuItem.Text = "变种7";
-            this.变种7ToolStripMenuItem.ToolTipText = "正则替换assert 和 Request替换POST";
+            this.变种7ToolStripMenuItem.ToolTipText = "正则替换assert和Request替换POST";
             this.变种7ToolStripMenuItem.Click += new System.EventHandler(this.变种7ToolStripMenuItem_Click);
             // 
             // 变种8ToolStripMenuItem

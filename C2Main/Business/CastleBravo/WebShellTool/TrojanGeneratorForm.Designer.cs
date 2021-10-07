@@ -36,13 +36,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.keyTextBox = new System.Windows.Forms.TextBox();
             this.encryComboBox = new System.Windows.Forms.ComboBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label1.Location = new System.Drawing.Point(16, 20);
+            this.label1.Location = new System.Drawing.Point(13, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 0;
@@ -51,10 +53,11 @@
             // passTextBox
             // 
             this.passTextBox.Font = new System.Drawing.Font("微软雅黑", 9.25F);
-            this.passTextBox.Location = new System.Drawing.Point(73, 16);
+            this.passTextBox.Location = new System.Drawing.Point(74, 16);
             this.passTextBox.Name = "passTextBox";
             this.passTextBox.Size = new System.Drawing.Size(260, 24);
             this.passTextBox.TabIndex = 1;
+            this.passTextBox.Text = "yxs";
             // 
             // label2
             // 
@@ -71,7 +74,7 @@
             this.trojanComboBox.Enabled = false;
             this.trojanComboBox.Font = new System.Drawing.Font("微软雅黑", 9.25F);
             this.trojanComboBox.FormattingEnabled = true;
-            this.trojanComboBox.Location = new System.Drawing.Point(73, 51);
+            this.trojanComboBox.Location = new System.Drawing.Point(74, 51);
             this.trojanComboBox.Name = "trojanComboBox";
             this.trojanComboBox.Size = new System.Drawing.Size(260, 25);
             this.trojanComboBox.TabIndex = 2;
@@ -90,7 +93,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label4.Location = new System.Drawing.Point(170, 90);
+            this.label4.Location = new System.Drawing.Point(159, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 17);
             this.label4.TabIndex = 10004;
@@ -100,15 +103,17 @@
             // 
             this.keyTextBox.Enabled = false;
             this.keyTextBox.Font = new System.Drawing.Font("微软雅黑", 9.25F);
-            this.keyTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.keyTextBox.Location = new System.Drawing.Point(73, 87);
+            this.keyTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.keyTextBox.Location = new System.Drawing.Point(74, 87);
             this.keyTextBox.Name = "keyTextBox";
-            this.keyTextBox.Size = new System.Drawing.Size(85, 24);
+            this.keyTextBox.Size = new System.Drawing.Size(78, 24);
             this.keyTextBox.TabIndex = 3;
             this.keyTextBox.Text = "无需配置";
             // 
             // encryComboBox
             // 
+            this.encryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.encryComboBox.DropDownWidth = 130;
             this.encryComboBox.Enabled = false;
             this.encryComboBox.Font = new System.Drawing.Font("微软雅黑", 9.25F);
             this.encryComboBox.FormattingEnabled = true;
@@ -116,16 +121,34 @@
             "PHP_XOR_RAW",
             "PHP_XOR_BASE64",
             "PHP_EVAL_BASE64"});
-            this.encryComboBox.Location = new System.Drawing.Point(220, 87);
+            this.encryComboBox.Location = new System.Drawing.Point(204, 86);
             this.encryComboBox.Name = "encryComboBox";
-            this.encryComboBox.Size = new System.Drawing.Size(113, 25);
+            this.encryComboBox.Size = new System.Drawing.Size(130, 25);
             this.encryComboBox.TabIndex = 4;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "php 文件|*.php|所有文件|*.*";
+            // 
+            // label5
+            // 
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(64, 23);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(9, 8);
+            this.label5.TabIndex = 10005;
+            this.label5.Text = "*";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TrojanGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 171);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.encryComboBox);
             this.Controls.Add(this.keyTextBox);
             this.Controls.Add(this.label4);
@@ -144,6 +167,7 @@
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.keyTextBox, 0);
             this.Controls.SetChildIndex(this.encryComboBox, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +183,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox keyTextBox;
         private System.Windows.Forms.ComboBox encryComboBox;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label label5;
     }
 }
