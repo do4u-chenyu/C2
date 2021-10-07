@@ -162,7 +162,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void GodzillaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new TrojanGeneratorForm("哥斯拉配套Trojan").ShowDialog();
+            new TrojanGeneratorForm("哥斯拉配套Trojan", true).ShowDialog();
         }
 
         private void BehinderToolStripMenuItem_Click(object sender, EventArgs e)

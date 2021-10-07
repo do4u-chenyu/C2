@@ -147,12 +147,14 @@
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
             this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OneWordToolStripMenuItem.Text = "一句话变种";
+            this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
             // 变种1ToolStripMenuItem
             // 
             this.变种1ToolStripMenuItem.Name = "变种1ToolStripMenuItem";
             this.变种1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种1ToolStripMenuItem.Text = "变种1";
+            this.变种1ToolStripMenuItem.ToolTipText = "replace_assert变种";
             this.变种1ToolStripMenuItem.Click += new System.EventHandler(this.变体1ToolStripMenuItem_Click);
             // 
             // 变种2ToolStripMenuItem
@@ -160,6 +162,7 @@
             this.变种2ToolStripMenuItem.Name = "变种2ToolStripMenuItem";
             this.变种2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种2ToolStripMenuItem.Text = "变种2";
+            this.变种2ToolStripMenuItem.ToolTipText = "assert_post字符拆分";
             this.变种2ToolStripMenuItem.Click += new System.EventHandler(this.变种2ToolStripMenuItem_Click);
             // 
             // 变种3ToolStripMenuItem
@@ -167,6 +170,7 @@
             this.变种3ToolStripMenuItem.Name = "变种3ToolStripMenuItem";
             this.变种3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种3ToolStripMenuItem.Text = "变种3";
+            this.变种3ToolStripMenuItem.ToolTipText = "assert全拆分";
             this.变种3ToolStripMenuItem.Click += new System.EventHandler(this.变种3ToolStripMenuItem_Click);
             // 
             // 变种4ToolStripMenuItem
@@ -174,6 +178,7 @@
             this.变种4ToolStripMenuItem.Name = "变种4ToolStripMenuItem";
             this.变种4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种4ToolStripMenuItem.Text = "变种4";
+            this.变种4ToolStripMenuItem.ToolTipText = "启用GLOBALS变量代替$_POST";
             this.变种4ToolStripMenuItem.Click += new System.EventHandler(this.变种4ToolStripMenuItem_Click);
             // 
             // 变种5ToolStripMenuItem
@@ -181,6 +186,7 @@
             this.变种5ToolStripMenuItem.Name = "变种5ToolStripMenuItem";
             this.变种5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种5ToolStripMenuItem.Text = "变种5";
+            this.变种5ToolStripMenuItem.ToolTipText = "凯撒变形assert 和 Request代替POST";
             this.变种5ToolStripMenuItem.Click += new System.EventHandler(this.变种5ToolStripMenuItem_Click);
             // 
             // 变种6ToolStripMenuItem
@@ -188,6 +194,7 @@
             this.变种6ToolStripMenuItem.Name = "变种6ToolStripMenuItem";
             this.变种6ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种6ToolStripMenuItem.Text = "变种6";
+            this.变种6ToolStripMenuItem.ToolTipText = "垃圾注释混淆";
             this.变种6ToolStripMenuItem.Click += new System.EventHandler(this.变种6ToolStripMenuItem_Click);
             // 
             // 变种7ToolStripMenuItem
@@ -195,6 +202,7 @@
             this.变种7ToolStripMenuItem.Name = "变种7ToolStripMenuItem";
             this.变种7ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种7ToolStripMenuItem.Text = "变种7";
+            this.变种7ToolStripMenuItem.ToolTipText = "正则替换assert 和 Request替换POST";
             this.变种7ToolStripMenuItem.Click += new System.EventHandler(this.变种7ToolStripMenuItem_Click);
             // 
             // 变种8ToolStripMenuItem
@@ -202,6 +210,7 @@
             this.变种8ToolStripMenuItem.Name = "变种8ToolStripMenuItem";
             this.变种8ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种8ToolStripMenuItem.Text = "变种8";
+            this.变种8ToolStripMenuItem.ToolTipText = "无法描述的版本";
             this.变种8ToolStripMenuItem.Click += new System.EventHandler(this.变种8ToolStripMenuItem_Click);
             // 
             // 变种9ToolStripMenuItem
@@ -209,6 +218,7 @@
             this.变种9ToolStripMenuItem.Name = "变种9ToolStripMenuItem";
             this.变种9ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.变种9ToolStripMenuItem.Text = "变种9";
+            this.变种9ToolStripMenuItem.ToolTipText = "传入参数置换EVAL";
             this.变种9ToolStripMenuItem.Click += new System.EventHandler(this.变种9ToolStripMenuItem_Click);
             // 
             // behinderToolStripMenuItem
@@ -232,7 +242,7 @@
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
             this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PHPEvalToolStripMenuItem.Text = "通用型";
-            this.PHPEvalToolStripMenuItem.ToolTipText = "最常见的 php eval一句话";
+            this.PHPEvalToolStripMenuItem.ToolTipText = "最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.PHPEvalToolStripMenuItem_Click);
             // 
             // GodzillaToolStripMenuItem
