@@ -167,7 +167,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void BehinderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new TrojanGeneratorForm("三代Behinder配套Trojan").ShowDialog();
+            new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
         }
     }
 }
