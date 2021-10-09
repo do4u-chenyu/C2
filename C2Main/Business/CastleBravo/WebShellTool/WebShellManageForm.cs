@@ -139,6 +139,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             EditToolStripMenuItem_Click(sender, e);
         }
 
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 复制当前的选中单元格到粘贴板
+        }
+
         private void PHPEvalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new TrojanGeneratorForm("PHP通用型一句话Trojan").ShowDialog();
@@ -203,6 +208,5 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
         }
-
     }
 }
