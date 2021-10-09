@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using C2.Core;
+using C2.Utils;
+using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -142,6 +144,21 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 复制当前的选中单元格到粘贴板
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            ListViewItem lvi = this.LV.SelectedItems[0];
+            // 没找到能复制指定单元格的方法, 先复制整行
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(lvi.SubItems[0].Text)  // 按道理一个foreach搞定,但内部类型没找到合适的引用方法
+              .AppendLine(lvi.SubItems[1].Text)
+              .AppendLine(lvi.SubItems[2].Text)
+              .AppendLine(lvi.SubItems[3].Text)
+              .AppendLine(lvi.SubItems[4].Text)
+              .AppendLine(lvi.SubItems[5].Text)
+              .AppendLine(lvi.SubItems[6].Text);
+
+            FileUtil.TryClipboardSetText(sb.ToString());
         }
 
         private void PHPEvalToolStripMenuItem_Click(object sender, EventArgs e)
