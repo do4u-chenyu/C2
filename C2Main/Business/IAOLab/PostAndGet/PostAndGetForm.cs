@@ -85,23 +85,34 @@ namespace C2.Business.IAOLab.PostAndGet
             }
         }
 
+        HttpWebResponse cnblogsRespone;
         private void PostText(HttpWebRequest req, byte[] bytesToPost, string responseResult)
         {
             req.ContentLength = bytesToPost.Length;
-            using (Stream reqStream = req.GetRequestStream())
+            try 
             {
-                reqStream.Write(bytesToPost, 0, bytesToPost.Length);
-            }
-            HttpWebResponse cnblogsRespone = (HttpWebResponse)req.GetResponse();
-            if (cnblogsRespone != null && cnblogsRespone.StatusCode == HttpStatusCode.OK)
-            {
-                StreamReader sr;
-                using (sr = new StreamReader(cnblogsRespone.GetResponseStream()))
+                using (Stream reqStream = req.GetRequestStream())
                 {
-                    responseResult = sr.ReadToEnd();
+                    reqStream.Write(bytesToPost, 0, bytesToPost.Length);
                 }
-                sr.Close();
+                cnblogsRespone = (HttpWebResponse)req.GetResponse();
+                if (cnblogsRespone != null && cnblogsRespone.StatusCode == HttpStatusCode.OK)
+                {
+                    StreamReader sr;
+                    using (sr = new StreamReader(cnblogsRespone.GetResponseStream()))
+                    {
+                        responseResult = sr.ReadToEnd();
+                    }
+                    sr.Close();
+                }
+                cnblogsRespone.Close();
             }
+            catch(System.Net.WebException ex) 
+            {
+                responseResult = ex.Message;
+            }
+
+            /*
             HttpWebResponse hwr = (HttpWebResponse)req.GetResponse();
             //StringBuilder sb = new StringBuilder();
             //foreach (DictionaryEntry head in hwr.Headers)
@@ -120,7 +131,7 @@ namespace C2.Business.IAOLab.PostAndGet
             {
                 ss.Append(s.ToString());
             }
-            cnblogsRespone.Close();
+            */
             try
             {
                 richTextBox1.Text = ConvertJsonString(responseResult);
@@ -236,9 +247,9 @@ namespace C2.Business.IAOLab.PostAndGet
                         PostText(req, bytesToPost, responseResult);
                     }
                 }
-                catch
+                catch(System.UriFormatException ex)
                 {
-                    richTextBox1.Text = "请输入正确的接口或参数";
+                    richTextBox1.Text = ex.Message;
                 }
             }
 
