@@ -217,7 +217,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     req = (HttpWebRequest)HttpWebRequest.Create(textBox.Text);
                     req.Method = splitType;
-                    req.ContentType = textBox3.Text;//header
+                    req.ContentType = "application/x-www-form-urlencoded";//header
                     req.Headers.Set("cookie", textBox2.Text);
                     if (textBox4.Text != string.Empty)
                     {
