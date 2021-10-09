@@ -16,7 +16,8 @@ namespace C2.Business.IAOLab.PostAndGet
     public partial class PostAndGetForm : BaseDialog
     {
         string splitType;
-        string encodeoutput;
+        string encodeOutput;
+        HttpWebResponse cnblogsRespone;
         //string decompression;
         public PostAndGetForm()
         {
@@ -26,41 +27,40 @@ namespace C2.Business.IAOLab.PostAndGet
 
         private void InitializeSelectedIndex()
         {
-            comboBox1.SelectedIndex = 0; // 默认选 POST 和 UTF-8
-            comboBox2.SelectedIndex = 0;
+            comboBoxHttpMethod.SelectedIndex = 0; // 默认选 POST 和 UTF-8
+            comboBoxEncodeMethod.SelectedIndex = 0;
         }
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            textBox.Text = string.Empty;
-            textBox1.Text = string.Empty;
-            textBox2.Text = string.Empty;
-            textBox3.Text = string.Empty;
-            textBox4.Text = string.Empty;
+            textBoxUrl.Text = string.Empty;
+            textBoxPost.Text = string.Empty;
+            textBoxCookie.Text = string.Empty;
+            textBoxHeader.Text = string.Empty;
+            textBoxIp.Text = string.Empty;
+            richTextBoxResponse.Text = string.Empty;
         }
-
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            splitType = comboBox1.SelectedItem as string;
+            splitType = comboBoxHttpMethod.SelectedItem as string;
         }
 
         
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            encodeoutput = "UTF-8";
-            switch (comboBox2.SelectedIndex)
+            encodeOutput = "UTF-8";
+            switch (comboBoxEncodeMethod.SelectedIndex)
             {
                 case 0:
-                    encodeoutput = "UTF-8";
+                    encodeOutput = "UTF-8";
                     break;
                 case 1:
-                    encodeoutput = "GBK";
+                    encodeOutput = "GBK";
                     break;
             }       
         }
         
-
         private string ConvertJsonString(string json)
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -85,7 +85,6 @@ namespace C2.Business.IAOLab.PostAndGet
             }
         }
 
-        HttpWebResponse cnblogsRespone;
         private void PostText(HttpWebRequest req, byte[] bytesToPost, string responseResult)
         {
             req.ContentLength = bytesToPost.Length;
@@ -111,7 +110,6 @@ namespace C2.Business.IAOLab.PostAndGet
             {
                 responseResult = ex.Message;
             }
-
             /*
             HttpWebResponse hwr = (HttpWebResponse)req.GetResponse();
             //StringBuilder sb = new StringBuilder();
@@ -134,11 +132,11 @@ namespace C2.Business.IAOLab.PostAndGet
             */
             try
             {
-                richTextBox1.Text = ConvertJsonString(responseResult);
+                richTextBoxResponse.Text = ConvertJsonString(responseResult);
             }
             catch 
             {
-                richTextBox1.Text = responseResult;
+                richTextBoxResponse.Text = responseResult;
             }
         }
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
@@ -162,22 +160,29 @@ namespace C2.Business.IAOLab.PostAndGet
 
         public async Task HeadTextAsync()
         {
-            var client = new HttpClient(new HttpClientHandler { UseProxy = false });
-            var request = new HttpRequestMessage(HttpMethod.Head, textBox.Text);
-            HttpResponseMessage response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            string result = await response.Content.ReadAsStringAsync();
-            richTextBox1.Text = result;
+            try 
+            {
+                var client = new HttpClient(new HttpClientHandler { UseProxy = false });
+                var request = new HttpRequestMessage(HttpMethod.Head, textBoxUrl.Text);
+                HttpResponseMessage response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                string result = await response.Content.ReadAsStringAsync();
+                richTextBoxResponse.Text = result;
+            }
+            catch (Exception ex) 
+            {
+                richTextBoxResponse.Text = ex.Message;
+            }
         }
 
         public async Task OptionsTextAsync()
         {
             var client = new HttpClient(new HttpClientHandler { UseProxy = false });
-            var request = new HttpRequestMessage(HttpMethod.Options, textBox.Text);
+            var request = new HttpRequestMessage(HttpMethod.Options, textBoxUrl.Text);
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             string result = await response.Content.ReadAsStringAsync();
-            richTextBox1.Text = result;
+            richTextBoxResponse.Text = result;
         }
 
         public StringBuilder GetHeaders(HttpWebResponse resp)
@@ -207,39 +212,40 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     getResult = reader.ReadToEnd();
                 }
-            }
-            finally
-            {
                 stream.Close();
+            }
+            catch(Exception ex)
+            {
+                getResult = ex.Message;
             }
             return getResult;
         }
-
 
         HttpWebRequest req;
         private async void Submit_ClickAsync(object sender, EventArgs e)
         {
             if (splitType == "POST")
             {
-                string data = textBox1.Text;
-                byte[] bytesToPost = encodeoutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.Default.GetBytes(data) ;
+                string data = textBoxPost.Text;
+                byte[] bytesToPost = encodeOutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.Default.GetBytes(data) ;
                 string responseResult = String.Empty;
                 try
                 {
-                    req = (HttpWebRequest)HttpWebRequest.Create(textBox.Text);
+                    req = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                     req.Method = splitType;
+                    req.Timeout = 150000;
                     req.ContentType = "application/x-www-form-urlencoded";//header
-                    req.Headers.Set("cookie", textBox2.Text);
-                    if (textBox4.Text != string.Empty)
+                    req.Headers.Set("cookie", textBoxCookie.Text);
+                    if (textBoxIp.Text != string.Empty)
                     {
                         try
                         {
-                            req.Proxy = new WebProxy(textBox4.Text);
+                            req.Proxy = new WebProxy(textBoxIp.Text);
                             PostText(req, bytesToPost, responseResult);
                         }
                         catch
                         {
-                            richTextBox1.Text = "代理不可用，请更换代理";
+                            richTextBoxResponse.Text = "代理不可用，请更换代理";
                         }
                     }
                     else
@@ -249,46 +255,47 @@ namespace C2.Business.IAOLab.PostAndGet
                 }
                 catch(System.UriFormatException ex)
                 {
-                    richTextBox1.Text = ex.Message;
+                    richTextBoxResponse.Text = ex.Message;
                 }
             }
-
-
             else if (splitType == "GET")
             {
                 //GET没有参数
-                if (textBox1.Text == string.Empty)
+                if (textBoxPost.Text == string.Empty)
                 {
                     try
                     {
-                        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBox.Text);
+                        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBoxUrl.Text);
                         req.Method = splitType;
+                        req.Timeout = 150000;
+                        req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
                         HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                         StringBuilder headerResult = GetHeaders(resp);
-                        if (textBox4.Text != string.Empty)
+                        if (textBoxIp.Text != string.Empty)
                         {
                             try
                             {
-                                WebProxy wp = new WebProxy(textBox4.Text);
+                                WebProxy wp = new WebProxy(textBoxIp.Text);
                                 req.Proxy = wp;
                                 string result = GetResultNullParam(resp);
-                                richTextBox1.Text = result;
+                                richTextBoxResponse.Text = result;
                             }
                             catch
                             {
-                                richTextBox1.Text = "代理不可用，请更换代理";
+                                richTextBoxResponse.Text = "代理不可用，请更换代理";
                             }
                         }
                         else
                         {
                             string result = GetResultNullParam(resp);
-                            richTextBox1.Text = result;
+                            richTextBoxResponse.Text = result;
                         }
                     }
-                    catch 
+                    catch (Exception ex)
                     {
-                        richTextBox1.Text = "请输入正确的接口或参数";
+                        //System.UriFormatException || System.Net.WebException
+                        richTextBoxResponse.Text = ex.Message;
                     }
                 }
                 //Get 含有参数
@@ -296,105 +303,78 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     string result = string.Empty;
                     StringBuilder builder = new StringBuilder();
-                    builder.Append(textBox.Text);
-                    /*
-                    if (dict.Count > 0)
-                    {
-                        builder.Append("?");
-                        int i = 0;
-                        foreach (var item in dic)
-                        {
-                            if (i > 0)
-                                builder.Append("&");
-                            builder.AppendFormat("{0}={1}", item.Key, item.Value);
-                            i++;
-                        }
-                    }
-                    */
-                    builder.AppendFormat(textBox1.Text);
-
-                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
-                    //添加参数
-                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                    WebHeaderCollection head = resp.Headers;
-                    IEnumerator iem = head.GetEnumerator();
-                    ArrayList value = new ArrayList();
-                    for (int i = 0; iem.MoveNext(); i++)
-                    {
-                        string key = head.GetKey(i);
-                        value.Add(head.GetKey(i) + ":" + head.Get(key) + "\r\n");
-                    }
-                    StringBuilder ss = new StringBuilder();
-                    foreach (var s in value)
-                    {
-                        ss.Append(s.ToString());
-                    }
-                    Stream stream = resp.GetResponseStream();
+                    builder.Append(textBoxUrl.Text + "?");
+                    builder.AppendFormat(textBoxPost.Text);
                     try
                     {
-                        //获取内容
-                        using (StreamReader reader = new StreamReader(stream))
+                        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
+                        req.Timeout = 150000;
+                        req.Method = splitType;
+                        req.ContentType = "application/x-www-form-urlencoded";
+                        req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
+                        HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                        StringBuilder headerResult = GetHeaders(resp);
+
+                        if (textBoxIp.Text != string.Empty)
                         {
-                            result = reader.ReadToEnd();
+                            WebProxy wp = new WebProxy(textBoxIp.Text);
+                            req.Proxy = wp;
+                            string resultHasParam = GetResultNullParam(resp);
+                            richTextBoxResponse.Text = resultHasParam;
                         }
+                        else
+                        {
+                            string resultHasParam = GetResultNullParam(resp);
+                            richTextBoxResponse.Text = resultHasParam;
+                        }     
                     }
-                    finally
+                    catch (Exception ex)
                     {
-                        stream.Close();
+                        richTextBoxResponse.Text = ex.Message;
                     }
-                    richTextBox1.Text = result;
                 }
             }
             else if (splitType == "PUT")
             {
-                byte[] datas = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(textBox1.Text);//data可以直接传字节类型 byte[] data,然后这一段就可以去掉
-                //if (encoding == null)
-                    //encoding = Encoding.UTF8;
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(textBox.Text);
-                request.Method = splitType;
-                request.Timeout = 150000;
-                request.AllowAutoRedirect = false;
-                if (!string.IsNullOrEmpty(textBox3.Text))
-                {
-                    request.ContentType = "application/json";
-                }
-                if (textBox1.Text.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+                byte[] paramsData = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(textBoxPost.Text);
+                HttpWebRequest re = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
+                req.Method = splitType;
+                req.Timeout = 150000;
+                req.AllowAutoRedirect = false;
+                req.ContentType = "application/json";
+                
+                if (textBoxPost.Text.StartsWith("https", StringComparison.OrdinalIgnoreCase))
                 {
                     ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
                 }
                 Stream requestStream = null;
-                string responseStr = null;
+                string responseStr = string.Empty;
                 try
                 {
-                    if (datas != null)
+                    if (paramsData != null)
                     {
-                        request.ContentLength = datas.Length;
-                        requestStream = request.GetRequestStream();
-                        requestStream.Write(datas, 0, datas.Length);
+                        req.ContentLength = paramsData.Length;
+                        requestStream = req.GetRequestStream();
+                        requestStream.Write(paramsData, 0, paramsData.Length);
                         requestStream.Close();
                     }
                     else
                     {
-                        request.ContentLength = 0;
+                        req.ContentLength = 0;
                     }
-                    using (HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse())
+                    using (HttpWebResponse webResponse = (HttpWebResponse)req.GetResponse())
                     {
                         Stream getStream = webResponse.GetResponseStream();
                         byte[] outBytes = ReadFully(getStream);
                         getStream.Close();
                         responseStr = Encoding.UTF8.GetString(outBytes);
                     }
+                    richTextBoxResponse.Text = responseStr;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    richTextBoxResponse.Text = ex.Message;
                 }
-                finally
-                {
-                    request = null;
-                    requestStream = null;
-                }
-                richTextBox1.Text = responseStr;
             }
             else if (splitType == "HEAD")
             {
@@ -405,7 +385,5 @@ namespace C2.Business.IAOLab.PostAndGet
                 await OptionsTextAsync();
             }
         }
-
-       
     }
 }
