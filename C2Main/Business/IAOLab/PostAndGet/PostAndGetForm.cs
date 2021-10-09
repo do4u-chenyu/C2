@@ -121,7 +121,14 @@ namespace C2.Business.IAOLab.PostAndGet
                 ss.Append(s.ToString());
             }
             cnblogsRespone.Close();
-            richTextBox1.Text = ConvertJsonString(responseResult);
+            try
+            {
+                richTextBox1.Text = ConvertJsonString(responseResult);
+            }
+            catch 
+            {
+                richTextBox1.Text = responseResult;
+            }
         }
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
@@ -234,6 +241,8 @@ namespace C2.Business.IAOLab.PostAndGet
                     richTextBox1.Text = "请输入正确的接口或参数";
                 }
             }
+
+
             else if (splitType == "GET")
             {
                 //GET没有参数
@@ -385,5 +394,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 await OptionsTextAsync();
             }
         }
+
+       
     }
 }

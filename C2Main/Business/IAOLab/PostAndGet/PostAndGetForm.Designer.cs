@@ -129,6 +129,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(347, 51);
             this.textBox3.TabIndex = 4;
+            //this.textBox3.Text = "application/x-www-form-urlencoded";
             // 
             // label6
             // 
