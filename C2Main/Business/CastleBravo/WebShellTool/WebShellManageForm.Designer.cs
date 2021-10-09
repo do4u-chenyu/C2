@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebShellManageForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addShellMenu = new System.Windows.Forms.ToolStripLabel();
@@ -68,9 +69,10 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EnterToolStripMenuItem,
+            this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 70);
             // 
             // EnterToolStripMenuItem
             // 
@@ -79,11 +81,18 @@
             this.EnterToolStripMenuItem.Text = "进入";
             this.EnterToolStripMenuItem.Click += new System.EventHandler(this.EnterToolStripMenuItem_Click);
             // 
+            // EditToolStripMenuItem
+            // 
+            this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.EditToolStripMenuItem.Text = "编辑";
+            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
+            // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.RemoveToolStripMenuItem.Text = "移除";
+            this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // toolStrip1
@@ -146,7 +155,7 @@
             this.变种9ToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
             this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.OneWordToolStripMenuItem.Text = "一句话变种";
+            this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
             this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
             // 变种1ToolStripMenuItem
@@ -241,7 +250,7 @@
             // 
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
             this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.PHPEvalToolStripMenuItem.Text = "通用型";
+            this.PHPEvalToolStripMenuItem.Text = "通用型PHPEVAL";
             this.PHPEvalToolStripMenuItem.ToolTipText = "最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.PHPEvalToolStripMenuItem_Click);
             // 
@@ -267,11 +276,12 @@
             this.lvDB});
             this.LV.ContextMenuStrip = this.contextMenuStrip1;
             this.LV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LV.Font = new System.Drawing.Font("宋体", 9F);
             this.LV.FullRowSelect = true;
             this.LV.GridLines = true;
             this.LV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LV.HideSelection = false;
-            this.LV.HoverSelection = true;
+            this.LV.LabelWrap = false;
             this.LV.Location = new System.Drawing.Point(0, 25);
             this.LV.MultiSelect = false;
             this.LV.Name = "LV";
@@ -281,6 +291,7 @@
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
+            this.LV.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseDoubleClick);
             // 
             // lvAddTime
             // 
@@ -370,5 +381,6 @@
         private System.Windows.Forms.ToolStripMenuItem BypassToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PHPEvalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GodzillaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
     }
 }

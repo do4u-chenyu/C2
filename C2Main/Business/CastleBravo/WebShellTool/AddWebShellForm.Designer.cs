@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.remarkTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.urlTextBox = new System.Windows.Forms.TextBox();
@@ -44,12 +44,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // nameTextBox
+            // remarkTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(96, 22);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(285, 21);
-            this.nameTextBox.TabIndex = 0;
+            this.remarkTextBox.Location = new System.Drawing.Point(96, 22);
+            this.remarkTextBox.Name = "remarkTextBox";
+            this.remarkTextBox.Size = new System.Drawing.Size(285, 21);
+            this.remarkTextBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -190,11 +190,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.urlTextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.nameTextBox);
+            this.Controls.Add(this.remarkTextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddWebShellForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell Setting";
-            this.Controls.SetChildIndex(this.nameTextBox, 0);
+            this.Controls.SetChildIndex(this.remarkTextBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.urlTextBox, 0);
             this.Controls.SetChildIndex(this.label2, 0);
@@ -215,7 +216,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TextBox remarkTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox urlTextBox;

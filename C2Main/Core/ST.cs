@@ -562,6 +562,27 @@ namespace C2.Core
             return Encoding.UTF8.GetString(bytes);
         }
 
+        public static string SuperDecodeBase64(string code)
+        {
+            
+            for (int i = 0; i < 3; i++)
+            {
+                code = Uri.UnescapeDataString(Uri.UnescapeDataString(code));
+                string clone = code.Clone() as string;
+                try
+                {
+                    code = DecodeBase64(code);
+                    if (code == string.Empty)
+                        code = clone;
+                }
+                catch
+                {
+                    code = clone;
+                }
+            }
+            return code;
+        }
+
         public static void WriteFontNode(XmlElement parentNode, string fontNodeName, Font font)
         {
             if (parentNode == null)
@@ -1108,6 +1129,10 @@ namespace C2.Core
             return sb.ToString();
         }
 
+        public static string NowString()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
         public static string AddAccelerator(string str, char accelerator)
         {
             if (accelerator > 0)

@@ -22,16 +22,32 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.versionComboBox.SelectedIndex = 0;
         }
 
-        public new WebShellTaskConfig ShowDialog()
-        {
+        public WebShellTaskConfig ShowDialog(string createTime)
+        {  
             return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ?
-                new WebShellTaskConfig(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                                       nameTextBox.Text,
+                new WebShellTaskConfig(createTime,
+                                       remarkTextBox.Text,
                                        urlTextBox.Text,
                                        passwordTextBox.Text,
                                        trojanTypeCombox.Text,
                                        versionComboBox.Text,
                                        databaseConfigTextBox.Text) : WebShellTaskConfig.Empty;
+        }
+
+        public WebShellTaskConfig ShowDialog(WebShellTaskConfig task)
+        {
+            remarkTextBox.Text = task.Remark;
+            urlTextBox.Text = task.Url;
+            passwordTextBox.Text = task.Password;
+            trojanTypeCombox.Text = task.TrojanType;
+            versionComboBox.Text = task.ClientVersion;
+
+            // 木马类型和客户端类型不允许修改, 支持修改没有意义
+            trojanTypeCombox.Enabled = false;
+            versionComboBox.Enabled = false;
+            databaseConfigTextBox.Text = task.DatabaseConfig;
+            // 创建时间不需要修改
+            return ShowDialog(task.CreateTime);
         }
 
         protected override bool OnOKButtonClick()

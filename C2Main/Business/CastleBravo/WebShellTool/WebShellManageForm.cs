@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using C2.Core;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -17,7 +19,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void AddShellMenu_Click(object sender, EventArgs e)
         {
-            WebShellTaskConfig config = new AddWebShellForm().ShowDialog();
+            WebShellTaskConfig config = new AddWebShellForm().ShowDialog(ST.NowString());
             if (config == WebShellTaskConfig.Empty)
                 return;
 
@@ -74,6 +76,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 LV.Items.Add(NewLVI(config));
         }
 
+        static bool isAlertnatingRows = true;
         private static ListViewItem NewLVI(WebShellTaskConfig config)
         {
             ListViewItem lvi = new ListViewItem(config.CreateTime);
@@ -84,7 +87,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.ClientVersion);
             lvi.SubItems.Add(config.DatabaseConfig);
 
-            lvi.Tag = config; // 指针关联
+            // 指针关联
+            lvi.Tag = config;
+            // 设置间隔行背景色
+            lvi.BackColor = isAlertnatingRows ? Color.FromArgb(255, 217, 225) : Color.FromArgb(208, 206, 206);
+            isAlertnatingRows = !isAlertnatingRows;
             return lvi;
         }
 
@@ -103,6 +110,33 @@ namespace C2.Business.CastleBravo.WebShellTool
             
             RefreshTasks();
             SaveDB();
+        }
+
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            WebShellTaskConfig old = LV.SelectedItems[0].Tag as WebShellTaskConfig;
+            WebShellTaskConfig cur = new AddWebShellForm().ShowDialog(old);
+
+            if (cur == WebShellTaskConfig.Empty)
+                return;
+
+            LV.SelectedItems[0].Tag = cur;
+            LV.SelectedItems[0].SubItems[1].Text = cur.Remark;         // 名称
+            LV.SelectedItems[0].SubItems[2].Text = cur.Url;            // url
+            LV.SelectedItems[0].SubItems[3].Text = cur.Password;       // 密码
+            LV.SelectedItems[0].SubItems[4].Text = cur.TrojanType;     // 木马类型
+            LV.SelectedItems[0].SubItems[5].Text = cur.ClientVersion;  // 客户端版本
+            LV.SelectedItems[0].SubItems[6].Text = cur.DatabaseConfig; // 数据库配置
+            // 按道理不会出现索引越界
+            tasks[tasks.IndexOf(old)] = cur;
+            SaveDB();
+        }
+        private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EditToolStripMenuItem_Click(sender, e);
         }
 
         private void PHPEvalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,5 +203,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
         }
+
     }
 }
