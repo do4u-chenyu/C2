@@ -911,14 +911,14 @@ namespace C2.Model.MindMaps
             {
                 this.id = id;
                 this.name = name;
-                this.filename = GenerateMD5(Path.GetFileNameWithoutExtension(filename)) + Path.GetExtension(filename);
+                this.filename = ST.GenerateMD5(Path.GetFileNameWithoutExtension(filename)) + Path.GetExtension(filename);
                 this.staticDataSource = staticDataSource;
             }
             public AttachmentInfo(string id, string name, string filename, string fullPath)
             {
                 this.id = id;
                 this.name = name;
-                this.filename = GenerateMD5(Path.GetFileNameWithoutExtension(filename)) + Path.GetExtension(filename);
+                this.filename = ST.GenerateMD5(Path.GetFileNameWithoutExtension(filename)) + Path.GetExtension(filename);
                 this.fullPath = fullPath;
             }
         }
@@ -991,19 +991,6 @@ namespace C2.Model.MindMaps
             public Stream GetSource()
             {
                 return new MemoryStream(bytes);
-            }
-        }
-        static string GenerateMD5(string text)
-        {
-            using (MD5 mi = MD5.Create())
-            {
-                byte[] buffer = Encoding.Default.GetBytes(text);
-                //开始加密
-                byte[] newBuffer = mi.ComputeHash(buffer);
-                StringBuilder sb = new StringBuilder(newBuffer.Length * 2); // 固定长度
-                for (int i = 0; i < newBuffer.Length; i++)
-                    sb.Append(newBuffer[i].ToString("x2"));
-                return sb.ToString();
             }
         }
     }

@@ -12,6 +12,7 @@ using C2.Model.Widgets;
 using C2.Globalization;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using System.Security.Cryptography;
 
 namespace C2.Core
 {
@@ -670,6 +671,20 @@ namespace C2.Core
         public static Color DeserializeColor(XmlElement node, string name, Color colorDefault)
         {
             return ST.GetColor(ST.ReadTextNode(node, name), colorDefault);
+        }
+
+        public static string GenerateMD5(string text)
+        {
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(text);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder(newBuffer.Length * 2); // 固定长度
+                for (int i = 0; i < newBuffer.Length; i++)
+                    sb.Append(newBuffer[i].ToString("x2"));
+                return sb.ToString();
+            }
         }
 
         public static string ImageBase64String(Image image)
