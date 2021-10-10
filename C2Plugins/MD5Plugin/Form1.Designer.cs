@@ -47,6 +47,7 @@
             this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.splitComboBox = new System.Windows.Forms.ComboBox();
             this.radixComboBox = new System.Windows.Forms.ComboBox();
+            this.ASE128RadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // inputTextBox
@@ -66,10 +67,8 @@
             this.outputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.outputTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.outputTextBox.Location = new System.Drawing.Point(561, 52);
-            this.outputTextBox.MaxLength = 0;
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.outputTextBox.Size = new System.Drawing.Size(460, 450);
             this.outputTextBox.TabIndex = 1;
             this.outputTextBox.Text = "加密后的结果";
@@ -115,7 +114,7 @@
             this.base64RadioButton.AutoSize = true;
             this.base64RadioButton.Checked = true;
             this.base64RadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.base64RadioButton.Location = new System.Drawing.Point(199, 13);
+            this.base64RadioButton.Location = new System.Drawing.Point(204, 13);
             this.base64RadioButton.Name = "base64RadioButton";
             this.base64RadioButton.Size = new System.Drawing.Size(95, 18);
             this.base64RadioButton.TabIndex = 5;
@@ -129,7 +128,7 @@
             // 
             this.urlRadioButton.AutoSize = true;
             this.urlRadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.urlRadioButton.Location = new System.Drawing.Point(296, 13);
+            this.urlRadioButton.Location = new System.Drawing.Point(305, 13);
             this.urlRadioButton.Name = "urlRadioButton";
             this.urlRadioButton.Size = new System.Drawing.Size(88, 18);
             this.urlRadioButton.TabIndex = 6;
@@ -142,7 +141,7 @@
             // 
             this.unicodeRadioButton.AutoSize = true;
             this.unicodeRadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.unicodeRadioButton.Location = new System.Drawing.Point(393, 13);
+            this.unicodeRadioButton.Location = new System.Drawing.Point(399, 13);
             this.unicodeRadioButton.Name = "unicodeRadioButton";
             this.unicodeRadioButton.Size = new System.Drawing.Size(116, 18);
             this.unicodeRadioButton.TabIndex = 12;
@@ -155,7 +154,7 @@
             // 
             this.md564RadioButton.AutoSize = true;
             this.md564RadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.md564RadioButton.Location = new System.Drawing.Point(107, 13);
+            this.md564RadioButton.Location = new System.Drawing.Point(110, 13);
             this.md564RadioButton.Name = "md564RadioButton";
             this.md564RadioButton.Size = new System.Drawing.Size(88, 18);
             this.md564RadioButton.TabIndex = 7;
@@ -168,7 +167,7 @@
             // 
             this.hexRadioButton.AutoSize = true;
             this.hexRadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.hexRadioButton.Location = new System.Drawing.Point(518, 13);
+            this.hexRadioButton.Location = new System.Drawing.Point(521, 13);
             this.hexRadioButton.Name = "hexRadioButton";
             this.hexRadioButton.Size = new System.Drawing.Size(88, 18);
             this.hexRadioButton.TabIndex = 12;
@@ -181,11 +180,11 @@
             // 
             this.sha1RadioButton.AutoSize = true;
             this.sha1RadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.sha1RadioButton.Location = new System.Drawing.Point(617, 13);
+            this.sha1RadioButton.Location = new System.Drawing.Point(688, 13);
             this.sha1RadioButton.Name = "sha1RadioButton";
             this.sha1RadioButton.Size = new System.Drawing.Size(53, 18);
             this.sha1RadioButton.TabIndex = 9;
-            this.sha1RadioButton.Text = "sha1";
+            this.sha1RadioButton.Text = "SHA1";
             this.toolTip1.SetToolTip(this.sha1RadioButton, "使用sha1对字符串进行加密");
             this.sha1RadioButton.UseVisualStyleBackColor = true;
             this.sha1RadioButton.CheckedChanged += new System.EventHandler(this.SHA1_RadioButton_CheckedChanged);
@@ -194,11 +193,11 @@
             // 
             this.sha256RadioButton.AutoSize = true;
             this.sha256RadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.sha256RadioButton.Location = new System.Drawing.Point(678, 13);
+            this.sha256RadioButton.Location = new System.Drawing.Point(747, 13);
             this.sha256RadioButton.Name = "sha256RadioButton";
             this.sha256RadioButton.Size = new System.Drawing.Size(67, 18);
             this.sha256RadioButton.TabIndex = 10;
-            this.sha256RadioButton.Text = "sha256";
+            this.sha256RadioButton.Text = "SHA256";
             this.toolTip1.SetToolTip(this.sha256RadioButton, "使用sha256对字符串进行加密");
             this.sha256RadioButton.UseVisualStyleBackColor = true;
             this.sha256RadioButton.CheckedChanged += new System.EventHandler(this.SHA256_RadioButton_CheckedChanged);
@@ -207,11 +206,11 @@
             // 
             this.sha512RadioButton.AutoSize = true;
             this.sha512RadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.sha512RadioButton.Location = new System.Drawing.Point(755, 13);
+            this.sha512RadioButton.Location = new System.Drawing.Point(820, 13);
             this.sha512RadioButton.Name = "sha512RadioButton";
             this.sha512RadioButton.Size = new System.Drawing.Size(67, 18);
             this.sha512RadioButton.TabIndex = 11;
-            this.sha512RadioButton.Text = "sha512";
+            this.sha512RadioButton.Text = "SHA512";
             this.toolTip1.SetToolTip(this.sha512RadioButton, "使用sha512对字符串进行加密");
             this.sha512RadioButton.UseVisualStyleBackColor = true;
             this.sha512RadioButton.CheckedChanged += new System.EventHandler(this.Sha512_RadioButton_CheckedChanged);
@@ -267,6 +266,19 @@
             this.radixComboBox.Visible = false;
             this.radixComboBox.SelectedIndexChanged += new System.EventHandler(this.RadixComboBox_SelectedIndexChanged);
             // 
+            // ASE128RadioButton
+            // 
+            this.ASE128RadioButton.AutoSize = true;
+            this.ASE128RadioButton.Font = new System.Drawing.Font("宋体", 10F);
+            this.ASE128RadioButton.Location = new System.Drawing.Point(615, 13);
+            this.ASE128RadioButton.Name = "ASE128RadioButton";
+            this.ASE128RadioButton.Size = new System.Drawing.Size(67, 18);
+            this.ASE128RadioButton.TabIndex = 15;
+            this.ASE128RadioButton.Text = "AES128";
+            this.toolTip1.SetToolTip(this.ASE128RadioButton, "AES128对字符串进行解码");
+            this.ASE128RadioButton.UseVisualStyleBackColor = true;
+            this.ASE128RadioButton.CheckedChanged += new System.EventHandler(this.ASE128_RadioButton_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -274,6 +286,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1027, 513);
+            this.Controls.Add(this.ASE128RadioButton);
             this.Controls.Add(this.radixComboBox);
             this.Controls.Add(this.sha512RadioButton);
             this.Controls.Add(this.sha256RadioButton);
@@ -320,6 +333,7 @@
         private System.Windows.Forms.ComboBox encodingComboBox;
         private System.Windows.Forms.ComboBox splitComboBox;
         private System.Windows.Forms.ComboBox radixComboBox;
+        private System.Windows.Forms.RadioButton ASE128RadioButton;
     }
 }
 

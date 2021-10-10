@@ -171,6 +171,23 @@ namespace MD5Plugin
             radixComboBox.Visible = true;
             SetDefault2();
         }
+        // ASE128解密
+        private void ASE128_RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            encodeButton.Text = "加密 =>";
+            decodeButton.Text = "<= 解密";
+            decodeButton.Visible = true;
+            encodeButton.Visible = true;
+
+            encodingComboBox.Visible = false;
+            splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
+
+            // 密钥
+            // 对齐
+            // 偏移
+            SetDefault1();
+        }
 
 
         //使用sha1对字符串进行加密
@@ -754,7 +771,5 @@ namespace MD5Plugin
                 return false;
             }
         }
-
-
     }
 }
