@@ -92,7 +92,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 指针关联
             lvi.Tag = config;
             // 设置间隔行背景色
-            lvi.BackColor = isAlertnatingRows ? Color.FromArgb(255, 217, 225) : Color.FromArgb(208, 206, 206);
+            lvi.BackColor = isAlertnatingRows ? Color.FromArgb(255, 217, 225, 242) : Color.FromArgb(255, 208, 206, 206);
             isAlertnatingRows = !isAlertnatingRows;
             return lvi;
         }
