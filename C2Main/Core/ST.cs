@@ -550,6 +550,11 @@ namespace C2.Core
                 return string.Format("{0}, {1}, {2}, {3}", padding.Left, padding.Top, padding.Right, padding.Bottom);
         }
 
+        public static string EncodeUrlBase64(string code)
+        {
+            return Uri.UnescapeDataString(ST.EncodeBase64(code));
+        }
+
         public static string EncodeBase64(string code)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(code);

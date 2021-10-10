@@ -7,14 +7,14 @@ using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    public class WebShellClientSetting
+    public class ClientSetting
     {
 
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         private static readonly string WebShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
-        public static readonly Dictionary<string, string> VersionPathDict = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> CKnifeDict = new Dictionary<string, string>
         {
             { "中国菜刀16_JAR版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Config.ini") },
             { "中国菜刀16_自定义版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini") },
@@ -48,14 +48,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PHP_DOWNLOAD;
         public string PHP_SHELL;
 
-        public WebShellClientSetting()
+        public ClientSetting()
         {
         }
 
-        public static WebShellClientSetting LoadSetting(string version)
+        public static ClientSetting LoadSetting(string version)
         {
-            string path = VersionPathDict[version];
-            return new WebShellClientSetting() {
+            string path = CKnifeDict[version];
+            return new ClientSetting() {
                 SPL = Read(version, "SPL", path),
                 SPR = Read(version, "SPR", path),
                 CODE = Read(version, "CODE", path),

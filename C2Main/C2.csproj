@@ -284,12 +284,18 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.Designer.cs">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\AltmanClient.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\CKnifeClient.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientFactory.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientSetting.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\IClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
@@ -304,7 +310,6 @@
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskConfig.cs" />
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShellClientSetting.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">

