@@ -75,7 +75,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             //broPath仅针对window文件系统，内容为c: d: e:
             if (paths.Count == 2 && paths[1].Contains(":"))
-                brothers = paths[1].Split(':').ToList();
+            {
+                foreach (string path in paths[1].Split(':'))
+                    brothers.Add(path.Trim());
+            }
+                
 
             string ret = PHPReadDict(root);
             foreach (string line in ret.Split('\n'))
@@ -100,7 +104,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         public List<string> PHPIndex()
         {
             string[] result = client.MidStrEx(Post(client.PHPIndex())).Split('\t');
-            return result.Skip(0).Take(result.Length - 1).ToList();
+            if (result.Length >= 2)
+                return result.Take(2).ToList();
+            else
+                return result.ToList();
         }
 
         public string PHPReadDict(string dict)
