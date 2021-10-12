@@ -14,28 +14,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         private static readonly string WebShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
-        public static readonly Dictionary<string, string> CKnifeDict = new Dictionary<string, string>
+        public static readonly Dictionary<string, Tuple<string, string>> WSDict = new Dictionary<string, Tuple<string, string>>
         {
-            { "中国菜刀16_JAR版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Config.ini") },
-            { "中国菜刀16_自定义版", Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini") },
-            { "中国菜刀11_EXE版", Path.Combine(WebShellFilePath, "Cknife11_EXE_Config.ini") },
-            { "中国菜刀14_EXE版", Path.Combine(WebShellFilePath, "Cknife14_EXE_Config.ini") },
-            { "中国菜刀18_BYPASS版", Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini") },
-        };
-
-        public static readonly Dictionary<string, string> AltmanDict = new Dictionary<string, string>
-        {
-            { "奥特曼2015版", Path.Combine(WebShellFilePath, "Altman15_Config.ini") },
-        };
-
-        public static readonly Dictionary<string, string> CKnife16EXEDict = new Dictionary<string, string>
-        {
-            { "中国菜刀16_EXE版", Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini") },
-        };
-
-        public static readonly Dictionary<string, string> AntSwordDict = new Dictionary<string, string>
-        {
-            { "蚁剑2.1.14版", Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini") },
+            { "中国菜刀16_JAR版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Config.ini"),"mode1") },
+            { "中国菜刀16_自定义版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini"),"mode1") },
+            { "中国菜刀11_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife11_EXE_Config.ini"),"mode1") },
+            { "中国菜刀14_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife14_EXE_Config.ini"),"mode1") },
+            { "中国菜刀18_BYPASS版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini"),"mode1") },
+            { "奥特曼2015_PHP版", Tuple.Create(Path.Combine(WebShellFilePath, "Altman15_PHP_Config.ini"),"mode1") },
+            { "中国菜刀16_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini"),"mode2") },
+            { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"),"mode3") }
         };
 
         public string SPL;
@@ -66,7 +54,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public static ClientSetting LoadSetting(string version)
         {
-            string path = CKnifeDict[version];
+            string path = WSDict[version].Item1;
             return new ClientSetting() {
                 SPL = Read(version, "SPL", path),
                 SPR = Read(version, "SPR", path),

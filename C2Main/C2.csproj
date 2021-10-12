@@ -284,7 +284,6 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.Designer.cs">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\Client\AltmanClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\CKnifeClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientFactory.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientSetting.cs" />
@@ -3866,6 +3865,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\WebScanDict\UserAgent.list">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Altman15_JSP_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Altman15_PHP_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\WebShellConfig\Cknife11_EXE_Config.ini">
