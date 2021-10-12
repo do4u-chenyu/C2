@@ -193,11 +193,11 @@
             this.comboBoxEncodeMethod.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxEncodeMethod.FormattingEnabled = true;
             this.comboBoxEncodeMethod.Items.AddRange(new object[] {
-            "输出编码 UTF-8",
+            "输出编码 UTF8",
             "输出编码 GBK"});
             this.comboBoxEncodeMethod.Location = new System.Drawing.Point(173, 210);
             this.comboBoxEncodeMethod.Name = "comboBoxEncodeMethod";
-            this.comboBoxEncodeMethod.Size = new System.Drawing.Size(186, 27);
+            this.comboBoxEncodeMethod.Size = new System.Drawing.Size(115, 27);
             this.comboBoxEncodeMethod.TabIndex = 6;
             this.comboBoxEncodeMethod.SelectedIndexChanged += new System.EventHandler(this.ComboBox2_SelectedIndexChanged);
             // 

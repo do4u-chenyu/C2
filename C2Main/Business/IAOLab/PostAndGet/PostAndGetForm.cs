@@ -39,7 +39,6 @@ namespace C2.Business.IAOLab.PostAndGet
             textBoxHeader.Text = string.Empty;
             textBoxIp.Text = string.Empty;
             richTextBoxResponse.Text = string.Empty;
-            textBoxTime.Text = "15";
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
