@@ -45,8 +45,6 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             splitType = comboBoxHttpMethod.SelectedItem as string;
         }
-
-        
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             encodeOutput = "UTF-8";
@@ -132,11 +130,15 @@ namespace C2.Business.IAOLab.PostAndGet
             */
             try
             {
-                richTextBoxResponse.Text = ConvertJsonString(responseResult);
+                byte[] byteArray = Encoding.UTF8.GetBytes(responseResult);
+                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(byteArray) : Encoding.Default.GetString(byteArray);
+                richTextBoxResponse.Text = ConvertJsonString(result.ToString());
             }
             catch 
             {
-                richTextBoxResponse.Text = responseResult;
+                byte[] byteArray = Encoding.UTF8.GetBytes(responseResult);
+                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(byteArray) : Encoding.Default.GetString(byteArray);
+                richTextBoxResponse.Text = result.ToString();
             }
         }
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
@@ -227,7 +229,8 @@ namespace C2.Business.IAOLab.PostAndGet
             if (splitType == "POST")
             {
                 string data = textBoxPost.Text;
-                byte[] bytesToPost = encodeOutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.Default.GetBytes(data) ;
+                //byte[] bytesToPost = encodeOutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.UTF8.GetBytes(data);
+                byte[] bytesToPost = Encoding.UTF8.GetBytes(data);
                 string responseResult = String.Empty;
                 try
                 {
