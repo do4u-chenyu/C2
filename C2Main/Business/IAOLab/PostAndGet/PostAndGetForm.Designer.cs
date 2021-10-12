@@ -49,6 +49,8 @@
             this.tabControlResponse = new System.Windows.Forms.TabControl();
             this.formatResponse = new System.Windows.Forms.TabPage();
             this.richTextBoxResponse = new System.Windows.Forms.RichTextBox();
+            this.textBoxTime = new System.Windows.Forms.TextBox();
+            this.labelTime = new System.Windows.Forms.Label();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +74,7 @@
             this.labelPost.TabIndex = 2;
             this.labelPost.Text = "POST";
             // 
-            // textBoxUrl
+            // textBoxPost
             // 
             this.textBoxPost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxPost.Location = new System.Drawing.Point(12, 64);
@@ -203,7 +205,7 @@
             // 
             this.buttonDelete.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.buttonDelete.Location = new System.Drawing.Point(173, 247);
-            this.buttonDelete.Name = "button3";
+            this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(95, 27);
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "清空表单";
@@ -267,11 +269,35 @@
             this.richTextBoxResponse.TabIndex = 10;
             this.richTextBoxResponse.Text = "";
             // 
+            // textBoxTime
+            // 
+            this.textBoxTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxTime.ForeColor = System.Drawing.Color.Black;
+            this.textBoxTime.Location = new System.Drawing.Point(654, 233);
+            this.textBoxTime.Multiline = true;
+            this.textBoxTime.Name = "textBoxTime";
+            this.textBoxTime.Size = new System.Drawing.Size(53, 21);
+            this.textBoxTime.TabIndex = 24;
+            this.textBoxTime.Text = "15";
+            this.textBoxTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelTime.Location = new System.Drawing.Point(651, 213);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(67, 17);
+            this.labelTime.TabIndex = 25;
+            this.labelTime.Text = "超时时间/s";
+            // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 577);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.textBoxTime);
             this.Controls.Add(this.labelUrl);
             this.Controls.Add(this.buttonSubmit);
             this.Controls.Add(this.tabControlResponse);
@@ -324,5 +350,7 @@
         private System.Windows.Forms.TabControl tabControlResponse;
         private System.Windows.Forms.TabPage formatResponse;
         private System.Windows.Forms.RichTextBox richTextBoxResponse;
+        private System.Windows.Forms.TextBox textBoxTime;
+        private System.Windows.Forms.Label labelTime;
     }
 }

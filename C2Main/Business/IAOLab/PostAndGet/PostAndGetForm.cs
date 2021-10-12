@@ -17,7 +17,6 @@ namespace C2.Business.IAOLab.PostAndGet
     {
         string splitType;
         string encodeOutput;
-        Random rd = new Random();
         HttpWebResponse cnblogsRespone;
         //string decompression;
         public PostAndGetForm()
@@ -40,6 +39,7 @@ namespace C2.Business.IAOLab.PostAndGet
             textBoxHeader.Text = string.Empty;
             textBoxIp.Text = string.Empty;
             richTextBoxResponse.Text = string.Empty;
+            textBoxTime.Text = "15";
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -237,7 +237,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     req = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                     req.Method = splitType;
-                    req.Timeout = rd.Next(10000,15000);
+                    req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
                     req.ContentType = "application/x-www-form-urlencoded";//header
                     req.Headers.Set("cookie", textBoxCookie.Text);
                     if (textBoxIp.Text != string.Empty)
@@ -271,7 +271,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     {
                         HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBoxUrl.Text);
                         req.Method = splitType;
-                        req.Timeout = rd.Next(10000, 15000);
+                        req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
                         req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
                         HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
@@ -312,7 +312,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     try
                     {
                         HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
-                        req.Timeout = rd.Next(10000, 15000);
+                        req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
                         req.Method = splitType;
                         req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
@@ -343,7 +343,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 byte[] paramsData = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(textBoxPost.Text);
                 HttpWebRequest re = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                 req.Method = splitType;
-                req.Timeout = rd.Next(10000, 15000);
+                req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
                 req.AllowAutoRedirect = false;
                 req.ContentType = "application/json";
                 
