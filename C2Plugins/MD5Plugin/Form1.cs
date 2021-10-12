@@ -75,12 +75,20 @@ namespace MD5Plugin
             return this.ShowDialog();
         }
 
-        private void SetDefault1()
+        private void SetDefaultEncrypFormat()
         {
             inputTextBox.Text = "请把你需要加密的内容粘贴在这里";
             outputTextBox.Text = "加密后的结果";
             inputTextBox.ForeColor = Color.DarkGray;
             outputTextBox.ForeColor = Color.DarkGray;
+
+            encodeButton.Text = "加密 =>";
+            decodeButton.Visible = false;
+            encodingComboBox.Visible = false;
+            splitComboBox.Visible = false;
+            radixComboBox.Visible = false;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
         }
         private void SetDefault2()
         {
@@ -96,33 +104,6 @@ namespace MD5Plugin
             outputTextBox.Text = "请输入你要解码的内容";
             inputTextBox.ForeColor = Color.DarkGray;
             outputTextBox.ForeColor = Color.DarkGray;
-        }
-
-        //md5(128位)
-        private void MD5_128_RadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            encodeButton.Text = "加密 =>";
-            decodeButton.Visible = false;
-            encodingComboBox.Visible = false;
-            splitComboBox.Visible = false;
-            radixComboBox.Visible = false;
-            labelEncryptionkey.Visible = false;
-            textBoxEncryptionkey.Visible = false;
-            SetDefault1();
-        }
-
-
-        //md5(64位)
-        private void MD5_64_RadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            encodeButton.Text = "加密 =>";
-            decodeButton.Visible = false;
-            encodingComboBox.Visible = false;
-            splitComboBox.Visible = false;
-            radixComboBox.Visible = false;
-            labelEncryptionkey.Visible = false;
-            textBoxEncryptionkey.Visible = false;
-            SetDefault1();
         }
 
         //Base64
@@ -198,38 +179,31 @@ namespace MD5Plugin
             SetDefault2();
         }
 
-
+        //md5(128位)
+        private void MD5_128_RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDefaultEncrypFormat();
+        }
+        //md5(64位)
+        private void MD5_64_RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDefaultEncrypFormat();
+        }
         //使用sha1对字符串进行加密
         private void SHA1_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            encodeButton.Text = "加密 =>";
-            decodeButton.Visible = false;
-            encodingComboBox.Visible = false;
-            splitComboBox.Visible = false;
-            radixComboBox.Visible = false;
-            SetDefault1();
+            SetDefaultEncrypFormat();
         }
 
         //使用sha256对字符串进行加密
         private void SHA256_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            encodeButton.Text = "加密 =>";
-            decodeButton.Visible = false;
-            encodingComboBox.Visible = false;
-            splitComboBox.Visible = false;
-            radixComboBox.Visible = false;
-            SetDefault1();
+            SetDefaultEncrypFormat();
         }
-
         //使用sha512对字符串进行加密
         private void Sha512_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            encodeButton.Text = "加密 =>";
-            decodeButton.Visible = false;
-            encodingComboBox.Visible = false;
-            splitComboBox.Visible = false;
-            radixComboBox.Visible = false;
-            SetDefault1();
+            SetDefaultEncrypFormat();
         }
 
         private void InputTextBox_MouseDown(object sender, EventArgs e)
