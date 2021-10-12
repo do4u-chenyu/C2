@@ -17,6 +17,7 @@ namespace C2.Business.IAOLab.PostAndGet
     {
         string splitType;
         string encodeOutput;
+        Random rd = new Random();
         HttpWebResponse cnblogsRespone;
         //string decompression;
         public PostAndGetForm()
@@ -236,7 +237,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     req = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                     req.Method = splitType;
-                    req.Timeout = 150000;
+                    req.Timeout = rd.Next(10000,15000);
                     req.ContentType = "application/x-www-form-urlencoded";//header
                     req.Headers.Set("cookie", textBoxCookie.Text);
                     if (textBoxIp.Text != string.Empty)
@@ -270,7 +271,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     {
                         HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBoxUrl.Text);
                         req.Method = splitType;
-                        req.Timeout = 150000;
+                        req.Timeout = rd.Next(10000, 15000);
                         req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
                         HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
@@ -311,7 +312,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     try
                     {
                         HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
-                        req.Timeout = 150000;
+                        req.Timeout = rd.Next(10000, 15000);
                         req.Method = splitType;
                         req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
@@ -342,7 +343,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 byte[] paramsData = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(textBoxPost.Text);
                 HttpWebRequest re = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                 req.Method = splitType;
-                req.Timeout = 150000;
+                req.Timeout = rd.Next(10000, 15000);
                 req.AllowAutoRedirect = false;
                 req.ContentType = "application/json";
                 
