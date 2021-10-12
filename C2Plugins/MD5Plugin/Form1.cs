@@ -106,6 +106,8 @@ namespace MD5Plugin
             encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
             SetDefault1();
         }
 
@@ -118,6 +120,8 @@ namespace MD5Plugin
             encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
             SetDefault1();
         }
 
@@ -131,6 +135,8 @@ namespace MD5Plugin
             encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
             SetDefault3();
         }
 
@@ -144,6 +150,8 @@ namespace MD5Plugin
             encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
             SetDefault2();
         }
 
@@ -157,6 +165,8 @@ namespace MD5Plugin
             encodingComboBox.Visible = false;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
             SetDefault2();
         }
         //Hex编解码
@@ -169,6 +179,8 @@ namespace MD5Plugin
             encodingComboBox.Visible = true;
             splitComboBox.Visible = true;
             radixComboBox.Visible = true;
+            labelEncryptionkey.Visible = false;
+            textBoxEncryptionkey.Visible = false;
             SetDefault2();
         }
         // ASE128解密
@@ -178,15 +190,12 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解密";
             decodeButton.Visible = true;
             encodeButton.Visible = true;
-
-            encodingComboBox.Visible = false;
+            encodingComboBox.Visible = true;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
-
-            // 密钥
-            // 对齐
-            // 偏移
-            SetDefault1();
+            labelEncryptionkey.Visible = true;
+            textBoxEncryptionkey.Visible = true;
+            SetDefault2();
         }
 
 
@@ -375,7 +384,43 @@ namespace MD5Plugin
             }
         }
 
-        
+
+        public void AES128Encode(string EncryptStr, string Key,string iv)
+        {
+            if (inputTextBox.Text == "请输入你要编码的内容")
+            {
+                inputTextBox.Text = string.Empty;
+                outputTextBox.Text = string.Empty;
+                MessageBox.Show("请输入编码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try 
+                {
+                    RijndaelManaged rijndaelCipher = new RijndaelManaged();
+                    rijndaelCipher.Mode = CipherMode.ECB;
+                    rijndaelCipher.Padding = PaddingMode.Zeros;
+                    rijndaelCipher.BlockSize = 128;
+                    byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
+                    byte[] keyBytes = new byte[16];
+                    int len = pwdBytes.Length;
+                    if (len > keyBytes.Length) len = keyBytes.Length;
+                    Array.Copy(pwdBytes, keyBytes, len);
+                    rijndaelCipher.Key = keyBytes;
+                    byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+                    rijndaelCipher.IV = new byte[16];
+                    ICryptoTransform transform = rijndaelCipher.CreateEncryptor();
+                    byte[] plainText = Encoding.GetEncoding(encodingType).GetBytes(EncryptStr);
+                    byte[] cipherBytes = transform.TransformFinalBlock(plainText, 0, plainText.Length);
+                    outputTextBox.Text = Convert.ToBase64String(cipherBytes);
+                }
+                catch (Exception ex)
+                {
+                    outputTextBox.Text = ex.Message;
+                }
+            }
+        }
+
         private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             encodingType = encodingComboBox.SelectedItem as string;
@@ -428,8 +473,8 @@ namespace MD5Plugin
                 }
                 outputTextBox.Text = sb.ToString();
             }
-
         }
+
         public void SHA512Encrypt(string str)
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
@@ -477,6 +522,10 @@ namespace MD5Plugin
             {
                 HexEncode(inputTextBox.Text);
             }
+            else if (ASE128RadioButton.Checked)
+            {
+                AES128Encode(inputTextBox.Text,textBoxEncryptionkey.Text,string.Empty);
+            }
             else if (sha1RadioButton.Checked)
             {
                 SHA1Encrypt(inputTextBox.Text);
@@ -515,6 +564,8 @@ namespace MD5Plugin
             }
             else if(hexRadioButton.Checked)
                 HexDecode(outputTextBox.Text);
+            else if (ASE128RadioButton.Checked)
+                AES128Decode(outputTextBox.Text,textBoxEncryptionkey.Text);
             else
             {
                 DecodeBase64(outputTextBox.Text);
@@ -693,6 +744,33 @@ namespace MD5Plugin
             catch 
             {
                 MessageBox.Show("请选择正确的分隔符号", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void AES128Decode(string DecryptStr, string Key)
+        {
+            try 
+            {
+                RijndaelManaged rijndaelCipher = new RijndaelManaged();
+                rijndaelCipher.Mode = CipherMode.ECB;
+                rijndaelCipher.Padding = PaddingMode.Zeros;
+                rijndaelCipher.BlockSize = 128;
+                byte[] encryptedData = Convert.FromBase64String(DecryptStr);
+                byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
+                byte[] keyBytes = new byte[16];
+                int len = pwdBytes.Length;
+                if (len > keyBytes.Length) len = keyBytes.Length;
+                Array.Copy(pwdBytes, keyBytes, len);
+                rijndaelCipher.Key = keyBytes;
+                //byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+                //rijndaelCipher.IV = ivBytes;
+                ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
+                byte[] plainText = transform.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+                inputTextBox.Text = Encoding.GetEncoding(encodingType).GetString(plainText);
+            }
+            catch (Exception ex)
+            {
+                inputTextBox.Text = ex.Message;
             }
         }
 
