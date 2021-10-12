@@ -13,10 +13,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             string mode = ClientSetting.WSDict.ContainsKey(clientSetting) ? ClientSetting.WSDict[clientSetting].Item2 : string.Empty ;
             switch (mode)
             {
-                case "mode1":
-                    return new CKnifeClient(password, clientSetting);
+                case "Common":
+                    return new CommonClient(password, clientSetting);
+                case "CKnife16EXE":
+                    return new CKnife16EXEClient(password, clientSetting);
                 default:
-                    return new CKnifeClient(password, clientSetting);
+                    return new CommonClient(password, clientSetting);
             }
         }
     }
