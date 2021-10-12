@@ -69,7 +69,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
         {
-            string path = pathFiles.Item1;
+            string path = pathFiles.Item1.Replace("\\","/");
             List<WSFile> files = pathFiles.Item2;
             List<string> broPaths = pathFiles.Item3;
 
