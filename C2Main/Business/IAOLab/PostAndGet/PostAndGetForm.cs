@@ -17,6 +17,7 @@ namespace C2.Business.IAOLab.PostAndGet
     {
         string splitType;
         string encodeOutput;
+        Random rd = new Random();
         HttpWebResponse cnblogsRespone;
         //string decompression;
         public PostAndGetForm()
@@ -45,8 +46,6 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             splitType = comboBoxHttpMethod.SelectedItem as string;
         }
-
-        
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             encodeOutput = "UTF-8";
@@ -132,11 +131,15 @@ namespace C2.Business.IAOLab.PostAndGet
             */
             try
             {
-                richTextBoxResponse.Text = ConvertJsonString(responseResult);
+                byte[] byteArray = Encoding.UTF8.GetBytes(responseResult);
+                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(byteArray) : Encoding.Default.GetString(byteArray);
+                richTextBoxResponse.Text = ConvertJsonString(result.ToString());
             }
             catch 
             {
-                richTextBoxResponse.Text = responseResult;
+                byte[] byteArray = Encoding.UTF8.GetBytes(responseResult);
+                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(byteArray) : Encoding.Default.GetString(byteArray);
+                richTextBoxResponse.Text = result.ToString();
             }
         }
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
@@ -227,13 +230,14 @@ namespace C2.Business.IAOLab.PostAndGet
             if (splitType == "POST")
             {
                 string data = textBoxPost.Text;
-                byte[] bytesToPost = encodeOutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.Default.GetBytes(data) ;
+                //byte[] bytesToPost = encodeOutput == "UTF-8" ? Encoding.UTF8.GetBytes(data) : Encoding.UTF8.GetBytes(data);
+                byte[] bytesToPost = Encoding.UTF8.GetBytes(data);
                 string responseResult = String.Empty;
                 try
                 {
                     req = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                     req.Method = splitType;
-                    req.Timeout = 150000;
+                    req.Timeout = rd.Next(10000,15000);
                     req.ContentType = "application/x-www-form-urlencoded";//header
                     req.Headers.Set("cookie", textBoxCookie.Text);
                     if (textBoxIp.Text != string.Empty)
@@ -267,7 +271,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     {
                         HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBoxUrl.Text);
                         req.Method = splitType;
-                        req.Timeout = 150000;
+                        req.Timeout = rd.Next(10000, 15000);
                         req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
                         HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
@@ -308,7 +312,7 @@ namespace C2.Business.IAOLab.PostAndGet
                     try
                     {
                         HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
-                        req.Timeout = 150000;
+                        req.Timeout = rd.Next(10000, 15000);
                         req.Method = splitType;
                         req.ContentType = "application/x-www-form-urlencoded";
                         req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
@@ -339,7 +343,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 byte[] paramsData = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(textBoxPost.Text);
                 HttpWebRequest re = (HttpWebRequest)HttpWebRequest.Create(textBoxUrl.Text);
                 req.Method = splitType;
-                req.Timeout = 150000;
+                req.Timeout = rd.Next(10000, 15000);
                 req.AllowAutoRedirect = false;
                 req.ContentType = "application/json";
                 
