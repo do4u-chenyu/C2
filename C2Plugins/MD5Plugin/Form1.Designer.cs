@@ -113,8 +113,6 @@
             // 
             // base64RadioButton
             // 
-            this.labelEncryptionkey.Visible = false;
-            this.textBoxEncryptionkey.Visible = false;
             this.base64RadioButton.AutoSize = true;
             this.base64RadioButton.Checked = true;
             this.base64RadioButton.Font = new System.Drawing.Font("宋体", 10F);
@@ -283,7 +281,7 @@
             this.radixComboBox.Visible = false;
             this.radixComboBox.SelectedIndexChanged += new System.EventHandler(this.RadixComboBox_SelectedIndexChanged);
             // 
-            // label1
+            // labelEncryptionkey
             // 
             this.labelEncryptionkey.AutoSize = true;
             this.labelEncryptionkey.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -292,13 +290,17 @@
             this.labelEncryptionkey.Size = new System.Drawing.Size(32, 17);
             this.labelEncryptionkey.TabIndex = 16;
             this.labelEncryptionkey.Text = "密钥";
+            this.labelEncryptionkey.Visible = false;
             // 
-            // textBox1
+            // textBoxEncryptionkey
             // 
+            this.textBoxEncryptionkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxEncryptionkey.ForeColor = System.Drawing.Color.Black;
             this.textBoxEncryptionkey.Location = new System.Drawing.Point(476, 147);
-            this.textBoxEncryptionkey.Name = "textBox1";
+            this.textBoxEncryptionkey.Name = "textBoxEncryptionkey";
             this.textBoxEncryptionkey.Size = new System.Drawing.Size(75, 21);
             this.textBoxEncryptionkey.TabIndex = 17;
+            this.textBoxEncryptionkey.Visible = false;
             // 
             // Form1
             // 
