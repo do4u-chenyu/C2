@@ -16,7 +16,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void InitializeWebShell()
         {
-            foreach (string key in ClientSetting.CKnifeDict.Keys)
+            foreach (string key in ClientSetting.WSDict.Keys)
                 this.versionComboBox.Items.Add(key);
             this.trojanTypeCombox.SelectedIndex = 0;
             this.versionComboBox.SelectedIndex = 0;

