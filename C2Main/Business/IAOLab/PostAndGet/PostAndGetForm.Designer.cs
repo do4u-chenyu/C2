@@ -80,14 +80,15 @@
             this.textBoxPost.Location = new System.Drawing.Point(12, 64);
             this.textBoxPost.Multiline = true;
             this.textBoxPost.Name = "textBoxPost";
-            this.textBoxPost.Size = new System.Drawing.Size(712, 42);
+            this.textBoxPost.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxPost.Size = new System.Drawing.Size(712, 75);
             this.textBoxPost.TabIndex = 2;
             // 
             // labelCookie
             // 
             this.labelCookie.AutoSize = true;
             this.labelCookie.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelCookie.Location = new System.Drawing.Point(9, 110);
+            this.labelCookie.Location = new System.Drawing.Point(9, 142);
             this.labelCookie.Name = "labelCookie";
             this.labelCookie.Size = new System.Drawing.Size(49, 17);
             this.labelCookie.TabIndex = 5;
@@ -96,10 +97,10 @@
             // textBoxCookie
             // 
             this.textBoxCookie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxCookie.Location = new System.Drawing.Point(12, 127);
+            this.textBoxCookie.Location = new System.Drawing.Point(12, 162);
             this.textBoxCookie.Multiline = true;
             this.textBoxCookie.Name = "textBoxCookie";
-            this.textBoxCookie.Size = new System.Drawing.Size(347, 51);
+            this.textBoxCookie.Size = new System.Drawing.Size(347, 48);
             this.textBoxCookie.TabIndex = 3;
             // 
             // labelCookieFormat
@@ -107,17 +108,17 @@
             this.labelCookieFormat.AutoSize = true;
             this.labelCookieFormat.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelCookieFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelCookieFormat.Location = new System.Drawing.Point(11, 186);
+            this.labelCookieFormat.Location = new System.Drawing.Point(11, 218);
             this.labelCookieFormat.Name = "labelCookieFormat";
             this.labelCookieFormat.Size = new System.Drawing.Size(296, 12);
-            this.labelCookieFormat.TabIndex = 7;
+            this.labelCookieFormat.TabIndex = 100;
             this.labelCookieFormat.Text = "格式：Key=Value;Key2=Value2; 分号分割键值对";
             // 
             // labelHeader
             // 
             this.labelHeader.AutoSize = true;
             this.labelHeader.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelHeader.Location = new System.Drawing.Point(374, 110);
+            this.labelHeader.Location = new System.Drawing.Point(374, 142);
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(51, 17);
             this.labelHeader.TabIndex = 8;
@@ -126,10 +127,10 @@
             // textBoxHeader
             // 
             this.textBoxHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxHeader.Location = new System.Drawing.Point(377, 127);
+            this.textBoxHeader.Location = new System.Drawing.Point(377, 162);
             this.textBoxHeader.Multiline = true;
             this.textBoxHeader.Name = "textBoxHeader";
-            this.textBoxHeader.Size = new System.Drawing.Size(347, 51);
+            this.textBoxHeader.Size = new System.Drawing.Size(347, 48);
             this.textBoxHeader.TabIndex = 4;
             // 
             // labelHeaderFormat
@@ -137,17 +138,17 @@
             this.labelHeaderFormat.AutoSize = true;
             this.labelHeaderFormat.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelHeaderFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelHeaderFormat.Location = new System.Drawing.Point(375, 186);
+            this.labelHeaderFormat.Location = new System.Drawing.Point(375, 218);
             this.labelHeaderFormat.Name = "labelHeaderFormat";
             this.labelHeaderFormat.Size = new System.Drawing.Size(173, 12);
-            this.labelHeaderFormat.TabIndex = 10;
+            this.labelHeaderFormat.TabIndex = 100;
             this.labelHeaderFormat.Text = "格式：Key:Value  一行一条";
             // 
             // labelIp
             // 
             this.labelIp.AutoSize = true;
             this.labelIp.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelIp.Location = new System.Drawing.Point(374, 210);
+            this.labelIp.Location = new System.Drawing.Point(374, 242);
             this.labelIp.Name = "labelIp";
             this.labelIp.Size = new System.Drawing.Size(56, 17);
             this.labelIp.TabIndex = 11;
@@ -156,7 +157,7 @@
             // textBoxIp
             // 
             this.textBoxIp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxIp.Location = new System.Drawing.Point(377, 233);
+            this.textBoxIp.Location = new System.Drawing.Point(377, 265);
             this.textBoxIp.Name = "textBoxIp";
             this.textBoxIp.Size = new System.Drawing.Size(244, 21);
             this.textBoxIp.TabIndex = 7;
@@ -165,10 +166,10 @@
             // 
             this.labelIpFormat.AutoSize = true;
             this.labelIpFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelIpFormat.Location = new System.Drawing.Point(375, 258);
+            this.labelIpFormat.Location = new System.Drawing.Point(375, 290);
             this.labelIpFormat.Name = "labelIpFormat";
             this.labelIpFormat.Size = new System.Drawing.Size(251, 12);
-            this.labelIpFormat.TabIndex = 13;
+            this.labelIpFormat.TabIndex = 100;
             this.labelIpFormat.Text = "格式：127.0.0.1:1080     使用代理访问网络";
             // 
             // comboBoxHttpMethod
@@ -181,7 +182,7 @@
             "GET",
             "HEAD",
             "PUT"});
-            this.comboBoxHttpMethod.Location = new System.Drawing.Point(14, 210);
+            this.comboBoxHttpMethod.Location = new System.Drawing.Point(14, 242);
             this.comboBoxHttpMethod.Name = "comboBoxHttpMethod";
             this.comboBoxHttpMethod.Size = new System.Drawing.Size(95, 27);
             this.comboBoxHttpMethod.TabIndex = 5;
@@ -195,7 +196,7 @@
             this.comboBoxEncodeMethod.Items.AddRange(new object[] {
             "输出编码 UTF8",
             "输出编码 GBK"});
-            this.comboBoxEncodeMethod.Location = new System.Drawing.Point(173, 210);
+            this.comboBoxEncodeMethod.Location = new System.Drawing.Point(173, 242);
             this.comboBoxEncodeMethod.Name = "comboBoxEncodeMethod";
             this.comboBoxEncodeMethod.Size = new System.Drawing.Size(115, 27);
             this.comboBoxEncodeMethod.TabIndex = 6;
@@ -204,10 +205,10 @@
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.buttonDelete.Location = new System.Drawing.Point(173, 247);
+            this.buttonDelete.Location = new System.Drawing.Point(173, 279);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(95, 27);
-            this.buttonDelete.TabIndex = 9;
+            this.buttonDelete.TabIndex = 10;
             this.buttonDelete.Text = "清空表单";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.Delete_Click);
@@ -215,10 +216,10 @@
             // buttonSubmit
             // 
             this.buttonSubmit.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonSubmit.Location = new System.Drawing.Point(13, 247);
+            this.buttonSubmit.Location = new System.Drawing.Point(13, 279);
             this.buttonSubmit.Name = "buttonSubmit";
             this.buttonSubmit.Size = new System.Drawing.Size(95, 27);
-            this.buttonSubmit.TabIndex = 8;
+            this.buttonSubmit.TabIndex = 9;
             this.buttonSubmit.Text = "提交";
             this.buttonSubmit.UseVisualStyleBackColor = true;
             this.buttonSubmit.Click += new System.EventHandler(this.Submit_ClickAsync);
@@ -238,7 +239,7 @@
             this.tabControlResponse.Controls.Add(this.formatResponse);
             this.tabControlResponse.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControlResponse.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.tabControlResponse.Location = new System.Drawing.Point(0, 280);
+            this.tabControlResponse.Location = new System.Drawing.Point(0, 310);
             this.tabControlResponse.Name = "tabControlResponse";
             this.tabControlResponse.Padding = new System.Drawing.Point(1, 2);
             this.tabControlResponse.SelectedIndex = 0;
@@ -266,36 +267,36 @@
             this.richTextBoxResponse.Name = "richTextBoxResponse";
             this.richTextBoxResponse.ReadOnly = true;
             this.richTextBoxResponse.Size = new System.Drawing.Size(722, 261);
-            this.richTextBoxResponse.TabIndex = 10;
+            this.richTextBoxResponse.TabIndex = 11;
             this.richTextBoxResponse.Text = "";
             // 
             // textBoxTime
             // 
             this.textBoxTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxTime.ForeColor = System.Drawing.Color.Black;
-            this.textBoxTime.Location = new System.Drawing.Point(654, 233);
-            this.textBoxTime.Multiline = true;
+            this.textBoxTime.Location = new System.Drawing.Point(654, 265);
             this.textBoxTime.Name = "textBoxTime";
-            this.textBoxTime.Size = new System.Drawing.Size(53, 21);
-            this.textBoxTime.TabIndex = 24;
+            this.textBoxTime.Size = new System.Drawing.Size(49, 21);
+            this.textBoxTime.TabIndex = 8;
             this.textBoxTime.Text = "15";
             this.textBoxTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxTime.WordWrap = false;
             // 
             // labelTime
             // 
             this.labelTime.AutoSize = true;
             this.labelTime.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelTime.Location = new System.Drawing.Point(651, 213);
+            this.labelTime.Location = new System.Drawing.Point(651, 242);
             this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(67, 17);
+            this.labelTime.Size = new System.Drawing.Size(52, 17);
             this.labelTime.TabIndex = 25;
-            this.labelTime.Text = "超时时间/s";
+            this.labelTime.Text = "超时(秒)";
             // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 577);
+            this.ClientSize = new System.Drawing.Size(736, 607);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.textBoxTime);
             this.Controls.Add(this.labelUrl);
