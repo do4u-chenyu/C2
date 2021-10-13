@@ -96,7 +96,8 @@ namespace C2.Business.IAOLab.PostAndGet
                 if (cnblogsRespone != null && cnblogsRespone.StatusCode == HttpStatusCode.OK)
                 {
                     StreamReader sr;
-                    using (sr = new StreamReader(cnblogsRespone.GetResponseStream()))
+                    System.Text.Encoding readerEncode = encodeOutput == "UTF-8" ? Encoding.UTF8 : Encoding.Default;
+                    using (sr = new StreamReader(cnblogsRespone.GetResponseStream(), readerEncode))
                     {
                         responseResult = sr.ReadToEnd();
                     }
@@ -130,14 +131,12 @@ namespace C2.Business.IAOLab.PostAndGet
             */
             try
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes(responseResult);
-                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(byteArray) : Encoding.Default.GetString(byteArray);
+                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(responseResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(responseResult));
                 richTextBoxResponse.Text = ConvertJsonString(result.ToString());
             }
             catch 
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes(responseResult);
-                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(byteArray) : Encoding.Default.GetString(byteArray);
+                string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(responseResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(responseResult));
                 richTextBoxResponse.Text = result.ToString();
             }
         }
@@ -210,7 +209,8 @@ namespace C2.Business.IAOLab.PostAndGet
             Stream stream = resp.GetResponseStream();
             try
             {
-                using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding("UTF-8")))
+                System.Text.Encoding readerEncode = encodeOutput == "UTF-8" ? Encoding.UTF8 : Encoding.Default;
+                using (StreamReader reader = new StreamReader(stream, readerEncode))
                 {
                     getResult = reader.ReadToEnd();
                 }
@@ -297,7 +297,6 @@ namespace C2.Business.IAOLab.PostAndGet
                     }
                     catch (Exception ex)
                     {
-                        //System.UriFormatException || System.Net.WebException
                         richTextBoxResponse.Text = ex.Message;
                     }
                 }
