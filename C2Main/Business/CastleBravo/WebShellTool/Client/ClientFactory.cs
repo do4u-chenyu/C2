@@ -10,9 +10,16 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         public static IClient Create(string password, string clientSetting)
         {
-            if (ClientSetting.CKnifeDict.ContainsKey(clientSetting))
-                return new CKnifeClient(password, clientSetting);
-            return new CKnifeClient(password, clientSetting);
+            string mode = ClientSetting.WSDict.ContainsKey(clientSetting) ? ClientSetting.WSDict[clientSetting].Item2 : string.Empty ;
+            switch (mode)
+            {
+                case "Common":
+                    return new CommonClient(password, clientSetting);
+                case "CKnife16EXE":
+                    return new CKnife16EXEClient(password, clientSetting);
+                default:
+                    return new CommonClient(password, clientSetting);
+            }
         }
     }
 }

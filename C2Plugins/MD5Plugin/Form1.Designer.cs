@@ -44,10 +44,12 @@
             this.sha1RadioButton = new System.Windows.Forms.RadioButton();
             this.sha256RadioButton = new System.Windows.Forms.RadioButton();
             this.sha512RadioButton = new System.Windows.Forms.RadioButton();
+            this.ASE128RadioButton = new System.Windows.Forms.RadioButton();
             this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.splitComboBox = new System.Windows.Forms.ComboBox();
             this.radixComboBox = new System.Windows.Forms.ComboBox();
-            this.ASE128RadioButton = new System.Windows.Forms.RadioButton();
+            this.labelEncryptionkey = new System.Windows.Forms.Label();
+            this.textBoxEncryptionkey = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // inputTextBox
@@ -215,6 +217,19 @@
             this.sha512RadioButton.UseVisualStyleBackColor = true;
             this.sha512RadioButton.CheckedChanged += new System.EventHandler(this.Sha512_RadioButton_CheckedChanged);
             // 
+            // ASE128RadioButton
+            // 
+            this.ASE128RadioButton.AutoSize = true;
+            this.ASE128RadioButton.Font = new System.Drawing.Font("宋体", 10F);
+            this.ASE128RadioButton.Location = new System.Drawing.Point(615, 13);
+            this.ASE128RadioButton.Name = "ASE128RadioButton";
+            this.ASE128RadioButton.Size = new System.Drawing.Size(67, 18);
+            this.ASE128RadioButton.TabIndex = 15;
+            this.ASE128RadioButton.Text = "AES128";
+            this.toolTip1.SetToolTip(this.ASE128RadioButton, "AES128对字符串进行解码");
+            this.ASE128RadioButton.UseVisualStyleBackColor = true;
+            this.ASE128RadioButton.CheckedChanged += new System.EventHandler(this.ASE128_RadioButton_CheckedChanged);
+            // 
             // encodingComboBox
             // 
             this.encodingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -223,7 +238,7 @@
             this.encodingComboBox.Items.AddRange(new object[] {
             "UTF-8",
             "GB2312"});
-            this.encodingComboBox.Location = new System.Drawing.Point(476, 336);
+            this.encodingComboBox.Location = new System.Drawing.Point(476, 289);
             this.encodingComboBox.Name = "encodingComboBox";
             this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
             this.encodingComboBox.TabIndex = 12;
@@ -259,25 +274,33 @@
             "十六进制",
             "十进制",
             "八进制"});
-            this.radixComboBox.Location = new System.Drawing.Point(476, 289);
+            this.radixComboBox.Location = new System.Drawing.Point(476, 336);
             this.radixComboBox.Name = "radixComboBox";
             this.radixComboBox.Size = new System.Drawing.Size(75, 27);
             this.radixComboBox.TabIndex = 14;
             this.radixComboBox.Visible = false;
             this.radixComboBox.SelectedIndexChanged += new System.EventHandler(this.RadixComboBox_SelectedIndexChanged);
             // 
-            // ASE128RadioButton
+            // labelEncryptionkey
             // 
-            this.ASE128RadioButton.AutoSize = true;
-            this.ASE128RadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.ASE128RadioButton.Location = new System.Drawing.Point(615, 13);
-            this.ASE128RadioButton.Name = "ASE128RadioButton";
-            this.ASE128RadioButton.Size = new System.Drawing.Size(67, 18);
-            this.ASE128RadioButton.TabIndex = 15;
-            this.ASE128RadioButton.Text = "AES128";
-            this.toolTip1.SetToolTip(this.ASE128RadioButton, "AES128对字符串进行解码");
-            this.ASE128RadioButton.UseVisualStyleBackColor = true;
-            this.ASE128RadioButton.CheckedChanged += new System.EventHandler(this.ASE128_RadioButton_CheckedChanged);
+            this.labelEncryptionkey.AutoSize = true;
+            this.labelEncryptionkey.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelEncryptionkey.Location = new System.Drawing.Point(495, 127);
+            this.labelEncryptionkey.Name = "labelEncryptionkey";
+            this.labelEncryptionkey.Size = new System.Drawing.Size(32, 17);
+            this.labelEncryptionkey.TabIndex = 16;
+            this.labelEncryptionkey.Text = "密钥";
+            this.labelEncryptionkey.Visible = false;
+            // 
+            // textBoxEncryptionkey
+            // 
+            this.textBoxEncryptionkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxEncryptionkey.ForeColor = System.Drawing.Color.Black;
+            this.textBoxEncryptionkey.Location = new System.Drawing.Point(476, 147);
+            this.textBoxEncryptionkey.Name = "textBoxEncryptionkey";
+            this.textBoxEncryptionkey.Size = new System.Drawing.Size(75, 21);
+            this.textBoxEncryptionkey.TabIndex = 17;
+            this.textBoxEncryptionkey.Visible = false;
             // 
             // Form1
             // 
@@ -286,6 +309,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1027, 513);
+            this.Controls.Add(this.textBoxEncryptionkey);
+            this.Controls.Add(this.labelEncryptionkey);
             this.Controls.Add(this.ASE128RadioButton);
             this.Controls.Add(this.radixComboBox);
             this.Controls.Add(this.sha512RadioButton);
@@ -334,6 +359,8 @@
         private System.Windows.Forms.ComboBox splitComboBox;
         private System.Windows.Forms.ComboBox radixComboBox;
         private System.Windows.Forms.RadioButton ASE128RadioButton;
+        private System.Windows.Forms.Label labelEncryptionkey;
+        private System.Windows.Forms.TextBox textBoxEncryptionkey;
     }
 }
 

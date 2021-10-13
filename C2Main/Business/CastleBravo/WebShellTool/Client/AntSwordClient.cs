@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace C2.Business.CastleBravo.WebShellTool
+namespace C2.Business.CastleBravo.WebShellTool.Client
 {
-    class AltmanClient : IClient
+    class AntSwordClient : IClient
     {
         public string FetchLog()
         {
@@ -11,7 +15,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string MidStrEx(string response)
         {
-            return response;
+            throw new NotImplementedException();
         }
 
         public string PHPIndex()

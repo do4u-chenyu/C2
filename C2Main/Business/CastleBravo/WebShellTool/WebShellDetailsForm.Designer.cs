@@ -79,7 +79,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 287);
+            this.tabControl1.Size = new System.Drawing.Size(800, 311);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
@@ -89,7 +89,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 257);
+            this.tabPage1.Size = new System.Drawing.Size(792, 281);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基础信息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             this.baseInfoWebBrowser.Location = new System.Drawing.Point(3, 3);
             this.baseInfoWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.baseInfoWebBrowser.Name = "baseInfoWebBrowser";
-            this.baseInfoWebBrowser.Size = new System.Drawing.Size(786, 251);
+            this.baseInfoWebBrowser.Size = new System.Drawing.Size(786, 275);
             this.baseInfoWebBrowser.TabIndex = 0;
             // 
             // tabPage3
@@ -291,7 +291,7 @@
             this.messageLog.Name = "messageLog";
             this.messageLog.ReadOnly = true;
             this.messageLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageLog.Size = new System.Drawing.Size(800, 159);
+            this.messageLog.Size = new System.Drawing.Size(800, 200);
             this.messageLog.TabIndex = 1;
             // 
             // splitContainer2
@@ -308,8 +308,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.messageLog);
-            this.splitContainer2.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer2.SplitterDistance = 287;
+            this.splitContainer2.Size = new System.Drawing.Size(800, 515);
+            this.splitContainer2.SplitterDistance = 311;
             this.splitContainer2.TabIndex = 2;
             // 
             // WebShellDetailsForm
@@ -317,7 +317,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 515);
             this.Controls.Add(this.splitContainer2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WebShellDetailsForm";

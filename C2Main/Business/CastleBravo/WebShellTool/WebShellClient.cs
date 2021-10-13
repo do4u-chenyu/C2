@@ -9,11 +9,18 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         private readonly string url;       
         private readonly IClient client;
-        public string FetchLog() { return client.FetchLog(); }
+        private string lastErrorMessage;
+        public string FetchLog() 
+        { 
+            string ret = client.FetchLog() + lastErrorMessage;
+            lastErrorMessage = string.Empty;
+            return ret;
+        }
 
         public WebShellClient(string url, string password, string clientSetting)
         {
             this.url = url;
+            this.lastErrorMessage = string.Empty;
             this.client = ClientFactory.Create(password, clientSetting);
         }
 
@@ -68,7 +75,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             //broPath仅针对window文件系统，内容为c: d: e:
             if (paths.Count == 2 && paths[1].Contains(":"))
-                brothers = paths[1].Split(':').ToList();
+            {
+                foreach (string path in paths[1].Split(':'))
+                    brothers.Add(path.Trim());
+            }
+                
 
             string ret = PHPReadDict(root);
             foreach (string line in ret.Split('\n'))
@@ -87,23 +98,41 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string PHPInfo()
         {
-            return client.MidStrEx(WebClientEx.Post(this.url, client.PHPInfo()));
+            return client.MidStrEx(Post(client.PHPInfo()));
         }
 
         public List<string> PHPIndex()
         {
-            string[] result = client.MidStrEx(WebClientEx.Post(this.url, client.PHPIndex())).Split('\t');
-            return result.Skip(0).Take(result.Length - 1).ToList();
+            string[] result = client.MidStrEx(Post(client.PHPIndex())).Split('\t');
+            if (result.Length >= 2)
+                return result.Take(2).ToList();
+            else
+                return result.ToList();
         }
 
         public string PHPReadDict(string dict)
         {
-            return client.MidStrEx(WebClientEx.Post(this.url, client.PHPReadDict(dict)));
+            return client.MidStrEx(Post(client.PHPReadDict(dict)));
         }
 
         public string PHPShell(string shellEnv, string command)
         {
-            return client.MidStrEx(WebClientEx.Post(this.url, client.PHPShell(shellEnv, command)));
+            return client.MidStrEx(Post(client.PHPShell(shellEnv, command)));
+        }
+
+        private string Post(string payload)
+        {
+            this.lastErrorMessage = string.Empty;
+            try
+            {
+                return WebClientEx.Post(this.url, payload);
+            }
+            catch (Exception e)
+            {
+                this.lastErrorMessage = e.Message;
+                return string.Empty;
+            }
+            
         }
     }
 
