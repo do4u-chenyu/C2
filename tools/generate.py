@@ -2,11 +2,15 @@
 from os.path import split, splitext, getctime, join, exists, isfile, abspath
 from os import chdir, getcwd, path
 import os
+import shutil
 from subprocess import Popen, PIPE
 import re
 import sys
 from typing import List
 from subprocess import Popen
+import ctypes, sys
+import subprocess
+
 
 def read_paths(file_path: str) -> List[str]:
     with open(file_path) as f:
@@ -44,12 +48,13 @@ def main(file_path: str) -> None:
 def C2_uninstall():
     #uninstall_cmd = "wmic product where Name=\"IAO解决方案\" call uninstall /nointeractive"
     tmp=(os.popen("wmic product where Name=\"IAO解决方案\" get IdentifyingNumber|awk 'NR==2{print}'")).read()
-    uninstall_cmd = "msiexec /q /x " + tmp;
+    uninstall_cmd = "msiexec /q /x " + tmp; 
     print(uninstall_cmd)
     if os.system(uninstall_cmd) == 0:
         return 0;
     else:
         return -1;
+
 
 def C2_install():
     product_path = os.path.abspath(os.path.dirname(os.getcwd())) + "\IAO解决方案\Release"
@@ -85,7 +90,11 @@ if __name__ == '__main__':
             print("新版IAO解决方案安装失败")
     else:
         if C2_uninstall() == 0:
-            print("旧版IAO解决方案卸载成功")
+            del_cmd = "del /f /s /q \"C:\Program Files\FiberHome\IAO解决方案\""
+            if os.system(del_cmd) == 0:
+                print("旧版IAO解决方案卸载成功")
+            else:
+                print("旧版IAO解决方案卸载失败")
             if C2_install() == 0:
                 print("新版IAO解决方案安装成功")
                 if beauty_product() == 0:
