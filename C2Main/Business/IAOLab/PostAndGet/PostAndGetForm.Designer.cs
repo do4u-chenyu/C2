@@ -168,9 +168,9 @@
             this.labelIpFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.labelIpFormat.Location = new System.Drawing.Point(375, 290);
             this.labelIpFormat.Name = "labelIpFormat";
-            this.labelIpFormat.Size = new System.Drawing.Size(251, 12);
+            this.labelIpFormat.Size = new System.Drawing.Size(293, 12);
             this.labelIpFormat.TabIndex = 100;
-            this.labelIpFormat.Text = "格式：127.0.0.1:1080     使用代理访问网络";
+            this.labelIpFormat.Text = "格式：http://127.0.0.1:1080     使用代理访问网络";
             // 
             // comboBoxHttpMethod
             // 

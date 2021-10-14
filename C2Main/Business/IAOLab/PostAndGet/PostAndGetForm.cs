@@ -245,12 +245,14 @@ namespace C2.Business.IAOLab.PostAndGet
                         {
                             try
                             {
-                                req.Proxy = new WebProxy(textBoxIp.Text);
+                                WebProxy proxy = new WebProxy();
+                                proxy.Address = new Uri(textBoxIp.Text);
+                                req.Proxy = proxy;
                                 PostText(req, bytesToPost, responseResult);
                             }
-                            catch
+                            catch(Exception ex)
                             {
-                                richTextBoxResponse.Text = "代理不可用，请更换代理";
+                                richTextBoxResponse.Text = ex.Message;
                             }
                         }
                         else
@@ -258,7 +260,7 @@ namespace C2.Business.IAOLab.PostAndGet
                             PostText(req, bytesToPost, responseResult);
                         }
                     }
-                    catch (System.UriFormatException ex)
+                    catch (Exception ex)
                     {
                         richTextBoxResponse.Text = ex.Message;
                     }
@@ -281,14 +283,15 @@ namespace C2.Business.IAOLab.PostAndGet
                             {
                                 try
                                 {
-                                    WebProxy wp = new WebProxy(textBoxIp.Text);
-                                    req.Proxy = wp;
+                                    WebProxy proxy = new WebProxy();
+                                    proxy.Address = new Uri(textBoxIp.Text);
+                                    req.Proxy = proxy;
                                     string result = GetResultNullParam(resp);
                                     richTextBoxResponse.Text = result;
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
-                                    richTextBoxResponse.Text = "代理不可用，请更换代理";
+                                    richTextBoxResponse.Text = ex.Message;
                                 }
                             }
                             else
@@ -321,8 +324,9 @@ namespace C2.Business.IAOLab.PostAndGet
 
                             if (textBoxIp.Text != string.Empty)
                             {
-                                WebProxy wp = new WebProxy(textBoxIp.Text);
-                                req.Proxy = wp;
+                                WebProxy proxy = new WebProxy();
+                                proxy.Address = new Uri(textBoxIp.Text);
+                                req.Proxy = proxy;
                                 string resultHasParam = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = resultHasParam;
                             }
@@ -388,9 +392,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 {
                     await OptionsTextAsync();
                 }
-
-            }
-               
+            }     
         }
     }
 }
