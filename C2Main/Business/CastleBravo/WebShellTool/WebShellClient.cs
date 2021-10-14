@@ -101,9 +101,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             return client.MidStrEx(Post(client.PHPInfo()));
         }
 
-        public List<string> PHPIndex()
+        public List<string> PHPIndex(int timeout = Global.WebClientDefaultTimeout)
         {
-            string[] result = client.MidStrEx(Post(client.PHPIndex())).Split('\t');
+            string[] result = client.MidStrEx(Post(client.PHPIndex(), timeout)).Split('\t');
             if (result.Length >= 2)
                 return result.Take(2).ToList();
             else
@@ -120,12 +120,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             return client.MidStrEx(Post(client.PHPShell(shellEnv, command)));
         }
 
-        private string Post(string payload)
+        private string Post(string payload, int defaultTimeout = Global.WebClientDefaultTimeout)
         {
             this.lastErrorMessage = string.Empty;
             try
             {
-                return WebClientEx.Post(this.url, payload);
+                return WebClientEx.Post(this.url, payload, defaultTimeout);
             }
             catch (Exception e)
             {

@@ -35,6 +35,9 @@
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.RefreshCurrentStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshAllStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addShellMenu = new System.Windows.Forms.ToolStripLabel();
             this.settingMenu = new System.Windows.Forms.ToolStripLabel();
@@ -60,6 +63,7 @@
             this.lvShellUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvPass = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1.SuspendLayout();
@@ -72,9 +76,12 @@
             this.EnterToolStripMenuItem,
             this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem,
-            this.CopyToolStripMenuItem});
+            this.CopyToolStripMenuItem,
+            this.toolStripSeparator,
+            this.RefreshCurrentStatusMenuItem,
+            this.RefreshAllStatusMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 142);
             // 
             // EnterToolStripMenuItem
             // 
@@ -103,6 +110,25 @@
             this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CopyToolStripMenuItem.Text = "复制到剪切板";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
+            // 
+            // RefreshCurrentStatusMenuItem
+            // 
+            this.RefreshCurrentStatusMenuItem.Name = "RefreshCurrentStatusMenuItem";
+            this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.RefreshCurrentStatusMenuItem.Text = "刷新当前状态";
+            this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.RefreshCurrentStatusMenuItem_Click);
+            // 
+            // RefreshAllStatusMenuItem
+            // 
+            this.RefreshAllStatusMenuItem.Name = "RefreshAllStatusMenuItem";
+            this.RefreshAllStatusMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.RefreshAllStatusMenuItem.Text = "刷新所有状态";
+            this.RefreshAllStatusMenuItem.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -282,6 +308,7 @@
             this.lvShellUrl,
             this.lvPass,
             this.lvType,
+            this.lvStatus,
             this.lvVersion,
             this.lvDB});
             this.LV.ContextMenuStrip = this.contextMenuStrip1;
@@ -327,6 +354,11 @@
             // 
             this.lvType.Text = "Trojan类型";
             this.lvType.Width = 75;
+            // 
+            // lvStatus
+            // 
+            this.lvStatus.Text = "状态";
+            this.lvStatus.Width = 45;
             // 
             // lvVersion
             // 
@@ -393,5 +425,9 @@
         private System.Windows.Forms.ToolStripMenuItem GodzillaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader lvStatus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem RefreshCurrentStatusMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RefreshAllStatusMenuItem;
     }
 }

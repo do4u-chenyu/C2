@@ -40,8 +40,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                                                  lvi.SubItems[2].Text,  // url
                                                  lvi.SubItems[3].Text,  // 密码
                                                  lvi.SubItems[4].Text,  // 木马类型
-                                                 lvi.SubItems[5].Text,  // 客户端版本
-                                                 lvi.SubItems[6].Text));// 数据库配置
+                                                 lvi.SubItems[5].Text,  // 木马状态
+                                                 lvi.SubItems[6].Text,  // 客户端版本
+                                                 lvi.SubItems[7].Text));// 数据库配置
         }
 
         private void SaveDB()
@@ -86,6 +87,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.Url);
             lvi.SubItems.Add(config.Password);
             lvi.SubItems.Add(config.TrojanType);
+            lvi.SubItems.Add(config.Status);
             lvi.SubItems.Add(config.ClientVersion);
             lvi.SubItems.Add(config.DatabaseConfig);
 
@@ -130,8 +132,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[2].Text = cur.Url;            // url
             LV.SelectedItems[0].SubItems[3].Text = cur.Password;       // 密码
             LV.SelectedItems[0].SubItems[4].Text = cur.TrojanType;     // 木马类型
-            LV.SelectedItems[0].SubItems[5].Text = cur.ClientVersion;  // 客户端版本
-            LV.SelectedItems[0].SubItems[6].Text = cur.DatabaseConfig; // 数据库配置
+            LV.SelectedItems[0].SubItems[5].Text = cur.Status;         // 木马状态
+            LV.SelectedItems[0].SubItems[6].Text = cur.ClientVersion;  // 客户端版本
+            LV.SelectedItems[0].SubItems[7].Text = cur.DatabaseConfig; // 数据库配置
             // 按道理不会出现索引越界
             tasks[tasks.IndexOf(old)] = cur;
             SaveDB();
@@ -156,7 +159,8 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine(lvi.SubItems[3].Text)
               .AppendLine(lvi.SubItems[4].Text)
               .AppendLine(lvi.SubItems[5].Text)
-              .AppendLine(lvi.SubItems[6].Text);
+              .AppendLine(lvi.SubItems[6].Text)
+              .AppendLine(lvi.SubItems[7].Text);
 
             FileUtil.TryClipboardSetText(sb.ToString());
         }
@@ -225,5 +229,46 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
         }
+
+        private void RefreshCurrentStatusMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            LV.SelectedItems[0].SubItems[5].Text = RefreshTaskStatus(LV.SelectedItems[0].Tag as WebShellTaskConfig);
+            RefreshTasks();
+            SaveDB();
+        }
+
+        private void RefreshAllStatusMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                lvi.SubItems[5].Text = RefreshTaskStatus(lvi.Tag as WebShellTaskConfig);
+            }
+
+            RefreshTasks();
+            SaveDB();
+        }
+
+        private string RefreshTaskStatus(WebShellTaskConfig task)
+        {
+            string status = "×";
+            using (GuarderUtil.WaitCursor)
+            {
+                foreach (string version in ClientSetting.WSDict.Keys)
+                {
+                    WebShellClient webShell = new WebShellClient(task.Url, task.Password, version);
+                    List<string> paths = webShell.PHPIndex(2000);//超时时间可以短一点
+                    if (paths.Count > 0 && !string.IsNullOrEmpty(paths[0]))
+                    {
+                        status = "√";
+                        break;
+                    }
+                }
+            }
+            return status;
+        }
+
     }
 }

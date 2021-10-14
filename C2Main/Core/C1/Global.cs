@@ -197,6 +197,8 @@ namespace C2.Core
         {
             { "业务拓展视图", MindMapLayoutType.MindMap}, {"组织架构视图", MindMapLayoutType.OrganizationDown}, { "运作模式视图", MindMapLayoutType.MindMap}
         };
+
+        public const int WebClientDefaultTimeout = 30000;
         public static void OnModifiedChange()
         {
             if (GetCurrentDocument() == null)

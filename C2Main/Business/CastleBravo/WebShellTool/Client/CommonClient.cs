@@ -24,6 +24,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string MidStrEx(string response)
         {
+            if (string.IsNullOrEmpty(response))
+                return string.Empty;
+
             string spl = this.clientSetting.SPL;
             string spr = this.clientSetting.SPR;
 

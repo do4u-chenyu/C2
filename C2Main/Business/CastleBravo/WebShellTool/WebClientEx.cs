@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using System;
 using System.Net;
 using System.Net.Cache;
@@ -17,11 +18,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             return request;
         }
 
-        public static WebClientEx Create()
+        public static WebClientEx Create(int timeout = Global.WebClientDefaultTimeout)
         {
             WebClientEx one = new WebClientEx()
             {
-                Timeout = 30000,              // 30秒
+                Timeout = timeout,              
                 Encoding = Encoding.Default,
                 CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
             };
@@ -30,13 +31,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             return one;
         }
 
-        public static string Post(string url, string payload)
+        public static string Post(string url, string payload, int timeout = Global.WebClientDefaultTimeout) // 默认30秒
         {
             // 调用者处理异常
             byte[] bytes = Encoding.Default.GetBytes(payload);
             using (GuarderUtil.WaitCursor)
                 // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
-                bytes = WebClientEx.Create()
+                bytes = WebClientEx.Create(timeout)
                                     .UploadData(url, "POST", bytes);
 
             return Encoding.Default.GetString(bytes);

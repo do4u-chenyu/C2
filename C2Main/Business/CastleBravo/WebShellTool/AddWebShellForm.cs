@@ -30,6 +30,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                        urlTextBox.Text,
                                        passwordTextBox.Text,
                                        trojanTypeCombox.Text,
+                                       string.Empty,
                                        versionComboBox.Text,
                                        databaseConfigTextBox.Text) : WebShellTaskConfig.Empty;
         }
