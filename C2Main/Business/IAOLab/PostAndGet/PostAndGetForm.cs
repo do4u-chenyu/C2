@@ -17,8 +17,8 @@ namespace C2.Business.IAOLab.PostAndGet
     {
         string splitType;
         string encodeOutput;
+        string IpProtocol;
         HttpWebResponse cnblogsRespone;
-        //string decompression;
         public PostAndGetForm()
         {
             InitializeComponent();
@@ -29,6 +29,7 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             comboBoxHttpMethod.SelectedIndex = 0; // 默认选 POST 和 UTF-8
             comboBoxEncodeMethod.SelectedIndex = 0;
+            comboBoxIpProtocol.SelectedIndex = 0;// 默认选择HTTP
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -246,7 +247,8 @@ namespace C2.Business.IAOLab.PostAndGet
                             try
                             {
                                 WebProxy proxy = new WebProxy();
-                                proxy.Address = new Uri(textBoxIp.Text);
+                                string IpPrefix = IpProtocol == "HTTP" ? "http://" : "socks://";
+                                proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
                                 req.Proxy = proxy;
                                 PostText(req, bytesToPost, responseResult);
                             }
@@ -270,22 +272,23 @@ namespace C2.Business.IAOLab.PostAndGet
                     //GET没有参数
                     if (textBoxPost.Text == string.Empty)
                     {
-                        try
-                        {
+                        //try
+                        //{
                             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBoxUrl.Text);
                             req.Method = splitType;
                             req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
                             req.ContentType = "application/x-www-form-urlencoded";
                             req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
-                            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                            StringBuilder headerResult = GetHeaders(resp);
                             if (textBoxIp.Text != string.Empty)
                             {
                                 try
                                 {
                                     WebProxy proxy = new WebProxy();
-                                    proxy.Address = new Uri(textBoxIp.Text);
+                                    string IpPrefix = IpProtocol == "HTTP" ? "http://" : "socks://";
+                                    proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
                                     req.Proxy = proxy;
+                                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                                    StringBuilder headerResult = GetHeaders(resp);
                                     string result = GetResultNullParam(resp);
                                     richTextBoxResponse.Text = result;
                                 }
@@ -296,14 +299,15 @@ namespace C2.Business.IAOLab.PostAndGet
                             }
                             else
                             {
+                                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                                 string result = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = result;
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            richTextBoxResponse.Text = ex.Message;
-                        }
+                        //}
+                        //catch (Exception ex)
+                        //{
+                            //richTextBoxResponse.Text = ex.Message;
+                        //}
                     }
                     //Get 含有参数
                     else
@@ -319,19 +323,20 @@ namespace C2.Business.IAOLab.PostAndGet
                             req.Method = splitType;
                             req.ContentType = "application/x-www-form-urlencoded";
                             req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
-                            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                            StringBuilder headerResult = GetHeaders(resp);
-
                             if (textBoxIp.Text != string.Empty)
                             {
                                 WebProxy proxy = new WebProxy();
-                                proxy.Address = new Uri(textBoxIp.Text);
+                                string IpPrefix = IpProtocol == "HTTP" ? "http://" : "socks://";
+                                proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
                                 req.Proxy = proxy;
+                                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                                StringBuilder headerResult = GetHeaders(resp);
                                 string resultHasParam = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = resultHasParam;
                             }
                             else
                             {
+                                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                                 string resultHasParam = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = resultHasParam;
                             }
@@ -393,6 +398,11 @@ namespace C2.Business.IAOLab.PostAndGet
                     await OptionsTextAsync();
                 }
             }     
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            IpProtocol = comboBoxIpProtocol.SelectedItem as string;
         }
     }
 }

@@ -51,6 +51,7 @@
             this.richTextBoxResponse = new System.Windows.Forms.RichTextBox();
             this.textBoxTime = new System.Windows.Forms.TextBox();
             this.labelTime = new System.Windows.Forms.Label();
+            this.comboBoxIpProtocol = new System.Windows.Forms.ComboBox();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
             this.SuspendLayout();
@@ -148,7 +149,7 @@
             // 
             this.labelIp.AutoSize = true;
             this.labelIp.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelIp.Location = new System.Drawing.Point(374, 242);
+            this.labelIp.Location = new System.Drawing.Point(464, 242);
             this.labelIp.Name = "labelIp";
             this.labelIp.Size = new System.Drawing.Size(56, 17);
             this.labelIp.TabIndex = 11;
@@ -157,9 +158,9 @@
             // textBoxIp
             // 
             this.textBoxIp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxIp.Location = new System.Drawing.Point(377, 265);
+            this.textBoxIp.Location = new System.Drawing.Point(443, 266);
             this.textBoxIp.Name = "textBoxIp";
-            this.textBoxIp.Size = new System.Drawing.Size(244, 21);
+            this.textBoxIp.Size = new System.Drawing.Size(120, 21);
             this.textBoxIp.TabIndex = 7;
             // 
             // labelIpFormat
@@ -168,9 +169,9 @@
             this.labelIpFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.labelIpFormat.Location = new System.Drawing.Point(375, 290);
             this.labelIpFormat.Name = "labelIpFormat";
-            this.labelIpFormat.Size = new System.Drawing.Size(293, 12);
+            this.labelIpFormat.Size = new System.Drawing.Size(233, 12);
             this.labelIpFormat.TabIndex = 100;
-            this.labelIpFormat.Text = "格式：http://127.0.0.1:1080     使用代理访问网络";
+            this.labelIpFormat.Text = "格式：127.0.0.1:1080  使用代理访问网络";
             // 
             // comboBoxHttpMethod
             // 
@@ -292,11 +293,24 @@
             this.labelTime.TabIndex = 25;
             this.labelTime.Text = "超时(秒)";
             // 
+            // comboBoxIpProtocol
+            // 
+            this.comboBoxIpProtocol.FormattingEnabled = true;
+            this.comboBoxIpProtocol.Items.AddRange(new object[] {
+            "HTTP",
+            "SOCKS"});
+            this.comboBoxIpProtocol.Location = new System.Drawing.Point(377, 266);
+            this.comboBoxIpProtocol.Name = "comboBoxIpProtocol";
+            this.comboBoxIpProtocol.Size = new System.Drawing.Size(60, 20);
+            this.comboBoxIpProtocol.TabIndex = 101;
+            this.comboBoxIpProtocol.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 607);
+            this.Controls.Add(this.comboBoxIpProtocol);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.textBoxTime);
             this.Controls.Add(this.labelUrl);
@@ -353,5 +367,6 @@
         private System.Windows.Forms.RichTextBox richTextBoxResponse;
         private System.Windows.Forms.TextBox textBoxTime;
         private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.ComboBox comboBoxIpProtocol;
     }
 }
