@@ -272,8 +272,8 @@ namespace C2.Business.IAOLab.PostAndGet
                     //GET没有参数
                     if (textBoxPost.Text == string.Empty)
                     {
-                        //try
-                        //{
+                        try
+                        {
                             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(textBoxUrl.Text);
                             req.Method = splitType;
                             req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
@@ -303,11 +303,11 @@ namespace C2.Business.IAOLab.PostAndGet
                                 string result = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = result;
                             }
-                        //}
-                        //catch (Exception ex)
-                        //{
-                            //richTextBoxResponse.Text = ex.Message;
-                        //}
+                        }
+                        catch (Exception ex)
+                        {
+                            richTextBoxResponse.Text = ex.Message;
+                        }
                     }
                     //Get 含有参数
                     else
