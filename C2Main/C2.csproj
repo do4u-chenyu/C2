@@ -3743,6 +3743,9 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_email_accountPass_C2_20211014.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3762,6 +3765,9 @@
     </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_email_accountPass_C2_20211014.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py" />
