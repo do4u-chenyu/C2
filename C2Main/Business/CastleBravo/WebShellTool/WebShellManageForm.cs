@@ -270,5 +270,22 @@ namespace C2.Business.CastleBravo.WebShellTool
             return status;
         }
 
+        private void AddAllShellMenu_Click(object sender, EventArgs e)
+        {
+            AddAllWebShellForm dialog = new AddAllWebShellForm();
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            foreach(WebShellTaskConfig task in dialog.Tasks)
+            {
+                if (task == WebShellTaskConfig.Empty)
+                    continue;
+
+                LV.Items.Add(NewLVI(task));
+                tasks.Add(task);
+            }
+
+            SaveDB();
+        }
     }
 }

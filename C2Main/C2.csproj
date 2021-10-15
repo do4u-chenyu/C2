@@ -278,6 +278,12 @@
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.Designer.cs">
+      <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1977,6 +1983,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
+      <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShellForm.resx">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
