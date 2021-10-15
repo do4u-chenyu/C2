@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.searchPwdTB = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.interfaceIPTB = new System.Windows.Forms.TextBox();
@@ -65,9 +68,6 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.searchPwdTB = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TaskConfigPB)).BeginInit();
@@ -108,6 +108,35 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "堡垒机配置";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.label11.Location = new System.Drawing.Point(452, 119);
+            this.label11.Margin = new System.Windows.Forms.Padding(0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(169, 19);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "选填,界面机没打信任关系时";
+            // 
+            // searchPwdTB
+            // 
+            this.searchPwdTB.Location = new System.Drawing.Point(313, 116);
+            this.searchPwdTB.Name = "searchPwdTB";
+            this.searchPwdTB.Size = new System.Drawing.Size(136, 25);
+            this.searchPwdTB.TabIndex = 53;
+            this.searchPwdTB.UseSystemPasswordChar = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(236, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 19);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "全文机密码";
             // 
             // checkBox1
             // 
@@ -384,6 +413,7 @@
             "侵公模型",
             "四方模型",
             "秒播vps",
+            "购置境外资产模型",
             "md5逆向",
             "自定义查询"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
@@ -485,35 +515,6 @@
             this.saveFileDialog.FileName = "全文模型结果";
             this.saveFileDialog.Filter = "tgz压缩包 (*.tgz)|*.tgz|tar.gz压缩包|*.tar.gz|zip压缩包|*.zip|所有文件|*.*";
             this.saveFileDialog.Title = "全文模型结果下载";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(236, 120);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 19);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "全文机密码";
-            // 
-            // searchPwdTB
-            // 
-            this.searchPwdTB.Location = new System.Drawing.Point(313, 116);
-            this.searchPwdTB.Name = "searchPwdTB";
-            this.searchPwdTB.Size = new System.Drawing.Size(136, 25);
-            this.searchPwdTB.TabIndex = 53;
-            this.searchPwdTB.UseSystemPasswordChar = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.label11.Location = new System.Drawing.Point(452, 119);
-            this.label11.Margin = new System.Windows.Forms.Padding(0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(169, 19);
-            this.label11.TabIndex = 55;
-            this.label11.Text = "选填,界面机没打信任关系时";
             // 
             // SearchToolkitForm
             // 

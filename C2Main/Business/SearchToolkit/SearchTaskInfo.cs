@@ -25,6 +25,7 @@ namespace C2.SearchToolkit
             ["四方模型"] = "sf",
             ["秒播vps"] = "vps",
             ["测试模型"] = "test",
+            ["购置境外资产模型"] = "email",
             ["md5逆向"] = "md5",
             ["自定义查询"] = "custom",
         };
@@ -44,6 +45,7 @@ namespace C2.SearchToolkit
             ["四方模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["秒播vps"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py",
+            ["购置境外资产模型"] = "batchquery_email_accountPass_C2_20211014_{0}.py",
             ["md5逆向"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
         };
@@ -64,6 +66,7 @@ namespace C2.SearchToolkit
             ["秒播vps"] = @"([^\n\r]+000000_queryResult_vps_\d+_\d+.tgz)",
             ["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
             ["md5逆向"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
+            ["购置境外资产模型"] = @"([^\n\r]+000000_queryResult_email_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
         };
 
