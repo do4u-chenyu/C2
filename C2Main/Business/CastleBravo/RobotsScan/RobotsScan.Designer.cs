@@ -31,65 +31,197 @@ namespace C2.Business.CastleBravo.RobotsScan
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RobotsScan));
             this.label2 = new System.Windows.Forms.Label();
-            this.resultBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.inputBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressPercent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanUseTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.urls = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.specials = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bugs = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 90);
+            this.label2.Location = new System.Drawing.Point(11, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 20);
-            this.label2.TabIndex = 94;
-            this.label2.Text = "内网靶场中对应的网站";
-            // 
-            // resultBox
-            // 
-            this.resultBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.resultBox.Location = new System.Drawing.Point(17, 113);
-            this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(300, 272);
-            this.resultBox.TabIndex = 2;
-            this.resultBox.Text = "";
+            this.label2.Size = new System.Drawing.Size(124, 20);
+            this.label2.TabIndex = 10006;
+            this.label2.Text = "CMS模板匹配结果";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 21);
+            this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(297, 20);
-            this.label1.TabIndex = 92;
-            this.label1.Text = "请输入域名 (例如：https://www.baidu.com/)";
+            this.label1.Size = new System.Drawing.Size(65, 20);
+            this.label1.TabIndex = 10004;
+            this.label1.Text = "输入域名";
             // 
-            // inputBox
+            // button1
             // 
-            this.inputBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.inputBox.Location = new System.Drawing.Point(17, 53);
-            this.inputBox.Name = "inputBox";
-            this.inputBox.Size = new System.Drawing.Size(300, 23);
-            this.inputBox.TabIndex = 1;
+            this.button1.Location = new System.Drawing.Point(615, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 25);
+            this.button1.TabIndex = 10008;
+            this.button1.Text = "查询";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
+            // 
+            // progressPercent
+            // 
+            this.progressPercent.Name = "progressPercent";
+            this.progressPercent.Size = new System.Drawing.Size(26, 17);
+            this.progressPercent.Text = "0%";
+            this.progressPercent.Click += new System.EventHandler(this.progressPercent_Click);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel3.Text = "用时：";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.progressBar,
+            this.progressPercent,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3,
+            this.scanUseTime});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 401);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(752, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 10007;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(36, 17);
+            this.toolStripStatusLabel1.Text = "进度 ";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(48, 17);
+            this.toolStripStatusLabel2.Text = "          ";
+            this.toolStripStatusLabel2.ToolTipText = "          ";
+            // 
+            // scanUseTime
+            // 
+            this.scanUseTime.Name = "scanUseTime";
+            this.scanUseTime.Size = new System.Drawing.Size(15, 17);
+            this.scanUseTime.Text = "0";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 35);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(752, 122);
+            this.richTextBox1.TabIndex = 10010;
+            this.richTextBox1.Text = "多个域名按换行分隔";
+            this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.urls,
+            this.hash,
+            this.result,
+            this.specials,
+            this.bugs});
+            this.dataGridView1.Location = new System.Drawing.Point(0, 193);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(752, 205);
+            this.dataGridView1.TabIndex = 10012;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Width = 60;
+            // 
+            // urls
+            // 
+            this.urls.HeaderText = "查询网站";
+            this.urls.Name = "urls";
+            // 
+            // hash
+            // 
+            this.hash.HeaderText = "网站hash值";
+            this.hash.Name = "hash";
+            this.hash.Width = 120;
+            // 
+            // result
+            // 
+            this.result.HeaderText = "匹配内网靶场网站";
+            this.result.Name = "result";
+            this.result.Width = 150;
+            // 
+            // specials
+            // 
+            this.specials.HeaderText = "识别特征";
+            this.specials.Name = "specials";
+            this.specials.Width = 150;
+            // 
+            // bugs
+            // 
+            this.bugs.HeaderText = "推荐漏洞";
+            this.bugs.Name = "bugs";
+            this.bugs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.bugs.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.bugs.UseColumnTextForLinkValue = true;
+            this.bugs.Width = 130;
             // 
             // RobotsScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 450);
-            this.Controls.Add(this.inputBox);
+            this.ClientSize = new System.Drawing.Size(752, 423);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.resultBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "RobotsScan";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Robots模板匹配";
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.resultBox, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.inputBox, 0);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,8 +230,22 @@ namespace C2.Business.CastleBravo.RobotsScan
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox resultBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox inputBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel progressPercent;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel scanUseTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn urls;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hash;
+        private System.Windows.Forms.DataGridViewTextBoxColumn result;
+        private System.Windows.Forms.DataGridViewTextBoxColumn specials;
+        private System.Windows.Forms.DataGridViewLinkColumn bugs;
     }
 }
