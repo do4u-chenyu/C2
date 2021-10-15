@@ -1,5 +1,6 @@
 ﻿using C2.Controls;
 using C2.Utils;
+using MihaZupan;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -223,6 +224,19 @@ namespace C2.Business.IAOLab.PostAndGet
             }
             return getResult;
         }
+        public void weatherIpProHttp(HttpWebRequest req)
+        {
+            WebProxy proxy = new WebProxy();
+            string IpPrefix = "http://";
+            proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
+            req.Proxy = proxy;
+        }
+        public void weatherIpProSocks(HttpWebRequest req)
+        {
+            string[] strArray = textBoxIp.Text.Split(new char[] { ':' }, 2);
+            var proxyScocks = new HttpToSocks5Proxy(new[] { new ProxyInfo(strArray[0], Convert.ToInt32(strArray[1])) });
+            req.Proxy = proxyScocks;
+        }
 
         HttpWebRequest req;
         private async void Submit_ClickAsync(object sender, EventArgs e)
@@ -246,10 +260,25 @@ namespace C2.Business.IAOLab.PostAndGet
                         {
                             try
                             {
-                                WebProxy proxy = new WebProxy();
-                                string IpPrefix = IpProtocol == "HTTP" ? "http://" : "socks://";
-                                proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
-                                req.Proxy = proxy;
+                                if (IpProtocol == "HTTP")
+                                {
+                                    weatherIpProHttp(req);
+                                    /*
+                                    WebProxy proxy = new WebProxy();
+                                    string IpPrefix = "http://";
+                                    proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
+                                    reqPost.Proxy = proxy;
+                                    */
+                                }
+                                else if (IpProtocol == "SOCKS")
+                                {
+                                    weatherIpProSocks(req);
+                                    /*
+                                    string[] strArray = textBoxIp.Text.Split(new char[] { ':' }, 2);
+                                    var proxyScocks = new HttpToSocks5Proxy(new[] { new ProxyInfo(strArray[0], Convert.ToInt32(strArray[1])) });
+                                    req.Proxy = proxyScocks;
+                                    */
+                                }
                                 PostText(req, bytesToPost, responseResult);
                             }
                             catch(Exception ex)
@@ -283,10 +312,15 @@ namespace C2.Business.IAOLab.PostAndGet
                             {
                                 try
                                 {
-                                    WebProxy proxy = new WebProxy();
-                                    string IpPrefix = IpProtocol == "HTTP" ? "http://" : "socks://";
-                                    proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
-                                    req.Proxy = proxy;
+                                    if (IpProtocol == "HTTP")
+                                    {
+                                        weatherIpProHttp(req);
+                                    }
+                                    else if (IpProtocol == "SOCKS")
+                                    {
+                                        //var proxytest = new HttpToSocks5Proxy(new[] { new ProxyInfo("213.186.119.58", 51302) });
+                                        weatherIpProSocks(req);
+                                    }
                                     HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                                     StringBuilder headerResult = GetHeaders(resp);
                                     string result = GetResultNullParam(resp);
@@ -325,10 +359,14 @@ namespace C2.Business.IAOLab.PostAndGet
                             req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
                             if (textBoxIp.Text != string.Empty)
                             {
-                                WebProxy proxy = new WebProxy();
-                                string IpPrefix = IpProtocol == "HTTP" ? "http://" : "socks://";
-                                proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
-                                req.Proxy = proxy;
+                                if (IpProtocol == "HTTP")
+                                {
+                                    weatherIpProHttp(req);
+                                }
+                                else if (IpProtocol == "SOCKS")
+                                {
+                                    weatherIpProSocks(req);
+                                }
                                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                                 StringBuilder headerResult = GetHeaders(resp);
                                 string resultHasParam = GetResultNullParam(resp);
@@ -399,7 +437,6 @@ namespace C2.Business.IAOLab.PostAndGet
                 }
             }     
         }
-
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             IpProtocol = comboBoxIpProtocol.SelectedItem as string;
