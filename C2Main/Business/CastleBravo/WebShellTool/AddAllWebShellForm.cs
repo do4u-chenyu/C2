@@ -89,9 +89,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              string.Empty,
                                              contentArray[0],
                                              contentArray[1],
+                                             "phpEval",
                                              string.Empty,
-                                             string.Empty,
-                                             string.Empty,
+                                             ClientSetting.WSDict.Keys.First(),
                                              string.Empty));
         }
 
