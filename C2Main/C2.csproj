@@ -301,7 +301,9 @@
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
@@ -465,6 +467,22 @@
     <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Dns\DefaultDnsResolver.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Dns\IDnsResolver.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\AddressType.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\Authentication.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\Command.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\SocketConnectionResult.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\ErrorResponseBuilder.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Helpers.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\.NETFramework,Version=v4.5.AssemblyAttributes.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\HttpToSocks5Proxy.AssemblyInfo.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\.NETStandard,Version=v2.0.AssemblyAttributes.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\HttpToSocks5Proxy.AssemblyInfo.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\ProxyInfo.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\SocketRelay.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Socks5.cs" />
     <Compile Include="Business\IAOLab\PostAndGet\PostAndGetForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2429,6 +2447,23 @@
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\bin\Debug\HttpToSocks5Proxy.1.4.0.nupkg" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\bin\Debug\netstandard2.0\MihaZupan.HttpToSocks5Proxy.deps.json" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\HttpToSocks5Proxy.1.4.0.nuspec" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\HttpToSocks5Proxy.AssemblyInfoInputs.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\HttpToSocks5Proxy.assets.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\HttpToSocks5Proxy.csproj.CoreCompileInputs.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\HttpToSocks5Proxy.csprojAssemblyReference.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\HttpToSocks5Proxy.AssemblyInfoInputs.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\HttpToSocks5Proxy.assets.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\HttpToSocks5Proxy.csproj.CoreCompileInputs.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\HttpToSocks5Proxy.csprojAssemblyReference.cache" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\HttpToSocks5Proxy.csproj.nuget.dgspec.json" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\HttpToSocks5Proxy.csproj.nuget.g.props" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\HttpToSocks5Proxy.csproj.nuget.g.targets" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\project.assets.json" />
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\project.nuget.cache" />
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -2461,6 +2496,16 @@
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\bin\Debug\net45\MihaZupan.HttpToSocks5Proxy.dll" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\bin\Debug\net45\MihaZupan.HttpToSocks5Proxy.pdb" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\bin\Debug\netstandard2.0\MihaZupan.HttpToSocks5Proxy.dll" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\bin\Debug\netstandard2.0\MihaZupan.HttpToSocks5Proxy.pdb" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\HttpToSocks5Proxy.csproj.FileListAbsolute.txt" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\MihaZupan.HttpToSocks5Proxy.dll" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\net45\MihaZupan.HttpToSocks5Proxy.pdb" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\HttpToSocks5Proxy.csproj.FileListAbsolute.txt" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\MihaZupan.HttpToSocks5Proxy.dll" />
+    <Content Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\obj\Debug\netstandard2.0\MihaZupan.HttpToSocks5Proxy.pdb" />
     <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

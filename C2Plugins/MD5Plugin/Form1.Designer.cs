@@ -242,7 +242,7 @@
             this.encodingComboBox.Name = "encodingComboBox";
             this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
             this.encodingComboBox.TabIndex = 12;
-            this.encodingComboBox.Visible = false;
+            this.encodingComboBox.Visible = true;
             this.encodingComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // splitComboBox

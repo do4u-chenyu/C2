@@ -113,7 +113,7 @@ namespace MD5Plugin
             decodeButton.Text = "<= 解码";
             encodeButton.Visible = true;
             decodeButton.Visible = true;
-            encodingComboBox.Visible = false;
+            encodingComboBox.Visible = true;
             splitComboBox.Visible = false;
             radixComboBox.Visible = false;
             labelEncryptionkey.Visible = false;
@@ -285,7 +285,7 @@ namespace MD5Plugin
             }
             else
             {
-                byte[] bytes = Encoding.GetEncoding("utf-8").GetBytes(filePath);
+                byte[] bytes = Encoding.GetEncoding(encodingType).GetBytes(filePath);
                 outputTextBox.Text = Convert.ToBase64String(bytes);
             }
         }
@@ -589,7 +589,7 @@ namespace MD5Plugin
                 else if (IsBase64Formatted(base64Str))
                 {
                     byte[] bytes = Convert.FromBase64String(base64Str);
-                    inputTextBox.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+                    inputTextBox.Text = Encoding.GetEncoding(encodingType).GetString(bytes);
                 }
                 else
                 {
@@ -616,7 +616,7 @@ namespace MD5Plugin
             if (IsBase64Formatted(ExceptionBase64Str))
             {
                 byte[] bytes = Convert.FromBase64String(ExceptionBase64Str);
-                inputTextBox.Text = Encoding.GetEncoding("utf-8").GetString(bytes);
+                inputTextBox.Text = Encoding.GetEncoding(encodingType).GetString(bytes);
                 return true;
             }
             return false;
