@@ -278,6 +278,12 @@
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.Designer.cs">
+      <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -461,6 +467,18 @@
     <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Dns\DefaultDnsResolver.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Dns\IDnsResolver.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\AddressType.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\Authentication.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\Command.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\SocketConnectionResult.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\ErrorResponseBuilder.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Helpers.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\ProxyInfo.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\SocketRelay.cs" />
+    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Socks5.cs" />
     <Compile Include="Business\IAOLab\PostAndGet\PostAndGetForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1980,6 +1998,9 @@
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
+      <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShellForm.resx">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -2422,6 +2443,7 @@
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

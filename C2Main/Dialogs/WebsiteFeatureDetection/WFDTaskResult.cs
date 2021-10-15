@@ -154,7 +154,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return results;
         }
 
-        public void FillDGV(int maxNumOfRow = 100)
+        public void FillDGV(int maxNumOfRow = 10000)
         {
             //TODO 看看有没有其他赋值方式
             List<WFDResult> datas = FormatWFDResults(TaskInfo.PreviewResults, maxNumOfRow);
@@ -212,7 +212,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             WFDResult blankRow = new WFDResult();//TODO 可能有坑，空结果类不会赋值，同一引用应该不会有问题
 
-            for (int i = 0; i < maxNumOfRow; i++)
+            for (int i = 0; i < Math.Min(maxNumOfRow, datas.Count + 10); i++)
             {
                 if (i >= datas.Count)
                     results.Add(blankRow);
