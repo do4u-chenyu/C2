@@ -23,7 +23,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "中国菜刀18_BYPASS版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini"),"Common") },
             { "奥特曼2015_PHP版", Tuple.Create(Path.Combine(WebShellFilePath, "Altman15_PHP_Config.ini"),"Common") },
             { "中国菜刀16_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini"),"CKnife16EXE") },
-            { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"),"mode3") }
+            { "蚁剑2.1.14版", Tuple.Create(string.Empty, "AntSword2114") }  // 2114版大部分参数都是每次随机变化的
         };
 
         public string SPL;
@@ -48,13 +48,22 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PHP_DOWNLOAD;
         public string PHP_SHELL;
 
+        public static readonly ClientSetting Empty = new ClientSetting();
+
         public ClientSetting()
         {
         }
 
         public static ClientSetting LoadSetting(string version)
         {
+            if (!WSDict.ContainsKey(version))
+                return ClientSetting.Empty;
+
             string path = WSDict[version].Item1;
+
+            if (string.IsNullOrEmpty(path))
+                return ClientSetting.Empty;
+
             return new ClientSetting() {
                 SPL = Read(version, "SPL", path),
                 SPR = Read(version, "SPR", path),
