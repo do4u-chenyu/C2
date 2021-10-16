@@ -47,7 +47,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.hash = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.specials = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bugs = new System.Windows.Forms.DataGridViewLinkColumn();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -74,9 +73,9 @@ namespace C2.Business.CastleBravo.RobotsScan
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(615, 4);
+            this.button1.Location = new System.Drawing.Point(583, 9);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 25);
+            this.button1.Size = new System.Drawing.Size(90, 23);
             this.button1.TabIndex = 10008;
             this.button1.Text = "查询";
             this.button1.UseVisualStyleBackColor = true;
@@ -92,7 +91,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.progressPercent.Name = "progressPercent";
             this.progressPercent.Size = new System.Drawing.Size(26, 17);
             this.progressPercent.Text = "0%";
-            this.progressPercent.Click += new System.EventHandler(this.progressPercent_Click);
             // 
             // toolStripStatusLabel3
             // 
@@ -111,7 +109,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.scanUseTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 401);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(752, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(731, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 10007;
             this.statusStrip1.Text = "statusStrip1";
@@ -141,7 +139,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.richTextBox1.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.richTextBox1.Location = new System.Drawing.Point(0, 35);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(752, 122);
+            this.richTextBox1.Size = new System.Drawing.Size(730, 122);
             this.richTextBox1.TabIndex = 10010;
             this.richTextBox1.Text = "多个域名按换行分隔";
             this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
@@ -156,8 +154,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.urls,
             this.hash,
             this.result,
-            this.specials,
-            this.bugs});
+            this.specials});
             this.dataGridView1.Location = new System.Drawing.Point(0, 193);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -174,39 +171,31 @@ namespace C2.Business.CastleBravo.RobotsScan
             // 
             this.urls.HeaderText = "查询网站";
             this.urls.Name = "urls";
+            this.urls.Width = 120;
             // 
             // hash
             // 
             this.hash.HeaderText = "网站hash值";
             this.hash.Name = "hash";
-            this.hash.Width = 120;
+            this.hash.Width = 150;
             // 
             // result
             // 
             this.result.HeaderText = "匹配内网靶场网站";
             this.result.Name = "result";
-            this.result.Width = 150;
+            this.result.Width = 180;
             // 
             // specials
             // 
             this.specials.HeaderText = "识别特征";
             this.specials.Name = "specials";
-            this.specials.Width = 150;
-            // 
-            // bugs
-            // 
-            this.bugs.HeaderText = "推荐漏洞";
-            this.bugs.Name = "bugs";
-            this.bugs.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.bugs.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.bugs.UseColumnTextForLinkValue = true;
-            this.bugs.Width = 130;
+            this.specials.Width = 180;
             // 
             // RobotsScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 423);
+            this.ClientSize = new System.Drawing.Size(731, 423);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
@@ -246,6 +235,5 @@ namespace C2.Business.CastleBravo.RobotsScan
         private System.Windows.Forms.DataGridViewTextBoxColumn hash;
         private System.Windows.Forms.DataGridViewTextBoxColumn result;
         private System.Windows.Forms.DataGridViewTextBoxColumn specials;
-        private System.Windows.Forms.DataGridViewLinkColumn bugs;
     }
 }
