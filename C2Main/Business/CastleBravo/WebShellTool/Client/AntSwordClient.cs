@@ -6,6 +6,7 @@
             :base(password, clientSetting)
         {
             this.prefix = password + "=";
+            this.clientSetting = new ClientSetting();
         }
 
         private string SPL
@@ -38,18 +39,25 @@
         //private string ReadDictTemplate;
         //private string ShellTemplate;
 
-        private string PhpinfoStart()
+        private void SessionReset()
         {
-            return string.Empty;
-        }
-
-        private void PhpinfoEnd()
-        {
-            
+            this.clientSetting.SPL = SPL;
+            this.clientSetting.SPR = SPR;
+            this.clientSetting.PHP_MAKE = ValueAB;  // 借用字段存一下, 不想建新变量,
+            this.clientSetting.CODE = TmpDir;       // 借用字段
+            this.clientSetting.ACTION = Param1K;    // 借用字段
         }
 
         public override string PHPInfo()
         {
+            // 1 根据payload模板生成各种随机参数
+            // 2 将随机参数赋值到session中
+            // 3 构造payload
+            // 4 发包
+            // 5 解析返回包
+            // 6 清空本次session参数,因为antsword每次报文参数都不一样
+            SessionReset();
+            string payload = string.Empty;
             return string.Empty;
         }
 
