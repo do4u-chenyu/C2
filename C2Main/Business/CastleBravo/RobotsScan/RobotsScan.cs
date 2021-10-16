@@ -66,17 +66,18 @@ namespace C2.Business.CastleBravo.RobotsScan
         }
 
         //下载推荐漏洞文件
-
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            MessageBox.Show("弹出");
             if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewLinkColumn && e.RowIndex > -1 && dataGridView1.CurrentCell is DataGridViewLinkCell)
             {
                 DataGridViewLinkCell cell = (DataGridViewLinkCell)dataGridView1.CurrentCell;
-                if (cell.Tag == null)
-                    return;
+                
                 List<string> test = new List<string>() { "WebRobots.json", "DocxExample.dotx" };//文件路径
-
                 DownLoad(test);
+                   
+
+                
                 //SaveScreenshotsToLocal(new List<WFDResult>() { TaskInfo.PreviewResults[e.RowIndex] });
             }
         }
@@ -95,21 +96,27 @@ namespace C2.Business.CastleBravo.RobotsScan
         {   //实现bsae64转码
             string target = "http://" + domain + "/favicon.ico";
             string utf8 = get_uft8(target);
-            
             byte[] b = System.Text.Encoding.Default.GetBytes(utf8);
             string base64string = Convert.ToBase64String(b);
-
-            string url = "https://www.fofa.so/result?qbase64=" + base64string;
-            HttpWebRequest req = WebRequest.CreateHttp(url);
-            req.Method = "GET";
-            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-            Stream resStream = resp.GetResponseStream();
-            StreamReader reader = new StreamReader(resStream, Encoding.UTF8);
-            string result = reader.ReadToEnd();
-            string RegexStr = @"icon_hash=(.*?)\)";
-            string p = Regex.Match(result, RegexStr).ToString().Replace("\"","").Replace("\\","");
-            string q = p.Replace(")", "").Replace("icon_hash=","");
-            return q;
+            try
+            {
+                string url = "https://www.fofa.so/result?qbase64=" + base64string;
+                HttpWebRequest req = WebRequest.CreateHttp(url);
+                req.Method = "GET";
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                Stream resStream = resp.GetResponseStream();
+                StreamReader reader = new StreamReader(resStream, Encoding.UTF8);
+                string result = reader.ReadToEnd();
+                string RegexStr = @"icon_hash=(.*?)\)";
+                string p = Regex.Match(result, RegexStr).ToString().Replace("\"", "").Replace("\\", "");
+                string q = p.Replace(")", "").Replace("icon_hash=", "");
+                return q;
+            }
+            catch
+            {
+                return "无";
+            }
+            
         }
 
         public string ConvertImageToBase64(Image file)
@@ -180,16 +187,6 @@ namespace C2.Business.CastleBravo.RobotsScan
                             return null;
                         } 
                     }
-                    else if (e.Message.Contains("操作超时"))
-                    {
-                        //MessageBox.Show("网络连接超时，请检查输入网站是否可以打开");
-                        return null;
-                    }
-                    else if (e.Message.Contains("404") || e.Message.Contains("500"))
-                    {
-                        //MessageBox.Show("无法获得该网站的robots.txt文件");
-                        return null;
-                    }
                     else
                     {
                         //MessageBox.Show("请检查输入格式为http://域名/");
@@ -235,7 +232,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             }
             
         }
-
 
 
         //获取匹配内网靶场网站结果
@@ -314,42 +310,47 @@ namespace C2.Business.CastleBravo.RobotsScan
         private void button1_Click(object sender, EventArgs e)
         {
 
-            
             StartTime = DateTime.Now;
-
+            while (this.dataGridView1.Rows.Count != 0)
+            {
+                this.dataGridView1.Rows.RemoveAt(0);
+            }
             int a = 1;
             string[] urls = richTextBox1.Text.Split('\n');
+            
             foreach (string item in urls)
-            //for(int i=0;i<urls.Length;i++ )
             {
-                string hash = Get_Hash(item);
-                DataGridViewRow dr = new DataGridViewRow();   //一行表格
-                DataGridViewTextBoxCell textCellID = new DataGridViewTextBoxCell();   //textCell0  一个单元格
-                DataGridViewTextBoxCell textCellURL = new DataGridViewTextBoxCell();
-                DataGridViewTextBoxCell textCellResult = new DataGridViewTextBoxCell();
-                DataGridViewTextBoxCell textCellSpecial = new DataGridViewTextBoxCell();
-                DataGridViewLinkCell textCellBugs = new DataGridViewLinkCell();
-                DataGridViewTextBoxCell textCellHash = new DataGridViewTextBoxCell();
+                if (item != string.Empty)
+                {
+                    string hash = Get_Hash(item);
+                    DataGridViewRow dr = new DataGridViewRow();   //一行表格
+                    DataGridViewTextBoxCell textCellID = new DataGridViewTextBoxCell();   //textCell0  一个单元格
+                    DataGridViewTextBoxCell textCellURL = new DataGridViewTextBoxCell();
+                    DataGridViewTextBoxCell textCellResult = new DataGridViewTextBoxCell();
+                    DataGridViewTextBoxCell textCellSpecial = new DataGridViewTextBoxCell();
+                    //DataGridViewLinkCell textCellBugs = new DataGridViewLinkCell();
+                    DataGridViewTextBoxCell textCellHash = new DataGridViewTextBoxCell();
 
-                textCellID.Value = a.ToString();
-                textCellURL.Value = item;
-                textCellResult.Value = Match(item);   //字符串类型
-                textCellSpecial.Value = Special(item);
-                textCellHash.Value = hash;
-                textCellBugs.Value = "暂无";
-                textCellBugs.Tag = Match(item);
+                    textCellID.Value = a.ToString();
+                    textCellURL.Value = item;
+                    textCellResult.Value = Match(item);   //字符串类型
+                    textCellSpecial.Value = Special(item);
+                    textCellHash.Value = hash;
+                    //textCellBugs.Value = "暂无";
+                    //textCellBugs.Tag = item;
 
-                dr.Cells.Add(textCellID);
-                dr.Cells.Add(textCellURL);
-                dr.Cells.Add(textCellHash);
-                dr.Cells.Add(textCellResult);   //一行单元格
-                dr.Cells.Add(textCellSpecial);
-                dr.Cells.Add(textCellBugs);
-                
+                    dr.Cells.Add(textCellID);
+                    dr.Cells.Add(textCellURL);
+                    dr.Cells.Add(textCellHash);
+                    dr.Cells.Add(textCellResult);   //一行单元格
+                    dr.Cells.Add(textCellSpecial);
+                    //dr.Cells.Add(textCellBugs);
 
-                dataGridView1.Rows.Add(dr);
+                    dataGridView1.Rows.Add(dr);
+                }
+
                 progressBar.Value = (a / urls.Length)*100;
-                
+                progressBar.Step = 1;
                 progressPercent.Text = progressBar.Value.ToString() + "%";
                 scanUseTime.Text = (DateTime.Now - StartTime).ToString();
                 runTime++;
@@ -358,10 +359,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             }     
         }
 
-        private void progressPercent_Click(object sender, EventArgs e)
-        {
-
-        }
     }
  }
 
