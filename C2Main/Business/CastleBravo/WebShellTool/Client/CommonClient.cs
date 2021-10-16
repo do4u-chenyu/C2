@@ -6,9 +6,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     public class CommonClient : IClient
     {
-        private readonly string prefix;
-        private readonly StringBuilder sb;
-        private readonly ClientSetting clientSetting;
+        protected string prefix;
+        protected StringBuilder sb;
+        protected ClientSetting clientSetting;
 
         public CommonClient(string password, string clientSetting)
         {
@@ -17,12 +17,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sb = new StringBuilder();
         }
 
-        public string FetchLog()
+        public virtual string FetchLog()
         {
             string ret = sb.ToString(); sb.Clear(); return ret; 
         }
 
-        public string MidStrEx(string response)
+        public virtual string MidStrEx(string response)
         {
             if (string.IsNullOrEmpty(response))
                 return string.Empty;
@@ -41,7 +41,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return response.Remove(sprIndex);
         }
 
-        public string PHPIndex()
+        public virtual string PHPIndex()
         {
             string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INDEX);
 
@@ -54,7 +54,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public string PHPInfo()
+        public virtual string PHPInfo()
         {
             string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INFO);
 
@@ -67,7 +67,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public string PHPReadDict(string dict)
+        public virtual string PHPReadDict(string dict)
         {
             string payload = String.Format("{0}={1}&{2}={3}",
                 prefix,
@@ -85,7 +85,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public string PHPShell(string shellEnv, string command)
+        public virtual string PHPShell(string shellEnv, string command)
         {
             string payload = String.Format("{0}={1}&{2}={3}&{4}={5}",
                 prefix,

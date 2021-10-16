@@ -1,48 +1,17 @@
 ﻿using C2.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    class CKnife16EXEClient : IClient
+    class CKnife16EXEClient : CommonClient
     {
-        private readonly string prefix;
-        private readonly StringBuilder sb;
-        private readonly ClientSetting clientSetting;
-
-        public CKnife16EXEClient(string password, string clientSetting)
+        public CKnife16EXEClient(string password, string clientSetting) 
+            : base(password, clientSetting)
         {
-            this.clientSetting = ClientSetting.LoadSetting(clientSetting);
             this.prefix = password + "=" + this.clientSetting.PHP_MAKE;
-            this.sb = new StringBuilder();
         }
 
 
-        public string FetchLog()
-        {
-            string ret = sb.ToString(); sb.Clear(); return ret;
-        }
-
-        public string MidStrEx(string response)
-        {
-            string spl = this.clientSetting.SPL;
-            string spr = this.clientSetting.SPR;
-
-            int splIndex = response.IndexOf(spl);
-            if (splIndex == -1) return string.Empty;
-
-            response = response.Substring(splIndex + spl.Length);
-
-            int sprIndex = response.IndexOf(spr);
-            if (sprIndex == -1) return string.Empty;
-
-            return response.Remove(sprIndex);
-        }
-
-        public string PHPIndex()
+        public override string PHPIndex()
         {
             string payload = prefix.Replace("@PARAM",clientSetting.PHP_INDEX);
 
@@ -54,7 +23,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public string PHPInfo()
+        public override string PHPInfo()
         {
             string payload = prefix.Replace("@PARAM", clientSetting.PHP_INFO);
 
@@ -66,7 +35,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public string PHPReadDict(string dict)
+        public override string PHPReadDict(string dict)
         {
             string attack = ST.DecodeBase64(clientSetting.PHP_READDICT).Replace("@PARAM2", dict);
             string payload = prefix.Replace("@PARAM", ST.EncodeBase64(attack));
@@ -81,7 +50,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public string PHPShell(string shellEnv, string command)
+        public override string PHPShell(string shellEnv, string command)
         {
 
             string attack = ST.DecodeBase64(clientSetting.PHP_SHELL).Replace("@PARAM1", shellEnv).Replace("@PARAM2", command);
