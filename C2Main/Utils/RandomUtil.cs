@@ -68,5 +68,10 @@ namespace C2.Utils
             }
             return sb.ToString();
         }
+
+        public static int RandomInt(int minValue, int maxValue)
+        {
+            return rd.Next(minValue, maxValue);
+        }
     }
 }

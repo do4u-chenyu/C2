@@ -10,29 +10,30 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.prefix = password + "=";
         }
 
-        private string SPL
+        private string RandomSPL()
         {
-            get { return string.Empty; }
+            int len = RandomUtil.RandomInt(7, 10);
+            return RandomUtil.RandomHexString(len, 0);
         }
 
-        private string SPR
+        private string RandomSPR()
         {
-            get { return string.Empty; }
+            return RandomSPL(); 
         }
         
-        private string ValueAB
+        private string RandomValueAB()
         {
-            get { return RandomUtil.RandomString(2, 1); }
+            return RandomUtil.RandomString(2, 1); 
         }
 
-        private string TmDir
+        private string RandomTmDir()
         {
-            get { return RandomUtil.RandomHexString(9, 0, "."); }
+            return RandomUtil.RandomHexString(9, 0, "."); 
         }
 
-        private string Param1K
+        private string RandomParam1K()
         {
-            get { return RandomUtil.RandomString(14, 0); }
+            return RandomUtil.RandomString(14, 0);
         }
 
         //private string IndexTemplate;
@@ -42,11 +43,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SessionReset()
         {
-            this.clientSetting.SPL = SPL;
-            this.clientSetting.SPR = SPR;
-            this.clientSetting.CODE = TmDir;        // 借用字段
-            this.clientSetting.ACTION = Param1K;    // 借用字段
-            this.clientSetting.PHP_MAKE = ValueAB;  // 借用字段存一下, 不想建新变量,
+            this.clientSetting.SPL      = RandomSPL();
+            this.clientSetting.SPR      = RandomSPR();
+            this.clientSetting.CODE     = RandomTmDir();        // 借用字段
+            this.clientSetting.ACTION   = RandomParam1K();    // 借用字段
+            this.clientSetting.PHP_MAKE = RandomValueAB();  // 借用字段存一下, 不想建新变量,
         }
 
         public override string PHPInfo()
