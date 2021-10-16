@@ -6,7 +6,6 @@
             :base(password, clientSetting)
         {
             this.prefix = password + "=";
-            this.clientSetting = new ClientSetting();
         }
 
         private string SPL
@@ -24,7 +23,7 @@
             get { return string.Empty; }
         }
 
-        private string TmpDir
+        private string TmDir
         {
             get { return string.Empty; }
         }
@@ -43,9 +42,9 @@
         {
             this.clientSetting.SPL = SPL;
             this.clientSetting.SPR = SPR;
-            this.clientSetting.PHP_MAKE = ValueAB;  // 借用字段存一下, 不想建新变量,
-            this.clientSetting.CODE = TmpDir;       // 借用字段
+            this.clientSetting.CODE = TmDir;        // 借用字段
             this.clientSetting.ACTION = Param1K;    // 借用字段
+            this.clientSetting.PHP_MAKE = ValueAB;  // 借用字段存一下, 不想建新变量,
         }
 
         public override string PHPInfo()
@@ -58,7 +57,7 @@
             // 6 清空本次session参数,因为antsword每次报文参数都不一样
             SessionReset();
             string payload = string.Empty;
-            return string.Empty;
+            return payload;
         }
 
 

@@ -3903,6 +3903,9 @@
     <None Include="Resources\WebShellConfig\Altman15_PHP_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\WebShellConfig\AntSword_2114_Config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\WebShellConfig\Cknife11_EXE_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

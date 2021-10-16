@@ -23,7 +23,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "中国菜刀18_BYPASS版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini"),"Common") },
             { "奥特曼2015_PHP版", Tuple.Create(Path.Combine(WebShellFilePath, "Altman15_PHP_Config.ini"),"Common") },
             { "中国菜刀16_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini"),"CKnife16EXE") },
-            { "蚁剑2.1.14版", Tuple.Create(string.Empty, "AntSword2114") }  // 2114版大部分参数都是每次随机变化的
+            { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"), "AntSword2114") }  // 2114版大部分参数都是每次随机变化的
         };
 
         public string SPL;

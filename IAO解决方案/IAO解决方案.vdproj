@@ -1437,6 +1437,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7F0D3BA0D7804A1AB39234B081E0FDE5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7FA2033130DC4C14960E6BBEC29712E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2037,6 +2043,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B2D0DF1C008F48C99D4446DE7E62F104"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B34F393656A4404881AAA766DFD725C0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2122,6 +2134,12 @@
         "Entry"
         {
         "MsmKey" = "8:_BC0F201D449E4B3D882A2EBC44BCE5B6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BC1E692EE6B240ABAAE553CEEBD5DB62"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -7692,6 +7710,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F0D3BA0D7804A1AB39234B081E0FDE5"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\Cknife16_EXE_Config.ini"
+            "TargetName" = "8:Cknife16_EXE_Config.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_DD466C3AE2AA4982AA0508BD0C3BA9AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7FA2033130DC4C14960E6BBEC29712E8"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\456_星期一.png"
@@ -9449,6 +9487,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B2D0DF1C008F48C99D4446DE7E62F104"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\Altman15_PHP_Config.ini"
+            "TargetName" = "8:Altman15_PHP_Config.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_DD466C3AE2AA4982AA0508BD0C3BA9AF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B34F393656A4404881AAA766DFD725C0"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\arightboxtop.png"
@@ -9746,6 +9804,26 @@
             "TargetName" = "8:demo_bcp.bcp"
             "Tag" = "8:"
             "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BC1E692EE6B240ABAAE553CEEBD5DB62"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\AntSword_2114_Config.ini"
+            "TargetName" = "8:AntSword_2114_Config.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_DD466C3AE2AA4982AA0508BD0C3BA9AF"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
