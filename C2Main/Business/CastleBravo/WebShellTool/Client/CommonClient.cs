@@ -45,7 +45,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             string payload = String.Format("{0}={1}", prefix, clientSetting.PHP_INDEX);
 
-            sb.AppendLine("定位Trojan所在目录:")
+            sb.AppendLine("定位D洞所在目录:")
               .AppendLine(payload)
               .AppendLine(string.Format("引导段:{0}", prefix))
               .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INDEX)))
