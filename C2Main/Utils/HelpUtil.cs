@@ -88,11 +88,11 @@ namespace C2.Utils
         public static string FaceDetectorFormHelpInfo = "检测图片中是否包含人脸，并返回人脸位置、关键点信息";
         public static string FaceBeautyFormHelpInfo = "颜值打分(0-5分)";
 
-        public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱口令爆破";
-        public static string PwdGeneratorHelpInfo = "社工生成器，输入目标信息，猜测可能使用的数字字符组合";
-        public static string WebScanHelpInfo = "Web目录扫描，敏感文件扫描和前后台入口扫描";
-        public static string RobotsScanHelpInfo = "基于Robots.txt的网站模板匹配";
-        public static string WebShellHelpInfo = "WebShell模拟器和Trojan生成器";
+        public static string CrackerFormHelpInfo = "基于ssh、rtd、mysql等协议的弱K令素描";
+        public static string PwdGeneratorHelpInfo = "SG生成器，输入目标信息，猜测可能使用的数字字符组合";
+        public static string WebScanHelpInfo = "Web目录素描，敏感文件素描和前后台入口素描";
+        public static string RobotsScanHelpInfo = "对目标网站的几个通用特征进行素描";
+        public static string WebShellHelpInfo = "D洞工具集";
 
 
 

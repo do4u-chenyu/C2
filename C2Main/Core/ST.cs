@@ -555,6 +555,16 @@ namespace C2.Core
             return Uri.UnescapeDataString(ST.EncodeBase64(code));
         }
 
+        public static string UrlEncode(string code)
+        {
+            return Uri.EscapeDataString(code);
+        }
+
+        public static string UrlDecode(string code)
+        {
+            return Uri.UnescapeDataString(code);
+        }
+
         public static string EncodeBase64(string code)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(code);
