@@ -1,4 +1,6 @@
-﻿namespace C2.Business.CastleBravo.WebShellTool
+﻿using C2.Utils;
+
+namespace C2.Business.CastleBravo.WebShellTool
 {
     class AntSwordClient : CommonClient
     {
@@ -20,17 +22,17 @@
         
         private string ValueAB
         {
-            get { return string.Empty; }
+            get { return RandomUtil.RandomString(2, 1); }
         }
 
         private string TmDir
         {
-            get { return string.Empty; }
+            get { return RandomUtil.RandomHexString(9, 0, "."); }
         }
 
         private string Param1K
         {
-            get { return string.Empty; }
+            get { return RandomUtil.RandomString(14, 0); }
         }
 
         //private string IndexTemplate;
