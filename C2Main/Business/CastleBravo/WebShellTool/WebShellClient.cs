@@ -98,12 +98,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string PHPInfo()
         {
-            return client.MidStrEx(Post(client.PHPInfo()));
+            return client.ExtractResponse(Post(client.PHPInfo()));
         }
 
         public List<string> PHPIndex(int timeout = Global.WebClientDefaultTimeout)
         {
-            string[] result = client.MidStrEx(Post(client.PHPIndex(), timeout)).Split('\t');
+            string[] result = client.ExtractResponse(Post(client.PHPIndex(), timeout)).Split('\t');
             if (result.Length >= 2)
                 return result.Take(2).ToList();
             else
@@ -112,12 +112,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string PHPReadDict(string dict)
         {
-            return client.MidStrEx(Post(client.PHPReadDict(dict)));
+            return client.ExtractResponse(Post(client.PHPReadDict(dict)));
         }
 
         public string PHPShell(string shellEnv, string command)
         {
-            return client.MidStrEx(Post(client.PHPShell(shellEnv, command)));
+            return client.ExtractResponse(Post(client.PHPShell(shellEnv, command)));
         }
 
         private string Post(string payload, int defaultTimeout = Global.WebClientDefaultTimeout)

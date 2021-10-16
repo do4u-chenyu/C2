@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C2.Business.CastleBravo.WebShellTool
+﻿namespace C2.Business.CastleBravo.WebShellTool
 {
     interface IClient
     {
@@ -13,6 +7,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         string PHPIndex();  
         string PHPReadDict(string dict);   // 带一个参数构造payload
         string PHPShell(string shellEnv, string command);   // 带二个参数构造payload
-        string MidStrEx(string response);
+        string ExtractResponse(string response);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo.WebShellTool.Client
 {
-    class AntSwordClient : IClient
+    class AntSwordClient : CommonClient
     {
         public string FetchLog()
         {

@@ -22,7 +22,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string ret = sb.ToString(); sb.Clear(); return ret; 
         }
 
-        public virtual string MidStrEx(string response)
+        public virtual string ExtractResponse(string response)
         {
             if (string.IsNullOrEmpty(response))
                 return string.Empty;
