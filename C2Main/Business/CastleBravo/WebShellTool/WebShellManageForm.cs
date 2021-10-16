@@ -235,17 +235,24 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            LV.SelectedItems[0].SubItems[5].Text = RefreshTaskStatus(LV.SelectedItems[0].Tag as WebShellTaskConfig);
+            LV.SelectedItems[0].SubItems[5].Text = RefreshTaskStatus(LV.SelectedItems[0].Tag as WebShellTaskConfig); ;
+            
             RefreshTasks();
             SaveDB();
         }
 
         private void RefreshAllStatusMenuItem_Click(object sender, EventArgs e)
         {
+            // 刷新前先强制清空
+            foreach (ListViewItem lvi in LV.Items)
+                lvi.SubItems[5].Text = string.Empty;
+
             foreach (ListViewItem lvi in LV.Items)
             {
                 lvi.SubItems[5].Text = RefreshTaskStatus(lvi.Tag as WebShellTaskConfig);
+                lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
             }
+                
 
             RefreshTasks();
             SaveDB();
@@ -254,19 +261,20 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string RefreshTaskStatus(WebShellTaskConfig task)
         {
             string status = "×";
+
             using (GuarderUtil.WaitCursor)
-            {
                 foreach (string version in ClientSetting.WSDict.Keys)
                 {
                     WebShellClient webShell = new WebShellClient(task.Url, task.Password, version);
-                    List<string> paths = webShell.PHPIndex(2000);//超时时间可以短一点
+                    List<string> paths = webShell.PHPIndex(1500);//超时时间可以短一点, 试了,感觉像是有个下限一样,设成1秒还是那样
                     if (paths.Count > 0 && !string.IsNullOrEmpty(paths[0]))
                     {
                         status = "√";
                         break;
                     }
                 }
-            }
+
+
             return status;
         }
 

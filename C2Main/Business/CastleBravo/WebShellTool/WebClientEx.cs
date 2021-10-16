@@ -38,7 +38,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (GuarderUtil.WaitCursor)
                 // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
                 bytes = WebClientEx.Create(timeout)
-                                    .UploadData(url, "POST", bytes);
+                                   .UploadData(url, "POST", bytes);
 
             return Encoding.Default.GetString(bytes);
         }

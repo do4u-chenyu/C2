@@ -301,9 +301,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
