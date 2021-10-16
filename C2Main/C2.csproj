@@ -290,6 +290,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.Designer.cs">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\AntSwordClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\CKnife16EXEClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\CommonClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientFactory.cs" />

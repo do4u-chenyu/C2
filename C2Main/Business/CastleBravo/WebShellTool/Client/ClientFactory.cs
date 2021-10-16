@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace C2.Business.CastleBravo.WebShellTool
 {
     class ClientFactory
@@ -17,6 +12,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return new CommonClient(password, clientSetting);
                 case "CKnife16EXE":
                     return new CKnife16EXEClient(password, clientSetting);
+                case "AntSword2114":
+                    return new AntSwordClient(password, clientSetting);
                 default:
                     return new CommonClient(password, clientSetting);
             }
