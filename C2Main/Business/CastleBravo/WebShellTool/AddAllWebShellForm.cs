@@ -18,7 +18,7 @@ namespace C2.Business.CastleBravo.WebShellTool
     partial class AddAllWebShellForm : StandardDialog
     {
         int maxRow;
-        string pattern;
+        //string pattern;
         string filePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<WebShellTaskConfig> Tasks;
 
@@ -26,7 +26,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             InitializeComponent();
             maxRow = 10000;
-            pattern = @"^((http|https|)\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$";
+            //pattern = @"^((http|https|)\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$";
             filePath = string.Empty;
             Tasks = new List<WebShellTaskConfig>();
         }
@@ -80,9 +80,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void AddTasksByLine(string line)
         {
-            string[] contentArray = line.Trim(new char[] { '\r', '\n' }).Split("\t");
+            string[] contentArray = Regex.Split(line.Trim(new char[] { '\r', '\n' }), @"\s+");
 
-            if (contentArray.Length < 2 || !new Regex(pattern).Match(contentArray[0]).Success)
+            //if (contentArray.Length < 2 || !new Regex(pattern).Match(contentArray[0]).Success)
+            //    return;
+            
+            if (contentArray.Length < 2 || contentArray[0].IsNullOrEmpty() || contentArray[1].IsNullOrEmpty())
                 return;
 
             Tasks.Add(new WebShellTaskConfig(ST.NowString(),
