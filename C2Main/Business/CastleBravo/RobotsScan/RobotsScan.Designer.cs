@@ -57,17 +57,17 @@ namespace C2.Business.CastleBravo.RobotsScan
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(11, 170);
+            this.label2.Location = new System.Drawing.Point(27, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 20);
+            this.label2.Size = new System.Drawing.Size(65, 20);
             this.label2.TabIndex = 10006;
-            this.label2.Text = "CMS模板匹配结果";
+            this.label2.Text = "匹配结果";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(28, 12);
+            this.label1.Location = new System.Drawing.Point(27, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 10004;
@@ -75,7 +75,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(589, 12);
+            this.button1.Location = new System.Drawing.Point(704, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 23);
             this.button1.TabIndex = 10008;
@@ -111,7 +111,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.scanUseTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 407);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(732, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(834, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 10007;
             this.statusStrip1.Text = "statusStrip1";
@@ -142,7 +142,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.richTextBox1.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.richTextBox1.Location = new System.Drawing.Point(0, 45);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(732, 122);
+            this.richTextBox1.Size = new System.Drawing.Size(834, 122);
             this.richTextBox1.TabIndex = 10010;
             this.richTextBox1.Text = "多个域名按换行分隔";
             this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
@@ -162,7 +162,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.dataGridView1.Location = new System.Drawing.Point(0, 202);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(732, 205);
+            this.dataGridView1.Size = new System.Drawing.Size(834, 205);
             this.dataGridView1.TabIndex = 10012;
             // 
             // panel1
@@ -173,7 +173,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(732, 167);
+            this.panel1.Size = new System.Drawing.Size(834, 167);
             this.panel1.TabIndex = 10013;
             // 
             // ID
@@ -186,31 +186,31 @@ namespace C2.Business.CastleBravo.RobotsScan
             // 
             this.urls.HeaderText = "查询域名";
             this.urls.Name = "urls";
-            this.urls.Width = 120;
+            this.urls.Width = 250;
             // 
             // hash
             // 
             this.hash.HeaderText = "MD5(favicon.ico)";
             this.hash.Name = "hash";
-            this.hash.Width = 150;
+            this.hash.Width = 180;
             // 
             // result
             // 
             this.result.HeaderText = "靶场匹配";
             this.result.Name = "result";
-            this.result.Width = 180;
+            this.result.Width = 150;
             // 
             // specials
             // 
             this.specials.HeaderText = "备注";
             this.specials.Name = "specials";
-            this.specials.Width = 180;
+            this.specials.Width = 150;
             // 
             // RobotsScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 429);
+            this.ClientSize = new System.Drawing.Size(834, 429);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.statusStrip1);
