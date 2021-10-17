@@ -45,6 +45,13 @@ namespace C2.Business.CastleBravo.WebShellTool
                                                  lvi.SubItems[7].Text));// 数据库配置
         }
 
+        private void ClearAll()
+        {
+            tasks.Clear();
+            RefreshLV();
+            SaveDB();
+        }
+
         private void SaveDB()
         {
             try
@@ -294,6 +301,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
 
             SaveDB();
+        }
+
+        private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearAll();
         }
     }
 }
