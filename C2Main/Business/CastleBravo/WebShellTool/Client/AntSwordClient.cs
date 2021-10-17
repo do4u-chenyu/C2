@@ -35,18 +35,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             return RandomUtil.RandomHexString(9, 0, "."); 
         }
 
-        private string RandomParam1K()
+        private string RandomParamK()
         {
             return RandomUtil.RandomString(14, 0);
         }
 
         private void SessionReset()
         {
-            this.clientSetting.SPL      = RandomSPL();
-            this.clientSetting.SPR      = RandomSPR();
-            this.clientSetting.CODE     = RandomTmDir();    // 借用字段
-            this.clientSetting.ACTION   = RandomParam1K();  // 借用字段
-            this.clientSetting.PHP_MAKE = RandomValueAB();  // 借用字段存一下, 不想建新变量,
+            this.clientSetting.SPL    = RandomSPL();
+            this.clientSetting.SPR    = RandomSPR();
+            this.clientSetting.CODE   = RandomTmDir();      // 借用字段存一下, 不想建新变量,
+            this.clientSetting.PARAM1 = RandomValueAB();    // 以下同上
+            this.clientSetting.PARAM2 = RandomValueAB();      
+            this.clientSetting.PARAM3 = RandomValueAB();
+
+            this.clientSetting.ACTION = RandomParamK();
+            this.clientSetting.PHP_MAKE = RandomParamK();
+            this.clientSetting.PHP_BASE64 = RandomParamK(); // 以下同上
         }
 
         public override string PHPInfo()
@@ -105,9 +110,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             SessionReset();
             string param1k = clientSetting.ACTION;
-            string param1v = clientSetting.PHP_MAKE + dict;
+            string param1v = clientSetting.PARAM1 + ST.EncodeBase64(dict);
 
-            string param1  = string.Format("{0}={1}&", param1k, ST.EncodeBase64(param1v));
+            string param1  = string.Format("{0}={1}&", param1k, param1v);
             string readdict = clientSetting.PHP_READDICT
                                            .Replace("@SPL", clientSetting.SPL)
                                            .Replace("@SPR", clientSetting.SPR)
@@ -124,12 +129,48 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine("随机参数 SPR:" + clientSetting.SPR)
               .AppendLine("随机参数 TMDIR:" + clientSetting.CODE)
               .AppendLine("随机参数 PARAM1 Key:" + param1k)
-              .AppendLine("随机参数 PARAM1 AB:" + clientSetting.PHP_MAKE)
+              .AppendLine("随机参数 PARAM1 AB:" + clientSetting.ACTION)
               .AppendLine("查询路径:" + dict);
 
             clientSetting.SPL = clientSetting.SPL.Replace("\".\"", "");
             clientSetting.SPR = clientSetting.SPR.Replace("\".\"", "");
 
+            return payload;
+        }
+
+        public override string PHPShell(string shellEnv, string command)
+        {  // 有 SPL SPR TMDIR, P1.Key, P2.Key, P3.Key, P1.ValueAB, P2.ValueAB, P3.ValueAB
+           // 9个随机变量
+            SessionReset();
+            string param1k = clientSetting.ACTION;
+            string param2k = clientSetting.PHP_MAKE;
+            string param3k = clientSetting.PHP_BASE64;
+
+            string param1v = string.Empty;
+            string param2v = string.Empty;
+            string param3v = string.Empty;
+
+            string shell = string.Empty;
+
+            // 只是为了过VS的提交检测, 功能并未实现
+            string payload = param1v + param2v + param3v;
+
+            sb.AppendLine("Remote Command:")
+              .AppendLine(payload)
+              .AppendLine(string.Format("攻击段:{0}", shell))
+              .AppendLine("随机参数 SPL:" + clientSetting.SPL)
+              .AppendLine("随机参数 SPR:" + clientSetting.SPR)
+              .AppendLine("随机参数 TMDIR:" + clientSetting.CODE)
+              .AppendLine("随机参数 PARAM1 Key:" + param1k)
+              .AppendLine("随机参数 PARAM2 Key:" + param2k)
+              .AppendLine("随机参数 PARAM3 Key:" + param3k)
+              .AppendLine("随机参数 PARAM1 AB:" + clientSetting.ACTION)
+              .AppendLine("随机参数 PARAM2 AB:" + clientSetting.PHP_MAKE)
+              .AppendLine("随机参数 PARAM3 AB:" + clientSetting.PHP_BASE64)
+              .AppendLine("命令:" + command);
+
+            clientSetting.SPL = clientSetting.SPL.Replace("\".\"", "");
+            clientSetting.SPR = clientSetting.SPR.Replace("\".\"", "");
             return payload;
         }
 
