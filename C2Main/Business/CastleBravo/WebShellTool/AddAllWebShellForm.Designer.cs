@@ -95,11 +95,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(94, 65);
+            this.label3.Location = new System.Drawing.Point(20, 65);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(311, 12);
+            this.label3.Size = new System.Drawing.Size(401, 12);
             this.label3.TabIndex = 10017;
-            this.label3.Text = "* 内容格式：\\t分割，固定第一列为url，第二列为密码。";
+            this.label3.Text = "* 内容格式:TAB分割,第一列url(http或https开头),第二列密码,一行一个.";
             // 
             // AddAllWebShellForm
             // 
