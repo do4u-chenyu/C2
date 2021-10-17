@@ -103,7 +103,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public List<string> PHPIndex(int timeout = Global.WebClientDefaultTimeout)
         {
-            string[] result = client.ExtractResponse(Post(client.PHPIndex(), timeout)).Split('\t');
+            string[] result = client.ExtractResponse(Post(client.PHPIndex(), true, timeout)).Split('\t');
             if (result.Length >= 2)
                 return result.Take(2).ToList();
             else
@@ -112,27 +112,40 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string PHPReadDict(string dict)
         {
-            return client.ExtractResponse(Post(client.PHPReadDict(dict)));
+            return client.ExtractResponse(Post(client.PHPReadDict(dict), true));
         }
 
         public string PHPShell(string shellEnv, string command)
         {
-            return client.ExtractResponse(Post(client.PHPShell(shellEnv, command)));
+            return client.ExtractResponse(Post(client.PHPShell(shellEnv, command), true));
         }
 
-        private string Post(string payload, int defaultTimeout = Global.WebClientDefaultTimeout)
+        private string Post(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)
         {
             this.lastErrorMessage = string.Empty;
             try
             {
-                return WebClientEx.Post(this.url, payload, defaultTimeout);
+                string rsp = WebClientEx.Post(this.url, payload, defaultTimeout);
+                if (logRsp) 
+                    client.AppendLog(Environment.NewLine)
+                          .AppendLog("返回报文:")
+                          .AppendLog(Environment.NewLine)
+                          .AppendLog(rsp)
+                          .AppendLog(Environment.NewLine);
+                return rsp;
             }
             catch (Exception e)
             {
-                this.lastErrorMessage = e.Message;
+                this.lastErrorMessage = WafDector(e.Message);
                 return string.Empty;
-            }
-            
+            }   
+        }
+
+        private string WafDector(string msg)
+        {
+            return msg.StartsWith("基础连接已经关闭: 接收时发生错误") ? 
+                string.Format("{0}{1}WAF检测:可能被WAF拦截{1}", msg, Environment.NewLine) : 
+                msg;
         }
     }
 

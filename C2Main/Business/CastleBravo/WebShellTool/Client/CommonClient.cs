@@ -4,7 +4,7 @@ using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    public class CommonClient : IClient
+    class CommonClient : IClient
     {
         protected string prefix;
         protected StringBuilder sb;
@@ -104,6 +104,11 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine();
 
             return payload;
+        }
+
+        public virtual IClient AppendLog(string msg)
+        {
+            sb.Append(msg); return this;
         }
     }
 }
