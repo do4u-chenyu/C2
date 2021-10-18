@@ -87,32 +87,54 @@ namespace C2.Business.CastleBravo.RobotsScan
             return decodedString;
         }
 
-        //计算网站ico的hash值
-        private string Get_Hash(string domain)
-        {   //实现bsae64转码
-            string target = "http://" + domain + "/favicon.ico";
-            string utf8 = get_uft8(target);
-            byte[] b = System.Text.Encoding.Default.GetBytes(utf8);
-            string base64string = Convert.ToBase64String(b);
+        //调用fofa计算网站ico的hash值
+        //private string Get_Hash(string domain)
+        //{   //实现bsae64转码
+        //    string target = "http://" + domain + "/favicon.ico";
+        //    string utf8 = get_uft8(target);
+        //    byte[] b = System.Text.Encoding.Default.GetBytes(utf8);
+        //    string base64string = Convert.ToBase64String(b);
+        //    try
+        //    {
+        //        string url = "https://www.fofa.so/result?qbase64=" + base64string;
+        //        HttpWebRequest req = WebRequest.CreateHttp(url);
+        //        req.Method = "GET";
+        //        HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+        //        Stream resStream = resp.GetResponseStream();
+        //        StreamReader reader = new StreamReader(resStream, Encoding.UTF8);
+        //        string result = reader.ReadToEnd();
+        //        string RegexStr = @"icon_hash=(.*?)\)";
+        //        string p = Regex.Match(result, RegexStr).ToString().Replace("\"", "").Replace("\\", "");
+        //        string q = p.Replace(")", "").Replace("icon_hash=", "");
+        //        return q;
+        //    }
+        //    catch
+        //    {
+        //        return "无";
+        //    }
+
+        //}
+        //计算本地ico文件的md5值
+        private static string GetMD5HashFromFile(string fileName)
+        {
             try
             {
-                string url = "https://www.fofa.so/result?qbase64=" + base64string;
-                HttpWebRequest req = WebRequest.CreateHttp(url);
-                req.Method = "GET";
-                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                Stream resStream = resp.GetResponseStream();
-                StreamReader reader = new StreamReader(resStream, Encoding.UTF8);
-                string result = reader.ReadToEnd();
-                string RegexStr = @"icon_hash=(.*?)\)";
-                string p = Regex.Match(result, RegexStr).ToString().Replace("\"", "").Replace("\\", "");
-                string q = p.Replace(")", "").Replace("icon_hash=", "");
-                return q;
+                FileStream file = new FileStream(fileName, FileMode.Open);
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(file);
+                file.Close();
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                return sb.ToString();
             }
-            catch
+            catch (Exception ex)
             {
-                return "无";
+                throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
             }
-            
         }
 
         public string ConvertImageToBase64(Image file)
@@ -318,7 +340,9 @@ namespace C2.Business.CastleBravo.RobotsScan
             {
                 if (item != string.Empty)
                 {
-                    string hash = Get_Hash(item);
+                    //string hash = Get_Hash(item);
+                    string hash = GetMD5HashFromFile("C:\\Users\\FH\\Desktop\\favicon(2).ico");
+                    //MessageBox.Show(hash);
                     DataGridViewRow dr = new DataGridViewRow();   //一行表格
                     DataGridViewTextBoxCell textCellID = new DataGridViewTextBoxCell();   //textCell0  一个单元格
                     DataGridViewTextBoxCell textCellURL = new DataGridViewTextBoxCell();
