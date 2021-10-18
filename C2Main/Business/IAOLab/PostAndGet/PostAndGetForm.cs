@@ -84,7 +84,6 @@ namespace C2.Business.IAOLab.PostAndGet
                 return json;
             }
         }
-
         private void PostText(HttpWebRequest req, byte[] bytesToPost, string responseResult)
         {
             req.ContentLength = bytesToPost.Length;
@@ -111,12 +110,10 @@ namespace C2.Business.IAOLab.PostAndGet
             {
                 responseResult = ex.Message;
             }
-            /*
-            HttpWebResponse hwr = (HttpWebResponse)req.GetResponse();
-            //StringBuilder sb = new StringBuilder();
-            //foreach (DictionaryEntry head in hwr.Headers)
-            //    sb.AppendLine(String.Format("{0}:{1}", head.Key, head.Value));
 
+            
+            HttpWebResponse hwr = (HttpWebResponse)req.GetResponse();
+            var reponsestatusCode = Convert.ToInt32(hwr.StatusCode);
             WebHeaderCollection head = hwr.Headers;
             IEnumerator iem = head.GetEnumerator();
             ArrayList value = new ArrayList();
@@ -125,12 +122,15 @@ namespace C2.Business.IAOLab.PostAndGet
                 string key = head.GetKey(i);
                 value.Add(head.GetKey(i) + ":" + head.Get(key) + "\r\n");
             }
+
             StringBuilder ss = new StringBuilder();
+            ss.Append("StatusCode:" + reponsestatusCode + "\r\n");
+            
             foreach (var s in value)
             {
                 ss.Append(s.ToString());
             }
-            */
+            richTextBoxHeaders.Text = ss.ToString();
             try
             {
                 string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(responseResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(responseResult));
@@ -190,6 +190,7 @@ namespace C2.Business.IAOLab.PostAndGet
 
         public StringBuilder GetHeaders(HttpWebResponse resp)
         {
+            var reponsestatusCode = Convert.ToInt32(resp.StatusCode);
             WebHeaderCollection head = resp.Headers;
             IEnumerator iem = head.GetEnumerator();
             ArrayList value = new ArrayList();
@@ -199,6 +200,7 @@ namespace C2.Business.IAOLab.PostAndGet
                 value.Add(head.GetKey(i) + ":" + head.Get(key) + "\r\n");
             }
             StringBuilder ss = new StringBuilder();
+            ss.Append("StatusCode:" + reponsestatusCode + "\r\n");
             foreach (var s in value)
             {
                 ss.Append(s.ToString());
@@ -263,21 +265,10 @@ namespace C2.Business.IAOLab.PostAndGet
                                 if (IpProtocol == "HTTP")
                                 {
                                     weatherIpProHttp(req);
-                                    /*
-                                    WebProxy proxy = new WebProxy();
-                                    string IpPrefix = "http://";
-                                    proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
-                                    reqPost.Proxy = proxy;
-                                    */
                                 }
                                 else if (IpProtocol == "SOCKS")
                                 {
                                     weatherIpProSocks(req);
-                                    /*
-                                    string[] strArray = textBoxIp.Text.Split(new char[] { ':' }, 2);
-                                    var proxyScocks = new HttpToSocks5Proxy(new[] { new ProxyInfo(strArray[0], Convert.ToInt32(strArray[1])) });
-                                    req.Proxy = proxyScocks;
-                                    */
                                 }
                                 PostText(req, bytesToPost, responseResult);
                             }
@@ -325,6 +316,7 @@ namespace C2.Business.IAOLab.PostAndGet
                                     StringBuilder headerResult = GetHeaders(resp);
                                     string result = GetResultNullParam(resp);
                                     richTextBoxResponse.Text = result;
+                                    richTextBoxHeaders.Text = headerResult.ToString();                                
                                 }
                                 catch(Exception ex)
                                 {
@@ -334,8 +326,10 @@ namespace C2.Business.IAOLab.PostAndGet
                             else
                             {
                                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                                StringBuilder headerResult = GetHeaders(resp);
                                 string result = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = result;
+                                richTextBoxHeaders.Text = headerResult.ToString();
                             }
                         }
                         catch (Exception ex)
@@ -371,12 +365,15 @@ namespace C2.Business.IAOLab.PostAndGet
                                 StringBuilder headerResult = GetHeaders(resp);
                                 string resultHasParam = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = resultHasParam;
+                                richTextBoxHeaders.Text = headerResult.ToString();                            
                             }
                             else
                             {
                                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                                StringBuilder headerResult = GetHeaders(resp);
                                 string resultHasParam = GetResultNullParam(resp);
                                 richTextBoxResponse.Text = resultHasParam;
+                                richTextBoxHeaders.Text = headerResult.ToString();
                             }
                         }
                         catch (Exception ex)
