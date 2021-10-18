@@ -299,38 +299,19 @@ namespace C2.Business.IAOLab.PostAndGet
                             req.Timeout = Convert.ToInt32(textBoxTime.Text) * 1000;
                             req.ContentType = "application/x-www-form-urlencoded";
                             req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
-                            if (textBoxIp.Text != string.Empty)
+                            if (textBoxIp.Text != string.Empty && IpProtocol == "HTTP")
                             {
-                                try
-                                {
-                                    if (IpProtocol == "HTTP")
-                                    {
-                                        weatherIpProHttp(req);
-                                    }
-                                    else if (IpProtocol == "SOCKS")
-                                    {
-                                        //var proxytest = new HttpToSocks5Proxy(new[] { new ProxyInfo("213.186.119.58", 51302) });
-                                        weatherIpProSocks(req);
-                                    }
-                                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                                    StringBuilder headerResult = GetHeaders(resp);
-                                    string result = GetResultNullParam(resp);
-                                    richTextBoxResponse.Text = result;
-                                    richTextBoxHeaders.Text = headerResult.ToString();                                
-                                }
-                                catch(Exception ex)
-                                {
-                                    richTextBoxResponse.Text = ex.Message;
-                                }
+                                weatherIpProHttp(req);
                             }
-                            else
+                            else if (textBoxIp.Text != string.Empty && IpProtocol == "SOCKS")
                             {
-                                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                                StringBuilder headerResult = GetHeaders(resp);
-                                string result = GetResultNullParam(resp);
-                                richTextBoxResponse.Text = result;
-                                richTextBoxHeaders.Text = headerResult.ToString();
+                                weatherIpProSocks(req);
                             }
+                            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                            StringBuilder headerResult = GetHeaders(resp);
+                            string result = GetResultNullParam(resp);
+                            richTextBoxResponse.Text = result;
+                            richTextBoxHeaders.Text = headerResult.ToString();
                         }
                         catch (Exception ex)
                         {
@@ -351,30 +332,19 @@ namespace C2.Business.IAOLab.PostAndGet
                             req.Method = splitType;
                             req.ContentType = "application/x-www-form-urlencoded";
                             req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
-                            if (textBoxIp.Text != string.Empty)
+                            if (textBoxIp.Text != string.Empty && IpProtocol == "HTTP")
                             {
-                                if (IpProtocol == "HTTP")
-                                {
-                                    weatherIpProHttp(req);
-                                }
-                                else if (IpProtocol == "SOCKS")
-                                {
-                                    weatherIpProSocks(req);
-                                }
-                                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                                StringBuilder headerResult = GetHeaders(resp);
-                                string resultHasParam = GetResultNullParam(resp);
-                                richTextBoxResponse.Text = resultHasParam;
-                                richTextBoxHeaders.Text = headerResult.ToString();                            
+                                weatherIpProHttp(req);
                             }
-                            else
+                            else if (textBoxIp.Text != string.Empty && IpProtocol == "SOCKS")
                             {
-                                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                                StringBuilder headerResult = GetHeaders(resp);
-                                string resultHasParam = GetResultNullParam(resp);
-                                richTextBoxResponse.Text = resultHasParam;
-                                richTextBoxHeaders.Text = headerResult.ToString();
+                                weatherIpProSocks(req);
                             }
+                            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                            StringBuilder headerResult = GetHeaders(resp);
+                            string resultHasParam = GetResultNullParam(resp);
+                            richTextBoxResponse.Text = resultHasParam;
+                            richTextBoxHeaders.Text = headerResult.ToString();
                         }
                         catch (Exception ex)
                         {
