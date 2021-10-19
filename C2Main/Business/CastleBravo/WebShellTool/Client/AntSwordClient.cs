@@ -11,8 +11,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             :base(password, clientSetting)
         {
             this.prefix = password + "=";
-            ShellSplitS = RandomUtil.RandomHexString(10, 0);
-            ShellSplitE = RandomUtil.RandomHexString(6, 0);
+            ShellSplitS = RandomShellSplit();
+            ShellSplitE = RandomShellSplit();
         }
 
         private string RandomSPL()
@@ -22,6 +22,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             lenL -= lenR;
 
             return RandomUtil.RandomHexString(lenL, 0) + "\".\"" + RandomUtil.RandomHexString(lenR, 0);
+        }
+
+        private string RandomShellSplit()
+        {
+            int len = RandomUtil.RandomInt(6, 12);
+            return RandomUtil.RandomHexString(len, 0);
         }
 
         private string RandomSPR()
