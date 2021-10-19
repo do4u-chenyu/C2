@@ -6,6 +6,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     class CommonClient : IClient
     {
+        public string ShellSplitS;
+        public string ShellSplitE;
+
         protected string prefix;
         protected StringBuilder sb;
         protected ClientSetting clientSetting;
@@ -15,6 +18,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.clientSetting = ClientSetting.LoadSetting(clientSetting);
             this.prefix = password + "=" + this.clientSetting.PHP_MAKE + "&" + this.clientSetting.ACTION;
             this.sb = new StringBuilder();
+            ShellSplitS = "[S]";
+            ShellSplitE = "[E]";
         }
 
         public virtual string FetchLog()
@@ -109,6 +114,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         public virtual IClient AppendLog(string msg)
         {
             sb.Append(msg); return this;
+        }
+
+        public Tuple<string, string> GetShellParams()
+        {
+            return Tuple.Create(ShellSplitS, ShellSplitE);
         }
     }
 }

