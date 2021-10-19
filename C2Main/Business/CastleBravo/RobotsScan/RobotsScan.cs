@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,7 +22,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             InitializeComponent();
         }
 
-
         //读取json文件
         public static JObject ReadJson()
         {
@@ -35,48 +35,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                 }
             }
         }
-        //下载C2内部文件
-        private void DownLoad(List<string> results)
-        {
-            foreach(string item in results)
-            {
-                string FilePath = Path.Combine(Application.StartupPath, "Resources/Templates/"+item);//文件路径
-                string FileName = Path.GetFileName(FilePath);
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Title = "下载文件";
-                saveFileDialog.Filter = "txt文件(*.txt)|*.txt";
-
-                saveFileDialog.FileName = FileName;
-                DialogResult dialogResult = saveFileDialog.ShowDialog(this);
-                if (dialogResult == DialogResult.OK)
-                {
-                    System.Net.WebClient client = new System.Net.WebClient();
-                    byte[] data = client.DownloadData(FilePath);//一个真正存放数据的地址，一般我们将连接存在数据库中，数据存放在数据服务器上
-                    FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create);
-                    fs.Write(data, 0, data.Length);
-                    fs.Close();
-                    MessageBox.Show("下载成功！");
-                }
-            }
-            
-        }
-
-        //下载推荐漏洞文件
-        private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            MessageBox.Show("弹出");
-            if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewLinkColumn && e.RowIndex > -1 && dataGridView1.CurrentCell is DataGridViewLinkCell)
-            {
-                DataGridViewLinkCell cell = (DataGridViewLinkCell)dataGridView1.CurrentCell;
-                
-                List<string> test = new List<string>() { "WebRobots.json", "DocxExample.dotx" };//文件路径
-                DownLoad(test);
-                   
-
-                
-                //SaveScreenshotsToLocal(new List<WFDResult>() { TaskInfo.PreviewResults[e.RowIndex] });
-            }
-        }
+             
 
         //对字符串进行utf-8编码
         public static string get_uft8(string unicodeString)
@@ -87,32 +46,51 @@ namespace C2.Business.CastleBravo.RobotsScan
             return decodedString;
         }
 
-        //计算网站ico的hash值
-        private string Get_Hash(string domain)
-        {   //实现bsae64转码
-            string target = "http://" + domain + "/favicon.ico";
-            string utf8 = get_uft8(target);
-            byte[] b = System.Text.Encoding.Default.GetBytes(utf8);
-            string base64string = Convert.ToBase64String(b);
+        //计算本地ico文件的md5值
+        private static string GetMD5Hash(string domain)
+        {
             try
             {
-                string url = "https://www.fofa.so/result?qbase64=" + base64string;
-                HttpWebRequest req = WebRequest.CreateHttp(url);
-                req.Method = "GET";
-                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                Stream resStream = resp.GetResponseStream();
-                StreamReader reader = new StreamReader(resStream, Encoding.UTF8);
-                string result = reader.ReadToEnd();
-                string RegexStr = @"icon_hash=(.*?)\)";
-                string p = Regex.Match(result, RegexStr).ToString().Replace("\"", "").Replace("\\", "");
-                string q = p.Replace(")", "").Replace("icon_hash=", "");
-                return q;
+                string url = "http://" + domain + "/favicon.ico";
+                System.Net.WebRequest webreq = System.Net.WebRequest.Create(url);
+                System.Net.WebResponse webres = webreq.GetResponse();
+                System.IO.Stream stream = webres.GetResponseStream();
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(stream);
+                //file.Close();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                return sb.ToString();
             }
             catch
             {
                 return "无";
             }
-            
+           
+        }
+
+        private static string GetMD5HashFromFile(string fileName)
+        {
+            try
+            {
+                FileStream file = new FileStream(fileName, FileMode.Open);
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(file);
+                file.Close();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
+            }
         }
 
         public string ConvertImageToBase64(Image file)
@@ -125,7 +103,6 @@ namespace C2.Business.CastleBravo.RobotsScan
             }
 
         }
-
 
         private void InputTextBox_MouseDown(object sender, EventArgs e)
         {
@@ -305,6 +282,7 @@ namespace C2.Business.CastleBravo.RobotsScan
         
         private void button1_Click(object sender, EventArgs e)
         {
+            System.Net.WebClient wc = new System.Net.WebClient();
 
             StartTime = DateTime.Now;
             while (this.dataGridView1.Rows.Count != 0)
@@ -318,7 +296,7 @@ namespace C2.Business.CastleBravo.RobotsScan
             {
                 if (item != string.Empty)
                 {
-                    string hash = Get_Hash(item);
+                    string hash = GetMD5Hash(item);
                     DataGridViewRow dr = new DataGridViewRow();   //一行表格
                     DataGridViewTextBoxCell textCellID = new DataGridViewTextBoxCell();   //textCell0  一个单元格
                     DataGridViewTextBoxCell textCellURL = new DataGridViewTextBoxCell();
@@ -332,17 +310,14 @@ namespace C2.Business.CastleBravo.RobotsScan
                     textCellResult.Value = Match(item);   //字符串类型
                     textCellSpecial.Value = Special(item);
                     textCellHash.Value = hash;
-                    //textCellBugs.Value = "暂无";
-                    //textCellBugs.Tag = item;
-
                     dr.Cells.Add(textCellID);
-                    dr.Cells.Add(textCellURL);
+                    dr.Cells.Add(textCellURL);   
                     dr.Cells.Add(textCellHash);
                     dr.Cells.Add(textCellResult);   //一行单元格
                     dr.Cells.Add(textCellSpecial);
-                    //dr.Cells.Add(textCellBugs);
-
+                   
                     dataGridView1.Rows.Add(dr);
+                    
                 }
 
                 progressBar.Value = (a / urls.Length)*100;
