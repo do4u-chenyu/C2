@@ -186,19 +186,19 @@ namespace C2.Business.CastleBravo.RobotsScan
             // 
             this.urls.HeaderText = "查询域名";
             this.urls.Name = "urls";
-            this.urls.Width = 250;
+            this.urls.Width = 180;
             // 
             // hash
             // 
             this.hash.HeaderText = "MD5(favicon.ico)";
             this.hash.Name = "hash";
-            this.hash.Width = 180;
+            this.hash.Width = 250;
             // 
             // result
             // 
             this.result.HeaderText = "靶场匹配";
             this.result.Name = "result";
-            this.result.Width = 150;
+            this.result.Width = 160;
             // 
             // specials
             // 

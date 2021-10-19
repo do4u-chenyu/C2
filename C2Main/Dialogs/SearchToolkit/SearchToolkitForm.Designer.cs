@@ -413,7 +413,7 @@
             "侵公模型",
             "四方模型",
             "秒播vps",
-            "购置境外资产模型",
+            "购置境外网络资产模型",
             "md5逆向",
             "自定义查询"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);

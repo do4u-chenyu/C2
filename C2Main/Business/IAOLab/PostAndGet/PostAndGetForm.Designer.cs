@@ -49,11 +49,14 @@
             this.tabControlResponse = new System.Windows.Forms.TabControl();
             this.formatResponse = new System.Windows.Forms.TabPage();
             this.richTextBoxResponse = new System.Windows.Forms.RichTextBox();
+            this.tabPageHeaders = new System.Windows.Forms.TabPage();
+            this.richTextBoxHeaders = new System.Windows.Forms.RichTextBox();
             this.textBoxTime = new System.Windows.Forms.TextBox();
             this.labelTime = new System.Windows.Forms.Label();
             this.comboBoxIpProtocol = new System.Windows.Forms.ComboBox();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
+            this.tabPageHeaders.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxUrl
@@ -238,11 +241,11 @@
             // tabControlResponse
             // 
             this.tabControlResponse.Controls.Add(this.formatResponse);
+            this.tabControlResponse.Controls.Add(this.tabPageHeaders);
             this.tabControlResponse.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControlResponse.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.tabControlResponse.Location = new System.Drawing.Point(0, 310);
             this.tabControlResponse.Name = "tabControlResponse";
-            this.tabControlResponse.Padding = new System.Drawing.Point(1, 2);
             this.tabControlResponse.SelectedIndex = 0;
             this.tabControlResponse.Size = new System.Drawing.Size(736, 297);
             this.tabControlResponse.TabIndex = 20;
@@ -251,12 +254,12 @@
             // 
             this.formatResponse.BackColor = System.Drawing.SystemColors.Control;
             this.formatResponse.Controls.Add(this.richTextBoxResponse);
-            this.formatResponse.Location = new System.Drawing.Point(4, 26);
+            this.formatResponse.Location = new System.Drawing.Point(4, 28);
             this.formatResponse.Name = "formatResponse";
             this.formatResponse.Padding = new System.Windows.Forms.Padding(3);
-            this.formatResponse.Size = new System.Drawing.Size(728, 267);
+            this.formatResponse.Size = new System.Drawing.Size(728, 265);
             this.formatResponse.TabIndex = 0;
-            this.formatResponse.Text = "Response";
+            this.formatResponse.Text = "响应体";
             // 
             // richTextBoxResponse
             // 
@@ -267,9 +270,33 @@
             this.richTextBoxResponse.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxResponse.Name = "richTextBoxResponse";
             this.richTextBoxResponse.ReadOnly = true;
-            this.richTextBoxResponse.Size = new System.Drawing.Size(722, 261);
+            this.richTextBoxResponse.Size = new System.Drawing.Size(722, 259);
             this.richTextBoxResponse.TabIndex = 11;
             this.richTextBoxResponse.Text = "";
+            // 
+            // tabPageHeaders
+            // 
+            this.tabPageHeaders.Controls.Add(this.richTextBoxHeaders);
+            this.tabPageHeaders.Location = new System.Drawing.Point(4, 28);
+            this.tabPageHeaders.Name = "tabPageHeaders";
+            this.tabPageHeaders.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHeaders.Size = new System.Drawing.Size(728, 265);
+            this.tabPageHeaders.TabIndex = 1;
+            this.tabPageHeaders.Text = "响应头";
+            this.tabPageHeaders.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxHeaders
+            // 
+            this.richTextBoxHeaders.BackColor = System.Drawing.Color.White;
+            this.richTextBoxHeaders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxHeaders.Font = new System.Drawing.Font("宋体", 9F);
+            this.richTextBoxHeaders.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxHeaders.Name = "richTextBoxHeaders";
+            this.richTextBoxHeaders.ReadOnly = true;
+            this.richTextBoxHeaders.Size = new System.Drawing.Size(722, 259);
+            this.richTextBoxHeaders.TabIndex = 0;
+            this.richTextBoxHeaders.Text = "";
             // 
             // textBoxTime
             // 
@@ -338,6 +365,7 @@
             this.Text = "POST工具";
             this.tabControlResponse.ResumeLayout(false);
             this.formatResponse.ResumeLayout(false);
+            this.tabPageHeaders.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,5 +396,7 @@
         private System.Windows.Forms.TextBox textBoxTime;
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.ComboBox comboBoxIpProtocol;
+        private System.Windows.Forms.TabPage tabPageHeaders;
+        private System.Windows.Forms.RichTextBox richTextBoxHeaders;
     }
 }
