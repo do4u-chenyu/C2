@@ -24,6 +24,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.client = ClientFactory.Create(password, clientSetting);
         }
 
+        public string Suscide()
+        {
+            return Post(this.client.Suscide());
+        }
         public Tuple<string, string> ShellStart()
         {
             List<string> paths = PHPIndex();

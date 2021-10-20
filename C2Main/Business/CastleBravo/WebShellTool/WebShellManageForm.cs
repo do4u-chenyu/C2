@@ -307,5 +307,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             ClearAll();
         }
+
+        private void SuscideMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            WebShellTaskConfig config = LV.SelectedItems[0].Tag as WebShellTaskConfig;
+            WebShellClient client = new WebShellClient(config.Url, config.Password, config.ClientVersion);
+            client.Suscide();
+            RemoveToolStripMenuItem_Click(sender, e);
+        }
     }
 }

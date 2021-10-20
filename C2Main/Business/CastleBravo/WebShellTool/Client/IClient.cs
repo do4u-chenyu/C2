@@ -12,5 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         string PHPShell(string shellEnv, string command);   // 带二个参数构造payload
         string ExtractResponse(string response);
         Tuple<string,string> GetShellParams();
+        //
+        string Suscide();   // 一键自毁
     }
 }
