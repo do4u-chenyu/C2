@@ -163,11 +163,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             string param3v = RandomUtil.RandomHexString(2, 0) + ST.EncodeBase64(shellEnv);
 
             string shell = clientSetting.PHP_SHELL.Replace("@SPL", clientSetting.SPL)
-                                                    .Replace("@SPR", clientSetting.SPR)
-                                                    .Replace("@PARAM1K", param1k)
-                                                    .Replace("@PARAM2K", param2k)
-                                                    .Replace("@PARAM3K", param3k)
-                                                    .Replace("@TMDIR", clientSetting.CODE);
+                                                  .Replace("@SPR", clientSetting.SPR)
+                                                  .Replace("@PARAM1K", param1k)
+                                                  .Replace("@PARAM2K", param2k)
+                                                  .Replace("@PARAM3K", param3k)
+                                                  .Replace("@TMDIR", clientSetting.CODE);
 
             string payload = param1k + "=" + param1v + "&" +
                              param2k + "=" + param2v + "&" +
