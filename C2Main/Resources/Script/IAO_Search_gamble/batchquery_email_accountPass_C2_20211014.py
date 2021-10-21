@@ -15,11 +15,12 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-class Airport:
+class Email:
     def __init__(self, data_path, startTime, endTime):
         self.data_path = data_path
         self.startTime = startTime
         self.endTime = endTime
+        self.querycontent = []
 
     def queryclient(self, keyWords):
         batch = []
@@ -39,21 +40,16 @@ class Airport:
             '--dbfilter', '\'' + ' OR '.join(['"' + value.decode('utf-8').encode('GBK') + '"' + ' in _SUBJECT' for value in LOGIN_VALUE]) + '\''
         ]
 
-        querystring = ". /home/search/search_profile && {0} > ".format(" ".join(cmd)) + DATA_PATH[2:] + "/fullfile; "
-        main_full_file = "cat " + DATA_PATH[2:] + "/fullfile | grep '_MAINFILE' > " + DATA_PATH[2:] + "/mainfile; "
-        ZIP_PATH = areacode + DATA_PATH[2:] + startTime + '_' + endTime + '.tgz'
+        querystring = ". /home/search/search_profile && {0} ".format(" ".join(cmd))
+        pipe = Popen(querystring, shell=True, stdout=PIPE)
+        print querystring
+        for line in pipe.stdout:
+            line = line.replace('\n','')
+            if '_MAINFILE' in line:
+                MAINFILE=line.replace('_MAINFILE: ', '')
+                self.querycontent.append(MAINFILE)
+        return self.querycontent
         
-        email = "if [ ! -s " + DATA_PATH[2:] + "/mainfile ]; then tar -zcvf " + ZIP_PATH + " " + DATA_PATH[2:] + " --remove-files; else sed -i 's/_MAINFILE: //g' " + DATA_PATH[2:] +  "/mainfile; wget -P " + DATA_PATH[2:] + " -i " + DATA_PATH[2:] + "/mainfile; tar -zcvf " + ZIP_PATH + " " +DATA_PATH[2:] + " --remove-files; fi"
-        
-        pipe = Popen(querystring + main_full_file + email, shell=True, stdout=PIPE)
-        print querystring + main_full_file + email
-        
-        out, err = pipe.communicate()
-        if pipe.returncode:
-            LOGGER.warning("Compress dirs failed with error code: {0}".format(pipe.returncode))
-            LOGGER.warning(err.decode())
-        else:
-            LOGGER.info("Compress dirs success!.")
 
     def run_query(self):
         KEY_WORDS = "donotreply_SG@godaddy.com OR support@namesilo.com OR orders@dynadot.com"
@@ -61,11 +57,17 @@ class Airport:
 
         try:
             LOGGER.info(
-                'OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(KEY_WORDS, self.startTime,self.endTime))
+                'QUERY_KEYS:{0}\nQUERYTIME:{1}_{2}'.format(KEY_WORDS, self.startTime,self.endTime))
         except Exception, e:
                 LOGGER.info('QUERY_ERROR-{0}'.format(e))
-        self.queryclient(KEY_WORDS)
-
+        mainfiles = self.queryclient(KEY_WORDS)
+        with open(os.path.join(self.data_path, 'mainfile'), 'a+') as f:
+            f.write('\n'.join(mainfiles))
+        email = "if [ -s " + DATA_PATH[2:] + "/mainfile ]; then wget -P " + DATA_PATH[2:] + " -i " + DATA_PATH[2:] + "/mainfile; fi"
+        rep = Popen(email, shell= True, stdout=PIPE)
+        for line in rep.stdout:
+            print line 
+            
 # #日志文件打印
 def init_logger(logname, filename, logger_level=logging.INFO):
     logger = logging.getLogger(logname)
@@ -85,7 +87,6 @@ def init_logger(logname, filename, logger_level=logging.INFO):
 def zip_result(DATA_PATH, ZIP_PATH):
     pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:], '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
-    print out
     if pipe.returncode:
         LOGGER.warning("Compress dirs failed with error code: {0}".format(pipe.returncode))
         LOGGER.warning(err.decode())
@@ -100,13 +101,13 @@ def init_path(path):
 
 def main():
     LOGGER.info('START EMAIL QUERY BATCH....')
-    ap = Airport(DATA_PATH, startTime, endTime)
+    ap = Email(DATA_PATH, startTime, endTime)
     ap.run_query()
+    ZIP_PATH = DATA_PATH + startTime + '_' + endTime + '.tgz.tmp'
+    zip_result(DATA_PATH, ZIP_PATH)
+    ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
+    os.rename(ZIP_PATH, ZIP_SUCCEED)
     LOGGER.info('END EMAIL QUERY BATCH')
-    # ZIP_PATH = DATA_PATH + startTime + '_' + endTime + '.tgz.tmp'
-    # zip_result(DATA_PATH, ZIP_PATH)
-    # ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
-    # os.rename(ZIP_PATH, ZIP_SUCCEED)
 
 
 if __name__ == '__main__':
