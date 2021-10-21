@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
 using C2.Utils;
 using MihaZupan;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
@@ -81,13 +80,13 @@ namespace C2.Business.IAOLab.PostAndGet
                         sr.Close();
                     }
                     resp.Close();
+                    richTextBoxHeaders.Text = GetHeaders(resp).ToString();
                 }
             }
             catch (Exception ex)
             {
                 responseResult = ex.Message;
             }
-            richTextBoxHeaders.Text = GetHeaders(resp).ToString();
             string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(responseResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(responseResult));
             richTextBoxResponse.Text = result.ToString();
         }
