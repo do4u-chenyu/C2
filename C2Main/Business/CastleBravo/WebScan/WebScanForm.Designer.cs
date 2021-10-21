@@ -41,6 +41,8 @@
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.refreshDictBtn = new System.Windows.Forms.Button();
             this.openDictPathBtn = new System.Windows.Forms.Button();
             this.dictListView = new System.Windows.Forms.ListView();
@@ -89,10 +91,8 @@
             this.loginCheckBox = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.editorCheckBox = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.loopCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -223,6 +223,26 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(246, 15);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "全不选";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(165, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "全选";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // refreshDictBtn
             // 
@@ -612,7 +632,7 @@
             this.groupBox6.Controls.Add(this.loginCheckBox);
             this.groupBox6.Controls.Add(this.checkBox3);
             this.groupBox6.Controls.Add(this.editorCheckBox);
-            this.groupBox6.Controls.Add(this.checkBox1);
+            this.groupBox6.Controls.Add(this.loopCheckBox);
             this.groupBox6.Location = new System.Drawing.Point(675, 12);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(100, 166);
@@ -655,36 +675,16 @@
             this.editorCheckBox.UseVisualStyleBackColor = true;
             this.editorCheckBox.CheckedChanged += new System.EventHandler(this.EditorCheckBox_CheckedChanged);
             // 
-            // checkBox1
+            // loopCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 26);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(66, 16);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "403遍历";
-            this.toolTip1.SetToolTip(this.checkBox1, "利用403返回码和专用字典，高效遍历网站目录。");
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(165, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "全选";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(246, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "全不选";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.loopCheckBox.AutoSize = true;
+            this.loopCheckBox.Location = new System.Drawing.Point(15, 26);
+            this.loopCheckBox.Name = "loopCheckBox";
+            this.loopCheckBox.Size = new System.Drawing.Size(66, 16);
+            this.loopCheckBox.TabIndex = 0;
+            this.loopCheckBox.Text = "403遍历";
+            this.toolTip1.SetToolTip(this.loopCheckBox, "利用403返回码和专用字典，高效遍历网站目录。");
+            this.loopCheckBox.UseVisualStyleBackColor = true;
             // 
             // WebScanForm
             // 
@@ -784,7 +784,7 @@
         private System.Windows.Forms.CheckBox loginCheckBox;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox editorCheckBox;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox loopCheckBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
