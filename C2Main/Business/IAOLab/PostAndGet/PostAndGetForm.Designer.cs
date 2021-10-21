@@ -334,7 +334,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.comboBoxIpProtocol.Name = "comboBoxIpProtocol";
             this.comboBoxIpProtocol.Size = new System.Drawing.Size(60, 20);
             this.comboBoxIpProtocol.TabIndex = 101;
-            this.comboBoxIpProtocol.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            this.comboBoxIpProtocol.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged_1);
             // 
             // labelHistory
             // 
@@ -359,7 +359,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.comboBoxHistory.Name = "comboBoxHistory";
             this.comboBoxHistory.Size = new System.Drawing.Size(169, 20);
             this.comboBoxHistory.TabIndex = 103;
-            this.comboBoxHistory.SelectedIndexChanged += new System.EventHandler(this.comboBoxHistory_SelectedIndexChanged);
+            this.comboBoxHistory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxHistory_SelectedIndexChanged);
             // 
             // PostAndGetForm
             // 
