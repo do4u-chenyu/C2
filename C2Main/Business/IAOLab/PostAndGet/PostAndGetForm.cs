@@ -17,7 +17,7 @@ namespace C2.Business.IAOLab.PostAndGet
         string splitType;
         string encodeOutput;
         string IpProtocol;
-        HttpWebResponse cnblogsRespone;
+        HttpWebResponse cnblogsResponse;
         HttpWebRequest req;
         public PostAndGetForm()
         {
@@ -60,60 +60,38 @@ namespace C2.Business.IAOLab.PostAndGet
             }       
         }
         
-        private string ConvertJsonString(string json)
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            TextReader tr = new StringReader(json);
-            JsonTextReader jtr = new JsonTextReader(tr);
-            object obj = serializer.Deserialize(jtr);
-            if (obj != null)
-            {
-                StringWriter textWriter = new StringWriter();
-                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
-                {
-                    Formatting = Formatting.Indented,
-                    Indentation = 4,
-                    IndentChar = OpUtil.Blank
-                };
-                serializer.Serialize(jsonWriter, obj);
-                return textWriter.ToString();
-            }
-            else
-            {
-                return json;
-            }
-        }
         private void PostText(HttpWebRequest req, byte[] bytesToPost)
         {
+            using (Stream reqStream = req.GetRequestStream())
+            reqStream.Write(bytesToPost, 0, bytesToPost.Length);
+            cnblogsResponse = (HttpWebResponse)req.GetResponse();
+            GetResultParam(cnblogsResponse);
+        }
+        public void GetResultParam(HttpWebResponse resp)
+        {
             string responseResult = string.Empty;
-            try 
+            try
             {
-                using (Stream reqStream = req.GetRequestStream())
+                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
                 {
-                    reqStream.Write(bytesToPost, 0, bytesToPost.Length);
-                }
-                cnblogsRespone = (HttpWebResponse)req.GetResponse();
-                if (cnblogsRespone != null && cnblogsRespone.StatusCode == HttpStatusCode.OK)
-                {
-                    StreamReader sr;
                     Encoding readerEncode = encodeOutput == "UTF-8" ? Encoding.UTF8 : Encoding.Default;
-                    using (sr = new StreamReader(cnblogsRespone.GetResponseStream(), readerEncode))
+                    using (StreamReader sr = new StreamReader(resp.GetResponseStream(), readerEncode))
                     {
                         responseResult = sr.ReadToEnd();
                         sr.Close();
                     }
+                    resp.Close();
                 }
-                cnblogsRespone.Close();
             }
-            catch(WebException ex) 
+            catch (Exception ex)
             {
                 responseResult = ex.Message;
             }
-            richTextBoxHeaders.Text = GetHeaders(cnblogsRespone).ToString();
+            richTextBoxHeaders.Text = GetHeaders(resp).ToString();
             string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(responseResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(responseResult));
             richTextBoxResponse.Text = result.ToString();
-            //richTextBoxResponse.Text = ConvertJsonString(result.ToString());
         }
+
         public static byte[] ReadFully(Stream stream)
         {
             byte[] buffer = new byte[512];
@@ -169,31 +147,11 @@ namespace C2.Business.IAOLab.PostAndGet
             }
             return HeadersValue;
         }
-        public string GetResultNullParam(HttpWebResponse resp)
-        {
-            string getResult = string.Empty;
-            Stream stream = resp.GetResponseStream();
-            try
-            {
-                Encoding readerEncode = encodeOutput == "UTF-8" ? Encoding.UTF8 : Encoding.Default;
-                using (StreamReader reader = new StreamReader(stream, readerEncode))
-                {
-                    getResult = reader.ReadToEnd();
-                }
-                stream.Close();
-            }
-            catch(Exception ex)
-            {
-                getResult = ex.Message;
-            }
-            string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(getResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(getResult));
-            return result;
-        }
+    
         public HttpWebRequest WeatherIpProHttp(HttpWebRequest req)
         {
             WebProxy proxy = new WebProxy();
-            string IpPrefix = "http://";
-            proxy.Address = new Uri(String.Format("{0}{1}", IpPrefix, textBoxIp.Text));
+            proxy.Address = new Uri(String.Format("{0}{1}", "http://", textBoxIp.Text));
             req.Proxy = proxy;
             return req;
         }
@@ -226,28 +184,18 @@ namespace C2.Business.IAOLab.PostAndGet
             using (GuarderUtil.WaitCursor)
             {
                 if (splitType == "POST")
-                {
                     PostSubmit();
-                }
                 else if (splitType == "GET")
-                {
                     GetSubmit();
-                }
                 else if (splitType == "PUT")
-                {
                     PutSubmit();
-                }
                 else if (splitType == "HEAD")
-                {
                     await HeadTextAsync();
-                }
                 else if (splitType == "OPTIONS")
-                {
                     await OptionsTextAsync();
-                }
             }     
         }
-        private void weatherNullPost(byte[] paramsData,HttpWebRequest req)
+        private void WeatherNullPost(byte[] paramsData,HttpWebRequest req)
         {
             if (paramsData != null)
             {
@@ -261,6 +209,16 @@ namespace C2.Business.IAOLab.PostAndGet
                 req.ContentLength = 0;
             }
         }
+        private void ConfigurationPostGet(HttpWebRequest req)
+        {
+            req.Method = splitType;
+            req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.Headers.Set("cookie", textBoxCookie.Text);
+            if (textBoxIp.Text != string.Empty)
+                _ = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
+            HistoryPost(textBoxPost.Text);
+        }
 
         private void PutSubmit()
         {
@@ -271,9 +229,8 @@ namespace C2.Business.IAOLab.PostAndGet
                 req = WebRequest.Create(textBoxUrl.Text) as HttpWebRequest;
                 req.Method = splitType;
                 req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
-                req.AllowAutoRedirect = false;
                 req.ContentType = "application/json";
-                weatherNullPost(paramsData,req);
+                WeatherNullPost(paramsData,req);
                 using (HttpWebResponse webResponse = (HttpWebResponse)req.GetResponse())
                 {
                     Stream getStream = webResponse.GetResponseStream();
@@ -291,19 +248,12 @@ namespace C2.Business.IAOLab.PostAndGet
 
         private void GetSubmit()
         {
-            req = textBoxPost.Text == string.Empty ? WebRequest.Create(textBoxUrl.Text) as HttpWebRequest : WebRequest.Create(textBoxUrl.Text + "?" + textBoxPost.Text) as HttpWebRequest;
             try
             {
-                req.Method = splitType;
-                req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
-                req.ContentType = "application/x-www-form-urlencoded";
-                req.Headers.Set("cookie", textBoxCookie.Text);
-                if (textBoxIp.Text != string.Empty)
-                    req = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
-                HistoryPost(textBoxPost.Text);
+                req = textBoxPost.Text == string.Empty ? WebRequest.Create(textBoxUrl.Text) as HttpWebRequest : WebRequest.Create(textBoxUrl.Text + "?" + textBoxPost.Text) as HttpWebRequest;
+                ConfigurationPostGet(req);
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                richTextBoxResponse.Text = GetResultNullParam(resp);
-                richTextBoxHeaders.Text = GetHeaders(resp).ToString();
+                GetResultParam(resp);
             }
             catch (Exception ex)
             {
@@ -313,18 +263,11 @@ namespace C2.Business.IAOLab.PostAndGet
 
         private void PostSubmit()
         {
-            HistoryPost(textBoxPost.Text);
             byte[] bytesToPost = Encoding.UTF8.GetBytes(textBoxPost.Text);
             try
             {
                 req = WebRequest.Create(textBoxUrl.Text) as HttpWebRequest;
-                req.Method = splitType;
-                req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
-                req.ContentType = "application/x-www-form-urlencoded";
-                req.Headers.Set("cookie", textBoxCookie.Text);
-                req.ContentLength = bytesToPost.Length;
-                if (textBoxIp.Text != string.Empty)
-                    req = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
+                ConfigurationPostGet(req);
                 PostText(req, bytesToPost);
             }
             catch (Exception ex)
@@ -333,11 +276,11 @@ namespace C2.Business.IAOLab.PostAndGet
             }
         }
 
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             IpProtocol = comboBoxIpProtocol.SelectedItem as string;
         }
-        private void comboBoxHistory_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxHistory.SelectedItem != null)
             {
