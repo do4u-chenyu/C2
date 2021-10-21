@@ -76,7 +76,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // 
             this.labelPost.AutoSize = true;
             this.labelPost.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelPost.Location = new System.Drawing.Point(9, 47);
+            this.labelPost.Location = new System.Drawing.Point(9, 48);
             this.labelPost.Name = "labelPost";
             this.labelPost.Size = new System.Drawing.Size(39, 17);
             this.labelPost.TabIndex = 2;
@@ -85,7 +85,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // textBoxPost
             // 
             this.textBoxPost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxPost.Location = new System.Drawing.Point(12, 67);
+            this.textBoxPost.Location = new System.Drawing.Point(12, 71);
             this.textBoxPost.Multiline = true;
             this.textBoxPost.Name = "textBoxPost";
             this.textBoxPost.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -96,7 +96,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // 
             this.labelCookie.AutoSize = true;
             this.labelCookie.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelCookie.Location = new System.Drawing.Point(9, 142);
+            this.labelCookie.Location = new System.Drawing.Point(9, 147);
             this.labelCookie.Name = "labelCookie";
             this.labelCookie.Size = new System.Drawing.Size(49, 17);
             this.labelCookie.TabIndex = 5;
@@ -105,7 +105,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // textBoxCookie
             // 
             this.textBoxCookie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxCookie.Location = new System.Drawing.Point(12, 162);
+            this.textBoxCookie.Location = new System.Drawing.Point(12, 167);
             this.textBoxCookie.Multiline = true;
             this.textBoxCookie.Name = "textBoxCookie";
             this.textBoxCookie.Size = new System.Drawing.Size(347, 48);
@@ -116,7 +116,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.labelCookieFormat.AutoSize = true;
             this.labelCookieFormat.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelCookieFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelCookieFormat.Location = new System.Drawing.Point(11, 218);
+            this.labelCookieFormat.Location = new System.Drawing.Point(11, 221);
             this.labelCookieFormat.Name = "labelCookieFormat";
             this.labelCookieFormat.Size = new System.Drawing.Size(296, 12);
             this.labelCookieFormat.TabIndex = 100;
@@ -126,7 +126,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // 
             this.labelHeader.AutoSize = true;
             this.labelHeader.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelHeader.Location = new System.Drawing.Point(374, 142);
+            this.labelHeader.Location = new System.Drawing.Point(374, 147);
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(51, 17);
             this.labelHeader.TabIndex = 8;
@@ -135,7 +135,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // textBoxHeader
             // 
             this.textBoxHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxHeader.Location = new System.Drawing.Point(377, 162);
+            this.textBoxHeader.Location = new System.Drawing.Point(377, 167);
             this.textBoxHeader.Multiline = true;
             this.textBoxHeader.Name = "textBoxHeader";
             this.textBoxHeader.Size = new System.Drawing.Size(347, 48);
@@ -146,7 +146,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.labelHeaderFormat.AutoSize = true;
             this.labelHeaderFormat.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelHeaderFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelHeaderFormat.Location = new System.Drawing.Point(375, 218);
+            this.labelHeaderFormat.Location = new System.Drawing.Point(375, 221);
             this.labelHeaderFormat.Name = "labelHeaderFormat";
             this.labelHeaderFormat.Size = new System.Drawing.Size(173, 12);
             this.labelHeaderFormat.TabIndex = 100;
@@ -339,21 +339,25 @@ namespace C2.Business.IAOLab.PostAndGet
             // labelHistory
             // 
             this.labelHistory.AutoSize = true;
-            this.labelHistory.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelHistory.Location = new System.Drawing.Point(550, 47);
+            this.labelHistory.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelHistory.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.labelHistory.Location = new System.Drawing.Point(500, 48);
             this.labelHistory.Name = "labelHistory";
-            this.labelHistory.Size = new System.Drawing.Size(49, 17);
+            this.labelHistory.Size = new System.Drawing.Size(56, 17);
             this.labelHistory.TabIndex = 102;
-            this.labelHistory.Text = "History";
+            this.labelHistory.Text = "历史记录";
             // 
             // comboBoxHistory
             // 
-            this.comboBoxHistory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxHistory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBoxHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxHistory.DropDownWidth = 169;
+            this.comboBoxHistory.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.comboBoxHistory.FormattingEnabled = true;
-            this.comboBoxHistory.Location = new System.Drawing.Point(603, 44);
+            this.comboBoxHistory.Location = new System.Drawing.Point(555, 46);
+            this.comboBoxHistory.MaxDropDownItems = 40;
             this.comboBoxHistory.Name = "comboBoxHistory";
-            this.comboBoxHistory.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxHistory.Size = new System.Drawing.Size(169, 20);
             this.comboBoxHistory.TabIndex = 103;
             this.comboBoxHistory.SelectedIndexChanged += new System.EventHandler(this.comboBoxHistory_SelectedIndexChanged);
             // 

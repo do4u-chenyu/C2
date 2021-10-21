@@ -3,12 +3,9 @@ using C2.Utils;
 using MihaZupan;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -210,14 +207,18 @@ namespace C2.Business.IAOLab.PostAndGet
 
         public void HistoryPost(string postData)
         {
-            if (postData != string.Empty)
-            {
-                if (!comboBoxHistory.Items.Contains(postData))
-                    comboBoxHistory.Items.Insert(0, postData);
+            if (postData == string.Empty)
+                return;
 
-                if (comboBoxHistory.Items.Count > 100)
-                    comboBoxHistory.Items.RemoveAt(comboBoxHistory.Items.Count - 1);
-            }
+            if (!comboBoxHistory.Items.Contains(postData))
+                comboBoxHistory.Items.Insert(0, postData);
+
+            if (comboBoxHistory.Items.Count > comboBoxHistory.MaxDropDownItems)
+                comboBoxHistory.Items.RemoveAt(comboBoxHistory.Items.Count - 1);
+            // 动态调整下拉框的长度
+            int width = TextRenderer.MeasureText(postData, comboBoxHistory.Font).Width;
+            if (width > comboBoxHistory.DropDownWidth)
+                comboBoxHistory.DropDownWidth = Math.Min(width, 500);
         }
 
         private async void Submit_ClickAsync(object sender, EventArgs e)
