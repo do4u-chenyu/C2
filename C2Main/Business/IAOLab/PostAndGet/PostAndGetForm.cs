@@ -215,10 +215,10 @@ namespace C2.Business.IAOLab.PostAndGet
 
             if (comboBoxHistory.Items.Count > comboBoxHistory.MaxDropDownItems)
                 comboBoxHistory.Items.RemoveAt(comboBoxHistory.Items.Count - 1);
-            // 动态调整下拉框的长度
+            // 动态调整下拉框的长度， 固定5:1宽高比
             int width = TextRenderer.MeasureText(postData, comboBoxHistory.Font).Width;
             if (width > comboBoxHistory.DropDownWidth)
-                comboBoxHistory.DropDownWidth = Math.Min(width, 500);
+                comboBoxHistory.DropDownWidth = Math.Min(width, comboBoxHistory.DropDownHeight * 5);
         }
 
         private async void Submit_ClickAsync(object sender, EventArgs e)
