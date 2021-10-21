@@ -286,5 +286,10 @@ namespace C2.Business.IAOLab.PostAndGet
                 textBoxPost.Text = comboBoxHistory.SelectedItem.ToString();
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.textBoxIp.Text = this.textBoxIp.Text.Trim() == string.Empty ? "127.0.0.1:10809" : string.Empty;
+        }
     }
 }
