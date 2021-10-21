@@ -85,7 +85,7 @@ namespace C2.Business.IAOLab.PostAndGet
             // textBoxPost
             // 
             this.textBoxPost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxPost.Location = new System.Drawing.Point(12, 64);
+            this.textBoxPost.Location = new System.Drawing.Point(12, 67);
             this.textBoxPost.Multiline = true;
             this.textBoxPost.Name = "textBoxPost";
             this.textBoxPost.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -342,9 +342,9 @@ namespace C2.Business.IAOLab.PostAndGet
             this.labelHistory.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.labelHistory.Location = new System.Drawing.Point(550, 47);
             this.labelHistory.Name = "labelHistory";
-            this.labelHistory.Size = new System.Drawing.Size(47, 17);
+            this.labelHistory.Size = new System.Drawing.Size(49, 17);
             this.labelHistory.TabIndex = 102;
-            this.labelHistory.Text = "history";
+            this.labelHistory.Text = "History";
             // 
             // comboBoxHistory
             // 
