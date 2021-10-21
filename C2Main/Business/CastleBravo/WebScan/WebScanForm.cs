@@ -408,7 +408,28 @@ namespace C2.Business.CastleBravo.WebScan
                 if (config.ShowCodes.Contains(svinfo.code.ToString()))
                     this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
 
-                //LogInfo("扫描完成-----" + svinfo.url + "-----" + "状态码：" + svinfo.code);
+                if (loopCheckBox.Checked && svinfo.code == 403 && this.dictContent.ContainsKey("PHP一级目录.txt")) //403遍历模式，命中403的url加入队列再次扫描
+                {
+                    List<string> urlList = this.dictContent["PHP一级目录.txt"];
+
+                    scanSumCount += urlList.Count;//下方进度条显示总数也要相应增加
+                    foreach (string url in urlList)
+                    {
+                        this.scanDirCount++;
+
+                        ServerInfo loop = new ServerInfo();
+                        loop.target = svinfo.url;
+                        loop.host = tools.UpdateUrl(svinfo.url, true);
+                        loop.id = this.scanDirCount;
+                        loop.type = "目录";
+                        loop.path = url;
+                        loop.url = loop.host + url;
+
+                        stp.WaitFor(1000, 10000);
+                        stp.QueueWorkItem<ServerInfo>(ScanExistsDirs, loop);
+                    }
+                }
+                
             }
             else
                 LogError("扫描失败-----" + svinfo.url + "-----" + result.contentType);
