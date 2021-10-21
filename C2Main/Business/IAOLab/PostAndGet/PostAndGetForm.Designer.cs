@@ -1,4 +1,6 @@
-﻿namespace C2.Business.IAOLab.PostAndGet
+﻿using System.Windows.Forms;
+
+namespace C2.Business.IAOLab.PostAndGet
 {
     partial class PostAndGetForm
     {
@@ -54,6 +56,8 @@
             this.textBoxTime = new System.Windows.Forms.TextBox();
             this.labelTime = new System.Windows.Forms.Label();
             this.comboBoxIpProtocol = new System.Windows.Forms.ComboBox();
+            this.labelHistory = new System.Windows.Forms.Label();
+            this.comboBoxHistory = new System.Windows.Forms.ComboBox();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
             this.tabPageHeaders.SuspendLayout();
@@ -332,11 +336,34 @@
             this.comboBoxIpProtocol.TabIndex = 101;
             this.comboBoxIpProtocol.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
+            // labelHistory
+            // 
+            this.labelHistory.AutoSize = true;
+            this.labelHistory.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.labelHistory.Location = new System.Drawing.Point(550, 47);
+            this.labelHistory.Name = "labelHistory";
+            this.labelHistory.Size = new System.Drawing.Size(47, 17);
+            this.labelHistory.TabIndex = 102;
+            this.labelHistory.Text = "history";
+            // 
+            // comboBoxHistory
+            // 
+            this.comboBoxHistory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxHistory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBoxHistory.FormattingEnabled = true;
+            this.comboBoxHistory.Location = new System.Drawing.Point(603, 44);
+            this.comboBoxHistory.Name = "comboBoxHistory";
+            this.comboBoxHistory.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxHistory.TabIndex = 103;
+            this.comboBoxHistory.SelectedIndexChanged += new System.EventHandler(this.comboBoxHistory_SelectedIndexChanged);
+            // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 607);
+            this.Controls.Add(this.comboBoxHistory);
+            this.Controls.Add(this.labelHistory);
             this.Controls.Add(this.comboBoxIpProtocol);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.textBoxTime);
@@ -398,5 +425,7 @@
         private System.Windows.Forms.ComboBox comboBoxIpProtocol;
         private System.Windows.Forms.TabPage tabPageHeaders;
         private System.Windows.Forms.RichTextBox richTextBoxHeaders;
+        private System.Windows.Forms.Label labelHistory;
+        private System.Windows.Forms.ComboBox comboBoxHistory;
     }
 }
