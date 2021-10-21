@@ -41,6 +41,8 @@
             this.urlTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.refreshDictBtn = new System.Windows.Forms.Button();
             this.openDictPathBtn = new System.Windows.Forms.Button();
             this.dictListView = new System.Windows.Forms.ListView();
@@ -86,10 +88,10 @@
             this.exportBtn = new System.Windows.Forms.Button();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.loginCheckBox = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.editorCheckBox = new System.Windows.Forms.CheckBox();
+            this.loopCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,7 +154,8 @@
             this.httpMethodCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.httpMethodCombo.FormattingEnabled = true;
             this.httpMethodCombo.Items.AddRange(new object[] {
-            "GET"});
+            "GET",
+            "HEAD"});
             this.httpMethodCombo.Location = new System.Drawing.Point(230, 111);
             this.httpMethodCombo.Name = "httpMethodCombo";
             this.httpMethodCombo.Size = new System.Drawing.Size(81, 20);
@@ -209,6 +212,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.refreshDictBtn);
             this.groupBox2.Controls.Add(this.openDictPathBtn);
             this.groupBox2.Controls.Add(this.dictListView);
@@ -218,6 +223,26 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(246, 15);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "全不选";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(165, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "全选";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // refreshDictBtn
             // 
@@ -285,7 +310,7 @@
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(778, 12);
+            this.groupBox3.Location = new System.Drawing.Point(783, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(119, 166);
             this.groupBox3.TabIndex = 2;
@@ -604,27 +629,28 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.checkBox4);
+            this.groupBox6.Controls.Add(this.loginCheckBox);
             this.groupBox6.Controls.Add(this.checkBox3);
-            this.groupBox6.Controls.Add(this.checkBox2);
-            this.groupBox6.Controls.Add(this.checkBox1);
+            this.groupBox6.Controls.Add(this.editorCheckBox);
+            this.groupBox6.Controls.Add(this.loopCheckBox);
             this.groupBox6.Location = new System.Drawing.Point(675, 12);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(97, 166);
+            this.groupBox6.Size = new System.Drawing.Size(100, 166);
             this.groupBox6.TabIndex = 9;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "扫描策略_TODO";
             // 
-            // checkBox4
+            // loginCheckBox
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(15, 143);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(72, 16);
-            this.checkBox4.TabIndex = 3;
-            this.checkBox4.Text = "入口扫描";
-            this.toolTip1.SetToolTip(this.checkBox4, "扫描各种等级的登录入口");
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.loginCheckBox.AutoSize = true;
+            this.loginCheckBox.Location = new System.Drawing.Point(15, 143);
+            this.loginCheckBox.Name = "loginCheckBox";
+            this.loginCheckBox.Size = new System.Drawing.Size(72, 16);
+            this.loginCheckBox.TabIndex = 3;
+            this.loginCheckBox.Text = "入口素描";
+            this.toolTip1.SetToolTip(this.loginCheckBox, "扫描各种等级的登录入口");
+            this.loginCheckBox.UseVisualStyleBackColor = true;
+            this.loginCheckBox.CheckedChanged += new System.EventHandler(this.LoginCheckBox_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -633,31 +659,32 @@
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 2;
-            this.checkBox3.Text = "指纹扫描";
+            this.checkBox3.Text = "指纹素描";
             this.toolTip1.SetToolTip(this.checkBox3, "cms，thinkphp，wp等模板指纹探测");
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // editorCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(15, 65);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 16);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Edit扫描";
-            this.toolTip1.SetToolTip(this.checkBox2, "探测网站所用的Edit控件，经常会被用来后续的文件上传漏洞检测。");
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.editorCheckBox.AutoSize = true;
+            this.editorCheckBox.Location = new System.Drawing.Point(15, 65);
+            this.editorCheckBox.Name = "editorCheckBox";
+            this.editorCheckBox.Size = new System.Drawing.Size(84, 16);
+            this.editorCheckBox.TabIndex = 1;
+            this.editorCheckBox.Text = "编辑器素描";
+            this.toolTip1.SetToolTip(this.editorCheckBox, "探测网站所用的编辑器控件，经常会被用来后续的文件上传漏洞检测。");
+            this.editorCheckBox.UseVisualStyleBackColor = true;
+            this.editorCheckBox.CheckedChanged += new System.EventHandler(this.EditorCheckBox_CheckedChanged);
             // 
-            // checkBox1
+            // loopCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 26);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(66, 16);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "403遍历";
-            this.toolTip1.SetToolTip(this.checkBox1, "利用403返回码和专用字典，高效遍历网站目录。");
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.loopCheckBox.AutoSize = true;
+            this.loopCheckBox.Location = new System.Drawing.Point(15, 26);
+            this.loopCheckBox.Name = "loopCheckBox";
+            this.loopCheckBox.Size = new System.Drawing.Size(66, 16);
+            this.loopCheckBox.TabIndex = 0;
+            this.loopCheckBox.Text = "403遍历";
+            this.toolTip1.SetToolTip(this.loopCheckBox, "利用403返回码和专用字典，高效遍历网站目录。");
+            this.loopCheckBox.UseVisualStyleBackColor = true;
             // 
             // WebScanForm
             // 
@@ -754,10 +781,12 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel threadPoolStatus;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox loginCheckBox;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox editorCheckBox;
+        private System.Windows.Forms.CheckBox loopCheckBox;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }

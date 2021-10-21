@@ -543,6 +543,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_31A2EA62ABE74632AD3BB600F2635337"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_32D9BA557AA341919F7B7C17E15116B0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1881,19 +1887,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A177B1F80FD446F3886DB2E32CFB3EF9"
+        "MsmKey" = "8:_A1D03C7619214365A5CF9D914386151D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A1D03C7619214365A5CF9D914386151D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A2593A27B6AC4EB9A5FF27B22B7FC764"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A27C9E86B790420AA4EDA7A88E1E0748"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2200,6 +2206,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C28EAE03D85A4015ACF32A3E5CC9EF71"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C3931EBABC8B433E953F1165E417B719"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3100,6 +3112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_FE456FFCD3AE40FB9349F4E3C335210B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FE996BA292E14A84A98D345238777B73"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5226,6 +5244,26 @@
             "TargetName" = "8:1_涉赌 (2).png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_31A2EA62ABE74632AD3BB600F2635337"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\编辑器_FCK.txt"
+            "TargetName" = "8:编辑器_FCK.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -8954,18 +8992,38 @@
             "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A1D03C7619214365A5CF9D914386151D"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_email_accountPass_C2_20211014.py.zip"
+            "TargetName" = "8:batchquery_email_accountPass_C2_20211014.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A177B1F80FD446F3886DB2E32CFB3EF9"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A1D03C7619214365A5CF9D914386151D"
             {
-            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\管理员后台-LiLi版.txt"
-            "TargetName" = "8:管理员后台-LiLi版.txt"
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_email_accountPass_C2_20211014.py.zip"
+            "TargetName" = "8:batchquery_email_accountPass_C2_20211014.py.zip"
             "Tag" = "8:"
-            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -8984,26 +9042,6 @@
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\通用PHP字典.txt"
             "TargetName" = "8:通用PHP字典.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A27C9E86B790420AA4EDA7A88E1E0748"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\管理员后台-Wx版.txt"
-            "TargetName" = "8:管理员后台-Wx版.txt"
             "Tag" = "8:"
             "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
             "Condition" = "8:"
@@ -10030,6 +10068,26 @@
             "TargetName" = "8:tail.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C3931EBABC8B433E953F1165E417B719"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\入口_后台-LiLi版.txt"
+            "TargetName" = "8:入口_后台-LiLi版.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -12654,6 +12712,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FE996BA292E14A84A98D345238777B73"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\入口_后台-Wx版.txt"
+            "TargetName" = "8:入口_后台-Wx版.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_B12BD8E665B44C348D39B551C4393C0C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FEF1FC0D27424DD0AB8B2A58738CBE05"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\262_数字2.png"
@@ -14058,7 +14136,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\Release\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\开发调试\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"

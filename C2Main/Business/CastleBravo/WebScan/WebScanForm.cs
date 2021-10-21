@@ -408,7 +408,28 @@ namespace C2.Business.CastleBravo.WebScan
                 if (config.ShowCodes.Contains(svinfo.code.ToString()))
                     this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
 
-                //LogInfo("扫描完成-----" + svinfo.url + "-----" + "状态码：" + svinfo.code);
+                if (loopCheckBox.Checked && svinfo.code == 403 && this.dictContent.ContainsKey("PHP一级目录.txt")) //403遍历模式，命中403的url加入队列再次扫描
+                {
+                    List<string> urlList = this.dictContent["PHP一级目录.txt"];
+
+                    scanSumCount += urlList.Count;//下方进度条显示总数也要相应增加
+                    foreach (string url in urlList)
+                    {
+                        this.scanDirCount++;
+
+                        ServerInfo loop = new ServerInfo();
+                        loop.target = svinfo.url;
+                        loop.host = tools.UpdateUrl(svinfo.url, true);
+                        loop.id = this.scanDirCount;
+                        loop.type = "目录";
+                        loop.path = url;
+                        loop.url = loop.host + url;
+
+                        stp.WaitFor(1000, 10000);
+                        stp.QueueWorkItem<ServerInfo>(ScanExistsDirs, loop);
+                    }
+                }
+                
             }
             else
                 LogError("扫描失败-----" + svinfo.url + "-----" + result.contentType);
@@ -637,6 +658,43 @@ namespace C2.Business.CastleBravo.WebScan
         {
             if (e.Control && e.KeyCode == Keys.C)
                 CopyUrls();
+        }
+
+
+        private void LoginCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loginCheckBox.Checked)
+            {
+                foreach (ListViewItem lvi in dictListView.Items)
+                {
+                    lvi.Checked = lvi.SubItems[1].Text.StartsWith("入口_") ? true : lvi.Checked;
+                }
+            }
+        }
+
+        private void EditorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (editorCheckBox.Checked)
+            {
+                foreach (ListViewItem lvi in dictListView.Items)
+                {
+                    lvi.Checked = lvi.SubItems[1].Text.StartsWith("编辑器_") ? true : lvi.Checked;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in dictListView.Items)
+                lvi.Checked = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in dictListView.Items)
+                lvi.Checked = false;
+            editorCheckBox.Checked = false;
+            loginCheckBox.Checked = false;
         }
     }
 }

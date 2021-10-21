@@ -1,4 +1,6 @@
-﻿namespace C2.Business.IAOLab.PostAndGet
+﻿using System.Windows.Forms;
+
+namespace C2.Business.IAOLab.PostAndGet
 {
     partial class PostAndGetForm
     {
@@ -54,6 +56,8 @@
             this.textBoxTime = new System.Windows.Forms.TextBox();
             this.labelTime = new System.Windows.Forms.Label();
             this.comboBoxIpProtocol = new System.Windows.Forms.ComboBox();
+            this.labelHistory = new System.Windows.Forms.Label();
+            this.comboBoxHistory = new System.Windows.Forms.ComboBox();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
             this.tabPageHeaders.SuspendLayout();
@@ -72,7 +76,7 @@
             // 
             this.labelPost.AutoSize = true;
             this.labelPost.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelPost.Location = new System.Drawing.Point(9, 47);
+            this.labelPost.Location = new System.Drawing.Point(9, 48);
             this.labelPost.Name = "labelPost";
             this.labelPost.Size = new System.Drawing.Size(39, 17);
             this.labelPost.TabIndex = 2;
@@ -81,7 +85,7 @@
             // textBoxPost
             // 
             this.textBoxPost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxPost.Location = new System.Drawing.Point(12, 64);
+            this.textBoxPost.Location = new System.Drawing.Point(12, 71);
             this.textBoxPost.Multiline = true;
             this.textBoxPost.Name = "textBoxPost";
             this.textBoxPost.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -92,7 +96,7 @@
             // 
             this.labelCookie.AutoSize = true;
             this.labelCookie.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelCookie.Location = new System.Drawing.Point(9, 142);
+            this.labelCookie.Location = new System.Drawing.Point(9, 147);
             this.labelCookie.Name = "labelCookie";
             this.labelCookie.Size = new System.Drawing.Size(49, 17);
             this.labelCookie.TabIndex = 5;
@@ -101,7 +105,7 @@
             // textBoxCookie
             // 
             this.textBoxCookie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxCookie.Location = new System.Drawing.Point(12, 162);
+            this.textBoxCookie.Location = new System.Drawing.Point(12, 167);
             this.textBoxCookie.Multiline = true;
             this.textBoxCookie.Name = "textBoxCookie";
             this.textBoxCookie.Size = new System.Drawing.Size(347, 48);
@@ -112,7 +116,7 @@
             this.labelCookieFormat.AutoSize = true;
             this.labelCookieFormat.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelCookieFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelCookieFormat.Location = new System.Drawing.Point(11, 218);
+            this.labelCookieFormat.Location = new System.Drawing.Point(11, 221);
             this.labelCookieFormat.Name = "labelCookieFormat";
             this.labelCookieFormat.Size = new System.Drawing.Size(296, 12);
             this.labelCookieFormat.TabIndex = 100;
@@ -122,7 +126,7 @@
             // 
             this.labelHeader.AutoSize = true;
             this.labelHeader.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.labelHeader.Location = new System.Drawing.Point(374, 142);
+            this.labelHeader.Location = new System.Drawing.Point(374, 147);
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(51, 17);
             this.labelHeader.TabIndex = 8;
@@ -131,7 +135,7 @@
             // textBoxHeader
             // 
             this.textBoxHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxHeader.Location = new System.Drawing.Point(377, 162);
+            this.textBoxHeader.Location = new System.Drawing.Point(377, 167);
             this.textBoxHeader.Multiline = true;
             this.textBoxHeader.Name = "textBoxHeader";
             this.textBoxHeader.Size = new System.Drawing.Size(347, 48);
@@ -142,7 +146,7 @@
             this.labelHeaderFormat.AutoSize = true;
             this.labelHeaderFormat.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelHeaderFormat.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.labelHeaderFormat.Location = new System.Drawing.Point(375, 218);
+            this.labelHeaderFormat.Location = new System.Drawing.Point(375, 221);
             this.labelHeaderFormat.Name = "labelHeaderFormat";
             this.labelHeaderFormat.Size = new System.Drawing.Size(173, 12);
             this.labelHeaderFormat.TabIndex = 100;
@@ -246,7 +250,6 @@
             this.tabControlResponse.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.tabControlResponse.Location = new System.Drawing.Point(0, 310);
             this.tabControlResponse.Name = "tabControlResponse";
-            this.tabControlResponse.Padding = new System.Drawing.Point(1, 2);
             this.tabControlResponse.SelectedIndex = 0;
             this.tabControlResponse.Size = new System.Drawing.Size(736, 297);
             this.tabControlResponse.TabIndex = 20;
@@ -255,10 +258,10 @@
             // 
             this.formatResponse.BackColor = System.Drawing.SystemColors.Control;
             this.formatResponse.Controls.Add(this.richTextBoxResponse);
-            this.formatResponse.Location = new System.Drawing.Point(4, 26);
+            this.formatResponse.Location = new System.Drawing.Point(4, 28);
             this.formatResponse.Name = "formatResponse";
             this.formatResponse.Padding = new System.Windows.Forms.Padding(3);
-            this.formatResponse.Size = new System.Drawing.Size(728, 267);
+            this.formatResponse.Size = new System.Drawing.Size(728, 265);
             this.formatResponse.TabIndex = 0;
             this.formatResponse.Text = "响应体";
             // 
@@ -271,45 +274,33 @@
             this.richTextBoxResponse.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxResponse.Name = "richTextBoxResponse";
             this.richTextBoxResponse.ReadOnly = true;
-            this.richTextBoxResponse.Size = new System.Drawing.Size(722, 261);
+            this.richTextBoxResponse.Size = new System.Drawing.Size(722, 259);
             this.richTextBoxResponse.TabIndex = 11;
             this.richTextBoxResponse.Text = "";
             // 
             // tabPageHeaders
             // 
             this.tabPageHeaders.Controls.Add(this.richTextBoxHeaders);
-            this.tabPageHeaders.Location = new System.Drawing.Point(4, 26);
+            this.tabPageHeaders.Location = new System.Drawing.Point(4, 28);
             this.tabPageHeaders.Name = "tabPageHeaders";
             this.tabPageHeaders.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHeaders.Size = new System.Drawing.Size(728, 267);
+            this.tabPageHeaders.Size = new System.Drawing.Size(728, 265);
             this.tabPageHeaders.TabIndex = 1;
             this.tabPageHeaders.Text = "响应头";
             this.tabPageHeaders.UseVisualStyleBackColor = true;
             // 
             // richTextBoxHeaders
             // 
-            this.richTextBoxHeaders.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxHeaders.Name = "richTextBoxHeaders";
-            this.richTextBoxHeaders.Size = new System.Drawing.Size(725, 261);
-            this.richTextBoxHeaders.TabIndex = 0;
-            this.richTextBoxHeaders.Text = "";
-            this.richTextBoxHeaders.ReadOnly = true;
             this.richTextBoxHeaders.BackColor = System.Drawing.Color.White;
             this.richTextBoxHeaders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBoxHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxHeaders.Font = new System.Drawing.Font("宋体", 9F);
-
-
-          
-   
-           
-           
-           
-          
-           
-
-
-
+            this.richTextBoxHeaders.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxHeaders.Name = "richTextBoxHeaders";
+            this.richTextBoxHeaders.ReadOnly = true;
+            this.richTextBoxHeaders.Size = new System.Drawing.Size(722, 259);
+            this.richTextBoxHeaders.TabIndex = 0;
+            this.richTextBoxHeaders.Text = "";
             // 
             // textBoxTime
             // 
@@ -343,13 +334,40 @@
             this.comboBoxIpProtocol.Name = "comboBoxIpProtocol";
             this.comboBoxIpProtocol.Size = new System.Drawing.Size(60, 20);
             this.comboBoxIpProtocol.TabIndex = 101;
-            this.comboBoxIpProtocol.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            this.comboBoxIpProtocol.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged_1);
+            // 
+            // labelHistory
+            // 
+            this.labelHistory.AutoSize = true;
+            this.labelHistory.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelHistory.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.labelHistory.Location = new System.Drawing.Point(500, 48);
+            this.labelHistory.Name = "labelHistory";
+            this.labelHistory.Size = new System.Drawing.Size(56, 17);
+            this.labelHistory.TabIndex = 102;
+            this.labelHistory.Text = "历史记录";
+            // 
+            // comboBoxHistory
+            // 
+            this.comboBoxHistory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBoxHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxHistory.DropDownWidth = 169;
+            this.comboBoxHistory.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.comboBoxHistory.FormattingEnabled = true;
+            this.comboBoxHistory.Location = new System.Drawing.Point(555, 46);
+            this.comboBoxHistory.MaxDropDownItems = 40;
+            this.comboBoxHistory.Name = "comboBoxHistory";
+            this.comboBoxHistory.Size = new System.Drawing.Size(169, 20);
+            this.comboBoxHistory.TabIndex = 103;
+            this.comboBoxHistory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxHistory_SelectedIndexChanged);
             // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 607);
+            this.Controls.Add(this.comboBoxHistory);
+            this.Controls.Add(this.labelHistory);
             this.Controls.Add(this.comboBoxIpProtocol);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.textBoxTime);
@@ -411,5 +429,7 @@
         private System.Windows.Forms.ComboBox comboBoxIpProtocol;
         private System.Windows.Forms.TabPage tabPageHeaders;
         private System.Windows.Forms.RichTextBox richTextBoxHeaders;
+        private System.Windows.Forms.Label labelHistory;
+        private System.Windows.Forms.ComboBox comboBoxHistory;
     }
 }

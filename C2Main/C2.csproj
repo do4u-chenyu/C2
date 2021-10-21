@@ -3961,14 +3961,17 @@
     <Content Include="Resources\WebScanDict\PHP一级目录.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\WebScanDict\入口_后台-LiLi版.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebScanDict\入口_后台-Wx版.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WebScanDict\敏感文件.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\WebScanDict\管理员后台-LiLi版.txt">
+    <Content Include="Resources\WebScanDict\编辑器_FCK.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\WebScanDict\管理员后台-Wx版.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\WebScanDict\通用PHP字典.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

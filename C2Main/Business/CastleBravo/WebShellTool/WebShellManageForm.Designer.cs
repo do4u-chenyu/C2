@@ -34,6 +34,7 @@
             this.EnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.RefreshCurrentStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,7 @@
             this.lvStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SuscideMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -82,13 +83,14 @@
             this.EnterToolStripMenuItem,
             this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem,
+            this.SuscideMenuItem,
             this.ClearAllToolStripMenuItem,
             this.CopyToolStripMenuItem,
             this.toolStripSeparator,
             this.RefreshCurrentStatusMenuItem,
             this.RefreshAllStatusMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 186);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 208);
             // 
             // EnterToolStripMenuItem
             // 
@@ -110,6 +112,13 @@
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
+            // 
+            // ClearAllToolStripMenuItem
+            // 
+            this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearAllToolStripMenuItem.Text = "全部清空";
+            this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
             // 
             // CopyToolStripMenuItem
             // 
@@ -413,12 +422,12 @@
             this.lvDB.Text = "数据库配置";
             this.lvDB.Width = 184;
             // 
-            // ClearAllToolStripMenuItem
+            // SuscideMenuItem
             // 
-            this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ClearAllToolStripMenuItem.Text = "全部清空";
-            this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
+            this.SuscideMenuItem.Name = "SuscideMenuItem";
+            this.SuscideMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SuscideMenuItem.Text = "一键Suscide";
+            this.SuscideMenuItem.Click += new System.EventHandler(this.SuscideMenuItem_Click);
             // 
             // WebShellManageForm
             // 
@@ -485,5 +494,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ClearAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SuscideMenuItem;
     }
 }
