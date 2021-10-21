@@ -1,4 +1,6 @@
-﻿namespace C2.Business.CastleBravo.WebShellTool
+﻿using System;
+
+namespace C2.Business.CastleBravo.WebShellTool
 {
     interface IClient
     {
@@ -9,5 +11,8 @@
         string PHPReadDict(string dict);   // 带一个参数构造payload
         string PHPShell(string shellEnv, string command);   // 带二个参数构造payload
         string ExtractResponse(string response);
+        Tuple<string,string> GetShellParams();
+        //
+        string Suscide();   // 一键自毁
     }
 }

@@ -638,5 +638,42 @@ namespace C2.Business.CastleBravo.WebScan
             if (e.Control && e.KeyCode == Keys.C)
                 CopyUrls();
         }
+
+
+        private void LoginCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loginCheckBox.Checked)
+            {
+                foreach (ListViewItem lvi in dictListView.Items)
+                {
+                    lvi.Checked = lvi.SubItems[1].Text.StartsWith("入口_") ? true : lvi.Checked;
+                }
+            }
+        }
+
+        private void EditorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (editorCheckBox.Checked)
+            {
+                foreach (ListViewItem lvi in dictListView.Items)
+                {
+                    lvi.Checked = lvi.SubItems[1].Text.StartsWith("编辑器_") ? true : lvi.Checked;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in dictListView.Items)
+                lvi.Checked = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in dictListView.Items)
+                lvi.Checked = false;
+            editorCheckBox.Checked = false;
+            loginCheckBox.Checked = false;
+        }
     }
 }

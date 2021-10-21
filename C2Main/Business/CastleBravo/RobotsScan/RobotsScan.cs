@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -323,7 +324,9 @@ namespace C2.Business.CastleBravo.RobotsScan
                 progressBar.Value = (a / urls.Length)*100;
                 progressBar.Step = 1;
                 progressPercent.Text = progressBar.Value.ToString() + "%";
-                scanUseTime.Text = (DateTime.Now - StartTime).ToString();
+                //startTime = DateTime.Parse(startTime.ToString("yyyy-MM-dd HH:mm"));
+                scanUseTime.Text = (DateTime.Now - StartTime).ToString().Split('.')[0];
+
                 runTime++;
                 a++;
                 
