@@ -331,7 +331,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
-            new ProxySettingForm().ShowDialog();
+            ProxySetting setting = new ProxySettingForm().ShowDialog();
         }
     }
 }
