@@ -4,27 +4,6 @@ using C2.Utils;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    class ProxySetting
-    {
-        public static ProxySetting Empty = new ProxySetting();
-
-        public bool Enable;
-        public string IP;
-        public string Port;
-        public string Type;
-        public ProxySetting()
-        {
-
-        }
-
-        public ProxySetting(bool enable, string ip, string port, string type)
-        {
-            Enable = enable;
-            IP = ip;
-            Port = port;
-            Type = type;
-        }
-    }
     partial class ProxySettingForm : StandardDialog
     {
         public string IP { get => IPTextBox.Text.Trim(); }
@@ -64,4 +43,27 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
     }
+
+    class ProxySetting
+    {
+        public static ProxySetting Empty = new ProxySetting();
+
+        public bool Enable;
+        public string IP;
+        public string Port;
+        public string Type;
+        public ProxySetting()
+        {
+
+        }
+
+        public ProxySetting(bool enable, string ip, string port, string type)
+        {
+            Enable = enable;
+            IP = ip;
+            Port = port;
+            Type = type;
+        }
+    }
+
 }
