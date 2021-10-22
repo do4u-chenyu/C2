@@ -75,6 +75,8 @@
             this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.变种10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.变种11LandGreyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripLabel();
+            this.proxyMenu = new System.Windows.Forms.ToolStripLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -166,7 +168,9 @@
             this.refreshAllShellMenu,
             this.toolStripSeparator4,
             this.trojanMenu,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.toolStripButton1,
+            this.proxyMenu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1214, 25);
@@ -449,6 +453,22 @@
             this.变种11LandGreyToolStripMenuItem.ToolTipText = "LandGrey版的一句话木马";
             this.变种11LandGreyToolStripMenuItem.Click += new System.EventHandler(this.变种11LandGreyToolStripMenuItem_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(0, 22);
+            this.toolStripButton1.Text = "dddd";
+            // 
+            // proxyMenu
+            // 
+            this.proxyMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.proxyMenu.Name = "proxyMenu";
+            this.proxyMenu.Size = new System.Drawing.Size(56, 22);
+            this.proxyMenu.Text = "代理设置";
+            this.proxyMenu.Click += new System.EventHandler(this.ProxyMenu_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -517,5 +537,7 @@
         private System.Windows.Forms.ToolStripMenuItem SuscideMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 变种10ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 变种11LandGreyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel toolStripButton1;
+        private System.Windows.Forms.ToolStripLabel proxyMenu;
     }
 }

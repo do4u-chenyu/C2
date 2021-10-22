@@ -328,5 +328,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
         }
+
+        private void ProxyMenu_Click(object sender, EventArgs e)
+        {
+            new ProxySettingForm().ShowDialog();
+        }
     }
 }

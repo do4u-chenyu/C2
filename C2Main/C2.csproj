@@ -284,6 +284,12 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.Designer.cs">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\ProxySettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\ProxySettingForm.Designer.cs">
+      <DependentUpon>ProxySettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\AddWebShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2008,6 +2014,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\ProxySettingForm.resx">
+      <DependentUpon>ProxySettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShellForm.resx">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>

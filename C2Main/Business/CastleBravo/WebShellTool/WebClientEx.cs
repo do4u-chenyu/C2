@@ -22,9 +22,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             WebClientEx one = new WebClientEx()
             {
-                Timeout = timeout,              
+                Timeout = timeout,
                 Encoding = Encoding.Default,
-                CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
+                CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore),
             };
 
             one.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
