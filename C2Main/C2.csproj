@@ -296,13 +296,21 @@
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientFactory.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ClientSetting.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\IClient.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\DetailsPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\DetailsPageForm.Designer.cs">
+      <DependentUpon>DetailsPageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
@@ -2004,11 +2012,15 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddWebShellForm.resx">
       <DependentUpon>AddWebShellForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\DetailsPageForm.resx">
+      <DependentUpon>DetailsPageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.resx">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.resx">
       <DependentUpon>WebShellDetailsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>

