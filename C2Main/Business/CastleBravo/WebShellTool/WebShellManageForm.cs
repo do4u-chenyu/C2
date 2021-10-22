@@ -318,5 +318,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             client.Suscide();
             RemoveToolStripMenuItem_Click(sender, e);
         }
+
+        private void 变种10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种10").ShowDialog();
+        }
+
+        private void 变种11LandGreyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
+        }
     }
 }
