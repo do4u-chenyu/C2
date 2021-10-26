@@ -287,9 +287,14 @@ namespace C2.Business.IAOLab.PostAndGet
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void AutoProxyLabel_Click(object sender, EventArgs e)
         {
             this.textBoxIp.Text = this.textBoxIp.Text.Trim() == string.Empty ? "127.0.0.1:10809" : string.Empty;
+        }
+
+        private void ClearProxyLabel_Click(object sender, EventArgs e)
+        {
+            this.textBoxIp.Text = string.Empty;
         }
     }
 }
