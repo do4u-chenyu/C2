@@ -14,5 +14,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         Tuple<string,string> GetShellParams();
         //
         string Suscide();   // 一键自毁
+        string DetailInfo(string PageData);
     }
 }

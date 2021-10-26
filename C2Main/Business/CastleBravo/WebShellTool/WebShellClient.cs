@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -126,6 +127,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PHPShell(string shellEnv, string command)
         {
             return client.ExtractResponse(Post(client.PHPShell(shellEnv, command), true));
+        }
+
+        public string DetailInfo(string PageData)
+        {
+            return client.ExtractResponse(Post(client.DetailInfo(PageData)));
         }
 
         private string Post(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)
