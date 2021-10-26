@@ -58,7 +58,8 @@ namespace C2.Business.IAOLab.PostAndGet
             this.comboBoxIpProtocol = new System.Windows.Forms.ComboBox();
             this.labelHistory = new System.Windows.Forms.Label();
             this.comboBoxHistory = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.AddProxyLabel = new System.Windows.Forms.Label();
+            this.ClearProxyLabel = new System.Windows.Forms.Label();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
             this.tabPageHeaders.SuspendLayout();
@@ -362,24 +363,37 @@ namespace C2.Business.IAOLab.PostAndGet
             this.comboBoxHistory.TabIndex = 103;
             this.comboBoxHistory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxHistory_SelectedIndexChanged);
             // 
-            // label1
+            // AddProxyLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(565, 267);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 17);
-            this.label1.TabIndex = 104;
-            this.label1.Text = "+";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.AddProxyLabel.AutoSize = true;
+            this.AddProxyLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.AddProxyLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.AddProxyLabel.Location = new System.Drawing.Point(565, 267);
+            this.AddProxyLabel.Name = "AddProxyLabel";
+            this.AddProxyLabel.Size = new System.Drawing.Size(17, 17);
+            this.AddProxyLabel.TabIndex = 104;
+            this.AddProxyLabel.Text = "+";
+            this.AddProxyLabel.Click += new System.EventHandler(this.AutoProxyLabel_Click);
+            // 
+            // ClearProxyLabel
+            // 
+            this.ClearProxyLabel.AutoSize = true;
+            this.ClearProxyLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ClearProxyLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClearProxyLabel.Location = new System.Drawing.Point(583, 267);
+            this.ClearProxyLabel.Name = "ClearProxyLabel";
+            this.ClearProxyLabel.Size = new System.Drawing.Size(13, 17);
+            this.ClearProxyLabel.TabIndex = 105;
+            this.ClearProxyLabel.Text = "-";
+            this.ClearProxyLabel.Click += new System.EventHandler(this.ClearProxyLabel_Click);
             // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 607);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ClearProxyLabel);
+            this.Controls.Add(this.AddProxyLabel);
             this.Controls.Add(this.comboBoxHistory);
             this.Controls.Add(this.labelHistory);
             this.Controls.Add(this.comboBoxIpProtocol);
@@ -445,6 +459,7 @@ namespace C2.Business.IAOLab.PostAndGet
         private System.Windows.Forms.RichTextBox richTextBoxHeaders;
         private System.Windows.Forms.Label labelHistory;
         private System.Windows.Forms.ComboBox comboBoxHistory;
-        private Label label1;
+        private Label AddProxyLabel;
+        private Label ClearProxyLabel;
     }
 }
