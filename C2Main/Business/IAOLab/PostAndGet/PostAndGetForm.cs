@@ -228,8 +228,6 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             req.Method = splitType;
             req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
-            //req.ContentType = "application/x-www-form-urlencoded";
-            //req.ContentType = "multipart/form-data";
             req.ContentType = contentType == "application/x-www-form-urlencoded" ? "application/x-www-form-urlencoded" : "multipart/form-data";
             req.Headers.Set("cookie", textBoxCookie.Text);
             if (textBoxIp.Text != string.Empty)
