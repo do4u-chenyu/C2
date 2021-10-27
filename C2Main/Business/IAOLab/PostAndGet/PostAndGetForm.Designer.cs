@@ -60,6 +60,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.comboBoxHistory = new System.Windows.Forms.ComboBox();
             this.AddProxyLabel = new System.Windows.Forms.Label();
             this.ClearProxyLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControlResponse.SuspendLayout();
             this.formatResponse.SuspendLayout();
             this.tabPageHeaders.SuspendLayout();
@@ -185,37 +186,37 @@ namespace C2.Business.IAOLab.PostAndGet
             // comboBoxHttpMethod
             // 
             this.comboBoxHttpMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxHttpMethod.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBoxHttpMethod.Font = new System.Drawing.Font("微软雅黑", 8.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxHttpMethod.FormattingEnabled = true;
             this.comboBoxHttpMethod.Items.AddRange(new object[] {
             "POST",
             "GET",
             "HEAD",
             "PUT"});
-            this.comboBoxHttpMethod.Location = new System.Drawing.Point(14, 242);
+            this.comboBoxHttpMethod.Location = new System.Drawing.Point(12, 242);
             this.comboBoxHttpMethod.Name = "comboBoxHttpMethod";
-            this.comboBoxHttpMethod.Size = new System.Drawing.Size(95, 27);
+            this.comboBoxHttpMethod.Size = new System.Drawing.Size(61, 25);
             this.comboBoxHttpMethod.TabIndex = 5;
             this.comboBoxHttpMethod.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // comboBoxEncodeMethod
             // 
             this.comboBoxEncodeMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEncodeMethod.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBoxEncodeMethod.Font = new System.Drawing.Font("微软雅黑", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxEncodeMethod.FormattingEnabled = true;
             this.comboBoxEncodeMethod.Items.AddRange(new object[] {
-            "输出编码 UTF8",
-            "输出编码 GBK"});
-            this.comboBoxEncodeMethod.Location = new System.Drawing.Point(173, 242);
+            "UTF8",
+            "GBK"});
+            this.comboBoxEncodeMethod.Location = new System.Drawing.Point(299, 242);
             this.comboBoxEncodeMethod.Name = "comboBoxEncodeMethod";
-            this.comboBoxEncodeMethod.Size = new System.Drawing.Size(115, 27);
+            this.comboBoxEncodeMethod.Size = new System.Drawing.Size(59, 24);
             this.comboBoxEncodeMethod.TabIndex = 6;
             this.comboBoxEncodeMethod.SelectedIndexChanged += new System.EventHandler(this.ComboBox2_SelectedIndexChanged);
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.buttonDelete.Location = new System.Drawing.Point(173, 279);
+            this.buttonDelete.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.buttonDelete.Location = new System.Drawing.Point(198, 282);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(95, 27);
             this.buttonDelete.TabIndex = 10;
@@ -225,8 +226,8 @@ namespace C2.Business.IAOLab.PostAndGet
             // 
             // buttonSubmit
             // 
-            this.buttonSubmit.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonSubmit.Location = new System.Drawing.Point(13, 279);
+            this.buttonSubmit.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonSubmit.Location = new System.Drawing.Point(79, 282);
             this.buttonSubmit.Name = "buttonSubmit";
             this.buttonSubmit.Size = new System.Drawing.Size(95, 27);
             this.buttonSubmit.TabIndex = 9;
@@ -250,10 +251,10 @@ namespace C2.Business.IAOLab.PostAndGet
             this.tabControlResponse.Controls.Add(this.tabPageHeaders);
             this.tabControlResponse.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControlResponse.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.tabControlResponse.Location = new System.Drawing.Point(0, 310);
+            this.tabControlResponse.Location = new System.Drawing.Point(0, 315);
             this.tabControlResponse.Name = "tabControlResponse";
             this.tabControlResponse.SelectedIndex = 0;
-            this.tabControlResponse.Size = new System.Drawing.Size(736, 297);
+            this.tabControlResponse.Size = new System.Drawing.Size(736, 292);
             this.tabControlResponse.TabIndex = 20;
             // 
             // formatResponse
@@ -263,7 +264,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.formatResponse.Location = new System.Drawing.Point(4, 28);
             this.formatResponse.Name = "formatResponse";
             this.formatResponse.Padding = new System.Windows.Forms.Padding(3);
-            this.formatResponse.Size = new System.Drawing.Size(728, 265);
+            this.formatResponse.Size = new System.Drawing.Size(728, 260);
             this.formatResponse.TabIndex = 0;
             this.formatResponse.Text = "响应体";
             // 
@@ -276,7 +277,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.richTextBoxResponse.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxResponse.Name = "richTextBoxResponse";
             this.richTextBoxResponse.ReadOnly = true;
-            this.richTextBoxResponse.Size = new System.Drawing.Size(722, 259);
+            this.richTextBoxResponse.Size = new System.Drawing.Size(722, 254);
             this.richTextBoxResponse.TabIndex = 11;
             this.richTextBoxResponse.Text = "";
             // 
@@ -286,7 +287,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.tabPageHeaders.Location = new System.Drawing.Point(4, 28);
             this.tabPageHeaders.Name = "tabPageHeaders";
             this.tabPageHeaders.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHeaders.Size = new System.Drawing.Size(728, 265);
+            this.tabPageHeaders.Size = new System.Drawing.Size(728, 260);
             this.tabPageHeaders.TabIndex = 1;
             this.tabPageHeaders.Text = "响应头";
             this.tabPageHeaders.UseVisualStyleBackColor = true;
@@ -300,7 +301,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.richTextBoxHeaders.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxHeaders.Name = "richTextBoxHeaders";
             this.richTextBoxHeaders.ReadOnly = true;
-            this.richTextBoxHeaders.Size = new System.Drawing.Size(722, 259);
+            this.richTextBoxHeaders.Size = new System.Drawing.Size(722, 254);
             this.richTextBoxHeaders.TabIndex = 0;
             this.richTextBoxHeaders.Text = "";
             // 
@@ -387,11 +388,26 @@ namespace C2.Business.IAOLab.PostAndGet
             this.ClearProxyLabel.Text = "-";
             this.ClearProxyLabel.Click += new System.EventHandler(this.ClearProxyLabel_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "application/x-www-form-urlencoded",
+            "multipart/form-data"});
+            this.comboBox1.Location = new System.Drawing.Point(79, 242);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(214, 24);
+            this.comboBox1.TabIndex = 106;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBoxType_SelectedIndexChanged);
+            // 
             // PostAndGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 607);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.ClearProxyLabel);
             this.Controls.Add(this.AddProxyLabel);
             this.Controls.Add(this.comboBoxHistory);
@@ -461,5 +477,6 @@ namespace C2.Business.IAOLab.PostAndGet
         private System.Windows.Forms.ComboBox comboBoxHistory;
         private Label AddProxyLabel;
         private Label ClearProxyLabel;
+        private ComboBox comboBox1;
     }
 }

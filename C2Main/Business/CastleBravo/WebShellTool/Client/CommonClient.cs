@@ -1,7 +1,5 @@
 ﻿using C2.Core;
 using System;
-using System.IO;
-using System.Net;
 using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool

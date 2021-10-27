@@ -15,6 +15,7 @@ namespace C2.Business.IAOLab.PostAndGet
     {
         string splitType;
         string encodeOutput;
+        string contentType;
         string IpProtocol;
         HttpWebResponse cnblogsResponse;
         HttpWebRequest req;
@@ -29,6 +30,7 @@ namespace C2.Business.IAOLab.PostAndGet
             comboBoxHttpMethod.SelectedIndex = 0; // 默认选 POST 和 UTF-8
             comboBoxEncodeMethod.SelectedIndex = 0;
             comboBoxIpProtocol.SelectedIndex = 0;// 默认选择HTTP
+            comboBox1.SelectedIndex = 0;
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -58,7 +60,21 @@ namespace C2.Business.IAOLab.PostAndGet
                     break;
             }       
         }
-        
+
+        private void ComboBoxType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            contentType = "application/x-www-form-urlencoded";
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    contentType = "application/x-www-form-urlencoded";
+                    break;
+                case 1:
+                    contentType = "multipart/form-data";
+                    break;
+            }
+        }
+
         private void PostText(HttpWebRequest req, byte[] bytesToPost)
         {
             using (Stream reqStream = req.GetRequestStream())
@@ -212,7 +228,9 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             req.Method = splitType;
             req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
-            req.ContentType = "application/x-www-form-urlencoded";
+            //req.ContentType = "application/x-www-form-urlencoded";
+            //req.ContentType = "multipart/form-data";
+            req.ContentType = contentType == "application/x-www-form-urlencoded" ? "application/x-www-form-urlencoded" : "multipart/form-data";
             req.Headers.Set("cookie", textBoxCookie.Text);
             if (textBoxIp.Text != string.Empty)
                 _ = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
