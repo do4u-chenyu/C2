@@ -75,14 +75,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshLV();
         }
 
-        private static string FormatUrl(string url)
-        {
-            string str = url.ToLower().TrimStart();
-            if (str.StartsWith("http://") || str.StartsWith("https://"))
-                return url;
-            else
-                return "http://" + url.TrimStart();
-        }
+
 
         private void LoadDB()
         {
@@ -113,6 +106,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.Status);
             lvi.SubItems.Add(config.ClientVersion);
             lvi.SubItems.Add(config.DatabaseConfig);
+            lvi.SubItems.Add(config.IP);
+            lvi.SubItems.Add(config.Country);
 
             // 指针关联
             lvi.Tag = config;
@@ -158,6 +153,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[5].Text = cur.Status;         // 木马状态
             LV.SelectedItems[0].SubItems[6].Text = cur.ClientVersion;  // 客户端版本
             LV.SelectedItems[0].SubItems[7].Text = cur.DatabaseConfig; // 数据库配置
+            LV.SelectedItems[0].SubItems[8].Text = cur.IP;             // 目标IP
+            LV.SelectedItems[0].SubItems[9].Text = cur.Country;        // 归属地
             // 按道理不会出现索引越界
             tasks[tasks.IndexOf(old)] = cur;
             SaveDB();
@@ -183,7 +180,9 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine(lvi.SubItems[4].Text)
               .AppendLine(lvi.SubItems[5].Text)
               .AppendLine(lvi.SubItems[6].Text)
-              .AppendLine(lvi.SubItems[7].Text);
+              .AppendLine(lvi.SubItems[7].Text)
+              .AppendLine(lvi.SubItems[8].Text)
+              .AppendLine(lvi.SubItems[9].Text);
 
             FileUtil.TryClipboardSetText(sb.ToString());
         }
@@ -292,7 +291,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (isSkipDead && lvi.SubItems[5].Text == "√")
                     continue;
 
-                lvi.SubItems[5].Text = RefreshTaskStatus(lvi.Tag as WebShellTaskConfig);
+                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+                lvi.SubItems[5].Text = RefreshTaskStatus(task);
+                lvi.SubItems[8].Text = task.IP;
                 lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
             }
 
@@ -308,14 +309,19 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (GuarderUtil.WaitCursor) 
             {
                 // 我总结的print穿透WAF大法
-                if (PostPrint(FormatUrl(task.Url), task.Password))
+                if (PostPrint(NetUtil.FormatUrl(task.Url), task.Password))
                 {
-                  
+                    RefreshIPAddress(task);  // D洞存在的情况下才更新IP
                     return "√";
-                }
-                    
+                }    
             }
             return status;
+        }
+
+        private void RefreshIPAddress(WebShellTaskConfig task)
+        {
+            task.IP = NetUtil.GetHostAddresses(task.Url);
+
         }
 
         private bool PostPrint(string url, string password)

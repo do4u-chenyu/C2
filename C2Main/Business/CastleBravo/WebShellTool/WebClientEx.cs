@@ -1,5 +1,4 @@
-﻿using C2.Core;
-using C2.Utils;
+﻿using C2.Utils;
 using System;
 using System.Net;
 using System.Net.Cache;
@@ -37,7 +36,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return one;
         }
 
-        public static string Post(string url, string payload, int timeout, ProxySetting proxy) // 默认30秒
+        public static string Post(string url, string payload, int timeout, ProxySetting proxy) 
         {
             // 调用者处理异常
             byte[] bytes = Encoding.Default.GetBytes(payload);

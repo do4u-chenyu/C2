@@ -15,8 +15,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string Status;          // 木马是否可连通并可用
         public string TrojanType;      // 木马类型, 如 php, asp, jsp
         public string ClientVersion;   // 客户端版本, 如 中国菜刀, 奥特曼, 哥斯拉 
-        public string DatabaseConfig;  
-
+        public string DatabaseConfig;
+        public string IP;               // IP地址
+        public string Country;          // 归属地
 
         public WebShellTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
@@ -30,6 +31,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             Status = status;
             ClientVersion = cVersion;
             DatabaseConfig = dbConfig;
+            IP = "0.0.0.0";
+            Country = string.Empty;
         }
     }
 }

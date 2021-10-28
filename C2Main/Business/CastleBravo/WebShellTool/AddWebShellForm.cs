@@ -43,9 +43,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             trojanTypeCombox.Text = task.TrojanType;
             versionComboBox.Text = task.ClientVersion;
 
-            // 木马类型和客户端类型不允许修改, 支持修改没有意义
+            // 木马类型不允许修改, 支持修改没有意义
             trojanTypeCombox.Enabled = false;
-            versionComboBox.Enabled = false;
             databaseConfigTextBox.Text = task.DatabaseConfig;
             // 创建时间不需要修改
             return ShowDialog(task.CreateTime);
