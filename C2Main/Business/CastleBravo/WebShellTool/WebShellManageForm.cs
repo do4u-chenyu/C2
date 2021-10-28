@@ -333,5 +333,40 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             ProxySetting setting = new ProxySettingForm().ShowDialog();
         }
+
+        private void SaveResultsMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "文本文件|*.txt";
+            dialog.FileName = "D洞管理" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            using (GuarderUtil.WaitCursor)
+                SaveResultToLocal(dialog.FileName);
+        }
+
+        private void SaveResultToLocal(string path)
+        {
+            StreamWriter sw = new StreamWriter(path, true); 
+            try
+            {
+                List<string> tmpLists = new List<string>();
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    tmpLists.Clear();
+                    for (int i = 0; i < lvi.SubItems.Count; i++)
+                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n"," "));
+                    sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
+                }
+            }
+            catch { }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
+        }
     }
 }
