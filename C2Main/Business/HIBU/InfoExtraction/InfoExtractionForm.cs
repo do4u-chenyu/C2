@@ -11,6 +11,7 @@ using System.Web;
 using System.Linq;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using C2.Core;
 
 namespace C2.Business.HIBU.InfoExtraction
 {
@@ -26,7 +27,7 @@ namespace C2.Business.HIBU.InfoExtraction
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            InfoExtractionUrl = "http://218.94.117.234:8970/HI_NLP/InformationExtraction";
+            InfoExtractionUrl = Global.ServerHIUrl + "/HI_NLP/InformationExtraction";
         }
 
         private void SingleButton_Click(object sender, EventArgs e)

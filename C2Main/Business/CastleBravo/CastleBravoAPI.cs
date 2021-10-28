@@ -1,4 +1,5 @@
 ﻿using C2.Business.HTTP;
+using C2.Core;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -25,7 +26,7 @@ namespace C2.Business.CastleBravo
 
         public CastleBravoAPI()
         {
-            APIUrl = "http://218.94.117.234:8484/Castle/";//正式
+            APIUrl = Global.ServerUrl +  "/Castle/";//正式
 
             SearchUrl = APIUrl + "search";
             ResultUrl = APIUrl + "result";

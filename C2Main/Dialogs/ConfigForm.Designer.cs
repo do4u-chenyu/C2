@@ -588,7 +588,6 @@
             this.FHGISHostTB.Name = "FHGISHostTB";
             this.FHGISHostTB.Size = new System.Drawing.Size(371, 23);
             this.FHGISHostTB.TabIndex = 8;
-            this.FHGISHostTB.Text = "218.94.117.234";
             // 
             // fhGISTB
             // 
@@ -659,7 +658,6 @@
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(523, 23);
             this.textBox9.TabIndex = 22;
-            this.textBox9.Text = "http://218.94.117.234:8484/C2Plugins/";
             // 
             // pictureBox1
             // 
@@ -946,7 +944,6 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(601, 17);
             this.label12.TabIndex = 10;
-            this.label12.Text = "插件下载主页：http://218.94.117.234:8484/C2Plugins/，将dll复制到程序plugins目录即可完成手工安装。";
             // 
             // pluginsTimeoutTB
             // 
@@ -997,7 +994,6 @@
             this.pluginsHostTB.Name = "pluginsHostTB";
             this.pluginsHostTB.Size = new System.Drawing.Size(371, 23);
             this.pluginsHostTB.TabIndex = 0;
-            this.pluginsHostTB.Text = "218.94.117.234";
             // 
             // WFDConfigPage
             // 

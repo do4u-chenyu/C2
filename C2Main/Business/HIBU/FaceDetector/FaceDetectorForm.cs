@@ -1,5 +1,6 @@
 ﻿using C2.Business.HTTP;
 using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -27,7 +28,7 @@ namespace C2.Business.HIBU.FaceDetector
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            FaceDetectorUrl = "http://218.94.117.234:8970/HI_CV/FaceDetector";
+            FaceDetectorUrl = Global.ServerHIUrl + "/HI_CV/FaceDetector";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)

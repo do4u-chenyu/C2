@@ -1,5 +1,6 @@
 ﻿using C2.Business.HTTP;
 using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -28,7 +29,7 @@ namespace C2.Business.HIBU.TibetanDetection
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://218.94.117.234:8970/HI_CV/TibetanDetection";
+            OCRUrl = Global.ServerHIUrl + "/HI_CV/TibetanDetection";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)

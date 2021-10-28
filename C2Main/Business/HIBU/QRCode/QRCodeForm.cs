@@ -1,5 +1,6 @@
 ﻿using C2.Business.HTTP;
 using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace C2.Business.HIBU.QRCode
             this.CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
-            OCRUrl = "http://218.94.117.234:8970/HI_CV/QRCode";
+            OCRUrl = Global.ServerHIUrl + "/HI_CV/QRCode";
         }
 
         private void BrowserBtn_Click(object sender, EventArgs e)

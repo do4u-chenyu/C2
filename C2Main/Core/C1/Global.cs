@@ -169,9 +169,13 @@ namespace C2.Core
         public static string LocalPluginsPath = Path.Combine(Application.StartupPath, "plugins");
         public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update", "install");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
-        public const string DLLHostUrl = @"http://218.94.117.234:8484/C2Plugins/";
-        public const string SoftwareUrl = @"http://218.94.117.234:8484/C2Software/";
-        public const string DLLPackageUrl = DLLHostUrl + @"packages/";
+        
+        public const string ServerHIUrl = @"http://58.213.184.18:8970";
+        public const string ServerUrl = @"http://58.213.184.18:8484";
+        public const string DLLHostUrl = ServerUrl + "/C2Plugins/";
+        public const string DLLPackageUrl = DLLHostUrl + "packages/";
+        public const string SoftwareUrl = ServerUrl + "/C2Software/";
+
         public static Dictionary<string, string> WFDPredictionCodeDict = new Dictionary<string, string>
         {
             {"0010001","贷款-P2P"},{"0010002","贷款-抵押"},{"0010003","贷款-小额"},{"0010004","贷款-资讯"},{"0010005","贷款-综合"},{"0010006","贷款-租赁"},{"0020007","赌-彩票预测"},{"0020008","赌-赌场系"},

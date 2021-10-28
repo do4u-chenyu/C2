@@ -39,6 +39,12 @@ namespace C2.Dialogs
         public ConfigForm()
         {
             InitializeComponent();
+           
+            this.FHGISHostTB.Text = Global.ServerUrl.Replace("http://", "");
+            this.textBox9.Text = Global.ServerUrl + "/C2Plugins/";
+            this.label12.Text = "插件下载主页：" + Global.ServerUrl + "/C2Plugins/，将dll复制到程序plugins目录即可完成手工安装。";
+            this.pluginsHostTB.Text = Global.ServerUrl.Replace("http://", "");
+
             Icon = C2.Properties.Resources.logo;
             progressBar = new UpdateProgressBar();
             progressBar.FormClosed += FormClosedEventHandler;
