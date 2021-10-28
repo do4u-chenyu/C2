@@ -265,16 +265,36 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllStatusMenuItem_Click(object sender, EventArgs e)
         {
+            RefreshAllTaskStatus();
+        }
+
+        private void RefreshAllTaskStatus(bool isSkipDead = false)
+        {
             // 刷新前先强制清空
             foreach (ListViewItem lvi in LV.Items)
-                lvi.SubItems[5].Text = string.Empty;
+            {
+                // 不启用跳过尸体, 全部清空
+                if (!isSkipDead)
+                {
+                    lvi.SubItems[5].Text = string.Empty;
+                    continue;
+                }  
+                // 启用跳过尸体, 只有死的才改变状态
+                if (lvi.SubItems[5].Text == "×")
+                    lvi.SubItems[5].Text = string.Empty;
+            }
+                
 
             foreach (ListViewItem lvi in LV.Items)
             {
+                // 启用跳过尸体, 遇到活人，跳过
+                if (isSkipDead && lvi.SubItems[5].Text == "√")
+                    continue;
+
                 lvi.SubItems[5].Text = RefreshTaskStatus(lvi.Tag as WebShellTaskConfig);
                 lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
             }
-                
+
 
             RefreshTasks();
             SaveDB();
@@ -289,17 +309,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 // 我总结的print穿透WAF大法
                 if (PostPrint(FormatUrl(task.Url), task.Password))
                     return "√";
-
-                foreach (string version in ClientSetting.WSDict.Keys)
-                {
-                    WebShellClient webShell = new WebShellClient(task.Url, task.Password, version);
-                    List<string> paths = webShell.PHPIndex(1500);//超时时间可以短一点, 试了,感觉像是有个下限一样,设成1秒还是那样
-                    if (paths.Count > 0 && !string.IsNullOrEmpty(paths[0]))
-                    {
-                        status = "√";
-                        break;
-                    }
-                }
             }
             return status;
         }
@@ -397,6 +406,11 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (sw != null)
                     sw.Close();
             }
+        }
+
+        private void RefreshAllDeadMenu_Click(object sender, EventArgs e)
+        {
+            RefreshAllTaskStatus(true);
         }
     }
 }

@@ -28,7 +28,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             };
 
             if (setting != ProxySetting.Empty && setting.Enable)
+            {
                 one.Proxy = new WebProxy(setting.IP, setting.Port);
+                one.Timeout += one.Timeout;  // 开代理的情况下速度慢, timeout时间放宽
+            }
+                
             one.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             return one;
         }
