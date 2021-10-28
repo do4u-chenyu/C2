@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
@@ -308,7 +309,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 // 我总结的print穿透WAF大法
                 if (PostPrint(FormatUrl(task.Url), task.Password))
+                {
+                  
                     return "√";
+                }
+                    
             }
             return status;
         }
@@ -316,7 +321,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private bool PostPrint(string url, string password)
         {
             try
-            {
+            {   
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
                 string result = WebClientEx.Post(url, string.Format("{0}=print({1});", password, seed), 1500, Proxy);
                 return result.Contains(seed);
