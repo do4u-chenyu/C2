@@ -69,7 +69,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 string PageData = browserDicectory + "/" + selectedFile.FileName;
                 DetailsPageForm frm = new DetailsPageForm();
-                frm.richTextBox1.Text = Encoding.UTF8.GetString(Encoding.GetEncoding("gb2312").GetBytes(webShell.DetailInfo(PageData)));
+                frm.richTextBox1.Text = webShell.DetailInfo(PageData);
                 frm.ShowDialog();
                 this.messageLog.Text = webShell.FetchLog();
             }
