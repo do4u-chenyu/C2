@@ -18,7 +18,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return request;
         }
 
-        public static WebClientEx Create(int timeout = Global.WebClientDefaultTimeout)
+        private static WebClientEx Create(int timeout, ProxySetting setting)
         {
             WebClientEx one = new WebClientEx()
             {
@@ -27,17 +27,19 @@ namespace C2.Business.CastleBravo.WebShellTool
                 CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore),
             };
 
+            if (setting != ProxySetting.Empty && setting.Enable)
+                one.Proxy = new WebProxy(setting.IP, setting.Port);
             one.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             return one;
         }
 
-        public static string Post(string url, string payload, int timeout = Global.WebClientDefaultTimeout) // 默认30秒
+        public static string Post(string url, string payload, int timeout, ProxySetting proxy) // 默认30秒
         {
             // 调用者处理异常
             byte[] bytes = Encoding.Default.GetBytes(payload);
             using (GuarderUtil.WaitCursor)
                 // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
-                bytes = WebClientEx.Create(timeout)
+                bytes = WebClientEx.Create(timeout, proxy)
                                    .UploadData(url, "POST", bytes);
 
             return Encoding.UTF8.GetString(bytes);

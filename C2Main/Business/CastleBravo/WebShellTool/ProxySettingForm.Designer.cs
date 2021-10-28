@@ -98,8 +98,7 @@
             this.proxyTypeCombox.Enabled = false;
             this.proxyTypeCombox.FormattingEnabled = true;
             this.proxyTypeCombox.Items.AddRange(new object[] {
-            "HTTP",
-            "SOCKS5(TODO)"});
+            "HTTP"});
             this.proxyTypeCombox.Location = new System.Drawing.Point(66, 126);
             this.proxyTypeCombox.Name = "proxyTypeCombox";
             this.proxyTypeCombox.Size = new System.Drawing.Size(205, 20);

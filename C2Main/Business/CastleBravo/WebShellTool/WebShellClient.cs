@@ -138,7 +138,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.lastErrorMessage = string.Empty;
             try
             {
-                string rsp = WebClientEx.Post(this.url, payload, defaultTimeout);
+                string rsp = WebClientEx.Post(this.url, payload, defaultTimeout, ProxySetting.Empty);
                 if (logRsp) 
                     client.AppendLog(Environment.NewLine)
                           .AppendLog("返回报文:")

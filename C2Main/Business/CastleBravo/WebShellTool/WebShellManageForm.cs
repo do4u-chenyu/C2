@@ -12,6 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     public partial class WebShellManageForm : Form
     {
+        public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         List<WebShellTaskConfig> tasks = new List<WebShellTaskConfig>();
         readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
         public WebShellManageForm()
@@ -303,12 +304,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             return status;
         }
 
-        private bool PostPrint(string url, string password, int timeout = 1500)
+        private bool PostPrint(string url, string password)
         {
             try
             {
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string result = WebClientEx.Post(url, string.Format("{0}=print({1});", password, seed), timeout);
+                string result = WebClientEx.Post(url, string.Format("{0}=print({1});", password, seed), 1500, Proxy);
                 return result.Contains(seed);
             } catch { return false; }
             
@@ -360,7 +361,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
-            ProxySetting setting = new ProxySettingForm().ShowDialog();
+            Proxy = new ProxySettingForm().ShowDialog();
         }
 
         private void SaveResultsMenuItem_Click(object sender, EventArgs e)

@@ -6,9 +6,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class ProxySettingForm : StandardDialog
     {
-        public string IP { get => IPTextBox.Text.Trim(); }
-        public string Port { get => PortTextBox.Text.Trim(); }
-        public bool Enable { get => enableComboBox.SelectedIndex == 1; }
         public ProxySettingForm()
         {
             InitializeComponent();
@@ -36,28 +33,28 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ?
                 new ProxySetting(
-                    enableComboBox.SelectedIndex == 1,
+                    enableComboBox.SelectedIndex == 1,   // 0 否 1是
                     IPTextBox.Text.Trim(),
-                    PortTextBox.Text.Trim(),
+                    ConvertUtil.TryParseInt(PortTextBox.Text.Trim(), 1080),
                     proxyTypeCombox.SelectedItem.ToString()) : ProxySetting.Empty;
         }
 
     }
 
-    class ProxySetting
+    public class ProxySetting
     {
         public static ProxySetting Empty = new ProxySetting();
 
         public bool Enable;
         public string IP;
-        public string Port;
+        public int Port;
         public string Type;
         public ProxySetting()
         {
 
         }
 
-        public ProxySetting(bool enable, string ip, string port, string type)
+        public ProxySetting(bool enable, string ip, int port, string type)
         {
             Enable = enable;
             IP = ip;
