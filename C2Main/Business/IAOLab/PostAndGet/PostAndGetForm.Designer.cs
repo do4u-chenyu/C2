@@ -94,6 +94,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.textBoxPost.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxPost.Size = new System.Drawing.Size(712, 75);
             this.textBoxPost.TabIndex = 2;
+            this.textBoxPost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPost_KeyDown);
             // 
             // labelCookie
             // 

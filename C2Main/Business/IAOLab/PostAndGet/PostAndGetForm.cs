@@ -314,5 +314,11 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             this.textBoxIp.Text = string.Empty;
         }
+        private void textBoxPost_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+                ((TextBox)sender).SelectAll();
+        }
+
     }
 }
