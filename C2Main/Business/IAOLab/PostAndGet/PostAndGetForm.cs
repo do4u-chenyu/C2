@@ -278,11 +278,13 @@ namespace C2.Business.IAOLab.PostAndGet
 
         private void PostSubmit()
         {
-            byte[] bytesToPost = Encoding.UTF8.GetBytes(textBoxPost.Text);
             try
             {
                 req = WebRequest.Create(textBoxUrl.Text) as HttpWebRequest;
                 ConfigurationPostGet(req);
+                // urlencode + 还是 +，手动解析成%2B
+                textBoxPost.Text = contentType == "application/x-www-form-urlencoded" ? textBoxPost.Text.Replace("+", "%2B") : textBoxPost.Text;
+                byte[] bytesToPost = Encoding.UTF8.GetBytes(textBoxPost.Text);
                 PostText(req, bytesToPost);
             }
             catch (Exception ex)
