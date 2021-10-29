@@ -23,23 +23,30 @@ namespace C2.Utils
                 return "http://" + url.TrimStart();
         }
 
-        public static string IPQuery_126Net(string ip)
+        private static string IPCheck(string ip)
         {
-            ip = ip.ToLower().Trim();
             if (ip.IsNullOrEmpty())
-                return ip;
+                return "空地址";
             if (ip.StartsWith("127.0.0."))
                 return "本机回环地址";
             if (ip.Contains("0.0.0.0"))
                 return "空地址";
             if (ip.StartsWith("192.168."))
-                return "内网IP"; 
+                return "内网IP";
             if (ip.StartsWith("10."))
                 return "内网IP";
             if (ip.StartsWith("172.16."))  // 172.16 - 172.31都是,赶时间先凑合
                 return "内网IP";
             if (ip.Contains("%"))
                 return "暂不支持IPV6";
+            return ip;
+        }
+
+        public static string IPQuery_126Net(string ip)
+        {
+            ip = ip.ToLower().Trim();
+            if (ip != IPCheck(ip))
+                return IPCheck(ip);
 
             string url = "http://ip.ws.126.net/ipquery?ip=" + ip;
             string result = "";
