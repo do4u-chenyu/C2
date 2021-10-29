@@ -83,6 +83,7 @@
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvCountry3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -443,7 +444,8 @@
             this.lvDB,
             this.lvIP,
             this.lvCountry1,
-            this.lvCountry2});
+            this.lvCountry2,
+            this.lvCountry3});
             this.LV.ContextMenuStrip = this.contextMenuStrip1;
             this.LV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LV.Font = new System.Drawing.Font("宋体", 9F);
@@ -517,6 +519,11 @@
             // 
             this.lvCountry2.Text = "归属地2";
             this.lvCountry2.Width = 104;
+            // 
+            // lvCountry3
+            // 
+            this.lvCountry3.Text = "归属地3";
+            this.lvCountry3.Width = 109;
             // 
             // WebShellManageForm
             // 
@@ -594,5 +601,6 @@
         private System.Windows.Forms.ColumnHeader lvIP;
         private System.Windows.Forms.ColumnHeader lvCountry1;
         private System.Windows.Forms.ColumnHeader lvCountry2;
+        private System.Windows.Forms.ColumnHeader lvCountry3;
     }
 }

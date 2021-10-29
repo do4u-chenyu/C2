@@ -123,5 +123,45 @@ namespace C2.Utils
             return result;
 
         }
+
+        public static string IPQuery_IpApi(string ip)
+        {
+            ip = ip.ToLower().Trim();
+            if (ip != IPCheck(ip))
+                return IPCheck(ip);
+
+            string url = "http://ip-api.com/json/" + ip + "?lang=zh-CN";
+            string result = "";
+            WebRequest wrt = null;
+            WebResponse wrp = null;
+            try
+            {
+                wrt = WebRequest.Create(url);
+                wrt.Credentials = CredentialCache.DefaultCredentials;
+
+                wrp = wrt.GetResponse();
+                StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.UTF8);
+                //获取到的是Json数据
+                string html = sr.ReadToEnd();
+
+                //Newtonsoft.Json读取数据
+                JObject obj = JsonConvert.DeserializeObject<JObject>(html);
+                string city = obj["city"].ToString();
+                string province = obj["regionName"].ToString();
+                string country = obj["country"].ToString();
+                result = (city.Equals(province) && province.Equals(country)) ? city : (country + province + city);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                if (wrp != null)
+                    wrp.Close();
+                if (wrt != null)
+                    wrt.Abort();
+            }
+            return result;
+        }
     }
 }

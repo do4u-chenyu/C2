@@ -109,6 +109,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.IP);
             lvi.SubItems.Add(config.Country);
             lvi.SubItems.Add(config.Country2);
+            lvi.SubItems.Add(config.Country3);
 
             // 指针关联
             lvi.Tag = config;
@@ -157,6 +158,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[8].Text = cur.IP;             // 目标IP
             LV.SelectedItems[0].SubItems[9].Text = cur.Country;        // 归属地
             LV.SelectedItems[0].SubItems[10].Text = cur.Country2;        // 归属地
+            LV.SelectedItems[0].SubItems[11].Text = cur.Country3;        // 归属地
             // 按道理不会出现索引越界
             tasks[tasks.IndexOf(old)] = cur;
             SaveDB();
@@ -184,7 +186,9 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine(lvi.SubItems[6].Text)
               .AppendLine(lvi.SubItems[7].Text)
               .AppendLine(lvi.SubItems[8].Text)
-              .AppendLine(lvi.SubItems[9].Text);
+              .AppendLine(lvi.SubItems[9].Text)
+              .AppendLine(lvi.SubItems[10].Text)
+              .AppendLine(lvi.SubItems[11].Text);
 
             FileUtil.TryClipboardSetText(sb.ToString());
         }
@@ -264,6 +268,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[8].Text = task.IP;
             LV.SelectedItems[0].SubItems[9].Text = task.Country;
             LV.SelectedItems[0].SubItems[10].Text = task.Country2;
+            LV.SelectedItems[0].SubItems[11].Text = task.Country3;
             RefreshTasks();
             SaveDB();
         }
@@ -284,6 +289,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                     lvi.SubItems[5].Text = string.Empty;
                     lvi.SubItems[8].Text = string.Empty;
                     lvi.SubItems[9].Text = string.Empty;
+                    lvi.SubItems[10].Text = string.Empty;
+                    lvi.SubItems[11].Text = string.Empty;
                     continue;
                 }  
                 // 启用跳过尸体, 只有死的才改变状态
@@ -292,6 +299,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                     lvi.SubItems[5].Text = string.Empty;
                     lvi.SubItems[8].Text = string.Empty;
                     lvi.SubItems[9].Text = string.Empty;
+                    lvi.SubItems[10].Text = string.Empty;
+                    lvi.SubItems[11].Text = string.Empty;
                 }
                     
             }
@@ -308,6 +317,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 lvi.SubItems[8].Text = task.IP;
                 lvi.SubItems[9].Text = task.Country;
                 lvi.SubItems[10].Text = task.Country2;
+                lvi.SubItems[11].Text = task.Country3;
                 lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
             }
 
@@ -337,6 +347,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             task.IP = NetUtil.GetHostAddresses(task.Url);
             task.Country = NetUtil.IPQuery_126Net(task.IP);
             task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
+            task.Country3 = NetUtil.IPQuery_IpApi(task.IP);
         }
 
         private bool PostPrint(string url, string password)
