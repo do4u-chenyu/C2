@@ -6,16 +6,27 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class ProxySettingForm : StandardDialog
     {
-        public ProxySettingForm()
+        public ProxySettingForm(ProxySetting proxy)
         {
             InitializeComponent();
-            InitializeWebShell();
+            InitializeWebShell(proxy);
         }
 
-        private void InitializeWebShell()
+        private void InitializeWebShell(ProxySetting proxy)
         {
-            this.proxyTypeCombox.SelectedIndex = 0;
-            this.enableComboBox.SelectedIndex = 0;
+            if (proxy == ProxySetting.Empty)
+            {
+                this.proxyTypeCombox.SelectedIndex = 0;
+                this.enableComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                this.proxyTypeCombox.SelectedIndex = proxy.Type == "HTTP" ? 0 : 1;
+                this.enableComboBox.SelectedIndex = proxy.Enable ? 1 : 0;
+                this.IPTextBox.Text = proxy.IP;
+                this.PortTextBox.Text = proxy.Port.ToString();
+            }
+
         }
 
         protected override bool OnOKButtonClick()

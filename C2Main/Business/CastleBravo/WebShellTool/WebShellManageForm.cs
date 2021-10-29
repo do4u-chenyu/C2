@@ -381,7 +381,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
-            Proxy = new ProxySettingForm().ShowDialog();
+            Proxy = new ProxySettingForm(Proxy).ShowDialog();
         }
 
         private void SaveResultsMenuItem_Click(object sender, EventArgs e)
