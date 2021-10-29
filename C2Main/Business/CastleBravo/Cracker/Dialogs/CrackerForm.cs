@@ -1019,7 +1019,7 @@ namespace C2.Business.Cracker.Dialogs
         {
             if (services.ContainsKey("SSH"))
             {
-                String dictPath = Path.GetDirectoryName(Directory.GetCurrentDirectory() + services["SSH"].DicPasswordPath);
+                String dictPath = Path.GetDirectoryName(Application.StartupPath + services["SSH"].DicPasswordPath);
                 ProcessUtil.ProcessOpen(dictPath);
             }
                 
