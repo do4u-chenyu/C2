@@ -79,45 +79,45 @@ namespace C2.Utils
 
         }
 
-        //public static string IPQuery_TaoBao(string ip)
-        //{
-        //    ip = ip.ToLower().Trim();
-        //    if (ip != IPCheck(ip))
-        //        return IPCheck(ip);
+        public static string IPQuery_TaoBao(string ip)
+        {
+            ip = ip.ToLower().Trim();
+            if (ip != IPCheck(ip))
+                return IPCheck(ip);
 
-        //    string url = "http://ip.taobao.com/outGetIpInfo?ip=" + ip + "&accessKey=alibaba-inc";
-        //    string result = "";
-        //    WebRequest wrt = null;
-        //    WebResponse wrp = null;
-        //    try
-        //    {
-        //        wrt = WebRequest.Create(url);
-        //        wrt.Credentials = CredentialCache.DefaultCredentials;
+            string url = "http://ip.taobao.com/outGetIpInfo?ip=" + ip + "&accessKey=alibaba-inc";
+            string result = "";
+            WebRequest wrt = null;
+            WebResponse wrp = null;
+            try
+            {
+                wrt = WebRequest.Create(url);
+                wrt.Credentials = CredentialCache.DefaultCredentials;
 
-        //        wrp = wrt.GetResponse();
-        //        StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.UTF8);
-        //        string html = sr.ReadToEnd();
-        //        string pattern = "\"country\":\"(?<country>.*?)\"[\\s\\S]*?\"city\":\"(?<city>.*?)\"[\\s\\S]*?\"region\":\"(?<province>.*?)\"";
-        //        Regex regex = new Regex(pattern, RegexOptions.None);
-        //        Match match = regex.Match(html);
-        //        string city = match.Groups["city"].Value;
-        //        string province = match.Groups["province"].Value;
-        //        string country = match.Groups["country"].Value;
-        //        result = (city.Equals(province) && province.Equals(country)) ? city : (country + province + city);
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    finally
-        //    {
-        //        if (wrp != null)
-        //            wrp.Close();
-        //        if (wrt != null)
-        //            wrt.Abort();
-        //    }
-        //    return result;
+                wrp = wrt.GetResponse();
+                StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.UTF8);
+                string html = sr.ReadToEnd();
+                string pattern = "\"country\":\"(?<country>.*?)\"[\\s\\S]*?\"city\":\"(?<city>.*?)\"[\\s\\S]*?\"region\":\"(?<province>.*?)\"";
+                Regex regex = new Regex(pattern, RegexOptions.None);
+                Match match = regex.Match(html);
+                string city = match.Groups["city"].Value;
+                string province = match.Groups["province"].Value;
+                string country = match.Groups["country"].Value;
+                result = (city.Equals(province) && province.Equals(country)) ? city : (country + province + city);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                if (wrp != null)
+                    wrp.Close();
+                if (wrt != null)
+                    wrt.Abort();
+            }
+            return result;
 
-        //}
+        }
 
         public static string IPQuery_IpApi(string ip)
         {

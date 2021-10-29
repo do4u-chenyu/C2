@@ -156,7 +156,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[7].Text = cur.DatabaseConfig; // 数据库配置
             LV.SelectedItems[0].SubItems[8].Text = cur.IP;             // 目标IP
             LV.SelectedItems[0].SubItems[9].Text = cur.Country;        // 归属地
-            LV.SelectedItems[0].SubItems[10].Text = cur.Country2;        // 归属地
+            LV.SelectedItems[0].SubItems[10].Text = cur.Country2;      // 归属地
             // 按道理不会出现索引越界
             tasks[tasks.IndexOf(old)] = cur;
             SaveDB();
@@ -339,7 +339,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             task.IP = NetUtil.GetHostAddresses(task.Url);
             task.Country = NetUtil.IPQuery_WhoIs(task.IP);
-            task.Country2 = NetUtil.IPQuery_IpApi(task.IP);
+            task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
         }
 
         private bool PostPrint(string url, string password)
