@@ -704,8 +704,8 @@ namespace C2.Business.Cracker.Dialogs
                 foreach (string serviceName in this.services_list.CheckedItems)
                 {
                     ServiceModel sm = this.services[serviceName];
-                    sm.ListUserName = FileTool.readFileToList(Directory.GetCurrentDirectory() + sm.DicUserNamePath);
-                    sm.ListPassword = FileTool.readFileToList(Directory.GetCurrentDirectory() + sm.DicPasswordPath);
+                    sm.ListUserName = FileTool.readFileToList(Application.StartupPath + sm.DicUserNamePath);
+                    sm.ListPassword = FileTool.readFileToList(Application.StartupPath + sm.DicPasswordPath);
                     if (sm.ListUserName.Count <= 0)
                     {
                         LogWarning("加载" + serviceName + "用户名字典未发现数据！");
