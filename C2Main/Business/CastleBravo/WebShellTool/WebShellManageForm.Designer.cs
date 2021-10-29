@@ -81,7 +81,8 @@
             this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvCountry = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvCountry1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvCountry2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -203,7 +204,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1298, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1305, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -441,7 +442,8 @@
             this.lvVersion,
             this.lvDB,
             this.lvIP,
-            this.lvCountry});
+            this.lvCountry1,
+            this.lvCountry2});
             this.LV.ContextMenuStrip = this.contextMenuStrip1;
             this.LV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LV.Font = new System.Drawing.Font("宋体", 9F);
@@ -455,7 +457,7 @@
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1298, 425);
+            this.LV.Size = new System.Drawing.Size(1305, 425);
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -469,27 +471,27 @@
             // lvRemark
             // 
             this.lvRemark.Text = "备注";
-            this.lvRemark.Width = 108;
+            this.lvRemark.Width = 95;
             // 
             // lvShellUrl
             // 
             this.lvShellUrl.Text = "目标Url";
-            this.lvShellUrl.Width = 350;
+            this.lvShellUrl.Width = 331;
             // 
             // lvPass
             // 
             this.lvPass.Text = "连接密码";
-            this.lvPass.Width = 105;
+            this.lvPass.Width = 96;
             // 
             // lvType
             // 
             this.lvType.Text = "Trojan类型";
-            this.lvType.Width = 78;
+            this.lvType.Width = 74;
             // 
             // lvStatus
             // 
             this.lvStatus.Text = "验活";
-            this.lvStatus.Width = 53;
+            this.lvStatus.Width = 42;
             // 
             // lvVersion
             // 
@@ -499,23 +501,28 @@
             // lvDB
             // 
             this.lvDB.Text = "数据库配置";
-            this.lvDB.Width = 98;
+            this.lvDB.Width = 77;
             // 
             // lvIP
             // 
             this.lvIP.Text = "IP";
-            this.lvIP.Width = 118;
+            this.lvIP.Width = 100;
             // 
-            // lvCountry
+            // lvCountry1
             // 
-            this.lvCountry.Text = "归属地";
-            this.lvCountry.Width = 113;
+            this.lvCountry1.Text = "归属地1";
+            this.lvCountry1.Width = 109;
+            // 
+            // lvCountry2
+            // 
+            this.lvCountry2.Text = "归属地2";
+            this.lvCountry2.Width = 104;
             // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1298, 450);
+            this.ClientSize = new System.Drawing.Size(1305, 450);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -585,6 +592,7 @@
         private System.Windows.Forms.ToolStripMenuItem SaveResultsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshAllDeadMenu;
         private System.Windows.Forms.ColumnHeader lvIP;
-        private System.Windows.Forms.ColumnHeader lvCountry;
+        private System.Windows.Forms.ColumnHeader lvCountry1;
+        private System.Windows.Forms.ColumnHeader lvCountry2;
     }
 }
