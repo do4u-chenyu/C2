@@ -336,7 +336,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             task.IP = NetUtil.GetHostAddresses(task.Url);
             task.Country = NetUtil.IPQuery_126Net(task.IP);
-            task.Country2 = NetUtil.IPQuery_126Net(task.IP);
+            task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
         }
 
         private bool PostPrint(string url, string password)
