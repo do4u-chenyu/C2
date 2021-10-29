@@ -18,6 +18,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string DatabaseConfig;
         public string IP;               // IP地址
         public string Country;          // 归属地
+        public string Country2;          // 归属地
 
         public WebShellTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
@@ -33,6 +34,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             DatabaseConfig = dbConfig;
             IP = "0.0.0.0";
             Country = string.Empty;
+            Country2 = string.Empty;
         }
     }
 }
