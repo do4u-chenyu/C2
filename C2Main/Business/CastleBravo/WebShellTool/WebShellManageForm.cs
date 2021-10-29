@@ -277,11 +277,18 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (!isSkipDead)
                 {
                     lvi.SubItems[5].Text = string.Empty;
+                    lvi.SubItems[8].Text = string.Empty;
+                    lvi.SubItems[9].Text = string.Empty;
                     continue;
                 }  
                 // 启用跳过尸体, 只有死的才改变状态
                 if (lvi.SubItems[5].Text == "×")
+                {
                     lvi.SubItems[5].Text = string.Empty;
+                    lvi.SubItems[8].Text = string.Empty;
+                    lvi.SubItems[9].Text = string.Empty;
+                }
+                    
             }
                 
 
@@ -294,6 +301,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
                 lvi.SubItems[5].Text = RefreshTaskStatus(task);
                 lvi.SubItems[8].Text = task.IP;
+                lvi.SubItems[9].Text = task.Country;
                 lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
             }
 
@@ -321,7 +329,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void RefreshIPAddress(WebShellTaskConfig task)
         {
             task.IP = NetUtil.GetHostAddresses(task.Url);
-
+            task.Country = NetUtil.IPQuery_126Net(task.IP);
         }
 
         private bool PostPrint(string url, string password)
