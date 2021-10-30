@@ -143,9 +143,9 @@
             this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Location = new System.Drawing.Point(23, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 12);
+            this.label4.Size = new System.Drawing.Size(191, 12);
             this.label4.TabIndex = 10021;
-            this.label4.Text = "代理设置未持久化,";
+            this.label4.Text = "代理设置不保存,用前每次设置一下";
             // 
             // ProxySettingForm
             // 
