@@ -50,6 +50,7 @@
             this.radixComboBox = new System.Windows.Forms.ComboBox();
             this.labelEncryptionkey = new System.Windows.Forms.Label();
             this.textBoxEncryptionkey = new System.Windows.Forms.TextBox();
+            this.NTLMRadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // inputTextBox
@@ -242,7 +243,6 @@
             this.encodingComboBox.Name = "encodingComboBox";
             this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
             this.encodingComboBox.TabIndex = 12;
-            this.encodingComboBox.Visible = true;
             this.encodingComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // splitComboBox
@@ -302,6 +302,19 @@
             this.textBoxEncryptionkey.TabIndex = 17;
             this.textBoxEncryptionkey.Visible = false;
             // 
+            // NTLMRadioButton
+            // 
+            this.NTLMRadioButton.AutoSize = true;
+            this.NTLMRadioButton.Font = new System.Drawing.Font("宋体", 10F);
+            this.NTLMRadioButton.Location = new System.Drawing.Point(893, 13);
+            this.NTLMRadioButton.Name = "NTLMRadioButton";
+            this.NTLMRadioButton.Size = new System.Drawing.Size(53, 18);
+            this.NTLMRadioButton.TabIndex = 18;
+            this.NTLMRadioButton.Text = "NTLM";
+            this.toolTip1.SetToolTip(this.NTLMRadioButton, "使用sha512对字符串进行加密");
+            this.NTLMRadioButton.UseVisualStyleBackColor = true;
+            this.NTLMRadioButton.CheckedChanged += new System.EventHandler(this.NTLMRadioButton_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -309,6 +322,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1027, 513);
+            this.Controls.Add(this.NTLMRadioButton);
             this.Controls.Add(this.textBoxEncryptionkey);
             this.Controls.Add(this.labelEncryptionkey);
             this.Controls.Add(this.ASE128RadioButton);
@@ -361,6 +375,7 @@
         private System.Windows.Forms.RadioButton ASE128RadioButton;
         private System.Windows.Forms.Label labelEncryptionkey;
         private System.Windows.Forms.TextBox textBoxEncryptionkey;
+        private System.Windows.Forms.RadioButton NTLMRadioButton;
     }
 }
 

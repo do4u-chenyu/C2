@@ -469,6 +469,26 @@ namespace MD5Plugin
             }
         }
 
+
+        public void NTLMEncrypt(string str)
+        {
+            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
+            {
+                ResetTextBox();
+            }
+            else
+            {
+                byte[] bytValue = Encoding.UTF8.GetBytes(str);
+                SHA512 sha512 = new SHA512CryptoServiceProvider();
+                byte[] retVal = sha512.ComputeHash(bytValue);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                outputTextBox.Text = sb.ToString();
+            }
+        }
         //编码或者加密功能
         private void EncodeButton_Click(object sender, EventArgs e)
         {
@@ -511,6 +531,10 @@ namespace MD5Plugin
             else if (sha512RadioButton.Checked)
             {
                 SHA512Encrypt(inputTextBox.Text);
+            }
+            else if (NTLMRadioButton.Checked)
+            {
+                NTLMEncrypt(inputTextBox.Text);
             }
             else
             {
@@ -822,6 +846,11 @@ namespace MD5Plugin
             {
                 return false;
             }
+        }
+
+        private void NTLMRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDefaultEncrypFormat();
         }
     }
 }
