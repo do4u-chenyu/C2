@@ -478,15 +478,7 @@ namespace MD5Plugin
             }
             else
             {
-                byte[] bytValue = Encoding.UTF8.GetBytes(str);
-                SHA512 sha512 = new SHA512CryptoServiceProvider();
-                byte[] retVal = sha512.ComputeHash(bytValue);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < retVal.Length; i++)
-                {
-                    sb.Append(retVal[i].ToString("x2"));
-                }
-                outputTextBox.Text = sb.ToString();
+                outputTextBox.Text = NTLM.ComputeHashHexString(str);
             }
         }
         //编码或者加密功能
