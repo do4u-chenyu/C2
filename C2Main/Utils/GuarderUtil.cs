@@ -43,5 +43,42 @@ namespace C2.Utils
                 control.ResumeLayout(true);
             }
         }
+
+        public class ControlEnableGuarder : IDisposable
+        {
+            private readonly Control[] cts;
+            public ControlEnableGuarder(Control ct)
+            {
+                this.cts = new Control[] { ct };
+                ct.Enabled = false;
+            }
+            public ControlEnableGuarder(Control[] cts)
+            {
+                this.cts = cts;
+                foreach (Control ct in this.cts)
+                    ct.Enabled = false;
+            }
+            public void Dispose()
+            {
+                foreach (Control ct in this.cts)
+                    ct.Enabled = true;
+            }
+        }
+
+        public class ToolStripItemEnableGuarder : IDisposable
+        {
+            private ToolStripItem[] items;
+            public ToolStripItemEnableGuarder(ToolStripItem[] items)
+            {
+                this.items = items;
+                foreach (ToolStripItem item in this.items)
+                    item.Enabled = false;
+            }
+            public void Dispose()
+            {
+                foreach (ToolStripItem item in this.items)
+                    item.Enabled = true;
+            }
+        }
     }
 }

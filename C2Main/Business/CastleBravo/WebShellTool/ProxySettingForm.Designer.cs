@@ -38,12 +38,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.enableComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 27);
+            this.label1.Location = new System.Drawing.Point(11, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 1;
@@ -52,7 +53,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 60);
+            this.label2.Location = new System.Drawing.Point(23, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 10004;
@@ -60,7 +61,7 @@
             // 
             // IPTextBox
             // 
-            this.IPTextBox.Location = new System.Drawing.Point(66, 56);
+            this.IPTextBox.Location = new System.Drawing.Point(66, 62);
             this.IPTextBox.Name = "IPTextBox";
             this.IPTextBox.Size = new System.Drawing.Size(205, 21);
             this.IPTextBox.TabIndex = 10003;
@@ -69,7 +70,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 95);
+            this.label3.Location = new System.Drawing.Point(11, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 10006;
@@ -77,7 +78,7 @@
             // 
             // PortTextBox
             // 
-            this.PortTextBox.Location = new System.Drawing.Point(66, 91);
+            this.PortTextBox.Location = new System.Drawing.Point(66, 97);
             this.PortTextBox.Name = "PortTextBox";
             this.PortTextBox.Size = new System.Drawing.Size(205, 21);
             this.PortTextBox.TabIndex = 10005;
@@ -86,7 +87,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 129);
+            this.label5.Location = new System.Drawing.Point(11, 135);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 10010;
@@ -99,7 +100,7 @@
             this.proxyTypeCombox.FormattingEnabled = true;
             this.proxyTypeCombox.Items.AddRange(new object[] {
             "HTTP"});
-            this.proxyTypeCombox.Location = new System.Drawing.Point(66, 126);
+            this.proxyTypeCombox.Location = new System.Drawing.Point(66, 132);
             this.proxyTypeCombox.Name = "proxyTypeCombox";
             this.proxyTypeCombox.Size = new System.Drawing.Size(205, 20);
             this.proxyTypeCombox.TabIndex = 10011;
@@ -108,7 +109,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(49, 60);
+            this.label8.Location = new System.Drawing.Point(49, 66);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(11, 12);
             this.label8.TabIndex = 10018;
@@ -118,7 +119,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(49, 96);
+            this.label9.Location = new System.Drawing.Point(49, 102);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(11, 12);
             this.label9.TabIndex = 10019;
@@ -131,10 +132,20 @@
             this.enableComboBox.Items.AddRange(new object[] {
             "否",
             "是"});
-            this.enableComboBox.Location = new System.Drawing.Point(66, 22);
+            this.enableComboBox.Location = new System.Drawing.Point(66, 28);
             this.enableComboBox.Name = "enableComboBox";
             this.enableComboBox.Size = new System.Drawing.Size(205, 20);
             this.enableComboBox.TabIndex = 10020;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(23, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 12);
+            this.label4.TabIndex = 10021;
+            this.label4.Text = "代理设置未持久化,";
             // 
             // ProxySettingForm
             // 
@@ -142,6 +153,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(290, 209);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.enableComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -166,6 +178,7 @@
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.label9, 0);
             this.Controls.SetChildIndex(this.enableComboBox, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +195,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox enableComboBox;
+        private System.Windows.Forms.Label label4;
     }
 }

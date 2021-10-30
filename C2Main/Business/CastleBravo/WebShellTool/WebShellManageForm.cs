@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
+using static C2.Utils.GuarderUtil;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -16,9 +16,25 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         List<WebShellTaskConfig> tasks = new List<WebShellTaskConfig>();
         readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
+
+        private ToolStripItem[] enableItems;
         public WebShellManageForm()
         {
             InitializeComponent();
+            InitializeToolStrip();
+        }
+
+        private void InitializeToolStrip()
+        {
+            // 批量验活时, 与其他菜单项互斥
+            enableItems = new ToolStripItem[]
+            {
+                this.addBatchShellMenu,
+                this.proxySettingMenu,
+                this.refreshAllShellMenu,
+                this.addOneShellMenu,
+                this.trojanMenu
+            };
         }
 
         private void AddShellMenu_Click(object sender, EventArgs e)
@@ -259,12 +275,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-
-            WebShellTaskConfig task = LV.SelectedItems[0].Tag as WebShellTaskConfig;
-            LV.SelectedItems[0].SubItems[5].Text = RefreshTaskStatus(task);
-            LV.SelectedItems[0].SubItems[8].Text = task.IP;
-            LV.SelectedItems[0].SubItems[9].Text = task.Country;
-            LV.SelectedItems[0].SubItems[10].Text = task.Country2;
+            UpdateAliveItems(LV.SelectedItems[0]);
             RefreshTasks();
             SaveDB();
         }
@@ -274,49 +285,60 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshAllTaskStatus();
         }
 
+        private bool refreshNeedStop = false;
+        private void RefreshStopMenu_Click(object sender, EventArgs e)
+        {
+            refreshNeedStop = true;
+        }
+
         private void RefreshAllTaskStatus(bool isSkipDead = false)
         {
+            this.progressBar.Value = 0;
+            this.progressBar.Maximum = 0;
             // 刷新前先强制清空
             foreach (ListViewItem lvi in LV.Items)
             {
-                // 不启用跳过尸体, 全部清空
-                if (!isSkipDead)
+                // 没启用跳过尸体, 清空 或 死状态 清空
+                if (!isSkipDead || lvi.SubItems[5].Text == "×")
                 {
-                    lvi.SubItems[5].Text = string.Empty;
-                    lvi.SubItems[8].Text = string.Empty;
-                    lvi.SubItems[9].Text = string.Empty;
-                    lvi.SubItems[10].Text = string.Empty;
-                    continue;
-                }  
-                // 启用跳过尸体, 只有死的才改变状态
-                if (lvi.SubItems[5].Text == "×")
-                {
-                    lvi.SubItems[5].Text = string.Empty;
-                    lvi.SubItems[8].Text = string.Empty;
-                    lvi.SubItems[9].Text = string.Empty;
-                    lvi.SubItems[10].Text = string.Empty;
-                }
-                    
+                    ClearAliveItems(lvi);
+                    this.progressBar.Maximum++;
+                }       
             }
-                
-
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                // 启用跳过尸体, 遇到活人，跳过
-                if (isSkipDead && lvi.SubItems[5].Text == "√")
-                    continue;
-
-                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-                lvi.SubItems[5].Text = RefreshTaskStatus(task);
-                lvi.SubItems[8].Text = task.IP;
-                lvi.SubItems[9].Text = task.Country;
-                lvi.SubItems[10].Text = task.Country2;
-                lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
-            }
-
-
+            
+            using (new ControlEnableGuarder(this.contextMenuStrip))
+                using(new ToolStripItemEnableGuarder(this.enableItems))
+                    foreach (ListViewItem lvi in LV.Items)
+                    {
+                        if (refreshNeedStop)
+                            break;
+                        // 启用跳过尸体, 遇到活人，跳过
+                        if (isSkipDead && lvi.SubItems[5].Text == "√")
+                            continue;
+                        this.progressBar.Value++;
+                        UpdateAliveItems(lvi);
+                    }
+            refreshNeedStop = false;
             RefreshTasks();
             SaveDB();
+        }
+
+        private void UpdateAliveItems(ListViewItem lvi)
+        {
+            WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+            lvi.SubItems[5].Text = RefreshTaskStatus(task);
+            lvi.SubItems[8].Text = task.IP;
+            lvi.SubItems[9].Text = task.Country;
+            lvi.SubItems[10].Text = task.Country2;
+            lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+        }
+
+        private static void ClearAliveItems(ListViewItem lvi)
+        {
+            lvi.SubItems[5].Text = string.Empty;
+            lvi.SubItems[8].Text = string.Empty;
+            lvi.SubItems[9].Text = string.Empty;
+            lvi.SubItems[10].Text = string.Empty;
         }
 
         private string RefreshTaskStatus(WebShellTaskConfig task)
@@ -337,9 +359,13 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshIPAddress(WebShellTaskConfig task)
         {
+            Application.DoEvents();
             task.IP = NetUtil.GetHostAddresses(task.Url);
+            Application.DoEvents();
             task.Country = NetUtil.IPQuery_WhoIs(task.IP);
+            Application.DoEvents();
             task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
+            Application.DoEvents();
         }
 
         private bool PostPrint(string url, string password)
@@ -441,5 +467,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             RefreshAllTaskStatus(true);
         }
+
+
     }
 }

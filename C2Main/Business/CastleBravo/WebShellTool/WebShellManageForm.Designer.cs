@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebShellManageForm));
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,13 +44,11 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveResultsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.addShellMenu = new System.Windows.Forms.ToolStripLabel();
+            this.addOneShellMenu = new System.Windows.Forms.ToolStripLabel();
             this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.addAllShellMenu = new System.Windows.Forms.ToolStripLabel();
+            this.addBatchShellMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.refreshAllShellMenu = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.trojanMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.OneWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.变种1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +68,11 @@
             this.GodzillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripLabel();
-            this.proxyMenu = new System.Windows.Forms.ToolStripLabel();
+            this.refreshAllShellMenu = new System.Windows.Forms.ToolStripLabel();
+            this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -83,14 +85,14 @@
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // contextMenuStrip1
+            // contextMenuStrip
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EnterToolStripMenuItem,
             this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem,
@@ -103,8 +105,8 @@
             this.RefreshAllDeadMenu,
             this.toolStripSeparator5,
             this.SaveResultsMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 236);
+            this.contextMenuStrip.Name = "contextMenuStrip1";
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 236);
             // 
             // EnterToolStripMenuItem
             // 
@@ -190,32 +192,34 @@
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addShellMenu,
+            this.addOneShellMenu,
             this.settingMenu,
             this.toolStripSeparator3,
-            this.addAllShellMenu,
+            this.addBatchShellMenu,
             this.toolStripSeparator1,
-            this.refreshAllShellMenu,
-            this.toolStripSeparator4,
             this.trojanMenu,
             this.toolStripSeparator2,
             this.toolStripButton1,
-            this.proxyMenu});
+            this.refreshAllShellMenu,
+            this.refreshStopMenu,
+            this.progressBar,
+            this.toolStripSeparator6,
+            this.proxySettingMenu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1305, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1319, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // addShellMenu
+            // addOneShellMenu
             // 
-            this.addShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addShellMenu.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.addShellMenu.Name = "addShellMenu";
-            this.addShellMenu.Size = new System.Drawing.Size(32, 22);
-            this.addShellMenu.Text = "添加";
-            this.addShellMenu.Click += new System.EventHandler(this.AddShellMenu_Click);
+            this.addOneShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addOneShellMenu.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.addOneShellMenu.Name = "addOneShellMenu";
+            this.addOneShellMenu.Size = new System.Drawing.Size(32, 22);
+            this.addOneShellMenu.Text = "添加";
+            this.addOneShellMenu.Click += new System.EventHandler(this.AddShellMenu_Click);
             // 
             // settingMenu
             // 
@@ -227,31 +231,18 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // addAllShellMenu
+            // addBatchShellMenu
             // 
-            this.addAllShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addAllShellMenu.Name = "addAllShellMenu";
-            this.addAllShellMenu.Size = new System.Drawing.Size(56, 22);
-            this.addAllShellMenu.Text = "批量添加";
-            this.addAllShellMenu.Click += new System.EventHandler(this.AddAllShellMenu_Click);
+            this.addBatchShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addBatchShellMenu.Name = "addBatchShellMenu";
+            this.addBatchShellMenu.Size = new System.Drawing.Size(56, 22);
+            this.addBatchShellMenu.Text = "批量添加";
+            this.addBatchShellMenu.Click += new System.EventHandler(this.AddAllShellMenu_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // refreshAllShellMenu
-            // 
-            this.refreshAllShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(56, 22);
-            this.refreshAllShellMenu.Text = "批量刷新";
-            this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // trojanMenu
             // 
@@ -419,13 +410,44 @@
             this.toolStripButton1.Size = new System.Drawing.Size(0, 22);
             this.toolStripButton1.Text = "dddd";
             // 
-            // proxyMenu
+            // refreshAllShellMenu
             // 
-            this.proxyMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.proxyMenu.Name = "proxyMenu";
-            this.proxyMenu.Size = new System.Drawing.Size(56, 22);
-            this.proxyMenu.Text = "代理设置";
-            this.proxyMenu.Click += new System.EventHandler(this.ProxyMenu_Click);
+            this.refreshAllShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.refreshAllShellMenu.Name = "refreshAllShellMenu";
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(56, 22);
+            this.refreshAllShellMenu.Text = "批量验活";
+            this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
+            // 
+            // refreshStopMenu
+            // 
+            this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.refreshStopMenu.Name = "refreshStopMenu";
+            this.refreshStopMenu.Size = new System.Drawing.Size(56, 22);
+            this.refreshStopMenu.Text = "停止验活";
+            this.refreshStopMenu.Click += new System.EventHandler(this.RefreshStopMenu_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.AutoSize = false;
+            this.progressBar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.progressBar.Font = new System.Drawing.Font("Microsoft YaHei UI", 8F);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(130, 19);
+            this.progressBar.Step = 1;
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // proxySettingMenu
+            // 
+            this.proxySettingMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.proxySettingMenu.Name = "proxySettingMenu";
+            this.proxySettingMenu.Size = new System.Drawing.Size(56, 22);
+            this.proxySettingMenu.Text = "代理设置";
+            this.proxySettingMenu.Click += new System.EventHandler(this.ProxyMenu_Click);
             // 
             // LV
             // 
@@ -444,7 +466,7 @@
             this.lvIP,
             this.lvCountry1,
             this.lvCountry2});
-            this.LV.ContextMenuStrip = this.contextMenuStrip1;
+            this.LV.ContextMenuStrip = this.contextMenuStrip;
             this.LV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LV.Font = new System.Drawing.Font("宋体", 9F);
             this.LV.FullRowSelect = true;
@@ -457,7 +479,7 @@
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1305, 425);
+            this.LV.Size = new System.Drawing.Size(1319, 425);
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -522,7 +544,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1305, 450);
+            this.ClientSize = new System.Drawing.Size(1319, 450);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -532,7 +554,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell模拟器";
             this.Load += new System.EventHandler(this.WebShellManageForm_Load);
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -541,9 +563,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel addShellMenu;
+        private System.Windows.Forms.ToolStripLabel addOneShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ListView LV;
         private System.Windows.Forms.ColumnHeader lvRemark;
@@ -577,22 +599,24 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem RefreshCurrentStatusMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshAllStatusMenuItem;
-        private System.Windows.Forms.ToolStripLabel addAllShellMenu;
+        private System.Windows.Forms.ToolStripLabel addBatchShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel refreshAllShellMenu;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ClearAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SuscideMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 变种10ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 变种11LandGreyToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel toolStripButton1;
-        private System.Windows.Forms.ToolStripLabel proxyMenu;
+        private System.Windows.Forms.ToolStripLabel proxySettingMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem SaveResultsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshAllDeadMenu;
         private System.Windows.Forms.ColumnHeader lvIP;
         private System.Windows.Forms.ColumnHeader lvCountry1;
         private System.Windows.Forms.ColumnHeader lvCountry2;
+        private System.Windows.Forms.ToolStripLabel refreshStopMenu;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
