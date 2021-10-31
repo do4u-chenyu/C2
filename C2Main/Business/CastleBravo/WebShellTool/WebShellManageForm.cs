@@ -296,16 +296,16 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-                foreach (ListViewItem lvi in LV.Items)
-                {
-                    if (refreshNeedStop)
-                        break;
-                    // 启用跳过尸体, 遇到活人，跳过
-                    if (isSkipDead && lvi.SubItems[5].Text == "√")
-                        continue;
-                    UpdateAliveItems(lvi);
-                    UpdateProgress();
-                }
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                if (refreshNeedStop)
+                    break;
+                // 启用跳过尸体, 遇到活人，跳过
+                if (isSkipDead && lvi.SubItems[5].Text == "√")
+                    continue;
+                UpdateAliveItems(lvi);
+                UpdateProgress();
+            }
             RefreshTasks();
             SaveDB();
         }
@@ -367,6 +367,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         private bool PostPrintTimeout(string url, string password, int timeout = 5)
         {   // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
             var t = Task.Run(() => PostPrint(url, password));
+            // 代理慢, timeout富裕一些
+            timeout = Proxy == ProxySetting.Empty ? timeout : timeout * 2;
+
             for (int i = 0; i < timeout; i++)
             {
                 Application.DoEvents();
