@@ -45,7 +45,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             LV.Items.Add(NewLVI(config));
             tasks.Add(config);
-
             SaveDB();
         }
 
@@ -91,8 +90,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshLV();
         }
 
-
-
         private void LoadDB()
         {
             try
@@ -101,7 +98,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                     tasks = new BinaryFormatter().Deserialize(stream) as List<WebShellTaskConfig>;
             }
             catch { }
-
         }
 
         public void RefreshLV()
@@ -164,7 +160,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             LV.SelectedItems[0].Tag = cur;
             LV.SelectedItems[0].SubItems[1].Text = cur.Remark;         // 名称
-            LV.SelectedItems[0].SubItems[2].Text = cur.Url; // url
+            LV.SelectedItems[0].SubItems[2].Text = cur.Url;            // url
             LV.SelectedItems[0].SubItems[3].Text = cur.Password;       // 密码
             LV.SelectedItems[0].SubItems[4].Text = cur.TrojanType;     // 木马类型
             LV.SelectedItems[0].SubItems[5].Text = cur.Status;         // 木马状态
@@ -191,17 +187,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             ListViewItem lvi = this.LV.SelectedItems[0];
             // 没找到能复制指定单元格的方法, 先复制整行
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(lvi.SubItems[0].Text)  // 按道理一个foreach搞定,但内部类型没找到合适的引用方法
-              .AppendLine(lvi.SubItems[1].Text)
-              .AppendLine(lvi.SubItems[2].Text)
-              .AppendLine(lvi.SubItems[3].Text)
-              .AppendLine(lvi.SubItems[4].Text)
-              .AppendLine(lvi.SubItems[5].Text)
-              .AppendLine(lvi.SubItems[6].Text)
-              .AppendLine(lvi.SubItems[7].Text)
-              .AppendLine(lvi.SubItems[8].Text)
-              .AppendLine(lvi.SubItems[9].Text)
-              .AppendLine(lvi.SubItems[10].Text);
+            for (int i = 0; i < lvi.SubItems.Count; i++)
+                sb.AppendLine(lvi.SubItems[i].Text);
 
             FileUtil.TryClipboardSetText(sb.ToString());
         }
@@ -293,13 +280,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllTaskStatus(bool isSkipDead = false)
         {
+            this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
             this.progressBar.Maximum = 0;
+            this.refreshNeedStop = false;
             // 刷新前先强制清空
             foreach (ListViewItem lvi in LV.Items)
             {
                 // 没启用跳过尸体, 清空 或 死状态 清空
-                if (!isSkipDead || lvi.SubItems[5].Text == "×")
+                if (!isSkipDead || lvi.SubItems[5].Text != "√")
                 {
                     ClearAliveItems(lvi);
                     this.progressBar.Maximum++;
@@ -315,10 +304,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                         // 启用跳过尸体, 遇到活人，跳过
                         if (isSkipDead && lvi.SubItems[5].Text == "√")
                             continue;
-                        this.progressBar.Value++;
                         UpdateAliveItems(lvi);
+                        UpdateProgress();
                     }
-            refreshNeedStop = false;
             RefreshTasks();
             SaveDB();
         }
@@ -331,6 +319,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems[9].Text = task.Country;
             lvi.SubItems[10].Text = task.Country2;
             lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+        }
+        private void UpdateProgress()
+        {
+            this.progressBar.Value++;
+            this.progressMenu.Text = string.Format("{0}/{1}", progressBar.Value, progressBar.Maximum);
         }
 
         private static void ClearAliveItems(ListViewItem lvi)

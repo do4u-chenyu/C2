@@ -85,6 +85,7 @@
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.progressMenu = new System.Windows.Forms.ToolStripLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -203,6 +204,7 @@
             this.refreshAllShellMenu,
             this.refreshStopMenu,
             this.progressBar,
+            this.progressMenu,
             this.toolStripSeparator6,
             this.proxySettingMenu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -273,7 +275,7 @@
             this.变种10ToolStripMenuItem,
             this.变种11LandGreyToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
-            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
             this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
@@ -368,7 +370,7 @@
             // behinderToolStripMenuItem
             // 
             this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
-            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.behinderToolStripMenuItem.Text = "三代冰蝎";
             this.behinderToolStripMenuItem.ToolTipText = "与三代冰蝎配套的Trojan";
             this.behinderToolStripMenuItem.Click += new System.EventHandler(this.BehinderToolStripMenuItem_Click);
@@ -376,7 +378,7 @@
             // BypassToolStripMenuItem
             // 
             this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
-            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.BypassToolStripMenuItem.Text = "凯撒变种";
             this.BypassToolStripMenuItem.ToolTipText = "凯撒加密Payload引导段";
             this.BypassToolStripMenuItem.Click += new System.EventHandler(this.BypassToolStripMenuItem_Click);
@@ -384,7 +386,7 @@
             // PHPEvalToolStripMenuItem
             // 
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
-            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PHPEvalToolStripMenuItem.Text = "通用型PHPEVAL";
             this.PHPEvalToolStripMenuItem.ToolTipText = "最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.PHPEvalToolStripMenuItem_Click);
@@ -392,7 +394,7 @@
             // GodzillaToolStripMenuItem
             // 
             this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
-            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.GodzillaToolStripMenuItem.Text = "哥斯拉";
             this.GodzillaToolStripMenuItem.ToolTipText = "与Godzilla配套的Trojan";
             this.GodzillaToolStripMenuItem.Click += new System.EventHandler(this.GodzillaToolStripMenuItem_Click);
@@ -416,6 +418,7 @@
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
             this.refreshAllShellMenu.Size = new System.Drawing.Size(56, 22);
             this.refreshAllShellMenu.Text = "批量验活";
+            this.refreshAllShellMenu.ToolTipText = "print大法批量验证D洞存活";
             this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // refreshStopMenu
@@ -540,6 +543,15 @@
             this.lvCountry2.Text = "归属地2";
             this.lvCountry2.Width = 104;
             // 
+            // progressMenu
+            // 
+            this.progressMenu.Enabled = false;
+            this.progressMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.progressMenu.Name = "progressMenu";
+            this.progressMenu.Size = new System.Drawing.Size(24, 22);
+            this.progressMenu.Text = "-/-";
+            this.progressMenu.ToolTipText = "验活进度";
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -618,5 +630,6 @@
         private System.Windows.Forms.ToolStripLabel refreshStopMenu;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripLabel progressMenu;
     }
 }

@@ -62,8 +62,10 @@ namespace C2.Utils
                 wrp = wrt.GetResponse();
                 StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.Default);
                 string html = sr.ReadToEnd();
-                string[] sArray = html.Split(new string[] { "{jsShow('", " " }, StringSplitOptions.RemoveEmptyEntries);
-                result = sArray[2];
+                string pattern = @"\{jsShow\('(?<country>.*?)',";
+                Match match = Regex.Match(html, pattern);
+                string country = match.Groups["country"].Value.Trim();
+                result = country;
             }
             catch (Exception)
             {
