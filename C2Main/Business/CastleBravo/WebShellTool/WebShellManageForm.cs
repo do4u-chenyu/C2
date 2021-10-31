@@ -364,13 +364,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             return status;
         }
 
-        private bool PostPrintTimeout(string url, string password, int timeout = 5000)
+        private bool PostPrintTimeout(string url, string password, int timeout = 5)
         {   // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
             var t = Task.Run(() => PostPrint(url, password));
-            if (t.Wait(timeout))
-                return t.Result;
-            else
-                return false;
+            for (int i = 0; i < timeout; i++)
+            {
+                Application.DoEvents();
+                if (t.Wait(1000))
+                    return t.Result;
+            }
+            return false;
         }
 
         private void RefreshIPAddress(WebShellTaskConfig task)
