@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
 
@@ -273,6 +274,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         private bool refreshNeedStop = false;
+        private int numberOfAlive = 0;
         private void RefreshStopMenu_Click(object sender, EventArgs e)
         {
             refreshNeedStop = true;
@@ -280,10 +282,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllTaskStatus(bool isSkipDead = false)
         {
-            this.progressMenu.Text = string.Empty;
-            this.progressBar.Value = 0;
-            this.progressBar.Maximum = 0;
-            this.refreshNeedStop = false;
+            ResetProgressMenu();
             // 刷新前先强制清空
             foreach (ListViewItem lvi in LV.Items)
             {
@@ -292,29 +291,43 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {
                     ClearAliveItems(lvi);
                     this.progressBar.Maximum++;
-                }       
+                }
             }
-            
+
             using (new ControlEnableGuarder(this.contextMenuStrip))
-                using(new ToolStripItemEnableGuarder(this.enableItems))
-                    foreach (ListViewItem lvi in LV.Items)
-                    {
-                        if (refreshNeedStop)
-                            break;
-                        // 启用跳过尸体, 遇到活人，跳过
-                        if (isSkipDead && lvi.SubItems[5].Text == "√")
-                            continue;
-                        UpdateAliveItems(lvi);
-                        UpdateProgress();
-                    }
+            using (new ToolStripItemEnableGuarder(this.enableItems))
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    if (refreshNeedStop)
+                        break;
+                    // 启用跳过尸体, 遇到活人，跳过
+                    if (isSkipDead && lvi.SubItems[5].Text == "√")
+                        continue;
+                    UpdateAliveItems(lvi);
+                    UpdateProgress();
+                }
             RefreshTasks();
             SaveDB();
+        }
+
+        private void ResetProgressMenu()
+        {
+            this.progressMenu.Text = string.Empty;
+            this.progressBar.Value = 0;
+            this.progressBar.Maximum = 0;
+            this.refreshNeedStop = false;
+            this.numberOfAlive = 0;
         }
 
         private void UpdateAliveItems(ListViewItem lvi)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-            lvi.SubItems[5].Text = RefreshTaskStatus(task);
+            string rts = RefreshTaskStatus(task);
+            
+            if (rts == "√")
+                this.numberOfAlive++;
+
+            lvi.SubItems[5].Text = rts;
             lvi.SubItems[8].Text = task.IP;
             lvi.SubItems[9].Text = task.Country;
             lvi.SubItems[10].Text = task.Country2;
@@ -322,8 +335,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressBar.Value++;
-            this.progressMenu.Text = string.Format("{0}/{1}", progressBar.Value, progressBar.Maximum);
+            this.progressMenu.Text = string.Format("{0}/{1} - 活{2}", 
+                ++progressBar.Value, 
+                progressBar.Maximum,
+                numberOfAlive);
         }
 
         private static void ClearAliveItems(ListViewItem lvi)
@@ -337,17 +352,25 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string RefreshTaskStatus(WebShellTaskConfig task)
         {
             string status = "×";
-
             using (GuarderUtil.WaitCursor) 
             {
                 // 我总结的print穿透WAF大法
-                if (PostPrint(NetUtil.FormatUrl(task.Url), task.Password))
+                if (PostPrintTimeout(NetUtil.FormatUrl(task.Url), task.Password))
                 {
                     RefreshIPAddress(task);  // D洞存在的情况下才更新IP
                     return "√";
                 }    
             }
             return status;
+        }
+
+        private bool PostPrintTimeout(string url, string password, int timeout = 5000)
+        {   // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
+            var t = Task.Run(() => PostPrint(url, password));
+            if (t.Wait(timeout))
+                return t.Result;
+            else
+                return false;
         }
 
         private void RefreshIPAddress(WebShellTaskConfig task)

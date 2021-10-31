@@ -12,8 +12,18 @@ namespace C2.Utils
     class NetUtil
     {
         public static string GetHostAddresses(string url)
-        { 
-            return Dns.GetHostEntry(new Uri(FormatUrl(url)).Host).AddressList[0].ToString();
+        {
+            try 
+            {   // 遇到host就是ip的,返回, Dns.GetHostEntry此时会报错
+                string host = new Uri(FormatUrl(url)).Host.Trim();
+                if (Regex.IsMatch(host, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$"))
+                    return host;
+                return Dns.GetHostEntry(host).AddressList[0].ToString();
+            }
+            catch 
+            {
+                return "0.0.0.0";
+            }
         }
 
         public static string FormatUrl(string url)
@@ -58,6 +68,7 @@ namespace C2.Utils
             {
                 wrt = WebRequest.Create(url);
                 wrt.Credentials = CredentialCache.DefaultCredentials;
+                wrt.Timeout = 5000;
 
                 wrp = wrt.GetResponse();
                 StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.Default);
@@ -95,6 +106,7 @@ namespace C2.Utils
             {
                 wrt = WebRequest.Create(url);
                 wrt.Credentials = CredentialCache.DefaultCredentials;
+                wrt.Timeout = 5000;
 
                 wrp = wrt.GetResponse();
                 StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.UTF8);
@@ -135,6 +147,7 @@ namespace C2.Utils
             {
                 wrt = WebRequest.Create(url);
                 wrt.Credentials = CredentialCache.DefaultCredentials;
+                wrt.Timeout = 5000;
 
                 wrp = wrt.GetResponse();
                 StreamReader sr = new StreamReader(wrp.GetResponseStream(), Encoding.UTF8);
