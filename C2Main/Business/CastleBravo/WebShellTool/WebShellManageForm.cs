@@ -15,6 +15,13 @@ namespace C2.Business.CastleBravo.WebShellTool
     public partial class WebShellManageForm : Form
     {
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
+        private int NumberOfAlive { get; set; }
+        private int NumberOfHost { get => setOfHost.Count; }
+        private int NumberOfIPAddress { get => setOfIPAddress.Count; }
+
+        private HashSet<string> setOfIPAddress;
+        private HashSet<string> setOfHost;
+
         List<WebShellTaskConfig> tasks = new List<WebShellTaskConfig>();
         readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
 
@@ -23,6 +30,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             InitializeComponent();
             InitializeToolStrip();
+            InitializeOther();
+        }
+
+        private void InitializeOther()
+        {
+            setOfHost = new HashSet<string>();
+            setOfIPAddress = new HashSet<string>();
+            NumberOfAlive = 0;
         }
 
         private void InitializeToolStrip()
@@ -274,7 +289,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         private bool refreshNeedStop = false;
-        private int numberOfAlive = 0;
+
         private void RefreshStopMenu_Click(object sender, EventArgs e)
         {
             refreshNeedStop = true;
@@ -316,7 +331,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressBar.Value = 0;
             this.progressBar.Maximum = 0;
             this.refreshNeedStop = false;
-            this.numberOfAlive = 0;
+            this.NumberOfAlive = 0;
+            this.setOfIPAddress.Clear();
+            this.setOfHost.Clear();
         }
 
         private void UpdateAliveItems(ListViewItem lvi, bool safeMode = false)
@@ -325,7 +342,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             string rts = RefreshTaskStatus(task, safeMode);
             
             if (rts == "√")
-                this.numberOfAlive++;
+            {
+                this.NumberOfAlive++;
+                this.setOfHost.Add(NetUtil.GetHostByUrl(task.Url));
+                this.setOfIPAddress.Add(task.IP);
+            }
+                
 
             lvi.SubItems[5].Text = rts;
             lvi.SubItems[8].Text = task.IP;
@@ -335,10 +357,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} - 活{2}", 
+            this.progressMenu.Text = string.Format("{0}/{1} - 活{2} - 域名{3} - IP{4}", 
                 ++progressBar.Value, 
                 progressBar.Maximum,
-                numberOfAlive);
+                NumberOfAlive,
+                NumberOfHost,
+                NumberOfIPAddress);
         }
 
         private static void ClearAliveItems(ListViewItem lvi)
@@ -354,7 +378,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string status = "×";
             using (GuarderUtil.WaitCursor) 
             {
-                // safe模式下 跳过国外网站
+                // safe模式下 跳过国内网站
                 bool isChina = RefreshIPAddress(task);
                 if (safeMode && isChina)
                     return "跳";

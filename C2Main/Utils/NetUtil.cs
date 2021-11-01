@@ -73,6 +73,12 @@ namespace C2.Utils
                 return "http://" + url.TrimStart();
         }
 
+        public static string GetHostByUrl(string url)
+        {
+            Uri uri = new Uri(FormatUrl(url));
+            return uri.Host;
+        }
+
         private static string IPCheck(string ip)
         {
             if (ip.IsNullOrEmpty())
