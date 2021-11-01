@@ -15,27 +15,35 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string browserDicectory = string.Empty;
         private string commandDirectory = string.Empty;
-
+        WebShellTaskConfig webShellTask = new WebShellTaskConfig();
         public WebShellDetailsForm()
         {
             InitializeComponent();
         }
         public WebShellDetailsForm(WebShellTaskConfig info) : this()
         {
+            
+            webShellTask = info;
             webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion);
             UpdateBaseInfo(webShell.PHPInfo());
         }
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //string loginInfo = webShell;
             if (tabControl1.SelectedTab.Text == "文件管理")
                 UpdateFileManager(webShell.PathBrowser());
             if (tabControl1.SelectedTab.Text == "基础信息")
                 UpdateBaseInfo(webShell.PHPInfo());
             if (tabControl1.SelectedTab.Text == "虚拟终端")
-                UpdateCmd(webShell.ShellStart());        
+                UpdateCmd(webShell.ShellStart());
+            if (tabControl1.SelectedTab.Text == "数据库管理")
+                UpdateDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig));
         }
-
+        private void UpdateDatabase(string a) 
+        {
+            string b = a;
+        }
         private void UpdateCmd(Tuple<string, string> excuteResult)
         {
             commandDirectory = excuteResult.Item1;

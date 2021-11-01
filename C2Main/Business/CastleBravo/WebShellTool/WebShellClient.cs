@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -22,6 +24,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.url = url;
             this.lastErrorMessage = string.Empty;
             this.client = ClientFactory.Create(password, clientSetting);
+
         }
 
         public string Suscide()
@@ -131,6 +134,32 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string DetailInfo(string PageData)
         {
             return client.ExtractResponse(Post(client.DetailInfo(PageData)));
+        }
+        public string DatabeseInfo(string loginInfo, string database, string command) 
+        {
+            return client.ExtractResponse(Post(client.GetDatabaseInfo(loginInfo, database, command)));
+        }
+        public string DatabeseInfo(string DBloginInfo)
+        {
+            if (DBloginInfo == string.Empty)
+                return null;
+            string host = ChangeInfo("HOST:(.+)\r\n", DBloginInfo);
+            string user = ChangeInfo("USER:(.+)\r\n", DBloginInfo);
+            string password = ChangeInfo("PASS:(.+)\r\n", DBloginInfo);
+
+            string dbConfig = string.Format("{0}choraheiheihei{1}choraheiheihei{2}",
+                host,
+                user,
+                password);
+            return client.ExtractResponse(Post(client.GetDatabaseInfo(dbConfig, "", "")));
+        }
+        private string ChangeInfo(string word, string info) 
+        {
+            if (word == string.Empty|| info == string.Empty)
+                return null;
+            Regex reg = new Regex(word);
+            Match match = reg.Match(info);
+            return match.Groups[1].Value;
         }
 
         private string Post(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)
