@@ -36,7 +36,7 @@ namespace C2.Utils
         {
             for(int i = 0; i < countryDesc.Length; i += 2)
             {
-                string sub = countryDesc.Substring(i, 2);
+                string sub = countryDesc.Substring(i, Math.Min(countryDesc.Length - i, 2));
                 
                 if (other.Contains(sub))
                     return false;

@@ -438,7 +438,7 @@
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
             this.refreshOtherMenu2.Size = new System.Drawing.Size(68, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
-            this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshStopMenu_Click);
+            this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // refreshStopMenu
             // 

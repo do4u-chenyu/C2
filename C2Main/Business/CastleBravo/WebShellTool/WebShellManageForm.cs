@@ -303,7 +303,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 // 启用跳过尸体, 遇到活人，跳过
                 if (isSkipDead && lvi.SubItems[5].Text == "√")
                     continue;
-                UpdateAliveItems(lvi);
+                UpdateAliveItems(lvi, safeMode);
                 UpdateProgress();
             }
             RefreshTasks();
@@ -319,10 +319,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.numberOfAlive = 0;
         }
 
-        private void UpdateAliveItems(ListViewItem lvi)
+        private void UpdateAliveItems(ListViewItem lvi, bool safeMode = false)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-            string rts = RefreshTaskStatus(task);
+            string rts = RefreshTaskStatus(task, safeMode);
             
             if (rts == "√")
                 this.numberOfAlive++;
@@ -349,12 +349,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems[10].Text = string.Empty;
         }
 
-        private string RefreshTaskStatus(WebShellTaskConfig task)
+        private string RefreshTaskStatus(WebShellTaskConfig task, bool safeMode)
         {
             string status = "×";
             using (GuarderUtil.WaitCursor) 
             {
-                RefreshIPAddress(task);
+                // safe模式下 跳过国外网站
+                bool isChina = RefreshIPAddress(task);
+                if (safeMode && isChina)
+                    return "跳";
+
                 // 我总结的print穿透WAF大法
                 if (PostPrintTimeout(NetUtil.FormatUrl(task.Url), task.Password))
                     return "√";
