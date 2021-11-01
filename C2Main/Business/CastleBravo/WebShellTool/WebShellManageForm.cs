@@ -280,7 +280,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             refreshNeedStop = true;
         }
 
-        private void RefreshAllTaskStatus(bool isSkipDead = false)
+        private void RefreshAllTaskStatus(bool isSkipDead = false, bool safeMode = false)
         {
             ResetProgressMenu();
             // 刷新前先强制清空
@@ -354,12 +354,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             string status = "×";
             using (GuarderUtil.WaitCursor) 
             {
+                RefreshIPAddress(task);
                 // 我总结的print穿透WAF大法
                 if (PostPrintTimeout(NetUtil.FormatUrl(task.Url), task.Password))
-                {
-                    RefreshIPAddress(task);  // D洞存在的情况下才更新IP
                     return "√";
-                }    
+                
             }
             return status;
         }
@@ -379,7 +378,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return false;
         }
 
-        private void RefreshIPAddress(WebShellTaskConfig task)
+        private bool RefreshIPAddress(WebShellTaskConfig task)
         {
             Application.DoEvents();
             task.IP = NetUtil.GetHostAddresses(task.Url);
@@ -388,6 +387,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             Application.DoEvents();
             task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
             Application.DoEvents();
+            // 
+            return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
         }
 
         private bool PostPrint(string url, string password)
@@ -490,6 +491,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshAllTaskStatus(true);
         }
 
-
+        private void RefreshOtherMenu_Click(object sender, EventArgs e)
+        {
+            RefreshAllTaskStatus(false, true);
+        }
     }
 }

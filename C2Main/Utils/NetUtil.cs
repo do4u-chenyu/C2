@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -11,6 +12,43 @@ namespace C2.Utils
 {
     class NetUtil
     {
+        private static HashSet<string> china = new HashSet<string>(new string[] {
+            "河北", "山西", "辽宁", "吉林", "黑龙", "江苏", "浙江", "安徽", "福建", "江西",
+            "山东", "河南", "湖北", "湖南", "广东", "海南", "四川", "贵州", "云南", "陕西",
+            "甘肃", "青海", "内蒙", "广西", "西藏", "宁夏", "新疆", "北京", "天津", "上海",
+            "重庆", "华北", "华东", "华南", 
+        });
+
+        private static HashSet<string> other = new HashSet<string>(new string[] {
+            "香港", "台湾", "澳门", "美国", "欧洲", "日本", "韩国", "越南", "英国", "伊朗",
+            "荷兰", "德国", "法国", "澳大", "加拿", "新加", "菲律", "巴西", "亚太", "西班",
+            "印度", "北美", "意大", "俄罗", "南非", "欧盟", "泰国", "罗马", "马来", "智利",
+            "阿根", "埃及", "南美", "瑞士", "冰岛", "丹麦", "挪威", "瑞典", "芬兰", "缅甸",
+            "柬埔", "约旦", "以色", "匈牙", "乌克", "古巴", "秘鲁", "梵蒂", "比利", "卢森",
+            "波兰", "爱尔", "尼泊", "斯坦", "孟加", "土耳", "沙特", "摩纳", "利亚", "内亚",
+            "比亚", "尼亚", "维亚", "苏丹", "立陶", "瑙鲁", "斐济", "哥斯", "拉圭", "海地",
+            "群岛", "马里", "乍得", "中非", "北非", "东非", "西非", "东欧", "北欧", "西欧",
+            "大洋", "澳洲", "美洲", "尼斯", "捷克", "卡塔", "科威", "也门", "阿曼", "黎巴",
+            "巴林", "阿富", "伊拉"
+        });
+
+        public static bool IsChina(string countryDesc)
+        {
+            for(int i = 0; i < countryDesc.Length; i += 2)
+            {
+                string sub = countryDesc.Substring(i, 2);
+                
+                if (other.Contains(sub))
+                    return false;
+                if (china.Contains(sub))
+                    return true;    
+            }
+
+            if (countryDesc.Contains("中国"))
+                return true;
+            
+            return false;
+        }
         public static string GetHostAddresses(string url)
         {
             try 
