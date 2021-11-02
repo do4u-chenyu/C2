@@ -25,7 +25,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public AddAllWebShellForm()
         {
             InitializeComponent();
-            maxRow = 10000;
+            maxRow = 100000;
             //pattern = @"^((http|https|)\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$";
             filePath = string.Empty;
             Tasks = new List<WebShellTaskConfig>();
