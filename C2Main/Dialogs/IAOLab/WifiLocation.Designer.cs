@@ -58,7 +58,12 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -346,6 +351,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label17);
             this.tabPage4.Controls.Add(this.richTextBox1);
             this.tabPage4.Controls.Add(this.label12);
             this.tabPage4.Controls.Add(this.label11);
@@ -405,6 +411,10 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.label13);
+            this.tabPage5.Controls.Add(this.richTextBox2);
+            this.tabPage5.Controls.Add(this.label16);
+            this.tabPage5.Controls.Add(this.label15);
+            this.tabPage5.Controls.Add(this.label14);
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -413,16 +423,71 @@
             this.tabPage5.Text = "手机归属地查询";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("宋体", 11F);
+            this.label14.Location = new System.Drawing.Point(5, 13);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(187, 15);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "请在下方输入待查询手机号";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label15.Location = new System.Drawing.Point(6, 81);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(439, 15);
+            this.label15.TabIndex = 10;
+            this.label15.Text = "一行一个,任意空白符(TAB,空格)按列分割,手机号必须为第一列.";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label16.Location = new System.Drawing.Point(6, 61);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(415, 15);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "查询结果以TAB为分隔符追加在每行最后一列,最大支持1万行.";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.BackColor = System.Drawing.Color.White;
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 104);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.richTextBox2.Size = new System.Drawing.Size(587, 207);
+            this.richTextBox2.TabIndex = 12;
+            this.richTextBox2.Text = "";
+            this.richTextBox2.WordWrap = false;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 11F);
-            this.label13.Location = new System.Drawing.Point(266, 166);
+            this.label13.Location = new System.Drawing.Point(270, 192);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(76, 15);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "施工中...";
+            this.label13.Size = new System.Drawing.Size(52, 15);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "施工中";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("宋体", 11F);
+            this.label17.Location = new System.Drawing.Point(265, 208);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(52, 15);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "施工中";
             // 
             // WifiLocation
             // 
@@ -491,6 +556,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label17;
     }
 }
