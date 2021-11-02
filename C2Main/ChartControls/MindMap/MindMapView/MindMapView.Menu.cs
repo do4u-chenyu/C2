@@ -345,6 +345,7 @@ namespace C2.Controls.MapViews
             {
                 ToolStripMenuItem MenuViewData = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCreateChart = new ToolStripMenuItem();
+                ToolStripMenuItem MenuCreateOrganization = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
                 ToolStripMenuItem MenuRefresh = new ToolStripMenuItem();
@@ -356,6 +357,7 @@ namespace C2.Controls.MapViews
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuViewData,
                 MenuCreateChart,
+                MenuCreateOrganization,
                 MenuDelete,
                 new ToolStripSeparator(),
                 MenuRefresh,
@@ -373,6 +375,12 @@ namespace C2.Controls.MapViews
                 MenuCreateChart.Tag = dataItem;
                 MenuCreateChart.ToolTipText = "仅支持数据源前一百行数据生成图表";
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
+
+                MenuCreateOrganization.Image = Properties.Resources.getChart;
+                MenuCreateOrganization.Text = Lang._("CreateOrganization");  // 生成图表 
+                MenuCreateOrganization.Tag = dataItem;
+                MenuCreateOrganization.ToolTipText = "生成组织架构图";
+                MenuCreateOrganization.Click += MenuCreateOrganization_Click;
 
                 MenuDelete.Image = Properties.Resources.deleteWidget;
                 MenuDelete.Text = Lang._("Delete");           //  删除
@@ -461,6 +469,31 @@ namespace C2.Controls.MapViews
             UpdateChartWidgetMenu(currentTopic.FindWidget<ChartWidget>(), dataCopy);
             Global.OnModifiedChange();
         }
+
+        void MenuCreateOrganization_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            if (hitItem.IsDatabase())
+            {
+                BCPBuffer.GetInstance().GetCachePreviewTable(hitItem.DBItem); // TODO DK 预加载也要写好方法
+            }
+
+            // 内部数据源且文件不存在
+            if (!hitItem.IsDatabase() && !File.Exists(hitItem.FilePath))
+            {
+                HelpUtil.ShowMessageBox(hitItem.FilePath + "文件不存在", "文件不存在");
+                return;
+            }
+
+            DataItem dataCopy = hitItem.Clone();
+            //这里需要一个配置窗口读文件
+
+            MindMap org = Global.GetDocumentForm().Document.Charts[1] as MindMap;
+            MessageBox.Show(org.Root.Children[0].Text);
+
+            Global.GetDocumentForm().ActiveChart(1);
+        }
+
         void MenuViewDataChart_Click(object sender, EventArgs e)
         {
             DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;

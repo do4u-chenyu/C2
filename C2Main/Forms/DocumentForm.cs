@@ -1671,6 +1671,11 @@ namespace C2.Forms
             multiChartsView1.ActiveChartPage(chartPage);
         }
 
+        public void ActiveChart(int index)
+        {
+            multiChartsView1.ActivePage(index);
+        }
+
         private void ImportDataSourceButton_Click(object sender, EventArgs e)
         {
             this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
