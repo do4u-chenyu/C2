@@ -135,23 +135,27 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             return client.ExtractResponse(Post(client.DetailInfo(PageData)));
         }
-        public string DatabeseInfo(string loginInfo, string database, string command) 
+        public string DatabeseInfo(string DBConfig, string database, string command) 
         {
-            return client.ExtractResponse(Post(client.GetDatabaseInfo(loginInfo, database, command)));
+            return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), database, command)));
         }
-        public string DatabeseInfo(string DBloginInfo)
+        private string ChangeDBLoginInfo(string DBConfig) 
         {
-            if (DBloginInfo == string.Empty)
+            if (DBConfig == string.Empty)
                 return null;
-            string host = ChangeInfo("HOST:(.+)\r\n", DBloginInfo);
-            string user = ChangeInfo("USER:(.+)\r\n", DBloginInfo);
-            string password = ChangeInfo("PASS:(.+)\r\n", DBloginInfo);
+            string host = ChangeInfo("HOST:(.+)\r\n", DBConfig);
+            string user = ChangeInfo("USER:(.+)\r\n", DBConfig);
+            string password = ChangeInfo("PASS:(.+)\r\n", DBConfig);
 
-            string dbConfig = string.Format("{0}choraheiheihei{1}choraheiheihei{2}",
+            string DBLoginInfo = string.Format("{0}choraheiheihei{1}choraheiheihei{2}",
                 host,
                 user,
                 password);
-            return client.ExtractResponse(Post(client.GetDatabaseInfo(dbConfig, "", "")));
+            return DBLoginInfo;
+        }
+        public string DatabeseInfo(string DBConfig)
+        {
+            return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), "", "")));
         }
         private string ChangeInfo(string word, string info) 
         {
