@@ -38,11 +38,87 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (tabControl1.SelectedTab.Text == "虚拟终端")
                 UpdateCmd(webShell.ShellStart());
             if (tabControl1.SelectedTab.Text == "数据库管理")
-                UpdateDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig));
+                ShowDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig));
         }
-        private void UpdateDatabase(string a) 
+        private void ShowDatabase(string dbResult) 
         {
-            string b = a;
+            if (dbResult == string.Empty)
+                return;
+            string[] dbResults = dbResult.Split('|');
+            foreach (string result in dbResults) 
+            {
+                string name = result.Replace("\t\r\n",string.Empty).Replace("\t\t",string.Empty);
+                if (name == String.Empty || name == "\t\r\n")
+                    continue;
+                TreeNode[] broNodes = this.treeView2.Nodes.Find(name, false);
+                if (broNodes.Length == 0)
+                    this.treeView2.Nodes.Add(new TreeNode
+                    {
+                        Tag = name + "/",
+                        Name = name,
+                        Text = name,
+                        ImageIndex = 4,
+                        SelectedImageIndex = 4
+                    });
+            }
+
+        }
+        private void UpdateDatabase(string dbResult,string selectNode) 
+        {
+            if (dbResult == string.Empty)
+                return;
+            string[] dbResults = dbResult.Split('|');
+            for(int i =1;i< dbResults.Length;i++)
+            {
+                string name = dbResults[i].Replace("\t\r\n", string.Empty).Replace("\t\t", string.Empty);
+                if (name == String.Empty || name == "\t\r\n")
+                    continue;
+                TreeNode[] broNodes = this.treeView2.Nodes.Find(selectNode, false);
+                broNodes[0].Nodes.Add(new TreeNode
+                {
+                    Tag = name + "/",
+                    Name = name,
+                    Text = name,
+                    ImageIndex = 4,
+                    SelectedImageIndex = 4
+                });
+            }
+        }
+        private void ReadTable(string tableData) 
+        {
+            string[] lines = tableData.Split(new string[] { "\t\r\n" }, StringSplitOptions.None);
+            if (dataGridView1.ColumnCount != 0)
+                dataGridView1.Columns.Clear();
+            dataGridView1.AllowUserToAddRows = false;
+            int j = 0;
+            while (j < lines[0].Split('|').Length - 1)//添加第一行
+            {
+                dataGridView1.Columns.Add(j.ToString(), lines[0].Split('|')[j]);
+                j++;
+            }
+            for (int k = 1; k < lines.Length - 1; k++)//最后一行为\t 
+            {
+                string[] data = lines[k].Split('|');
+                int index = dataGridView1.Rows.Add();
+                for (int i = 0; i < data.Length -1 ; i++) 
+                {
+                    dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t", string.Empty);
+                }
+            }
+        }
+        private void TreeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode node = treeView2.SelectedNode;
+            string selectNode = node.Text;
+            if (node.Level == 0)
+                UpdateDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig, selectNode + "\t", String.Format("show tables from {0}", selectNode)), selectNode);
+            if (node.Level == 1)
+                ReadTable(webShell.DatabeseInfo(webShellTask.DatabaseConfig, node.Parent.Text, String.Format("select * from {0}", selectNode)));
+        }
+        private void TreeView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+
         }
         private void UpdateCmd(Tuple<string, string> excuteResult)
         {
@@ -237,5 +313,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (e.KeyCode == Keys.Enter)
                 UpdateCmd(webShell.Excute(commandDirectory, this.cmdTextBox.Text));
         }
+
+       
     }
 }
