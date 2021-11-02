@@ -54,7 +54,7 @@ namespace C2.Utils
             try 
             {   // 遇到host就是ip的,返回, Dns.GetHostEntry此时会报错
                 string host = new Uri(FormatUrl(url)).Host.Trim();
-                if (Regex.IsMatch(host, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$"))
+                if (IsIPAddress(host))
                     return host;
                 return Dns.GetHostEntry(host).AddressList[0].ToString();
             }
@@ -62,6 +62,11 @@ namespace C2.Utils
             {
                 return "0.0.0.0";
             }
+        }
+
+        public static bool IsIPAddress(string url)
+        {
+            return Regex.IsMatch(url, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$");
         }
 
         public static string FormatUrl(string url)
