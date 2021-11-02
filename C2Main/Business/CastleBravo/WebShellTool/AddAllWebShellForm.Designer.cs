@@ -83,6 +83,7 @@
             // 
             this.wsTextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
             this.wsTextBox.Location = new System.Drawing.Point(96, 90);
+            this.wsTextBox.MaxLength = 4000000;
             this.wsTextBox.Multiline = true;
             this.wsTextBox.Name = "wsTextBox";
             this.wsTextBox.ReadOnly = true;
