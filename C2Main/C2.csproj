@@ -314,7 +314,9 @@
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
@@ -825,6 +827,12 @@
     </Compile>
     <Compile Include="Business\IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Dialogs\WidgetChart\OrganizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WidgetChart\OrganizationForm.Designer.cs">
+      <DependentUpon>OrganizationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\MindMaps\APEDocxFile.cs" />
     <Compile Include="Model\MindMaps\ImportXmindFile.cs" />
     <Compile Include="Model\MindMaps\DocxFile.cs" />
@@ -2373,6 +2381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.resx">
       <DependentUpon>WFDTaskResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WidgetChart\OrganizationForm.resx">
+      <DependentUpon>OrganizationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WidgetChart\VisualDisplayDialog.resx">
       <DependentUpon>VisualDisplayDialog.cs</DependentUpon>

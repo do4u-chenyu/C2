@@ -413,7 +413,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             Application.DoEvents();
             task.Country = NetUtil.IPQuery_WhoIs(task.IP);
             Application.DoEvents();
-            task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
+            task.Country2 = NetUtil.IPQuery_ChunZhen(task.IP);
             Application.DoEvents();
             // 
             return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
