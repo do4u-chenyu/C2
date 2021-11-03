@@ -362,7 +362,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 域 {3} - IP {4}", 
+            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}", 
                 ++progressBar.Value, 
                 progressBar.Maximum,
                 NumberOfAlive,
