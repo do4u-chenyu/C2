@@ -2,6 +2,7 @@
 using C2.IAOLab.BankTool;
 using C2.IAOLab.BaseStation;
 using C2.IAOLab.BaseAddress;
+using C2.IAOLab.IPAddress;
 using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WifiMac;
 using C2.Utils;
@@ -47,6 +48,10 @@ namespace C2.Dialogs.IAOLab
             else if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
             {
                 fileType = "BaseAddress";
+            }
+            else if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true) 
+            {
+                fileType = "IPAddress";
             }
             return fileType;
         }
@@ -115,6 +120,24 @@ namespace C2.Dialogs.IAOLab
                     }
                 }
             }
+            if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true)
+            {
+                string[] inputArray = this.IPStationIR.Text.Split('\n');
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "IP\t地址\n";
+                tmpResult.Append(firstLine);
+                foreach (string baseAddress in inputArray)
+                {
+                    ShowResult(baseAddress, "IPAddress", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        progressBar1.Value = 0;
+                    }
+                }
+            }
 
             if (tabControl1.Visible == false) 
             {
@@ -151,7 +174,8 @@ namespace C2.Dialogs.IAOLab
                         case "baseStation":
                             tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
                             baseStationIR.Text = tmpResult.ToString();
-                        break;
+                            break;
+
                         case "baseAddress":
                             if (input.Contains("地址"))
                                 input = String.Empty;
@@ -161,12 +185,16 @@ namespace C2.Dialogs.IAOLab
                         case "mac":
                             tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
                             wifiMacIR.Text = tmpResult.ToString();
-                        break;
+                            break;
                         case "bankCard":
                             tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
                             bankCardIR.Text = tmpResult.ToString();
-                        break;
-                    }
+                            break;
+                        case "IPAddress":
+                            tmpResult.Append(IPAddress.GetInstance().GetIPAddress(input.Split('\t')[0]));
+                            IPStationIR.Text = tmpResult.ToString();
+                            break;
+                }
                    
                     progressBar1.Value += 1;
             }
@@ -263,6 +291,10 @@ namespace C2.Dialogs.IAOLab
                         firstLine = "银行卡号\t银行名称\t卡种\t归属地\r\n";
                         text = bankCardIR.Text;
                         break;
+                    case "IPAddress":
+                        firstLine = "IP\t地址\r\n";
+                        text = IPStationIR.Text;
+                        break;
                 }
                 string path = saveDialog.FileName;
                 
@@ -283,6 +315,8 @@ namespace C2.Dialogs.IAOLab
                             if (line.Contains("地址"))
                                 continue;
                             if (line.Contains("WiFiMac号"))
+                                continue;
+                            if (line.Contains("IP"))
                                 continue;
                             fs.WriteLine(line);
                             fs.Flush();
