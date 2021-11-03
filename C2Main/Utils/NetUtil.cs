@@ -179,7 +179,7 @@ namespace C2.Utils
             return result;
 
         }
-
+        
         public static string IPQuery_IpApi(string ip)
         {
             ip = ip.ToLower().Trim();

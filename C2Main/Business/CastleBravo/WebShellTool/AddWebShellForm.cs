@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
 using C2.Core;
 using C2.Utils;
-using System;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {

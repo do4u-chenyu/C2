@@ -477,6 +477,7 @@
     <Compile Include="Business\IAOLab\BankTool\BankTool.cs" />
     <Compile Include="Business\IAOLab\BaseAddress\BaseAddress.cs" />
     <Compile Include="Business\IAOLab\BaseStation\BaseStation.cs" />
+    <Compile Include="Business\IAOLab\IPAddress\IPAddress.cs" />
     <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />

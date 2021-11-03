@@ -3,14 +3,10 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -60,20 +56,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private bool GenTasksFromPaste()
         {
-            Tasks.Clear();
-
             if (this.wsTextBox.Text.Trim().IsEmpty())
                 return false;
+            // 如果粘贴文件不合格,就别清空旧数据了
+            Tasks.Clear();
 
-            int count = 0;
-            foreach(string line in this.wsTextBox.Text.Split("\r\n"))
-            {
-                if (count > maxRow)
-                    break;
-                count++;
-
-                AddTasksByLine(line);
-            }
+            string[] lines = this.wsTextBox.Text.SplitLine();
+            for(int i = 0; i < Math.Min(lines.Length, maxRow); i++)
+                AddTasksByLine(lines[i]);
+  
             return true;
         }
 
