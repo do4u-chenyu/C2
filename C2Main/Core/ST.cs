@@ -859,6 +859,8 @@ namespace C2.Core
             return sb.ToString();
         }
 
+
+
         public static TopicShape GetTopicShape(string str, TopicShape defaultValue)
         {
             int i;
