@@ -88,6 +88,7 @@
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.secondRefreshMenu = new System.Windows.Forms.ToolStripLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -213,6 +214,7 @@
             this.toolStripButton1,
             this.refreshAllShellMenu,
             this.refreshOtherMenu2,
+            this.secondRefreshMenu,
             this.refreshStopMenu,
             this.progressBar,
             this.progressMenu,
@@ -572,6 +574,14 @@
             this.lvCountry2.Text = "归属地2";
             this.lvCountry2.Width = 104;
             // 
+            // secondRefreshMenu
+            // 
+            this.secondRefreshMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.secondRefreshMenu.Name = "secondRefreshMenu";
+            this.secondRefreshMenu.Size = new System.Drawing.Size(56, 22);
+            this.secondRefreshMenu.Text = "二刷不活";
+            this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -654,5 +664,6 @@
         private System.Windows.Forms.ToolStripLabel progressMenu;
         private System.Windows.Forms.ToolStripMenuItem refreshOtherMenu;
         private System.Windows.Forms.ToolStripLabel refreshOtherMenu2;
+        private System.Windows.Forms.ToolStripLabel secondRefreshMenu;
     }
 }

@@ -48,6 +48,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.addBatchShellMenu,
                 this.proxySettingMenu,
                 this.refreshAllShellMenu,
+                this.refreshOtherMenu2,
+                this.secondRefreshMenu,
                 this.addOneShellMenu,
                 this.trojanMenu
             };
@@ -285,7 +287,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllStatusMenuItem_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus();
+            RefreshAllTaskStatus(false);
         }
 
         private bool refreshNeedStop = false;
@@ -295,46 +297,73 @@ namespace C2.Business.CastleBravo.WebShellTool
             refreshNeedStop = true;
         }
 
-        private void RefreshAllTaskStatus(bool isSkipDead = false, bool safeMode = false)
-        {   // 刷新前先强制清空
+        private void SecondRefreshTaskStatus()
+        {
             ResetProgressMenu();
+
             foreach (ListViewItem lvi in LV.Items)
             {   // 没启用跳过尸体, 清空 或 死状态 清空
-                if (!isSkipDead || lvi.SubItems[5].Text != "√")
-                {
-                    ClearAliveItems(lvi);
-                    this.progressBar.Maximum++;
-                }
+                if (lvi.SubItems[5].Text == "×")
+                    lvi.SubItems[5].Text = "待";
+                else
+                    this.progressBar.Maximum--;
             }
+            RefreshAll(true, false);
+            EndRefresh();
+        }
+
+        private void RefreshAllTaskStatus(bool safeMode)
+        {   // 刷新前先强制清空
+            ResetProgressMenu();
+
+            foreach (ListViewItem lvi in LV.Items)
+                ClearAliveItems(lvi);
+            
+            RefreshAll(false, safeMode);
+            EndRefresh();
+        }
+
+        private void RefreshAll(bool skipAlive, bool safeMode)
+        {
             DateTime s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            using (new ToolStripItemEnableGuarder(this.progressBar, true))
             foreach (ListViewItem lvi in LV.Items)
             {
                 if (refreshNeedStop)
                     break;
-                if (isSkipDead && lvi.SubItems[5].Text == "√")
-                    continue;  // 启用跳过尸体, 遇到活人，跳过
+                // 启用二刷
+                if (skipAlive && lvi.SubItems[5].Text != "待")
+                    continue;
                 UpdateAliveItems(lvi, safeMode);
                 UpdateProgress();
-                TimeSpan gap = DateTime.Now - s;
-                if (gap.TotalMinutes >= 5)
-                {   // 5分钟保存一次
-                    RefreshTasks();
-                    SaveDB();
-                    s = DateTime.Now;
-                }
+                s = CheckSavePoint(s); // 5分钟保存一次
             }
+        }
+
+        private void EndRefresh()
+        {
             RefreshTasks();
             SaveDB();
+        }
+
+        private DateTime CheckSavePoint(DateTime s)
+        {
+            TimeSpan gap = DateTime.Now - s;
+            if (gap.TotalMinutes >= 5)
+            {   // 5分钟保存一次
+                RefreshTasks();
+                SaveDB();
+                s = DateTime.Now;
+            }
+            return s;
         }
 
         private void ResetProgressMenu()
         {
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
-            this.progressBar.Maximum = 0;
+            this.progressBar.Maximum = LV.Items.Count;
             this.refreshNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
@@ -521,12 +550,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllDeadMenu_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus(true);
+            SecondRefreshTaskStatus();
         }
 
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus(false, true);
+            RefreshAllTaskStatus(true);
         }
 
         private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)

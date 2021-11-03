@@ -229,5 +229,13 @@ namespace C2.Core
         {
             return str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         }
+
+        public static bool In(this string str, string[] vs)
+        {
+            foreach (string v in vs)
+                if (str.Contains(v))
+                    return true;
+            return false;
+        }
     }
 }
