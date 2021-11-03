@@ -69,18 +69,18 @@ namespace C2.Business.CastleBravo.WebShellTool
             tasks.Clear();
             foreach (ListViewItem lvi in LV.Items)
             {
-                WebShellTaskConfig config = new WebShellTaskConfig(lvi.SubItems[0].Text,  // 创建时间
-                                                                   lvi.SubItems[1].Text,  // 名称
-                                                                   lvi.SubItems[2].Text,  // url
-                                                                   lvi.SubItems[3].Text,  // 密码
-                                                                   lvi.SubItems[4].Text,  // 木马类型
-                                                                   lvi.SubItems[5].Text,  // 木马状态
-                                                                   lvi.SubItems[6].Text,  // 客户端版本
-                                                                   lvi.SubItems[7].Text); // 
+                WebShellTaskConfig config = new WebShellTaskConfig(GetSubItemsTextArray(lvi));
                 lvi.Tag = config; // 关联
                 tasks.Add(config);// 数据库配置
             }
+        }
 
+        private string[] GetSubItemsTextArray(ListViewItem lvi)
+        {
+            List<string> array = new List<string>(lvi.SubItems.Count);
+            for (int i = 0; i < lvi.SubItems.Count; i++)
+                array.Add(lvi.SubItems[i].Text);
+            return array.ToArray();
         }
 
         private void ClearAll()
@@ -296,30 +296,35 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         private void RefreshAllTaskStatus(bool isSkipDead = false, bool safeMode = false)
-        {
+        {   // 刷新前先强制清空
             ResetProgressMenu();
-            // 刷新前先强制清空
             foreach (ListViewItem lvi in LV.Items)
-            {
-                // 没启用跳过尸体, 清空 或 死状态 清空
+            {   // 没启用跳过尸体, 清空 或 死状态 清空
                 if (!isSkipDead || lvi.SubItems[5].Text != "√")
                 {
                     ClearAliveItems(lvi);
                     this.progressBar.Maximum++;
                 }
             }
-
+            DateTime s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
+            using (new ToolStripItemEnableGuarder(this.progressBar, true))
             foreach (ListViewItem lvi in LV.Items)
             {
                 if (refreshNeedStop)
                     break;
-                // 启用跳过尸体, 遇到活人，跳过
                 if (isSkipDead && lvi.SubItems[5].Text == "√")
-                    continue;
+                    continue;  // 启用跳过尸体, 遇到活人，跳过
                 UpdateAliveItems(lvi, safeMode);
                 UpdateProgress();
+                TimeSpan gap = DateTime.Now - s;
+                if (gap.TotalMinutes >= 5)
+                {   // 5分钟保存一次
+                    RefreshTasks();
+                    SaveDB();
+                    s = DateTime.Now;
+                }
             }
             RefreshTasks();
             SaveDB();
@@ -357,7 +362,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} - 活{2} - 域名{3} - IP{4}", 
+            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 域 {3} - IP {4}", 
                 ++progressBar.Value, 
                 progressBar.Maximum,
                 NumberOfAlive,
@@ -522,6 +527,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
             RefreshAllTaskStatus(false, true);
+        }
+
+        private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.refreshNeedStop = true;
+            using (GuarderUtil.WaitCursor)
+            {
+                RefreshTasks();
+                SaveDB();
+            }
         }
     }
 }

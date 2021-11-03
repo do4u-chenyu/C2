@@ -110,92 +110,92 @@
             this.toolStripSeparator5,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 280);
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 258);
             // 
             // EnterToolStripMenuItem
             // 
             this.EnterToolStripMenuItem.Name = "EnterToolStripMenuItem";
-            this.EnterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EnterToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.EnterToolStripMenuItem.Text = "进入";
             this.EnterToolStripMenuItem.Click += new System.EventHandler(this.EnterToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.EditToolStripMenuItem.Text = "编辑";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // SuscideMenuItem
             // 
             this.SuscideMenuItem.Name = "SuscideMenuItem";
-            this.SuscideMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SuscideMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SuscideMenuItem.Text = "一键Suscide";
             this.SuscideMenuItem.Click += new System.EventHandler(this.SuscideMenuItem_Click);
             // 
             // ClearAllToolStripMenuItem
             // 
             this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ClearAllToolStripMenuItem.Text = "全部清空";
             this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CopyToolStripMenuItem.Text = "复制到剪切板";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
             // 
             // RefreshCurrentStatusMenuItem
             // 
             this.RefreshCurrentStatusMenuItem.Name = "RefreshCurrentStatusMenuItem";
-            this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RefreshCurrentStatusMenuItem.Text = "选定项验活";
             this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.RefreshCurrentStatusMenuItem_Click);
             // 
             // RefreshAllStatusMenuItem
             // 
             this.RefreshAllStatusMenuItem.Name = "RefreshAllStatusMenuItem";
-            this.RefreshAllStatusMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RefreshAllStatusMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RefreshAllStatusMenuItem.Text = "所有项验活";
             this.RefreshAllStatusMenuItem.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // RefreshAllDeadMenu
             // 
             this.RefreshAllDeadMenu.Name = "RefreshAllDeadMenu";
-            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(180, 22);
+            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(148, 22);
             this.RefreshAllDeadMenu.Text = "二刷所有不活";
             this.RefreshAllDeadMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
             // refreshOtherMenu
             // 
             this.refreshOtherMenu.Name = "refreshOtherMenu";
-            this.refreshOtherMenu.Size = new System.Drawing.Size(180, 22);
+            this.refreshOtherMenu.Size = new System.Drawing.Size(148, 22);
             this.refreshOtherMenu.Text = "境外站验活";
             this.refreshOtherMenu.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
             // 
             // SaveResultsMenuItem
             // 
             this.SaveResultsMenuItem.Name = "SaveResultsMenuItem";
-            this.SaveResultsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveResultsMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SaveResultsMenuItem.Text = "导出结果";
             this.SaveResultsMenuItem.Click += new System.EventHandler(this.SaveResultsMenuItem_Click);
             // 
@@ -452,6 +452,7 @@
             // 
             this.progressBar.AutoSize = false;
             this.progressBar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.progressBar.Enabled = false;
             this.progressBar.Font = new System.Drawing.Font("Microsoft YaHei UI", 8F);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(130, 19);
@@ -584,6 +585,7 @@
             this.Name = "WebShellManageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebShell模拟器";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WebShellManageForm_FormClosing);
             this.Load += new System.EventHandler(this.WebShellManageForm_Load);
             this.contextMenuStrip.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
