@@ -21,7 +21,7 @@ namespace C2.IAOLab.BankTool
         public string BankToolSearch(string input)
         {
 
-            if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号")
+            if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
                 return null;
             foreach (var i in input)//检测输入是否为纯数字
             {
