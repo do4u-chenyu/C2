@@ -34,6 +34,7 @@
             this.pasteModeCB = new System.Windows.Forms.CheckBox();
             this.wsTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -53,13 +54,13 @@
             this.filePathTextBox.Location = new System.Drawing.Point(96, 29);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(249, 25);
+            this.filePathTextBox.Size = new System.Drawing.Size(263, 25);
             this.filePathTextBox.TabIndex = 10007;
             // 
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(351, 30);
+            this.browserButton.Location = new System.Drawing.Point(365, 30);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(59, 23);
             this.browserButton.TabIndex = 10008;
@@ -82,12 +83,12 @@
             // wsTextBox
             // 
             this.wsTextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.wsTextBox.Location = new System.Drawing.Point(96, 90);
-            this.wsTextBox.MaxLength = 4000000;
+            this.wsTextBox.Location = new System.Drawing.Point(95, 90);
+            this.wsTextBox.MaxLength = 4194304;
             this.wsTextBox.Multiline = true;
             this.wsTextBox.Name = "wsTextBox";
             this.wsTextBox.ReadOnly = true;
-            this.wsTextBox.Size = new System.Drawing.Size(314, 126);
+            this.wsTextBox.Size = new System.Drawing.Size(329, 159);
             this.wsTextBox.TabIndex = 10016;
             this.wsTextBox.WordWrap = false;
             // 
@@ -96,18 +97,30 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(20, 65);
+            this.label3.Location = new System.Drawing.Point(3, 65);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(401, 12);
+            this.label3.Size = new System.Drawing.Size(431, 12);
             this.label3.TabIndex = 10017;
-            this.label3.Text = "* 内容格式:TAB分割,第一列url(http或https开头),第二列密码,一行一个.";
+            this.label3.Text = "* 内容格式:TAB分割,第一列url(http或https开头),第二列密码,一行一个,10W行";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(3, 114);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.TabIndex = 10018;
+            this.label1.Text = "* 最大 4M 文本";
             // 
             // AddAllWebShellForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(437, 285);
+            this.ClientSize = new System.Drawing.Size(437, 305);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.wsTextBox);
             this.Controls.Add(this.pasteModeCB);
@@ -122,6 +135,7 @@
             this.Controls.SetChildIndex(this.pasteModeCB, 0);
             this.Controls.SetChildIndex(this.wsTextBox, 0);
             this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,5 +149,6 @@
         private System.Windows.Forms.CheckBox pasteModeCB;
         private System.Windows.Forms.TextBox wsTextBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 }
