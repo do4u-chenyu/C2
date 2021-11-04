@@ -33,7 +33,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeComponent();
             InitializeToolStrip();
             InitializeOther();
-            ResetSLabel();
         }
 
         private void ResetSLabel()
@@ -102,6 +101,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SaveDB()
         {
+            ResetSLabel();
             try
             {
                 using (Stream stream = File.Open(configFFP, FileMode.Create))
@@ -114,6 +114,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             LoadDB();
             RefreshLV();
+            ResetSLabel();
         }
 
         private void LoadDB()
@@ -131,7 +132,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.Items.Clear();  // 不能删表头的clear方法
             foreach (WebShellTaskConfig config in tasks)
                 LV.Items.Add(NewLVI(config));
-            ResetSLabel();
         }
 
         static bool isAlertnatingRows = true;
@@ -170,8 +170,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             foreach (ListViewItem lvi in LV.SelectedItems)
                 lvi.Remove();
-
-            ResetSLabel();
             RefreshTasks();
             SaveDB();
         }
@@ -502,7 +500,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 LV.Items.Add(NewLVI(task));
                 tasks.Add(task);
             }
-
             SaveDB();
         }
 
