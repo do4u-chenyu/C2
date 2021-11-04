@@ -102,6 +102,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void SaveDB()
         {
             ResetSLabel();
+            StaticItems();
             try
             {
                 using (Stream stream = File.Open(configFFP, FileMode.Create))
@@ -115,6 +116,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LoadDB();
             RefreshLV();
             ResetSLabel();
+            StaticItems();
         }
 
         private void LoadDB()
@@ -580,6 +582,30 @@ namespace C2.Business.CastleBravo.WebShellTool
                 RefreshTasks();
                 SaveDB();
             }
+        }
+
+        private void StaticItems()
+        {
+            int dead = 0;
+            int alive = 0;
+
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                switch(lvi.SubItems[5].Text)
+                {
+                    case "√":
+                        alive++;
+                        break;
+                    case "×":
+                        dead++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            StatusLabel.Text = string.Format("活 {0} - 死 {1}", 
+                alive,
+                dead);
         }
     }
 }

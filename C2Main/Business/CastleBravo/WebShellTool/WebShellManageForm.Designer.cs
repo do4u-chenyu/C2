@@ -92,6 +92,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -590,10 +591,11 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ItemCountSLabel,
-            this.ProxyEnableSLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 482);
+            this.ProxyEnableSLabel,
+            this.StatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 481);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1319, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1319, 23);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 4;
             // 
@@ -601,12 +603,18 @@
             // 
             this.ItemCountSLabel.AutoSize = false;
             this.ItemCountSLabel.Name = "ItemCountSLabel";
-            this.ItemCountSLabel.Size = new System.Drawing.Size(64, 17);
+            this.ItemCountSLabel.Size = new System.Drawing.Size(64, 18);
             // 
             // ProxyEnableSLabel
             // 
             this.ProxyEnableSLabel.Name = "ProxyEnableSLabel";
-            this.ProxyEnableSLabel.Size = new System.Drawing.Size(0, 17);
+            this.ProxyEnableSLabel.Size = new System.Drawing.Size(0, 18);
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(35, 18);
+            this.StatusLabel.Text = "统计:";
             // 
             // WebShellManageForm
             // 
@@ -698,5 +706,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel ItemCountSLabel;
         private System.Windows.Forms.ToolStripStatusLabel ProxyEnableSLabel;
+        private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
     }
 }
