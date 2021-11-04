@@ -136,9 +136,9 @@
             this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Location = new System.Drawing.Point(10, 160);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 10015;
-            this.label4.Text = "* 最大 4M 文本";
+            this.label4.Text = "* 最大4M文本";
             // 
             // AddWFDTask
             // 
