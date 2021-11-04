@@ -31,8 +31,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeComponent();
             InitializeToolStrip();
             InitializeOther();
+            ResetSLabel();
         }
 
+        private void ResetSLabel()
+        {
+            ItemCountSLabel.Text = string.Format("共{0}项", LV.Items.Count);
+            ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
+        }
         private void InitializeOther()
         {
             setOfHost = new HashSet<string>();
@@ -123,6 +129,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.Items.Clear();  // 不能删表头的clear方法
             foreach (WebShellTaskConfig config in tasks)
                 LV.Items.Add(NewLVI(config));
+            ResetSLabel();
         }
 
         static bool isAlertnatingRows = true;
@@ -158,9 +165,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             foreach (ListViewItem lvi in LV.SelectedItems)
                 lvi.Remove();
-            
+
+            ResetSLabel();
             RefreshTasks();
             SaveDB();
         }
@@ -202,12 +211,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            ListViewItem lvi = this.LV.SelectedItems[0];
-            // 没找到能复制指定单元格的方法, 先复制整行
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < lvi.SubItems.Count; i++)
-                sb.AppendLine(lvi.SubItems[i].Text);
-
+            foreach (ListViewItem lvi in this.LV.SelectedItems)
+            {
+                for (int i = 0; i < lvi.SubItems.Count; i++)
+                    sb.Append(lvi.SubItems[i].Text).Append(OpUtil.TabSeparator);
+                sb.TrimEndT().AppendLine();
+            }
             FileUtil.TryClipboardSetText(sb.ToString());
         }
 
@@ -303,7 +313,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             foreach (ListViewItem lvi in LV.Items)
             {   // 没启用跳过尸体, 清空 或 死状态 清空
-                if (lvi.SubItems[5].Text == "×")
+                if (lvi.SubItems[5].Text.In(new string[] { "×", "待"}))
                     lvi.SubItems[5].Text = "待";
                 else
                     this.progressBar.Maximum--;
@@ -516,6 +526,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
             Proxy = new ProxySettingForm(Proxy).ShowDialog();
+            ResetSLabel();
         }
 
         private void SaveResultsMenuItem_Click(object sender, EventArgs e)
