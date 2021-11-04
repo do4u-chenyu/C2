@@ -412,6 +412,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string status = "×";
             using (GuarderUtil.WaitCursor) 
             {
+                
                 // safe模式下 跳过国内网站
                 bool isChina = RefreshIPAddress(task);
                 if (safeMode && isChina)
@@ -442,14 +443,18 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private bool RefreshIPAddress(WebShellTaskConfig task)
         {
-            Application.DoEvents();
-            task.IP = NetUtil.GetHostAddresses(task.Url);
-            Application.DoEvents();
-            task.Country = NetUtil.IPQuery_WhoIs(task.IP);
-            Application.DoEvents();
-            task.Country2 = NetUtil.IPQuery_ChunZhen(task.IP);
-            Application.DoEvents();
-            // 
+            // 二刷时直接利用上次IP结果,加速
+            if (task.Status != "待")
+            {
+                Application.DoEvents();
+                task.IP = NetUtil.GetHostAddresses(task.Url);
+                Application.DoEvents();
+                task.Country = NetUtil.IPQuery_WhoIs(task.IP);
+                Application.DoEvents();
+                task.Country2 = NetUtil.IPQuery_ChunZhen(task.IP);
+                Application.DoEvents();
+            }
+
             return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
         }
 
