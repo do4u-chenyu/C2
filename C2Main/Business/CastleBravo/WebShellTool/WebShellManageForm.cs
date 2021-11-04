@@ -26,6 +26,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
 
         private ToolStripItem[] enableItems;
+
+        private DateTime s; // 自动保存
         public WebShellManageForm()
         {
             InitializeComponent();
@@ -286,6 +288,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
         }
 
+        private void 变种10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种10").ShowDialog();
+        }
+
+        private void 变种11LandGreyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
+        }
+
         private void RefreshCurrentStatusMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
@@ -335,7 +347,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAll(bool skipAlive, bool safeMode)
         {
-            DateTime s = DateTime.Now;
+            s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             foreach (ListViewItem lvi in LV.Items)
@@ -347,7 +359,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     continue;
                 UpdateAliveItems(lvi, safeMode);
                 UpdateProgress();
-                s = CheckSavePoint(s); // 5分钟保存一次
+                CheckSavePoint(); // 5分钟保存一次
             }
         }
 
@@ -357,7 +369,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             SaveDB();
         }
 
-        private DateTime CheckSavePoint(DateTime s)
+        private void CheckSavePoint()
         {
             TimeSpan gap = DateTime.Now - s;
             if (gap.TotalMinutes >= 5)
@@ -366,7 +378,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 SaveDB();
                 s = DateTime.Now;
             }
-            return s;
         }
 
         private void ResetProgressMenu()
@@ -391,8 +402,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.setOfHost.Add(NetUtil.GetHostByUrl(task.Url));
                 this.setOfIPAddress.Add(task.IP);
             }
-                
-
             lvi.SubItems[5].Text = rts;
             lvi.SubItems[8].Text = task.IP;
             lvi.SubItems[9].Text = task.Country;
@@ -513,15 +522,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             RemoveToolStripMenuItem_Click(sender, e);
         }
 
-        private void 变种10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种10").ShowDialog();
-        }
 
-        private void 变种11LandGreyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
-        }
 
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
