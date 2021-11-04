@@ -544,7 +544,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(path, true); 
+            StreamWriter sw = new StreamWriter(path, false); 
             try
             {
                 List<string> tmpLists = new List<string>();
