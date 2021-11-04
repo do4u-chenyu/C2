@@ -37,6 +37,7 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.md5TextBox = new System.Windows.Forms.TextBox();
             this.pasteModeCB = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -107,6 +108,7 @@
             // 
             this.md5TextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
             this.md5TextBox.Location = new System.Drawing.Point(103, 137);
+            this.md5TextBox.MaxLength = 4194304;
             this.md5TextBox.Multiline = true;
             this.md5TextBox.Name = "md5TextBox";
             this.md5TextBox.ReadOnly = true;
@@ -127,12 +129,24 @@
             this.pasteModeCB.UseVisualStyleBackColor = true;
             this.pasteModeCB.CheckedChanged += new System.EventHandler(this.PasteModeCB_CheckedChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(10, 160);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 10015;
+            this.label4.Text = "* 最大 4M 文本";
+            // 
             // AddWFDTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(470, 318);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.pasteModeCB);
             this.Controls.Add(this.md5TextBox);
             this.Controls.Add(this.label3);
@@ -153,6 +167,7 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.pasteModeCB, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,5 +184,6 @@
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.TextBox md5TextBox;
         private System.Windows.Forms.CheckBox pasteModeCB;
+        private System.Windows.Forms.Label label4;
     }
 }
