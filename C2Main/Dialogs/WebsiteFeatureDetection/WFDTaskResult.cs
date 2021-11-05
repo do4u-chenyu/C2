@@ -118,7 +118,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             {
                 TaskInfo.Status = WFDTaskStatus.Running;
                 this.statusInfoLabel.Text = "[ " + datas.Replace("\"","").Replace("{","").Replace("}","") + " ]";
-                this.taskInfoLabel.Text = "[ " + taskInfo.Replace("\"", "").Replace("{", "").Replace("}", "") + " ]";
+                this.taskInfoLabel.Text = "[ " + taskInfo.Replace("\'", "").Replace("{", "").Replace("}", "").Replace("ahead_task", "排队任务数").Replace("will_finished", "预计完成的时间") + " ]";
             }
             else if (respMsg == "fail")
             {
