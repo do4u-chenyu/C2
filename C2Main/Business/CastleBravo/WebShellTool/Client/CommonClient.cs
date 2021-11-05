@@ -144,7 +144,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public string Suscide()
         {
-            return passwd + "=" + "echo(unlink($_SERVER%5BSCRIPT_FILENAME%5D));";
+            return passwd + "=" + "print(unlink($_SERVER%5BSCRIPT_FILENAME%5D));";
         }
     
        

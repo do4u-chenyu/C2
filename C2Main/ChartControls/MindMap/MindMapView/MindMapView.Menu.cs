@@ -4,6 +4,7 @@ using C2.Core;
 using C2.Database;
 using C2.Dialogs;
 using C2.Dialogs.Base;
+using C2.Dialogs.WidgetChart;
 using C2.Forms;
 using C2.Globalization;
 using C2.IAOLab.WebEngine;
@@ -487,10 +488,12 @@ namespace C2.Controls.MapViews
 
             DataItem dataCopy = hitItem.Clone();
             //这里需要一个配置窗口读文件
-
+            OrganizationForm displayDialog = new OrganizationForm(dataCopy);
+            if (DialogResult.OK != displayDialog.ShowDialog())
+                return;
+            
             MindMap org = Global.GetDocumentForm().Document.Charts[1] as MindMap;
             MessageBox.Show(org.Root.Children[0].Text);
-
             Global.GetDocumentForm().ActiveChart(1);
         }
 

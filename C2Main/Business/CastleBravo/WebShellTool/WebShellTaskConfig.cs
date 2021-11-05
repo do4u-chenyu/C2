@@ -20,21 +20,36 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string Country;          // 归属地
         public string Country2;          // 归属地
 
+        public WebShellTaskConfig(string[] array)
+        {
+            if (array.Length > 7)
+            {
+                CreateTime = array[0];
+                Remark = array[1];
+                Url = array[2];
+                Password = array[3];
+                TrojanType = array[4];
+                Status = array[5];
+                ClientVersion = array[6];
+                DatabaseConfig = array[7];
+                IP = "0.0.0.0";
+                Country = string.Empty;
+                Country2 = string.Empty;
+            }
+            // 字段随版本不断扩充, 保持向上兼容
+            if (array.Length > 8)
+                IP = array[8];
+
+            if (array.Length > 10)
+            {
+                Country = array[9];
+                Country2 = array[10];
+            }
+        }
         public WebShellTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
         public WebShellTaskConfig(string cTime, string remark, string url, string pass, string trojanType, string status, string cVersion, string dbConfig)
-        {
-            CreateTime = cTime;
-            Remark = remark;
-            Url = url;
-            Password = pass;
-            TrojanType = trojanType;
-            Status = status;
-            ClientVersion = cVersion;
-            DatabaseConfig = dbConfig;
-            IP = "0.0.0.0";
-            Country = string.Empty;
-            Country2 = string.Empty;
-        }
+        : this(new string[] { cTime, remark, url, pass, trojanType, status, cVersion, dbConfig })
+        { }
     }
 }

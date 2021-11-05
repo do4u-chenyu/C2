@@ -26,6 +26,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
 
         private ToolStripItem[] enableItems;
+
+        private DateTime s; // 自动保存
         public WebShellManageForm()
         {
             InitializeComponent();
@@ -33,6 +35,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeOther();
         }
 
+        private void ResetSLabel()
+        {
+            ItemCountSLabel.Text = string.Format("共{0}项", LV.Items.Count);
+            ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
+        }
         private void InitializeOther()
         {
             setOfHost = new HashSet<string>();
@@ -48,6 +55,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.addBatchShellMenu,
                 this.proxySettingMenu,
                 this.refreshAllShellMenu,
+                this.refreshOtherMenu2,
+                this.secondRefreshMenu,
                 this.addOneShellMenu,
                 this.trojanMenu
             };
@@ -69,18 +78,18 @@ namespace C2.Business.CastleBravo.WebShellTool
             tasks.Clear();
             foreach (ListViewItem lvi in LV.Items)
             {
-                WebShellTaskConfig config = new WebShellTaskConfig(lvi.SubItems[0].Text,  // 创建时间
-                                                                   lvi.SubItems[1].Text,  // 名称
-                                                                   lvi.SubItems[2].Text,  // url
-                                                                   lvi.SubItems[3].Text,  // 密码
-                                                                   lvi.SubItems[4].Text,  // 木马类型
-                                                                   lvi.SubItems[5].Text,  // 木马状态
-                                                                   lvi.SubItems[6].Text,  // 客户端版本
-                                                                   lvi.SubItems[7].Text); // 
+                WebShellTaskConfig config = new WebShellTaskConfig(GetSubItemsTextArray(lvi));
                 lvi.Tag = config; // 关联
                 tasks.Add(config);// 数据库配置
             }
+        }
 
+        private string[] GetSubItemsTextArray(ListViewItem lvi)
+        {
+            List<string> array = new List<string>(lvi.SubItems.Count);
+            for (int i = 0; i < lvi.SubItems.Count; i++)
+                array.Add(lvi.SubItems[i].Text);
+            return array.ToArray();
         }
 
         private void ClearAll()
@@ -92,6 +101,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SaveDB()
         {
+            ResetSLabel();
+            StaticItems();
             try
             {
                 using (Stream stream = File.Open(configFFP, FileMode.Create))
@@ -104,6 +115,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             LoadDB();
             RefreshLV();
+            ResetSLabel();
+            StaticItems();
         }
 
         private void LoadDB()
@@ -156,9 +169,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             foreach (ListViewItem lvi in LV.SelectedItems)
                 lvi.Remove();
-            
             RefreshTasks();
             SaveDB();
         }
@@ -200,12 +213,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            ListViewItem lvi = this.LV.SelectedItems[0];
-            // 没找到能复制指定单元格的方法, 先复制整行
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < lvi.SubItems.Count; i++)
-                sb.AppendLine(lvi.SubItems[i].Text);
-
+            foreach (ListViewItem lvi in this.LV.SelectedItems)
+            {
+                for (int i = 0; i < lvi.SubItems.Count; i++)
+                    sb.Append(lvi.SubItems[i].Text).Append(OpUtil.TabSeparator);
+                sb.TrimEndT().AppendLine();
+            }
             FileUtil.TryClipboardSetText(sb.ToString());
         }
 
@@ -274,6 +288,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
         }
 
+        private void 变种10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种10").ShowDialog();
+        }
+
+        private void 变种11LandGreyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
+        }
+
         private void RefreshCurrentStatusMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
@@ -285,7 +309,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllStatusMenuItem_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus();
+            RefreshAllTaskStatus(false);
         }
 
         private bool refreshNeedStop = false;
@@ -295,41 +319,72 @@ namespace C2.Business.CastleBravo.WebShellTool
             refreshNeedStop = true;
         }
 
-        private void RefreshAllTaskStatus(bool isSkipDead = false, bool safeMode = false)
+        private void SecondRefreshTaskStatus()
         {
             ResetProgressMenu();
-            // 刷新前先强制清空
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                // 没启用跳过尸体, 清空 或 死状态 清空
-                if (!isSkipDead || lvi.SubItems[5].Text != "√")
-                {
-                    ClearAliveItems(lvi);
-                    this.progressBar.Maximum++;
-                }
-            }
 
+            foreach (ListViewItem lvi in LV.Items)
+            {   // 没启用跳过尸体, 清空 或 死状态 清空
+                if (lvi.SubItems[5].Text.In(new string[] { "×", "待"}))
+                    lvi.SubItems[5].Text = "待";
+                else
+                    this.progressBar.Maximum--;
+            }
+            RefreshAll(true, false);
+            EndRefresh();
+        }
+
+        private void RefreshAllTaskStatus(bool safeMode)
+        {   // 刷新前先强制清空
+            ResetProgressMenu();
+
+            foreach (ListViewItem lvi in LV.Items)
+                ClearAliveItems(lvi);
+            
+            RefreshAll(false, safeMode);
+            EndRefresh();
+        }
+
+        private void RefreshAll(bool skipAlive, bool safeMode)
+        {
+            s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             foreach (ListViewItem lvi in LV.Items)
             {
                 if (refreshNeedStop)
                     break;
-                // 启用跳过尸体, 遇到活人，跳过
-                if (isSkipDead && lvi.SubItems[5].Text == "√")
+                // 启用二刷
+                if (skipAlive && lvi.SubItems[5].Text != "待")
                     continue;
                 UpdateAliveItems(lvi, safeMode);
                 UpdateProgress();
+                CheckSavePoint(); // 5分钟保存一次
             }
+        }
+
+        private void EndRefresh()
+        {
             RefreshTasks();
             SaveDB();
+        }
+
+        private void CheckSavePoint()
+        {
+            TimeSpan gap = DateTime.Now - s;
+            if (gap.TotalMinutes >= 5)
+            {   // 5分钟保存一次
+                RefreshTasks();
+                SaveDB();
+                s = DateTime.Now;
+            }
         }
 
         private void ResetProgressMenu()
         {
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
-            this.progressBar.Maximum = 0;
+            this.progressBar.Maximum = LV.Items.Count;
             this.refreshNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
@@ -347,8 +402,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.setOfHost.Add(NetUtil.GetHostByUrl(task.Url));
                 this.setOfIPAddress.Add(task.IP);
             }
-                
-
             lvi.SubItems[5].Text = rts;
             lvi.SubItems[8].Text = task.IP;
             lvi.SubItems[9].Text = task.Country;
@@ -357,7 +410,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} - 活{2} - 域名{3} - IP{4}", 
+            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}", 
                 ++progressBar.Value, 
                 progressBar.Maximum,
                 NumberOfAlive,
@@ -378,6 +431,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string status = "×";
             using (GuarderUtil.WaitCursor) 
             {
+                
                 // safe模式下 跳过国内网站
                 bool isChina = RefreshIPAddress(task);
                 if (safeMode && isChina)
@@ -408,14 +462,18 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private bool RefreshIPAddress(WebShellTaskConfig task)
         {
-            Application.DoEvents();
-            task.IP = NetUtil.GetHostAddresses(task.Url);
-            Application.DoEvents();
-            task.Country = NetUtil.IPQuery_WhoIs(task.IP);
-            Application.DoEvents();
-            task.Country2 = NetUtil.IPQuery_TaoBao(task.IP);
-            Application.DoEvents();
-            // 
+            // 二刷时直接利用上次IP结果,加速
+            if (task.Status != "待")
+            {
+                Application.DoEvents();
+                task.IP = NetUtil.GetHostAddresses(task.Url);
+                Application.DoEvents();
+                task.Country = NetUtil.IPQuery_WhoIs(task.IP);
+                Application.DoEvents();
+                task.Country2 = NetUtil.IPQuery_ChunZhen(task.IP);
+                Application.DoEvents();
+            }
+
             return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
         }
 
@@ -444,7 +502,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 LV.Items.Add(NewLVI(task));
                 tasks.Add(task);
             }
-
             SaveDB();
         }
 
@@ -464,19 +521,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             RemoveToolStripMenuItem_Click(sender, e);
         }
 
-        private void 变种10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种10").ShowDialog();
-        }
 
-        private void 变种11LandGreyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
-        }
 
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
             Proxy = new ProxySettingForm(Proxy).ShowDialog();
+            ResetSLabel();
         }
 
         private void SaveResultsMenuItem_Click(object sender, EventArgs e)
@@ -494,7 +544,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(path, true); 
+            StreamWriter sw = new StreamWriter(path, false); 
             try
             {
                 List<string> tmpLists = new List<string>();
@@ -516,12 +566,46 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllDeadMenu_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus(true);
+            SecondRefreshTaskStatus();
         }
 
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus(false, true);
+            RefreshAllTaskStatus(true);
+        }
+
+        private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.refreshNeedStop = true;
+            using (GuarderUtil.WaitCursor)
+            {
+                RefreshTasks();
+                SaveDB();
+            }
+        }
+
+        private void StaticItems()
+        {
+            int dead = 0;
+            int alive = 0;
+
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                switch(lvi.SubItems[5].Text)
+                {
+                    case "√":
+                        alive++;
+                        break;
+                    case "×":
+                        dead++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            StatusLabel.Text = string.Format("活 {0} - 死 {1}", 
+                alive,
+                dead);
         }
     }
 }

@@ -96,14 +96,20 @@ namespace C2.Business.CastleBravo.WebShellTool
                 dataGridView1.Columns.Add(j.ToString(), lines[0].Split('|')[j]);
                 j++;
             }
+
             for (int k = 1; k < lines.Length - 1; k++)//最后一行为\t 
             {
-                string[] data = lines[k].Split('|');
-                int index = dataGridView1.Rows.Add();
-                for (int i = 0; i < data.Length -1 ; i++) 
-                {
-                    dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t", string.Empty);
-                }
+                
+                    string[] data = lines[k].Split(new string[] { "\t|\t" }, StringSplitOptions.None);
+                    int index = dataGridView1.Rows.Add();
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        if(i == data.Length-1)
+                            dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t|",string.Empty);
+                        else
+                            dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t", string.Empty);
+                    }
+               
             }
         }
         private void TreeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
