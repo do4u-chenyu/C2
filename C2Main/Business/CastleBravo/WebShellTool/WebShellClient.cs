@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,6 +186,21 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.lastErrorMessage = WafDector(e.Message);
                 return string.Empty;
             }   
+        }
+
+
+        public static bool CheckAlive(WebShellTaskConfig task, ProxySetting proxy)
+        {
+            try
+            {
+                string url = NetUtil.FormatUrl(task.Url);
+                string pass = task.Password;
+                string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
+                string result = WebClientEx.Post(url, string.Format("{0}=print({1});", pass, seed), 1500, proxy);
+                return result.Contains(seed);
+            }
+            catch { return false; }
+
         }
 
         private string WafDector(string msg)
