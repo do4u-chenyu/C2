@@ -14,6 +14,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return new CKnife16EXEClient(password, clientSetting);
                 case "AntSword2114":
                     return new AntSwordClient(password, clientSetting);
+                case "Xise19":
+                    return new Xise19Client(password, clientSetting);
                 default:
                     return new CommonClient(password, clientSetting);
             }

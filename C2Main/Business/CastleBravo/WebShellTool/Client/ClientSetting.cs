@@ -23,7 +23,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "中国菜刀14_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife14_EXE_Config.ini"),"Common") },
             { "中国菜刀18_BYPASS版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini"),"Common") },
             { "奥特曼2015_PHP版", Tuple.Create(Path.Combine(WebShellFilePath, "Altman15_PHP_Config.ini"),"Common") },
-            { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"), "AntSword2114") }  // 2114版大部分参数都是每次随机变化的
+            { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"), "AntSword2114") },  // 2114版大部分参数都是每次随机变化的
+            { "Xise19.9版", Tuple.Create(Path.Combine(WebShellFilePath, "Xise19_WAF_Config.ini"), "Xise19") }
         };
 
         public string SPL;
@@ -35,6 +36,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PARAM3;
         public string PHP_BASE64;
         public string PHP_MAKE;
+        public string PHP_MAKE2;
         public string PHP_INFO;
         public string PHP_INDEX;
         public string PHP_READDICT;
@@ -48,6 +50,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string PHP_DOWNLOAD;
         public string PHP_SHELL;
         public string PHP_DB_MYSQL;
+        public string z0;
+        public string z9;
+        public string PHP_INFO2;
+        public string PHP_MAKE3;
 
         public static readonly ClientSetting Empty = new ClientSetting();
 
@@ -88,6 +94,11 @@ namespace C2.Business.CastleBravo.WebShellTool
                 PHP_DOWNLOAD = Read(version, "PHP_DOWNLOAD", path),
                 PHP_SHELL = Read(version, "PHP_SHELL", path),
                 PHP_DB_MYSQL = Read(version, "PHP_DB_MYSQL", path),
+                z0 = Read(version, "z0", path),
+                z9 = Read(version, "z9", path),
+                PHP_MAKE2 = Read(version, "PHP_MAKE2", path),
+                PHP_INFO2 = Read(version, "PHP_INFO2", path),
+                PHP_MAKE3 = Read(version, "PHP_MAKE3", path),
             };
         }
 
