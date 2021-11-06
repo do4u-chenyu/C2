@@ -193,6 +193,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 string.Format("{0}{1}WAF检测:可能被WAF拦截{1}", msg, Environment.NewLine) : 
                 msg;
         }
+
     }
 
     public enum WebShellFileType

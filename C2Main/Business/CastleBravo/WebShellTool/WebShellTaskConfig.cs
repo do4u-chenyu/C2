@@ -51,5 +51,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         public WebShellTaskConfig(string cTime, string remark, string url, string pass, string trojanType, string status, string cVersion, string dbConfig)
         : this(new string[] { cTime, remark, url, pass, trojanType, status, cVersion, dbConfig })
         { }
+
+        public static string AutoDetectTrojanType(string url)
+        {
+            url = url.Trim().ToLower();
+            if (url.EndsWith(".asp"))
+                return "aspEval";
+            if (url.EndsWith(".php"))
+                return "phpEval";
+            return "自动判断";
+        }
     }
 }
