@@ -63,6 +63,7 @@
             this.变种9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.变种10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.变种11LandGreyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.变种12无密码多语句ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.behinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BypassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PHPEvalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,7 +94,6 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.变种12无密码多语句ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -388,6 +388,14 @@
             this.变种11LandGreyToolStripMenuItem.ToolTipText = "一句话Trojan_变种11|LandGrey版的一句话木马";
             this.变种11LandGreyToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
             // 
+            // 变种12无密码多语句ToolStripMenuItem
+            // 
+            this.变种12无密码多语句ToolStripMenuItem.Name = "变种12无密码多语句ToolStripMenuItem";
+            this.变种12无密码多语句ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.变种12无密码多语句ToolStripMenuItem.Text = "变种12_无密码多语句";
+            this.变种12无密码多语句ToolStripMenuItem.ToolTipText = "一句话Trojan_变种12|无密码且支持一次上次多个payload";
+            this.变种12无密码多语句ToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
+            // 
             // behinderToolStripMenuItem
             // 
             this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
@@ -618,14 +626,6 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
-            // 变种12无密码多语句ToolStripMenuItem
-            // 
-            this.变种12无密码多语句ToolStripMenuItem.Name = "变种12无密码多语句ToolStripMenuItem";
-            this.变种12无密码多语句ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.变种12无密码多语句ToolStripMenuItem.Text = "变种12_无密码多语句";
-            this.变种12无密码多语句ToolStripMenuItem.ToolTipText = "一句话Trojan_变种12|无密码且支持一次上次多个payload";
-            this.变种12无密码多语句ToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
-            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -640,7 +640,7 @@
             this.MaximizeBox = false;
             this.Name = "WebShellManageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WebShell模拟器";
+            this.Text = "DD模拟器";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WebShellManageForm_FormClosing);
             this.Load += new System.EventHandler(this.WebShellManageForm_Load);
             this.contextMenuStrip.ResumeLayout(false);

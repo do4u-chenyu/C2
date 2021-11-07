@@ -198,7 +198,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddWebShellForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WebShell Setting";
+            this.Text = "DD Setting";
             this.Controls.SetChildIndex(this.remarkTextBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.urlTextBox, 0);

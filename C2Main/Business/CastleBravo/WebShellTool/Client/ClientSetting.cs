@@ -24,7 +24,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "中国菜刀18_BYPASS版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife18_Bypass_Config.ini"),"Common") },
             { "奥特曼2015_PHP版", Tuple.Create(Path.Combine(WebShellFilePath, "Altman15_PHP_Config.ini"),"Common") },
             { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"), "AntSword2114") },  // 2114版大部分参数都是每次随机变化的
-            { "Xise19.9版", Tuple.Create(Path.Combine(WebShellFilePath, "Xise19_WAF_Config.ini"), "Xise19") }
+            { "Xise19.9版", Tuple.Create(Path.Combine(WebShellFilePath, "Xise19_WAF_Config.ini"), "Xise19") },
+            { "ASP通用版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini"), "AspCommon") },
         };
 
         public string SPL;
