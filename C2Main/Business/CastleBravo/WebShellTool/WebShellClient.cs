@@ -14,8 +14,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private readonly IClient client;
         private string lastErrorMessage;
         public string FetchLog() 
-        { 
-            string ret = client.FetchLog() + lastErrorMessage;
+        {
+            string ret = lastErrorMessage + Environment.NewLine + client.FetchLog(); // 错误日志特意放在第一行
             lastErrorMessage = string.Empty;
             return ret;
         }
@@ -205,9 +205,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string WafDector(string msg)
         {
-            return msg.StartsWith("基础连接已经关闭: 接收时发生错误") ? 
-                string.Format("{0}{1}WAF检测:可能被WAF拦截{1}", msg, Environment.NewLine) : 
-                msg;
+            if (msg.StartsWith("基础连接已经关闭: 接收时发生错误"))
+                return string.Format("{0}{1}WAF检测:可能被WAF拦截{1}", msg, Environment.NewLine);
+            if (msg.StartsWith("远程服务器返回错误: (500) 内部服务器错误。"))
+                return string.Format("{0}{1}WAF检测:可能是Payload语法,逻辑不正确或被WAF拦截{1}", msg, Environment.NewLine);
+            return string.Format("{0}{1}", msg, Environment.NewLine);
         }
 
     }
