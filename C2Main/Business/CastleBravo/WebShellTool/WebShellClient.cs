@@ -208,7 +208,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (msg.StartsWith("基础连接已经关闭: 接收时发生错误"))
                 return string.Format("{0}{1}WAF检测:可能被WAF拦截{1}", msg, Environment.NewLine);
             if (msg.StartsWith("远程服务器返回错误: (500) 内部服务器错误。"))
-                return string.Format("{0}{1}WAF检测:可能是Payload语法,逻辑不正确或被WAF拦截{1}", msg, Environment.NewLine);
+                return string.Format("{0}{1}WAF检测:可能密码错误,Payload语法不正确或被WAF拦截{1}", msg, Environment.NewLine);
             return string.Format("{0}{1}", msg, Environment.NewLine);
         }
 
