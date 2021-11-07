@@ -3956,6 +3956,9 @@
     <None Include="Resources\WebShellConfig\Cknife18_Bypass_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\WebShellConfig\Xise19_WAF_Config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\windows_themes.xml" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />
     <Content Include="Resources\C1\datasource\pythonHelper2.png" />

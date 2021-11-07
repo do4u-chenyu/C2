@@ -189,26 +189,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
 
-        public static bool CheckAlive(WebShellTaskConfig task, ProxySetting proxy)
-        {
-            try
-            {
-                string url = NetUtil.FormatUrl(task.Url);
-                string pass = task.Password;
-                string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string result = WebClientEx.Post(url, string.Format("{0}=print({1});", pass, seed), 1500, proxy);
-                return result.Contains(seed);
-            }
-            catch { return false; }
-
-        }
-
         private string WafDector(string msg)
         {
             if (msg.StartsWith("基础连接已经关闭: 接收时发生错误"))
-                return string.Format("{0}{1}WAF检测:可能被WAF拦截{1}", msg, Environment.NewLine);
+                return string.Format("{0}{1}WAF探测参考:可能被WAF拦截{1}", msg, Environment.NewLine);
             if (msg.StartsWith("远程服务器返回错误: (500) 内部服务器错误。"))
-                return string.Format("{0}{1}WAF检测:可能密码错误,Payload语法不正确或被WAF拦截{1}", msg, Environment.NewLine);
+                return string.Format("{0}{1}WAF探测参考:可能密码错误,Payload语法不正确或被WAF拦截{1}", msg, Environment.NewLine);
             return string.Format("{0}{1}", msg, Environment.NewLine);
         }
 
