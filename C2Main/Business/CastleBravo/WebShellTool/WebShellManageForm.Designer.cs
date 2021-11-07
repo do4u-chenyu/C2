@@ -93,6 +93,7 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.变种12无密码多语句ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -292,16 +293,17 @@
             this.变种8ToolStripMenuItem,
             this.变种9ToolStripMenuItem,
             this.变种10ToolStripMenuItem,
-            this.变种11LandGreyToolStripMenuItem});
+            this.变种11LandGreyToolStripMenuItem,
+            this.变种12无密码多语句ToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
-            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
             this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
             // 变种1ToolStripMenuItem
             // 
             this.变种1ToolStripMenuItem.Name = "变种1ToolStripMenuItem";
-            this.变种1ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种1ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种1ToolStripMenuItem.Text = "变种1";
             this.变种1ToolStripMenuItem.ToolTipText = "一句话Trojan_变种1|replace_assert变种";
             this.变种1ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -309,7 +311,7 @@
             // 变种2ToolStripMenuItem
             // 
             this.变种2ToolStripMenuItem.Name = "变种2ToolStripMenuItem";
-            this.变种2ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种2ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种2ToolStripMenuItem.Text = "变种2";
             this.变种2ToolStripMenuItem.ToolTipText = "一句话Trojan_变种2|assert_post字符拆分";
             this.变种2ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -317,7 +319,7 @@
             // 变种3ToolStripMenuItem
             // 
             this.变种3ToolStripMenuItem.Name = "变种3ToolStripMenuItem";
-            this.变种3ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种3ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种3ToolStripMenuItem.Text = "变种3";
             this.变种3ToolStripMenuItem.ToolTipText = "一句话Trojan_变种3|assert全拆分";
             this.变种3ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -325,7 +327,7 @@
             // 变种4ToolStripMenuItem
             // 
             this.变种4ToolStripMenuItem.Name = "变种4ToolStripMenuItem";
-            this.变种4ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种4ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种4ToolStripMenuItem.Text = "变种4";
             this.变种4ToolStripMenuItem.ToolTipText = "一句话Trojan_变种4|启用GLOBALS变量代替$_POST";
             this.变种4ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -333,7 +335,7 @@
             // 变种5ToolStripMenuItem
             // 
             this.变种5ToolStripMenuItem.Name = "变种5ToolStripMenuItem";
-            this.变种5ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种5ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种5ToolStripMenuItem.Text = "变种5";
             this.变种5ToolStripMenuItem.ToolTipText = "一句话Trojan_变种5|凯撒变形assert和Request代替POST";
             this.变种5ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -341,7 +343,7 @@
             // 变种6ToolStripMenuItem
             // 
             this.变种6ToolStripMenuItem.Name = "变种6ToolStripMenuItem";
-            this.变种6ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种6ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种6ToolStripMenuItem.Text = "变种6";
             this.变种6ToolStripMenuItem.ToolTipText = "一句话Trojan_变种6|垃圾注释混淆";
             this.变种6ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -349,7 +351,7 @@
             // 变种7ToolStripMenuItem
             // 
             this.变种7ToolStripMenuItem.Name = "变种7ToolStripMenuItem";
-            this.变种7ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种7ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种7ToolStripMenuItem.Text = "变种7";
             this.变种7ToolStripMenuItem.ToolTipText = "一句话Trojan_变种7|正则替换assert和Request替换POST";
             this.变种7ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -357,7 +359,7 @@
             // 变种8ToolStripMenuItem
             // 
             this.变种8ToolStripMenuItem.Name = "变种8ToolStripMenuItem";
-            this.变种8ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种8ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种8ToolStripMenuItem.Text = "变种8";
             this.变种8ToolStripMenuItem.ToolTipText = "一句话Trojan_变种8|无法描述的版本";
             this.变种8ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -365,7 +367,7 @@
             // 变种9ToolStripMenuItem
             // 
             this.变种9ToolStripMenuItem.Name = "变种9ToolStripMenuItem";
-            this.变种9ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种9ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种9ToolStripMenuItem.Text = "变种9";
             this.变种9ToolStripMenuItem.ToolTipText = "一句话Trojan_变种9|传入参数置换EVAL";
             this.变种9ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -373,7 +375,7 @@
             // 变种10ToolStripMenuItem
             // 
             this.变种10ToolStripMenuItem.Name = "变种10ToolStripMenuItem";
-            this.变种10ToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种10ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种10ToolStripMenuItem.Text = "变种10_AntSword";
             this.变种10ToolStripMenuItem.ToolTipText = "一句话Trojan_变种10|AntSword版的一句话木马";
             this.变种10ToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -381,7 +383,7 @@
             // 变种11LandGreyToolStripMenuItem
             // 
             this.变种11LandGreyToolStripMenuItem.Name = "变种11LandGreyToolStripMenuItem";
-            this.变种11LandGreyToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.变种11LandGreyToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.变种11LandGreyToolStripMenuItem.Text = "变种11_LandGrey";
             this.变种11LandGreyToolStripMenuItem.ToolTipText = "一句话Trojan_变种11|LandGrey版的一句话木马";
             this.变种11LandGreyToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -389,7 +391,7 @@
             // behinderToolStripMenuItem
             // 
             this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
-            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.behinderToolStripMenuItem.Text = "三代冰蝎";
             this.behinderToolStripMenuItem.ToolTipText = "三代冰蝎配套Trojan|AES128加密";
             this.behinderToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -397,7 +399,7 @@
             // BypassToolStripMenuItem
             // 
             this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
-            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.BypassToolStripMenuItem.Text = "凯撒变种";
             this.BypassToolStripMenuItem.ToolTipText = "凯撒变种Trojan|凯撒加密Payload引导段";
             this.BypassToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -405,7 +407,7 @@
             // PHPEvalToolStripMenuItem
             // 
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
-            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PHPEvalToolStripMenuItem.Text = "通用型PHPEVAL";
             this.PHPEvalToolStripMenuItem.ToolTipText = "PHP通用型一句话Trojan|最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -413,7 +415,7 @@
             // GodzillaToolStripMenuItem
             // 
             this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
-            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.GodzillaToolStripMenuItem.Text = "哥斯拉";
             this.GodzillaToolStripMenuItem.ToolTipText = "哥斯拉配套Trojan|与Godzilla配套的Trojan";
             this.GodzillaToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
@@ -616,6 +618,14 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
+            // 变种12无密码多语句ToolStripMenuItem
+            // 
+            this.变种12无密码多语句ToolStripMenuItem.Name = "变种12无密码多语句ToolStripMenuItem";
+            this.变种12无密码多语句ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.变种12无密码多语句ToolStripMenuItem.Text = "变种12_无密码多语句";
+            this.变种12无密码多语句ToolStripMenuItem.ToolTipText = "一句话Trojan_变种12|无密码且支持一次上次多个payload";
+            this.变种12无密码多语句ToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -707,5 +717,6 @@
         private System.Windows.Forms.ToolStripStatusLabel ItemCountSLabel;
         private System.Windows.Forms.ToolStripStatusLabel ProxyEnableSLabel;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem 变种12无密码多语句ToolStripMenuItem;
     }
 }
