@@ -223,80 +223,18 @@ namespace C2.Business.CastleBravo.WebShellTool
             FileUtil.TryClipboardSetText(sb.ToString());
         }
 
-        private void PHPEvalToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void TrojanGeneratorMenuItem_Click(object sender, EventArgs e)
         {
-            new TrojanGeneratorForm("PHP通用型一句话Trojan").ShowDialog();
+            string type = (sender as ToolStripMenuItem).ToolTipText.Split('|')[0];
+            new TrojanGeneratorForm(type).ShowDialog();
         }
 
-        private void BypassToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("凯撒变种Trojan").ShowDialog();
-        }
-
-        private void 变体1ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种1").ShowDialog();
-        }
-
-        private void 变种2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种2").ShowDialog();
-        }
-
-        private void 变种3ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种3").ShowDialog();
-        }
-
-        private void 变种4ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种4").ShowDialog();
-        }
-
-        private void 变种5ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种5").ShowDialog();
-        }
-
-        private void 变种6ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种6").ShowDialog();
-        }
-
-        private void 变种7ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种7").ShowDialog();
-        }
-
-        private void 变种8ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种8").ShowDialog();
-        }
-
-        private void 变种9ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种9").ShowDialog();
-        }
-
-        private void GodzillaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GodzillaTrojanGeneratorMenuItem_Click(object sender, EventArgs e)
         {
             new TrojanGeneratorForm("哥斯拉配套Trojan", true).ShowDialog();
         }
 
-        private void BehinderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("三代冰蝎配套Trojan").ShowDialog();
-        }
-
-        private void 变种10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种10").ShowDialog();
-        }
-
-        private void 变种11LandGreyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new TrojanGeneratorForm("一句话Trojan_变种11").ShowDialog();
-        }
 
         private void RefreshCurrentStatusMenuItem_Click(object sender, EventArgs e)
         {
@@ -439,8 +377,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 // 我总结的print穿透WAF大法
                 if (PostPrintTimeout(task))
-                    return "√";
-                
+                    return "√";   
             }
             return status;
         }
@@ -527,8 +464,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             RemoveToolStripMenuItem_Click(sender, e);
         }
 
-
-
         private void ProxyMenu_Click(object sender, EventArgs e)
         {
             Proxy = new ProxySettingForm(Proxy).ShowDialog();
@@ -609,9 +544,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                         break;
                 }
             }
-            StatusLabel.Text = string.Format("活 {0} - 死 {1}", 
-                alive,
-                dead);
+            StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
         }
     }
 }
