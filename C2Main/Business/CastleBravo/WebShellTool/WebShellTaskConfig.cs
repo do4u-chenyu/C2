@@ -61,5 +61,11 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return "phpEval";
             return "自动判断";
         }
+        public static string AutoDetectClientType(string url, string defaultVersion)
+        {
+            if (url.ToLower().Trim().EndsWith(".asp"))
+                return "ASP通用版";
+            return defaultVersion;
+        }
     }
 }

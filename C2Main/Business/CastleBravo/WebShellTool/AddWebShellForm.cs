@@ -62,7 +62,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UrlTextBox_TextChanged(object sender, System.EventArgs e)
         {
-            trojanTypeCombox.Text = WebShellTaskConfig.AutoDetectTrojanType(urlTextBox.Text);
+            versionComboBox.Text  = WebShellTaskConfig.AutoDetectClientType(urlTextBox.Text, versionComboBox.Text);
+            trojanTypeCombox.Text = WebShellTaskConfig.AutoDetectTrojanType(urlTextBox.Text); 
         }
     }
 }

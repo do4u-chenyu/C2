@@ -81,7 +81,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              contentArray[1],
                                              WebShellTaskConfig.AutoDetectTrojanType(contentArray[0]),
                                              string.Empty,
-                                             ClientSetting.WSDict.Keys.First(),
+                                             WebShellTaskConfig.AutoDetectClientType(contentArray[0], ClientSetting.WSDict.Keys.First()),
                                              string.Empty));
         }
 
