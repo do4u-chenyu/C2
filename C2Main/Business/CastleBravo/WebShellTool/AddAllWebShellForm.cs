@@ -95,27 +95,17 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return false;
             }
 
-            StreamReader sr = null;
-            FileStream fs = null;
             try
             {
-                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                sr = new StreamReader(fs, Encoding.Default);
-
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                using (StreamReader sr = new StreamReader(fs, Encoding.Default))
                 for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
                     AddTasksByLine(sr.ReadLine());
             }
             catch
             {
-                HelpUtil.ShowMessageBox(filePath + "文件加载出错，请检查文件内容。");
+                HelpUtil.ShowMessageBox(filePath + ",文件加载出错，请检查文件内容。");
                 return false;
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
-                if (sr != null)
-                    sr.Close();
             }
             return true;
         }
