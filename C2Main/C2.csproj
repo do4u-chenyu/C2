@@ -691,6 +691,12 @@
     <Compile Include="Dialogs\IAOLab\BigAPKForm.Designer.cs">
       <DependentUpon>BigAPKForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\IAOLab\FraudDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\FraudDialog.Designer.cs">
+      <DependentUpon>FraudDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2330,6 +2336,9 @@
     <EmbeddedResource Include="Dialogs\IAOLab\BigAPKForm.resx">
       <DependentUpon>BigAPKForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\FraudDialog.resx">
+      <DependentUpon>FraudDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\WifiLocation.resx">
       <DependentUpon>WifiLocation.cs</DependentUpon>
     </EmbeddedResource>
@@ -2964,6 +2973,7 @@
     <Content Include="Resources\Images\FaceDetector.png" />
     <Content Include="Resources\Images\FaceExpression.png" />
     <Content Include="Resources\Images\FaceRecognizer.png" />
+    <None Include="Resources\Images\fraud.png" />
     <Content Include="Resources\Images\freemind_butterfly.png" />
     <None Include="Resources\Images\full_screen.png" />
     <None Include="Resources\Images\full_screen_exit.png" />

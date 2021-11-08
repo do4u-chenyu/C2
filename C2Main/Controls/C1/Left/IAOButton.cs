@@ -96,6 +96,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
                     break;
+                case "Fraud":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.fraud;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FraudFormHelpInfo);
+                    break;
                 case "图片文本识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
@@ -268,8 +272,10 @@ namespace C2.Controls.Left
                     GPSTransformForm(buttonType).ShowDialog();
                     break;
                 case "PostAndGet":
-                    
-                     new PostAndGetForm().ShowDialog();
+                    new PostAndGetForm().ShowDialog();
+                    break;
+                case "Fraud":
+                    new FraudDialog().ShowDialog();
                     break;
                 case "BigAPK":
                     BigAPKForm().ShowDialog();
