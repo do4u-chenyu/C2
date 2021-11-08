@@ -501,7 +501,10 @@ namespace C2.Controls.MapViews
 
             Topic root = org.Root;
             root.Children.Clear();
-
+            foreach (Widget wd in root.Widgets)
+            {
+                wd.Remove();
+            }
             root.Text = ja[0]["user"].ToString();
             //添加备注挂件
             NoteWidget lable = new NoteWidget();
