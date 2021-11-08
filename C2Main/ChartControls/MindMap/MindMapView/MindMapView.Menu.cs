@@ -12,8 +12,11 @@ using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Windows.Forms;
 
@@ -488,13 +491,45 @@ namespace C2.Controls.MapViews
 
             DataItem dataCopy = hitItem.Clone();
             //这里需要一个配置窗口读文件
-            OrganizationForm displayDialog = new OrganizationForm(dataCopy);
+            List<string> returnList = new List<string>();
+            OrganizationForm displayDialog = new OrganizationForm(dataCopy, returnList);
             if (DialogResult.OK != displayDialog.ShowDialog())
                 return;
-            
+            returnList = displayDialog.returnList;
+            JArray ja = (JArray)JsonConvert.DeserializeObject(returnList[0]);
             MindMap org = Global.GetDocumentForm().Document.Charts[1] as MindMap;
-            MessageBox.Show(org.Root.Children[0].Text);
+
+            Topic root = org.Root;
+            root.Children.Clear();
+
+            root.Text = ja[0]["user"].ToString();
+            //添加备注挂件
+            NoteWidget lable = new NoteWidget();
+            lable.Text = ja[0]["label"].ToString();
+            root.Add(lable);
+            //添加子节点
+            DataToGraphic(ja[0], root);
+
             Global.GetDocumentForm().ActiveChart(1);
+
+        }
+        public void DataToGraphic(JToken jt, Topic root)
+        {
+            foreach( JToken token in jt["children"])
+            {
+                if (token["up"].ToString() == jt["user"].ToString())
+                {
+                    Topic children = new Topic();
+                    children.Text = token["user"].ToString();
+
+                    NoteWidget lable1 = new NoteWidget();
+                    lable1.Text = token["label"].ToString();
+                    children.Add(lable1);
+
+                    root.Children.Add(children);
+                    DataToGraphic(token, children);
+                }
+            }
         }
 
         void MenuViewDataChart_Click(object sender, EventArgs e)
