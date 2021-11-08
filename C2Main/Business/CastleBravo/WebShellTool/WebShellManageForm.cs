@@ -421,9 +421,12 @@ namespace C2.Business.CastleBravo.WebShellTool
                 string url = NetUtil.FormatUrl(task.Url);
                 string pass = task.Password;
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string payload = task.TrojanType == "phpEval" ? string.Format("=print({0});", seed) :
-                                 task.TrojanType == "aspEval" ? string.Format("=response.write({0})", seed) :
-                                 string.Empty;
+                string php = string.Format("=print({0});", seed);
+                string asp = string.Format("=response.write({0})", seed);
+                // 默认按php算
+                string payload = task.TrojanType == "phpEval" ? php :
+                                 task.TrojanType == "aspEval" ? asp :
+                                 php;
 
                 string result = WebClientEx.Post(url, pass + payload, 1500, Proxy);
                 return result.Contains(seed);
