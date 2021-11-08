@@ -1187,6 +1187,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap fraud {
+            get {
+                object obj = ResourceManager.GetObject("fraud", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Icon freq_icon {
@@ -3015,7 +3025,7 @@ namespace C2.Properties {
         /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;dictionary&gt;
-        ///	&lt;information id=&quot;zh-CHS&quot; name=&quot;Chinese Simplified&quot; nature_name=&quot;简体中文&quot; stable=&quot;true&quot; &gt;
+        ///    &lt;information id=&quot;zh-CHS&quot; name=&quot;Chinese Simplified&quot; nature_name=&quot;简体中文&quot; stable=&quot;true&quot; &gt;
         ///    &lt;author name=&quot;&quot; email=&quot;&quot;/&gt;
         ///  &lt;/information&gt;
         ///  &lt;compatibility&gt;
@@ -3026,12 +3036,11 @@ namespace C2.Properties {
         ///    &lt;culture id=&quot;zh-mo&quot;/&gt;
         ///    &lt;culture id=&quot;zh-sg&quot;/&gt;
         ///  &lt;/compatibility&gt;
-        ///	&lt;words&gt;		
-        ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
-        ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
-        ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///		&lt;item name=&quot;New&quot;&gt;新建&lt;/item&gt;
-        ///		&lt; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;words&gt;        
+        ///    &lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
+        ///    &lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
+        ///    &lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
+        ///    &lt;item name [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string zh_CHS {
             get {
