@@ -1887,6 +1887,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A1D03C7619214365A5CF9D914386151D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A2593A27B6AC4EB9A5FF27B22B7FC764"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2674,6 +2680,12 @@
         "Entry"
         {
         "MsmKey" = "8:_E5C0127111CF42E496585DE8A21CDC30"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E6469A0702F444ABA702764BDE74671A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -9006,6 +9018,26 @@
                 "Vital" = "11:TRUE"
                 }
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A1D03C7619214365A5CF9D914386151D"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_email_accountPass_C2_20211014.py.zip"
+            "TargetName" = "8:batchquery_email_accountPass_C2_20211014.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2593A27B6AC4EB9A5FF27B22B7FC764"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\通用PHP字典.txt"
@@ -11442,6 +11474,26 @@
             "TargetName" = "8:71_VPN.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E6469A0702F444ABA702764BDE74671A"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\Xise19_WAF_Config.ini"
+            "TargetName" = "8:Xise19_WAF_Config.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_DD466C3AE2AA4982AA0508BD0C3BA9AF"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"

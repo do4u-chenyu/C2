@@ -199,8 +199,10 @@ namespace C2.Business.WebsiteFeatureDetection
                 if (resDict.TryGetValue("operate_status", out string status))
                 {
                     resDict.TryGetValue("data", out string datas);
+                    resDict.TryGetValue("taskinfo", out string taskInfo);
                     result.Datas = datas;
                     result.RespMsg = status;
+                    result.TaskInfo = taskInfo;
                 }
                 else
                     result.RespMsg = "任务结果查询失败。";

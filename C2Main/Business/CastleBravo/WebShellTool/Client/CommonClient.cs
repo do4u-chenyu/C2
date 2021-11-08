@@ -39,7 +39,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             string spr = this.clientSetting.SPR;
 
             int splIndex = response.IndexOf(spl);
-            if (splIndex == -1) return string.Empty;
+            //if (splIndex == -1) return string.Empty;
+            if (splIndex == -1) return response;
 
             response = response.Substring(splIndex + spl.Length);
 

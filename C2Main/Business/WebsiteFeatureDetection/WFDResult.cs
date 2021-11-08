@@ -104,10 +104,12 @@ namespace C2.Business.WebsiteFeatureDetection
     {
         public string RespMsg { set; get; }
         public string Datas { set; get; }
+        public string TaskInfo { set; get; }
         public WFDAPIResult()
         {
             RespMsg = string.Empty;
             Datas = string.Empty;
+            TaskInfo = string.Empty;
         }
     }
 }

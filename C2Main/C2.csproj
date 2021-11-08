@@ -284,6 +284,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.Designer.cs">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\ProxySettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -314,9 +315,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.Designer.cs">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\WebClientEx.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellDetailsForm.cs">
       <SubType>Form</SubType>
@@ -3956,6 +3955,9 @@
     </None>
     <None Include="Resources\WebShellConfig\Cknife18_Bypass_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\Xise19_WAF_Config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\windows_themes.xml" />
     <Content Include="Resources\C1\datasource\pythonHelper1.png" />

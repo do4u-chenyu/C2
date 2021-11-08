@@ -13,7 +13,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class AddAllWebShellForm : StandardDialog
     {
-        int maxRow;
+        readonly int maxRow;
         //string pattern;
         string filePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<WebShellTaskConfig> Tasks;
@@ -22,7 +22,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             InitializeComponent();
             maxRow = 100000;
-            //pattern = @"^((http|https|)\://)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$";
             filePath = string.Empty;
             Tasks = new List<WebShellTaskConfig>();
         }
@@ -72,10 +71,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void AddTasksByLine(string line)
         {
             string[] contentArray = Regex.Split(line.Trim(new char[] { '\r', '\n' }), @"\s+");
-
-            //if (contentArray.Length < 2 || !new Regex(pattern).Match(contentArray[0]).Success)
-            //    return;
-            
+   
             if (contentArray.Length < 2 || contentArray[0].IsNullOrEmpty() || contentArray[1].IsNullOrEmpty())
                 return;
 
@@ -83,9 +79,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              string.Empty,
                                              contentArray[0],
                                              contentArray[1],
-                                             "phpEval",
+                                             WebShellTaskConfig.AutoDetectTrojanType(contentArray[0]),
                                              string.Empty,
-                                             ClientSetting.WSDict.Keys.First(),
+                                             WebShellTaskConfig.AutoDetectClientType(contentArray[0], ClientSetting.WSDict.Keys.First()),
                                              string.Empty));
         }
 

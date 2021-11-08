@@ -69,16 +69,19 @@ namespace C2.Utils
         public class ToolStripItemEnableGuarder : IDisposable
         {
             private ToolStripItem[] items;
-            public ToolStripItemEnableGuarder(ToolStripItem[] items)
+            public ToolStripItemEnableGuarder(ToolStripItem[] items, bool value = false)
             {
                 this.items = items;
                 foreach (ToolStripItem item in this.items)
-                    item.Enabled = false;
+                    item.Enabled = value;
             }
+
+            public ToolStripItemEnableGuarder(ToolStripItem item, bool value = false) 
+                : this(new ToolStripItem[] { item }, value) { }
             public void Dispose()
             {
                 foreach (ToolStripItem item in this.items)
-                    item.Enabled = true;
+                    item.Enabled = !item.Enabled;
             }
         }
     }

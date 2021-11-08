@@ -68,7 +68,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     return;
             }
 
-            UpdateTaskInfoByResp(result.RespMsg, result.Datas);
+            UpdateTaskInfoByResp(result);
             Global.GetWebsiteFeatureDetectionControl().Save();//状态刷新，修改本地持久化文件
             FillDGV();
         }
@@ -100,24 +100,31 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return results;
         }
         
-        private void UpdateTaskInfoByResp(string respMsg, string datas)
+        private void UpdateTaskInfoByResp(WFDAPIResult result)
         {
+            string respMsg = result.RespMsg;
+            string datas = result.Datas;
+            string taskInfo = result.TaskInfo;
+
             if (respMsg == "success")// && TaskInfo.Status != WFDTaskStatus.Done 考虑是否每次都刷新
             {
                 TaskInfo.Status = WFDTaskStatus.Done;
                 datas = datas.Replace("None", "''").Replace("True", "'True'").Replace("False", "'False'").Replace("''''","''");
                 TaskInfo.PreviewResults = DealData(TaskInfo.ResultFilePath, datas);
                 this.statusInfoLabel.Text = string.Empty;
+                this.taskInfoLabel.Text = string.Empty;
             }
             else if (respMsg == "wait") 
             {
                 TaskInfo.Status = WFDTaskStatus.Running;
                 this.statusInfoLabel.Text = "[ " + datas.Replace("\"","").Replace("{","").Replace("}","") + " ]";
+                this.taskInfoLabel.Text = "[ " + taskInfo.Replace("\'", "").Replace("{", "").Replace("}", "").Replace("ahead_task", "排队任务数").Replace("will_finished", "预计完成的时间") + " ]";
             }
             else if (respMsg == "fail")
             {
                 TaskInfo.Status = WFDTaskStatus.Failed;
                 this.statusInfoLabel.Text = string.Empty;
+                this.taskInfoLabel.Text = string.Empty;
             }
                 
             this.taskStatusLabel.Text = TaskInfo.Status.ToString();

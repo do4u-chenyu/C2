@@ -76,6 +76,7 @@
             this.urlTextBox.Size = new System.Drawing.Size(285, 21);
             this.urlTextBox.TabIndex = 10003;
             this.urlTextBox.Text = "http://";
+            this.urlTextBox.TextChanged += new System.EventHandler(this.UrlTextBox_TextChanged);
             // 
             // label3
             // 
@@ -108,7 +109,9 @@
             this.trojanTypeCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.trojanTypeCombox.FormattingEnabled = true;
             this.trojanTypeCombox.Items.AddRange(new object[] {
-            "phpEval"});
+            "自动判断",
+            "phpEval",
+            "aspEval"});
             this.trojanTypeCombox.Location = new System.Drawing.Point(96, 127);
             this.trojanTypeCombox.Name = "trojanTypeCombox";
             this.trojanTypeCombox.Size = new System.Drawing.Size(285, 20);
@@ -195,7 +198,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddWebShellForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WebShell Setting";
+            this.Text = "DD Setting";
             this.Controls.SetChildIndex(this.remarkTextBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.urlTextBox, 0);
