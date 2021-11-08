@@ -35,8 +35,6 @@ namespace C2.Dialogs.WidgetChart
         private void InitializeDropDown()
         {
             Options = new Dictionary<string, string[]>();
-            //this.comboBox1.SelectedIndex = 0;
-            //this.comboBox2.SelectedIndex = 0;
             this.bcpInfo = new BcpInfo(FilePath, FileEncoding, new char[] { FileSep });
             this.comboBox1.Items.AddRange(bcpInfo.ColumnArray);
             this.comboBox2.Items.AddRange(bcpInfo.ColumnArray);
@@ -82,10 +80,14 @@ namespace C2.Dialogs.WidgetChart
             if (k != 1)
             {
                 MessageBox.Show("输入的数据根节点个数不正确，请重新输入");
-                //return;
+                return false;
             }
-            returnList = Trans(dataTable, chartOptions, rootIndex);
-            return base.OnOKButtonClick();
+            else
+            {
+                returnList = Trans(dataTable, chartOptions, rootIndex);
+                return base.OnOKButtonClick();
+            }
+            
         }
 
         private string[] TransListStringToInt(List<string> t, List<int> listInt)
