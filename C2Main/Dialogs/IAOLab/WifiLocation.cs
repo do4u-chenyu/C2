@@ -12,6 +12,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using C2.Core;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -162,7 +163,6 @@ namespace C2.Dialogs.IAOLab
         {
             if (!string.IsNullOrEmpty(input) && progressBar1.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
-
                     if (progressBar1.Value % 100 == 0)
                     {
                         Thread.Sleep(500);
@@ -189,10 +189,10 @@ namespace C2.Dialogs.IAOLab
                             bankCardIR.Text = tmpResult.ToString();
                             break;
                         case "IPAddress":
-                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(input.Split('\t')[0]))) ;
+                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0]))) ;
                             IPStationIR.Text = tmpResult.ToString();
                             break;
-                }
+                    }
                    
                     progressBar1.Value += 1;
             }

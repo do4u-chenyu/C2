@@ -224,6 +224,10 @@ namespace C2.Core
         {
             return str.Split(new string[] { separator }, StringSplitOptions.None);
         }
+        public static string[] SplitWhitespace(this string str)
+        {
+            return str.Split(new string[] { "\t", " " }, StringSplitOptions.None);
+        }
 
         public static string[] SplitLine(this string str)
         {
