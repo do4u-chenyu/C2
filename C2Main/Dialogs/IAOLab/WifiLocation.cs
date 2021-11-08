@@ -126,8 +126,6 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "IP\t地址\n";
-                tmpResult.Append(firstLine);
                 foreach (string baseAddress in inputArray)
                 {
                     ShowResult(baseAddress, "IPAddress", tmpResult);
@@ -191,7 +189,7 @@ namespace C2.Dialogs.IAOLab
                             bankCardIR.Text = tmpResult.ToString();
                             break;
                         case "IPAddress":
-                            tmpResult.Append(IPAddress.GetInstance().GetIPAddress(input.Split('\t')[0]));
+                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(input.Split('\t')[0]))) ;
                             IPStationIR.Text = tmpResult.ToString();
                             break;
                 }
@@ -292,7 +290,6 @@ namespace C2.Dialogs.IAOLab
                         text = bankCardIR.Text;
                         break;
                     case "IPAddress":
-                        firstLine = "IP\t地址\r\n";
                         text = IPStationIR.Text;
                         break;
                 }

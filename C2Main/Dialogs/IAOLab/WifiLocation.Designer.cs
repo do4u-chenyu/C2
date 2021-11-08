@@ -356,9 +356,9 @@
             this.label11.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label11.Location = new System.Drawing.Point(6, 61);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(518, 19);
+            this.label11.Size = new System.Drawing.Size(355, 19);
             this.label11.TabIndex = 9;
-            this.label11.Text = "一行一个,任意空白符(TAB,空格)按列分割,IP必须为第一列.";
+            this.label11.Text = "一行一个,TAB按列分割,IP必须为第一列.";
             // 
             // label10
             // 

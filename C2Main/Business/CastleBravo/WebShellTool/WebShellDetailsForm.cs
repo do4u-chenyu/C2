@@ -100,15 +100,22 @@ namespace C2.Business.CastleBravo.WebShellTool
             for (int k = 1; k < lines.Length - 1; k++)//最后一行为\t 
             {
                 
-                    string[] data = lines[k].Split(new string[] { "\t|\t" }, StringSplitOptions.None);
-                    int index = dataGridView1.Rows.Add();
-                    for (int i = 0; i < data.Length; i++)
+                string[] data = lines[k].Split(new string[] { "\t|\t" }, StringSplitOptions.None);
+                int index = dataGridView1.Rows.Add();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    try
                     {
-                        if(i == data.Length-1)
-                            dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t|",string.Empty);
+                        if (i == data.Length - 1)
+                            dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t|", string.Empty);
                         else
                             dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t", string.Empty);
                     }
+                    catch 
+                    {
+                        continue;
+                    }
+                }
                
             }
         }

@@ -1,4 +1,5 @@
 ﻿using C2.Utils;
+using System.Text.RegularExpressions;
 
 namespace C2.IAOLab.IPAddress
 {
@@ -15,11 +16,14 @@ namespace C2.IAOLab.IPAddress
         {
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
                 return null;
+            //Regex reg3 = new Regex(@"^((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))$");
+            //var IPs = reg3.Matches(input);
+            //string IP = IPs[0].Value;
             string IP = input.Trim(' ');
             if (!NetUtil.IsIPAddress(IP))
-                return ("请正确输入IP号");
-            string result = NetUtil.IPQuery_WhoIs(IP);
-            return string.Format("{0}\t{1}\n",input,result);
+                return ("请正确输入IP号\n");
+            string result = NetUtil.IPQuery_ChunZhen(IP);
+            return string.Format("{0}\n",result);
         }
     }
 }
