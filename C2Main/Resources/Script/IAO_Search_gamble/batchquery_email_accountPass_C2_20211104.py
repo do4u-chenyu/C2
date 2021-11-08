@@ -22,12 +22,7 @@ class Email:
         self.endTime = endTime
         self.querycontent = []
 
-    def queryclient(self, keyWords):
-        batch = []
-        cont_flag = False
-        cont_end_flag = True
-        content = ''
-        end_item = '_QUERY_MATCHTERMS'
+    def queryclient(self, keyWords, model):
         cmd = [
             '/home/search/sbin/queryclient',
             '--server', '127.0.0.1',
@@ -36,10 +31,11 @@ class Email:
             '--start', self.startTime,
             '--end', self.endTime,
             '--contextlen', '1000000',
-            '--maxcount', '1000000',
-            '--dbfilter', '\'' + ' OR '.join(['"' + value.decode('utf-8').encode('GBK') + '"' + ' in _SUBJECT' for value in LOGIN_VALUE]) + '\''
+            '--maxcount', '1000000',         
         ]
-
+        dbfilter = ['--dbfilter', '\'' + ' OR '.join(['"' + value.decode('utf-8').encode('GBK') + '"' + ' in _SUBJECT' for value in LOGIN_VALUE]) + '\'']
+        if model == 'domain':
+            cmd = cmd + dbfilter
         querystring = ". /home/search/search_profile && {0} ".format(" ".join(cmd))
         pipe = Popen(querystring, shell=True, stdout=PIPE)
         print querystring
@@ -49,24 +45,31 @@ class Email:
                 MAINFILE=line.replace('_MAINFILE: ', '')
                 self.querycontent.append(MAINFILE)
         return self.querycontent
-        
-
-    def run_query(self):
-        KEY_WORDS = "donotreply_SG@godaddy.com OR support@namesilo.com OR orders@dynadot.com"
-        out_file = 'email_out.txt'
-
-        try:
-            LOGGER.info(
-                'QUERY_KEYS:{0}\nQUERYTIME:{1}_{2}'.format(KEY_WORDS, self.startTime,self.endTime))
-        except Exception, e:
-                LOGGER.info('QUERY_ERROR-{0}'.format(e))
-        mainfiles = self.queryclient(KEY_WORDS)
+    
+    def get_mainfile(self, mainfiles):
         with open(os.path.join(self.data_path, 'mainfile'), 'a+') as f:
             f.write('\n'.join(mainfiles))
         email = "if [ -s " + DATA_PATH[2:] + "/mainfile ]; then wget -P " + DATA_PATH[2:] + " -i " + DATA_PATH[2:] + "/mainfile; fi"
         rep = Popen(email, shell= True, stdout=PIPE)
         for line in rep.stdout:
-            print line 
+            print line
+
+    def run_query(self):
+        domain_keys = ["donotreply_SG@godaddy.com", "support@namesilo.com", "orders@dynadot.com"]
+        vpn_keys = ['noreply@cloudss.co', 'a7728051@gmail.com', "noreply@mg.greenss.co", "a7728051@gmail.com", "seeocloud@seoo.vip", "noreply@qiuyin.co", "hi@paoluz.net" "no-reply@linkhub.store", "speed_notice@qq.com", "support@suying666.pw", "leisu@mail.lei-su.link", "no-replay@mail.flyint.date"]
+        KEY_WORDS_DOMAIN = " OR ".join(domain_keys)
+        KEY_WORDS_VPN = " OR ".join(vpn_keys)
+
+        try:
+            LOGGER.info('QUERY_KEYS:{0}\nQUERYTIME:{1}_{2}'.format(KEY_WORDS_DOMAIN, self.startTime,self.endTime))
+            LOGGER.info('QUERY_KEYS:{0}\nQUERYTIME:{1}_{2}'.format(KEY_WORDS_VPN, self.startTime,self.endTime))
+        except Exception, e:
+            LOGGER.info('QUERY_ERROR-{0}'.format(e))
+        
+        domain_mainfiles = self.queryclient(KEY_WORDS_DOMAIN, 'domain') 
+        self.get_mainfile(domain_mainfiles)
+        vpn_mainfiles = self.queryclient(KEY_WORDS_VPN, 'vpn')
+        self.get_mainfile(vpn_mainfiles)
             
 # #日志文件打印
 def init_logger(logname, filename, logger_level=logging.INFO):
