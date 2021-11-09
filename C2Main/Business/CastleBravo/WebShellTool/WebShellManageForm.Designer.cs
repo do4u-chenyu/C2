@@ -96,6 +96,7 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.变种14构造Base64DecodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -295,9 +296,10 @@
             this.变种10ToolStripMenuItem,
             this.变种11LandGreyToolStripMenuItem,
             this.变种12无密码多语句ToolStripMenuItem,
-            this.变种13无结尾假变量ToolStripMenuItem});
+            this.变种13无结尾假变量ToolStripMenuItem,
+            this.变种14构造Base64DecodeToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
-            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
             this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
@@ -645,6 +647,14 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
+            // 变种14构造Base64DecodeToolStripMenuItem
+            // 
+            this.变种14构造Base64DecodeToolStripMenuItem.Name = "变种14构造Base64DecodeToolStripMenuItem";
+            this.变种14构造Base64DecodeToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.变种14构造Base64DecodeToolStripMenuItem.Text = "变种14_++构造Base64_Decode";
+            this.变种14构造Base64DecodeToolStripMenuItem.ToolTipText = "变种14|用++从一个无关字符串构造出base64_decode";
+            this.变种14构造Base64DecodeToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -739,5 +749,6 @@
         private System.Windows.Forms.ToolStripMenuItem refreshAllShellMenu;
         private System.Windows.Forms.ToolStripMenuItem refreshOtherMenu2;
         private System.Windows.Forms.ToolStripMenuItem secondRefreshMenu;
+        private System.Windows.Forms.ToolStripMenuItem 变种14构造Base64DecodeToolStripMenuItem;
     }
 }
