@@ -577,6 +577,30 @@ namespace C2.Core
             return Encoding.UTF8.GetString(bytes);
         }
 
+        public static string StringToHex(string code)
+        {
+            StringBuilder sb = new StringBuilder();
+            byte[] arrByte = Encoding.GetEncoding("UTF-8").GetBytes(code);
+            for (int i = 0; i < arrByte.Length; i++)
+            {
+                sb.Append(Convert.ToString(arrByte[i], 16));
+            }
+            return sb.ToString();
+        }
+
+        public static string HexToString(string code)
+        {
+            byte[] arrByte = new byte[code.Length / 2];
+            if (code.Length % 2 != 0)
+                code = code.Substring(0, code.Length - 1);
+
+            int index = 0;
+            for (int i = 0; i < code.Length; i += 2)
+                arrByte[index++] = Convert.ToByte(code.Substring(i, 2), 16);        //Convert.ToByte(string,16)把十六进制string转化成byte 
+
+            return Encoding.UTF8.GetString(arrByte);
+        }
+
         public static string SuperDecodeBase64(string code)
         {
             

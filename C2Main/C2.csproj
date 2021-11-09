@@ -284,6 +284,7 @@
     <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.Designer.cs">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\ProxySettingForm.cs">
       <SubType>Form</SubType>
@@ -3947,6 +3948,9 @@
     </None>
     <None Include="Resources\WebShellConfig\AntSword_2114_Config.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\WebShellConfig\ASP_Custom_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\WebShellConfig\Cknife11_EXE_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
