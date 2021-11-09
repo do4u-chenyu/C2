@@ -169,6 +169,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string Post(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)
         {
+            if (string.IsNullOrEmpty(payload))
+                return string.Empty;
+
             this.lastErrorMessage = string.Empty;
             try
             {

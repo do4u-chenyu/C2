@@ -577,6 +577,17 @@ namespace C2.Core
             return Encoding.UTF8.GetString(bytes);
         }
 
+        public static string StringToHex(string code)
+        {
+            StringBuilder sb = new StringBuilder();
+            byte[] arrByte = Encoding.GetEncoding("UTF-8").GetBytes(code);
+            for (int i = 0; i < arrByte.Length; i++)
+            {
+                sb.Append(Convert.ToString(arrByte[i], 16));
+            }
+            return sb.ToString();
+        }
+
         public static string SuperDecodeBase64(string code)
         {
             

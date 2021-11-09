@@ -16,6 +16,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return new AntSwordClient(password, clientSetting);
                 case "Xise19":
                     return new Xise19Client(password, clientSetting);
+                case "ASPCustom":
+                    return new ASPCustomClient(password, clientSetting);
                 default:
                     return new CommonClient(password, clientSetting);
             }
