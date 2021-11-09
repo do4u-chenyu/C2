@@ -29,7 +29,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             sb.AppendLine("定位D洞所在目录:")
               .AppendLine(payload)
-              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_INDEX)))
+              .AppendLine(string.Format("攻击段:{0}", ST.HexToString(clientSetting.PHP_INDEX)))
               .AppendLine();
 
             return payload;
@@ -44,7 +44,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             sb.AppendLine("遍历目录:")
               .AppendLine(payload)
-              .AppendLine(string.Format("攻击段:{0}", payload))
+              .AppendLine(string.Format("攻击段:{0}", ST.HexToString(clientSetting.PHP_READDICT)))
               .AppendLine(string.Format("查询路径:{0}", ST.SuperDecodeBase64(dict)))
               .AppendLine();
 
@@ -65,6 +65,22 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine();
 
             return payload;
+        }
+
+        public override string PHPShell(string shellEnv, string command)
+        {
+            string payload = "该功能暂不支持";
+            sb.AppendLine(payload);
+
+            return string.Empty;
+        }
+
+        public override string GetDatabaseInfo(string loginInfo, string database, string command)
+        {
+            string payload = "该功能暂不支持";
+            sb.AppendLine(payload);
+
+            return string.Empty;
         }
     }
 }
