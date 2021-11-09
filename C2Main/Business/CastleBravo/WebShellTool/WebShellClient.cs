@@ -93,11 +93,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
                 
 
-            string ret = PHPReadDict(root);
+            string ret = PHPReadDict(root).Replace("|","\t");
             foreach (string line in ret.Split('\n'))
             {
                 string[] info = line.Split('\t');
-                if (info.Length < 4 || info[0].IsNullOrEmpty() || info[0] == "./" || info[0] == "../")
+                if (info.Length < 4 || info[0].IsNullOrEmpty() || info[0] == "./" || info[0] == "../" || info[0] == "->")
                     continue;
 
                 children.Add(new WSFile(info[0].EndsWith("/") ? WebShellFileType.Directory : WebShellFileType.File,
@@ -118,6 +118,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             string[] result = client.ExtractResponse(Post(client.PHPIndex(), true, timeout)).Split('\t');
             if (result.Length >= 2)
                 return result.Take(2).ToList();
+            //if (result.Length == 1)
+            if(ClientSetting.WSDict.ContainsKey("Xise19.9版"))
+            {
+                String newResult = String.Join("", result).Replace("->|","");
+                String doubleResult = newResult.Substring(0, newResult.IndexOf("|"));
+                String[] sArray = doubleResult.Split(' ');
+                return sArray.ToList();
+            }
             else
                 return result.ToList();
         }
