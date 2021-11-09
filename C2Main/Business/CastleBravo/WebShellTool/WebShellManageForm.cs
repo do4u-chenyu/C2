@@ -57,6 +57,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.refreshAllShellMenu,
                 this.refreshOtherMenu2,
                 this.secondRefreshMenu,
+                this.checkAliveDDB,
                 this.addOneShellMenu,
                 this.trojanMenu
             };
@@ -548,6 +549,21 @@ namespace C2.Business.CastleBravo.WebShellTool
                 }
             }
             StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
+        }
+
+        private void 批量验活ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 境外站验活ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 二刷不活ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
