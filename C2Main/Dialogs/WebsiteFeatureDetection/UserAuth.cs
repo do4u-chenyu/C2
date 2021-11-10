@@ -21,11 +21,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         protected override bool OnOKButtonClick()
         {
             string respMsg = string.Empty;
-            if (!IsValidityUser() || !IsValidityOtp())
+            //if (!IsValidityUser() || !IsValidityOtp())
+            //    return false;
+            if (!IsValidityUser())
                 return false;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);
+                //respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);
+                respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName));
             }
 
             if (respMsg == "success")
