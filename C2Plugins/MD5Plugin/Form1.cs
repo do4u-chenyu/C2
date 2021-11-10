@@ -794,18 +794,24 @@ namespace MD5Plugin
 
         byte[] HexDecode_8(string str)
         {
-            str = str.Replace(splitType, string.Empty);
-
-            if (str.Length % 3 != 0)
-                str = str.Substring(0, str.Length - str.Length % 3);
-            byte[] arrByte = new byte[str.Length / 3];
-            int index = 0;
-            for (int i = 0; i < str.Length; i += 3)
+            if (splitType == "无分隔符")
             {
-                arrByte[index++] = Convert.ToByte(str.Substring(i, 3), 8); 
+                if (str.Length % 3 != 0)
+                    str = str.Substring(0, str.Length - str.Length % 3);
+                byte[] arrByte = new byte[str.Length / 3];
+                int index = 0;
+                for (int i = 0; i < str.Length; i += 3)
+                    arrByte[index++] = Convert.ToByte(str.Substring(i, 3), 8);
+                return arrByte;
             }
-
-            return arrByte;
+            else
+            {
+                string[] arr = str.Split(new string[] { splitType }, StringSplitOptions.RemoveEmptyEntries);
+                byte[] arrByte = new byte[arr.Length];
+                for (int i = 0; i < arr.Length; i++)
+                    arrByte[i] = Convert.ToByte(arr[i], 8);
+                return arrByte;
+            }
         }
 
         public void Base64StrToFile(string base64Str,string value)
