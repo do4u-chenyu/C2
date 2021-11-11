@@ -98,9 +98,9 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(351, 77);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(11, 11);
+            this.label3.Size = new System.Drawing.Size(66, 11);
             this.label3.TabIndex = 10008;
-            this.label3.Text = "*";
+            this.label3.Text = "(暂时不填）";
             // 
             // UserAuth
             // 

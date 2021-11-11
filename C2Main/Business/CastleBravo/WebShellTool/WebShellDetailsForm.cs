@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -165,9 +161,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (selectedFile.Type == WebShellFileType.File)
             {
                 string PageData = browserDicectory + "/" + selectedFile.FileName;
-                DetailsPageForm frm = new DetailsPageForm();
-                frm.richTextBox1.Text = webShell.DetailInfo(PageData);
-                frm.ShowDialog();
+                new DetailsPageForm(webShell.DetailInfo(PageData)).ShowDialog();
                 this.messageLog.Text = webShell.FetchLog();
             }
         }

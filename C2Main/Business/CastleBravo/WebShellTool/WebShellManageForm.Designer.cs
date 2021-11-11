@@ -71,9 +71,10 @@
             this.GodzillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripLabel();
-            this.refreshAllShellMenu = new System.Windows.Forms.ToolStripLabel();
-            this.refreshOtherMenu2 = new System.Windows.Forms.ToolStripLabel();
-            this.secondRefreshMenu = new System.Windows.Forms.ToolStripLabel();
+            this.checkAliveDDB = new System.Windows.Forms.ToolStripDropDownButton();
+            this.refreshAllShellMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshOtherMenu2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.secondRefreshMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
@@ -95,6 +96,7 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.变种14构造Base64DecodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -220,9 +222,7 @@
             this.trojanMenu,
             this.toolStripSeparator2,
             this.toolStripButton1,
-            this.refreshAllShellMenu,
-            this.refreshOtherMenu2,
-            this.secondRefreshMenu,
+            this.checkAliveDDB,
             this.refreshStopMenu,
             this.progressBar,
             this.progressMenu,
@@ -296,7 +296,8 @@
             this.变种10ToolStripMenuItem,
             this.变种11LandGreyToolStripMenuItem,
             this.变种12无密码多语句ToolStripMenuItem,
-            this.变种13无结尾假变量ToolStripMenuItem});
+            this.变种13无结尾假变量ToolStripMenuItem,
+            this.变种14构造Base64DecodeToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
             this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
@@ -409,7 +410,7 @@
             // behinderToolStripMenuItem
             // 
             this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
-            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.behinderToolStripMenuItem.Text = "三代冰蝎";
             this.behinderToolStripMenuItem.ToolTipText = "三代冰蝎配套Trojan|AES128加密";
             this.behinderToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -417,7 +418,7 @@
             // BypassToolStripMenuItem
             // 
             this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
-            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.BypassToolStripMenuItem.Text = "凯撒变种";
             this.BypassToolStripMenuItem.ToolTipText = "凯撒变种Trojan|凯撒加密Payload引导段";
             this.BypassToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -425,7 +426,7 @@
             // PHPEvalToolStripMenuItem
             // 
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
-            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.PHPEvalToolStripMenuItem.Text = "通用型PHPEVAL";
             this.PHPEvalToolStripMenuItem.ToolTipText = "PHP通用型一句话Trojan|最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -433,7 +434,7 @@
             // GodzillaToolStripMenuItem
             // 
             this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
-            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.GodzillaToolStripMenuItem.Text = "哥斯拉";
             this.GodzillaToolStripMenuItem.ToolTipText = "哥斯拉配套Trojan|与Godzilla配套的Trojan";
             this.GodzillaToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
@@ -451,28 +452,38 @@
             this.toolStripButton1.Size = new System.Drawing.Size(0, 22);
             this.toolStripButton1.Text = "dddd";
             // 
+            // checkAliveDDB
+            // 
+            this.checkAliveDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.checkAliveDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshAllShellMenu,
+            this.refreshOtherMenu2,
+            this.secondRefreshMenu});
+            this.checkAliveDDB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.checkAliveDDB.Image = ((System.Drawing.Image)(resources.GetObject("checkAliveDDB.Image")));
+            this.checkAliveDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.checkAliveDDB.Name = "checkAliveDDB";
+            this.checkAliveDDB.Size = new System.Drawing.Size(69, 22);
+            this.checkAliveDDB.Text = "验活功能";
+            // 
             // refreshAllShellMenu
             // 
-            this.refreshAllShellMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(56, 22);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(180, 22);
             this.refreshAllShellMenu.Text = "批量验活";
-            this.refreshAllShellMenu.ToolTipText = "print大法批量验证D洞存活";
             this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
-            this.refreshOtherMenu2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(68, 22);
+            this.refreshOtherMenu2.Size = new System.Drawing.Size(180, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
             this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // secondRefreshMenu
             // 
-            this.secondRefreshMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(56, 22);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(180, 22);
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
@@ -636,6 +647,14 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
+            // 变种14构造Base64DecodeToolStripMenuItem
+            // 
+            this.变种14构造Base64DecodeToolStripMenuItem.Name = "变种14构造Base64DecodeToolStripMenuItem";
+            this.变种14构造Base64DecodeToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.变种14构造Base64DecodeToolStripMenuItem.Text = "变种14_++构造Base64_Decode";
+            this.变种14构造Base64DecodeToolStripMenuItem.ToolTipText = "变种14|用++从一个无关字符串构造出base64_decode";
+            this.变种14构造Base64DecodeToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -702,7 +721,6 @@
         private System.Windows.Forms.ToolStripMenuItem RefreshAllStatusMenuItem;
         private System.Windows.Forms.ToolStripLabel addBatchShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripLabel refreshAllShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ClearAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SuscideMenuItem;
@@ -721,13 +739,16 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripLabel progressMenu;
         private System.Windows.Forms.ToolStripMenuItem refreshOtherMenu;
-        private System.Windows.Forms.ToolStripLabel refreshOtherMenu2;
-        private System.Windows.Forms.ToolStripLabel secondRefreshMenu;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel ItemCountSLabel;
         private System.Windows.Forms.ToolStripStatusLabel ProxyEnableSLabel;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         private System.Windows.Forms.ToolStripMenuItem 变种12无密码多语句ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 变种13无结尾假变量ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton checkAliveDDB;
+        private System.Windows.Forms.ToolStripMenuItem refreshAllShellMenu;
+        private System.Windows.Forms.ToolStripMenuItem refreshOtherMenu2;
+        private System.Windows.Forms.ToolStripMenuItem secondRefreshMenu;
+        private System.Windows.Forms.ToolStripMenuItem 变种14构造Base64DecodeToolStripMenuItem;
     }
 }

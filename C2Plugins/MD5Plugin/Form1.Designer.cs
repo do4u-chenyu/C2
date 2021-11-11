@@ -45,12 +45,12 @@
             this.sha256RadioButton = new System.Windows.Forms.RadioButton();
             this.sha512RadioButton = new System.Windows.Forms.RadioButton();
             this.ASE128RadioButton = new System.Windows.Forms.RadioButton();
+            this.NTLMRadioButton = new System.Windows.Forms.RadioButton();
             this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.splitComboBox = new System.Windows.Forms.ComboBox();
             this.radixComboBox = new System.Windows.Forms.ComboBox();
             this.labelEncryptionkey = new System.Windows.Forms.Label();
             this.textBoxEncryptionkey = new System.Windows.Forms.TextBox();
-            this.NTLMRadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // inputTextBox
@@ -231,6 +231,19 @@
             this.ASE128RadioButton.UseVisualStyleBackColor = true;
             this.ASE128RadioButton.CheckedChanged += new System.EventHandler(this.ASE128_RadioButton_CheckedChanged);
             // 
+            // NTLMRadioButton
+            // 
+            this.NTLMRadioButton.AutoSize = true;
+            this.NTLMRadioButton.Font = new System.Drawing.Font("宋体", 10F);
+            this.NTLMRadioButton.Location = new System.Drawing.Point(893, 13);
+            this.NTLMRadioButton.Name = "NTLMRadioButton";
+            this.NTLMRadioButton.Size = new System.Drawing.Size(53, 18);
+            this.NTLMRadioButton.TabIndex = 18;
+            this.NTLMRadioButton.Text = "NTLM";
+            this.toolTip1.SetToolTip(this.NTLMRadioButton, "使用sha512对字符串进行加密");
+            this.NTLMRadioButton.UseVisualStyleBackColor = true;
+            this.NTLMRadioButton.CheckedChanged += new System.EventHandler(this.NTLMRadioButton_CheckedChanged);
+            // 
             // encodingComboBox
             // 
             this.encodingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -257,6 +270,7 @@
             "#",
             "%",
             "/",
+            "\\",
             "0x"});
             this.splitComboBox.Location = new System.Drawing.Point(476, 383);
             this.splitComboBox.Name = "splitComboBox";
@@ -301,19 +315,6 @@
             this.textBoxEncryptionkey.Size = new System.Drawing.Size(75, 21);
             this.textBoxEncryptionkey.TabIndex = 17;
             this.textBoxEncryptionkey.Visible = false;
-            // 
-            // NTLMRadioButton
-            // 
-            this.NTLMRadioButton.AutoSize = true;
-            this.NTLMRadioButton.Font = new System.Drawing.Font("宋体", 10F);
-            this.NTLMRadioButton.Location = new System.Drawing.Point(893, 13);
-            this.NTLMRadioButton.Name = "NTLMRadioButton";
-            this.NTLMRadioButton.Size = new System.Drawing.Size(53, 18);
-            this.NTLMRadioButton.TabIndex = 18;
-            this.NTLMRadioButton.Text = "NTLM";
-            this.toolTip1.SetToolTip(this.NTLMRadioButton, "使用sha512对字符串进行加密");
-            this.NTLMRadioButton.UseVisualStyleBackColor = true;
-            this.NTLMRadioButton.CheckedChanged += new System.EventHandler(this.NTLMRadioButton_CheckedChanged);
             // 
             // Form1
             // 

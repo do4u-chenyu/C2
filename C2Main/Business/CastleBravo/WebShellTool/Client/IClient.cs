@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -11,6 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         string PHPReadDict(string dict);   // 带一个参数构造payload
         string PHPShell(string shellEnv, string command);   // 带二个参数构造payload
         string ExtractResponse(string response);
+        List<string> ParseCurrentPath(string data);
         Tuple<string,string> GetShellParams();
         //
         string Suscide();                     // 一键自毁
