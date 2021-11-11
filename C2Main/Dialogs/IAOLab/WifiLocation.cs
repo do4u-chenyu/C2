@@ -5,6 +5,7 @@ using C2.IAOLab.BaseAddress;
 using C2.IAOLab.IPAddress;
 using C2.IAOLab.WebEngine.Boss.Option;
 using C2.IAOLab.WifiMac;
+using C2.IAOLab.PhoneLocation;
 using C2.Utils;
 using System;
 using System.Configuration;
@@ -31,7 +32,7 @@ namespace C2.Dialogs.IAOLab
 
         public bool TabControlVisible { set { this.tabControl1.Visible = value; } }
         public string InputLable { set { this.inputLabel.Text = value; } }
-      
+
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
 
@@ -50,9 +51,13 @@ namespace C2.Dialogs.IAOLab
             {
                 fileType = "BaseAddress";
             }
-            else if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true) 
+            else if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true)
             {
                 fileType = "IPAddress";
+            }
+            else if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
+            {
+                fileType = "PhoneLocation";
             }
             return fileType;
         }
@@ -61,11 +66,11 @@ namespace C2.Dialogs.IAOLab
         private void Search_Click(object sender, EventArgs e)
         {
             StringBuilder tmpResult = new StringBuilder();
-            
+
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
 
-            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true) 
+            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
             {
                 string[] inputArray = this.wifiMacIR.Text.Split('\n');
                 progressBar1.Value = 0;
@@ -84,7 +89,7 @@ namespace C2.Dialogs.IAOLab
                 }
             }
 
-            if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true) 
+            if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true)
             {
                 string[] inputArray = this.baseStationIR.Text.Split('\n');
                 progressBar1.Value = 0;
@@ -137,8 +142,24 @@ namespace C2.Dialogs.IAOLab
                     }
                 }
             }
+            if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
+            {
+                string[] inputArray = this.PhoneLocationIR.Text.Split('\n');
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                foreach (string phoneNum in inputArray)
+                {
+                    ShowResult(phoneNum, "PhoneLocation", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        progressBar1.Value = 0;
+                    }
+                }
+            }
 
-            if (tabControl1.Visible == false) 
+            if (tabControl1.Visible == false)
             {
                 string[] inputArray = this.bankCardIR.Text.Split('\n');
                 progressBar1.Value = 0;
@@ -163,47 +184,50 @@ namespace C2.Dialogs.IAOLab
         {
             if (!string.IsNullOrEmpty(input) && progressBar1.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
-                    if (progressBar1.Value % 100 == 0)
-                    {
-                        Thread.Sleep(500);
-                    }
-                    switch (type)
-                    {
-                        case "baseStation":
-                            tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
-                            baseStationIR.Text = tmpResult.ToString();
-                            break;
+                if (progressBar1.Value % 100 == 0)
+                {
+                    Thread.Sleep(500);
+                }
+                switch (type)
+                {
+                    case "baseStation":
+                        tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
+                        baseStationIR.Text = tmpResult.ToString();
+                        break;
+                    case "baseAddress":
+                        if (input.Contains("地址"))
+                            input = String.Empty;
+                        tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
+                        baseAddressIR.Text = tmpResult.ToString();
+                        ; break;
+                    case "mac":
+                        tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
+                        wifiMacIR.Text = tmpResult.ToString();
+                        break;
+                    case "bankCard":
+                        tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
+                        bankCardIR.Text = tmpResult.ToString();
+                        break;
+                    case "IPAddress":
+                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0])));
+                        IPStationIR.Text = tmpResult.ToString();
+                        break;
+                    case "PhoneLocation":
+                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), PhoneLocation.GetInstance().GetPhoneLocation(CollectionExtensions.SplitWhitespace(input)[0])));
+                        PhoneLocationIR.Text = tmpResult.ToString();
+                        break;
+                }
 
-                        case "baseAddress":
-                            if (input.Contains("地址"))
-                                input = String.Empty;
-                            tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
-                            baseAddressIR.Text = tmpResult.ToString();
-;                            break;
-                        case "mac":
-                            tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
-                            wifiMacIR.Text = tmpResult.ToString();
-                            break;
-                        case "bankCard":
-                            tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
-                            bankCardIR.Text = tmpResult.ToString();
-                            break;
-                        case "IPAddress":
-                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0]))) ;
-                            IPStationIR.Text = tmpResult.ToString();
-                            break;
-                    }
-                   
-                    progressBar1.Value += 1;
+                progressBar1.Value += 1;
             }
         }
-            
-        
+
+
         private int GetRelLengthOfArry(string[] arry)
         {
             int relLength = 0;
-            foreach(string i in arry)
-            {   
+            foreach (string i in arry)
+            {
                 if (!string.IsNullOrEmpty(i.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
                     relLength++;
             }
@@ -227,7 +251,7 @@ namespace C2.Dialogs.IAOLab
             {
                 Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv"
             };
-            if (OpenFileDialog1.ShowDialog()==DialogResult.OK)
+            if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -248,6 +272,10 @@ namespace C2.Dialogs.IAOLab
                             baseStationIR.Text = sb.TrimEndN().ToString();
                         if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
                             baseAddressIR.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true)
+                            IPStationIR.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
+                            PhoneLocationIR.Text = sb.TrimEndN().ToString();
                         if (tabControl1.Visible == false)
                             bankCardIR.Text = sb.TrimEndN().ToString();
                     }
@@ -259,7 +287,7 @@ namespace C2.Dialogs.IAOLab
             }
         }
 
-        private void ExportData() 
+        private void ExportData()
         {
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Title = "请选择要导出的位置";
@@ -292,9 +320,13 @@ namespace C2.Dialogs.IAOLab
                     case "IPAddress":
                         text = IPStationIR.Text;
                         break;
+                    case "PhoneLocation":
+                        text = PhoneLocationIR.Text;
+                        break;
+
                 }
                 string path = saveDialog.FileName;
-                
+
                 try
                 {
                     using (StreamWriter fs = new StreamWriter(path))
@@ -331,10 +363,12 @@ namespace C2.Dialogs.IAOLab
 
         private void Export_Click(object sender, EventArgs e)
         {
-            if ((tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && wifiMacIR.Text == string.Empty) || 
-                (tabControl1.Visible == false && bankCardIR.Text == string.Empty) || 
+            if ((tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && wifiMacIR.Text == string.Empty) ||
+                (tabControl1.Visible == false && bankCardIR.Text == string.Empty) ||
                 (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true && baseAddressIR.Text == string.Empty) ||
-                (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true && baseStationIR.Text == string.Empty))
+                (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true && baseStationIR.Text == string.Empty) ||
+                (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true && IPStationIR.Text == string.Empty) ||
+                (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true && PhoneLocationIR.Text == string.Empty))
             {
                 MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

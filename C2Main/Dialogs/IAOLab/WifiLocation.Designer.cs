@@ -55,8 +55,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.PhoneLocationIR = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -373,8 +372,7 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.label13);
-            this.tabPage5.Controls.Add(this.richTextBox2);
+            this.tabPage5.Controls.Add(this.PhoneLocationIR);
             this.tabPage5.Controls.Add(this.label16);
             this.tabPage5.Controls.Add(this.label15);
             this.tabPage5.Controls.Add(this.label14);
@@ -386,29 +384,18 @@
             this.tabPage5.Text = "手机归属地查询";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // PhoneLocationIR
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("宋体", 11F);
-            this.label13.Location = new System.Drawing.Point(270, 192);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 19);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "施工中";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.BackColor = System.Drawing.Color.White;
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 100);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox2.Size = new System.Drawing.Size(587, 207);
-            this.richTextBox2.TabIndex = 12;
-            this.richTextBox2.Text = "";
-            this.richTextBox2.WordWrap = false;
+            this.PhoneLocationIR.BackColor = System.Drawing.Color.White;
+            this.PhoneLocationIR.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PhoneLocationIR.Location = new System.Drawing.Point(3, 100);
+            this.PhoneLocationIR.Margin = new System.Windows.Forms.Padding(2);
+            this.PhoneLocationIR.Name = "PhoneLocationIR";
+            this.PhoneLocationIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PhoneLocationIR.Size = new System.Drawing.Size(587, 207);
+            this.PhoneLocationIR.TabIndex = 12;
+            this.PhoneLocationIR.Text = "";
+            this.PhoneLocationIR.WordWrap = false;
             // 
             // label16
             // 
@@ -546,7 +533,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RichTextBox PhoneLocationIR;
     }
 }
