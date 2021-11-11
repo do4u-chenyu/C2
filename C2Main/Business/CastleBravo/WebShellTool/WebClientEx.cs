@@ -45,7 +45,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 bytes = WebClientEx.Create(timeout, proxy)
                                    .UploadData(url, "POST", bytes);
 
-            return Encoding.UTF8.GetString(bytes);
+            return Encoding.Default.GetString(bytes);
         }
     }
 }
