@@ -68,7 +68,10 @@ namespace C2.Utils
         {
             return Regex.IsMatch(url, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$");
         }
-
+        public static bool IsPhoneNum(string num) 
+        {
+            return Regex.IsMatch(num, @"^(\d{11})$");
+        }
         public static string FormatUrl(string url)
         {
             string str = url.ToLower().TrimStart();
