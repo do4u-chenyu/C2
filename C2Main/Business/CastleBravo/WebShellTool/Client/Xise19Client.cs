@@ -1,5 +1,7 @@
 ﻿using C2.Core;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -95,6 +97,20 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine();
 
             return payload;
+        }
+
+        public override List<string> ParseCurrentPath(string data)
+        {
+            string[] sArray = new string[] { };
+            try
+            {
+                string newResult = string.Join("", data).Replace("->|", "");
+                string doubleResult = newResult.Substring(0, newResult.IndexOf("|"));
+                sArray = doubleResult.Split(' ');
+            }
+            catch { }
+
+            return sArray.ToList();
         }
     }
 }

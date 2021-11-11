@@ -115,19 +115,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public List<string> PHPIndex(int timeout = Global.WebClientDefaultTimeout)
         {
-            string[] result = client.ExtractResponse(Post(client.PHPIndex(), true, timeout)).Split('\t');
-            if (result.Length >= 2)
-                return result.Take(2).ToList();
-            //if (result.Length == 1)
-            if(ClientSetting.WSDict.ContainsKey("Xise19.9版"))
-            {
-                String newResult = String.Join("", result).Replace("->|","");
-                String doubleResult = newResult.Substring(0, newResult.IndexOf("|"));
-                String[] sArray = doubleResult.Split(' ');
-                return sArray.ToList();
-            }
-            else
-                return result.ToList();
+            return client.ParseCurrentPath(client.ExtractResponse(Post(client.PHPIndex(), true, timeout)));
         }
 
         public string PHPReadDict(string dict)
