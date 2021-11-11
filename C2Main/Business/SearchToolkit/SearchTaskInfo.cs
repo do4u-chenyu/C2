@@ -45,7 +45,7 @@ namespace C2.SearchToolkit
             ["四方模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["秒播vps"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py",
-            ["购置境外网络资产模型"] = "batchquery_email_accountPass_C2_20211014_{0}.py",
+            ["购置境外网络资产模型"] = "batchquery_email_accountPass_C2_20211109_{0}.py",
             ["md5逆向"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
         };
