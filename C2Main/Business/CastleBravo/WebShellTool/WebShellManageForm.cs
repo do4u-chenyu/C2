@@ -555,5 +555,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
 
         }
+
+        private void WeakPasswdBlastingMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LocalSensitiveFileScanMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
