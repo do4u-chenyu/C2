@@ -44,7 +44,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             // 木马类型不允许修改, 支持修改没有意义
             trojanTypeCombox.Enabled = false;
-            databaseConfigTextBox.Text = task.DatabaseConfig;
+            databaseConfigTextBox.Text = task.SGInfoCollectionConfig;
             // 创建时间不需要修改
             return ShowDialog(task.CreateTime);
         }

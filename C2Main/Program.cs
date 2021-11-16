@@ -81,9 +81,9 @@ namespace C2
         static void Main(params string[] args)
         {
             //Regist();
-            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021111700000000") > 0)
+            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021121700000000") > 0)
             {
-                MessageBox.Show("产品可用时间截止到2021年11月17号");
+                MessageBox.Show("产品可用时间截止到2021年12月17号");
                 return;
             }
             #region

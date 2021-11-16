@@ -21,6 +21,13 @@ namespace MD5Plugin
         //Base64解密
         string outPath;
 
+        public string EncodingType { 
+            get 
+            { 
+                return encodingType; 
+            }
+            set => encodingType = value; }
+
         public Form1()
         {
             InitializeComponent();
@@ -62,7 +69,7 @@ namespace MD5Plugin
 
         public string GetPluginName()
         {
-            return "MD5加密";
+            return "加密解密";
         }
 
         public string GetPluginVersion()
@@ -156,7 +163,7 @@ namespace MD5Plugin
             encodeButton.Text = "编码 =>";
             decodeButton.Text = "<= 解码";
             decodeButton.Visible = true;
-            encodeButton.Visible = true;
+            encodeButton.Visible = true; 
             encodingComboBox.Visible = true;
             splitComboBox.Visible = true;
             radixComboBox.Visible = true;
@@ -285,7 +292,7 @@ namespace MD5Plugin
             }
             else
             {
-                byte[] bytes = Encoding.GetEncoding(encodingType).GetBytes(filePath);
+                byte[] bytes = GetEncodingBytes(filePath);
                 outputTextBox.Text = Convert.ToBase64String(bytes);
             }
         }
@@ -341,9 +348,9 @@ namespace MD5Plugin
             else
             {
                 StringBuilder sb = new StringBuilder();
-                byte[] arrByte = Encoding.GetEncoding(encodingType).GetBytes(str);
+                byte[] arrByte = GetEncodingBytes(str);
 
-                string sep = splitType == "无分隔符" ? "%" : splitType.Trim();
+                string sep = splitType == "无分隔符" ? string.Empty : splitType.Trim();
                 int radix = 16;
                 if (radixType == "十进制")
                     radix = 10;
@@ -356,6 +363,20 @@ namespace MD5Plugin
                 }
                 outputTextBox.Text = sb.ToString();
             }
+        }
+
+        private byte[] GetEncodingBytes(string str)
+        {
+            // 编码时不应该选择HEX, 如果选了默认为UTF-8
+            EncodingType = EncodingType == "HEX" ? "UTF-8" : EncodingType;
+            return Encoding.GetEncoding(EncodingType).GetBytes(str);
+        }
+
+        private string GetDecodingString(byte[] bytes)
+        {
+            if (EncodingType == "HEX")
+                return BitConverter.ToString(bytes).Replace("-", string.Empty);
+            return Encoding.GetEncoding(EncodingType).GetString(bytes);
         }
 
 
@@ -384,7 +405,7 @@ namespace MD5Plugin
                     byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
                     rijndaelCipher.IV = new byte[16];
                     ICryptoTransform transform = rijndaelCipher.CreateEncryptor();
-                    byte[] plainText = Encoding.GetEncoding(encodingType).GetBytes(EncryptStr);
+                    byte[] plainText = GetEncodingBytes(EncryptStr);
                     byte[] cipherBytes = transform.TransformFinalBlock(plainText, 0, plainText.Length);
                     outputTextBox.Text = Convert.ToBase64String(cipherBytes);
                 }
@@ -397,7 +418,7 @@ namespace MD5Plugin
 
         private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            encodingType = encodingComboBox.SelectedItem as string;
+            EncodingType = encodingComboBox.SelectedItem as string;
         }
 
         private void Split_SelectedIndexChanged(object sender, EventArgs e)
@@ -605,7 +626,7 @@ namespace MD5Plugin
                 else if (IsBase64Formatted(base64Str))
                 {
                     byte[] bytes = Convert.FromBase64String(base64Str);
-                    inputTextBox.Text = Encoding.GetEncoding(encodingType).GetString(bytes);
+                    inputTextBox.Text = GetDecodingString(bytes);
                 }
                 else
                 {
@@ -632,7 +653,7 @@ namespace MD5Plugin
             if (IsBase64Formatted(ExceptionBase64Str))
             {
                 byte[] bytes = Convert.FromBase64String(ExceptionBase64Str);
-                inputTextBox.Text = Encoding.GetEncoding(encodingType).GetString(bytes);
+                inputTextBox.Text = GetDecodingString(bytes);
                 return true;
             }
             return false;
@@ -728,8 +749,7 @@ namespace MD5Plugin
                         break;
                 }
 
-                inputTextBox.Text = encodingType == "GB2312" ? Encoding.Default.GetString(bytes) 
-                    : Encoding.UTF8.GetString(bytes);
+                inputTextBox.Text = GetDecodingString(bytes);
             }
             catch 
             {
@@ -756,7 +776,7 @@ namespace MD5Plugin
                 //rijndaelCipher.IV = ivBytes;
                 ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
                 byte[] plainText = transform.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
-                inputTextBox.Text = Encoding.GetEncoding(encodingType).GetString(plainText);
+                inputTextBox.Text = GetDecodingString(plainText);
             }
             catch (Exception ex)
             {
@@ -850,5 +870,7 @@ namespace MD5Plugin
         {
             SetDefaultEncrypFormat();
         }
+
+
     }
 }

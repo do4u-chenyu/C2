@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using C2.Business.IAOLab.PhoneLocation;
 using C2.Core;
 using Newtonsoft.Json;
@@ -43,7 +39,7 @@ namespace C2.IAOLab.PhoneLocation
             //内容类型
             request.ContentType = "application/x-www-form-urlencoded";
 
-            Stream writer = null;
+            Stream writer;
             try
             {
                 writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
@@ -82,7 +78,6 @@ namespace C2.IAOLab.PhoneLocation
                                         rt.phoneType,
                                         rt.city);
             return "查询失败";
-            
         }
     }
 }
