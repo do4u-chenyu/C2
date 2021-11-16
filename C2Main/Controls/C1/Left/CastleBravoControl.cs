@@ -1,4 +1,5 @@
 ﻿using C2.Business.CastleBravo;
+using C2.Business.CastleBravo.Binary;
 using C2.Business.CastleBravo.PwdGenerator;
 using C2.Business.CastleBravo.RobotsScan;
 using C2.Business.CastleBravo.WebScan;
@@ -11,6 +12,7 @@ using C2.Globalization;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -154,6 +156,11 @@ namespace C2.Controls.C1.Left
                         this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
                         break;
+                    case "Binary":
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
+                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BinaryHelpInfo);
+                        break;
+
                 }
             }
             private void InitButtonMenu()
@@ -204,6 +211,9 @@ namespace C2.Controls.C1.Left
                         break;
                     case "WebShell":
                         new WebShellManageForm().ShowDialog();
+                        break;
+                    case "Binary":
+                        new BinaryMainForm().ShowDialog();
                         break;
                 }
             }
@@ -321,6 +331,7 @@ namespace C2.Controls.C1.Left
         private void CastleBravoControl_Load(object sender, EventArgs e)
         {
             LoadCBPlugins();
+            ResizeCBLocation();
             //初次加载时加载本地文件内容到button
             LoadTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
         }
@@ -328,14 +339,24 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan", "WebShell"};
+            List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan", "WebShell", "Binary"};
             CBPlugins.ForEach(pname => this.AddCBPlugin(new CastleBravoPlugin(pname)));
+        }
+        private void ResizeCBLocation()
+        {
+            backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
+            backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
         }
 
         private void AddCBPlugin(CastleBravoPlugin plugin)
         {
-            plugin.Location = new System.Drawing.Point(20, this.titleLabel.Height + this.Controls.Find("BaseLeftInnerButton", false).Length * 40 + 10);
+            plugin.Location = new Point(20, ComputeSplitLineLocation());
             this.Controls.Add(plugin);
+        }
+
+        private int ComputeSplitLineLocation()
+        {
+            return this.titleLabel.Height + this.Controls.Find("BaseLeftInnerButton", false).Length * 40 + 10;
         }
 
         private void HelpInfoLable_Click(object sender, EventArgs e)
