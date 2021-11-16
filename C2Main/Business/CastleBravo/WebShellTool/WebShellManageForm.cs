@@ -67,7 +67,15 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.secondRefreshMenu,
                 this.checkAliveDDB,
                 this.addOneShellMenu,
-                this.trojanMenu
+                this.trojanMenu,
+                this.infoCollectionMenu,
+                this.passwdBlastingMenuItem,
+                this.sensitiveFileScanMenuItem,
+                this.infoCollectionMenu,
+                this.allTaskFileMenuItem,
+                this.aliveTaskFileMenuItem,
+                this.allTaskMysqlMenuItem,
+                this.allTaskMysqlMenuItem
             };
         }
 
