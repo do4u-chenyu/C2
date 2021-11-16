@@ -107,6 +107,9 @@ namespace C2.Utils
                 case "数据标准化":
                     type = ElementSubType.DataFormatOperator;
                     break;
+                case "数据预处理":
+                    type = ElementSubType.PreprocessingOperator;
+                    break;
                 default:
                     type = ElementSubType.Null;
                     break;

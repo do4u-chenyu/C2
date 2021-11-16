@@ -436,6 +436,9 @@ namespace C2.Controls.Move.Op
                 case "数据标准化":
                     new DataFormatOperatorView(this).ShowDialog();
                     break;
+                case "数据预处理":
+                    new PreprocessingOperatorView(this).ShowDialog();
+                    break;
                 default:
                     break;
             }

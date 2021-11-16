@@ -554,6 +554,7 @@
     <Compile Include="Business\Schedule\Cmd\KeywordOperatorCmd.cs" />
     <Compile Include="Business\Option\PythonInterpreterInfo.cs" />
     <Compile Include="Business\Option\PythonOPConfig.cs" />
+    <Compile Include="Business\Schedule\Cmd\PreprocessingOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\PythonOperatorCmd.cs" />
     <Compile Include="Business\SearchToolkit\SearchModelSettingsInfo.cs" />
     <Compile Include="Business\SearchToolkit\SearchTaskInfo.cs" />
@@ -675,6 +676,12 @@
     <Compile Include="Design\WaterMarkTypeConverter.cs" />
     <Compile Include="Dialogs\BastionDownloadProgressBar.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\PreprocessingOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\PreprocessingOperatorView.Designer.cs">
+      <DependentUpon>PreprocessingOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\CastleBravo\AddCBTask.cs">
       <SubType>Form</SubType>
@@ -2274,6 +2281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\MinOperatorView.resx">
       <DependentUpon>MinOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\PreprocessingOperatorView.resx">
+      <DependentUpon>PreprocessingOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorHelper.resx">
       <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
