@@ -37,7 +37,8 @@ namespace C2.Business.Model
         CustomOperator2, //自定义算子, 二元算子
         PythonOperator,  //Py算子
         DataFormatOperator, //数据标准化
-        KeywordOperator  //关键词过滤  
+        KeywordOperator,  //关键词过滤  
+        PreprocessingOperator  //数据预处理  
     }
     public enum ElementStatus
     {

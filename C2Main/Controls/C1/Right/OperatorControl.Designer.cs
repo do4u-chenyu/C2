@@ -64,6 +64,8 @@
             this.leftPanelOpSort = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpFreq = new C2.Controls.Common.NoFocusButton();
             this.leftPanelOpAvg = new C2.Controls.Common.NoFocusButton();
+            this.preprocessingOPButton = new C2.Controls.Common.NoFocusButton();
+            this.preprocessingOpPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).BeginInit();
@@ -81,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.custom2OpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pythonOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.custom1OpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.preprocessingOpPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // relateOpPictureBox
@@ -591,6 +594,35 @@
             this.leftPanelOpAvg.UseVisualStyleBackColor = false;
             this.leftPanelOpAvg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
+            // preprocessingOPButton
+            // 
+            this.preprocessingOPButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.preprocessingOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.preprocessingOPButton.FlatAppearance.BorderSize = 0;
+            this.preprocessingOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.preprocessingOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.preprocessingOPButton.Location = new System.Drawing.Point(129, 285);
+            this.preprocessingOPButton.Name = "preprocessingOPButton";
+            this.preprocessingOPButton.Size = new System.Drawing.Size(88, 29);
+            this.preprocessingOPButton.TabIndex = 43;
+            this.preprocessingOPButton.TabStop = false;
+            this.preprocessingOPButton.Text = "数据预处理";
+            this.preprocessingOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.preprocessingOPButton.UseMnemonic = false;
+            this.preprocessingOPButton.UseVisualStyleBackColor = false;
+            this.preprocessingOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // preprocessingOpPictureBox
+            // 
+            this.preprocessingOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.preprocessingOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.preprocessingOpPictureBox.Location = new System.Drawing.Point(107, 289);
+            this.preprocessingOpPictureBox.Name = "preprocessingOpPictureBox";
+            this.preprocessingOpPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.preprocessingOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.preprocessingOpPictureBox.TabIndex = 42;
+            this.preprocessingOpPictureBox.TabStop = false;
+            // 
             // OperatorControl
             // 
             this.AllowDrop = true;
@@ -598,6 +630,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Controls.Add(this.preprocessingOPButton);
+            this.Controls.Add(this.preprocessingOpPictureBox);
             this.Controls.Add(this.leftPanelOpRelate);
             this.Controls.Add(this.pythonOPButton);
             this.Controls.Add(this.customOPButton1);
@@ -654,6 +688,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.custom2OpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pythonOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.custom1OpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.preprocessingOpPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -696,5 +731,7 @@
         private System.Windows.Forms.PictureBox pythonOpPictureBox;
         private Common.NoFocusButton customOPButton1;
         private System.Windows.Forms.PictureBox custom1OpPictureBox;
+        private Common.NoFocusButton preprocessingOPButton;
+        private System.Windows.Forms.PictureBox preprocessingOpPictureBox;
     }
 }

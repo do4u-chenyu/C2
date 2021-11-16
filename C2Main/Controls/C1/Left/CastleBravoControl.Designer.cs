@@ -38,12 +38,13 @@
             // 
             // backPanel
             // 
-            this.backPanel.Location = new System.Drawing.Point(3, 239);
-            this.backPanel.Size = new System.Drawing.Size(179, 417);
+            this.backPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.backPanel.Location = new System.Drawing.Point(3, 258);
+            this.backPanel.Size = new System.Drawing.Size(179, 330);
             // 
             // manageButtonPanel
             // 
-            this.manageButtonPanel.Size = new System.Drawing.Size(177, 383);
+            this.manageButtonPanel.Size = new System.Drawing.Size(177, 296);
             // 
             // helpInfoLable
             // 

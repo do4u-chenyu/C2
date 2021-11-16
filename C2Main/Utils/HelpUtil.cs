@@ -94,6 +94,7 @@ namespace C2.Utils
         public static string WebScanHelpInfo = "Web目录素描，敏感文件素描和前后台入口素描";
         public static string RobotsScanHelpInfo = "对目标网站的几个通用特征进行素描";
         public static string WebShellHelpInfo = "D洞工具集";
+        public static string BinaryHelpInfo = "二进制逆向、分析和解密专项";
 
 
 

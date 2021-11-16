@@ -385,6 +385,7 @@ namespace C2.Business.Schedule
                         case ElementSubType.PythonOperator: cmds = (new PythonOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.DataFormatOperator: cmds = (new DataFormatOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.KeywordOperator: cmds = (new KeywordOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.PreprocessingOperator: cmds = (new PreprocessingOperatorCmd(triple)).GenCmd(); break;
                     }
                     break;
                 }
