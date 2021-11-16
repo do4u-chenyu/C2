@@ -155,7 +155,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.TrojanType);
             lvi.SubItems.Add(config.Status);
             lvi.SubItems.Add(config.ClientVersion);
-            lvi.SubItems.Add(config.DatabaseConfig);
+            lvi.SubItems.Add(config.SGInfoCollectionConfig);
             lvi.SubItems.Add(config.IP);
             lvi.SubItems.Add(config.Country);
             lvi.SubItems.Add(config.Country2);
@@ -203,7 +203,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[4].Text = cur.TrojanType;     // 木马类型
             LV.SelectedItems[0].SubItems[5].Text = cur.Status;         // 木马状态
             LV.SelectedItems[0].SubItems[6].Text = cur.ClientVersion;  // 客户端版本
-            LV.SelectedItems[0].SubItems[7].Text = cur.DatabaseConfig; // 数据库配置
+            LV.SelectedItems[0].SubItems[7].Text = cur.SGInfoCollectionConfig; // 数据库配置
             LV.SelectedItems[0].SubItems[8].Text = cur.IP;             // 目标IP
             LV.SelectedItems[0].SubItems[9].Text = cur.Country;        // 归属地
             LV.SelectedItems[0].SubItems[10].Text = cur.Country2;      // 归属地
@@ -469,19 +469,19 @@ namespace C2.Business.CastleBravo.WebShellTool
                 switch (InfoCollectionType)
                 {
                     case InfoType.Mysql:
-                        task.DatabaseConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.mysqlPayload), 1500, Proxy);
+                        task.SGInfoCollectionConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.mysqlPayload), 1500, Proxy);
                         return true;
                     case InfoType.SensitiveFile:
-                        task.DatabaseConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.localFilePayload), 1500, Proxy);
+                        task.SGInfoCollectionConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.localFilePayload), 1500, Proxy);
                         return true;
                     default:
-                        task.DatabaseConfig = string.Empty;
+                        task.SGInfoCollectionConfig = string.Empty;
                         break;
                 }
             }
             catch (Exception ex)
             {
-                task.DatabaseConfig = ex.Message;
+                task.SGInfoCollectionConfig = ex.Message;
             }
             return isSuccess;
 
@@ -644,7 +644,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {
                     this.NumberOfsuccessful++;
                 }
-                lvi.SubItems[7].Text = task.DatabaseConfig;
+                lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
                 lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
                 UpdateProgress();
                 CheckSavePoint(); // 5分钟保存一次
