@@ -601,7 +601,7 @@ namespace MD5Plugin
             pairs.Add("UEsDBA", "zip");
             pairs.Add("UmFyIR", "rar");
             pairs.Add("N3q8rycc", "7z");
-            pairs.Add("H4sIC", "gz");
+            pairs.Add("H4sIC", "gz");     // 1F8B08
 
             // base64解码前先进行url解码,反复3次
             // HttpUtility里的urldecode方法会把+号变成空格, 这个不是标准解法, 采用Uri.UnescapeDataString代替
@@ -618,9 +618,8 @@ namespace MD5Plugin
                 {
                     string value;
                     pairs.TryGetValue(key, out value);
-                    //outPath = string.Format(TryGetSysTempDir() + "{0:D4}{1:D2}{2:D2}{3:D2}{4:D2}{5:D2}.{6:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, value);
+               
                     Base64StrToFile(base64Str,value);
-                    //inputTextBox.Text = outputTextBox.Text != string.Empty ? "文件解析地址为:" + outPath : string.Empty;
                     break;
                 }
                 else if (IsBase64Formatted(base64Str))
