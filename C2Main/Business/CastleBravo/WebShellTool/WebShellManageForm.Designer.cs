@@ -100,6 +100,11 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.allTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoCollectionSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allTaskFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveTaskFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -303,7 +308,7 @@
             this.变种13无结尾假变量ToolStripMenuItem,
             this.变种14构造Base64DecodeToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
-            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
             this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
@@ -422,7 +427,7 @@
             // behinderToolStripMenuItem
             // 
             this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
-            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.behinderToolStripMenuItem.Text = "三代冰蝎";
             this.behinderToolStripMenuItem.ToolTipText = "三代冰蝎配套Trojan|AES128加密";
             this.behinderToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -430,7 +435,7 @@
             // BypassToolStripMenuItem
             // 
             this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
-            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.BypassToolStripMenuItem.Text = "凯撒变种";
             this.BypassToolStripMenuItem.ToolTipText = "凯撒变种Trojan|凯撒加密Payload引导段";
             this.BypassToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -438,7 +443,7 @@
             // PHPEvalToolStripMenuItem
             // 
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
-            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PHPEvalToolStripMenuItem.Text = "通用型PHPEVAL";
             this.PHPEvalToolStripMenuItem.ToolTipText = "PHP通用型一句话Trojan|最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -446,7 +451,7 @@
             // GodzillaToolStripMenuItem
             // 
             this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
-            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.GodzillaToolStripMenuItem.Text = "哥斯拉";
             this.GodzillaToolStripMenuItem.ToolTipText = "哥斯拉配套Trojan|与Godzilla配套的Trojan";
             this.GodzillaToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
@@ -481,21 +486,21 @@
             // refreshAllShellMenu
             // 
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(136, 22);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(180, 22);
             this.refreshAllShellMenu.Text = "批量验活";
             this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(136, 22);
+            this.refreshOtherMenu2.Size = new System.Drawing.Size(180, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
             this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // secondRefreshMenu
             // 
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(136, 22);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(180, 22);
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
@@ -536,15 +541,19 @@
             // 
             this.infoCollectionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.passwdBlastingMenuItem,
-            this.sensitiveFileScanMenuItem});
+            this.sensitiveFileScanMenuItem,
+            this.infoCollectionSetMenuItem});
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(97, 22);
-            this.infoCollectionMenu.Text = "后SG信息收集";
+            this.infoCollectionMenu.Size = new System.Drawing.Size(81, 22);
+            this.infoCollectionMenu.Text = "后信息收集";
             // 
             // passwdBlastingMenuItem
             // 
+            this.passwdBlastingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allTaskMysqlMenuItem,
+            this.aliveTaskMysqlMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
             this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwdBlastingMenuItem.Text = "mysql K令";
@@ -552,6 +561,9 @@
             // 
             // sensitiveFileScanMenuItem
             // 
+            this.sensitiveFileScanMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allTaskFileMenuItem,
+            this.aliveTaskFileMenuItem});
             this.sensitiveFileScanMenuItem.Name = "sensitiveFileScanMenuItem";
             this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sensitiveFileScanMenuItem.Text = "文件素描";
@@ -684,6 +696,37 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
+            // allTaskMysqlMenuItem
+            // 
+            this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskMysqlMenuItem.Text = "全任务处理";
+            this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.批量ToolStripMenuItem_Click);
+            // 
+            // aliveTaskMysqlMenuItem
+            // 
+            this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskMysqlMenuItem.Text = "验活目标处理";
+            // 
+            // infoCollectionSetMenuItem
+            // 
+            this.infoCollectionSetMenuItem.Name = "infoCollectionSetMenuItem";
+            this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infoCollectionSetMenuItem.Text = "设置";
+            // 
+            // allTaskFileMenuItem
+            // 
+            this.allTaskFileMenuItem.Name = "allTaskFileMenuItem";
+            this.allTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskFileMenuItem.Text = "全任务处理";
+            // 
+            // aliveTaskFileMenuItem
+            // 
+            this.aliveTaskFileMenuItem.Name = "aliveTaskFileMenuItem";
+            this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskFileMenuItem.Text = "验活任务处理";
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -782,5 +825,10 @@
         private System.Windows.Forms.ToolStripDropDownButton infoCollectionMenu;
         private System.Windows.Forms.ToolStripMenuItem passwdBlastingMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sensitiveFileScanMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allTaskMysqlMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aliveTaskMysqlMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infoCollectionSetMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allTaskFileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aliveTaskFileMenuItem;
     }
 }

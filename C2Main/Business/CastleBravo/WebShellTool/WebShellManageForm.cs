@@ -651,5 +651,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
+        private void 批量ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
