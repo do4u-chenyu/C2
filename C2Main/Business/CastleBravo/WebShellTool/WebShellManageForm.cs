@@ -611,11 +611,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
         }
 
-        private void 变种14构造Base64DecodeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void WeakPasswdBlastingMenuItem_Click(object sender, EventArgs e)
         {
             this.InfoCollectionType = InfoType.Mysql;

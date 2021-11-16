@@ -251,7 +251,8 @@
             this.encodingComboBox.FormattingEnabled = true;
             this.encodingComboBox.Items.AddRange(new object[] {
             "UTF-8",
-            "GB2312"});
+            "GB2312",
+            "HEX"});
             this.encodingComboBox.Location = new System.Drawing.Point(476, 289);
             this.encodingComboBox.Name = "encodingComboBox";
             this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
