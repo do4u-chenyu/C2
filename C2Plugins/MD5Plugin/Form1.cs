@@ -69,7 +69,7 @@ namespace MD5Plugin
 
         public string GetPluginName()
         {
-            return "MD5加密";
+            return "加密解密";
         }
 
         public string GetPluginVersion()
