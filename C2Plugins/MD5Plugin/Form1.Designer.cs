@@ -350,7 +350,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MD5加密";
+            this.Text = "加密解密";
             this.ResumeLayout(false);
             this.PerformLayout();
 
