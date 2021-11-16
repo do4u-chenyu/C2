@@ -230,6 +230,7 @@
     <item name="Key_Enter">回车键</item>
     <item name="Key_Escape">Esc</item>
     <item name="Base Line">基准线</item>
+    <item name="Binary">二进制逆向</item>
     <item name="Ellipse">椭圆形</item>
     <item name="Rectangle">矩形</item>
     <item name="Previous Tab">上一个标签页</item>

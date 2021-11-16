@@ -157,7 +157,7 @@ namespace C2.Controls.C1.Left
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
                         break;
                     case "Binary":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
+                        this.leftPictureBox.Image = global::C2.Properties.Resources.二进制;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BinaryHelpInfo);
                         break;
 

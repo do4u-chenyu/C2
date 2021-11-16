@@ -2954,6 +2954,7 @@
     <None Include="Resources\Images\chain_small.png" />
     <None Include="Resources\Images\chart.png" />
     <None Include="Resources\Images\check_update.png" />
+    <None Include="Resources\Images\binary_system.png" />
     <Content Include="Resources\Images\CardRecognition.png" />
     <Content Include="Resources\Images\chevron.png" />
     <None Include="Resources\Images\close.png" />
