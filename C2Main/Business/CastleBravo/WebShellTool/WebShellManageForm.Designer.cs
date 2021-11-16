@@ -540,8 +540,8 @@
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(105, 22);
-            this.infoCollectionMenu.Text = "后渗透信息收集";
+            this.infoCollectionMenu.Size = new System.Drawing.Size(97, 22);
+            this.infoCollectionMenu.Text = "后SG信息收集";
             // 
             // passwdBlastingMenuItem
             // 
@@ -554,7 +554,7 @@
             // 
             this.sensitiveFileScanMenuItem.Name = "sensitiveFileScanMenuItem";
             this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.sensitiveFileScanMenuItem.Text = "本地敏感文件扫描";
+            this.sensitiveFileScanMenuItem.Text = "本地敏感文件素描";
             this.sensitiveFileScanMenuItem.Click += new System.EventHandler(this.LocalSensitiveFileScanMenuItem_Click);
             // 
             // proxySettingMenu
