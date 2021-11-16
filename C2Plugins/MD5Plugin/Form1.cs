@@ -586,13 +586,12 @@ namespace MD5Plugin
         public void originOutput()
         {
             inputTextBox.Text = string.Empty;
-            outputTextBox.Text = string.Empty;
-            MessageBox.Show("请输入解码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            outputTextBox.Text = "请输入解码内容";
+            //MessageBox.Show("请输入解码内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public void DecodeBase64(string base64Str)
         {
-            //DateTime dateTime = DateTime.Now;
             Dictionary<string, string> pairs = new Dictionary<string, string>();
             pairs.Add("/9j/", "jpg");
             pairs.Add("iVBORw", "png");
@@ -602,6 +601,7 @@ namespace MD5Plugin
             pairs.Add("UEsDBA", "zip");
             pairs.Add("UmFyIR", "rar");
             pairs.Add("N3q8rycc", "7z");
+            pairs.Add("H4sIC", "gz");
 
             // base64解码前先进行url解码,反复3次
             // HttpUtility里的urldecode方法会把+号变成空格, 这个不是标准解法, 采用Uri.UnescapeDataString代替
@@ -641,7 +641,7 @@ namespace MD5Plugin
                     if (i == baseLengh)
                     {
                         inputTextBox.Text = string.Empty;
-                        MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z/.gz文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }  
                 }
@@ -850,7 +850,7 @@ namespace MD5Plugin
             }
             catch 
             {
-                MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z/.gz文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public static bool IsBase64Formatted(string input)
@@ -870,7 +870,5 @@ namespace MD5Plugin
         {
             SetDefaultEncrypFormat();
         }
-
-
     }
 }
