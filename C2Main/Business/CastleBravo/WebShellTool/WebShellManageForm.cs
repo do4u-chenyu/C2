@@ -71,11 +71,10 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
                 this.sensitiveFileScanMenuItem,
-                this.infoCollectionMenu,
                 this.allTaskFileMenuItem,
                 this.aliveTaskFileMenuItem,
                 this.allTaskMysqlMenuItem,
-                this.allTaskMysqlMenuItem
+                this.aliveTaskMysqlMenuItem
             };
         }
 
@@ -419,8 +418,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             // 代理慢, timeout富裕一些
             timeout = Proxy == ProxySetting.Empty ? timeout : timeout * 2;
-
-            for (int i = 0; i < timeout; i++)
+            int start = Environment.TickCount;
+            while (Math.Abs(Environment.TickCount - start) < timeout * 1000)
             {
                 Application.DoEvents();
                 if (t.Wait(1000))
@@ -477,10 +476,10 @@ namespace C2.Business.CastleBravo.WebShellTool
                 switch (InfoCollectionType)
                 {
                     case InfoType.Mysql:
-                        task.SGInfoCollectionConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.mysqlPayload), 1500, Proxy);
+                        task.SGInfoCollectionConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.mysqlPayload), 90000, Proxy);
                         return true;
                     case InfoType.SensitiveFile:
-                        task.SGInfoCollectionConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.localFilePayload), 1500, Proxy);
+                        task.SGInfoCollectionConfig = WebClientEx.Post(url, string.Format("{0}={1};", password, Global.localFilePayload), 90000, Proxy);
                         return true;
                     default:
                         task.SGInfoCollectionConfig = string.Empty;
@@ -611,52 +610,73 @@ namespace C2.Business.CastleBravo.WebShellTool
             StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
         }
 
-        private void WeakPasswdBlastingMenuItem_Click(object sender, EventArgs e)
-        {
-            this.InfoCollectionType = InfoType.Mysql;
-            InfoCollection_RefreshAllTaskStatus();
-        }
-
-        private void LocalSensitiveFileScanMenuItem_Click(object sender, EventArgs e)
-        {
-            this.InfoCollectionType = InfoType.SensitiveFile;
-            InfoCollection_RefreshAllTaskStatus();
-        }
-        private void InfoCollection_RefreshAllTaskStatus()
+        private void InfoCollection_RefreshAllTaskStatus(bool checkAlive)
         {   // 刷新前先强制清空
             ResetProgressMenu();
-
             foreach (ListViewItem lvi in LV.Items)
-                lvi.SubItems[7].Text = string.Empty; ;
+                lvi.SubItems[7].Text = string.Empty;
 
-            RefreshScanResult();
+            RefreshScanResult(checkAlive);
             EndRefresh();
             this.InfoCollectionType = InfoType.Empty;
         }
-        private void RefreshScanResult()
+        private void RefreshScanResult(bool checkAlive)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (refreshNeedStop)
-                    break;
-                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-                if (PostPrintTimeout(task, 90, false))
+                foreach (ListViewItem lvi in LV.Items)
                 {
-                    this.NumberOfsuccessful++;
+
+                    if (refreshNeedStop)
+                        break;
+                    if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
+                    {
+                        lvi.SubItems[7].Text = "跳";
+                        UpdateProgress();
+                        CheckSavePoint(); // 5分钟保存一次
+                        continue;
+                    }
+
+                    WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+                    using (GuarderUtil.WaitCursor)
+                    {
+                        if (PostPrintTimeout(task, 90, false))
+                        {
+                            this.NumberOfsuccessful++;
+                        }
+
+                    }
+                    lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
+                    lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
                 }
-                lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
-                lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
         }
 
-        private void 批量ToolStripMenuItem_Click(object sender, EventArgs e)
+           
+        private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.InfoCollectionType = InfoType.Mysql;
+            InfoCollection_RefreshAllTaskStatus(false);
         }
+        private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
+        {
+            this.InfoCollectionType = InfoType.Mysql;
+            InfoCollection_RefreshAllTaskStatus(true);
+        }
+        private void AliveTaskFileMenuItem_Click(object sender, EventArgs e)
+        {
+            this.InfoCollectionType = InfoType.SensitiveFile;
+            InfoCollection_RefreshAllTaskStatus(true);
+        }
+
+        private void AllTaskFileMenuItem_Click(object sender, EventArgs e)
+        {
+            this.InfoCollectionType = InfoType.SensitiveFile;
+            InfoCollection_RefreshAllTaskStatus(false);
+        }
+
+     
     }
 }
