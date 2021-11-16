@@ -3143,6 +3143,7 @@
     <Content Include="Resources\Images\webkit.png" />
     <Content Include="Resources\Images\WebScan.png" />
     <None Include="Resources\Images\webshell.png" />
+    <None Include="Resources\Images\WidgetImage\organizationChart.png" />
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
