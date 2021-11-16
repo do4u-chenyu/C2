@@ -504,7 +504,7 @@
             this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.refreshStopMenu.Name = "refreshStopMenu";
             this.refreshStopMenu.Size = new System.Drawing.Size(56, 22);
-            this.refreshStopMenu.Text = "停止验活";
+            this.refreshStopMenu.Text = "停止任务";
             this.refreshStopMenu.Click += new System.EventHandler(this.RefreshStopMenu_Click);
             // 
             // progressBar
