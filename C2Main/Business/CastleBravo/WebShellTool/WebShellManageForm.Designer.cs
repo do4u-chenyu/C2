@@ -106,6 +106,8 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.素描选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.素描选定项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -554,23 +556,26 @@
             // 
             this.passwdBlastingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allTaskMysqlMenuItem,
-            this.aliveTaskMysqlMenuItem});
+            this.aliveTaskMysqlMenuItem,
+            this.素描选定项ToolStripMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.passwdBlastingMenuItem.Text = "mysql K令";
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.passwdBlastingMenuItem.Text = "Mysql管理员K令素描";
             // 
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.allTaskMysqlMenuItem.Text = "全任务处理";
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskMysqlMenuItem.Text = "素描所有项";
+
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.aliveTaskMysqlMenuItem.Text = "验活目标处理";
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskMysqlMenuItem.Text = "素描验活项";
+
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
             // sensitiveFileScanMenuItem
@@ -578,23 +583,27 @@
             this.sensitiveFileScanMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allTaskFileMenuItem,
             this.aliveTaskFileMenuItem,
-            this.查看结果ToolStripMenuItem});
+            this.素描选定项ToolStripMenuItem1});
+
             this.sensitiveFileScanMenuItem.Name = "sensitiveFileScanMenuItem";
-            this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sensitiveFileScanMenuItem.Text = "文件素描";
+            this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.sensitiveFileScanMenuItem.Text = "高质量文件素描";
             // 
             // allTaskFileMenuItem
             // 
             this.allTaskFileMenuItem.Name = "allTaskFileMenuItem";
-            this.allTaskFileMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.allTaskFileMenuItem.Text = "全任务处理";
+            this.allTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskFileMenuItem.Text = "素描所有项";
+
             this.allTaskFileMenuItem.Click += new System.EventHandler(this.AllTaskFileMenuItem_Click);
             // 
             // aliveTaskFileMenuItem
             // 
             this.aliveTaskFileMenuItem.Name = "aliveTaskFileMenuItem";
-            this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.aliveTaskFileMenuItem.Text = "验活任务处理";
+
+            this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskFileMenuItem.Text = "素描验活项";
+
             this.aliveTaskFileMenuItem.Click += new System.EventHandler(this.AliveTaskFileMenuItem_Click);
             // 
             // 查看结果ToolStripMenuItem
@@ -606,7 +615,7 @@
             // infoCollectionSetMenuItem
             // 
             this.infoCollectionSetMenuItem.Name = "infoCollectionSetMenuItem";
-            this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(193, 22);
             this.infoCollectionSetMenuItem.Text = "设置";
             this.infoCollectionSetMenuItem.Click += new System.EventHandler(this.InfoCollectionSetMenuItem_Click);
             // 
@@ -737,6 +746,18 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
+            // 素描选定项ToolStripMenuItem
+            // 
+            this.素描选定项ToolStripMenuItem.Name = "素描选定项ToolStripMenuItem";
+            this.素描选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.素描选定项ToolStripMenuItem.Text = "素描选定项";
+            // 
+            // 素描选定项ToolStripMenuItem1
+            // 
+            this.素描选定项ToolStripMenuItem1.Name = "素描选定项ToolStripMenuItem1";
+            this.素描选定项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.素描选定项ToolStripMenuItem1.Text = "素描选定项";
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -841,5 +862,8 @@
         private System.Windows.Forms.ToolStripMenuItem allTaskFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aliveTaskFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 素描选定项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 素描选定项ToolStripMenuItem1;
+
     }
 }
