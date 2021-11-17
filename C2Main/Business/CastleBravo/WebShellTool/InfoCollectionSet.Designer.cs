@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.useSetComboBox = new System.Windows.Forms.ComboBox();
-            this.remoteAddrTextBox = new System.Windows.Forms.TextBox();
+            this.addrTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.localAddrTextBox = new System.Windows.Forms.TextBox();
             this.useSet = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.remoteAddr = new System.Windows.Forms.RadioButton();
-            this.localAddr = new System.Windows.Forms.RadioButton();
+            this.addr = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // useSetComboBox
@@ -45,20 +45,19 @@
             this.useSetComboBox.Items.AddRange(new object[] {
             "否",
             "是"});
-            this.useSetComboBox.Location = new System.Drawing.Point(95, 47);
+            this.useSetComboBox.Location = new System.Drawing.Point(63, 50);
             this.useSetComboBox.Name = "useSetComboBox";
             this.useSetComboBox.Size = new System.Drawing.Size(205, 20);
             this.useSetComboBox.TabIndex = 10026;
             // 
-            // remoteAddrTextBox
+            // addrTextBox
             // 
-            this.remoteAddrTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.remoteAddrTextBox.Location = new System.Drawing.Point(95, 81);
-            this.remoteAddrTextBox.Name = "remoteAddrTextBox";
-            this.remoteAddrTextBox.Size = new System.Drawing.Size(205, 21);
-            this.remoteAddrTextBox.TabIndex = 10024;
-            this.remoteAddrTextBox.Text = "http://xxx.com/";
-            this.remoteAddrTextBox.TextChanged += new System.EventHandler(this.PortTextBox_TextChanged);
+            this.addrTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.addrTextBox.Location = new System.Drawing.Point(63, 87);
+            this.addrTextBox.Name = "addrTextBox";
+            this.addrTextBox.Size = new System.Drawing.Size(205, 21);
+            this.addrTextBox.TabIndex = 10024;
+            this.addrTextBox.Text = "http://xxx.com/";
             // 
             // label2
             // 
@@ -67,15 +66,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 12);
             this.label2.TabIndex = 10023;
-            // 
-            // localAddrTextBox
-            // 
-            this.localAddrTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.localAddrTextBox.Location = new System.Drawing.Point(95, 113);
-            this.localAddrTextBox.Name = "localAddrTextBox";
-            this.localAddrTextBox.Size = new System.Drawing.Size(205, 21);
-            this.localAddrTextBox.TabIndex = 10022;
-            this.localAddrTextBox.Text = "c:/xxx/";
             // 
             // useSet
             // 
@@ -96,53 +86,49 @@
             this.label4.TabIndex = 10027;
             this.label4.Text = "此设置不保存,用前每次设置一下";
             // 
-            // remoteAddr
+            // addr
             // 
-            this.remoteAddr.AutoSize = true;
-            this.remoteAddr.Checked = true;
-            this.remoteAddr.Location = new System.Drawing.Point(12, 86);
-            this.remoteAddr.Name = "remoteAddr";
-            this.remoteAddr.Size = new System.Drawing.Size(71, 16);
-            this.remoteAddr.TabIndex = 10028;
-            this.remoteAddr.TabStop = true;
-            this.remoteAddr.Text = "远程地址";
-            this.remoteAddr.UseVisualStyleBackColor = true;
+            this.addr.AutoSize = true;
+            this.addr.Location = new System.Drawing.Point(16, 90);
+            this.addr.Name = "addr";
+            this.addr.Size = new System.Drawing.Size(29, 12);
+            this.addr.TabIndex = 10028;
+            this.addr.Text = "地址";
             // 
-            // localAddr
+            // pictureBox1
             // 
-            this.localAddr.AutoSize = true;
-            this.localAddr.Location = new System.Drawing.Point(12, 118);
-            this.localAddr.Name = "localAddr";
-            this.localAddr.Size = new System.Drawing.Size(71, 16);
-            this.localAddr.TabIndex = 10029;
-            this.localAddr.Text = "本地地址";
-            this.localAddr.UseVisualStyleBackColor = true;
+            this.pictureBox1.Image = global::C2.Properties.Resources.help;
+            this.pictureBox1.Location = new System.Drawing.Point(274, 85);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 23);
+            this.pictureBox1.TabIndex = 10029;
+            this.pictureBox1.TabStop = false;
             // 
             // InfoCollectionSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(326, 204);
-            this.Controls.Add(this.localAddr);
-            this.Controls.Add(this.remoteAddr);
+            this.ClientSize = new System.Drawing.Size(315, 170);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.addr);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.useSetComboBox);
-            this.Controls.Add(this.remoteAddrTextBox);
+            this.Controls.Add(this.addrTextBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.localAddrTextBox);
             this.Controls.Add(this.useSet);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InfoCollectionSet";
             this.Text = "后信息收集设置";
             this.Controls.SetChildIndex(this.useSet, 0);
-            this.Controls.SetChildIndex(this.localAddrTextBox, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.remoteAddrTextBox, 0);
+            this.Controls.SetChildIndex(this.addrTextBox, 0);
             this.Controls.SetChildIndex(this.useSetComboBox, 0);
             this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.remoteAddr, 0);
-            this.Controls.SetChildIndex(this.localAddr, 0);
+            this.Controls.SetChildIndex(this.addr, 0);
+            this.Controls.SetChildIndex(this.pictureBox1, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,12 +137,11 @@
         #endregion
 
         private System.Windows.Forms.ComboBox useSetComboBox;
-        private System.Windows.Forms.TextBox remoteAddrTextBox;
+        private System.Windows.Forms.TextBox addrTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox localAddrTextBox;
         private System.Windows.Forms.Label useSet;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton remoteAddr;
-        private System.Windows.Forms.RadioButton localAddr;
+        private System.Windows.Forms.Label addr;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

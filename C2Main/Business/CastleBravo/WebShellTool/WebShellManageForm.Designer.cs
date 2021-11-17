@@ -104,6 +104,7 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -693,6 +694,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ItemCountSLabel,
             this.ProxyEnableSLabel,
+            this.infoConfigEnable,
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 481);
             this.statusStrip1.Name = "statusStrip1";
@@ -716,6 +718,11 @@
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
+            // 
+            // infoConfigEnable
+            // 
+            this.infoConfigEnable.Name = "infoConfigEnable";
+            this.infoConfigEnable.Size = new System.Drawing.Size(0, 18);
             // 
             // WebShellManageForm
             // 
@@ -819,6 +826,6 @@
         private System.Windows.Forms.ToolStripMenuItem infoCollectionSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 素描选定项ToolStripMenuItem;
-
+        private System.Windows.Forms.ToolStripStatusLabel infoConfigEnable;
     }
 }

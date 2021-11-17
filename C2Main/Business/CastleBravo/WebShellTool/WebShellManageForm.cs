@@ -629,7 +629,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void InfoCollectionSetMenuItem_Click(object sender, EventArgs e)
         {
             InfoCollectionConfig = new InfoCollectionSet(InfoCollectionConfig).ShowDialog();
-            ResetSLabel();
+            infoConfigEnable.Text = InfoCollectionConfig.Enable ? "后信息收集配置启用" : string.Empty;
         }
     }
 }
