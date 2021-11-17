@@ -84,11 +84,10 @@
             this.passwdBlastingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sensitiveFileScanMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allTaskFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aliveTaskFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.素描选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
+            this.查看结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -105,6 +104,7 @@
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -541,7 +541,6 @@
             // 
             this.infoCollectionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.passwdBlastingMenuItem,
-            this.sensitiveFileScanMenuItem,
             this.infoCollectionSetMenuItem});
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -553,53 +552,38 @@
             // 
             this.passwdBlastingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allTaskMysqlMenuItem,
-            this.aliveTaskMysqlMenuItem});
+            this.aliveTaskMysqlMenuItem,
+            this.素描选定项ToolStripMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.passwdBlastingMenuItem.Text = "mysql K令";
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.passwdBlastingMenuItem.Text = "Mysql管理员K令素描";
             // 
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
             this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.allTaskMysqlMenuItem.Text = "全任务处理";
+            this.allTaskMysqlMenuItem.Text = "素描所有项";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
             this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aliveTaskMysqlMenuItem.Text = "验活目标处理";
+            this.aliveTaskMysqlMenuItem.Text = "素描验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
-            // sensitiveFileScanMenuItem
+            // 素描选定项ToolStripMenuItem
             // 
-            this.sensitiveFileScanMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allTaskFileMenuItem,
-            this.aliveTaskFileMenuItem});
-            this.sensitiveFileScanMenuItem.Name = "sensitiveFileScanMenuItem";
-            this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sensitiveFileScanMenuItem.Text = "文件素描";
-            // 
-            // allTaskFileMenuItem
-            // 
-            this.allTaskFileMenuItem.Name = "allTaskFileMenuItem";
-            this.allTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.allTaskFileMenuItem.Text = "全任务处理";
-            this.allTaskFileMenuItem.Click += new System.EventHandler(this.AllTaskFileMenuItem_Click);
-            // 
-            // aliveTaskFileMenuItem
-            // 
-            this.aliveTaskFileMenuItem.Name = "aliveTaskFileMenuItem";
-            this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aliveTaskFileMenuItem.Text = "验活任务处理";
-            this.aliveTaskFileMenuItem.Click += new System.EventHandler(this.AliveTaskFileMenuItem_Click);
+            this.素描选定项ToolStripMenuItem.Name = "素描选定项ToolStripMenuItem";
+            this.素描选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.素描选定项ToolStripMenuItem.Text = "素描选定项";
             // 
             // infoCollectionSetMenuItem
             // 
             this.infoCollectionSetMenuItem.Name = "infoCollectionSetMenuItem";
-            this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(193, 22);
             this.infoCollectionSetMenuItem.Text = "设置";
+            this.infoCollectionSetMenuItem.Click += new System.EventHandler(this.InfoCollectionSetMenuItem_Click);
             // 
             // proxySettingMenu
             // 
@@ -608,6 +592,12 @@
             this.proxySettingMenu.Size = new System.Drawing.Size(56, 22);
             this.proxySettingMenu.Text = "代理设置";
             this.proxySettingMenu.Click += new System.EventHandler(this.ProxyMenu_Click);
+            // 
+            // 查看结果ToolStripMenuItem
+            // 
+            this.查看结果ToolStripMenuItem.Name = "查看结果ToolStripMenuItem";
+            this.查看结果ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.查看结果ToolStripMenuItem.Text = "查看结果";
             // 
             // LV
             // 
@@ -704,6 +694,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ItemCountSLabel,
             this.ProxyEnableSLabel,
+            this.infoConfigEnable,
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 481);
             this.statusStrip1.Name = "statusStrip1";
@@ -727,6 +718,11 @@
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
+            // 
+            // infoConfigEnable
+            // 
+            this.infoConfigEnable.Name = "infoConfigEnable";
+            this.infoConfigEnable.Size = new System.Drawing.Size(0, 18);
             // 
             // WebShellManageForm
             // 
@@ -825,11 +821,11 @@
         private System.Windows.Forms.ToolStripMenuItem 变种14构造Base64DecodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton infoCollectionMenu;
         private System.Windows.Forms.ToolStripMenuItem passwdBlastingMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sensitiveFileScanMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allTaskMysqlMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aliveTaskMysqlMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoCollectionSetMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allTaskFileMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aliveTaskFileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 素描选定项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel infoConfigEnable;
     }
 }
