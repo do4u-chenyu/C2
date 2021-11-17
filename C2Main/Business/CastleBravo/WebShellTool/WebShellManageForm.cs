@@ -71,9 +71,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.trojanMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
-                this.sensitiveFileScanMenuItem,
-                this.allTaskFileMenuItem,
-                this.aliveTaskFileMenuItem,
                 this.allTaskMysqlMenuItem,
                 this.aliveTaskMysqlMenuItem
             };
@@ -418,7 +415,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private bool PostCollectInfo(WebShellTaskConfig task)
         {
-            return DoEventsWait(90, Task.Run(() => CollectInfo(task)));
+            return DoEventsWait(90, Task.Run(() => PostMysqlBlastingRequest(task)));
         }
 
         private static bool DoEventsWait(int timeout, Task<bool> t)
@@ -472,31 +469,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch { return false; }
 
         }
-        private bool CollectInfo(WebShellTaskConfig task)
+        private bool PostMysqlBlastingRequest(WebShellTaskConfig task)
         {
-            string payload = string.Empty;
-
-            switch (InfoCollectionType)
-            {
-                case InfoType.Mysql:
-                    payload = string.Format("{0}={1};", task.Password, Global.MysqlPayload);
-                    break;
-                case InfoType.SensitiveFile:
-                    payload = string.Format("{0}={1};", task.Password, Global.SensitiveFilePayload);
-                    break;
-            }
             try
             {
-                string response = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
-                switch (InfoCollectionType)
-                {
-                    case InfoType.Mysql:
-                        task.SGInfoCollectionConfig = response;
-                        break;
-                    case InfoType.SensitiveFile:
-                        task.SGInfoCollectionConfig = WriteResult(task.Url, response);
-                        break;
-                }
+                string payload = string.Format("{0}={1};", task.Password, Global.MysqlPayload);
+                task.SGInfoCollectionConfig = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
+
             }
             catch (Exception ex)
             {
@@ -505,36 +484,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return true;
         }
-        private string WriteResult(string url, string result)
-        {
-            string[] array = url.Split('/');
-            if (array.Length < 4)
-                return string.Empty;
-
-            string file_name = array[2] + "_" + array[array.Length - 1] + ".html";
-            try
-            {
-                string path = Path.Combine(Global.UserWorkspacePath, "后信息采集");
-                Directory.CreateDirectory(path);
-                path += "\\" + file_name;
-                if (!File.Exists(path))
-                {
-                    FileStream fs1 = new FileStream(path, FileMode.Create);
-                    fs1.Close();
-                }
-                using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-                {
-                    sw.WriteLine(result);
-                }
-                return path;
-
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-
-        }
+        
         private void AddAllShellMenu_Click(object sender, EventArgs e)
         {
             AddAllWebShellForm dialog = new AddAllWebShellForm();
@@ -700,31 +650,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.InfoCollectionType = InfoType.Mysql;
             RefreshInfoColletionStatus(true);
         }
-        private void AliveTaskFileMenuItem_Click(object sender, EventArgs e)
-        {
-            this.InfoCollectionType = InfoType.SensitiveFile;
-            RefreshInfoColletionStatus(true);
-        }
-        private void CleanResultFile(string path)
-        {
-            if (!Directory.Exists(path))
-                return;
-            foreach (string file in Directory.GetFileSystemEntries(path))
-            {
-                if (File.Exists(file))
-                {
-                    File.Delete(file);
-                }
-
-            }
-
-        }
-        private void AllTaskFileMenuItem_Click(object sender, EventArgs e)
-        {
-            this.InfoCollectionType = InfoType.SensitiveFile;
-            RefreshInfoColletionStatus(false);
-        }
-
+      
+      
         private void InfoCollectionSetMenuItem_Click(object sender, EventArgs e)
         {
             InfoCollectionConfig = new InfoCollectionSet(InfoCollectionConfig).ShowDialog();
