@@ -572,7 +572,7 @@
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
             this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aliveTaskMysqlMenuItem.Text = "素描验货项";
+            this.aliveTaskMysqlMenuItem.Text = "素描验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
             // sensitiveFileScanMenuItem
@@ -596,7 +596,7 @@
             // 
             this.aliveTaskFileMenuItem.Name = "aliveTaskFileMenuItem";
             this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aliveTaskFileMenuItem.Text = "素描验货项";
+            this.aliveTaskFileMenuItem.Text = "素描验活项";
             this.aliveTaskFileMenuItem.Click += new System.EventHandler(this.AliveTaskFileMenuItem_Click);
             // 
             // infoCollectionSetMenuItem
