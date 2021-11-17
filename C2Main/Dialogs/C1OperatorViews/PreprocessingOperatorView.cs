@@ -3,6 +3,7 @@ using C2.Controls.Move.Op;
 using C2.Core;
 using C2.Dialogs.Base;
 using System;
+using System.Text;
 
 namespace C2.OperatorViews
 {
@@ -24,7 +25,7 @@ namespace C2.OperatorViews
             //this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             //this.opControl.Option.SetOption("outfield0", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());
             
-            this.opControl.Option.SetOption("pretype", System.Boolean.TrueString);
+            this.opControl.Option.SetOption("pretype", Convert.ToInt32((ConvertBoolToString(this.checkBox1.Checked) + ConvertBoolToString(this.checkBox2.Checked) + ConvertBoolToString(this.checkBox3.Checked)), 2));
 
             //更新子图所有节点状态
             UpdateSubGraphStatus();
@@ -34,13 +35,30 @@ namespace C2.OperatorViews
         {
             if (string.IsNullOrEmpty(this.opControl.Option.GetOption("pretype")))
                 return;
-            bool index = Convert.ToBoolean(this.opControl.Option.GetOption("pretype"));
-            this.checkBox1.Checked = index;
-            this.checkBox2.Checked = index;
-            this.checkBox3.Checked = index;
-
+            string pretype = DecimalToBinary(int.Parse(this.opControl.Option.GetOption("pretype")));
+            this.checkBox1.Checked = pretype[0].ToString() == "1" ;
+            this.checkBox2.Checked = pretype[1].ToString() == "1";
+            this.checkBox3.Checked = pretype[2].ToString() == "1";
         }
         #endregion
+
+        private string DecimalToBinary(int decimalNum)
+        {
+            string binaryNum = Convert.ToString(decimalNum, 2);
+            if (binaryNum.Length < 3)
+            {
+                for (int i = 0; i < 3 - binaryNum.Length; i++)
+                {
+                    binaryNum = '0' + binaryNum;
+                }
+            }
+            return binaryNum;
+        }
+
+        private string ConvertBoolToString(bool flag)
+        {
+            return flag ? "1" : "0";
+        }
 
         protected override void CancelButton_Click(object sender, EventArgs e)
         {

@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaskTools", "TaskTools", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeBase", "C2Plugins\KnowledgeBase\KnowledgeBase.csproj", "{625326FB-5999-48D5-A573-D448537E1012}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "preprocessing", "tools\preprocessing\preprocessing.csproj", "{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,12 @@ Global
 		{625326FB-5999-48D5-A573-D448537E1012}.Release|Any CPU.Build.0 = Release|Any CPU
 		{625326FB-5999-48D5-A573-D448537E1012}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
 		{625326FB-5999-48D5-A573-D448537E1012}.开发调试|Any CPU.Build.0 = Release|Any CPU
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +148,7 @@ Global
 		{4E8D83C1-E7CD-4443-A63B-FB027FD926B5} = {02DF5FE1-EB81-4609-A8BF-0DFFA9B7FE68}
 		{EC5ACF2F-91EB-4A5B-B8C7-3FF5272040F9} = {02DF5FE1-EB81-4609-A8BF-0DFFA9B7FE68}
 		{625326FB-5999-48D5-A573-D448537E1012} = {347ABCF9-220C-4D65-9170-5689273E2F50}
+		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346} = {02DF5FE1-EB81-4609-A8BF-0DFFA9B7FE68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {009696A9-FA4B-463E-AF26-413B108EFC6A}
