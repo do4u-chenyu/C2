@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}</ProjectGuid>
+    <ProjectGuid>{4766A953-545E-405B-9D3F-CCBE74569422}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>preprocessing</RootNamespace>
-    <AssemblyName>preprocessing</AssemblyName>
+    <RootNamespace>analysis</RootNamespace>
+    <AssemblyName>analysis</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DealData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

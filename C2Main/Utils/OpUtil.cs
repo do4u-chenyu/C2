@@ -110,6 +110,12 @@ namespace C2.Utils
                 case "数据预处理":
                     type = ElementSubType.PreprocessingOperator;
                     break;
+                case "数据分析1":
+                    type = ElementSubType.AnalysisOperator1;
+                    break;
+                case "数据分析2":
+                    type = ElementSubType.AnalysisOperator2;
+                    break;
                 default:
                     type = ElementSubType.Null;
                     break;
@@ -172,6 +178,15 @@ namespace C2.Utils
                     break;
                 case "DataFormatOperator":
                     type = "数据标准化";
+                    break;
+                case "PreprocessingOperator":
+                    type = "数据预处理";
+                    break;
+                case "AnalysisOperator1":
+                    type = "数据分析1";
+                    break;
+                case "AnalysisOperator2":
+                    type = "数据分析2";
                     break;
                 default:
                     type = "Null";

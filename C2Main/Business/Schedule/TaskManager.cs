@@ -386,6 +386,8 @@ namespace C2.Business.Schedule
                         case ElementSubType.DataFormatOperator: cmds = (new DataFormatOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.KeywordOperator: cmds = (new KeywordOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.PreprocessingOperator: cmds = (new PreprocessingOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.AnalysisOperator1: cmds = (new AnalysisOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.AnalysisOperator2: cmds = (new AnalysisOperatorCmd(triple)).GenCmd(); break;
                     }
                     break;
                 }

@@ -22,9 +22,9 @@ namespace C2.OperatorViews
         {
             this.opControl.Option.Clear();
             //输入输出字段待定
-            //this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             //this.opControl.Option.SetOption("outfield0", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());
             
+            this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("pretype", Convert.ToInt32((ConvertBoolToString(this.checkBox1.Checked) + ConvertBoolToString(this.checkBox2.Checked) + ConvertBoolToString(this.checkBox3.Checked)), 2));
 
             //更新子图所有节点状态

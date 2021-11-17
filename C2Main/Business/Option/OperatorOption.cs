@@ -125,6 +125,9 @@ namespace C2.Business.Option
                                                                           new RegisterInfo("virtualMachine", TypeCode.String)},
 
                 [ElementSubType.PreprocessingOperator] = new RegisterInfo[]    { new RegisterInfo("pretype", TypeCode.String)},
+
+                [ElementSubType.AnalysisOperator1] = new RegisterInfo[] { new RegisterInfo("analysisType", TypeCode.String) },
+                [ElementSubType.AnalysisOperator2] = new RegisterInfo[] { new RegisterInfo("analysisType", TypeCode.String) },
             };
 
         }
@@ -244,7 +247,7 @@ namespace C2.Business.Option
         private bool WithoutInputColumns()
         {
             // python 算子会产生空结果文件，因为不应该做这个检测
-            if (OpUtil.SEType(opControl.SubTypeName) == ElementSubType.PythonOperator || OpUtil.SEType(opControl.SubTypeName) == ElementSubType.PreprocessingOperator)
+            if (OpUtil.SEType(opControl.SubTypeName) == ElementSubType.PythonOperator || OpUtil.SEType(opControl.SubTypeName) == ElementSubType.PreprocessingOperator || OpUtil.SEType(opControl.SubTypeName) == ElementSubType.AnalysisOperator1 || OpUtil.SEType(opControl.SubTypeName) == ElementSubType.AnalysisOperator2)
                 return false;
 
             bool notHasInput0 = String.IsNullOrEmpty(GetOption("columnname0"));
