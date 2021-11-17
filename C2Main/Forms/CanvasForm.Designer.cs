@@ -224,7 +224,7 @@
             this.operatorControl.Location = new System.Drawing.Point(640, 34);
             this.operatorControl.Margin = new System.Windows.Forms.Padding(0);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(215, 320);
+            this.operatorControl.Size = new System.Drawing.Size(215, 345);
             this.operatorControl.TabIndex = 40;
             // 
             // naviViewControl
@@ -272,7 +272,6 @@
             this.Name = "CanvasForm";
             this.Text = "CanvasForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CanvasForm_FormClosing);
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CanvasForm_FormClosed);
             this.SizeChanged += new System.EventHandler(this.CanvasForm_SizeChanged);
             this.currentModelRunBackLab.ResumeLayout(false);
             this.ResumeLayout(false);

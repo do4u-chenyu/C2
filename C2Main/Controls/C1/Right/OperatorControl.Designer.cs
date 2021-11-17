@@ -66,6 +66,10 @@
             this.leftPanelOpAvg = new C2.Controls.Common.NoFocusButton();
             this.preprocessingOPButton = new C2.Controls.Common.NoFocusButton();
             this.preprocessingOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.analysisOPButton = new C2.Controls.Common.NoFocusButton();
+            this.analysisOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.analysisDoubleOPButton = new C2.Controls.Common.NoFocusButton();
+            this.analysisDoubleOpPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).BeginInit();
@@ -84,6 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pythonOpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.custom1OpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.preprocessingOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.analysisOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.analysisDoubleOpPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // relateOpPictureBox
@@ -623,6 +629,64 @@
             this.preprocessingOpPictureBox.TabIndex = 42;
             this.preprocessingOpPictureBox.TabStop = false;
             // 
+            // analysisOPButton
+            // 
+            this.analysisOPButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.analysisOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.analysisOPButton.FlatAppearance.BorderSize = 0;
+            this.analysisOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.analysisOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.analysisOPButton.Location = new System.Drawing.Point(30, 316);
+            this.analysisOPButton.Name = "analysisOPButton";
+            this.analysisOPButton.Size = new System.Drawing.Size(81, 29);
+            this.analysisOPButton.TabIndex = 45;
+            this.analysisOPButton.TabStop = false;
+            this.analysisOPButton.Text = "数据分析1";
+            this.analysisOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.analysisOPButton.UseMnemonic = false;
+            this.analysisOPButton.UseVisualStyleBackColor = false;
+            this.analysisOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // analysisOpPictureBox
+            // 
+            this.analysisOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.analysisOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.analysisOpPictureBox.Location = new System.Drawing.Point(8, 320);
+            this.analysisOpPictureBox.Name = "analysisOpPictureBox";
+            this.analysisOpPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.analysisOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.analysisOpPictureBox.TabIndex = 44;
+            this.analysisOpPictureBox.TabStop = false;
+            // 
+            // analysisDoubleOPButton
+            // 
+            this.analysisDoubleOPButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.analysisDoubleOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.analysisDoubleOPButton.FlatAppearance.BorderSize = 0;
+            this.analysisDoubleOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.analysisDoubleOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.analysisDoubleOPButton.Location = new System.Drawing.Point(129, 316);
+            this.analysisDoubleOPButton.Name = "analysisDoubleOPButton";
+            this.analysisDoubleOPButton.Size = new System.Drawing.Size(85, 29);
+            this.analysisDoubleOPButton.TabIndex = 47;
+            this.analysisDoubleOPButton.TabStop = false;
+            this.analysisDoubleOPButton.Text = "数据分析2";
+            this.analysisDoubleOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.analysisDoubleOPButton.UseMnemonic = false;
+            this.analysisDoubleOPButton.UseVisualStyleBackColor = false;
+            this.analysisDoubleOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // analysisDoubleOpPictureBox
+            // 
+            this.analysisDoubleOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.analysisDoubleOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.analysisDoubleOpPictureBox.Location = new System.Drawing.Point(107, 320);
+            this.analysisDoubleOpPictureBox.Name = "analysisDoubleOpPictureBox";
+            this.analysisDoubleOpPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.analysisDoubleOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.analysisDoubleOpPictureBox.TabIndex = 46;
+            this.analysisDoubleOpPictureBox.TabStop = false;
+            // 
             // OperatorControl
             // 
             this.AllowDrop = true;
@@ -630,6 +694,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Controls.Add(this.analysisDoubleOPButton);
+            this.Controls.Add(this.analysisDoubleOpPictureBox);
+            this.Controls.Add(this.analysisOPButton);
+            this.Controls.Add(this.analysisOpPictureBox);
             this.Controls.Add(this.preprocessingOPButton);
             this.Controls.Add(this.preprocessingOpPictureBox);
             this.Controls.Add(this.leftPanelOpRelate);
@@ -670,7 +738,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "OperatorControl";
-            this.Size = new System.Drawing.Size(217, 322);
+            this.Size = new System.Drawing.Size(217, 348);
             ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).EndInit();
@@ -689,6 +757,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pythonOpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.custom1OpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.preprocessingOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.analysisOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.analysisDoubleOpPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -733,5 +803,9 @@
         private System.Windows.Forms.PictureBox custom1OpPictureBox;
         private Common.NoFocusButton preprocessingOPButton;
         private System.Windows.Forms.PictureBox preprocessingOpPictureBox;
+        private Common.NoFocusButton analysisOPButton;
+        private System.Windows.Forms.PictureBox analysisOpPictureBox;
+        private Common.NoFocusButton analysisDoubleOPButton;
+        private System.Windows.Forms.PictureBox analysisDoubleOpPictureBox;
     }
 }

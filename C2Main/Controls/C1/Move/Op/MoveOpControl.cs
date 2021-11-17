@@ -23,7 +23,7 @@ namespace C2.Controls.Move.Op
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
         private MoveWrapper moveWrapper1;
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤 数据分析2";
 
 
         private bool doublelPinFlag = false;
@@ -205,6 +205,14 @@ namespace C2.Controls.Move.Op
                     this.leftPictureBox.Image = global::C2.Properties.Resources.word_op;
                     break;
                 case "数据标准化":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
+                    break;
+                case "数据分析1":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
+                    break;
+                case "数据分析2":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
                     this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
                     break;
@@ -438,6 +446,12 @@ namespace C2.Controls.Move.Op
                     break;
                 case "数据预处理":
                     new PreprocessingOperatorView(this).ShowDialog();
+                    break;
+                case "数据分析1":
+                    new AnalysisOperatorView(this).ShowDialog();
+                    break;
+                case "数据分析2":
+                    new AnalysisOperatorView(this).ShowDialog();
                     break;
                 default:
                     break;

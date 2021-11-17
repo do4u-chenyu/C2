@@ -555,6 +555,7 @@
     <Compile Include="Business\Option\MoveRsControlFactory.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Option\OptionDao.cs" />
+    <Compile Include="Business\Schedule\Cmd\AnalysisOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CustomOperatorCmd.cs" />
@@ -684,6 +685,12 @@
     <Compile Include="Design\WaterMarkTypeConverter.cs" />
     <Compile Include="Dialogs\BastionDownloadProgressBar.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\AnalysisOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\C1OperatorViews\AnalysisOperatorView.Designer.cs">
+      <DependentUpon>AnalysisOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\C1OperatorViews\PreprocessingOperatorView.cs">
       <SubType>Form</SubType>
@@ -2259,6 +2266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BastionDownloadProgressBar.resx">
       <DependentUpon>BastionDownloadProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\C1OperatorViews\AnalysisOperatorView.resx">
+      <DependentUpon>AnalysisOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\AvgOperatorView.resx">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>

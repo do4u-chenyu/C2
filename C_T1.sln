@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeBase", "C2Plugins\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "preprocessing", "tools\preprocessing\preprocessing.csproj", "{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "analysis", "tools\analysis\analysis.csproj", "{4766A953-545E-405B-9D3F-CCBE74569422}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,12 @@ Global
 		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
 		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346}.开发调试|Any CPU.Build.0 = Release|Any CPU
+		{4766A953-545E-405B-9D3F-CCBE74569422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4766A953-545E-405B-9D3F-CCBE74569422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4766A953-545E-405B-9D3F-CCBE74569422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4766A953-545E-405B-9D3F-CCBE74569422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4766A953-545E-405B-9D3F-CCBE74569422}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
+		{4766A953-545E-405B-9D3F-CCBE74569422}.开发调试|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +157,7 @@ Global
 		{EC5ACF2F-91EB-4A5B-B8C7-3FF5272040F9} = {02DF5FE1-EB81-4609-A8BF-0DFFA9B7FE68}
 		{625326FB-5999-48D5-A573-D448537E1012} = {347ABCF9-220C-4D65-9170-5689273E2F50}
 		{9BC54A3D-57A5-4950-8ACF-3B2C2F459346} = {02DF5FE1-EB81-4609-A8BF-0DFFA9B7FE68}
+		{4766A953-545E-405B-9D3F-CCBE74569422} = {02DF5FE1-EB81-4609-A8BF-0DFFA9B7FE68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {009696A9-FA4B-463E-AF26-413B108EFC6A}
