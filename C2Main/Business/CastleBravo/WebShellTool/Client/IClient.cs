@@ -17,6 +17,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         //
         string Suscide();                     // 一键自毁
         string DetailInfo(string PageData);   // 文件浏览
+        string DownloadFile(string PageData); //文件下载
         string GetDatabaseInfo(string loginInfo, string database, string command);
     }
 }

