@@ -17,16 +17,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         public static InfoCollectionSetting InfoCollectionConfig { get; set; } = InfoCollectionSetting.Empty;
         private int NumberOfAlive { get; set; }
-        private int NumberOfsuccessful { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
         private int NumberOfIPAddress { get => setOfIPAddress.Count; }
-        public InfoType InfoCollectionType { get; set; } = InfoType.Empty;
-        public enum InfoType
-        {
-            Mysql,
-            SensitiveFile,
-            Empty
-        }
 
         private HashSet<string> setOfIPAddress;
         private HashSet<string> setOfHost;
@@ -339,7 +331,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressBar.Maximum = LV.Items.Count;
             this.refreshNeedStop = false;
             this.NumberOfAlive = 0;
-            this.NumberOfsuccessful = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
         }
@@ -363,23 +354,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            if (!InfoCollectionType.Equals(InfoType.Empty))
-            {
-                this.progressMenu.Text = string.Format("{0}/{1} - 成功 {2}",
-                    ++progressBar.Value,
-                    progressBar.Maximum,
-                    NumberOfsuccessful);
-            }
-            else
-            {
-                this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}",
-                    ++progressBar.Value,
-                    progressBar.Maximum,
-                    NumberOfAlive,
-                    NumberOfHost,
-                    NumberOfIPAddress);
-            }
-
+            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}",
+                ++progressBar.Value,
+                progressBar.Maximum,
+                NumberOfAlive,
+                NumberOfHost,
+                NumberOfIPAddress);
         }
 
         private static void ClearAliveItems(ListViewItem lvi)
@@ -475,12 +455,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 string payload = string.Format("{0}={1};", task.Password, Global.MysqlPayload);
                 task.SGInfoCollectionConfig = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
-
             }
             catch (Exception ex)
             {
                 task.SGInfoCollectionConfig = ex.Message;
-                return false;
             }
             return true;
         }
@@ -630,9 +608,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
                 WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
                 using (GuarderUtil.WaitCursor)
-                    if (PostCollectInfo(task))
-                        this.NumberOfsuccessful++;
-         
+                    PostCollectInfo(task);
                 lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
                 UpdateProgress();
                 CheckSavePoint(); // 5分钟保存一次
@@ -642,12 +618,10 @@ namespace C2.Business.CastleBravo.WebShellTool
            
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.InfoCollectionType = InfoType.Mysql;
             RefreshInfoColletionStatus(false);
         }
         private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.InfoCollectionType = InfoType.Mysql;
             RefreshInfoColletionStatus(true);
         }
       
