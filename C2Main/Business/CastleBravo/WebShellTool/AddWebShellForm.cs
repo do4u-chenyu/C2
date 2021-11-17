@@ -31,6 +31,10 @@ namespace C2.Business.CastleBravo.WebShellTool
                                        trojanTypeCombox.Text,
                                        string.Empty,
                                        versionComboBox.Text,
+                                       string.Empty,
+                                       string.Empty,
+                                       string.Empty,
+                                       string.Empty,
                                        databaseConfigTextBox.Text) : WebShellTaskConfig.Empty;
         }
 
@@ -44,7 +48,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             // 木马类型不允许修改, 支持修改没有意义
             trojanTypeCombox.Enabled = false;
-            databaseConfigTextBox.Text = task.SGInfoCollectionConfig;
+            databaseConfigTextBox.Text = task.DatabaseConfig;
             // 创建时间不需要修改
             return ShowDialog(task.CreateTime);
         }

@@ -34,7 +34,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (tabControl1.SelectedTab.Text == "虚拟终端")
                 UpdateCmd(webShell.ShellStart());
             if (tabControl1.SelectedTab.Text == "数据库管理")
-                ShowDatabase(webShell.DatabeseInfo(webShellTask.SGInfoCollectionConfig));
+                ShowDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig));
         }
         private void ShowDatabase(string dbResult) 
         {
@@ -120,9 +120,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             TreeNode node = treeView2.SelectedNode;
             string selectNode = node.Text;
             if (node.Level == 0)
-                UpdateDatabase(webShell.DatabeseInfo(webShellTask.SGInfoCollectionConfig, selectNode + "\t", String.Format("show tables from {0}", selectNode)), selectNode);
+                UpdateDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig, selectNode + "\t", String.Format("show tables from {0}", selectNode)), selectNode);
             if (node.Level == 1)
-                ReadTable(webShell.DatabeseInfo(webShellTask.SGInfoCollectionConfig, node.Parent.Text, String.Format("select * from {0}", selectNode)));
+                ReadTable(webShell.DatabeseInfo(webShellTask.DatabaseConfig, node.Parent.Text, String.Format("select * from {0}", selectNode)));
         }
         private void TreeView2_MouseDoubleClick(object sender, MouseEventArgs e)
         {

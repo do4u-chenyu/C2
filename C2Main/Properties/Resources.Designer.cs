@@ -2066,6 +2066,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap organizationChart {
+            get {
+                object obj = ResourceManager.GetObject("organizationChart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap outdent {
             get {
                 object obj = ResourceManager.GetObject("outdent", resourceCulture);
@@ -3084,6 +3094,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap 业务视图 {
             get {
                 object obj = ResourceManager.GetObject("业务视图", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 二进制 {
+            get {
+                object obj = ResourceManager.GetObject("二进制", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

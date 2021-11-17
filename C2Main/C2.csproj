@@ -2954,6 +2954,7 @@
     <None Include="Resources\Images\chain_small.png" />
     <None Include="Resources\Images\chart.png" />
     <None Include="Resources\Images\check_update.png" />
+    <None Include="Resources\Images\binary_system.png" />
     <Content Include="Resources\Images\CardRecognition.png" />
     <Content Include="Resources\Images\chevron.png" />
     <None Include="Resources\Images\close.png" />
@@ -3162,6 +3163,7 @@
     <Content Include="Resources\Images\webkit.png" />
     <Content Include="Resources\Images\WebScan.png" />
     <None Include="Resources\Images\webshell.png" />
+    <None Include="Resources\Images\WidgetImage\organizationChart.png" />
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

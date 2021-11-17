@@ -380,8 +380,8 @@ namespace C2.Controls.MapViews
                 MenuCreateChart.ToolTipText = "仅支持数据源前一百行数据生成图表";
                 MenuCreateChart.Click += MenuCreateDataChart_Click;
 
-                MenuCreateOrganization.Image = Properties.Resources.getChart;
-                MenuCreateOrganization.Text = Lang._("CreateOrganization");  // 生成图表 
+                MenuCreateOrganization.Image = Properties.Resources.organizationChart;
+                MenuCreateOrganization.Text = Lang._("CreateOrganization");  // 生成组织架构 
                 MenuCreateOrganization.Tag = dataItem;
                 MenuCreateOrganization.ToolTipText = "生成组织架构图";
                 MenuCreateOrganization.Click += MenuCreateOrganization_Click;
