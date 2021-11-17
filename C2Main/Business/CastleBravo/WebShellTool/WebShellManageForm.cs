@@ -15,6 +15,7 @@ namespace C2.Business.CastleBravo.WebShellTool
     public partial class WebShellManageForm : Form
     {
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
+        public static InfoCollectionSetting InfoCollectionConfig { get; set; } = InfoCollectionSetting.Empty;
         private int NumberOfAlive { get; set; }
         private int NumberOfsuccessful { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
@@ -724,6 +725,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshInfoColletionStatus(false);
         }
 
-     
+        private void InfoCollectionSetMenuItem_Click(object sender, EventArgs e)
+        {
+            InfoCollectionConfig = new InfoCollectionSet(InfoCollectionConfig).ShowDialog();
+            ResetSLabel();
+        }
     }
 }

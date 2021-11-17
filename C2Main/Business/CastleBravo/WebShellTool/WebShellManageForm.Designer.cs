@@ -87,6 +87,7 @@
             this.sensitiveFileScanMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTaskFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveTaskFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查看结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
             this.LV = new System.Windows.Forms.ListView();
@@ -561,14 +562,14 @@
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(148, 22);
             this.allTaskMysqlMenuItem.Text = "全任务处理";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(148, 22);
             this.aliveTaskMysqlMenuItem.Text = "验活目标处理";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
@@ -576,7 +577,8 @@
             // 
             this.sensitiveFileScanMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allTaskFileMenuItem,
-            this.aliveTaskFileMenuItem});
+            this.aliveTaskFileMenuItem,
+            this.查看结果ToolStripMenuItem});
             this.sensitiveFileScanMenuItem.Name = "sensitiveFileScanMenuItem";
             this.sensitiveFileScanMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sensitiveFileScanMenuItem.Text = "文件素描";
@@ -584,22 +586,29 @@
             // allTaskFileMenuItem
             // 
             this.allTaskFileMenuItem.Name = "allTaskFileMenuItem";
-            this.allTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskFileMenuItem.Size = new System.Drawing.Size(148, 22);
             this.allTaskFileMenuItem.Text = "全任务处理";
             this.allTaskFileMenuItem.Click += new System.EventHandler(this.AllTaskFileMenuItem_Click);
             // 
             // aliveTaskFileMenuItem
             // 
             this.aliveTaskFileMenuItem.Name = "aliveTaskFileMenuItem";
-            this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskFileMenuItem.Size = new System.Drawing.Size(148, 22);
             this.aliveTaskFileMenuItem.Text = "验活任务处理";
             this.aliveTaskFileMenuItem.Click += new System.EventHandler(this.AliveTaskFileMenuItem_Click);
+            // 
+            // 查看结果ToolStripMenuItem
+            // 
+            this.查看结果ToolStripMenuItem.Name = "查看结果ToolStripMenuItem";
+            this.查看结果ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.查看结果ToolStripMenuItem.Text = "查看结果";
             // 
             // infoCollectionSetMenuItem
             // 
             this.infoCollectionSetMenuItem.Name = "infoCollectionSetMenuItem";
             this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(180, 22);
             this.infoCollectionSetMenuItem.Text = "设置";
+            this.infoCollectionSetMenuItem.Click += new System.EventHandler(this.InfoCollectionSetMenuItem_Click);
             // 
             // proxySettingMenu
             // 
@@ -831,5 +840,6 @@
         private System.Windows.Forms.ToolStripMenuItem infoCollectionSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allTaskFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aliveTaskFileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
     }
 }
