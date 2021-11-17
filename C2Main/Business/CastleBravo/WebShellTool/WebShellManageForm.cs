@@ -592,34 +592,42 @@ namespace C2.Business.CastleBravo.WebShellTool
             EndRefresh();
         }
 
-        private void ClearScanResult()
+        private void ClearScanResult(bool clearAll = true)
         {
             foreach (ListViewItem lvi in LV.Items)
+            {
+                if (!clearAll && !lvi.Selected)
+                    continue;
                 lvi.SubItems[7].Text = string.Empty;
+            }
+              
         }
 
-        private void RefreshScanResult(bool checkAlive)
+        private void RefreshScanResult(bool checkAlive,bool checkSelected = false)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (refreshNeedStop)
-                    break;
-                if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
+                foreach (ListViewItem lvi in LV.Items)
                 {
-                    lvi.SubItems[7].Text = "跳";
-                    continue;
-                }
+                    if (refreshNeedStop)
+                        break;
+                    if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
+                    {
+                        lvi.SubItems[7].Text = "跳";
+                        continue;
+                    }
+                    if (checkSelected && !lvi.Selected)
+                        continue;
 
-                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-                using (GuarderUtil.WaitCursor)
-                    PostCollectInfo(task);
-                lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+
+                    WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+                    using (GuarderUtil.WaitCursor)
+                        PostCollectInfo(task);
+                    lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
         }
 
            
@@ -640,6 +648,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            ClearScanResult(false);
+            RefreshScanResult(false, true);
 
         }
     }
