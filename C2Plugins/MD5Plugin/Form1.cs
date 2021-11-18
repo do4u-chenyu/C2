@@ -277,6 +277,7 @@ namespace MD5Plugin
             {
                 ResetTextBox();
             }
+            /*
             else if (File.Exists(filePath))
             {
                 string base64Str = string.Empty;
@@ -290,6 +291,7 @@ namespace MD5Plugin
                 }
                 outputTextBox.Text = base64Str;
             }
+            */
             else
             {
                 byte[] bytes = GetEncodingBytes(filePath);
