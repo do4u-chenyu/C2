@@ -1,5 +1,4 @@
-﻿using System;
-using C2.Controls;
+﻿using C2.Controls;
 using C2.Utils;
 using C2.Core;
 
@@ -7,61 +6,30 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class InfoCollectionSet : StandardDialog
     {
+        private string Account { get => this.mysqlAccount.Text.Trim(); }
+        private string DictAddr { get => this.addrTextBox.Text.Trim(); }
 
-        public InfoCollectionSet(InfoCollectionSetting setting)
+        public InfoCollectionSet()
         {
             InitializeComponent();
-            InitializeWebShell(setting);
+            InitializeWebShell();
         }
 
-        private void InitializeWebShell(InfoCollectionSetting setting)
+        private void InitializeWebShell()
         {
-            if (setting == InfoCollectionSetting.Empty)
-            {
-                this.useSetComboBox.SelectedIndex = 0;
-            }
-            else
-            {
-                this.useSetComboBox.SelectedIndex = setting.Enable ? 1 : 0;
-                this.addrTextBox.Text = setting.Addr;
-
-            }
-
+            this.mysqlAccount.Text = Global.MysqlAccount;
+            this.addrTextBox.Text = Global.MysqlDictAddr;
         }
         protected override bool OnOKButtonClick()
         {
-            //TODO 判断必填是否有值
-            if (addrTextBox.Text.IsNullOrEmpty())
+            if (Account.IsNullOrEmpty() || DictAddr.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox("【地址】不能为空。");
+                HelpUtil.ShowMessageBox("【账号】和【地址】不能为空。");
                 return false;
             }
+            Global.MysqlDictAddr = DictAddr;
+            Global.MysqlAccount = Account;
             return base.OnOKButtonClick();
-        }
-        public new InfoCollectionSetting ShowDialog()
-        {
-            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK && this.useSetComboBox.SelectedIndex == 1 ?
-                new InfoCollectionSetting(
-                    useSetComboBox.SelectedIndex == 1,   // 0 否 1是
-                    addrTextBox.Text.Trim()) : InfoCollectionSetting.Empty;
-        }
-
-
-    }
-    public class InfoCollectionSetting
-    {
-        public static InfoCollectionSetting Empty = new InfoCollectionSetting();
-
-        public bool Enable;
-        public string Addr;
-
-        public InfoCollectionSetting()
-        { }
-        public InfoCollectionSetting(bool enable, string addr)
-        {
-            Enable = enable;
-            Addr = addr;
-
         }
     }
 }

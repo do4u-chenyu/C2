@@ -161,7 +161,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (selectedFile.Type == WebShellFileType.File)
             {
                 string PageData = browserDicectory + "/" + selectedFile.FileName;
-                new DetailsPageForm(webShell.DetailInfo(PageData)).ShowDialog();
+                new DetailsPageForm(webShell.DetailInfo(PageData),selectedFile.FileName).ShowDialog();
                 this.messageLog.Text = webShell.FetchLog();
             }
         }

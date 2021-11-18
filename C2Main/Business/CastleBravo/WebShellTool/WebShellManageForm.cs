@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
@@ -15,7 +16,6 @@ namespace C2.Business.CastleBravo.WebShellTool
     public partial class WebShellManageForm : Form
     {
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
-        public static InfoCollectionSetting InfoCollectionConfig { get; set; } = InfoCollectionSetting.Empty;
         private int NumberOfAlive { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
         private int NumberOfIPAddress { get => setOfIPAddress.Count; }
@@ -451,10 +451,17 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private bool PostMysqlBlastingRequest(WebShellTaskConfig task)
         {
+            Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
             try
             {
-                string payload = string.Format("{0}={1};", task.Password, Global.MysqlPayload);
-                task.SGInfoCollectionConfig = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
+                string payload = string.Format(Global.MysqlPayload, 
+                    task.Password, 
+                    ST.EncodeBase64(Global.MysqlDictAddr), 
+                    Global.MysqlAccount);
+                
+                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
+                Match m = r.Match(ret);
+                task.SGInfoCollectionConfig = m.Success ? m.Groups[1].Value : ret;
             }
             catch (Exception ex)
             {
@@ -588,7 +595,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void ClearScanResult()
         {
             foreach (ListViewItem lvi in LV.Items)
-                lvi.SubItems[7].Text = string.Empty;
+                lvi.SubItems[7].Text = string.Empty;        
         }
 
         private void RefreshScanResult(bool checkAlive)
@@ -596,26 +603,30 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (refreshNeedStop)
-                    break;
-                if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
+                foreach (ListViewItem lvi in LV.Items)
                 {
-                    lvi.SubItems[7].Text = "跳";
-                    continue;
+                    if (refreshNeedStop)
+                        break;
+                    if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
+                    {
+                        lvi.SubItems[7].Text = "跳";
+                        continue;
+                    }
+                    ScanMysql(lvi);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
                 }
-
-                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-                using (GuarderUtil.WaitCursor)
-                    PostCollectInfo(task);
-                lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
         }
 
-           
+        private void ScanMysql(ListViewItem lvi)
+        {
+            WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+            lvi.SubItems[7].Text = "进行中";
+            using (GuarderUtil.WaitCursor)
+                PostCollectInfo(task);
+            lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
+        }
+
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
             RefreshInfoColletionStatus(false);
@@ -628,8 +639,13 @@ namespace C2.Business.CastleBravo.WebShellTool
       
         private void InfoCollectionSetMenuItem_Click(object sender, EventArgs e)
         {
-            InfoCollectionConfig = new InfoCollectionSet(InfoCollectionConfig).ShowDialog();
-            infoConfigEnable.Text = InfoCollectionConfig.Enable ? "后信息收集配置启用" : string.Empty;
+            new InfoCollectionSet().ShowDialog();
+        }
+
+        private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in this.LV.SelectedItems)
+                ScanMysql(item);
         }
     }
 }
