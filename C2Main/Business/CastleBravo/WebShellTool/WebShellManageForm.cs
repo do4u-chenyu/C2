@@ -592,18 +592,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             EndRefresh();
         }
 
-        private void ClearScanResult(bool clearAll = true)
+        private void ClearScanResult()
         {
             foreach (ListViewItem lvi in LV.Items)
-            {
-                if (!clearAll && !lvi.Selected)
-                    continue;
-                lvi.SubItems[7].Text = string.Empty;
-            }
-              
+                lvi.SubItems[7].Text = string.Empty;        
         }
 
-        private void RefreshScanResult(bool checkAlive,bool checkSelected = false)
+        private void RefreshScanResult(bool checkAlive)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
@@ -617,20 +612,21 @@ namespace C2.Business.CastleBravo.WebShellTool
                         lvi.SubItems[7].Text = "跳";
                         continue;
                     }
-                    if (checkSelected && !lvi.Selected)
-                        continue;
-
-
-                    WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-                    using (GuarderUtil.WaitCursor)
-                        PostCollectInfo(task);
-                    lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
+                    ScanMysql(lvi);
                     UpdateProgress();
                     CheckSavePoint(); // 5分钟保存一次
                 }
         }
 
-           
+        private void ScanMysql(ListViewItem lvi)
+        {
+            WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
+            lvi.SubItems[7].Text = "进行中";
+            using (GuarderUtil.WaitCursor)
+                PostCollectInfo(task);
+            lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
+        }
+
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
             RefreshInfoColletionStatus(false);
@@ -648,11 +644,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.LV.SelectedItems.Count == 0)
-                return;
-            ClearScanResult(false);
-            RefreshScanResult(false, true);
-
+            foreach(ListViewItem item in this.LV.SelectedItems)
+                ScanMysql(item);
         }
     }
 }
