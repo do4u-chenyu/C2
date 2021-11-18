@@ -128,7 +128,7 @@
             this.toolStripSeparator5,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(149, 258);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 280);
             // 
             // EnterToolStripMenuItem
             // 
@@ -231,11 +231,11 @@
             this.toolStripSeparator2,
             this.toolStripButton1,
             this.checkAliveDDB,
+            this.infoCollectionMenu,
             this.refreshStopMenu,
             this.progressBar,
             this.progressMenu,
             this.toolStripSeparator6,
-            this.infoCollectionMenu,
             this.proxySettingMenu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -575,7 +575,7 @@
             // 素描选定项ToolStripMenuItem
             // 
             this.素描选定项ToolStripMenuItem.Name = "素描选定项ToolStripMenuItem";
-            this.素描选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.素描选定项ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.素描选定项ToolStripMenuItem.Text = "素描选定项";
             this.素描选定项ToolStripMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
             // 
