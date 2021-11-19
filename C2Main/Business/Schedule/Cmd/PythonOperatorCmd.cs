@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using C2.Model.Widgets;
 using C2.Utils;
 
@@ -6,7 +7,6 @@ namespace C2.Business.Schedule.Cmd
 {
     class PythonOperatorCmd : OperatorCmd
     {
-
         public PythonOperatorCmd(Triple triple) : base(triple)
         {
         }
@@ -22,18 +22,32 @@ namespace C2.Business.Schedule.Cmd
             string[] cmdElements=  cmdPython.Split(OpUtil.Blank);
 
             cmds.Add("cd /d " + path);
-            if (pythonExePaths.Count > 0 && !IsExecutableCmd(pythonExePaths, cmdPython))
+
+            string[] pythonScript = cmdPython.Split(' ');
+            if (!File.Exists(@pythonScript[1]))
             {
-                // 针对模型市场中Python算子在不同电脑python.exe路径未知,不重新配置python算子就无法正确运行问题
-                cmdElements[0] = pythonExePaths[0];
-                string newCmd = string.Join(OpUtil.StringBlank, cmdElements);
-                cmds.Add(newCmd);
+                cmds.Add("echo " + pythonScript[1] + "脚本不存在");
+            }
+
+            if (!IsExecutableCmd(pythonExePaths, cmdPython))
+            {
+                if (pythonExePaths.Count == 0)
+                {
+                    cmds.Add("echo 虚拟机不存在");
+                    cmds.Add(cmdPython);
+                }
+                else if (pythonExePaths.Count > 0)
+                {
+                    // 针对模型市场中Python算子在不同电脑python.exe路径未知,不重新配置python算子就无法正确运行问题
+                    cmdElements[0] = pythonExePaths[0];
+                    string newCmd = string.Join(OpUtil.StringBlank, cmdElements);
+                    cmds.Add(newCmd);
+                }
             }
             else
             {
                 cmds.Add(cmdPython);
             }
-
             return cmds;
         }
         private List<string> GetPythonExePaths()
