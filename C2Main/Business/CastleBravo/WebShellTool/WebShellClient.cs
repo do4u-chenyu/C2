@@ -145,7 +145,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private string ChangeDBLoginInfo(string DBConfig) 
         {
-            if (DBConfig == null)
+            if (string.IsNullOrEmpty(DBConfig))
             {
                 MessageBox.Show("请填写数据库配置信息");
                 return string.Empty;
@@ -162,7 +162,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string DatabeseInfo(string DBConfig)
         {
-            if (DBConfig == null) 
+            if (string.IsNullOrEmpty(DBConfig)) 
             {
                 MessageBox.Show("请输入数据库配置信息");
                 return string.Empty;
@@ -175,7 +175,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 Regex reg = new Regex(word);
                 Match match = reg.Match(info);
-                return match.Groups[1].Value;
+                if(match.Groups.Count > 1)
+                    return match.Groups[1].Value;
+                return string.Empty;
             }
             catch 
             {

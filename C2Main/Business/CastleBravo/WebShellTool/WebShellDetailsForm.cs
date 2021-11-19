@@ -38,7 +38,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void ShowDatabase(string dbResult) 
         {
-            if (dbResult == string.Empty)
+            if (string.IsNullOrEmpty(dbResult))
                 return;
             string[] dbResults = dbResult.Split('|');
             foreach (string result in dbResults) 
