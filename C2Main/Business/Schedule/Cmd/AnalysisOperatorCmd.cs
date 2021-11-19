@@ -10,7 +10,6 @@ namespace C2.Business.Schedule.Cmd
 {
     class AnalysisOperatorCmd : OperatorCmd
     {
-        private static readonly int DefaultSleepSecond = 5; // 默认一个算子跑30秒
         public AnalysisOperatorCmd(Triple triple) : base(triple)
         {
         }
@@ -21,29 +20,14 @@ namespace C2.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
-            int sleepSecond = DoSleepCommand();// 休眠指定时间
-            cmds.Add(string.Format("sbin\\sleep.exe {0}s ", sleepSecond));
+            string inputFilePath1 = inputFilePaths.First();//左输入文件
+            string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
+            string analysisType = option.GetOption("analysisType");//分析类型
+
+            cmds.Add(string.Format("sbin\\analysis.exe {0} {1} {2}", inputFilePath1, inputFilePath2, this.outputFilePath, analysisType));
+
             return cmds;
         }
-
-        private int DoSleepCommand()
-        {
-            int sleepSecond = DefaultSleepSecond;
-
-            if (option.GetOption("fix").ToLower() == "true")
-            {
-                int tmpSec = ConvertUtil.TryParseInt(option.GetOption("fixSecond"));
-                sleepSecond = tmpSec <= 0 ? DefaultSleepSecond : tmpSec;
-            }
-            else
-            {
-                int randomBegin = ConvertUtil.TryParseInt(option.GetOption("randomBegin"));
-                int randomEnd = ConvertUtil.TryParseInt(option.GetOption("randomEnd"));
-                Random rand = new Random();
-                sleepSecond = randomBegin <= 0 || randomEnd <= 0 || randomEnd - randomBegin < 0 ? DefaultSleepSecond : rand.Next(randomBegin, randomEnd);
-            }
-            //Thread.Sleep(sleepSecond * 1000);
-            return sleepSecond;
-        }
+        
     }
 }

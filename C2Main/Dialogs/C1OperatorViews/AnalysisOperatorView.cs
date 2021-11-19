@@ -24,12 +24,14 @@ namespace C2.OperatorViews
                 this.outListCCBL1.Visible = true;
                 this.Text = "数据分析2";
                 this.Icon = Properties.Resources.custom_icon;
+                this.comboBox2.Items.AddRange(new object[] { "关键词分析" });
             }
             else
             {
                 this.Text = "数据分析1";
                 this.label2.Location = new Point(this.label2.Location.X, this.label2.Location.Y - 30);
                 this.comboBox2.Location = new Point(this.comboBox2.Location.X, this.comboBox2.Location.Y - 30);
+                this.comboBox2.Items.AddRange(new object[] { "主题分析", "同群分析", "银行卡分析" });
             }
 
             InitializeDataSource();//初始化配置内容
@@ -43,6 +45,11 @@ namespace C2.OperatorViews
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("analysisType", this.comboBox2.Text);
 
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            if (opControl.OperatorDimension() == 2)
+            {
+                this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            }
             //更新子图所有节点状态
             UpdateSubGraphStatus();
         }
