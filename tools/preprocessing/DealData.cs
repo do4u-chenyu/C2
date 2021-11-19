@@ -14,7 +14,7 @@ namespace preprocessing
         private string outputFilePath;
         private string preType;
         private DataTable dataTable;
-        bool deleteAdGroup;
+        bool deleteAd;
         bool deleteLongText;
         bool deletePic;
 
@@ -27,13 +27,13 @@ namespace preprocessing
 
             //this.inputFilePath = "C:\\Users\\RedHat\\Desktop\\ql\\GROUPCODE_680692357_QQ.tsv";
             //this.outputFilePath = "C:\\Users\\RedHat\\Desktop\\ql\\1.txt";
-            //this.preType = "3";
+            //this.preType = "7";
 
 
             this.dataTable = new DataTable();
 
             string pretype = DecimalToBinary(int.Parse(preType));
-            this.deleteAdGroup = pretype[0].ToString() == "1";
+            this.deleteAd = pretype[0].ToString() == "1";
             this.deleteLongText = pretype[1].ToString() == "1";
             this.deletePic = pretype[2].ToString() == "1";
         }
@@ -62,6 +62,7 @@ namespace preprocessing
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
             string[] columnArray = new string[] { "APPID", "QQNUM", "CAPTURE_TIME", "GROUPCODE", "CONTENT", "DATATYPE", "IP", "IPAREAID", "IP_CITY", "IP_PROVINCE", "DotIP", "Position" };
+            Dictionary<string, List<string[]>> groupContentsDict = new Dictionary<string, List<string[]>>();
 
             // 可能有同名列，这里需要重命名一下
             Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
@@ -94,17 +95,36 @@ namespace preprocessing
                         continue;
 
                     string[] rowList = lineStr.TrimEnd(new char[] { '\r', '\n' }).Split('\t');
-                    if((deleteLongText && rowList[4].Length > 200) || (deletePic && ContainPic(rowList[4])))
+                    if (rowList.Length < 5)
+                        continue;
+                    string group = rowList[3];
+                    string content = rowList[4];
+
+                    if(deleteAd && content.Length > 60)
+                    {
+                        
+                        if (groupContentsDict.ContainsKey(group))
+                            groupContentsDict[group] = JudgeSimilar(groupContentsDict[group], rowList);
+                        else
+                            groupContentsDict.Add(group, new List<string[]>() { rowList });
+                        continue;
+                    }
+
+                    if((deleteLongText && rowList[4].Length > 100) || (deletePic && ContainPic(rowList[4])))
                         continue;
 
-                    List<string> tmpRowList = new List<string>();
-                    for (int j = 0; j < columnArray.Length; j++)
-                    {
-                        string cellValue = j < rowList.Length ? rowList[j] : "";
-                        tmpRowList.Add(cellValue);
-                    }
-                    dataTable.Rows.Add(tmpRowList.ToArray());
+                    dataTable.Rows.Add(CompleteLine(rowList, columnArray.Length).ToArray());
                 }
+
+                if (deleteAd)
+                {
+                    foreach(string group in groupContentsDict.Keys)
+                    {
+                        foreach(string[] line in groupContentsDict[group])
+                            dataTable.Rows.Add(CompleteLine(line, columnArray.Length).ToArray());
+                    }
+                }
+
             }
             catch { }
             finally
@@ -116,6 +136,63 @@ namespace preprocessing
             }
 
             return dataTable;
+        }
+
+
+        private List<string> CompleteLine(string[] rowList, int length)
+        {
+            List<string> tmpRowList = new List<string>();
+            for (int j = 0; j < length; j++)
+            {
+                string cellValue = j < rowList.Length ? rowList[j] : "";
+                tmpRowList.Add(cellValue);
+            }
+            return tmpRowList;
+        }
+
+        private List<string[]> JudgeSimilar(List<string[]> contentList, string[] content)
+        {
+            //判断文本相似度，如果重复度大于90%，说明文本内容基本一致
+            List<string[]> tmpList = new List<string[]>();
+            foreach(string[] oriContent in contentList)
+            {
+                if (Sim(oriContent[4], content[4]) < 0.9)
+                    tmpList.Add(oriContent);
+            }
+            if (tmpList.Count == contentList.Count)//相同，说明没有相似文本
+                tmpList.Add(content);
+
+            return tmpList;
+        }
+
+        private double Sim(string txt1, string txt2)
+        {
+            List<char> sl1 = txt1.ToCharArray().ToList();
+            List<char> sl2 = txt2.ToCharArray().ToList();
+            //去重
+            List<char> sl = sl1.Union(sl2).ToList<char>();
+
+            //获取重复次数
+            List<int> arrA = new List<int>();
+            List<int> arrB = new List<int>();
+            foreach (var str in sl)
+            {
+                arrA.Add(sl1.Where(x => x == str).Count());
+                arrB.Add(sl2.Where(x => x == str).Count());
+            }
+            //计算商
+            double num = 0;
+            //被除数
+            double numA = 0;
+            double numB = 0;
+            for (int i = 0; i < sl.Count; i++)
+            {
+                num += arrA[i] * arrB[i];
+                numA += Math.Pow(arrA[i], 2);
+                numB += Math.Pow(arrB[i], 2);
+            }
+            double cos = num / (Math.Sqrt(numA) * Math.Sqrt(numB));
+            return cos;
         }
 
         private bool ContainPic(string content)

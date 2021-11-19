@@ -89,7 +89,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(129, 33);
+            this.checkBox2.Location = new System.Drawing.Point(123, 33);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(82, 18);
             this.checkBox2.TabIndex = 1;
@@ -101,9 +101,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(22, 33);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(82, 18);
+            this.checkBox1.Size = new System.Drawing.Size(68, 18);
             this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "去广告群";
+            this.checkBox1.Text = "去广告";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // PreprocessingOperatorView
