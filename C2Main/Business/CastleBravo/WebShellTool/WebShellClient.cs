@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -139,12 +140,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string DatabeseInfo(string DBConfig, string database, string command) 
         {
+
             return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), database, command)));
         }
         private string ChangeDBLoginInfo(string DBConfig) 
         {
-            if (DBConfig == string.Empty)
-                return null;
+            if (DBConfig == null)
+            {
+                MessageBox.Show("请填写数据库配置信息");
+                return string.Empty;
+            }
             string host = ChangeInfo("HOST:(.+)\r\n", DBConfig);
             string user = ChangeInfo("USER:(.+)\r\n", DBConfig);
             string password = ChangeInfo("PASS:(.+)\r\n", DBConfig);
@@ -157,15 +162,26 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public string DatabeseInfo(string DBConfig)
         {
+            if (DBConfig == null) 
+            {
+                MessageBox.Show("请输入数据库配置信息");
+                return string.Empty;
+            }
             return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), "", "")));
         }
         private string ChangeInfo(string word, string info) 
         {
-            if (word == string.Empty|| info == string.Empty)
-                return null;
-            Regex reg = new Regex(word);
-            Match match = reg.Match(info);
-            return match.Groups[1].Value;
+            try
+            {
+                Regex reg = new Regex(word);
+                Match match = reg.Match(info);
+                return match.Groups[1].Value;
+            }
+            catch 
+            {
+                MessageBox.Show("请按格式正确填写数据库配置");
+                return string.Empty;
+            }
         }
 
         private string Post(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)
