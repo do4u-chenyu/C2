@@ -292,10 +292,10 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
-    <Compile Include="Business\CastleBravo\WebShellTool\InfoCollectionSet.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\InfoCollectionSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\InfoCollectionSet.Designer.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\InfoCollectionSet.Designer.cs">
       <DependentUpon>InfoCollectionSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\ProxySettingForm.cs">
@@ -321,6 +321,12 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\DetailsPageForm.Designer.cs">
       <DependentUpon>DetailsPageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.Designer.cs">
+      <DependentUpon>MSFSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
@@ -2062,7 +2068,7 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\InfoCollectionSet.resx">
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\InfoCollectionSet.resx">
       <DependentUpon>InfoCollectionSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\ProxySettingForm.resx">
@@ -2073,6 +2079,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\DetailsPageForm.resx">
       <DependentUpon>DetailsPageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.resx">
+      <DependentUpon>MSFSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.resx">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>

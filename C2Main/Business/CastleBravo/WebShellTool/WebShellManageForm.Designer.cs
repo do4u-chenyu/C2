@@ -76,16 +76,16 @@
             this.refreshAllShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshOtherMenu2 = new System.Windows.Forms.ToolStripMenuItem();
             this.secondRefreshMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
-            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.progressMenu = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.infoCollectionMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.passwdBlastingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.素描选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressMenu = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
             this.查看结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LV = new System.Windows.Forms.ListView();
@@ -105,6 +105,8 @@
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.msfMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -126,9 +128,11 @@
             this.RefreshAllDeadMenu,
             this.refreshOtherMenu,
             this.toolStripSeparator5,
+            this.msfMenu,
+            this.toolStripSeparator4,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 280);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 308);
             // 
             // EnterToolStripMenuItem
             // 
@@ -504,39 +508,6 @@
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
-            // refreshStopMenu
-            // 
-            this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.refreshStopMenu.Name = "refreshStopMenu";
-            this.refreshStopMenu.Size = new System.Drawing.Size(56, 22);
-            this.refreshStopMenu.Text = "停止任务";
-            this.refreshStopMenu.Click += new System.EventHandler(this.RefreshStopMenu_Click);
-            // 
-            // progressBar
-            // 
-            this.progressBar.AutoSize = false;
-            this.progressBar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.progressBar.Enabled = false;
-            this.progressBar.Font = new System.Drawing.Font("Microsoft YaHei UI", 8F);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(130, 19);
-            this.progressBar.Step = 1;
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            // 
-            // progressMenu
-            // 
-            this.progressMenu.Enabled = false;
-            this.progressMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.progressMenu.Name = "progressMenu";
-            this.progressMenu.Size = new System.Drawing.Size(24, 22);
-            this.progressMenu.Text = "-/-";
-            this.progressMenu.ToolTipText = "验活进度";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
             // infoCollectionMenu
             // 
             this.infoCollectionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -585,6 +556,39 @@
             this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(193, 22);
             this.infoCollectionSetMenuItem.Text = "设置";
             this.infoCollectionSetMenuItem.Click += new System.EventHandler(this.InfoCollectionSetMenuItem_Click);
+            // 
+            // refreshStopMenu
+            // 
+            this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.refreshStopMenu.Name = "refreshStopMenu";
+            this.refreshStopMenu.Size = new System.Drawing.Size(56, 22);
+            this.refreshStopMenu.Text = "停止任务";
+            this.refreshStopMenu.Click += new System.EventHandler(this.RefreshStopMenu_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.AutoSize = false;
+            this.progressBar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.progressBar.Enabled = false;
+            this.progressBar.Font = new System.Drawing.Font("Microsoft YaHei UI", 8F);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(130, 19);
+            this.progressBar.Step = 1;
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // progressMenu
+            // 
+            this.progressMenu.Enabled = false;
+            this.progressMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.progressMenu.Name = "progressMenu";
+            this.progressMenu.Size = new System.Drawing.Size(24, 22);
+            this.progressMenu.Text = "-/-";
+            this.progressMenu.ToolTipText = "验活进度";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // proxySettingMenu
             // 
@@ -725,6 +729,18 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // msfMenu
+            // 
+            this.msfMenu.Name = "msfMenu";
+            this.msfMenu.Size = new System.Drawing.Size(180, 22);
+            this.msfMenu.Text = "MSF联动";
+            this.msfMenu.Click += new System.EventHandler(this.msfMenu_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -828,5 +844,7 @@
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 素描选定项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel infoConfigEnable;
+        private System.Windows.Forms.ToolStripMenuItem msfMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

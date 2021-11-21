@@ -647,5 +647,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             foreach(ListViewItem item in this.LV.SelectedItems)
                 ScanMysql(item);
         }
+
+        private void msfMenu_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            new MSFSet().ShowDialog();
+        }
     }
 }
