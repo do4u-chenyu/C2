@@ -152,49 +152,45 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
     
        
-        public virtual string DetailInfo(string PageData)
+        public virtual string DetailInfo(string pageData)
         {
             string payload = String.Format("{0}={1}&{2}={3}",
                  prefix,
                  clientSetting.PHP_READFILE,
                  clientSetting.PARAM1,
-                 ST.EncodeUrlBase64(PageData));
+                 ST.EncodeUrlBase64(pageData));
 
             sb.AppendLine("文件浏览:")
               .AppendLine(payload)
               .AppendLine(string.Format("引导段:{0}", prefix))
               .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(PageData)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(pageData)))
               .AppendLine();
 
             return payload;
         }
 
-        public virtual string DownloadFile(string PageData) 
+        public virtual string DownloadFile(string pageData) 
         {
             string payload = String.Format("{0}={1}&{2}={3}",
                   prefix,
                   clientSetting.PHP_DOWNLOAD,
                   clientSetting.PARAM1,
-                  ST.EncodeUrlBase64(PageData));
+                  ST.EncodeUrlBase64(pageData));
 
             sb.AppendLine("文件下载:")
               .AppendLine(payload)
               .AppendLine(string.Format("引导段:{0}", prefix))
               .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(PageData)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(pageData)))
               .AppendLine();
 
             return payload;
         }
 
         public virtual List<string> ParseCurrentPath(string data)
-        {
-            string[] result = data.Split('\t');
-            if (result.Length >= 2)
-                return result.Take(2).ToList();
-            else
-                return result.ToList();
+        {   // take会自动处理越界问题
+            return data.Split('\t').Take(2).ToList();
         }
     }
 }

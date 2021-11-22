@@ -1,11 +1,7 @@
 ﻿using C2.Core;
-using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -14,7 +10,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private readonly string url;       
         private readonly IClient client;
         private string lastErrorMessage;
-        private string databaseInfo;
+        private readonly string databaseInfo;
         public string FetchLog() 
         {
             string ret = lastErrorMessage + Environment.NewLine + client.FetchLog(); // 错误日志特意放在第一行
@@ -136,9 +132,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             return client.ExtractResponse(Post(client.DetailInfo(PageData)));
         }
 
-        public byte[] DownloadFile(string PageData)
+        public byte[] DownloadFile(string pageData)
         {
-            return PostDownload(client.DownloadFile(PageData), true);
+            return PostDownload(client.DownloadFile(pageData), true);
         }
         public string DatabeseInfo(string DBConfig, string database, string command) 
         {
@@ -151,11 +147,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             string user = ChangeInfo("USER:(.+)\r\n", config);
             string password = ChangeInfo("PASS:(.+)\r\n", config);
 
-            string DBLoginInfo = string.Format("{0}choraheiheihei{1}choraheiheihei{2}",
-                host,
-                user,
-                password);
-            return DBLoginInfo;
+            return string.Format("{0}choraheiheihei{1}choraheiheihei{2}",
+                    host,
+                    user,
+                    password);
         }
         public string DatabeseInfo() 
         {
@@ -168,7 +163,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.lastErrorMessage = "数据库配置信息未填写";
                 return string.Empty;
             }
-            return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(config), "", "")));
+            return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(config), string.Empty, string.Empty)));
         }
         private string ChangeInfo(string word, string info) 
         {
@@ -222,7 +217,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                     client.AppendLog(Environment.NewLine)
                           .AppendLog("返回报文:")
                           .AppendLog(Environment.NewLine)
-                          //.AppendLog(rsp)
                           .AppendLog(Environment.NewLine);
                 return rsp;
             }

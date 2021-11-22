@@ -12,7 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private string browserDicectory = string.Empty;
         private string commandDirectory = string.Empty;
-        WebShellTaskConfig webShellTask = new WebShellTaskConfig();
+        readonly WebShellTaskConfig webShellTask = new WebShellTaskConfig();
         private string PageData = string.Empty;
         private WSFile seleFile;
         public WebShellDetailsForm()
@@ -43,7 +43,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (dbResult == "->||<-" || string.IsNullOrEmpty(dbResult)) 
             {
-                this.messageLog.Text = webShell.FetchLog()+"\n数据库连接失败";
+                this.messageLog.Text = webShell.FetchLog() + "\n数据库连接失败";
                 return;
             }
             string[] dbResults = dbResult.Split('|');
@@ -329,31 +329,29 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.fileManagerListView.SelectedItems.Count == 0)
                 return;
-            byte[] Download = webShell.DownloadFile(PageData);
-            byte[] endDownload = Download.Skip(3).Take(Download.Length - 6).ToArray();
+            byte[] download = webShell.DownloadFile(PageData);
+            download = download.Skip(3).Take(download.Length - 6).ToArray();
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
                 FileName = seleFile.FileName
             };
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try
             {
-                try
-                {
-                    using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(endDownload, 0, endDownload.Length);
-                        fs.Flush();
-                    }
-                    MessageBox.Show("下载文件成功！", "保存文件");
-                }
-                catch
-                {
-                    MessageBox.Show("导出数据发生异常");
-                }
+                using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    fs.Write(download, 0, download.Length);
+
+                this.messageLog.Text = "下载文件成功" + Environment.NewLine + webShell.FetchLog();
             }
-            this.messageLog.Text = webShell.FetchLog();
+            catch (Exception ex)
+            {
+                this.messageLog.Text = "保存文件时发生异常:" + ex.Message + Environment.NewLine + webShell.FetchLog();
+            }  
         }
     }
 }

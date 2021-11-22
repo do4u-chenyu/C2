@@ -51,17 +51,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             return payload;
         }
 
-        public override string DetailInfo(string PageData)
+        public override string DetailInfo(string pageData)
         {
             string payload = String.Format("{0}&{1}={2}",
                                              prefix.Replace("PAYLOAD", clientSetting.PHP_READFILE),
                                              clientSetting.PARAM1,
-                                             ST.StringToHex(PageData));
+                                             ST.StringToHex(pageData));
 
             sb.AppendLine("文件浏览:")
               .AppendLine(payload)
               .AppendLine(string.Format("攻击段:{0}", payload))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(PageData)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(pageData)))
               .AppendLine();
 
             return payload;
