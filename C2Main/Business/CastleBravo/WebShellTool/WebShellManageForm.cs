@@ -156,6 +156,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.IP);
             lvi.SubItems.Add(config.Country);
             lvi.SubItems.Add(config.Country2);
+            lvi.SubItems.Add(config.DatabaseConfig);
 
             // 指针关联
             lvi.Tag = config;
@@ -498,7 +499,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             WebShellTaskConfig config = LV.SelectedItems[0].Tag as WebShellTaskConfig;
-            WebShellClient client = new WebShellClient(config.Url, config.Password, config.ClientVersion);
+            WebShellClient client = new WebShellClient(config.Url, config.Password, config.ClientVersion, config.DatabaseConfig);
             client.Suscide();
             RemoveToolStripMenuItem_Click(sender, e);
         }

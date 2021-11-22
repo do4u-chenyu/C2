@@ -14,6 +14,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private readonly string url;       
         private readonly IClient client;
         private string lastErrorMessage;
+        private string databaseInfo;
         public string FetchLog() 
         {
             string ret = lastErrorMessage + Environment.NewLine + client.FetchLog(); // 错误日志特意放在第一行
@@ -21,11 +22,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             return ret;
         }
 
-        public WebShellClient(string url, string password, string clientSetting)
+        public WebShellClient(string url, string password, string clientSetting, string databaseInfo)
         {
             this.url = url;
             this.lastErrorMessage = string.Empty;
             this.client = ClientFactory.Create(password, clientSetting);
+            this.databaseInfo = databaseInfo;
 
         }
 
@@ -143,16 +145,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), database, command)));
         }
-        private string ChangeDBLoginInfo(string DBConfig) 
+        private string ChangeDBLoginInfo(string config) 
         {
-            if (string.IsNullOrEmpty(DBConfig))
-            {
-                MessageBox.Show("请填写数据库配置信息");
-                return string.Empty;
-            }
-            string host = ChangeInfo("HOST:(.+)\r\n", DBConfig);
-            string user = ChangeInfo("USER:(.+)\r\n", DBConfig);
-            string password = ChangeInfo("PASS:(.+)\r\n", DBConfig);
+            string host = ChangeInfo("HOST:(.+)\r\n", config);
+            string user = ChangeInfo("USER:(.+)\r\n", config);
+            string password = ChangeInfo("PASS:(.+)\r\n", config);
 
             string DBLoginInfo = string.Format("{0}choraheiheihei{1}choraheiheihei{2}",
                 host,
@@ -160,14 +157,18 @@ namespace C2.Business.CastleBravo.WebShellTool
                 password);
             return DBLoginInfo;
         }
-        public string DatabeseInfo(string DBConfig)
+        public string DatabeseInfo() 
         {
-            if (string.IsNullOrEmpty(DBConfig)) 
+            return DatabeseInfo(this.databaseInfo);
+        }
+        private string DatabeseInfo(string config)
+        {
+            if (string.IsNullOrEmpty(config)) 
             {
-                MessageBox.Show("请输入数据库配置信息");
+                this.lastErrorMessage = "数据库配置信息未填写";
                 return string.Empty;
             }
-            return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(DBConfig), "", "")));
+            return client.ExtractResponse(Post(client.GetDatabaseInfo(ChangeDBLoginInfo(config), "", "")));
         }
         private string ChangeInfo(string word, string info) 
         {
@@ -175,15 +176,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 Regex reg = new Regex(word);
                 Match match = reg.Match(info);
-                if(match.Groups.Count > 1)
+                if(match.Success)
                     return match.Groups[1].Value;
-                return string.Empty;
             }
             catch 
             {
-                MessageBox.Show("请按格式正确填写数据库配置");
-                return string.Empty;
+                this.lastErrorMessage = "数据库配置格式不正确";
             }
+            return string.Empty;
         }
 
         private string Post(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)

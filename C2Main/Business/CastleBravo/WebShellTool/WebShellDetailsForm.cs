@@ -23,7 +23,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             
             webShellTask = info;
-            webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion);
+            webShell = new WebShellClient(info.Url, info.Password, info.ClientVersion,info.DatabaseConfig);
             UpdateBaseInfo(webShell.PHPInfo());
         }
 
@@ -37,17 +37,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (tabControl1.SelectedTab.Text == "虚拟终端")
                 UpdateCmd(webShell.ShellStart());
             if (tabControl1.SelectedTab.Text == "数据库管理")
-                ShowDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig));
+                ShowDatabase(webShell.DatabeseInfo());
         }
         private void ShowDatabase(string dbResult) 
         {
-            if (string.IsNullOrEmpty(dbResult))
+            if (dbResult == "->||<-" || string.IsNullOrEmpty(dbResult)) 
+            {
+                this.messageLog.Text = webShell.FetchLog()+"\n数据库连接失败";
                 return;
+            }
             string[] dbResults = dbResult.Split('|');
             foreach (string result in dbResults) 
             {
-                string name = result.Replace("\t\r\n",string.Empty).Replace("\t\t",string.Empty);
-                if (name == String.Empty || name == "\t\r\n")
+                string name = result.Replace("\t\r\n",string.Empty).Replace("\t\t",string.Empty);//返回报文为sql命令行显示模式，包含有大量连续分隔符，需要去除
+                if (name == String.Empty)
                     continue;
                 TreeNode[] broNodes = this.treeView2.Nodes.Find(name, false);
                 if (broNodes.Length == 0)
@@ -60,19 +63,19 @@ namespace C2.Business.CastleBravo.WebShellTool
                         SelectedImageIndex = 4
                     });
             }
-
+            this.messageLog.Text = webShell.FetchLog();
         }
-        private void UpdateDatabase(string dbResult,string selectNode) 
+        private void UpdateDatabase(string dbResult, string selectNode) 
         {
-            if (dbResult == string.Empty)
+            TreeNode[] broNodes = this.treeView2.Nodes.Find(selectNode, false);
+            if (string.IsNullOrEmpty(dbResult))
                 return;
             string[] dbResults = dbResult.Split('|');
-            for(int i =1;i< dbResults.Length;i++)
+            for(int i =1; i< dbResults.Length; i++)
             {
                 string name = dbResults[i].Replace("\t\r\n", string.Empty).Replace("\t\t", string.Empty);
-                if (name == String.Empty || name == "\t\r\n")
+                if (name == String.Empty)
                     continue;
-                TreeNode[] broNodes = this.treeView2.Nodes.Find(selectNode, false);
                 broNodes[0].Nodes.Add(new TreeNode
                 {
                     Tag = name + "/",
@@ -82,38 +85,31 @@ namespace C2.Business.CastleBravo.WebShellTool
                     SelectedImageIndex = 4
                 });
             }
+            this.messageLog.Text = webShell.FetchLog();
         }
         private void ReadTable(string tableData) 
         {
             string[] lines = tableData.Split(new string[] { "\t\r\n" }, StringSplitOptions.None);
-            if (dataGridView1.ColumnCount != 0)
-                dataGridView1.Columns.Clear();
-            dataGridView1.AllowUserToAddRows = false;
-            int j = 0;
-            while (j < lines[0].Split('|').Length - 1)//添加第一行
+            dataGridView1.Columns.Clear();
+            int i = 0;
+            if (lines.Length == 0)
+                return;
+            string[] rowName = lines[0].Split('|');
+            while (i < rowName.Length - 1)//添加第一行
             {
-                dataGridView1.Columns.Add(j.ToString(), lines[0].Split('|')[j]);
-                j++;
+                dataGridView1.Columns.Add(i.ToString(), rowName[i]);
+                i++;
             }
-
-            for (int k = 1; k < lines.Length - 1; k++)//最后一行为\t 
+            for (int j = 1; j < lines.Length - 1; j++)//最后一行为\t 从第二行开始
             {
-                
-                string[] data = lines[k].Split(new string[] { "\t|\t" }, StringSplitOptions.None);
+                string[] data = lines[j].Split(new string[] { "\t|\t" }, StringSplitOptions.None);
                 int index = dataGridView1.Rows.Add();
-                for (int i = 0; i < data.Length; i++)
+                for (int k = 0; k < data.Length; k++)
                 {
-                    try
-                    {
-                        if (i == data.Length - 1)
-                            dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t|", string.Empty);
-                        else
-                            dataGridView1.Rows[index].Cells[i].Value = data[i].Replace("\t", string.Empty);
-                    }
-                    catch 
-                    {
-                        continue;
-                    }
+                    if (k == data.Length - 1)
+                        dataGridView1.Rows[index].Cells[k].Value = data[k].Replace("\t|", string.Empty);
+                    else
+                        dataGridView1.Rows[index].Cells[k].Value = data[k].Replace("\t", string.Empty);
                 }
                
             }
@@ -125,12 +121,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (node.Level == 0)
                 UpdateDatabase(webShell.DatabeseInfo(webShellTask.DatabaseConfig, selectNode + "\t", String.Format("show tables from {0}", selectNode)), selectNode);
             if (node.Level == 1)
+            {
                 ReadTable(webShell.DatabeseInfo(webShellTask.DatabaseConfig, node.Parent.Text, String.Format("select * from {0}", selectNode)));
-        }
-        private void TreeView2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            
-
+                this.messageLog.Text = webShell.FetchLog();
+            }
         }
         private void UpdateCmd(Tuple<string, string> excuteResult)
         {
