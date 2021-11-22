@@ -25,10 +25,9 @@ namespace preprocessing
             this.outputFilePath = param[1];
             this.preType = param[2];
 
-            //this.inputFilePath = "C:\\Users\\RedHat\\Desktop\\ql\\GROUPCODE_680692357_QQ.tsv";
+            //this.inputFilePath = "C:\\Users\\RedHat\\Desktop\\ql";
             //this.outputFilePath = "C:\\Users\\RedHat\\Desktop\\ql\\1.txt";
             //this.preType = "7";
-
 
             this.dataTable = new DataTable();
 
@@ -59,7 +58,7 @@ namespace preprocessing
 
         private DataTable GenDataTable(string path)
         {
-            DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
+            DataTable dataTable = new DataTable("preprocessing");
 
             string[] columnArray = new string[] { "APPID", "QQNUM", "CAPTURE_TIME", "GROUPCODE", "CONTENT", "DATATYPE", "IP", "IPAREAID", "IP_CITY", "IP_PROVINCE", "DotIP", "Position" };
             Dictionary<string, List<string[]>> groupContentsDict = new Dictionary<string, List<string[]>>();
@@ -80,51 +79,65 @@ namespace preprocessing
                 }
             }
 
-            int lineCount = 0;
+            
             FileStream fs_dir = null;
             StreamReader reader = null;
+            List<string> fileList = new List<string>();
+
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo folder = new DirectoryInfo(path);
+                foreach (FileInfo file in folder.GetFiles())
+                    fileList.Add(Path.Combine(path,file.Name));
+            }
+            else
+                fileList.Add(path);
+
             try
             {
-                fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
-                reader = new StreamReader(fs_dir);
-                string lineStr;
-                while ((lineStr = reader.ReadLine()) != null)
+                foreach (string file in fileList)
                 {
-                    lineCount++;
-                    if (lineCount == 1 || lineStr == string.Empty)
-                        continue;
-
-                    string[] rowList = lineStr.TrimEnd(new char[] { '\r', '\n' }).Split('\t');
-                    if (rowList.Length < 5)
-                        continue;
-                    string group = rowList[3];
-                    string content = rowList[4];
-
-                    if(deleteAd && content.Length > 60)
+                    int lineCount = 0;
+                    fs_dir = new FileStream(file, FileMode.Open, FileAccess.Read);
+                    reader = new StreamReader(fs_dir);
+                    string lineStr;
+                    while ((lineStr = reader.ReadLine()) != null)
                     {
-                        
-                        if (groupContentsDict.ContainsKey(group))
-                            groupContentsDict[group] = JudgeSimilar(groupContentsDict[group], rowList);
-                        else
-                            groupContentsDict.Add(group, new List<string[]>() { rowList });
-                        continue;
+                        lineCount++;
+                        if (lineCount == 1 || lineStr == string.Empty)
+                            continue;
+
+                        string[] rowList = lineStr.TrimEnd(new char[] { '\r', '\n' }).Split('\t');
+                        if (rowList.Length < 5)
+                            continue;
+                        string group = rowList[3];
+                        string content = rowList[4];
+
+                        if (deleteAd && content.Length > 60)
+                        {
+
+                            if (groupContentsDict.ContainsKey(group))
+                                groupContentsDict[group] = JudgeSimilar(groupContentsDict[group], rowList);
+                            else
+                                groupContentsDict.Add(group, new List<string[]>() { rowList });
+                            continue;
+                        }
+
+                        if ((deleteLongText && rowList[4].Length > 100) || (deletePic && ContainPic(rowList[4])))
+                            continue;
+
+                        dataTable.Rows.Add(CompleteLine(rowList, columnArray.Length).ToArray());
                     }
 
-                    if((deleteLongText && rowList[4].Length > 100) || (deletePic && ContainPic(rowList[4])))
-                        continue;
-
-                    dataTable.Rows.Add(CompleteLine(rowList, columnArray.Length).ToArray());
-                }
-
-                if (deleteAd)
-                {
-                    foreach(string group in groupContentsDict.Keys)
+                    if (deleteAd)
                     {
-                        foreach(string[] line in groupContentsDict[group])
-                            dataTable.Rows.Add(CompleteLine(line, columnArray.Length).ToArray());
+                        foreach (string group in groupContentsDict.Keys)
+                        {
+                            foreach (string[] line in groupContentsDict[group])
+                                dataTable.Rows.Add(CompleteLine(line, columnArray.Length).ToArray());
+                        }
                     }
                 }
-
             }
             catch { }
             finally

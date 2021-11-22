@@ -1,24 +1,29 @@
-﻿using C2.Business.Model;
-using C2.Controls.Move.Op;
-using C2.Core;
+﻿using C2.Controls.Move.Op;
 using C2.Dialogs.Base;
+using C2.Utils;
 using System;
-using System.Text;
+using System.IO;
+using System.Windows.Forms;
 
 namespace C2.OperatorViews
 {
     public partial class PreprocessingOperatorView : C1BaseOperatorView
     {
+        private string fileSamplePath;
+        private string dirSamplePath;
+
         public PreprocessingOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitializeDataSource();//初始化配置内容
             LoadOption();
+            fileSamplePath = Path.Combine(Application.StartupPath, "Resources", "Templates", "数据预处理文件模板.txt");
+            dirSamplePath = Path.Combine(Application.StartupPath, "Resources", "Templates", "数据预处理文件夹模板.txt");
         }
 
 
-        #region 配置信息的保存与加载
-        protected override void SaveOption()
+    #region 配置信息的保存与加载
+    protected override void SaveOption()
         {
             this.opControl.Option.Clear();
             //输入输出字段待定
@@ -62,15 +67,41 @@ namespace C2.OperatorViews
 
         protected override void CancelButton_Click(object sender, EventArgs e)
         {
-            //bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
-            //if (isReady && !this.checkBox1.Checked && !this.checkBox2.Checked && !this.checkBox3.Checked)
-            //{
-            //    this.opControl.Status = ElementStatus.Null;
-            //}
-            //opControl.Option.OptionValidating();
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
+        }
 
+        private void DirSampleLabel_Click(object sender, EventArgs e)
+        {
+            SaveFileToLocal(dirSamplePath);
+        }
+
+        private void FileSampleLabel_Click(object sender, EventArgs e)
+        {
+            SaveFileToLocal(fileSamplePath);
+        }
+
+        private void SaveFileToLocal(string sourcePath)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "文本文件|*.txt",
+                FileName = Path.GetFileName(sourcePath)
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            using (GuarderUtil.WaitCursor)
+            {
+                if (!File.Exists(dialog.FileName))
+                {
+                    StreamWriter sw = new StreamWriter(dialog.FileName);
+                    sw.Close();
+                }
+                File.Copy(sourcePath, dialog.FileName, true);
+            }
+            HelpUtil.ShowMessageBox("保存完毕。");
         }
     }
 }

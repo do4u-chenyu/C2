@@ -1,0 +1,6 @@
+说明
+C:\\Users\\RedHat\\Desktop\\ql
+【第二行为群聊文件存放文件夹路径，可修改】
+【其他部分禁止修改】
+【文件夹内文件必须只有QQ数据】
+【表头固定12个字段为：APPID	QQNUM	CAPTURE_TIME	GROUPCODE	CONTENT	DATATYPE	IP	IPAREAID	IP_CITY	IP_PROVINCE	DotIP	Position】
