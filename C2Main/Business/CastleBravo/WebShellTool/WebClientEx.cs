@@ -44,8 +44,17 @@ namespace C2.Business.CastleBravo.WebShellTool
                 // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
                 bytes = WebClientEx.Create(timeout, proxy)
                                    .UploadData(url, "POST", bytes);
+             return Encoding.Default.GetString(bytes);   
+        }
 
-            return Encoding.Default.GetString(bytes);
+        public static byte[] PostDownload(string url, string payload, int timeout, ProxySetting proxy)
+        {
+            // 调用者处理异常
+            byte[] bytes = Encoding.Default.GetBytes(payload);
+            using (GuarderUtil.WaitCursor)
+                bytes = WebClientEx.Create(timeout, proxy)
+                                   .UploadData(url, "POST", bytes);
+                return bytes;
         }
     }
 }

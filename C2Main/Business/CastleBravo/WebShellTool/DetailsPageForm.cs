@@ -17,39 +17,25 @@ namespace C2.Business.CastleBravo.WebShellTool
     public partial class DetailsPageForm : Form
     {
         public string Content;
-        public string fileName;
-        public DetailsPageForm(string content, string filename)
+    
+        public DetailsPageForm(string content)
         {
             InitializeComponent();
             this.Content = content;
-            this.fileName = filename;
             this.comboBox1.SelectedIndex = 0;
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboBox1.SelectedItem.ToString() == "GB2312")
+
+            if (this.comboBox1.SelectedItem.ToString() == "GB2312") 
                 this.richTextBox1.Text = Content;
+           
             else
             {
                 byte[] getBt = Encoding.GetEncoding("GB2312").GetBytes(Content);
                 this.richTextBox1.Text = Encoding.GetEncoding("utf-8").GetString(getBt);
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**";
-            saveFileDialog1.FileName = fileName;
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-            DialogResult dr = saveFileDialog1.ShowDialog();
-            if (dr == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-                MessageBox.Show("下载文件成功！", "保存文件");
-            } 
         }
     }
 }

@@ -53,6 +53,9 @@
             this.cmdTextBox = new System.Windows.Forms.TextBox();
             this.messageLog = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.下载ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -68,6 +71,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -166,6 +170,7 @@
             this.flvTime,
             this.flvSize,
             this.flvChmod});
+            this.fileManagerListView.ContextMenuStrip = this.contextMenuStrip1;
             this.fileManagerListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileManagerListView.HideSelection = false;
             this.fileManagerListView.Location = new System.Drawing.Point(0, 23);
@@ -326,6 +331,28 @@
             this.splitContainer2.SplitterDistance = 310;
             this.splitContainer2.TabIndex = 2;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.浏览ToolStripMenuItem,
+            this.下载ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // 浏览ToolStripMenuItem
+            // 
+            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
+            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.浏览ToolStripMenuItem.Text = "浏览";
+            this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
+            // 
+            // 下载ToolStripMenuItem
+            // 
+            this.下载ToolStripMenuItem.Name = "下载ToolStripMenuItem";
+            this.下载ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.下载ToolStripMenuItem.Text = "下载";
+            this.下载ToolStripMenuItem.Click += new System.EventHandler(this.下载ToolStripMenuItem_Click);
+            // 
             // WebShellDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -356,6 +383,7 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -385,5 +413,8 @@
         private System.Windows.Forms.TextBox cmdTextBox;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 浏览ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 下载ToolStripMenuItem;
     }
 }

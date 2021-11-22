@@ -134,9 +134,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             return client.ExtractResponse(Post(client.DetailInfo(PageData)));
         }
 
-        public string DownloadFile(string PageData) 
+        public byte[] DownloadFile(string PageData)
         {
-            return client.ExtractResponse(Post(client.DownloadFile(PageData)));
+            return PostDownload(client.DownloadFile(PageData), true);
         }
         public string DatabeseInfo(string DBConfig, string database, string command) 
         {
@@ -208,6 +208,29 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.lastErrorMessage = WafDector(e.Message);
                 return string.Empty;
             }   
+        }
+        private byte[] PostDownload(string payload, bool logRsp = false, int defaultTimeout = Global.WebClientDefaultTimeout)
+        {
+            if (string.IsNullOrEmpty(payload))
+                return new byte[] { };
+
+            this.lastErrorMessage = string.Empty;
+            try
+            {
+                byte[] rsp = WebClientEx.PostDownload(this.url, payload, defaultTimeout, ProxySetting.Empty);
+                if (logRsp)
+                    client.AppendLog(Environment.NewLine)
+                          .AppendLog("返回报文:")
+                          .AppendLog(Environment.NewLine)
+                          //.AppendLog(rsp)
+                          .AppendLog(Environment.NewLine);
+                return rsp;
+            }
+            catch (Exception e)
+            {
+                this.lastErrorMessage = WafDector(e.Message);
+                return new byte[] { };
+            }
         }
 
 

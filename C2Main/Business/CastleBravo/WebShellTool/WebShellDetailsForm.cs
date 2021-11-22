@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string browserDicectory = string.Empty;
         private string commandDirectory = string.Empty;
         WebShellTaskConfig webShellTask = new WebShellTaskConfig();
+        private string PageData = string.Empty;
+        private WSFile seleFile;
         public WebShellDetailsForm()
         {
             InitializeComponent();
@@ -158,12 +161,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
             if (selectedFile.Type == WebShellFileType.Directory)
                 UpdateFileManager(webShell.PathBrowser(browserDicectory + "/" + selectedFile.FileName));
-            if (selectedFile.Type == WebShellFileType.File)
-            {
-                string PageData = browserDicectory + "/" + selectedFile.FileName;
-                new DetailsPageForm(webShell.DetailInfo(PageData),selectedFile.FileName).ShowDialog();
-                this.messageLog.Text = webShell.FetchLog();
-            }
         }
 
         private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
@@ -321,6 +318,48 @@ namespace C2.Business.CastleBravo.WebShellTool
                 UpdateCmd(webShell.Excute(commandDirectory, this.cmdTextBox.Text));
         }
 
-       
+        private void 浏览ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.fileManagerListView.SelectedItems.Count == 0)
+                return;
+            seleFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
+            PageData = browserDicectory + "/" + seleFile.FileName;
+            if (seleFile.Type == WebShellFileType.File)
+            {
+                new DetailsPageForm(webShell.DetailInfo(PageData)).ShowDialog();
+                this.messageLog.Text = webShell.FetchLog();
+            }
+        }
+
+        private void 下载ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.fileManagerListView.SelectedItems.Count == 0)
+                return;
+            byte[] Download = webShell.DownloadFile(PageData);
+            byte[] endDownload = Download.Skip(3).Take(Download.Length - 6).ToArray();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
+                FileName = seleFile.FileName
+            };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(endDownload, 0, endDownload.Length);
+                        fs.Flush();
+                    }
+                    MessageBox.Show("下载文件成功！", "保存文件");
+                }
+                catch
+                {
+                    MessageBox.Show("导出数据发生异常");
+                }
+            }
+            this.messageLog.Text = webShell.FetchLog();
+        }
     }
 }
