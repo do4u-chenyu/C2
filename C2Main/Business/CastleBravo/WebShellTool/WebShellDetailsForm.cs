@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -161,7 +162,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (selectedFile.Type == WebShellFileType.File)
             {
                 string PageData = browserDicectory + "/" + selectedFile.FileName;
-                new DetailsPageForm(webShell.DetailInfo(PageData),selectedFile.FileName).ShowDialog();
+                new DetailsPageForm(webShell.DetailInfo(PageData),webShell.DownloadFile(PageData),selectedFile.FileName).ShowDialog();
                 this.messageLog.Text = webShell.FetchLog();
             }
         }
@@ -321,6 +322,57 @@ namespace C2.Business.CastleBravo.WebShellTool
                 UpdateCmd(webShell.Excute(commandDirectory, this.cmdTextBox.Text));
         }
 
-       
+        private void 浏览ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.fileManagerListView.SelectedItems.Count == 0)
+                return;
+            WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
+            if (selectedFile.Type == WebShellFileType.File)
+            {
+                string PageData = browserDicectory + "/" + selectedFile.FileName;
+                new DetailsPageForm(webShell.DetailInfo(PageData), webShell.DownloadFile(PageData), selectedFile.FileName).ShowDialog();
+                this.messageLog.Text = webShell.FetchLog();
+            }
+        }
+
+        private void 下载ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.fileManagerListView.SelectedItems.Count == 0)
+                return;
+            WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
+            string PageData = browserDicectory + "/" + selectedFile.FileName;
+
+            byte[] Download = webShell.DownloadFile(PageData);
+            byte[] preDownload = Download.Skip(3).ToArray();
+            byte[] endDownload = new byte[preDownload.Length - 3];
+            int count = 0;
+            for (int i = 0; i < preDownload.Length - 3; i++)
+            {
+                endDownload[count] = preDownload[i];
+                count++;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
+                FileName = selectedFile.FileName
+            };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(endDownload, 0, endDownload.Length);
+                        fs.Flush();
+                    }
+                    MessageBox.Show("下载文件成功！", "保存文件");
+                }
+                catch
+                {
+                    MessageBox.Show("导出数据发生异常");
+                }
+            }
+
+        }
     }
 }

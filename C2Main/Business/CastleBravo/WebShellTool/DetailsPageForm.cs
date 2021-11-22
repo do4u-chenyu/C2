@@ -18,18 +18,23 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         public string Content;
         public string fileName;
-        public DetailsPageForm(string content, string filename)
+        public byte[] Download;
+    
+        public DetailsPageForm(string content,byte[] download, string filename)
         {
             InitializeComponent();
             this.Content = content;
             this.fileName = filename;
+            this.Download = download;
             this.comboBox1.SelectedIndex = 0;
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboBox1.SelectedItem.ToString() == "GB2312")
+
+            if (this.comboBox1.SelectedItem.ToString() == "GB2312") 
                 this.richTextBox1.Text = Content;
+           
             else
             {
                 byte[] getBt = Encoding.GetEncoding("GB2312").GetBytes(Content);
@@ -37,19 +42,39 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
+        /*
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**";
-            saveFileDialog1.FileName = fileName;
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-            DialogResult dr = saveFileDialog1.ShowDialog();
-            if (dr == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+           byte[] preDownload = Download.Skip(3).ToArray();
+           byte[] endDownload = new byte[preDownload.Length-3];
+            int count = 0;
+            for (int i = 0; i < preDownload.Length-3; i++)
             {
-                richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-                MessageBox.Show("下载文件成功！", "保存文件");
+                endDownload[count] = preDownload[i];
+                count++;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
+                FileName = fileName
+            };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(endDownload, 0, endDownload.Length);
+                        fs.Flush();
+                    }
+                    MessageBox.Show("下载文件成功！", "保存文件");
+                }
+                catch 
+                {
+                    MessageBox.Show("导出数据发生异常");
+                }
             } 
         }
+        */
     }
 }
