@@ -13,6 +13,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string browserDicectory = string.Empty;
         private string commandDirectory = string.Empty;
         WebShellTaskConfig webShellTask = new WebShellTaskConfig();
+        private string PageData = string.Empty;
+        private WSFile seleFile;
         public WebShellDetailsForm()
         {
             InitializeComponent();
@@ -159,12 +161,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
             if (selectedFile.Type == WebShellFileType.Directory)
                 UpdateFileManager(webShell.PathBrowser(browserDicectory + "/" + selectedFile.FileName));
-            if (selectedFile.Type == WebShellFileType.File)
-            {
-                string PageData = browserDicectory + "/" + selectedFile.FileName;
-                new DetailsPageForm(webShell.DetailInfo(PageData),webShell.DownloadFile(PageData),selectedFile.FileName).ShowDialog();
-                this.messageLog.Text = webShell.FetchLog();
-            }
         }
 
         private void UpdateFileManager(Tuple<string, List<WSFile>, List<string>> pathFiles)
@@ -326,11 +322,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.fileManagerListView.SelectedItems.Count == 0)
                 return;
-            WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
-            if (selectedFile.Type == WebShellFileType.File)
+            seleFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
+            PageData = browserDicectory + "/" + seleFile.FileName;
+            if (seleFile.Type == WebShellFileType.File)
             {
-                string PageData = browserDicectory + "/" + selectedFile.FileName;
-                new DetailsPageForm(webShell.DetailInfo(PageData), webShell.DownloadFile(PageData), selectedFile.FileName).ShowDialog();
+                new DetailsPageForm(webShell.DetailInfo(PageData)).ShowDialog();
                 this.messageLog.Text = webShell.FetchLog();
             }
         }
@@ -339,22 +335,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.fileManagerListView.SelectedItems.Count == 0)
                 return;
-            WSFile selectedFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
-            string PageData = browserDicectory + "/" + selectedFile.FileName;
-
             byte[] Download = webShell.DownloadFile(PageData);
-            byte[] preDownload = Download.Skip(3).ToArray();
-            byte[] endDownload = new byte[preDownload.Length - 3];
-            int count = 0;
-            for (int i = 0; i < preDownload.Length - 3; i++)
-            {
-                endDownload[count] = preDownload[i];
-                count++;
-            }
+            byte[] endDownload = Download.Skip(3).Take(Download.Length - 6).ToArray();
+
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
-                FileName = selectedFile.FileName
+                FileName = seleFile.FileName
             };
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -372,7 +359,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     MessageBox.Show("导出数据发生异常");
                 }
             }
-
+            this.messageLog.Text = webShell.FetchLog();
         }
     }
 }

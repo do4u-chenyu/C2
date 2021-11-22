@@ -47,7 +47,7 @@ namespace C2.Business.CastleBravo.WebShellTool
              return Encoding.Default.GetString(bytes);   
         }
 
-        public static byte[] Post2(string url, string payload, int timeout, ProxySetting proxy)
+        public static byte[] PostDownload(string url, string payload, int timeout, ProxySetting proxy)
         {
             // 调用者处理异常
             byte[] bytes = Encoding.Default.GetBytes(payload);

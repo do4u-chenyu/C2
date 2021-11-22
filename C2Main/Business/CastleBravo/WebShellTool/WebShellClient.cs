@@ -217,7 +217,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.lastErrorMessage = string.Empty;
             try
             {
-                byte[] rsp = WebClientEx.Post2(this.url, payload, defaultTimeout, ProxySetting.Empty);
+                byte[] rsp = WebClientEx.PostDownload(this.url, payload, defaultTimeout, ProxySetting.Empty);
                 if (logRsp)
                     client.AppendLog(Environment.NewLine)
                           .AppendLog("返回报文:")
