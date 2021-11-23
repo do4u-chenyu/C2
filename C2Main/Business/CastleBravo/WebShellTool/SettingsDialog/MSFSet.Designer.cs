@@ -53,7 +53,7 @@
             this.help2.Name = "help2";
             this.help2.Size = new System.Drawing.Size(101, 12);
             this.help2.TabIndex = 10037;
-            this.help2.Text = "103.43.17.9:4444";
+            this.help2.Text = "103.43.17.9:8889";
             // 
             // addr
             // 

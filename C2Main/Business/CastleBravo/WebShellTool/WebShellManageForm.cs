@@ -649,12 +649,12 @@ namespace C2.Business.CastleBravo.WebShellTool
                 ScanMysql(item);
         }
 
-        private void msfMenu_Click(object sender, EventArgs e)
+        private void MSFMenu_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            new MSFSet().ShowDialog();
+            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig,Proxy).ShowDialog();
         }
     }
 }

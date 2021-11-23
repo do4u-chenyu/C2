@@ -85,7 +85,25 @@
             this.素描选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.定时任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.数据库配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
@@ -109,24 +127,6 @@
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.数据库配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.定时任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -239,7 +239,7 @@
             this.msfMenu.Name = "msfMenu";
             this.msfMenu.Size = new System.Drawing.Size(148, 22);
             this.msfMenu.Text = "MSF联动";
-            this.msfMenu.Click += new System.EventHandler(this.msfMenu_Click);
+            this.msfMenu.Click += new System.EventHandler(this.MSFMenu_Click);
             // 
             // toolStripSeparator4
             // 
@@ -522,21 +522,21 @@
             // refreshAllShellMenu
             // 
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(136, 22);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(180, 22);
             this.refreshAllShellMenu.Text = "批量验活";
             this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(136, 22);
+            this.refreshOtherMenu2.Size = new System.Drawing.Size(180, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
             this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // secondRefreshMenu
             // 
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(136, 22);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(180, 22);
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
@@ -604,6 +604,24 @@
             this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
             // 
+            // 所有项ToolStripMenuItem
+            // 
+            this.所有项ToolStripMenuItem.Name = "所有项ToolStripMenuItem";
+            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem
+            // 
+            this.验活项ToolStripMenuItem.Name = "验活项ToolStripMenuItem";
+            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem
+            // 
+            this.选定项ToolStripMenuItem.Name = "选定项ToolStripMenuItem";
+            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem.Text = "选定项";
+            // 
             // processViewToolStripMenuItem
             // 
             this.processViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -613,6 +631,108 @@
             this.processViewToolStripMenuItem.Name = "processViewToolStripMenuItem";
             this.processViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.processViewToolStripMenuItem.Text = "进程列表";
+            // 
+            // 所有项ToolStripMenuItem1
+            // 
+            this.所有项ToolStripMenuItem1.Name = "所有项ToolStripMenuItem1";
+            this.所有项ToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem1.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem1
+            // 
+            this.验活项ToolStripMenuItem1.Name = "验活项ToolStripMenuItem1";
+            this.验活项ToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem1.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem1
+            // 
+            this.选定项ToolStripMenuItem1.Name = "选定项ToolStripMenuItem1";
+            this.选定项ToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem1.Text = "选定项";
+            // 
+            // 定时任务ToolStripMenuItem
+            // 
+            this.定时任务ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.所有项ToolStripMenuItem2,
+            this.验活项ToolStripMenuItem2,
+            this.选定项ToolStripMenuItem2});
+            this.定时任务ToolStripMenuItem.Name = "定时任务ToolStripMenuItem";
+            this.定时任务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.定时任务ToolStripMenuItem.Text = "定时任务";
+            // 
+            // 所有项ToolStripMenuItem2
+            // 
+            this.所有项ToolStripMenuItem2.Name = "所有项ToolStripMenuItem2";
+            this.所有项ToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem2.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem2
+            // 
+            this.验活项ToolStripMenuItem2.Name = "验活项ToolStripMenuItem2";
+            this.验活项ToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem2.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem2
+            // 
+            this.选定项ToolStripMenuItem2.Name = "选定项ToolStripMenuItem2";
+            this.选定项ToolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem2.Text = "选定项";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.所有项ToolStripMenuItem3,
+            this.验活项ToolStripMenuItem3,
+            this.选定项ToolStripMenuItem3});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "地理位置";
+            // 
+            // 所有项ToolStripMenuItem3
+            // 
+            this.所有项ToolStripMenuItem3.Name = "所有项ToolStripMenuItem3";
+            this.所有项ToolStripMenuItem3.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem3.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem3
+            // 
+            this.验活项ToolStripMenuItem3.Name = "验活项ToolStripMenuItem3";
+            this.验活项ToolStripMenuItem3.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem3.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem3
+            // 
+            this.选定项ToolStripMenuItem3.Name = "选定项ToolStripMenuItem3";
+            this.选定项ToolStripMenuItem3.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem3.Text = "选定项";
+            // 
+            // 数据库配置ToolStripMenuItem
+            // 
+            this.数据库配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.所有项ToolStripMenuItem4,
+            this.验活项ToolStripMenuItem4,
+            this.选定项ToolStripMenuItem4});
+            this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
+            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.数据库配置ToolStripMenuItem.Text = "数据库配置";
+            // 
+            // 所有项ToolStripMenuItem4
+            // 
+            this.所有项ToolStripMenuItem4.Name = "所有项ToolStripMenuItem4";
+            this.所有项ToolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem4.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem4
+            // 
+            this.验活项ToolStripMenuItem4.Name = "验活项ToolStripMenuItem4";
+            this.验活项ToolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem4.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem4
+            // 
+            this.选定项ToolStripMenuItem4.Name = "选定项ToolStripMenuItem4";
+            this.选定项ToolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem4.Text = "选定项";
             // 
             // refreshStopMenu
             // 
@@ -785,126 +905,6 @@
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
-            // 
-            // 数据库配置ToolStripMenuItem
-            // 
-            this.数据库配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem4,
-            this.验活项ToolStripMenuItem4,
-            this.选定项ToolStripMenuItem4});
-            this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
-            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.数据库配置ToolStripMenuItem.Text = "数据库配置";
-            // 
-            // 定时任务ToolStripMenuItem
-            // 
-            this.定时任务ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem2,
-            this.验活项ToolStripMenuItem2,
-            this.选定项ToolStripMenuItem2});
-            this.定时任务ToolStripMenuItem.Name = "定时任务ToolStripMenuItem";
-            this.定时任务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.定时任务ToolStripMenuItem.Text = "定时任务";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem3,
-            this.验活项ToolStripMenuItem3,
-            this.选定项ToolStripMenuItem3});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "地理位置";
-            // 
-            // 所有项ToolStripMenuItem
-            // 
-            this.所有项ToolStripMenuItem.Name = "所有项ToolStripMenuItem";
-            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem
-            // 
-            this.验活项ToolStripMenuItem.Name = "验活项ToolStripMenuItem";
-            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem
-            // 
-            this.选定项ToolStripMenuItem.Name = "选定项ToolStripMenuItem";
-            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem1
-            // 
-            this.所有项ToolStripMenuItem1.Name = "所有项ToolStripMenuItem1";
-            this.所有项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem1.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem1
-            // 
-            this.验活项ToolStripMenuItem1.Name = "验活项ToolStripMenuItem1";
-            this.验活项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem1.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem1
-            // 
-            this.选定项ToolStripMenuItem1.Name = "选定项ToolStripMenuItem1";
-            this.选定项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem1.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem2
-            // 
-            this.所有项ToolStripMenuItem2.Name = "所有项ToolStripMenuItem2";
-            this.所有项ToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem2.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem2
-            // 
-            this.验活项ToolStripMenuItem2.Name = "验活项ToolStripMenuItem2";
-            this.验活项ToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem2.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem2
-            // 
-            this.选定项ToolStripMenuItem2.Name = "选定项ToolStripMenuItem2";
-            this.选定项ToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem2.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem3
-            // 
-            this.所有项ToolStripMenuItem3.Name = "所有项ToolStripMenuItem3";
-            this.所有项ToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem3.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem3
-            // 
-            this.验活项ToolStripMenuItem3.Name = "验活项ToolStripMenuItem3";
-            this.验活项ToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem3.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem3
-            // 
-            this.选定项ToolStripMenuItem3.Name = "选定项ToolStripMenuItem3";
-            this.选定项ToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem3.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem4
-            // 
-            this.所有项ToolStripMenuItem4.Name = "所有项ToolStripMenuItem4";
-            this.所有项ToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem4.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem4
-            // 
-            this.验活项ToolStripMenuItem4.Name = "验活项ToolStripMenuItem4";
-            this.验活项ToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem4.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem4
-            // 
-            this.选定项ToolStripMenuItem4.Name = "选定项ToolStripMenuItem4";
-            this.选定项ToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem4.Text = "选定项";
             // 
             // WebShellManageForm
             // 
