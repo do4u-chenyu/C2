@@ -261,8 +261,10 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridView1.Location = new System.Drawing.Point(203, 4);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
@@ -278,7 +280,7 @@
             this.treeView2.Location = new System.Drawing.Point(4, 4);
             this.treeView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(209, 346);
+            this.treeView2.Size = new System.Drawing.Size(200, 346);
             this.treeView2.TabIndex = 0;
             this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView2_NodeMouseDoubleClick);
             // 
