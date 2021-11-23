@@ -292,11 +292,11 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\InfoCollectionSet.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\InfoCollectionSet.Designer.cs">
-      <DependentUpon>InfoCollectionSet.cs</DependentUpon>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.Designer.cs">
+      <DependentUpon>MysqlBlastingSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\ProxySettingForm.cs">
       <SubType>Form</SubType>
@@ -2068,8 +2068,8 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\InfoCollectionSet.resx">
-      <DependentUpon>InfoCollectionSet.cs</DependentUpon>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.resx">
+      <DependentUpon>MysqlBlastingSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\ProxySettingForm.resx">
       <DependentUpon>ProxySettingForm.cs</DependentUpon>

