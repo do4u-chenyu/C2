@@ -627,7 +627,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 PostCollectInfo(task);
             lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
         }
-
+        #region 后信息收集模块
+        // mysql部分
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
             RefreshInfoColletionStatus(false);
@@ -636,19 +637,23 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             RefreshInfoColletionStatus(true);
         }
-      
-      
-        private void InfoCollectionSetMenuItem_Click(object sender, EventArgs e)
-        {
-            new InfoCollectionSet().ShowDialog();
-        }
-
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
             foreach(ListViewItem item in this.LV.SelectedItems)
                 ScanMysql(item);
         }
+        private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
+        {
+            new MysqlBlastingSet().ShowDialog();
+        }
+        // 地理位置部分
+        private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
+        //公共函数部分
+
+        // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
@@ -657,9 +662,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig,Proxy).ShowDialog();
         }
 
-        private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
-        {
+        
+        #endregion
 
-        }
     }
 }
