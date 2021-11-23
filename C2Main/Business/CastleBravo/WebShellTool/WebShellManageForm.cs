@@ -656,5 +656,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig,Proxy).ShowDialog();
         }
+
+        private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
