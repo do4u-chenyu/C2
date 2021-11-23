@@ -29,6 +29,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private ToolStripItem[] enableItems;
 
         private DateTime s; // 自动保存
+        private InfoType InfoType;
         public WebShellManageForm()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             setOfHost = new HashSet<string>();
             setOfIPAddress = new HashSet<string>();
             NumberOfAlive = 0;
+            InfoType = InfoType.empty;
         }
 
         private void InitializeToolStrip()
@@ -663,6 +665,16 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         
         #endregion
+
+    }
+    internal enum InfoType
+    { 
+        mysqlBlasting,
+        systemInfo,
+        processList,
+        timedTask,
+        locationInfo,
+        empty
 
     }
 }
