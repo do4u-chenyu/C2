@@ -329,12 +329,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.fileManagerListView.SelectedItems.Count == 0)
                 return;
+            seleFile = this.fileManagerListView.SelectedItems[0].Tag as WSFile;
             byte[] download = webShell.DownloadFile(PageData);
             download = download.Skip(3).Take(download.Length - 6).ToArray();
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
+                //Filter = "ext files (*.txt)|*.txt|All files(*.*)|*>**",
+                Filter = "All files(*.*)|*>**",
                 FileName = seleFile.FileName
             };
 
