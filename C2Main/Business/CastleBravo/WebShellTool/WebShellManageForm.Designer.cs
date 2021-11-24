@@ -569,28 +569,28 @@
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
             this.allTaskMysqlMenuItem.Text = "所有项";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
             this.aliveTaskMysqlMenuItem.Text = "验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
             // currentMysqlTaskMenuItem
             // 
             this.currentMysqlTaskMenuItem.Name = "currentMysqlTaskMenuItem";
-            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(112, 22);
             this.currentMysqlTaskMenuItem.Text = "选定项";
             this.currentMysqlTaskMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
             // 
             // mysqlTaskSetMenuItem
             // 
             this.mysqlTaskSetMenuItem.Name = "mysqlTaskSetMenuItem";
-            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(112, 22);
             this.mysqlTaskSetMenuItem.Text = "设置";
             this.mysqlTaskSetMenuItem.Click += new System.EventHandler(this.MysqlTaskSetMenuItem_Click);
             // 
@@ -607,19 +607,19 @@
             // 所有项ToolStripMenuItem
             // 
             this.所有项ToolStripMenuItem.Name = "所有项ToolStripMenuItem";
-            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.所有项ToolStripMenuItem.Text = "所有项";
             // 
             // 验活项ToolStripMenuItem
             // 
             this.验活项ToolStripMenuItem.Name = "验活项ToolStripMenuItem";
-            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.验活项ToolStripMenuItem.Text = "验活项";
             // 
             // 选定项ToolStripMenuItem
             // 
             this.选定项ToolStripMenuItem.Name = "选定项ToolStripMenuItem";
-            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.选定项ToolStripMenuItem.Text = "选定项";
             // 
             // processViewToolStripMenuItem
@@ -691,21 +691,23 @@
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.aliveLocationInfo.Text = "验活项";
+            this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.currentLocationInfo.Text = "选定项";
+            this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
             // 
             // 数据库配置ToolStripMenuItem
             // 

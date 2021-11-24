@@ -600,6 +600,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             this.infoType = InfoType.locationInfo;
         }
+        private void AliveLocationInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CurrentLocationInfo_Click(object sender, EventArgs e)
+        {
+
+        }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
@@ -662,9 +671,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig,Proxy).ShowDialog();
         }
 
-        
+
         #endregion
 
+       
     }
     public enum InfoType
     { 
