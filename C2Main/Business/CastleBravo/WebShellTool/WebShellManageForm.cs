@@ -29,7 +29,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private ToolStripItem[] enableItems;
 
         private DateTime s; // 自动保存
-        private InfoType InfoType;
+        private InfoType infoType;
         public WebShellManageForm()
         {
             InitializeComponent();
@@ -47,7 +47,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             setOfHost = new HashSet<string>();
             setOfIPAddress = new HashSet<string>();
             NumberOfAlive = 0;
-            InfoType = InfoType.empty;
         }
 
         private void InitializeToolStrip()
@@ -579,10 +578,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         // mysql部分
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
+            this.infoType = InfoType.mysqlBlasting;
             BatchInfoColletion(false);
         }
         private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
+            this.infoType = InfoType.mysqlBlasting;
             BatchInfoColletion(true);
         }
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
@@ -597,7 +598,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.infoType = InfoType.locationInfo;
         }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
@@ -636,14 +637,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private bool PostInfoCollectionPayload(WebShellTaskConfig task)
         {
-            Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
+
             try
             {
-                string payload = string.Format(Global.MysqlPayload,
-                    task.Password,
-                    ST.EncodeBase64(Global.MysqlDictAddr),
-                    Global.MysqlAccount);
-
+                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);
+                Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
                 string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
                 Match m = r.Match(ret);
                 task.SGInfoCollectionConfig = m.Success ? m.Groups[1].Value : ret;
@@ -654,6 +652,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return true;
         }
+      
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
@@ -667,7 +666,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         #endregion
 
     }
-    internal enum InfoType
+    public enum InfoType
     { 
         mysqlBlasting,
         systemInfo,
