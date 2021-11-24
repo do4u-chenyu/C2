@@ -328,6 +328,12 @@
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.Designer.cs">
       <DependentUpon>MSFSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.Designer.cs">
+      <DependentUpon>ReverseShellSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2082,6 +2088,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.resx">
       <DependentUpon>MSFSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.resx">
+      <DependentUpon>ReverseShellSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.resx">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>

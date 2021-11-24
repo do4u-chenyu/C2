@@ -13,9 +13,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         private ProxySetting proxy;
         public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy)
         {
+            InitializeComponent();
             task = taskConfig;
             this.proxy = proxy;
-            InitializeComponent();
             MSF = Global.MSFHost;
         }
         protected override bool OnOKButtonClick()

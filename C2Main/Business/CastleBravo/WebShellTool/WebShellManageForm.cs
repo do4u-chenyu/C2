@@ -578,12 +578,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         // mysql部分
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.mysqlBlasting;
+            this.infoType = InfoType.MysqlBlasting;
             BatchInfoColletion(false);
         }
         private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.mysqlBlasting;
+            this.infoType = InfoType.MysqlBlasting;
             BatchInfoColletion(true);
         }
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
@@ -598,7 +598,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.locationInfo;
+            this.infoType = InfoType.LocationInfo;
         }
         private void AliveLocationInfo_Click(object sender, EventArgs e)
         {
@@ -671,19 +671,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig,Proxy).ShowDialog();
         }
 
+        private void ReverseShellMenu_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+        }
 
         #endregion
 
-       
+
     }
     public enum InfoType
     { 
-        mysqlBlasting,
-        systemInfo,
-        processList,
-        timedTask,
-        locationInfo,
-        empty
-
+        MysqlBlasting,
+        SystemInfo,
+        ProcessView,
+        ScheduleTask,
+        LocationInfo,
+        Empty
     }
 }
