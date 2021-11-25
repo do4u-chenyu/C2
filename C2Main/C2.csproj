@@ -4097,6 +4097,9 @@
     <None Include="Resources\词云样例3.png" />
     <None Include="Resources\词云样例4.png" />
     <None Include="Resources\组织架构图样例.png" />
+    <Content Include="sbin\analysis.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sbin\preprocessing.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

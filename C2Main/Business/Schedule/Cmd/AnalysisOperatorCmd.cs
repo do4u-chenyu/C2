@@ -24,7 +24,7 @@ namespace C2.Business.Schedule.Cmd
             string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
             string analysisType = option.GetOption("analysisType");//分析类型
 
-            cmds.Add(string.Format("sbin\\analysis.exe {0} {1} {2}", inputFilePath1, inputFilePath2, this.outputFilePath, analysisType));
+            cmds.Add(string.Format("sbin\\analysis.exe {0} {1} {2} {3}", inputFilePath1, inputFilePath2, this.outputFilePath, analysisType));
 
             return cmds;
         }
