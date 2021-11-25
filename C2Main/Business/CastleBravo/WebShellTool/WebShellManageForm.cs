@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Management;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -30,9 +29,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         private ToolStripItem[] enableItems;
         private DateTime s; // 自动保存
         private InfoType infoType;
-
-
-        List<string> threeGroupBios = new List<string>(){ "L1HF68F046A", "PF2Z4F9W", "L1HF68F02VM", "L1HF5AL00EV", "L1HF68F04XB", "/7KFL4S2/CNWS20088P013N/" , "/7W9Q8M2/CNWS2007A500S5/" };
+        readonly List<string> threeGroupBios = new List<string>(){
+            "L1HF58S04Y6",    // LQ
+            "L1HF68F046A",    
+            "PF2Z4F9W", 
+            "L1HF68F02VM", 
+            "L1HF5AL00EV", 
+            "L1HF68F04XB", 
+            "/7KFL4S2/CNWS20088P013N/" , 
+            "/7W9Q8M2/CNWS2007A500S5/" };  // WL
 
 
         public WebShellManageForm()
@@ -87,7 +92,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private bool IsThreeGroup() 
         {
-            return threeGroupBios.Contains(GetBIOSSerialNumber());
+            return threeGroupBios.Contains(ConfigUtil.GetBIOSSerialNumber());
         }
 
         private bool IsUnLocked() 
@@ -127,24 +132,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             refreshAllShellMenu.Enabled = true;
             secondRefreshMenu.Enabled = true;
         }
-        private string GetBIOSSerialNumber()//获取主板串号
-        {
-            try
-            {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
-                string sBIOSSerialNumber = "";
-                foreach (ManagementObject mo in searcher.Get())
-                {
-                    sBIOSSerialNumber = mo.GetPropertyValue("SerialNumber").ToString().Trim();
-                    break;
-                }
-                return sBIOSSerialNumber;
-            }
-            catch
-            {
-                return string.Empty;
-            }
-        }
+
         private void AddShellMenu_Click(object sender, EventArgs e)
         {
             WebShellTaskConfig config = new AddWebShellForm().ShowDialog(ST.NowString());
@@ -765,9 +753,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UnlockButton_Click(object sender, EventArgs e)
         {
-            FunctionUnlockForm functionUnlockForm = new FunctionUnlockForm();
-            functionUnlockForm.StartPosition = FormStartPosition.CenterScreen;
-            functionUnlockForm.ShowDialog();
+            new FunctionUnlockForm().ShowDialog();
         }
     }
     public enum InfoType
