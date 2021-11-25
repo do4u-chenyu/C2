@@ -88,7 +88,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox encodingComboBox;
+        private new System.Windows.Forms.ComboBox encodingComboBox;
         private System.Windows.Forms.TextBox textBoxEncryptionkey;
         private System.Windows.Forms.Label labelEncryptionkey;
     }
