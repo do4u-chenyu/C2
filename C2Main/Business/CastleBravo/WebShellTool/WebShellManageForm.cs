@@ -667,14 +667,21 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-
-            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig,Proxy).ShowDialog();
+            FormViewSet viewSet = new FormViewSet();
+            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
         }
 
         private void ReverseShellMenu_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
+            FormViewSet viewSet = new FormViewSet()
+            {
+                Title = "NC反弹设置",
+                SubTitle = "反弹地址:",
+                TipInfo = "输入NC反弹地址,例如:"
+            };
+            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
         }
 
         #endregion
@@ -688,6 +695,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         ProcessView,
         ScheduleTask,
         LocationInfo,
+        MSF,
+        NC,
         Empty
     }
 }
