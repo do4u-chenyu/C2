@@ -40,7 +40,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeComponent();
             InitializeToolStrip();
             InitializeOther();
-            InitializeLock();
+            //InitializeLock();
         }
 
         private void ResetSLabel()
