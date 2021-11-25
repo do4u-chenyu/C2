@@ -43,6 +43,7 @@
             this.RefreshAllDeadMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshOtherMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.ReverseShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.msfMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveResultsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,10 +83,28 @@
             this.passwdBlastingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.素描选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.infoCollectionSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentMysqlTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mysqlTaskSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allProcessView = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveProcessView = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentProcessView = new System.Windows.Forms.ToolStripMenuItem();
+            this.timedTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allTimedTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveTimedTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentTimedTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.locationInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allLocationInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveLocationInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentLocationInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.数据库配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.所有项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.选定项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
@@ -109,24 +128,6 @@
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.数据库配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.定时任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -148,11 +149,12 @@
             this.RefreshAllDeadMenu,
             this.refreshOtherMenu,
             this.toolStripSeparator5,
+            this.ReverseShellMenu,
             this.msfMenu,
             this.toolStripSeparator4,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(149, 286);
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 308);
             // 
             // EnterToolStripMenuItem
             // 
@@ -234,12 +236,19 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
             // 
+            // ReverseShellMenu
+            // 
+            this.ReverseShellMenu.Name = "ReverseShellMenu";
+            this.ReverseShellMenu.Size = new System.Drawing.Size(148, 22);
+            this.ReverseShellMenu.Text = "反弹Shell";
+            this.ReverseShellMenu.Click += new System.EventHandler(this.ReverseShellMenu_Click);
+            // 
             // msfMenu
             // 
             this.msfMenu.Name = "msfMenu";
             this.msfMenu.Size = new System.Drawing.Size(148, 22);
             this.msfMenu.Text = "MSF联动";
-            this.msfMenu.Click += new System.EventHandler(this.msfMenu_Click);
+            this.msfMenu.Click += new System.EventHandler(this.MSFMenu_Click);
             // 
             // toolStripSeparator4
             // 
@@ -546,8 +555,8 @@
             this.passwdBlastingMenuItem,
             this.systemInfoToolStripMenuItem,
             this.processViewToolStripMenuItem,
-            this.定时任务ToolStripMenuItem,
-            this.toolStripMenuItem1,
+            this.timedTaskMenuItem,
+            this.locationInfoMenuItem,
             this.数据库配置ToolStripMenuItem});
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -560,39 +569,39 @@
             this.passwdBlastingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allTaskMysqlMenuItem,
             this.aliveTaskMysqlMenuItem,
-            this.素描选定项ToolStripMenuItem,
-            this.infoCollectionSetMenuItem});
+            this.currentMysqlTaskMenuItem,
+            this.mysqlTaskSetMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(143, 22);
             this.passwdBlastingMenuItem.Text = "K令(Mysql)";
             // 
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
             this.allTaskMysqlMenuItem.Text = "所有项";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
             this.aliveTaskMysqlMenuItem.Text = "验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
-            // 素描选定项ToolStripMenuItem
+            // currentMysqlTaskMenuItem
             // 
-            this.素描选定项ToolStripMenuItem.Name = "素描选定项ToolStripMenuItem";
-            this.素描选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.素描选定项ToolStripMenuItem.Text = "选定项";
-            this.素描选定项ToolStripMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
+            this.currentMysqlTaskMenuItem.Name = "currentMysqlTaskMenuItem";
+            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.currentMysqlTaskMenuItem.Text = "选定项";
+            this.currentMysqlTaskMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
             // 
-            // infoCollectionSetMenuItem
+            // mysqlTaskSetMenuItem
             // 
-            this.infoCollectionSetMenuItem.Name = "infoCollectionSetMenuItem";
-            this.infoCollectionSetMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.infoCollectionSetMenuItem.Text = "设置";
-            this.infoCollectionSetMenuItem.Click += new System.EventHandler(this.InfoCollectionSetMenuItem_Click);
+            this.mysqlTaskSetMenuItem.Name = "mysqlTaskSetMenuItem";
+            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.mysqlTaskSetMenuItem.Text = "设置";
+            this.mysqlTaskSetMenuItem.Click += new System.EventHandler(this.MysqlTaskSetMenuItem_Click);
             // 
             // systemInfoToolStripMenuItem
             // 
@@ -601,18 +610,141 @@
             this.验活项ToolStripMenuItem,
             this.选定项ToolStripMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
-            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
+            // 
+            // 所有项ToolStripMenuItem
+            // 
+            this.所有项ToolStripMenuItem.Name = "所有项ToolStripMenuItem";
+            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem
+            // 
+            this.验活项ToolStripMenuItem.Name = "验活项ToolStripMenuItem";
+            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem
+            // 
+            this.选定项ToolStripMenuItem.Name = "选定项ToolStripMenuItem";
+            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem.Text = "选定项";
             // 
             // processViewToolStripMenuItem
             // 
             this.processViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem1,
-            this.验活项ToolStripMenuItem1,
-            this.选定项ToolStripMenuItem1});
+            this.allProcessView,
+            this.aliveProcessView,
+            this.currentProcessView});
             this.processViewToolStripMenuItem.Name = "processViewToolStripMenuItem";
-            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.processViewToolStripMenuItem.Text = "进程列表";
+            // 
+            // allProcessView
+            // 
+            this.allProcessView.Name = "allProcessView";
+            this.allProcessView.Size = new System.Drawing.Size(112, 22);
+            this.allProcessView.Text = "所有项";
+            // 
+            // aliveProcessView
+            // 
+            this.aliveProcessView.Name = "aliveProcessView";
+            this.aliveProcessView.Size = new System.Drawing.Size(112, 22);
+            this.aliveProcessView.Text = "验活项";
+            // 
+            // currentProcessView
+            // 
+            this.currentProcessView.Name = "currentProcessView";
+            this.currentProcessView.Size = new System.Drawing.Size(112, 22);
+            this.currentProcessView.Text = "选定项";
+            // 
+            // timedTaskMenuItem
+            // 
+            this.timedTaskMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allTimedTask,
+            this.aliveTimedTask,
+            this.currentTimedTask});
+            this.timedTaskMenuItem.Name = "timedTaskMenuItem";
+            this.timedTaskMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.timedTaskMenuItem.Text = "定时任务";
+            // 
+            // allTimedTask
+            // 
+            this.allTimedTask.Name = "allTimedTask";
+            this.allTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.allTimedTask.Text = "所有项";
+            // 
+            // aliveTimedTask
+            // 
+            this.aliveTimedTask.Name = "aliveTimedTask";
+            this.aliveTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.aliveTimedTask.Text = "验活项";
+            // 
+            // currentTimedTask
+            // 
+            this.currentTimedTask.Name = "currentTimedTask";
+            this.currentTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.currentTimedTask.Text = "选定项";
+            // 
+            // locationInfoMenuItem
+            // 
+            this.locationInfoMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allLocationInfo,
+            this.aliveLocationInfo,
+            this.currentLocationInfo});
+            this.locationInfoMenuItem.Name = "locationInfoMenuItem";
+            this.locationInfoMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.locationInfoMenuItem.Text = "地理位置";
+            // 
+            // allLocationInfo
+            // 
+            this.allLocationInfo.Name = "allLocationInfo";
+            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.allLocationInfo.Text = "所有项";
+            this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
+            // 
+            // aliveLocationInfo
+            // 
+            this.aliveLocationInfo.Name = "aliveLocationInfo";
+            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.aliveLocationInfo.Text = "验活项";
+            this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
+            // 
+            // currentLocationInfo
+            // 
+            this.currentLocationInfo.Name = "currentLocationInfo";
+            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.currentLocationInfo.Text = "选定项";
+            this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
+            // 
+            // 数据库配置ToolStripMenuItem
+            // 
+            this.数据库配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.所有项ToolStripMenuItem4,
+            this.验活项ToolStripMenuItem4,
+            this.选定项ToolStripMenuItem4});
+            this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
+            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.数据库配置ToolStripMenuItem.Text = "数据库配置";
+            // 
+            // 所有项ToolStripMenuItem4
+            // 
+            this.所有项ToolStripMenuItem4.Name = "所有项ToolStripMenuItem4";
+            this.所有项ToolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.所有项ToolStripMenuItem4.Text = "所有项";
+            // 
+            // 验活项ToolStripMenuItem4
+            // 
+            this.验活项ToolStripMenuItem4.Name = "验活项ToolStripMenuItem4";
+            this.验活项ToolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.验活项ToolStripMenuItem4.Text = "验活项";
+            // 
+            // 选定项ToolStripMenuItem4
+            // 
+            this.选定项ToolStripMenuItem4.Name = "选定项ToolStripMenuItem4";
+            this.选定项ToolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.选定项ToolStripMenuItem4.Text = "选定项";
             // 
             // refreshStopMenu
             // 
@@ -786,126 +918,6 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 18);
             this.StatusLabel.Text = "统计:";
             // 
-            // 数据库配置ToolStripMenuItem
-            // 
-            this.数据库配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem4,
-            this.验活项ToolStripMenuItem4,
-            this.选定项ToolStripMenuItem4});
-            this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
-            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.数据库配置ToolStripMenuItem.Text = "数据库配置";
-            // 
-            // 定时任务ToolStripMenuItem
-            // 
-            this.定时任务ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem2,
-            this.验活项ToolStripMenuItem2,
-            this.选定项ToolStripMenuItem2});
-            this.定时任务ToolStripMenuItem.Name = "定时任务ToolStripMenuItem";
-            this.定时任务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.定时任务ToolStripMenuItem.Text = "定时任务";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem3,
-            this.验活项ToolStripMenuItem3,
-            this.选定项ToolStripMenuItem3});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "地理位置";
-            // 
-            // 所有项ToolStripMenuItem
-            // 
-            this.所有项ToolStripMenuItem.Name = "所有项ToolStripMenuItem";
-            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem
-            // 
-            this.验活项ToolStripMenuItem.Name = "验活项ToolStripMenuItem";
-            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem
-            // 
-            this.选定项ToolStripMenuItem.Name = "选定项ToolStripMenuItem";
-            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem1
-            // 
-            this.所有项ToolStripMenuItem1.Name = "所有项ToolStripMenuItem1";
-            this.所有项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem1.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem1
-            // 
-            this.验活项ToolStripMenuItem1.Name = "验活项ToolStripMenuItem1";
-            this.验活项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem1.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem1
-            // 
-            this.选定项ToolStripMenuItem1.Name = "选定项ToolStripMenuItem1";
-            this.选定项ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem1.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem2
-            // 
-            this.所有项ToolStripMenuItem2.Name = "所有项ToolStripMenuItem2";
-            this.所有项ToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem2.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem2
-            // 
-            this.验活项ToolStripMenuItem2.Name = "验活项ToolStripMenuItem2";
-            this.验活项ToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem2.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem2
-            // 
-            this.选定项ToolStripMenuItem2.Name = "选定项ToolStripMenuItem2";
-            this.选定项ToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem2.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem3
-            // 
-            this.所有项ToolStripMenuItem3.Name = "所有项ToolStripMenuItem3";
-            this.所有项ToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem3.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem3
-            // 
-            this.验活项ToolStripMenuItem3.Name = "验活项ToolStripMenuItem3";
-            this.验活项ToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem3.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem3
-            // 
-            this.选定项ToolStripMenuItem3.Name = "选定项ToolStripMenuItem3";
-            this.选定项ToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem3.Text = "选定项";
-            // 
-            // 所有项ToolStripMenuItem4
-            // 
-            this.所有项ToolStripMenuItem4.Name = "所有项ToolStripMenuItem4";
-            this.所有项ToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.所有项ToolStripMenuItem4.Text = "所有项";
-            // 
-            // 验活项ToolStripMenuItem4
-            // 
-            this.验活项ToolStripMenuItem4.Name = "验活项ToolStripMenuItem4";
-            this.验活项ToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.验活项ToolStripMenuItem4.Text = "验活项";
-            // 
-            // 选定项ToolStripMenuItem4
-            // 
-            this.选定项ToolStripMenuItem4.Name = "选定项ToolStripMenuItem4";
-            this.选定项ToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.选定项ToolStripMenuItem4.Text = "选定项";
-            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1005,31 +1017,32 @@
         private System.Windows.Forms.ToolStripMenuItem passwdBlastingMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allTaskMysqlMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aliveTaskMysqlMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem infoCollectionSetMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mysqlTaskSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 素描选定项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentMysqlTaskMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel infoConfigEnable;
         private System.Windows.Forms.ToolStripMenuItem msfMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem systemInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem processViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据库配置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 定时任务ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timedTaskMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 所有项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 所有项ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 所有项ToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 所有项ToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem allProcessView;
+        private System.Windows.Forms.ToolStripMenuItem aliveProcessView;
+        private System.Windows.Forms.ToolStripMenuItem currentProcessView;
+        private System.Windows.Forms.ToolStripMenuItem allTimedTask;
+        private System.Windows.Forms.ToolStripMenuItem aliveTimedTask;
+        private System.Windows.Forms.ToolStripMenuItem currentTimedTask;
+        private System.Windows.Forms.ToolStripMenuItem locationInfoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allLocationInfo;
+        private System.Windows.Forms.ToolStripMenuItem aliveLocationInfo;
+        private System.Windows.Forms.ToolStripMenuItem currentLocationInfo;
         private System.Windows.Forms.ToolStripMenuItem 所有项ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem ReverseShellMenu;
     }
 }

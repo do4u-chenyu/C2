@@ -4,12 +4,12 @@ using C2.Core;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    partial class InfoCollectionSet : StandardDialog
+    partial class MysqlBlastingSet : StandardDialog
     {
         private string Account { get => this.mysqlAccount.Text.Trim(); }
         private string DictAddr { get => this.addrTextBox.Text.Trim(); }
 
-        public InfoCollectionSet()
+        public MysqlBlastingSet()
         {
             InitializeComponent();
             InitializeWebShell();

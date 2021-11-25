@@ -1,6 +1,6 @@
 ﻿namespace C2.Business.CastleBravo.WebShellTool
 {
-    partial class MSFSet
+    partial class ReverseShellSet
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             this.help2 = new System.Windows.Forms.Label();
             this.addr = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.msfTextBox = new System.Windows.Forms.TextBox();
+            this.rshTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // help1
@@ -41,9 +41,9 @@
             this.help1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.help1.Location = new System.Drawing.Point(12, 76);
             this.help1.Name = "help1";
-            this.help1.Size = new System.Drawing.Size(107, 12);
-            this.help1.TabIndex = 10038;
-            this.help1.Text = "输入MSF地址,例如:";
+            this.help1.Size = new System.Drawing.Size(113, 12);
+            this.help1.TabIndex = 10043;
+            this.help1.Text = "输入反弹地址,例如:";
             // 
             // help2
             // 
@@ -52,7 +52,7 @@
             this.help2.Location = new System.Drawing.Point(12, 94);
             this.help2.Name = "help2";
             this.help2.Size = new System.Drawing.Size(101, 12);
-            this.help2.TabIndex = 10037;
+            this.help2.TabIndex = 10042;
             this.help2.Text = "103.43.17.9:8889";
             // 
             // addr
@@ -60,9 +60,9 @@
             this.addr.AutoSize = true;
             this.addr.Location = new System.Drawing.Point(12, 22);
             this.addr.Name = "addr";
-            this.addr.Size = new System.Drawing.Size(53, 12);
-            this.addr.TabIndex = 10036;
-            this.addr.Text = "MSF地址:";
+            this.addr.Size = new System.Drawing.Size(59, 12);
+            this.addr.TabIndex = 10041;
+            this.addr.Text = "反弹地址:";
             // 
             // label4
             // 
@@ -71,18 +71,18 @@
             this.label4.Location = new System.Drawing.Point(12, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(179, 12);
-            this.label4.TabIndex = 10035;
+            this.label4.TabIndex = 10040;
             this.label4.Text = "此设置不保存,用前每次设置一下";
             // 
-            // msfTextBox
+            // rsaTextBox
             // 
-            this.msfTextBox.ForeColor = System.Drawing.Color.Black;
-            this.msfTextBox.Location = new System.Drawing.Point(77, 19);
-            this.msfTextBox.Name = "msfTextBox";
-            this.msfTextBox.Size = new System.Drawing.Size(205, 21);
-            this.msfTextBox.TabIndex = 10034;
+            this.rshTextBox.ForeColor = System.Drawing.Color.Black;
+            this.rshTextBox.Location = new System.Drawing.Point(77, 19);
+            this.rshTextBox.Name = "rsaTextBox";
+            this.rshTextBox.Size = new System.Drawing.Size(205, 21);
+            this.rshTextBox.TabIndex = 10039;
             // 
-            // MSFSet
+            // ReverseShellSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,10 +91,10 @@
             this.Controls.Add(this.help2);
             this.Controls.Add(this.addr);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.msfTextBox);
-            this.Name = "MSFSet";
-            this.Text = "MSF配置";
-            this.Controls.SetChildIndex(this.msfTextBox, 0);
+            this.Controls.Add(this.rshTextBox);
+            this.Name = "ReverseShellSet";
+            this.Text = "反弹Shell配置";
+            this.Controls.SetChildIndex(this.rshTextBox, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.addr, 0);
             this.Controls.SetChildIndex(this.help2, 0);
@@ -110,6 +110,6 @@
         private System.Windows.Forms.Label help2;
         private System.Windows.Forms.Label addr;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox msfTextBox;
+        private System.Windows.Forms.TextBox rshTextBox;
     }
 }

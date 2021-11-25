@@ -567,6 +567,8 @@ namespace C2.Core
 
         public static string EncodeBase64(string code)
         {
+            if (code.IsNullOrEmpty())
+                return string.Empty;
             byte[] bytes = Encoding.UTF8.GetBytes(code);
             return Convert.ToBase64String(bytes);
         }

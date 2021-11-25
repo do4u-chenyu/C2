@@ -79,13 +79,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         */
 
-        public override string DetailInfo(string PageData)
+        public override string DetailInfo(string pageData)
         {
             string payload = String.Format("{0}={1}&{2}={3}{4}={5}",
                  prefix,
                  clientSetting.z0,
                  clientSetting.PARAM2,
-                 ST.EncodeUrlBase64(PageData),
+                 ST.EncodeUrlBase64(pageData),
                  suffix,
                  clientSetting.z9); 
 
@@ -93,7 +93,7 @@ namespace C2.Business.CastleBravo.WebShellTool
               .AppendLine(payload)
               .AppendLine(string.Format("引导段:{0}", prefix))
               .AppendLine(string.Format("攻击段:{0}", ST.SuperDecodeBase64(clientSetting.PHP_READDICT)))
-              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(PageData)))
+              .AppendLine(string.Format("参数一:{0}", ST.SuperDecodeBase64(pageData)))
               .AppendLine();
 
             return payload;
@@ -104,7 +104,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string[] sArray = new string[] { };
             try
             {
-                string newResult = string.Join("", data).Replace("->|", "");
+                string newResult = string.Join(string.Empty, data).Replace("->|", string.Empty);
                 string doubleResult = newResult.Substring(0, newResult.IndexOf("|"));
                 sArray = doubleResult.Split(' ');
             }
