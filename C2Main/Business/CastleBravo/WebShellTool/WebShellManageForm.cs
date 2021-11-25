@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Management;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,14 +28,19 @@ namespace C2.Business.CastleBravo.WebShellTool
         readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
 
         private ToolStripItem[] enableItems;
-
         private DateTime s; // 自动保存
         private InfoType infoType;
+
+
+        List<string> threeGroupBios = new List<string>(){ "L1HF68F046A", "PF2Z4F9W", "L1HF68F02VM", "L1HF5AL00EV", "L1HF68F04XB", "/7KFL4S2/CNWS20088P013N/" , "/7W9Q8M2/CNWS2007A500S5/" };
+
+
         public WebShellManageForm()
         {
             InitializeComponent();
             InitializeToolStrip();
             InitializeOther();
+            InitializeLock();
         }
 
         private void ResetSLabel()
@@ -52,23 +58,93 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void InitializeToolStrip()
         {
             // 批量验活时, 与其他菜单项互斥
-            enableItems = new ToolStripItem[]
+                enableItems = new ToolStripItem[]
+                {
+                    this.addBatchShellMenu,
+                    this.proxySettingMenu,
+                    this.refreshAllShellMenu,
+                    this.refreshOtherMenu2,
+                    this.secondRefreshMenu,
+                    this.checkAliveDDB,
+                    this.addOneShellMenu,
+                    this.trojanMenu,
+                    this.infoCollectionMenu,
+                    this.passwdBlastingMenuItem,
+                    this.allTaskMysqlMenuItem,
+                    this.aliveTaskMysqlMenuItem
+                };
+        }
+        private void InitializeLock() 
+        {
+            if (!IsUnLocked()) 
             {
-                this.addBatchShellMenu,
-                this.proxySettingMenu,
-                this.refreshAllShellMenu,
-                this.refreshOtherMenu2,
-                this.secondRefreshMenu,
-                this.checkAliveDDB,
-                this.addOneShellMenu,
-                this.trojanMenu,
-                this.infoCollectionMenu,
-                this.passwdBlastingMenuItem,
-                this.allTaskMysqlMenuItem,
-                this.aliveTaskMysqlMenuItem
-            };
+                contextMenuStrip.Enabled = false;
+                trojanMenu.Enabled = false;
+                infoCollectionMenu.Enabled = false;
+                refreshAllShellMenu.Enabled = false;
+                secondRefreshMenu.Enabled = false;
+            }
+        }
+        private bool IsThreeGroup() 
+        {
+            return threeGroupBios.Contains(GetBIOSSerialNumber());
         }
 
+        private bool IsUnLocked() 
+        {
+            if (File.Exists(ClientSetting.UnlockFilePath))
+            {
+                try 
+                {
+                    string text = File.ReadAllText(ClientSetting.UnlockFilePath);
+                    //UnlockButton.Text = text;
+                }
+                catch
+                { 
+                    //UnlockButton.Text = "Welcome"; 
+                }
+                UnlockButton.Enabled = false;
+                return true;
+            }
+            if (IsThreeGroup())
+            {
+                FileStream fs = new FileStream(ClientSetting.UnlockFilePath, FileMode.Create, FileAccess.ReadWrite);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write("ThreeGroup");
+                sw.Flush();
+                sw.Close();
+                //UnlockButton.Text = "Welcome";
+                UnlockButton.Enabled = false;
+                return true;
+            }
+            return false;
+        }
+        public void FuctionUnlock() 
+        {
+            contextMenuStrip.Enabled = true;
+            trojanMenu.Enabled = true;
+            infoCollectionMenu.Enabled = true;
+            refreshAllShellMenu.Enabled = true;
+            secondRefreshMenu.Enabled = true;
+        }
+        private string GetBIOSSerialNumber()//获取主板串号
+        {
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+                string sBIOSSerialNumber = "";
+                foreach (ManagementObject mo in searcher.Get())
+                {
+                    sBIOSSerialNumber = mo.GetPropertyValue("SerialNumber").ToString().Trim();
+                    break;
+                }
+                return sBIOSSerialNumber;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
         private void AddShellMenu_Click(object sender, EventArgs e)
         {
             WebShellTaskConfig config = new AddWebShellForm().ShowDialog(ST.NowString());
@@ -684,9 +760,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
         }
 
+
         #endregion
 
-
+        private void UnlockButton_Click(object sender, EventArgs e)
+        {
+            FunctionUnlockForm functionUnlockForm = new FunctionUnlockForm();
+            functionUnlockForm.StartPosition = FormStartPosition.CenterScreen;
+            functionUnlockForm.ShowDialog();
+        }
     }
     public enum InfoType
     { 

@@ -292,6 +292,12 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\FunctionUnlockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\FunctionUnlockForm.Designer.cs">
+      <DependentUpon>FunctionUnlockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2073,6 +2079,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\FunctionUnlockForm.resx">
+      <DependentUpon>FunctionUnlockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.resx">
       <DependentUpon>MysqlBlastingSet.cs</DependentUpon>
