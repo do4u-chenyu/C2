@@ -652,7 +652,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            foreach(ListViewItem item in this.LV.SelectedItems)
+            this.infoType = InfoType.MysqlBlasting;
+            foreach (ListViewItem item in this.LV.SelectedItems)
                 SingleInfoCollection(item);
         }
         private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
@@ -663,15 +664,20 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
             this.infoType = InfoType.LocationInfo;
+            BatchInfoColletion(false);
         }
         private void AliveLocationInfo_Click(object sender, EventArgs e)
         {
 
+            this.infoType = InfoType.LocationInfo;
+            BatchInfoColletion(true);
         }
 
         private void CurrentLocationInfo_Click(object sender, EventArgs e)
         {
-
+            this.infoType = InfoType.LocationInfo;
+            foreach (ListViewItem item in this.LV.SelectedItems)
+                SingleInfoCollection(item);
         }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
