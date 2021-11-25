@@ -1,4 +1,5 @@
-﻿using C2.IAOLab.Plugins;
+﻿/*
+using C2.IAOLab.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -294,7 +295,7 @@ namespace MD5Plugin
                 outputTextBox.Text = base64Str;
             }
             */
-
+/*
             else
             {
                 byte[] bytes = GetEncodingBytes(filePath);
@@ -876,3 +877,4 @@ namespace MD5Plugin
         }
     }
 }
+*/

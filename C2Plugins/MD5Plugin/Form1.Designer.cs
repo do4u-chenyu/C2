@@ -1,4 +1,4 @@
-﻿
+﻿/*
 namespace MD5Plugin
 {
     partial class Form1
@@ -381,3 +381,4 @@ namespace MD5Plugin
         private System.Windows.Forms.RadioButton NTLMRadioButton;
     }
 }
+*/
