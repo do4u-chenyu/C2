@@ -69,5 +69,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             versionComboBox.Text  = WebShellTaskConfig.AutoDetectClientType(urlTextBox.Text, versionComboBox.Text);
             trojanTypeCombox.Text = WebShellTaskConfig.AutoDetectTrojanType(urlTextBox.Text); 
         }
+
+        private void DatabaseConfigTextBox_Focus(object sender, System.EventArgs e)
+        {
+            databaseConfigTextBox.ForeColor = System.Drawing.Color.Black;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace C2.Business.CastleBravo.WebShellTool
 {
-    partial class InfoCollectionSet
+    partial class MysqlBlastingSet
     {
         /// <summary>
         /// Required designer variable.

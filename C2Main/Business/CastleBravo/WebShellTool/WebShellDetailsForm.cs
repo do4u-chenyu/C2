@@ -73,8 +73,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             string[] dbResults = dbResult.Split('|');
             for(int i =1; i< dbResults.Length; i++)
             {
-                string name = dbResults[i].Replace("\t\r\n", string.Empty).Replace("\t\t", string.Empty);
-                if (name == String.Empty)
+                string name = dbResults[i].Replace("\t\r\n", string.Empty).Replace("\t\t", string.Empty).TrimEnd('\t');
+                if (name == String.Empty || broNodes[0].Nodes.Find(name,true).Length > 0)//跳过同名表
                     continue;
                 broNodes[0].Nodes.Add(new TreeNode
                 {
@@ -89,6 +89,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void ReadTable(string tableData) 
         {
+            //var bytes = src.GetBytes(tableData);
+            //bytes = Encoding.Convert(src, dst, bytes);
+            //dst.GetString(bytes);
             string[] lines = tableData.Split(new string[] { "\t\r\n" }, StringSplitOptions.None);
             dataGridView1.Columns.Clear();
             int i = 0;

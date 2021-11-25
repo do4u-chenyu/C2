@@ -42,6 +42,9 @@
             this.flvTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flvSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flvChmod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.下载ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filePathTb = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -53,9 +56,6 @@
             this.cmdTextBox = new System.Windows.Forms.TextBox();
             this.messageLog = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.下载ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -63,6 +63,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -71,7 +72,6 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -83,7 +83,7 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1067, 387);
@@ -94,9 +94,9 @@
             // 
             this.tabPage1.Controls.Add(this.baseInfoWebBrowser);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(1059, 354);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基础信息";
@@ -106,7 +106,7 @@
             // 
             this.baseInfoWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.baseInfoWebBrowser.Location = new System.Drawing.Point(4, 4);
-            this.baseInfoWebBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.baseInfoWebBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.baseInfoWebBrowser.MinimumSize = new System.Drawing.Size(27, 25);
             this.baseInfoWebBrowser.Name = "baseInfoWebBrowser";
             this.baseInfoWebBrowser.Size = new System.Drawing.Size(1051, 346);
@@ -116,10 +116,10 @@
             // 
             this.tabPage3.Controls.Add(this.splitContainer1);
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage3.Size = new System.Drawing.Size(1059, 355);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(1059, 354);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "文件管理";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -128,7 +128,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(4, 4);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -139,7 +139,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fileManagerListView);
             this.splitContainer1.Panel2.Controls.Add(this.filePathTb);
-            this.splitContainer1.Size = new System.Drawing.Size(1051, 347);
+            this.splitContainer1.Size = new System.Drawing.Size(1051, 346);
             this.splitContainer1.SplitterDistance = 348;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
@@ -150,10 +150,10 @@
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(348, 347);
+            this.treeView1.Size = new System.Drawing.Size(348, 346);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeCollapse);
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeView1_BeforeExpand);
@@ -181,10 +181,10 @@
             this.fileManagerListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileManagerListView.HideSelection = false;
             this.fileManagerListView.Location = new System.Drawing.Point(0, 27);
-            this.fileManagerListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.fileManagerListView.Margin = new System.Windows.Forms.Padding(4);
             this.fileManagerListView.MultiSelect = false;
             this.fileManagerListView.Name = "fileManagerListView";
-            this.fileManagerListView.Size = new System.Drawing.Size(698, 320);
+            this.fileManagerListView.Size = new System.Drawing.Size(698, 319);
             this.fileManagerListView.SmallImageList = this.imageList1;
             this.fileManagerListView.TabIndex = 1;
             this.fileManagerListView.UseCompatibleStateImageBehavior = false;
@@ -210,12 +210,35 @@
             // 
             this.flvChmod.Text = "属性";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.浏览ToolStripMenuItem,
+            this.下载ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 52);
+            // 
+            // 浏览ToolStripMenuItem
+            // 
+            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
+            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.浏览ToolStripMenuItem.Text = "浏览";
+            this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
+            // 
+            // 下载ToolStripMenuItem
+            // 
+            this.下载ToolStripMenuItem.Name = "下载ToolStripMenuItem";
+            this.下载ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.下载ToolStripMenuItem.Text = "下载";
+            this.下载ToolStripMenuItem.Click += new System.EventHandler(this.下载ToolStripMenuItem_Click);
+            // 
             // filePathTb
             // 
             this.filePathTb.BackColor = System.Drawing.Color.White;
             this.filePathTb.Dock = System.Windows.Forms.DockStyle.Top;
             this.filePathTb.Location = new System.Drawing.Point(0, 0);
-            this.filePathTb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.filePathTb.Margin = new System.Windows.Forms.Padding(4);
             this.filePathTb.Name = "filePathTb";
             this.filePathTb.ReadOnly = true;
             this.filePathTb.Size = new System.Drawing.Size(698, 27);
@@ -226,9 +249,9 @@
             this.tabPage4.Controls.Add(this.dataGridView1);
             this.tabPage4.Controls.Add(this.treeView2);
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage4.Size = new System.Drawing.Size(1059, 354);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "数据库管理";
@@ -238,35 +261,38 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(207, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(203, 4);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(852, 355);
+            this.dataGridView1.Size = new System.Drawing.Size(852, 346);
             this.dataGridView1.TabIndex = 1;
             // 
             // treeView2
             // 
-            this.treeView2.Location = new System.Drawing.Point(0, 0);
+            this.treeView2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView2.Location = new System.Drawing.Point(4, 4);
             this.treeView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(209, 356);
+            this.treeView2.Size = new System.Drawing.Size(200, 346);
             this.treeView2.TabIndex = 0;
             this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView2_NodeMouseDoubleClick);
-            
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.outputTextBox);
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1059, 355);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1059, 354);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "虚拟终端";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -277,12 +303,12 @@
             this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outputTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.outputTextBox.Location = new System.Drawing.Point(4, 35);
-            this.outputTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.outputTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
             this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.outputTextBox.Size = new System.Drawing.Size(1051, 316);
+            this.outputTextBox.Size = new System.Drawing.Size(1051, 315);
             this.outputTextBox.TabIndex = 1;
             // 
             // panel1
@@ -291,7 +317,7 @@
             this.panel1.Controls.Add(this.cmdTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1051, 31);
             this.panel1.TabIndex = 0;
@@ -299,7 +325,7 @@
             // excuteBtn
             // 
             this.excuteBtn.Location = new System.Drawing.Point(909, -1);
-            this.excuteBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.excuteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.excuteBtn.Name = "excuteBtn";
             this.excuteBtn.Size = new System.Drawing.Size(135, 29);
             this.excuteBtn.TabIndex = 1;
@@ -312,7 +338,7 @@
             this.cmdTextBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.cmdTextBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmdTextBox.Location = new System.Drawing.Point(0, 0);
-            this.cmdTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.cmdTextBox.Name = "cmdTextBox";
             this.cmdTextBox.Size = new System.Drawing.Size(904, 25);
             this.cmdTextBox.TabIndex = 0;
@@ -323,7 +349,7 @@
             this.messageLog.BackColor = System.Drawing.Color.White;
             this.messageLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.messageLog.Location = new System.Drawing.Point(0, 0);
-            this.messageLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.messageLog.Margin = new System.Windows.Forms.Padding(4);
             this.messageLog.Multiline = true;
             this.messageLog.Name = "messageLog";
             this.messageLog.ReadOnly = true;
@@ -335,7 +361,7 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -351,28 +377,6 @@
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 2;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.浏览ToolStripMenuItem,
-            this.下载ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
-            // 
-            // 浏览ToolStripMenuItem
-            // 
-            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
-            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.浏览ToolStripMenuItem.Text = "浏览";
-            this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
-            // 
-            // 下载ToolStripMenuItem
-            // 
-            this.下载ToolStripMenuItem.Name = "下载ToolStripMenuItem";
-            this.下载ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.下载ToolStripMenuItem.Text = "下载";
-            this.下载ToolStripMenuItem.Click += new System.EventHandler(this.下载ToolStripMenuItem_Click);
-            // 
             // WebShellDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -381,7 +385,7 @@
             this.ClientSize = new System.Drawing.Size(1067, 644);
             this.Controls.Add(this.splitContainer2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WebShellDetailsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DD详情";
@@ -393,6 +397,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -404,7 +409,6 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -22,6 +22,8 @@ namespace analysis
             {
                 Console.WriteLine(ex.Message);
             }
+            //DealData dd = new DealData(args);
+            //dd.Deal();
         }
     }
 }
