@@ -43,28 +43,29 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.panel1.Controls.Add(this.ExitButton);
-            this.panel1.Location = new System.Drawing.Point(0, 165);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 206);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(340, 38);
+            this.panel1.Size = new System.Drawing.Size(453, 48);
             this.panel1.TabIndex = 0;
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(266, 10);
-            this.ExitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExitButton.Location = new System.Drawing.Point(355, 12);
+            this.ExitButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(64, 26);
+            this.ExitButton.Size = new System.Drawing.Size(85, 32);
             this.ExitButton.TabIndex = 0;
             this.ExitButton.Text = "取消";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // IDBox
             // 
-            this.IDBox.Location = new System.Drawing.Point(154, 22);
-            this.IDBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.IDBox.Location = new System.Drawing.Point(205, 28);
+            this.IDBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.IDBox.Name = "IDBox";
-            this.IDBox.Size = new System.Drawing.Size(104, 21);
+            this.IDBox.Size = new System.Drawing.Size(137, 25);
             this.IDBox.TabIndex = 1;
             // 
             // label1
@@ -72,10 +73,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(57, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(76, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 15);
+            this.label1.Size = new System.Drawing.Size(123, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "请输入工号：";
             // 
@@ -83,20 +83,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(63, 58);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(84, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(218, 57);
+            this.label2.Size = new System.Drawing.Size(274, 72);
             this.label2.TabIndex = 3;
             this.label2.Text = "点击解锁危险功能，慎用\r\n点击解锁危险功能，慎用\r\n点击解锁危险功能，慎用";
             // 
             // OKButton
             // 
             this.OKButton.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OKButton.Location = new System.Drawing.Point(124, 129);
-            this.OKButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OKButton.Location = new System.Drawing.Point(165, 161);
+            this.OKButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(76, 31);
+            this.OKButton.Size = new System.Drawing.Size(101, 39);
             this.OKButton.TabIndex = 4;
             this.OKButton.Text = "解锁";
             this.OKButton.UseVisualStyleBackColor = true;
@@ -104,16 +104,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 
             // FunctionUnlockForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 203);
+            this.ClientSize = new System.Drawing.Size(453, 254);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IDBox);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FunctionUnlockForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "危险功能解锁";
