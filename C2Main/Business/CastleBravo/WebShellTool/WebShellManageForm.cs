@@ -766,6 +766,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.infoType = InfoType.MSF;
             FormViewSet viewSet = new FormViewSet();
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
+            this.infoConfigStatus.Text = DateTime.Now + ": MSF联动已发起";
         }
 
         private void ReverseShellMenu_Click(object sender, EventArgs e)
@@ -781,6 +782,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         };
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
+            this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
 
 

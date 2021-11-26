@@ -127,7 +127,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
+            this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -574,7 +574,7 @@
             this.currentMysqlTaskMenuItem,
             this.mysqlTaskSetMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(143, 22);
             this.passwdBlastingMenuItem.Text = "K令(Mysql)";
             // 
             // allTaskMysqlMenuItem
@@ -612,7 +612,7 @@
             this.验活项ToolStripMenuItem,
             this.选定项ToolStripMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
-            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
             // 
             // 所有项ToolStripMenuItem
@@ -640,7 +640,7 @@
             this.aliveProcessView,
             this.currentProcessView});
             this.processViewToolStripMenuItem.Name = "processViewToolStripMenuItem";
-            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.processViewToolStripMenuItem.Text = "进程列表";
             // 
             // allProcessView
@@ -668,26 +668,26 @@
             this.aliveTimedTask,
             this.currentTimedTask});
             this.timedTaskMenuItem.Name = "timedTaskMenuItem";
-            this.timedTaskMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.timedTaskMenuItem.Size = new System.Drawing.Size(143, 22);
             this.timedTaskMenuItem.Text = "定时任务";
             // 
             // allTimedTask
             // 
             this.allTimedTask.Name = "allTimedTask";
-            this.allTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.allTimedTask.Size = new System.Drawing.Size(112, 22);
             this.allTimedTask.Text = "所有项";
             this.allTimedTask.Click += new System.EventHandler(this.allTimedTask_Click);
             // 
             // aliveTimedTask
             // 
             this.aliveTimedTask.Name = "aliveTimedTask";
-            this.aliveTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.aliveTimedTask.Size = new System.Drawing.Size(112, 22);
             this.aliveTimedTask.Text = "验活项";
             // 
             // currentTimedTask
             // 
             this.currentTimedTask.Name = "currentTimedTask";
-            this.currentTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.currentTimedTask.Size = new System.Drawing.Size(112, 22);
             this.currentTimedTask.Text = "选定项";
             // 
             // locationInfoMenuItem
@@ -697,27 +697,27 @@
             this.aliveLocationInfo,
             this.currentLocationInfo});
             this.locationInfoMenuItem.Name = "locationInfoMenuItem";
-            this.locationInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.locationInfoMenuItem.Size = new System.Drawing.Size(143, 22);
             this.locationInfoMenuItem.Text = "地理位置";
             // 
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.aliveLocationInfo.Text = "验活项";
             this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
             // 
@@ -728,7 +728,7 @@
             this.验活项ToolStripMenuItem4,
             this.选定项ToolStripMenuItem4});
             this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
-            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.数据库配置ToolStripMenuItem.Text = "数据库配置";
             // 
             // 所有项ToolStripMenuItem4
@@ -906,7 +906,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ItemCountSLabel,
             this.ProxyEnableSLabel,
-            this.infoConfigEnable,
+            this.infoConfigStatus,
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 478);
             this.statusStrip1.Name = "statusStrip1";
@@ -926,10 +926,11 @@
             this.ProxyEnableSLabel.Name = "ProxyEnableSLabel";
             this.ProxyEnableSLabel.Size = new System.Drawing.Size(0, 21);
             // 
-            // infoConfigEnable
+            // infoConfigStatus
             // 
-            this.infoConfigEnable.Name = "infoConfigEnable";
-            this.infoConfigEnable.Size = new System.Drawing.Size(0, 21);
+            this.infoConfigStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold);
+            this.infoConfigStatus.Name = "infoConfigStatus";
+            this.infoConfigStatus.Size = new System.Drawing.Size(0, 21);
             // 
             // StatusLabel
             // 
@@ -1041,7 +1042,7 @@
         private System.Windows.Forms.ToolStripMenuItem mysqlTaskSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentMysqlTaskMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel infoConfigEnable;
+        private System.Windows.Forms.ToolStripStatusLabel infoConfigStatus;
         private System.Windows.Forms.ToolStripMenuItem msfMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem systemInfoToolStripMenuItem;
