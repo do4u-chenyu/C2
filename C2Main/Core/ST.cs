@@ -578,7 +578,13 @@ namespace C2.Core
             byte[] bytes = Convert.FromBase64String(code);
             return Encoding.UTF8.GetString(bytes);
         }
-
+        public static string EncodeUTF8(string code)
+        {
+            if (code.IsNullOrEmpty())
+                return string.Empty;
+            byte[] btCN = Encoding.Default.GetBytes(code);
+            return Encoding.UTF8.GetString(btCN);
+        }
         public static string StringToHex(string code)
         {
             StringBuilder sb = new StringBuilder();

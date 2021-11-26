@@ -415,6 +415,8 @@
             "秒播vps",
             "购置境外网络资产模型",
             "md5逆向",
+            "后门箱子模型",
+            "黑客关键词DD模型",
             "自定义查询"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
