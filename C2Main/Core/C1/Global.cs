@@ -240,5 +240,11 @@ namespace C2.Core
                                              {InfoType.ScheduleTask, ScheduleTaskPayload },
                                              {InfoType.LocationInfo, LocationPayload },};
         /*<--静态变量赋值先后顺序不能改变-->*/
+        public static List<string> BDLocationAK = new List<string>() 
+                                                  {
+                                                  "YcVOPhECz13S3kEi8drRYjTjCxxD6ovF",
+                                                  "wFtP7Go4rUxNf3bm8jQBcLOe0LC7dNCR"
+                                                  };
+        public static string BDLocationAPI ="https://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1}";
     }
 }
