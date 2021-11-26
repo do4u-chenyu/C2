@@ -901,6 +901,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ItemCountSLabel,
@@ -917,7 +918,7 @@
             // ItemCountSLabel
             // 
             this.ItemCountSLabel.AutoSize = false;
-            this.ItemCountSLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ItemCountSLabel.BackColor = System.Drawing.SystemColors.Control;
             this.ItemCountSLabel.Name = "ItemCountSLabel";
             this.ItemCountSLabel.Size = new System.Drawing.Size(64, 20);
             // 
