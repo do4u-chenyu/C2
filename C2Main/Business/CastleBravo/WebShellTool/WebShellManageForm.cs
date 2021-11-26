@@ -720,11 +720,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             try
             {
-                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);
-                Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
-                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
-                Match m = r.Match(ret);
-                task.SGInfoCollectionConfig = m.Success ? m.Groups[1].Value : ret;
+                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);               
+                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);              
+                task.SGInfoCollectionConfig = ProcessingResults(ret);
             }
             catch (Exception ex)
             {
@@ -732,7 +730,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return true;
         }
-      
+        /// <summary>
+        /// 异常：ArgumentException，NullException
+        /// </summary>
+        private String ProcessingResults(string ret)
+        {
+            Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
+            Match m = r.Match(ret);
+            string rawResult = m.Success ? m.Groups[1].Value : ret;
+            int index = new Random().Next(0, Global.BDLocationAK.Count - 1);
+            if (this.infoType == InfoType.LocationInfo)
+            {
+                string bdURL = string.Format(Global.BDLocationAPI, Global.BDLocationAK[index], rawResult);
+                return WebClientEx.Post(bdURL, "", 10000, Proxy);
+
+            }
+            return rawResult;
+        }
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
@@ -762,6 +776,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (new FunctionUnlockForm().ShowDialog() == DialogResult.OK)
                 FuctionUnlock();
+        }
+
+        private void allTimedTask_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public enum InfoType
