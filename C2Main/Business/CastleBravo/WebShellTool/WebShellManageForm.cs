@@ -38,7 +38,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             "L1HF68F04XB",
             "/7KFL4S2/CNWS20088P013N/" ,
             "/7W9Q8M2/CNWS2007A500S5/" };  // WL
-        //"L1HF68F02VM",
+        //
 
         public WebShellManageForm()
         {
@@ -361,17 +361,19 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-                foreach (ListViewItem lvi in LV.Items)
-                {
-                    if (refreshNeedStop)
-                        break;
-                    // 启用二刷
-                    if (skipAlive && lvi.SubItems[5].Text != "待")
-                        continue;
-                    UpdateAliveItems(lvi, safeMode);
-                    UpdateProgress();
-                    CheckSavePoint(); // 5分钟保存一次
-                }
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                if (refreshNeedStop)
+                    break;
+                // 启用二刷
+                if (skipAlive && lvi.SubItems[5].Text != "待")
+                    continue;
+                UpdateAliveItems(lvi, safeMode);
+                UpdateProgress();
+                CheckSavePoint(); // 5分钟保存一次
+            }
+            InitializeLock();//验活不影响功能加锁
+
         }
 
         private void EndRefresh()
