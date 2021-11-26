@@ -102,7 +102,7 @@ namespace C2.Utils
         {
             try
             {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BaseBoard");
                 string sBIOSSerialNumber = string.Empty;
                 foreach (ManagementObject mo in searcher.Get())
                 {

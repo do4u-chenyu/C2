@@ -917,6 +917,7 @@
             // ItemCountSLabel
             // 
             this.ItemCountSLabel.AutoSize = false;
+            this.ItemCountSLabel.BackColor = System.Drawing.Color.Transparent;
             this.ItemCountSLabel.Name = "ItemCountSLabel";
             this.ItemCountSLabel.Size = new System.Drawing.Size(64, 20);
             // 
@@ -932,6 +933,7 @@
             // 
             // StatusLabel
             // 
+            this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(43, 20);
             this.StatusLabel.Text = "统计:";
