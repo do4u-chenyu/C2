@@ -45,7 +45,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeComponent();
             InitializeToolStrip();
             InitializeOther();
-            //InitializeLock();
+            InitializeLock();
         }
 
         private void ResetSLabel()
@@ -773,7 +773,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UnlockButton_Click(object sender, EventArgs e)
         {
-            new FunctionUnlockForm().ShowDialog();
+            if (new FunctionUnlockForm().ShowDialog() == DialogResult.OK)
+                FuctionUnlock();
         }
 
         private void allTimedTask_Click(object sender, EventArgs e)
