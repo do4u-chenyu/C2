@@ -265,6 +265,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -792,7 +793,7 @@
             // 
             // UnlockButton
             // 
-            this.UnlockButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.UnlockButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.UnlockButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.UnlockButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.UnlockButton.ForeColor = System.Drawing.Color.Black;
