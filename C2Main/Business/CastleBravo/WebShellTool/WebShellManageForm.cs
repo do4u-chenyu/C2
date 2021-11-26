@@ -31,12 +31,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         private InfoType infoType;
         readonly List<string> threeGroupBios = new List<string>(){
             "L1HF58S04Y6",    // LQ
-            "L1HF68F046A",    
-            "PF2Z4F9W", 
-            "L1HF68F02VM", 
-            "L1HF5AL00EV", 
-            "L1HF68F04XB", 
-            "/7KFL4S2/CNWS20088P013N/" , 
+            "L1HF68F046A",
+            "PF2Z4F9W",
+            "L1HF68F02VM",
+            "L1HF5AL00EV",
+            "L1HF68F04XB",
+            "/7KFL4S2/CNWS20088P013N/" ,
             "/7W9Q8M2/CNWS2007A500S5/" };  // WL
 
 
@@ -63,8 +63,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void InitializeToolStrip()
         {
             // 批量验活时, 与其他菜单项互斥
-                enableItems = new ToolStripItem[]
-                {
+            enableItems = new ToolStripItem[]
+            {
                     this.addBatchShellMenu,
                     this.proxySettingMenu,
                     this.refreshAllShellMenu,
@@ -77,11 +77,11 @@ namespace C2.Business.CastleBravo.WebShellTool
                     this.passwdBlastingMenuItem,
                     this.allTaskMysqlMenuItem,
                     this.aliveTaskMysqlMenuItem
-                };
+            };
         }
-        private void InitializeLock() 
+        private void InitializeLock()
         {
-            if (!IsUnLocked()) 
+            if (!IsUnLocked())
             {
                 contextMenuStrip.Enabled = false;
                 trojanMenu.Enabled = false;
@@ -90,22 +90,22 @@ namespace C2.Business.CastleBravo.WebShellTool
                 secondRefreshMenu.Enabled = false;
             }
         }
-        private bool IsThreeGroup() 
+        private bool IsThreeGroup()
         {
             return threeGroupBios.Contains(ConfigUtil.GetBIOSSerialNumber());
         }
 
-        private bool IsUnLocked() 
+        private bool IsUnLocked()
         {
             if (File.Exists(ClientSetting.UnlockFilePath))
             {
-                try 
+                try
                 {
                     string text = File.ReadAllText(ClientSetting.UnlockFilePath);
                     //UnlockButton.Text = text;
                 }
                 catch
-                { 
+                {
                     //UnlockButton.Text = "Welcome"; 
                 }
                 UnlockButton.Enabled = false;
@@ -124,7 +124,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return false;
         }
-        public void FuctionUnlock() 
+        public void FuctionUnlock()
         {
             contextMenuStrip.Enabled = true;
             trojanMenu.Enabled = true;
@@ -360,17 +360,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (refreshNeedStop)
-                    break;
-                // 启用二刷
-                if (skipAlive && lvi.SubItems[5].Text != "待")
-                    continue;
-                UpdateAliveItems(lvi, safeMode);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    if (refreshNeedStop)
+                        break;
+                    // 启用二刷
+                    if (skipAlive && lvi.SubItems[5].Text != "待")
+                        continue;
+                    UpdateAliveItems(lvi, safeMode);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
         }
 
         private void EndRefresh()
@@ -511,8 +511,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch { return false; }
 
         }
-       
-        
+
+
         private void AddAllShellMenu_Click(object sender, EventArgs e)
         {
             AddAllWebShellForm dialog = new AddAllWebShellForm();
@@ -627,17 +627,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
         }
 
-      
+
 
         private void ClearScanResult()
         {
             foreach (ListViewItem lvi in LV.Items)
-                lvi.SubItems[7].Text = string.Empty;        
+                lvi.SubItems[7].Text = string.Empty;
         }
 
-       
 
-      
+
+
         #region 后信息收集模块
         // mysql部分
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
@@ -719,8 +719,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             try
             {
-                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);               
-                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);              
+                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);
+                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
                 task.SGInfoCollectionConfig = ProcessingResults(ret);
             }
             catch (Exception ex)
@@ -737,14 +737,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
             Match m = r.Match(ret);
             string rawResult = m.Success ? m.Groups[1].Value : ret;
-            int index = new Random().Next(0, Global.BDLocationAK.Count - 1);
             if (this.infoType == InfoType.LocationInfo)
             {
-                string bdURL = string.Format(Global.BDLocationAPI, Global.BDLocationAK[index], rawResult);
-                return WebClientEx.Post(bdURL, "", 10000, Proxy);
-
+                return LocationResult(rawResult);
             }
             return rawResult;
+        }
+        /// <summary>
+        /// 异常：ArgumentException，NullException
+        /// </summary>
+        private string LocationResult(string rawResult)
+        {
+            Regex r = new Regex("formatted_address\":\"(.+),\"business");
+            int index = new Random().Next(0, Global.BDLocationAK.Count - 1);
+            string bdURL = string.Format(Global.BDLocationAPI, Global.BDLocationAK[index], rawResult);
+            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, "", 10000, Proxy));
+            Match m = r.Match(jsonResult);
+            return m.Success ? m.Groups[1].Value : string.Empty;
         }
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
@@ -783,7 +792,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
     }
     public enum InfoType
-    { 
+    {
         MysqlBlasting,
         SystemInfo,
         ProcessView,
