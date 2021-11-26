@@ -32,13 +32,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         readonly List<string> threeGroupBios = new List<string>(){
             "L1HF58S04Y6",    // LQ
             "L1HF68F046A",    
-            "PF2Z4F9W", 
-             
+            "PF2Z4F9W",
+            "L1HF68F02VM",
             "L1HF5AL00EV", 
             "L1HF68F04XB", 
             "/7KFL4S2/CNWS20088P013N/" , 
             "/7W9Q8M2/CNWS2007A500S5/" };  // WL
-        //"L1HF68F02VM",
+        //
 
         public WebShellManageForm()
         {
@@ -372,6 +372,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 UpdateProgress();
                 CheckSavePoint(); // 5分钟保存一次
             }
+            InitializeLock();//验活不影响功能加锁
         }
 
         private void EndRefresh()
