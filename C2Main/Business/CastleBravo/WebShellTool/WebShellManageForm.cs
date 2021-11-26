@@ -763,6 +763,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
+            this.infoType = InfoType.MSF;
             FormViewSet viewSet = new FormViewSet();
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
         }
@@ -775,8 +776,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 Title = "NC反弹设置",
                 SubTitle = "反弹地址:",
-                TipInfo = "输入NC反弹地址,例如:"
-            };
+                TipInfo = "输入NC反弹地址,例如:",
+                InfoType = InfoType.NC
+
+        };
             new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
         }
 
