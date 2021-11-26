@@ -10,7 +10,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         public FunctionUnlockForm()
         {
             InitializeComponent();
-            
         }
 
         private void OKButton_Click(object sender, EventArgs e)
@@ -34,6 +33,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         private bool IsID(string ID) 
         {
             return Regex.IsMatch(ID, @"^[X]\d{4}|[x]\d{4}$"); ;
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

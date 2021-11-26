@@ -33,12 +33,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             "L1HF58S04Y6",    // LQ
             "L1HF68F046A",    
             "PF2Z4F9W", 
-            "L1HF68F02VM", 
+             
             "L1HF5AL00EV", 
             "L1HF68F04XB", 
             "/7KFL4S2/CNWS20088P013N/" , 
             "/7W9Q8M2/CNWS2007A500S5/" };  // WL
-
+        //"L1HF68F02VM",
 
         public WebShellManageForm()
         {
@@ -131,6 +131,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             infoCollectionMenu.Enabled = true;
             refreshAllShellMenu.Enabled = true;
             secondRefreshMenu.Enabled = true;
+            UnlockButton.Enabled = false;
         }
 
         private void AddShellMenu_Click(object sender, EventArgs e)
