@@ -8,14 +8,14 @@ namespace MD5Plugin
 {
     public partial class Base64Plugin : URLlPlugin
     {
-        string encodingType = "UTF-8";
+        public string encodingType = "UTF-8";
         string outPath;
         public Base64Plugin()
         {
             InitializeComponent();
             InitializeControls();
         }
-        private void InitializeControls()
+        public void InitializeControls()
         {
             inputTextBox.Select(inputTextBox.TextLength, 0);
             inputTextBox.Select(0, 0);
@@ -36,7 +36,7 @@ namespace MD5Plugin
         }
         public byte[] GetEncodingBytes(string str)
         {
-            // 编码时不应该选择HEX, 如果选了默认为UTF-8
+            //编码时不应该选择HEX, 如果选了默认为UTF-8
             EncodingType = EncodingType == "HEX" ? "UTF-8" : EncodingType;
             return Encoding.GetEncoding(EncodingType).GetBytes(str);
         }
@@ -87,6 +87,7 @@ namespace MD5Plugin
                 MessageBox.Show("目前仅支持/字符串/.jpg/.png/.gif/.bmp/.zip/.rar/.7z/.gz文件的解码", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         public static bool IsBase64Formatted(string input)
         {
             try
@@ -99,6 +100,7 @@ namespace MD5Plugin
                 return false;
             }
         }
+
         public string GetDecodingString(byte[] bytes)
         {
             if (EncodingType == "HEX")

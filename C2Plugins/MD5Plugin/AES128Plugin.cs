@@ -6,19 +6,20 @@ namespace MD5Plugin
 {
     public partial class AES128Plugin : Base64Plugin
     {
+        public RijndaelManaged rijndaelCipher = new RijndaelManaged();
         public AES128Plugin()
         {
             InitializeComponent();
             InitializeControls();
             this.inputTextBox.Text = "请把你需要加密的内容粘贴在这里";
             this.outputTextBox.Text = "请把你需要解密的内容粘贴在这里";
-
         }
-        private void InitializeControls()
+
+        public void setting(RijndaelManaged rijndaelCipher)
         {
-            inputTextBox.Select(inputTextBox.TextLength, 0);
-            inputTextBox.Select(0, 0);
-            encodingComboBox.SelectedIndex = 0;
+            rijndaelCipher.Mode = CipherMode.ECB;
+            rijndaelCipher.Padding = PaddingMode.Zeros;
+            rijndaelCipher.BlockSize = 128;
         }
 
         public override void encode(string EncryptStr)
@@ -33,10 +34,7 @@ namespace MD5Plugin
             {
                 try
                 {
-                    RijndaelManaged rijndaelCipher = new RijndaelManaged();
-                    rijndaelCipher.Mode = CipherMode.ECB;
-                    rijndaelCipher.Padding = PaddingMode.Zeros;
-                    rijndaelCipher.BlockSize = 128;
+                    setting(rijndaelCipher);
                     byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
                     byte[] keyBytes = new byte[16];
                     int len = pwdBytes.Length;
@@ -55,7 +53,6 @@ namespace MD5Plugin
                     outputTextBox.Text = ex.Message;
                 }
             }
-
         }
        
         public override void decode(string DecryptStr)
@@ -69,10 +66,7 @@ namespace MD5Plugin
             {
                 try
                 {
-                    RijndaelManaged rijndaelCipher = new RijndaelManaged();
-                    rijndaelCipher.Mode = CipherMode.ECB;
-                    rijndaelCipher.Padding = PaddingMode.Zeros;
-                    rijndaelCipher.BlockSize = 128;
+                    setting(rijndaelCipher);
                     byte[] encryptedData = Convert.FromBase64String(DecryptStr);
                     byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
                     byte[] keyBytes = new byte[16];

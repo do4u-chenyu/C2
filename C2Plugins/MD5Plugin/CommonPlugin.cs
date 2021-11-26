@@ -42,7 +42,7 @@ namespace MD5Plugin
 
         public void OutputTextBox_MouseDown(object sender, EventArgs e)
         {
-            if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要用Base64解密的内容" || outputTextBox.Text == "请输入你要解码的Url" || outputTextBox.Text == "请输入你要解码的内容")
+            if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要用Base64解密的内容" || outputTextBox.Text == "请输入你要解码的Url" || outputTextBox.Text == "请输入你要解码的内容"|| outputTextBox.Text == "请把你需要解密的内容粘贴在这里")
             {
                 outputTextBox.Text = string.Empty;
             }

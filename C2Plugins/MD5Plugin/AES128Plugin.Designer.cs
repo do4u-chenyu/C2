@@ -28,28 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-
-            this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.textBoxEncryptionkey = new System.Windows.Forms.TextBox();
             this.labelEncryptionkey = new System.Windows.Forms.Label();
             this.SuspendLayout();
-
-            // 
-            // encodingComboBox
-            // 
-            
-            this.encodingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.encodingComboBox.Font = new System.Drawing.Font("微软雅黑", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.encodingComboBox.FormattingEnabled = true;
-            this.encodingComboBox.Items.AddRange(new object[] {
-            "UTF-8",
-            "GB2312",
-            "HEX"});
-            this.encodingComboBox.Location = new System.Drawing.Point(483, 310);
-            this.encodingComboBox.Name = "encodingComboBox";
-            this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
-            this.encodingComboBox.TabIndex = 4;
-            this.encodingComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             
             // 
             // textBoxEncryptionkey
@@ -78,7 +59,6 @@
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Controls.Add(this.labelEncryptionkey);
             this.Controls.Add(this.textBoxEncryptionkey);
-            this.Controls.Add(this.encodingComboBox);
          
             this.Name = "AES128Plugin";
             this.Size = new System.Drawing.Size(1046, 549);
@@ -88,7 +68,6 @@
         }
 
         #endregion
-        private new System.Windows.Forms.ComboBox encodingComboBox;
         private System.Windows.Forms.TextBox textBoxEncryptionkey;
         private System.Windows.Forms.Label labelEncryptionkey;
     }
