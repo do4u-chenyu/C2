@@ -239,8 +239,8 @@ namespace C2.Core
                                              {InfoType.ProcessView, ProcessViewPayload },
                                              {InfoType.ScheduleTask, ScheduleTaskPayload },
                                              {InfoType.LocationInfo, LocationPayload },
-                                             {InfoType.MSF,MSFPayload},
-                                             {InfoType.NC,ReverseShellPayload} };
+                                             {InfoType.MSF, MSFPayload},
+                                             {InfoType.NC, ReverseShellPayload} };
         /*<--静态变量赋值先后顺序不能改变-->*/
         public static List<string> BDLocationAK = new List<string>() 
                                                   {

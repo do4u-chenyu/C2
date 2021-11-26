@@ -763,9 +763,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            this.infoType = InfoType.MSF;
-            FormViewSet viewSet = new FormViewSet();
-            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
+            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
             this.infoConfigStatus.Text = DateTime.Now + ": MSF联动已发起";
         }
 
@@ -773,15 +771,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            FormViewSet viewSet = new FormViewSet()
-            {
-                Title = "NC反弹设置",
-                SubTitle = "反弹地址:",
-                TipInfo = "输入NC反弹地址,例如:",
-                InfoType = InfoType.NC
-
-        };
-            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy, viewSet).ShowDialog();
+            new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
             this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
 
@@ -794,7 +784,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
-        private void allTimedTask_Click(object sender, EventArgs e)
+        private void AllTimedTask_Click(object sender, EventArgs e)
         {
 
         }

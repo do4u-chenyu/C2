@@ -677,7 +677,7 @@
             this.allTimedTask.Name = "allTimedTask";
             this.allTimedTask.Size = new System.Drawing.Size(112, 22);
             this.allTimedTask.Text = "所有项";
-            this.allTimedTask.Click += new System.EventHandler(this.allTimedTask_Click);
+            this.allTimedTask.Click += new System.EventHandler(this.AllTimedTask_Click);
             // 
             // aliveTimedTask
             // 

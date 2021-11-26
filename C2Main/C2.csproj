@@ -337,9 +337,6 @@
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.Designer.cs">
-      <DependentUpon>ReverseShellSet.cs</DependentUpon>
-    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
