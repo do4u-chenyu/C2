@@ -31,12 +31,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         private InfoType infoType;
         readonly List<string> threeGroupBios = new List<string>(){
             "L1HF58S04Y6",    // LQ
-            "L1HF68F046A",
-            "PF2Z4F9W",
-            "L1HF68F02VM",
-            "L1HF5AL00EV",
-            "L1HF68F04XB",
-            "/7KFL4S2/CNWS20088P013N/" ,
+            "L1HF68F046A",    // SQY
+            "PF2Z4F9W",       // HZH
+            "L1HF68F02VM",    // MHD
+            "L1HF5AL00EV",    // LXF
+            "L1HF68F04XB",    // WLY
+            "/7KFL4S2/CNWS20088P013N/" ,   // XX
             "/7W9Q8M2/CNWS2007A500S5/" };  // WL
         //
 
