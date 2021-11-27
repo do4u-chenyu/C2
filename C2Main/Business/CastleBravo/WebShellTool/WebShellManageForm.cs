@@ -700,7 +700,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             try
             {
-                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);
+                string payload = string.Format(ClientSetting.InfoPayloadDict[this.infoType], task.Password);
                 string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
                 task.SGInfoCollectionConfig = ProcessingResults(ret);
             }
@@ -730,8 +730,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string LocationResult(string rawResult)
         {
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
-            int index = new Random().Next(0, Global.BDLocationAK.Count - 1);
-            string bdURL = string.Format(Global.BDLocationAPI, Global.BDLocationAK[index], rawResult);
+            int index = new Random().Next(0, ClientSetting.BDLocationAK.Count - 1);
+            string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
             string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, "", 10000, Proxy));
             Match m = r.Match(jsonResult);
             return m.Success ? m.Groups[1].Value : string.Empty;
