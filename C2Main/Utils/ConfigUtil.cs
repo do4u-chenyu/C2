@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Management;
 using System.Text;
 
 namespace C2.Utils
@@ -94,6 +95,26 @@ namespace C2.Utils
                 }
             }
             return possiblePythonPath;
+        }
+
+        //获取主板串号
+        public static string GetBIOSSerialNumber()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BaseBoard");
+                string sBIOSSerialNumber = string.Empty;
+                foreach (ManagementObject mo in searcher.Get())
+                {
+                    sBIOSSerialNumber = mo.GetPropertyValue("SerialNumber").ToString().Trim();
+                    break;
+                }
+                return sBIOSSerialNumber;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }

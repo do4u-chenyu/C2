@@ -1,4 +1,5 @@
-﻿using C2.IAOLab.Plugins;
+﻿/*
+using C2.IAOLab.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -61,11 +62,13 @@ namespace MD5Plugin
         {
             return "将字符串进行常用的加密、解密、编码和解码操作；如MD5加密，Base64，Url编码和解码，UTF8和GBK转码等。";
         }
-
+        
         public Image GetPluginImage()
         {
             return this.Icon.ToBitmap();
         }
+        
+        
 
         public string GetPluginName()
         {
@@ -292,6 +295,7 @@ namespace MD5Plugin
                 outputTextBox.Text = base64Str;
             }
             */
+/*
             else
             {
                 byte[] bytes = GetEncodingBytes(filePath);
@@ -873,3 +877,4 @@ namespace MD5Plugin
         }
     }
 }
+*/

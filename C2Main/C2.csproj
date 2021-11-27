@@ -292,6 +292,12 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FunctionUnlockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FunctionUnlockForm.Designer.cs">
+      <DependentUpon>FunctionUnlockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -330,9 +336,6 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.Designer.cs">
-      <DependentUpon>ReverseShellSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
@@ -2073,6 +2076,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\FunctionUnlockForm.resx">
+      <DependentUpon>FunctionUnlockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlBlastingSet.resx">
       <DependentUpon>MysqlBlastingSet.cs</DependentUpon>
@@ -3853,7 +3859,19 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hackDD_accountPass_C2_20211126.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hackDD_accountPass_C2_20211126.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hostDD_accountPass_C2_20211126.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hostDD_accountPass_C2_20211126.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip">
