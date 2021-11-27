@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DealData.cs" />
+    <Compile Include="Method\BankCardExtract.cs" />
     <Compile Include="Method\KeyWordAnalysis.cs" />
+    <Compile Include="Method\OrganizationAnalysis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

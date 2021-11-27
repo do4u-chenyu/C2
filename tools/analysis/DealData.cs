@@ -26,8 +26,8 @@ namespace analysis
 
             //this.inputFilePath1 = "C:\\FiberHomeIAOModelDocument\\IAO\\聚沙成塔\\群聊关键词分析\\_datas\\L16_20211117_041034.bcp";
             //this.inputFilePath2 = "C:\\FiberHomeIAOModelDocument\\IAO\\聚沙成塔\\群聊关键词分析\\_datas\\key.txt";
-            //this.outputFilePath = "C:\\FiberHomeIAOModelDocument\\IAO\\聚沙成塔\\群聊关键词分析\\_datas\\L34_20211122_103746.bcp";
-            //this.analysisType = "关键词分析";
+            //this.outputFilePath = "C:\\FiberHomeIAOModelDocument\\IAO\\聚沙成塔\\群聊关键词分析\\_datas\\1.txt";
+            //this.analysisType = "同群分析";
 
             this.dataTable = new DataTable();
         }
@@ -39,7 +39,15 @@ namespace analysis
                 case "关键词分析":
                     dataTable = new KeyWordAnalysis(inputFilePath1, inputFilePath2).GenDataTable();
                     break;
-
+                case "银行卡提取":
+                    dataTable = new BankCardExtract(inputFilePath1).GenDataTable();
+                    break;
+                case "同群分析":
+                    //认为2个QQ号在2个群同时出现，认为这2个QQ属于统一组织
+                    dataTable = new OrganizationAnalysis(inputFilePath1).GenDataTable();
+                    break;
+                default:
+                    break;
 
 
             }
