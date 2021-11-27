@@ -9,13 +9,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.Text = "反弹Shell配置";
             this.addr.Text = "反弹地址:";
 
-            this.payload = Global.ReverseShellPayload;
-            this.RemoteHost = Global.ReverseShellHost;
+            this.payload = ClientSetting.ReverseShellPayload;
+            this.RemoteHost = ClientSetting.ReverseShellHost;
         }
 
         protected override void SetRemoteHost()
         {
-            Global.ReverseShellHost = RemoteHost.Trim();     
+            ClientSetting.ReverseShellHost = RemoteHost.Trim();     
         }
     }
 }

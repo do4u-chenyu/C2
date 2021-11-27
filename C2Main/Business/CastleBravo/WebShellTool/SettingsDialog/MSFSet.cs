@@ -20,8 +20,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.task = taskConfig;
             this.proxy = proxy;
 
-            this.payload = Global.MSFPayload;
-            this.RemoteHost = Global.MSFHost;
+            this.payload = ClientSetting.MSFPayload;
+            this.RemoteHost = ClientSetting.MSFHost;
         }
 
         protected override bool OnOKButtonClick()
@@ -51,7 +51,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         protected virtual void SetRemoteHost()
         {
-            Global.MSFHost = RemoteHost.Trim();
+            ClientSetting.MSFHost = RemoteHost.Trim();
         }
             
         private string PostPayload(string payload)

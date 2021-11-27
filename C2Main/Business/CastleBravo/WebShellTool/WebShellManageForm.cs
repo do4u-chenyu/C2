@@ -65,23 +65,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 批量验活时, 与其他菜单项互斥
             enableItems = new ToolStripItem[]
             {
-                    this.addBatchShellMenu,
-                    this.proxySettingMenu,
-                    this.refreshAllShellMenu,
-                    this.refreshOtherMenu2,
-                    this.secondRefreshMenu,
-                    this.checkAliveDDB,
-                    this.addOneShellMenu,
-                    this.trojanMenu,
-                    this.infoCollectionMenu,
-                    this.passwdBlastingMenuItem,
-                    this.allTaskMysqlMenuItem,
-                    this.aliveTaskMysqlMenuItem
+                this.addBatchShellMenu,
+                this.proxySettingMenu,
+                this.refreshAllShellMenu,
+                this.refreshOtherMenu2,
+                this.secondRefreshMenu,
+                this.checkAliveDDB,
+                this.addOneShellMenu,
+                this.trojanMenu,
+                this.infoCollectionMenu,
+                this.passwdBlastingMenuItem,
+                this.allTaskMysqlMenuItem,
+                this.aliveTaskMysqlMenuItem
             };
         }
         private void InitializeLock()
         {
-            if (!IsUnLocked())
+            if (IsLocked())
             {
                 contextMenuStrip.Enabled = false;
                 trojanMenu.Enabled = false;
@@ -95,35 +95,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             return threeGroupBios.Contains(ConfigUtil.GetBIOSSerialNumber());
         }
 
-        private bool IsUnLocked()
+        private bool IsLocked()
         {
-            if (File.Exists(ClientSetting.UnlockFilePath))
-            {
-                try
-                {
-                    string text = File.ReadAllText(ClientSetting.UnlockFilePath);
-                    //UnlockButton.Text = text;
-                }
-                catch
-                {
-                    //UnlockButton.Text = "Welcome"; 
-                }
+            if (IsThreeGroup() || File.Exists(ClientSetting.UnlockFilePath))
                 UnlockButton.Enabled = false;
-                return true;
-            }
-            if (IsThreeGroup())
-            {
-                FileStream fs = new FileStream(ClientSetting.UnlockFilePath, FileMode.Create, FileAccess.ReadWrite);
-                StreamWriter sw = new StreamWriter(fs);
-                sw.Write("ThreeGroup");
-                sw.Flush();
-                sw.Close();
-                //UnlockButton.Text = "Welcome";
-                UnlockButton.Enabled = false;
-                return true;
-            }
-            return false;
+            return UnlockButton.Enabled;
         }
+
         public void FuctionUnlock()
         {
             contextMenuStrip.Enabled = true;
@@ -722,7 +700,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             try
             {
-                string payload = string.Format(Global.InfoPayloadDict[this.infoType], task.Password);
+                string payload = string.Format(ClientSetting.InfoPayloadDict[this.infoType], task.Password);
                 string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
                 task.SGInfoCollectionConfig = ProcessingResults(ret);
             }
@@ -752,9 +730,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string LocationResult(string rawResult)
         {
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
-            int index = new Random().Next(0, Global.BDLocationAK.Count - 1);
-            string bdURL = string.Format(Global.BDLocationAPI, Global.BDLocationAK[index], rawResult);
-            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, "", 10000, Proxy));
+            int index = new Random().Next(0, ClientSetting.BDLocationAK.Count - 1);
+            string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
+            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
             Match m = r.Match(jsonResult);
             return m.Success ? m.Groups[1].Value : string.Empty;
         }

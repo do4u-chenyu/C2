@@ -743,5 +743,19 @@ namespace C2.Utils
             crc32.Update(buffer);
             return crc32.Value;
         }
+
+        public static bool TouchFile(string ffp)
+        {
+            if (File.Exists(ffp))
+                return true;
+
+            try
+            {
+                using (new FileStream(ffp, FileMode.Create)) { }
+            }
+            catch { return false; }
+
+            return true;
+        }
     }
 }

@@ -17,8 +17,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void InitializeWebShell()
         {
-            this.mysqlAccount.Text = Global.MysqlAccount;
-            this.addrTextBox.Text = Global.MysqlDictAddr;
+            this.mysqlAccount.Text = ClientSetting.MysqlAccount;
+            this.addrTextBox.Text = ClientSetting.MysqlDictAddr;
         }
         protected override bool OnOKButtonClick()
         {
@@ -27,8 +27,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 HelpUtil.ShowMessageBox("【账号】和【地址】不能为空。");
                 return false;
             }
-            Global.MysqlDictAddr = DictAddr;
-            Global.MysqlAccount = Account;
+            ClientSetting.MysqlDictAddr = DictAddr;
+            ClientSetting.MysqlAccount = Account;
             return base.OnOKButtonClick();
         }
     }

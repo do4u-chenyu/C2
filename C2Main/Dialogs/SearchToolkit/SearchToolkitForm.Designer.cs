@@ -400,24 +400,6 @@
             this.taskModelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.taskModelComboBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskModelComboBox.FormattingEnabled = true;
-            this.taskModelComboBox.Items.AddRange(new object[] {
-            "涉赌模型",
-            "涉枪模型",
-            "涉黄模型",
-            "飞机场模型",
-            "黑客模型",
-            "宝塔面板",
-            "应用分发",
-            "ddos模型",
-            "xss模型",
-            "侵公模型",
-            "四方模型",
-            "秒播vps",
-            "购置境外网络资产模型",
-            "md5逆向",
-            "后门箱子模型",
-            "黑客关键词DD模型",
-            "自定义查询"});
             this.taskModelComboBox.Location = new System.Drawing.Point(81, 81);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(211, 27);
