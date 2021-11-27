@@ -732,7 +732,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
             int index = new Random().Next(0, ClientSetting.BDLocationAK.Count - 1);
             string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
-            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, "", 10000, Proxy));
+            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
             Match m = r.Match(jsonResult);
             return m.Success ? m.Groups[1].Value : string.Empty;
         }

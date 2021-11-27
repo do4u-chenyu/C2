@@ -802,6 +802,7 @@
             this.UnlockButton.Name = "UnlockButton";
             this.UnlockButton.Size = new System.Drawing.Size(60, 22);
             this.UnlockButton.Text = "功能解锁";
+            this.UnlockButton.ToolTipText = "SG高级功能默认不开放, 需要手工解锁";
             this.UnlockButton.Click += new System.EventHandler(this.UnlockButton_Click);
             // 
             // 查看结果ToolStripMenuItem
