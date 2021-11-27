@@ -45,7 +45,10 @@ namespace C2.SearchToolkit
                 this.interfaceIPTB,
                 this.searchPwdTB
             };
-       
+            // 根据字典 自动添加 模型下拉列表
+            foreach(string key in SearchTaskInfo.TaskDescriptionTable.Keys)
+                this.taskModelComboBox.Items.Add(key);
+
             this.taskModelComboBox.SelectedIndex = 0; // 默认选择 涉赌任务
         }
 
