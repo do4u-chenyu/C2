@@ -1,6 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
+﻿using C2.Utils;
+using System;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -14,25 +13,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void OKButton_Click(object sender, EventArgs e)
         {
-            string ID = IDBox.Text;
-            if (!IsID(ID))
+            string id = IDBox.Text.Trim();
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("请正确输入工号", "WORNING");
+                HelpUtil.ShowMessageBox("输入工号, 解锁SG高级功能", "工号为空");
                 return;
             }
-            if (File.Exists(ClientSetting.UnlockFilePath))
-                return;
-            FileStream fs = new FileStream(ClientSetting.UnlockFilePath, FileMode.Create, FileAccess.ReadWrite);
-            StreamWriter sw = new StreamWriter(fs);
-            sw.Write("ID");
-            sw.Flush();
-            sw.Close();
+            FileUtil.TouchFile(ClientSetting.UnlockFilePath);
             this.DialogResult = DialogResult.OK;
-        }
-
-        private bool IsID(string ID) 
-        {
-            return Regex.IsMatch(ID, @"^[X]\d{4}|[x]\d{4}$"); ;
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

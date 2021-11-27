@@ -65,23 +65,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 批量验活时, 与其他菜单项互斥
             enableItems = new ToolStripItem[]
             {
-                    this.addBatchShellMenu,
-                    this.proxySettingMenu,
-                    this.refreshAllShellMenu,
-                    this.refreshOtherMenu2,
-                    this.secondRefreshMenu,
-                    this.checkAliveDDB,
-                    this.addOneShellMenu,
-                    this.trojanMenu,
-                    this.infoCollectionMenu,
-                    this.passwdBlastingMenuItem,
-                    this.allTaskMysqlMenuItem,
-                    this.aliveTaskMysqlMenuItem
+                this.addBatchShellMenu,
+                this.proxySettingMenu,
+                this.refreshAllShellMenu,
+                this.refreshOtherMenu2,
+                this.secondRefreshMenu,
+                this.checkAliveDDB,
+                this.addOneShellMenu,
+                this.trojanMenu,
+                this.infoCollectionMenu,
+                this.passwdBlastingMenuItem,
+                this.allTaskMysqlMenuItem,
+                this.aliveTaskMysqlMenuItem
             };
         }
         private void InitializeLock()
         {
-            if (!IsUnLocked())
+            if (IsLocked())
             {
                 contextMenuStrip.Enabled = false;
                 trojanMenu.Enabled = false;
@@ -95,35 +95,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             return threeGroupBios.Contains(ConfigUtil.GetBIOSSerialNumber());
         }
 
-        private bool IsUnLocked()
+        private bool IsLocked()
         {
-            if (File.Exists(ClientSetting.UnlockFilePath))
-            {
-                try
-                {
-                    string text = File.ReadAllText(ClientSetting.UnlockFilePath);
-                    //UnlockButton.Text = text;
-                }
-                catch
-                {
-                    //UnlockButton.Text = "Welcome"; 
-                }
+            if (IsThreeGroup() || File.Exists(ClientSetting.UnlockFilePath))
                 UnlockButton.Enabled = false;
-                return true;
-            }
-            if (IsThreeGroup())
-            {
-                FileStream fs = new FileStream(ClientSetting.UnlockFilePath, FileMode.Create, FileAccess.ReadWrite);
-                StreamWriter sw = new StreamWriter(fs);
-                sw.Write("ThreeGroup");
-                sw.Flush();
-                sw.Close();
-                //UnlockButton.Text = "Welcome";
-                UnlockButton.Enabled = false;
-                return true;
-            }
-            return false;
+            return UnlockButton.Enabled;
         }
+
         public void FuctionUnlock()
         {
             contextMenuStrip.Enabled = true;

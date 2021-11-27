@@ -801,7 +801,7 @@
             this.UnlockButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.UnlockButton.Name = "UnlockButton";
             this.UnlockButton.Size = new System.Drawing.Size(60, 22);
-            this.UnlockButton.Text = "危险扳机";
+            this.UnlockButton.Text = "功能解锁";
             this.UnlockButton.Click += new System.EventHandler(this.UnlockButton_Click);
             // 
             // 查看结果ToolStripMenuItem
