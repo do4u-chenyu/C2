@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -19,17 +20,25 @@ namespace C2.Business.CastleBravo.Binary
             sb = new StringBuilder();
         }
 
-        public string Strings(string ffp)
+        public string[] Strings(string ffp)
         {
             Reset();
 
-            using (FileStream fs = new FileStream(ffp, FileMode.Open))
-            using (BinaryReader br = new BinaryReader(fs))
-            while(Read4M(br))
-                Consume();
+            try
+            {
+                using (FileStream fs = new FileStream(ffp, FileMode.Open))
+                using (BinaryReader br = new BinaryReader(fs))
+                    while (Read4M(br))
+                        Consume();
+            }
+            catch (Exception e)
+            {
+                ls.Add(e.Message);
+            }
+
 
             // TODO 后续处理, 如 打标, 排序
-            return ls.JoinString(System.Environment.NewLine);
+            return ls.ToArray();
         }
 
         private void Reset()
@@ -59,6 +68,8 @@ namespace C2.Business.CastleBravo.Binary
             ConsumeAscii();
             Consume16LE();
             Consume16BE();
+            // Consume32LE
+            // ConsumeAscii7Bits()
         }
 
         private void ConsumeAscii()

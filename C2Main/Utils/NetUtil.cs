@@ -70,7 +70,7 @@ namespace C2.Utils
         }
         public static bool IsPhoneNum(string num) 
         {
-            return Regex.IsMatch(num, @"^(\d{11})$");
+            return Regex.IsMatch(num, @"^(1\d{10})$");
         }
         public static string FormatUrl(string url)
         {

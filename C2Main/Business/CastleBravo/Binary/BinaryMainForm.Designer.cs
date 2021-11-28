@@ -46,6 +46,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -72,11 +73,12 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(687, 456);
+            this.tabControl1.Size = new System.Drawing.Size(687, 461);
             this.tabControl1.TabIndex = 1;
             // 
             // StringsTabPage
             // 
+            this.StringsTabPage.Controls.Add(this.label6);
             this.StringsTabPage.Controls.Add(this.FileButton);
             this.StringsTabPage.Controls.Add(this.FileTB);
             this.StringsTabPage.Controls.Add(this.ResultTB);
@@ -86,14 +88,14 @@
             this.StringsTabPage.Location = new System.Drawing.Point(4, 26);
             this.StringsTabPage.Name = "StringsTabPage";
             this.StringsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.StringsTabPage.Size = new System.Drawing.Size(679, 426);
+            this.StringsTabPage.Size = new System.Drawing.Size(679, 431);
             this.StringsTabPage.TabIndex = 0;
             this.StringsTabPage.Text = "提取字符串";
             this.StringsTabPage.UseVisualStyleBackColor = true;
             // 
             // FileButton
             // 
-            this.FileButton.Location = new System.Drawing.Point(590, 38);
+            this.FileButton.Location = new System.Drawing.Point(590, 32);
             this.FileButton.Name = "FileButton";
             this.FileButton.Size = new System.Drawing.Size(63, 23);
             this.FileButton.TabIndex = 6;
@@ -105,7 +107,7 @@
             // 
             this.FileTB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FileTB.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.FileTB.Location = new System.Drawing.Point(6, 38);
+            this.FileTB.Location = new System.Drawing.Point(4, 32);
             this.FileTB.Name = "FileTB";
             this.FileTB.ReadOnly = true;
             this.FileTB.Size = new System.Drawing.Size(562, 23);
@@ -114,7 +116,7 @@
             // ResultTB
             // 
             this.ResultTB.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ResultTB.Location = new System.Drawing.Point(3, 76);
+            this.ResultTB.Location = new System.Drawing.Point(3, 81);
             this.ResultTB.MaxLength = 16777216;
             this.ResultTB.Multiline = true;
             this.ResultTB.Name = "ResultTB";
@@ -125,7 +127,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(446, 9);
+            this.label5.Location = new System.Drawing.Point(446, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(207, 17);
             this.label5.TabIndex = 2;
@@ -134,7 +136,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 9);
+            this.label4.Location = new System.Drawing.Point(2, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(436, 34);
             this.label4.TabIndex = 1;
@@ -226,11 +228,21 @@
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 8.5F);
+            this.label6.Location = new System.Drawing.Point(4, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 17);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "0 条";
+            // 
             // BinaryMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 456);
+            this.ClientSize = new System.Drawing.Size(687, 461);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -270,5 +282,6 @@
         private System.Windows.Forms.Button FileButton;
         private System.Windows.Forms.TextBox FileTB;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label label6;
     }
 }
