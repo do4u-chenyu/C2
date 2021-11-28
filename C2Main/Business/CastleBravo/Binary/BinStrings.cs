@@ -36,8 +36,6 @@ namespace C2.Business.CastleBravo.Binary
                 ls.Add(e.Message);
             }
 
-
-            // TODO 后续处理, 如 打标, 排序
             return ls.ToArray();
         }
 
