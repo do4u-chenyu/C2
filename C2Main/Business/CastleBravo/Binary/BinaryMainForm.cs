@@ -21,8 +21,7 @@ namespace C2.Business.CastleBravo.Binary
 
             using (GuarderUtil.WaitCursor)
             {
-                BinStrings bs = new BinStrings();
-                bs.Strings(this.FileTB.Text);
+                this.ResultTB.Text = new BinStrings().Strings(this.FileTB.Text);
             }
         }
     }

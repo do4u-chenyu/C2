@@ -65,7 +65,7 @@ namespace C2.Business.CastleBravo.Binary
         private bool IsChar(byte b)
         {
             // 可见字符和 /r /n /t
-            return (b >= 0x20 && b <= 0x7E) || (b >= 0x09 && b <= 0x13);
+            return b >= 0x20 && b <= 0x7E;
         }
 
         private bool IsChar(byte l, byte r)
@@ -97,7 +97,7 @@ namespace C2.Business.CastleBravo.Binary
         {
             if (IsChar(l, r))
             {
-                sb.Append(l);
+                sb.Append((char)l);  // 前面判断肯定在可见字符集,这里大胆转
                 if (sb.Length < max)
                     return;
             }
