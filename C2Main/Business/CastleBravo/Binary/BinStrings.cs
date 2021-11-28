@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using C2.Core;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -21,7 +22,7 @@ namespace C2.Business.CastleBravo.Binary
             max = 1024;
         }
 
-        public string[] Strings(string ffp)
+        public string Strings(string ffp)
         {
             Reset();
 
@@ -30,8 +31,9 @@ namespace C2.Business.CastleBravo.Binary
             while(Read4M(br))
                 Consume();
 
-            
-            return ls.ToArray();
+            // TODO 后续处理, 如 打标, 排序
+
+            return ls.JoinString(System.Environment.NewLine);
         }
 
         private void Reset()

@@ -32,6 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.StringsTabPage = new System.Windows.Forms.TabPage();
+            this.FileButton = new System.Windows.Forms.Button();
+            this.FileTB = new System.Windows.Forms.TextBox();
+            this.ResultTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -42,10 +45,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -77,9 +77,9 @@
             // 
             // StringsTabPage
             // 
-            this.StringsTabPage.Controls.Add(this.button1);
-            this.StringsTabPage.Controls.Add(this.textBox2);
-            this.StringsTabPage.Controls.Add(this.textBox1);
+            this.StringsTabPage.Controls.Add(this.FileButton);
+            this.StringsTabPage.Controls.Add(this.FileTB);
+            this.StringsTabPage.Controls.Add(this.ResultTB);
             this.StringsTabPage.Controls.Add(this.label5);
             this.StringsTabPage.Controls.Add(this.label4);
             this.StringsTabPage.Controls.Add(this.label1);
@@ -90,6 +90,37 @@
             this.StringsTabPage.TabIndex = 0;
             this.StringsTabPage.Text = "提取字符串";
             this.StringsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // FileButton
+            // 
+            this.FileButton.Location = new System.Drawing.Point(590, 38);
+            this.FileButton.Name = "FileButton";
+            this.FileButton.Size = new System.Drawing.Size(63, 23);
+            this.FileButton.TabIndex = 6;
+            this.FileButton.Text = "+分析";
+            this.FileButton.UseVisualStyleBackColor = true;
+            this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
+            // 
+            // FileTB
+            // 
+            this.FileTB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FileTB.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.FileTB.Location = new System.Drawing.Point(6, 38);
+            this.FileTB.Name = "FileTB";
+            this.FileTB.ReadOnly = true;
+            this.FileTB.Size = new System.Drawing.Size(562, 23);
+            this.FileTB.TabIndex = 5;
+            // 
+            // ResultTB
+            // 
+            this.ResultTB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ResultTB.Location = new System.Drawing.Point(3, 76);
+            this.ResultTB.MaxLength = 4194304;
+            this.ResultTB.Multiline = true;
+            this.ResultTB.Name = "ResultTB";
+            this.ResultTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ResultTB.Size = new System.Drawing.Size(673, 347);
+            this.ResultTB.TabIndex = 4;
             // 
             // label5
             // 
@@ -117,7 +148,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(710, 354);
+            this.tabPage2.Size = new System.Drawing.Size(679, 426);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Xise解密";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -158,7 +189,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(710, 354);
+            this.tabPage1.Size = new System.Drawing.Size(679, 426);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "冰蝎解密";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -191,36 +222,9 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "施工中...";
             // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox1.Location = new System.Drawing.Point(3, 76);
-            this.textBox1.MaxLength = 4194304;
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(673, 347);
-            this.textBox1.TabIndex = 4;
-            // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(6, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(562, 23);
-            this.textBox2.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(590, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "+浏览";
-            this.button1.UseVisualStyleBackColor = true;
+            this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a|所有文件|*.*";
             // 
             // BinaryMainForm
             // 
@@ -262,9 +266,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox ResultTB;
+        private System.Windows.Forms.Button FileButton;
+        private System.Windows.Forms.TextBox FileTB;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
