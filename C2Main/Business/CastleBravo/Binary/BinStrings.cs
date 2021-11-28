@@ -7,10 +7,10 @@ namespace C2.Business.CastleBravo.Binary
     class BinStrings
     {
         private byte[] bytes;
-        private List<string> ls;
-        private StringBuilder sb;
-        private int min;  // 长度小于这个数的不要
-        private int max;  // 长度大于这个数的截断
+        private readonly List<string> ls;
+        private readonly StringBuilder sb;
+        private readonly int min;  // 长度小于这个数的不要
+        private readonly int max;  // 长度大于这个数的截断
         
         public BinStrings()
         {
@@ -55,23 +55,9 @@ namespace C2.Business.CastleBravo.Binary
         }
 
         private void ConsumeAscii()
-        {
-            
+        {         
             foreach (byte b in bytes)
-            {
-                bool isChar = IsChar(b);
-                if (isChar)
-                {
-                    sb.Append(b);
-                    if (sb.Length < max)
-                        continue;
-                }
-                        
-                if (sb.Length > min)
-                    ls.Add(sb.ToString());
-
-                sb.Clear();
-            }
+                ConsumeOne(b);
         }
 
         private bool IsChar(byte b)
@@ -80,11 +66,18 @@ namespace C2.Business.CastleBravo.Binary
             return (b >= 0x20 && b <= 0x7E) || (b >= 0x09 && b <= 0x13);
         }
 
+        private bool IsChar(byte l, byte r)
+        {
+            return IsChar(l) && r == 0x00;
+        }
+
         private void Consume16LE()
         {
             for (int i = 0; i < bytes.Length; i += 2)
             {
-
+                byte l = bytes[i + 0];
+                byte r = bytes[i + 1];
+                ConsumeOne(l, r);
             }
         }
 
@@ -92,8 +85,25 @@ namespace C2.Business.CastleBravo.Binary
         {
             for (int i = 0; i < bytes.Length; i += 2)
             {
-
+                byte l = bytes[i + 1];
+                byte r = bytes[i + 0];
+                ConsumeOne(l, r);
             }
+        }
+
+        private void ConsumeOne(byte l, byte r = 0x00)
+        {
+            if (IsChar(l, r))
+            {
+                sb.Append(l);
+                if (sb.Length < max)
+                    return;
+            }
+
+            if (sb.Length > min)
+                ls.Add(sb.ToString());
+
+            sb.Clear();
         }
     }
 }

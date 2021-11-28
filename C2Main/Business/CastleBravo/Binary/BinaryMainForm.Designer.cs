@@ -32,17 +32,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.StringsTabPage = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -53,7 +56,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(282, 168);
+            this.label1.Location = new System.Drawing.Point(269, 204);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 33);
             this.label1.TabIndex = 0;
@@ -69,22 +72,42 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(718, 384);
+            this.tabControl1.Size = new System.Drawing.Size(687, 456);
             this.tabControl1.TabIndex = 1;
             // 
             // StringsTabPage
             // 
-            this.StringsTabPage.Controls.Add(this.label6);
+            this.StringsTabPage.Controls.Add(this.button1);
+            this.StringsTabPage.Controls.Add(this.textBox2);
+            this.StringsTabPage.Controls.Add(this.textBox1);
             this.StringsTabPage.Controls.Add(this.label5);
             this.StringsTabPage.Controls.Add(this.label4);
             this.StringsTabPage.Controls.Add(this.label1);
             this.StringsTabPage.Location = new System.Drawing.Point(4, 26);
             this.StringsTabPage.Name = "StringsTabPage";
             this.StringsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.StringsTabPage.Size = new System.Drawing.Size(710, 354);
+            this.StringsTabPage.Size = new System.Drawing.Size(679, 426);
             this.StringsTabPage.TabIndex = 0;
             this.StringsTabPage.Text = "提取字符串";
             this.StringsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(446, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(207, 17);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "支持单字节, 大端双字节和小端双字节\r\n";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(2, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(417, 17);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a)中提取文本,尤其是IP,域名,手机号和用户名...\r\n";
             // 
             // tabPage2
             // 
@@ -98,6 +121,24 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Xise解密";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 37);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(322, 17);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "针对Xise19.9无视世界WAF版后门加密流量进行定制化解密";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 17);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "设计规划";
             // 
             // label2
             // 
@@ -122,51 +163,14 @@
             this.tabPage1.Text = "冰蝎解密";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // label10
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(276, 161);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(159, 33);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "施工中...";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 37);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(395, 17);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a)中提取文本,尤其是IP,域名,手机号,QQ等";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(390, 17);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "支持单字节, 双字节和大小端, 四字节和大小端以及变长字符集(地狱模式)";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 10);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 17);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "设计规划";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 17);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "设计规划";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 37);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(248, 17);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "针对三代冰蝎的加密流量报文进行定制化解密";
             // 
             // label8
             // 
@@ -177,29 +181,52 @@
             this.label8.TabIndex = 5;
             this.label8.Text = "设计规划";
             // 
-            // label9
+            // label3
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 37);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(322, 17);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "针对Xise19.9无视世界WAF版后门加密流量进行定制化解密";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(276, 161);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(159, 33);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "施工中...";
             // 
-            // label10
+            // textBox1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 37);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(248, 17);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "针对三代冰蝎的加密流量报文进行定制化解密";
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBox1.Location = new System.Drawing.Point(3, 76);
+            this.textBox1.MaxLength = 4194304;
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(673, 347);
+            this.textBox1.TabIndex = 4;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(6, 38);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(562, 23);
+            this.textBox2.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(590, 37);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(63, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "+浏览";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // BinaryMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 384);
+            this.ClientSize = new System.Drawing.Size(687, 456);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -231,10 +258,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
