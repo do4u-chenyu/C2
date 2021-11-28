@@ -7,19 +7,16 @@ namespace C2.Business.CastleBravo.Binary
 {
     class BinStrings
     {
-        private byte[] bytes;
         private readonly List<string> ls;
         private readonly StringBuilder sb;
-        private readonly int min;  // 长度小于这个数的不要
-        private readonly int max;  // 长度大于这个数的截断
+
+        private byte[] bytes;
+        private string uniqueStr;
         
         public BinStrings()
         {
-            bytes = new byte[0];
             ls = new List<string>();
             sb = new StringBuilder();
-            min = 4;
-            max = 1024;
         }
 
         public string Strings(string ffp)
@@ -32,12 +29,12 @@ namespace C2.Business.CastleBravo.Binary
                 Consume();
 
             // TODO 后续处理, 如 打标, 排序
-
             return ls.JoinString(System.Environment.NewLine);
         }
 
         private void Reset()
         {
+            uniqueStr = string.Empty;
             bytes = new byte[0];
             ls.Clear();
             sb.Clear();
@@ -47,6 +44,14 @@ namespace C2.Business.CastleBravo.Binary
         {
             bytes = br.ReadBytes(1024 * 1024 * 4);
             return bytes.Length > 0;
+        }
+
+        private void UniqueAdd(string str)
+        { 
+            if (str != uniqueStr) 
+                ls.Add(str);
+    
+            uniqueStr = str;
         }
 
         private void Consume()
@@ -59,51 +64,37 @@ namespace C2.Business.CastleBravo.Binary
         private void ConsumeAscii()
         {         
             foreach (byte b in bytes)
-                ConsumeOne(b);
+                TryConsumeOne(b);
         }
 
-        private bool IsChar(byte b)
+        private bool IsVisibleChar(byte l, byte r)
         {
-            // 可见字符和 /r /n /t
-            return b >= 0x20 && b <= 0x7E;
-        }
-
-        private bool IsChar(byte l, byte r)
-        {
-            return IsChar(l) && r == 0x00;
+            return l >= 0x20 && l <= 0x7E && r == 0x00;
         }
 
         private void Consume16LE()
         {
             for (int i = 0; i < bytes.Length; i += 2)
-            {
-                byte l = bytes[i + 0];
-                byte r = bytes[i + 1];
-                ConsumeOne(l, r);
-            }
+                TryConsumeOne(bytes[i + 0], bytes[i + 1]);
         }
 
         private void Consume16BE()
         {
             for (int i = 0; i < bytes.Length; i += 2)
-            {
-                byte l = bytes[i + 1];
-                byte r = bytes[i + 0];
-                ConsumeOne(l, r);
-            }
+                TryConsumeOne(bytes[i + 1], bytes[i + 0]);
         }
 
-        private void ConsumeOne(byte l, byte r = 0x00)
+        private void TryConsumeOne(byte l, byte r = 0x00)
         {
-            if (IsChar(l, r))
+            if (IsVisibleChar(l, r))
             {
-                sb.Append((char)l);  // 前面判断肯定在可见字符集,这里大胆转
-                if (sb.Length < max)
+                sb.Append((char)l);    // 前面判断肯定在可见字符集,这里大胆转
+                if (sb.Length < 1024)  // 超出截断
                     return;
             }
 
-            if (sb.Length > min)
-                ls.Add(sb.ToString());
+            if (sb.Length > 4)             // 太小放弃
+                UniqueAdd(sb.ToString());  // 局部去重
 
             sb.Clear();
         }
