@@ -74,13 +74,13 @@ namespace C2.Business.CastleBravo.Binary
 
         private void Consume16LE()
         {
-            for (int i = 0; i < bytes.Length; i += 2)
+            for (int i = 0; i < (bytes.Length >> 1 << 1); i += 2)  // 模2对齐
                 TryConsumeOne(bytes[i + 0], bytes[i + 1]);
         }
 
         private void Consume16BE()
         {
-            for (int i = 0; i < bytes.Length; i += 2)
+            for (int i = 0; i < (bytes.Length >> 1 << 1); i += 2)  // 模2对齐
                 TryConsumeOne(bytes[i + 1], bytes[i + 0]);
         }
 

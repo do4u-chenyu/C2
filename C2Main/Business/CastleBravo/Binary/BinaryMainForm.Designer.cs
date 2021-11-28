@@ -115,7 +115,7 @@
             // 
             this.ResultTB.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ResultTB.Location = new System.Drawing.Point(3, 76);
-            this.ResultTB.MaxLength = 4194304;
+            this.ResultTB.MaxLength = 16777216;
             this.ResultTB.Multiline = true;
             this.ResultTB.Name = "ResultTB";
             this.ResultTB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -136,9 +136,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(2, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(417, 17);
+            this.label4.Size = new System.Drawing.Size(436, 34);
             this.label4.TabIndex = 1;
-            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a)中提取文本,尤其是IP,域名,手机号和用户名...\r\n";
+            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a, ...)中提取文本,尤其是IP,域名,手机号.和用户名...\r\n\r\n";
             // 
             // tabPage2
             // 
@@ -224,7 +224,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a|所有文件|*.*";
+            this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
             // 
             // BinaryMainForm
             // 
