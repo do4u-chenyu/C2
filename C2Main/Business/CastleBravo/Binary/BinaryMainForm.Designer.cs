@@ -138,9 +138,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(2, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(436, 34);
+            this.label4.Size = new System.Drawing.Size(433, 34);
             this.label4.TabIndex = 1;
-            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a, ...)中提取文本,尤其是IP,域名,手机号.和用户名...\r\n\r\n";
+            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a, ...)中提取文本,尤其是IP,域名,手机号和用户名...\r\n\r\n";
             // 
             // tabPage2
             // 
