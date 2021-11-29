@@ -7,6 +7,7 @@ namespace MD5Plugin.DecimalConvert
     {
 
         protected string sepType = " ";
+        protected int decimalBase;
         public OctDecimal()
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace MD5Plugin.DecimalConvert
             inputTextBox.Select(inputTextBox.TextLength, 0);
             inputTextBox.Select(0, 0);
             sepComboBox.SelectedIndex = 0;
+            decimalBase = 8;
         }
 
         public void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -30,24 +32,41 @@ namespace MD5Plugin.DecimalConvert
 
         public override void encode(string str)
         {
-            StringBuilder sb = new StringBuilder();
-            string[] strings = str.Split(new string[] { sepType }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in strings)
+            if (inputTextBox.Text == "请输入你要编码的内容")
             {
-                sb.Append(Convert.ToString(Convert.ToByte(s, 8), 16)).Append(sepType);
+                ResetTextBox();
+                return;
             }
-            outputTextBox.Text = sb.ToString();
+            outputTextBox.Text = DoConvert(str, decimalBase, 16);
+        }
+        public override void decode(string str)
+        {
+            if (outputTextBox.Text == "请输入你要解码的内容")
+            {
+                originOutput();
+                return;
+            }
+ 
+            inputTextBox.Text = DoConvert(str, 16, decimalBase);
         }
 
-        public override void decode(string str)
+        protected string ConvertBaseString(string s, int baseSrc, int baseDst)
+        {
+            try
+            {
+                return Convert.ToString(Convert.ToByte(s, baseSrc), baseDst);
+            }
+            catch { }
+            return string.Empty;
+        }
+
+        protected string DoConvert(string str, int baseStr, int baseDst)
         {
             StringBuilder sb = new StringBuilder();
             string[] strings = str.Split(new string[] { sepType }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string s in strings)
-            {
-                sb.Append(Convert.ToString(Convert.ToByte(s, 16), 8)).Append(sepType);
-            }
-            inputTextBox.Text = sb.ToString();
+                sb.Append(ConvertBaseString(s, baseStr, baseDst)).Append(sepType);
+            return sb.ToString();
         }
 
 
