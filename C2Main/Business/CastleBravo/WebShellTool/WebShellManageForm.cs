@@ -33,7 +33,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             "L1HF58S04Y6",    // LQ
             "L1HF68F046A",    // SQY
             "PF2Z4F9W",       // HZH
-            "L1HF68F02VM",    // MHD
+            //"L1HF68F02VM",    // MHD
             "L1HF5AL00EV",    // LXF
             "L1HF68F04XB",    // WLY
             "/7KFL4S2/CNWS20088P013N/" ,   // XX
@@ -83,11 +83,18 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (IsLocked())
             {
-                contextMenuStrip.Enabled = false;
                 trojanMenu.Enabled = false;
                 infoCollectionMenu.Enabled = false;
                 refreshAllShellMenu.Enabled = false;
                 secondRefreshMenu.Enabled = false;
+                //右键菜单
+                EnterToolStripMenuItem.Enabled = false;
+                SuscideMenuItem.Enabled = false;
+                RefreshCurrentStatusMenuItem.Enabled = false;
+                RefreshAllStatusMenuItem.Enabled = false;
+                RefreshAllDeadMenu.Enabled = false;
+                ReverseShellMenu.Enabled = false;
+                msfMenu.Enabled = false;
             }
         }
         private bool IsThreeGroup()
@@ -101,15 +108,23 @@ namespace C2.Business.CastleBravo.WebShellTool
                 UnlockButton.Enabled = false;
             return UnlockButton.Enabled;
         }
-
+        
         public void FuctionUnlock()
         {
-            contextMenuStrip.Enabled = true;
             trojanMenu.Enabled = true;
             infoCollectionMenu.Enabled = true;
             refreshAllShellMenu.Enabled = true;
             secondRefreshMenu.Enabled = true;
-            UnlockButton.Enabled = false;
+            //右键菜单
+            EnterToolStripMenuItem.Enabled = true;
+            SuscideMenuItem.Enabled = true;
+            RefreshCurrentStatusMenuItem.Enabled = true;
+            RefreshAllStatusMenuItem.Enabled = true;
+            RefreshAllDeadMenu.Enabled = true;
+            ReverseShellMenu.Enabled = true;
+            msfMenu.Enabled = true;
+
+            UnlockButton.Enabled = false;//按钮不可用
         }
 
         private void AddShellMenu_Click(object sender, EventArgs e)
