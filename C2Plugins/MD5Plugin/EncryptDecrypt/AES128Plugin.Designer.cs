@@ -31,13 +31,20 @@
             this.textBoxEncryptionkey = new System.Windows.Forms.TextBox();
             this.labelEncryptionkey = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            
+            // 
+            // encodingComboBox
+            // 
+            this.encodingComboBox.Location = new System.Drawing.Point(418, 308);
+            // 
+            // buttonDecode
+            // 
+            this.buttonDecode.Location = new System.Drawing.Point(418, 250);
             // 
             // textBoxEncryptionkey
             // 
             this.textBoxEncryptionkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxEncryptionkey.ForeColor = System.Drawing.Color.Black;
-            this.textBoxEncryptionkey.Location = new System.Drawing.Point(483, 148);
+            this.textBoxEncryptionkey.Location = new System.Drawing.Point(418, 147);
             this.textBoxEncryptionkey.Name = "textBoxEncryptionkey";
             this.textBoxEncryptionkey.Size = new System.Drawing.Size(74, 21);
             this.textBoxEncryptionkey.TabIndex = 5;
@@ -59,9 +66,14 @@
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Controls.Add(this.labelEncryptionkey);
             this.Controls.Add(this.textBoxEncryptionkey);
-         
             this.Name = "AES128Plugin";
-            this.Size = new System.Drawing.Size(1046, 549);
+            this.Controls.SetChildIndex(this.textBoxEncryptionkey, 0);
+            this.Controls.SetChildIndex(this.labelEncryptionkey, 0);
+            this.Controls.SetChildIndex(this.encodingComboBox, 0);
+            this.Controls.SetChildIndex(this.buttonDecode, 0);
+            this.Controls.SetChildIndex(this.inputTextBox, 0);
+            this.Controls.SetChildIndex(this.outputTextBox, 0);
+            this.Controls.SetChildIndex(this.buttonEncode, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

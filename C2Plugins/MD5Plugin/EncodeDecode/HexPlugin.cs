@@ -15,7 +15,7 @@ namespace MD5Plugin
             InitializeComponent();
             InitializeControls();
         }
-        private void InitializeControls()
+        private new void InitializeControls()
         {
             inputTextBox.Select(inputTextBox.TextLength, 0);
             inputTextBox.Select(0, 0);

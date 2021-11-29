@@ -11,6 +11,7 @@ namespace MD5Plugin
         public Form2()
         {
             InitializeComponent();
+            treeView1.ExpandAll();
         }
         
         private void removeControls()
@@ -21,10 +22,11 @@ namespace MD5Plugin
         private void addControls()
         {
             this.commonPlugin.BackColor = SystemColors.InactiveCaption;
-            this.commonPlugin.Location = new Point(12, 55);
-            this.commonPlugin.Name = "commonPlugin";
-            this.commonPlugin.Size = new Size(1046, 549);
-            this.commonPlugin.TabIndex = 12;
+            this.commonPlugin.Location = new Point(186, 2);
+            this.commonPlugin.Name = "commonPlugin1";
+            this.commonPlugin.Size = new System.Drawing.Size(910, 491);
+            this.commonPlugin.TabIndex = 13;
+
             this.Controls.Add(this.commonPlugin);
         }
         
@@ -38,65 +40,34 @@ namespace MD5Plugin
             }
         }
 
-        private void RadioButton_Click(object sender, EventArgs e)
+        private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            //this.SuspendLayout();
             removeControls();
-
-            RadioButton radioButtonClick = sender as RadioButton;
-            if (radioButtonClick.Checked)
-            {
-                switch (radioButtonClick.Name)
-                {
-                    case "md5128RadioButton":
-                        this.commonPlugin = new MD5128Plugin();
-                        break;
-                    
-                    case "md564RadioButton":
-                        this.commonPlugin = new MD564Plugin();
-                        break;
-
-                    case "sha1RadioButton":
-                        this.commonPlugin = new SHA1Plugin();
-                        break;
-                    case "sha256RadioButton":
-                        this.commonPlugin = new SHA256Plugin();
-                        break;
-
-                    case "sha512RadioButton":
-                        this.commonPlugin = new SHA512Plugin();
-                        break;
-
-                    case "NTLMRadioButton":
-                        this.commonPlugin = new NTLMPlugin();
-                        break;
-
-                    case "urlRadioButton":
-                        this.commonPlugin = new URLlPlugin();
-                        break;
-
-                    case "unicodeRadioButton":
-                        this.commonPlugin = new UnicodePlugin();
-                        break;
-
-                    case "base64RadioButton":
-                        this.commonPlugin = new Base64Plugin();
-                        break;
-
-                    case "ASE128RadioButton":
-                        this.commonPlugin = new AES128Plugin();
-                        break;
-
-                    case "hexRadioButton":
-                        this.commonPlugin = new HexPlugin();
-                        break;
-                }
-            }
+            if (e.Node.Name == "MD5128") 
+                this.commonPlugin = new MD5128Plugin();
+            else if (e.Node.Name == "MD564")
+                this.commonPlugin = new MD564Plugin();
+            else if (e.Node.Name == "Base64")
+                this.commonPlugin = new Base64Plugin();
+            else if (e.Node.Name == "URL")
+                this.commonPlugin = new URLlPlugin();
+            else if (e.Node.Name == "Unicode")
+                this.commonPlugin = new UnicodePlugin();
+            else if (e.Node.Name == "HEX")
+                this.commonPlugin = new HexPlugin();
+            else if (e.Node.Name == "AES128")
+                this.commonPlugin = new AES128Plugin();
+            else if (e.Node.Name == "SHA1")
+                this.commonPlugin = new SHA1Plugin();
+            else if (e.Node.Name == "SHA256")
+                this.commonPlugin = new SHA256Plugin();
+            else if (e.Node.Name == "SHA512")
+                this.commonPlugin = new SHA512Plugin();
+            else if (e.Node.Name == "NTLM")
+                this.commonPlugin = new NTLMPlugin();
             addControls();
-            //this.ResumeLayout(false);
         }
-
-        
+       
         public Image GetPluginImage()
         {
             return this.Icon.ToBitmap();

@@ -1,6 +1,6 @@
 ﻿namespace MD5Plugin
 {
-    partial class URLlPlugin
+    partial class UnicodePlugin
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,28 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonDecode = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonDecode
             // 
-            this.buttonDecode.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonDecode.Location = new System.Drawing.Point(483, 252);
-            this.buttonDecode.Name = "buttonDecode";
-            this.buttonDecode.Size = new System.Drawing.Size(75, 30);
-            this.buttonDecode.TabIndex = 3;
-            this.buttonDecode.Text = "<= 解码";
-            this.buttonDecode.UseVisualStyleBackColor = true;
-            this.buttonDecode.Click += new System.EventHandler(this.buttonDecode_Click);
+            this.buttonDecode.Location = new System.Drawing.Point(417, 254);
             // 
-            // CustomPlugin
+            // UnicodePlugin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.Controls.Add(this.buttonDecode);
-            this.Name = "CustomPlugin";
-            this.Size = new System.Drawing.Size(1046, 549);
+            this.Name = "UnicodePlugin";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -57,9 +47,5 @@
 
         #endregion
 
-       
-       
-        
-        public System.Windows.Forms.Button buttonDecode;
     }
 }

@@ -65,16 +65,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AES128Plugin.cs">
+    <Compile Include="EncryptDecrypt\AES128Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AES128Plugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\AES128Plugin.Designer.cs">
       <DependentUpon>AES128Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="HexPlugin.cs">
+    <Compile Include="EncodeDecode\HexPlugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HexPlugin.Designer.cs">
+    <Compile Include="EncodeDecode\HexPlugin.Designer.cs">
       <DependentUpon>HexPlugin.cs</DependentUpon>
     </Compile>
     <Compile Include="CommonPlugin.cs">
@@ -83,58 +83,58 @@
     <Compile Include="CommonPlugin.Designer.cs">
       <DependentUpon>CommonPlugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="SHA1Plugin.cs">
+    <Compile Include="EncryptDecrypt\SHA1Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SHA1Plugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\SHA1Plugin.Designer.cs">
       <DependentUpon>SHA1Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="MD564Plugin.cs">
+    <Compile Include="EncryptDecrypt\MD564Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MD564Plugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\MD564Plugin.Designer.cs">
       <DependentUpon>MD564Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="NTLMPlugin.cs">
+    <Compile Include="EncryptDecrypt\NTLMPlugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NTLMPlugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\NTLMPlugin.Designer.cs">
       <DependentUpon>NTLMPlugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="SHA512Plugin.cs">
+    <Compile Include="EncryptDecrypt\SHA512Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SHA512Plugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\SHA512Plugin.Designer.cs">
       <DependentUpon>SHA512Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="SHA256Plugin.cs">
+    <Compile Include="EncryptDecrypt\SHA256Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SHA256Plugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\SHA256Plugin.Designer.cs">
       <DependentUpon>SHA256Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="MD5128Plugin.cs">
+    <Compile Include="EncryptDecrypt\MD5128Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MD5128Plugin.Designer.cs">
+    <Compile Include="EncryptDecrypt\MD5128Plugin.Designer.cs">
       <DependentUpon>MD5128Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base64Plugin.cs">
+    <Compile Include="EncodeDecode\Base64Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Base64Plugin.Designer.cs">
+    <Compile Include="EncodeDecode\Base64Plugin.Designer.cs">
       <DependentUpon>Base64Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="UnicodePlugin.cs">
+    <Compile Include="EncodeDecode\UnicodePlugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UnicodePlugin.Designer.cs">
+    <Compile Include="EncodeDecode\UnicodePlugin.Designer.cs">
       <DependentUpon>UnicodePlugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="URLlPlugin.cs">
+    <Compile Include="EncodeDecode\URLlPlugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="URLlPlugin.Designer.cs">
+    <Compile Include="EncodeDecode\URLlPlugin.Designer.cs">
       <DependentUpon>URLlPlugin.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
@@ -153,37 +153,37 @@
     <Compile Include="NTLM.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AES128Plugin.resx">
+    <EmbeddedResource Include="EncryptDecrypt\AES128Plugin.resx">
       <DependentUpon>AES128Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HexPlugin.resx">
+    <EmbeddedResource Include="EncodeDecode\HexPlugin.resx">
       <DependentUpon>HexPlugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPlugin.resx">
       <DependentUpon>CommonPlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MD564Plugin.resx">
+    <EmbeddedResource Include="EncryptDecrypt\MD564Plugin.resx">
       <DependentUpon>MD564Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NTLMPlugin.resx">
+    <EmbeddedResource Include="EncryptDecrypt\NTLMPlugin.resx">
       <DependentUpon>NTLMPlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SHA512Plugin.resx">
+    <EmbeddedResource Include="EncryptDecrypt\SHA512Plugin.resx">
       <DependentUpon>SHA512Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SHA256Plugin.resx">
+    <EmbeddedResource Include="EncryptDecrypt\SHA256Plugin.resx">
       <DependentUpon>SHA256Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MD5128Plugin.resx">
+    <EmbeddedResource Include="EncryptDecrypt\MD5128Plugin.resx">
       <DependentUpon>MD5128Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Base64Plugin.resx">
+    <EmbeddedResource Include="EncodeDecode\Base64Plugin.resx">
       <DependentUpon>Base64Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UnicodePlugin.resx">
+    <EmbeddedResource Include="EncodeDecode\UnicodePlugin.resx">
       <DependentUpon>UnicodePlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="URLlPlugin.resx">
+    <EmbeddedResource Include="EncodeDecode\URLlPlugin.resx">
       <DependentUpon>URLlPlugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">

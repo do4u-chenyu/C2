@@ -38,33 +38,31 @@ namespace MD5Plugin
             // inputTextBox
             // 
             this.inputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            //this.inputTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.inputTextBox.Location = new System.Drawing.Point(17, 20);
+            this.inputTextBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.inputTextBox.Location = new System.Drawing.Point(3, 3);
             this.inputTextBox.Multiline = true;
             this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(460, 450);
+            this.inputTextBox.Size = new System.Drawing.Size(408, 489);
             this.inputTextBox.TabIndex = 0;
             this.inputTextBox.Text = "请把你需要加密的内容粘贴在这里";
             this.inputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
-            inputTextBox.ForeColor = Color.DarkGray;
             // 
             // outputTextBox
             // 
             this.outputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.outputTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.outputTextBox.Location = new System.Drawing.Point(564, 20);
+            this.outputTextBox.ForeColor = System.Drawing.Color.DarkGray;
+            this.outputTextBox.Location = new System.Drawing.Point(498, 6);
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.Size = new System.Drawing.Size(460, 450);
+            this.outputTextBox.Size = new System.Drawing.Size(408, 486);
             this.outputTextBox.TabIndex = 1;
             this.outputTextBox.Text = "加密后的结果";
-            outputTextBox.ForeColor = Color.DarkGray;
             this.outputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OutputTextBox_MouseDown);
             // 
             // buttonEncode
             // 
             this.buttonEncode.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonEncode.Location = new System.Drawing.Point(483, 193);
+            this.buttonEncode.Location = new System.Drawing.Point(417, 197);
             this.buttonEncode.Name = "buttonEncode";
             this.buttonEncode.Size = new System.Drawing.Size(75, 30);
             this.buttonEncode.TabIndex = 2;
@@ -72,7 +70,7 @@ namespace MD5Plugin
             this.buttonEncode.UseVisualStyleBackColor = true;
             this.buttonEncode.Click += new System.EventHandler(this.buttonEncode_Click);
             // 
-            // MD5128Plugin
+            // CommonPlugin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -80,8 +78,8 @@ namespace MD5Plugin
             this.Controls.Add(this.buttonEncode);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
-            this.Name = "MD5128Plugin";
-            this.Size = new System.Drawing.Size(1046, 549);
+            this.Name = "CommonPlugin";
+            this.Size = new System.Drawing.Size(910, 499);
             this.ResumeLayout(false);
             this.PerformLayout();
 
