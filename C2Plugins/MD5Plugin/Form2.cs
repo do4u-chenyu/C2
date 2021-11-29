@@ -1,4 +1,5 @@
 ﻿using C2.IAOLab.Plugins;
+using MD5Plugin.DecimalConvert;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -98,6 +99,16 @@ namespace MD5Plugin
             {
                 this.Text = "NTLM";
                 this.commonPlugin = new NTLMPlugin();
+            }
+            else if (e.Node.Name == "十进制转十六")
+            {
+                this.Text = "十进制转十六";
+                this.commonPlugin = new HexDecimal();
+            }
+            else if (e.Node.Name == "八进制转十六")
+            {
+                this.Text = "八进制转十六";
+                this.commonPlugin = new OctDecimal();
             }
             else 
             {

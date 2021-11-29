@@ -65,6 +65,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DecimalConvert\HexDecimal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DecimalConvert\HexDecimal.Designer.cs">
+      <DependentUpon>HexDecimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DecimalConvert\OctDecimal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DecimalConvert\OctDecimal.Designer.cs">
+      <DependentUpon>OctDecimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="EncryptDecrypt\AES128Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +165,9 @@
     <Compile Include="NTLM.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DecimalConvert\OctDecimal.resx">
+      <DependentUpon>OctDecimal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EncryptDecrypt\AES128Plugin.resx">
       <DependentUpon>AES128Plugin.cs</DependentUpon>
     </EmbeddedResource>

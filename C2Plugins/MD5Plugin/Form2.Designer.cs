@@ -97,9 +97,9 @@
             treeNode13.ForeColor = System.Drawing.SystemColors.ControlDark;
             treeNode13.Name = "节点1";
             treeNode13.Text = "加密/解密";
-            treeNode14.Name = "节点1";
+            treeNode14.Name = "十进制转十六";
             treeNode14.Text = "十进制转十六";
-            treeNode15.Name = "节点2";
+            treeNode15.Name = "八进制转十六";
             treeNode15.Text = "八进制转十六";
             treeNode16.ForeColor = System.Drawing.SystemColors.ControlDark;
             treeNode16.Name = "节点0";
