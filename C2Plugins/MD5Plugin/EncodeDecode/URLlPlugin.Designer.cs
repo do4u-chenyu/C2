@@ -34,7 +34,7 @@
             // buttonDecode
             // 
             this.buttonDecode.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonDecode.Location = new System.Drawing.Point(417, 249);
+            this.buttonDecode.Location = new System.Drawing.Point(417, 195);
             this.buttonDecode.Name = "buttonDecode";
             this.buttonDecode.Size = new System.Drawing.Size(75, 30);
             this.buttonDecode.TabIndex = 3;

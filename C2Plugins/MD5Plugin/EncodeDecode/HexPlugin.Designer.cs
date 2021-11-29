@@ -34,11 +34,7 @@
             // 
             // encodingComboBox
             // 
-            this.encodingComboBox.Location = new System.Drawing.Point(417, 302);
-            // 
-            // buttonDecode
-            // 
-            this.buttonDecode.Location = new System.Drawing.Point(417, 248);
+            this.encodingComboBox.Location = new System.Drawing.Point(417, 245);
             // 
             // splitComboBox
             // 
@@ -54,7 +50,7 @@
             "/",
             "\\",
             "0x"});
-            this.splitComboBox.Location = new System.Drawing.Point(417, 401);
+            this.splitComboBox.Location = new System.Drawing.Point(417, 345);
             this.splitComboBox.Name = "splitComboBox";
             this.splitComboBox.Size = new System.Drawing.Size(75, 27);
             this.splitComboBox.TabIndex = 5;
@@ -69,7 +65,7 @@
             "十六进制",
             "十进制",
             "八进制"});
-            this.radixComboBox.Location = new System.Drawing.Point(417, 353);
+            this.radixComboBox.Location = new System.Drawing.Point(417, 295);
             this.radixComboBox.Name = "radixComboBox";
             this.radixComboBox.Size = new System.Drawing.Size(75, 27);
             this.radixComboBox.TabIndex = 6;

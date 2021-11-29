@@ -32,14 +32,6 @@
             this.labelEncryptionkey = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // encodingComboBox
-            // 
-            this.encodingComboBox.Location = new System.Drawing.Point(418, 308);
-            // 
-            // buttonDecode
-            // 
-            this.buttonDecode.Location = new System.Drawing.Point(418, 250);
-            // 
             // textBoxEncryptionkey
             // 
             this.textBoxEncryptionkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;

@@ -37,6 +37,7 @@ namespace MD5Plugin
             // 
             // inputTextBox
             // 
+            this.inputTextBox.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.inputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.inputTextBox.ForeColor = System.Drawing.Color.DarkGray;
             this.inputTextBox.Location = new System.Drawing.Point(3, 3);
@@ -49,6 +50,7 @@ namespace MD5Plugin
             // 
             // outputTextBox
             // 
+            this.outputTextBox.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.outputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.outputTextBox.ForeColor = System.Drawing.Color.DarkGray;
             this.outputTextBox.Location = new System.Drawing.Point(498, 6);
@@ -62,7 +64,7 @@ namespace MD5Plugin
             // buttonEncode
             // 
             this.buttonEncode.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonEncode.Location = new System.Drawing.Point(417, 197);
+            this.buttonEncode.Location = new System.Drawing.Point(417, 145);
             this.buttonEncode.Name = "buttonEncode";
             this.buttonEncode.Size = new System.Drawing.Size(75, 30);
             this.buttonEncode.TabIndex = 2;

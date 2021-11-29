@@ -31,10 +31,6 @@
             this.encodingComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // buttonDecode
-            // 
-            this.buttonDecode.Location = new System.Drawing.Point(417, 252);
-            // 
             // encodingComboBox
             // 
             this.encodingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -44,7 +40,7 @@
             "UTF-8",
             "GB2312",
             "HEX"});
-            this.encodingComboBox.Location = new System.Drawing.Point(417, 311);
+            this.encodingComboBox.Location = new System.Drawing.Point(417, 245);
             this.encodingComboBox.Name = "encodingComboBox";
             this.encodingComboBox.Size = new System.Drawing.Size(75, 27);
             this.encodingComboBox.TabIndex = 4;

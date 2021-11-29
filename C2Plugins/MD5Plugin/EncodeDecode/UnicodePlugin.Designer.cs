@@ -32,7 +32,7 @@
             // 
             // buttonDecode
             // 
-            this.buttonDecode.Location = new System.Drawing.Point(417, 254);
+            this.buttonDecode.Location = new System.Drawing.Point(417, 195);
             // 
             // UnicodePlugin
             // 
