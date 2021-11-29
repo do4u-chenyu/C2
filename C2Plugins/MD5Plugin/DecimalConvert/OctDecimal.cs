@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace MD5Plugin.DecimalConvert
 {
@@ -29,7 +30,13 @@ namespace MD5Plugin.DecimalConvert
 
         public override void encode(string str)
         {
-
+            StringBuilder sb = new StringBuilder();
+            string[] strings = str.Split(new string[] { sepType }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in strings)
+            {
+                sb.Append(s).Append(sepType);
+            }
+            outputTextBox.Text = sb.ToString();
         }
 
 
