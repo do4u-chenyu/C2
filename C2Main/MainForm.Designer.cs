@@ -517,6 +517,7 @@ namespace C2
             this.HIBUControl.Size = new System.Drawing.Size(185, 558);
             this.HIBUControl.TabIndex = 0;
             this.HIBUControl.Visible = false;
+            this.HIBUControl.ItemLabel.Text = "HIBU";
             // 
             // modelMarketControl
             // 

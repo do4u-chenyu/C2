@@ -72,6 +72,6 @@
         }
         #endregion
         private System.Windows.Forms.Panel IAOLabPanel;
-        private System.Windows.Forms.Label ItemLabel;
+        public System.Windows.Forms.Label ItemLabel;
     }
 }
