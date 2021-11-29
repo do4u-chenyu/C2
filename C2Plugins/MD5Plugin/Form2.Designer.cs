@@ -52,6 +52,11 @@
             treeNode10,
             treeNode11,
             treeNode12});
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("十进制转十六");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("八进制转十六");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("进制转换", new System.Windows.Forms.TreeNode[] {
+            treeNode14,
+            treeNode15});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.commonPlugin = new MD5Plugin.CommonPlugin();
@@ -92,9 +97,17 @@
             treeNode13.ForeColor = System.Drawing.SystemColors.ControlDark;
             treeNode13.Name = "节点1";
             treeNode13.Text = "加密/解密";
+            treeNode14.Name = "节点1";
+            treeNode14.Text = "十进制转十六";
+            treeNode15.Name = "节点2";
+            treeNode15.Text = "八进制转十六";
+            treeNode16.ForeColor = System.Drawing.SystemColors.ControlDark;
+            treeNode16.Name = "节点0";
+            treeNode16.Text = "进制转换";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode5,
-            treeNode13});
+            treeNode13,
+            treeNode16});
             this.treeView1.Size = new System.Drawing.Size(180, 493);
             this.treeView1.TabIndex = 12;
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1_NodeMouseDoubleClick);
