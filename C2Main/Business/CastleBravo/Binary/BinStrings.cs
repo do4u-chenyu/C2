@@ -63,41 +63,69 @@ namespace C2.Business.CastleBravo.Binary
 
         private void Consume()
         {
-            ConsumeAscii();
-            Consume16LE();
-            Consume16BE();
-            // Consume32LE
-            // ConsumeAscii7Bits()
+            ConsumeAscii();  // 单字节
+            Consume16LE();   // 双字节小端
+            Consume16BE();   // 双字节大端
+            Consume32LE();   // 四字节小端  单纯是为了与strings命令一致
+            Consume32BE();   // 四字节大端  X86下的win和linux的二进制文件我感觉应该是没有
+            //ConsumeAscii7Bits();  // 没啥用, 7Bits字符串, 纯属拍脑袋
         }
 
+        private void Consume32LE()
+        {
+            for (int i = 0; i < (bytes.Length >> 2 << 2); i += 4)  // 模4对齐
+                TryConsumeQuad(bytes[i + 0], bytes[i + 1], bytes[i + 2], bytes[i + 3]);
+        }
+
+        private void Consume32BE()
+        {
+            for (int i = 0; i < (bytes.Length >> 2 << 2); i += 4)  // 模4对齐
+                TryConsumeQuad(bytes[i + 3], bytes[i + 2], bytes[i + 1], bytes[i + 0]);
+        }
+
+        private void ConsumeAscii7Bits()
+        {
+            foreach (byte b in bytes)
+                TryConsumeSingle(b > 0x7F ? (byte)(b & 0x7F) : (byte)0);  // 去掉最高位
+        }
         private void ConsumeAscii()
         {         
             foreach (byte b in bytes)
-                TryConsumeOne(b);
+                TryConsumeSingle(b);
         }
 
-        private bool IsVisibleChar(byte l, byte r)
+        private bool IsVisibleChar(byte o, byte s = 0x00, byte t = 0x00, byte q = 0x00)
         {
-            return l >= 0x20 && l <= 0x7E && r == 0x00;
+            return o >= 0x20 && o <= 0x7E && s == 0x00 && t == 0x00 && q == 0x00;
         }
 
         private void Consume16LE()
         {
             for (int i = 0; i < (bytes.Length >> 1 << 1); i += 2)  // 模2对齐
-                TryConsumeOne(bytes[i + 0], bytes[i + 1]);
+                TryConsumeDouble(bytes[i + 0], bytes[i + 1]);
         }
 
         private void Consume16BE()
         {
             for (int i = 0; i < (bytes.Length >> 1 << 1); i += 2)  // 模2对齐
-                TryConsumeOne(bytes[i + 1], bytes[i + 0]);
+                TryConsumeDouble(bytes[i + 1], bytes[i + 0]);
         }
 
-        private void TryConsumeOne(byte l, byte r = 0x00)
+        private void TryConsumeDouble(byte l, byte r)
         {
-            if (IsVisibleChar(l, r))
+            TryConsumeQuad(l, r, (byte)0x00, (byte)0x00);
+        }
+
+        private void TryConsumeSingle(byte l)
+        {
+            TryConsumeDouble(l, (byte)0x00);
+        }
+
+        private void TryConsumeQuad(byte o, byte s, byte t, byte q)
+        {
+            if (IsVisibleChar(o, s, t, q))
             {
-                sb.Append((char)l);    // 前面判断肯定在可见字符集,这里大胆转
+                sb.Append((char)o);    // 前面判断肯定在可见字符集,这里大胆转
                 if (sb.Length < 1024)  // 超出截断
                     return;
             }
