@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -145,5 +146,30 @@ namespace C2.Business.CastleBravo.WebShellTool
                                                   "wFtP7Go4rUxNf3bm8jQBcLOe0LC7dNCR"
                                                   };
         public static string BDLocationAPI = "https://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1}";
+        public static string WriteResult(string result, string url, string type)
+        {
+            string time = DateTime.Now.ToString("yyyyMMDDHHmmss");           
+            try
+            {
+
+                Match m = new Regex("://(.*?)/").Match(url);
+                string fileName = m.Success ? string.Format("{0}_{1}", m.Groups[1].Value, time) : time;
+                fileName += ".txt";
+                string path = Path.Combine(Global.UserWorkspacePath, "后信息采集", type);
+                Directory.CreateDirectory(path);
+                string filePath = Path.Combine(path, fileName);
+                using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
+                {
+                    sw.WriteLine(result);
+                }
+                return filePath;
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
     }
 }

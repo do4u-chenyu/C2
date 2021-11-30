@@ -755,7 +755,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 string payload = string.Format(ClientSetting.InfoPayloadDict[this.infoType], task.Password);
                 string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
-                task.SGInfoCollectionConfig = ProcessingResults(ret);
+                task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
             }
             catch (Exception ex)
             {
@@ -766,14 +766,30 @@ namespace C2.Business.CastleBravo.WebShellTool
         /// <summary>
         /// 异常：ArgumentException，NullException
         /// </summary>
-        private String ProcessingResults(string ret)
+        private String ProcessingResults(string ret,string taskUrl)
         {
-            Regex r = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
-            Match m = r.Match(ret);
-            string rawResult = m.Success ? m.Groups[1].Value : ret;
+            Regex r0 = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
+            Match m0 = r0.Match(ret);
+            Regex r1 = new Regex("<pre>(.*)</pre>");
+            Match m1 = r1.Match(ret);
+            string rawResult;
+            if (m0.Success)
+                rawResult = m0.Groups[1].Value;
+            else if (m1.Success)
+                rawResult = m1.Groups[1].Value;
+            else
+                rawResult = ret;
             if (this.infoType == InfoType.LocationInfo)
             {
                 return LocationResult(rawResult);
+            }
+            else if (this.infoType == InfoType.ProcessView)
+            {
+                return ClientSetting.WriteResult(rawResult, taskUrl, "进程信息");
+            }
+            else if (this.infoType == InfoType.ScheduleTask)
+            {
+                return ClientSetting.WriteResult(rawResult, taskUrl,"计划任务");
             }
             return rawResult;
         }
