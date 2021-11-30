@@ -649,8 +649,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
             this.infoType = InfoType.MysqlBlasting;
-            foreach (ListViewItem item in this.LV.SelectedItems)
-                SingleInfoCollection(item);
+            DoCurrentItemTask();
         }
         private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
         {
@@ -672,8 +671,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CurrentProcessView_Click(object sender, EventArgs e)
         {
             this.infoType = InfoType.ProcessView;
-            foreach (ListViewItem item in this.LV.SelectedItems)
-                SingleInfoCollection(item);
+            DoCurrentItemTask();
+
         }
         // 定时任务
         private void AllScheduleTask_Click(object sender, EventArgs e)
@@ -691,8 +690,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CurrentScheduleTask_Click(object sender, EventArgs e)
         {
             this.infoType = InfoType.ScheduleTask;
-            foreach (ListViewItem item in this.LV.SelectedItems)
-                SingleInfoCollection(item);
+            DoCurrentItemTask();
+
         }
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
@@ -710,8 +709,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CurrentLocationInfo_Click(object sender, EventArgs e)
         {
             this.infoType = InfoType.LocationInfo;
+            DoCurrentItemTask();
+        }
+        private void DoCurrentItemTask()
+        {
             foreach (ListViewItem item in this.LV.SelectedItems)
+            {
+                if (refreshNeedStop)
+                    break;
                 SingleInfoCollection(item);
+            }
         }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
