@@ -72,6 +72,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
                     break;
+                case "InformationSearch":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.InformationSearch;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
+                    break;
                 case "Address":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
@@ -192,9 +196,6 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceRecognizer;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceRecognizerFormHelpInfo);
                     break;
-
-
-
             }
 
         }
@@ -264,6 +265,9 @@ namespace C2.Controls.Left
                 case "Wifi":
                     new WifiLocation() { FormType = buttonType }.ShowDialog();
                     //new WifiLocation().ShowDialog();
+                    break;
+                case "InformationSearch":
+                    new InformationSearch() { FormType = buttonType }.ShowDialog();
                     break;
                 case "Card":
                     BankToolForm(buttonType).ShowDialog();

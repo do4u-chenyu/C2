@@ -865,6 +865,9 @@
   <data name="Wifi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TabBarImage\WIFI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+   <data name="InformationSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabBarImage\InformationSearch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\_blank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

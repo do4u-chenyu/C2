@@ -531,6 +531,7 @@
     <Compile Include="Business\IAOLab\PostAndGet\PostAndGetForm.Designer.cs">
       <DependentUpon>PostAndGetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\IAOLab\RecordNumber\RecordNumber.cs" />
     <Compile Include="Business\IAOLab\Transform\GPSTransform.cs" />
     <Compile Include="Business\IAOLab\Transform\TimeAndIPTransform.cs" />
     <Compile Include="Business\IAOLab\Visualization\Dialogs\SettingChartDialog.cs">
@@ -743,6 +744,12 @@
     </Compile>
     <Compile Include="Dialogs\IAOLab\FraudDialog.Designer.cs">
       <DependentUpon>FraudDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\InformationSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\InformationSearch.Designer.cs">
+      <DependentUpon>InformationSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.cs">
       <SubType>Form</SubType>
@@ -2406,6 +2413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\FraudDialog.resx">
       <DependentUpon>FraudDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\InformationSearch.resx">
+      <DependentUpon>InformationSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\WifiLocation.resx">
       <DependentUpon>WifiLocation.cs</DependentUpon>
