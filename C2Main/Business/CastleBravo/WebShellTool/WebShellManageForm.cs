@@ -675,6 +675,25 @@ namespace C2.Business.CastleBravo.WebShellTool
             foreach (ListViewItem item in this.LV.SelectedItems)
                 SingleInfoCollection(item);
         }
+        // 定时任务
+        private void AllScheduleTask_Click(object sender, EventArgs e)
+        {
+            this.infoType = InfoType.ScheduleTask;
+            BatchInfoColletion(false);
+        }
+
+        private void AliveScheduleTask_Click(object sender, EventArgs e)
+        {
+            this.infoType = InfoType.ScheduleTask;
+            BatchInfoColletion(true);
+        }
+
+        private void CurrentScheduleTask_Click(object sender, EventArgs e)
+        {
+            this.infoType = InfoType.ScheduleTask;
+            foreach (ListViewItem item in this.LV.SelectedItems)
+                SingleInfoCollection(item);
+        }
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
@@ -796,20 +815,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
-        private void AllTimedTask_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AliveTimedTask_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CurrentTimedTask_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
     public enum InfoType
     {

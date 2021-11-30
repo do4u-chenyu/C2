@@ -680,21 +680,21 @@
             this.allTimedTask.Name = "allTimedTask";
             this.allTimedTask.Size = new System.Drawing.Size(180, 22);
             this.allTimedTask.Text = "所有项";
-            this.allTimedTask.Click += new System.EventHandler(this.AllTimedTask_Click);
+            this.allTimedTask.Click += new System.EventHandler(this.AllScheduleTask_Click);
             // 
             // aliveTimedTask
             // 
             this.aliveTimedTask.Name = "aliveTimedTask";
             this.aliveTimedTask.Size = new System.Drawing.Size(180, 22);
             this.aliveTimedTask.Text = "验活项";
-            this.aliveTimedTask.Click += new System.EventHandler(this.AliveTimedTask_Click);
+            this.aliveTimedTask.Click += new System.EventHandler(this.AliveScheduleTask_Click);
             // 
             // currentTimedTask
             // 
             this.currentTimedTask.Name = "currentTimedTask";
             this.currentTimedTask.Size = new System.Drawing.Size(180, 22);
             this.currentTimedTask.Text = "选定项";
-            this.currentTimedTask.Click += new System.EventHandler(this.CurrentTimedTask_Click);
+            this.currentTimedTask.Click += new System.EventHandler(this.CurrentScheduleTask_Click);
             // 
             // locationInfoMenuItem
             // 
