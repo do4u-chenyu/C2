@@ -63,7 +63,7 @@ namespace MD5Plugin
             else if (e.Node.Name == "URL编解码")
             {
                 this.Text = "URL编解码";
-                this.commonPlugin = new URLlPlugin();
+                this.commonPlugin = new URLPlugin();
             }
             else if (e.Node.Name == "Unicode编解码")
             {

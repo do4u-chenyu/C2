@@ -6,7 +6,7 @@ using System.IO;
 
 namespace MD5Plugin
 {
-    public partial class Base64Plugin : URLlPlugin
+    public partial class Base64Plugin : URLPlugin
     {
         public string encodingType = "UTF-8";
         string outPath;

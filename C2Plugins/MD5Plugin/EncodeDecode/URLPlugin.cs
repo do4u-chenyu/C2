@@ -5,9 +5,9 @@ using System.Web;
 
 namespace MD5Plugin
 {
-    public partial class URLlPlugin : CommonPlugin
+    public partial class URLPlugin : CommonPlugin
     {
-        public URLlPlugin()
+        public URLPlugin()
         {
             InitializeComponent();
             this.inputTextBox.Text = "请输入你要编码的内容";

@@ -1,6 +1,6 @@
 ﻿namespace MD5Plugin
 {
-    partial class URLlPlugin
+    partial class URLPlugin
     {
         /// <summary> 
         /// 必需的设计器变量。

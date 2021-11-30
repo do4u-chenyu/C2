@@ -3,7 +3,7 @@ using System.Text;
 
 namespace MD5Plugin.DecimalConvert
 {
-    public partial class OctDecimal : URLlPlugin
+    public partial class OctDecimal : URLPlugin
     {
 
         protected string sepType = " ";

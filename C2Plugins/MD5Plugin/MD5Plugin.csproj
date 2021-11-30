@@ -143,11 +143,11 @@
     <Compile Include="EncodeDecode\UnicodePlugin.Designer.cs">
       <DependentUpon>UnicodePlugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncodeDecode\URLlPlugin.cs">
+    <Compile Include="EncodeDecode\URLPlugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncodeDecode\URLlPlugin.Designer.cs">
-      <DependentUpon>URLlPlugin.cs</DependentUpon>
+    <Compile Include="EncodeDecode\URLPlugin.Designer.cs">
+      <DependentUpon>URLPlugin.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -198,8 +198,8 @@
     <EmbeddedResource Include="EncodeDecode\UnicodePlugin.resx">
       <DependentUpon>UnicodePlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncodeDecode\URLlPlugin.resx">
-      <DependentUpon>URLlPlugin.cs</DependentUpon>
+    <EmbeddedResource Include="EncodeDecode\URLPlugin.resx">
+      <DependentUpon>URLPlugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

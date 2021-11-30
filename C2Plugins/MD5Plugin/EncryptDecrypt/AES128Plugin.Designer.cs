@@ -36,7 +36,7 @@
             // 
             this.textBoxEncryptionkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxEncryptionkey.ForeColor = System.Drawing.Color.Black;
-            this.textBoxEncryptionkey.Location = new System.Drawing.Point(418, 147);
+            this.textBoxEncryptionkey.Location = new System.Drawing.Point(417, 95);
             this.textBoxEncryptionkey.Name = "textBoxEncryptionkey";
             this.textBoxEncryptionkey.Size = new System.Drawing.Size(74, 21);
             this.textBoxEncryptionkey.TabIndex = 5;

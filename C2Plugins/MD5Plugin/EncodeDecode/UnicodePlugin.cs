@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace MD5Plugin
 {
-    public partial class UnicodePlugin : URLlPlugin
+    public partial class UnicodePlugin : URLPlugin
     {
         public UnicodePlugin()
         {
