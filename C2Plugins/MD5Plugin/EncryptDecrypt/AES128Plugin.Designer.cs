@@ -45,7 +45,7 @@
             // 
             this.labelEncryptionkey.AutoSize = true;
             this.labelEncryptionkey.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelEncryptionkey.Location = new System.Drawing.Point(503, 128);
+            this.labelEncryptionkey.Location = new System.Drawing.Point(439, 75);
             this.labelEncryptionkey.Name = "labelEncryptionkey";
             this.labelEncryptionkey.Size = new System.Drawing.Size(32, 17);
             this.labelEncryptionkey.TabIndex = 6;
