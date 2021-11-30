@@ -656,6 +656,25 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             new MysqlBlastingSet().ShowDialog();
         }
+        // 进程信息
+        private void AllProcessView_Click(object sender, EventArgs e)
+        {
+            this.infoType = InfoType.ProcessView;
+            BatchInfoColletion(false);
+        }
+
+        private void AliveProcessView_Click(object sender, EventArgs e)
+        {
+            this.infoType = InfoType.ProcessView;
+            BatchInfoColletion(true);
+        }
+
+        private void CurrentProcessView_Click(object sender, EventArgs e)
+        {
+            this.infoType = InfoType.ProcessView;
+            foreach (ListViewItem item in this.LV.SelectedItems)
+                SingleInfoCollection(item);
+        }
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
@@ -778,6 +797,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         private void AllTimedTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AliveTimedTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CurrentTimedTask_Click(object sender, EventArgs e)
         {
 
         }

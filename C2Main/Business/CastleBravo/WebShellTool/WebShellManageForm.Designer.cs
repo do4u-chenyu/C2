@@ -534,21 +534,21 @@
             // refreshAllShellMenu
             // 
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(136, 22);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(180, 22);
             this.refreshAllShellMenu.Text = "批量验活";
             this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(136, 22);
+            this.refreshOtherMenu2.Size = new System.Drawing.Size(180, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
             this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // secondRefreshMenu
             // 
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(136, 22);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(180, 22);
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
@@ -575,7 +575,7 @@
             this.currentMysqlTaskMenuItem,
             this.mysqlTaskSetMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwdBlastingMenuItem.Text = "K令(Mysql)";
             // 
             // allTaskMysqlMenuItem
@@ -613,7 +613,7 @@
             this.验活项ToolStripMenuItem,
             this.选定项ToolStripMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
-            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
             // 
             // 所有项ToolStripMenuItem
@@ -641,7 +641,7 @@
             this.aliveProcessView,
             this.currentProcessView});
             this.processViewToolStripMenuItem.Name = "processViewToolStripMenuItem";
-            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.processViewToolStripMenuItem.Text = "进程列表";
             // 
             // allProcessView
@@ -649,18 +649,21 @@
             this.allProcessView.Name = "allProcessView";
             this.allProcessView.Size = new System.Drawing.Size(112, 22);
             this.allProcessView.Text = "所有项";
+            this.allProcessView.Click += new System.EventHandler(this.AllProcessView_Click);
             // 
             // aliveProcessView
             // 
             this.aliveProcessView.Name = "aliveProcessView";
             this.aliveProcessView.Size = new System.Drawing.Size(112, 22);
             this.aliveProcessView.Text = "验活项";
+            this.aliveProcessView.Click += new System.EventHandler(this.AliveProcessView_Click);
             // 
             // currentProcessView
             // 
             this.currentProcessView.Name = "currentProcessView";
             this.currentProcessView.Size = new System.Drawing.Size(112, 22);
             this.currentProcessView.Text = "选定项";
+            this.currentProcessView.Click += new System.EventHandler(this.CurrentProcessView_Click);
             // 
             // timedTaskMenuItem
             // 
@@ -669,27 +672,29 @@
             this.aliveTimedTask,
             this.currentTimedTask});
             this.timedTaskMenuItem.Name = "timedTaskMenuItem";
-            this.timedTaskMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.timedTaskMenuItem.Size = new System.Drawing.Size(180, 22);
             this.timedTaskMenuItem.Text = "定时任务";
             // 
             // allTimedTask
             // 
             this.allTimedTask.Name = "allTimedTask";
-            this.allTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.allTimedTask.Size = new System.Drawing.Size(180, 22);
             this.allTimedTask.Text = "所有项";
             this.allTimedTask.Click += new System.EventHandler(this.AllTimedTask_Click);
             // 
             // aliveTimedTask
             // 
             this.aliveTimedTask.Name = "aliveTimedTask";
-            this.aliveTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.aliveTimedTask.Size = new System.Drawing.Size(180, 22);
             this.aliveTimedTask.Text = "验活项";
+            this.aliveTimedTask.Click += new System.EventHandler(this.AliveTimedTask_Click);
             // 
             // currentTimedTask
             // 
             this.currentTimedTask.Name = "currentTimedTask";
-            this.currentTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.currentTimedTask.Size = new System.Drawing.Size(180, 22);
             this.currentTimedTask.Text = "选定项";
+            this.currentTimedTask.Click += new System.EventHandler(this.CurrentTimedTask_Click);
             // 
             // locationInfoMenuItem
             // 
@@ -698,7 +703,7 @@
             this.aliveLocationInfo,
             this.currentLocationInfo});
             this.locationInfoMenuItem.Name = "locationInfoMenuItem";
-            this.locationInfoMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.locationInfoMenuItem.Size = new System.Drawing.Size(180, 22);
             this.locationInfoMenuItem.Text = "地理位置";
             // 
             // allLocationInfo
@@ -729,7 +734,7 @@
             this.验活项ToolStripMenuItem4,
             this.选定项ToolStripMenuItem4});
             this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
-            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.数据库配置ToolStripMenuItem.Text = "数据库配置";
             // 
             // 所有项ToolStripMenuItem4
