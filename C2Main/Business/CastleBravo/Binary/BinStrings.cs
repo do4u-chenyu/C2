@@ -68,6 +68,7 @@ namespace C2.Business.CastleBravo.Binary
             Consume16BE();   // 双字节大端
             Consume32LE();   // 四字节小端  单纯是为了与strings命令一致
             Consume32BE();   // 四字节大端  X86下的win和linux的二进制文件我感觉应该是没有
+            // ConsumeZHCN   // 不知道怎么实现
             //ConsumeAscii7Bits();  // 没啥用, 7Bits字符串, 纯属拍脑袋
         }
 
