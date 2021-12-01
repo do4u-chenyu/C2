@@ -21,7 +21,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using ICSharpCode.SharpZipLib.Zip;
 
 
 namespace C2
@@ -31,7 +30,8 @@ namespace C2
         Null,
         DocumentForm,
         CanvasForm,
-        StartForm
+        StartForm,   // 首页
+        JSForm       // 胶水界面
     }
     public partial class MainForm: DocumentManageForm
     {
@@ -224,7 +224,10 @@ namespace C2
         }
         void InitializeStartForm()
         {
-            this.NewForm(FormType.StartForm); 
+            StartForm startPage = new StartForm();
+            ShowForm(startPage, true, false);      
+            ShowForm(new JSForm(), true, false);  
+            SelectForm(startPage);                 // 默认显示首页
         }
         #endregion
         void SetAGoodLocation()
@@ -477,24 +480,7 @@ namespace C2
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
         #region C2
-        public void NewForm(FormType formType)
-        {
-            switch (formType)
-            {
-                case FormType.DocumentForm:
-                    NewDocumentForm("");
-                    break;
-                case FormType.CanvasForm:
-                    NewCanvasForm();
-                    break;
-                case FormType.StartForm:
-                    NewStartForm();
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void NewDocumentForm(string name,string titile = "")
+        private void NewDocumentForm(string name = "", string titile = "")
         {
             Document doc = CreateNewMap(name);
             if (!string.IsNullOrEmpty(titile))
@@ -558,11 +544,7 @@ namespace C2
             if (opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;
         }
-        private void NewStartForm()
-        {
-            StartForm form = new StartForm();
-            ShowForm(form, true, false);
-        }
+
         public  Document CreateNewMapForWord(string templateName) 
         {
             return CreateNewMap(templateName);
@@ -739,7 +721,7 @@ namespace C2
             DialogResult dialogResult = createNewModelForm.ShowDialog();
             // 新建业务视图
             if (dialogResult == DialogResult.OK)
-                this.NewDocumentForm(templateName,createNewModelForm.ModelTitle);
+                this.NewDocumentForm(templateName, createNewModelForm.ModelTitle);
         }
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
         {

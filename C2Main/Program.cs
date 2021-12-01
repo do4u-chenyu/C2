@@ -133,7 +133,7 @@ namespace C2
                 else
                 {
                     RunByVersionExtend();
-                   Application.EnableVisualStyles();
+                    Application.EnableVisualStyles();
                 }    
             }
             else
@@ -141,7 +141,7 @@ namespace C2
                 //1.2 已经有一个实例在运行
                 HandleRunningInstance(instance);
             }      
-            C2.Configuration.Options.Current.Save();
+            Options.Current.Save();
         }
 
         private static void ConfigProgram()

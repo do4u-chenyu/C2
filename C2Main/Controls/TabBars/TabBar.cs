@@ -2362,6 +2362,8 @@ namespace C2.Controls
             {
                 if (ti.Tag is StartForm)//首页不算在搜索范围内
                     continue;
+                if (ti.Tag is JSForm)
+                    continue;
                 if ((ti.Tag as BaseDocumentForm).Text == title)
                     return ti;
             }

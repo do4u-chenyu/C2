@@ -179,11 +179,13 @@ namespace C2.Controls
             Global.GetWorkSpacePanel().SuspendLayout();
             if (showTab && TaskBar != null)
             {
-                var ti = new TabItem();
-                ti.Text = form.Text;
-                ti.CanClose = canClose;
-                ti.Tag = form;
-                ti.ToolTipText = form.FormNameToolTip;
+                var ti = new TabItem
+                {
+                    Text = form.Text,
+                    CanClose = canClose,
+                    Tag = form,
+                    ToolTipText = form.FormNameToolTip
+                };
                 if (form is BaseForm)
                     ti.Icon = form.IconImage;
                 else

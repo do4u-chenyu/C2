@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
 using C2.Core;
 using C2.Globalization;
-using System;
 
 namespace C2.Forms
 {
@@ -48,18 +47,6 @@ namespace C2.Forms
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-        }
-
-        void metroBox1_ItemClick(object sender, ThumbViewItemEventArgs e)
-        {
-            if (e.Item is FileThumbItem)
-            {
-                var item = (FileThumbItem)e.Item;
-                if (Global.GetMainForm() != null && !string.IsNullOrEmpty(item.Filename))
-                {
-                    Global.GetMainForm().OpenDocument(item.Filename);
-                }
-            }
         }
     }
 }
