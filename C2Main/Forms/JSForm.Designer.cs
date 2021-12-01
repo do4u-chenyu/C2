@@ -33,7 +33,7 @@
             // JSForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(804, 438);
+            this.ClientSize = new System.Drawing.Size(784, 462);
             this.IconImage = global::C2.Properties.Resources.首页;
             this.Name = "JSForm";
             this.Text = "胶水系统";

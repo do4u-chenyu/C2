@@ -136,7 +136,6 @@ namespace C2.Controls
         {
             SuspendLayout();
             OnOptionsChanged();
-            //Options_UISettingChanged(this, EventArgs.Empty);
             OnCurrentLanguageChanged();
             ResumeLayout();
         }
@@ -179,6 +178,11 @@ namespace C2.Controls
 
         protected virtual void OnCurrentLanguageChanged()
         {
+        }
+
+        public virtual bool IsNeedShowBottomViewPanel()
+        {
+            return true;
         }
 
         public virtual void ApplyTheme(UITheme theme)

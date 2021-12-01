@@ -1,5 +1,4 @@
 ﻿using C2.Controls;
-using C2.Globalization;
 
 namespace C2.Forms
 {
@@ -8,6 +7,11 @@ namespace C2.Forms
         public JSForm()
         {
             InitializeComponent();
+        }
+
+        public override bool IsNeedShowBottomViewPanel()
+        {
+            return false;
         }
     }
 }

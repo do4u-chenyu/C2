@@ -1,5 +1,4 @@
 ﻿using C2.Controls;
-using C2.Core;
 using C2.Globalization;
 
 namespace C2.Forms
@@ -47,6 +46,11 @@ namespace C2.Forms
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
+        }
+
+        public override bool IsNeedShowBottomViewPanel()
+        {
+            return false;
         }
     }
 }

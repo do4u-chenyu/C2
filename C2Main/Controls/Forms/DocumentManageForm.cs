@@ -365,11 +365,10 @@ namespace C2.Controls
 
         protected virtual void OnSelectedFormChanged(BaseForm old)
         {
-            if (MdiClient != null)
+            if (MdiClient != null && SelectedForm != null)
             {
-               
                 MdiClient.ActiveMdiForm(SelectedForm);
-                Global.GetBottomViewPanel().Visible = !(Global.GetMainForm().MdiClient.ActivedMdiForm is StartForm);
+                Global.GetBottomViewPanel().Visible = SelectedForm.IsNeedShowBottomViewPanel();
             }
         }
     }
