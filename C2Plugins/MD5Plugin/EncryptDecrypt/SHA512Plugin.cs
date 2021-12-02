@@ -1,14 +1,11 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
-using System.Security.Cryptography;
 
 namespace MD5Plugin
 {
-    public partial class SHA512Plugin : CommonPlugin
+    public partial class SHA512Plugin : CommonHashPlugin
     {
-        public SHA512Plugin()
+        public SHA512Plugin() : base()
         {
             InitializeComponent();
         }

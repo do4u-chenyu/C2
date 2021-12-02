@@ -655,6 +655,21 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             new MysqlBlastingSet().ShowDialog();
         }
+        //系统信息
+        private void AllSysInfoMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AliveSysInfoMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CurrentSysInfoMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
         // 进程信息
         private void AllProcessView_Click(object sender, EventArgs e)
         {

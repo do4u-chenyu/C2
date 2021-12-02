@@ -4,9 +4,9 @@ using System.Security.Cryptography;
 
 namespace MD5Plugin
 {
-    public partial class MD564Plugin : CommonPlugin
+    public partial class MD564Plugin : CommonHashPlugin
     {
-        public MD564Plugin()
+        public MD564Plugin() : base()
         {
             InitializeComponent();
         }
@@ -20,7 +20,7 @@ namespace MD5Plugin
             {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str)), 4, 8);
-                t2 = t2.Replace("-", "");
+                t2 = t2.Replace("-", string.Empty);
                 t2 = t2.ToLower();
                 outputTextBox.Text = t2;
             }

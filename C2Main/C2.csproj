@@ -3083,6 +3083,7 @@
     <None Include="Resources\Images\italic.png" />
     <None Include="Resources\Images\WidgetImage\joinPool.png" />
     <Content Include="Resources\Images\InfoExtraction.png" />
+    <None Include="Resources\Images\JS.png" />
     <Content Include="Resources\Images\keyboard.png" />
     <None Include="Resources\Images\languages.png" />
     <None Include="Resources\Images\last.png" />

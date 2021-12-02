@@ -4,9 +4,9 @@ using System.Security.Cryptography;
 
 namespace MD5Plugin
 {
-    public partial class SHA1Plugin : CommonPlugin
+    public partial class SHA1Plugin : CommonHashPlugin
     {
-        public SHA1Plugin()
+        public SHA1Plugin() : base()
         {
             InitializeComponent();
         }
@@ -18,7 +18,7 @@ namespace MD5Plugin
             }
             else
             {
-                var strRes = Encoding.Default.GetBytes(str);
+                byte[] strRes = Encoding.Default.GetBytes(str);
                 HashAlgorithm iSha = new SHA1CryptoServiceProvider();
                 strRes = iSha.ComputeHash(strRes);
                 var enText = new StringBuilder();

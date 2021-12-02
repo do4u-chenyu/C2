@@ -8,9 +8,9 @@ using System.Diagnostics.Contracts;
 
 namespace MD5Plugin
 {
-    public partial class NTLMPlugin : CommonPlugin
+    public partial class NTLMPlugin : CommonHashPlugin
     {
-        public NTLMPlugin()
+        public NTLMPlugin() : base()
         {
             InitializeComponent();
         }

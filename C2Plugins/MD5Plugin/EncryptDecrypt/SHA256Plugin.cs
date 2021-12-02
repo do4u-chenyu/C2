@@ -1,14 +1,11 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
-using System.Security.Cryptography;
 
 namespace MD5Plugin
 {
-    public partial class SHA256Plugin : CommonPlugin
+    public partial class SHA256Plugin : CommonHashPlugin
     {
-        public SHA256Plugin()
+        public SHA256Plugin() : base()
         {
             InitializeComponent();
         }
@@ -21,7 +18,7 @@ namespace MD5Plugin
             }
             else
             {
-                byte[] bytValue = System.Text.Encoding.UTF8.GetBytes(str);
+                byte[] bytValue = Encoding.UTF8.GetBytes(str);
                 SHA256 sha256 = new SHA256CryptoServiceProvider();
                 byte[] retVal = sha256.ComputeHash(bytValue);
                 StringBuilder sb = new StringBuilder();

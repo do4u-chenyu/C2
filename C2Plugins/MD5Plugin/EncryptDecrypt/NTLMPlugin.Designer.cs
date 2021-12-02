@@ -28,8 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(420, 235);
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Text = "NTLM不可逆";
+            // 
+            // encodeTypeCB
+            // 
+            this.encodeTypeCB.Visible = false;
+            // 
+            // NTLMPlugin
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "NTLMPlugin";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

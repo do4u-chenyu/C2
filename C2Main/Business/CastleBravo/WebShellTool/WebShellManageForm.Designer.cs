@@ -86,9 +86,9 @@
             this.currentMysqlTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mysqlTaskSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allProcessView = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveProcessView = new System.Windows.Forms.ToolStripMenuItem();
@@ -534,21 +534,21 @@
             // refreshAllShellMenu
             // 
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(180, 22);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(136, 22);
             this.refreshAllShellMenu.Text = "批量验活";
             this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(180, 22);
+            this.refreshOtherMenu2.Size = new System.Drawing.Size(136, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
             this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // secondRefreshMenu
             // 
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(180, 22);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(136, 22);
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
@@ -609,30 +609,33 @@
             // systemInfoToolStripMenuItem
             // 
             this.systemInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.所有项ToolStripMenuItem,
-            this.验活项ToolStripMenuItem,
-            this.选定项ToolStripMenuItem});
+            this.allSysInfoMenuItem,
+            this.aliveSysInfoMenuItem,
+            this.currentSysInfoMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
             this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
             // 
-            // 所有项ToolStripMenuItem
+            // allSysInfoMenuItem
             // 
-            this.所有项ToolStripMenuItem.Name = "所有项ToolStripMenuItem";
-            this.所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.所有项ToolStripMenuItem.Text = "所有项";
+            this.allSysInfoMenuItem.Name = "allSysInfoMenuItem";
+            this.allSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allSysInfoMenuItem.Text = "所有项";
+            this.allSysInfoMenuItem.Click += new System.EventHandler(this.AllSysInfoMenuItem_Click);
             // 
-            // 验活项ToolStripMenuItem
+            // aliveSysInfoMenuItem
             // 
-            this.验活项ToolStripMenuItem.Name = "验活项ToolStripMenuItem";
-            this.验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.验活项ToolStripMenuItem.Text = "验活项";
+            this.aliveSysInfoMenuItem.Name = "aliveSysInfoMenuItem";
+            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveSysInfoMenuItem.Text = "验活项";
+            this.aliveSysInfoMenuItem.Click += new System.EventHandler(this.AliveSysInfoMenuItem_Click);
             // 
-            // 选定项ToolStripMenuItem
+            // currentSysInfoMenuItem
             // 
-            this.选定项ToolStripMenuItem.Name = "选定项ToolStripMenuItem";
-            this.选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.选定项ToolStripMenuItem.Text = "选定项";
+            this.currentSysInfoMenuItem.Name = "currentSysInfoMenuItem";
+            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentSysInfoMenuItem.Text = "选定项";
+            this.currentSysInfoMenuItem.Click += new System.EventHandler(this.CurrentSysInfoMenuItem_Click);
             // 
             // processViewToolStripMenuItem
             // 
@@ -678,21 +681,21 @@
             // allTimedTask
             // 
             this.allTimedTask.Name = "allTimedTask";
-            this.allTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.allTimedTask.Size = new System.Drawing.Size(112, 22);
             this.allTimedTask.Text = "所有项";
             this.allTimedTask.Click += new System.EventHandler(this.AllScheduleTask_Click);
             // 
             // aliveTimedTask
             // 
             this.aliveTimedTask.Name = "aliveTimedTask";
-            this.aliveTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.aliveTimedTask.Size = new System.Drawing.Size(112, 22);
             this.aliveTimedTask.Text = "验活项";
             this.aliveTimedTask.Click += new System.EventHandler(this.AliveScheduleTask_Click);
             // 
             // currentTimedTask
             // 
             this.currentTimedTask.Name = "currentTimedTask";
-            this.currentTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.currentTimedTask.Size = new System.Drawing.Size(112, 22);
             this.currentTimedTask.Text = "选定项";
             this.currentTimedTask.Click += new System.EventHandler(this.CurrentScheduleTask_Click);
             // 
@@ -1056,9 +1059,9 @@
         private System.Windows.Forms.ToolStripMenuItem processViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据库配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timedTaskMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 所有项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 验活项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 选定项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allSysInfoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aliveSysInfoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentSysInfoMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allProcessView;
         private System.Windows.Forms.ToolStripMenuItem aliveProcessView;
         private System.Windows.Forms.ToolStripMenuItem currentProcessView;
