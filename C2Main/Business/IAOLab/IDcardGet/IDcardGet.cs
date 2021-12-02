@@ -45,18 +45,6 @@ namespace C2.IAOLab.IDcardGet
             }
         }
 
-        //public static JObject ReadJson()
-        //{
-        //    string jsonfile = Path.Combine(System.Windows.Forms.Application.StartupPath, "Resources/Templates/AreaNum.json");
-        //    using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
-        //    {
-        //        using (JsonTextReader reader = new JsonTextReader(file))
-        //        {
-        //            JObject o = (JObject)JToken.ReadFrom(reader);
-        //            return o;
-        //        }
-        //    }
-        //}
 
         /// 读取JSON文件  <param name="key">JSON文件中的key值</param>  <returns>JSON文件中的value值</returns>
         public static string Readjson(string key)
@@ -80,8 +68,7 @@ namespace C2.IAOLab.IDcardGet
                     }
                     else {
                         return String.Empty;
-                    }            
-                    
+                    }              
                 }
             }
             
