@@ -30,21 +30,21 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.lvUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvMember = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvMoney = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
-            this.browserButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.sampleButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.browserButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -74,49 +74,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "DB专项";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 436);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "SQ专项";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(776, 436);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "SH专项";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(776, 436);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "DD专项";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.sampleButton);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.updateButton);
-            this.panel1.Controls.Add(this.browserButton);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(770, 44);
-            this.panel1.TabIndex = 0;
             // 
             // listView1
             // 
@@ -161,39 +118,18 @@
             this.lvMoney.Text = "涉案金额";
             this.lvMoney.Width = 102;
             // 
-            // label1
+            // panel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "导入涉赌数据：";
-            // 
-            // browserButton
-            // 
-            this.browserButton.Location = new System.Drawing.Point(331, 12);
-            this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(46, 23);
-            this.browserButton.TabIndex = 1;
-            this.browserButton.Text = "浏览";
-            this.browserButton.UseVisualStyleBackColor = true;
-            // 
-            // updateButton
-            // 
-            this.updateButton.Location = new System.Drawing.Point(383, 12);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(51, 23);
-            this.updateButton.TabIndex = 2;
-            this.updateButton.Text = "上传";
-            this.updateButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(127, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 21);
-            this.textBox1.TabIndex = 3;
+            this.panel1.Controls.Add(this.sampleButton);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.updateButton);
+            this.panel1.Controls.Add(this.browserButton);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(770, 44);
+            this.panel1.TabIndex = 0;
             // 
             // sampleButton
             // 
@@ -204,12 +140,76 @@
             this.sampleButton.Text = "模板";
             this.sampleButton.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(127, 12);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(198, 21);
+            this.textBox1.TabIndex = 3;
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(383, 12);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(51, 23);
+            this.updateButton.TabIndex = 2;
+            this.updateButton.Text = "上传";
+            this.updateButton.UseVisualStyleBackColor = true;
+            // 
+            // browserButton
+            // 
+            this.browserButton.Location = new System.Drawing.Point(331, 12);
+            this.browserButton.Name = "browserButton";
+            this.browserButton.Size = new System.Drawing.Size(46, 23);
+            this.browserButton.TabIndex = 1;
+            this.browserButton.Text = "浏览";
+            this.browserButton.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(32, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "导入涉赌数据：";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(776, 436);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "SQ专项";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(776, 436);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "SH专项";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(776, 436);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "DD专项";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // JSForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(784, 462);
             this.Controls.Add(this.tabControl1);
-            this.IconImage = global::C2.Properties.Resources.首页;
+            this.IconImage = global::C2.Properties.Resources.JS;
             this.Name = "JSForm";
             this.Text = "胶水系统";
             this.tabControl1.ResumeLayout(false);
