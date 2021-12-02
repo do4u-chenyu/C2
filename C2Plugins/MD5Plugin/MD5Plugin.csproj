@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonHashPlugin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonHashPlugin.Designer.cs">
+      <DependentUpon>CommonHashPlugin.cs</DependentUpon>
+    </Compile>
     <Compile Include="DecimalConvert\HexDecimal.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     <Compile Include="IPlugin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CommonHashPlugin.resx">
+      <DependentUpon>CommonHashPlugin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DecimalConvert\OctDecimal.resx">
       <DependentUpon>OctDecimal.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EncryptDecrypt\NTLMPlugin.resx">
       <DependentUpon>NTLMPlugin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EncryptDecrypt\SHA1Plugin.resx">
+      <DependentUpon>SHA1Plugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EncryptDecrypt\SHA512Plugin.resx">
       <DependentUpon>SHA512Plugin.cs</DependentUpon>
