@@ -1,5 +1,6 @@
 ﻿using C2.Controls;
 using C2.IAOLab.BankTool;
+using C2.IAOLab.IDcardGet;
 using C2.IAOLab.BaseAddress;
 using C2.Utils;
 using System;
@@ -12,14 +13,14 @@ namespace C2.Dialogs.IAOLab
 {
     public partial class InformationSearch : BaseDialog
     {
-        private string formType;
-        public InformationSearch()
+        private string formType;  //直接在类中定义，方法体外，实例变量
+        public InformationSearch()   //无参构造方法
         {
             InitializeComponent();
             tabControl1.Visible = true;
         }
 
-        public string TipBank { set { this.label6.Text = value; } }
+        public string TipBank { set { this.label6.Text = value; } }   
 
         public bool TabControlVisible { set { this.tabControl1.Visible = value; } }
         //public string InputLable { set { this.inputLabel.Text = value; } }
@@ -37,6 +38,10 @@ namespace C2.Dialogs.IAOLab
             else if (tabControl1.SelectedTab == tabPage7 && tabControl1.Visible == true)
             {
                 fileType = "webUrl";
+            }
+            else if (tabControl1.SelectedTab == tabPage8 && tabControl1.Visible == true)
+            {
+                fileType = "idCard";
             }
             return fileType;
         }
@@ -87,6 +92,26 @@ namespace C2.Dialogs.IAOLab
                 }
             }
 
+            if (tabControl1.SelectedTab == tabPage8 && tabControl1.Visible == true)     //身份证号查询
+            {
+
+                string[] inputArray = this.richTextBox3.Text.Split('\n');
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "身份证号\t转18位身份证号\t归属地\t出生日期\t性别\n";
+                tmpResult.Append(firstLine);
+                foreach (string idCard in inputArray)
+                {
+                    ShowResult(idCard, "idCard", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        progressBar1.Value = 0;
+                    }
+                }            
+            }
+
             this.Cursor = Cursors.Arrow;
         }
         private void ShowResult(string input, string type, StringBuilder tmpResult)
@@ -109,12 +134,16 @@ namespace C2.Dialogs.IAOLab
                         tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
                         richTextBox1.Text = tmpResult.ToString();
                         break;
+                    case "idCard":
+                        tmpResult.Append(IDcardGet.GetInstance().IDcardSearch(input.Split('\t')[0]));
+                        richTextBox3.Text = tmpResult.ToString();
+                        break;
+
                 }
 
                 progressBar1.Value += 1;
             }
         }
-
 
         private int GetRelLengthOfArry(string[] arry)
         {
@@ -138,7 +167,7 @@ namespace C2.Dialogs.IAOLab
             //this.wifiMacIR.Clear();
         }
 
-        private void Import_Click(object sender, EventArgs e)
+        private void Import_Click(object sender, EventArgs e)  //导入文件
         {
             OpenFileDialog OpenFileDialog1 = new OpenFileDialog
             {
@@ -163,6 +192,8 @@ namespace C2.Dialogs.IAOLab
                             richTextBox1.Text = sb.TrimEndN().ToString();
                         if (tabControl1.SelectedTab == tabPage7 && tabControl1.Visible == true)
                             richTextBox2.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage8 && tabControl1.Visible == true)
+                            richTextBox3.Text = sb.TrimEndN().ToString();
 
                         if (tabControl1.Visible == false)
                             richTextBox1.Text = sb.TrimEndN().ToString();
@@ -174,6 +205,7 @@ namespace C2.Dialogs.IAOLab
                 }
             }
         }
+        
 
         private void ExportData()
         {
@@ -195,6 +227,9 @@ namespace C2.Dialogs.IAOLab
                         break;
                     case "webUrl":
                         text = richTextBox2.Text;
+                        break;
+                    case "idCard":
+                        text = richTextBox3.Text;
                         break;
 
                 }
@@ -234,7 +269,7 @@ namespace C2.Dialogs.IAOLab
             }
         }
 
-        private void Export_Click(object sender, EventArgs e)
+        private void Export_Click(object sender, EventArgs e)  //导出文件
         {
             if ((tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true && richTextBox1.Text == string.Empty) ||
                 (tabControl1.SelectedTab == tabPage7 && tabControl1.Visible == true && richTextBox2.Text == string.Empty))
@@ -246,5 +281,7 @@ namespace C2.Dialogs.IAOLab
                 ExportData();
             }
         }
+
+       
     }
 }
