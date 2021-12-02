@@ -30,7 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.dbListView = new System.Windows.Forms.ListView();
             this.lvUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -38,7 +38,7 @@
             this.lvMoney = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
             this.sampleButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.excelPathTextBox = new System.Windows.Forms.TextBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.browserButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.listView1);
+            this.tabPage1.Controls.Add(this.dbListView);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -75,23 +75,23 @@
             this.tabPage1.Text = "DB专项";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // dbListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dbListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvUrl,
             this.lvName,
             this.lvTime,
             this.lvMember,
             this.lvMoney});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 47);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(770, 386);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.dbListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbListView.GridLines = true;
+            this.dbListView.HideSelection = false;
+            this.dbListView.Location = new System.Drawing.Point(3, 47);
+            this.dbListView.Name = "dbListView";
+            this.dbListView.Size = new System.Drawing.Size(770, 386);
+            this.dbListView.TabIndex = 1;
+            this.dbListView.UseCompatibleStateImageBehavior = false;
+            this.dbListView.View = System.Windows.Forms.View.Details;
             // 
             // lvUrl
             // 
@@ -121,7 +121,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.sampleButton);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.excelPathTextBox);
             this.panel1.Controls.Add(this.updateButton);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.label1);
@@ -133,37 +133,39 @@
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(440, 12);
+            this.sampleButton.Location = new System.Drawing.Point(493, 12);
             this.sampleButton.Name = "sampleButton";
-            this.sampleButton.Size = new System.Drawing.Size(49, 23);
+            this.sampleButton.Size = new System.Drawing.Size(76, 23);
             this.sampleButton.TabIndex = 4;
-            this.sampleButton.Text = "模板";
+            this.sampleButton.Text = "下载模板";
             this.sampleButton.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // excelPathTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(127, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 21);
-            this.textBox1.TabIndex = 3;
+            this.excelPathTextBox.Location = new System.Drawing.Point(127, 12);
+            this.excelPathTextBox.Name = "excelPathTextBox";
+            this.excelPathTextBox.Size = new System.Drawing.Size(198, 21);
+            this.excelPathTextBox.TabIndex = 3;
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(383, 12);
+            this.updateButton.Location = new System.Drawing.Point(422, 12);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(51, 23);
+            this.updateButton.Size = new System.Drawing.Size(55, 23);
             this.updateButton.TabIndex = 2;
             this.updateButton.Text = "上传";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // browserButton
             // 
             this.browserButton.Location = new System.Drawing.Point(331, 12);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(46, 23);
+            this.browserButton.Size = new System.Drawing.Size(76, 23);
             this.browserButton.TabIndex = 1;
-            this.browserButton.Text = "浏览";
+            this.browserButton.Text = "选择文件";
             this.browserButton.UseVisualStyleBackColor = true;
+            this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
             // label1
             // 
@@ -224,7 +226,7 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView dbListView;
         private System.Windows.Forms.ColumnHeader lvUrl;
         private System.Windows.Forms.ColumnHeader lvName;
         private System.Windows.Forms.ColumnHeader lvTime;
@@ -232,7 +234,7 @@
         private System.Windows.Forms.ColumnHeader lvMoney;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button sampleButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox excelPathTextBox;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button browserButton;
         private System.Windows.Forms.Label label1;

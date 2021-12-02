@@ -18,7 +18,7 @@ namespace MD5Plugin
             }
             else
             {
-                byte[] bytValue = Encoding.UTF8.GetBytes(str);
+                byte[] bytValue = GetBytes(str);
                 SHA256 sha256 = new SHA256CryptoServiceProvider();
                 byte[] retVal = sha256.ComputeHash(bytValue);
                 StringBuilder sb = new StringBuilder();

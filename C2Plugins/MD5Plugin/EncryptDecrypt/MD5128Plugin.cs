@@ -19,7 +19,7 @@ namespace MD5Plugin
             else
             {
                 MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
-                byte[] data = md5Hasher.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str));
+                byte[] data = md5Hasher.ComputeHash(GetBytes(str));
                 StringBuilder sBuilder = new StringBuilder();
                 for (int i = 0; i < data.Length; i++)
                 {
