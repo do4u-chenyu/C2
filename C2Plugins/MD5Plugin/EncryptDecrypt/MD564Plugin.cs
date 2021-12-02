@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Security.Cryptography;
 
 namespace MD5Plugin
@@ -19,7 +18,7 @@ namespace MD5Plugin
             else
             {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(str)), 4, 8);
+                string t2 = BitConverter.ToString(md5.ComputeHash(GetBytes(str)), 4, 8);
                 t2 = t2.Replace("-", string.Empty);
                 t2 = t2.ToLower();
                 outputTextBox.Text = t2;
