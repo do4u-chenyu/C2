@@ -34,11 +34,17 @@
             // 
             // titleLabel
             // 
-            this.titleLabel.Text = "全文工具箱";
+            this.titleLabel.Text = "胶水系统";
             // 
-            // addTaskLabel
+            // backPanel
             // 
-            this.addTaskLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddTaskLabel_MouseClick);
+            this.backPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.backPanel.Location = new System.Drawing.Point(3, 258);
+            this.backPanel.Size = new System.Drawing.Size(179, 330);
+            // 
+            // manageButtonPanel
+            // 
+            this.manageButtonPanel.Size = new System.Drawing.Size(177, 296);
             // 
             // helpInfoLable
             // 
@@ -48,9 +54,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DoubleBuffered = true;
             this.Name = "SearchToolkitControl";
-            this.Load += new System.EventHandler(this.SearchToolkitControl_Load);
+            this.Load += new System.EventHandler(this.CastleBravoControl_Load);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);
