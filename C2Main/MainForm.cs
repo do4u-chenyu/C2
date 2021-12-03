@@ -492,12 +492,7 @@ namespace C2
         {
             ShowForm(form);
         }
-        private void NewCanvasForm()
-        {
-            ModelDocument doc = new ModelDocument("运算视图", this.UserName);
-            CanvasForm form = new CanvasForm(doc);
-            ShowForm(form);
-        }
+
         public void NewCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)
