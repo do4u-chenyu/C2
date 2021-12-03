@@ -158,7 +158,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 string path = Path.Combine(Global.UserWorkspacePath, "后信息采集", type);
                 Directory.CreateDirectory(path);
                 string filePath = Path.Combine(path, fileName);
-                using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
+                using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.Default))
                 {
                     sw.WriteLine(result);
                 }
