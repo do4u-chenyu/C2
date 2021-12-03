@@ -106,19 +106,19 @@ namespace C2.Controls.C1.Left
                 this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
                 switch (this.pluginType)
                 {
-                    case "DB专项":
+                    case "涉赌专项":
                         this.leftPictureBox.Image = global::C2.Properties.Resources.db;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DBFormHelpInfo);
                         break;
-                    case "SQ专项":
+                    case "涉枪专项":
                         this.leftPictureBox.Image = global::C2.Properties.Resources.sq;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.SQFormHelpInfo);
                         break;
-                    case "SH专项":
+                    case "涉黄专项":
                         this.leftPictureBox.Image = global::C2.Properties.Resources.sh;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.SHFormHelpInfo);
                         break;
-                    case "DD专项":
+                    case "盗洞专项":
                         this.leftPictureBox.Image = global::C2.Properties.Resources.dd;
                         this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DDFormHelpInfo);
                         break;
@@ -159,16 +159,16 @@ namespace C2.Controls.C1.Left
             {
                 switch (pluginType)
                 {
-                    case "DB专项":
+                    case "涉赌专项":
                         //new DB().ShowDialog();
                         break;
-                    case "SQ专项":
+                    case "涉枪专项":
                         //new SQ().ShowDialog();
                         break;
-                    case "SH专项":
+                    case "涉黄专项":
                         //new SH().ShowDialog();
                         break;
-                    case "DD专项":
+                    case "盗洞专项":
                         //new DD().ShowDialog();
                         break;
                 }
@@ -186,7 +186,7 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { "DB专项", "SQ专项", "SH专项" ,"DD专项"};
+            List<string> CBPlugins = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" ,"盗洞专项"};
             CBPlugins.ForEach(pname => this.AddCBPlugin(new CastleBravoPlugin(pname)));
         }
         private void ResizeCBLocation()
