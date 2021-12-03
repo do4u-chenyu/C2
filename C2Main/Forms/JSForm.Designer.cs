@@ -133,7 +133,7 @@
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(493, 12);
+            this.sampleButton.Location = new System.Drawing.Point(689, 12);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 23);
             this.sampleButton.TabIndex = 4;
@@ -142,14 +142,14 @@
             // 
             // excelPathTextBox
             // 
-            this.excelPathTextBox.Location = new System.Drawing.Point(127, 12);
+            this.excelPathTextBox.Location = new System.Drawing.Point(328, 14);
             this.excelPathTextBox.Name = "excelPathTextBox";
-            this.excelPathTextBox.Size = new System.Drawing.Size(198, 21);
+            this.excelPathTextBox.Size = new System.Drawing.Size(149, 21);
             this.excelPathTextBox.TabIndex = 3;
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(422, 12);
+            this.updateButton.Location = new System.Drawing.Point(616, 12);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(55, 23);
             this.updateButton.TabIndex = 2;
@@ -159,7 +159,7 @@
             // 
             // browserButton
             // 
-            this.browserButton.Location = new System.Drawing.Point(331, 12);
+            this.browserButton.Location = new System.Drawing.Point(525, 12);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(76, 23);
             this.browserButton.TabIndex = 1;
@@ -170,7 +170,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 17);
+            this.label1.Location = new System.Drawing.Point(233, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 0;
