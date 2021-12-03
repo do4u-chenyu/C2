@@ -135,7 +135,7 @@ namespace C2.Dialogs.IAOLab
                         richTextBox1.Text = tmpResult.ToString();
                         break;
                     case "idCard":
-                        tmpResult.Append(IDcardGet.GetInstance().IDcardSearch(input.Split('\t')[0]));
+                        tmpResult.Append(IDcardGet.GetInstance().IDsearch(input.Split('\t')[0]));
                         richTextBox3.Text = tmpResult.ToString();
                         break;
 
