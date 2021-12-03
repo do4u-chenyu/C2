@@ -1,5 +1,4 @@
-﻿using C2.Business.GlueWater;
-using C2.Business.SSH;
+﻿using C2.Business.SSH;
 using C2.Globalization;
 using C2.SearchToolkit;
 using C2.Utils;
@@ -88,15 +87,7 @@ namespace C2.Controls.C1.Left
 
         }
 
-
-
         //  -----------------------------------------------------
-
-      
-
-        
-     
-
 
         private class CastleBravoPlugin : BaseLeftInnerButton
         {
@@ -169,16 +160,16 @@ namespace C2.Controls.C1.Left
                 switch (pluginType)
                 {
                     case "DB专项":
-                        new DB().ShowDialog();
+                        //new DB().ShowDialog();
                         break;
                     case "SQ专项":
-                        new SQ().ShowDialog();
+                        //new SQ().ShowDialog();
                         break;
                     case "SH专项":
-                        new SH().ShowDialog();
+                        //new SH().ShowDialog();
                         break;
                     case "DD专项":
-                        new DD().ShowDialog();
+                        //new DD().ShowDialog();
                         break;
                 }
             }

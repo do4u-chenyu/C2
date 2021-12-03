@@ -34,7 +34,7 @@
             // 
             // titleLabel
             // 
-            this.titleLabel.Text = "胶水系统";
+            this.titleLabel.Text = "全文&&胶水";
             // 
             // backPanel
             // 

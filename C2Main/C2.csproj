@@ -363,30 +363,6 @@
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskConfig.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
-    <Compile Include="Business\GlueWater\DB.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\DB.Designer.cs">
-      <DependentUpon>DB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\DD.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\DD.Designer.cs">
-      <DependentUpon>DD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\SH.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\SH.Designer.cs">
-      <DependentUpon>SH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\SQ.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\SQ.Designer.cs">
-      <DependentUpon>SQ.cs</DependentUpon>
-    </Compile>
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
       <SubType>Form</SubType>
     </Compile>
