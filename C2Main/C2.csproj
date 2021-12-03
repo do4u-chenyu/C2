@@ -625,6 +625,12 @@
     <Compile Include="Controls\C1\Left\BaseLeftInnerPanel.Designer.cs">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitControl.Designer.cs">
+      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\CastleBravoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -642,12 +648,6 @@
     </Compile>
     <Compile Include="Controls\C1\Left\SearchToolkitButton.Designer.cs">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\C1\Left\SearchToolkitControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Left\SearchToolkitControl.Designer.cs">
-      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Left\TableListControl.cs">
       <SubType>Component</SubType>
@@ -2189,6 +2189,9 @@
     <EmbeddedResource Include="Controls\C1\Left\BaseLeftInnerPanel.resx">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
+      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\CastleBravoControl.resx">
       <DependentUpon>CastleBravoControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -2214,9 +2217,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\SearchToolkitButton.resx">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
-      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\WebsiteFeatureDetectionControl.resx">
       <DependentUpon>WebsiteFeatureDetectionControl.cs</DependentUpon>

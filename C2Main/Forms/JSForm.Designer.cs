@@ -57,22 +57,25 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.tabControl1.ItemSize = new System.Drawing.Size(130, 22);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(784, 462);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dbListView);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(776, 436);
+            this.tabPage1.Size = new System.Drawing.Size(776, 432);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "DB专项";
+            this.tabPage1.Text = "涉赌专项";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // dbListView
@@ -86,9 +89,9 @@
             this.dbListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dbListView.GridLines = true;
             this.dbListView.HideSelection = false;
-            this.dbListView.Location = new System.Drawing.Point(3, 47);
+            this.dbListView.Location = new System.Drawing.Point(3, 53);
             this.dbListView.Name = "dbListView";
-            this.dbListView.Size = new System.Drawing.Size(770, 386);
+            this.dbListView.Size = new System.Drawing.Size(770, 376);
             this.dbListView.TabIndex = 1;
             this.dbListView.UseCompatibleStateImageBehavior = false;
             this.dbListView.View = System.Windows.Forms.View.Details;
@@ -128,30 +131,30 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(770, 44);
+            this.panel1.Size = new System.Drawing.Size(770, 50);
             this.panel1.TabIndex = 0;
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(689, 12);
+            this.sampleButton.Location = new System.Drawing.Point(528, 14);
             this.sampleButton.Name = "sampleButton";
-            this.sampleButton.Size = new System.Drawing.Size(76, 23);
+            this.sampleButton.Size = new System.Drawing.Size(76, 26);
             this.sampleButton.TabIndex = 4;
             this.sampleButton.Text = "下载模板";
             this.sampleButton.UseVisualStyleBackColor = true;
             // 
             // excelPathTextBox
             // 
-            this.excelPathTextBox.Location = new System.Drawing.Point(328, 14);
+            this.excelPathTextBox.Location = new System.Drawing.Point(142, 14);
             this.excelPathTextBox.Name = "excelPathTextBox";
-            this.excelPathTextBox.Size = new System.Drawing.Size(149, 21);
+            this.excelPathTextBox.Size = new System.Drawing.Size(198, 25);
             this.excelPathTextBox.TabIndex = 3;
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(616, 12);
+            this.updateButton.Location = new System.Drawing.Point(456, 13);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(55, 23);
+            this.updateButton.Size = new System.Drawing.Size(55, 26);
             this.updateButton.TabIndex = 2;
             this.updateButton.Text = "上传";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -159,9 +162,9 @@
             // 
             // browserButton
             // 
-            this.browserButton.Location = new System.Drawing.Point(525, 12);
+            this.browserButton.Location = new System.Drawing.Point(361, 13);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(76, 23);
+            this.browserButton.Size = new System.Drawing.Size(76, 26);
             this.browserButton.TabIndex = 1;
             this.browserButton.Text = "选择文件";
             this.browserButton.UseVisualStyleBackColor = true;
@@ -170,40 +173,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(233, 17);
+            this.label1.Location = new System.Drawing.Point(29, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.Size = new System.Drawing.Size(107, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "导入涉赌数据：";
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 436);
+            this.tabPage2.Size = new System.Drawing.Size(776, 432);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "SQ专项";
+            this.tabPage2.Text = "涉Gun专项";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(776, 436);
+            this.tabPage3.Size = new System.Drawing.Size(776, 432);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "SH专项";
+            this.tabPage3.Text = "涉H专项";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(776, 436);
+            this.tabPage4.Size = new System.Drawing.Size(776, 432);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "DD专项";
+            this.tabPage4.Text = "D洞专项";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // JSForm

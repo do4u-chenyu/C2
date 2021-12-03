@@ -658,17 +658,20 @@ namespace C2.Business.CastleBravo.WebShellTool
         //系统信息
         private void AllSysInfoMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.infoType = InfoType.SystemInfo;
+            BatchInfoColletion(false);
         }
 
         private void AliveSysInfoMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.infoType = InfoType.SystemInfo;
+            BatchInfoColletion(true);
         }
 
         private void CurrentSysInfoMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.infoType = InfoType.SystemInfo;
+            DoCurrentItemTask();
         }
         // 进程信息
         private void AllProcessView_Click(object sender, EventArgs e)
@@ -790,29 +793,24 @@ namespace C2.Business.CastleBravo.WebShellTool
         /// </summary>
         private String ProcessingResults(string ret,string taskUrl)
         {
-            Regex r0 = new Regex("QACKL3IO9P==(.+)==QACKL3IO9P");
+            Dictionary<InfoType,string> localSave = new Dictionary<InfoType, string>()
+            {
+                { InfoType.ProcessView,"进程信息" },
+                { InfoType.ScheduleTask, "计划任务"},
+                { InfoType.SystemInfo,"系统信息" }
+            };
+            Regex r0 = new Regex("QACKL3IO9P==(.*)==QACKL3IO9P",RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
-            Regex r1 = new Regex("<pre>(.*)</pre>");
-            Match m1 = r1.Match(ret);
-            string rawResult;
-            if (m0.Success)
-                rawResult = m0.Groups[1].Value;
-            else if (m1.Success)
-                rawResult = m1.Groups[1].Value;
-            else
-                rawResult = ret;
+            string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
             if (this.infoType == InfoType.LocationInfo)
             {
                 return LocationResult(rawResult);
             }
-            else if (this.infoType == InfoType.ProcessView)
+            if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息
             {
-                return ClientSetting.WriteResult(rawResult, taskUrl, "进程信息");
+                return ClientSetting.WriteResult(rawResult, taskUrl, localSave[infoType]);
             }
-            else if (this.infoType == InfoType.ScheduleTask)
-            {
-                return ClientSetting.WriteResult(rawResult, taskUrl,"计划任务");
-            }
+
             return rawResult;
         }
         /// <summary>
@@ -825,6 +823,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
             string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
             Match m = r.Match(jsonResult);
+
             return m.Success ? m.Groups[1].Value : string.Empty;
         }
         // msf部分

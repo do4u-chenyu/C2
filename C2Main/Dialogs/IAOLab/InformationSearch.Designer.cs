@@ -37,7 +37,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.label21 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -48,10 +48,10 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -147,7 +147,7 @@
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.label21);
+            this.tabPage7.Controls.Add(this.textBox1);
             this.tabPage7.Controls.Add(this.label20);
             this.tabPage7.Controls.Add(this.richTextBox2);
             this.tabPage7.Controls.Add(this.label19);
@@ -159,15 +159,17 @@
             this.tabPage7.Text = "备案号查询";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // label21
+            // textBox1
             // 
-            this.label21.AutoSize = true;
-            this.label21.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label21.Location = new System.Drawing.Point(6, 81);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(262, 15);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "批量查询格式：多个备案号用换行分隔";
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.textBox1.Location = new System.Drawing.Point(9, 79);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(351, 17);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "域名查询接口：https://api.vvhan.com/api/icp?url=";
             // 
             // label20
             // 
@@ -176,9 +178,9 @@
             this.label20.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label20.Location = new System.Drawing.Point(6, 61);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(216, 15);
+            this.label20.Size = new System.Drawing.Size(479, 15);
             this.label20.TabIndex = 2;
-            this.label20.Text = "单次输入格式：www.baidu.com";
+            this.label20.Text = "单次输入格式：www.baidu.com;批量查询格式：多个备案号用换行分隔";
             // 
             // richTextBox2
             // 
@@ -289,19 +291,22 @@
             this.tabPage8.Text = "身份证号查询";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // richTextBox3
+            // label4
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(0, 122);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(595, 192);
-            this.richTextBox3.TabIndex = 0;
-            this.richTextBox3.Text = "";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 11F);
+            this.label4.Location = new System.Drawing.Point(5, 13);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(202, 15);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "请在下方输入待查询身份证号";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.Location = new System.Drawing.Point(8, 90);
+            this.label2.Location = new System.Drawing.Point(6, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(277, 15);
             this.label2.TabIndex = 5;
@@ -312,22 +317,19 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.Location = new System.Drawing.Point(8, 70);
+            this.label3.Location = new System.Drawing.Point(6, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(256, 15);
             this.label3.TabIndex = 4;
             this.label3.Text = "单次输入格式：321321166605005515";
             // 
-            // label4
+            // richTextBox3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 11F);
-            this.label4.Location = new System.Drawing.Point(8, 15);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(202, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "请在下方输入待查询身份证号";
+            this.richTextBox3.Location = new System.Drawing.Point(3, 104);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(587, 207);
+            this.richTextBox3.TabIndex = 0;
+            this.richTextBox3.Text = "";
             // 
             // InformationSearch
             // 
@@ -369,7 +371,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label19;
@@ -384,5 +385,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

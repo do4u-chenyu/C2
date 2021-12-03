@@ -79,7 +79,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "网站域名\t备案号\n";
+                firstLine = "网站域名\t接口备案号\t网页备案号\t网页备案号查询\n";
                 tmpResult.Append(firstLine);
                 foreach (string webUrl in inputArray)
                 {
@@ -135,7 +135,7 @@ namespace C2.Dialogs.IAOLab
                         richTextBox1.Text = tmpResult.ToString();
                         break;
                     case "idCard":
-                        tmpResult.Append(IDcardGet.GetInstance().IDcardSearch(input.Split('\t')[0]));
+                        tmpResult.Append(IDcardGet.GetInstance().IDsearch(input.Split('\t')[0]));
                         richTextBox3.Text = tmpResult.ToString();
                         break;
 
