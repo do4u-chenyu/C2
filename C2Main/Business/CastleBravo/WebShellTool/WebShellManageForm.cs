@@ -793,7 +793,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         /// </summary>
         private String ProcessingResults(string ret,string taskUrl)
         {
-            Dictionary<InfoType,string> localSave = new Dictionary<InfoType, string>()
+            Dictionary<InfoType, string> localSave = new Dictionary<InfoType, string>()
             {
                 { InfoType.ProcessView,"进程信息" },
                 { InfoType.ScheduleTask, "定时任务"},
@@ -823,7 +823,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
             string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
             Match m = r.Match(jsonResult);
-            return m.Success ? m.Groups[1].Value : string.Empty;
+            return m.Success ? rawResult + ":" + m.Groups[1].Value : string.Empty;
         }
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
