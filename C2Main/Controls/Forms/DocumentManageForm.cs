@@ -172,7 +172,9 @@ namespace C2.Controls
             else
                 return null;
         }
-        protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose)
+
+
+        protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose, bool visiable = true)
         {
             if (form == null)
                 throw new ArgumentNullException();
@@ -199,7 +201,8 @@ namespace C2.Controls
                 else
                     TaskBar.Items.Add(ti);
 
-                TaskBar.SelectedItem = ti;
+                if (visiable)
+                    TaskBar.SelectedItem = ti;
 
             }
 
@@ -209,7 +212,10 @@ namespace C2.Controls
 
             if (MdiClient != null)
             {
-                MdiClient.ShowMdiForm(form);
+                if (visiable)
+                    MdiClient.ShowMdiForm(form);
+                else
+                    MdiClient.AddMidForm(form); // 初始化时不需要显示
             }
             else if (IsMdiContainer)
             {

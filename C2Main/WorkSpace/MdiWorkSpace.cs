@@ -50,6 +50,12 @@ namespace C2.WorkSpace
 
         public override void ShowMdiForm(Form form)
         {
+            AddMidForm(form);
+            ActiveMdiForm(form);
+        }
+
+        public void AddMidForm(Form form)
+        {
             if (form == null)
                 throw new ArgumentNullException();
 
@@ -64,7 +70,6 @@ namespace C2.WorkSpace
             form.Activated += new EventHandler(MdiForm_Activated);
             form.FormClosed += new FormClosedEventHandler(MdiForm_FormClosed);
             Controls.Add(form);
-            ActiveMdiForm(form);
         }
 
         public override void ActiveMdiForm(Form form)

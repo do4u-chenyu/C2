@@ -224,12 +224,11 @@ namespace C2
         }
         void InitializeStartForm()
         {
-            StartForm startPage = new StartForm();
-            ShowForm(startPage, true, false);      
-            ShowForm(new JSForm(), true, false);  
-            SelectForm(startPage);                 // 默认显示首页
+            ShowForm(new StartForm(), true, false, true);      
+            ShowForm(new JSForm(), true, false, false);  
         }
         #endregion
+        
         void SetAGoodLocation()
         {
             if (WindowState == FormWindowState.Normal)
