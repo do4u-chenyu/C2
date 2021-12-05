@@ -17,15 +17,6 @@ using Microsoft.Win32;
 
 namespace C2
 {
-
-    //全局类  
-    public class DesignerModelClass
-    {
-        //私有构造器，防止实例化  
-        private DesignerModelClass() { }
-        //用于标识运行时/设计时的bool型静态成员，初始值设为false  
-        public static bool IsDesignerMode = true;
-    }
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
@@ -53,7 +44,7 @@ namespace C2
                 key = Registry.ClassesRoot.CreateSubKey(keyName);
                 key.SetValue("Create", Application.ExecutablePath.ToString());
                 
-                Microsoft.Win32.RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
+                RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
                 //iconKey.SetValue("", Application.ExecutablePath);
                 string icoFind = Path.Combine("Resources", "C2", "Icon");
                 string icoFile = Path.Combine(System.Windows.Forms.Application.StartupPath, icoFind, "Icon.ico");
@@ -94,7 +85,6 @@ namespace C2
             if (!args.IsNullOrEmpty() && TryOpenByOtherInstance(args))
                 return;
 
-            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             IsRunTime = true;
@@ -110,9 +100,8 @@ namespace C2
 
             Current_OpitonsChanged(null, EventArgs.Empty);
             #endregion
-            DesignerModelClass.IsDesignerMode = false;
+
             ConfigProgram();
-            Application.EnableVisualStyles();
             LanguageManage.Initialize();
             
             Process instance = RunningInstance();
@@ -123,18 +112,13 @@ namespace C2
                 //1.1 没有实例在运行
                 if (args.Length > 0)
                 {
-                    string path = string.Empty;
-                    for (int i = 0; i < args.Length; i++)
-                    path += args[i] + string.Empty;
-                    path = path.TrimEnd(OpUtil.Blank);
+                    string path = args.JoinString(string.Empty).TrimEnd(OpUtil.Blank);
                     RunByVersion(path);
-                    Application.EnableVisualStyles();
                 }
                 else
-                {
-                    RunByVersionExtend();
-                    Application.EnableVisualStyles();
-                }    
+                    RunByVersionExtend(); 
+          
+                Application.EnableVisualStyles();
             }
             else
             {
@@ -173,7 +157,7 @@ namespace C2
         public static void RunByVersion(string path)
         {
             Global.SetUsername("IAO");
-            Application.Run(new MainForm(Global.GetUsername(),path));
+            Application.Run(new MainForm(Global.GetUsername(), path));
         }
 
         public static void RunByVersionExtend()
