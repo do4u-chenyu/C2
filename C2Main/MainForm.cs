@@ -269,7 +269,7 @@ namespace C2
 
                 if (isLeftViewPanelMinimum)
                     this.ShowLeftFold();
-            }  
+            }   
         }
 
         private void ModelMarketButton_Click(object sender, EventArgs e)
