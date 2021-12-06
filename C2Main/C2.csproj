@@ -3903,7 +3903,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\tab_button.png" />
     <None Include="Resources\Robots.png" />
@@ -3918,7 +3918,9 @@
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py" />
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
     <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
     <Content Include="Resources\Script\IAO_Web_validation\screenshot.js" />
