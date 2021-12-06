@@ -61,9 +61,6 @@ namespace C2.Configuration
                     var openWith = shell.GetSubKeyDefaultValue(@"Open\Command") as string;
                     if (!ST.IsSameFile(GetFilePathFromRegStr(openWith), appName))
                         return false;
-                    //var editWith = shell.GetSubKeyDefaultValue(@"Edit\Command") as string;
-                    //if (!ST.IsSameFile(editWith, appName))
-                    //    return false;
                     shell.Close();
                 }
                 docType.Close();

@@ -87,6 +87,9 @@ namespace C2.Controls.Right
             this.toolTip1.SetToolTip(this.customOPButton1, HelpUtil.CustomOperator1HelpInfo);
             this.toolTip1.SetToolTip(this.customOPButton2, HelpUtil.CustomOperator2HelpInfo);
             this.toolTip1.SetToolTip(this.pythonOPButton, HelpUtil.PythonOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.preprocessingOPButton, HelpUtil.PreprocessingOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.analysisOPButton, HelpUtil.AnalysisOperator1HelpInfo);
+            this.toolTip1.SetToolTip(this.analysisDoubleOPButton, HelpUtil.AnalysisOperator2HelpInfo);
         }
 
 

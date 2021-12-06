@@ -2,6 +2,8 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -23,9 +25,9 @@ namespace C2.Controls.C1.Left
             InitializeComponent();
             taskManager = new SearchTaskManager();
             lastInfo = new LastOptionInfo();
+            this.addTaskLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddTaskLabel_MouseClick);
+            this.Load += new System.EventHandler(this.SearchToolkitControl_Load);
         }
-
-
 
         private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
         {
@@ -66,7 +68,7 @@ namespace C2.Controls.C1.Left
                 AddInnerButton(new SearchToolkitButton(task));
         }
 
-        public void DeleteButton(SearchToolkitButton button, SearchTaskInfo task) 
+        public void DeleteButton(SearchToolkitButton button, SearchTaskInfo task)
         {
             using (GuarderUtil.WaitCursor)
                 taskManager.DeleteTask(task);
@@ -75,12 +77,44 @@ namespace C2.Controls.C1.Left
 
         private void HelpInfoLable_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "全文工具箱帮助文档.txt");
                 Help.ShowHelp(this, helpfile);
-            } catch { };
+            }
+            catch { };
 
         }
+
+        
+        private void CastleBravoControl_Load(object sender, EventArgs e)
+        {
+            LoadCBPlugins();
+            ResizeCBLocation();
+        }
+       
+
+        private void LoadCBPlugins()
+        {
+            List<string> CBPlugins = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" ,"盗洞专项"};
+            CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
+        }
+        private void ResizeCBLocation()
+        {
+            backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
+            backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
+        }
+
+        private void AddCBPlugin(PluginButton plugin)
+        {
+            plugin.Location = new Point(20, ComputeSplitLineLocation());
+            this.Controls.Add(plugin);
+        }
+
+        private int ComputeSplitLineLocation()
+        {
+            return this.titleLabel.Height + this.Controls.Find("BaseLeftInnerButton", false).Length * 40 + 10;
+        }
+
     }
 }

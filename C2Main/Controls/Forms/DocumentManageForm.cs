@@ -172,7 +172,9 @@ namespace C2.Controls
             else
                 return null;
         }
-        protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose)
+
+
+        protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose, bool visiable = true)
         {
             if (form == null)
                 throw new ArgumentNullException();
@@ -195,11 +197,12 @@ namespace C2.Controls
                     TaskBar.Items.Insert(TaskBar.Items.IndexOf(TaskBar.SelectedItem) + 1, ti);
                 else if (form is CanvasForm)
                     //模型市场的模型默认在最前面打开
-                    TaskBar.Items.Insert(1, ti);
+                    TaskBar.Items.Insert(2, ti);
                 else
                     TaskBar.Items.Add(ti);
 
-                TaskBar.SelectedItem = ti;
+                if (visiable)
+                    TaskBar.SelectedItem = ti;
 
             }
 
@@ -209,7 +212,10 @@ namespace C2.Controls
 
             if (MdiClient != null)
             {
-                MdiClient.ShowMdiForm(form);
+                if (visiable)
+                    MdiClient.ShowMdiForm(form);
+                else
+                    MdiClient.AddMidForm(form); // 初始化时不需要显示
             }
             else if (IsMdiContainer)
             {

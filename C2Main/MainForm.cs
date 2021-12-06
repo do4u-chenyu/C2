@@ -224,12 +224,11 @@ namespace C2
         }
         void InitializeStartForm()
         {
-            StartForm startPage = new StartForm();
-            ShowForm(startPage, true, false);      
-            ShowForm(new JSForm(), true, false);  
-            SelectForm(startPage);                 // 默认显示首页
+            ShowForm(new StartForm(), true, false, true);      
+            ShowForm(new JSForm(), true, false, false);  
         }
         #endregion
+        
         void SetAGoodLocation()
         {
             if (WindowState == FormWindowState.Normal)
@@ -492,12 +491,7 @@ namespace C2
         {
             ShowForm(form);
         }
-        private void NewCanvasForm()
-        {
-            ModelDocument doc = new ModelDocument("运算视图", this.UserName);
-            CanvasForm form = new CanvasForm(doc);
-            ShowForm(form);
-        }
+
         public void NewCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)

@@ -779,7 +779,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             try
             {
                 string payload = string.Format(ClientSetting.InfoPayloadDict[this.infoType], task.Password);
-                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 90000, Proxy);
+                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
                 task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
             }
             catch (Exception ex)
@@ -793,13 +793,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         /// </summary>
         private String ProcessingResults(string ret,string taskUrl)
         {
-            Dictionary<InfoType,string> localSave = new Dictionary<InfoType, string>()
+            Dictionary<InfoType, string> localSave = new Dictionary<InfoType, string>()
             {
                 { InfoType.ProcessView,"进程信息" },
-                { InfoType.ScheduleTask, "计划任务"},
+                { InfoType.ScheduleTask, "定时任务"},
                 { InfoType.SystemInfo,"系统信息" }
             };
-            Regex r0 = new Regex("QACKL3IO9P==(.*)==QACKL3IO9P",RegexOptions.Singleline);
+            Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P",RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
             string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
             if (this.infoType == InfoType.LocationInfo)
@@ -823,8 +823,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
             string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
             Match m = r.Match(jsonResult);
-
-            return m.Success ? m.Groups[1].Value : string.Empty;
+            return m.Success ? rawResult + ":" + m.Groups[1].Value : string.Empty;
         }
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)

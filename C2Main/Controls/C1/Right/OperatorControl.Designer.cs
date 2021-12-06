@@ -621,7 +621,7 @@
             // preprocessingOpPictureBox
             // 
             this.preprocessingOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.preprocessingOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.preprocessingOpPictureBox.Image = global::C2.Properties.Resources.pre_op;
             this.preprocessingOpPictureBox.Location = new System.Drawing.Point(107, 289);
             this.preprocessingOpPictureBox.Name = "preprocessingOpPictureBox";
             this.preprocessingOpPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -638,10 +638,10 @@
             this.analysisOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.analysisOPButton.Location = new System.Drawing.Point(30, 316);
             this.analysisOPButton.Name = "analysisOPButton";
-            this.analysisOPButton.Size = new System.Drawing.Size(81, 29);
+            this.analysisOPButton.Size = new System.Drawing.Size(73, 29);
             this.analysisOPButton.TabIndex = 45;
             this.analysisOPButton.TabStop = false;
-            this.analysisOPButton.Text = "数据分析1";
+            this.analysisOPButton.Text = "主体分析";
             this.analysisOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.analysisOPButton.UseMnemonic = false;
             this.analysisOPButton.UseVisualStyleBackColor = false;
@@ -650,7 +650,7 @@
             // analysisOpPictureBox
             // 
             this.analysisOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.analysisOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.analysisOpPictureBox.Image = global::C2.Properties.Resources.analysis1_op;
             this.analysisOpPictureBox.Location = new System.Drawing.Point(8, 320);
             this.analysisOpPictureBox.Name = "analysisOpPictureBox";
             this.analysisOpPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -670,7 +670,7 @@
             this.analysisDoubleOPButton.Size = new System.Drawing.Size(85, 29);
             this.analysisDoubleOPButton.TabIndex = 47;
             this.analysisDoubleOPButton.TabStop = false;
-            this.analysisDoubleOPButton.Text = "数据分析2";
+            this.analysisDoubleOPButton.Text = "关联分析";
             this.analysisDoubleOPButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.analysisDoubleOPButton.UseMnemonic = false;
             this.analysisDoubleOPButton.UseVisualStyleBackColor = false;
@@ -679,7 +679,7 @@
             // analysisDoubleOpPictureBox
             // 
             this.analysisDoubleOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.analysisDoubleOpPictureBox.Image = global::C2.Properties.Resources.python_op;
+            this.analysisDoubleOpPictureBox.Image = global::C2.Properties.Resources.analysis2_op;
             this.analysisDoubleOpPictureBox.Location = new System.Drawing.Point(107, 320);
             this.analysisDoubleOpPictureBox.Name = "analysisDoubleOpPictureBox";
             this.analysisDoubleOpPictureBox.Size = new System.Drawing.Size(20, 20);

@@ -625,6 +625,15 @@
     <Compile Include="Controls\C1\Left\BaseLeftInnerPanel.Designer.cs">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\PluginButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\SearchToolkitControl.Designer.cs">
+      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\C1\Left\CastleBravoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -642,12 +651,6 @@
     </Compile>
     <Compile Include="Controls\C1\Left\SearchToolkitButton.Designer.cs">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\C1\Left\SearchToolkitControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\C1\Left\SearchToolkitControl.Designer.cs">
-      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Left\TableListControl.cs">
       <SubType>Component</SubType>
@@ -2189,6 +2192,9 @@
     <EmbeddedResource Include="Controls\C1\Left\BaseLeftInnerPanel.resx">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
+      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\CastleBravoControl.resx">
       <DependentUpon>CastleBravoControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -2214,9 +2220,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\SearchToolkitButton.resx">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
-      <DependentUpon>SearchToolkitControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\WebsiteFeatureDetectionControl.resx">
       <DependentUpon>WebsiteFeatureDetectionControl.cs</DependentUpon>
@@ -3245,6 +3248,8 @@
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <None Include="Resources\Opcontrol_ico\sql.ico" />
+    <None Include="Resources\Opcontrol_ico\关联分析.ico" />
+    <None Include="Resources\Opcontrol_ico\主体分析.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
     <Content Include="Resources\Opcontrol_ico\关键词过滤.ico" />
     <Content Include="Resources\Opcontrol_ico\分组.ico" />
@@ -3253,6 +3258,7 @@
     <Content Include="Resources\Opcontrol_ico\平均值.ico" />
     <Content Include="Resources\Opcontrol_ico\并集.ico" />
     <Content Include="Resources\Opcontrol_ico\排序.ico" />
+    <None Include="Resources\Opcontrol_ico\数据处理.ico" />
     <Content Include="Resources\Opcontrol_ico\数据标准化.ico" />
     <Content Include="Resources\Opcontrol_ico\最大值.ico" />
     <Content Include="Resources\Opcontrol_ico\最小值.ico" />
@@ -3282,6 +3288,9 @@
     <None Include="Resources\Operators\sql_help.png" />
     <None Include="Resources\Operators\db_connect.png" />
     <None Include="Resources\Operators\table_view.png" />
+    <None Include="Resources\Operators\pre_op.png" />
+    <None Include="Resources\Operators\analysis1_op.png" />
+    <None Include="Resources\Operators\analysis2_op.png" />
     <Content Include="Resources\PictureIconLib\100_HTTP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -3900,7 +3909,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\tab_button.png" />
     <None Include="Resources\Robots.png" />
@@ -3915,7 +3924,9 @@
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py" />
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
     <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
     <Content Include="Resources\Script\IAO_Web_validation\screenshot.js" />

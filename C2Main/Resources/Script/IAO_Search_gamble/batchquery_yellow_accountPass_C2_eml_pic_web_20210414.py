@@ -547,9 +547,12 @@ def emailExact(dataDict):
     return shEmail
 
 
-def download_one(image):    
-    with open(join(down_path,image['name']),'wb') as f:
-        f.write((urllib.urlopen(image['url'])).read())
+def download_one(image):
+    try:    
+        with open(join(down_path,image['name']),'wb') as f:
+            f.write((urllib.urlopen(image['url'])).read())
+    except:
+        LOGGER.info("picture download failed")
         
 def picExact(picDicts):
     LOGGER.info("start email pic data")

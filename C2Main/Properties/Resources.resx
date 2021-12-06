@@ -1530,6 +1530,18 @@
   <data name="TerrorismDetection" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\TerrorismDetection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="db" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\db.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sq" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\sq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\sh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\dd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="currentModelRunningBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\currentModelRunningBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2225,5 +2237,23 @@
   </data>
   <data name="JS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\JS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pre_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\pre_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="analysis1_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\analysis1_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="analysis2_op" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Operators\analysis2_op.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="主体分析" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Opcontrol_ico\主体分析.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="关联分析" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Opcontrol_ico\关联分析.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="数据处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Opcontrol_ico\数据处理.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

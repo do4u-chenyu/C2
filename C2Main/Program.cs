@@ -13,66 +13,13 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace C2
 {
-
-    //全局类  
-    public class DesignerModelClass
-    {
-        //私有构造器，防止实例化  
-        private DesignerModelClass() { }
-        //用于标识运行时/设计时的bool型静态成员，初始值设为false  
-        public static bool IsDesignerMode = true;
-    }
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
-        public static bool IsRunTime { get; private set; }
         public const string Software_Version = "1.4.14";
-        [DllImport("shell32.dll")]
-        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
-
-        private static void Regist()
-        {
-            string keyName = "C2File";
-            string keyValue = "C2文件";
-            bool isCreateRegistry = true;
-
-            //检查文件关联是否创建 
-            RegistryKey isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
-            if (isExCommand != null && isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
-            {
-                isCreateRegistry = false;
-            }
-            //假如文件关联 还没有创建，或是关联位置已被改变 
-            else if (isCreateRegistry)
-            {
-                RegistryKey key, KeyC2;
-                key = Registry.ClassesRoot.CreateSubKey(keyName);
-                key.SetValue("Create", Application.ExecutablePath.ToString());
-                
-                Microsoft.Win32.RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
-                //iconKey.SetValue("", Application.ExecutablePath);
-                string icoFind = Path.Combine("Resources", "C2", "Icon");
-                string icoFile = Path.Combine(System.Windows.Forms.Application.StartupPath, icoFind, "Icon.ico");
-                iconKey.SetValue(String.Empty, icoFile);
-
-                SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
-                key.SetValue("", keyValue);
-                key = key.CreateSubKey("Shell")
-                             .CreateSubKey("Open")
-                                 .CreateSubKey("Command");
-                string exeFile = Path.Combine(Application.StartupPath, "C2Shell.exe");
-                if (File.Exists(exeFile))
-                    key.SetValue(String.Empty, exeFile + @" %1");
-                string keyC2Name = ".c2";
-                string keyC2Value = "C2File";
-                KeyC2 = Registry.ClassesRoot.CreateSubKey(keyC2Name);
-                KeyC2.SetValue("", keyC2Value);
-            }
-        }
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -80,7 +27,6 @@ namespace C2
         [STAThread]
         static void Main(params string[] args)
         {
-            //Regist();
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021121700000000") > 0)
             {
                 MessageBox.Show("产品可用时间截止到2021年12月17号");
@@ -94,11 +40,7 @@ namespace C2
             if (!args.IsNullOrEmpty() && TryOpenByOtherInstance(args))
                 return;
 
-            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            IsRunTime = true;
-
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
 
@@ -110,11 +52,10 @@ namespace C2
 
             Current_OpitonsChanged(null, EventArgs.Empty);
             #endregion
-            DesignerModelClass.IsDesignerMode = false;
+
             ConfigProgram();
-            Application.EnableVisualStyles();
             LanguageManage.Initialize();
-            
+            Application.EnableVisualStyles();//窗体启动前调用
             Process instance = RunningInstance();
 
 
@@ -123,18 +64,11 @@ namespace C2
                 //1.1 没有实例在运行
                 if (args.Length > 0)
                 {
-                    string path = string.Empty;
-                    for (int i = 0; i < args.Length; i++)
-                    path += args[i] + string.Empty;
-                    path = path.TrimEnd(OpUtil.Blank);
+                    string path = args.JoinString(string.Empty).TrimEnd(OpUtil.Blank);
                     RunByVersion(path);
-                    Application.EnableVisualStyles();
                 }
                 else
-                {
-                    RunByVersionExtend();
-                    Application.EnableVisualStyles();
-                }    
+                    RunByVersionExtend(); 
             }
             else
             {
@@ -154,13 +88,13 @@ namespace C2
 
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
             // 如果硬盘不存在,用程序所在目录
-            if (!System.IO.Directory.Exists(root))
+            if (!Directory.Exists(root))
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
             Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("RunLevel", ConfigUtil.DefaultVersionType);
             if (Global.VersionType.Equals(Global.GreenLevel))
-                Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
+                Global.WorkspaceDirectory = Path.Combine(Environment.CurrentDirectory, Global.GreenPath);
 
             //设置临时文件夹路径，默认操作系统临时文件夹路径。如果默认路径有访问权限，用程序的工作目录临时文件夹。
             string tempDir = FileUtil.TryGetSysTempDir();
@@ -173,7 +107,7 @@ namespace C2
         public static void RunByVersion(string path)
         {
             Global.SetUsername("IAO");
-            Application.Run(new MainForm(Global.GetUsername(),path));
+            Application.Run(new MainForm(Global.GetUsername(), path));
         }
 
         public static void RunByVersionExtend()
@@ -209,9 +143,9 @@ namespace C2
             SetForegroundWindow(instance.MainWindowHandle); //将窗口放置最前端
         }
         [DllImport("User32.dll")]
-        private static extern bool ShowWindowAsync(System.IntPtr hWnd, int cmdShow);
+        private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
         [DllImport("User32.dll")]
-        private static extern bool SetForegroundWindow(System.IntPtr hWnd);
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
         #endregion
         static bool TryOpenByOtherInstance(string[] args)
         {
@@ -229,10 +163,12 @@ namespace C2
                 var data = Encoding.UTF8.GetBytes(files.JoinString(";"));
                 var buffer = OSHelper.IntPtrAlloc(data);
 
-                var cds = new COPYDATASTRUCT();
-                cds.dwData = new IntPtr(OPEN_FILES_MESSAGE);
-                cds.cbData = data.Length;
-                cds.lpData = buffer;
+                var cds = new COPYDATASTRUCT
+                {
+                    dwData = new IntPtr(OPEN_FILES_MESSAGE),
+                    cbData = data.Length,
+                    lpData = buffer
+                };
                 var cbs_buffer = OSHelper.IntPtrAlloc(cds);
                 IntPtr result = User32.SendMessage(inst.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
                 OSHelper.IntPtrFree(cbs_buffer);

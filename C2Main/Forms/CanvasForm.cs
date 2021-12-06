@@ -207,10 +207,6 @@ namespace C2.Forms
             UpdateTopicResults(RelateTopic);
         }
 
-        private void CanvasForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveDocAndTopic();
-        }
 
         private void CanvasForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -685,20 +681,6 @@ namespace C2.Forms
         #endregion
 
         #region 文档加载
-        public void LoadDocument(string modelTitle)
-        {
-            // TODO 就不该有多个doc
-            CanvasRemoveAllEle();
-            ModelDocument modelDoc = new ModelDocument(modelTitle, userName);
-            this.Document = modelDoc;
-            this.Document.Load();
-            this.CanvasAddElement(modelDoc);
-        }
-        private void CanvasRemoveAllEle()
-        {
-            this.canvasPanel.Controls.Clear();
-            this.naviViewControl.UpdateNaviView();
-        }
         public void CanvasAddElement(ModelDocument doc)
         {
             doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));

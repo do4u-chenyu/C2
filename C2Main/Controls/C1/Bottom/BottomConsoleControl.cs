@@ -32,28 +32,6 @@ namespace C2.Controls.Bottom
             ReleaseConsoleControl(cmdConsoleControl);
         }
 
-        public void LoadPythonInterpreter()
-        {
-            // 先所有现存的Python Console清空
-            // 可能包含很多清空步骤
-            PIISClear();
-
-            string pythonConfigString = ConfigUtil.TryGetAppSettingsByKey("python");
-            PythonOPConfig config = new PythonOPConfig(pythonConfigString);
-            if (config.Empty())
-                return;
-
-
-
-            foreach (PythonInterpreterInfo pii in config.AllPII)
-            {
-                piis.Add(pii);
-                this.comboBox1.Items.Add(pii.PythonAlias);
-            }
-
-        }
-
-
         private ConsoleControl.ConsoleControl CreateNewConsoleControl(string controlName, bool visible = false)
         {
             ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl
@@ -90,20 +68,8 @@ namespace C2.Controls.Bottom
             }
         }
 
-        private void PIISClear()
-        {
-            piis.Clear();
-            this.comboBox1.Items.Clear();
-            this.comboBox1.Items.Add(CmdConsoleString);
-            this.comboBox1.SelectedIndex = 0;
-        }
-
         private void BottomPythonConsoleControl_Load(object sender, EventArgs e)
         {
-            if (DesignerModelClass.IsDesignerMode)
-                return;
-
-            //LoadPythonInterpreter(); 加载py控制台的暂时不用,bug太多
             this.comboBox1.SelectedIndex = 0;
             if (CmdConsoleSeleted())
                 StartCmdProcess();
@@ -259,27 +225,6 @@ namespace C2.Controls.Bottom
             TryStartProcess(console, pythonFFP, param);
             this.startProcessButton.Enabled = false;
             ConsoleControlReLayout(console);
-        }
-
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string owner = CurrentConsoleOwnerString();
-            if (string.IsNullOrEmpty(owner) || !consoles.ContainsKey(owner) || consoles[owner] == null)
-            {
-                this.startProcessButton.Enabled = true;
-                return;
-            }
-
-
-            ConsoleControl.ConsoleControl console = consoles[owner];
-            if (console.IsProcessRunning)
-            {
-                this.startProcessButton.Enabled = false;
-                ConsoleControlReLayout(console);
-            }
-            else
-                this.startProcessButton.Enabled = true;
-
         }
 
         private void ConsoleControlReLayout(ConsoleControl.ConsoleControl console)
