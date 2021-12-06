@@ -55,7 +55,7 @@ namespace C2
 
             ConfigProgram();
             LanguageManage.Initialize();
-            Application.EnableVisualStyles();
+            Application.EnableVisualStyles();//窗体启动前调用
             Process instance = RunningInstance();
 
 
