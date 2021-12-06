@@ -13,19 +13,14 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace C2
 {
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
-        public static bool IsRunTime { get; private set; }
         public const string Software_Version = "1.4.14";
-        [DllImport("shell32.dll")]
-        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -46,9 +41,6 @@ namespace C2
                 return;
 
             Application.SetCompatibleTextRenderingDefault(false);
-
-            IsRunTime = true;
-
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
 
@@ -63,7 +55,7 @@ namespace C2
 
             ConfigProgram();
             LanguageManage.Initialize();
-            
+            Application.EnableVisualStyles();
             Process instance = RunningInstance();
 
 
@@ -77,8 +69,6 @@ namespace C2
                 }
                 else
                     RunByVersionExtend(); 
-          
-                Application.EnableVisualStyles();
             }
             else
             {
@@ -98,13 +88,13 @@ namespace C2
 
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
             // 如果硬盘不存在,用程序所在目录
-            if (!System.IO.Directory.Exists(root))
+            if (!Directory.Exists(root))
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
             Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("RunLevel", ConfigUtil.DefaultVersionType);
             if (Global.VersionType.Equals(Global.GreenLevel))
-                Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
+                Global.WorkspaceDirectory = Path.Combine(Environment.CurrentDirectory, Global.GreenPath);
 
             //设置临时文件夹路径，默认操作系统临时文件夹路径。如果默认路径有访问权限，用程序的工作目录临时文件夹。
             string tempDir = FileUtil.TryGetSysTempDir();
@@ -153,9 +143,9 @@ namespace C2
             SetForegroundWindow(instance.MainWindowHandle); //将窗口放置最前端
         }
         [DllImport("User32.dll")]
-        private static extern bool ShowWindowAsync(System.IntPtr hWnd, int cmdShow);
+        private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
         [DllImport("User32.dll")]
-        private static extern bool SetForegroundWindow(System.IntPtr hWnd);
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
         #endregion
         static bool TryOpenByOtherInstance(string[] args)
         {
@@ -173,10 +163,12 @@ namespace C2
                 var data = Encoding.UTF8.GetBytes(files.JoinString(";"));
                 var buffer = OSHelper.IntPtrAlloc(data);
 
-                var cds = new COPYDATASTRUCT();
-                cds.dwData = new IntPtr(OPEN_FILES_MESSAGE);
-                cds.cbData = data.Length;
-                cds.lpData = buffer;
+                var cds = new COPYDATASTRUCT
+                {
+                    dwData = new IntPtr(OPEN_FILES_MESSAGE),
+                    cbData = data.Length,
+                    lpData = buffer
+                };
                 var cbs_buffer = OSHelper.IntPtrAlloc(cds);
                 IntPtr result = User32.SendMessage(inst.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
                 OSHelper.IntPtrFree(cbs_buffer);
