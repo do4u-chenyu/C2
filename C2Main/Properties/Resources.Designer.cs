@@ -3189,6 +3189,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon 主体分析 {
+            get {
+                object obj = ResourceManager.GetObject("主体分析", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap 二进制 {
@@ -3235,6 +3245,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("全文检索", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon 关联分析 {
+            get {
+                object obj = ResourceManager.GetObject("关联分析", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -3330,6 +3350,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("数据", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon 数据处理 {
+            get {
+                object obj = ResourceManager.GetObject("数据处理", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
