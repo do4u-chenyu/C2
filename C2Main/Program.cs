@@ -25,53 +25,13 @@ namespace C2
         [DllImport("shell32.dll")]
         public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
-        private static void Regist()
-        {
-            string keyName = "C2File";
-            string keyValue = "C2文件";
-            bool isCreateRegistry = true;
-
-            //检查文件关联是否创建 
-            RegistryKey isExCommand = Registry.ClassesRoot.OpenSubKey(keyName);
-            if (isExCommand != null && isExCommand.GetValue("Create").ToString() == Application.ExecutablePath.ToString())
-            {
-                isCreateRegistry = false;
-            }
-            //假如文件关联 还没有创建，或是关联位置已被改变 
-            else if (isCreateRegistry)
-            {
-                RegistryKey key, KeyC2;
-                key = Registry.ClassesRoot.CreateSubKey(keyName);
-                key.SetValue("Create", Application.ExecutablePath.ToString());
-                
-                RegistryKey iconKey = key.CreateSubKey("DefaultIcon");
-                //iconKey.SetValue("", Application.ExecutablePath);
-                string icoFind = Path.Combine("Resources", "C2", "Icon");
-                string icoFile = Path.Combine(System.Windows.Forms.Application.StartupPath, icoFind, "Icon.ico");
-                iconKey.SetValue(String.Empty, icoFile);
-
-                SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
-                key.SetValue("", keyValue);
-                key = key.CreateSubKey("Shell")
-                             .CreateSubKey("Open")
-                                 .CreateSubKey("Command");
-                string exeFile = Path.Combine(Application.StartupPath, "C2Shell.exe");
-                if (File.Exists(exeFile))
-                    key.SetValue(String.Empty, exeFile + @" %1");
-                string keyC2Name = ".c2";
-                string keyC2Value = "C2File";
-                KeyC2 = Registry.ClassesRoot.CreateSubKey(keyC2Name);
-                KeyC2.SetValue("", keyC2Value);
-            }
-        }
-
+        
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main(params string[] args)
         {
-            //Regist();
             if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2021121700000000") > 0)
             {
                 MessageBox.Show("产品可用时间截止到2021年12月17号");
