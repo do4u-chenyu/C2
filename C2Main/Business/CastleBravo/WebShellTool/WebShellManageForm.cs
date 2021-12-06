@@ -799,7 +799,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 { InfoType.ScheduleTask, "定时任务"},
                 { InfoType.SystemInfo,"系统信息" }
             };
-            Regex r0 = new Regex("QACKL3IO9P==(.*)==QACKL3IO9P",RegexOptions.Singleline);
+            Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P",RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
             string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
             if (this.infoType == InfoType.LocationInfo)
