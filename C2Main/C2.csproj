@@ -504,7 +504,7 @@
     <Compile Include="Business\HTTP\HttpHandler.cs" />
     <Compile Include="Business\HTTP\Response.cs" />
     <Compile Include="Business\IAOLab\ApkTool\ApkToolStart.cs" />
-    <Compile Include="Business\IAOLab\IDcardGet\IDcardGet.cs" />
+    <Compile Include="Business\IAOLab\IdInfoGet\IdInfoGet.cs" />
     <Compile Include="Business\IAOLab\BankTool\BankTool.cs" />
     <Compile Include="Business\IAOLab\BaseAddress\BaseAddress.cs" />
     <Compile Include="Business\IAOLab\BaseStation\BaseStation.cs" />
@@ -3945,6 +3945,9 @@
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
+    <None Include="Resources\Templates\AreaNum.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Templates\DocxExample.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

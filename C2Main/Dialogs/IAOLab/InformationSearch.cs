@@ -1,6 +1,6 @@
 ﻿using C2.Controls;
 using C2.IAOLab.BankTool;
-using C2.IAOLab.IDcardGet;
+using C2.IAOLab.IdInfoGet;
 using C2.IAOLab.BaseAddress;
 using C2.Utils;
 using System;
@@ -135,7 +135,7 @@ namespace C2.Dialogs.IAOLab
                         richTextBox1.Text = tmpResult.ToString();
                         break;
                     case "idCard":
-                        tmpResult.Append(IDcardGet.GetInstance().IDsearch(input.Split('\t')[0]));
+                        tmpResult.Append(IdInfoGet.GetInstance().IdSearch(input.Split('\t')[0]));
                         richTextBox3.Text = tmpResult.ToString();
                         break;
 
