@@ -1,14 +1,7 @@
 ﻿using C2.Business.CastleBravo;
-using C2.Business.CastleBravo.Binary;
-using C2.Business.CastleBravo.PwdGenerator;
-using C2.Business.CastleBravo.RobotsScan;
-using C2.Business.CastleBravo.WebScan;
-using C2.Business.CastleBravo.WebShellTool;
-using C2.Business.Cracker.Dialogs;
 using C2.Business.Model;
 using C2.Core;
 using C2.Dialogs.CastleBravo;
-using C2.Globalization;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -119,105 +112,7 @@ namespace C2.Controls.C1.Left
         }
 
 
-        private class CastleBravoPlugin : BaseLeftInnerButton
-        {
-            private string pluginType;
-            public CastleBravoPlugin(string name)
-            {
-                pluginType = name;
-                InitButtonMenu();
-                InitButtonType();
-                InitButtonDoubleClick();
-            }
-
-            private void InitButtonType()
-            {
-                ButtonText = Lang._(this.pluginType);
-                this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
-                switch (this.pluginType)
-                {
-                    case "Cracker":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
-                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.CrackerFormHelpInfo);
-                        break;
-                    case "PwdGenerator":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.dictGenerator;
-                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
-                        break;
-                    case "WebScan":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
-                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebScanHelpInfo);
-                        break;
-                    case "RobotsScan":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.Robots;
-                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RobotsScanHelpInfo);
-                        break;
-                    case "WebShell":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
-                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
-                        break;
-                    case "Binary":
-                        this.leftPictureBox.Image = global::C2.Properties.Resources.二进制;
-                        this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BinaryHelpInfo);
-                        break;
-
-                }
-            }
-            private void InitButtonMenu()
-            {
-                ToolStripMenuItem OpenToolStripMenuItem = new ToolStripMenuItem
-                {
-                    Name = "OpenToolStripMenuItem",
-                    Size = new System.Drawing.Size(196, 22),
-                    Text = "打开"
-                };
-                OpenToolStripMenuItem.Click += new EventHandler(OpenToolStripMenuItem_Click);
-
-                this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {
-                    OpenToolStripMenuItem
-                 });
-
-            }
-            private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-                OpenPluginForm();
-            }
-
-            private void InitButtonDoubleClick()
-            {
-                this.noFocusButton.MouseDown += new MouseEventHandler(this.NoFocusButton_MouseDown);
-            }
-            private void NoFocusButton_MouseDown(object sender, MouseEventArgs e)
-            {
-                if (e.Button == MouseButtons.Left && e.Clicks == 2)
-                    OpenPluginForm();
-            }
-
-            private void OpenPluginForm()
-            {
-                switch (pluginType)
-                {
-                    case "Cracker":
-                        new CrackerForm().ShowDialog();
-                        break;
-                    case "PwdGenerator":
-                        new PwdGeneratorForm().ShowDialog();
-                        break;
-                    case "WebScan":
-                        new WebScanForm().ShowDialog();
-                        break;
-                    case "RobotsScan":
-                        new RobotsScan().ShowDialog();
-                        break;
-                    case "WebShell":
-                        new WebShellManageForm().ShowDialog();
-                        break;
-                    case "Binary":
-                        new BinaryMainForm().ShowDialog();
-                        break;
-                }
-            }
-        }
+        
 
 
         private class CastleBravoButton : BaseLeftInnerButton
@@ -340,7 +235,7 @@ namespace C2.Controls.C1.Left
         private void LoadCBPlugins()
         {
             List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan", "WebShell", "Binary"};
-            CBPlugins.ForEach(pname => this.AddCBPlugin(new CastleBravoPlugin(pname)));
+            CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
         }
         private void ResizeCBLocation()
         {
@@ -348,7 +243,7 @@ namespace C2.Controls.C1.Left
             backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
         }
 
-        private void AddCBPlugin(CastleBravoPlugin plugin)
+        private void AddCBPlugin(PluginButton plugin)
         {
             plugin.Location = new Point(20, ComputeSplitLineLocation());
             this.Controls.Add(plugin);
