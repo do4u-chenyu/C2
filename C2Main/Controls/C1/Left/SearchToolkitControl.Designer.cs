@@ -46,6 +46,10 @@
             // 
             this.manageButtonPanel.Size = new System.Drawing.Size(177, 296);
             // 
+            // addTaskLabel
+            // 
+            this.addTaskLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddTaskLabel_MouseClick);
+            // 
             // helpInfoLable
             // 
             this.helpInfoLable.Click += new System.EventHandler(this.HelpInfoLable_Click);
@@ -55,7 +59,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "SearchToolkitControl";
-            this.Load += new System.EventHandler(this.CastleBravoControl_Load);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);

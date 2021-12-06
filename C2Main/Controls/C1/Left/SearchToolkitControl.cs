@@ -18,15 +18,15 @@ namespace C2.Controls.C1.Left
     };
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
-        private SearchTaskManager taskManager;
+        private readonly SearchTaskManager taskManager;
         private LastOptionInfo lastInfo;
         public SearchToolkitControl()
         {
-            InitializeComponent();
             taskManager = new SearchTaskManager();
             lastInfo = new LastOptionInfo();
-            this.addTaskLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddTaskLabel_MouseClick);
-            this.Load += new System.EventHandler(this.SearchToolkitControl_Load);
+            InitializeComponent();     
+            SearchToolkitControlLoad();
+            PluginsButtonLoad();
         }
 
         private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
@@ -60,7 +60,7 @@ namespace C2.Controls.C1.Left
             HelpUtil.ShowMessageBox(message);
         }
 
-        private void SearchToolkitControl_Load(object sender, EventArgs e)
+        private void SearchToolkitControlLoad()
         {
             taskManager.Refresh();
 
@@ -87,7 +87,7 @@ namespace C2.Controls.C1.Left
         }
 
         
-        private void CastleBravoControl_Load(object sender, EventArgs e)
+        private void PluginsButtonLoad()
         {
             LoadCBPlugins();
             ResizeCBLocation();
@@ -115,6 +115,5 @@ namespace C2.Controls.C1.Left
         {
             return this.titleLabel.Height + this.Controls.Find("BaseLeftInnerButton", false).Length * 40 + 10;
         }
-
     }
 }

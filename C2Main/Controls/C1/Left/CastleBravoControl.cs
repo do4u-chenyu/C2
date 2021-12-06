@@ -17,6 +17,7 @@ namespace C2.Controls.C1.Left
         public CastleBravoControl()
         {
             InitializeComponent();
+            CastleBravoControlLoad(); // 取消延迟加载, 避免visible时的闪烁
             this.addTaskLabel.Click += new EventHandler(this.AddLabel_Click);
         }
 
@@ -223,7 +224,7 @@ namespace C2.Controls.C1.Left
             }
         }
 
-        private void CastleBravoControl_Load(object sender, EventArgs e)
+        private void CastleBravoControlLoad()
         {
             LoadCBPlugins();
             ResizeCBLocation();
