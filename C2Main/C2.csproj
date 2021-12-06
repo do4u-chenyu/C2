@@ -3282,6 +3282,9 @@
     <None Include="Resources\Operators\sql_help.png" />
     <None Include="Resources\Operators\db_connect.png" />
     <None Include="Resources\Operators\table_view.png" />
+    <None Include="Resources\Operators\pre_op.png" />
+    <None Include="Resources\Operators\analysis1_op.png" />
+    <None Include="Resources\Operators\analysis2_op.png" />
     <Content Include="Resources\PictureIconLib\100_HTTP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -39,8 +39,8 @@ namespace C2.Business.Model
         DataFormatOperator, //数据标准化
         KeywordOperator,  //关键词过滤  
         PreprocessingOperator,  //数据预处理  
-        AnalysisOperator1,  //数据分析1  
-        AnalysisOperator2  //数据分析2   
+        AnalysisOperator1,  //主体分析  
+        AnalysisOperator2  //关联分析   
     }
     public enum ElementStatus
     {

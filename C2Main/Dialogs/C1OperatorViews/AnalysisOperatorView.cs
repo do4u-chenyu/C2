@@ -22,13 +22,13 @@ namespace C2.OperatorViews
             {
                 this.dataSourceTB1.Visible = true;
                 this.outListCCBL1.Visible = true;
-                this.Text = "数据分析2";
+                this.Text = "关联分析";
                 this.Icon = Properties.Resources.custom_icon;
                 this.comboBox2.Items.AddRange(new object[] { "关键词分析" });
             }
             else
             {
-                this.Text = "数据分析1";
+                this.Text = "主体分析";
                 this.label2.Location = new Point(this.label2.Location.X, this.label2.Location.Y - 30);
                 this.comboBox2.Location = new Point(this.comboBox2.Location.X, this.comboBox2.Location.Y - 30);
                 this.comboBox2.Items.AddRange(new object[] { "同群分析", "银行卡提取" });

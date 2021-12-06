@@ -153,6 +153,26 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap analysis1_op {
+            get {
+                object obj = ResourceManager.GetObject("analysis1_op", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap analysis2_op {
+            get {
+                object obj = ResourceManager.GetObject("analysis2_op", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap Apk {
             get {
                 object obj = ResourceManager.GetObject("Apk", resourceCulture);
@@ -2179,6 +2199,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap PostgreSQL {
             get {
                 object obj = ResourceManager.GetObject("PostgreSQL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap pre_op {
+            get {
+                object obj = ResourceManager.GetObject("pre_op", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
