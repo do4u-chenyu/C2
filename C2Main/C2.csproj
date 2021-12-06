@@ -3248,6 +3248,8 @@
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <None Include="Resources\Opcontrol_ico\sql.ico" />
+    <None Include="Resources\Opcontrol_ico\关联分析.ico" />
+    <None Include="Resources\Opcontrol_ico\主体分析.ico" />
     <Content Include="Resources\Opcontrol_ico\关联算子.ico" />
     <Content Include="Resources\Opcontrol_ico\关键词过滤.ico" />
     <Content Include="Resources\Opcontrol_ico\分组.ico" />
@@ -3256,6 +3258,7 @@
     <Content Include="Resources\Opcontrol_ico\平均值.ico" />
     <Content Include="Resources\Opcontrol_ico\并集.ico" />
     <Content Include="Resources\Opcontrol_ico\排序.ico" />
+    <None Include="Resources\Opcontrol_ico\数据处理.ico" />
     <Content Include="Resources\Opcontrol_ico\数据标准化.ico" />
     <Content Include="Resources\Opcontrol_ico\最大值.ico" />
     <Content Include="Resources\Opcontrol_ico\最小值.ico" />

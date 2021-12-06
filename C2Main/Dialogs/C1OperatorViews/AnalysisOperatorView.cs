@@ -23,7 +23,7 @@ namespace C2.OperatorViews
                 this.dataSourceTB1.Visible = true;
                 this.outListCCBL1.Visible = true;
                 this.Text = "关联分析";
-                this.Icon = Properties.Resources.custom_icon;
+                this.Icon = Properties.Resources.关联分析;
                 this.comboBox2.Items.AddRange(new object[] { "关键词分析" });
             }
             else

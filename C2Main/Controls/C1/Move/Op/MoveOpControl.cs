@@ -208,13 +208,17 @@ namespace C2.Controls.Move.Op
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
                     this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
                     break;
+                case "数据预处理":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PreprocessingOperatorHelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.pre_op;
+                    break;
                 case "主体分析":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AnalysisOperator1HelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.analysis1_op;
                     break;
                 case "关联分析":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.stan_op;
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AnalysisOperator2HelpInfo);
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.analysis2_op;
                     break;
                 default:
                     break;
