@@ -235,7 +235,13 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan", "WebShell", "Binary"};
+            List<string> CBPlugins = new List<string>() { 
+                "Cracker", 
+                "PwdGenerator", 
+                "WebScan",
+                /*"RobotsScan",*/ 
+                "WebShell", 
+                "Binary"};
             CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
         }
         private void ResizeCBLocation()
