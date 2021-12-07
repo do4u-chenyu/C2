@@ -145,10 +145,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                                   "YcVOPhECz13S3kEi8drRYjTjCxxD6ovF",
                                                   "wFtP7Go4rUxNf3bm8jQBcLOe0LC7dNCR"
                                                   };
-        public static string BDLocationAPI = "https://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1}";
-
-        public string WebDBSetDir = "config,.env,application,api,app,Common,Conf,data,e,class,inc,include,includes,system,upload,zb_users";
-        public string WebDBSetFile = "database.php,db.php,database.php,config.php,config.inc.php,config_db.php,common.inc.php,conn.php,dbconfig.php,config1.php,deploy.php,index.php,sql_config.php,wp-config.php,c_option.php";
+        public static string BDLocationAPI = "https://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1}";      
         public static string WriteResult(string result, string url, string type)
         {
             string time = DateTime.Now.ToString("yyyyMMDDHHmmss");           

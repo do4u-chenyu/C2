@@ -101,10 +101,6 @@
             this.allLocationInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveLocationInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.currentLocationInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.数据库配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allWebDBSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aliveWebDBSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentWebDBSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
@@ -559,8 +555,7 @@
             this.systemInfoToolStripMenuItem,
             this.processViewToolStripMenuItem,
             this.timedTaskMenuItem,
-            this.locationInfoMenuItem,
-            this.数据库配置ToolStripMenuItem});
+            this.locationInfoMenuItem});
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
@@ -581,28 +576,28 @@
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allTaskMysqlMenuItem.Text = "所有项";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aliveTaskMysqlMenuItem.Text = "验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
             // currentMysqlTaskMenuItem
             // 
             this.currentMysqlTaskMenuItem.Name = "currentMysqlTaskMenuItem";
-            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(180, 22);
             this.currentMysqlTaskMenuItem.Text = "选定项";
             this.currentMysqlTaskMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
             // 
             // mysqlTaskSetMenuItem
             // 
             this.mysqlTaskSetMenuItem.Name = "mysqlTaskSetMenuItem";
-            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mysqlTaskSetMenuItem.Text = "设置";
             this.mysqlTaskSetMenuItem.Click += new System.EventHandler(this.MysqlTaskSetMenuItem_Click);
             // 
@@ -729,37 +724,6 @@
             this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
-            // 
-            // 数据库配置ToolStripMenuItem
-            // 
-            this.数据库配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allWebDBSetMenuItem,
-            this.aliveWebDBSetMenuItem,
-            this.currentWebDBSetMenuItem});
-            this.数据库配置ToolStripMenuItem.Name = "数据库配置ToolStripMenuItem";
-            this.数据库配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.数据库配置ToolStripMenuItem.Text = "网站数据库配置";
-            // 
-            // allWebDBSetMenuItem
-            // 
-            this.allWebDBSetMenuItem.Name = "allWebDBSetMenuItem";
-            this.allWebDBSetMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.allWebDBSetMenuItem.Text = "所有项";
-            this.allWebDBSetMenuItem.Click += new System.EventHandler(this.AllWebDBSetMenuItem_Click);
-            // 
-            // aliveWebDBSetMenuItem
-            // 
-            this.aliveWebDBSetMenuItem.Name = "aliveWebDBSetMenuItem";
-            this.aliveWebDBSetMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aliveWebDBSetMenuItem.Text = "验活项";
-            this.aliveWebDBSetMenuItem.Click += new System.EventHandler(this.AliveWebDBSetMenuItem_Click);
-            // 
-            // currentWebDBSetMenuItem
-            // 
-            this.currentWebDBSetMenuItem.Name = "currentWebDBSetMenuItem";
-            this.currentWebDBSetMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.currentWebDBSetMenuItem.Text = "选定项";
-            this.currentWebDBSetMenuItem.Click += new System.EventHandler(this.CurrentWebDBSetMenuItem_Click);
             // 
             // refreshStopMenu
             // 
@@ -1060,7 +1024,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem systemInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem processViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 数据库配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timedTaskMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allSysInfoMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aliveSysInfoMenuItem;
@@ -1075,9 +1038,6 @@
         private System.Windows.Forms.ToolStripMenuItem allLocationInfo;
         private System.Windows.Forms.ToolStripMenuItem aliveLocationInfo;
         private System.Windows.Forms.ToolStripMenuItem currentLocationInfo;
-        private System.Windows.Forms.ToolStripMenuItem allWebDBSetMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aliveWebDBSetMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem currentWebDBSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReverseShellMenu;
         private System.Windows.Forms.ToolStripButton UnlockButton;
     }
