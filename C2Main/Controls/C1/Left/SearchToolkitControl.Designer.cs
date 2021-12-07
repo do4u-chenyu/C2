@@ -63,7 +63,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "SearchToolkitControl";
             this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.Load += new System.EventHandler(this.SearchToolkitControl_Load);
+            this.Resize += new System.EventHandler(this.SearchToolkitControl_Resize);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);

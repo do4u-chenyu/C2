@@ -241,8 +241,7 @@ namespace C2.Controls.C1.Left
         }
         private void ResizeCBLocation()
         {
-            //backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
-            backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
+            backPanel.Height = this.Height - ComputeSplitLineLocation();
         }
 
         private void AddCBPlugin(PluginButton plugin)
@@ -267,7 +266,7 @@ namespace C2.Controls.C1.Left
 
         }
 
-        private void CastleBravoControl_Load(object sender, EventArgs e)
+        private void CastleBravoControl_Resize(object sender, EventArgs e)
         {
             ResizeCBLocation();
         }

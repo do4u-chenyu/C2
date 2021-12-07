@@ -1,4 +1,5 @@
 ﻿using C2.Business.SSH;
+using C2.Core;
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
@@ -100,8 +101,7 @@ namespace C2.Controls.C1.Left
         }
         private void ResizeCBLocation()
         {
-            //backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
-            backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
+            backPanel.Height = this.Height - ComputeSplitLineLocation();
         }
 
         private void AddCBPlugin(PluginButton plugin)
@@ -115,7 +115,7 @@ namespace C2.Controls.C1.Left
             return this.titleLabel.Height + this.Controls.Find("BaseLeftInnerButton", false).Length * 40 + 10;
         }
 
-        private void SearchToolkitControl_Load(object sender, EventArgs e)
+        private void SearchToolkitControl_Resize(object sender, EventArgs e)
         {
             ResizeCBLocation();
         }
