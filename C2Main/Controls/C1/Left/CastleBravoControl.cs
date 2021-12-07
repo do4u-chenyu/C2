@@ -242,7 +242,7 @@ namespace C2.Controls.C1.Left
         }
         private void ResizeCBLocation()
         {
-            backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
+            //backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
             backPanel.Height = this.Height - ComputeSplitLineLocation();
         }
 
