@@ -59,6 +59,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CastleBravoControl";
             this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.Load += new System.EventHandler(this.CastleBravoControl_Load);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);

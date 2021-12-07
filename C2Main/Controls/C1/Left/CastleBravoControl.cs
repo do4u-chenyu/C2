@@ -223,7 +223,6 @@ namespace C2.Controls.C1.Left
         private void CastleBravoControlLoad()
         {
             LoadCBPlugins();
-            ResizeCBLocation();
             //初次加载时加载本地文件内容到button
             LoadTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
         }
@@ -243,7 +242,7 @@ namespace C2.Controls.C1.Left
         private void ResizeCBLocation()
         {
             //backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
-            backPanel.Height = this.Height - ComputeSplitLineLocation();
+            backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
         }
 
         private void AddCBPlugin(PluginButton plugin)
@@ -266,6 +265,11 @@ namespace C2.Controls.C1.Left
             }
             catch { };
 
+        }
+
+        private void CastleBravoControl_Load(object sender, EventArgs e)
+        {
+            ResizeCBLocation();
         }
     }
 }
