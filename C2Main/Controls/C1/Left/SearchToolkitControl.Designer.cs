@@ -34,12 +34,15 @@
             // 
             // titleLabel
             // 
+            this.titleLabel.Location = new System.Drawing.Point(3, 0);
+            this.titleLabel.Size = new System.Drawing.Size(179, 30);
             this.titleLabel.Text = "全文&&胶水";
             // 
             // backPanel
             // 
             this.backPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
-            this.backPanel.Location = new System.Drawing.Point(3, 258);
+            this.backPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.backPanel.Location = new System.Drawing.Point(3, 330);
             this.backPanel.Size = new System.Drawing.Size(179, 330);
             // 
             // manageButtonPanel
@@ -59,6 +62,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "SearchToolkitControl";
+            this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);
