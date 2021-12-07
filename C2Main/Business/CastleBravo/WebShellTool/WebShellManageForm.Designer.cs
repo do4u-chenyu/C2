@@ -265,14 +265,14 @@
             this.dbFilePathMenu.Name = "dbFilePathMenu";
             this.dbFilePathMenu.Size = new System.Drawing.Size(180, 22);
             this.dbFilePathMenu.Text = "配置文件路径素描";
-            this.dbFilePathMenu.Click += new System.EventHandler(this.DBFilePathScan_Click);
+            this.dbFilePathMenu.Click += new System.EventHandler(this.ConfigFilePathScan_Click);
             // 
             // configInfoMenu
             // 
             this.configInfoMenu.Name = "configInfoMenu";
             this.configInfoMenu.Size = new System.Drawing.Size(180, 22);
             this.configInfoMenu.Text = "K令素描";
-            this.configInfoMenu.Click += new System.EventHandler(this.DBConfigScan_Click);
+            this.configInfoMenu.Click += new System.EventHandler(this.WebConfigInfoScan_Click);
             // 
             // toolStripSeparator4
             // 
