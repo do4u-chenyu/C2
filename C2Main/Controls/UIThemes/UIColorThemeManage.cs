@@ -24,7 +24,7 @@ namespace C2.Controls
                     Color.FromArgb(0xE6, 0xED, 0xF6));
             }
         }
-
+        /*
         public static UIColorTheme System
         {
             get
@@ -38,6 +38,7 @@ namespace C2.Controls
                     SystemColors.ControlLight);
             }
         }
+        */
 
         public static UIColorTheme GetNamedTheme(string name)
         {

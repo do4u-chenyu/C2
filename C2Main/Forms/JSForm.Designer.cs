@@ -57,9 +57,11 @@
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.mdiWorkSpace1 = new C2.WorkSpace.MdiWorkSpace();
+            this.tabBar1 = new C2.Controls.TabBar();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // mdiWorkSpace1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
@@ -75,8 +77,14 @@
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
+            this.mdiWorkSpace1.BackColor = System.Drawing.SystemColors.Window;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 62);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(784, 402);
+            this.mdiWorkSpace1.TabIndex = 3;
+            this.mdiWorkSpace1.Text = "mdiWorkSpace1";
             // 
-            // tabPage1
+            // tabBar1
             // 
             this.tabPage1.Controls.Add(this.dbListView);
             this.tabPage1.Controls.Add(this.panel1);
@@ -287,15 +295,29 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "D洞专项";
             this.tabPage4.UseVisualStyleBackColor = true;
+
+            this.tabBar1.BackColor = System.Drawing.SystemColors.Window;
+            this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabBar1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabBar1.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.tabBar1.Location = new System.Drawing.Point(0, 0);
+            this.tabBar1.Name = "tabBar1";
+            this.tabBar1.ShowPreferencesButton = false;
+            this.tabBar1.Size = new System.Drawing.Size(784, 39);
+            this.tabBar1.TabIndex = 4;
+            this.tabBar1.Text = "tabBar1";
+
             // 
             // JSForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(784, 462);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabBar1);
+            this.Controls.Add(this.mdiWorkSpace1);
             this.IconImage = global::C2.Properties.Resources.JS;
             this.Name = "JSForm";
             this.Text = "胶水系统";
+
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -303,6 +325,7 @@
             this.tabPage2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+
             this.ResumeLayout(false);
 
         }
@@ -333,5 +356,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private WorkSpace.MdiWorkSpace mdiWorkSpace1;
+        private Controls.TabBar tabBar1;
     }
 }

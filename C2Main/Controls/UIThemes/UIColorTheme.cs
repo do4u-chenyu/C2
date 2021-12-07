@@ -115,6 +115,14 @@ namespace C2.Controls
             }
         }
 
+        public Color ScrollBarColor
+        {
+            get
+            {
+                return SystemColors.AppWorkspace;
+            }
+        }
+
         public Image CreateThumb(Size size)
         {
             if (size.Width <= 0 || size.Height <= 0)
