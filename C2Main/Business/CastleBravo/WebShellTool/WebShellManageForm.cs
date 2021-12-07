@@ -738,21 +738,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 SingleInfoCollection(item);
             }
         }
-        // 数据库配置信息
-        private void AllWebDBSetMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void AliveWebDBSetMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CurrentWebDBSetMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
