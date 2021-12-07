@@ -843,12 +843,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
         // 数据库账号密码扫描
-        private void DBConfigScan_Click(object sender, EventArgs e)
+        private void WebConfigInfoScan_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void DBFilePathScan_Click(object sender, EventArgs e)
+        private void ConfigFilePathScan_Click(object sender, EventArgs e)
         {
 
         }

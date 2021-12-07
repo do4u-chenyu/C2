@@ -32,6 +32,9 @@ namespace C2.Forms
             Directory.CreateDirectory(txtDirectory);
             LoadHistory(SDPath);
             DbTable = GenDataTable(SDPath);
+
+            webBrowser1.Navigate(webUrl);
+            webBrowser1.ObjectForScripting = this;
         }
 
         public override bool IsNeedShowBottomViewPanel()
@@ -54,54 +57,82 @@ namespace C2.Forms
         }
 
         private void UpdateButton_Click(object sender, System.EventArgs e)
-        {   
-            ReadRst rrst = FileUtil.ReadExcel(excelPath, maxRow);
-            if (rrst.ReturnCode != 0 || rrst.Result.Count == 0)
+        {
+            ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
+            if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
             {
-                HelpUtil.ShowMessageBox(rrst.Message);
+                HelpUtil.ShowMessageBox(rrst1.Message);
                 return;
             }
-            List<List<string>> rowContentList = rrst.Result;
-            List<string> headList = new List<string> { "网站网址", "网站名称", "发现时间", "用户数", "金额" };
-            List<int> headIndex = new List<int> { };
-            foreach (string content in headList)
+            ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站人员");
+            if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
+            {
+                HelpUtil.ShowMessageBox(rrst2.Message);
+                return;
+            }
+
+            List<string> colList1 = new List<string> { "网站网址", "网站名称", "网站网址", "网站Ip", "REFER标题", "REFER", "金额", "用户数", "赌博类型(多值##分隔)", "开始运营时间", "归属地", "发现时间" };
+            List<string> colList2 = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)" };
+
+            List<int> headIndex1 = IndexFilter(colList1, rrst1.Result);
+            List<int> headIndex2 = IndexFilter(colList2, rrst2.Result);
+            if (headIndex1.Count == 0 || headIndex2.Count == 0)
+                return;
+
+
+            for (int i = 1; i < rrst1.Result.Count; i++)
+            {
+                List<string> resultList = ContentFilter(headIndex1, rrst1.Result[i]);
+                for (int j = 1; j < rrst2.Result.Count; j++)
+                {
+                    List<string> resultList1 = ContentFilter(headIndex2, rrst2.Result[j]);
+                    if (resultList[0] == resultList1[0])
+                    {
+                        resultList1.Remove(resultList1[0]);
+                        resultList.InsertRange(6, resultList1);
+
+                        WriteResult(SDPath, resultList.Skip(1).ToList());
+                        break;
+                    }
+                }
+            }
+            HelpUtil.ShowMessageBox("赌博数据上传成功。");
+        }
+
+        private List<string> ContentFilter(List<int> indexList, List<string> contentList)
+        {
+            List<string> resultList = new List<string> { };
+
+            foreach (int colindex in indexList)
+                resultList.Add(contentList[colindex].TrimEnd(new char[] { '\r', '\n'}));
+
+            return resultList;
+        }
+
+        private List<int> IndexFilter(List<string> colList, List<List<string>> rowContentList)
+        {
+            List<int> headIndex = new List<int>();
+            foreach (string col in colList)
             {
                 for (int i = 0; i < rowContentList[0].Count; i++)
                 {
-                    if (rowContentList[0][i] == content)
+                    if (rowContentList[0][i] == col)
                     {
                         headIndex.Add(i);
                         break;
                     }
                 }
             }
-            if (headIndex.Count != headList.Count)
+
+            if (headIndex.Count != colList.Count)
             {
                 HelpUtil.ShowMessageBox("上传的赌博数据非标准格式。");
-                return;
+                return new List<int>();
             }
 
-            for (int i = 1; i < rowContentList.Count; i++)
-            {
-                if (headIndex.Max() > rowContentList[i].Count)
-                    return;
-                List<string> resultList = ContentFilter(headIndex, rowContentList[i]);
-                FillLV(resultList);
-                WriteResult(SDPath, resultList);
-            }
-            HelpUtil.ShowMessageBox("赌博数据上传成功。");
+            return headIndex;
         }
-        private List<string> ContentFilter(List<int> indexList ,List<string> contentList)
-        {
 
-            List<string> resultList = new List<string> { };    
-            {
-                foreach (int index in indexList)
-                    resultList.Add(contentList[index]);
-            }
-            
-            return resultList;
-        }
         public void LoadHistory(string path)
         {
             if (!File.Exists(path))
@@ -148,7 +179,7 @@ namespace C2.Forms
             {
                 using (StreamWriter sw = new StreamWriter(txtPath, true, System.Text.Encoding.UTF8))
                 {
-                    string content = string.Join("\t", contentList) + "\n";
+                    string content = string.Join("\t", contentList);
                     sw.WriteLine(content);
                 }
             }
@@ -163,8 +194,7 @@ namespace C2.Forms
         {
             if (this.tabControl1.SelectedTab.Text == "涉Gun专项")
             {
-                webBrowser1.Navigate(webUrl);
-                webBrowser1.ObjectForScripting = this;
+                RefreshHtmlTable();
             }
         }
 
@@ -177,6 +207,11 @@ namespace C2.Forms
         }
 
         private void Button2_Click(object sender, EventArgs e)
+        {
+            RefreshHtmlTable();
+        }
+
+        private void RefreshHtmlTable()
         {
             //有几个操作都会动态刷新html，初始化、添加、排序
             this.webBrowser1.Document.InvokeScript("clearTable");
@@ -217,7 +252,7 @@ namespace C2.Forms
                 fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
                 reader = new StreamReader(fs_dir);
 
-                string[] colList = reader.ReadLine().TrimEnd(new char[]{ '\r', '\n' }).Split("\t");
+                string[] colList = new string[] { "网站名称", "域名", "IP", "Refer对应Title", "Refer", "认证账号", "登陆IP", "登陆账号", "登陆密码", "涉案金额", "涉赌人数", "赌博类型", "运营时间", "发现地市", "发现时间" };
                 foreach(string col in colList)
                     dataTable.Columns.Add(col);
 
