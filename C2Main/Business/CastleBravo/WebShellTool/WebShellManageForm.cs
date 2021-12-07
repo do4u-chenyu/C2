@@ -842,8 +842,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
             this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
+        // 数据库账号密码扫描
+        private void DBConfigScan_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void DBFilePathScan_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         private void UnlockButton_Click(object sender, EventArgs e)
@@ -852,7 +860,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
-      
+
+
+       
     }
     public enum InfoType
     {
