@@ -15,7 +15,6 @@ namespace C2.Business.GlueWater
         public OutForm()
         {
             InitializeComponent();
-            this.label1.Text = "导入购置外资产数据：";
         }
     }
 }

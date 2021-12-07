@@ -15,7 +15,6 @@ namespace C2.Business.GlueWater
         public SHForm()
         {
             InitializeComponent();
-            this.label1.Text = "导入涉黄数据：";
         }
     }
 }

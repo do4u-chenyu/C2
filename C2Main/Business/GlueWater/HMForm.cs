@@ -15,7 +15,6 @@ namespace C2.Business.GlueWater
         public HMForm()
         {
             InitializeComponent();
-            this.label1.Text = "导入后门数据：";
         }
     }
 }
