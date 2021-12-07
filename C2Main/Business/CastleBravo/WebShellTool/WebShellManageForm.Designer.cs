@@ -258,20 +258,20 @@
             this.configInfoMenu});
             this.dbConfigMenu.Name = "dbConfigMenu";
             this.dbConfigMenu.Size = new System.Drawing.Size(180, 22);
-            this.dbConfigMenu.Text = "网站数据库配置";
+            this.dbConfigMenu.Text = "config探针";
             // 
             // dbFilePathMenu
             // 
             this.dbFilePathMenu.Name = "dbFilePathMenu";
             this.dbFilePathMenu.Size = new System.Drawing.Size(180, 22);
-            this.dbFilePathMenu.Text = "配置文件路径素描";
+            this.dbFilePathMenu.Text = "config路径";
             this.dbFilePathMenu.Click += new System.EventHandler(this.ConfigFilePathScan_Click);
             // 
             // configInfoMenu
             // 
             this.configInfoMenu.Name = "configInfoMenu";
             this.configInfoMenu.Size = new System.Drawing.Size(180, 22);
-            this.configInfoMenu.Text = "K令素描";
+            this.configInfoMenu.Text = "mysql配置信息";
             this.configInfoMenu.Click += new System.EventHandler(this.WebConfigInfoScan_Click);
             // 
             // toolStripSeparator4
