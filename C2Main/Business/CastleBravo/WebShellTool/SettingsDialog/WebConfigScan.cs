@@ -22,10 +22,15 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 
         protected override bool OnOKButtonClick()
         {
-            //TODO 判断必填是否有值
+            //判断必填是否有值
             if (filePathTextBox.Text.IsNullOrEmpty() || scanFieldTextBox.Text.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox("【IP】 和 【端口】 不能为空。");
+                HelpUtil.ShowMessageBox("【配置文件路径】 和 【扫描字段】 不能为空。");
+                return false;
+            }
+            if (scanFieldTextBox.Text.Equals("账号字段,密码字段"))
+            {
+                HelpUtil.ShowMessageBox(" 【扫描字段】 不能使用默认值。");
                 return false;
             }
             return base.OnOKButtonClick();
