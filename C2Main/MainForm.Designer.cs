@@ -174,7 +174,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(40, 22);
+            this.usernamelabel.Size = new System.Drawing.Size(26, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "BI";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -435,7 +435,6 @@ namespace C2
             // leftToolBoxPanel
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftToolBoxPanel.Controls.Add(this.castleBravoControl);
             this.leftToolBoxPanel.Controls.Add(this.mindMapControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoLabControl);
@@ -443,6 +442,7 @@ namespace C2
             this.leftToolBoxPanel.Controls.Add(this.modelMarketControl);
             this.leftToolBoxPanel.Controls.Add(this.websiteFeatureDetectionControl);
             this.leftToolBoxPanel.Controls.Add(this.searchToolkitControl);
+            this.leftToolBoxPanel.Controls.Add(this.castleBravoControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(145, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
@@ -458,9 +458,9 @@ namespace C2
             this.castleBravoControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.castleBravoControl.Location = new System.Drawing.Point(0, 0);
             this.castleBravoControl.Name = "castleBravoControl";
+            this.castleBravoControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.castleBravoControl.Size = new System.Drawing.Size(185, 558);
             this.castleBravoControl.TabIndex = 1;
-            this.castleBravoControl.Visible = false;
             // 
             // mindMapControl
             // 
@@ -474,7 +474,6 @@ namespace C2
             this.mindMapControl.Name = "mindMapControl";
             this.mindMapControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapControl.TabIndex = 0;
-            this.mindMapControl.Visible = false;
             // 
             // dataSourceControl
             // 
@@ -488,7 +487,6 @@ namespace C2
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
-            this.dataSourceControl.Visible = false;
             // 
             // iaoLabControl
             // 
@@ -502,7 +500,6 @@ namespace C2
             this.iaoLabControl.Name = "iaoLabControl";
             this.iaoLabControl.Size = new System.Drawing.Size(185, 558);
             this.iaoLabControl.TabIndex = 0;
-            this.iaoLabControl.Visible = false;
             // 
             // HIBUControl
             // 
@@ -516,8 +513,6 @@ namespace C2
             this.HIBUControl.Name = "HIBUControl";
             this.HIBUControl.Size = new System.Drawing.Size(185, 558);
             this.HIBUControl.TabIndex = 0;
-            this.HIBUControl.Visible = false;
-            this.HIBUControl.ItemLabel.Text = "HIBU";
             // 
             // modelMarketControl
             // 
@@ -530,7 +525,6 @@ namespace C2
             this.modelMarketControl.Name = "modelMarketControl";
             this.modelMarketControl.Size = new System.Drawing.Size(185, 558);
             this.modelMarketControl.TabIndex = 0;
-            this.modelMarketControl.Visible = false;
             // 
             // websiteFeatureDetectionControl
             // 
@@ -543,7 +537,6 @@ namespace C2
             this.websiteFeatureDetectionControl.Name = "websiteFeatureDetectionControl";
             this.websiteFeatureDetectionControl.Size = new System.Drawing.Size(185, 558);
             this.websiteFeatureDetectionControl.TabIndex = 0;
-            this.websiteFeatureDetectionControl.Visible = false;
             // 
             // searchToolkitControl
             // 
@@ -554,9 +547,9 @@ namespace C2
             this.searchToolkitControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchToolkitControl.Location = new System.Drawing.Point(0, 0);
             this.searchToolkitControl.Name = "searchToolkitControl";
+            this.searchToolkitControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.searchToolkitControl.Size = new System.Drawing.Size(185, 558);
             this.searchToolkitControl.TabIndex = 0;
-            this.searchToolkitControl.Visible = false;
             // 
             // leftFoldButton
             // 
