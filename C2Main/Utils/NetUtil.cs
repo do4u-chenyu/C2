@@ -167,7 +167,12 @@ namespace C2.Utils
                 Regex regex = new Regex(pattern, RegexOptions.None);
                 Match match = regex.Match(html);
                 string city = match.Groups["city"].Value;
-                result = city;
+
+                string pattern1 = "\"isp\": \"(?<isp>.*?)\"";
+                Regex regex1 = new Regex(pattern1, RegexOptions.None);
+                Match match1 = regex1.Match(html);
+                string isp = match1.Groups["isp"].Value;
+                result = city + "\t" + isp;
             }
             catch (Exception)
             {

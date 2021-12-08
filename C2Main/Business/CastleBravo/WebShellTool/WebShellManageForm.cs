@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -91,7 +92,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 EnterToolStripMenuItem.Enabled = false;
                 SuscideMenuItem.Enabled = false;
                 RefreshCurrentStatusMenuItem.Enabled = false;
-                RefreshAllStatusMenuItem.Enabled = false;
                 RefreshAllDeadMenu.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
@@ -119,7 +119,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             EnterToolStripMenuItem.Enabled = true;
             SuscideMenuItem.Enabled = true;
             RefreshCurrentStatusMenuItem.Enabled = true;
-            RefreshAllStatusMenuItem.Enabled = true;
             RefreshAllDeadMenu.Enabled = true;
             ReverseShellMenu.Enabled = true;
             msfMenu.Enabled = true;
@@ -738,21 +737,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 SingleInfoCollection(item);
             }
         }
-        // 数据库配置信息
-        private void AllWebDBSetMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void AliveWebDBSetMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CurrentWebDBSetMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
@@ -812,7 +797,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 { InfoType.ProcessView,"进程信息" },
                 { InfoType.ScheduleTask, "定时任务"},
-                { InfoType.SystemInfo,"系统信息" }
+                { InfoType.WebConfigPath,"WEB配置文件路径" },
+                { InfoType.MysqlConfigField,"Mysql探针" },
+                { InfoType.SystemInfo,"系统信息" },
             };
             Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P",RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
@@ -821,7 +808,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 return LocationResult(rawResult);
             }
-            if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息
+            if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息……
             {
                 return ClientSetting.WriteResult(rawResult, taskUrl, localSave[infoType]);
             }
@@ -845,19 +832,38 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
-            this.infoConfigStatus.Text = DateTime.Now + ": MSF联动已发起";
+            DialogResult dialogResult = new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
+            if (dialogResult.Equals(DialogResult.OK))
+                this.infoConfigStatus.Text = DateTime.Now + ": MSF联动已发起";
         }
 
         private void ReverseShellMenu_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
-            this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
+            DialogResult dialogResult = new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
+            if (dialogResult.Equals(DialogResult.OK))
+                this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
+        }
+        // 数据库账号密码扫描
+        private void WebConfigInfoScan_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            string payload = new WebConfigScan().ShowDialog();
+            if (payload.IsNullOrEmpty()) return;
+            this.infoType = InfoType.MysqlConfigField;
+            ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField] = payload;
+            SingleInfoCollection(this.LV.SelectedItems[0]);
         }
 
-
+        private void ConfigFilePathScan_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            this.infoType = InfoType.WebConfigPath;
+            SingleInfoCollection(this.LV.SelectedItems[0]);
+        }
         #endregion
 
         private void UnlockButton_Click(object sender, EventArgs e)
@@ -866,7 +872,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
-      
+
+
+       
     }
     public enum InfoType
     {
@@ -877,6 +885,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         LocationInfo,
         MSF,
         NC,
+        WebConfigPath,
+        MysqlConfigField,
         Empty
     }
 }

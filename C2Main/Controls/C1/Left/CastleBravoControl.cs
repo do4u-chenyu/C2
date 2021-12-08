@@ -112,10 +112,6 @@ namespace C2.Controls.C1.Left
             return outStatus;
         }
 
-
-        
-
-
         private class CastleBravoButton : BaseLeftInnerButton
         {
             public CastleBravoTaskInfo TaskInfo { get; set; } = CastleBravoTaskInfo.Empty;
@@ -145,7 +141,7 @@ namespace C2.Controls.C1.Left
                 ToolStripMenuItem RemoveToolStripMenuItem = new ToolStripMenuItem
                 {
                     Name = "RemoveToolStripMenuItem",
-                    Size = new System.Drawing.Size(196, 22),
+                    Size = new Size(196, 22),
                     Text = "删除任务",
                     ToolTipText = "删除任务,同时删除本地文件"
                 };
@@ -154,7 +150,7 @@ namespace C2.Controls.C1.Left
                 ToolStripMenuItem OpenDatasourceToolStripMenuItem = new ToolStripMenuItem
                 {
                     Name = "OpenDatasourceToolStripMenuItem",
-                    Size = new System.Drawing.Size(196, 22),
+                    Size = new Size(196, 22),
                     Text = "打开源文件",
                     ToolTipText = "预览输入的URL列表文件"
                 };
@@ -163,7 +159,7 @@ namespace C2.Controls.C1.Left
                 ToolStripMenuItem ResultToolStripMenuItem = new ToolStripMenuItem
                 {
                     Name = "ResultToolStripMenuItem",
-                    Size = new System.Drawing.Size(196, 22),
+                    Size = new Size(196, 22),
                     Text = "任务详情",
                     ToolTipText = "查看任务的详细信息"
                 };
@@ -227,7 +223,6 @@ namespace C2.Controls.C1.Left
         private void CastleBravoControlLoad()
         {
             LoadCBPlugins();
-            ResizeCBLocation();
             //初次加载时加载本地文件内容到button
             LoadTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
         }
@@ -235,13 +230,20 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { "Cracker", "PwdGenerator", "WebScan" ,"RobotsScan", "WebShell", "Binary"};
+            List<string> CBPlugins = new List<string>() { 
+                "Cracker", 
+                "PwdGenerator", 
+                "WebScan",
+                /*"RobotsScan",*/ 
+                "WebShell", 
+                "Binary"};
             CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
         }
         private void ResizeCBLocation()
         {
-            backPanel.Location = new Point(backPanel.Location.X, ComputeSplitLineLocation());
-            backPanel.Height = this.Height - ComputeSplitLineLocation() + 95;
+            backPanel.Height = this.Height - ComputeSplitLineLocation();
+            backPanel.Height -= hashTitleLabel.Height;
+            hashTitleLabel.Location = new Point(hashTitleLabel.Location.X, backPanel.Location.Y - hashTitleLabel.Height - 2);
         }
 
         private void AddCBPlugin(PluginButton plugin)
@@ -264,6 +266,11 @@ namespace C2.Controls.C1.Left
             }
             catch { };
 
+        }
+
+        private void CastleBravoControl_Resize(object sender, EventArgs e)
+        {
+            ResizeCBLocation();
         }
     }
 }

@@ -633,11 +633,16 @@ namespace C2.Controls
 
                 SelectedItemBackColor = theme.Colors.Window;//.Sharp;
                 SelectedItemForeColor = theme.Colors.WindowText;// PaintHelper.FarthestColor(SelectedItemBackColor, theme.Colors.Dark, theme.Colors.Light);// theme.Colors.SharpText;
-                ItemBackColor = theme.Colors.MediumLight;
-                ItemForeColor = PaintHelper.FarthestColor(ItemBackColor, theme.Colors.Dark, theme.Colors.Light);
-                HoverItemBackColor = theme.Colors.Sharp;
-                HoverItemForeColor = PaintHelper.FarthestColor(HoverItemBackColor, theme.Colors.Dark, theme.Colors.Light);
-                BaseLineColor = theme.Colors.BorderColor;
+                //ItemBackColor = theme.Colors.MediumLight;
+                ItemBackColor = theme.Colors.Window;
+                //ItemForeColor = PaintHelper.FarthestColor(ItemBackColor, theme.Colors.Dark, theme.Colors.Light);
+                ItemForeColor = PaintHelper.FarthestColor(ItemBackColor, theme.Colors.ScrollBarColor, theme.Colors.ScrollBarColor);
+                //HoverItemBackColor = theme.Colors.Sharp;
+                HoverItemBackColor = theme.Colors.Window;
+                //HoverItemForeColor = PaintHelper.FarthestColor(HoverItemBackColor, theme.Colors.Dark, theme.Colors.Light);
+                HoverItemForeColor = PaintHelper.FarthestColor(HoverItemBackColor, theme.Colors.ScrollBarColor, theme.Colors.Light);
+                //BaseLineColor = theme.Colors.BorderColor;
+                BaseLineColor = theme.Colors.ScrollBarColor;
             }
         }
 

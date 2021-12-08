@@ -9,6 +9,7 @@ using C2.Globalization;
 
 namespace C2.Controls
 {
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class BaseForm : Form, IThemableUI//C2.Controls.Aero.GlassForm//, IGlobalBackground
     {
         Image _IconImage = null;

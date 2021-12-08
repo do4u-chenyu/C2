@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="../JS/jquery-2.2.1.min.js"></script>
+
+	<style type="text/css">
+body, html{font-family:"Times New Roman";}
+
+table#dataintable {
+	margin-top:15px;
+	border-collapse:collapse;
+	border:0px solid #aaa;
+	width:100%;
+	font-size:14px;
+	}
+
+table#dataintable th {
+	vertical-align:baseline;
+	padding:12px 5px 12px 5px;
+	background-color:#e7e7e7;
+	border:1px solid #aaa;
+	text-align:left;
+	color:#666666;
+	}
+
+table#dataintable td {
+	vertical-align:text-top;
+	padding:6px 5px 6px 6px;
+    border-bottom:1px solid #edebeb;
+	
+	vertical-align:middle;
+	}
+
+table#dataintable tr:nth-child(odd) {
+	background-color:#e5f8fc;
+}
+
+table#dataintable tr:nth-child(even) {
+	background-color:#fff;
+}
+
+td#th0{
+    color:#4a86e8;
+}
+	</style>
+	<script type ="text/javascript">
+        function Hello(a) {
+            window.external.Hello(a.text);//getDebugPath()为c#方法
+        }
+		function WfToHtml(argStr) {
+		    $("#dataintable").append(argStr);
+        }
+	    function clearTable(){
+		    alert("更新成功")
+		    var arr=[];
+		    $('tr[name="row"]').each(function(){
+			    $(this).remove();
+		    });
+	    }
+    </script>
+</head>
+<body>
+<table id="dataintable">
+<tr>
+<th>网站名称/域名/IP</th>
+<th>Refer对应Title/Refer</th>
+<th>认证账号/登陆IP</th>
+<th>登陆账号/登陆密码</th>
+<th>涉案金额/涉赌人数</th>
+<th>赌博类型/运营时间</th>
+<th>发现地市/发现时间</th>
+</tr>
+
+
+</table>
+</body>
+</html>

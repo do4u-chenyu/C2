@@ -40,10 +40,10 @@ namespace MD5Plugin
             this.inputTextBox.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.inputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.inputTextBox.ForeColor = System.Drawing.Color.DarkGray;
-            this.inputTextBox.Location = new System.Drawing.Point(3, 3);
+            this.inputTextBox.Location = new System.Drawing.Point(3, 6);
             this.inputTextBox.Multiline = true;
             this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(408, 489);
+            this.inputTextBox.Size = new System.Drawing.Size(408, 486);
             this.inputTextBox.TabIndex = 0;
             this.inputTextBox.Text = "请把你需要加密的内容粘贴在这里";
             this.inputTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.InputTextBox_MouseDown);
