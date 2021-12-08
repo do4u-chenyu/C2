@@ -63,6 +63,7 @@
             this.sampleButton.TabIndex = 4;
             this.sampleButton.Text = "下载模板";
             this.sampleButton.UseVisualStyleBackColor = true;
+            this.sampleButton.Click += new System.EventHandler(this.SampleButton_Click);
             // 
             // excelPathTextBox
             // 

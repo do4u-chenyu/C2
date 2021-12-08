@@ -1,6 +1,7 @@
 ﻿using C2.Controls;
 using C2.IAOLab.BankTool;
-using C2.IAOLab.IdInfoGet;
+using C2.IAOLab.IDInfoGet;
+using C2.IAOLab.ExpressNum;
 using C2.IAOLab.BaseAddress;
 using C2.Utils;
 using System;
@@ -42,6 +43,10 @@ namespace C2.Dialogs.IAOLab
             else if (tabControl1.SelectedTab == tabPage8 && tabControl1.Visible == true)
             {
                 fileType = "idCard";
+            }
+            else if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)
+            {
+                fileType = "expressNum";
             }
             return fileType;
         }
@@ -112,6 +117,27 @@ namespace C2.Dialogs.IAOLab
                 }            
             }
 
+            if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)     //身份证号查询
+            {
+
+                string[] inputArray = this.richTextBox3.Text.Split('\n');
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "快递单号\t揽件地址\t派件地址\n";
+                tmpResult.Append(firstLine);
+                foreach (string expressNum in inputArray)
+                {
+                    ShowResult(expressNum, "expressNum", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        progressBar1.Value = 0;
+                    }
+                }
+            }
+
+
             this.Cursor = Cursors.Arrow;
         }
         private void ShowResult(string input, string type, StringBuilder tmpResult)
@@ -135,8 +161,12 @@ namespace C2.Dialogs.IAOLab
                         richTextBox1.Text = tmpResult.ToString();
                         break;
                     case "idCard":
-                        tmpResult.Append(IdInfoGet.GetInstance().IdSearch(input.Split('\t')[0]));
+                        tmpResult.Append(IDInfoGet.GetInstance().IDSearch(input.Split('\t')[0]));
                         richTextBox3.Text = tmpResult.ToString();
+                        break;
+                    case "expressNum":
+                        tmpResult.Append(ExpressNum.GetInstance().ExpressSearch(input.Split('\t')[0]));
+                        richTextBox4.Text = tmpResult.ToString();
                         break;
 
                 }
@@ -194,6 +224,8 @@ namespace C2.Dialogs.IAOLab
                             richTextBox2.Text = sb.TrimEndN().ToString();
                         if (tabControl1.SelectedTab == tabPage8 && tabControl1.Visible == true)
                             richTextBox3.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)
+                            richTextBox4.Text = sb.TrimEndN().ToString();
 
                         if (tabControl1.Visible == false)
                             richTextBox1.Text = sb.TrimEndN().ToString();
@@ -230,6 +262,9 @@ namespace C2.Dialogs.IAOLab
                         break;
                     case "idCard":
                         text = richTextBox3.Text;
+                        break;
+                    case "ExpressNum":
+                        text = richTextBox4.Text;
                         break;
 
                 }
@@ -282,6 +317,5 @@ namespace C2.Dialogs.IAOLab
             }
         }
 
-       
     }
 }

@@ -551,5 +551,10 @@ namespace C2.Forms
             return dataTable;
         }
         #endregion
+
+        private void SampleButton_Click(object sender, EventArgs e)
+        {
+            RefreshHtmlTable();
+        }
     }
 }
