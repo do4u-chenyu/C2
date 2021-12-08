@@ -470,25 +470,12 @@ namespace C2.Forms
         }
 
         #region 界面html版
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.tabControl1.SelectedTab.Text == "涉Gun专项")
-            {
-                RefreshHtmlTable();
-            }
-        }
-
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void Hello(string a)
         {
             DataRow[] rows = DbTable.Select("域名='" + a + "'");
             MessageBox.Show(rows[0][0].ToString() + rows[0][1].ToString() + rows[0][2].ToString());
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            RefreshHtmlTable();
         }
 
         private void RefreshHtmlTable()
