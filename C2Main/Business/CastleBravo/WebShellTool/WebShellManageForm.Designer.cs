@@ -34,13 +34,12 @@
             this.EnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.SuscideMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.RefreshCurrentStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshAllDeadMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshOtherMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshAllDeadMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.ReverseShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.msfMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +47,8 @@
             this.dbFilePathMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.configInfoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveResultsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addOneShellMenu = new System.Windows.Forms.ToolStripLabel();
@@ -127,10 +128,14 @@
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip
@@ -155,7 +160,7 @@
             this.CopyToolStripMenuItem,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 336);
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 314);
             // 
             // EnterToolStripMenuItem
             // 
@@ -178,26 +183,17 @@
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
+            // 
             // SuscideMenuItem
             // 
             this.SuscideMenuItem.Name = "SuscideMenuItem";
             this.SuscideMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SuscideMenuItem.Text = "一键Suscide";
             this.SuscideMenuItem.Click += new System.EventHandler(this.SuscideMenuItem_Click);
-            // 
-            // ClearAllToolStripMenuItem
-            // 
-            this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.ClearAllToolStripMenuItem.Text = "全部清空";
-            this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
-            // 
-            // CopyToolStripMenuItem
-            // 
-            this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.CopyToolStripMenuItem.Text = "复制到剪切板";
-            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
@@ -211,19 +207,19 @@
             this.RefreshCurrentStatusMenuItem.Text = "选定项验活";
             this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.RefreshCurrentStatusMenuItem_Click);
             // 
-            // RefreshAllDeadMenu
-            // 
-            this.RefreshAllDeadMenu.Name = "RefreshAllDeadMenu";
-            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(180, 22);
-            this.RefreshAllDeadMenu.Text = "二刷不活";
-            this.RefreshAllDeadMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
-            // 
             // refreshOtherMenu
             // 
             this.refreshOtherMenu.Name = "refreshOtherMenu";
             this.refreshOtherMenu.Size = new System.Drawing.Size(148, 22);
             this.refreshOtherMenu.Text = "境外站验活";
             this.refreshOtherMenu.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
+            // 
+            // RefreshAllDeadMenu
+            // 
+            this.RefreshAllDeadMenu.Name = "RefreshAllDeadMenu";
+            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(148, 22);
+            this.RefreshAllDeadMenu.Text = "二刷不活";
+            this.RefreshAllDeadMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
             // toolStripSeparator5
             // 
@@ -250,7 +246,7 @@
             this.dbFilePathMenu,
             this.configInfoMenu});
             this.dbConfigMenu.Name = "dbConfigMenu";
-            this.dbConfigMenu.Size = new System.Drawing.Size(180, 22);
+            this.dbConfigMenu.Size = new System.Drawing.Size(148, 22);
             this.dbConfigMenu.Text = "Mysql探针";
             // 
             // dbFilePathMenu
@@ -271,6 +267,20 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
+            // 
+            // ClearAllToolStripMenuItem
+            // 
+            this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ClearAllToolStripMenuItem.Text = "全部清空";
+            this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
+            // 
+            // CopyToolStripMenuItem
+            // 
+            this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.CopyToolStripMenuItem.Text = "复制到剪切板";
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // SaveResultsMenuItem
             // 
@@ -839,6 +849,7 @@
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
+            this.LV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseClick);
             this.LV.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseDoubleClick);
             // 
             // lvAddTime
@@ -936,10 +947,35 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 21);
             this.StatusLabel.Text = "统计:";
             // 
-            // toolStripSeparator8
+            // contextMenuStrip1
             // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenFileMenu,
+            this.OpenDirMenu,
+            this.CopyDirMenu});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            // 
+            // OpenFileMenu
+            // 
+            this.OpenFileMenu.Name = "OpenFileMenu";
+            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenFileMenu.Text = "打开文件";
+            this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenuItem_Click);
+            // 
+            // OpenDirMenu
+            // 
+            this.OpenDirMenu.Name = "OpenDirMenu";
+            this.OpenDirMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenDirMenu.Text = "浏览目录";
+            this.OpenDirMenu.Click += new System.EventHandler(this.OpenDirMenuItem_Click);
+            // 
+            // CopyDirMenu
+            // 
+            this.CopyDirMenu.Name = "CopyDirMenu";
+            this.CopyDirMenu.Size = new System.Drawing.Size(180, 22);
+            this.CopyDirMenu.Text = "完整路径到剪切板";
+            this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
             // 
             // WebShellManageForm
             // 
@@ -964,6 +1000,7 @@
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1068,5 +1105,9 @@
         private System.Windows.Forms.ToolStripMenuItem dbFilePathMenu;
         private System.Windows.Forms.ToolStripMenuItem configInfoMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem OpenDirMenu;
+        private System.Windows.Forms.ToolStripMenuItem CopyDirMenu;
+        private System.Windows.Forms.ToolStripMenuItem OpenFileMenu;
     }
 }

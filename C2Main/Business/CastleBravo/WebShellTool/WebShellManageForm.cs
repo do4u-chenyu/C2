@@ -34,7 +34,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             "L1HF58S04Y6",    // LQ
             "L1HF68F046A",    // SQY
             "PF2Z4F9W",       // HZH
-            //"L1HF68F02VM",    // MHD
+            "L1HF68F02VM",    // MHD
             "L1HF5AL00EV",    // LXF
             "L1HF68F04XB",    // WLY
             "/7KFL4S2/CNWS20088P013N/" ,   // XX
@@ -864,6 +864,51 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.infoType = InfoType.WebConfigPath;
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
+        //右键菜单功能
+        private void LV_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.LV.ContextMenuStrip = this.contextMenuStrip;
+
+            if (e.Button != MouseButtons.Right || e.Clicks != 1)
+                return;
+
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            ListViewItem item = LV.SelectedItems[0];
+            ListViewItem.ListViewSubItem subItem = item.GetSubItemAt(e.X, e.Y);
+
+            if (subItem == null)
+                return;
+
+            if (item.SubItems.IndexOf(subItem) != 7)
+                return;
+
+            if (!subItem.Text.StartsWith(Path.Combine(Global.UserWorkspacePath, "后信息采集")))
+                return;
+
+            this.LV.ContextMenuStrip = this.contextMenuStrip1;
+
+        }
+        private void OpenFileMenuItem_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.ProcessOpen(CurrentFilePath());
+        }
+
+        private void OpenDirMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(CurrentFilePath());
+        }
+
+        private void CopyDirMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(CurrentFilePath());
+        }
+        private string CurrentFilePath()
+        {
+            ListViewItem item = LV.SelectedItems[0];
+            return item.SubItems[7].Text;
+        }
         #endregion
 
         private void UnlockButton_Click(object sender, EventArgs e)
@@ -872,7 +917,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
-
+       
 
        
     }

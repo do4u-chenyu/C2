@@ -58,6 +58,7 @@
             // 
             this.hashTitleLabel.AutoSize = true;
             this.hashTitleLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.hashTitleLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.hashTitleLabel.Location = new System.Drawing.Point(44, 303);
             this.hashTitleLabel.Name = "hashTitleLabel";
             this.hashTitleLabel.Size = new System.Drawing.Size(98, 22);

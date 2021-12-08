@@ -39,14 +39,23 @@
             this.splitComboBox.FormattingEnabled = true;
             this.splitComboBox.Items.AddRange(new object[] {
             "无分隔符",
-            "\\X",
+            "空格分割",
+            "0x",
             "\\x",
             "#",
             "%",
             "/",
             "\\",
+            "|",
+            ",",
+            "-",
             "?",
-            "0x"});
+            ":",
+            "&",
+            "=",
+            "+",
+            "$",
+            "."});
             this.splitComboBox.Location = new System.Drawing.Point(417, 345);
             this.splitComboBox.Name = "splitComboBox";
             this.splitComboBox.Size = new System.Drawing.Size(75, 27);
