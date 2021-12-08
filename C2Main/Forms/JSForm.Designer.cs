@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.sampleButton = new System.Windows.Forms.Button();
             this.excelPathTextBox = new System.Windows.Forms.TextBox();
-            this.updateButton = new System.Windows.Forms.Button();
             this.browserButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabBar1 = new C2.Controls.TabBar();
@@ -46,7 +45,6 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.sampleButton);
             this.panel1.Controls.Add(this.excelPathTextBox);
-            this.panel1.Controls.Add(this.updateButton);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -58,7 +56,7 @@
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(555, 11);
+            this.sampleButton.Location = new System.Drawing.Point(482, 11);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 26);
             this.sampleButton.TabIndex = 4;
@@ -74,23 +72,14 @@
             this.excelPathTextBox.Size = new System.Drawing.Size(307, 21);
             this.excelPathTextBox.TabIndex = 3;
             // 
-            // updateButton
-            // 
-            this.updateButton.Location = new System.Drawing.Point(486, 11);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(55, 26);
-            this.updateButton.TabIndex = 2;
-            this.updateButton.Text = "上传";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
-            // 
             // browserButton
             // 
+            this.browserButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.browserButton.Location = new System.Drawing.Point(396, 11);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(76, 26);
             this.browserButton.TabIndex = 1;
-            this.browserButton.Text = "选择文件";
+            this.browserButton.Text = "+数据包";
             this.browserButton.UseVisualStyleBackColor = true;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
@@ -157,7 +146,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button sampleButton;
         private System.Windows.Forms.TextBox excelPathTextBox;
-        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button browserButton;
         private System.Windows.Forms.Label label1;
         private Controls.TabBar tabBar1;

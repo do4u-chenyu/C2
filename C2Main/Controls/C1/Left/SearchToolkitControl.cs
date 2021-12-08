@@ -96,7 +96,14 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" ,"盗洞专项"};
+            List<string> CBPlugins = new List<string>() { 
+                "涉赌专项", 
+                "涉枪专项", 
+                "涉黄专项",
+                "盗洞专项",
+                "后门黑吃黑专项",
+                "境外网产专项"
+            };
             CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
         }
         private void ResizeCBLocation()

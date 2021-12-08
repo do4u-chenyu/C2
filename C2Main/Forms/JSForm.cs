@@ -45,7 +45,7 @@ namespace C2.Forms
             ShowForm(panel3, "涉黄专项", true, false, false);
             ShowForm(panel3, "盗洞专项", true, false, false);
             ShowForm(panel3, "后门黑吃黑专项", true, false, false);
-            ShowForm(panel3, "购置境外资产专项", true, false, false);
+            ShowForm(panel3, "境外网产专项", true, false, false);
             OnTaskBarChanged();
             OnMdiClientChanged();
         }
@@ -313,7 +313,7 @@ namespace C2.Forms
             return false;
         }
 
-        private void BrowserButton_Click(object sender, System.EventArgs e)
+        private void BrowserButton_Click(object sender, EventArgs e)
         {
             this.excelPathTextBox.Clear();
             OpenFileDialog OpenFileDialog = new OpenFileDialog
@@ -324,9 +324,10 @@ namespace C2.Forms
                 return;
             this.excelPathTextBox.Text = OpenFileDialog.FileName;
             excelPath = OpenFileDialog.FileName;
+            UpdateButton_Click(sender, e);
         }
 
-        private void UpdateButton_Click(object sender, System.EventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
             if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
