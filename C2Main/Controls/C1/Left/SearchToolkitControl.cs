@@ -1,5 +1,4 @@
 ﻿using C2.Business.SSH;
-using C2.Core;
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
@@ -53,7 +52,8 @@ namespace C2.Controls.C1.Left
                 message = String.Format("创建全文任务【{0}】 成功", task.TaskName);
 
                 if (task.LastErrorCode == BastionCodePage.NoHomeSearch)
-                    message += ", 但全文机上并没有找到全文环境 /home/search/sbin/queryclient";
+                    message += ", 但全文主节点上并没有找到全文环境 /home/search/sbin/queryclient" +
+                        ", 很有可能配置了错误的全文机IP";
             }
             else
                 message = String.Format("创建全文任务【{0}】 失败：{1}", task.TaskName, task.LastErrorMsg);

@@ -99,7 +99,7 @@ namespace C2.Utils
         public static string WebShellHelpInfo = "D洞工具集";
         public static string BinaryHelpInfo = "二进制逆向、分析和解密专项";
 
-        public static string DBFormHelpInfo = "赌博专项分析";
+        public static string DBFormHelpInfo = "涉赌专项分析";
         public static string SQFormHelpInfo = "涉枪专项分析";
         public static string SHFormHelpInfo = "涉黄专项分析";
         public static string DDFormHelpInfo = "盗洞专项分析";

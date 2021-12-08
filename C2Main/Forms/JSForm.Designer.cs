@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabBar1 = new C2.Controls.TabBar();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -51,13 +51,14 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 50);
+            this.panel1.Size = new System.Drawing.Size(784, 40);
             this.panel1.TabIndex = 0;
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(528, 18);
+            this.sampleButton.Location = new System.Drawing.Point(555, 11);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 26);
             this.sampleButton.TabIndex = 4;
@@ -67,14 +68,15 @@
             // 
             // excelPathTextBox
             // 
-            this.excelPathTextBox.Location = new System.Drawing.Point(142, 18);
+            this.excelPathTextBox.Location = new System.Drawing.Point(83, 14);
             this.excelPathTextBox.Name = "excelPathTextBox";
-            this.excelPathTextBox.Size = new System.Drawing.Size(198, 21);
+            this.excelPathTextBox.ReadOnly = true;
+            this.excelPathTextBox.Size = new System.Drawing.Size(307, 21);
             this.excelPathTextBox.TabIndex = 3;
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(456, 17);
+            this.updateButton.Location = new System.Drawing.Point(486, 11);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(55, 26);
             this.updateButton.TabIndex = 2;
@@ -84,7 +86,7 @@
             // 
             // browserButton
             // 
-            this.browserButton.Location = new System.Drawing.Point(361, 17);
+            this.browserButton.Location = new System.Drawing.Point(396, 11);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(76, 26);
             this.browserButton.TabIndex = 1;
@@ -95,11 +97,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 23);
+            this.label1.Location = new System.Drawing.Point(7, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "导入涉赌数据：";
+            this.label1.Text = "导入数据包：";
             // 
             // tabBar1
             // 
@@ -117,7 +119,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.webBrowser1);
+            this.panel3.Controls.Add(this.webBrowser);
             this.panel3.Controls.Add(this.panel1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 39);
@@ -125,14 +127,15 @@
             this.panel3.Size = new System.Drawing.Size(784, 423);
             this.panel3.TabIndex = 5;
             // 
-            // webBrowser1
+            // webBrowser
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 50);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(784, 373);
-            this.webBrowser1.TabIndex = 1;
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.Location = new System.Drawing.Point(0, 40);
+            this.webBrowser.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(784, 383);
+            this.webBrowser.TabIndex = 1;
             // 
             // JSForm
             // 
@@ -159,6 +162,6 @@
         private System.Windows.Forms.Label label1;
         private Controls.TabBar tabBar1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }

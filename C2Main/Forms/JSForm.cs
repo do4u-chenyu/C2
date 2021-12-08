@@ -1,5 +1,4 @@
-﻿using C2.Business.GlueWater;
-using C2.Controls;
+﻿using C2.Controls;
 using C2.Core;
 using C2.Utils;
 using System;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 
@@ -26,28 +24,28 @@ namespace C2.Forms
         private string[] DbMemberColList;
         private DataTable DbWebTable;
         private DataTable DbMemberTable;
-        private string webUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "JSTable.html");
+        private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
 
         public JSForm()
         {
             InitializeComponent();
             InitLocalPathAndSetting();
 
-            webBrowser1.Navigate(webUrl);
-            webBrowser1.ObjectForScripting = this;
+            webBrowser.Navigate(webUrl);
+            webBrowser.ObjectForScripting = this;
 
-            init();
+            Init();
         }
 
         #region tab页代码
-        public void init() 
+        public void Init() 
         {
-            ShowForm(panel3, "DB专项", true, false, true);
-            ShowForm(panel3, "SQ专项", true, false, false);
-            ShowForm(panel3, "SH专项", true, false, false);
-            ShowForm(panel3, "DD专项", true, false, false);
-            ShowForm(panel3, "后门专项", true, false, false);
-            ShowForm(panel3, "购置境资产专项", true, false, false);
+            ShowForm(panel3, "涉赌专项", true, false, true);
+            ShowForm(panel3, "涉枪专项", true, false, false);
+            ShowForm(panel3, "涉黄专项", true, false, false);
+            ShowForm(panel3, "盗洞专项", true, false, false);
+            ShowForm(panel3, "后门黑吃黑专项", true, false, false);
+            ShowForm(panel3, "购置境外资产专项", true, false, false);
             OnTaskBarChanged();
             OnMdiClientChanged();
         }
@@ -486,12 +484,12 @@ namespace C2.Forms
         private void RefreshHtmlTable()
         {
             //有几个操作都会动态刷新html，初始化、添加、排序
-            this.webBrowser1.Document.InvokeScript("clearTable");
+            this.webBrowser.Document.InvokeScript("clearTable");
 
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
             {
-                this.webBrowser1.Document.InvokeScript("WfToHtml", new object[] { string.Format(
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { string.Format(
                 "<tr name=\"row\">" +
                 "   <td id=\"th0\">{0}<br><a onclick=\"Hello(this)\">{1}</a><br>{2}</td>" +
                 "   <td>{3}<br>{4}</td>" +
