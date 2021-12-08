@@ -864,14 +864,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.infoType = InfoType.WebConfigPath;
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
-        #endregion
-
-        private void UnlockButton_Click(object sender, EventArgs e)
-        {
-            if (new FunctionUnlockForm().ShowDialog() == DialogResult.OK)
-                FuctionUnlock();
-        }
-
+        //右键菜单功能
         private void LV_MouseClick(object sender, MouseEventArgs e)
         {
             this.LV.ContextMenuStrip = this.contextMenuStrip;
@@ -895,23 +888,38 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             this.LV.ContextMenuStrip = this.contextMenuStrip1;
-           
-        }
 
+        }
         private void OpenFileMenuItem_Click(object sender, EventArgs e)
         {
-
+            ProcessUtil.ProcessOpen(CurrentFilePath());
         }
 
         private void OpenDirMenuItem_Click(object sender, EventArgs e)
         {
-
+            FileUtil.ExploreDirectory(CurrentFilePath());
         }
 
         private void CopyDirMenuItem_Click(object sender, EventArgs e)
         {
-
+            FileUtil.TryClipboardSetText(CurrentFilePath());
         }
+        private string CurrentFilePath()
+        {
+            ListViewItem item = LV.SelectedItems[0];
+            return item.SubItems[7].Text;
+        }
+        #endregion
+
+        private void UnlockButton_Click(object sender, EventArgs e)
+        {
+            if (new FunctionUnlockForm().ShowDialog() == DialogResult.OK)
+                FuctionUnlock();
+        }
+
+       
+
+       
     }
     public enum InfoType
     {
