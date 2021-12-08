@@ -15,7 +15,6 @@ namespace C2.Business.GlueWater
         public DDForm()
         {
             InitializeComponent();
-            this.label1.Text = "导入盗洞数据：";
         }
     }
 }

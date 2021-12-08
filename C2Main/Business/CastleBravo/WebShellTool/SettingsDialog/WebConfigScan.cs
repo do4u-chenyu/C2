@@ -15,9 +15,11 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
     partial class WebConfigScan : StandardDialog
     {
-        public WebConfigScan()
+        private readonly WebShellTaskConfig task;
+        public WebConfigScan(WebShellTaskConfig taskConfig)
         {
             InitializeComponent();
+            this.task = taskConfig;
         }
 
         protected override bool OnOKButtonClick()
@@ -28,14 +30,19 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
                 HelpUtil.ShowMessageBox("【配置文件路径】 和 【扫描字段】 不能为空。");
                 return false;
             }
-            if (scanFieldTextBox.Text.Equals("账号字段,密码字段"))
+            string[] configFields = scanFieldTextBox.Text.Split(',');
+            if (scanFieldTextBox.Text.Equals("账号字段,密码字段") || configFields.Length != 2)
             {
-                HelpUtil.ShowMessageBox(" 【扫描字段】 不能使用默认值。");
+                HelpUtil.ShowMessageBox(" 【扫描字段】 格式设置有误");
                 return false;
             }
+            string payload = string.Empty;
             return base.OnOKButtonClick();
         }
+        public new string ShowDialog()
+        {
+            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ?string.Empty : string.Empty;
+        }
 
-        
     }
 }

@@ -46,7 +46,7 @@
             this.scanField.Name = "scanField";
             this.scanField.Size = new System.Drawing.Size(65, 12);
             this.scanField.TabIndex = 10010;
-            this.scanField.Text = "扫描字段：";
+            this.scanField.Text = "素描字段：";
             // 
             // scanFieldTextBox
             // 
@@ -63,9 +63,9 @@
             this.filePath.BackColor = System.Drawing.Color.Transparent;
             this.filePath.Location = new System.Drawing.Point(12, 24);
             this.filePath.Name = "filePath";
-            this.filePath.Size = new System.Drawing.Size(89, 12);
+            this.filePath.Size = new System.Drawing.Size(83, 12);
             this.filePath.TabIndex = 10008;
-            this.filePath.Text = "配置文件路径：";
+            this.filePath.Text = "config 路径：";
             // 
             // filePathTextBox
             // 
@@ -129,7 +129,7 @@
             this.Controls.Add(this.filePath);
             this.Controls.Add(this.filePathTextBox);
             this.Name = "WebConfigScan";
-            this.Text = "WebConfigScan";
+            this.Text = "config探针";
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.filePath, 0);
             this.Controls.SetChildIndex(this.scanFieldTextBox, 0);

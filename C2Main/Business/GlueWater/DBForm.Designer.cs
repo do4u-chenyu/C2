@@ -89,15 +89,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 14);
+            this.label1.Location = new System.Drawing.Point(12, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "导入涉赌数据：";
+            this.label1.Text = "导入数据包：";
             // 
             // browserButton
             // 
-            this.browserButton.Location = new System.Drawing.Point(361, 13);
+            this.browserButton.Location = new System.Drawing.Point(432, 10);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(76, 26);
             this.browserButton.TabIndex = 1;
@@ -107,7 +107,7 @@
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(456, 13);
+            this.updateButton.Location = new System.Drawing.Point(526, 10);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(55, 26);
             this.updateButton.TabIndex = 2;
@@ -117,14 +117,14 @@
             // 
             // excelPathTextBox
             // 
-            this.excelPathTextBox.Location = new System.Drawing.Point(142, 14);
+            this.excelPathTextBox.Location = new System.Drawing.Point(90, 12);
             this.excelPathTextBox.Name = "excelPathTextBox";
-            this.excelPathTextBox.Size = new System.Drawing.Size(198, 21);
+            this.excelPathTextBox.Size = new System.Drawing.Size(332, 21);
             this.excelPathTextBox.TabIndex = 3;
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(528, 14);
+            this.sampleButton.Location = new System.Drawing.Point(599, 10);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 26);
             this.sampleButton.TabIndex = 4;

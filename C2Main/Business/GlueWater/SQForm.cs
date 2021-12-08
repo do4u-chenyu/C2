@@ -16,7 +16,6 @@ namespace C2.Business.GlueWater
         public SQForm()
         {
             InitializeComponent();
-            this.label1.Text = "导入涉枪数据：";
         }
     }
 }

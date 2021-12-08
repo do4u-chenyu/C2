@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -798,7 +799,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 { InfoType.ProcessView,"进程信息" },
                 { InfoType.ScheduleTask, "定时任务"},
-                { InfoType.SystemInfo,"系统信息" }
+                { InfoType.WebConfigPath,"WEB配置文件路径" },
+                { InfoType.MysqlConfigField,"Mysql探针" },
+                { InfoType.SystemInfo,"系统信息" },
             };
             Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P",RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
@@ -807,7 +810,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 return LocationResult(rawResult);
             }
-            if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息
+            if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息……
             {
                 return ClientSetting.WriteResult(rawResult, taskUrl, localSave[infoType]);
             }
@@ -845,12 +848,17 @@ namespace C2.Business.CastleBravo.WebShellTool
         // 数据库账号密码扫描
         private void WebConfigInfoScan_Click(object sender, EventArgs e)
         {
-
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            new WebConfigScan(LV.SelectedItems[0].Tag as WebShellTaskConfig).ShowDialog();
         }
 
         private void ConfigFilePathScan_Click(object sender, EventArgs e)
         {
-
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            this.infoType = InfoType.WebConfigPath;
+            SingleInfoCollection(this.LV.SelectedItems[0]);
         }
         #endregion
 
@@ -873,6 +881,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         LocationInfo,
         MSF,
         NC,
+        WebConfigPath,
+        MysqlConfigField,
         Empty
     }
 }
