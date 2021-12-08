@@ -242,6 +242,8 @@ namespace C2.Controls.C1.Left
         private void ResizeCBLocation()
         {
             backPanel.Height = this.Height - ComputeSplitLineLocation();
+            backPanel.Height -= hashTitleLabel.Height;
+            hashTitleLabel.Location = new Point(hashTitleLabel.Location.X, backPanel.Location.Y - hashTitleLabel.Height - 2);
         }
 
         private void AddCBPlugin(PluginButton plugin)

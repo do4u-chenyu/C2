@@ -102,6 +102,9 @@ namespace C2.Controls.C1.Left
         private void ResizeCBLocation()
         {
             backPanel.Height = this.Height - ComputeSplitLineLocation();
+            backPanel.Height -= searchTitleLabel.Height;
+            searchTitleLabel.Location = new Point(searchTitleLabel.Location.X, backPanel.Location.Y - searchTitleLabel.Height - 2);
+            
         }
 
         private void AddCBPlugin(PluginButton plugin)
