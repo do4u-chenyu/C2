@@ -32,10 +32,6 @@
             this.radixComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // encodingComboBox
-            // 
-            this.encodingComboBox.Location = new System.Drawing.Point(417, 245);
-            // 
             // splitComboBox
             // 
             this.splitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -49,6 +45,7 @@
             "%",
             "/",
             "\\",
+            "?",
             "0x"});
             this.splitComboBox.Location = new System.Drawing.Point(417, 345);
             this.splitComboBox.Name = "splitComboBox";
