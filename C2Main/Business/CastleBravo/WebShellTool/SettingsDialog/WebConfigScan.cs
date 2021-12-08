@@ -15,11 +15,10 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
     partial class WebConfigScan : StandardDialog
     {
-        private readonly WebShellTaskConfig task;
-        public WebConfigScan(WebShellTaskConfig taskConfig)
+        private string payload;
+        public WebConfigScan()
         {
             InitializeComponent();
-            this.task = taskConfig;
         }
 
         protected override bool OnOKButtonClick()
@@ -33,15 +32,19 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
             string[] configFields = scanFieldTextBox.Text.Split(',');
             if (scanFieldTextBox.Text.Equals("账号字段,密码字段") || configFields.Length != 2)
             {
-                HelpUtil.ShowMessageBox(" 【扫描字段】 格式设置有误");
+                HelpUtil.ShowMessageBox(" 【扫描字段】 格式设置有误。");
                 return false;
             }
-            string payload = string.Empty;
+            payload =string.Format( ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField],
+                                          "{0}",
+                                          ST.EncodeBase64(filePathTextBox.Text.Trim()), 
+                                          configFields[0].Trim(),
+                                          configFields[1].Trim());
             return base.OnOKButtonClick();
         }
         public new string ShowDialog()
         {
-            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ?string.Empty : string.Empty;
+            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ? payload : string.Empty;
         }
 
     }
