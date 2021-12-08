@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 
@@ -18,41 +19,35 @@ namespace C2.Forms
         BaseForm _SelectedForm;
         private string excelPath;
         private static readonly int maxRow = 100;
-        private readonly string txtDirectory;
-        private readonly string SDPath;
-
-        private DataTable DbTable;
+        
+        private string DbWebPath;
+        private string DbMemberPath;
+        private string[] DbWebColList;
+        private string[] DbMemberColList;
+        private DataTable DbWebTable;
+        private DataTable DbMemberTable;
         private string webUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "JSTable.html");
 
         public JSForm()
         {
             InitializeComponent();
-            txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
-            SDPath = Path.Combine(txtDirectory, "涉D.txt");
-            Directory.CreateDirectory(txtDirectory);
-            LoadHistory(SDPath);
-            DbTable = GenDataTable(SDPath);
-
+            InitLocalPathAndSetting();
 
             webBrowser1.Navigate(webUrl);
             webBrowser1.ObjectForScripting = this;
 
-            //ShowForm(new StartForm(), true, false, true);
-            ShowForm(panel3, "DB专项",true, false, true);
+            init();
+        }
+
+        #region tab页代码
+        public void init() 
+        {
+            ShowForm(panel3, "DB专项", true, false, true);
             ShowForm(panel3, "SQ专项", true, false, false);
             ShowForm(panel3, "SH专项", true, false, false);
             ShowForm(panel3, "DD专项", true, false, false);
             ShowForm(panel3, "后门专项", true, false, false);
             ShowForm(panel3, "购置境资产专项", true, false, false);
-            //ShowForm(new SQForm(), true, false, false);
-            //ShowForm(new SHForm(), true, false, false);
-            //ShowForm(new DDForm(), true, false, false);
-            //ShowForm(new HMForm(), true, false, false);
-            //ShowForm(new OutForm(), true, false, false);
-            init();
-        }
-        public void init() 
-        {
             OnTaskBarChanged();
             OnMdiClientChanged();
         }
@@ -313,9 +308,7 @@ namespace C2.Forms
                 }
             }
         }
-
-
-
+        #endregion
 
         public override bool IsNeedShowBottomViewPanel()
         {
@@ -324,15 +317,14 @@ namespace C2.Forms
 
         private void BrowserButton_Click(object sender, System.EventArgs e)
         {
-            //this.excelPathTextBox.Clear();
-            //this.dbListView.Items.Clear();
+            this.excelPathTextBox.Clear();
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
                 Filter = "文档 | *.xls;*.xlsx"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-            //this.excelPathTextBox.Text = OpenFileDialog.FileName;
+            this.excelPathTextBox.Text = OpenFileDialog.FileName;
             excelPath = OpenFileDialog.FileName;
         }
 
@@ -351,116 +343,104 @@ namespace C2.Forms
                 return;
             }
 
-            List<string> colList1 = new List<string> { "网站网址", "网站名称", "网站网址", "网站Ip", "REFER标题", "REFER", "金额", "用户数", "赌博类型(多值##分隔)", "开始运营时间", "归属地", "发现时间" };
-            List<string> colList2 = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)" };
-
-            List<int> headIndex1 = IndexFilter(colList1, rrst1.Result);
-            List<int> headIndex2 = IndexFilter(colList2, rrst2.Result);
-            if (headIndex1.Count == 0 || headIndex2.Count == 0)
-                return;
-
+            List<string> DbWebExcelColList = new List<string> { "网站名称", "网站网址", "网站Ip", "REFER标题", "REFER", "金额", "用户数", "赌博类型(多值##分隔)", "开始运营时间", "归属地", "发现时间" };
+            List<string> DbMemberExcelColList = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)" };
+            List<int> headIndex = IndexFilter(DbWebExcelColList, rrst1.Result);
+            List<int> headIndex2 = IndexFilter(DbMemberExcelColList, rrst2.Result);
 
             for (int i = 1; i < rrst1.Result.Count; i++)
             {
-                List<string> resultList = ContentFilter(headIndex1, rrst1.Result[i]);
-                for (int j = 1; j < rrst2.Result.Count; j++)
-                {
-                    List<string> resultList1 = ContentFilter(headIndex2, rrst2.Result[j]);
-                    if (resultList[0] == resultList1[0])
-                    {
-                        resultList1.Remove(resultList1[0]);
-                        resultList.InsertRange(6, resultList1);
+                if (headIndex.Max() > rrst1.Result[i].Count)
+                    return;
+                List<string> resultList = ContentFilter(headIndex, rrst1.Result[i]);
 
-                        WriteResult(SDPath, resultList.Skip(1).ToList());
-                        break;
+                //这里要做判断了 对于web，url存在，替换掉
+                DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
+                if(rows.Length > 0)
+                    DbWebTable.Rows.Remove(rows[0]);
+
+                DbWebTable.Rows.Add(resultList.ToArray());
+            }
+
+            for (int i = 1; i < rrst2.Result.Count; i++)
+            {
+                if (headIndex2.Max() > rrst2.Result[i].Count)
+                    return;
+                List<string> resultList = ContentFilter(headIndex2, rrst2.Result[i]);
+
+                //这里要做判断了 对于member，url存在，比较是否完全一致
+                DataRow[] rows = DbMemberTable.Select("域名='" + resultList[1] + "'");
+                if(rows.Length == 0)
+                    DbMemberTable.Rows.Add(resultList.ToArray());
+                else
+                {
+                    foreach (DataRow row in rows)
+                    {
+                        List<string> rowContent = new List<string>();
+                        for (int j = 0; j < DbMemberTable.Columns.Count; j++)
+                            rowContent.Add(row[j].ToString());
+
+                        if (rowContent.Count != 0 && string.Join("\t", rowContent) != string.Join("\t", resultList))
+                            DbMemberTable.Rows.Add(resultList.ToArray());
                     }
                 }
+
             }
+
             HelpUtil.ShowMessageBox("赌博数据上传成功。");
-        }
+            RefreshHtmlTable();
 
-        private List<string> ContentFilter(List<int> indexList, List<string> contentList)
-        {
-            List<string> resultList = new List<string> { };
-
-            foreach (int colindex in indexList)
-                resultList.Add(contentList[colindex].TrimEnd(new char[] { '\r', '\n'}));
-
-            return resultList;
+            ReWriteResult(DbWebPath, DbWebTable);
+            ReWriteResult(DbMemberPath, DbMemberTable);
         }
 
         private List<int> IndexFilter(List<string> colList, List<List<string>> rowContentList)
         {
-            List<int> headIndex = new List<int>();
-            foreach (string col in colList)
+            List<int> headIndex = new List<int> { };
+            foreach (string content in colList)
             {
                 for (int i = 0; i < rowContentList[0].Count; i++)
                 {
-                    if (rowContentList[0][i] == col)
+                    if (rowContentList[0][i] == content)
                     {
                         headIndex.Add(i);
                         break;
                     }
                 }
             }
-
             if (headIndex.Count != colList.Count)
             {
                 HelpUtil.ShowMessageBox("上传的赌博数据非标准格式。");
                 return new List<int>();
             }
-
             return headIndex;
         }
 
-        public void LoadHistory(string path)
+        private List<string> ContentFilter(List<int> indexList, List<string> contentList)
         {
-            if (!File.Exists(path))
-                return;
-            FileStream fs_dir = null;
-            StreamReader reader = null;
+            List<string> resultList = new List<string> { };
+            {
+                foreach (int index in indexList)
+                    resultList.Add(contentList[index]);
+            }
+
+            return resultList;
+        }
+
+        private void ReWriteResult(string txtPath, DataTable dataTable)
+        {
             try
             {
-                fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
-                reader = new StreamReader(fs_dir);
-                string lineStr;
-                while ((lineStr = reader.ReadLine()) != null)
+                using (StreamWriter sw = new StreamWriter(txtPath, false, System.Text.Encoding.UTF8))
                 {
-                    if (!lineStr.Equals(""))
+                    foreach(DataRow row in dataTable.Rows)
                     {
-                        List<string> line = new List<string>(lineStr.Split("\t"));
-                        FillLV(line);
+                        List<string> rowContent = new List<string>();
+                        for (int i = 0; i < dataTable.Columns.Count; i++)
+                            rowContent.Add(row[i].ToString());
+
+                        sw.WriteLine(string.Join("\t", rowContent));
                     }
-                }
-            }
-            catch { }
-            finally
-            {
-                if (reader != null)
-                    reader.Close();
-                if (fs_dir != null)
-                    fs_dir.Close();
-            }
-        }
-
-        private void FillLV(List<string> contentList)
-        {
-            ListViewItem items = new ListViewItem(contentList[0]);
-            for (int i=1; i < contentList.Count; i++)
-            {
-                items.SubItems.Add(contentList[i]);
-            }
-            //this.dbListView.Items.Add(items);
-        }
-
-        private void WriteResult(string txtPath, List<string> contentList)
-        {
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(txtPath, true, System.Text.Encoding.UTF8))
-                {
-                    string content = string.Join("\t", contentList);
-                    sw.WriteLine(content);
                 }
             }
             catch (Exception ex)
@@ -468,14 +448,39 @@ namespace C2.Forms
                 HelpUtil.ShowMessageBox(ex.Message);
             }
         }
+        
 
         #region 界面html版
+        private void InitLocalPathAndSetting()
+        {
+            string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
+            Directory.CreateDirectory(txtDirectory);
+            DbWebPath = Path.Combine(txtDirectory, "DB_web.txt");
+            DbMemberPath = Path.Combine(txtDirectory, "DB_member.txt");
+
+            DbWebColList = new string[] { "网站名称", "域名", "IP", "Refer对应Title", "Refer", "涉案金额", "涉赌人数", "赌博类型", "运营时间", "发现地市", "发现时间" };
+            DbMemberColList = new string[] { "域名", "认证账号", "登陆IP", "登陆账号", "登陆密码", "安全码", "登陆地址" };
+
+        }
+
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void Hello(string a)
         {
-            DataRow[] rows = DbTable.Select("域名='" + a + "'");
-            MessageBox.Show(rows[0][0].ToString() + rows[0][1].ToString() + rows[0][2].ToString());
+            DataRow[] rows = DbMemberTable.Select("域名='" + a + "'");
+            if(rows.Length > 0)
+                MessageBox.Show(rows[0][0].ToString() + rows[0][1].ToString() + rows[0][2].ToString());
+        }
+
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+        public void InitDataTable()
+        {
+            //空文件的话，这些table都只有colume表头信息
+            DbWebTable = GenDataTable(DbWebPath, DbWebColList);
+            DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
+
+            RefreshHtmlTable();
         }
 
         private void RefreshHtmlTable()
@@ -484,31 +489,33 @@ namespace C2.Forms
             this.webBrowser1.Document.InvokeScript("clearTable");
 
             //先试试初始化
-            foreach (DataRow dr in DbTable.Rows)
+            foreach (DataRow dr in DbWebTable.Rows)
             {
                 this.webBrowser1.Document.InvokeScript("WfToHtml", new object[] { string.Format(
                 "<tr name=\"row\">" +
                 "   <td id=\"th0\">{0}<br><a onclick=\"Hello(this)\">{1}</a><br>{2}</td>" +
                 "   <td>{3}<br>{4}</td>" +
-                "   <td>{5}<br>{6}</td>" +
+                "   <td>{5}</td>" +
+                "   <td>{6}</td>" +
                 "   <td>{7}<br>{8}</td>" +
                 "   <td>{9}<br>{10}</td>" +
-                "   <td>{11}<br>{12}</td>" +
-                "   <td>{13}<br>{14}</td>" +
                 "</tr>",
                 dr["网站名称"].ToString(), dr["域名"].ToString(), dr["IP"].ToString(),
                 dr["Refer对应Title"].ToString(), dr["Refer"].ToString(),
-                dr["认证账号"].ToString(), dr["登陆IP"].ToString(),
-                dr["登陆账号"].ToString(), dr["登陆密码"].ToString(),
-                dr["涉案金额"].ToString(), dr["涉赌人数"].ToString(),
+                dr["涉案金额"].ToString(),
+                dr["涉赌人数"].ToString(),
                 dr["赌博类型"].ToString(), dr["运营时间"].ToString(),
                 dr["发现地市"].ToString(), dr["发现时间"].ToString()) });
             }
         }
 
-        private DataTable GenDataTable(string path)
+        private DataTable GenDataTable(string path, string[] colList)
         {
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
+
+            foreach (string col in colList)
+                dataTable.Columns.Add(col);
+
             if (!File.Exists(path))
                 return dataTable;
 
@@ -518,10 +525,6 @@ namespace C2.Forms
             {
                 fs_dir = new FileStream(path, FileMode.Open, FileAccess.Read);
                 reader = new StreamReader(fs_dir);
-
-                string[] colList = new string[] { "网站名称", "域名", "IP", "Refer对应Title", "Refer", "认证账号", "登陆IP", "登陆账号", "登陆密码", "涉案金额", "涉赌人数", "赌博类型", "运营时间", "发现地市", "发现时间" };
-                foreach(string col in colList)
-                    dataTable.Columns.Add(col);
 
                 string lineStr;
                 while ((lineStr = reader.ReadLine()) != null)
