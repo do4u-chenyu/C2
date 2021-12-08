@@ -92,7 +92,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 EnterToolStripMenuItem.Enabled = false;
                 SuscideMenuItem.Enabled = false;
                 RefreshCurrentStatusMenuItem.Enabled = false;
-                RefreshAllStatusMenuItem.Enabled = false;
                 RefreshAllDeadMenu.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
@@ -120,7 +119,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             EnterToolStripMenuItem.Enabled = true;
             SuscideMenuItem.Enabled = true;
             RefreshCurrentStatusMenuItem.Enabled = true;
-            RefreshAllStatusMenuItem.Enabled = true;
             RefreshAllDeadMenu.Enabled = true;
             ReverseShellMenu.Enabled = true;
             msfMenu.Enabled = true;

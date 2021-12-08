@@ -39,7 +39,6 @@
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.RefreshCurrentStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshAllStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshAllDeadMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshOtherMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -128,6 +127,7 @@
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -140,22 +140,22 @@
             this.EnterToolStripMenuItem,
             this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem,
+            this.toolStripSeparator8,
             this.SuscideMenuItem,
-            this.ClearAllToolStripMenuItem,
-            this.CopyToolStripMenuItem,
             this.toolStripSeparator,
             this.RefreshCurrentStatusMenuItem,
-            this.RefreshAllStatusMenuItem,
-            this.RefreshAllDeadMenu,
             this.refreshOtherMenu,
+            this.RefreshAllDeadMenu,
             this.toolStripSeparator5,
             this.ReverseShellMenu,
             this.msfMenu,
             this.dbConfigMenu,
             this.toolStripSeparator4,
+            this.ClearAllToolStripMenuItem,
+            this.CopyToolStripMenuItem,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(149, 330);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 336);
             // 
             // EnterToolStripMenuItem
             // 
@@ -211,18 +211,11 @@
             this.RefreshCurrentStatusMenuItem.Text = "选定项验活";
             this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.RefreshCurrentStatusMenuItem_Click);
             // 
-            // RefreshAllStatusMenuItem
-            // 
-            this.RefreshAllStatusMenuItem.Name = "RefreshAllStatusMenuItem";
-            this.RefreshAllStatusMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.RefreshAllStatusMenuItem.Text = "所有项验活";
-            this.RefreshAllStatusMenuItem.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
-            // 
             // RefreshAllDeadMenu
             // 
             this.RefreshAllDeadMenu.Name = "RefreshAllDeadMenu";
-            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(148, 22);
-            this.RefreshAllDeadMenu.Text = "二刷所有不活";
+            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(180, 22);
+            this.RefreshAllDeadMenu.Text = "二刷不活";
             this.RefreshAllDeadMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
             // refreshOtherMenu
@@ -257,8 +250,8 @@
             this.dbFilePathMenu,
             this.configInfoMenu});
             this.dbConfigMenu.Name = "dbConfigMenu";
-            this.dbConfigMenu.Size = new System.Drawing.Size(148, 22);
-            this.dbConfigMenu.Text = "config探针";
+            this.dbConfigMenu.Size = new System.Drawing.Size(180, 22);
+            this.dbConfigMenu.Text = "Mysql探针";
             // 
             // dbFilePathMenu
             // 
@@ -943,6 +936,11 @@
             this.StatusLabel.Size = new System.Drawing.Size(35, 21);
             this.StatusLabel.Text = "统计:";
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1007,7 +1005,6 @@
         private System.Windows.Forms.ColumnHeader lvStatus;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem RefreshCurrentStatusMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RefreshAllStatusMenuItem;
         private System.Windows.Forms.ToolStripLabel addBatchShellMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -1070,5 +1067,6 @@
         private System.Windows.Forms.ToolStripMenuItem dbConfigMenu;
         private System.Windows.Forms.ToolStripMenuItem dbFilePathMenu;
         private System.Windows.Forms.ToolStripMenuItem configInfoMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
