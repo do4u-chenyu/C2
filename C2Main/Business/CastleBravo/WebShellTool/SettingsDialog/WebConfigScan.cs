@@ -15,7 +15,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
     partial class WebConfigScan : StandardDialog
     {
-        private string payload;
+        private string Payload { get; set; } = string.Empty;
         public WebConfigScan()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
                 HelpUtil.ShowMessageBox(" 【扫描字段】 格式设置有误。");
                 return false;
             }
-            payload =string.Format( ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField],
+            Payload = string.Format( ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField],
                                           "{0}",
                                           ST.EncodeBase64(filePathTextBox.Text.Trim()), 
                                           configFields[0].Trim(),
@@ -44,7 +44,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         }
         public new string ShowDialog()
         {
-            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ? payload : string.Empty;
+            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ? Payload : string.Empty;
         }
 
     }
