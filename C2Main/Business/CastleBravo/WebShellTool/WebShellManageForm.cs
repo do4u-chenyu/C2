@@ -834,23 +834,29 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
-            this.infoConfigStatus.Text = DateTime.Now + ": MSF联动已发起";
+            DialogResult dialogResult = new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
+            if (dialogResult.Equals(DialogResult.OK))
+                this.infoConfigStatus.Text = DateTime.Now + ": MSF联动已发起";
         }
 
         private void ReverseShellMenu_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
-            this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
+            DialogResult dialogResult = new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
+            if (dialogResult.Equals(DialogResult.OK))
+                this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
         // 数据库账号密码扫描
         private void WebConfigInfoScan_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            new WebConfigScan(LV.SelectedItems[0].Tag as WebShellTaskConfig).ShowDialog();
+            string payload = new WebConfigScan().ShowDialog();
+            if (payload.IsNullOrEmpty()) return;
+            this.infoType = InfoType.MysqlConfigField;
+            ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField] = payload;
+            SingleInfoCollection(this.LV.SelectedItems[0]);
         }
 
         private void ConfigFilePathScan_Click(object sender, EventArgs e)
