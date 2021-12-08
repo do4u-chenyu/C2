@@ -898,17 +898,17 @@ namespace C2.Business.CastleBravo.WebShellTool
            
         }
 
-        private void 打开文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenFileMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void 打开目录ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenDirMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void 完整路径ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyDirMenuItem_Click(object sender, EventArgs e)
         {
 
         }
