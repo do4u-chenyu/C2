@@ -45,7 +45,9 @@ namespace MD5Plugin
                 StringBuilder sb = new StringBuilder();
                 byte[] arrByte = GetEncodingBytes(str);
 
-                string sep = splitType == "无分隔符" ? string.Empty : splitType.Trim();
+                string sep = splitType == "无分隔符" ? string.Empty :
+                    splitType == "空格分割"?  " " : splitType.Trim();
+
                 int radix = 16;
                 if (radixType == "十进制")
                     radix = 10;
