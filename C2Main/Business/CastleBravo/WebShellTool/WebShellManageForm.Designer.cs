@@ -128,9 +128,14 @@
             this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.打开目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.完整路径ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip
@@ -155,7 +160,7 @@
             this.CopyToolStripMenuItem,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 336);
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 314);
             // 
             // EnterToolStripMenuItem
             // 
@@ -839,6 +844,7 @@
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
+            this.LV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseClick);
             this.LV.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseDoubleClick);
             // 
             // lvAddTime
@@ -941,6 +947,36 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开文件ToolStripMenuItem,
+            this.打开目录ToolStripMenuItem,
+            this.完整路径ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            // 
+            // 打开目录ToolStripMenuItem
+            // 
+            this.打开目录ToolStripMenuItem.Name = "打开目录ToolStripMenuItem";
+            this.打开目录ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.打开目录ToolStripMenuItem.Text = "浏览目录";
+            this.打开目录ToolStripMenuItem.Click += new System.EventHandler(this.打开目录ToolStripMenuItem_Click);
+            // 
+            // 完整路径ToolStripMenuItem
+            // 
+            this.完整路径ToolStripMenuItem.Name = "完整路径ToolStripMenuItem";
+            this.完整路径ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.完整路径ToolStripMenuItem.Text = "完整路径到剪切板";
+            this.完整路径ToolStripMenuItem.Click += new System.EventHandler(this.完整路径ToolStripMenuItem_Click);
+            // 
+            // 打开文件ToolStripMenuItem
+            // 
+            this.打开文件ToolStripMenuItem.Name = "打开文件ToolStripMenuItem";
+            this.打开文件ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.打开文件ToolStripMenuItem.Text = "打开文件";
+            this.打开文件ToolStripMenuItem.Click += new System.EventHandler(this.打开文件ToolStripMenuItem_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -964,6 +1000,7 @@
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1068,5 +1105,9 @@
         private System.Windows.Forms.ToolStripMenuItem dbFilePathMenu;
         private System.Windows.Forms.ToolStripMenuItem configInfoMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 打开目录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 完整路径ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开文件ToolStripMenuItem;
     }
 }

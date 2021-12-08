@@ -34,7 +34,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             "L1HF58S04Y6",    // LQ
             "L1HF68F046A",    // SQY
             "PF2Z4F9W",       // HZH
-            //"L1HF68F02VM",    // MHD
+            "L1HF68F02VM",    // MHD
             "L1HF5AL00EV",    // LXF
             "L1HF68F04XB",    // WLY
             "/7KFL4S2/CNWS20088P013N/" ,   // XX
@@ -872,9 +872,46 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
+        private void LV_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.LV.ContextMenuStrip = this.contextMenuStrip;
 
+            if (e.Button != MouseButtons.Right || e.Clicks != 1)
+                return;
 
-       
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            ListViewItem item = LV.SelectedItems[0];
+            ListViewItem.ListViewSubItem subItem = item.GetSubItemAt(e.X, e.Y);
+
+            if (subItem == null)
+                return;
+
+            if (item.SubItems.IndexOf(subItem) != 7)
+                return;
+
+            if (!subItem.Text.StartsWith(Path.Combine(Global.UserWorkspacePath, "后信息采集")))
+                return;
+
+            this.LV.ContextMenuStrip = this.contextMenuStrip1;
+           
+        }
+
+        private void 打开文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 打开目录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 完整路径ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     public enum InfoType
     {
