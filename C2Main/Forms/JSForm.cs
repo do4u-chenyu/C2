@@ -38,12 +38,17 @@ namespace C2.Forms
             webBrowser1.ObjectForScripting = this;
 
             //ShowForm(new StartForm(), true, false, true);
-            ShowForm(new DBForm(), true, false, true);
-            ShowForm(new SQForm(), true, false, false);
-            ShowForm(new SHForm(), true, false, false);
-            ShowForm(new DDForm(), true, false, false);
-            ShowForm(new HMForm(), true, false, false);
-            ShowForm(new OutForm(), true, false, false);
+            ShowForm(panel3, "DB专项",true, false, true);
+            ShowForm(panel3, "SQ专项", true, false, false);
+            ShowForm(panel3, "SH专项", true, false, false);
+            ShowForm(panel3, "DD专项", true, false, false);
+            ShowForm(panel3, "后门专项", true, false, false);
+            ShowForm(panel3, "购置境资产专项", true, false, false);
+            //ShowForm(new SQForm(), true, false, false);
+            //ShowForm(new SHForm(), true, false, false);
+            //ShowForm(new DDForm(), true, false, false);
+            //ShowForm(new HMForm(), true, false, false);
+            //ShowForm(new OutForm(), true, false, false);
             init();
         }
         public void init() 
@@ -66,14 +71,17 @@ namespace C2.Forms
         }
         protected virtual void OnSelectedFormChanged(BaseForm old)
         {
+            /*
             if (mdiWorkSpace1 != null && SelectedForm != null)
             {
                 mdiWorkSpace1.ActiveMdiForm(SelectedForm);
                 Global.GetBottomViewPanel().Visible = SelectedForm.IsNeedShowBottomViewPanel();
             }
+            */
         }
         private void OnMdiClientChanged()
         {
+            /*
             if (mdiWorkSpace1 != null)
             {
                 IsMdiContainer = false;
@@ -85,7 +93,7 @@ namespace C2.Forms
             {
                 IsMdiContainer = true;
             }
-
+            */
         }
         
         void MdiClient_MdiFormClosed(object sender, EventArgs e)
@@ -120,7 +128,7 @@ namespace C2.Forms
         }
         void MdiClient_MdiFormActived(object sender, EventArgs e)
         {
-            SelectedForm = mdiWorkSpace1.ActivedMdiForm as BaseForm;
+            //SelectedForm = mdiWorkSpace1.ActivedMdiForm as BaseForm;
 
             Form_Activated(sender, e);
         }
@@ -150,10 +158,12 @@ namespace C2.Forms
                 Form form = tabBar1.SelectedItem.Tag as Form;
                 if (form != null)
                 {
+                    /*
                     if (mdiWorkSpace1 != null)
                         mdiWorkSpace1.ActiveMdiForm(form);
                     else
                         form.Activate();
+                    */
                     if (form is CanvasForm)
                     {
                         (form as CanvasForm).UpdateRunbuttonImageInfo();
@@ -169,6 +179,7 @@ namespace C2.Forms
         {
             if (e.Item != null && e.Item.Tag is Form)
             {
+                /*
                 if (mdiWorkSpace1 == null)
                     ((Form)e.Item.Tag).Close();
                 else if (e.Item.Tag is DocumentForm)
@@ -191,7 +202,7 @@ namespace C2.Forms
                 }
                 else
                     mdiWorkSpace1.CloseMdiForm((Form)e.Item.Tag);
-
+                */
 
             }
         }
@@ -220,19 +231,19 @@ namespace C2.Forms
                    select (T)f;
         }
         
-        protected virtual void ShowForm(BaseForm form, bool showTab, bool canClose, bool visiable = true)
+        protected virtual void ShowForm(Panel panel, string name,bool showTab, bool canClose, bool visiable = true)
         {
-            if (form == null)
+            if (panel == null)
                 throw new ArgumentNullException();
             Global.GetWorkSpacePanel().SuspendLayout();
             if (showTab && tabBar1 != null)
             {
                 var ti = new TabItem
                 {
-                    Text = form.Text,
+                    Text = name,
                     CanClose = canClose,
-                    Tag = form,
-                    ToolTipText = form.FormNameToolTip
+                    Tag = panel,
+                    //ToolTipText = panel.FormNameToolTip
                 };
 
                 /*
@@ -243,6 +254,7 @@ namespace C2.Forms
                     ti.Icon = PaintHelper.IconToImage(form.Icon);
                 */
 
+                /*
                 if (form is CanvasForm && !string.IsNullOrEmpty(form.FormNameToolTip))
                     tabBar1.Items.Insert(tabBar1.Items.IndexOf(tabBar1.SelectedItem) + 1, ti);
                 else if (form is CanvasForm)
@@ -251,19 +263,19 @@ namespace C2.Forms
                 else
                     //tabBar1.Items.Add(ti);
                     tabBar1.Items.Add(ti);
-
+                */
+                tabBar1.Items.Add(ti);
                 if (visiable)
                     tabBar1.SelectedItem = ti;
-
             }
 
-            form.TextChanged += new EventHandler(Form_TextChanged);
-            form.Activated += new EventHandler(Form_Activated);
-            form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+            //form.TextChanged += new EventHandler(Form_TextChanged);
+            //form.Activated += new EventHandler(Form_Activated);
+            //form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
 
 
 
-
+            /*
             if (mdiWorkSpace1 != null)
             {
                 if (visiable)
@@ -279,6 +291,7 @@ namespace C2.Forms
                 form.ControlBox = false;
                 form.Show();
             }
+            */
 
             Global.GetWorkSpacePanel().ResumeLayout();
             /*
