@@ -92,6 +92,7 @@
             this.Controls.Add(this.addr);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.rhTextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MSFSet";
             this.Text = "MSF配置";
             this.Controls.SetChildIndex(this.rhTextBox, 0);

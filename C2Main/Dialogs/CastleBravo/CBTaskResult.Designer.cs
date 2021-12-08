@@ -263,6 +263,7 @@
             this.ClientSize = new System.Drawing.Size(775, 480);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CBTaskResult";
             this.Text = "喝彩城堡-任务结果";
             this.Shown += new System.EventHandler(this.CBTaskResult_Shown);

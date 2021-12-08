@@ -45,7 +45,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.panel1.Controls.Add(this.ExitButton);
             this.panel1.Location = new System.Drawing.Point(0, 165);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(340, 38);
             this.panel1.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             // ExitButton
             // 
             this.ExitButton.Location = new System.Drawing.Point(266, 10);
-            this.ExitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExitButton.Margin = new System.Windows.Forms.Padding(2);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(64, 26);
             this.ExitButton.TabIndex = 0;
@@ -64,7 +64,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             // IDBox
             // 
             this.IDBox.Location = new System.Drawing.Point(128, 22);
-            this.IDBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.IDBox.Margin = new System.Windows.Forms.Padding(2);
             this.IDBox.Name = "IDBox";
             this.IDBox.Size = new System.Drawing.Size(153, 21);
             this.IDBox.TabIndex = 1;
@@ -97,7 +97,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 
             this.OKButton.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.OKButton.Location = new System.Drawing.Point(132, 99);
-            this.OKButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OKButton.Margin = new System.Windows.Forms.Padding(2);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(76, 31);
             this.OKButton.TabIndex = 4;
@@ -129,8 +129,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IDBox);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FunctionUnlockForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "高级功能解锁";

@@ -128,8 +128,9 @@
             this.Controls.Add(this.scanFieldTextBox);
             this.Controls.Add(this.filePath);
             this.Controls.Add(this.filePathTextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WebConfigScan";
-            this.Text = "config探针";
+            this.Text = "Mysql探针配置";
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.filePath, 0);
             this.Controls.SetChildIndex(this.scanFieldTextBox, 0);

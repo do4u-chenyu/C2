@@ -191,6 +191,7 @@
             this.Controls.Add(this.taskNameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddCBTask";
             this.Text = "喝彩城堡-新建任务";
             this.Load += new System.EventHandler(this.AddCBTask_Load);
