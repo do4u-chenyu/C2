@@ -62,6 +62,7 @@
             // 
             this.searchTitleLabel.AutoSize = true;
             this.searchTitleLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.searchTitleLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.searchTitleLabel.Location = new System.Drawing.Point(48, 304);
             this.searchTitleLabel.Name = "searchTitleLabel";
             this.searchTitleLabel.Size = new System.Drawing.Size(90, 22);
