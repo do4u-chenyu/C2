@@ -141,7 +141,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              {InfoType.LocationInfo, LocationPayload },
                                              {InfoType.MSF, MSFPayload},
                                              {InfoType.WebConfigPath, WebConfigPathPayload},
-                                             {InfoType.MysqlConfigField, WebConfigFieldPayload},
+                                             {InfoType.MysqlProbe, WebConfigFieldPayload},
                                              {InfoType.NC, ReverseShellPayload} };
         /*<--静态变量赋值先后顺序不能改变-->*/
         public static List<string> BDLocationAK = new List<string>()

@@ -796,13 +796,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             Dictionary<InfoType, string> localSave = new Dictionary<InfoType, string>()
             {
-                { InfoType.ProcessView,"进程信息" },
-                { InfoType.ScheduleTask, "定时任务"},
-                { InfoType.WebConfigPath,"WEB配置文件路径" },
-                { InfoType.MysqlConfigField,"Mysql探针" },
-                { InfoType.SystemInfo,"系统信息" },
+                {InfoType.ProcessView, "进程信息"},
+                {InfoType.ScheduleTask, "定时任务"},
+                {InfoType.WebConfigPath,"WEB配置文件路径"},
+                {InfoType.MysqlProbe, "Mysql探针"},
+                {InfoType.SystemInfo, "系统信息"},
             };
-            Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P",RegexOptions.Singleline);
+            Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P", RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
             string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
             if (this.infoType == InfoType.LocationInfo)
@@ -853,8 +853,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
             string payload = new WebConfigScan().ShowDialog();
             if (payload.IsNullOrEmpty()) return;
-            this.infoType = InfoType.MysqlConfigField;
-            ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField] = payload;
+            this.infoType = InfoType.MysqlProbe;
+            ClientSetting.InfoPayloadDict[InfoType.MysqlProbe] = payload;
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
 
@@ -929,7 +929,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         MSF,
         NC,
         WebConfigPath,
-        MysqlConfigField,
+        MysqlProbe,
         Empty
     }
 }
