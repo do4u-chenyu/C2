@@ -72,7 +72,7 @@ namespace C2.Business.GlueWater.Settings
             {
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
-                            "   <td id=\"th0\">{0}<br><a onclick=\"Hello(this)\">{1}</a><br>{2}</td>" +
+                            "   <td id=\"th0\">{0}<br><a onclick=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}</td>" +
                             "   <td>{6}</td>" +
@@ -90,13 +90,15 @@ namespace C2.Business.GlueWater.Settings
             return sb.ToString();
         }
 
-        public override string SearchInfo(string memeber)
+        public override DataTable SearchInfo(string memeber)
         {
+            DataTable resTable = DbMemberTable.Clone();
             DataRow[] rows = DbMemberTable.Select("域名='" + memeber + "'");
-            if (rows.Length > 0)
-                return (rows[0][0].ToString() + rows[0][1].ToString() + rows[0][2].ToString());
-            else
-                return "";
+
+            foreach (DataRow row in rows)
+                resTable.Rows.Add(row.ItemArray);
+
+            return resTable;
         }
 
         public override bool UpdateContent(string excelPath)
