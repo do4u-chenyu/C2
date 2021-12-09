@@ -41,6 +41,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             "/7W9Q8M2/CNWS2007A500S5/" };  // WL
         //
 
+        private FindSet finder;
+
         public WebShellManageForm()
         {
             InitializeComponent();
@@ -59,6 +61,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             setOfHost = new HashSet<string>();
             setOfIPAddress = new HashSet<string>();
             NumberOfAlive = 0;
+            finder = new FindSet(LV);
         }
 
         private void InitializeToolStrip()
@@ -899,20 +902,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 查找ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SearchHit(new FindSet().ShowDialog());
+            finder.SearchHit();
         }
-
-        private void SearchHit(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                return;
-            ListViewItem lvi = LV.FindItemWithText(value, true, 0, true);
-            if (lvi == null)
-                return;
-            lvi.Selected = true;
-            lvi.EnsureVisible();  
-        }
-
     }
     public enum InfoType
     {
