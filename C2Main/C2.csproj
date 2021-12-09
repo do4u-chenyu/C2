@@ -369,6 +369,9 @@
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskConfig.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
+    <Compile Include="Business\GlueWater\CommonFunc.cs" />
+    <Compile Include="Business\GlueWater\DbSetting.cs" />
+    <Compile Include="Business\GlueWater\ISetting.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4293,7 +4296,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\GlueWater\" />
     <Folder Include="Business\IAOLab\Webbrowser\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
