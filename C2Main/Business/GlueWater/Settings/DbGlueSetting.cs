@@ -72,7 +72,7 @@ namespace C2.Business.GlueWater.Settings
             {
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
-                            "   <td id=\"th0\">{0}<br><a onclick=\"ShowDetails(this)\">{1}</a><br>{2}</td>" +
+                            "   <td id=\"th0\">{0}<br><a onclick=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}</td>" +
                             "   <td>{6}</td>" +
