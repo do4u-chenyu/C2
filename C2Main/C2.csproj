@@ -3918,7 +3918,7 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_hackDD_accountPass_C2_20211126.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hackDD_accountPass_C2_20211126.zip">
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hackDD_accountPass_C2_20211126.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py.zip">
@@ -3927,7 +3927,7 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_hostDD_accountPass_C2_20211126.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hostDD_accountPass_C2_20211126.zip">
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_hostDD_accountPass_C2_20211126.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip">
