@@ -147,7 +147,7 @@ class BatchQuery:
             return res2
         return res2
 
-    def create_post(url, pw):
+    def create_post(self,url, pw):
         if ('.php' in url and '.asp' not in url and '.jsp' not in url):
             new_post = pw + '=echo(31415926);'
         elif ('.asp' in url and '.jsp' not in url):
@@ -194,10 +194,10 @@ class BatchQuery:
                     LOGGER.info('QUERY_ERROR-{0}'.format(e))
                 for data in self.queryclient(KEY_WORDS,QUREY_TYPE):
                     if data.get('_HOST', '') and data.get('_MAINFILE', ''):
-                        pload, method = self.ext_mainfile(data.get('_MAINFILE', ''))
+                        pload, method, content = self.ext_mainfile(data.get('_MAINFILE', ''))
                         if pload != 'http文件获取失败':
                             try:
-                                f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ pload+'\t'+method+'\t'+KEY_WORDS+ '\n')
+                                f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ pload+'\t'+method+'\t'+KEY_WORDS+'\n')
                             except:
                                 pass
 
@@ -238,7 +238,7 @@ def main():
     LOGGER.info('START BatchQuery QUERY BATCH....')
     ap = BatchQuery(DATA_PATH,startTime,endTime,ALL_ITEMS)
     ap.run_query()
-    ap.DataAnalyse()
+    #ap.DataAnalyse()
     ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S")  + '.tgz.tmp'
     zip_result(DATA_PATH,ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
@@ -262,14 +262,14 @@ if __name__ == '__main__':
     areacode    = option.areacode
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 30)
+    OneYear = datetime.timedelta(days = 90)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_kw_' + defaultEnd
-    Kwl = [ '_HOST:9128.cc','_HOST:threnfa.com','SiteUrl= SitePass=']
+    DATA_PATH = './_queryResult_hostDD_' + defaultEnd
+    Kwl = [ '_HOST:9128.cc','_HOST:threnfa.com','SiteUrl= SitePass=', '_HOST:c.wwwcd.top','_HOST:tophack.net','_HOST:djking.f3322.net:93','_HOST:www.xazchs.com','_HOST:45677789.com']
 
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
