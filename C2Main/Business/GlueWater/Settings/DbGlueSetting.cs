@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C2.Business.GlueWater
+namespace C2.Business.GlueWater.Settings
 {
-    class DbSetting : CommonFunc, ISetting
+    class DbGlueSetting : BaseGlueSetting
     {
         private string DbWebPath;
         private string DbMemberPath;
@@ -23,9 +23,18 @@ namespace C2.Business.GlueWater
 
         private DataTable DbWebTable;
         private DataTable DbMemberTable;
-        
 
-        public DbSetting()
+        private static DbGlueSetting DbSettingInstance;
+        public static DbGlueSetting GetInstance()
+        {
+            if (DbSettingInstance == null)
+            {
+                DbSettingInstance = new DbGlueSetting();
+            }
+            return DbSettingInstance;
+        }
+
+        public DbGlueSetting() : base()
         {
             DbWebPath = Path.Combine(txtDirectory, "DB_web.txt");
             DbMemberPath = Path.Combine(txtDirectory, "DB_member.txt");
@@ -37,7 +46,7 @@ namespace C2.Business.GlueWater
             DbMemberColList = new string[] { "域名", "认证账号", "登陆IP", "登陆账号", "登陆密码", "安全码", "登陆地址" };
         }
 
-        public void InitDataTable()
+        public override void InitDataTable()
         {
             //空文件的话，这些table都只有colume表头信息
             DbWebTable = GenDataTable(DbWebPath, DbWebColList);
@@ -46,10 +55,18 @@ namespace C2.Business.GlueWater
             RefreshHtmlTable();
         }
 
-        public string RefreshHtmlTable()
+        public override string RefreshHtmlTable()
         {
             StringBuilder sb = new StringBuilder();
-
+            sb.Append("<tr name=\"row\">" +
+                      "    <th>网站名称/域名/IP</th>" +
+                      "    <th>Refer对应Title/Refer</th>" +
+                      "    <th>涉案金额</th>" +
+                      "    <th>涉赌人数</th>" +
+                      "    <th>赌博类型/运营时间</th>" +
+                      "    <th>发现地市/发现时间</th>" +
+                      "</tr>"
+                      );
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
             {
@@ -73,7 +90,7 @@ namespace C2.Business.GlueWater
             return sb.ToString();
         }
 
-        public string SearchInfo(string memeber)
+        public override string SearchInfo(string memeber)
         {
             DataRow[] rows = DbMemberTable.Select("域名='" + memeber + "'");
             if (rows.Length > 0)
@@ -82,7 +99,7 @@ namespace C2.Business.GlueWater
                 return "";
         }
 
-        public bool UpdateContent(string excelPath)
+        public override bool UpdateContent(string excelPath)
         {
             return DealWebContent(excelPath) && DealMemberContent(excelPath);
         }
