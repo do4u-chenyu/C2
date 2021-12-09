@@ -252,15 +252,15 @@
             // dbFilePathMenu
             // 
             this.dbFilePathMenu.Name = "dbFilePathMenu";
-            this.dbFilePathMenu.Size = new System.Drawing.Size(158, 22);
+            this.dbFilePathMenu.Size = new System.Drawing.Size(180, 22);
             this.dbFilePathMenu.Text = "config路径";
             this.dbFilePathMenu.Click += new System.EventHandler(this.ConfigFilePathScan_Click);
             // 
             // configInfoMenu
             // 
             this.configInfoMenu.Name = "configInfoMenu";
-            this.configInfoMenu.Size = new System.Drawing.Size(158, 22);
-            this.configInfoMenu.Text = "mysql配置信息";
+            this.configInfoMenu.Size = new System.Drawing.Size(180, 22);
+            this.configInfoMenu.Text = "Mysql配置信息";
             this.configInfoMenu.Click += new System.EventHandler(this.WebConfigInfoScan_Click);
             // 
             // toolStripSeparator4
@@ -954,26 +954,26 @@
             this.OpenDirMenu,
             this.CopyDirMenu});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 70);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(172, 22);
             this.OpenFileMenu.Text = "打开文件";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenuItem_Click);
             // 
             // OpenDirMenu
             // 
             this.OpenDirMenu.Name = "OpenDirMenu";
-            this.OpenDirMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenDirMenu.Size = new System.Drawing.Size(172, 22);
             this.OpenDirMenu.Text = "浏览目录";
             this.OpenDirMenu.Click += new System.EventHandler(this.OpenDirMenuItem_Click);
             // 
             // CopyDirMenu
             // 
             this.CopyDirMenu.Name = "CopyDirMenu";
-            this.CopyDirMenu.Size = new System.Drawing.Size(180, 22);
+            this.CopyDirMenu.Size = new System.Drawing.Size(172, 22);
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
             // 
