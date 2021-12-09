@@ -1,12 +1,9 @@
 ﻿using C2.Business.GlueWater;
+using C2.Business.GlueWater.Settings;
 using C2.Controls;
 using C2.Core;
-using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 
@@ -16,9 +13,8 @@ namespace C2.Forms
     public partial class JSForm : BaseForm
     {
         private string excelPath;
-
-        private DbSetting dbSetting;
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
+        IGlueSetting glueSetting;
 
         public JSForm()
         {
@@ -28,7 +24,7 @@ namespace C2.Forms
             webBrowser.Navigate(webUrl);
             webBrowser.ObjectForScripting = this;
 
-            dbSetting = new DbSetting();
+            glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
         }
 
         #region tab页代码
@@ -50,7 +46,8 @@ namespace C2.Forms
         }
         void TaskBar_SelectedItemChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(tabBar1.SelectedItem.Tag.ToString());
+            glueSetting = GlueSettingFactory.GetSetting(tabBar1.SelectedItem.Tag.ToString());
+            RefreshHtmlTable();
         }
 
         protected virtual void AddTabItem(string name, bool visiable = false)
@@ -90,7 +87,7 @@ namespace C2.Forms
             this.excelPathTextBox.Text = OpenFileDialog.FileName;
             excelPath = OpenFileDialog.FileName;
 
-            if (dbSetting.UpdateContent(excelPath))
+            if (glueSetting.UpdateContent(excelPath))
                 MessageBox.Show("数据上传成功。");
             else
                 MessageBox.Show("数据上传失败。");
@@ -104,14 +101,14 @@ namespace C2.Forms
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void Hello(string a)
         {
-            MessageBox.Show(dbSetting.SearchInfo(a));
+            MessageBox.Show(glueSetting.SearchInfo(a));
         }
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void InitDataTable()
         {
-            dbSetting.InitDataTable();
+            glueSetting.InitDataTable();
             RefreshHtmlTable();
         }
 
@@ -121,7 +118,7 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("clearTable");
 
             //先试试初始化
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { dbSetting.RefreshHtmlTable() });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable() });
         }
         #endregion
 

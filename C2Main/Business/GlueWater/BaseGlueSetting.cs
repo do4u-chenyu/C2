@@ -7,15 +7,35 @@ using System.IO;
 
 namespace C2.Business.GlueWater
 {
-    class CommonFunc
+    class BaseGlueSetting : IGlueSetting
     {
         public int maxRow = 65534;
         public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
 
-        public CommonFunc()
+        public BaseGlueSetting()
         {
             if(!Directory.Exists(txtDirectory))
                 FileUtil.CreateDirectory(txtDirectory);
+        }
+
+        public virtual void InitDataTable()
+        {
+
+        }
+
+        public virtual bool UpdateContent(string excelPath)
+        {
+            return false;
+        }
+
+        public virtual string RefreshHtmlTable()
+        {
+            return string.Empty;
+        }
+
+        public virtual string SearchInfo(string item)
+        {
+            return string.Empty;
         }
 
         public List<int> IndexFilter(List<string> colList, List<List<string>> rowContentList)
@@ -118,5 +138,7 @@ namespace C2.Business.GlueWater
 
             return dataTable;
         }
+
+
     }
 }
