@@ -284,7 +284,7 @@ def main():
     ap.run_query()
     ap.handle_res()
 
-    ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S") + '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + '_' + defaultStart + '.tgz.tmp'
     zip_result(DATA_PATH, ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)
@@ -308,13 +308,13 @@ if __name__ == '__main__':
     areacode    = option.areacode
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 120)
+    OneYear = datetime.timedelta(days = 30)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_kw_' + defaultEnd
+    DATA_PATH = './_queryResult_hackDD_' + defaultEnd
     kwl = ['eval _POST =', 'eval _REQUEST =', 'array_map @ev =', 'ini_set display_errors dirname _SERVER =', 'Dizep cTSWX', 'response.write response.end =', 'ASPXSpy =', 'eval = BaSE64_dEcOdE', 'ute isnumeric =', 'Action=getTerminalInfo', 'DarkBladePass= goaction=', 'JspSpyPwd', 'eval System.Text.Encoding.GetEncoding', 'A17filelist folder=', 'fopen base64_decode', 'assert _POST', 'dbhost= dbport= dbuser= dbpass= connect= ', 'Execute password= system', 'Response.Write eval', '%eval request', 'exec request.getParameter', 'execute request', 'eval _SERVER', 'system _REQUEST', 'create_funtion _POST', 'preg_replace _POST']
     kwl2 = ['eval _POST =	PAYLOAD', 'eval _REQUEST =	PAYLOAD', 'array_map @ev =	PAYLOAD', 'ini_set display_errors dirname _SERVER =	PAYLOAD', 'Dizep cTSWX	PAYLOAD', 'response.write response.end =	PAYLOAD', 'ASPXSpy =	PAYLOAD', 'eval = BaSE64_dEcOdE	PAYLOAD', 'ute isnumeric =	PAYLOAD', 'Action=getTerminalInfo	PAYLOAD', 'DarkBladePass= goaction=	PAYLOAD', 'JspSpyPwd	PAYLOAD', 'eval System.Text.Encoding.GetEncoding	PAYLOAD', 'A17filelist folder=	PAYLOAD', 'fopen base64_decode	PAYLOAD', 'assert _POST	PAYLOAD', 'dbhost= dbport= dbuser= dbpass= connect= 	PAYLOAD', 'Execute password= system	PAYLOAD', 'Response.Write eval	PAYLOAD', '%eval request	PAYLOAD', 'exec request.getParameter	PAYLOAD', 'execute request	PAYLOAD', 'eval _SERVER	PAYLOAD', 'system _REQUEST	PAYLOAD', 'create_funtion _POST	PAYLOAD', 'preg_replace _POST	PAYLOAD']
     init_path(DATA_PATH)
