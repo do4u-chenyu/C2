@@ -61,9 +61,9 @@ namespace C2.Business.GlueWater.Settings
             return sb.ToString();
         }
 
-        public override string SearchInfo(string item)
+        public override DataTable SearchInfo(string item)
         {
-            return string.Empty;
+            return base.SearchInfo(item);
         }
 
         public override bool UpdateContent(string excelPath)

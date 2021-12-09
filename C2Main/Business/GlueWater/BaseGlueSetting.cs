@@ -33,9 +33,9 @@ namespace C2.Business.GlueWater
             return string.Empty;
         }
 
-        public virtual string SearchInfo(string item)
+        public virtual DataTable SearchInfo(string item)
         {
-            return string.Empty;
+            return new DataTable();
         }
 
         public List<int> IndexFilter(List<string> colList, List<List<string>> rowContentList)

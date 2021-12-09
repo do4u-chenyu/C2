@@ -15,6 +15,7 @@ namespace C2.Forms
         private string excelPath;
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
         IGlueSetting glueSetting;
+        GlueDetailInfoDialog detailDialog;
 
         public JSForm()
         {
@@ -24,6 +25,7 @@ namespace C2.Forms
             webBrowser.Navigate(webUrl);
             webBrowser.ObjectForScripting = this;
 
+            detailDialog = new GlueDetailInfoDialog();
             glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
         }
 
@@ -99,9 +101,11 @@ namespace C2.Forms
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-        public void Hello(string a)
+        public void ShowDetails(string item)
         {
-            MessageBox.Show(glueSetting.SearchInfo(a));
+            detailDialog.DetailTable = glueSetting.SearchInfo(item);
+            detailDialog.RefreshDGV();
+            detailDialog.ShowDialog();
         }
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
