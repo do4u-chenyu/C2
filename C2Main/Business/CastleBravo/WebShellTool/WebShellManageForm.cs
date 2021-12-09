@@ -66,13 +66,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 批量验活时, 与其他菜单项互斥
             enableItems = new ToolStripItem[]
             {
-                this.addBatchShellMenu,
+                this.editDDB,
                 this.proxySettingMenu,
                 this.refreshAllShellMenu,
                 this.refreshOtherMenu2,
                 this.secondRefreshMenu,
                 this.checkAliveDDB,
-                this.addOneShellMenu,
                 this.trojanMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
@@ -95,6 +94,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 RefreshAllDeadMenu.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
+                mysqlProbeMenu.Enabled = false;
             }
         }
         private bool IsThreeGroup()
@@ -122,11 +122,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             RefreshAllDeadMenu.Enabled = true;
             ReverseShellMenu.Enabled = true;
             msfMenu.Enabled = true;
+            mysqlProbeMenu.Enabled = true;
 
             UnlockButton.Enabled = false;//按钮不可用
         }
 
-        private void AddShellMenu_Click(object sender, EventArgs e)
+        private void 添加ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WebShellTaskConfig config = new AddWebShellForm().ShowDialog(ST.NowString());
             if (config == WebShellTaskConfig.Empty)
@@ -134,6 +135,23 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             LV.Items.Add(NewLVI(config));
             tasks.Add(config);
+            SaveDB();
+        }
+
+        private void 批量添加ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddAllWebShellForm dialog = new AddAllWebShellForm();
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            foreach (WebShellTaskConfig task in dialog.Tasks)
+            {
+                if (task == WebShellTaskConfig.Empty)
+                    continue;
+
+                LV.Items.Add(NewLVI(task));
+                tasks.Add(task);
+            }
             SaveDB();
         }
 
@@ -507,23 +525,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         }
 
-
-        private void AddAllShellMenu_Click(object sender, EventArgs e)
-        {
-            AddAllWebShellForm dialog = new AddAllWebShellForm();
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            foreach (WebShellTaskConfig task in dialog.Tasks)
-            {
-                if (task == WebShellTaskConfig.Empty)
-                    continue;
-
-                LV.Items.Add(NewLVI(task));
-                tasks.Add(task);
-            }
-            SaveDB();
-        }
 
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -917,9 +918,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
-       
-
-       
     }
     public enum InfoType
     {
