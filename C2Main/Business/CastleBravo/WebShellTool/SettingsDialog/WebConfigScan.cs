@@ -24,22 +24,15 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         protected override bool OnOKButtonClick()
         {
             //判断必填是否有值
-            if (filePathTextBox.Text.IsNullOrEmpty() || scanFieldTextBox.Text.IsNullOrEmpty())
+            if (filePathTextBox.Text.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox("【配置文件路径】 和 【扫描字段】 不能为空。");
+                HelpUtil.ShowMessageBox("【配置文件路径】 不能为空。");
                 return false;
             }
-            string[] configFields = scanFieldTextBox.Text.Split(',');
-            if (scanFieldTextBox.Text.Equals("账号字段,密码字段") || configFields.Length != 2)
-            {
-                HelpUtil.ShowMessageBox(" 【扫描字段】 格式设置有误。");
-                return false;
-            }
-            Payload = string.Format( ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField],
+           
+            Payload = string.Format(ClientSetting.InfoPayloadDict[InfoType.MysqlConfigField],
                                           "{0}",
-                                          ST.EncodeBase64(filePathTextBox.Text.Trim()), 
-                                          configFields[0].Trim(),
-                                          configFields[1].Trim());
+                                          ST.EncodeBase64(filePathTextBox.Text.Trim()));
             return base.OnOKButtonClick();
         }
         public new string ShowDialog()

@@ -28,34 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.scanField = new System.Windows.Forms.Label();
-            this.scanFieldTextBox = new System.Windows.Forms.TextBox();
             this.filePath = new System.Windows.Forms.Label();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.help1 = new System.Windows.Forms.Label();
             this.help2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.help3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // scanField
-            // 
-            this.scanField.AutoSize = true;
-            this.scanField.Location = new System.Drawing.Point(12, 58);
-            this.scanField.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
-            this.scanField.Name = "scanField";
-            this.scanField.Size = new System.Drawing.Size(65, 12);
-            this.scanField.TabIndex = 10010;
-            this.scanField.Text = "素描字段：";
-            // 
-            // scanFieldTextBox
-            // 
-            this.scanFieldTextBox.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.scanFieldTextBox.Location = new System.Drawing.Point(104, 55);
-            this.scanFieldTextBox.Name = "scanFieldTextBox";
-            this.scanFieldTextBox.Size = new System.Drawing.Size(205, 21);
-            this.scanFieldTextBox.TabIndex = 10009;
-            this.scanFieldTextBox.Text = "账号字段,密码字段";
             // 
             // filePath
             // 
@@ -80,11 +60,11 @@
             // 
             this.help1.AutoSize = true;
             this.help1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.help1.Location = new System.Drawing.Point(12, 119);
+            this.help1.Location = new System.Drawing.Point(12, 85);
             this.help1.Name = "help1";
-            this.help1.Size = new System.Drawing.Size(281, 12);
+            this.help1.Size = new System.Drawing.Size(299, 12);
             this.help1.TabIndex = 10041;
-            this.help1.Text = "配置文件路径为相对于网站根目录路径，请重新设置";
+            this.help1.Text = "若配置文件路径D:/wwwroot/star.com/data/config.php";
             // 
             // help2
             // 
@@ -99,7 +79,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(12, 91);
+            this.label4.Location = new System.Drawing.Point(12, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(179, 12);
             this.label4.TabIndex = 10039;
@@ -114,18 +94,27 @@
             this.label1.Size = new System.Drawing.Size(0, 12);
             this.label1.TabIndex = 10042;
             // 
+            // help3
+            // 
+            this.help3.AutoSize = true;
+            this.help3.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.help3.Location = new System.Drawing.Point(12, 107);
+            this.help3.Name = "help3";
+            this.help3.Size = new System.Drawing.Size(161, 12);
+            this.help3.TabIndex = 10043;
+            this.help3.Text = "config路径为：/data/config";
+            // 
             // WebConfigScan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(319, 184);
+            this.ClientSize = new System.Drawing.Size(319, 176);
+            this.Controls.Add(this.help3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.help1);
             this.Controls.Add(this.help2);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.scanField);
-            this.Controls.Add(this.scanFieldTextBox);
             this.Controls.Add(this.filePath);
             this.Controls.Add(this.filePathTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -133,26 +122,23 @@
             this.Text = "Mysql探针配置";
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.filePath, 0);
-            this.Controls.SetChildIndex(this.scanFieldTextBox, 0);
-            this.Controls.SetChildIndex(this.scanField, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.help2, 0);
             this.Controls.SetChildIndex(this.help1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.help3, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label scanField;
-        private System.Windows.Forms.TextBox scanFieldTextBox;
         private System.Windows.Forms.Label filePath;
         private System.Windows.Forms.TextBox filePathTextBox;
         private System.Windows.Forms.Label help1;
         private System.Windows.Forms.Label help2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label help3;
     }
 }
