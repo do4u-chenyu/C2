@@ -54,6 +54,7 @@
             this.editDDB = new System.Windows.Forms.ToolStripDropDownButton();
             this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.批量添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查找ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.trojanMenu = new System.Windows.Forms.ToolStripDropDownButton();
@@ -132,7 +133,6 @@
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.查找ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -166,78 +166,78 @@
             // EnterToolStripMenuItem
             // 
             this.EnterToolStripMenuItem.Name = "EnterToolStripMenuItem";
-            this.EnterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EnterToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.EnterToolStripMenuItem.Text = "进入";
             this.EnterToolStripMenuItem.Click += new System.EventHandler(this.EnterToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.EditToolStripMenuItem.Text = "编辑";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
             // 
             // SuscideMenuItem
             // 
             this.SuscideMenuItem.Name = "SuscideMenuItem";
-            this.SuscideMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SuscideMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SuscideMenuItem.Text = "一键Suscide";
             this.SuscideMenuItem.Click += new System.EventHandler(this.SuscideMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
             // 
             // RefreshCurrentStatusMenuItem
             // 
             this.RefreshCurrentStatusMenuItem.Name = "RefreshCurrentStatusMenuItem";
-            this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RefreshCurrentStatusMenuItem.Text = "选定项验活";
             this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.RefreshCurrentStatusMenuItem_Click);
             // 
             // refreshOtherMenu
             // 
             this.refreshOtherMenu.Name = "refreshOtherMenu";
-            this.refreshOtherMenu.Size = new System.Drawing.Size(180, 22);
+            this.refreshOtherMenu.Size = new System.Drawing.Size(148, 22);
             this.refreshOtherMenu.Text = "境外站验活";
             this.refreshOtherMenu.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // RefreshAllDeadMenu
             // 
             this.RefreshAllDeadMenu.Name = "RefreshAllDeadMenu";
-            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(180, 22);
+            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(148, 22);
             this.RefreshAllDeadMenu.Text = "二刷不活";
             this.RefreshAllDeadMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
             // 
             // ReverseShellMenu
             // 
             this.ReverseShellMenu.Name = "ReverseShellMenu";
-            this.ReverseShellMenu.Size = new System.Drawing.Size(180, 22);
+            this.ReverseShellMenu.Size = new System.Drawing.Size(148, 22);
             this.ReverseShellMenu.Text = "反弹Shell";
             this.ReverseShellMenu.Click += new System.EventHandler(this.ReverseShellMenu_Click);
             // 
             // msfMenu
             // 
             this.msfMenu.Name = "msfMenu";
-            this.msfMenu.Size = new System.Drawing.Size(180, 22);
+            this.msfMenu.Size = new System.Drawing.Size(148, 22);
             this.msfMenu.Text = "MSF联动";
             this.msfMenu.Click += new System.EventHandler(this.MSFMenu_Click);
             // 
@@ -247,46 +247,46 @@
             this.dbFilePathMenu,
             this.configInfoMenu});
             this.mysqlProbeMenu.Name = "mysqlProbeMenu";
-            this.mysqlProbeMenu.Size = new System.Drawing.Size(180, 22);
+            this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
             this.mysqlProbeMenu.Text = "Mysql探针";
             // 
             // dbFilePathMenu
             // 
             this.dbFilePathMenu.Name = "dbFilePathMenu";
-            this.dbFilePathMenu.Size = new System.Drawing.Size(180, 22);
+            this.dbFilePathMenu.Size = new System.Drawing.Size(159, 22);
             this.dbFilePathMenu.Text = "config路径";
             this.dbFilePathMenu.Click += new System.EventHandler(this.ConfigFilePathScan_Click);
             // 
             // configInfoMenu
             // 
             this.configInfoMenu.Name = "configInfoMenu";
-            this.configInfoMenu.Size = new System.Drawing.Size(180, 22);
+            this.configInfoMenu.Size = new System.Drawing.Size(159, 22);
             this.configInfoMenu.Text = "Mysql配置信息";
             this.configInfoMenu.Click += new System.EventHandler(this.WebConfigInfoScan_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
             // 
             // ClearAllToolStripMenuItem
             // 
             this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ClearAllToolStripMenuItem.Text = "全部清空";
             this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CopyToolStripMenuItem.Text = "复制到剪切板";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // SaveResultsMenuItem
             // 
             this.SaveResultsMenuItem.Name = "SaveResultsMenuItem";
-            this.SaveResultsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveResultsMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SaveResultsMenuItem.Text = "导出结果";
             this.SaveResultsMenuItem.Click += new System.EventHandler(this.SaveResultsMenuItem_Click);
             // 
@@ -327,21 +327,29 @@
             this.editDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editDDB.Name = "editDDB";
             this.editDDB.Size = new System.Drawing.Size(45, 22);
-            this.editDDB.Text = "添加";
+            this.editDDB.Text = "常规";
+            this.editDDB.ToolTipText = "常规操作";
             // 
             // 添加ToolStripMenuItem
             // 
             this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.添加ToolStripMenuItem.Text = "单个添加";
             this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // 批量添加ToolStripMenuItem
             // 
             this.批量添加ToolStripMenuItem.Name = "批量添加ToolStripMenuItem";
-            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.批量添加ToolStripMenuItem.Text = "批量添加";
             this.批量添加ToolStripMenuItem.Click += new System.EventHandler(this.批量添加ToolStripMenuItem_Click);
+            // 
+            // 查找ToolStripMenuItem
+            // 
+            this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
+            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.查找ToolStripMenuItem.Text = "查找";
+            this.查找ToolStripMenuItem.Click += new System.EventHandler(this.查找ToolStripMenuItem_Click);
             // 
             // settingMenu
             // 
@@ -979,12 +987,6 @@
             this.CopyDirMenu.Size = new System.Drawing.Size(172, 22);
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
-            // 
-            // 查找ToolStripMenuItem
-            // 
-            this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
-            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.查找ToolStripMenuItem.Text = "查找";
             // 
             // WebShellManageForm
             // 

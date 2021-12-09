@@ -293,6 +293,12 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FindSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FindSet.Designer.cs">
+      <DependentUpon>FindSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FunctionUnlockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2104,6 +2110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.resx">
       <DependentUpon>AddAllWebShellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\FindSet.resx">
+      <DependentUpon>FindSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\FunctionUnlockForm.resx">
       <DependentUpon>FunctionUnlockForm.cs</DependentUpon>

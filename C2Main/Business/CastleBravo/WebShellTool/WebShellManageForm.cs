@@ -918,6 +918,10 @@ namespace C2.Business.CastleBravo.WebShellTool
                 FuctionUnlock();
         }
 
+        private void 查找ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FindSet().ShowDialog();
+        }
     }
     public enum InfoType
     {
