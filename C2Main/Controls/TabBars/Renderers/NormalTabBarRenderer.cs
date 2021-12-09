@@ -6,6 +6,7 @@ namespace C2.Controls
 {
     class NormalTabBarRenderer : TabBarRenderer
     {
+        Rectangle rectangle;
         public NormalTabBarRenderer(TabBar bar)
             : base(bar)
         {
@@ -163,7 +164,7 @@ namespace C2.Controls
 
         protected virtual void DrawItemBackground(TabItemPaintEventArgs e)
         {
-            var rect = e.Bounds;
+            rectangle = e.Bounds;
             Color borderColor = Color.Empty;
             if (e.Selected)
             {
@@ -171,18 +172,18 @@ namespace C2.Controls
                 switch (e.Bar.Alignment)
                 {
                     case TabAlignment.Left:
-                        rect.Width += e.Bar.BaseLineSize;
+                        rectangle.Width += e.Bar.BaseLineSize;
                         break;
                     case TabAlignment.Top:
-                        rect.Height += e.Bar.BaseLineSize;
+                        rectangle.Height += e.Bar.BaseLineSize;
                         break;
                     case TabAlignment.Right:
-                        rect.X -= e.Bar.BaseLineSize;
-                        rect.Width += e.Bar.BaseLineSize;
+                        rectangle.X -= e.Bar.BaseLineSize;
+                        rectangle.Width += e.Bar.BaseLineSize;
                         break;
                     case TabAlignment.Bottom:
-                        rect.Y -= e.Bar.BaseLineSize;
-                        rect.Height += e.Bar.BaseLineSize;
+                        rectangle.Y -= e.Bar.BaseLineSize;
+                        rectangle.Height += e.Bar.BaseLineSize;
                         break;
                 }
 
@@ -191,7 +192,7 @@ namespace C2.Controls
                 {
                     //LinearGradientBrush backBrush = new LinearGradientBrush(e.Bounds, PaintHelper.GetLightColor(backColor), backColor, 90.0f);
                     var backBrush = new SolidBrush(backColor);
-                    e.Graphics.FillRectangle(backBrush, rect);
+                    e.Graphics.FillRectangle(backBrush, rectangle);
                 }
 
                 borderColor = e.Bar.BaseLineColor;
@@ -218,7 +219,8 @@ namespace C2.Controls
 
             if (!borderColor.IsEmpty)
             {
-                DrawItemBorder(e, rect, borderColor);
+                //TabItem之间矩形边界根据颜色划线
+                DrawItemBorder(e, rectangle, borderColor);
             }
         }
 
@@ -253,6 +255,7 @@ namespace C2.Controls
                                 new Point(rect.Right, rect.Bottom), 
                                 new Point(rect.Left, rect.Bottom) };
                     break;
+                
                 case TabAlignment.Top:
                 default:
                     pts = new Point[]{ 
@@ -261,13 +264,20 @@ namespace C2.Controls
                                 new Point(rect.Right, rect.Y), 
                                 new Point(rect.Right, rect.Bottom) };
                     break;
+                
             }
-
+            /*
             Pen pen = new Pen(color);
             var pom = e.Graphics.PixelOffsetMode;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
             e.Graphics.DrawLines(pen, pts);
             e.Graphics.PixelOffsetMode = pom;
+            */
+
+            Pen newPen = new Pen(Color.DodgerBlue, 6);
+            e.Graphics.DrawLine(newPen, new Point(rectangle.Left, rectangle.Bottom), new Point(rectangle.Right, rectangle.Bottom));
+
+
             //e.Graphics.DrawPath(new Pen(Bar.BaseLineColor), path);
         }
 
@@ -368,8 +378,11 @@ namespace C2.Controls
 
             if (Bar.SelectedItem != null)
             {
-                if (Bar.IsHorizontal)
+                if (Bar.IsHorizontal) 
+                {
                     e.Graphics.ExcludeClip(new Rectangle(Bar.SelectedItem.Bounds.X, 0, Bar.SelectedItem.Bounds.Width, Bar.Height));
+                }
+                    
                 else
                     e.Graphics.ExcludeClip(new Rectangle(0, Bar.SelectedItem.Bounds.Y, Bar.Width, Bar.SelectedItem.Bounds.Height));
             }
