@@ -6,6 +6,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
     partial class FindSet : StandardDialog
     {
         private string SText { get; set; }
+        private string TText { get => this.textBox1.Text.Trim(); }
         private readonly ListView lv;
         private int lastIndex;
         public FindSet(ListView lv)
@@ -18,21 +19,44 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 
         public void SearchHit()
         {
-            base.ShowDialog();
-            if (string.IsNullOrEmpty(SText))
+            if (ShowDialog() != DialogResult.OK)
                 return;
 
-            if (!SText.Equals(this.textBox1.Text.Trim()))
-                this.lastIndex = 0;
+            if (string.IsNullOrEmpty(TText))
+                return;
 
-            ListViewItem lvi = lv.FindItemWithText(SText, true, this.lastIndex, true);
+            if (SText != TText)
+            {
+                this.lastIndex = 0;
+                SText = TText;
+            }
+                
+
+            ListViewItem lvi = FindItemWithText(SText, this.lastIndex);
             this.lastIndex = lvi == null ? 0 : lvi.Index + 1;
 
             if (lvi == null) 
                 return;
- 
+            
+            lv.SelectedItems.Clear();
+            lv.FocusedItem = lvi;
             lvi.Selected = true;
             lvi.EnsureVisible();
+        }
+
+        private ListViewItem FindItemWithText(string text, int startIndex)
+        {
+            foreach(ListViewItem item in lv.Items)
+            {
+                if (item.Index < startIndex)
+                    continue;
+
+                foreach(ListViewItem.ListViewSubItem sub in item.SubItems)
+                    if (sub.Text.Contains(text))
+                        return item;
+            }
+
+            return null;
         }
     }
 }
