@@ -369,42 +369,6 @@
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellTaskConfig.cs" />
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
-    <Compile Include="Business\GlueWater\DBForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\DBForm.Designer.cs">
-      <DependentUpon>DBForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\OutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\OutForm.Designer.cs">
-      <DependentUpon>OutForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\HMForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\HMForm.Designer.cs">
-      <DependentUpon>HMForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\DDForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\DDForm.Designer.cs">
-      <DependentUpon>DDForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\SHForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\SHForm.Designer.cs">
-      <DependentUpon>SHForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Business\GlueWater\SQForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\GlueWater\SQForm.Designer.cs">
-      <DependentUpon>SQForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2171,24 +2135,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\DBForm.resx">
-      <DependentUpon>DBForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\OutForm.resx">
-      <DependentUpon>OutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\HMForm.resx">
-      <DependentUpon>HMForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\DDForm.resx">
-      <DependentUpon>DDForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\SHForm.resx">
-      <DependentUpon>SHForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\SQForm.resx">
-      <DependentUpon>SQForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\FaceBeauty\FaceBeautyForm.resx">
       <DependentUpon>FaceBeautyForm.cs</DependentUpon>
@@ -4347,6 +4293,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Business\GlueWater\" />
     <Folder Include="Business\IAOLab\Webbrowser\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
