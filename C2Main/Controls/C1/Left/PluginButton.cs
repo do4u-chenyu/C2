@@ -71,11 +71,11 @@ namespace C2.Controls.C1.Left
                     break;
                 case "后门黑吃黑专项":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dd;
-                    this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DDFormHelpInfo);
+                    this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.XiseBackdoorHelpInfo);
                     break;
                 case "境外网产专项":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dd;
-                    this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DDFormHelpInfo);
+                    this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.NetworkAssetsHelpInfo);
                     break;
 
 
