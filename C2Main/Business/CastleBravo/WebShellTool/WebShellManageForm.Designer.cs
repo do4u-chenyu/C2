@@ -832,7 +832,6 @@
             this.LV.Font = new System.Drawing.Font("宋体", 9F);
             this.LV.FullRowSelect = true;
             this.LV.GridLines = true;
-            this.LV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LV.HideSelection = false;
             this.LV.LabelWrap = false;
             this.LV.Location = new System.Drawing.Point(0, 25);
@@ -843,6 +842,7 @@
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
+            this.LV.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.LV_ColumnClick);
             this.LV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseClick);
             this.LV.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseDoubleClick);
             // 

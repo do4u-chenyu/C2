@@ -121,7 +121,7 @@ namespace C2.Business.GlueWater
                     List<string> tmpRowList = new List<string>();
                     for (int j = 0; j < colList.Length; j++)
                     {
-                        string cellValue = j < rowList.Length ? rowList[j] : "";
+                        string cellValue = j < rowList.Length ? rowList[j] : string.Empty;
                         tmpRowList.Add(cellValue);
                     }
                     dataTable.Rows.Add(tmpRowList.ToArray());

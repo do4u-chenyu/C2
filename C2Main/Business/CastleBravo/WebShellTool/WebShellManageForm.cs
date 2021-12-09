@@ -62,6 +62,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             setOfIPAddress = new HashSet<string>();
             NumberOfAlive = 0;
             finder = new FindSet(LV);
+            LV.ListViewItemSorter = new LVComparer();
         }
 
         private void InitializeToolStrip()
@@ -904,7 +905,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             new MysqlProbeSet().ShowDialog();
-
+            // TODO LXF
             this.infoType = InfoType.WebConfigPath;
 
             //string payload = new WebConfigScan().ShowDialog();
@@ -915,18 +916,25 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
-    }
-    public enum InfoType
-    {
-        MysqlBlasting,
-        SystemInfo,
-        ProcessView,
-        ScheduleTask,
-        LocationInfo,
-        MSF,
-        NC,
-        WebConfigPath,
-        MysqlProbe,
-        Empty
+
+        private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            LVComparer c = LV.ListViewItemSorter as LVComparer;
+
+            switch (e.Column)
+            {
+                case 2: // url      支持排序的列
+                case 3: // password
+                case 5: // alive
+                case 7: // SG
+                case 8: // ip
+                case 9: // C1
+                case 10:// C2 
+                    c.col = e.Column;
+                    c.asce = !c.asce;
+                    LV.Sort();
+                    break;
+            }
+        }
     }
 }

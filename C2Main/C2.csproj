@@ -285,6 +285,7 @@
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\Action\LVComparer.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,6 +294,7 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\Info\Type.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FindSet.cs">
       <SubType>Form</SubType>
     </Compile>
