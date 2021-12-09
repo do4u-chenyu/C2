@@ -341,6 +341,10 @@
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.Designer.cs">
       <DependentUpon>MSFSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.Designer.cs">
+      <DependentUpon>MysqlProbeSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3121,6 +3125,7 @@
     <None Include="Resources\Images\internet.png" />
     <None Include="Resources\Images\italic.png" />
     <None Include="Resources\Images\WidgetImage\joinPool.png" />
+    <None Include="Resources\Images\HM.png" />
     <Content Include="Resources\Images\InfoExtraction.png" />
     <None Include="Resources\Images\JS.png" />
     <Content Include="Resources\Images\keyboard.png" />
@@ -3264,6 +3269,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Images\WC.png" />
     <Content Include="Resources\Images\webkit.png" />
     <Content Include="Resources\Images\WebScan.png" />
     <None Include="Resources\Images\webshell.png" />
