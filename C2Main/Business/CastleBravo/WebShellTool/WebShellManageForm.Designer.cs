@@ -44,8 +44,6 @@
             this.ReverseShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.msfMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mysqlProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.dbFilePathMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.configInfoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,26 +241,10 @@
             // 
             // mysqlProbeMenu
             // 
-            this.mysqlProbeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dbFilePathMenu,
-            this.configInfoMenu});
             this.mysqlProbeMenu.Name = "mysqlProbeMenu";
             this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
             this.mysqlProbeMenu.Text = "Mysql探针";
-            // 
-            // dbFilePathMenu
-            // 
-            this.dbFilePathMenu.Name = "dbFilePathMenu";
-            this.dbFilePathMenu.Size = new System.Drawing.Size(159, 22);
-            this.dbFilePathMenu.Text = "config路径";
-            this.dbFilePathMenu.Click += new System.EventHandler(this.ConfigFilePathScan_Click);
-            // 
-            // configInfoMenu
-            // 
-            this.configInfoMenu.Name = "configInfoMenu";
-            this.configInfoMenu.Size = new System.Drawing.Size(159, 22);
-            this.configInfoMenu.Text = "Mysql配置信息";
-            this.configInfoMenu.Click += new System.EventHandler(this.WebConfigInfoScan_Click);
+            this.mysqlProbeMenu.Click += new System.EventHandler(this.MysqlProbeMenu_Click);
             // 
             // toolStripSeparator4
             // 
@@ -333,14 +315,14 @@
             // 添加ToolStripMenuItem
             // 
             this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.添加ToolStripMenuItem.Text = "单个添加";
             this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // 批量添加ToolStripMenuItem
             // 
             this.批量添加ToolStripMenuItem.Name = "批量添加ToolStripMenuItem";
-            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.批量添加ToolStripMenuItem.Text = "批量添加";
             this.批量添加ToolStripMenuItem.Click += new System.EventHandler(this.批量添加ToolStripMenuItem_Click);
             // 
@@ -348,7 +330,7 @@
             // 
             this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
             this.查找ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.查找ToolStripMenuItem.Text = "查找";
             this.查找ToolStripMenuItem.Click += new System.EventHandler(this.查找ToolStripMenuItem_Click);
             // 
@@ -1111,8 +1093,6 @@
         private System.Windows.Forms.ToolStripMenuItem ReverseShellMenu;
         private System.Windows.Forms.ToolStripButton UnlockButton;
         private System.Windows.Forms.ToolStripMenuItem mysqlProbeMenu;
-        private System.Windows.Forms.ToolStripMenuItem dbFilePathMenu;
-        private System.Windows.Forms.ToolStripMenuItem configInfoMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem OpenDirMenu;

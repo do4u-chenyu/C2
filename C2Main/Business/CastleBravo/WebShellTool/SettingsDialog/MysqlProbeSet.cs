@@ -7,6 +7,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         public MysqlProbeSet()
         {
             InitializeComponent();
+            this.probeScopeCB.SelectedIndex = 0;
         }
     }
 }

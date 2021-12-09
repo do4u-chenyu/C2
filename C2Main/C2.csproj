@@ -341,7 +341,9 @@
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.Designer.cs">
       <DependentUpon>MSFSet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.Designer.cs">
       <DependentUpon>MysqlProbeSet.cs</DependentUpon>
     </Compile>
@@ -2137,6 +2139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.resx">
       <DependentUpon>MSFSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.resx">
+      <DependentUpon>MysqlProbeSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.resx">
       <DependentUpon>ReverseShellSet.cs</DependentUpon>

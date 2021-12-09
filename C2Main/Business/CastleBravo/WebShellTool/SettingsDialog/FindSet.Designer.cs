@@ -56,6 +56,7 @@
             this.ClientSize = new System.Drawing.Size(451, 115);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FindSet";
             this.Text = "查找";
             this.Controls.SetChildIndex(this.label1, 0);

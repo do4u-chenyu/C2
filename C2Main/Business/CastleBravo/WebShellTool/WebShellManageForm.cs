@@ -847,13 +847,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
 
-        private void ConfigFilePathScan_Click(object sender, EventArgs e)
-        {
-            if (this.LV.SelectedItems.Count == 0)
-                return;
-            this.infoType = InfoType.WebConfigPath;
-            SingleInfoCollection(this.LV.SelectedItems[0]);
-        }
         //右键菜单功能
         private void LV_MouseClick(object sender, MouseEventArgs e)
         {
@@ -903,6 +896,24 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void 查找ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             finder.FindHit();
+        }
+
+        private void MysqlProbeMenu_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            new MysqlProbeSet().ShowDialog();
+
+            this.infoType = InfoType.WebConfigPath;
+
+            //string payload = new WebConfigScan().ShowDialog();
+            //if (payload.IsNullOrEmpty()) return;
+            //this.infoType = InfoType.MysqlProbe;
+            //ClientSetting.InfoPayloadDict[InfoType.MysqlProbe] = payload;
+            //SingleInfoCollection(this.LV.SelectedItems[0]);
+
+            SingleInfoCollection(this.LV.SelectedItems[0]);
         }
     }
     public enum InfoType
