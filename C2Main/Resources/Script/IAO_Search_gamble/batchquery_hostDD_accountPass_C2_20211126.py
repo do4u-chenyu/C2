@@ -194,7 +194,7 @@ class BatchQuery:
                     LOGGER.info('QUERY_ERROR-{0}'.format(e))
                 for data in self.queryclient(KEY_WORDS,QUREY_TYPE):
                     if data.get('_HOST', '') and data.get('_MAINFILE', ''):
-                        pload, method, content = self.ext_mainfile(data.get('_MAINFILE', ''))
+                        pload, method = self.ext_mainfile(data.get('_MAINFILE', ''))
                         if pload != 'http文件获取失败':
                             try:
                                 f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ pload+'\t'+method+'\t'+KEY_WORDS+'\n')
