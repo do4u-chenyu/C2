@@ -920,21 +920,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             LVComparer c = LV.ListViewItemSorter as LVComparer;
-
-            switch (e.Column)
-            {
-                case 2: // url      支持排序的列
-                case 3: // password
-                case 5: // alive
-                case 7: // SG
-                case 8: // ip
-                case 9: // C1
-                case 10:// C2 
-                    c.col = e.Column;
-                    c.asce = !c.asce;
-                    LV.Sort();
-                    break;
-            }
+            c.col = e.Column;
+            c.asce = !c.asce;
+            LV.Sort();
         }
     }
 }
