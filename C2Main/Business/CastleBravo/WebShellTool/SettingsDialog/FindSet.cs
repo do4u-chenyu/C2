@@ -26,7 +26,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
                 this.lastIndex = 0;
 
             ListViewItem lvi = lv.FindItemWithText(SText, true, this.lastIndex, true);
-            this.lastIndex = lvi == null ? 0 : lvi.Index;
+            this.lastIndex = lvi == null ? 0 : lvi.Index + 1;
 
             if (lvi == null) 
                 return;
