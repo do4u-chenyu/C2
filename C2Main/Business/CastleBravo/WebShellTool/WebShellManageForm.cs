@@ -454,7 +454,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             string status = "×";
             using (GuarderUtil.WaitCursor)
             {
-
                 // safe模式下 跳过国内网站
                 bool isChina = RefreshIPAddress(task);
                 if (safeMode && isChina)
@@ -623,16 +622,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             StatusLabel.Text = string.Format("活 {0} - 死 {1}", alive, dead);
         }
 
-
-
         private void ClearScanResult()
         {
             foreach (ListViewItem lvi in LV.Items)
                 lvi.SubItems[7].Text = string.Empty;
         }
-
-
-
 
         #region 后信息收集模块
         // mysql部分
@@ -776,7 +770,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private bool PostInfoCollectionPayload(WebShellTaskConfig task)
         {
-
             try
             {
                 string payload = string.Format(ClientSetting.InfoPayloadDict[this.infoType], task.Password);
@@ -789,9 +782,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return true;
         }
-        /// <summary>
-        /// 异常：ArgumentException，NullException
-        /// </summary>
+
         private String ProcessingResults(string ret,string taskUrl)
         {
             Dictionary<InfoType, string> localSave = new Dictionary<InfoType, string>()
@@ -806,19 +797,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             Match m0 = r0.Match(ret);
             string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
             if (this.infoType == InfoType.LocationInfo)
-            {
                 return LocationResult(rawResult);
-            }
+   
             if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息……
-            {
                 return ClientSetting.WriteResult(rawResult, taskUrl, localSave[infoType]);
-            }
-
+         
             return rawResult;
         }
-        /// <summary>
-        /// 异常：ArgumentException，NullException
-        /// </summary>
+
         private string LocationResult(string rawResult)
         {
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
@@ -870,19 +856,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             this.LV.ContextMenuStrip = this.contextMenuStrip;
 
-            if (e.Button != MouseButtons.Right || e.Clicks != 1)
-                return;
-
-            if (this.LV.SelectedItems.Count == 0)
+            if (e.Button != MouseButtons.Right || e.Clicks != 1 || LV.SelectedItems.Count == 0)
                 return;
 
             ListViewItem item = LV.SelectedItems[0];
             ListViewItem.ListViewSubItem subItem = item.GetSubItemAt(e.X, e.Y);
 
-            if (subItem == null)
-                return;
-
-            if (item.SubItems.IndexOf(subItem) != 7)
+            if (subItem == null || item.SubItems.IndexOf(subItem) != 7)
                 return;
 
             if (!subItem.Text.StartsWith(Path.Combine(Global.UserWorkspacePath, "后信息采集")))
@@ -907,8 +887,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private string CurrentFilePath()
         {
-            ListViewItem item = LV.SelectedItems[0];
-            return item.SubItems[7].Text;
+            return LV.SelectedItems[0].SubItems[7].Text;
         }
         #endregion
 
@@ -920,8 +899,20 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 查找ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new FindSet().ShowDialog();
+            SearchHit(new FindSet().ShowDialog());
         }
+
+        private void SearchHit(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return;
+            ListViewItem lvi = LV.FindItemWithText(value, true, 0, true);
+            if (lvi == null)
+                return;
+            lvi.Selected = true;
+            lvi.EnsureVisible();  
+        }
+
     }
     public enum InfoType
     {
