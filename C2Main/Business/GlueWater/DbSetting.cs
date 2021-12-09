@@ -49,7 +49,15 @@ namespace C2.Business.GlueWater
         public string RefreshHtmlTable()
         {
             StringBuilder sb = new StringBuilder();
-
+            sb.Append("<tr name=\"row\">" +
+                      "    <th>网站名称/域名/IP</th>" +
+                      "    <th>Refer对应Title/Refer</th>" +
+                      "    <th>涉案金额</th>" +
+                      "    <th>涉赌人数</th>" +
+                      "    <th>赌博类型/运营时间</th>" +
+                      "    <th>发现地市/发现时间</th>" +
+                      "</tr>"
+                      );
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
             {
