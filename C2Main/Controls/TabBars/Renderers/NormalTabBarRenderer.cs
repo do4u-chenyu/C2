@@ -211,7 +211,8 @@ namespace C2.Controls
                     var backBrush = new SolidBrush(backColor);
                     e.Graphics.FillRectangle(backBrush, e.Item.Bounds);
 
-                    borderColor = PaintHelper.AdjustColorS(PaintHelper.GetDarkColor(backColor, 0.15), 10, 20);
+                    //TabBar各矩形空间之间划线
+                    //borderColor = PaintHelper.AdjustColorS(PaintHelper.GetDarkColor(backColor, 0.15), 10, 20);
                 }
             }
 
