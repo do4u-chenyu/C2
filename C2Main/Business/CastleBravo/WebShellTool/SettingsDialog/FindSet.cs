@@ -17,7 +17,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
             this.lastIndex = 0;
         }
 
-        public void SearchHit()
+        public void FindHit()
         {
             if (ShowDialog() != DialogResult.OK)
                 return;
