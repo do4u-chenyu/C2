@@ -850,7 +850,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             string files = mps.SearchFiles;
             string fields = mps.SearchFields;
             this.sgType = SGType.MysqlProbe;
-            string payload = string.Format(ClientSetting.MysqlProbe, ps, ST.EncodeBase64(files), ST.EncodeBase64(fields));
+            string payload = string.Format(ClientSetting.MysqlProbe,"{0}", ps, ST.EncodeBase64(files), ST.EncodeBase64(fields));
             ClientSetting.InfoPayloadDict[SGType.MysqlProbe] = payload;
             SingleInfoCollection(this.LV.SelectedItems[0], ts);
         }
