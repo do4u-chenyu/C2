@@ -16,7 +16,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         public int TimeoutSeconds { get => ConvertUtil.TryParseInt(timeoutTB.Text.Trim(), 600); }
         public string SearchFiles { get => fileList.Text.Trim(); }
         public string SearchFields { get => fieldList.Text.Trim(); }
-        public string ProbeStrategy { get => probeStrategyCB.Text.Trim(); }
+        public int ProbeStrategy { get => probeStrategyCB.SelectedIndex; }
 
         protected override bool OnOKButtonClick()
         {
