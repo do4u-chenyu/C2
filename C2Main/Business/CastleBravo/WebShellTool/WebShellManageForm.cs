@@ -910,8 +910,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             int ts = mps.TimeoutSeconds;
             string ps = mps.ProbeStrategy;
-            string[] ewl = mps.EndWithList;
-
+            string files = mps.SearchFiles;
+            string fields = mps.SearchFields;
+           
             // TODO LXF  根据参数将两个步骤合并到一个步骤中
             // 根据情况适当改变参数
             this.sgType = SGType.WebConfigPath;

@@ -32,12 +32,12 @@
             this.timeoutTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.nameListTB = new System.Windows.Forms.TextBox();
+            this.fileList = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.probeStrategyCB = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.fieldList = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -70,14 +70,14 @@
             this.label2.TabIndex = 10006;
             this.label2.Text = "目标文件:";
             // 
-            // nameListTB
+            // fileList
             // 
-            this.nameListTB.Font = new System.Drawing.Font("宋体", 9F);
-            this.nameListTB.Location = new System.Drawing.Point(65, 40);
-            this.nameListTB.Name = "nameListTB";
-            this.nameListTB.Size = new System.Drawing.Size(436, 21);
-            this.nameListTB.TabIndex = 3;
-            this.nameListTB.Text = "mysql.php,database.php,db.php,database.php,config.php,config.inc.php,config_db.ph" +
+            this.fileList.Font = new System.Drawing.Font("宋体", 9F);
+            this.fileList.Location = new System.Drawing.Point(65, 40);
+            this.fileList.Name = "fileList";
+            this.fileList.Size = new System.Drawing.Size(436, 21);
+            this.fileList.TabIndex = 3;
+            this.fileList.Text = "mysql.php,database.php,db.php,database.php,config.php,config.inc.php,config_db.ph" +
     "p,common.inc.php,conn.php,dbconfig.php,config1.php,deploy.php,sql_config.php,wp-" +
     "config.php,c_option.php,config_base.php";
             // 
@@ -107,8 +107,8 @@
             this.probeStrategyCB.Font = new System.Drawing.Font("微软雅黑", 8.5F);
             this.probeStrategyCB.FormattingEnabled = true;
             this.probeStrategyCB.Items.AddRange(new object[] {
-            "整个主机",
             "仅当前站点目录",
+            "整个主机",
             "仅1000个文件",
             "仅10000个文件"});
             this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
@@ -126,14 +126,14 @@
             this.label3.TabIndex = 10036;
             this.label3.Text = "此设置不保存,用前每次设置一下";
             // 
-            // textBox1
+            // fieldList
             // 
-            this.textBox1.Font = new System.Drawing.Font("宋体", 9F);
-            this.textBox1.Location = new System.Drawing.Point(65, 67);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(436, 21);
-            this.textBox1.TabIndex = 10037;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.fieldList.Font = new System.Drawing.Font("宋体", 9F);
+            this.fieldList.Location = new System.Drawing.Point(65, 67);
+            this.fieldList.Name = "fieldList";
+            this.fieldList.Size = new System.Drawing.Size(436, 21);
+            this.fieldList.TabIndex = 10037;
+            this.fieldList.Text = resources.GetString("fieldList.Text");
             // 
             // label6
             // 
@@ -150,13 +150,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 184);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.fieldList);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.probeStrategyCB);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.nameListTB);
+            this.Controls.Add(this.fileList);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.timeoutTB);
             this.Controls.Add(this.label1);
@@ -166,13 +166,13 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.timeoutTB, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.nameListTB, 0);
+            this.Controls.SetChildIndex(this.fileList, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.probeStrategyCB, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.fieldList, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,12 +183,12 @@
         private System.Windows.Forms.TextBox timeoutTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox nameListTB;
+        private System.Windows.Forms.TextBox fileList;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox probeStrategyCB;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox fieldList;
         private System.Windows.Forms.Label label6;
     }
 }
