@@ -851,8 +851,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             int ts = mps.TimeoutSeconds;
             int ps = mps.ProbeStrategy;
-            string files = mps.SearchFiles.Trim;
-            string fields = mps.SearchFields.Trim;
+            string files = mps.SearchFiles.Trim();
+            string fields = mps.SearchFields.Trim();
 
             this.sgType = SGType.MysqlProbe;
             string payload = string.Format(ClientSetting.MysqlProbePayload, 
