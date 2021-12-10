@@ -29,7 +29,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private ToolStripItem[] enableItems;
         private DateTime s; // 自动保存
-        private InfoType infoType;
+        private SGType sgType;
         readonly List<string> threeGroupBios = new List<string>(){
             "L1HF58S04Y6",    // LQ
             "L1HF68F046A",    // SQY
@@ -636,17 +636,17 @@ namespace C2.Business.CastleBravo.WebShellTool
         // mysql部分
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.MysqlBlasting;
+            this.sgType = SGType.MysqlBlasting;
             BatchInfoColletion(false);
         }
         private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.MysqlBlasting;
+            this.sgType = SGType.MysqlBlasting;
             BatchInfoColletion(true);
         }
         private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.MysqlBlasting;
+            this.sgType = SGType.MysqlBlasting;
             DoCurrentItemTask();
         }
         private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
@@ -656,75 +656,75 @@ namespace C2.Business.CastleBravo.WebShellTool
         //系统信息
         private void AllSysInfoMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.SystemInfo;
+            this.sgType = SGType.SystemInfo;
             BatchInfoColletion(false);
         }
 
         private void AliveSysInfoMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.SystemInfo;
+            this.sgType = SGType.SystemInfo;
             BatchInfoColletion(true);
         }
 
         private void CurrentSysInfoMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.SystemInfo;
+            this.sgType = SGType.SystemInfo;
             DoCurrentItemTask();
         }
         // 进程信息
         private void AllProcessView_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.ProcessView;
+            this.sgType = SGType.ProcessView;
             BatchInfoColletion(false);
         }
 
         private void AliveProcessView_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.ProcessView;
+            this.sgType = SGType.ProcessView;
             BatchInfoColletion(true);
         }
 
         private void CurrentProcessView_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.ProcessView;
+            this.sgType = SGType.ProcessView;
             DoCurrentItemTask();
 
         }
         // 定时任务
         private void AllScheduleTask_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.ScheduleTask;
+            this.sgType = SGType.ScheduleTask;
             BatchInfoColletion(false);
         }
 
         private void AliveScheduleTask_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.ScheduleTask;
+            this.sgType = SGType.ScheduleTask;
             BatchInfoColletion(true);
         }
 
         private void CurrentScheduleTask_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.ScheduleTask;
+            this.sgType = SGType.ScheduleTask;
             DoCurrentItemTask();
 
         }
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.LocationInfo;
+            this.sgType = SGType.LocationInfo;
             BatchInfoColletion(false);
         }
         private void AliveLocationInfo_Click(object sender, EventArgs e)
         {
 
-            this.infoType = InfoType.LocationInfo;
+            this.sgType = SGType.LocationInfo;
             BatchInfoColletion(true);
         }
 
         private void CurrentLocationInfo_Click(object sender, EventArgs e)
         {
-            this.infoType = InfoType.LocationInfo;
+            this.sgType = SGType.LocationInfo;
             DoCurrentItemTask();
         }
         private void DoCurrentItemTask()
@@ -776,7 +776,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             try
             {
-                string payload = string.Format(ClientSetting.InfoPayloadDict[this.infoType], task.Password);
+                string payload = string.Format(ClientSetting.InfoPayloadDict[this.sgType], task.Password);
                 string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
                 task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
             }
@@ -789,22 +789,22 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private String ProcessingResults(string ret,string taskUrl)
         {
-            Dictionary<InfoType, string> localSave = new Dictionary<InfoType, string>()
+            Dictionary<SGType, string> localSave = new Dictionary<SGType, string>()
             {
-                {InfoType.ProcessView, "进程信息"},
-                {InfoType.ScheduleTask, "定时任务"},
-                {InfoType.WebConfigPath,"WEB配置文件路径"},
-                {InfoType.MysqlProbe, "Mysql探针"},
-                {InfoType.SystemInfo, "系统信息"},
+                {SGType.ProcessView, "进程信息"},
+                {SGType.ScheduleTask, "定时任务"},
+                {SGType.WebConfigPath,"WEB配置文件路径"},
+                {SGType.MysqlProbe, "Mysql探针"},
+                {SGType.SystemInfo, "系统信息"},
             };
             Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P", RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
             string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
-            if (this.infoType == InfoType.LocationInfo)
+            if (this.sgType == SGType.LocationInfo)
                 return LocationResult(rawResult);
    
-            if (localSave.ContainsKey(this.infoType))//进程 计划任务 系统信息……
-                return ClientSetting.WriteResult(rawResult, taskUrl, localSave[infoType]);
+            if (localSave.ContainsKey(this.sgType))//进程 计划任务 系统信息……
+                return ClientSetting.WriteResult(rawResult, taskUrl, localSave[sgType]);
          
             return rawResult;
         }
@@ -843,8 +843,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
             string payload = new WebConfigScan().ShowDialog();
             if (payload.IsNullOrEmpty()) return;
-            this.infoType = InfoType.MysqlProbe;
-            ClientSetting.InfoPayloadDict[InfoType.MysqlProbe] = payload;
+            this.sgType = SGType.MysqlProbe;
+            ClientSetting.InfoPayloadDict[SGType.MysqlProbe] = payload;
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
 
@@ -904,9 +904,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
-            new MysqlProbeSet().ShowDialog();
-            // TODO LXF
-            this.infoType = InfoType.WebConfigPath;
+            MysqlProbeSet mps = new MysqlProbeSet();
+            if (mps.ShowDialog() != DialogResult.OK)
+                return;
+
+            int ts = mps.TimeoutSeconds;
+            string ps = mps.ProbeStrategy;
+            string[] ewl = mps.EndWithList;
+
+            // TODO LXF  根据参数将两个步骤合并到一个步骤中
+            // 根据情况适当改变参数
+            this.sgType = SGType.WebConfigPath;
 
             //string payload = new WebConfigScan().ShowDialog();
             //if (payload.IsNullOrEmpty()) return;
@@ -922,7 +930,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             LVComparer c = LV.ListViewItemSorter as LVComparer;
             c.col = e.Column;
             c.asce = !c.asce;
-            LV.Sort();
+            using(GuarderUtil.WaitCursor)
+                LV.Sort();
         }
     }
 }

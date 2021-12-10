@@ -21,7 +21,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
                 return false;
             }
            
-            Payload = string.Format(ClientSetting.InfoPayloadDict[InfoType.MysqlProbe],
+            Payload = string.Format(ClientSetting.InfoPayloadDict[SGType.MysqlProbe],
                                           "{0}",
                                           ST.EncodeBase64(filePathTextBox.Text.Trim()));
             return base.OnOKButtonClick();

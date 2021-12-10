@@ -295,7 +295,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1319, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1336, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -838,7 +838,7 @@
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1319, 458);
+            this.LV.Size = new System.Drawing.Size(1336, 458);
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -854,7 +854,7 @@
             // lvRemark
             // 
             this.lvRemark.Text = "备注";
-            this.lvRemark.Width = 95;
+            this.lvRemark.Width = 68;
             // 
             // lvShellUrl
             // 
@@ -884,12 +884,12 @@
             // lvInfoCollection
             // 
             this.lvInfoCollection.Text = "后信息收集";
-            this.lvInfoCollection.Width = 77;
+            this.lvInfoCollection.Width = 111;
             // 
             // lvIP
             // 
             this.lvIP.Text = "IP";
-            this.lvIP.Width = 100;
+            this.lvIP.Width = 107;
             // 
             // lvCountry1
             // 
@@ -912,7 +912,7 @@
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 483);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1319, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1336, 26);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 4;
             // 
@@ -976,7 +976,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1319, 509);
+            this.ClientSize = new System.Drawing.Size(1336, 509);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);

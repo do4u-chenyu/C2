@@ -34,7 +34,7 @@
             this.nameListTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.probeScopeCB = new System.Windows.Forms.ComboBox();
+            this.probeStrategyCB = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -98,18 +98,18 @@
             // 
             // probeScopeCB
             // 
-            this.probeScopeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.probeScopeCB.Font = new System.Drawing.Font("微软雅黑", 8.5F);
-            this.probeScopeCB.FormattingEnabled = true;
-            this.probeScopeCB.Items.AddRange(new object[] {
+            this.probeStrategyCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.probeStrategyCB.Font = new System.Drawing.Font("微软雅黑", 8.5F);
+            this.probeStrategyCB.FormattingEnabled = true;
+            this.probeStrategyCB.Items.AddRange(new object[] {
             "整个主机",
             "仅当前站点目录",
             "仅1000个文件",
             "仅10000个文件"});
-            this.probeScopeCB.Location = new System.Drawing.Point(311, 8);
-            this.probeScopeCB.Name = "probeScopeCB";
-            this.probeScopeCB.Size = new System.Drawing.Size(107, 24);
-            this.probeScopeCB.TabIndex = 2;
+            this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
+            this.probeStrategyCB.Name = "probeScopeCB";
+            this.probeStrategyCB.Size = new System.Drawing.Size(107, 24);
+            this.probeStrategyCB.TabIndex = 2;
             // 
             // label3
             // 
@@ -127,7 +127,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 145);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.probeScopeCB);
+            this.Controls.Add(this.probeStrategyCB);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nameListTB);
@@ -143,7 +143,7 @@
             this.Controls.SetChildIndex(this.nameListTB, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.probeScopeCB, 0);
+            this.Controls.SetChildIndex(this.probeStrategyCB, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -158,7 +158,7 @@
         private System.Windows.Forms.TextBox nameListTB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox probeScopeCB;
+        private System.Windows.Forms.ComboBox probeStrategyCB;
         private System.Windows.Forms.Label label3;
     }
 }

@@ -222,7 +222,11 @@ namespace C2.Core
         }
         public static string[] Split(this string str, string separator)
         {
-            return str.Split(new string[] { separator }, StringSplitOptions.None);
+            return str.Split(separator, StringSplitOptions.None);
+        }
+        public static string[] Split(this string str, string separator, StringSplitOptions options)
+        {
+            return str.Split(new string[] { separator }, options);
         }
         public static string[] SplitWhitespace(this string str)
         {
