@@ -204,7 +204,7 @@
             this.RefreshCurrentStatusMenuItem.Name = "RefreshCurrentStatusMenuItem";
             this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RefreshCurrentStatusMenuItem.Text = "选定项验活";
-            this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.RefreshCurrentStatusMenuItem_Click);
+            this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.CheckAliveSelectedItemMenuItem_Click);
             // 
             // refreshOtherMenu
             // 
@@ -556,7 +556,7 @@
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
             this.refreshAllShellMenu.Size = new System.Drawing.Size(136, 22);
             this.refreshAllShellMenu.Text = "批量验活";
-            this.refreshAllShellMenu.Click += new System.EventHandler(this.RefreshAllStatusMenuItem_Click);
+            this.refreshAllShellMenu.Click += new System.EventHandler(this.CheckAliveAllMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
@@ -755,7 +755,7 @@
             this.refreshStopMenu.Name = "refreshStopMenu";
             this.refreshStopMenu.Size = new System.Drawing.Size(56, 22);
             this.refreshStopMenu.Text = "停止任务";
-            this.refreshStopMenu.Click += new System.EventHandler(this.RefreshStopMenu_Click);
+            this.refreshStopMenu.Click += new System.EventHandler(this.CheckAliveStopMenu_Click);
             // 
             // progressBar
             // 

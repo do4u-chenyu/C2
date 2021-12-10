@@ -149,8 +149,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             // 修复添加6万左右数据卡死的问题
-            using (GuarderUtil.WaitCursor)
-                LV.Items.AddRange(NewLVIS(dialog.Tasks));
+            RefreshLV();
             tasks.AddRange(dialog.Tasks);
             SaveDB();
         }
@@ -219,6 +218,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         static bool isAlertnatingRows = true;
+        static readonly Color SingleRowColor = Color.FromArgb(255, 217, 225, 242);
+        static readonly Color AltertnatingRowColor = Color.FromArgb(255, 208, 206, 206);
         private ListViewItem NewLVI(WebShellTaskConfig config)
         {
             ListViewItem lvi = new ListViewItem(config.CreateTime);
@@ -237,7 +238,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 指针关联
             lvi.Tag = config;
             // 设置间隔行背景色
-            lvi.BackColor = isAlertnatingRows ? Color.FromArgb(255, 217, 225, 242) : Color.FromArgb(255, 208, 206, 206);
+            lvi.BackColor = isAlertnatingRows ? SingleRowColor : AltertnatingRowColor;
             isAlertnatingRows = !isAlertnatingRows;
             return lvi;
         }
@@ -327,7 +328,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
 
-        private void RefreshCurrentStatusMenuItem_Click(object sender, EventArgs e)
+        private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
@@ -336,19 +337,19 @@ namespace C2.Business.CastleBravo.WebShellTool
             SaveDB();
         }
 
-        private void RefreshAllStatusMenuItem_Click(object sender, EventArgs e)
+        private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus(false);
+            DoCheckAliveAllMenuItemClick(false);
         }
 
-        private bool refreshNeedStop = false;
+        private bool checkAliveNeedStop = false;
 
-        private void RefreshStopMenu_Click(object sender, EventArgs e)
+        private void CheckAliveStopMenu_Click(object sender, EventArgs e)
         {
-            refreshNeedStop = true;
+            checkAliveNeedStop = true;
         }
 
-        private void SecondRefreshTaskStatus()
+        private void SecondCheckAliveTaskStatus()
         {
             ResetProgressMenu();
 
@@ -359,29 +360,29 @@ namespace C2.Business.CastleBravo.WebShellTool
                 else
                     this.progressBar.Maximum--;
             }
-            RefreshAll(true, false);
-            EndRefresh();
+            CheckAliveAll(true, false);
+            EndCheckAlive();
         }
 
-        private void RefreshAllTaskStatus(bool safeMode)
+        private void DoCheckAliveAllMenuItemClick(bool safeMode)
         {   // 刷新前先强制清空
             ResetProgressMenu();
 
             foreach (ListViewItem lvi in LV.Items)
-                ClearAliveItems(lvi);
+                ClearAliveSubItems(lvi);
 
-            RefreshAll(false, safeMode);
-            EndRefresh();
+            CheckAliveAll(false, safeMode);
+            EndCheckAlive();
         }
 
-        private void RefreshAll(bool skipAlive, bool safeMode)
+        private void CheckAliveAll(bool skipAlive, bool safeMode)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             foreach (ListViewItem lvi in LV.Items)
             {
-                if (refreshNeedStop)
+                if (checkAliveNeedStop)
                     break;
                 // 启用二刷
                 if (skipAlive && lvi.SubItems[5].Text != "待")
@@ -394,7 +395,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         }
 
-        private void EndRefresh()
+        private void EndCheckAlive()
         {
             RefreshTasks();
             SaveDB();
@@ -416,7 +417,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
             this.progressBar.Maximum = LV.Items.Count;
-            this.refreshNeedStop = false;
+            this.checkAliveNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
@@ -425,7 +426,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void UpdateAliveItems(ListViewItem lvi, bool safeMode = false)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-            string rts = RefreshTaskStatus(task, safeMode);
+            string rts = CheckAliveOneTask(task, safeMode);
 
             if (rts == "√")
             {
@@ -449,7 +450,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 NumberOfIPAddress);
         }
 
-        private static void ClearAliveItems(ListViewItem lvi)
+        private static void ClearAliveSubItems(ListViewItem lvi)
         {
             lvi.SubItems[5].Text = string.Empty;
             lvi.SubItems[8].Text = string.Empty;
@@ -457,7 +458,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems[10].Text = string.Empty;
         }
 
-        private string RefreshTaskStatus(WebShellTaskConfig task, bool safeMode)
+        private string CheckAliveOneTask(WebShellTaskConfig task, bool safeMode)
         {
             string status = "×";
             using (GuarderUtil.WaitCursor)
@@ -592,17 +593,17 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshAllDeadMenu_Click(object sender, EventArgs e)
         {
-            SecondRefreshTaskStatus();
+            SecondCheckAliveTaskStatus();
         }
 
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
-            RefreshAllTaskStatus(true);
+            DoCheckAliveAllMenuItemClick(true);
         }
 
         private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.refreshNeedStop = true;
+            this.checkAliveNeedStop = true;
             using (GuarderUtil.WaitCursor)
             {
                 RefreshTasks();
@@ -735,7 +736,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             foreach (ListViewItem item in this.LV.SelectedItems)
             {
-                if (refreshNeedStop)
+                if (checkAliveNeedStop)
                     break;
                 SingleInfoCollection(item);
             }
@@ -747,7 +748,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             ResetProgressMenu();
             ClearScanResult();
             DoInfoCollectionTask(checkAlive);
-            EndRefresh();
+            EndCheckAlive();
         }
         private void DoInfoCollectionTask(bool checkAlive)
         {
@@ -756,7 +757,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemEnableGuarder(this.enableItems))
                 foreach (ListViewItem lvi in LV.Items)
                 {
-                    if (refreshNeedStop)
+                    if (checkAliveNeedStop)
                         break;
                     if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
                     {
@@ -923,7 +924,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             c.col = e.Column;
             c.asce = !c.asce;
             using(GuarderUtil.WaitCursor)
+            using (new LayoutGuarder(LV))
+            {
                 LV.Sort();
+                RefreshTasks(); // 回写任务
+                RefreshLV();    // 重新布局
+            }
+                
         }
     }
 }
