@@ -50,6 +50,9 @@ namespace C2.Forms
             string selectedItem = tabBar1.SelectedItem.Tag.ToString();
             glueSetting = GlueSettingFactory.GetSetting(selectedItem);
             RefreshHtmlTable();
+            this.excelTextBox.Text = "未选择任何文件";
+            if (selectedItem == "境外网产专项")
+                selectedItem = "网产专项";
             this.itemLabel.Text = selectedItem.Replace("专项", "");
         }
 
@@ -90,7 +93,7 @@ namespace C2.Forms
             excelPath = OpenFileDialog.FileName;
 
             if (glueSetting.UpdateContent(excelPath))
-                this.label4.Text = System.IO.Path.GetFileName(excelPath) + "文件上传成功。";
+                this.excelTextBox.Text = System.IO.Path.GetFileName(excelPath) + "文件上传成功。";
             else
                 MessageBox.Show("数据上传失败。");
 
