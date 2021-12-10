@@ -154,12 +154,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             SaveDB();
         }
 
-        private void RefreshTasks()
+        private void RefreshTasks(bool create = true)
         {
             tasks.Clear();
             foreach (ListViewItem lvi in LV.Items)
             {
-                WebShellTaskConfig config = new WebShellTaskConfig(GetSubItemsTextArray(lvi));
+                WebShellTaskConfig config = create ? new WebShellTaskConfig(GetSubItemsTextArray(lvi)) : 
+                    lvi.Tag as WebShellTaskConfig;
                 lvi.Tag = config; // 关联
                 tasks.Add(config);
             }
@@ -916,8 +917,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             finder.FindHit();
         }
 
-       
-
         private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             LVComparer c = LV.ListViewItemSorter as LVComparer;
@@ -927,7 +926,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new LayoutGuarder(LV))
             {
                 LV.Sort();
-                RefreshTasks(); // 回写任务
+                RefreshTasks(false); // 回写任务, 速度慢, 将来要优化
                 RefreshLV();    // 重新布局
             }
                 
