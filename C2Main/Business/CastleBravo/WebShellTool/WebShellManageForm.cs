@@ -837,17 +837,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
         // 数据库账号密码扫描
-        private void WebConfigInfoScan_Click(object sender, EventArgs e)
-        {
-            if (this.LV.SelectedItems.Count == 0)
-                return;
-            string payload = new WebConfigScan().ShowDialog();
-            if (payload.IsNullOrEmpty()) return;
-            this.sgType = SGType.MysqlProbe;
-            ClientSetting.InfoPayloadDict[SGType.MysqlProbe] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0]);
-        }
-
+       
         //右键菜单功能
         private void LV_MouseClick(object sender, MouseEventArgs e)
         {
