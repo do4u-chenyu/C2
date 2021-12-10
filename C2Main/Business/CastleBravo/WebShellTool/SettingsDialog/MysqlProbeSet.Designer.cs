@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MysqlProbeSet));
             this.timeoutTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,6 +37,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.probeStrategyCB = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timeoutTB
@@ -74,7 +77,9 @@
             this.nameListTB.Name = "nameListTB";
             this.nameListTB.Size = new System.Drawing.Size(436, 21);
             this.nameListTB.TabIndex = 3;
-            this.nameListTB.Text = "config.php|config.inc.php|db.php|db_config.php";
+            this.nameListTB.Text = "mysql.php,database.php,db.php,database.php,config.php,config.inc.php,config_db.ph" +
+    "p,common.inc.php,conn.php,dbconfig.php,config1.php,deploy.php,sql_config.php,wp-" +
+    "config.php,c_option.php,config_base.php";
             // 
             // label4
             // 
@@ -96,7 +101,7 @@
             this.label5.TabIndex = 10012;
             this.label5.Text = "秒";
             // 
-            // probeScopeCB
+            // probeStrategyCB
             // 
             this.probeStrategyCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.probeStrategyCB.Font = new System.Drawing.Font("微软雅黑", 8.5F);
@@ -107,7 +112,7 @@
             "仅1000个文件",
             "仅10000个文件"});
             this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
-            this.probeStrategyCB.Name = "probeScopeCB";
+            this.probeStrategyCB.Name = "probeStrategyCB";
             this.probeStrategyCB.Size = new System.Drawing.Size(107, 24);
             this.probeStrategyCB.TabIndex = 2;
             // 
@@ -115,17 +120,38 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(6, 70);
+            this.label3.Location = new System.Drawing.Point(6, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(179, 12);
             this.label3.TabIndex = 10036;
             this.label3.Text = "此设置不保存,用前每次设置一下";
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("宋体", 9F);
+            this.textBox1.Location = new System.Drawing.Point(65, 67);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(436, 21);
+            this.textBox1.TabIndex = 10037;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(5, 69);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 17);
+            this.label6.TabIndex = 10038;
+            this.label6.Text = "检索字段:";
+            // 
             // MysqlProbeSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 145);
+            this.ClientSize = new System.Drawing.Size(513, 184);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.probeStrategyCB);
             this.Controls.Add(this.label5);
@@ -145,6 +171,8 @@
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.probeStrategyCB, 0);
             this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.textBox1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,5 +188,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox probeStrategyCB;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
     }
 }
