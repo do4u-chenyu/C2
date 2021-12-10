@@ -20,16 +20,25 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         protected override bool OnOKButtonClick()
         {
             //判断必填是否有值
+            int index = probeStrategyCB.SelectedIndex;
             if (timeoutTB.Text.IsNullOrEmpty() ||
-                probeStrategyCB.SelectedIndex < 0 ||
                 fieldList.Text.IsNullOrEmpty() ||
-                fileList.Text.IsNullOrEmpty())
+                fileList.Text.IsNullOrEmpty() ||
+                (index > 0 && hostDir.Text.IsEmpty())
+                )
             {
                 HelpUtil.ShowMessageBox("各配置项不能为空。");
                 return false;
             }
+
             return base.OnOKButtonClick();
         }
+
+        private void ProbeStrategyCB_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            hostDir.Enabled = probeStrategyCB.SelectedIndex > 0;
+        }
+
 
 
     }
