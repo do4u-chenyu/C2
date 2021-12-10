@@ -768,19 +768,19 @@ namespace C2.Business.CastleBravo.WebShellTool
                     CheckSavePoint(); // 5分钟保存一次
                 }
         }
-        private void SingleInfoCollection(ListViewItem lvi)
+        private void SingleInfoCollection(ListViewItem lvi,int time = 90)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
             lvi.SubItems[7].Text = "进行中";
             using (GuarderUtil.WaitCursor)
-                DoEventsWait(90, Task.Run(() => PostInfoCollectionPayload(task)));
+                DoEventsWait(time, Task.Run(() => PostInfoCollectionPayload(task)));
             lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
         }
         private bool PostInfoCollectionPayload(WebShellTaskConfig task)
         {
             try
             {
-                string payload = string.Format(ClientSetting.InfoPayloadDict[this.sgType], task.Password);
+                string payload = string.Format(ClientSetting.PayloadDict[this.sgType], task.Password);
                 string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
                 task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
             }
@@ -797,7 +797,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 {SGType.ProcessView, "进程信息"},
                 {SGType.ScheduleTask, "定时任务"},
-                {SGType.WebConfigPath,"WEB配置文件路径"},
                 {SGType.MysqlProbe, "Mysql探针"},
                 {SGType.SystemInfo, "系统信息"},
             };
@@ -840,7 +839,32 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (dialogResult.Equals(DialogResult.OK))
                 this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
-        //右键菜单功能
+
+        private void MysqlProbeMenu_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            MysqlProbeSet mps = new MysqlProbeSet();
+            if (mps.ShowDialog() != DialogResult.OK)
+                return;
+
+            int ts = mps.TimeoutSeconds;
+            int ps = mps.ProbeStrategy;
+            string files = mps.SearchFiles;
+            string fields = mps.SearchFields;
+
+            this.sgType = SGType.MysqlProbe;
+            string payload = string.Format(ClientSetting.MysqlProbePayload, 
+                "{0}", 
+                ps, 
+                ST.EncodeBase64(files), 
+                ST.EncodeBase64(fields));
+
+            ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
+            SingleInfoCollection(this.LV.SelectedItems[0], ts);
+        }
+
         private void LV_MouseClick(object sender, MouseEventArgs e)
         {
             this.LV.ContextMenuStrip = this.contextMenuStrip;
@@ -891,31 +915,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             finder.FindHit();
         }
 
-        private void MysqlProbeMenu_Click(object sender, EventArgs e)
-        {
-            if (this.LV.SelectedItems.Count == 0)
-                return;
-
-            MysqlProbeSet mps = new MysqlProbeSet();
-            if (mps.ShowDialog() != DialogResult.OK)
-                return;
-
-            int ts = mps.TimeoutSeconds;
-            string ps = mps.ProbeStrategy;
-            string[] ewl = mps.EndWithList;
-
-            // TODO LXF  根据参数将两个步骤合并到一个步骤中
-            // 根据情况适当改变参数
-            this.sgType = SGType.WebConfigPath;
-
-            //string payload = new WebConfigScan().ShowDialog();
-            //if (payload.IsNullOrEmpty()) return;
-            //this.infoType = InfoType.MysqlProbe;
-            //ClientSetting.InfoPayloadDict[InfoType.MysqlProbe] = payload;
-            //SingleInfoCollection(this.LV.SelectedItems[0]);
-
-            SingleInfoCollection(this.LV.SelectedItems[0]);
-        }
+       
 
         private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
         {
