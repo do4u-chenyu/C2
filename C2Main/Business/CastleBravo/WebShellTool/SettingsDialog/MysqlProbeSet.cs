@@ -1,4 +1,6 @@
 ﻿using C2.Controls;
+using C2.Core;
+using C2.Utils;
 
 namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
@@ -7,7 +9,28 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         public MysqlProbeSet()
         {
             InitializeComponent();
-            this.probeScopeCB.SelectedIndex = 0;
+            this.probeStrategyCB.SelectedIndex = 0;
         }
+
+        public int TimeoutSeconds { get => ConvertUtil.TryParseInt(timeoutTB.Text.Trim(), 600); }
+        public string SearchFiles { get => fileList.Text.Trim(); }
+        public string SearchFields { get => fieldList.Text.Trim(); }
+        public int ProbeStrategy { get => probeStrategyCB.SelectedIndex; }
+
+        protected override bool OnOKButtonClick()
+        {
+            //判断必填是否有值
+            if (timeoutTB.Text.IsNullOrEmpty() ||
+                probeStrategyCB.SelectedIndex < 0 ||
+                fieldList.Text.IsNullOrEmpty() ||
+                fileList.Text.IsNullOrEmpty())
+            {
+                HelpUtil.ShowMessageBox("各配置项不能为空。");
+                return false;
+            }
+            return base.OnOKButtonClick();
+        }
+
+
     }
 }

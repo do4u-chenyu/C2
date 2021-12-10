@@ -53,8 +53,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -83,7 +83,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 337);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(602, 44);
+            this.panel1.Size = new System.Drawing.Size(619, 44);
             this.panel1.TabIndex = 5;
             // 
             // export
@@ -158,7 +158,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 24);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(593, 314);
+            this.tabPage7.Size = new System.Drawing.Size(611, 309);
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "备案号查询";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -190,11 +190,11 @@
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.White;
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 104);
+            this.richTextBox2.Location = new System.Drawing.Point(3, 99);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox2.Size = new System.Drawing.Size(587, 207);
+            this.richTextBox2.Size = new System.Drawing.Size(605, 207);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
@@ -219,7 +219,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(593, 314);
+            this.tabPage6.Size = new System.Drawing.Size(611, 309);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "银行卡号查询";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -260,11 +260,11 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.White;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 104);
+            this.richTextBox1.Location = new System.Drawing.Point(3, 99);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox1.Size = new System.Drawing.Size(587, 207);
+            this.richTextBox1.Size = new System.Drawing.Size(605, 207);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -275,11 +275,12 @@
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(601, 342);
+            this.tabControl1.Size = new System.Drawing.Size(619, 337);
             this.tabControl1.TabIndex = 12;
             // 
             // tabPage8
@@ -291,7 +292,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 24);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(593, 314);
+            this.tabPage8.Size = new System.Drawing.Size(611, 309);
             this.tabPage8.TabIndex = 6;
             this.tabPage8.Text = "身份证号查询";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -330,9 +331,10 @@
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(3, 104);
+            this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox3.Location = new System.Drawing.Point(3, 99);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(587, 207);
+            this.richTextBox3.Size = new System.Drawing.Size(605, 207);
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "";
             // 
@@ -343,18 +345,10 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 24);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(593, 314);
+            this.tabPage9.Size = new System.Drawing.Size(611, 309);
             this.tabPage9.TabIndex = 7;
             this.tabPage9.Text = "快递单号查询";
             this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox4
-            // 
-            this.richTextBox4.Location = new System.Drawing.Point(3, 104);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(587, 207);
-            this.richTextBox4.TabIndex = 1;
-            this.richTextBox4.Text = "";
             // 
             // label7
             // 
@@ -366,11 +360,20 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "批量查询格式：多个快递单号用换行分隔";
             // 
+            // richTextBox4
+            // 
+            this.richTextBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox4.Location = new System.Drawing.Point(3, 99);
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.Size = new System.Drawing.Size(605, 207);
+            this.richTextBox4.TabIndex = 1;
+            this.richTextBox4.Text = "";
+            // 
             // InformationSearch
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(602, 381);
+            this.ClientSize = new System.Drawing.Size(619, 381);
             this.Controls.Add(this.import);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);

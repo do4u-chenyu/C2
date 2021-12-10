@@ -36,7 +36,7 @@
             this.sampleButton = new System.Windows.Forms.Button();
             this.browserButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabBar1 = new C2.Controls.TabBar();
+            this.tabBar1 = new C2.Controls.JSTabBar();
             this.panel3 = new System.Windows.Forms.Panel();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.panel1.SuspendLayout();

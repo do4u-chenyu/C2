@@ -1,16 +1,15 @@
 ﻿namespace C2.Business.CastleBravo.WebShellTool
 {
-    public enum InfoType
+    public enum SGType
     {
         MysqlBlasting,
+        MysqlProbe,
         SystemInfo,
         ProcessView,
         ScheduleTask,
         LocationInfo,
         MSF,
-        NC,
-        WebConfigPath,
-        MysqlProbe,
+        NC,  
         Empty
     }
 }

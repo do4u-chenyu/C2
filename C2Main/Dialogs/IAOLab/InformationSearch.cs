@@ -104,7 +104,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "身份证号\t转18位身份证号\t归属地\t出生日期\t性别\n";
+                firstLine = "15位身份证号\t18位身份证号\t出生日期\t性别\t归属地\n";
                 tmpResult.Append(firstLine);
                 foreach (string idCard in inputArray)
                 {
@@ -120,7 +120,7 @@ namespace C2.Dialogs.IAOLab
             if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)     //身份证号查询
             {
 
-                string[] inputArray = this.richTextBox3.Text.Split('\n');
+                string[] inputArray = this.richTextBox4.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;

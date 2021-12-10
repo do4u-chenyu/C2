@@ -116,15 +116,22 @@ namespace C2.Forms
             RefreshHtmlTable();
         }
 
-        private void RefreshHtmlTable()
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+        public void SortCol(string col, string sortType)
         {
-            //有几个操作都会动态刷新html，初始化、添加、排序
-            this.webBrowser.Document.InvokeScript("clearTable");
+            glueSetting.SortDataTableByCol(col, sortType);
+            RefreshHtmlTable(false);
+        }
 
-            //先试试初始化
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable() });
+        private void RefreshHtmlTable(bool freshTitle = true)
+        {
+            this.webBrowser.Document.InvokeScript("clearTable");
+            if(freshTitle)
+                this.webBrowser.Document.InvokeScript("clearTableTitle"); 
+
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(freshTitle) });
         }
         #endregion
-
     }
 }

@@ -46,7 +46,7 @@ namespace C2.Business.GlueWater.Settings
         {
         }
 
-        public override string RefreshHtmlTable()
+        public override string RefreshHtmlTable(bool freshTitle = true)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("<tr name=\"row\">" +

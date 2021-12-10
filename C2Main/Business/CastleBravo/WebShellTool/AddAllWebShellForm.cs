@@ -41,7 +41,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "文件 | *.txt"
+                Filter = "文件 | *.txt",
+                FileName = filePath
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;

