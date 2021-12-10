@@ -1,4 +1,7 @@
 ﻿using C2.Controls;
+using C2.Utils;
+using C2.Core;
+using System;
 
 namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
@@ -7,7 +10,11 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         public MysqlProbeSet()
         {
             InitializeComponent();
-            this.probeScopeCB.SelectedIndex = 0;
+            this.probeStrategyCB.SelectedIndex = 0;
         }
+
+        public int TimeoutSeconds { get => ConvertUtil.TryParseInt(timeoutTB.Text.Trim(), 600); }
+        public string[] EndWithList { get => nameListTB.Text.Trim().Split("|", StringSplitOptions.RemoveEmptyEntries); } 
+        public string ProbeStrategy { get => probeStrategyCB.Text.Trim(); }
     }
 }
