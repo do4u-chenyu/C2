@@ -148,14 +148,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            foreach (WebShellTaskConfig task in dialog.Tasks)
-            {
-                if (task == WebShellTaskConfig.Empty)
-                    continue;
-
-                LV.Items.Add(NewLVI(task));
-                tasks.Add(task);
-            }
+            // 修复添加6万左右数据卡死的问题
+            using (GuarderUtil.WaitCursor)
+                LV.Items.AddRange(NewLVIS(dialog.Tasks));
+            tasks.AddRange(dialog.Tasks);
             SaveDB();
         }
 
@@ -218,12 +214,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         public void RefreshLV()
         {
             LV.Items.Clear();  // 不能删表头的clear方法
-            foreach (WebShellTaskConfig config in tasks)
-                LV.Items.Add(NewLVI(config));
+            using (GuarderUtil.WaitCursor)
+                LV.Items.AddRange(NewLVIS(tasks));
         }
 
         static bool isAlertnatingRows = true;
-        private static ListViewItem NewLVI(WebShellTaskConfig config)
+        private ListViewItem NewLVI(WebShellTaskConfig config)
         {
             ListViewItem lvi = new ListViewItem(config.CreateTime);
             lvi.SubItems.Add(config.Remark);
@@ -244,6 +240,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.BackColor = isAlertnatingRows ? Color.FromArgb(255, 217, 225, 242) : Color.FromArgb(255, 208, 206, 206);
             isAlertnatingRows = !isAlertnatingRows;
             return lvi;
+        }
+
+        private ListViewItem[] NewLVIS(IList<WebShellTaskConfig> tasks)
+        {
+            ListViewItem[] lvis = new ListViewItem[tasks.Count];
+            for (int i = 0; i < lvis.Length; i++)
+                lvis[i] = NewLVI(tasks[i]);
+            return lvis;
         }
 
         private void EnterToolStripMenuItem_Click(object sender, EventArgs e)

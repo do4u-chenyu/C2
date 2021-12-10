@@ -21,12 +21,13 @@ namespace C2.IAOLab.IDInfoGet
 
         public IDInfoGet()
         {
-            table = new Dictionary<string, string>(3209);
+            table = new Dictionary<string, string>(1024 * 4);
             string ret = FileUtil.FileReadToEnd(Path.Combine(Application.StartupPath, "Resources/Templates/AreaNum.txt"));
             foreach(string line in ret.Split(System.Environment.NewLine))
             {
                 string[] lineSplit = line.Split(":");
-                table[lineSplit[0].Trim()] = lineSplit[1].Trim();
+                if (lineSplit.Length >= 2)
+                    table[lineSplit[0].Trim()] = lineSplit[1].Trim();
             }
         }
 
