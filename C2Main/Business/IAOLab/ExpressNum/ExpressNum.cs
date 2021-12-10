@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using C2.Utils;
-using System.Collections;
 using System.Web;
 using System.Text;
 using System.Net;
 using System;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace C2.IAOLab.ExpressNum
 {
@@ -20,70 +18,95 @@ namespace C2.IAOLab.ExpressNum
                 instance = new ExpressNum();
             return instance;
         }
+        private readonly string EBusinessID = "1719835";//即用户ID，快递鸟
+        private readonly string ApiKey = "604e4b0f-8d4d-435e-8dcd-7a5e90eeb99c";//即API key
+        private readonly string ReqURL = "https://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx"; //请求URL
 
         public string ExpressSearch(string input)
         {
-            //string result;
-            return null;
+            Dictionary<string, string> nameCode = new Dictionary<string, string>();
+            nameCode.Add("shentong", "STO");
+            nameCode.Add("huitong", "HTKY");
+            nameCode.Add("yuantong", "YTO");
+            nameCode.Add("tiantian", "HHTT");
+            string name = GetName(input); //我要查 查询快递公司结果
+            if (name == string.Empty)
+                return string.Format("{0}\t{1}{2}", input, "快递单号查询失败", Environment.NewLine);
+            string result = OrderOnlineByJson(nameCode[name],input);
+            string locRex = @"\u0022AcceptStation\u0022 : \u0022(.*?)\u0022,";    //获取快递途径站点
+            MatchCollection loc = Regex.Matches(result,locRex);
+            string startLoc = loc[0].Groups[1].Value;
+            string endLoc = loc[loc.Count - 2].Groups[1].Value;
+
+            string startRex1 = "【(.*?)】";
+            startLoc = Regex.Match(startLoc,startRex1).Groups[1].Value;
+            string endRex1 = "(.*?)，";
+            endLoc = Regex.Match(endLoc, endRex1).Groups[1].Value;
+            return string.Format("{0}\t{1}\t{2}\t{3}",input,startLoc,endLoc,Environment.NewLine);
+        }
+
+        public static string Sha256(string data)    //sha256加密
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            byte[] hash = SHA256.Create().ComputeHash(bytes);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                builder.Append(hash[i].ToString("X2"));
+            return builder.ToString().ToLower();
         }
         
-        private string EBusinessID = "1719835";//即用户ID
-        private string ApiKey = "604e4b0f-8d4d-435e-8dcd-7a5e90eeb99c";//即API key
-        private string ReqURL = "https://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx"; //请求URL
-
-        public string orderOnlineByJson()
+        public string GetName(string input)    //返回快递公司名称
         {
-            // 组装应用级参数
-            string requestData = "{" +
-                "'CustomerName': ''," +
-                "'OrderCode': ''," +
-                "'ShipperCode': 'YTO'," +
-                "'LogisticCode': 'YT6088486161592'," +
-                "}";
-            // 组装系统级参数
+            List<string> result = new List<string>();
+            string sign = Sha256("appid=10000681&module=getExpressInfo&order=" + input + "&appkey=c33d13c4fbdfd31448674b777336c9c9");
+            string url = string.Format("http://cha.ebaitian.cn/api/json?type=get&appid=10000681&module=getExpressInfo&order={0}&sign={1}", input, sign);
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+            string info = client.DownloadString(url);
+            string nameStr = @"\u0022id\u0022:\u0022(.*?)\u0022,";
+            string name = Regex.Match(info, nameStr).Groups[1].ToString();   //获得快递公司的名称  .*\u0022id\u0022:\u0022(.*?)\u0022,
+            return name;
+    
+        }
+        
+        public string OrderOnlineByJson(string courier,string input)
+        {
+            string requestData = "{" + "'CustomerName': ''," + 
+                "'OrderCode': ''," + 
+                "'ShipperCode':'"+ courier + "'," + 
+                "'LogisticCode':'" + input + "'," + "}";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("RequestData", HttpUtility.UrlEncode(requestData, Encoding.UTF8));
             param.Add("EBusinessID", EBusinessID);
-            param.Add("RequestType", "1002");//免费即时查询接口指令1002/在途监控即时查询接口指令8001/地图版即时查询接口指令8003
-            string dataSign = encrypt(requestData, ApiKey, "UTF-8");
+            param.Add("RequestType", "1002");
+            string dataSign = Encrypt(requestData, ApiKey, "UTF-8");
             param.Add("DataSign", HttpUtility.UrlEncode(dataSign, Encoding.UTF8));
             param.Add("DataType", "2");
-            // 以form表单形式提交post请求，post请求体中包含了应用级参数和系统级参数
-            string result = sendPost(ReqURL, param);
-
-            //根据公司业务处理返回的信息......
+            string result = SendPost(ReqURL, param);
             return result;
         }
 
-        /// <summary>
         /// Post方式提交数据，返回网页的源代码
-        /// </summary>
-        /// <param name="url">发送请求的 URL</param>
-        /// <param name="param">请求的参数集合</param>
-        /// <returns>远程资源的响应结果</returns>
-        private string sendPost(string url, Dictionary<string, string> param)
+        private string SendPost(string url, Dictionary<string, string> param)
         {
-            string result = "";
             StringBuilder postData = new StringBuilder();
             if (param != null && param.Count > 0)
             {
                 foreach (var p in param)
                 {
                     if (postData.Length > 0)
-                    {
                         postData.Append("&");
-                    }
                     postData.Append(p.Key);
                     postData.Append("=");
                     postData.Append(p.Value);
                 }
             }
             byte[] byteData = Encoding.GetEncoding("UTF-8").GetBytes(postData.ToString());
+            string result;
             try
             {
-
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.ContentType = "application/x-www-form-urlencoded"; //
+                request.ContentType = "application/x-www-form-urlencoded";
                 request.Referer = url;
                 request.Accept = "*/*";
                 request.Timeout = 30 * 1000;
@@ -112,33 +135,22 @@ namespace C2.IAOLab.ExpressNum
 
         ///<summary>
         ///电商Sign签名
-        ///</summary>
-        ///<param name="content">内容</param>
-        ///<param name="keyValue">ApiKey</param>
-        ///<param name="charset">URL编码 </param>
-        ///<returns>DataSign签名</returns>
-        private string encrypt(String content, String keyValue, String charset)
+        private string Encrypt(string content, string keyValue, string charset)
         {
             if (keyValue != null)
-            {
-                return base64(MD5(content + keyValue, charset), charset);
-            }
-            return base64(MD5(content, charset), charset);
+                return Base64(MD5(content + keyValue, charset), charset);
+            return Base64(MD5(content, charset), charset);
         }
 
         ///<summary>
         /// 字符串MD5加密
-        ///</summary>
-        ///<param name="str">要加密的字符串</param>
-        ///<param name="charset">编码方式</param>
-        ///<returns>密文</returns>
         private string MD5(string str, string charset)
         {
-            byte[] buffer = System.Text.Encoding.GetEncoding(charset).GetBytes(str);
+            byte[] buffer = Encoding.GetEncoding(charset).GetBytes(str);
             try
             {
-                System.Security.Cryptography.MD5CryptoServiceProvider check;
-                check = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                MD5CryptoServiceProvider check;
+                check = new MD5CryptoServiceProvider();
                 byte[] somme = check.ComputeHash(buffer);
                 string ret = "";
                 foreach (byte a in somme)
@@ -155,24 +167,12 @@ namespace C2.IAOLab.ExpressNum
                 throw;
             }
         }
-
         /// <summary>
         /// base64编码
-        /// </summary>
-        /// <param name="str">内容</param>
-        /// <param name="charset">编码方式</param>
-        /// <returns></returns>
-        private string base64(String str, String charset)
+        private string Base64(string str, string charset)
         {
-            return Convert.ToBase64String(System.Text.Encoding.GetEncoding(charset).GetBytes(str));
+            return Convert.ToBase64String(Encoding.GetEncoding(charset).GetBytes(str));
         }
-
-
-
-
-
-
-
     }
 }
 
