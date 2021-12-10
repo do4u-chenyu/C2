@@ -211,11 +211,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch { }
         }
 
-        public void RefreshLV()
+        private void RefreshLV()
         {
             LV.Items.Clear();  // 不能删表头的clear方法
             using (GuarderUtil.WaitCursor)
                 LV.Items.AddRange(NewLVIS(tasks));
+        }
+
+        private void RefreshBackColor()
+        {
+            foreach(ListViewItem lvi in LV.Items)
+            {
+                lvi.BackColor = isAlertnatingRows ? SingleRowColor : AltertnatingRowColor;
+                isAlertnatingRows = !isAlertnatingRows;
+            }
         }
 
         static bool isAlertnatingRows = true;
@@ -927,7 +936,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 LV.Sort();
                 RefreshTasks(false); // 回写任务, 速度慢, 将来要优化
-                RefreshLV();    // 重新布局
+                RefreshBackColor();  // 重新布局
             }
                 
         }
