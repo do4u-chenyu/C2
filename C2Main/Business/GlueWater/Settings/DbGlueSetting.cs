@@ -40,7 +40,7 @@ namespace C2.Business.GlueWater.Settings
             DbMemberPath = Path.Combine(txtDirectory, "DB_member.txt");
             
             DbWebExcelColList = new List<string> { "网站名称", "网站网址", "网站Ip", "REFER标题", "REFER", "金额", "用户数", "赌博类型(多值##分隔)", "开始运营时间", "归属地", "发现时间" };
-            DbMemberExcelColList = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)" };
+            DbMemberExcelColList = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)", "安全码", "登陆地址(多值##分隔)" };
 
             DbWebColList = new string[] { "网站名称", "域名", "IP", "Refer对应Title", "Refer", "涉案金额", "涉赌人数", "赌博类型", "运营时间", "发现地市", "发现时间" };
             DbMemberColList = new string[] { "域名", "认证账号", "登陆IP", "登陆账号", "登陆密码", "安全码", "登陆地址" };
@@ -122,6 +122,7 @@ namespace C2.Business.GlueWater.Settings
                 return false;
 
             List<int> headIndex = IndexFilter(DbWebExcelColList, rrst1.Result);
+
             for (int i = 1; i < rrst1.Result.Count; i++)
             {
                 if (headIndex.Max() > rrst1.Result[i].Count)
@@ -146,6 +147,8 @@ namespace C2.Business.GlueWater.Settings
                 return false;
 
             List<int> headIndex2 = IndexFilter(DbMemberExcelColList, rrst2.Result);
+            List<List<string>> needAddList = new List<List<string>>();
+
             for (int i = 1; i < rrst2.Result.Count; i++)
             {
                 if (headIndex2.Max() > rrst2.Result[i].Count)
@@ -153,9 +156,9 @@ namespace C2.Business.GlueWater.Settings
                 List<string> resultList = ContentFilter(headIndex2, rrst2.Result[i]);
 
                 //这里要做判断了 对于member，url存在，比较是否完全一致
-                DataRow[] rows = DbMemberTable.Select("域名='" + resultList[1] + "'");
+                DataRow[] rows = DbMemberTable.Select("域名='" + resultList[0] + "'");
                 if (rows.Length == 0)
-                    DbMemberTable.Rows.Add(resultList.ToArray());
+                    needAddList.Add(resultList);
                 else
                 {
                     foreach (DataRow row in rows)
@@ -165,11 +168,14 @@ namespace C2.Business.GlueWater.Settings
                             rowContent.Add(row[j].ToString());
 
                         if (rowContent.Count != 0 && string.Join("\t", rowContent) != string.Join("\t", resultList))
-                            DbMemberTable.Rows.Add(resultList.ToArray());
+                            needAddList.Add(resultList);
                     }
                 }
 
             }
+            foreach(List<string> li in needAddList)
+                DbMemberTable.Rows.Add(li.ToArray());
+
             ReWriteResult(DbMemberPath, DbMemberTable);
             return true;
         }
