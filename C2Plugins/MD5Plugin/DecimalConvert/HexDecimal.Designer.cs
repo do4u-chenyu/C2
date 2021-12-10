@@ -1,4 +1,4 @@
-﻿namespace MD5Plugin.DecimalConvert
+﻿namespace MD5Plugin
 {
     partial class HexDecimal
     {

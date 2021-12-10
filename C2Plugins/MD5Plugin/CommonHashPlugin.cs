@@ -23,8 +23,6 @@ namespace MD5Plugin
                 case 1:
                     bytes = HexStringToBytes(str);
                     break;
-                default:
-                    break;
             }
 
             return bytes;

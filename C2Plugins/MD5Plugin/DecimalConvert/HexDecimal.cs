@@ -1,6 +1,6 @@
-﻿namespace MD5Plugin.DecimalConvert
+﻿namespace MD5Plugin
 {
-    public partial class HexDecimal : OctDecimal
+    partial class HexDecimal : OctDecimal
     {
         public HexDecimal()
         {

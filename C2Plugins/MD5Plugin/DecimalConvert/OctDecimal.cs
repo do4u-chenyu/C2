@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 
-namespace MD5Plugin.DecimalConvert
+namespace MD5Plugin
 {
-    public partial class OctDecimal : URLPlugin
+    partial class OctDecimal : URLPlugin
     {
 
         protected string sepType = " ";
@@ -30,7 +30,7 @@ namespace MD5Plugin.DecimalConvert
                 sepType = " ";
         }
 
-        public override void encode(string str)
+        public override void Encode(string str)
         {
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
@@ -39,11 +39,11 @@ namespace MD5Plugin.DecimalConvert
             }
             outputTextBox.Text = DoConvert(str, decimalBase, 16);
         }
-        public override void decode(string str)
+        public override void Decode(string str)
         {
             if (outputTextBox.Text == "请输入你要解码的内容")
             {
-                originOutput();
+                OriginOutput();
                 return;
             }
  

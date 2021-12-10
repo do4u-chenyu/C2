@@ -18,7 +18,7 @@ namespace MD5Plugin
             MessageBox.Show("请输入加密内容", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public virtual void encode(string str)
+        public virtual void Encode(string str)
         {
 
         }
@@ -26,7 +26,7 @@ namespace MD5Plugin
         
         public void buttonEncode_Click(object sender, EventArgs e)
         {
-            encode(inputTextBox.Text);
+            Encode(inputTextBox.Text);
             outputTextBox.ForeColor = Color.Black;
         }
         

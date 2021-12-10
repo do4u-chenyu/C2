@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace MD5Plugin
 {
-    public partial class HexPlugin : Base64Plugin
+    partial class HexPlugin : Base64Plugin
     {
         string splitType = "无分隔符";
         string radixType = "十六进制";
@@ -34,7 +33,7 @@ namespace MD5Plugin
             radixType = radixComboBox.SelectedItem as string;
         }
 
-        public override void encode(string str)
+        public override void Encode(string str)
         {
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
@@ -110,7 +109,7 @@ namespace MD5Plugin
             return arrByte;
         }
 
-        public override void decode(string str)
+        public override void Decode(string str)
         {
             try
             {

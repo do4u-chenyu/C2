@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace MD5Plugin
 {
-    public partial class AES128Plugin : Base64Plugin
+    partial class AES128Plugin : Base64Plugin
     {
         public RijndaelManaged rijndaelCipher = new RijndaelManaged();
         public AES128Plugin()
@@ -15,14 +15,14 @@ namespace MD5Plugin
             this.outputTextBox.Text = "请把你需要解密的内容粘贴在这里";
         }
 
-        public void setting(RijndaelManaged rijndaelCipher)
+        public void Setting(RijndaelManaged rijndaelCipher)
         {
             rijndaelCipher.Mode = CipherMode.ECB;
             rijndaelCipher.Padding = PaddingMode.Zeros;
             rijndaelCipher.BlockSize = 128;
         }
 
-        public override void encode(string EncryptStr)
+        public override void Encode(string EncryptStr)
         {
             string Key = textBoxEncryptionkey.Text;
             string iv = string.Empty;
@@ -34,7 +34,7 @@ namespace MD5Plugin
             {
                 try
                 {
-                    setting(rijndaelCipher);
+                    Setting(rijndaelCipher);
                     byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
                     byte[] keyBytes = new byte[16];
                     int len = pwdBytes.Length;
@@ -55,18 +55,18 @@ namespace MD5Plugin
             }
         }
        
-        public override void decode(string DecryptStr)
+        public override void Decode(string DecryptStr)
         {
             string Key = textBoxEncryptionkey.Text;
             if (outputTextBox.Text == "请把你需要解密的内容粘贴在这里")
             {
-                originOutput();
+                OriginOutput();
             }
             else 
             {
                 try
                 {
-                    setting(rijndaelCipher);
+                    Setting(rijndaelCipher);
                     byte[] encryptedData = Convert.FromBase64String(DecryptStr);
                     byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
                     byte[] keyBytes = new byte[16];
