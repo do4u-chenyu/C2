@@ -63,8 +63,8 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
                       "    <th>Refer对应Title/Refer</th>" +
-                      "    <th>涉案金额<a class=\"arrow desc\" onclick=\"SortCol(this)\"></a></th>" +
-                      "    <th>涉赌人数<a class=\"arrow desc\" onclick=\"SortCol(this)\"></a></th>" +
+                      "    <th>涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
+                      "    <th>涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "    <th>赌博类型/运营时间</th>" +
                       "    <th>发现地市/发现时间</th>" +
                       "</tr>"
@@ -75,7 +75,7 @@ namespace C2.Business.GlueWater.Settings
             {
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
-                            "   <td id=\"th0\">{0}<br><a onclick=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
+                            "   <td id=\"th0\">{0}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}</td>" +
                             "   <td>{6}</td>" +
