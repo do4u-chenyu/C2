@@ -107,10 +107,16 @@
             this.probeStrategyCB.Font = new System.Drawing.Font("微软雅黑", 8.5F);
             this.probeStrategyCB.FormattingEnabled = true;
             this.probeStrategyCB.Items.AddRange(new object[] {
-            "仅当前站点目录",
+            "当前站点目录",
             "所有同站目录",
-            "仅1000个文件",
-            "仅10000个文件"});
+            "前1000个文件",
+            "前10000个文件",
+            "前100000个文件(规划中...)",
+            "基于字典(规划中...)",
+            "/www(规划中...)",
+            "宝塔面板(规划中...)",
+            "小皮面板(规则中...)",
+            "自定义(规划中...)"});
             this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
             this.probeStrategyCB.Name = "probeStrategyCB";
             this.probeStrategyCB.Size = new System.Drawing.Size(107, 24);
