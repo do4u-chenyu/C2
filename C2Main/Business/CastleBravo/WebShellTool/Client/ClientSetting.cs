@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,8 +13,8 @@ namespace C2.Business.CastleBravo.WebShellTool
     public class ClientSetting
     {
 
-        [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
+        //[DllImport("kernel32")]
+        //private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         public static string UnlockFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "SuperPowerConfig.ini");//DD功能解锁文件地址
 
@@ -102,6 +103,42 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         /// <summary>
+        /// Base64解密，采用utf8编码方式解密
+        /// </summary>
+        /// <param name="result">待解密的密文</param>
+        /// <returns>解密后的字符串</returns>
+        public static string Base64Decode(string result)
+        {
+            return Base64Decode(Encoding.UTF8, result);
+        }
+
+        /// <summary>
+        /// Base64解密
+        /// </summary>
+        /// <param name="encodeType">解密采用的编码方式，注意和加密时采用的方式一致</param>
+        /// <param name="result">待解密的密文</param>
+        /// <returns>解密后的字符串</returns>
+        public static string Base64Decode(Encoding encodeType, string result)
+        {
+            string base64Tmp = string.Empty;
+            using (StreamReader reader = new StreamReader(result, Encoding.UTF8))
+            {
+                base64Tmp = reader.ReadLine();
+            }
+            byte[] bytes = Convert.FromBase64String(base64Tmp);
+            string decode = string.Empty;
+            try
+            {
+                decode = encodeType.GetString(bytes);
+            }
+            catch
+            {
+                decode = result;
+            }
+            return decode;
+        }
+
+        /// <summary>
         /// 读取INI文件值
         /// </summary>
         /// <param name="section">节点名</param>
@@ -112,8 +149,20 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             int nSize = 1024 * 4;
             StringBuilder sb = new StringBuilder(nSize);
-            GetPrivateProfileString(section, key, String.Empty, sb, nSize, filePath);
-            return sb.ToString();
+            string tmp = sb.ToString();
+            tmp = Base64Decode(filePath);
+            List<string> striparr = tmp.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+            striparr = striparr.Where(s => !string.IsNullOrEmpty(s)).ToList();
+            string[] keyRes = new string[2];
+            foreach (string str in striparr)
+            {
+                if (str.Contains(key))
+                {
+                    keyRes = str.Split("=");
+                }
+            }
+            //GetPrivateProfileString(section, key, String.Empty, sb, nSize, tmp);
+            return keyRes[1];
         }
 
         /*<--静态变量复制先后顺序不能改变-->*/
