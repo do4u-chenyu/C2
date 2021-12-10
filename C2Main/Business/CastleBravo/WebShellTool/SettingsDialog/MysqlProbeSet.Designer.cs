@@ -108,13 +108,13 @@
             this.probeStrategyCB.FormattingEnabled = true;
             this.probeStrategyCB.Items.AddRange(new object[] {
             "仅当前站点目录",
-            "整个主机",
+            "所有同站目录",
             "仅1000个文件",
             "仅10000个文件"});
             this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
             this.probeStrategyCB.Name = "probeStrategyCB";
             this.probeStrategyCB.Size = new System.Drawing.Size(107, 24);
-            this.probeStrategyCB.TabIndex = 2;          
+            this.probeStrategyCB.TabIndex = 2;
             // 
             // label3
             // 
@@ -122,9 +122,9 @@
             this.label3.ForeColor = System.Drawing.Color.Red;
             this.label3.Location = new System.Drawing.Point(6, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(179, 12);
+            this.label3.Size = new System.Drawing.Size(269, 12);
             this.label3.TabIndex = 10036;
-            this.label3.Text = "此设置不保存,用前每次设置一下";
+            this.label3.Text = "此设置不保存,用前每次设置一下,默认不需要更改";
             // 
             // fieldList
             // 
@@ -132,7 +132,7 @@
             this.fieldList.Location = new System.Drawing.Point(65, 75);
             this.fieldList.Name = "fieldList";
             this.fieldList.Size = new System.Drawing.Size(436, 21);
-            this.fieldList.TabIndex = 10037;
+            this.fieldList.TabIndex = 4;
             this.fieldList.Text = resources.GetString("fieldList.Text");
             // 
             // label6
@@ -143,7 +143,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 17);
             this.label6.TabIndex = 10038;
-            this.label6.Text = "检索字段:";
+            this.label6.Text = "目标字段:";
             // 
             // MysqlProbeSet
             // 
