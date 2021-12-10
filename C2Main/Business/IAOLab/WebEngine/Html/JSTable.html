@@ -43,11 +43,32 @@ table#dataintable tr:nth-child(even) {
 
 td#th0{
     color:#4a86e8;
+	
 }
+        .arrow {
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+            height: 0;
+            margin-left: 5px;
+        }
+		
+.arrow.asc {
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-bottom: 6px solid #666666;
+				cursor:pointer;
+            }
+			.arrow.desc {
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-top: 6px solid #666666;
+				cursor:pointer;
+            }
 	</style>
 	<script type ="text/javascript">
         function ShowDetails(a) {
-            window.external.ShowDetails(a.text);//getDebugPath()为c#方法
+            window.external.ShowDetails(a.text);//ShowDetails为c#方法
         }
 		function WfToHtml(argStr) {
 		    $("#dataintable").append(argStr);
@@ -59,6 +80,29 @@ td#th0{
 			    $(this).remove();
 		    });
 	    }
+		function clearTableTitle(){
+		    
+		    var arr=[];
+		    $('tr[name="title"]').each(function(){
+			    $(this).remove();
+		    });
+	    }
+		function SortCol(col){
+			var type=$(col).attr('class');
+			var colname=$(col).parent().text();
+			//alert(type);
+			var sortType="";
+			if(type=="arrow asc"){
+				$(col).removeClass("asc");
+				$(col).addClass("desc");
+				sortType="desc";
+			}else if(type=="arrow desc"){
+				$(col).removeClass("desc");
+				$(col).addClass("asc");
+				sortType="asc";
+			}
+			window.external.SortCol(colname,sortType);//ShowDetails为c#方法
+		}
 		
 		$(document).ready(function(){ 
             window.external.InitDataTable();
@@ -67,7 +111,6 @@ td#th0{
 </head>
 <body>
 <table id="dataintable">
-
 
 
 </table>

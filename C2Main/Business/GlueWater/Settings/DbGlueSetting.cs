@@ -55,18 +55,21 @@ namespace C2.Business.GlueWater.Settings
             RefreshHtmlTable();
         }
 
-        public override string RefreshHtmlTable()
+        public override string RefreshHtmlTable(bool freshTitle = true)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<tr name=\"row\">" +
+
+            if(freshTitle)
+                sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
                       "    <th>Refer对应Title/Refer</th>" +
-                      "    <th>涉案金额</th>" +
-                      "    <th>涉赌人数</th>" +
+                      "    <th>涉案金额<a class=\"arrow desc\" onclick=\"SortCol(this)\"></a></th>" +
+                      "    <th>涉赌人数<a class=\"arrow desc\" onclick=\"SortCol(this)\"></a></th>" +
                       "    <th>赌博类型/运营时间</th>" +
                       "    <th>发现地市/发现时间</th>" +
                       "</tr>"
                       );
+
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
             {
@@ -99,6 +102,12 @@ namespace C2.Business.GlueWater.Settings
                 resTable.Rows.Add(row.ItemArray);
 
             return resTable;
+        }
+
+        public override void SortDataTableByCol(string col, string sortType)
+        {
+            DbWebTable.DefaultView.Sort = col + " " + sortType;
+            DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
         public override bool UpdateContent(string excelPath)

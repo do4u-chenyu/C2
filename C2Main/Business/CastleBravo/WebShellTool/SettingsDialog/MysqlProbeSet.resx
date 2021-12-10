@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>username,db_username,db_user,sql_user,user,mysql_user,con_db_id,cfg_dbuser,dbuser,phome_db_username,dbusername,sqluser,zc_mysql_username,password,db_password,db_pwd,sql_pass,pwd,db_passwd,mysql_pwd,con_db_pass,cfg_dbpwd,dbpass,dbpwd,phome_db_password,dbpassword,sqlpwd,pass,dbpw,zc_mysql_password</value>
+  </data>
 </root>
