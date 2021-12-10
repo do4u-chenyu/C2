@@ -34,9 +34,12 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
             return base.OnOKButtonClick();
         }
 
-        private void ProbeStrategyCB_SelectedIndexChanged(object sender, EventArgs e)
+        private void ProbeStrategyCB_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             hostDir.Enabled = probeStrategyCB.SelectedIndex > 0;
         }
+
+
+
     }
 }
