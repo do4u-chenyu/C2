@@ -1,5 +1,4 @@
 ﻿using C2.Business.GlueWater;
-using C2.Business.GlueWater.Settings;
 using C2.Controls;
 using C2.Core;
 using System;
@@ -48,8 +47,10 @@ namespace C2.Forms
         }
         void TaskBar_SelectedItemChanged(object sender, EventArgs e)
         {
-            glueSetting = GlueSettingFactory.GetSetting(tabBar1.SelectedItem.Tag.ToString());
+            string selectedItem = tabBar1.SelectedItem.Tag.ToString();
+            glueSetting = GlueSettingFactory.GetSetting(selectedItem);
             RefreshHtmlTable();
+            this.itemLabel.Text = selectedItem.Replace("专项", "");
         }
 
         protected virtual void AddTabItem(string name, bool visiable = false)
@@ -79,18 +80,17 @@ namespace C2.Forms
 
         private void BrowserButton_Click(object sender, EventArgs e)
         {
-            this.excelPathTextBox.Clear();
+            
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
                 Filter = "文档 | *.xls;*.xlsx"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-            this.excelPathTextBox.Text = OpenFileDialog.FileName;
             excelPath = OpenFileDialog.FileName;
 
             if (glueSetting.UpdateContent(excelPath))
-                MessageBox.Show("数据上传成功。");
+                this.label4.Text = System.IO.Path.GetFileName(excelPath) + "文件上传成功。";
             else
                 MessageBox.Show("数据上传失败。");
 
