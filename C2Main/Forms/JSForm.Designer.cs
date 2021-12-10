@@ -91,7 +91,7 @@
             // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(524, 8);
+            this.sampleButton.Location = new System.Drawing.Point(524, 9);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 26);
             this.sampleButton.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             // excelPathTextBox
             // 
-            this.excelPathTextBox.Location = new System.Drawing.Point(122, 11);
+            this.excelPathTextBox.Location = new System.Drawing.Point(122, 12);
             this.excelPathTextBox.Name = "excelPathTextBox";
             this.excelPathTextBox.ReadOnly = true;
             this.excelPathTextBox.Size = new System.Drawing.Size(284, 21);
@@ -109,7 +109,7 @@
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(435, 8);
+            this.browserButton.Location = new System.Drawing.Point(435, 9);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(76, 26);
             this.browserButton.TabIndex = 1;
@@ -120,7 +120,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 17);
+            this.label3.Location = new System.Drawing.Point(30, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 6;
