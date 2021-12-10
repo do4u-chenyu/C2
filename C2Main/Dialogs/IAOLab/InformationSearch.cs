@@ -120,7 +120,7 @@ namespace C2.Dialogs.IAOLab
             if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)     //身份证号查询
             {
 
-                string[] inputArray = this.richTextBox3.Text.Split('\n');
+                string[] inputArray = this.richTextBox4.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;

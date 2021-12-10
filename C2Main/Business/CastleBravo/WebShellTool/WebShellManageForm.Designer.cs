@@ -44,8 +44,6 @@
             this.ReverseShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.msfMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mysqlProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.dbFilePathMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.configInfoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,26 +241,10 @@
             // 
             // mysqlProbeMenu
             // 
-            this.mysqlProbeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dbFilePathMenu,
-            this.configInfoMenu});
             this.mysqlProbeMenu.Name = "mysqlProbeMenu";
             this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
             this.mysqlProbeMenu.Text = "Mysql探针";
-            // 
-            // dbFilePathMenu
-            // 
-            this.dbFilePathMenu.Name = "dbFilePathMenu";
-            this.dbFilePathMenu.Size = new System.Drawing.Size(159, 22);
-            this.dbFilePathMenu.Text = "config路径";
-            this.dbFilePathMenu.Click += new System.EventHandler(this.ConfigFilePathScan_Click);
-            // 
-            // configInfoMenu
-            // 
-            this.configInfoMenu.Name = "configInfoMenu";
-            this.configInfoMenu.Size = new System.Drawing.Size(159, 22);
-            this.configInfoMenu.Text = "Mysql配置信息";
-            this.configInfoMenu.Click += new System.EventHandler(this.WebConfigInfoScan_Click);
+            this.mysqlProbeMenu.Click += new System.EventHandler(this.MysqlProbeMenu_Click);
             // 
             // toolStripSeparator4
             // 
@@ -313,7 +295,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1319, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1336, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -333,14 +315,14 @@
             // 添加ToolStripMenuItem
             // 
             this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.添加ToolStripMenuItem.Text = "单个添加";
             this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // 批量添加ToolStripMenuItem
             // 
             this.批量添加ToolStripMenuItem.Name = "批量添加ToolStripMenuItem";
-            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.批量添加ToolStripMenuItem.Text = "批量添加";
             this.批量添加ToolStripMenuItem.Click += new System.EventHandler(this.批量添加ToolStripMenuItem_Click);
             // 
@@ -348,7 +330,7 @@
             // 
             this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
             this.查找ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.查找ToolStripMenuItem.Text = "查找";
             this.查找ToolStripMenuItem.Click += new System.EventHandler(this.查找ToolStripMenuItem_Click);
             // 
@@ -850,17 +832,17 @@
             this.LV.Font = new System.Drawing.Font("宋体", 9F);
             this.LV.FullRowSelect = true;
             this.LV.GridLines = true;
-            this.LV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LV.HideSelection = false;
             this.LV.LabelWrap = false;
             this.LV.Location = new System.Drawing.Point(0, 25);
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1319, 458);
+            this.LV.Size = new System.Drawing.Size(1336, 458);
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
+            this.LV.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.LV_ColumnClick);
             this.LV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseClick);
             this.LV.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LV_MouseDoubleClick);
             // 
@@ -872,7 +854,7 @@
             // lvRemark
             // 
             this.lvRemark.Text = "备注";
-            this.lvRemark.Width = 95;
+            this.lvRemark.Width = 68;
             // 
             // lvShellUrl
             // 
@@ -902,12 +884,12 @@
             // lvInfoCollection
             // 
             this.lvInfoCollection.Text = "后信息收集";
-            this.lvInfoCollection.Width = 77;
+            this.lvInfoCollection.Width = 111;
             // 
             // lvIP
             // 
             this.lvIP.Text = "IP";
-            this.lvIP.Width = 100;
+            this.lvIP.Width = 107;
             // 
             // lvCountry1
             // 
@@ -930,7 +912,7 @@
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 483);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1319, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1336, 26);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 4;
             // 
@@ -994,7 +976,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1319, 509);
+            this.ClientSize = new System.Drawing.Size(1336, 509);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
@@ -1111,8 +1093,6 @@
         private System.Windows.Forms.ToolStripMenuItem ReverseShellMenu;
         private System.Windows.Forms.ToolStripButton UnlockButton;
         private System.Windows.Forms.ToolStripMenuItem mysqlProbeMenu;
-        private System.Windows.Forms.ToolStripMenuItem dbFilePathMenu;
-        private System.Windows.Forms.ToolStripMenuItem configInfoMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem OpenDirMenu;

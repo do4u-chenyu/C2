@@ -55,24 +55,27 @@ namespace C2.Business.GlueWater.Settings
             RefreshHtmlTable();
         }
 
-        public override string RefreshHtmlTable()
+        public override string RefreshHtmlTable(bool freshTitle = true)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<tr name=\"row\">" +
+
+            if(freshTitle)
+                sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
                       "    <th>Refer对应Title/Refer</th>" +
-                      "    <th>涉案金额</th>" +
-                      "    <th>涉赌人数</th>" +
+                      "    <th>涉案金额<a class=\"arrow desc\" onclick=\"SortCol(this)\"></a></th>" +
+                      "    <th>涉赌人数<a class=\"arrow desc\" onclick=\"SortCol(this)\"></a></th>" +
                       "    <th>赌博类型/运营时间</th>" +
                       "    <th>发现地市/发现时间</th>" +
                       "</tr>"
                       );
+
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
             {
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
-                            "   <td id=\"th0\">{0}<br><a onclick=\"Hello(this)\">{1}</a><br>{2}</td>" +
+                            "   <td id=\"th0\">{0}<br><a onclick=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}</td>" +
                             "   <td>{6}</td>" +
@@ -90,13 +93,21 @@ namespace C2.Business.GlueWater.Settings
             return sb.ToString();
         }
 
-        public override string SearchInfo(string memeber)
+        public override DataTable SearchInfo(string memeber)
         {
+            DataTable resTable = DbMemberTable.Clone();
             DataRow[] rows = DbMemberTable.Select("域名='" + memeber + "'");
-            if (rows.Length > 0)
-                return (rows[0][0].ToString() + rows[0][1].ToString() + rows[0][2].ToString());
-            else
-                return "";
+
+            foreach (DataRow row in rows)
+                resTable.Rows.Add(row.ItemArray);
+
+            return resTable;
+        }
+
+        public override void SortDataTableByCol(string col, string sortType)
+        {
+            DbWebTable.DefaultView.Sort = col + " " + sortType;
+            DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
         public override bool UpdateContent(string excelPath)

@@ -239,7 +239,7 @@ def main():
     ap = BatchQuery(DATA_PATH,startTime,endTime,ALL_ITEMS)
     ap.run_query()
     #ap.DataAnalyse()
-    ZIP_PATH = DATA_PATH + NowTime.strftime("%Y%m%d%H%M%S")  + '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + '_' + defaultStart  + '.tgz.tmp'
     zip_result(DATA_PATH,ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)

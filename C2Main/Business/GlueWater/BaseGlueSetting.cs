@@ -11,11 +11,14 @@ namespace C2.Business.GlueWater
     {
         public int maxRow = 65534;
         public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
+        public List<string> doubleTypeColList; 
 
         public BaseGlueSetting()
         {
             if(!Directory.Exists(txtDirectory))
                 FileUtil.CreateDirectory(txtDirectory);
+
+            doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数" };
         }
 
         public virtual void InitDataTable()
@@ -28,16 +31,20 @@ namespace C2.Business.GlueWater
             return false;
         }
 
-        public virtual string RefreshHtmlTable()
+        public virtual string RefreshHtmlTable(bool freshTitle)
         {
             return string.Empty;
         }
 
-        public virtual string SearchInfo(string item)
+        public virtual DataTable SearchInfo(string item)
         {
-            return string.Empty;
+            return new DataTable();
         }
 
+        public virtual void SortDataTableByCol(string col, string sortType)
+        {
+            return;
+        }
         public List<int> IndexFilter(List<string> colList, List<List<string>> rowContentList)
         {
             List<int> headIndex = new List<int> { };
@@ -98,8 +105,13 @@ namespace C2.Business.GlueWater
         {
             DataTable dataTable = new DataTable(Path.GetFileNameWithoutExtension(path));
 
+            //为了方便排序，特定字段需要特殊处理
             foreach (string col in colList)
-                dataTable.Columns.Add(col);
+            {
+                Type type = doubleTypeColList.Contains(col) ? typeof(double) : typeof(string);
+                dataTable.Columns.Add(col, type);
+            }
+                
 
             if (!File.Exists(path))
                 return dataTable;
@@ -121,7 +133,7 @@ namespace C2.Business.GlueWater
                     List<string> tmpRowList = new List<string>();
                     for (int j = 0; j < colList.Length; j++)
                     {
-                        string cellValue = j < rowList.Length ? rowList[j] : "";
+                        string cellValue = j < rowList.Length ? rowList[j] : string.Empty;
                         tmpRowList.Add(cellValue);
                     }
                     dataTable.Rows.Add(tmpRowList.ToArray());
@@ -138,7 +150,6 @@ namespace C2.Business.GlueWater
 
             return dataTable;
         }
-
 
     }
 }

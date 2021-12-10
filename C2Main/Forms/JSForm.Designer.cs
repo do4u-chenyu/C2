@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.sampleButton = new System.Windows.Forms.Button();
             this.excelPathTextBox = new System.Windows.Forms.TextBox();
             this.browserButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabBar1 = new C2.Controls.TabBar();
             this.panel3 = new System.Windows.Forms.Panel();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -55,9 +55,43 @@
             this.panel1.Size = new System.Drawing.Size(784, 40);
             this.panel1.TabIndex = 0;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.sampleButton);
+            this.panel2.Controls.Add(this.excelPathTextBox);
+            this.panel2.Controls.Add(this.browserButton);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(147, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(637, 40);
+            this.panel2.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(99, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "：";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 10F);
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(55, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 14);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "数据包";
+            // 
             // sampleButton
             // 
-            this.sampleButton.Location = new System.Drawing.Point(524, 8);
+            this.sampleButton.Location = new System.Drawing.Point(524, 9);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 26);
             this.sampleButton.TabIndex = 4;
@@ -66,7 +100,7 @@
             // 
             // excelPathTextBox
             // 
-            this.excelPathTextBox.Location = new System.Drawing.Point(122, 11);
+            this.excelPathTextBox.Location = new System.Drawing.Point(122, 12);
             this.excelPathTextBox.Name = "excelPathTextBox";
             this.excelPathTextBox.ReadOnly = true;
             this.excelPathTextBox.Size = new System.Drawing.Size(284, 21);
@@ -75,7 +109,7 @@
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(435, 8);
+            this.browserButton.Location = new System.Drawing.Point(435, 9);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(76, 26);
             this.browserButton.TabIndex = 1;
@@ -83,16 +117,14 @@
             this.browserButton.UseVisualStyleBackColor = true;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(57, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "数据包";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(30, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "导入";
             // 
             // tabBar1
             // 
@@ -128,38 +160,6 @@
             this.webBrowser.Size = new System.Drawing.Size(784, 376);
             this.webBrowser.TabIndex = 1;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.sampleButton);
-            this.panel2.Controls.Add(this.excelPathTextBox);
-            this.panel2.Controls.Add(this.browserButton);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(147, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(637, 40);
-            this.panel2.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(99, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "导入";
-            // 
             // JSForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -170,9 +170,9 @@
             this.Name = "JSForm";
             this.Text = "胶水系统";
             this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

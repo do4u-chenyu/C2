@@ -285,6 +285,7 @@
     <Compile Include="Business\CastleBravo\WebScan\WebScanForm.Designer.cs">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\Action\LVComparer.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\AddAllWebShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,6 +294,7 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\Client\ASPCustomClient.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\Client\Xise19Client.cs" />
+    <Compile Include="Business\CastleBravo\WebShellTool\Info\Type.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\FindSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,14 +343,14 @@
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.Designer.cs">
       <DependentUpon>MSFSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.Designer.cs">
+      <DependentUpon>MysqlProbeSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\WebConfigScan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\WebConfigScan.Designer.cs">
-      <DependentUpon>WebConfigScan.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
@@ -376,6 +378,12 @@
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\GlueWater\BaseGlueSetting.cs" />
+    <Compile Include="Business\GlueWater\GlueDetailInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\GlueWater\GlueDetailInfoDialog.Designer.cs">
+      <DependentUpon>GlueDetailInfoDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\GlueWater\GlueSettingFactory.cs" />
     <Compile Include="Business\GlueWater\IGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\DbGlueSetting.cs" />
@@ -2134,11 +2142,11 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MSFSet.resx">
       <DependentUpon>MSFSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.resx">
+      <DependentUpon>MysqlProbeSet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.resx">
       <DependentUpon>ReverseShellSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\WebConfigScan.resx">
-      <DependentUpon>WebConfigScan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.resx">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
@@ -2149,6 +2157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\GlueWater\GlueDetailInfoDialog.resx">
+      <DependentUpon>GlueDetailInfoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\FaceBeauty\FaceBeautyForm.resx">
       <DependentUpon>FaceBeautyForm.cs</DependentUpon>
