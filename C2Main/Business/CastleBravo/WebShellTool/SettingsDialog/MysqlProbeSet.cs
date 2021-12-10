@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
-using C2.Utils;
 using C2.Core;
-using System;
+using C2.Utils;
 
 namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
