@@ -43,24 +43,18 @@ namespace C2.IAOLab.IDInfoGet
                 return string.Format("{0}\t{1}{2}", input, "身份证号错误", System.Environment.NewLine);
             string id15 = Convert18To15(input);
             string id18 = Convert15To18(input);
-            string province = id18.Substring(0, 2) + "0000";
-            string city = id18.Substring(0, 4) + "00";
-            string area = id18.Substring(0, 6);
-            string provinceStr = TryGetValue(province);
-            string cityStr = TryGetValue(city);
-            string areaStr = TryGetValue(area);
-            string year = id18.Substring(6, 4);
-            string month = id18.Substring(10, 2);
-            string day = id18.Substring(12, 2);
-            string description = provinceStr + cityStr + areaStr;
-            string birthday = year + "年" + month + "月" + day + "日";
+            string province = TryGetValue(id18.Substring(0, 2) + "0000");
+            string city = TryGetValue(id18.Substring(0, 4) + "00");
+            string village = TryGetValue(id18.Substring(0, 6));
+            string description = province + city + village;
+            string birthday = id18.Substring(6, 8);
             string gender = id18[16] % 2 == 0 ? "女" : "男";
             return string.Format("{0}\t{1}\t{2}\t{3}\t{4}" + System.Environment.NewLine,
                 id15,                // 15
                 id18,                // 18
-                description,         // 归属地
                 birthday,            // 生日
-                gender);             // 性别
+                gender,              // 性别
+                description);        // 归属地            
         }
 
         private string Convert15To18(string input)
