@@ -39,8 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.fieldList = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.hostDir = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // timeoutTB
@@ -66,7 +64,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(5, 77);
+            this.label2.Location = new System.Drawing.Point(5, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 17);
             this.label2.TabIndex = 10006;
@@ -75,7 +73,7 @@
             // fileList
             // 
             this.fileList.Font = new System.Drawing.Font("宋体", 9F);
-            this.fileList.Location = new System.Drawing.Point(65, 75);
+            this.fileList.Location = new System.Drawing.Point(65, 48);
             this.fileList.Name = "fileList";
             this.fileList.Size = new System.Drawing.Size(436, 21);
             this.fileList.TabIndex = 3;
@@ -116,14 +114,13 @@
             this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
             this.probeStrategyCB.Name = "probeStrategyCB";
             this.probeStrategyCB.Size = new System.Drawing.Size(107, 24);
-            this.probeStrategyCB.TabIndex = 2;
-            this.probeStrategyCB.SelectedIndexChanged += new System.EventHandler(this.ProbeStrategyCB_SelectedIndexChanged);
+            this.probeStrategyCB.TabIndex = 2;          
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(6, 136);
+            this.label3.Location = new System.Drawing.Point(6, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(179, 12);
             this.label3.TabIndex = 10036;
@@ -132,7 +129,7 @@
             // fieldList
             // 
             this.fieldList.Font = new System.Drawing.Font("宋体", 9F);
-            this.fieldList.Location = new System.Drawing.Point(65, 102);
+            this.fieldList.Location = new System.Drawing.Point(65, 75);
             this.fieldList.Name = "fieldList";
             this.fieldList.Size = new System.Drawing.Size(436, 21);
             this.fieldList.TabIndex = 10037;
@@ -142,38 +139,17 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(5, 104);
+            this.label6.Location = new System.Drawing.Point(5, 77);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 17);
             this.label6.TabIndex = 10038;
             this.label6.Text = "检索字段:";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(5, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 17);
-            this.label7.TabIndex = 10039;
-            this.label7.Text = "主机地址:";
-            // 
-            // hostDir
-            // 
-            this.hostDir.Enabled = false;
-            this.hostDir.Font = new System.Drawing.Font("宋体", 9F);
-            this.hostDir.Location = new System.Drawing.Point(65, 46);
-            this.hostDir.Name = "hostDir";
-            this.hostDir.Size = new System.Drawing.Size(436, 21);
-            this.hostDir.TabIndex = 10040;
-            // 
             // MysqlProbeSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 206);
-            this.Controls.Add(this.hostDir);
-            this.Controls.Add(this.label7);
+            this.ClientSize = new System.Drawing.Size(513, 174);
             this.Controls.Add(this.fieldList);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
@@ -197,8 +173,6 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.fieldList, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.hostDir, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,7 +190,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox fieldList;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox hostDir;
     }
 }
