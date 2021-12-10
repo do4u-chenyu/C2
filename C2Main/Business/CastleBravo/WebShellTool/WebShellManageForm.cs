@@ -543,7 +543,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         }
 
-
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearAll();
@@ -674,13 +673,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sgType = SGType.SystemInfo;
             BatchInfoColletion(false);
         }
-
         private void AliveSysInfoMenuItem_Click(object sender, EventArgs e)
         {
             this.sgType = SGType.SystemInfo;
             BatchInfoColletion(true);
         }
-
         private void CurrentSysInfoMenuItem_Click(object sender, EventArgs e)
         {
             this.sgType = SGType.SystemInfo;
@@ -717,7 +714,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sgType = SGType.ScheduleTask;
             BatchInfoColletion(true);
         }
-
         private void CurrentScheduleTask_Click(object sender, EventArgs e)
         {
             this.sgType = SGType.ScheduleTask;
@@ -931,7 +927,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LVComparer c = LV.ListViewItemSorter as LVComparer;
             c.col = e.Column;
             c.asce = !c.asce;
-            using(GuarderUtil.WaitCursor)
+            using(WaitCursor)
             using (new LayoutGuarder(LV))
             {
                 LV.Sort();
