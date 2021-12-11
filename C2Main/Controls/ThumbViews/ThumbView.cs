@@ -60,9 +60,9 @@ namespace C2.Controls
             Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.autoFilter, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.nothing, ThumbItem.ModelTypes.Null));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.nothing, ThumbItem.ModelTypes.Null));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.nothing, ThumbItem.ModelTypes.Null));
+            Items.Add(new ThumbItem("信息抽取", global::C2.Properties.Resources.infoExtraction1, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("关键词分析", global::C2.Properties.Resources.keywordAnalysis, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("同群分析", global::C2.Properties.Resources.groupAnalysis, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
             Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
         }
