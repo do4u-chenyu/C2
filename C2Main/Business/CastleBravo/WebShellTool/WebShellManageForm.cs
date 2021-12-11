@@ -149,7 +149,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             // 修复添加6万左右数据卡死的问题
-            RefreshLV();
+            using (GuarderUtil.WaitCursor)
+                LV.Items.AddRange(NewLVIS(dialog.Tasks));
             tasks.AddRange(dialog.Tasks);
             SaveDB();
         }
@@ -161,8 +162,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 WebShellTaskConfig config = create ? new WebShellTaskConfig(GetSubItemsTextArray(lvi)) : 
                     lvi.Tag as WebShellTaskConfig;
-                lvi.Tag = config; // 关联
-                tasks.Add(config);
+                // 针对删除菜单的优化,删除先置Empty后删除  
+                if (config != WebShellTaskConfig.Empty)
+                {
+                    lvi.Tag = config; // 关联
+                    tasks.Add(config);
+                }         
             }
         }
 
@@ -271,11 +276,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             foreach (ListViewItem lvi in LV.SelectedItems)
-                lvi.Remove();
-            RefreshTasks();
-            SaveDB();
+                lvi.Tag = WebShellTaskConfig.Empty;
+
+            RefreshTasks(false);
+            using (WaitCursor)
+                SaveDB();
+            using (new LayoutGuarder(LV))
+                foreach (ListViewItem lvi in LV.SelectedItems)
+                    lvi.Remove();
         }
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
