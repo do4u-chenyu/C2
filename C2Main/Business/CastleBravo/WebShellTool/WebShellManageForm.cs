@@ -94,11 +94,15 @@ namespace C2.Business.CastleBravo.WebShellTool
                 //右键菜单
                 EnterToolStripMenuItem.Enabled = false;
                 SuscideMenuItem.Enabled = false;
-                RefreshCurrentStatusMenuItem.Enabled = false;
-                RefreshAllDeadMenu.Enabled = false;
+                CheckAliveSelectedItemMenuItem.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
                 mysqlProbeMenu.Enabled = false;
+                currentTaskMysqlMenuItem.Enabled = false;
+                currentSysInfoMenuItem2.Enabled = false;
+                currentProcessViewMenuItem.Enabled = false;
+                currentScheduleTaskMenuItem.Enabled = false;
+                currentLocationInfoMenuItem.Enabled = false;
             }
         }
         private bool IsThreeGroup()
@@ -122,11 +126,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             //右键菜单
             EnterToolStripMenuItem.Enabled = true;
             SuscideMenuItem.Enabled = true;
-            RefreshCurrentStatusMenuItem.Enabled = true;
-            RefreshAllDeadMenu.Enabled = true;
+            CheckAliveSelectedItemMenuItem.Enabled = true;
             ReverseShellMenu.Enabled = true;
             msfMenu.Enabled = true;
             mysqlProbeMenu.Enabled = true;
+            currentTaskMysqlMenuItem.Enabled = true;
+            currentSysInfoMenuItem2.Enabled = true;
+            currentProcessViewMenuItem.Enabled = true;
+            currentScheduleTaskMenuItem.Enabled = true;
+            currentLocationInfoMenuItem.Enabled = true;
 
             UnlockButton.Enabled = false;//按钮不可用
         }
@@ -609,7 +617,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
-        private void RefreshAllDeadMenu_Click(object sender, EventArgs e)
+        private void SecondeCheckAliveMenu_Click(object sender, EventArgs e)
         {
             SecondCheckAliveTaskStatus();
         }
