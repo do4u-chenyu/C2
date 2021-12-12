@@ -815,23 +815,28 @@ namespace C2.Business.CastleBravo.WebShellTool
             return true;
         }
 
-        private String ProcessingResults(string ret,string taskUrl)
+        private String ProcessingResults(string ret, string taskUrl)
         {
-            Dictionary<SGType, string> localSave = new Dictionary<SGType, string>()
+            Dictionary<SGType, string> table = new Dictionary<SGType, string>()
             {
                 {SGType.ProcessView, "进程信息"},
                 {SGType.ScheduleTask, "定时任务"},
                 {SGType.MysqlProbe, "Mysql探针"},
                 {SGType.SystemInfo, "系统信息"},
+                {SGType.LocationInfo, "地理定位" }
             };
-            Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P", RegexOptions.Singleline);
+
+            Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
-            string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
+            if (!m0.Success)
+                return table[this.sgType] + ":无结果";
+
+            string rawResult = m0.Groups[1].Value;
             if (this.sgType == SGType.LocationInfo)
                 return LocationResult(rawResult);
    
-            if (localSave.ContainsKey(this.sgType))//进程 计划任务 系统信息……
-                return ClientSetting.WriteResult(rawResult, taskUrl, localSave[sgType]);
+            if (table.ContainsKey(this.sgType)) //进程 计划任务 系统信息……
+                return ClientSetting.WriteResult(rawResult, taskUrl, table[this.sgType]);
          
             return rawResult;
         }
