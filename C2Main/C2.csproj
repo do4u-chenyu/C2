@@ -388,6 +388,7 @@
     <Compile Include="Business\GlueWater\IGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\DbGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\SqGlueSetting.cs" />
+    <Compile Include="Business\GlueWater\Settings\YellowGlueSetting.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
       <SubType>Form</SubType>
     </Compile>
