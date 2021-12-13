@@ -4020,9 +4020,9 @@
     <None Include="Resources\Templates\树状图.xml" />
     <None Include="Resources\Templates\思维导图.xml" />
     <None Include="Resources\Templates\空模板.xml" />
-    <Content Include="Resources\Templates\AreaNum.txt">
+    <None Include="Resources\Templates\RegionalismCode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Resources\Templates\数据预处理文件夹模板.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
