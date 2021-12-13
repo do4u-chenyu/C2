@@ -612,6 +612,13 @@ namespace C2
             }
         }
 
+        public void OpenJSTab(string tabName)
+        {
+            TabItem item = taskBar.GetJSForm();
+            taskBar.SelectedItem = item;
+            (item.Tag as JSForm).SelectTabByName(tabName);
+        }
+
         public void OpenDocument(string filename, bool readOnly)
         {
             BaseDocumentForm form = FindDocumentForm(filename);

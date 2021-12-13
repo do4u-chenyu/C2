@@ -37,13 +37,17 @@
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.SuscideMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.RefreshCurrentStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshOtherMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshAllDeadMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CheckAliveSelectedItemMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.currentTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mysqlProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentSysInfoMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentProcessViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentScheduleTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentLocationInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.ReverseShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.msfMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mysqlProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,19 +151,23 @@
             this.toolStripSeparator8,
             this.SuscideMenuItem,
             this.toolStripSeparator,
-            this.RefreshCurrentStatusMenuItem,
-            this.refreshOtherMenu,
-            this.RefreshAllDeadMenu,
+            this.CheckAliveSelectedItemMenuItem,
+            this.toolStripSeparator3,
+            this.currentTaskMysqlMenuItem,
+            this.mysqlProbeMenu,
+            this.currentSysInfoMenuItem2,
+            this.currentProcessViewMenuItem,
+            this.currentScheduleTaskMenuItem,
+            this.currentLocationInfoMenuItem,
             this.toolStripSeparator5,
             this.ReverseShellMenu,
             this.msfMenu,
-            this.mysqlProbeMenu,
             this.toolStripSeparator4,
             this.ClearAllToolStripMenuItem,
             this.CopyToolStripMenuItem,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(149, 314);
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 386);
             // 
             // EnterToolStripMenuItem
             // 
@@ -199,26 +207,59 @@
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
             // 
-            // RefreshCurrentStatusMenuItem
+            // CheckAliveSelectedItemMenuItem
             // 
-            this.RefreshCurrentStatusMenuItem.Name = "RefreshCurrentStatusMenuItem";
-            this.RefreshCurrentStatusMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.RefreshCurrentStatusMenuItem.Text = "选定项验活";
-            this.RefreshCurrentStatusMenuItem.Click += new System.EventHandler(this.CheckAliveSelectedItemMenuItem_Click);
+            this.CheckAliveSelectedItemMenuItem.Name = "CheckAliveSelectedItemMenuItem";
+            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.CheckAliveSelectedItemMenuItem.Text = "验活";
+            this.CheckAliveSelectedItemMenuItem.Click += new System.EventHandler(this.CheckAliveSelectedItemMenuItem_Click);
             // 
-            // refreshOtherMenu
+            // toolStripSeparator3
             // 
-            this.refreshOtherMenu.Name = "refreshOtherMenu";
-            this.refreshOtherMenu.Size = new System.Drawing.Size(148, 22);
-            this.refreshOtherMenu.Text = "境外站验活";
-            this.refreshOtherMenu.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
             // 
-            // RefreshAllDeadMenu
+            // currentTaskMysqlMenuItem
             // 
-            this.RefreshAllDeadMenu.Name = "RefreshAllDeadMenu";
-            this.RefreshAllDeadMenu.Size = new System.Drawing.Size(148, 22);
-            this.RefreshAllDeadMenu.Text = "二刷不活";
-            this.RefreshAllDeadMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
+            this.currentTaskMysqlMenuItem.Name = "currentTaskMysqlMenuItem";
+            this.currentTaskMysqlMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.currentTaskMysqlMenuItem.Text = "Mysql K令";
+            this.currentTaskMysqlMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
+            // 
+            // mysqlProbeMenu
+            // 
+            this.mysqlProbeMenu.Name = "mysqlProbeMenu";
+            this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
+            this.mysqlProbeMenu.Text = "Mysql 探针";
+            this.mysqlProbeMenu.Click += new System.EventHandler(this.MysqlProbeMenu_Click);
+            // 
+            // currentSysInfoMenuItem2
+            // 
+            this.currentSysInfoMenuItem2.Name = "currentSysInfoMenuItem2";
+            this.currentSysInfoMenuItem2.Size = new System.Drawing.Size(148, 22);
+            this.currentSysInfoMenuItem2.Text = "系统信息";
+            this.currentSysInfoMenuItem2.Click += new System.EventHandler(this.CurrentSysInfoMenuItem_Click);
+            // 
+            // currentProcessViewMenuItem
+            // 
+            this.currentProcessViewMenuItem.Name = "currentProcessViewMenuItem";
+            this.currentProcessViewMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.currentProcessViewMenuItem.Text = "进程列表";
+            this.currentProcessViewMenuItem.Click += new System.EventHandler(this.CurrentProcessView_Click);
+            // 
+            // currentScheduleTaskMenuItem
+            // 
+            this.currentScheduleTaskMenuItem.Name = "currentScheduleTaskMenuItem";
+            this.currentScheduleTaskMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.currentScheduleTaskMenuItem.Text = "定时任务";
+            this.currentScheduleTaskMenuItem.Click += new System.EventHandler(this.CurrentScheduleTask_Click);
+            // 
+            // currentLocationInfoMenuItem
+            // 
+            this.currentLocationInfoMenuItem.Name = "currentLocationInfoMenuItem";
+            this.currentLocationInfoMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.currentLocationInfoMenuItem.Text = "地理定位";
+            this.currentLocationInfoMenuItem.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
             // 
             // toolStripSeparator5
             // 
@@ -238,13 +279,6 @@
             this.msfMenu.Size = new System.Drawing.Size(148, 22);
             this.msfMenu.Text = "MSF联动";
             this.msfMenu.Click += new System.EventHandler(this.MSFMenu_Click);
-            // 
-            // mysqlProbeMenu
-            // 
-            this.mysqlProbeMenu.Name = "mysqlProbeMenu";
-            this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
-            this.mysqlProbeMenu.Text = "Mysql探针";
-            this.mysqlProbeMenu.Click += new System.EventHandler(this.MysqlProbeMenu_Click);
             // 
             // toolStripSeparator4
             // 
@@ -570,7 +604,7 @@
             this.secondRefreshMenu.Name = "secondRefreshMenu";
             this.secondRefreshMenu.Size = new System.Drawing.Size(136, 22);
             this.secondRefreshMenu.Text = "二刷不活";
-            this.secondRefreshMenu.Click += new System.EventHandler(this.RefreshAllDeadMenu_Click);
+            this.secondRefreshMenu.Click += new System.EventHandler(this.SecondeCheckAliveMenu_Click);
             // 
             // infoCollectionMenu
             // 
@@ -594,7 +628,7 @@
             this.currentMysqlTaskMenuItem,
             this.mysqlTaskSetMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwdBlastingMenuItem.Text = "K令(Mysql)";
             // 
             // allTaskMysqlMenuItem
@@ -632,7 +666,7 @@
             this.aliveSysInfoMenuItem,
             this.currentSysInfoMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
-            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
             // 
             // allSysInfoMenuItem
@@ -663,7 +697,7 @@
             this.aliveProcessView,
             this.currentProcessView});
             this.processViewToolStripMenuItem.Name = "processViewToolStripMenuItem";
-            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.processViewToolStripMenuItem.Text = "进程列表";
             // 
             // allProcessView
@@ -694,7 +728,7 @@
             this.aliveTimedTask,
             this.currentTimedTask});
             this.timedTaskMenuItem.Name = "timedTaskMenuItem";
-            this.timedTaskMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.timedTaskMenuItem.Size = new System.Drawing.Size(180, 22);
             this.timedTaskMenuItem.Text = "定时任务";
             // 
             // allTimedTask
@@ -725,27 +759,27 @@
             this.aliveLocationInfo,
             this.currentLocationInfo});
             this.locationInfoMenuItem.Name = "locationInfoMenuItem";
-            this.locationInfoMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.locationInfoMenuItem.Text = "地理位置";
+            this.locationInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.locationInfoMenuItem.Text = "地理定位";
             // 
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.aliveLocationInfo.Text = "验活项";
             this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
             // 
@@ -1034,7 +1068,7 @@
         private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader lvStatus;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem RefreshCurrentStatusMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CheckAliveSelectedItemMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ClearAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SuscideMenuItem;
@@ -1042,9 +1076,7 @@
         private System.Windows.Forms.ToolStripMenuItem 变种11LandGreyToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel toolStripButton1;
         private System.Windows.Forms.ToolStripLabel proxySettingMenu;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem SaveResultsMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RefreshAllDeadMenu;
         private System.Windows.Forms.ColumnHeader lvIP;
         private System.Windows.Forms.ColumnHeader lvCountry1;
         private System.Windows.Forms.ColumnHeader lvCountry2;
@@ -1052,7 +1084,6 @@
         private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripLabel progressMenu;
-        private System.Windows.Forms.ToolStripMenuItem refreshOtherMenu;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel ItemCountSLabel;
         private System.Windows.Forms.ToolStripStatusLabel ProxyEnableSLabel;
@@ -1102,5 +1133,12 @@
         private System.Windows.Forms.ToolStripMenuItem 添加ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 批量添加ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查找ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentSysInfoMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem currentProcessViewMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentScheduleTaskMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentLocationInfoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentTaskMysqlMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

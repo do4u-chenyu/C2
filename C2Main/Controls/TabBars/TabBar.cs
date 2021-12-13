@@ -632,8 +632,8 @@ namespace C2.Controls
                 TabRounded = theme.RoundCorner;
 
                 SelectedItemBackColor = theme.Colors.Window;//.Sharp;
-                SelectedItemForeColor = Color.DodgerBlue;//点击TabBar控件，修改选中控件的文本颜色
-                //SelectedItemForeColor = theme.Colors.WindowText;// PaintHelper.FarthestColor(SelectedItemBackColor, theme.Colors.Dark, theme.Colors.Light);// theme.Colors.SharpText;
+                //SelectedItemForeColor = Color.DodgerBlue;//点击TabBar控件，修改选中控件的文本颜色
+                SelectedItemForeColor = theme.Colors.WindowText;// PaintHelper.FarthestColor(SelectedItemBackColor, theme.Colors.Dark, theme.Colors.Light);// theme.Colors.SharpText;
                 //ItemBackColor = theme.Colors.MediumLight;
                 ItemBackColor = theme.Colors.Window;
                 //ItemForeColor = PaintHelper.FarthestColor(ItemBackColor, theme.Colors.Dark, theme.Colors.Light);
@@ -2381,5 +2381,14 @@ namespace C2.Controls
             return null;
         }
 
+        public TabItem GetJSForm()
+        {
+            foreach (TabItem ti in Items)
+            {
+                if (ti.Tag is JSForm)
+                    return ti;
+            }
+            return null;
+        }
     }
 }

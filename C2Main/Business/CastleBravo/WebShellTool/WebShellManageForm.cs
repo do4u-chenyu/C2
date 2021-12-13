@@ -94,11 +94,15 @@ namespace C2.Business.CastleBravo.WebShellTool
                 //右键菜单
                 EnterToolStripMenuItem.Enabled = false;
                 SuscideMenuItem.Enabled = false;
-                RefreshCurrentStatusMenuItem.Enabled = false;
-                RefreshAllDeadMenu.Enabled = false;
+                CheckAliveSelectedItemMenuItem.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
                 mysqlProbeMenu.Enabled = false;
+                currentTaskMysqlMenuItem.Enabled = false;
+                currentSysInfoMenuItem2.Enabled = false;
+                currentProcessViewMenuItem.Enabled = false;
+                currentScheduleTaskMenuItem.Enabled = false;
+                currentLocationInfoMenuItem.Enabled = false;
             }
         }
         private bool IsThreeGroup()
@@ -122,11 +126,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             //右键菜单
             EnterToolStripMenuItem.Enabled = true;
             SuscideMenuItem.Enabled = true;
-            RefreshCurrentStatusMenuItem.Enabled = true;
-            RefreshAllDeadMenu.Enabled = true;
+            CheckAliveSelectedItemMenuItem.Enabled = true;
             ReverseShellMenu.Enabled = true;
             msfMenu.Enabled = true;
             mysqlProbeMenu.Enabled = true;
+            currentTaskMysqlMenuItem.Enabled = true;
+            currentSysInfoMenuItem2.Enabled = true;
+            currentProcessViewMenuItem.Enabled = true;
+            currentScheduleTaskMenuItem.Enabled = true;
+            currentLocationInfoMenuItem.Enabled = true;
 
             UnlockButton.Enabled = false;//按钮不可用
         }
@@ -149,7 +157,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
 
             // 修复添加6万左右数据卡死的问题
-            RefreshLV();
+            using (GuarderUtil.WaitCursor)
+                LV.Items.AddRange(NewLVIS(dialog.Tasks));
             tasks.AddRange(dialog.Tasks);
             SaveDB();
         }
@@ -161,8 +170,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 WebShellTaskConfig config = create ? new WebShellTaskConfig(GetSubItemsTextArray(lvi)) : 
                     lvi.Tag as WebShellTaskConfig;
-                lvi.Tag = config; // 关联
-                tasks.Add(config);
+                // 针对删除菜单的优化,删除先置Empty后删除  
+                if (config != WebShellTaskConfig.Empty)
+                {
+                    lvi.Tag = config; // 关联
+                    tasks.Add(config);
+                }         
             }
         }
 
@@ -271,11 +284,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             foreach (ListViewItem lvi in LV.SelectedItems)
-                lvi.Remove();
-            RefreshTasks();
-            SaveDB();
+                lvi.Tag = WebShellTaskConfig.Empty;
+
+            RefreshTasks(false);
+            using (WaitCursor)
+                SaveDB();
+            using (new LayoutGuarder(LV))
+                foreach (ListViewItem lvi in LV.SelectedItems)
+                    lvi.Remove();
         }
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -600,7 +617,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
-        private void RefreshAllDeadMenu_Click(object sender, EventArgs e)
+        private void SecondeCheckAliveMenu_Click(object sender, EventArgs e)
         {
             SecondCheckAliveTaskStatus();
         }
@@ -798,23 +815,28 @@ namespace C2.Business.CastleBravo.WebShellTool
             return true;
         }
 
-        private String ProcessingResults(string ret,string taskUrl)
+        private String ProcessingResults(string ret, string taskUrl)
         {
-            Dictionary<SGType, string> localSave = new Dictionary<SGType, string>()
+            Dictionary<SGType, string> table = new Dictionary<SGType, string>()
             {
                 {SGType.ProcessView, "进程信息"},
                 {SGType.ScheduleTask, "定时任务"},
                 {SGType.MysqlProbe, "Mysql探针"},
                 {SGType.SystemInfo, "系统信息"},
+                {SGType.LocationInfo, "地理定位" }
             };
-            Regex r0 = new Regex("QACKL3IO9P==(.*?)==QACKL3IO9P", RegexOptions.Singleline);
+
+            Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
-            string rawResult = m0.Success ? m0.Groups[1].Value : "无结果";
+            if (!m0.Success)
+                return table[this.sgType] + ":无结果";
+
+            string rawResult = m0.Groups[1].Value;
             if (this.sgType == SGType.LocationInfo)
                 return LocationResult(rawResult);
    
-            if (localSave.ContainsKey(this.sgType))//进程 计划任务 系统信息……
-                return ClientSetting.WriteResult(rawResult, taskUrl, localSave[sgType]);
+            if (table.ContainsKey(this.sgType)) //进程 计划任务 系统信息……
+                return ClientSetting.WriteResult(rawResult, taskUrl, table[this.sgType]);
          
             return rawResult;
         }
