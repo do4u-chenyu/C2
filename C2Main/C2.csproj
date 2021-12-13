@@ -731,6 +731,7 @@
     <Compile Include="Controls\TabBars\JSTabBar\JSTabBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TabBars\Renderers\JSTabBarRenderer.cs" />
     <Compile Include="Core\Exports\DocxEngine.cs" />
     <Compile Include="Core\Exports\XmindEngine.cs" />
     <Compile Include="Business\Database\BaseDAOImpl.cs" />
