@@ -6,7 +6,7 @@ using System.IO;
 
 namespace MD5Plugin
 {
-    public partial class Base64Plugin : URLPlugin
+    partial class Base64Plugin : URLPlugin
     {
         public string encodingType = "UTF-8";
         string outPath;
@@ -41,7 +41,7 @@ namespace MD5Plugin
             return Encoding.GetEncoding(EncodingType).GetBytes(str);
         }
 
-        public override void encode(string str)
+        public override void Encode(string str)
         {
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
@@ -118,7 +118,7 @@ namespace MD5Plugin
             return false;
         }
 
-        public override void decode(string base64Str)
+        public override void Decode(string base64Str)
         {
             Dictionary<string, string> pairs = new Dictionary<string, string>();
             pairs.Add("/9j/", "jpg");
@@ -139,14 +139,12 @@ namespace MD5Plugin
             {
                 if (outputTextBox.Text == "加密后的结果" || outputTextBox.Text == "请输入你要解码的内容")
                 {
-                    originOutput();
+                    OriginOutput();
                     break;
                 }
                 else if (base64Str.StartsWith(key))
                 {
-                    string value;
-                    pairs.TryGetValue(key, out value);
-
+                    pairs.TryGetValue(key, out string value);
                     Base64StrToFile(base64Str, value);
                     break;
                 }

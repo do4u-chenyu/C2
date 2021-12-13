@@ -64,7 +64,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(5, 42);
+            this.label2.Location = new System.Drawing.Point(5, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 17);
             this.label2.TabIndex = 10006;
@@ -73,7 +73,7 @@
             // fileList
             // 
             this.fileList.Font = new System.Drawing.Font("宋体", 9F);
-            this.fileList.Location = new System.Drawing.Point(65, 40);
+            this.fileList.Location = new System.Drawing.Point(65, 48);
             this.fileList.Name = "fileList";
             this.fileList.Size = new System.Drawing.Size(436, 21);
             this.fileList.TabIndex = 3;
@@ -107,10 +107,16 @@
             this.probeStrategyCB.Font = new System.Drawing.Font("微软雅黑", 8.5F);
             this.probeStrategyCB.FormattingEnabled = true;
             this.probeStrategyCB.Items.AddRange(new object[] {
-            "仅当前站点目录",
-            "整个主机",
-            "仅1000个文件",
-            "仅10000个文件"});
+            "当前站点目录",
+            "所有同站目录",
+            "前1000个文件",
+            "前10000个文件",
+            "前100000个文件(规划中...)",
+            "基于字典(规划中...)",
+            "/www(规划中...)",
+            "宝塔面板(规划中...)",
+            "小皮面板(规则中...)",
+            "自定义(规划中...)"});
             this.probeStrategyCB.Location = new System.Drawing.Point(311, 8);
             this.probeStrategyCB.Name = "probeStrategyCB";
             this.probeStrategyCB.Size = new System.Drawing.Size(107, 24);
@@ -120,36 +126,36 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(6, 101);
+            this.label3.Location = new System.Drawing.Point(6, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(179, 12);
+            this.label3.Size = new System.Drawing.Size(269, 12);
             this.label3.TabIndex = 10036;
-            this.label3.Text = "此设置不保存,用前每次设置一下";
+            this.label3.Text = "此设置不保存,用前每次设置一下,默认不需要更改";
             // 
             // fieldList
             // 
             this.fieldList.Font = new System.Drawing.Font("宋体", 9F);
-            this.fieldList.Location = new System.Drawing.Point(65, 67);
+            this.fieldList.Location = new System.Drawing.Point(65, 75);
             this.fieldList.Name = "fieldList";
             this.fieldList.Size = new System.Drawing.Size(436, 21);
-            this.fieldList.TabIndex = 10037;
+            this.fieldList.TabIndex = 4;
             this.fieldList.Text = resources.GetString("fieldList.Text");
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(5, 69);
+            this.label6.Location = new System.Drawing.Point(5, 77);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 17);
             this.label6.TabIndex = 10038;
-            this.label6.Text = "检索字段:";
+            this.label6.Text = "目标字段:";
             // 
             // MysqlProbeSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 184);
+            this.ClientSize = new System.Drawing.Size(513, 174);
             this.Controls.Add(this.fieldList);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);

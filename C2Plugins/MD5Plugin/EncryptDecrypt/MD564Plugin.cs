@@ -9,7 +9,7 @@ namespace MD5Plugin
         {
             InitializeComponent();
         }
-        public override void encode(string str)
+        public override void Encode(string str)
         {
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {

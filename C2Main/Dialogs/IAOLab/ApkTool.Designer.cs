@@ -53,6 +53,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -64,18 +65,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label1.Location = new System.Drawing.Point(27, 25);
+            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 23);
+            this.label1.Size = new System.Drawing.Size(135, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "请选择APK存放目录";
             // 
             // inputPathTextBox
             // 
-            this.inputPathTextBox.Location = new System.Drawing.Point(209, 25);
-            this.inputPathTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.inputPathTextBox.Location = new System.Drawing.Point(157, 20);
+            this.inputPathTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.inputPathTextBox.Name = "inputPathTextBox";
-            this.inputPathTextBox.Size = new System.Drawing.Size(501, 25);
+            this.inputPathTextBox.Size = new System.Drawing.Size(377, 21);
             this.inputPathTextBox.TabIndex = 1;
             // 
             // panel1
@@ -84,18 +86,18 @@
             this.panel1.Controls.Add(this.analyse);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 396);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 317);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(895, 54);
+            this.panel1.Size = new System.Drawing.Size(671, 43);
             this.panel1.TabIndex = 6;
             // 
             // analyse
             // 
-            this.analyse.Location = new System.Drawing.Point(696, 12);
-            this.analyse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.analyse.Location = new System.Drawing.Point(522, 10);
+            this.analyse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.analyse.Name = "analyse";
-            this.analyse.Size = new System.Drawing.Size(75, 30);
+            this.analyse.Size = new System.Drawing.Size(56, 24);
             this.analyse.TabIndex = 3;
             this.analyse.Text = "解析";
             this.analyse.UseVisualStyleBackColor = true;
@@ -104,10 +106,10 @@
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(811, 12);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Location = new System.Drawing.Point(608, 10);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
+            this.button2.Size = new System.Drawing.Size(56, 24);
             this.button2.TabIndex = 4;
             this.button2.Text = "取消";
             this.button2.UseVisualStyleBackColor = true;
@@ -115,29 +117,30 @@
             // 
             // jdkPathTextBox
             // 
-            this.jdkPathTextBox.Location = new System.Drawing.Point(209, 59);
-            this.jdkPathTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.jdkPathTextBox.Location = new System.Drawing.Point(157, 47);
+            this.jdkPathTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.jdkPathTextBox.Name = "jdkPathTextBox";
-            this.jdkPathTextBox.Size = new System.Drawing.Size(501, 25);
+            this.jdkPathTextBox.Size = new System.Drawing.Size(377, 21);
             this.jdkPathTextBox.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label2.Location = new System.Drawing.Point(27, 58);
+            this.label2.Location = new System.Drawing.Point(20, 46);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 23);
+            this.label2.Size = new System.Drawing.Size(133, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "请选择JDK所在路径";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::C2.Properties.Resources.folder_sys;
-            this.pictureBox1.Location = new System.Drawing.Point(728, 28);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(546, 22);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(21, 22);
+            this.pictureBox1.Size = new System.Drawing.Size(16, 18);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.InputPathPictureBox_Click);
@@ -145,10 +148,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::C2.Properties.Resources.folder_sys;
-            this.pictureBox2.Location = new System.Drawing.Point(728, 61);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(546, 49);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(21, 22);
+            this.pictureBox2.Size = new System.Drawing.Size(16, 18);
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.JdkPathPictureBox_Click);
@@ -169,14 +172,14 @@
             this.mainFunction,
             this.size});
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 131);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 105);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(895, 272);
+            this.dataGridView1.Size = new System.Drawing.Size(671, 218);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridView1_MouseDown);
             // 
@@ -196,7 +199,7 @@
             this.fileName.MinimumWidth = 6;
             this.fileName.Name = "fileName";
             this.fileName.ReadOnly = true;
-            this.fileName.Width = 81;
+            this.fileName.Width = 66;
             // 
             // ApkName
             // 
@@ -229,17 +232,18 @@
             this.size.MinimumWidth = 6;
             this.size.Name = "size";
             this.size.ReadOnly = true;
-            this.size.Width = 66;
+            this.size.Width = 54;
             // 
             // tipLable
             // 
             this.tipLable.AutoSize = true;
             this.tipLable.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.tipLable.Location = new System.Drawing.Point(28, 94);
+            this.tipLable.Location = new System.Drawing.Point(21, 75);
+            this.tipLable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.tipLable.Name = "tipLable";
-            this.tipLable.Size = new System.Drawing.Size(506, 15);
+            this.tipLable.Size = new System.Drawing.Size(353, 12);
             this.tipLable.TabIndex = 12;
-            this.tipLable.Text = "java.exe路径示例：C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
+            this.tipLable.Text = "JDK 路径示例:C:\\Program Files\\Java\\jdk-13.0.1\\bin\\java.exe";
             // 
             // contextMenuStrip1
             // 
@@ -247,12 +251,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.导出到ExcelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(142, 26);
             // 
             // 导出到ExcelToolStripMenuItem
             // 
             this.导出到ExcelToolStripMenuItem.Name = "导出到ExcelToolStripMenuItem";
-            this.导出到ExcelToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.导出到ExcelToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.导出到ExcelToolStripMenuItem.Text = "导出到Excel";
             this.导出到ExcelToolStripMenuItem.Click += new System.EventHandler(this.ExportToExcelToolStripMenuItem_Click);
             // 
@@ -262,29 +266,44 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(673, 104);
+            this.textBox1.Location = new System.Drawing.Point(505, 83);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(210, 25);
+            this.textBox1.Size = new System.Drawing.Size(158, 21);
             this.textBox1.TabIndex = 14;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.Location = new System.Drawing.Point(28, 114);
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label3.Location = new System.Drawing.Point(21, 91);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(363, 15);
+            this.label3.Size = new System.Drawing.Size(293, 12);
             this.label3.TabIndex = 15;
-            this.label3.Text = "APK分析需要占用较大C盘空间，多个APK建议分批分析";
+            this.label3.Text = "APK 分析需要占用较大C盘空间，多个APK建议分批分析";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(395, 75);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 12);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "* JDK1.8及以上";
             // 
             // ApkTool
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(895, 450);
+            this.ClientSize = new System.Drawing.Size(671, 360);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tipLable);
@@ -297,7 +316,7 @@
             this.Controls.Add(this.inputPathTextBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ApkTool";
             this.Text = "非法APK分析";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ApkTool_FormClosed);
@@ -337,5 +356,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn packageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn mainFunction;
         private System.Windows.Forms.DataGridViewTextBoxColumn size;
+        private System.Windows.Forms.Label label4;
     }
 }

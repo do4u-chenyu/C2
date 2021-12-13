@@ -388,6 +388,7 @@
     <Compile Include="Business\GlueWater\IGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\DbGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\SqGlueSetting.cs" />
+    <Compile Include="Business\GlueWater\Settings\YellowGlueSetting.cs" />
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -730,6 +731,7 @@
     <Compile Include="Controls\TabBars\JSTabBar\JSTabBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TabBars\Renderers\JSTabBarRenderer.cs" />
     <Compile Include="Core\Exports\DocxEngine.cs" />
     <Compile Include="Core\Exports\XmindEngine.cs" />
     <Compile Include="Business\Database\BaseDAOImpl.cs" />
@@ -3980,19 +3982,20 @@
     <Content Include="Resources\Script\IAO_Web_validation\step5_finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
-    <None Include="Resources\StartPage\autoFilter.png" />
     <None Include="Resources\StartPage\autoFilter.jpg" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
     <Content Include="Resources\StartPage\dataStorge.png" />
     <Content Include="Resources\StartPage\dbnet.png" />
+    <None Include="Resources\StartPage\groupAnalysis.jpg" />
     <Content Include="Resources\StartPage\gunLuntan.png" />
+    <None Include="Resources\StartPage\keywordAnalysis.jpg" />
+    <None Include="Resources\StartPage\infoExtraction.jpg" />
     <Content Include="Resources\StartPage\logicMap.png" />
     <Content Include="Resources\StartPage\mindMap.png" />
     <Content Include="Resources\StartPage\modelTop.png" />
     <Content Include="Resources\StartPage\modelTopLabel.png" />
-    <None Include="Resources\StartPage\nothing.png" />
     <None Include="Resources\StartPage\nothing.jpg" />
     <Content Include="Resources\StartPage\organization.png" />
     <Content Include="Resources\StartPage\ram.png" />

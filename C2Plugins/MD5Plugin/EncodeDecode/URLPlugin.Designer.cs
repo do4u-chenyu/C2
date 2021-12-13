@@ -40,7 +40,7 @@
             this.buttonDecode.TabIndex = 3;
             this.buttonDecode.Text = "<= 解码";
             this.buttonDecode.UseVisualStyleBackColor = true;
-            this.buttonDecode.Click += new System.EventHandler(this.buttonDecode_Click);
+            this.buttonDecode.Click += new System.EventHandler(this.ButtonDecode_Click);
             // 
             // URLlPlugin
             // 

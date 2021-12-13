@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace MD5Plugin
 {
-    public partial class UnicodePlugin : URLPlugin
+    partial class UnicodePlugin : URLPlugin
     {
         public UnicodePlugin()
         {
             InitializeComponent();
         }
 
-        public override void encode(string str)
+        public override void Encode(string str)
         {
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
@@ -34,7 +33,7 @@ namespace MD5Plugin
             }
         }
 
-        public void dealWithUnicode(string str)
+        public void DealWithUnicode(string str)
         {
             string resultStr = String.Empty;
             string[] strList = str.Split('u');
@@ -45,7 +44,7 @@ namespace MD5Plugin
             inputTextBox.Text = resultStr;
         }
 
-        public override void decode(string str)
+        public override void Decode(string str)
         {
             string a = "&#".ToString();
             string b = "x".ToString();
@@ -53,17 +52,17 @@ namespace MD5Plugin
             {
                 if (outputTextBox.Text == "请输入你要解码的内容")
                 {
-                    originOutput();
+                    OriginOutput();
                 }
                 else if (str.Contains('u'))
                 {
-                    str = str.Replace(@"\", @"");
-                    dealWithUnicode(str);
+                    str = str.Replace(@"\", string.Empty);
+                    DealWithUnicode(str);
                 }
                 else if (str.Contains(a) && str.Contains(b))//十六进制
                 {
-                    str = str.Replace(@"&#x", @"u").Replace(@";", @"");
-                    dealWithUnicode(str);
+                    str = str.Replace("&#x", "u").Replace(";", string.Empty);
+                    DealWithUnicode(str);
                 }
                 else if (str.Contains(a) && !str.Contains(b))//十进制
                 {
@@ -74,12 +73,12 @@ namespace MD5Plugin
                     {
                         int ss = int.Parse(mc[i].ToString());
                         String strA = ss.ToString("x8");
-                        strA = strA.Replace(@"0000", @"x").Replace(strA, @"&#" + strA + ';');
+                        strA = strA.Replace("0000", "x").Replace(strA, "&#" + strA + ';');
                         result += strA;
                     }
                     string newstr = result;
-                    newstr = newstr.Replace(@"&#x", @"u").Replace(@";", @"");
-                    dealWithUnicode(newstr);
+                    newstr = newstr.Replace("&#x", "u").Replace(@";", string.Empty);
+                    DealWithUnicode(newstr);
                 }
                 else
                 {

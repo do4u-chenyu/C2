@@ -104,7 +104,7 @@ namespace C2.Dialogs.CastleBravo
                 fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, Encoding.Default);
                 for (int row = 0; row < MaxRowNumber && !sr.EndOfStream; row++)
-                    md5List.Add(sr.ReadLine().Trim(new char[] { '\r', '\n'}));
+                    md5List.Add(sr.ReadLine().Trim());
             }
             catch
             {

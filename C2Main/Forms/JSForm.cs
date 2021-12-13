@@ -1,6 +1,7 @@
 ﻿using C2.Business.GlueWater;
 using C2.Controls;
 using C2.Core;
+using C2.Utils;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -50,6 +51,9 @@ namespace C2.Forms
             string selectedItem = tabBar1.SelectedItem.Tag.ToString();
             glueSetting = GlueSettingFactory.GetSetting(selectedItem);
             RefreshHtmlTable();
+            this.excelTextBox.Text = "未选择任何文件";
+            if (selectedItem == "境外网产专项")
+                selectedItem = "网产专项";
             this.itemLabel.Text = selectedItem.Replace("专项", "");
         }
 
@@ -89,12 +93,26 @@ namespace C2.Forms
                 return;
             excelPath = OpenFileDialog.FileName;
 
-            if (glueSetting.UpdateContent(excelPath))
-                this.label4.Text = System.IO.Path.GetFileName(excelPath) + "文件上传成功。";
-            else
-                MessageBox.Show("数据上传失败。");
+            using (GuarderUtil.WaitCursor)
+            {
+                if (glueSetting.UpdateContent(excelPath))
+                    this.excelTextBox.Text = System.IO.Path.GetFileName(excelPath) + "文件上传成功。";
+                else
+                    this.excelTextBox.Text = System.IO.Path.GetFileName(excelPath) + "文件上传失败。";
+                RefreshHtmlTable();
+            }
+        }
 
-            RefreshHtmlTable();
+        public void SelectTabByName(string name)
+        {
+            foreach(TabItem ti in tabBar1.Items)
+            {
+                if (ti.Tag.ToString() == name)
+                {
+                    tabBar1.SelectedItem = ti;
+                    break;
+                }
+            }
         }
 
         #region 界面html版

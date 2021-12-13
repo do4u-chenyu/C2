@@ -4,6 +4,7 @@ using C2.Business.CastleBravo.RobotsScan;
 using C2.Business.CastleBravo.WebScan;
 using C2.Business.CastleBravo.WebShellTool;
 using C2.Business.Cracker.Dialogs;
+using C2.Core;
 using C2.Globalization;
 using C2.Utils;
 using System;
@@ -134,16 +135,12 @@ namespace C2.Controls.C1.Left
                     new BinaryMainForm().ShowDialog();
                     break;
                 case "涉赌专项":
-                    //new DB().ShowDialog();
-                    break;
                 case "涉枪专项":
-                    //new SQ().ShowDialog();
-                    break;
                 case "涉黄专项":
-                    //new SH().ShowDialog();
-                    break;
                 case "盗洞专项":
-                    //new DD().ShowDialog();
+                case "后门黑吃黑专项":
+                case "境外网产专项":
+                    Global.GetMainForm().OpenJSTab(pluginType);
                     break;
                 default:
                     break;

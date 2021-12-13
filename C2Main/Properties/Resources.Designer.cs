@@ -1309,6 +1309,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap groupAnalysis {
+            get {
+                object obj = ResourceManager.GetObject("groupAnalysis", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap GunDetection {
             get {
                 object obj = ResourceManager.GetObject("GunDetection", resourceCulture);
@@ -1516,6 +1526,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap infoExtraction1 {
+            get {
+                object obj = ResourceManager.GetObject("infoExtraction1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap InformationSearch {
             get {
                 object obj = ResourceManager.GetObject("InformationSearch", resourceCulture);
@@ -1590,6 +1610,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("keyword_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap keywordAnalysis {
+            get {
+                object obj = ResourceManager.GetObject("keywordAnalysis", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

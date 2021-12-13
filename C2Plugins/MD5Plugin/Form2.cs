@@ -1,6 +1,4 @@
 ﻿using C2.IAOLab.Plugins;
-using MD5Plugin.DecimalConvert;
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,20 +6,18 @@ namespace MD5Plugin
 {
     public partial class Form2 : Form, IPlugin
     {
-        //CommonPlugin commonPlugin;
         public Form2()
         {
             InitializeComponent();
             treeView1.ExpandAll();
-            treeView1.ItemHeight = 20;
         }
         
-        private void removeControls()
+        private void RemoveControls()
         {
             this.Controls.Remove(this.commonPlugin);
         }
         
-        private void addControls()
+        private void AddControls()
         {
             this.commonPlugin.BackColor = SystemColors.InactiveCaption;
             this.commonPlugin.Location = new Point(186, 0);
@@ -41,82 +37,7 @@ namespace MD5Plugin
                 return cp;
             }
         }
-
-        private void TreeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            removeControls();
-            if (e.Node.Name == "MD5(128位)")
-            {
-                this.Text = "MD5(128位)";
-                this.commonPlugin = new MD5128Plugin();
-            }
-            else if (e.Node.Name == "MD5(64位)")
-            {
-                this.Text = "MD5(64位)";
-                this.commonPlugin = new MD564Plugin();
-            }
-            else if (e.Node.Name == "超级Base64")
-            {
-                this.Text = "超级Base64";
-                this.commonPlugin = new Base64Plugin();
-            }
-            else if (e.Node.Name == "URL编解码")
-            {
-                this.Text = "URL编解码";
-                this.commonPlugin = new URLPlugin();
-            }
-            else if (e.Node.Name == "Unicode编解码")
-            {
-                this.Text = "Unicode编解码";
-                this.commonPlugin = new UnicodePlugin();
-            }
-            else if (e.Node.Name == "Hex编解码")
-            {
-                this.Text = "Hex编解码";
-                this.commonPlugin = new HexPlugin();
-            }
-            else if (e.Node.Name == "AES(128位)")
-            {
-                this.Text = "AES(128位)";
-                this.commonPlugin = new AES128Plugin();
-            }
-            else if (e.Node.Name == "SHA-1")
-            {
-                this.Text = "SHA-1";
-                this.commonPlugin = new SHA1Plugin();
-            }
-            else if (e.Node.Name == "SHA-256")
-            {
-                this.Text = "SHA-256";
-                this.commonPlugin = new SHA256Plugin();
-            }
-            else if (e.Node.Name == "SHA-512")
-            {
-                this.Text = "SHA-512";
-                this.commonPlugin = new SHA512Plugin();
-            }
-            else if (e.Node.Name == "NTLM")
-            {
-                this.Text = "NTLM";
-                this.commonPlugin = new NTLMPlugin();
-            }
-            else if (e.Node.Name == "十进制转十六")
-            {
-                this.Text = "十进制转十六";
-                this.commonPlugin = new HexDecimal();
-            }
-            else if (e.Node.Name == "八进制转十六")
-            {
-                this.Text = "八进制转十六";
-                this.commonPlugin = new OctDecimal();
-            }
-            else 
-            {
-                this.Text = "加密解密";
-            }
-            addControls();
-        }
-       
+   
         public Image GetPluginImage()
         {
             return this.Icon.ToBitmap();
@@ -127,7 +48,7 @@ namespace MD5Plugin
         }
         public string GetPluginVersion()
         {
-            return "0.0.3";
+            return "1.0.1";
         }
         public string GetPluginName()
         {
@@ -136,6 +57,44 @@ namespace MD5Plugin
         public DialogResult ShowFormDialog()
         {
             return this.ShowDialog();
+        }
+
+        private void TreeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                return;
+
+            RemoveControls();
+            this.Text = e.Node.Name;
+            if (e.Node.Name == "MD5(128位)")
+                this.commonPlugin = new MD5128Plugin();
+            else if (e.Node.Name == "MD5(64位)")
+                this.commonPlugin = new MD564Plugin();
+            else if (e.Node.Name == "超级Base64")
+                this.commonPlugin = new Base64Plugin();
+            else if (e.Node.Name == "URL编解码")
+                this.commonPlugin = new URLPlugin();
+            else if (e.Node.Name == "Unicode编解码")
+                this.commonPlugin = new UnicodePlugin();
+            else if (e.Node.Name == "Hex编解码")
+                this.commonPlugin = new HexPlugin();
+            else if (e.Node.Name == "AES(128位)")
+                this.commonPlugin = new AES128Plugin();
+            else if (e.Node.Name == "SHA-1")
+                this.commonPlugin = new SHA1Plugin();
+            else if (e.Node.Name == "SHA-256")
+                this.commonPlugin = new SHA256Plugin();
+            else if (e.Node.Name == "SHA-512")
+                this.commonPlugin = new SHA512Plugin();
+            else if (e.Node.Name == "NTLM")
+                this.commonPlugin = new NTLMPlugin();
+            else if (e.Node.Name == "十进制转十六")
+                this.commonPlugin = new HexDecimal();
+            else if (e.Node.Name == "八进制转十六")
+                this.commonPlugin = new OctDecimal();
+            else
+                this.Text = "加密解密";
+            AddControls();
         }
     }
 }

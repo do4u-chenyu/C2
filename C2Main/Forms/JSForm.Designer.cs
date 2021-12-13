@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.excelTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.itemLabel = new System.Windows.Forms.Label();
             this.sampleButton = new System.Windows.Forms.Button();
@@ -55,23 +55,13 @@
             this.panel1.Size = new System.Drawing.Size(784, 40);
             this.panel1.TabIndex = 0;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label4.Location = new System.Drawing.Point(257, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 20);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "未选择任何文件";
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.excelTextBox);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.itemLabel);
             this.panel2.Controls.Add(this.sampleButton);
             this.panel2.Controls.Add(this.browserButton);
-            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(147, 0);
@@ -79,11 +69,21 @@
             this.panel2.Size = new System.Drawing.Size(637, 40);
             this.panel2.TabIndex = 0;
             // 
+            // excelTextBox
+            // 
+            this.excelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.excelTextBox.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.excelTextBox.Location = new System.Drawing.Point(249, 15);
+            this.excelTextBox.Name = "excelTextBox";
+            this.excelTextBox.Size = new System.Drawing.Size(284, 18);
+            this.excelTextBox.TabIndex = 7;
+            this.excelTextBox.Text = "未选择任何文件";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label2.Location = new System.Drawing.Point(117, 14);
+            this.label2.Location = new System.Drawing.Point(105, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 20);
             this.label2.TabIndex = 5;
@@ -94,7 +94,7 @@
             this.itemLabel.AutoSize = true;
             this.itemLabel.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.itemLabel.ForeColor = System.Drawing.Color.Red;
-            this.itemLabel.Location = new System.Drawing.Point(84, 14);
+            this.itemLabel.Location = new System.Drawing.Point(72, 14);
             this.itemLabel.Name = "itemLabel";
             this.itemLabel.Size = new System.Drawing.Size(39, 20);
             this.itemLabel.TabIndex = 0;
@@ -105,7 +105,7 @@
             this.sampleButton.AutoSize = true;
             this.sampleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.sampleButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.sampleButton.Location = new System.Drawing.Point(540, 9);
+            this.sampleButton.Location = new System.Drawing.Point(542, 9);
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 30);
             this.sampleButton.TabIndex = 4;
@@ -116,7 +116,7 @@
             // 
             this.browserButton.AutoSize = true;
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.browserButton.Location = new System.Drawing.Point(170, 9);
+            this.browserButton.Location = new System.Drawing.Point(156, 9);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(85, 30);
             this.browserButton.TabIndex = 1;
@@ -128,7 +128,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label3.Location = new System.Drawing.Point(53, 14);
+            this.label3.Location = new System.Drawing.Point(41, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 20);
             this.label3.TabIndex = 6;
@@ -190,12 +190,12 @@
         private System.Windows.Forms.Button sampleButton;
         private System.Windows.Forms.Button browserButton;
         private System.Windows.Forms.Label itemLabel;
-        private Controls.TabBar tabBar1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private Controls.JSTabBar tabBar1;
+        private System.Windows.Forms.TextBox excelTextBox;
     }
 }

@@ -110,7 +110,7 @@
             treeNode16});
             this.treeView1.Size = new System.Drawing.Size(180, 493);
             this.treeView1.TabIndex = 12;
-            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1_NodeMouseDoubleClick);
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1_NodeMouseClick);
             // 
             // commonPlugin
             // 
