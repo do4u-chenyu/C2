@@ -2381,5 +2381,14 @@ namespace C2.Controls
             return null;
         }
 
+        public TabItem GetJSForm()
+        {
+            foreach (TabItem ti in Items)
+            {
+                if (ti.Tag is JSForm)
+                    return ti;
+            }
+            return null;
+        }
     }
 }
