@@ -186,7 +186,10 @@ class BatchQuery:
                 for line in lines[1:]:  ##跳过第一行title
                     line = line.strip('\n')
                     ##data = "{0}\t{1}{\t}{2}\n".format(line.split('\t')[8],line.split('\t')[9],line.split('\t')[16])
-                    data = line.split('\t')[7] + '\t' + line.split('\t')[8] + '\t' + line.split('\t')[15] + '\n'
+                    try:
+                        data = line.split('\t')[7] + '\t' + line.split('\t')[8] + '\t' + line.split('\t')[15] + '\n'
+                    except:
+                        data = ""
                     tmplist.append(data)
                 tmplist = list(set(tmplist))  ##去重
                 for line in tmplist:
