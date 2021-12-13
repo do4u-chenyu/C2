@@ -213,7 +213,7 @@ namespace C2.Controls
                     e.Graphics.FillRectangle(backBrush, e.Item.Bounds);
 
                     //TabBar各矩形空间之间划线
-                    //borderColor = PaintHelper.AdjustColorS(PaintHelper.GetDarkColor(backColor, 0.15), 10, 20);
+                    borderColor = PaintHelper.AdjustColorS(PaintHelper.GetDarkColor(backColor, 0.15), 10, 20);
                 }
             }
 
@@ -266,20 +266,35 @@ namespace C2.Controls
                     break;
                 
             }
-            /*
+            //GraphicsLine(color, e, pts, rectangle);
+            
             Pen pen = new Pen(color);
             var pom = e.Graphics.PixelOffsetMode;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
             e.Graphics.DrawLines(pen, pts);
             e.Graphics.PixelOffsetMode = pom;
-            */
+            
 
+            /*
             Pen newPen = new Pen(Color.DodgerBlue, 6);
             e.Graphics.DrawLine(newPen, new Point(rectangle.Left, rectangle.Bottom), new Point(rectangle.Right, rectangle.Bottom));
-
+            */
 
             //e.Graphics.DrawPath(new Pen(Bar.BaseLineColor), path);
         }
+        
+        /*
+        public virtual void GraphicsLine(Color color, TabItemPaintEventArgs e, Point[] pts, Rectangle rectangle)
+        {
+            
+            Pen pen = new Pen(color);
+            var pom = e.Graphics.PixelOffsetMode;
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
+            e.Graphics.DrawLines(pen, pts);
+            e.Graphics.PixelOffsetMode = pom;
+        }*/
+    
+    
 
         protected override void DrawButton(PaintEventArgs e, TabBarButton button, UIControlStatus ucs)
         {

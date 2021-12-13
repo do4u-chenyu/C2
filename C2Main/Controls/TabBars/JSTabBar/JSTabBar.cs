@@ -39,7 +39,16 @@ namespace C2.Controls
             }
         }
 
-
-
+        
+        public override TabBarRenderer DefaultRenderer
+        {
+            get
+            {
+                return new JSTabBarRenderer(this);
+            }
+        }
+        
+        
+     
     }
 }
