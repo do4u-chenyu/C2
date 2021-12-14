@@ -5,19 +5,25 @@
 	<script src="../JS/jquery-2.2.1.min.js"></script>
 
 	<style type="text/css">
-body, html{font-family:"Times New Roman";}
+body, html{
+    font-family:"Times New Roman";
+	margin:3px 10px;
+	}
 
 table#dataintable {
 	border-collapse:collapse;
 	border:0px solid #aaa;
 	width:100%;
 	font-size:14px;
-	cursor:default
+	cursor:default;
+	table-layout:fixed;
+	word-break:keep-all;
+	
 	}
 
 table#dataintable th {
 	vertical-align:baseline;
-	padding:12px 5px 12px 5px;
+	padding:12px 12px 12px 12px;
 	background-color:#e7e7e7;
 	border:1px solid #aaa;
 	text-align:left;
@@ -25,11 +31,14 @@ table#dataintable th {
 	}
 
 table#dataintable td {
-	vertical-align:text-top;
-	padding:6px 5px 6px 6px;
+
+	padding:10px 12px 10px 12px;
     border-bottom:1px solid #edebeb;
 	
 	vertical-align:middle;
+	    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 	}
 
 table#dataintable tr:nth-child(odd) {
@@ -44,6 +53,7 @@ td#th0{
     color:#4a86e8;
 	
 }
+
         .arrow {
             display: inline-block;
             vertical-align: middle;

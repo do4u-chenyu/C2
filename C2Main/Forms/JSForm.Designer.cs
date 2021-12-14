@@ -161,6 +161,7 @@
             // webBrowser
             // 
             this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser.Location = new System.Drawing.Point(0, 40);
             this.webBrowser.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
