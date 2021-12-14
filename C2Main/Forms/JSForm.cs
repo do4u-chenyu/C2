@@ -95,11 +95,17 @@ namespace C2.Forms
 
             using (GuarderUtil.WaitCursor)
             {
-                if (glueSetting.UpdateContent(excelPath))
-                    this.excelTextBox.Text = System.IO.Path.GetFileName(excelPath) + "文件上传成功。";
+                string returnMsg = glueSetting.UpdateContent(excelPath);
+                if (returnMsg == "文件上传成功")
+                {
+                    this.excelTextBox.Text = Path.GetFileNameWithoutExtension(excelPath) + "文件上传成功";
+                    RefreshHtmlTable();
+                }
                 else
-                    this.excelTextBox.Text = System.IO.Path.GetFileName(excelPath) + "文件上传失败。";
-                RefreshHtmlTable();
+                {
+                    this.excelTextBox.Text = Path.GetFileNameWithoutExtension(excelPath) + "文件上传失败";
+                    MessageBox.Show(returnMsg);
+                }
             }
         }
 

@@ -50,9 +50,9 @@ namespace C2.Business.GlueWater.Settings
             return base.SearchInfo(item);
         }
 
-        public override bool UpdateContent(string excelPath)
+        public override string UpdateContent(string excelPath)
         {
-            return false;
+            return base.UpdateContent(excelPath);
         }
     }
 }

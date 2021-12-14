@@ -26,9 +26,9 @@ namespace C2.Business.GlueWater
 
         }
 
-        public virtual bool UpdateContent(string excelPath)
+        public virtual string UpdateContent(string excelPath)
         {
-            return false;
+            return string.Empty;
         }
 
         public virtual string RefreshHtmlTable(bool freshTitle)
