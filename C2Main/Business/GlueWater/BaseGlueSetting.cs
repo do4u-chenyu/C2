@@ -18,7 +18,7 @@ namespace C2.Business.GlueWater
             if(!Directory.Exists(txtDirectory))
                 FileUtil.CreateDirectory(txtDirectory);
 
-            doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数" };
+            doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数", "涉黄人数" };
         }
 
         public virtual void InitDataTable()
@@ -26,9 +26,9 @@ namespace C2.Business.GlueWater
 
         }
 
-        public virtual bool UpdateContent(string excelPath)
+        public virtual string UpdateContent(string excelPath)
         {
-            return false;
+            return string.Empty;
         }
 
         public virtual string RefreshHtmlTable(bool freshTitle)

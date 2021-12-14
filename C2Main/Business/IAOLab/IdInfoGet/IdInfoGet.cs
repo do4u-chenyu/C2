@@ -22,8 +22,8 @@ namespace C2.IAOLab.IDInfoGet
         public IDInfoGet()
         {
             table = new Dictionary<string, string>(1024 * 4);
-            string ret = FileUtil.FileReadToEnd(Path.Combine(Application.StartupPath, "Resources/Templates/AreaNum.txt"));
-            foreach(string line in ret.Split(System.Environment.NewLine))
+            string ret = FileUtil.FileReadToEnd(Path.Combine(Application.StartupPath, "Resources/Templates/RegionalismCode.txt"));
+            foreach (string line in ret.Split(System.Environment.NewLine))
             {
                 string[] lineSplit = line.Split(":");
                 if (lineSplit.Length >= 2)

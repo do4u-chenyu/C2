@@ -21,23 +21,23 @@ namespace C2.IAOLab.ExpressNum
         private readonly string EBusinessID = "1719835";//即用户ID，快递鸟
         private readonly string ApiKey = "604e4b0f-8d4d-435e-8dcd-7a5e90eeb99c";//即API key
         private readonly string ReqURL = "https://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx"; //请求URL
-
+        
         public string ExpressSearch(string input)
         {
+            DateTime.Now.ToString("yyyy-MM-dd");
             Dictionary<string, string> nameCode = new Dictionary<string, string>();
-            nameCode.Add("shentong", "STO");
-            nameCode.Add("huitong", "HTKY");
-            nameCode.Add("yuantong", "YTO");
-            nameCode.Add("tiantian", "HHTT");
+            nameCode.Add("shentong", "STO");  //申通
+            nameCode.Add("huitong", "HTKY");   //百世
+            nameCode.Add("yuantong", "YTO");   //圆通
+            nameCode.Add("tiantian", "HHTT");   //天天
             string name = GetName(input); //我要查 查询快递公司结果
             if (name == string.Empty)
                 return string.Format("{0}\t{1}{2}", input, "快递单号查询失败", Environment.NewLine);
-            string result = OrderOnlineByJson(nameCode[name],input);
+            string result = GetResult(nameCode[name],input);
             string locRex = @"\u0022AcceptStation\u0022 : \u0022(.*?)\u0022,";    //获取快递途径站点
             MatchCollection loc = Regex.Matches(result,locRex);
             string startLoc = loc[0].Groups[1].Value;
             string endLoc = loc[loc.Count - 2].Groups[1].Value;
-
             string startRex1 = "【(.*?)】";
             startLoc = Regex.Match(startLoc,startRex1).Groups[1].Value;
             string endRex1 = "(.*?)，";
@@ -57,7 +57,6 @@ namespace C2.IAOLab.ExpressNum
         
         public string GetName(string input)    //返回快递公司名称
         {
-            List<string> result = new List<string>();
             string sign = Sha256("appid=10000681&module=getExpressInfo&order=" + input + "&appkey=c33d13c4fbdfd31448674b777336c9c9");
             string url = string.Format("http://cha.ebaitian.cn/api/json?type=get&appid=10000681&module=getExpressInfo&order={0}&sign={1}", input, sign);
             WebClient client = new WebClient();
@@ -65,11 +64,10 @@ namespace C2.IAOLab.ExpressNum
             string info = client.DownloadString(url);
             string nameStr = @"\u0022id\u0022:\u0022(.*?)\u0022,";
             string name = Regex.Match(info, nameStr).Groups[1].ToString();   //获得快递公司的名称  .*\u0022id\u0022:\u0022(.*?)\u0022,
-            return name;
-    
+            return name;  
         }
-        
-        public string OrderOnlineByJson(string courier,string input)
+
+        public string GetResult(string courier,string input)
         {
             string requestData = "{" + "'CustomerName': ''," + 
                 "'OrderCode': ''," + 

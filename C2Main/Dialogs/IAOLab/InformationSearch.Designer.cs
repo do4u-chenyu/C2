@@ -53,8 +53,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -83,7 +86,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 337);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(619, 44);
+            this.panel1.Size = new System.Drawing.Size(660, 44);
             this.panel1.TabIndex = 5;
             // 
             // export
@@ -158,7 +161,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 24);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(611, 309);
+            this.tabPage7.Size = new System.Drawing.Size(652, 309);
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "备案号查询";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -194,7 +197,7 @@
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox2.Size = new System.Drawing.Size(605, 207);
+            this.richTextBox2.Size = new System.Drawing.Size(646, 207);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
@@ -219,7 +222,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(611, 309);
+            this.tabPage6.Size = new System.Drawing.Size(652, 309);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "银行卡号查询";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -264,7 +267,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox1.Size = new System.Drawing.Size(605, 207);
+            this.richTextBox1.Size = new System.Drawing.Size(646, 207);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -280,7 +283,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(619, 337);
+            this.tabControl1.Size = new System.Drawing.Size(660, 337);
             this.tabControl1.TabIndex = 12;
             // 
             // tabPage8
@@ -292,7 +295,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 24);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(611, 309);
+            this.tabPage8.Size = new System.Drawing.Size(652, 309);
             this.tabPage8.TabIndex = 6;
             this.tabPage8.Text = "身份证号查询";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -334,46 +337,81 @@
             this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.richTextBox3.Location = new System.Drawing.Point(3, 99);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(605, 207);
+            this.richTextBox3.Size = new System.Drawing.Size(646, 207);
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "";
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.label10);
+            this.tabPage9.Controls.Add(this.label8);
+            this.tabPage9.Controls.Add(this.label9);
             this.tabPage9.Controls.Add(this.label7);
             this.tabPage9.Controls.Add(this.richTextBox4);
             this.tabPage9.Location = new System.Drawing.Point(4, 24);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(611, 309);
+            this.tabPage9.Size = new System.Drawing.Size(652, 309);
             this.tabPage9.TabIndex = 7;
             this.tabPage9.Text = "快递单号查询";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label8.Location = new System.Drawing.Point(6, 81);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(226, 15);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "单次输入：321321166605005515";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label9.Location = new System.Drawing.Point(6, 61);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(384, 15);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "当前支持查询申通，中通，百世，天天快递，共500次/天";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.Location = new System.Drawing.Point(6, 81);
+            this.label7.Location = new System.Drawing.Point(240, 81);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(277, 15);
+            this.label7.Size = new System.Drawing.Size(247, 15);
             this.label7.TabIndex = 6;
-            this.label7.Text = "批量查询格式：多个快递单号用换行分隔";
+            this.label7.Text = "批量查询：多个快递单号用换行分隔";
             // 
             // richTextBox4
             // 
             this.richTextBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.richTextBox4.Location = new System.Drawing.Point(3, 99);
             this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(605, 207);
+            this.richTextBox4.Size = new System.Drawing.Size(646, 207);
             this.richTextBox4.TabIndex = 1;
             this.richTextBox4.Text = "";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 11F);
+            this.label10.Location = new System.Drawing.Point(5, 13);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(202, 15);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "请在下方输入待查询快递单号";
             // 
             // InformationSearch
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(619, 381);
+            this.ClientSize = new System.Drawing.Size(660, 381);
             this.Controls.Add(this.import);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
@@ -429,5 +467,8 @@
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.RichTextBox richTextBox4;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

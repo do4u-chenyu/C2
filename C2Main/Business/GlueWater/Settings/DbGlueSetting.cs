@@ -62,7 +62,7 @@ namespace C2.Business.GlueWater.Settings
             if(freshTitle)
                 sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
-                      "    <th>Refer对应Title/Refer</th>" +
+                      "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
                       "    <th>涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "    <th>涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "    <th>赌博类型/运营时间</th>" +
@@ -76,7 +76,7 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
                             "   <td id=\"th0\">{0}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
-                            "   <td>{3}<br>{4}</td>" +
+                            "   <td  style=\"width:150px\">{3}<br>{4}</td>" +
                             "   <td>{5}</td>" +
                             "   <td>{6}</td>" +
                             "   <td>{7}<br>{8}</td>" +
@@ -110,24 +110,33 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
-        public override bool UpdateContent(string excelPath)
+        public override string UpdateContent(string excelPath)
         {
-            return DealWebContent(excelPath) && DealMemberContent(excelPath);
-        }
+            //return DealWebContent(excelPath) && DealMemberContent(excelPath);
 
-        private bool DealWebContent(string excelPath)
-        {
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
             if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
-                return false;
+                return rrst1.Message;
 
-            List<int> headIndex = IndexFilter(DbWebExcelColList, rrst1.Result);
+            ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站人员");
+            if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
+                return rrst2.Message;
 
-            for (int i = 1; i < rrst1.Result.Count; i++)
+            if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
+                return "文件上传成功";
+            else
+                return "文件格式不正确";
+        }
+
+        private bool DealWebContent(List<List<string>> contents)
+        {
+            List<int> headIndex = IndexFilter(DbWebExcelColList, contents);
+
+            for (int i = 1; i < contents.Count; i++)
             {
-                if (headIndex.Max() > rrst1.Result[i].Count)
+                if (headIndex.Max() > contents[i].Count)
                     return false;
-                List<string> resultList = ContentFilter(headIndex, rrst1.Result[i]);
+                List<string> resultList = ContentFilter(headIndex, contents[i]);
 
                 //这里要做判断了 对于web，url存在，替换掉
                 DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
@@ -140,20 +149,16 @@ namespace C2.Business.GlueWater.Settings
             return true;
         }
 
-        private bool DealMemberContent(string excelPath)
+        private bool DealMemberContent(List<List<string>> contents)
         {
-            ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站人员");
-            if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
-                return false;
-
-            List<int> headIndex2 = IndexFilter(DbMemberExcelColList, rrst2.Result);
+            List<int> headIndex = IndexFilter(DbMemberExcelColList, contents);
             List<List<string>> needAddList = new List<List<string>>();
 
-            for (int i = 1; i < rrst2.Result.Count; i++)
+            for (int i = 1; i < contents.Count; i++)
             {
-                if (headIndex2.Max() > rrst2.Result[i].Count)
+                if (headIndex.Max() > contents[i].Count)
                     return false;
-                List<string> resultList = ContentFilter(headIndex2, rrst2.Result[i]);
+                List<string> resultList = ContentFilter(headIndex, contents[i]);
 
                 //这里要做判断了 对于member，url存在，比较是否完全一致
                 DataRow[] rows = DbMemberTable.Select("域名='" + resultList[0] + "'");

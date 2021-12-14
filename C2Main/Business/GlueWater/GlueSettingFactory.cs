@@ -17,6 +17,8 @@ namespace C2.Business.GlueWater
                     return DbGlueSetting.GetInstance();
                 case "涉枪专项":
                     return SqGlueSetting.GetInstance();
+                case "涉黄专项":
+                    return YellowGlueSetting.GetInstance();
                 default:
                     return DbGlueSetting.GetInstance();
             }
