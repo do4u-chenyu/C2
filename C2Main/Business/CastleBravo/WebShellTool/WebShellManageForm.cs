@@ -665,7 +665,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 lvi.SubItems[7].Text = string.Empty;
         }
 
-        #region 后信息收集模块
+        #region 后信息收集模块,该模块部分payload是存储在境外服务器103.43.17.9上的图片马
         // mysql部分
         private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
         {
