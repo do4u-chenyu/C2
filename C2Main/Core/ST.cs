@@ -754,6 +754,48 @@ namespace C2.Core
             }
         }
 
+        public static string GenerateCharsetMD5(string str, string charset)  //可选编码方式
+        {
+            byte[] buffer = Encoding.GetEncoding(charset).GetBytes(str);
+            try
+            {
+                MD5CryptoServiceProvider check;
+                check = new MD5CryptoServiceProvider();
+                byte[] somme = check.ComputeHash(buffer);
+                string ret = "";
+                foreach (byte a in somme)
+                {
+                    if (a < 16)
+                        ret += "0" + a.ToString("X");
+                    else
+                        ret += a.ToString("X");
+                }
+                return ret.ToLower();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static string Base64Encode(string str, string charset)
+        {
+            return Convert.ToBase64String(Encoding.GetEncoding(charset).GetBytes(str));
+        }
+
+        public static string Sha256(string data)    //sha256加密
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            byte[] hash = SHA256.Create().ComputeHash(bytes);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                builder.Append(hash[i].ToString("X2"));
+            return builder.ToString().ToLower();
+        }
+
+
+
+
         public static string ImageBase64String(Image image)
         {
             if (image == null)
