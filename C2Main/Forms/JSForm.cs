@@ -3,6 +3,7 @@ using C2.Controls;
 using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace C2.Forms
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
         IGlueSetting glueSetting;
         GlueDetailInfoDialog detailDialog;
+        private List<string> doneGlueList;
 
         public JSForm()
         {
@@ -27,6 +29,9 @@ namespace C2.Forms
 
             detailDialog = new GlueDetailInfoDialog();
             glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
+            doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
+
+            this.label1.Visible = false;
         }
 
         #region tab页代码
@@ -50,7 +55,18 @@ namespace C2.Forms
         {
             string selectedItem = tabBar1.SelectedItem.Tag.ToString();
             glueSetting = GlueSettingFactory.GetSetting(selectedItem);
-            RefreshHtmlTable();
+            if (doneGlueList.Contains(selectedItem))
+            {
+                RefreshHtmlTable();
+                this.webBrowser.Visible = true;
+                this.label1.Visible = false;
+            }
+            else
+            {
+                this.webBrowser.Visible = false;
+                this.label1.Visible = true;
+            }
+            
             this.excelTextBox.Text = "未选择任何文件";
             if (selectedItem == "境外网产专项")
                 selectedItem = "网产专项";

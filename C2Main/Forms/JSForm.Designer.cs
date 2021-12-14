@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabBar1 = new C2.Controls.JSTabBar();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -149,7 +150,8 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.webBrowser);
             this.panel3.Controls.Add(this.panel1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,6 +159,18 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(784, 416);
             this.panel3.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("宋体", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.Location = new System.Drawing.Point(360, 169);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(387, 64);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "敬 请 期 待";
             // 
             // webBrowser
             // 
@@ -182,6 +196,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -198,5 +213,6 @@
         private System.Windows.Forms.Label label3;
         private Controls.JSTabBar tabBar1;
         private System.Windows.Forms.TextBox excelTextBox;
+        private System.Windows.Forms.Label label1;
     }
 }
