@@ -1608,9 +1608,6 @@
   <data name="PoliticsTextRecognition" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\PoliticsTextRecognition.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="autoFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\autoFilter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="div" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\C1\toolbox\div.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2265,13 +2262,16 @@
   <data name="WC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="autoFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartPage\autoFilter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="groupAnalysis" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\groupAnalysis.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\StartPage\groupAnalysis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="infoExtraction1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\infoExtraction.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\StartPage\infoExtraction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="keywordAnalysis" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartPage\keywordAnalysis.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\StartPage\keywordAnalysis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
