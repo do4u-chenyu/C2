@@ -2614,6 +2614,7 @@
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Business\CastleBravo\WebShellTool\payload\db_dict" />
     <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -2647,6 +2648,12 @@
     <EmbeddedResource Include="Resources\cur_style_brush.cur" />
     <None Include="Resources\flow.png" />
     <None Include="Resources\businessoutline.png" />
+    <Content Include="Business\CastleBravo\WebShellTool\payload\aess.gif" />
+    <Content Include="Business\CastleBravo\WebShellTool\payload\cmd.gif" />
+    <Content Include="Business\CastleBravo\WebShellTool\payload\conf.gif" />
+    <Content Include="Business\CastleBravo\WebShellTool\payload\less.gif" />
+    <Content Include="Business\CastleBravo\WebShellTool\payload\readme.txt" />
+    <Content Include="Business\CastleBravo\WebShellTool\payload\sysinfo.gif" />
     <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
