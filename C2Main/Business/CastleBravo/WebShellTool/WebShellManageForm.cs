@@ -357,6 +357,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
+            this.checkAliveNeedStop = false;
             if (this.LV.SelectedItems.Count == 0)
                 return;
             UpdateAliveItems(LV.SelectedItems[0]);
@@ -513,6 +514,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 代理慢, timeout富裕一些
             timeout = Proxy == ProxySetting.Empty ? timeout : timeout * 2;
             int start = Environment.TickCount;
+
             while (Math.Abs(Environment.TickCount - start) < timeout * 1000)
             {
                 Application.DoEvents();
@@ -757,6 +759,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void DoCurrentItemTask()
         {
+            this.checkAliveNeedStop = false;
             foreach (ListViewItem item in this.LV.SelectedItems)
             {
                 if (checkAliveNeedStop)
