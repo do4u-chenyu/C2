@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.IAOLab.IDInfoGet;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace C2.Business.GlueWater.Settings
                       "    <th>涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "    <th>涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "    <th>赌博类型/运营时间</th>" +
-                      "    <th>发现地市/发现时间</th>" +
+                      "    <th>发现地市/发现时间<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "</tr>"
                       );
 
@@ -77,8 +78,8 @@ namespace C2.Business.GlueWater.Settings
                             "<tr name=\"row\">" +
                             "   <td id=\"th0\">{0}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
                             "   <td  style=\"width:150px\">{3}<br>{4}</td>" +
-                            "   <td>{5}</td>" +
-                            "   <td>{6}</td>" +
+                            "   <td id=\"th2\">{5}</td>" +
+                            "   <td id=\"th2\">{6}</td>" +
                             "   <td>{7}<br>{8}</td>" +
                             "   <td>{9}<br>{10}</td>" +
                             "</tr>",
@@ -106,6 +107,10 @@ namespace C2.Business.GlueWater.Settings
 
         public override void SortDataTableByCol(string col, string sortType)
         {
+            //html的标题为发现地市/发现时间，排序此列需要去掉发现地市
+            if (col.Contains("发现时间"))
+                col = "发现时间";
+
             DbWebTable.DefaultView.Sort = col + " " + sortType;
             DbWebTable = DbWebTable.DefaultView.ToTable();
         }
@@ -115,11 +120,11 @@ namespace C2.Business.GlueWater.Settings
             //return DealWebContent(excelPath) && DealMemberContent(excelPath);
 
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
-            if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
+            if (rrst1.ReturnCode != 0)
                 return rrst1.Message;
 
             ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站人员");
-            if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
+            if (rrst2.ReturnCode != 0)
                 return rrst2.Message;
 
             if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
@@ -130,6 +135,9 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contents)
         {
+            if (contents.Count == 0)
+                return false;
+
             List<int> headIndex = IndexFilter(DbWebExcelColList, contents);
 
             for (int i = 1; i < contents.Count; i++)
@@ -137,6 +145,8 @@ namespace C2.Business.GlueWater.Settings
                 if (headIndex.Max() > contents[i].Count)
                     return false;
                 List<string> resultList = ContentFilter(headIndex, contents[i]);
+                //这里要对地市编码做转换
+                resultList[9] = IDInfoGet.GetInstance().TransRegionCode(resultList[9]);
 
                 //这里要做判断了 对于web，url存在，替换掉
                 DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
@@ -151,6 +161,9 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContent(List<List<string>> contents)
         {
+            if (contents.Count == 0)
+                return false;
+
             List<int> headIndex = IndexFilter(DbMemberExcelColList, contents);
             List<List<string>> needAddList = new List<List<string>>();
 

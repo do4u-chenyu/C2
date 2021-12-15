@@ -120,7 +120,7 @@ namespace C2.Forms
                 else
                 {
                     this.excelTextBox.Text = Path.GetFileNameWithoutExtension(excelPath) + "文件上传失败";
-                    MessageBox.Show(returnMsg);
+                    HelpUtil.ShowMessageBox(returnMsg);
                 }
             }
         }
