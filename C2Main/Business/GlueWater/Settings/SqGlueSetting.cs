@@ -163,6 +163,10 @@ namespace C2.Business.GlueWater.Settings
                 List<string> resultListSecond = ContentFilter(tailIndex, contentSecond[j]);
                 List<string> resultList = resultListFirst.Concat(resultListSecond).ToList();
 
+                DataRow[] rows = SqWebTable.Select("认证账号='" + resultList[3] + "'");
+                if (rows.Length > 0)
+                    SqWebTable.Rows.Remove(rows[0]);
+
                 SqWebTable.Rows.Add(resultList.ToArray());
             }
             ReWriteResult(SqWebPath, SqWebTable);
