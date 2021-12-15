@@ -2778,6 +2778,9 @@
     <Content Include="Business\IAOLab\WebEngine\Html\Visual.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img10\back.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
