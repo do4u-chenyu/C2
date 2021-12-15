@@ -287,18 +287,18 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(3, 22);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(177, 17);
+            this.label11.Size = new System.Drawing.Size(179, 17);
             this.label11.TabIndex = 10;
-            this.label11.Text = "xise后门加密字符串有两种形式:";
+            this.label11.Text = "Xise后门加密字符串有两种形式:";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(24, 41);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(319, 17);
+            this.label12.Size = new System.Drawing.Size(321, 17);
             this.label12.TabIndex = 11;
-            this.label12.Text = "A)  3132323F...33363F, 为报文格式, 就是B格式的hex编码";
+            this.label12.Text = "A)  3132323F...33363F, 为报文格式, 就是B格式的Hex编码";
             // 
             // label13
             // 

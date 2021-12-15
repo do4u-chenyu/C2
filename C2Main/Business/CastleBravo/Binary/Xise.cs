@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using C2.Core;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -6,16 +7,6 @@ namespace C2.Business.CastleBravo.Binary
 {
     class Xise
     {
-        readonly DESCryptoServiceProvider des; 
-
-        public Xise()
-        {
-            des = new DESCryptoServiceProvider
-            {
-                Mode = CipherMode.ECB,
-                Key = Reverse(XOR8Bits("goklong soft"))
-            };
-        }
         private byte[] Reverse(byte[] bytes)
         {
             return bytes;
@@ -31,8 +22,20 @@ namespace C2.Business.CastleBravo.Binary
 
         private string DESDecrypt(string val)
         {
+            DESCryptoServiceProvider des;
+            des = new DESCryptoServiceProvider
+            {
+                Mode = CipherMode.ECB,
+                Key = Reverse(XOR8Bits("goklong soft")),
+                IV = Reverse(XOR8Bits("goklong soft")),
+            };
+            byte[] bytes = ST.HexStringToBytes(val);
             MemoryStream ms = new MemoryStream();
-            return string.Empty;
+            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(bytes, 0, bytes.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Encoding.Default.GetString(ms.ToArray());
         }
     }
 }
