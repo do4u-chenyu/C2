@@ -33,23 +33,32 @@ namespace C2.IAOLab.ExpressNum
                 { "tiantian", "HHTT" }   //天天
             };
             string name = QueryName(input); //我要查 查询快递公司结果
+            if (!Regex.IsMatch(input, @"(^[A-Za-z0-9]{10,16}$)"))
+                return string.Format("{0}\t{1}{2}", input, "快递单号错误", Environment.NewLine);
             if (name == string.Empty)
                 return string.Format("{0}\t{1}{2}", input, "快递单号查询失败", Environment.NewLine);
             if(!nameCode.ContainsKey(name))
                 return string.Format("{0}\t{1}{2}", input, "无法查询该快递公司单号", Environment.NewLine);
+            try
+            {
+                string locRex = @"\u0022AcceptStation\u0022 : \u0022(.*?)\u0022,";    //获取快递途径站点
+                string result = QueryResult(nameCode[name], input);
+                MatchCollection loc = Regex.Matches(result, locRex);
+                string startLoc = loc[0].Groups[1].Value;
+                string endLoc = loc[loc.Count - 2].Groups[1].Value;
 
-            string locRex = @"\u0022AcceptStation\u0022 : \u0022(.*?)\u0022,";    //获取快递途径站点
-            string result = QueryResult(nameCode[name], input);
-            MatchCollection loc = Regex.Matches(result, locRex);
-            string startLoc = loc[0].Groups[1].Value;
-            string endLoc = loc[loc.Count - 2].Groups[1].Value;
+                string startRex1 = "【(.*?)】";
+                startLoc = Regex.Match(startLoc, startRex1).Groups[1].Value;
 
-            string startRex1 = "【(.*?)】";
-            startLoc = Regex.Match(startLoc, startRex1).Groups[1].Value;
-
-            string endRex1 = "(.*?)，";
-            endLoc = Regex.Match(endLoc, endRex1).Groups[1].Value;
-            return string.Format("{0}\t{1}\t{2}\t{3}", input, startLoc, endLoc, Environment.NewLine);
+                string endRex1 = "(.*?)，";
+                endLoc = Regex.Match(endLoc, endRex1).Groups[1].Value;
+                return string.Format("{0}\t{1}\t{2}\t{3}", input, startLoc, endLoc, Environment.NewLine);
+            }
+            catch
+            {
+                return string.Format("{0}\t{1}{2}", input, "快递单号查询失败", Environment.NewLine);
+            }
+            
         }
         
         private string QueryName(string input)    //返回快递公司名称
