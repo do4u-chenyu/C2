@@ -185,15 +185,18 @@ namespace C2.Business.GlueWater.Settings
                     needAddList.Add(resultList);
                 else
                 {
+                    List<string> rowContentList = new List<string>();
                     foreach (DataRow row in rows)
                     {
                         List<string> rowContent = new List<string>();
                         for (int j = 0; j < DbMemberTable.Columns.Count; j++)
                             rowContent.Add(row[j].ToString());
 
-                        if (rowContent.Count != 0 && string.Join("\t", rowContent) != string.Join("\t", resultList))
-                            needAddList.Add(resultList);
+                        rowContentList.Add(string.Join("\t", rowContent));
+
                     }
+                    if (!rowContentList.Contains(string.Join("\t", resultList)))
+                        needAddList.Add(resultList);
                 }
 
             }
