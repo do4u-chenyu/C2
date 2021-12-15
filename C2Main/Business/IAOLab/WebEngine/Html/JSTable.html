@@ -17,7 +17,7 @@ table#dataintable {
 	font-size:14px;
 	cursor:default;
 	table-layout:fixed;
-	word-break:keep-all;
+	
 	
 	}
 
@@ -28,13 +28,14 @@ table#dataintable th {
 	border:1px solid #aaa;
 	text-align:left;
 	color:#666666;
+	word-break:break-all;
 	}
 
 table#dataintable td {
 
 	padding:10px 12px 10px 12px;
     border-bottom:1px solid #edebeb;
-	
+	word-break:keep-all;
 	vertical-align:middle;
 	    white-space:nowrap;/* 不换行 */
     overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
@@ -55,7 +56,7 @@ td#th0{
 }
 td#th2{
     text-align:center;
-	
+	width:80px;
 }
         .arrow {
             display: inline-block;

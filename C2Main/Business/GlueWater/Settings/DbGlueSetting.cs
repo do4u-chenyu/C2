@@ -64,8 +64,8 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
                       "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
-                      "    <th>涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
-                      "    <th>涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
+                      "    <th style=\"width:80px\">涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
+                      "    <th style=\"width:80px\">涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "    <th>赌博类型/运营时间</th>" +
                       "    <th>发现地市/发现时间<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
                       "</tr>"
@@ -77,7 +77,7 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
                             "   <td id=\"th0\">{0}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
-                            "   <td  style=\"width:150px\">{3}<br>{4}</td>" +
+                            "   <td>{3}<br>{4}</td>" +
                             "   <td id=\"th2\">{5}</td>" +
                             "   <td id=\"th2\">{6}</td>" +
                             "   <td>{7}<br>{8}</td>" +
@@ -152,6 +152,12 @@ namespace C2.Business.GlueWater.Settings
                 DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
                 if (rows.Length > 0)
                     DbWebTable.Rows.Remove(rows[0]);
+
+                //由于人员和金额可能为空，需要额外判断
+                string tmpMember = resultList[DbWebColList.ToList().IndexOf("涉赌人数")];
+                resultList[DbWebColList.ToList().IndexOf("涉赌人数")] = tmpMember == string.Empty ? "0" : tmpMember;
+                string tmpMoney = resultList[DbWebColList.ToList().IndexOf("涉案金额")];
+                resultList[DbWebColList.ToList().IndexOf("涉案金额")] = tmpMoney == string.Empty ? "0" : tmpMoney;
 
                 DbWebTable.Rows.Add(resultList.ToArray());
             }
