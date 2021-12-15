@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Web;
-using System.Text;
-using System.Net;
+﻿using C2.Core;
 using System;
-using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
-using C2.Core;
+using System.Web;
 
 namespace C2.IAOLab.ExpressNum
 {
@@ -26,7 +25,6 @@ namespace C2.IAOLab.ExpressNum
         private readonly string URL = "http://cha.ebaitian.cn/api/json?type=get&appid=10000681&module=getExpressInfo&"; //我要查URL
         public string ExpressSearch(string input)
         {
-            DateTime.Now.ToString("yyyy-MM-dd");
             Dictionary<string, string> nameCode = new Dictionary<string, string>
             {
                 { "shentong", "STO" },  //申通
@@ -39,104 +37,87 @@ namespace C2.IAOLab.ExpressNum
                 return string.Format("{0}\t{1}{2}", input, "快递单号查询失败", Environment.NewLine);
             if(!nameCode.ContainsKey(name))
                 return string.Format("{0}\t{1}{2}", input, "无法查询该快递公司单号", Environment.NewLine);
-            string result = GetResult(nameCode[name],input);
+
             string locRex = @"\u0022AcceptStation\u0022 : \u0022(.*?)\u0022,";    //获取快递途径站点
-            MatchCollection loc = Regex.Matches(result,locRex);
+            string result = QueryResult(nameCode[name], input);
+            MatchCollection loc = Regex.Matches(result, locRex);
             string startLoc = loc[0].Groups[1].Value;
             string endLoc = loc[loc.Count - 2].Groups[1].Value;
+
             string startRex1 = "【(.*?)】";
-            startLoc = Regex.Match(startLoc,startRex1).Groups[1].Value;
+            startLoc = Regex.Match(startLoc, startRex1).Groups[1].Value;
+
             string endRex1 = "(.*?)，";
             endLoc = Regex.Match(endLoc, endRex1).Groups[1].Value;
-            return string.Format("{0}\t{1}\t{2}\t{3}",input,startLoc,endLoc,Environment.NewLine);
+            return string.Format("{0}\t{1}\t{2}\t{3}", input, startLoc, endLoc, Environment.NewLine);
         }
-
-       
         
-        public string QueryName(string input)    //返回快递公司名称
+        private string QueryName(string input)    //返回快递公司名称
         {
             string appKey = "&appkey=c33d13c4fbdfd31448674b777336c9c9";
-            string sign = ST.Sha256("appid=10000681&module=getExpressInfo&order=" + input + "" + appKey);
+            string sign = ST.SHA256("appid=10000681&module=getExpressInfo&order=" + input + appKey);
             string url = string.Format("{0}order={1}&sign={2}", URL, input, sign);
-            WebClient client = new WebClient{Encoding = Encoding.UTF8};
+            WebClient client = new WebClient { Encoding = Encoding.UTF8 };
             string info = client.DownloadString(url);
             string nameStr = @"\u0022id\u0022:\u0022(.*?)\u0022,";
             string name = Regex.Match(info, nameStr).Groups[1].ToString();   //获得快递公司的名称  .*\u0022id\u0022:\u0022(.*?)\u0022,
             return name;  
         }
 
-        public string GetResult(string courier,string input)
+        private string QueryResult(string courier, string input)
         {
-            string requestData = "{'CustomerName': '','OrderCode': ''," + 
-                "'ShipperCode':'"+ courier + "','LogisticCode':'" + input + "',}";
+            string requestData = "{'CustomerName': '','OrderCode': '','ShipperCode':'" +
+                courier + "','LogisticCode':'" + input + "',}";
             Dictionary<string, string> param = new Dictionary<string, string>
             {
                 { "RequestData", HttpUtility.UrlEncode(requestData, Encoding.UTF8) },
-                { "EBusinessID", EBusinessID }, 
+                { "EBusinessID", EBusinessID },
                 { "RequestType", "1002" },
-                { "DataType", "2" }
+                { "DataType", "2" },
+                { "DataSign", HttpUtility.UrlEncode(Encrypt(requestData), Encoding.UTF8) }
             };
-            string dataSign = Encrypt(requestData, ApiKey, "UTF-8");
-            param.Add("DataSign", HttpUtility.UrlEncode(dataSign, Encoding.UTF8));
             return Post(ReqURL, param); ;
         }
 
         /// Post方式提交数据，返回网页的源代码
         private string Post(string url, Dictionary<string, string> param)
         {
-            StringBuilder postData = new StringBuilder();
-            if (param != null && param.Count > 0)
-            {
-                foreach (var p in param)
-                {
-                    if (postData.Length > 0)
-                        postData.Append("&");
-                    postData.Append(p.Key);
-                    postData.Append("=");
-                    postData.Append(p.Value);
-                }
-            }
-            byte[] byteData = Encoding.GetEncoding("UTF-8").GetBytes(postData.ToString());
-            string result;
+            StringBuilder sb = new StringBuilder();
+            foreach (var p in param)
+                sb.Append(p.Key + "=" + p.Value).Append('&');  // 后面多一个应该没影响
+         
+            byte[] postData = Encoding.UTF8.GetBytes(sb.ToString());
+            string result = string.Empty;
+            HttpWebRequest request = null;
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request = WebRequest.Create(url) as HttpWebRequest;
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.Timeout = 30 * 1000;
                 request.UserAgent = UserAgent;
                 request.Method = "POST";
-                request.ContentLength = byteData.Length;
-                using (Stream stream = request.GetRequestStream())
-                {
-                    stream.Write(byteData, 0, byteData.Length);
-                    stream.Flush();
-                    stream.Close();
-                }
-                using(HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    Stream backStream = response.GetResponseStream();
-                    StreamReader sr = new StreamReader(backStream, Encoding.GetEncoding("UTF-8"));
-                    result = sr.ReadToEnd();
-                    sr.Close();
-                    backStream.Close();
-                    response.Close();
-                }
-                
-                request.Abort();
+                request.ContentLength = postData.Length;
+                // 发送
+                request.GetRequestStream().Write(postData, 0, postData.Length);
+                // 接收
+                result = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.UTF8).ReadToEnd(); 
             }
             catch (Exception ex)
             {
                 result = ex.Message;
             }
+            finally
+            {
+                if (request != null)
+                    request.Abort();
+            }
             return result;
         }
 
         ///电商Sign签名
-        private string Encrypt(string content, string keyValue, string charset)
+        private string Encrypt(string content)
         {
-            if (keyValue != null)
-                return ST.Base64Encode(ST.GenerateCharsetMD5(content + keyValue, charset), charset);
-            return ST.Base64Encode(ST.GenerateCharsetMD5(content, charset), charset);
+            return ST.EncodeBase64(ST.GenerateMD5(content + ApiKey, "UTF8"));
         }
   
     }
