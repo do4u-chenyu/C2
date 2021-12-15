@@ -12,7 +12,8 @@ namespace C2.Business.GlueWater.Settings
         private string SqWebPath;
         private string SqMemberPath;
 
-        private List<string> SqWebExcelColList;//excel里字段
+        private List<string> SqWebExcelColList;//涉枪论坛人员用户信息
+        private List<string> SqWebExcelColList2;//涉枪人员信息
         private List<string> SqMemberExcelColList;
 
         private string[] SqWebColList;//内存datatable里字段
@@ -37,17 +38,9 @@ namespace C2.Business.GlueWater.Settings
             SqWebPath = Path.Combine(txtDirectory, "SQ_web.txt");
             SqMemberPath = Path.Combine(txtDirectory, "SQ_member.txt");
 
-            /*
-            SqWebExcelColList = new List<string> { "网站名称", "网站网址", "网站Ip", "REFER标题", "REFER", "金额", "用户数", "赌博类型(多值##分隔)", "开始运营时间", "归属地", "发现时间" };
-            SqMemberExcelColList = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)" };
-
-            SqWebColList = new string[] { "网站名称", "域名", "IP", "Refer对应Title", "Refer", "涉案金额", "涉赌人数", "赌博类型", "运营时间", "发现地市", "发现时间" };
-            SqMemberColList = new string[] { "域名", "认证账号", "登陆IP", "登陆账号", "登陆密码", "安全码", "登陆地址" };
-            */
-
-            
             //  涉枪论坛人员用户信息 & 涉枪人员信息
-            SqWebExcelColList = new List<string> { "论坛名称", "论坛网址", "源IP", "认证账号", "目的IP", "登录名", "登录密码", "注册时间", "主题数", "回帖数", "归属地","发现时间" };
+            SqWebExcelColList = new List<string> { "论坛名称", "论坛网址", "源IP", "认证账号", "目的IP", "登录名", "登录密码", "注册时间", "主题数", "回帖数" };
+            SqWebExcelColList2 = new List<string> { "归属地", "发现时间" };
             SqMemberExcelColList = new List<string> { "网站网址", "认证账号", "最后登录IP", "登陆账号(多值##分隔)", "登陆密码(多值##分隔)", "安全码", "登陆地址(多值##分隔)" };
 
             SqWebColList = new string[] { "论坛名称", "网址", "IP", "认证账号", "登录IP", "登录账号", "登录密码", "论坛注册时间", "主题数", "回帖数", "发现地市","发现时间" };
@@ -69,7 +62,8 @@ namespace C2.Business.GlueWater.Settings
         {
             
             StringBuilder sb = new StringBuilder();
-            sb.Append("<tr name=\"row\">" +
+            if (freshTitle)
+                sb.Append("<tr name=\"row\">" +
                       "    <th>论坛名称/网址/IP</th>" +
                       "    <th>认证账号/登陆IP</th>" +
                       "    <th>登陆账号/登陆密码</th>" +
@@ -78,47 +72,29 @@ namespace C2.Business.GlueWater.Settings
                       "    <th>发现地市/发现时间</th>" +
                       "</tr>"
                       );
-            return sb.ToString();
             
-
-            /*
-            StringBuilder sb = new StringBuilder();
-
-            if (freshTitle)
-                sb.Append("<tr name=\"title\">" +
-                      "    <th>网站名称/域名/IP</th>" +
-                      "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
-                      "    <th>涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
-                      "    <th>涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
-                      "    <th>赌博类型/运营时间</th>" +
-                      "    <th>发现地市/发现时间</th>" +
-                      "</tr>"
-                      );
-
+        
             //先试试初始化
             foreach (DataRow dr in SqWebTable.Rows)
             {
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
-                            "   <td id=\"th0\">{0}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
-                            "   <td  style=\"width:150px\">{3}<br>{4}</td>" +
-                            "   <td>{5}</td>" +
-                            "   <td>{6}</td>" +
-                            "   <td>{7}<br>{8}</td>" +
-                            "   <td>{9}<br>{10}</td>" +
+                            "   <td>{0}<br>{1}<br>{2}</td>" +
+                            "   <td>{3}<br>{4}</td>" +
+                            "   <td>{5}<br>{6}</td>" +
+                            "   <td>{7}</td>" +
+                            "   <td>{8}<br>{9}</td>" +
+                            "   <td>{10}<br>{11}</td>" +
                             "</tr>",
-                            dr["网站名称"].ToString(), dr["域名"].ToString(), dr["IP"].ToString(),
-                            dr["Refer对应Title"].ToString(), dr["Refer"].ToString(),
-                            dr["涉案金额"].ToString(),
-                            dr["涉赌人数"].ToString(),
-                            dr["赌博类型"].ToString(), dr["运营时间"].ToString(),
+                            dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
+                            dr["认证账号"].ToString(), dr["登录IP"].ToString(),
+                            dr["登录账号"].ToString(), dr["登录密码"].ToString(),
+                            dr["论坛注册时间"].ToString(),
+                            dr["主题数"].ToString(), dr["回帖数"].ToString(),
                             dr["发现地市"].ToString(), dr["发现时间"].ToString()
                 ));
             }
             return sb.ToString();
-
-            */
-
         }
 
         public override DataTable SearchInfo(string memeber)
@@ -140,36 +116,52 @@ namespace C2.Business.GlueWater.Settings
 
         public override string UpdateContent(string excelPath)
         {
-            //return DealWebContent(excelPath) && DealMemberContent(excelPath);
-
-            ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
+            
+            ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉枪论坛人员用户信息");
             if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
                 return rrst1.Message;
 
-            ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站人员");
+            
+            ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉枪人员信息");
             if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
                 return rrst2.Message;
 
+            
+            
+            /* MemberContent
+            ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉枪人员信息");
+            if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
+                return rrst2.Message;
+            */
+
+            if (DealWebContent(rrst1.Result,rrst2.Result))
+                return "文件上传成功";
+            else
+                return "文件格式不正确";
+
+            /*
             if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
                 return "文件上传成功";
             else
                 return "文件格式不正确";
+            */
         }
 
-        private bool DealWebContent(List<List<string>> contents)
+        private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond)
         {
-            List<int> headIndex = IndexFilter(SqWebExcelColList, contents);
+            List<int> headIndex = IndexFilter(SqWebExcelColList, contentsFirst);
+            List<int> tailIndex = IndexFilter(SqWebExcelColList2, contentSecond);
 
-            for (int i = 1; i < contents.Count; i++)
+          
+            int i, j;
+            for (i = 1,j = 1; i < contentsFirst.Count && j<contentSecond.Count; i++,j++)
             {
-                if (headIndex.Max() > contents[i].Count)
+                if (headIndex.Max() > contentsFirst[i].Count || tailIndex.Max() > contentSecond[j].Count)
                     return false;
-                List<string> resultList = ContentFilter(headIndex, contents[i]);
 
-                //这里要做判断了 对于web，url存在，替换掉
-                DataRow[] rows = SqWebTable.Select("域名='" + resultList[1] + "'");
-                if (rows.Length > 0)
-                    SqWebTable.Rows.Remove(rows[0]);
+                List<string> resultListFirst = ContentFilter(headIndex, contentsFirst[i]);
+                List<string> resultListSecond = ContentFilter(tailIndex, contentSecond[j]);
+                List<string> resultList = resultListFirst.Concat(resultListSecond).ToList();
 
                 SqWebTable.Rows.Add(resultList.ToArray());
             }
@@ -212,7 +204,5 @@ namespace C2.Business.GlueWater.Settings
             ReWriteResult(SqMemberPath, SqMemberTable);
             return true;
         }
-
-
     }
 }
