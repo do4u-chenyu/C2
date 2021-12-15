@@ -209,6 +209,7 @@
       <DependentUpon>BinaryMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\Binary\BinStrings.cs" />
+    <Compile Include="Business\CastleBravo\Binary\Xise.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
