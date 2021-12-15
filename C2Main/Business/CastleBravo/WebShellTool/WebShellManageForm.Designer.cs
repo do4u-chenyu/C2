@@ -617,8 +617,9 @@
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(81, 22);
-            this.infoCollectionMenu.Text = "后信息收集";
+            this.infoCollectionMenu.Size = new System.Drawing.Size(67, 22);
+            this.infoCollectionMenu.Text = "D洞探针";
+            this.infoCollectionMenu.ToolTipText = "各种信息探针";
             // 
             // passwdBlastingMenuItem
             // 
@@ -634,28 +635,28 @@
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allTaskMysqlMenuItem.Text = "所有项";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aliveTaskMysqlMenuItem.Text = "验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
             // currentMysqlTaskMenuItem
             // 
             this.currentMysqlTaskMenuItem.Name = "currentMysqlTaskMenuItem";
-            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(180, 22);
             this.currentMysqlTaskMenuItem.Text = "选定项";
             this.currentMysqlTaskMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
             // 
             // mysqlTaskSetMenuItem
             // 
             this.mysqlTaskSetMenuItem.Name = "mysqlTaskSetMenuItem";
-            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mysqlTaskSetMenuItem.Text = "设置";
             this.mysqlTaskSetMenuItem.Click += new System.EventHandler(this.MysqlTaskSetMenuItem_Click);
             // 
@@ -672,21 +673,21 @@
             // allSysInfoMenuItem
             // 
             this.allSysInfoMenuItem.Name = "allSysInfoMenuItem";
-            this.allSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.allSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allSysInfoMenuItem.Text = "所有项";
             this.allSysInfoMenuItem.Click += new System.EventHandler(this.AllSysInfoMenuItem_Click);
             // 
             // aliveSysInfoMenuItem
             // 
             this.aliveSysInfoMenuItem.Name = "aliveSysInfoMenuItem";
-            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aliveSysInfoMenuItem.Text = "验活项";
             this.aliveSysInfoMenuItem.Click += new System.EventHandler(this.AliveSysInfoMenuItem_Click);
             // 
             // currentSysInfoMenuItem
             // 
             this.currentSysInfoMenuItem.Name = "currentSysInfoMenuItem";
-            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
             this.currentSysInfoMenuItem.Text = "选定项";
             this.currentSysInfoMenuItem.Click += new System.EventHandler(this.CurrentSysInfoMenuItem_Click);
             // 
@@ -703,21 +704,21 @@
             // allProcessView
             // 
             this.allProcessView.Name = "allProcessView";
-            this.allProcessView.Size = new System.Drawing.Size(112, 22);
+            this.allProcessView.Size = new System.Drawing.Size(180, 22);
             this.allProcessView.Text = "所有项";
             this.allProcessView.Click += new System.EventHandler(this.AllProcessView_Click);
             // 
             // aliveProcessView
             // 
             this.aliveProcessView.Name = "aliveProcessView";
-            this.aliveProcessView.Size = new System.Drawing.Size(112, 22);
+            this.aliveProcessView.Size = new System.Drawing.Size(180, 22);
             this.aliveProcessView.Text = "验活项";
             this.aliveProcessView.Click += new System.EventHandler(this.AliveProcessView_Click);
             // 
             // currentProcessView
             // 
             this.currentProcessView.Name = "currentProcessView";
-            this.currentProcessView.Size = new System.Drawing.Size(112, 22);
+            this.currentProcessView.Size = new System.Drawing.Size(180, 22);
             this.currentProcessView.Text = "选定项";
             this.currentProcessView.Click += new System.EventHandler(this.CurrentProcessView_Click);
             // 
@@ -729,26 +730,26 @@
             this.currentTimedTask});
             this.timedTaskMenuItem.Name = "timedTaskMenuItem";
             this.timedTaskMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.timedTaskMenuItem.Text = "定时任务";
+            this.timedTaskMenuItem.Text = "计划任务";
             // 
             // allTimedTask
             // 
             this.allTimedTask.Name = "allTimedTask";
-            this.allTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.allTimedTask.Size = new System.Drawing.Size(180, 22);
             this.allTimedTask.Text = "所有项";
             this.allTimedTask.Click += new System.EventHandler(this.AllScheduleTask_Click);
             // 
             // aliveTimedTask
             // 
             this.aliveTimedTask.Name = "aliveTimedTask";
-            this.aliveTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.aliveTimedTask.Size = new System.Drawing.Size(180, 22);
             this.aliveTimedTask.Text = "验活项";
             this.aliveTimedTask.Click += new System.EventHandler(this.AliveScheduleTask_Click);
             // 
             // currentTimedTask
             // 
             this.currentTimedTask.Name = "currentTimedTask";
-            this.currentTimedTask.Size = new System.Drawing.Size(112, 22);
+            this.currentTimedTask.Size = new System.Drawing.Size(180, 22);
             this.currentTimedTask.Text = "选定项";
             this.currentTimedTask.Click += new System.EventHandler(this.CurrentScheduleTask_Click);
             // 
@@ -917,7 +918,7 @@
             // 
             // lvInfoCollection
             // 
-            this.lvInfoCollection.Text = "后信息收集";
+            this.lvInfoCollection.Text = "探针";
             this.lvInfoCollection.Width = 111;
             // 
             // lvIP

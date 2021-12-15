@@ -201,7 +201,7 @@ namespace C2.Business.CastleBravo.WebShellTool
        
         public static string WriteResult(string result, string url, string type)
         {
-            string time = DateTime.Now.ToString("yyyyMMDDHHmmss");           
+            string time = DateTime.Now.ToString("yyyyMMddHHmmss");           
             try
             {
 
