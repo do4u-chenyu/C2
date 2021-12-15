@@ -64,10 +64,10 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
                       "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
-                      "    <th style=\"width:80px\">涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
-                      "    <th style=\"width:80px\">涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
+                      "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                      "    <th style=\"width:80px\">涉赌人数<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                       "    <th>赌博类型/运营时间</th>" +
-                      "    <th>发现地市/发现时间<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
+                      "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                       "</tr>"
                       );
 
@@ -185,15 +185,18 @@ namespace C2.Business.GlueWater.Settings
                     needAddList.Add(resultList);
                 else
                 {
+                    List<string> rowContentList = new List<string>();
                     foreach (DataRow row in rows)
                     {
                         List<string> rowContent = new List<string>();
                         for (int j = 0; j < DbMemberTable.Columns.Count; j++)
                             rowContent.Add(row[j].ToString());
 
-                        if (rowContent.Count != 0 && string.Join("\t", rowContent) != string.Join("\t", resultList))
-                            needAddList.Add(resultList);
+                        rowContentList.Add(string.Join("\t", rowContent));
+
                     }
+                    if (!rowContentList.Contains(string.Join("\t", resultList)))
+                        needAddList.Add(resultList);
                 }
 
             }
