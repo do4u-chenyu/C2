@@ -740,11 +740,28 @@ namespace C2.Core
             return ST.GetColor(ST.ReadTextNode(node, name), colorDefault);
         }
 
-        public static string GenerateMD5(string text)
+        public static string GenerateMD5(string text, string charset = "Default")
         {
             using (MD5 mi = MD5.Create())
             {
-                byte[] buffer = Encoding.Default.GetBytes(text);
+                Encoding encoding = Encoding.Default;
+                switch (charset.ToUpper().Trim())
+                {
+                    case "UTF8":
+                        encoding = Encoding.UTF8;
+                        break;
+                    case "UTF7":
+                        encoding = Encoding.UTF7;
+                        break;
+                    case "ASCII":
+                        encoding = Encoding.ASCII;
+                        break;
+                    default:
+                        encoding = Encoding.Default;
+                        break;
+                }
+
+                byte[] buffer = encoding.GetBytes(text);
                 //开始加密
                 byte[] newBuffer = mi.ComputeHash(buffer);
                 StringBuilder sb = new StringBuilder(newBuffer.Length * 2); // 固定长度
@@ -753,6 +770,18 @@ namespace C2.Core
                 return sb.ToString();
             }
         }
+        public static string SHA256(string data)    //sha256加密
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            byte[] hash = System.Security.Cryptography.SHA256.Create().ComputeHash(bytes);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                builder.Append(hash[i].ToString("X2"));
+            return builder.ToString().ToLower();
+        }
+
+
+
 
         public static string ImageBase64String(Image image)
         {
