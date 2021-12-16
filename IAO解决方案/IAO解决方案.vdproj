@@ -123,6 +123,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0CD55B92B45742688F58002DB10D7EFE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0D6A81CAD6494DB1B67EE857CFF9B1BB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2067,6 +2073,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B15B9025DF994021A681D127DEFB8785"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B2D0DF1C008F48C99D4446DE7E62F104"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3171,6 +3183,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FFD083555CA14E5E9EEE3D73377553E5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
@@ -3899,6 +3917,26 @@
             "TargetName" = "8:200_重点区域.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0CD55B92B45742688F58002DB10D7EFE"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\同群分析.iao"
+            "TargetName" = "8:同群分析.iao"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -9641,6 +9679,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B15B9025DF994021A681D127DEFB8785"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\关键词分析.iao"
+            "TargetName" = "8:关键词分析.iao"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B2D0DF1C008F48C99D4446DE7E62F104"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\Altman15_PHP_Config.ini"
@@ -12928,6 +12986,26 @@
             "TargetName" = "8:phx.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FFD083555CA14E5E9EEE3D73377553E5"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\信息抽取.iao"
+            "TargetName" = "8:信息抽取.iao"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
