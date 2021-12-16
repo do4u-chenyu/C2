@@ -96,6 +96,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void Button1_Click(object sender, System.EventArgs e)
         {
+            string ret = new Xise().Decrypt(textBox1.Text);
 
         }
     }
