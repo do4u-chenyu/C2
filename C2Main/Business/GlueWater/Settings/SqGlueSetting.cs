@@ -157,7 +157,12 @@ namespace C2.Business.GlueWater.Settings
                 List<string> resultListSecond = ContentFilter(tailIndex, contentSecond[j]);
                 List<string> resultList = resultListFirst.Concat(resultListSecond).ToList();
 
-                DataRow[] rows = SqWebTable.Select("认证账号='" + resultList[3] + "'");
+                DataRow[] rows = SqWebTable.Select(
+                     "认证账号='" + resultList[3] + "' " +
+                     "and 登录IP='" + resultList[4] + "' " +
+                     "and 登录账号='" + resultList[5] + "'" +
+                     "and 登录密码='" + resultList[6] + "'"
+                    );
                 if (rows.Length > 0)
                     SqWebTable.Rows.Remove(rows[0]);
 
