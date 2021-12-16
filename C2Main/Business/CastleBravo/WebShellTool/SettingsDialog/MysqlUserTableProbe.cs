@@ -1,6 +1,4 @@
 ﻿using C2.Controls;
-using System;
-using System.Drawing;
 
 namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
