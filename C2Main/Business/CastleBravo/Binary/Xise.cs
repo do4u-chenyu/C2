@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.Utils;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,35 +8,45 @@ namespace C2.Business.CastleBravo.Binary
 {
     class Xise
     {
-        private byte[] Reverse(byte[] bytes)
+        private byte[] XOR8(string pass)
         {
-            return bytes;
-        }
-        private byte[] XOR8Bits(string pass)
-        {
-            return Encoding.Default.GetBytes(pass);
+            int i = 0;
+            byte[] bytes8 = new byte[8];
+            byte[] bytesP = Encoding.Default.GetBytes(pass);
+            foreach(byte b in bytesP)
+            {
+                bytes8[i] = (byte)(b ^ bytes8[i]);
+                i = i < 7 ? i + 1 : 0;
+            }
+            return bytes8;
         }
         public string Decrypt(string val)
         {
-            return DESDecrypt(val) ;
+            byte[] bytes = ST.DecimalHexStringToBytes("122?57?118?39?232?250?196?214?", "?");
+            return DESDecrypt(bytes) ;
         }
 
-        private string DESDecrypt(string val)
+        private string DESDecrypt(byte[] bytes)
         {
-            DESCryptoServiceProvider des;
-            des = new DESCryptoServiceProvider
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider
             {
                 Mode = CipherMode.ECB,
-                Key = Reverse(XOR8Bits("goklong soft")),
-                IV = Reverse(XOR8Bits("goklong soft")),
+                Key = ConvertUtil.ReverseBytes(XOR8("goklong soft")),
             };
-            byte[] bytes = ST.HexStringToBytes(val);
-            MemoryStream ms = new MemoryStream();
-            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
-            cs.Write(bytes, 0, bytes.Length);
-            cs.FlushFinalBlock();
-            cs.Close();
-            return Encoding.Default.GetString(ms.ToArray());
+            using (MemoryStream ms = new MemoryStream())
+            using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write))
+            {
+                cs.Write(bytes, 0, bytes.Length);
+                try
+                { 
+                    cs.FlushFinalBlock();
+                }
+                catch
+                {
+                    return "密码串解密错误";
+                }
+                return Encoding.Default.GetString(ms.ToArray());
+            }
         }
     }
 }
