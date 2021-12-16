@@ -1,6 +1,7 @@
 ﻿using C2.Globalization;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -628,6 +629,16 @@ namespace C2.Core
 
             return arrByte;
         }
+
+        public static byte[] DecimalHexStringToBytes(string str, string sep)
+        {   
+            string[] s = str.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            byte[] bytes = new byte[s.Length];
+            for (int i = 0; i < s.Length; i++)
+                bytes[i] = ConvertUtil.TryParseByte(s[i]);
+            return bytes;
+        }
+
 
         public static string SuperDecodeBase64(string code)
         {
