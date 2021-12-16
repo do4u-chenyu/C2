@@ -2616,6 +2616,8 @@
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Business\CastleBravo\WebShellTool\Payload\db_dict" />
+    <None Include="Business\CastleBravo\WebShellTool\Payload\gzip.php" />
+    <None Include="Business\CastleBravo\WebShellTool\Payload\unzip.php" />
     <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
