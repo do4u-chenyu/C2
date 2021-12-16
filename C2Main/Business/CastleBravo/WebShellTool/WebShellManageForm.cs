@@ -956,7 +956,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UserTableProbeMenu_Click(object sender, EventArgs e)
         {
-
+             new MysqlUserTableProbe().ShowDialog();
         }
     }
 }
