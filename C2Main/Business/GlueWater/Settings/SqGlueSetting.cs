@@ -42,11 +42,11 @@ namespace C2.Business.GlueWater.Settings
             //  涉枪论坛人员用户信息 & 涉枪人员信息
             SqWebExcelColList = new List<string> { "论坛名称", "论坛网址", "源IP", "认证账号", "目的IP", "登录名", "登录密码", "注册时间", "主题数", "回帖数" };
             SqWebExcelColList2 = new List<string> { "归属地", "发现时间" };
-            SqWebExcelColList1 = new List<string> { "认证账号", "登录名","登录密码","主题数" };
-            SqMemberExcelColList = new List<string> {"认证账号","登入名","密码", "主题", "发帖时间","内容关键词", "内容", "评论" };
+            SqWebExcelColList1 = new List<string> { "论坛网址","认证账号", "登录名","登录密码","主题数" };
+            SqMemberExcelColList = new List<string> {"论坛网址","认证账号","登入名","密码", "主题", "发帖时间","内容关键词", "内容", "评论" };
 
             SqWebColList = new string[] { "论坛名称", "网址", "IP", "认证账号", "登录IP", "登录账号", "登录密码", "论坛注册时间", "主题数", "回帖数", "发现地市","发现时间" };
-            SqMemberColList = new string[] { "用户名称", "发帖主题", "发帖时间", "涉枪关键词", "发帖信息", "回帖信息","主题数" };
+            SqMemberColList = new string[] { "论坛网址","用户名称", "发帖主题", "发帖时间", "涉枪关键词", "发帖信息", "回帖信息" };
             
             InitDataTable();
         }
@@ -85,8 +85,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}<br>{6}</td>" +
                             "   <td>{7}</td>" +
-                           // "   <td>{8}<br>{9}</td>" +
-                            "   <td id=\"th0\"><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{8}</a><br>{9}</td>" +
+                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">{8}</a><br>{9}</td>" +
                             "   <td>{10}<br>{11}</td>" +
                             "</tr>",
                             dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
@@ -102,8 +101,14 @@ namespace C2.Business.GlueWater.Settings
 
         public override DataTable SearchInfo(string memeber)
         {
+            string url = memeber.Substring(0, memeber.IndexOf(","));
+            string username = memeber.Substring(memeber.IndexOf(",") +1, memeber.Length - memeber.IndexOf(",") -1);
             DataTable resTable = SqMemberTable.Clone();
-            DataRow[] rows = SqMemberTable.Select("主题数='" + memeber + "'");
+            DataRow[] rows = SqMemberTable.Select(
+                //"主题数='" + memeber + "'"
+                 "论坛网址='" + url + "' " +
+                 "and 用户名称='" + username + "' " 
+                );
 
             foreach (DataRow row in rows)
                 resTable.Rows.Add(row.ItemArray);
@@ -196,16 +201,16 @@ namespace C2.Business.GlueWater.Settings
                         if (resultListFirst[0] == resultListSecond[0] && resultListFirst[1] == resultListSecond[1] 
                             && resultListFirst[2] == resultListSecond[2])
                         {
-                            resultListSecond.Add(resultListFirst[3]);
-                            resultListSecond.Remove(resultListSecond[0]);
+                            //resultListSecond.Add(resultListFirst[4]);
                             resultListSecond.Remove(resultListSecond[1]);
+                            resultListSecond.Remove(resultListSecond[2]);
 
                             //重复数据筛选条件
                             DataRow[] rows = SqMemberTable.Select(
-                                "发帖信息='" + resultListSecond[4] + "' " +
-                                "and 用户名称='" + resultListSecond[0] + "' " +
-                                "and 发帖主题='" + resultListSecond[1] + "'" +
-                                 "and 发帖时间='" + resultListSecond[2] + "'"
+                                "发帖信息='" + resultListSecond[5] + "' " +
+                                "and 用户名称='" + resultListSecond[1] + "' " +
+                                "and 发帖主题='" + resultListSecond[2] + "'" +
+                                 "and 发帖时间='" + resultListSecond[3] + "'"
                                 );
                             if (rows.Length > 0)
                                 SqMemberTable.Rows.Remove(rows[0]);

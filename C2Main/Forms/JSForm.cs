@@ -150,6 +150,15 @@ namespace C2.Forms
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+        public void ShowDetailsMore(string item)
+        {
+            detailDialog.DetailTable = glueSetting.SearchInfo(item);
+            detailDialog.RefreshDGV();
+            detailDialog.ShowDialog();
+        }
+
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void InitDataTable()
         {
             glueSetting.InitDataTable();
