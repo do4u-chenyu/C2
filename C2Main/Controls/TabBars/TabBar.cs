@@ -1480,10 +1480,6 @@ namespace C2.Controls
             return size;
         }
 
-        public virtual int setX(TabItem ti)
-        {
-            return ti.Size.Width + ItemSpace; //调整各个Tabitem之间的距离
-        }
         void CalculatePositions()
         {
             Rectangle workArea = GetWorkArea();
@@ -1561,8 +1557,7 @@ namespace C2.Controls
                     else
                     {
                         ti.Location = new Point(x, workArea.Top);
-                        int newX = setX(ti);
-                        x = x + newX;    //x += ti.Size.Width + ItemSpace + 30;调整各个Tabitem之间的距离
+                        x += ti.Size.Width + ItemSpace;//调整各个Tabitem之间的距离
                     }
                 }
 
