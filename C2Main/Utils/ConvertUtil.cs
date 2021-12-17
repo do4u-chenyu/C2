@@ -23,6 +23,18 @@ namespace C2.Utils
             }
         }
 
+        public static byte TryParseByte(string value, byte defaultValue = 0x00)
+        {
+            try
+            {
+                return byte.Parse(value);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
+
         public static int TryParseInt(string value, int defaultValue = 0)
         {
             if (string.IsNullOrEmpty(value)) return defaultValue;
@@ -177,6 +189,27 @@ namespace C2.Utils
         public static string GetPort(string address, string defaultPort = "22")
         {
             return address.IndexOf(':') == -1 ? defaultPort : address.Substring(address.IndexOf(':')).Trim(':');   
+        }
+
+        public static byte ReverseByte(byte b)
+        {
+            return (byte)
+            (((b & 0b00000001) << 7) |
+            (( b & 0b00000010) << 5) |
+            (( b & 0b00000100) << 3) |
+            (( b & 0b00001000) << 1) |
+            (( b & 0b00010000) >> 1) |
+            (( b & 0b00100000) >> 3) |
+            (( b & 0b01000000) >> 5) |
+            (( b & 0b10000000) >> 7));
+        }
+
+        public static byte[] ReverseBytes(byte[] bytes)
+        {
+            for (int i = 0; i < bytes.Length; i++)
+                bytes[i] = ConvertUtil.ReverseByte(bytes[i]);
+
+            return bytes;
         }
     }
 }

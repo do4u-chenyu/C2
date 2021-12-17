@@ -1,4 +1,5 @@
 ﻿using C2.Core;
+using C2.IAOLab.IDInfoGet;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -63,10 +64,10 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append("<tr name=\"title\">" +
                       "    <th>网站名称/域名/IP</th>" +
                       "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
-                      "    <th>涉案金额<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
-                      "    <th>涉赌人数<a class=\"arrow desc\" onmousedown=\"SortCol(this)\"></a></th>" +
+                      "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                      "    <th style=\"width:80px\">涉赌人数<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                       "    <th>赌博类型/运营时间</th>" +
-                      "    <th>发现地市/发现时间</th>" +
+                      "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                       "</tr>"
                       );
 
@@ -76,9 +77,9 @@ namespace C2.Business.GlueWater.Settings
                 sb.Append(string.Format(
                             "<tr name=\"row\">" +
                             "   <td id=\"th0\">{0}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{1}</a><br>{2}</td>" +
-                            "   <td  style=\"width:150px\">{3}<br>{4}</td>" +
-                            "   <td>{5}</td>" +
-                            "   <td>{6}</td>" +
+                            "   <td>{3}<br>{4}</td>" +
+                            "   <td id=\"th2\">{5}</td>" +
+                            "   <td id=\"th2\">{6}</td>" +
                             "   <td>{7}<br>{8}</td>" +
                             "   <td>{9}<br>{10}</td>" +
                             "</tr>",
@@ -106,30 +107,44 @@ namespace C2.Business.GlueWater.Settings
 
         public override void SortDataTableByCol(string col, string sortType)
         {
+            //html的标题为发现地市/发现时间，排序此列需要去掉发现地市
+            if (col.Contains("发现时间"))
+                col = "发现时间";
+
             DbWebTable.DefaultView.Sort = col + " " + sortType;
             DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
-        public override string UpdateContent(string excelPath)
+        public override string UpdateContent(string zipPath)
         {
-            //return DealWebContent(excelPath) && DealMemberContent(excelPath);
+            string excelPath = FindExcelFromZip(zipPath);
+            if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
+                return excelPath;
+
 
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
-            if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
+            if (rrst1.ReturnCode != 0)
                 return rrst1.Message;
 
             ReadRst rrst2 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站人员");
-            if (rrst2.ReturnCode != 0 || rrst2.Result.Count == 0)
+            if (rrst2.ReturnCode != 0)
                 return rrst2.Message;
 
             if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
+            {
+                BackupZip(zipPath);
                 return "文件上传成功";
+            }
+                
             else
                 return "文件格式不正确";
         }
 
         private bool DealWebContent(List<List<string>> contents)
         {
+            if (contents.Count == 0)
+                return false;
+
             List<int> headIndex = IndexFilter(DbWebExcelColList, contents);
 
             for (int i = 1; i < contents.Count; i++)
@@ -137,11 +152,19 @@ namespace C2.Business.GlueWater.Settings
                 if (headIndex.Max() > contents[i].Count)
                     return false;
                 List<string> resultList = ContentFilter(headIndex, contents[i]);
+                //这里要对地市编码做转换
+                resultList[9] = IDInfoGet.GetInstance().TransRegionCode(resultList[9]);
 
                 //这里要做判断了 对于web，url存在，替换掉
                 DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
                 if (rows.Length > 0)
                     DbWebTable.Rows.Remove(rows[0]);
+
+                //由于人员和金额可能为空，需要额外判断
+                string tmpMember = resultList[DbWebColList.ToList().IndexOf("涉赌人数")];
+                resultList[DbWebColList.ToList().IndexOf("涉赌人数")] = tmpMember == string.Empty ? "0" : tmpMember;
+                string tmpMoney = resultList[DbWebColList.ToList().IndexOf("涉案金额")];
+                resultList[DbWebColList.ToList().IndexOf("涉案金额")] = tmpMoney == string.Empty ? "0" : tmpMoney;
 
                 DbWebTable.Rows.Add(resultList.ToArray());
             }
@@ -151,6 +174,9 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContent(List<List<string>> contents)
         {
+            if (contents.Count == 0)
+                return false;
+
             List<int> headIndex = IndexFilter(DbMemberExcelColList, contents);
             List<List<string>> needAddList = new List<List<string>>();
 
@@ -166,15 +192,18 @@ namespace C2.Business.GlueWater.Settings
                     needAddList.Add(resultList);
                 else
                 {
+                    List<string> rowContentList = new List<string>();
                     foreach (DataRow row in rows)
                     {
                         List<string> rowContent = new List<string>();
                         for (int j = 0; j < DbMemberTable.Columns.Count; j++)
                             rowContent.Add(row[j].ToString());
 
-                        if (rowContent.Count != 0 && string.Join("\t", rowContent) != string.Join("\t", resultList))
-                            needAddList.Add(resultList);
+                        rowContentList.Add(string.Join("\t", rowContent));
+
                     }
+                    if (!rowContentList.Contains(string.Join("\t", resultList)))
+                        needAddList.Add(resultList);
                 }
 
             }

@@ -144,6 +144,7 @@ namespace C2.Dialogs.IAOLab
         {
             if (!string.IsNullOrEmpty(input) && progressBar1.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
+                input = input.Trim(' ') ;//去除前后空格
                 if (progressBar1.Value % 100 == 0)
                 {
                     Thread.Sleep(500);

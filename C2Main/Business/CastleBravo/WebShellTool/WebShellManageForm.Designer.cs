@@ -41,6 +41,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.currentTaskMysqlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mysqlProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.iniProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.userTableProbeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.currentSysInfoMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.currentProcessViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentScheduleTaskMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -228,10 +230,26 @@
             // 
             // mysqlProbeMenu
             // 
+            this.mysqlProbeMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iniProbeMenu,
+            this.userTableProbeMenu});
             this.mysqlProbeMenu.Name = "mysqlProbeMenu";
             this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
             this.mysqlProbeMenu.Text = "Mysql 探针";
-            this.mysqlProbeMenu.Click += new System.EventHandler(this.MysqlProbeMenu_Click);
+            // 
+            // iniProbeMenu
+            // 
+            this.iniProbeMenu.Name = "iniProbeMenu";
+            this.iniProbeMenu.Size = new System.Drawing.Size(180, 22);
+            this.iniProbeMenu.Text = "配置文件探测";
+            this.iniProbeMenu.Click += new System.EventHandler(this.IniProbeMenu_Click);
+            // 
+            // userTableProbeMenu
+            // 
+            this.userTableProbeMenu.Name = "userTableProbeMenu";
+            this.userTableProbeMenu.Size = new System.Drawing.Size(180, 22);
+            this.userTableProbeMenu.Text = "USER表探测";
+            this.userTableProbeMenu.Click += new System.EventHandler(this.UserTableProbeMenu_Click);
             // 
             // currentSysInfoMenuItem2
             // 
@@ -617,8 +635,9 @@
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(81, 22);
-            this.infoCollectionMenu.Text = "后信息收集";
+            this.infoCollectionMenu.Size = new System.Drawing.Size(67, 22);
+            this.infoCollectionMenu.Text = "D洞探针";
+            this.infoCollectionMenu.ToolTipText = "各种信息探针";
             // 
             // passwdBlastingMenuItem
             // 
@@ -628,7 +647,7 @@
             this.currentMysqlTaskMenuItem,
             this.mysqlTaskSetMenuItem});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(143, 22);
             this.passwdBlastingMenuItem.Text = "K令(Mysql)";
             // 
             // allTaskMysqlMenuItem
@@ -666,7 +685,7 @@
             this.aliveSysInfoMenuItem,
             this.currentSysInfoMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
-            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.systemInfoToolStripMenuItem.Text = "系统信息";
             // 
             // allSysInfoMenuItem
@@ -697,7 +716,7 @@
             this.aliveProcessView,
             this.currentProcessView});
             this.processViewToolStripMenuItem.Name = "processViewToolStripMenuItem";
-            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.processViewToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.processViewToolStripMenuItem.Text = "进程列表";
             // 
             // allProcessView
@@ -728,8 +747,8 @@
             this.aliveTimedTask,
             this.currentTimedTask});
             this.timedTaskMenuItem.Name = "timedTaskMenuItem";
-            this.timedTaskMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.timedTaskMenuItem.Text = "定时任务";
+            this.timedTaskMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.timedTaskMenuItem.Text = "计划任务";
             // 
             // allTimedTask
             // 
@@ -759,27 +778,27 @@
             this.aliveLocationInfo,
             this.currentLocationInfo});
             this.locationInfoMenuItem.Name = "locationInfoMenuItem";
-            this.locationInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.locationInfoMenuItem.Size = new System.Drawing.Size(143, 22);
             this.locationInfoMenuItem.Text = "地理定位";
             // 
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.aliveLocationInfo.Text = "验活项";
             this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
             // 
@@ -917,7 +936,7 @@
             // 
             // lvInfoCollection
             // 
-            this.lvInfoCollection.Text = "后信息收集";
+            this.lvInfoCollection.Text = "探针";
             this.lvInfoCollection.Width = 111;
             // 
             // lvIP
@@ -1140,5 +1159,7 @@
         private System.Windows.Forms.ToolStripMenuItem currentTaskMysqlMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem iniProbeMenu;
+        private System.Windows.Forms.ToolStripMenuItem userTableProbeMenu;
     }
 }

@@ -45,8 +45,9 @@ namespace analysis.Method
                     string member = rowList[1];
                     if (memberGroupDict.ContainsKey(member) && !memberGroupDict[member].Contains(group))
                         memberGroupDict[member].Add(group);
-                    else
+                    else if(!memberGroupDict.ContainsKey(member))
                         memberGroupDict.Add(member, new List<string>() { group });
+
                 }
             }
             catch { }
@@ -65,7 +66,7 @@ namespace analysis.Method
         {
             DataTable dataTable = new DataTable("organization");
 
-            string[] columnArray = new string[] { "QQNUM", "GROUPCODE" };
+            string[] columnArray = new string[] { "QQNUM", "GROUPCODE", "GROUPCOUNT" };
             foreach (string col in columnArray)
                 dataTable.Columns.Add(col);
 
@@ -98,7 +99,7 @@ namespace analysis.Method
                 done.Add(string.Join(",", groupList));
 
                 if(orgList.Count > 1)
-                    dataTable.Rows.Add(new string[2] { string.Join(",",orgList), string.Join(",", groupList) });
+                    dataTable.Rows.Add(new string[3] { string.Join(",",orgList), string.Join(",", groupList), groupList.Count.ToString() });
 
             }
 

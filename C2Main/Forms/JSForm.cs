@@ -41,7 +41,7 @@ namespace C2.Forms
             AddTabItem("涉枪专项");
             AddTabItem("涉黄专项");
             AddTabItem("盗洞专项");
-            AddTabItem("后门黑吃黑专项");
+            AddTabItem("黑吃黑专项");
             AddTabItem("境外网产专项");
             OnTaskBarChanged();
         }
@@ -103,7 +103,7 @@ namespace C2.Forms
             
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "文档 | *.xls;*.xlsx"
+                Filter = "文档 | *.xls;*.xlsx;*.zip"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -120,7 +120,7 @@ namespace C2.Forms
                 else
                 {
                     this.excelTextBox.Text = Path.GetFileNameWithoutExtension(excelPath) + "文件上传失败";
-                    MessageBox.Show(returnMsg);
+                    HelpUtil.ShowMessageBox(returnMsg);
                 }
             }
         }
@@ -142,6 +142,15 @@ namespace C2.Forms
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void ShowDetails(string item)
+        {
+            detailDialog.DetailTable = glueSetting.SearchInfo(item);
+            detailDialog.RefreshDGV();
+            detailDialog.ShowDialog();
+        }
+
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+        public void ShowDetailsMore(string item)
         {
             detailDialog.DetailTable = glueSetting.SearchInfo(item);
             detailDialog.RefreshDGV();

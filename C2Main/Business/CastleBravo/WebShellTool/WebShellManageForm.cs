@@ -820,26 +820,17 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private String ProcessingResults(string ret, string taskUrl)
         {
-            Dictionary<SGType, string> table = new Dictionary<SGType, string>()
-            {
-                {SGType.ProcessView, "进程信息"},
-                {SGType.ScheduleTask, "定时任务"},
-                {SGType.MysqlProbe, "Mysql探针"},
-                {SGType.SystemInfo, "系统信息"},
-                {SGType.LocationInfo, "地理定位" }
-            };
-
             Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
             if (!m0.Success)
-                return table[this.sgType] + ":无结果";
+                return ClientSetting.table[this.sgType] + ":无结果";
 
             string rawResult = m0.Groups[1].Value;
             if (this.sgType == SGType.LocationInfo)
                 return LocationResult(rawResult);
    
-            if (table.ContainsKey(this.sgType)) //进程 计划任务 系统信息……
-                return ClientSetting.WriteResult(rawResult, taskUrl, table[this.sgType]);
+            if (ClientSetting.table.ContainsKey(this.sgType)) //进程 计划任务 系统信息……
+                return ClientSetting.WriteResult(rawResult, taskUrl, ClientSetting.table[this.sgType]);
          
             return rawResult;
         }
@@ -872,30 +863,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.infoConfigStatus.Text = DateTime.Now + ": 反弹Shell已发起";
         }
 
-        private void MysqlProbeMenu_Click(object sender, EventArgs e)
-        {
-            if (this.LV.SelectedItems.Count == 0)
-                return;
-
-            MysqlProbeSet mps = new MysqlProbeSet();
-            if (mps.ShowDialog() != DialogResult.OK)
-                return;
-
-            int ts = mps.TimeoutSeconds;
-            int ps = mps.ProbeStrategy;
-            string files = mps.SearchFiles.Trim();
-            string fields = mps.SearchFields.Trim();
-
-            this.sgType = SGType.MysqlProbe;
-            string payload = string.Format(ClientSetting.MysqlProbePayload, 
-                "{0}", 
-                ps, 
-                ST.EncodeBase64(files), 
-                ST.EncodeBase64(fields));
-
-            ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0], ts);
-        }
 
         private void LV_MouseClick(object sender, MouseEventArgs e)
         {
@@ -960,6 +927,36 @@ namespace C2.Business.CastleBravo.WebShellTool
                 RefreshBackColor();  // 重新布局
             }
                 
+        }
+
+        private void IniProbeMenu_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+
+            MysqlProbeSet mps = new MysqlProbeSet();
+            if (mps.ShowDialog() != DialogResult.OK)
+                return;
+
+            int ts = mps.TimeoutSeconds;
+            int ps = mps.ProbeStrategy;
+            string files = mps.SearchFiles.Trim();
+            string fields = mps.SearchFields.Trim();
+
+            this.sgType = SGType.MysqlProbe;
+            string payload = string.Format(ClientSetting.MysqlProbePayload,
+                "{0}",
+                ps,
+                ST.EncodeBase64(files),
+                ST.EncodeBase64(fields));
+
+            ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
+            SingleInfoCollection(this.LV.SelectedItems[0], ts);
+        }
+
+        private void UserTableProbeMenu_Click(object sender, EventArgs e)
+        {
+             new MysqlUserTableProbe().ShowDialog();
         }
     }
 }

@@ -269,7 +269,7 @@ if __name__ == '__main__':
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
     DATA_PATH = './_queryResult_hostDD_' + defaultEnd
-    Kwl = [ '_HOST:9128.cc','_HOST:threnfa.com','SiteUrl= SitePass=', '_HOST:c.wwwcd.top','_HOST:tophack.net','_HOST:djking.f3322.net:93','_HOST:www.xazchs.com','_HOST:45677789.com']
+    Kwl = [ '_HOST:9128.cc','_HOST:threnfa.com','SiteUrl= SitePass=', '_HOST:c.wwwcd.top','_HOST:tophack.net','_HOST:djking.f3322.net','_HOST:www.xazchs.com','_HOST:45677789.com','_HOST:web.lbz2.com','_HOST:xazchs.com','_HOST:maicaidao.co','_HOST:maicaidao.net','_HOST:maicaidao.me','hm=http']
 
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))

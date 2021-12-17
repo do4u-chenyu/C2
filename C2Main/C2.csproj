@@ -209,6 +209,7 @@
       <DependentUpon>BinaryMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\Binary\BinStrings.cs" />
+    <Compile Include="Business\CastleBravo\Binary\Xise.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
@@ -348,6 +349,12 @@
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.Designer.cs">
       <DependentUpon>MysqlProbeSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbe.Designer.cs">
+      <DependentUpon>MysqlUserTableProbe.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
       <SubType>Form</SubType>
@@ -2150,6 +2157,9 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.resx">
       <DependentUpon>MysqlProbeSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbe.resx">
+      <DependentUpon>MysqlUserTableProbe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.resx">
       <DependentUpon>ReverseShellSet.cs</DependentUpon>
     </EmbeddedResource>
@@ -2615,6 +2625,8 @@
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Business\CastleBravo\WebShellTool\Payload\db_dict" />
+    <None Include="Business\CastleBravo\WebShellTool\Payload\gzip.php" />
+    <None Include="Business\CastleBravo\WebShellTool\Payload\unzip.php" />
     <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -2776,6 +2788,9 @@
     <None Include="Business\IAOLab\WebEngine\img\BossStyle14.jpg" />
     <None Include="Business\IAOLab\WebEngine\img\BossStyle15.jpg" />
     <Content Include="Business\IAOLab\WebEngine\Html\Visual.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Business\IAOLab\WebEngine\img\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Business\IAOLab\WebEngine\img\img10\back.jpg">

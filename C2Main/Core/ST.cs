@@ -1,6 +1,7 @@
 ﻿using C2.Globalization;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -608,6 +609,37 @@ namespace C2.Core
             return Encoding.UTF8.GetString(arrByte);
         }
 
+        public static byte[] HexStringToBytes(string str)
+        {
+            str = str.ToLower().Trim();
+            str = str.StartsWith("0x") ? str.Substring(2) : str;
+
+            byte[] arrByte = new byte[str.Length >> 1];
+            str = str.Substring(0, arrByte.Length << 1);
+
+            try
+            {
+                for (int i = 0; i < arrByte.Length; i++)
+                    arrByte[i] = Convert.ToByte(str.Substring(i << 1, 2), 16);
+            }
+            catch
+            {
+                return new byte[0];
+            }
+
+            return arrByte;
+        }
+
+        public static byte[] DecimalHexStringToBytes(string str, string sep)
+        {   
+            string[] s = str.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            byte[] bytes = new byte[s.Length];
+            for (int i = 0; i < s.Length; i++)
+                bytes[i] = ConvertUtil.TryParseByte(s[i]);
+            return bytes;
+        }
+
+
         public static string SuperDecodeBase64(string code)
         {
             
@@ -740,11 +772,28 @@ namespace C2.Core
             return ST.GetColor(ST.ReadTextNode(node, name), colorDefault);
         }
 
-        public static string GenerateMD5(string text)
+        public static string GenerateMD5(string text, string charset = "Default")
         {
             using (MD5 mi = MD5.Create())
             {
-                byte[] buffer = Encoding.Default.GetBytes(text);
+                Encoding encoding = Encoding.Default;
+                switch (charset.ToUpper().Trim())
+                {
+                    case "UTF8":
+                        encoding = Encoding.UTF8;
+                        break;
+                    case "UTF7":
+                        encoding = Encoding.UTF7;
+                        break;
+                    case "ASCII":
+                        encoding = Encoding.ASCII;
+                        break;
+                    default:
+                        encoding = Encoding.Default;
+                        break;
+                }
+
+                byte[] buffer = encoding.GetBytes(text);
                 //开始加密
                 byte[] newBuffer = mi.ComputeHash(buffer);
                 StringBuilder sb = new StringBuilder(newBuffer.Length * 2); // 固定长度
@@ -753,6 +802,18 @@ namespace C2.Core
                 return sb.ToString();
             }
         }
+        public static string SHA256(string data)    //sha256加密
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            byte[] hash = System.Security.Cryptography.SHA256.Create().ComputeHash(bytes);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                builder.Append(hash[i].ToString("X2"));
+            return builder.ToString().ToLower();
+        }
+
+
+
 
         public static string ImageBase64String(Image image)
         {

@@ -57,6 +57,13 @@ namespace C2.IAOLab.IDInfoGet
                 description);        // 归属地            
         }
 
+        public string TransRegionCode(string code)
+        {
+            return string.Format("{0}{1}", 
+                TryGetValue(code.Substring(0, 2) + "0000"), //省
+                TryGetValue(code.Substring(0, 4) + "00")    //市
+                );
+        }
         private string Convert15To18(string input)
         {
             if (input.Length == 18)

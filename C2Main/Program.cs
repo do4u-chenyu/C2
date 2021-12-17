@@ -73,7 +73,10 @@ namespace C2
             else
             {
                 //1.2 已经有一个实例在运行
-                HandleRunningInstance(instance);
+                instance.Kill();
+                string path = args.JoinString(string.Empty).TrimEnd(OpUtil.Blank);
+                RunByVersion(path);
+                //HandleRunningInstance(instance);
             }      
             Options.Current.Save();
         }

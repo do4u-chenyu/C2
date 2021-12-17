@@ -10,8 +10,8 @@ namespace C2.Business.CastleBravo.Binary
     public partial class BinaryMainForm : Form
     {
         private string[] strings;
-        private List<string> list = new List<string>();
-        private StringBuilder sb = new StringBuilder();
+        private readonly List<string> list = new List<string>();
+        private readonly StringBuilder sb = new StringBuilder();
         public BinaryMainForm()
         {
             InitializeComponent();
@@ -87,6 +87,17 @@ namespace C2.Business.CastleBravo.Binary
         private int CountUsername(string[] strings)
         {
             return Count(strings, new Regex(@"^[\w \._-]+$"));
+        }
+
+        private void Button2_Click(object sender, System.EventArgs e)
+        {
+            this.textBox1.Clear();
+        }
+
+        private void Button1_Click(object sender, System.EventArgs e)
+        {
+            string ret = new Xise().Decrypt(textBox1.Text);
+
         }
     }
 }

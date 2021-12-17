@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -17,7 +17,7 @@ table#dataintable {
 	font-size:14px;
 	cursor:default;
 	table-layout:fixed;
-	word-break:keep-all;
+	
 	
 	}
 
@@ -28,13 +28,14 @@ table#dataintable th {
 	border:1px solid #aaa;
 	text-align:left;
 	color:#666666;
+	word-break:break-all;
 	}
 
 table#dataintable td {
 
 	padding:10px 12px 10px 12px;
     border-bottom:1px solid #edebeb;
-	
+	word-break:keep-all;
 	vertical-align:middle;
 	    white-space:nowrap;/* 不换行 */
     overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
@@ -53,31 +54,27 @@ td#th0{
     color:#4a86e8;
 	
 }
+td#th2{
+    text-align:center;
+	width:80px;
+}
 
-        .arrow {
-            display: inline-block;
-            vertical-align: middle;
-            width: 0;
-            height: 0;
-            margin-left: 5px;
-        }
+.arrow {
+	display: inline-block;
+	vertical-align: middle;
+	width: 10px;
+	height: 10px;
+	margin-left: 5px;
+	cursor:pointer;
+}
 		
-.arrow.asc {
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                border-bottom: 6px solid #666666;
-				cursor:pointer;
-            }
-			.arrow.desc {
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                border-top: 6px solid #666666;
-				cursor:pointer;
-            }
 	</style>
 	<script type ="text/javascript">
         function ShowDetails(a) {
             window.external.ShowDetails(a.text);//ShowDetails为c#方法
+        }
+		function ShowDetailsMore(a) {
+            window.external.ShowDetailsMore(a.name);//ShowDetailsMore为c#方法
         }
 		function WfToHtml(argStr) {
 		    $("#dataintable").append(argStr);
