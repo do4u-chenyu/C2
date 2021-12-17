@@ -103,7 +103,7 @@ namespace C2.Forms
             
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "文档 | *.xls;*.xlsx"
+                Filter = "文档 | *.xls;*.xlsx;*.zip"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;

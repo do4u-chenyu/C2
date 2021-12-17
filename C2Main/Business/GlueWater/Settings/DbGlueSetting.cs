@@ -115,9 +115,12 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
-        public override string UpdateContent(string excelPath)
+        public override string UpdateContent(string zipPath)
         {
-            //return DealWebContent(excelPath) && DealMemberContent(excelPath);
+            string excelPath = FindExcelFromZip(zipPath);
+            if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
+                return excelPath;
+
 
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉赌网站");
             if (rrst1.ReturnCode != 0)
@@ -128,7 +131,11 @@ namespace C2.Business.GlueWater.Settings
                 return rrst2.Message;
 
             if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
+            {
+                BackupZip(zipPath);
                 return "文件上传成功";
+            }
+                
             else
                 return "文件格式不正确";
         }
