@@ -11,10 +11,7 @@ namespace C2.Controls
         {
             
         }
-        public override int setX(TabItem ti)
-        {
-            return ti.Size.Width + ItemSpace + 30; //调整各个Tabitem之间的距离
-        }
+
         public override void ApplyTheme(UITheme theme)
         {
             base.ApplyTheme(theme);

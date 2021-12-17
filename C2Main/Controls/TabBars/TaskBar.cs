@@ -14,10 +14,6 @@ namespace C2.Controls
         public event EventHandler InactiveSelectedItemBackColorChanged;
         public event EventHandler InactiveSelectedItemForeColorChanged;
 
-        public override int setX(TabItem ti)
-        {
-            return ti.Size.Width + ItemSpace; //调整各个Tabitem之间的距离
-        }
 
         public TaskBar()
         {

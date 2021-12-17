@@ -104,7 +104,7 @@ namespace C2.Utils
         public static string SHFormHelpInfo = "涉黄专项分析";
         public static string DDFormHelpInfo = "盗洞专项分析";
 
-        public static string XiseBackdoorHelpInfo = "后门黑吃黑专项分析";
+        public static string XiseBackdoorHelpInfo = "黑吃黑专项分析";
         public static string NetworkAssetsHelpInfo  = "购置境外网络资产专项分析";
 
 

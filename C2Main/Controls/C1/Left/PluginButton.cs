@@ -70,7 +70,7 @@ namespace C2.Controls.C1.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dd;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DDFormHelpInfo);
                     break;
-                case "后门黑吃黑专项":
+                case "黑吃黑专项":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.HM;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.XiseBackdoorHelpInfo);
                     break;
@@ -138,7 +138,7 @@ namespace C2.Controls.C1.Left
                 case "涉枪专项":
                 case "涉黄专项":
                 case "盗洞专项":
-                case "后门黑吃黑专项":
+                case "黑吃黑专项":
                 case "境外网产专项":
                     Global.GetMainForm().OpenJSTab(pluginType);
                     break;

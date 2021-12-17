@@ -141,6 +141,7 @@
             this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabBar1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabBar1.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.tabBar1.ItemSpace = 30;
             this.tabBar1.Location = new System.Drawing.Point(0, 0);
             this.tabBar1.Name = "tabBar1";
             this.tabBar1.ShowPreferencesButton = false;

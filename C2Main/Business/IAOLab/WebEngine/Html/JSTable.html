@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -72,6 +72,9 @@ td#th2{
 	<script type ="text/javascript">
         function ShowDetails(a) {
             window.external.ShowDetails(a.text);//ShowDetails为c#方法
+        }
+		function ShowDetailsMore(a) {
+            window.external.ShowDetailsMore(a.name);//ShowDetailsMore为c#方法
         }
 		function WfToHtml(argStr) {
 		    $("#dataintable").append(argStr);
