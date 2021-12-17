@@ -41,7 +41,7 @@ namespace C2.Forms
             AddTabItem("涉枪专项");
             AddTabItem("涉黄专项");
             AddTabItem("盗洞专项");
-            AddTabItem("后门黑吃黑专项");
+            AddTabItem("黑吃黑专项");
             AddTabItem("境外网产专项");
             OnTaskBarChanged();
         }
