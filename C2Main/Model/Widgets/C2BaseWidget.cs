@@ -1,14 +1,12 @@
-﻿using C2.Controls.MapViews;
-using System.Drawing;
+﻿using C2.Business.Model;
+using C2.Controls.MapViews;
+using C2.Core;
+using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Xml;
-using C2.Business.Model;
-using C2.Utils;
-using C2.Core;
-using System;
-using C2.Database;
-using System.Xml.XPath;
 
 namespace C2.Model.Widgets
 {
