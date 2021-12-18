@@ -355,7 +355,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuRefresh = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
-                MenuOpenDataSource.Image = Properties.Resources.数据;
+                MenuOpenDataSource.Image = Properties.Resources.数据挂件;
 
                 MenuOpenDataSource.Text = dataItem.DataType == DatabaseType.Null ? String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.')) : String.Format("{0}[{1}]", dataItem.FileName, dataItem.DataType);
                 MenuOpenDataSource.DropDownItems.AddRange(new ToolStripItem[] {

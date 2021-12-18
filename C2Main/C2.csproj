@@ -4228,6 +4228,8 @@
     <Content Include="Resources\WebScanDict\通用目录字典.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\喝彩城堡任务.png" />
+    <None Include="Resources\WidgetIcon\数据挂件.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
