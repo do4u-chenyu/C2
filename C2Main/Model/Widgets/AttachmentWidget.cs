@@ -15,7 +15,20 @@ namespace C2.Model.Widgets
 
         [Browsable(false)]
         public List<string> AttachmentPaths { get; set; } = new List<string>();
-        public override string Description => HelpUtil.AttachmentWidgetHelpInfo;
+        public override string Description
+        {
+            get
+            {
+                string attachList = string.Empty;
+                if (AttachmentPaths.Count > 0)
+                    attachList = Path.GetFileName(AttachmentPaths[0]);
+                if (AttachmentPaths.Count > 1)
+                    attachList += "," + Path.GetFileName(AttachmentPaths[1]);
+                return string.Format(HelpUtil.AttachmentWidgetHelpInfo, attachList);
+            }
+        }
+
+        
 
         public AttachmentWidget()
         {
