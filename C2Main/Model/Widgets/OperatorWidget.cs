@@ -147,9 +147,9 @@ namespace C2.Model.Widgets
         }
         public override void OnDoubleClick(HandledEventArgs e) 
         {
-            if (Status == OpStatus.Ready || Status == OpStatus.Done)
+            if (Status != OpStatus.Null)
             {
-                GenType(this).ShowDialog();
+                GenType(this)?.ShowDialog();
             }
                 
         }

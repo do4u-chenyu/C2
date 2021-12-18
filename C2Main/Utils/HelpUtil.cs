@@ -36,7 +36,7 @@ namespace C2.Utils
         public static string FramePictureBoxHelpInfo = "框选屏幕中算子进行整体拖动";
         public static string MoreButtonHelpInfo = "首选项:配置程序的各项参数";
 
-        public static string AttachmentWidgetHelpInfo = "附件:支持添加多个附件,支持多种类型文档";
+        public static string AttachmentWidgetHelpInfo = "附件:【{0}】支持多个附件和多种类型文档";
         public static string ChartWidgetHelpInfo = "图表:柱状图,折线图,饼图,环形图,雷达图等";
         public static string OperatorWidgetHelpInfo = "算子:内置多种算子,支持Python脚本";
         public static string ResultWidgetHelpInfo = "运算结果:算子和多维运算后生成的结果,支持预览";
