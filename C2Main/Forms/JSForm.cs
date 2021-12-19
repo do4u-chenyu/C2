@@ -70,7 +70,7 @@ namespace C2.Forms
             this.excelTextBox.Text = "未选择任何文件";
             if (selectedItem == "境外网产专项")
                 selectedItem = "网产专项";
-            this.itemLabel.Text = selectedItem.Replace("专项", "");
+            this.itemLabel.Text = selectedItem.Replace("专项", string.Empty);
         }
 
         protected virtual void AddTabItem(string name, bool visiable = false)
@@ -103,7 +103,7 @@ namespace C2.Forms
             
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
-                Filter = "文档 | *.xls;*.xlsx;*.zip"
+                Filter = "数据包 | *.zip|其他| *.xls;*.xlsx"
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
