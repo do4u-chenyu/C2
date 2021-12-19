@@ -11,6 +11,7 @@ namespace MD5Plugin
         public UnicodePlugin()
         {
             InitializeComponent();
+            this.comboBox1.SelectedIndex = 0;
         }
 
         public override void Encode(string str)
