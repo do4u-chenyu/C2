@@ -8,10 +8,16 @@ namespace MD5Plugin
 {
     partial class UnicodePlugin : URLPlugin
     {
+        string splitType = "\\u";
         public UnicodePlugin()
         {
             InitializeComponent();
             this.comboBox1.SelectedIndex = 0;
+        }
+
+        private void Split_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            splitType = comboBox1.SelectedItem as string;
         }
 
         public override void Encode(string str)
@@ -37,6 +43,7 @@ namespace MD5Plugin
         public void DealWithUnicode(string str)
         {
             string resultStr = String.Empty;
+            
             string[] strList = str.Split('u');
             for (int i = 1; i < strList.Length; i++)
             {
@@ -55,18 +62,39 @@ namespace MD5Plugin
                 {
                     OriginOutput();
                 }
-                else if (str.Contains('u'))
+                else if (str.Contains("u") || splitType == "\\u")
                 {
                     str = str.Replace(@"\", string.Empty);
                     DealWithUnicode(str);
                 }
+                else if (splitType == "&#;") //&#22823;&#28385;&#36143;&#22823;&#22235;
+                {
+                    if(str.Substring(str.Length - 1, 1) == ";")
+                        str = str.Substring(0, str.Length - 1);//去掉最后一个;
+                    StringBuilder stringBuilder = new StringBuilder();
+                    string[] words = str.Split(';');
+                    foreach (var word in words)
+                    {
+                        char v = Convert.ToChar(Convert.ToInt32(word.Replace("&#", "")));
+                        stringBuilder.AppendFormat(v.ToString());
+                    }
+                    inputTextBox.Text = stringBuilder.ToString();
+                }
+
                 else if (str.Contains(a) && str.Contains(b))//十六进制
                 {
                     str = str.Replace("&#x", "u").Replace(";", string.Empty);
                     DealWithUnicode(str);
                 }
+
                 else if (str.Contains(a) && !str.Contains(b))//十进制
                 {
+                    char v = Convert.ToChar(Convert.ToInt32(str.Replace("&#", "")));
+
+                    inputTextBox.Text = v.ToString();
+
+
+                    
                     Regex r = new Regex("\\d+\\.?\\d*");
                     MatchCollection mc = r.Matches(str);
                     string result = string.Empty;
@@ -80,6 +108,7 @@ namespace MD5Plugin
                     string newstr = result;
                     newstr = newstr.Replace("&#x", "u").Replace(@";", string.Empty);
                     DealWithUnicode(newstr);
+                    
                 }
                 else
                 {
