@@ -62,7 +62,7 @@ namespace MD5Plugin
                 {
                     OriginOutput();
                 }
-                else if (str.Contains("u") || splitType == "\\u")
+                else if (splitType == "\\u")
                 {
                     str = str.Replace(@"\", string.Empty);
                     DealWithUnicode(str);
@@ -80,21 +80,13 @@ namespace MD5Plugin
                     }
                     inputTextBox.Text = stringBuilder.ToString();
                 }
-
                 else if (str.Contains(a) && str.Contains(b))//十六进制
                 {
                     str = str.Replace("&#x", "u").Replace(";", string.Empty);
                     DealWithUnicode(str);
                 }
-
-                else if (str.Contains(a) && !str.Contains(b))//十进制
+                else if (splitType == "&#")//十进制
                 {
-                    char v = Convert.ToChar(Convert.ToInt32(str.Replace("&#", "")));
-
-                    inputTextBox.Text = v.ToString();
-
-
-                    
                     Regex r = new Regex("\\d+\\.?\\d*");
                     MatchCollection mc = r.Matches(str);
                     string result = string.Empty;
@@ -107,8 +99,7 @@ namespace MD5Plugin
                     }
                     string newstr = result;
                     newstr = newstr.Replace("&#x", "u").Replace(@";", string.Empty);
-                    DealWithUnicode(newstr);
-                    
+                    DealWithUnicode(newstr); 
                 }
                 else
                 {
