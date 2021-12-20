@@ -85,7 +85,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}<br>{6}</td>" +
                             "   <td>{7}</td>" +
-                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">{8}</a><br>{9}</td>" +
+                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">主题数：{8}</a><br>回帖数：{9}</td>" +
                             "   <td>{10}<br>{11}</td>" +
                             "</tr>",
                             dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
@@ -122,9 +122,12 @@ namespace C2.Business.GlueWater.Settings
             SqWebTable = SqWebTable.DefaultView.ToTable();
         }
 
-        public override string UpdateContent(string excelPath)
+        public override string UpdateContent(string zipPath)
         {
-            
+            string excelPath = FindExcelFromZip(zipPath);
+            if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
+                return excelPath;
+
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉枪论坛人员用户信息");
             if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
                 return rrst1.Message;
@@ -138,10 +141,13 @@ namespace C2.Business.GlueWater.Settings
             ReadRst rrst3 = FileUtil.ReadExcel(excelPath, maxRow, "论坛发帖情况");
             if (rrst3.ReturnCode != 0 || rrst3.Result.Count == 0)
                 return rrst2.Message;
-            
 
-            if (DealWebContent(rrst1.Result,rrst2.Result) && DealMemberContent(rrst1.Result,rrst3.Result))
+
+            if (DealWebContent(rrst1.Result, rrst2.Result) && DealMemberContent(rrst1.Result, rrst3.Result))
+            {
                 return "数据添加成功";
+            }
+                
             else
                 return "非系统要求格式，请查看模板样例修改";
         }
