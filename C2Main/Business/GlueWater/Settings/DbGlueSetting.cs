@@ -130,11 +130,11 @@ namespace C2.Business.GlueWater.Settings
             if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
             {
                 BackupZip(zipPath);
-                return "文件上传成功";
+                return "数据添加成功";
             }
                 
             else
-                return "文件格式不正确";
+                return "非系统要求格式，请查看模板样例修改";
         }
 
         private bool DealWebContent(List<List<string>> contents)
