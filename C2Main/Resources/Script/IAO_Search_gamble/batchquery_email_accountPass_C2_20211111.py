@@ -38,8 +38,7 @@ class Email:
         dbfilter = ['--dbfilter', '\'' + ' OR '.join(['"' + value.decode('utf-8').encode('GBK') + '"' + ' in _SUBJECT' for value in LOGIN_VALUE]) + '\'']
         if model == 'domain':
             cmd = cmd + dbfilter
-        querystring = ". /home/search/search_profile && {0} ".format(" ".join(cmd))
-        
+        querystring = ". /home/search/search_profile && {0} ".format(" ".join(cmd))      
         return querystring
     
     def get_mainfile(self, mainfiles, mainfilename):
@@ -57,26 +56,24 @@ class Email:
         vpn_keys = ["noreply@cloudss.co", "a7728051@gmail.com", "noreply@mg.greenss.co", "seeocloud@seoo.vip", "noreply@qiuyin.co", "hi@paoluz.net", "no-reply@linkhub.store", "speed_notice@qq.com", "support@suying666.pw", "leisu@mail.lei-su.link", "no-replay@mail.flyint.date", "sales@hostwinds.com", "support@hostease.com", "china@resellerclub.com", "support@raksmart.com", "noreply@vultr.com", "no-reply-aws@amazon.com", "support@gigsgigscloud.com", "no-reply@sugarhosts.com", "support@megalayer.net", "robot@app.cloudcone.email", "support@krypt.com", "sales@cn.bluehost.com", "support@bandwagonhost.com", "support@gcorelabs.com", "billing@gcore.lu", "support@hosteons.com", "no.reply@frantech.ca", "no-reply@virmach.com", "sales@racknerd.com", "no-reply@referrals.digitalocean.com", "no-reply@antpool.com", "no-reply@f2pool.com", "noreply@em720.notify.blockin.com", "hello@foundrydigital.com", "noreply@mail2.viabtc.com", "noreply@btc.com",  "noreply@slushpool.com", "noreply@mail.huobi.mn", "noreply@prod.sbicrypto.com", "no-reply@emcd.io", "hello@luxor.tech", "support@greatpool.ca", "no-reply@sigmapool.com", "no-reply@email2.trustpool.ru", "service@2009pool.com", "noreply@qubtc.com", "Notification@mg.lincoinpool.com", "no-reply@hashcity.org", "385561983@qq.com", "no-reply@cruxpool.com", "info@laurentiapool.org", "Sales@BlockwareSolutions.com", "noreply@mining-dutch.nl"]
         KEY_WORDS_VPN = " OR ".join(vpn_keys)
         
-        try:
+        try:        
+            querystring = self.queryclient(KEY_WORDS_DOMAIN, 'domain') + "; " + self.queryclient(KEY_WORDS_VPN, 'vpn')
+            pipe = Popen(querystring, shell=True, stdout=PIPE)
+            
+            for line in pipe.stdout:
+                line = line.replace('\n','')
+                self.fullfile_content.append(line)
+                if '_MAINFILE' in line:
+                    MAINFILE=line.replace('_MAINFILE: ', '')
+                    self.mainfile_content.append(MAINFILE)
+            with open(os.path.join(self.data_path, "fullfile"), 'w') as f:
+                f.write('\n'.join(self.fullfile_content))
+            self.get_mainfile(self.mainfile_content, 'mainfile')
             LOGGER.info('QUERY_KEYS:{0}\nQUERYTIME:{1}_{2}\n'.format(KEY_WORDS_DOMAIN, self.startTime,self.endTime))
             LOGGER.info('QUERY_KEYS:{0}\nQUERYTIME:{1}_{2}\n'.format(KEY_WORDS_VPN, self.startTime,self.endTime))
         except Exception, e:
             LOGGER.info('QUERY_ERROR-{0}\n'.format(e))
         
-        querystring = self.queryclient(KEY_WORDS_DOMAIN, 'domain') + "; " + self.queryclient(KEY_WORDS_VPN, 'vpn')
-        print querystring
-        pipe = Popen(querystring, shell=True, stdout=PIPE)
-        
-        for line in pipe.stdout:
-            line = line.replace('\n','')
-            self.fullfile_content.append(line)
-            if '_MAINFILE' in line:
-                MAINFILE=line.replace('_MAINFILE: ', '')
-                self.mainfile_content.append(MAINFILE)
-        with open(os.path.join(self.data_path, "fullfile"), 'w') as f:
-            f.write('\n'.join(self.fullfile_content))
-        
-        self.get_mainfile(self.mainfile_content, 'mainfile')
             
 # #日志文件打印
 def init_logger(logname, filename, logger_level=logging.INFO):
@@ -103,7 +100,6 @@ def zip_result(DATA_PATH, ZIP_PATH):
     else:
         LOGGER.info("Compress dirs success!.")
 
-
 def init_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
@@ -113,7 +109,7 @@ def main():
     LOGGER.info('START EMAIL QUERY BATCH....')
     ap = Email(DATA_PATH, startTime, endTime)
     ap.run_query()
-    ZIP_PATH = DATA_PATH + startTime + '_' + endTime + '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + startTime + '_' + endTime + '.tgz.tmp'    
     zip_result(DATA_PATH, ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)
