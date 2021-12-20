@@ -143,7 +143,7 @@ namespace C2.Business.GlueWater.Settings
             {
                 BackupZip(zipPath);
                 WriteToTable(WebMember, Web, Member);
-                return "文件上传成功";
+                return "数据添加成功";
             }
             else
                 return "非系统要求格式，请查看模板样例修改";
