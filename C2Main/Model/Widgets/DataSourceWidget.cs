@@ -14,7 +14,7 @@ namespace C2.Model.Widgets
         public DataSourceWidget()
         {
             DisplayIndex = 0;
-            widgetIcon = Properties.Resources.数据;
+            widgetIcon = Properties.Resources.数据挂件;
         }
         public override string GetTypeID()
         {

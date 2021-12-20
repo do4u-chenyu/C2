@@ -146,7 +146,7 @@ namespace C2.Business.GlueWater.Settings
                 return "文件上传成功";
             }
             else
-                return "文件格式不正确";
+                return "非系统要求格式，请查看模板样例修改";
         }
 
 

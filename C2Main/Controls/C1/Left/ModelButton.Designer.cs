@@ -62,7 +62,7 @@
             this.lelfPictureBox.Location = new System.Drawing.Point(3, 6);
             this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.lelfPictureBox.Name = "lelfPictureBox";
-            this.lelfPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.lelfPictureBox.Size = new System.Drawing.Size(24, 24);
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;

@@ -54,7 +54,11 @@ namespace MD5Plugin
         {
             try
             {
-                return Convert.ToString(Convert.ToByte(s, baseSrc), baseDst);
+                byte b = Convert.ToByte(s, baseSrc);
+                // 十六进制前面补0
+                if (baseDst == 16)
+                    return string.Format("{0:X2}", b);
+                return Convert.ToString(b, baseDst);
             }
             catch { }
             return string.Empty;

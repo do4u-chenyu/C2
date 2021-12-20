@@ -132,7 +132,7 @@ namespace C2.Controls.C1.Left
 
             private void InitButtonType()
             {
-                this.leftPictureBox.Image = global::C2.Properties.Resources.侦察兵左侧;
+                this.leftPictureBox.Image = global::C2.Properties.Resources.喝彩城堡任务;
                 this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
             }
 

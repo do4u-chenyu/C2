@@ -21,7 +21,7 @@ namespace C2.Controls.MapViews
             il.Images.Add(Properties.Resources.document);
             il.Images.Add(Properties.Resources.topic);
             il.Images.Add(Properties.Resources.结果);
-            il.Images.Add(Properties.Resources.数据);
+            il.Images.Add(Properties.Resources.数据挂件);
             ImageList = il;
             Dock = System.Windows.Forms.DockStyle.Fill;
             HideSelection = false;

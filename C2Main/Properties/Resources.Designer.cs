@@ -3362,6 +3362,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap 喝彩城堡任务 {
+            get {
+                object obj = ResourceManager.GetObject("喝彩城堡任务", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap 图表 {
             get {
                 object obj = ResourceManager.GetObject("图表", resourceCulture);
@@ -3461,6 +3471,16 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("数据处理", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 数据挂件 {
+            get {
+                object obj = ResourceManager.GetObject("数据挂件", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
