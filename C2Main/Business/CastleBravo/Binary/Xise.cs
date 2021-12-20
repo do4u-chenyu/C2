@@ -39,7 +39,8 @@ namespace C2.Business.CastleBravo.Binary
                 cs.Write(bytes, 0, bytes.Length);
                 try
                 { 
-                    cs.FlushFinalBlock();
+                    cs.FlushFinalBlock();  // 这里无论如何都解不出来
+                                           // 只能硬刚解密算法了, 正在进行中
                 }
                 catch
                 {
