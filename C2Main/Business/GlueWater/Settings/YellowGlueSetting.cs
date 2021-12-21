@@ -3,10 +3,11 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace C2.Business.GlueWater.Settings
 {
@@ -142,7 +143,7 @@ namespace C2.Business.GlueWater.Settings
             if (DealWebMemberContent(rrst0.Result, WebMember) && DealWebContent(rrst1.Result, Web) && DealMemberContent(rrst2.Result, Member))
             {
                 BackupZip(zipPath);
-                WriteToTable(WebMember, Web, Member);
+                WriteToTable(WebMember, Web, Member, zipPath);
                 return "数据添加成功";
             }
             else
@@ -162,8 +163,9 @@ namespace C2.Business.GlueWater.Settings
                 if (headIndex.Max() > contents[i].Count)
                     return false;
                 List<string> resultList = Trans(ContentFilter(headIndex, contents[i]));
+                int city = YellowWebColList.ToList().IndexOf("发现地市");
+                resultList[city] = IDInfoGet.GetInstance().TransRegionCode(resultList[city]);
 
-                //这里要做判断了 对于web，url存在，替换掉
                 DataRow[] rows = YellowWebTable.Select("认证账号='" + resultList[0] + "'" +
                      "and 手机号='" + resultList[1] + "'" +
                      "and QQ='" + resultList[2] + "'" +
@@ -173,22 +175,17 @@ namespace C2.Business.GlueWater.Settings
                 if (rows.Length > 0)
                     YellowWebTable.Rows.Remove(rows[0]);
                 WebMember.Add(resultList);
-                //YellowWebTable.Rows.Add(resultList.ToArray());
             }
             listData(WebMember);
             return true;
         }
 
-        //List<String> listRealData = new List<string>();
-
         private bool DealWebContent(List<List<string>> contents, List<List<string>> Web)
         {
-
             if (contents.Count == 0)
                 return false;
 
             List<int> headIndex = IndexFilter(YellowWebExcelColList, contents);
-
             for (int i = 1; i < contents.Count; i++)
             {
                 if (headIndex.Max() > contents[i].Count)
@@ -197,18 +194,14 @@ namespace C2.Business.GlueWater.Settings
 
                 //这里要做判断了 对于web，url存在，替换掉
                 DataRow[] rows = YellowWebTable.Select("网站网址='" + resultList[1] + "'");
-                if (rows.Length > 0)
-                {
-
+                if (rows.Length > 0)        
                     YellowWebTable.Rows.Remove(rows[0]);
-                }
                 
                 int userNum = YellowWebColList.ToList().IndexOf("网站人数") - YellowPhotoMemberExcelColList.Count;
                 string tmpMember = resultList[userNum];
                 resultList[userNum] = tmpMember == string.Empty ? "0" : tmpMember;
                 Web.Add(resultList);
             }
-            
             listData(Web);
             return true;
         }
@@ -222,28 +215,8 @@ namespace C2.Business.GlueWater.Settings
                 if (headIndex2.Max() > contents[i].Count)
                     return false;
                 List<string> resultList = ContentFilter(headIndex2, contents[i]);
-
-                //这里要做判断了 对于member，url存在，比较是否完全一致
-                DataRow[] rows = YellowMemberTable.Select("网站='" + resultList[0] + "'");
-                if (rows.Length == 0)
-                    Member.Add(resultList);
-                else
-                {
-                    List<string> rowContentList = new List<string>();
-                    foreach (DataRow row in rows)
-                    {
-                        List<string> rowContent = new List<string>();
-                        for (int j = 0; j < YellowMemberTable.Columns.Count; j++)
-                        {
-                            if (j == YellowMemberColList.ToList().IndexOf("安全码") || j == YellowMemberColList.ToList().IndexOf("登录地址"))
-                                continue;
-                            rowContent.Add(row[j].ToString());
-                        }
-                        rowContentList.Add(string.Join("\t", rowContent));
-                    }
-                    if (!rowContentList.Contains(string.Join("\t", resultList)))
-                        Member.Add(resultList);
-                }
+                Member.Add(resultList);
+               
             }
             listData(Member);
             return true;
@@ -254,11 +227,7 @@ namespace C2.Business.GlueWater.Settings
             YellowWebTable = YellowWebTable.DefaultView.ToTable();
         }
 
-        //Dictionary<string, List<string>> webAndAuth = new Dictionary<string, List<string>>();
-        //List<int> removeWebMemberIndex = new List<int>();
-        //List<int> removeWebIndex = new List<int>();
-
-        private void WriteToTable(List<List<string>> WebMember, List<List<string>> Web, List<List<string>> Member)
+        private void WriteToTable(List<List<string>> WebMember, List<List<string>> Web, List<List<string>> Member, string zipPath)
         {
             Dictionary<string, List<string>> webAndAuth = new Dictionary<string, List<string>>();
             List<int> removeWebMemberIndex = new List<int>();
@@ -299,8 +268,25 @@ namespace C2.Business.GlueWater.Settings
                         WebMember[j].RemoveRange(len, Web[i].Count());
                     }
                 }
-                YellowMemberTable.Rows.Add(memberList.ToArray());
-                //ReWriteResult(YellowMemberPath, YellowMemberTable);
+
+                DataRow[] rows = YellowMemberTable.Select("网站='" + memberList[0] + "'");
+                if (rows.Length == 0)
+                    YellowMemberTable.Rows.Add(memberList.ToArray());
+                else
+                {
+                    List<string> rowContentList = new List<string>();
+                    foreach (DataRow row in rows)
+                    {
+                        List<string> rowContent = new List<string>();
+                        for (int j = 0; j < YellowMemberTable.Columns.Count; j++)
+                            rowContent.Add(row[j].ToString());
+                        rowContentList.Add(string.Join("\t", rowContent));
+                    }
+
+                    if (!rowContentList.Contains(string.Join("\t", memberList)))
+                        YellowMemberTable.Rows.Add(memberList.ToArray());
+                }
+                ReWriteResult(YellowMemberPath, YellowMemberTable);
             }
             for (int i = 0; i < Web.Count(); i++)
             {
@@ -337,8 +323,21 @@ namespace C2.Business.GlueWater.Settings
                     else if (web == Web[i][1] && webAndAuth[web].Count() < 2)
                         yellowPhotoEmpty[0] = webAndAuth[web][0];
                 }
+                if (yellowPhotoEmpty[9] != string.Empty && yellowPhotoEmpty[5] == string.Empty)
+                    yellowPhotoEmpty[5] = "涉黄网站人员";
+                if (yellowPhotoEmpty[9] != string.Empty && yellowPhotoEmpty[6] == string.Empty)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(zipPath);
+                    Match regResult = Regex.Match(fileName, @"-(?<time>[0-9]{4}[0-9]{2}[0-9]{2})-");
+                    if (!regResult.Success)
+                        continue;
+                    string findTime = regResult.Groups["time"].ToString();
+                    findTime = DateTime.ParseExact(findTime, "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture, DateTimeStyles.None).ToString();
+                    yellowPhotoEmpty[6] = findTime.Replace("/", "-").Replace(" 0:00:00", " 00:00:00");
+                }
+                yellowPhotoEmpty[7] = WebMember.Count > 0 ? WebMember[0][7] : yellowPhotoEmpty[7];
                 YellowWebTable.Rows.Add(yellowPhotoEmpty.ToArray());
-                //ReWriteResult(YellowWebPath, YellowWebTable);
+                ReWriteResult(YellowWebPath, YellowWebTable);
                 
             }
             for (int j = 0; j < WebMember.Count(); j++)
@@ -350,28 +349,12 @@ namespace C2.Business.GlueWater.Settings
                 yellowWebEmpty = GetEmptylist(WebExcelCol);
                 WebMember[j].AddRange(yellowWebEmpty);
                 YellowWebTable.Rows.Add(WebMember[j].ToArray());
-                //ReWriteResult(YellowWebPath, YellowWebTable);
+                ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
 
         private List<string> Trans(List<string> resultList)
         {
-            int city = YellowWebColList.ToList().IndexOf("发现地市");
-            resultList[city] = IDInfoGet.GetInstance().TransRegionCode(resultList[city]);
-
-
-            if (resultList[0] == string.Empty)
-            {
-                if (resultList[1] != string.Empty)
-                    resultList[0] = resultList[1];
-                else if (resultList[2] != string.Empty)
-                    resultList[0] = resultList[2];
-                else if (resultList[3] != string.Empty)
-                    resultList[0] = resultList[3];
-                else
-                    resultList[0] = resultList[4];
-            }
-
             resultList[1] = "手机号: " + resultList[1];
             resultList[2] = "QQ: " + resultList[2];
             resultList[3] = "微信帐号: " + resultList[3];

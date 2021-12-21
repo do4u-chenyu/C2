@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using C2.Business.Schedule.Cmd;
 using C2.Core;
 using C2.Database;
+using C2.Dialogs;
 using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
 using C2.Model;
@@ -23,38 +24,47 @@ namespace C2.Controls.MapViews
         private void GenRunCmds()
         {
             //除了未配置状态，其余情况下全部重新运行
-            if (opw.Status != OpStatus.Null)
+            if (opw.Status == OpStatus.Null)
+                return;
+
+            //运行前，先判断要运算的是否有python算子，且虚拟机配置了，若未配置，结束，同时弹窗
+            if (opw.OpType == OpType.PythonOperator && OpUtil.GetPythonConfigPaths().Count == 0)
             {
-                //Global.GetDocumentForm().ShowRunLab();
-                List<string> cmds = GenerateCmd();
-                if (cmds == null)
-                    return;
-                this.Cursor = Cursors.WaitCursor;
-                string runMessage = RunLinuxCommand(cmds);
-                opw.Status = runMessage == "算子成功执行完毕" ? OpStatus.Done : OpStatus.Warn;
-                HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化
-                this.Cursor = Cursors.Default;
-
-                //没能成功运行，直接返回
-                if (opw.Status != OpStatus.Done)
-                    return;
-
-                //Global.GetDocumentForm().HideRunLab();
-                DataItem resultItem = opw.ResultItem;
-                Topic topic = opw.Container as Topic;
-                ResultWidget rsw = topic.FindWidget<ResultWidget>();
-                if (rsw == null)
-                {
-                    topic.Widgets.Add(new ResultWidget { DataItems = new List<DataItem> { resultItem } });
-                    //Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
-                }
-                else
-                {
-                    rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
-                    rsw.DataItems.Add(resultItem);                   
-                }
-                TopicUpdate(topic, null);
+                HelpUtil.ShowMessageBox("未配置python运行环境，点击确定跳转至虚拟机配置界面。");
+                new ConfigForm().ShowDialog();
+                return;
             }
+
+            //Global.GetDocumentForm().ShowRunLab();
+            List<string> cmds = GenerateCmd();
+            if (cmds == null)
+                return;
+
+            this.Cursor = Cursors.WaitCursor;
+            string runMessage = RunLinuxCommand(cmds);
+            opw.Status = runMessage == "算子成功执行完毕" ? OpStatus.Done : OpStatus.Warn;
+            HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化
+            this.Cursor = Cursors.Default;
+
+            //没能成功运行，直接返回
+            if (opw.Status != OpStatus.Done)
+                return;
+
+            //Global.GetDocumentForm().HideRunLab();
+            DataItem resultItem = opw.ResultItem;
+            Topic topic = opw.Container as Topic;
+            ResultWidget rsw = topic.FindWidget<ResultWidget>();
+            if (rsw == null)
+            {
+                topic.Widgets.Add(new ResultWidget { DataItems = new List<DataItem> { resultItem } });
+                //Global.GetCurrentDocument().Modified = false; //新建了一个挂件，此时文档dirty，需要置false
+            }
+            else
+            {
+                rsw.DataItems.RemoveAll(di => di.ResultDataType == DataItem.ResultType.SingleOp);
+                rsw.DataItems.Add(resultItem);                   
+            }
+            TopicUpdate(topic, null);
         }
         private void RunSQL()
         {
@@ -184,7 +194,7 @@ namespace C2.Controls.MapViews
 
                     if (p.ExitCode != 0)
                     {
-                        message = "执行程序非正常退出，请检查程序后再运行。";
+                        message = string.Format("运算出现问题,ExitCode:{0},点击下方面板【运行日志】查看出错信息,反馈售后群", p.ExitCode);
                     }
 
                 }

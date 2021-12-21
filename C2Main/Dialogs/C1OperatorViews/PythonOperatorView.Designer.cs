@@ -52,18 +52,22 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.previewCmdGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.outputFileSeparatorSettingGroup.SuspendLayout();
             this.outputFileEncodeSettingGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataSourceTB0
             // 
             this.dataSourceTB0.Location = new System.Drawing.Point(137, 15);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 28);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
             this.dataSourceTB0.TabIndex = 12;
             // 
             // cancelButton
@@ -87,13 +91,13 @@
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 429);
-            this.bottomPanel.Size = new System.Drawing.Size(529, 40);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 439);
+            this.bottomPanel.Size = new System.Drawing.Size(531, 40);
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(16, 19);
-            this.label1.Size = new System.Drawing.Size(85, 19);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             // 
             // pythonChosenComboBox
             // 
@@ -101,7 +105,7 @@
             this.pythonChosenComboBox.FormattingEnabled = true;
             this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 57);
             this.pythonChosenComboBox.Name = "pythonChosenComboBox";
-            this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 29);
+            this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 25);
             this.pythonChosenComboBox.TabIndex = 3;
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
@@ -113,7 +117,7 @@
             this.label2.Location = new System.Drawing.Point(19, 61);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 19);
+            this.label2.Size = new System.Drawing.Size(91, 14);
             this.label2.TabIndex = 13;
             this.label2.Text = "Python虚拟机";
             this.toolTip1.SetToolTip(this.label2, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
@@ -125,7 +129,7 @@
             this.label4.Location = new System.Drawing.Point(17, 148);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 19);
+            this.label4.Size = new System.Drawing.Size(91, 14);
             this.label4.TabIndex = 16;
             this.label4.Text = "脚本传入参数";
             this.toolTip1.SetToolTip(this.label4, "脚本需要传入的其他参数");
@@ -136,7 +140,7 @@
             this.pyParamTextBox.Location = new System.Drawing.Point(137, 143);
             this.pyParamTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyParamTextBox.Name = "pyParamTextBox";
-            this.pyParamTextBox.Size = new System.Drawing.Size(311, 29);
+            this.pyParamTextBox.Size = new System.Drawing.Size(311, 23);
             this.pyParamTextBox.TabIndex = 17;
             this.pyParamTextBox.TextChanged += new System.EventHandler(this.PyParamTextBox_TextChanged);
             // 
@@ -147,7 +151,7 @@
             this.label6.Location = new System.Drawing.Point(19, 106);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(107, 19);
+            this.label6.Size = new System.Drawing.Size(77, 14);
             this.label6.TabIndex = 24;
             this.label6.Text = "Python脚本";
             this.toolTip1.SetToolTip(this.label6, "自定义的第三方Python脚本");
@@ -180,7 +184,7 @@
             this.pyFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyFullFilePathTextBox.Name = "pyFullFilePathTextBox";
             this.pyFullFilePathTextBox.ReadOnly = true;
-            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(311, 29);
+            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(311, 23);
             this.pyFullFilePathTextBox.TabIndex = 25;
             // 
             // openFileDialog1
@@ -207,12 +211,12 @@
             this.previewCmdText.BackColor = System.Drawing.SystemColors.Window;
             this.previewCmdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.previewCmdText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewCmdText.Location = new System.Drawing.Point(2, 24);
+            this.previewCmdText.Location = new System.Drawing.Point(2, 18);
             this.previewCmdText.Margin = new System.Windows.Forms.Padding(2);
             this.previewCmdText.Multiline = true;
             this.previewCmdText.Name = "previewCmdText";
             this.previewCmdText.ReadOnly = true;
-            this.previewCmdText.Size = new System.Drawing.Size(509, 54);
+            this.previewCmdText.Size = new System.Drawing.Size(509, 60);
             this.previewCmdText.TabIndex = 2;
             // 
             // gbkRadio
@@ -221,7 +225,7 @@
             this.gbkRadio.Location = new System.Drawing.Point(217, 13);
             this.gbkRadio.Margin = new System.Windows.Forms.Padding(2);
             this.gbkRadio.Name = "gbkRadio";
-            this.gbkRadio.Size = new System.Drawing.Size(66, 27);
+            this.gbkRadio.Size = new System.Drawing.Size(51, 21);
             this.gbkRadio.TabIndex = 1;
             this.gbkRadio.TabStop = true;
             this.gbkRadio.Text = "GBK";
@@ -234,7 +238,7 @@
             this.utfRadio.Location = new System.Drawing.Point(119, 15);
             this.utfRadio.Margin = new System.Windows.Forms.Padding(2);
             this.utfRadio.Name = "utfRadio";
-            this.utfRadio.Size = new System.Drawing.Size(80, 27);
+            this.utfRadio.Size = new System.Drawing.Size(60, 21);
             this.utfRadio.TabIndex = 0;
             this.utfRadio.TabStop = true;
             this.utfRadio.Text = "UTF-8";
@@ -246,7 +250,7 @@
             this.otherSeparatorText.Margin = new System.Windows.Forms.Padding(2);
             this.otherSeparatorText.MaxLength = 1;
             this.otherSeparatorText.Name = "otherSeparatorText";
-            this.otherSeparatorText.Size = new System.Drawing.Size(68, 29);
+            this.otherSeparatorText.Size = new System.Drawing.Size(68, 23);
             this.otherSeparatorText.TabIndex = 3;
             this.otherSeparatorText.TextChanged += new System.EventHandler(this.OtherSeparatorText_TextChanged);
             // 
@@ -256,7 +260,7 @@
             this.otherSeparatorRadio.Location = new System.Drawing.Point(309, 15);
             this.otherSeparatorRadio.Margin = new System.Windows.Forms.Padding(2);
             this.otherSeparatorRadio.Name = "otherSeparatorRadio";
-            this.otherSeparatorRadio.Size = new System.Drawing.Size(65, 27);
+            this.otherSeparatorRadio.Size = new System.Drawing.Size(50, 21);
             this.otherSeparatorRadio.TabIndex = 2;
             this.otherSeparatorRadio.TabStop = true;
             this.otherSeparatorRadio.Text = "其他";
@@ -268,7 +272,7 @@
             this.commaRadio.Location = new System.Drawing.Point(217, 15);
             this.commaRadio.Margin = new System.Windows.Forms.Padding(2);
             this.commaRadio.Name = "commaRadio";
-            this.commaRadio.Size = new System.Drawing.Size(65, 27);
+            this.commaRadio.Size = new System.Drawing.Size(50, 21);
             this.commaRadio.TabIndex = 1;
             this.commaRadio.TabStop = true;
             this.commaRadio.Text = "逗号";
@@ -281,7 +285,7 @@
             this.tabRadio.Location = new System.Drawing.Point(118, 15);
             this.tabRadio.Margin = new System.Windows.Forms.Padding(2);
             this.tabRadio.Name = "tabRadio";
-            this.tabRadio.Size = new System.Drawing.Size(64, 27);
+            this.tabRadio.Size = new System.Drawing.Size(49, 21);
             this.tabRadio.TabIndex = 0;
             this.tabRadio.TabStop = true;
             this.tabRadio.Text = "TAB";
@@ -294,7 +298,7 @@
             this.browseChosenTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.browseChosenTextBox.Name = "browseChosenTextBox";
             this.browseChosenTextBox.ReadOnly = true;
-            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 29);
+            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 23);
             this.browseChosenTextBox.TabIndex = 25;
             // 
             // rsChosenButton
@@ -345,7 +349,7 @@
             this.label8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.Location = new System.Drawing.Point(1, 16);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 23);
+            this.label8.Size = new System.Drawing.Size(92, 17);
             this.label8.TabIndex = 35;
             this.label8.Text = "结果文件分隔符";
             // 
@@ -367,7 +371,7 @@
             this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.Location = new System.Drawing.Point(1, 15);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 23);
+            this.label7.Size = new System.Drawing.Size(80, 17);
             this.label7.TabIndex = 34;
             this.label7.Text = "结果文件编码";
             // 
@@ -377,7 +381,7 @@
             this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(8, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(146, 23);
+            this.label5.Size = new System.Drawing.Size(104, 17);
             this.label5.TabIndex = 33;
             this.label5.Text = "指定展示结果文件";
             // 
@@ -387,7 +391,7 @@
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(453, 146);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 23);
+            this.label3.Size = new System.Drawing.Size(64, 17);
             this.label3.TabIndex = 37;
             this.label3.Text = "(非必填项)";
             // 
@@ -407,7 +411,7 @@
             this.label10.ForeColor = System.Drawing.Color.Red;
             this.label10.Location = new System.Drawing.Point(465, 16);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(78, 23);
+            this.label10.Size = new System.Drawing.Size(56, 17);
             this.label10.TabIndex = 39;
             this.label10.Text = "帮助文档";
             this.label10.Click += new System.EventHandler(this.label10_Click);
@@ -423,22 +427,57 @@
             this.pictureBox1.TabIndex = 40;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::C2.Properties.Resources.designer;
+            this.pictureBox2.Location = new System.Drawing.Point(361, 59);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 48;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Location = new System.Drawing.Point(385, 63);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(141, 17);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "来添加本机已有Py虚拟机";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(296, 63);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 17);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "通过右上角";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(293, 60);
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(286, 61);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(73, 23);
-            this.label11.TabIndex = 41;
-            this.label11.Text = "(必选项)";
+            this.label11.Size = new System.Drawing.Size(16, 19);
+            this.label11.TabIndex = 45;
+            this.label11.Text = "*";
             // 
             // PythonOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(529, 469);
+            this.ClientSize = new System.Drawing.Size(531, 479);
             this.ControlBox = true;
+            this.Controls.Add(this.pythonChosenComboBox);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label10);
@@ -454,7 +493,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataSourceTB0);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pythonChosenComboBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.bottomPanel);
@@ -471,7 +509,6 @@
             this.Controls.SetChildIndex(this.bottomPanel, 0);
             this.Controls.SetChildIndex(this.confirmButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
-            this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.Controls.SetChildIndex(this.label2, 0);
@@ -487,6 +524,10 @@
             this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.label11, 0);
+            this.Controls.SetChildIndex(this.label12, 0);
+            this.Controls.SetChildIndex(this.label13, 0);
+            this.Controls.SetChildIndex(this.pictureBox2, 0);
+            this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
             this.previewCmdGroup.ResumeLayout(false);
             this.previewCmdGroup.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -496,6 +537,7 @@
             this.outputFileEncodeSettingGroup.ResumeLayout(false);
             this.outputFileEncodeSettingGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -531,6 +573,9 @@
         private System.Windows.Forms.GroupBox outputFileSeparatorSettingGroup;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
     }
 }
