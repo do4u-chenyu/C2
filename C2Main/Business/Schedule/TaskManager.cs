@@ -495,8 +495,9 @@ namespace C2.Business.Schedule
                     UpdateLogDelegate("退出码" + p.ExitCode.ToString());
                     if (p.ExitCode != 0)
                     {
-                        errorMessage = "执行算子出现问题，请点击下方面板【运行日志】查看出错信息";
-                        UpdateLogDelegate("执行算子出现问题，请点击下方面板【运行日志】查看出错信息");
+
+                        errorMessage = string.Format("执行算子出现问题, ExitCode:{0}，请点击下方面板【运行日志】查看出错信息", p.ExitCode);
+                        UpdateLogDelegate(errorMessage);
                     }
 
                 }
