@@ -194,7 +194,7 @@ namespace C2.Controls.MapViews
 
                     if (p.ExitCode != 0)
                     {
-                        message = "执行算子出现问题，请点击下方面板【运行日志】查看出错信息";
+                        message = string.Format("运算出现问题,ExitCode:{0},点击下方面板【运行日志】查看出错信息,反馈售后群", p.ExitCode);
                     }
 
                 }
