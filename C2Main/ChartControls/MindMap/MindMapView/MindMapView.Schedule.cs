@@ -194,7 +194,7 @@ namespace C2.Controls.MapViews
 
                     if (p.ExitCode != 0)
                     {
-                        message = "执行程序非正常退出，请检查程序后再运行。";
+                        message = "执行算子出现问题，请点击下方面板【运行日志】查看出错信息";
                     }
 
                 }
