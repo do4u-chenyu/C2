@@ -2475,6 +2475,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D712EC669501418F8327C22870D2A348"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D7F06B0F08084594BA819BA3AB8B7CC0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3178,12 +3184,6 @@
         "Entry"
         {
         "MsmKey" = "8:_FF9BC880E85B4822A7554718CF135CFA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FFD083555CA14E5E9EEE3D73377553E5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -10992,6 +10992,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D712EC669501418F8327C22870D2A348"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\YHK提取.iao"
+            "TargetName" = "8:YHK提取.iao"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D7F06B0F08084594BA819BA3AB8B7CC0"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img6\\back.jpg"
@@ -12986,26 +13006,6 @@
             "TargetName" = "8:phx.js"
             "Tag" = "8:"
             "Folder" = "8:_44B1DCDAA5C14BEFBAF7AD14E64A5D55"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FFD083555CA14E5E9EEE3D73377553E5"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\信息抽取.iao"
-            "TargetName" = "8:信息抽取.iao"
-            "Tag" = "8:"
-            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
