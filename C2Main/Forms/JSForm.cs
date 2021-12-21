@@ -66,11 +66,8 @@ namespace C2.Forms
                 this.webBrowser.Visible = false;
                 this.label1.Visible = true;
             }
-            
-            this.excelTextBox.Text = "未选择任何文件";
-            if (selectedItem == "境外网产专项")
-                selectedItem = "网产专项";
-            this.itemLabel.Text = selectedItem.Replace("专项", string.Empty);
+
+            StyleChange(selectedItem);
         }
 
         protected virtual void AddTabItem(string name, bool visiable = false)
@@ -96,6 +93,15 @@ namespace C2.Forms
         public override bool IsNeedShowBottomViewPanel()
         {
             return false;
+        }
+
+        private void StyleChange(string selectedItem)
+        {
+            this.excelTextBox.Text = "未选择任何文件";
+            selectedItem = selectedItem == "境外网产专项" ? "网产专项" : selectedItem;
+            this.itemLabel.Text = selectedItem.Replace("专项", string.Empty);
+            this.itemLabel.Location = selectedItem == "黑吃黑专项" ? new System.Drawing.Point(56, 14) : new System.Drawing.Point(72, 14);
+            this.label3.Location = selectedItem == "黑吃黑专项" ? new System.Drawing.Point(24, 14) : new System.Drawing.Point(41, 14);
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
