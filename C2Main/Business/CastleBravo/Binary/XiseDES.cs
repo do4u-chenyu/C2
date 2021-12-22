@@ -1,6 +1,9 @@
-﻿using System;
+﻿using C2.Core;
+using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace C2.Business.CastleBravo.Binary
 {
@@ -328,9 +331,25 @@ namespace C2.Business.CastleBravo.Binary
             
         }
 
+        private byte[] XOR8(string pass)
+        {
+            int i = 0;
+            byte[] bytes8 = new byte[8];
+            byte[] bytesP = Encoding.Default.GetBytes(pass);
+            foreach (byte b in bytesP)
+            {
+                bytes8[i] = (byte)(b ^ bytes8[i]);
+                i = i < 7 ? i + 1 : 0;
+            }
+            return bytes8;
+        }
+
+
         public string XiseDecrypt(string plainText)
         {
-            return string.Empty;
+            byte[] bytes = ST.DecimalHexStringToBytes("122?57?118?39?232?250?196?214?", "?");
+            byte[] ret = Decrypt(bytes, ConvertUtil.ReverseBytes(XOR8("goklong soft")));
+            return Encoding.Default.GetString(ret);
         }
 
         public string XiseHexDecrypt(string hexText)
