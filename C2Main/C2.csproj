@@ -2272,6 +2272,9 @@
     <EmbeddedResource Include="Controls\C1\Left\SearchToolkitButton.resx">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\TableListControl.resx">
+      <DependentUpon>TableListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\WebsiteFeatureDetectionControl.resx">
       <DependentUpon>WebsiteFeatureDetectionControl.cs</DependentUpon>
     </EmbeddedResource>
