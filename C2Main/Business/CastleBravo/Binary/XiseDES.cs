@@ -347,9 +347,10 @@ namespace C2.Business.CastleBravo.Binary
 
         public string XiseDecrypt(string plainText)
         {
+            // 122?57?118?39?232?250?196?214?~141?43?244?40?155?102?159?246?108?206?242?154?53?85?183?221?
             byte[] bytes = ST.DecimalHexStringToBytes("122?57?118?39?232?250?196?214?", "?");
             byte[] ret = Decrypt(bytes, ConvertUtil.ReverseBytes(XOR8("goklong soft")));
-            return Encoding.Default.GetString(ret);
+            return Encoding.Default.GetString(ret.Skip(4).ToArray());  // 去掉4位长度前缀
         }
 
         public string XiseHexDecrypt(string hexText)
