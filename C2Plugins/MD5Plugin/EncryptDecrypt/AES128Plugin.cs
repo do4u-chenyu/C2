@@ -36,11 +36,12 @@ namespace MD5Plugin
 
         public void Setting(RijndaelManaged rijndaelCipher)
         {
-            rijndaelCipher.IV = Encoding.UTF8.GetBytes(IvtextBox.Text);
+            if (IvtextBox.Text != string.Empty)
+                rijndaelCipher.IV = Encoding.UTF8.GetBytes(IvtextBox.Text);
 
             if (EncryMode == "ECB")
                 rijndaelCipher.Mode = CipherMode.ECB;
-            else if(EncryMode == "CBC")
+            else if (EncryMode == "CBC")
                 rijndaelCipher.Mode = CipherMode.CBC;
 
             if (paddingMode == "Zeros")
@@ -48,7 +49,7 @@ namespace MD5Plugin
             else if (paddingMode == "None")
                 rijndaelCipher.Padding = PaddingMode.None;
 
-            if(dataBlockMode == "128位")
+            if (dataBlockMode == "128位")
                 rijndaelCipher.BlockSize = 128;
             else if (dataBlockMode == "192位")
                 rijndaelCipher.BlockSize = 192;
@@ -86,15 +87,16 @@ namespace MD5Plugin
                 }
             }
         }
-       
+
         public override void Decode(string DecryptStr)
         {
+
             string Key = textBoxEncryptionkey.Text;
-            if (outputTextBox.Text == "请把你需要解密的内容粘贴在这里") 
+            if (outputTextBox.Text == "请把你需要解密的内容粘贴在这里")
             {
                 OriginOutput();
             }
-            else 
+            else
             {
                 try
                 {
