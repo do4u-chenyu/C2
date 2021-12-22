@@ -519,7 +519,7 @@
             this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.leftPanelOpWordFilter.Location = new System.Drawing.Point(129, 183);
             this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
-            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(85, 29);
+            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(88, 29);
             this.leftPanelOpWordFilter.TabIndex = 32;
             this.leftPanelOpWordFilter.TabStop = false;
             this.leftPanelOpWordFilter.Text = "关键词过滤";

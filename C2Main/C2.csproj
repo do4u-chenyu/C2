@@ -210,6 +210,7 @@
     </Compile>
     <Compile Include="Business\CastleBravo\Binary\BinStrings.cs" />
     <Compile Include="Business\CastleBravo\Binary\Xise.cs" />
+    <Compile Include="Business\CastleBravo\Binary\XiseDES.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoTaskInfo.cs" />
@@ -4035,7 +4036,7 @@
     <None Include="Resources\Templates\WebRobots.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Templates\信息抽取.iao">
+    <None Include="Resources\Templates\YHK提取.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Templates\关键词分析.iao">
