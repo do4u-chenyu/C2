@@ -23,8 +23,6 @@ namespace C2.Business.GlueWater
             dataGridView.ColumnHeadersHeight = 30;
             // 列头居中
             dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("微软雅黑", 10, FontStyle.Bold);
-            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#e5f8fc");
-
         }
 
         public void RefreshDGV()
