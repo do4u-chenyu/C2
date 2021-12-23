@@ -767,7 +767,21 @@ namespace C2.Business.CastleBravo.WebShellTool
                 SingleInfoCollection(item);
             }
         }
+        // User表探针
+        private void UserTableProbeMenu_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
 
+            UserTableProbe utp = new UserTableProbe();
+            if (utp.ShowDialog() != DialogResult.OK)
+                return;
+            string payload = string.Format(ClientSetting.UserTablePayload,
+                                         "{0}", utp.DBUser,utp.DBPassword);
+
+            ClientSetting.PayloadDict[SGType.UserTable] = payload;
+            SingleInfoCollection(this.LV.SelectedItems[0]);
+        }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
@@ -823,12 +837,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
             Match m0 = r0.Match(ret);
             if (!m0.Success)
-                return ClientSetting.table[this.sgType] + ":无结果";
+                return ClientSetting.InfoProbeItems[this.sgType] + ":无结果";
 
             string rawResult = m0.Groups[1].Value;
             if (this.sgType == SGType.LocationInfo)
                 return LocationResult(rawResult);
-   
+
             if (ClientSetting.table.ContainsKey(this.sgType)) //进程 计划任务 系统信息……
                 return ClientSetting.WriteResult(rawResult, taskUrl, ClientSetting.table[this.sgType]);
          
@@ -954,9 +968,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             SingleInfoCollection(this.LV.SelectedItems[0], ts);
         }
 
-        private void UserTableProbeMenu_Click(object sender, EventArgs e)
-        {
-             new MysqlUserTableProbe().ShowDialog();
-        }
+    
     }
 }

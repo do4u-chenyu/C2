@@ -645,7 +645,7 @@ namespace C2.Forms
             this.ClientSize = new System.Drawing.Size(804, 438);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.IconImage = global::C2.Properties.Resources.业务视图;
+            this.IconImage = global::C2.Properties.Resources.业务视图1;
             this.KeyPreview = true;
             this.Name = "DocumentForm";
             this.Text = "DocumentForm";

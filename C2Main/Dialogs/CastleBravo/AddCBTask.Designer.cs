@@ -144,7 +144,8 @@
             "SHA1(MD5($pwd))",
             "SHA256",
             "SHA512",
-            "宝塔面板"});
+            "宝塔面板",
+            "Mysql5"});
             this.modeComboBox.Location = new System.Drawing.Point(383, 57);
             this.modeComboBox.Name = "modeComboBox";
             this.modeComboBox.Size = new System.Drawing.Size(73, 20);
