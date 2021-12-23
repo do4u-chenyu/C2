@@ -17,6 +17,7 @@ namespace C2.Forms
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
         IGlueSetting glueSetting;
         GlueDetailInfoDialog detailDialog;
+        DbDetailInfoDialog dbDeatilDialog;
         private List<string> doneGlueList;
 
         public JSForm()
@@ -28,6 +29,7 @@ namespace C2.Forms
             webBrowser.ObjectForScripting = this;
 
             detailDialog = new GlueDetailInfoDialog();
+            dbDeatilDialog = new DbDetailInfoDialog();
             glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
             doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
 
@@ -158,9 +160,9 @@ namespace C2.Forms
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void ShowDetailsMore(string item)
         {
-            detailDialog.DetailTable = glueSetting.SearchInfo(item);
-            detailDialog.RefreshDGV();
-            detailDialog.ShowDialog();
+            dbDeatilDialog.DetailTable = glueSetting.SearchInfo(item);
+            dbDeatilDialog.RefreshDGV();
+            dbDeatilDialog.ShowDialog();
         }
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
