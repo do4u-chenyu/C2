@@ -79,7 +79,7 @@ namespace C2.Business.GlueWater
 
             foreach (DirectoryInfo NextFolder in theFolder.GetDirectories())
             {
-                ListDirectory(NextFolder.FullName);
+                return ListDirectory(NextFolder.FullName);
             }
             return "数据包内不包含excel文件";
         }

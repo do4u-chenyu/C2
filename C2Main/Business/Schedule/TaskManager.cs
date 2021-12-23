@@ -1,6 +1,8 @@
 ﻿using C2.Business.Model;
 using C2.Business.Schedule.Cmd;
 using C2.Controls.Move.Op;
+using C2.Dialogs;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -264,6 +266,15 @@ namespace C2.Business.Schedule
         #region 开始运算调度逻辑
         public void Start()
         {
+            //运算前，先判断要运算的是否有python算子，且虚拟机配置了，若未配置，结束，同时弹窗
+            if(this.currentModelTripleList.FindAll(c => c.OperateElement.SubType == ElementSubType.PythonOperator).Count > 0 
+                && OpUtil.GetPythonConfigPaths().Count == 0)
+            {
+                HelpUtil.ShowMessageBox("未配置python运行环境，点击确定跳转至虚拟机配置界面。");
+                new ConfigForm().ShowDialog();
+                return;
+            }
+
             //开始运算，初始化后台运算线程scheduleThread，线程里开启方法StartTask
             this.modelStatus = ModelStatus.Running;
             this.tokenSource = new CancellationTokenSource();
@@ -484,8 +495,9 @@ namespace C2.Business.Schedule
                     UpdateLogDelegate("退出码" + p.ExitCode.ToString());
                     if (p.ExitCode != 0)
                     {
-                        errorMessage = "执行程序非正常退出，请检查程序后再运行。";
-                        UpdateLogDelegate("执行程序非正常退出，请检查程序后再运行。");
+
+                        errorMessage = string.Format("执行算子出现问题, ExitCode:{0}，请点击下方面板【运行日志】查看出错信息", p.ExitCode);
+                        UpdateLogDelegate(errorMessage);
                     }
 
                 }

@@ -287,5 +287,20 @@ namespace C2.Utils
                 return true;
 
         }
+
+        public static List<string> GetPythonConfigPaths()
+        {
+            string value = ConfigUtil.TryGetAppSettingsByKey("python");
+            List<string> paths = new List<string>();
+            foreach (string pItem in value.Split(';'))
+            {
+                string[] oneConfig = pItem.Split('|');
+                if (oneConfig.Length != 3)
+                    continue;
+                string pythonFFP = oneConfig[0].Trim();
+                paths.Add(pythonFFP);
+            }
+            return paths;
+        }
     }
 }

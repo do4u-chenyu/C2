@@ -9,7 +9,8 @@
         ScheduleTask,
         LocationInfo,
         MSF,
-        NC,  
+        NC,
+        UserTable,
         Empty
     }
 }

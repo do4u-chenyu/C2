@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.IAOLab.IDInfoGet;
+using C2.Utils;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -65,13 +66,13 @@ namespace C2.Business.GlueWater.Settings
             
             StringBuilder sb = new StringBuilder();
             if (freshTitle)
-                sb.Append("<tr name=\"row\">" +
+                sb.Append("<tr name=\"title\">" +
                       "    <th>论坛名称/网址/IP</th>" +
                       "    <th>认证账号/登陆IP</th>" +
                       "    <th>登陆账号/登陆密码</th>" +
                       "    <th>论坛注册时间</th>" +
                       "    <th>主题数/回帖数</th>" +
-                      "    <th>发现地市/发现时间</th>" +
+                      "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                       "</tr>"
                       );
             
@@ -85,7 +86,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td>{3}<br>{4}</td>" +
                             "   <td>{5}<br>{6}</td>" +
                             "   <td>{7}</td>" +
-                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">{8}</a><br>{9}</td>" +
+                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">主题数：{8}</a><br>回帖数：{9}</td>" +
                             "   <td>{10}<br>{11}</td>" +
                             "</tr>",
                             dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
@@ -118,13 +119,19 @@ namespace C2.Business.GlueWater.Settings
 
         public override void SortDataTableByCol(string col, string sortType)
         {
+            //html的标题为发现地市/发现时间，排序此列需要去掉发现地市
+            if (col.Contains("发现时间"))
+                col = "发现时间";
             SqWebTable.DefaultView.Sort = col + " " + sortType;
             SqWebTable = SqWebTable.DefaultView.ToTable();
         }
 
-        public override string UpdateContent(string excelPath)
+        public override string UpdateContent(string zipPath)
         {
-            
+            string excelPath = FindExcelFromZip(zipPath);
+            if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
+                return excelPath;
+
             ReadRst rrst1 = FileUtil.ReadExcel(excelPath, maxRow, "涉枪论坛人员用户信息");
             if (rrst1.ReturnCode != 0 || rrst1.Result.Count == 0)
                 return rrst1.Message;
@@ -138,10 +145,13 @@ namespace C2.Business.GlueWater.Settings
             ReadRst rrst3 = FileUtil.ReadExcel(excelPath, maxRow, "论坛发帖情况");
             if (rrst3.ReturnCode != 0 || rrst3.Result.Count == 0)
                 return rrst2.Message;
-            
 
-            if (DealWebContent(rrst1.Result,rrst2.Result) && DealMemberContent(rrst1.Result,rrst3.Result))
+
+            if (DealWebContent(rrst1.Result, rrst2.Result) && DealMemberContent(rrst1.Result, rrst3.Result))
+            {
                 return "数据添加成功";
+            }
+                
             else
                 return "非系统要求格式，请查看模板样例修改";
         }
@@ -161,6 +171,8 @@ namespace C2.Business.GlueWater.Settings
                 List<string> resultListFirst = ContentFilter(headIndex, contentsFirst[i]);
                 List<string> resultListSecond = ContentFilter(tailIndex, contentSecond[j]);
                 List<string> resultList = resultListFirst.Concat(resultListSecond).ToList();
+                //这里要对地市编码做转换 字典映射
+                resultList[10] = IDInfoGet.GetInstance().TransRegionCode(resultList[10]);
 
                 DataRow[] rows = SqWebTable.Select(
                      "认证账号='" + resultList[3] + "' " +

@@ -1,6 +1,7 @@
 ﻿using C2.Core;
 using C2.Utils;
 using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -231,19 +232,25 @@ namespace C2.Business.Model
             if (string.IsNullOrEmpty(fileName))
                 return !hasUnZip;
 
-            // 是否包含同名模型文档
-            if (IsSameModelTitle(modelName, isC2Model))
-            {
-                result = MessageBox.Show("文件:" + modelName + "已存在，是否覆盖该文档", "导入", MessageBoxButtons.OKCancel);
-                if (result == DialogResult.Cancel)
-                    return !hasUnZip;
-            }
-
             if (Global.GetTaskBar().ContainModel(modelName))
             {
                 HelpUtil.ShowMessageBox("文件:" + modelName + "已打开，请关闭该文档并重新进行导入", "关闭文档");
                 return !hasUnZip;
             }
+
+            // 是否包含同名模型文档
+            if (IsSameModelTitle(modelName, isC2Model))
+            {
+                result = MessageBox.Show("文件:" + modelName + "已存在，是否覆盖该文档", "导入", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.Cancel)
+                {
+                    HelpUtil.ShowMessageBox(String.Format("打开已经存在的[{0}]", modelName));
+                    Global.GetMainForm().OpenDocument(this.modelFilePath);
+                    return false;
+                }   
+                    //return !hasUnZip;
+            }
+
 
             //先将压缩包解压到临时文件夹，防止解压失败时原模型文件被覆盖
             tmpDir = Path.Combine(Global.TempDirectory, modelName);
