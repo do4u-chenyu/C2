@@ -59,7 +59,7 @@
             // lelfPictureBox
             // 
             this.lelfPictureBox.Image = global::C2.Properties.Resources.模型视图;
-            this.lelfPictureBox.Location = new System.Drawing.Point(3, 6);
+            this.lelfPictureBox.Location = new System.Drawing.Point(1, 1);
             this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.lelfPictureBox.Name = "lelfPictureBox";
             this.lelfPictureBox.Size = new System.Drawing.Size(24, 24);

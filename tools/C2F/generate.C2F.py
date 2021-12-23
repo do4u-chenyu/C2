@@ -63,6 +63,21 @@ def del_zipfile(path):
                 print(c_path)
 
 
+def change_name(filename):
+       os.chdir(filename)
+       for i in os.listdir("."):
+           try:
+               test_name=i.encode("cp437")
+               test_name=test_name.decode("gbk")#将文件名转为gbk中文编码
+               os.rename(i,test_name)#重命名
+               i=test_name
+           except:
+               pass
+           if os.path.isdir(i):#如果解压后的是一个文件夹
+               change_name(i)
+               os.chdir('..')
+
+
 if __name__ == "__main__":
     src_path = r"D:\work\C2F"
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\业务视图"
@@ -83,10 +98,14 @@ if __name__ == "__main__":
     for c2zip in c2zip_list:
         print(c2zip)
         fz = zipfile.ZipFile(os.path.abspath(c2zip), 'r')
-        zipname = c2zip.split('_')[0]
+        for file in fz.namelist():
+            fz.extract(file, dst_path) 
+        zipname = c2zip.split('.')[0]
         rename_subfolders(dst_path,zipname)
-        fz.extractall(path = os.path.join(dst_path, zipname))
-        
-        
+        path = os.path.join(dst_path, zipname)
+        #fz.extractall(path)
+        change_name(path)
+
+
     #del_zipfile(dst_path)
     time.sleep(3)
