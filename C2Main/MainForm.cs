@@ -395,7 +395,7 @@ namespace C2
 
         private void LoadInnerPlugins()
         {
-            string[] IAOLabArr = { "BigAPK", "APK", "Visualization", "Fraud", "Wifi", "InformationSearch", "Tude", "Ip" , "PostAndGet" };
+            string[] IAOLabArr = { "BigAPK", "APK", "Visualization", "Wifi", "InformationSearch", "Tude", "Ip" , "PostAndGet" };
             string IAOLabPlugins = ConfigUtil.TryGetAppSettingsByKey("IAOLab", ConfigUtil.DefaultIAOLab);
             foreach (string name in IAOLabPlugins.Split(','))
             {

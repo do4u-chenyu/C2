@@ -3290,6 +3290,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 业务视图1 {
+            get {
+                object obj = ResourceManager.GetObject("业务视图1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Icon 主体分析 {
@@ -3477,6 +3487,16 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap 数据导入 {
+            get {
+                object obj = ResourceManager.GetObject("数据导入", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap 数据挂件 {
             get {
                 object obj = ResourceManager.GetObject("数据挂件", resourceCulture);
@@ -3515,6 +3535,16 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap 模型视图 {
             get {
                 object obj = ResourceManager.GetObject("模型视图", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 模型视图1 {
+            get {
+                object obj = ResourceManager.GetObject("模型视图1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
