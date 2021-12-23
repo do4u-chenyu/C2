@@ -402,7 +402,7 @@ namespace C2.Business.CastleBravo.Binary
                     return string.Empty;
                 
                 string host = ret[0].Trim();
-                string pass = ret[1].Trim();
+                string pass = ret[1].Trim().TrimEnd('\0');
                 if (pass.Contains("~") && pass.Contains("?"))
                     pass = XiseDecrypt(pass);
 
