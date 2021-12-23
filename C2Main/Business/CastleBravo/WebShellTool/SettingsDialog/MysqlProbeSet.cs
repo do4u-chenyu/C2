@@ -10,7 +10,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         public MysqlProbeSet()
         {
             InitializeComponent();
-            this.probeStrategyCB.SelectedIndex = 0;
+            this.probeStrategyCB.SelectedIndex = 1;
         }
 
         public int TimeoutSeconds { get => ConvertUtil.TryParseInt(timeoutTB.Text.Trim(), 600); }
