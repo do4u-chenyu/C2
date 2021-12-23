@@ -386,6 +386,12 @@
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\GlueWater\BaseGlueSetting.cs" />
+    <Compile Include="Business\GlueWater\DbDetailInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\GlueWater\DbDetailInfoDialog.Designer.cs">
+      <DependentUpon>DbDetailInfoDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\GlueWater\GlueDetailInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2173,6 +2179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\GlueWater\DbDetailInfoDialog.resx">
+      <DependentUpon>DbDetailInfoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\GlueWater\GlueDetailInfoDialog.resx">
       <DependentUpon>GlueDetailInfoDialog.cs</DependentUpon>
