@@ -51,9 +51,9 @@
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Image = global::C2.Properties.Resources.数据;
-            this.leftPictureBox.Location = new System.Drawing.Point(10, 4);
-            this.leftPictureBox.Size = new System.Drawing.Size(24, 24);
+            this.leftPictureBox.Image = global::C2.Properties.Resources.数据导入;
+            this.leftPictureBox.Location = new System.Drawing.Point(11, 6);
+            this.leftPictureBox.Size = new System.Drawing.Size(16, 16);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;
             this.leftPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);

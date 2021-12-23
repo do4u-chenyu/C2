@@ -209,7 +209,6 @@
       <DependentUpon>BinaryMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\Binary\BinStrings.cs" />
-    <Compile Include="Business\CastleBravo\Binary\Xise.cs" />
     <Compile Include="Business\CastleBravo\Binary\XiseDES.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoAPI.cs" />
     <Compile Include="Business\CastleBravo\CastleBravoResultOne.cs" />
@@ -2272,6 +2271,9 @@
     <EmbeddedResource Include="Controls\C1\Left\SearchToolkitButton.resx">
       <DependentUpon>SearchToolkitButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\TableListControl.resx">
+      <DependentUpon>TableListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\WebsiteFeatureDetectionControl.resx">
       <DependentUpon>WebsiteFeatureDetectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -3250,7 +3252,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\TabBarImage\业务视图.png" />
+    <None Include="Resources\Images\TabBarImage\业务视图1.png" />
     <Content Include="Resources\Images\TabBarImage\模型视图.png" />
+    <None Include="Resources\Images\TabBarImage\模型视图1.png" />
     <Content Include="Resources\Images\TabBarImage\首页.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
@@ -4231,6 +4235,7 @@
     </Content>
     <None Include="Resources\喝彩城堡任务.png" />
     <None Include="Resources\WidgetIcon\数据挂件.png" />
+    <None Include="Resources\WidgetIcon\数据导入.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

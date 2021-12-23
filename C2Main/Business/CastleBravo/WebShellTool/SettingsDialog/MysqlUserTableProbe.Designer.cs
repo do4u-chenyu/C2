@@ -1,6 +1,6 @@
 ﻿namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
-    partial class MysqlUserTableProbe
+    partial class UserTableProbe
     {
         /// <summary>
         /// Required designer variable.
@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mysqlAccount = new System.Windows.Forms.TextBox();
+            this.dbUser = new System.Windows.Forms.TextBox();
             this.label0 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dbPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // mysqlAccount
+            // dbUser
             // 
-            this.mysqlAccount.BackColor = System.Drawing.Color.White;
-            this.mysqlAccount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mysqlAccount.Location = new System.Drawing.Point(89, 12);
-            this.mysqlAccount.Name = "mysqlAccount";
-            this.mysqlAccount.Size = new System.Drawing.Size(162, 21);
-            this.mysqlAccount.TabIndex = 10035;
+            this.dbUser.BackColor = System.Drawing.Color.White;
+            this.dbUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dbUser.Location = new System.Drawing.Point(89, 12);
+            this.dbUser.Name = "dbUser";
+            this.dbUser.Size = new System.Drawing.Size(162, 21);
+            this.dbUser.TabIndex = 10035;
             // 
             // label0
             // 
@@ -84,14 +84,14 @@
             this.label2.TabIndex = 10039;
             this.label2.Text = "db_password:";
             // 
-            // textBox1
+            // dbPassword
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBox1.Location = new System.Drawing.Point(89, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(162, 21);
-            this.textBox1.TabIndex = 10040;
+            this.dbPassword.BackColor = System.Drawing.Color.White;
+            this.dbPassword.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dbPassword.Location = new System.Drawing.Point(89, 43);
+            this.dbPassword.Name = "dbPassword";
+            this.dbPassword.Size = new System.Drawing.Size(162, 21);
+            this.dbPassword.TabIndex = 10040;
             // 
             // label4
             // 
@@ -109,21 +109,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 143);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dbPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.mysqlAccount);
+            this.Controls.Add(this.dbUser);
             this.Controls.Add(this.label0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MysqlUserTableProbe";
             this.Text = "Mysql.User表探针";
             this.Controls.SetChildIndex(this.label0, 0);
-            this.Controls.SetChildIndex(this.mysqlAccount, 0);
+            this.Controls.SetChildIndex(this.dbUser, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.dbPassword, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -132,12 +132,12 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox mysqlAccount;
+        private System.Windows.Forms.TextBox dbUser;
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox dbPassword;
         private System.Windows.Forms.Label label4;
     }
 }

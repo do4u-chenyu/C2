@@ -9,8 +9,8 @@ namespace C2.Business.CastleBravo.WebShellTool
     partial class MSFSet : StandardDialog
     {
         protected string RemoteHost { get => rhTextBox.Text.Trim(); set => rhTextBox.Text = value; }
-        private readonly WebShellTaskConfig task;
-        private readonly ProxySetting proxy;
+        protected readonly WebShellTaskConfig task;
+        protected readonly ProxySetting proxy;
         protected string payload;
 
         public MSFSet(WebShellTaskConfig taskConfig, ProxySetting proxy)
@@ -54,7 +54,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             ClientSetting.MSFHost = RemoteHost.Trim();
         }
             
-        private string PostPayload(string payload)
+        protected string PostPayload(string payload)
         {
             try 
             { 
