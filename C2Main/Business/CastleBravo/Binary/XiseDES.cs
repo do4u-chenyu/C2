@@ -344,18 +344,71 @@ namespace C2.Business.CastleBravo.Binary
             return bytes8;
         }
 
+        private byte[] XOR8(byte[] pass)
+        {
+            int i = 0;
+            byte[] bytes8 = new byte[8];
+            foreach (byte b in pass)
+            {
+                bytes8[i] = (byte)(b ^ bytes8[i]);
+                i = i < 7 ? i + 1 : 0;
+            }
+            return bytes8;
+        }
 
+        
         public string XiseDecrypt(string plainText)
         {
-            // 122?57?118?39?232?250?196?214?~141?43?244?40?155?102?159?246?108?206?242?154?53?85?183?221?
-            byte[] bytes = ST.DecimalHexStringToBytes("122?57?118?39?232?250?196?214?", "?");
-            byte[] ret = Decrypt(bytes, ConvertUtil.ReverseBytes(XOR8("goklong soft")));
-            return Encoding.Default.GetString(ret.Skip(4).ToArray());  // 去掉4位长度前缀
+            string[] ret = plainText.Split("~", StringSplitOptions.RemoveEmptyEntries);
+            
+            if (ret.Length < 2)
+                return string.Empty;
+
+            string pass = ret[0].Trim('?').Trim();
+            string text = ret[1].Trim('?').Trim();
+
+            byte[] pass_bytes = ST.DecimalHexStringToBytes(pass, "?");
+            byte[] text_bytes = ST.DecimalHexStringToBytes(text, "?");
+            if (text_bytes.Length % 8 != 0)
+                return "格式错误:密文转换成字节数组后长度必须是8的整倍数" +
+                    Environment.NewLine +
+                    text; 
+
+            pass_bytes = Decrypt(pass_bytes, ConvertUtil.ReverseBytes(XOR8("goklong soft")));
+            pass_bytes = pass_bytes.Skip(4).ToArray(); // 去掉4位长度前缀
+
+            text_bytes = Decrypt(text_bytes, ConvertUtil.ReverseBytes(XOR8(pass_bytes)));
+            text_bytes = text_bytes.Skip(4).ToArray(); // 去掉4位长度前缀
+
+            return Encoding.Default.GetString(text_bytes);
         }
 
         public string XiseHexDecrypt(string hexText)
         {
-            return string.Empty;
+            string text = ST.HexToString(hexText);
+            if (text.Contains("~") && text.Contains("?"))
+                text = XiseDecrypt(text);
+            else
+                return text;
+
+            if (text.Contains(@"{~x~}"))
+            {
+                string[] ret = text.Split(@"{~x~}", StringSplitOptions.RemoveEmptyEntries);
+                if (ret.Length == 0)
+                    return string.Empty;
+                if (ret.Length == 1)
+                    return ret[0];
+                if (ret.Length < 2)
+                    return string.Empty;
+                
+                string host = ret[0].Trim();
+                string pass = ret[1].Trim();
+                if (pass.Contains("~") && pass.Contains("?"))
+                    pass = XiseDecrypt(pass);
+
+                return string.Format("{0}\t{1}", host, pass);
+            }
+            return "格式错误";
         }
     }
 }
