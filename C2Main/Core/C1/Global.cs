@@ -162,7 +162,6 @@ namespace C2.Core
 
         public static string VersionType { get; set; }
         public const string GreenLevel = "Green";
-        public const string Nolanding = "NoLogin";
         public const string GreenPath = "source";
         public const string IAOLab = "APK, BaseStation, Wifi, Card, Tude, Ip ";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
