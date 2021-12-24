@@ -421,7 +421,7 @@ namespace C2.Business.CastleBravo.Binary
 
                 return string.Format("{0}\t{1}", host, pass);
             }
-            return "格式错误";
+            return text;
         }
     }
 }
