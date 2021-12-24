@@ -191,7 +191,7 @@ namespace C2.Dialogs.WidgetChart
                 {
                     for (int j = 2; j < chartOptions.Length; j++)
                     {
-                        secondFormatter = secondFormatter + colName[j] + ":" + colList[j][i]+ "\n";
+                        secondFormatter = secondFormatter + colName[j] + ": " + colList[j][i]+ "<br>";
                     }
                 }
                 infoFormatter = infoFormatter + secondFormatter;
