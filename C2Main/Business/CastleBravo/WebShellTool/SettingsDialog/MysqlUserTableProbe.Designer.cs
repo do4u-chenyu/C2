@@ -119,7 +119,7 @@
             this.Controls.Add(this.label0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "UserTableProbe";
-            this.Text = "Mysql.User表探针";
+            this.Text = "user.MYD探针";
             this.Controls.SetChildIndex(this.label0, 0);
             this.Controls.SetChildIndex(this.dbUser, 0);
             this.Controls.SetChildIndex(this.label1, 0);
