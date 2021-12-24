@@ -177,7 +177,7 @@ class BatchQuery:
                     line = line.strip('\n')
                     ##data = "{0}\t{1}{\t}{2}\n".format(line.split('\t')[8],line.split('\t')[9],line.split('\t')[16])
                     try:
-                        data = line.split('\t')[7] + '\t' + line.split('\t')[8] + '\t' + line.split('\t')[15] + '\n'
+                        data = line.split('\t')[0] + '\t' + line.split('\t')[2] + '\t'+ line.split('\t')[3] + '\t'+ line.split('\t')[7] + '\t' + line.split('\t')[8] + '\t' + line.split('\t')[13] + '\n'
                     except:
                         data = ""
                     tmplist.append(data)
@@ -189,19 +189,19 @@ class BatchQuery:
 
         qw_result = io.open(os.path.join(self.data_path,result_file), mode='r', encoding='utf-8').readlines()
         data1 = io.open(os.path.join(self.data_path,'request_post.txt'), mode='wb+')
-        data1.write('url' + '\t' + 'post' + '\t' + 'password' + '\n')
+        data1.write('AUTH_ACCOUNT' + '\t' + 'CAPTURE_TIME' + '\t' + 'STRSRC_IP' '\t' + 'url' + '\t' + 'password' + '\n')
         for line in qw_result:
             l = line.strip().split('\t')
             # print(l)
-            if (len(l) < 3):
+            if (len(l) < 6):
                 continue
-            url = l[0] + l[1]
+            url = l[3] + l[4]
             if 'http://' not in url:
                 url_res = 'http://' + url
-            l[2] = l[2].strip('"').replace('""', '"')
-            password = l[2].strip().split('=')[0]
-            if (len(l[2]) < 10000 and '.gov' not in url_res and '.edu' not in url_res):
-                data1.write(url_res + '\t' + urllib.unquote(l[2]) + '\t' + password + '\n')
+            l[5] = l[5].strip('"').replace('""', '"')
+            password = l[5].strip().split('=')[0]
+            if (len(l[5]) < 10000 and '.gov' not in url_res and '.edu' not in url_res):
+                data1.write(l[0] + '\t' + l[1] + '\t' + l[2] + '\t' + url_res + '\t' + password + '\n')
         data1.close()
 
     def run_query(self):
