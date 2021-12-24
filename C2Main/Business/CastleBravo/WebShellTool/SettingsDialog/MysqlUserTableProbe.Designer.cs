@@ -40,11 +40,12 @@
             // dbUser
             // 
             this.dbUser.BackColor = System.Drawing.Color.White;
-            this.dbUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dbUser.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.dbUser.Location = new System.Drawing.Point(89, 12);
             this.dbUser.Name = "dbUser";
             this.dbUser.Size = new System.Drawing.Size(162, 21);
             this.dbUser.TabIndex = 10035;
+            this.dbUser.Text = "默认不需要设置";
             // 
             // label0
             // 
@@ -87,11 +88,12 @@
             // dbPassword
             // 
             this.dbPassword.BackColor = System.Drawing.Color.White;
-            this.dbPassword.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dbPassword.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.dbPassword.Location = new System.Drawing.Point(89, 43);
             this.dbPassword.Name = "dbPassword";
             this.dbPassword.Size = new System.Drawing.Size(162, 21);
             this.dbPassword.TabIndex = 10040;
+            this.dbPassword.Text = "默认不需要设置";
             // 
             // label4
             // 
@@ -103,7 +105,7 @@
             this.label4.TabIndex = 10041;
             this.label4.Text = "(选填)";
             // 
-            // MysqlUserTableProbe
+            // UserTableProbe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +118,7 @@
             this.Controls.Add(this.dbUser);
             this.Controls.Add(this.label0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "MysqlUserTableProbe";
+            this.Name = "UserTableProbe";
             this.Text = "Mysql.User表探针";
             this.Controls.SetChildIndex(this.label0, 0);
             this.Controls.SetChildIndex(this.dbUser, 0);

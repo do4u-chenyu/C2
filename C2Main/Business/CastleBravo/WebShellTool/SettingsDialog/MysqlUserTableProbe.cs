@@ -1,7 +1,7 @@
 ﻿using C2.Controls;
 using C2.Core;
-using C2.Utils;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
@@ -12,10 +12,26 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
         public UserTableProbe()
         {
             InitializeComponent();
+            this.dbUser.GotFocus += OnGotFocus;
+            this.dbPassword.GotFocus += OnGotFocus;
+        }
+
+        private void OnGotFocus(object sender, System.EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.ForeColor == SystemColors.InactiveCaption)
+            {
+                tb.ForeColor = SystemColors.WindowText;
+                tb.Clear();
+            }
+            
         }
 
         protected override bool OnOKButtonClick()
         {
+            dbUser.Focus();
+            dbPassword.Focus();
+
             DBUser = this.dbUser.Text.Trim();
             DBPassword = this.dbPassword.Text.Trim();
             if (DBUser.IsNullOrEmpty() || DBUser.IsNullOrEmpty())
@@ -26,6 +42,8 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
            
             return base.OnOKButtonClick();
         }
+
+
         
     }
 }
