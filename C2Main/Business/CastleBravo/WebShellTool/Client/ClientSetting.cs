@@ -186,7 +186,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {SGType.ProcessView, "进程信息"},
                 {SGType.ScheduleTask, "定时任务"},
                 {SGType.MysqlProbe, "Mysql探针"},
-                {SGType.SystemInfo, "系统信息"}
+                {SGType.SystemInfo, "系统信息"},
+                {SGType.UserTable, "User表探测"}
             };
         public static Dictionary<SGType, string> InfoProbeItems = new Dictionary<SGType, string>()
             {
@@ -247,6 +248,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 return ex.Message;
             }
+        }
+
+
+        public static String ProcessingResults(byte[] ret, string taskUrl, string type)
+        {
+            if (ret.Length == 0)
+                return type + ":无结果";
+            string time = DateTime.Now.ToString("yyyyMMdd");
+            Match m = new Regex("://(.*?)/").Match(taskUrl);
+            string fileName = m.Success ? string.Format("{0}_{1}", m.Groups[1].Value, time) : time;
+            string path = Path.Combine(Global.UserWorkspacePath, "后信息采集", type);
+            Directory.CreateDirectory(path);
+            fileName += ".MYD";
+            string filePath = Path.Combine(path, fileName);
+            using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                fs.Write(ret, 0, ret.Length);
+            return filePath;
         }
 
     }

@@ -772,7 +772,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-
+            this.sgType = SGType.UserTable;
             UserTableProbe utp = new UserTableProbe();
             if (utp.ShowDialog() != DialogResult.OK)
                 return;
@@ -822,8 +822,17 @@ namespace C2.Business.CastleBravo.WebShellTool
             try
             {
                 string payload = string.Format(ClientSetting.PayloadDict[this.sgType], task.Password);
-                string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
-                task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
+                if (this.sgType == SGType.UserTable)
+                {
+                    byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
+                    task.SGInfoCollectionConfig = ClientSetting.ProcessingResults(ret, task.Url, ClientSetting.InfoProbeItems[this.sgType]);
+                }
+                else
+                {
+                    string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
+                    task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
+                }
+
             }
             catch (Exception ex)
             {
@@ -831,7 +840,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
             return true;
         }
-
+        
         private String ProcessingResults(string ret, string taskUrl)
         {
             Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
@@ -848,7 +857,7 @@ namespace C2.Business.CastleBravo.WebShellTool
          
             return rawResult;
         }
-
+       
         private string LocationResult(string rawResult)
         {
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
