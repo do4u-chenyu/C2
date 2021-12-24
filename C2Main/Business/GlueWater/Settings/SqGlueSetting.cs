@@ -151,6 +151,7 @@ namespace C2.Business.GlueWater.Settings
 
             if (DealWebContent(rrst1.Result, rrst2.Result) && DealMemberContent(rrst1.Result, rrst3.Result))
             {
+                BackupZip(zipPath);
                 return "数据添加成功";
             }
                 
