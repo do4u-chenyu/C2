@@ -3017,6 +3017,10 @@
     <Content Include="Resources\C1\toolbox\flow.png" />
     <Content Include="Resources\C1\toolbox\relate.png" />
     <Content Include="Resources\C1\toolbox\stop.png" />
+    <Content Include="Resources\CommonDict\Behinder_RKL_2944.txt" />
+    <Content Include="Resources\CommonDict\JS_RKL_0_1000.txt" />
+    <Content Include="Resources\CommonDict\JS_RKL_1000_8000.txt" />
+    <Content Include="Resources\CommonDict\JS_RKL_8000_26000.txt" />
     <Content Include="Resources\CrackerDict\dic_password_ftp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
