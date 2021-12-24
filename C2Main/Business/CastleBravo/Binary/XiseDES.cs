@@ -356,6 +356,19 @@ namespace C2.Business.CastleBravo.Binary
             return bytes8;
         }
 
+        public string XiseSimpleDecrypt(string plainText)
+        {
+            string text = plainText.Trim('?').Trim();
+            byte[] text_bytes = ST.DecimalHexStringToBytes(text, "?");
+            if (text_bytes.Length % 8 != 0)
+                return "格式错误:密文转换成字节数组后长度必须是8的整倍数" +
+                    Environment.NewLine +
+                    text;
+            text_bytes = Decrypt(text_bytes, ConvertUtil.ReverseBytes(XOR8("goklong soft")));
+            text_bytes = text_bytes.Skip(4).ToArray(); // 去掉4位长度前缀
+            return Encoding.Default.GetString(text_bytes);
+        }
+
         
         public string XiseDecrypt(string plainText)
         {
@@ -370,7 +383,7 @@ namespace C2.Business.CastleBravo.Binary
             byte[] pass_bytes = ST.DecimalHexStringToBytes(pass, "?");
             byte[] text_bytes = ST.DecimalHexStringToBytes(text, "?");
             if (text_bytes.Length % 8 != 0)
-                return "格式错误:密文转换成字节数组后长度必须是8的整倍数" +
+                return "格式错误:密文各个部分转换成字节数组后长度必须是8的整倍数" +
                     Environment.NewLine +
                     text; 
 
