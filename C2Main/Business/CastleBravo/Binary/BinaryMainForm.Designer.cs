@@ -337,13 +337,14 @@
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.textBox2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBox2.Location = new System.Drawing.Point(3, 81);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox2.Size = new System.Drawing.Size(709, 347);
             this.textBox2.TabIndex = 7;
+            this.textBox2.Text = resources.GetString("textBox2.Text");
             // 
             // progressBar1
             // 
@@ -361,6 +362,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "清空";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -384,7 +386,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label14.Location = new System.Drawing.Point(303, 229);
+            this.label14.Location = new System.Drawing.Point(550, 10);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(58, 21);
             this.label14.TabIndex = 15;
@@ -398,6 +400,7 @@
             this.button7.TabIndex = 16;
             this.button7.Text = "例1";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // BinaryMainForm
             // 
