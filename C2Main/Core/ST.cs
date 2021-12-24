@@ -578,6 +578,19 @@ namespace C2.Core
             byte[] bytes = Convert.FromBase64String(code);
             return Encoding.UTF8.GetString(bytes);
         }
+
+        public static byte[] DecodeBase64ToBytes(string code)
+        {
+            try
+            {
+                return Convert.FromBase64String(code);
+            }
+            catch
+            {
+                return new byte[0];
+            }
+                
+        }
         public static string EncodeUTF8(string code)
         {
             if (code.IsNullOrEmpty())
