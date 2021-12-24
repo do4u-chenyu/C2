@@ -504,6 +504,8 @@ namespace C2.Controls.MapViews
             foreach (Widget wd in root.Widgets)
             {
                 wd.Remove();
+                if (root.Widgets.Count == 0)
+                    break;
             }
             root.Text = ja[0]["user"].ToString();
             //添加备注挂件

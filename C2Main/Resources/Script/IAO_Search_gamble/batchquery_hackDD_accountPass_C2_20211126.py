@@ -106,15 +106,17 @@ class BatchQuery:
             content = response.read().decode()
             pload = content.split('\n')[-1].replace('\t','').replace('\r','').replace('\n','').strip()
             method = content.split(' ')[0]
-            return pload.strip(), method,content
+            if(len(pload)>100 and len(pload)<1000):
+                return pload.strip(), method
+            else:
+                return 'http文件获取失败','http文件获取失败'
 
         except Exception, e:
-            return 'http文件获取失败','http文件获取失败','http文件获取失败'
-
+            return 'http文件获取失败','http文件获取失败'
 
     def get_airport_user(self, content):
-        user_key     = ['email','account','uid','name','phone','username','userid']
-        password_key = ['passwd','password','userpwd','pwd','userpass']
+        user_key     = ['email']
+        password_key = ['passwd','password']
         user_str = ''
         pass_str = ''
         for part in re.split(r'\.\.\.',content):
@@ -130,18 +132,6 @@ class BatchQuery:
                 except:
                     pass
         return user_str,pass_str
-
-    def get_position(self):
-        dict1 = {}
-        for line in kwl2:
-            l = line.strip().split('\t')
-            if (l[1] not in dict1.keys()):
-                dict1[l[1]] = []
-                dict1[l[1]].append(l[0])
-            else:
-                dict1[l[1]].append(l[0])
-        # print(dict1)
-        return dict1
 
     def find_keyword_position(self,kw, d):
         lk = []
@@ -212,27 +202,13 @@ class BatchQuery:
             password = l[2].strip().split('=')[0]
             if (len(l[2]) < 10000 and '.gov' not in url_res and '.edu' not in url_res):
                 data1.write(url_res + '\t' + urllib.unquote(l[2]) + '\t' + password + '\n')
-                data1.write(url_res + '\t' + self.create_new_post(url_res, password) + '\t' + password + '\n')
         data1.close()
-
-    def create_new_post(url, pw):
-        if ('.php' in url and '.asp' not in url and '.jsp' not in url):
-            new_post = pw + '=echo(31415926);'
-        elif ('.asp' in url and '.jsp' not in url):
-            new_post = pw + '=response.write("31415926")'
-        elif ('.jsp' in url):
-            new_post = pw + '=out.print(31415926)'
-        else:
-            new_post = pw + '=echo(31415926);'
-        return new_post
-
 
     def run_query(self):
         QUREY_TYPE = 'airport_'
         out_file = 'ws_out.txt'
-        d=self.get_position()
         with open(os.path.join(self.data_path, out_file), 'a+') as f:
-            f.write('\t'.join(ALL_ITEMS + ['USERNAME','PASSWORD','PAYLOAD', 'KEY_WORDS']) + '\n')
+            f.write('\t'.join(ALL_ITEMS + ['PAYLOAD', 'METHOD', 'KEY_WORDS']) + '\n')
             for KEY_WORDS in kwl:
                 try:
                     LOGGER.info('OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(self.all_items, KEY_WORDS, self.startTime, self.endTime))
@@ -240,13 +216,11 @@ class BatchQuery:
                     LOGGER.info('QUERY_ERROR-{0}'.format(e))
                 for data in self.queryclient(KEY_WORDS,QUREY_TYPE):
                     if data.get('_HOST', '') and data.get('_MAINFILE', ''):
-                        pload, method,content = self.ext_mainfile(data.get('_MAINFILE', ''))
-                        data, pload=self.position_match(data, KEY_WORDS, pload, d)
-                        username,password=self.get_airport_user(content)
+                        pload, method = self.ext_mainfile(data.get('_MAINFILE', ''))
                         
                         if pload != 'http文件获取失败':
                             try:
-                                f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ username+'\t'+password+'\t'+pload+'\t'+KEY_WORDS+ '\n')
+                                f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ pload+'\t'+method+'\t'+KEY_WORDS+ '\n')
                             except:
                                 pass
 
@@ -311,15 +285,14 @@ if __name__ == '__main__':
     areacode    = option.areacode
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 30)
+    OneYear = datetime.timedelta(days = 15)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
     DATA_PATH = './_queryResult_hackDD_' + defaultEnd
-    kwl = ['eval _POST =', 'eval _REQUEST =', 'array_map @ev =', 'ini_set display_errors dirname _SERVER =', 'Dizep cTSWX', 'response.write response.end =', 'ASPXSpy =', 'eval = BaSE64_dEcOdE', 'ute isnumeric =', 'Action=getTerminalInfo', 'DarkBladePass= goaction=', 'JspSpyPwd', 'eval System.Text.Encoding.GetEncoding', 'A17filelist folder=', 'fopen base64_decode', 'assert _POST', 'dbhost= dbport= dbuser= dbpass= connect= ', 'Execute password= system', 'Response.Write eval', '%eval request', 'exec request.getParameter', 'execute request', 'eval _SERVER', 'system _REQUEST', 'create_funtion _POST', 'preg_replace _POST']
-    kwl2 = ['eval _POST =	PAYLOAD', 'eval _REQUEST =	PAYLOAD', 'array_map @ev =	PAYLOAD', 'ini_set display_errors dirname _SERVER =	PAYLOAD', 'Dizep cTSWX	PAYLOAD', 'response.write response.end =	PAYLOAD', 'ASPXSpy =	PAYLOAD', 'eval = BaSE64_dEcOdE	PAYLOAD', 'ute isnumeric =	PAYLOAD', 'Action=getTerminalInfo	PAYLOAD', 'DarkBladePass= goaction=	PAYLOAD', 'JspSpyPwd	PAYLOAD', 'eval System.Text.Encoding.GetEncoding	PAYLOAD', 'A17filelist folder=	PAYLOAD', 'fopen base64_decode	PAYLOAD', 'assert _POST	PAYLOAD', 'dbhost= dbport= dbuser= dbpass= connect= 	PAYLOAD', 'Execute password= system	PAYLOAD', 'Response.Write eval	PAYLOAD', '%eval request	PAYLOAD', 'exec request.getParameter	PAYLOAD', 'execute request	PAYLOAD', 'eval _SERVER	PAYLOAD', 'system _REQUEST	PAYLOAD', 'create_funtion _POST	PAYLOAD', 'preg_replace _POST	PAYLOAD']
+    kwl = ['eval _POST' , 'eval _REQUEST' , 'eval _SERVER' , 'eval BaSE64 dEcOdE' , 'assert _POST' , 'assert _REQUEST' , 'assert _SERVER' , 'assert BaSE64 dEcOdE' , 'create_function _POST' , 'create_function _REQUEST' , 'create_function _SERVER' , 'create_function BaSE64 dEcOdE' , 'preg_replace _POST' , 'preg_replace _REQUEST' , 'preg_replace _SERVER' , 'preg_replace BaSE64 dEcOdE' , 'system _POST' , 'system _REQUEST' , 'system _SERVER' , 'system BaSE64 dEcOdE' , 'array_map @ev' , 'ini_set display_errors dirname _SERVER' , 'response.write response.end' , 'eval POST stripslashes' , 'edoced_46esab z0=' , 'replace chr hen:bd' , 'ASPXSpy' , 'Action=getTerminalInfo' , 'DarkBladePass= goaction=' , 'JspSpyPwd' , 'eval System.Text.Encoding.GetEncoding' , 'filelist folder=' , 'Execute password= system' , 'exec request.getParameter']
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     if startTime is None and endTime is None:

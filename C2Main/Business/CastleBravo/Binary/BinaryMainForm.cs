@@ -96,7 +96,13 @@ namespace C2.Business.CastleBravo.Binary
 
         private void Button1_Click(object sender, System.EventArgs e)
         {
-            textBox1.Text = new XiseDES().XiseDecrypt(textBox1.Text);
+            string plainText = textBox1.Text.Trim().ToLower();
+            if (plainText.Contains("?") && plainText.Contains("~"))
+                textBox1.Text = new XiseDES().XiseDecrypt(textBox1.Text);
+            else if (Regex.IsMatch(plainText, @"^[\da-f]+$") && plainText.Length % 2 == 0)
+                textBox1.Text = new XiseDES().XiseHexDecrypt(textBox1.Text);
+            else
+                textBox1.Text = "格式错误";
         }
     }
 }

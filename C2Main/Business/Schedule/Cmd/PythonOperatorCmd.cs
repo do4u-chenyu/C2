@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using C2.Model.Widgets;
 using C2.Utils;
 
@@ -19,35 +20,43 @@ namespace C2.Business.Schedule.Cmd
             string cmdPython = option.GetOption("cmd");
             string path = System.IO.Path.GetDirectoryName(option.GetOption("pyFullPath"));
             List<string> pythonExePaths = GetPythonExePaths();
-            string[] cmdElements=  cmdPython.Split(OpUtil.Blank);
 
-            cmds.Add("cd /d " + path);
-
-            string[] pythonScript = cmdPython.Split(' ');
-            if (!File.Exists(@pythonScript[1]))
+            string exePath = string.Empty;
+            string pyPath = string.Empty;
+            string pyParam = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            //不能直接切分了，exe和py都有可能带空格，变成3个参数
+            string[] cmdElements = cmdPython.Split(OpUtil.Blank);
+            foreach (string ele in cmdElements)
             {
-                cmds.Add("echo " + pythonScript[1] + "脚本不存在");
-            }
-
-            if (!IsExecutableCmd(pythonExePaths, cmdPython))
-            {
-                if (pythonExePaths.Count == 0)
+                if (ele.EndsWith(".exe"))
                 {
-                    cmds.Add("echo 虚拟机不存在");
-                    cmds.Add(cmdPython);
+                    exePath = sb.Append(" " + ele).ToString().TrimStart(OpUtil.Blank);
+                    sb.Clear();
                 }
-                else if (pythonExePaths.Count > 0)
+                else if (ele.EndsWith(".py"))
                 {
-                    // 针对模型市场中Python算子在不同电脑python.exe路径未知,不重新配置python算子就无法正确运行问题
-                    cmdElements[0] = pythonExePaths[0];
-                    string newCmd = string.Join(OpUtil.StringBlank, cmdElements);
-                    cmds.Add(newCmd);
+                    pyPath = sb.Append(" " + ele).ToString().TrimStart(OpUtil.Blank);
+                    sb.Clear();
                 }
+                else
+                    sb.Append(" " + ele);
             }
-            else
-            {
-                cmds.Add(cmdPython);
-            }
+            pyParam = sb.ToString().TrimStart(OpUtil.Blank);
+            exePath = GetRealExePath(pythonExePaths, exePath);
+
+
+            //判断
+            if (!File.Exists(pyPath))
+                cmds.Add("echo " + pyPath + "脚本不存在");
+
+            if (!File.Exists(exePath))
+                cmds.Add("echo " + exePath + "虚拟机不存在");
+
+            cmds.Add("cd /d " + "\"" + path + "\"");
+            //不存在也必须要加上，否则后台认为python脚本运行正确，不会终止
+            cmds.Add(string.Format("\"{0}\" \"{1}\" {2}", exePath, pyPath, pyParam));
+
             return cmds;
         }
         private List<string> GetPythonExePaths()
@@ -76,6 +85,16 @@ namespace C2.Business.Schedule.Cmd
                     return true;
             }
             return false;
+        }
+
+        private string GetRealExePath(List<string> paths, string exePath)
+        {
+            foreach (string path in paths)
+            {
+                if (exePath.Trim().StartsWith(path.Trim()))
+                    return exePath;
+            }
+            return paths.Count == 0 ? string.Empty : paths[0];
         }
     }
 }
