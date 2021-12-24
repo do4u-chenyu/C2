@@ -567,6 +567,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_32EAD9F6E22B4136BC74B779338056E9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_330B216FE03742ABA72FF3FE24985A5A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1719,6 +1725,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8E5FF2CA87A343EC801B975032D2D41B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8E78A62B633C4309AF8DD18CFC101BD9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1871,6 +1883,12 @@
         {
         "MsmKey" = "8:_9BCCA61333A93021265DB2D017881898"
         "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9C9BEC19111649DD8B0DA46B4CD406FA"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2140,6 +2158,12 @@
         "Entry"
         {
         "MsmKey" = "8:_B6D88C5DAB9D490D97484FE059545864"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B7A523EEB8E74735BDD6AD6BCEA374C6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5386,6 +5410,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32EAD9F6E22B4136BC74B779338056E9"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\CommonDict\\JS_RKL_1000_8000.txt"
+            "TargetName" = "8:JS_RKL_1000_8000.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_11A6A805A4554E959FC0FDB72B02069F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_330B216FE03742ABA72FF3FE24985A5A"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\75_QQ.png"
@@ -8564,6 +8608,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E5FF2CA87A343EC801B975032D2D41B"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\CommonDict\\JS_RKL_8000_26000.txt"
+            "TargetName" = "8:JS_RKL_8000_26000.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_11A6A805A4554E959FC0FDB72B02069F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E78A62B633C4309AF8DD18CFC101BD9"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img10\\back.jpg"
@@ -9004,6 +9068,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C9BEC19111649DD8B0DA46B4CD406FA"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\CommonDict\\JS_RKL_0_1000.txt"
+            "TargetName" = "8:JS_RKL_0_1000.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_11A6A805A4554E959FC0FDB72B02069F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D9F61DB19EC4CF08C0FAC8C0E7F0A39"
@@ -9905,6 +9989,26 @@
             "TargetName" = "8:73_URL.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B7A523EEB8E74735BDD6AD6BCEA374C6"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\CommonDict\\Behinder_RKL_2944.txt"
+            "TargetName" = "8:Behinder_RKL_2944.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_11A6A805A4554E959FC0FDB72B02069F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -13331,6 +13435,17 @@
                     "Property" = "8:_062FD6561A814FA1B7CD18E2E76E05AE"
                         "Folders"
                         {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_11A6A805A4554E959FC0FDB72B02069F"
+                            {
+                            "Name" = "8:CommonDict"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_B7CB73BB584E41CDBCA6549E4038160F"
+                                "Folders"
+                                {
+                                }
+                            }
                             "{9EF0B969-E518-4E46-987F-47570745A589}:_30D87A175307459A8BC3E9D16C7F4967"
                             {
                             "Name" = "8:CrackerDict"
@@ -14336,7 +14451,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\Release\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -14364,7 +14479,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\Debug\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\开发调试\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
