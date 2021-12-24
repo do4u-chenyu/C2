@@ -202,6 +202,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CastleBravo\Binary\Behinder.cs" />
     <Compile Include="Business\CastleBravo\Binary\BinaryMainForm.cs">
       <SubType>Form</SubType>
     </Compile>

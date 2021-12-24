@@ -39,6 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -52,8 +54,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -179,6 +186,26 @@
             this.tabPage2.Text = "Xise解密";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(386, 57);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(42, 23);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "例2";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(386, 35);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(42, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "例1";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -258,6 +285,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button7);
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.button5);
+            this.tabPage1.Controls.Add(this.button6);
+            this.tabPage1.Controls.Add(this.progressBar1);
+            this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label3);
@@ -272,26 +306,25 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 37);
+            this.label10.Location = new System.Drawing.Point(7, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(248, 17);
+            this.label10.Size = new System.Drawing.Size(215, 17);
             this.label10.TabIndex = 6;
-            this.label10.Text = "针对三代冰蝎的加密流量报文进行定制化解密";
+            this.label10.Text = "破解三代冰蝎的加密流量报文(AES128)";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(8, 10);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 17);
+            this.label8.Size = new System.Drawing.Size(0, 17);
             this.label8.TabIndex = 5;
-            this.label8.Text = "设计规划";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(276, 161);
+            this.label3.Location = new System.Drawing.Point(255, 250);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(159, 33);
             this.label3.TabIndex = 2;
@@ -301,25 +334,70 @@
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
             // 
-            // button3
+            // textBox2
             // 
-            this.button3.Location = new System.Drawing.Point(386, 35);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(42, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "例1";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBox2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.textBox2.Location = new System.Drawing.Point(3, 81);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox2.Size = new System.Drawing.Size(709, 347);
+            this.textBox2.TabIndex = 7;
             // 
-            // button4
+            // progressBar1
             // 
-            this.button4.Location = new System.Drawing.Point(386, 57);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(42, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "例2";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.progressBar1.Location = new System.Drawing.Point(38, 52);
+            this.progressBar1.Maximum = 1000;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(376, 23);
+            this.progressBar1.TabIndex = 11;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(643, 52);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(60, 23);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "清空";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(548, 52);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(60, 23);
+            this.button6.TabIndex = 12;
+            this.button6.Text = "解密";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 17);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "进度";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Location = new System.Drawing.Point(303, 229);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 21);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "施工中";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(228, 6);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(42, 23);
+            this.button7.TabIndex = 16;
+            this.button7.Text = "例1";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // BinaryMainForm
             // 
@@ -373,5 +451,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button7;
     }
 }
