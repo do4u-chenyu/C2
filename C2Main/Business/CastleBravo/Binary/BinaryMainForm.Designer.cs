@@ -50,12 +50,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.XiseTextBox = new System.Windows.Forms.TextBox();
             this.BehinderTabPage = new System.Windows.Forms.TabPage();
-            this.ProgressLabel = new System.Windows.Forms.Label();
             this.HitPasswordLabel = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.IteratorCountLabel = new System.Windows.Forms.Label();
             this.DictCountLabel = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.BehinderS1Button = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -292,12 +289,9 @@
             // 
             // BehinderTabPage
             // 
-            this.BehinderTabPage.Controls.Add(this.ProgressLabel);
             this.BehinderTabPage.Controls.Add(this.HitPasswordLabel);
             this.BehinderTabPage.Controls.Add(this.label19);
-            this.BehinderTabPage.Controls.Add(this.IteratorCountLabel);
             this.BehinderTabPage.Controls.Add(this.DictCountLabel);
-            this.BehinderTabPage.Controls.Add(this.label16);
             this.BehinderTabPage.Controls.Add(this.label15);
             this.BehinderTabPage.Controls.Add(this.BehinderS1Button);
             this.BehinderTabPage.Controls.Add(this.label14);
@@ -317,22 +311,11 @@
             this.BehinderTabPage.Text = "冰蝎流量解密";
             this.BehinderTabPage.UseVisualStyleBackColor = true;
             // 
-            // ProgressLabel
-            // 
-            this.ProgressLabel.AutoSize = true;
-            this.ProgressLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.ProgressLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.ProgressLabel.Location = new System.Drawing.Point(286, 55);
-            this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(27, 17);
-            this.ProgressLabel.TabIndex = 23;
-            this.ProgressLabel.Text = "0/0";
-            // 
             // HitPasswordLabel
             // 
             this.HitPasswordLabel.AutoSize = true;
             this.HitPasswordLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.HitPasswordLabel.Location = new System.Drawing.Point(408, 55);
+            this.HitPasswordLabel.Location = new System.Drawing.Point(424, 54);
             this.HitPasswordLabel.Name = "HitPasswordLabel";
             this.HitPasswordLabel.Size = new System.Drawing.Size(50, 17);
             this.HitPasswordLabel.TabIndex = 22;
@@ -341,44 +324,26 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(342, 55);
+            this.label19.Location = new System.Drawing.Point(358, 54);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(59, 17);
             this.label19.TabIndex = 21;
             this.label19.Text = "命中密码:";
             // 
-            // IteratorCountLabel
-            // 
-            this.IteratorCountLabel.AutoSize = true;
-            this.IteratorCountLabel.Location = new System.Drawing.Point(408, 30);
-            this.IteratorCountLabel.Name = "IteratorCountLabel";
-            this.IteratorCountLabel.Size = new System.Drawing.Size(52, 17);
-            this.IteratorCountLabel.TabIndex = 20;
-            this.IteratorCountLabel.Text = "Iterator";
-            // 
             // DictCountLabel
             // 
             this.DictCountLabel.AutoSize = true;
             this.DictCountLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DictCountLabel.Location = new System.Drawing.Point(408, 6);
+            this.DictCountLabel.Location = new System.Drawing.Point(424, 26);
             this.DictCountLabel.Name = "DictCountLabel";
             this.DictCountLabel.Size = new System.Drawing.Size(70, 17);
             this.DictCountLabel.TabIndex = 19;
             this.DictCountLabel.Text = "DictCount";
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(342, 30);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 17);
-            this.label16.TabIndex = 18;
-            this.label16.Text = "迭代次数:";
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(342, 6);
+            this.label15.Location = new System.Drawing.Point(358, 26);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 17);
             this.label15.TabIndex = 17;
@@ -543,12 +508,9 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button BehinderS1Button;
-        private System.Windows.Forms.Label IteratorCountLabel;
         private System.Windows.Forms.Label DictCountLabel;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label HitPasswordLabel;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label ProgressLabel;
     }
 }

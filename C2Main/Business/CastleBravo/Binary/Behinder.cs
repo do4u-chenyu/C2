@@ -1,6 +1,7 @@
 ﻿using C2.Business.CastleBravo.Binary.Info;
 using C2.Core;
 using System;
+using System.Text;
 
 namespace C2.Business.CastleBravo.Binary
 {
@@ -54,8 +55,14 @@ namespace C2.Business.CastleBravo.Binary
 
         private string XOR_Decrypt(string text, string pass)
         {
+            StringBuilder sb = new StringBuilder(text.Length);
+            text = ST.DecodeBase64(text);
 
-            return string.Empty;
+            for (int i = 0; i < text.Length; i++)
+            {
+                sb.Append((char)(text[i] ^ pass[(i + 1) & 15]));
+            }
+            return sb.ToString();
         }
 
         private string AES128_Decrypt(string text, string pass)

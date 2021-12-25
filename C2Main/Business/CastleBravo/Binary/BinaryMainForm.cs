@@ -32,12 +32,10 @@ namespace C2.Business.CastleBravo.Binary
             using (GuarderUtil.WaitCursor)
                 this.DictCountLabel.Text = Password.GetInstance().Pass.Count.ToString();
 
-            this.IteratorCountLabel.Text = string.Empty;
             this.HitPasswordLabel.Text = string.Empty;
             this.progressBar.Minimum = 0;
             this.progressBar.Maximum = Password.GetInstance().Pass.Count;
             this.progressBar.Value = 0;
-            this.ProgressLabel.Text = string.Format("0/{0}", this.progressBar.Maximum);
         }
 
         private void TextBox_GotFocus(object sender, System.EventArgs e)
@@ -167,7 +165,6 @@ namespace C2.Business.CastleBravo.Binary
             Behinder bh = new Behinder();
             bh.OnIteratorCount += Bh_OnIteratorCount;
             BehinderTextBox.Text = bh.Descrypt(BehinderTextBox.Text.Trim());
-            IteratorCountLabel.Text = bh.IteratorCount.ToString();
             HitPasswordLabel.Text = bh.HitPassword;
         }
 
@@ -175,8 +172,6 @@ namespace C2.Business.CastleBravo.Binary
         {
             Behinder bh  = sender as Behinder;
             this.progressBar.Value = bh.IteratorCount;
-            this.IteratorCountLabel.Text = bh.IteratorCount.ToString();  
-            this.ProgressLabel.Text = string.Format("{0}/{1}", bh.IteratorCount, this.progressBar.Maximum);
         }
 
         private void XiseClearButton_Click(object sender, System.EventArgs e)
