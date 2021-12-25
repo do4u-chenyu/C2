@@ -18,15 +18,23 @@ namespace C2.Business.CastleBravo.Binary
         {
             InitializeComponent();
             InitializeOther();
+            InitializeBehinderLabels();
         }
 
         private void InitializeOther()
         {
             this.XiseTextBox.GotFocus += TextBox_GotFocus;
-            this.BehinderTextBox.GotFocus += TextBox_GotFocus;
+            this.BehinderTextBox.GotFocus += TextBox_GotFocus; 
+        }
+
+        private void InitializeBehinderLabels()
+        {
             this.DictCountLabel.Text = Password.GetInstance().Pass.Count.ToString();
             this.IteratorCountLabel.Text = string.Empty;
             this.HitnessCountLabel.Text = string.Empty;
+            this.progressBar.Minimum = 0;
+            this.progressBar.Maximum = Password.GetInstance().Pass.Count;
+            this.ProgressLabel.Text = string.Format("0/{0}", this.progressBar.Maximum);
         }
 
         private void TextBox_GotFocus(object sender, System.EventArgs e)
@@ -145,12 +153,13 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderClearButton_Click(object sender, System.EventArgs e)
         {
-            this.BehinderTextBox.Clear();
+            InitializeBehinderLabels();
+            this.BehinderTextBox.Clear(); 
         }
 
         private void BehinderDecryptButton_Click(object sender, System.EventArgs e)
         {
-
+            InitializeBehinderLabels();
         }
 
         private void XiseClearButton_Click(object sender, System.EventArgs e)
