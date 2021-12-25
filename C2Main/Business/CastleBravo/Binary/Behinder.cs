@@ -1,16 +1,25 @@
 ﻿using C2.Business.CastleBravo.Binary.Info;
 using C2.Core;
 using System;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace C2.Business.CastleBravo.Binary
 {
     class Behinder
     {
+        readonly RijndaelManaged cbc;  // AES128解密器 CBC模式
         public Behinder()
         {
             IteratorCount = 0;
             HitPassword = string.Empty;
+            cbc = new RijndaelManaged
+            {
+                BlockSize = 128,
+                Mode = CipherMode.CBC,
+                Padding = PaddingMode.None
+            };
         }
         public int IteratorCount { get; set; }
         public string HitPassword { get; set; }
@@ -67,12 +76,19 @@ namespace C2.Business.CastleBravo.Binary
 
         private string AES128_Decrypt(string text, string pass)
         {
-            return string.Empty;
+            byte[] key_bytes = Encoding.Default.GetBytes(pass);  // 定然是16位
+            byte[] iv_bytes = new byte[16];
+            byte[] text_bytes = Encoding.Default.GetBytes(text);
+
+            ICryptoTransform transform = cbc.CreateEncryptor(key_bytes, iv_bytes);
+            byte[] ret_bytes = transform.TransformFinalBlock(text_bytes, 0, text_bytes.Length);
+
+            return "assert|eval(base" + Encoding.Default.GetString(ret_bytes).Skip(16);
         }
 
         private bool IsDecryptCorrect(string value)
         {
-            return value.Contains("base64_decode");
+            return value.Contains("assert|eval(base64_decode");
         }
     }
 }
