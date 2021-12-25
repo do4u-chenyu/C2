@@ -1,7 +1,6 @@
 ﻿using C2.Core;
 using C2.Utils;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Binary.Info
