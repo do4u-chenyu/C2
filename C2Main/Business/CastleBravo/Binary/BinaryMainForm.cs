@@ -29,11 +29,14 @@ namespace C2.Business.CastleBravo.Binary
 
         private void InitializeBehinderLabels()
         {
-            this.DictCountLabel.Text = Password.GetInstance().Pass.Count.ToString();
+            using (GuarderUtil.WaitCursor)
+                this.DictCountLabel.Text = Password.GetInstance().Pass.Count.ToString();
+
             this.IteratorCountLabel.Text = string.Empty;
-            this.HitnessCountLabel.Text = string.Empty;
+            this.HitPasswordLabel.Text = string.Empty;
             this.progressBar.Minimum = 0;
             this.progressBar.Maximum = Password.GetInstance().Pass.Count;
+            this.progressBar.Value = 0;
             this.ProgressLabel.Text = string.Format("0/{0}", this.progressBar.Maximum);
         }
 
@@ -159,12 +162,27 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderDecryptButton_Click(object sender, System.EventArgs e)
         {
+            BehinderTextBox.Focus();
             InitializeBehinderLabels();
+            Behinder bh = new Behinder();
+            bh.OnIteratorCount += Bh_OnIteratorCount;
+            BehinderTextBox.Text = bh.Descrypt(BehinderTextBox.Text.Trim());
+            IteratorCountLabel.Text = bh.IteratorCount.ToString();
+            HitPasswordLabel.Text = bh.HitPassword;
+        }
+
+        private void Bh_OnIteratorCount(object sender, System.EventArgs e)
+        {
+            Behinder bh  = sender as Behinder;
+            this.progressBar.Value = bh.IteratorCount;
+            this.IteratorCountLabel.Text = bh.IteratorCount.ToString();  
+            this.ProgressLabel.Text = string.Format("{0}/{1}", bh.IteratorCount, this.progressBar.Maximum);
         }
 
         private void XiseClearButton_Click(object sender, System.EventArgs e)
         {
             this.XiseTextBox.Clear();
         }
+
     }
 }

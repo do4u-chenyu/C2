@@ -51,7 +51,7 @@
             this.XiseTextBox = new System.Windows.Forms.TextBox();
             this.BehinderTabPage = new System.Windows.Forms.TabPage();
             this.ProgressLabel = new System.Windows.Forms.Label();
-            this.HitnessCountLabel = new System.Windows.Forms.Label();
+            this.HitPasswordLabel = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.IteratorCountLabel = new System.Windows.Forms.Label();
             this.DictCountLabel = new System.Windows.Forms.Label();
@@ -293,7 +293,7 @@
             // BehinderTabPage
             // 
             this.BehinderTabPage.Controls.Add(this.ProgressLabel);
-            this.BehinderTabPage.Controls.Add(this.HitnessCountLabel);
+            this.BehinderTabPage.Controls.Add(this.HitPasswordLabel);
             this.BehinderTabPage.Controls.Add(this.label19);
             this.BehinderTabPage.Controls.Add(this.IteratorCountLabel);
             this.BehinderTabPage.Controls.Add(this.DictCountLabel);
@@ -324,19 +324,19 @@
             this.ProgressLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.ProgressLabel.Location = new System.Drawing.Point(286, 55);
             this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(50, 17);
+            this.ProgressLabel.Size = new System.Drawing.Size(27, 17);
             this.ProgressLabel.TabIndex = 23;
-            this.ProgressLabel.Text = "label21";
+            this.ProgressLabel.Text = "0/0";
             // 
-            // HitnessCountLabel
+            // HitPasswordLabel
             // 
-            this.HitnessCountLabel.AutoSize = true;
-            this.HitnessCountLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.HitnessCountLabel.Location = new System.Drawing.Point(408, 55);
-            this.HitnessCountLabel.Name = "HitnessCountLabel";
-            this.HitnessCountLabel.Size = new System.Drawing.Size(50, 17);
-            this.HitnessCountLabel.TabIndex = 22;
-            this.HitnessCountLabel.Text = "label20";
+            this.HitPasswordLabel.AutoSize = true;
+            this.HitPasswordLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.HitPasswordLabel.Location = new System.Drawing.Point(408, 55);
+            this.HitPasswordLabel.Name = "HitPasswordLabel";
+            this.HitPasswordLabel.Size = new System.Drawing.Size(50, 17);
+            this.HitPasswordLabel.TabIndex = 22;
+            this.HitPasswordLabel.Text = "HitPass";
             // 
             // label19
             // 
@@ -352,9 +352,9 @@
             this.IteratorCountLabel.AutoSize = true;
             this.IteratorCountLabel.Location = new System.Drawing.Point(408, 30);
             this.IteratorCountLabel.Name = "IteratorCountLabel";
-            this.IteratorCountLabel.Size = new System.Drawing.Size(50, 17);
+            this.IteratorCountLabel.Size = new System.Drawing.Size(52, 17);
             this.IteratorCountLabel.TabIndex = 20;
-            this.IteratorCountLabel.Text = "label18";
+            this.IteratorCountLabel.Text = "Iterator";
             // 
             // DictCountLabel
             // 
@@ -362,9 +362,9 @@
             this.DictCountLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.DictCountLabel.Location = new System.Drawing.Point(408, 6);
             this.DictCountLabel.Name = "DictCountLabel";
-            this.DictCountLabel.Size = new System.Drawing.Size(52, 17);
+            this.DictCountLabel.Size = new System.Drawing.Size(70, 17);
             this.DictCountLabel.TabIndex = 19;
-            this.DictCountLabel.Text = "label17";
+            this.DictCountLabel.Text = "DictCount";
             // 
             // label16
             // 
@@ -398,7 +398,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label14.Location = new System.Drawing.Point(274, 225);
+            this.label14.Location = new System.Drawing.Point(552, 3);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(131, 25);
             this.label14.TabIndex = 15;
@@ -547,7 +547,7 @@
         private System.Windows.Forms.Label DictCountLabel;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label HitnessCountLabel;
+        private System.Windows.Forms.Label HitPasswordLabel;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label ProgressLabel;
     }

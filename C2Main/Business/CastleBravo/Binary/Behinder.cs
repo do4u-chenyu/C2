@@ -1,5 +1,8 @@
 ﻿using C2.Business.CastleBravo.Binary.Info;
 using C2.Core;
+using System;
+using System.Text;
+using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Binary
 {
@@ -7,13 +10,22 @@ namespace C2.Business.CastleBravo.Binary
     {
         public Behinder()
         {
-            
+            IteratorCount = 0;
+            HitPassword = string.Empty;
         }
-        public int DecryptIteratorCount { get; set; } = 0;
+        public int IteratorCount { get; set; }
+        public string HitPassword { get; set; }
+
+        public event EventHandler<EventArgs> OnIteratorCount;
 
         public string Descrypt(string text)
         {
-            DecryptIteratorCount = 0;
+            if (text.IsNullOrEmpty())
+                return string.Empty;
+
+            IteratorCount = 0;
+            HitPassword = string.Empty;
+
             // Base64变成byte数组
             // 加载字典
             // 尝试 XOR 解密
@@ -26,8 +38,12 @@ namespace C2.Business.CastleBravo.Binary
             Password dict = Password.GetInstance();
             foreach (string pass in dict.Pass)
             {
-                DecryptIteratorCount++;
-                byte[] pass_byte = ST.DecodeBase64ToBytes(pass);
+                IteratorCount++;
+
+                if (IteratorCount % (1024 * 2) == 0)
+                    OnIteratorCount?.Invoke(this, new EventArgs());
+
+                byte[] pass_byte = Encoding.Default.GetBytes(pass);
                 string ret = XOR_Decrypt(text_bytes, pass_byte);
                 if (IsDecryptCorrect(ret))
                     return ret;
@@ -37,7 +53,7 @@ namespace C2.Business.CastleBravo.Binary
                     return ret;
             }
 
-            dict.MissLoad(); // 爆破失败, 加载更多字典
+            OnIteratorCount?.Invoke(this, new EventArgs());
             return string.Empty;
         }
 
@@ -55,7 +71,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private bool IsDecryptCorrect(string value)
         {
-            return true;
+            return value.Contains("base64_decode");
         }
     }
 }

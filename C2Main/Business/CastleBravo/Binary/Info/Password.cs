@@ -37,18 +37,10 @@ namespace C2.Business.CastleBravo.Binary.Info
 
         private void Load()
         {
-            if (dicts.IsEmpty())
-                return;
-            // 找不到时, 按顺序加载, 能省一点是一点
-            string ffp = dicts.First();
-            dicts.RemoveAt(0);
-            string text = FileUtil.FileReadToEnd(ffp);
-            passwords.AddRange(text.SplitLine());
-        }
-
-        public void MissLoad()
-        {
-            Load();
+            foreach(string ffp in dicts)
+            {
+                passwords.AddRange(FileUtil.FileReadToEnd(ffp).SplitLine());
+            }
         }
     }
 }
