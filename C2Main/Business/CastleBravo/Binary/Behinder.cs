@@ -7,10 +7,8 @@ namespace C2.Business.CastleBravo.Binary
     {
         public Behinder()
         {
-
+            
         }
-
-        public int DictCount { get => Password.GetInstance().Pass.Count; }
         public int DecryptIteratorCount { get; set; } = 0;
 
         public string Descrypt(string text)

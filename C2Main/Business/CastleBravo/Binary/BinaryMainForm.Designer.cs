@@ -38,40 +38,40 @@
             this.ResultTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.XiseTabPage = new System.Windows.Forms.TabPage();
+            this.XiseS2Button = new System.Windows.Forms.Button();
+            this.XiseS1Button = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.XiseClearButton = new System.Windows.Forms.Button();
+            this.XiseDecryptButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
+            this.XiseTextBox = new System.Windows.Forms.TextBox();
+            this.BehinderTabPage = new System.Windows.Forms.TabPage();
+            this.ProgressLabel = new System.Windows.Forms.Label();
+            this.HitnessCountLabel = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.IteratorCountLabel = new System.Windows.Forms.Label();
+            this.DictCountLabel = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.BehinderS1Button = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.BehinderClearButton = new System.Windows.Forms.Button();
+            this.BehinderDecryptButton = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.BehinderTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.XiseTabPage.SuspendLayout();
+            this.BehinderTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -87,8 +87,8 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.StringsTabPage);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.XiseTabPage);
+            this.tabControl1.Controls.Add(this.BehinderTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -173,45 +173,45 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a, ...)中提取文本,尤其是IP,域名,手机号和用户名...\r\n\r\n";
             // 
-            // tabPage2
+            // XiseTabPage
             // 
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(715, 431);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Xise流量解密";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.XiseTabPage.Controls.Add(this.XiseS2Button);
+            this.XiseTabPage.Controls.Add(this.XiseS1Button);
+            this.XiseTabPage.Controls.Add(this.label13);
+            this.XiseTabPage.Controls.Add(this.label12);
+            this.XiseTabPage.Controls.Add(this.label11);
+            this.XiseTabPage.Controls.Add(this.XiseClearButton);
+            this.XiseTabPage.Controls.Add(this.XiseDecryptButton);
+            this.XiseTabPage.Controls.Add(this.label7);
+            this.XiseTabPage.Controls.Add(this.label9);
+            this.XiseTabPage.Controls.Add(this.XiseTextBox);
+            this.XiseTabPage.Location = new System.Drawing.Point(4, 26);
+            this.XiseTabPage.Name = "XiseTabPage";
+            this.XiseTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.XiseTabPage.Size = new System.Drawing.Size(715, 431);
+            this.XiseTabPage.TabIndex = 1;
+            this.XiseTabPage.Text = "Xise流量解密";
+            this.XiseTabPage.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // XiseS2Button
             // 
-            this.button4.Location = new System.Drawing.Point(386, 57);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(42, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "例2";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.XiseS2Button.Location = new System.Drawing.Point(386, 57);
+            this.XiseS2Button.Name = "XiseS2Button";
+            this.XiseS2Button.Size = new System.Drawing.Size(42, 23);
+            this.XiseS2Button.TabIndex = 14;
+            this.XiseS2Button.Text = "例2";
+            this.XiseS2Button.UseVisualStyleBackColor = true;
+            this.XiseS2Button.Click += new System.EventHandler(this.XiseS2Button_Click);
             // 
-            // button3
+            // XiseS1Button
             // 
-            this.button3.Location = new System.Drawing.Point(386, 35);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(42, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "例1";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.XiseS1Button.Location = new System.Drawing.Point(386, 35);
+            this.XiseS1Button.Name = "XiseS1Button";
+            this.XiseS1Button.Size = new System.Drawing.Size(42, 23);
+            this.XiseS1Button.TabIndex = 13;
+            this.XiseS1Button.Text = "例1";
+            this.XiseS1Button.UseVisualStyleBackColor = true;
+            this.XiseS1Button.Click += new System.EventHandler(this.XiseS1Button_Click);
             // 
             // label13
             // 
@@ -240,25 +240,25 @@
             this.label11.TabIndex = 10;
             this.label11.Text = "Xise后门加密字符串有两种形式:";
             // 
-            // button2
+            // XiseClearButton
             // 
-            this.button2.Location = new System.Drawing.Point(643, 52);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "清空";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.XiseClearButton.Location = new System.Drawing.Point(643, 52);
+            this.XiseClearButton.Name = "XiseClearButton";
+            this.XiseClearButton.Size = new System.Drawing.Size(60, 23);
+            this.XiseClearButton.TabIndex = 9;
+            this.XiseClearButton.Text = "清空";
+            this.XiseClearButton.UseVisualStyleBackColor = true;
+            this.XiseClearButton.Click += new System.EventHandler(this.XiseClearButton_Click);
             // 
-            // button1
+            // XiseDecryptButton
             // 
-            this.button1.Location = new System.Drawing.Point(548, 52);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "解密";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.XiseDecryptButton.Location = new System.Drawing.Point(548, 52);
+            this.XiseDecryptButton.Name = "XiseDecryptButton";
+            this.XiseDecryptButton.Size = new System.Drawing.Size(60, 23);
+            this.XiseDecryptButton.TabIndex = 8;
+            this.XiseDecryptButton.Text = "解密";
+            this.XiseDecryptButton.UseVisualStyleBackColor = true;
+            this.XiseDecryptButton.Click += new System.EventHandler(this.XiseDecryptButton_Click);
             // 
             // label7
             // 
@@ -278,54 +278,117 @@
             this.label9.TabIndex = 5;
             this.label9.Text = "针对Xise系列后门加密流量进行定制化解密,";
             // 
-            // textBox1
+            // XiseTextBox
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox1.Location = new System.Drawing.Point(3, 81);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(709, 347);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.XiseTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.XiseTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.XiseTextBox.Location = new System.Drawing.Point(3, 81);
+            this.XiseTextBox.Multiline = true;
+            this.XiseTextBox.Name = "XiseTextBox";
+            this.XiseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.XiseTextBox.Size = new System.Drawing.Size(709, 347);
+            this.XiseTextBox.TabIndex = 6;
+            this.XiseTextBox.Text = resources.GetString("XiseTextBox.Text");
             // 
-            // tabPage1
+            // BehinderTabPage
             // 
-            this.tabPage1.Controls.Add(this.label21);
-            this.tabPage1.Controls.Add(this.label20);
-            this.tabPage1.Controls.Add(this.label19);
-            this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.label16);
-            this.tabPage1.Controls.Add(this.label15);
-            this.tabPage1.Controls.Add(this.button7);
-            this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.button5);
-            this.tabPage1.Controls.Add(this.button6);
-            this.tabPage1.Controls.Add(this.progressBar1);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(715, 431);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "冰蝎流量解密";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.BehinderTabPage.Controls.Add(this.ProgressLabel);
+            this.BehinderTabPage.Controls.Add(this.HitnessCountLabel);
+            this.BehinderTabPage.Controls.Add(this.label19);
+            this.BehinderTabPage.Controls.Add(this.IteratorCountLabel);
+            this.BehinderTabPage.Controls.Add(this.DictCountLabel);
+            this.BehinderTabPage.Controls.Add(this.label16);
+            this.BehinderTabPage.Controls.Add(this.label15);
+            this.BehinderTabPage.Controls.Add(this.BehinderS1Button);
+            this.BehinderTabPage.Controls.Add(this.label14);
+            this.BehinderTabPage.Controls.Add(this.label2);
+            this.BehinderTabPage.Controls.Add(this.BehinderClearButton);
+            this.BehinderTabPage.Controls.Add(this.BehinderDecryptButton);
+            this.BehinderTabPage.Controls.Add(this.progressBar1);
+            this.BehinderTabPage.Controls.Add(this.BehinderTextBox);
+            this.BehinderTabPage.Controls.Add(this.label10);
+            this.BehinderTabPage.Controls.Add(this.label8);
+            this.BehinderTabPage.Controls.Add(this.label3);
+            this.BehinderTabPage.Location = new System.Drawing.Point(4, 26);
+            this.BehinderTabPage.Name = "BehinderTabPage";
+            this.BehinderTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BehinderTabPage.Size = new System.Drawing.Size(715, 431);
+            this.BehinderTabPage.TabIndex = 2;
+            this.BehinderTabPage.Text = "冰蝎流量解密";
+            this.BehinderTabPage.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // ProgressLabel
             // 
-            this.button7.Location = new System.Drawing.Point(228, 6);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(42, 23);
-            this.button7.TabIndex = 16;
-            this.button7.Text = "例1";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.ProgressLabel.AutoSize = true;
+            this.ProgressLabel.Location = new System.Drawing.Point(286, 55);
+            this.ProgressLabel.Name = "ProgressLabel";
+            this.ProgressLabel.Size = new System.Drawing.Size(50, 17);
+            this.ProgressLabel.TabIndex = 23;
+            this.ProgressLabel.Text = "label21";
+            // 
+            // HitnessCountLabel
+            // 
+            this.HitnessCountLabel.AutoSize = true;
+            this.HitnessCountLabel.Location = new System.Drawing.Point(408, 54);
+            this.HitnessCountLabel.Name = "HitnessCountLabel";
+            this.HitnessCountLabel.Size = new System.Drawing.Size(50, 17);
+            this.HitnessCountLabel.TabIndex = 22;
+            this.HitnessCountLabel.Text = "label20";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(342, 54);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(59, 17);
+            this.label19.TabIndex = 21;
+            this.label19.Text = "命中密码:";
+            // 
+            // IteratorCountLabel
+            // 
+            this.IteratorCountLabel.AutoSize = true;
+            this.IteratorCountLabel.Location = new System.Drawing.Point(408, 30);
+            this.IteratorCountLabel.Name = "IteratorCountLabel";
+            this.IteratorCountLabel.Size = new System.Drawing.Size(50, 17);
+            this.IteratorCountLabel.TabIndex = 20;
+            this.IteratorCountLabel.Text = "label18";
+            // 
+            // DictCountLabel
+            // 
+            this.DictCountLabel.AutoSize = true;
+            this.DictCountLabel.Location = new System.Drawing.Point(408, 6);
+            this.DictCountLabel.Name = "DictCountLabel";
+            this.DictCountLabel.Size = new System.Drawing.Size(50, 17);
+            this.DictCountLabel.TabIndex = 19;
+            this.DictCountLabel.Text = "label17";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(342, 30);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(59, 17);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "迭代次数:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(342, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(59, 17);
+            this.label15.TabIndex = 17;
+            this.label15.Text = "字典数据:";
+            // 
+            // BehinderS1Button
+            // 
+            this.BehinderS1Button.Location = new System.Drawing.Point(288, 6);
+            this.BehinderS1Button.Name = "BehinderS1Button";
+            this.BehinderS1Button.Size = new System.Drawing.Size(42, 23);
+            this.BehinderS1Button.TabIndex = 16;
+            this.BehinderS1Button.Text = "例1";
+            this.BehinderS1Button.UseVisualStyleBackColor = true;
+            this.BehinderS1Button.Click += new System.EventHandler(this.BehinderS1Button_Click);
             // 
             // label14
             // 
@@ -346,24 +409,25 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "进度";
             // 
-            // button5
+            // BehinderClearButton
             // 
-            this.button5.Location = new System.Drawing.Point(643, 52);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(60, 23);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "清空";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.BehinderClearButton.Location = new System.Drawing.Point(643, 52);
+            this.BehinderClearButton.Name = "BehinderClearButton";
+            this.BehinderClearButton.Size = new System.Drawing.Size(60, 23);
+            this.BehinderClearButton.TabIndex = 13;
+            this.BehinderClearButton.Text = "清空";
+            this.BehinderClearButton.UseVisualStyleBackColor = true;
+            this.BehinderClearButton.Click += new System.EventHandler(this.BehinderClearButton_Click);
             // 
-            // button6
+            // BehinderDecryptButton
             // 
-            this.button6.Location = new System.Drawing.Point(548, 52);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(60, 23);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "解密";
-            this.button6.UseVisualStyleBackColor = true;
+            this.BehinderDecryptButton.Location = new System.Drawing.Point(548, 52);
+            this.BehinderDecryptButton.Name = "BehinderDecryptButton";
+            this.BehinderDecryptButton.Size = new System.Drawing.Size(60, 23);
+            this.BehinderDecryptButton.TabIndex = 12;
+            this.BehinderDecryptButton.Text = "解密";
+            this.BehinderDecryptButton.UseVisualStyleBackColor = true;
+            this.BehinderDecryptButton.Click += new System.EventHandler(this.BehinderDecryptButton_Click);
             // 
             // progressBar1
             // 
@@ -373,26 +437,26 @@
             this.progressBar1.Size = new System.Drawing.Size(232, 23);
             this.progressBar1.TabIndex = 11;
             // 
-            // textBox2
+            // BehinderTextBox
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox2.Location = new System.Drawing.Point(3, 81);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(709, 347);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.Text = resources.GetString("textBox2.Text");
+            this.BehinderTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BehinderTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.BehinderTextBox.Location = new System.Drawing.Point(3, 81);
+            this.BehinderTextBox.Multiline = true;
+            this.BehinderTextBox.Name = "BehinderTextBox";
+            this.BehinderTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.BehinderTextBox.Size = new System.Drawing.Size(709, 347);
+            this.BehinderTextBox.TabIndex = 7;
+            this.BehinderTextBox.Text = resources.GetString("BehinderTextBox.Text");
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(7, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(215, 17);
+            this.label10.Size = new System.Drawing.Size(275, 17);
             this.label10.TabIndex = 6;
-            this.label10.Text = "破解三代冰蝎的加密流量报文(AES128)";
+            this.label10.Text = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
             // 
             // label8
             // 
@@ -416,69 +480,6 @@
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(342, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 17);
-            this.label15.TabIndex = 17;
-            this.label15.Text = "字典数据:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(342, 30);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 17);
-            this.label16.TabIndex = 18;
-            this.label16.Text = "迭代次数:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(408, 6);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(50, 17);
-            this.label17.TabIndex = 19;
-            this.label17.Text = "label17";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(408, 30);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(50, 17);
-            this.label18.TabIndex = 20;
-            this.label18.Text = "label18";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(342, 54);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(59, 17);
-            this.label19.TabIndex = 21;
-            this.label19.Text = "命中密码:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(408, 54);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(50, 17);
-            this.label20.TabIndex = 22;
-            this.label20.Text = "label20";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(276, 55);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(50, 17);
-            this.label21.TabIndex = 23;
-            this.label21.Text = "label21";
-            // 
             // BinaryMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -496,10 +497,10 @@
             this.tabControl1.ResumeLayout(false);
             this.StringsTabPage.ResumeLayout(false);
             this.StringsTabPage.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.XiseTabPage.ResumeLayout(false);
+            this.XiseTabPage.PerformLayout();
+            this.BehinderTabPage.ResumeLayout(false);
+            this.BehinderTabPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -509,8 +510,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage StringsTabPage;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage XiseTabPage;
+        private System.Windows.Forms.TabPage BehinderTabPage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -522,28 +523,28 @@
         private System.Windows.Forms.TextBox FileTB;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox XiseTextBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button XiseClearButton;
+        private System.Windows.Forms.Button XiseDecryptButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button XiseS2Button;
+        private System.Windows.Forms.Button XiseS1Button;
+        private System.Windows.Forms.TextBox BehinderTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button BehinderClearButton;
+        private System.Windows.Forms.Button BehinderDecryptButton;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button BehinderS1Button;
+        private System.Windows.Forms.Label IteratorCountLabel;
+        private System.Windows.Forms.Label DictCountLabel;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label HitnessCountLabel;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label ProgressLabel;
     }
 }

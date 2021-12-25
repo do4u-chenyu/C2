@@ -2,6 +2,7 @@
 using C2.Utils;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Binary.Info
 {
@@ -24,10 +25,10 @@ namespace C2.Business.CastleBravo.Binary.Info
         private Password()
         {
             dicts = new List<string>() {
-                Global.WorkspaceDirectory + Settings.Path_Behinder_RKL_2944,
-                Global.WorkspaceDirectory + Settings.Path_JS_RKL_0_1000,
-                Global.WorkspaceDirectory + Settings.Path_JS_RKL_1000_8000,
-                Global.WorkspaceDirectory + Settings.Path_JS_RKL_8000_26000,
+                Application.StartupPath + Settings.Path_Behinder_RKL_2944,
+                Application.StartupPath + Settings.Path_JS_RKL_0_1000,
+                Application.StartupPath + Settings.Path_JS_RKL_1000_8000,
+                Application.StartupPath + Settings.Path_JS_RKL_8000_26000,
             };
             
             passwords = new List<string>();
