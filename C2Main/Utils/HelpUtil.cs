@@ -98,6 +98,7 @@ namespace C2.Utils
         public static string RobotsScanHelpInfo = "对目标网站的几个通用特征进行素描";
         public static string WebShellHelpInfo = "D洞工具集";
         public static string BinaryHelpInfo = "二进制逆向、分析和解密专项";
+        public static string IntruderHelpInfo = "基于特定规则和字典自动发包扫描网站";
 
         public static string DBFormHelpInfo = "涉赌专项分析";
         public static string SQFormHelpInfo = "涉枪专项分析";

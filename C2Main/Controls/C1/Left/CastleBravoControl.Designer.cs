@@ -43,12 +43,12 @@
             // 
             this.backPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.backPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.backPanel.Location = new System.Drawing.Point(3, 330);
-            this.backPanel.Size = new System.Drawing.Size(179, 330);
+            this.backPanel.Location = new System.Drawing.Point(3, 366);
+            this.backPanel.Size = new System.Drawing.Size(179, 294);
             // 
             // manageButtonPanel
             // 
-            this.manageButtonPanel.Size = new System.Drawing.Size(177, 296);
+            this.manageButtonPanel.Size = new System.Drawing.Size(177, 260);
             // 
             // helpInfoLable
             // 
@@ -59,7 +59,7 @@
             this.hashTitleLabel.AutoSize = true;
             this.hashTitleLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.hashTitleLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.hashTitleLabel.Location = new System.Drawing.Point(44, 303);
+            this.hashTitleLabel.Location = new System.Drawing.Point(41, 341);
             this.hashTitleLabel.Name = "hashTitleLabel";
             this.hashTitleLabel.Size = new System.Drawing.Size(98, 22);
             this.hashTitleLabel.TabIndex = 5;

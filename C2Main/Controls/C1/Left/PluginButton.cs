@@ -1,4 +1,5 @@
 ﻿using C2.Business.CastleBravo.Binary;
+using C2.Business.CastleBravo.Intruder;
 using C2.Business.CastleBravo.PwdGenerator;
 using C2.Business.CastleBravo.RobotsScan;
 using C2.Business.CastleBravo.WebScan;
@@ -53,6 +54,10 @@ namespace C2.Controls.C1.Left
                 case "Binary":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.二进制;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BinaryHelpInfo);
+                    break;
+                case "Intruder":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.intruder;
+                    this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.IntruderHelpInfo);
                     break;
                 case "涉赌专项":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.db;
@@ -133,6 +138,9 @@ namespace C2.Controls.C1.Left
                     break;
                 case "Binary":
                     new BinaryMainForm().ShowDialog();
+                    break;
+                case "Intruder":
+                    new IntruderForm().ShowDialog();
                     break;
                 case "涉赌专项":
                 case "涉枪专项":

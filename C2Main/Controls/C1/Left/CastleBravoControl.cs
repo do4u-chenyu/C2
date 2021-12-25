@@ -237,7 +237,8 @@ namespace C2.Controls.C1.Left
                 "WebScan",
                 /*"RobotsScan",*/ 
                 "WebShell", 
-                "Binary"};
+                "Binary",
+                "Intruder"};
             CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
         }
         private void ResizeCBLocation()

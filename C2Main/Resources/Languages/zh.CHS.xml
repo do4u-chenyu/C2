@@ -448,6 +448,7 @@
     <item name="RobotsScan">(网)W特征素描</item>    
     <item name="WebScan">(网)W目录素描</item>
     <item name="WebShell">(网)D洞管理</item>
+	<item name="Intruder">(网)自动发包器</item>
     <item name="OCR">OCR</item>
     <item name="命名实体识别">命名实体识别</item>
     <item name="语音转文本">语音转文本</item>

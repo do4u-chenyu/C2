@@ -261,6 +261,12 @@
     <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemsQueue.cs" />
     <Compile Include="Business\CastleBravo\Cracker\Tools\FileTool.cs" />
     <Compile Include="Business\CastleBravo\Cracker\Tools\Tool.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\IntruderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\Intruder\IntruderForm.Designer.cs">
+      <DependentUpon>IntruderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\PwdGenerator\PwdResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2127,6 +2133,9 @@
     <EmbeddedResource Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.resx">
       <DependentUpon>CrackerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\Intruder\IntruderForm.resx">
+      <DependentUpon>IntruderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdResultForm.resx">
       <DependentUpon>PwdResultForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -3178,6 +3187,7 @@
     <None Include="Resources\Images\HM.png" />
     <Content Include="Resources\Images\InfoExtraction.png" />
     <None Include="Resources\Images\JS.png" />
+    <None Include="Resources\Images\intruder.png" />
     <Content Include="Resources\Images\keyboard.png" />
     <None Include="Resources\Images\languages.png" />
     <None Include="Resources\Images\last.png" />
