@@ -166,6 +166,7 @@ namespace C2.Business.CastleBravo.Binary
             bh.OnIteratorCount += Bh_OnIteratorCount;
             BehinderTextBox.Text = bh.Descrypt(BehinderTextBox.Text.Trim());
             HitPasswordLabel.Text = bh.HitPassword;
+            SuccessLabel.Text = bh.Success ? "成功" : "失败";
         }
 
         private void Bh_OnIteratorCount(object sender, System.EventArgs e)

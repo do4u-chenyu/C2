@@ -18,11 +18,13 @@ namespace C2.Business.CastleBravo.Binary
             {
                 BlockSize = 128,
                 Mode = CipherMode.CBC,
-                Padding = PaddingMode.None
+                Padding = PaddingMode.None,
             };
         }
         public int IteratorCount { get; set; }
         public string HitPassword { get; set; }
+
+        public bool Success { get; set; }
 
         public event EventHandler<EventArgs> OnIteratorCount;
 
@@ -33,6 +35,7 @@ namespace C2.Business.CastleBravo.Binary
 
             IteratorCount = 0;
             HitPassword = string.Empty;
+            Success = false;
 
             // 加载字典
             // 尝试 XOR 解密
@@ -45,6 +48,7 @@ namespace C2.Business.CastleBravo.Binary
                 if (IteratorCount % (1024 * 2) == 0)
                     OnIteratorCount?.Invoke(this, new EventArgs());
 
+                HitPassword = p;
                 string pass = ST.GenerateMD5(p).Substring(0, 16);
 
                 string ret = XOR_Decrypt(text, pass);
@@ -56,6 +60,8 @@ namespace C2.Business.CastleBravo.Binary
                     return ret;
             }
 
+            HitPassword = string.Empty;
+            Success = false;
             OnIteratorCount?.Invoke(this, new EventArgs());
             return string.Empty;
         }
@@ -65,7 +71,7 @@ namespace C2.Business.CastleBravo.Binary
         private string XOR_Decrypt(string text, string pass)
         {
             StringBuilder sb = new StringBuilder(text.Length);
-            text = ST.DecodeBase64(text);
+            text = ST.TryDecodeBase64(text);
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -75,20 +81,21 @@ namespace C2.Business.CastleBravo.Binary
         }
 
         private string AES128_Decrypt(string text, string pass)
-        {
-            byte[] key_bytes = Encoding.Default.GetBytes(pass);  // 定然是16位
-            byte[] iv_bytes = new byte[16];
-            byte[] text_bytes = Encoding.Default.GetBytes(text);
+        {   // 默认密码 e45e329feb5d925b
+            byte[] key_bytes = Encoding.ASCII.GetBytes(pass);  // 定然是128位
+            byte[] text_bytes = ST.DecodeBase64ToBytes(text);
 
-            ICryptoTransform transform = cbc.CreateEncryptor(key_bytes, iv_bytes);
+            ICryptoTransform transform = cbc.CreateDecryptor(key_bytes, key_bytes);
             byte[] ret_bytes = transform.TransformFinalBlock(text_bytes, 0, text_bytes.Length);
+            ret_bytes = ret_bytes.Skip(16).ToArray();  // 去掉前16位
 
-            return "assert|eval(base" + Encoding.Default.GetString(ret_bytes).Skip(16);
+            return "assert|eval(base" + Encoding.ASCII.GetString(ret_bytes);
         }
 
         private bool IsDecryptCorrect(string value)
         {
-            return value.Contains("assert|eval(base64_decode");
+            Success = value.Contains("assert|eval(base64_decode");
+            return Success;
         }
     }
 }

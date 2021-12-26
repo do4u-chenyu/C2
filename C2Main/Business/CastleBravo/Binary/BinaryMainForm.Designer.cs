@@ -65,6 +65,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.SuccessLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
@@ -289,6 +290,7 @@
             // 
             // BehinderTabPage
             // 
+            this.BehinderTabPage.Controls.Add(this.SuccessLabel);
             this.BehinderTabPage.Controls.Add(this.HitPasswordLabel);
             this.BehinderTabPage.Controls.Add(this.label19);
             this.BehinderTabPage.Controls.Add(this.DictCountLabel);
@@ -449,6 +451,15 @@
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
             // 
+            // SuccessLabel
+            // 
+            this.SuccessLabel.AutoSize = true;
+            this.SuccessLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.SuccessLabel.Location = new System.Drawing.Point(285, 54);
+            this.SuccessLabel.Name = "SuccessLabel";
+            this.SuccessLabel.Size = new System.Drawing.Size(0, 17);
+            this.SuccessLabel.TabIndex = 23;
+            // 
             // BinaryMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -512,5 +523,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label HitPasswordLabel;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label SuccessLabel;
     }
 }

@@ -55,7 +55,10 @@ namespace MD5Plugin
 
                 for (int i = 0; i < arrByte.Length; i++)
                 {
-                    sb.Append(sep + Convert.ToString(arrByte[i], radix));
+                    if (sep.Length == 2)
+                        sb.Append(sep + Convert.ToString(arrByte[i], radix));
+                    else
+                        sb.Append(Convert.ToString(arrByte[i], radix) + sep);
                 }
                 outputTextBox.Text = sb.ToString();
             }

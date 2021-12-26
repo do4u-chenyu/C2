@@ -104,9 +104,7 @@ namespace MD5Plugin
                     byte[] encryptedData = Convert.FromBase64String(DecryptStr);
                     byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
                     byte[] keyBytes = new byte[16];
-                    int len = pwdBytes.Length;
-                    if (len > keyBytes.Length) len = keyBytes.Length;
-                    Array.Copy(pwdBytes, keyBytes, len);
+                    Array.Copy(pwdBytes, keyBytes, Math.Min(16, pwdBytes.Length));
                     rijndaelCipher.Key = keyBytes;
 
                     ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
