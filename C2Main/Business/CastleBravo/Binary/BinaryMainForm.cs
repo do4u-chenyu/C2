@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using C2.Business.CastleBravo.Binary.Info;
+using System;
 
 namespace C2.Business.CastleBravo.Binary
 {
@@ -165,7 +166,15 @@ namespace C2.Business.CastleBravo.Binary
             InitializeBehinderLabels();
             Behinder bh = new Behinder();
             bh.OnIteratorCount += Bh_OnIteratorCount;
-            BehinderTextBox.Text = bh.Format(bh.Descrypt(BehinderTextBox.Text.Trim()));
+            try 
+            {
+                BehinderTextBox.Text = bh.Format(bh.Descrypt(BehinderTextBox.Text.Trim()));
+            }
+            catch (Exception ex)
+            {
+                BehinderTextBox.Text = ex.Message;
+            }
+            
             HitPasswordLabel.Text = bh.HitPassword;
             SuccessLabel.Text = bh.Success ? "成功" : "完成";
         }

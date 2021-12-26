@@ -19,7 +19,7 @@ namespace C2.Business.CastleBravo.Binary
             {
                 BlockSize = 128,
                 Mode = CipherMode.CBC,
-                Padding = PaddingMode.None,
+                Padding = PaddingMode.PKCS7,
             };
         }
         public int IteratorCount { get; set; }
@@ -61,6 +61,10 @@ namespace C2.Business.CastleBravo.Binary
                 if (IsDecryptCorrect(ret))
                     return ret;
 
+                // 不是128位, 不需要做AES解密, 肯定不是
+                if (text_bytes.Length % 16 != 0)
+                    continue;
+
                 ret = AES128_Decrypt(text_bytes, pass);
                 if (IsDecryptCorrect(ret))
                     return ret;
@@ -69,7 +73,7 @@ namespace C2.Business.CastleBravo.Binary
             HitPassword = string.Empty;
             Success = false;
             OnIteratorCount?.Invoke(this, new EventArgs());
-            return string.Empty;
+            return "没有命中";
         }
 
         // 原生的behinder报文一般人看不懂,需要格式化一下
@@ -108,12 +112,12 @@ namespace C2.Business.CastleBravo.Binary
         }
 
         private string AES128_Decrypt(byte[] text_bytes, string pass)
-        {   // 默认密码 e45e329feb5d925b
+        {   
+            
             byte[] key_bytes = Encoding.ASCII.GetBytes(pass);  // 定然是128位
             ICryptoTransform transform = cbc.CreateDecryptor(key_bytes, key_bytes);
             byte[] ret_bytes = transform.TransformFinalBlock(text_bytes, 0, text_bytes.Length);
             ret_bytes = ret_bytes.Skip(16).ToArray();  // 去掉前16位
-
             return "assert|eval(base" + Encoding.ASCII.GetString(ret_bytes);
         }
 
