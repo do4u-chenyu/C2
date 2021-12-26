@@ -252,7 +252,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems.Add(config.TrojanType);
             lvi.SubItems.Add(config.Status);
             lvi.SubItems.Add(config.ClientVersion);
-            lvi.SubItems.Add(config.SGInfoCollectionConfig);
+            lvi.SubItems.Add(config.ProbeInfo);
             lvi.SubItems.Add(config.IP);
             lvi.SubItems.Add(config.Country);
             lvi.SubItems.Add(config.Country2);
@@ -313,7 +313,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             LV.SelectedItems[0].SubItems[4].Text = cur.TrojanType;     // 木马类型
             LV.SelectedItems[0].SubItems[5].Text = cur.Status;         // 木马状态
             LV.SelectedItems[0].SubItems[6].Text = cur.ClientVersion;  // 客户端版本
-            LV.SelectedItems[0].SubItems[7].Text = cur.SGInfoCollectionConfig; // 后SG字段
+            LV.SelectedItems[0].SubItems[7].Text = cur.ProbeInfo;      // 后SG字段
             LV.SelectedItems[0].SubItems[8].Text = cur.IP;             // 目标IP
             LV.SelectedItems[0].SubItems[9].Text = cur.Country;        // 归属地
             LV.SelectedItems[0].SubItems[10].Text = cur.Country2;      // 归属地
@@ -815,7 +815,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems[7].Text = "进行中";
             using (GuarderUtil.WaitCursor)
                 DoEventsWait(time, Task.Run(() => PostInfoCollectionPayload(task)));
-            lvi.SubItems[7].Text = task.SGInfoCollectionConfig;
+            lvi.SubItems[7].Text = task.ProbeInfo;
         }
         private bool PostInfoCollectionPayload(WebShellTaskConfig task)
         {
@@ -825,18 +825,18 @@ namespace C2.Business.CastleBravo.WebShellTool
                 if (this.sgType == SGType.UserTable)
                 {
                     byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
-                    task.SGInfoCollectionConfig = ClientSetting.ProcessingResults(ret, task.Url, ClientSetting.InfoProbeItems[this.sgType]);
+                    task.ProbeInfo = ClientSetting.ProcessingResults(ret, task.Url, ClientSetting.InfoProbeItems[this.sgType]);
                 }
                 else
                 {
                     string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
-                    task.SGInfoCollectionConfig = ProcessingResults(ret, task.Url);
+                    task.ProbeInfo = ProcessingResults(ret, task.Url);
                 }
 
             }
             catch (Exception ex)
             {
-                task.SGInfoCollectionConfig = ex.Message;
+                task.ProbeInfo = ex.Message;
             }
             return true;
         }

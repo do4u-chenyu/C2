@@ -7,7 +7,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     partial class AddWebShellForm : StandardDialog
     {
-
+        private WebShellTaskConfig wtc;
         public AddWebShellForm()
         {
             InitializeComponent();
@@ -20,6 +20,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.versionComboBox.Items.Add(key);
             this.trojanTypeCombox.SelectedIndex = 0;
             this.versionComboBox.SelectedIndex = 0;
+            wtc = WebShellTaskConfig.Empty;
         }
 
         public WebShellTaskConfig ShowDialog(string createTime)
@@ -30,17 +31,18 @@ namespace C2.Business.CastleBravo.WebShellTool
                                        urlTextBox.Text,
                                        passwordTextBox.Text,
                                        trojanTypeCombox.Text,
-                                       string.Empty,
+                                       wtc == WebShellTaskConfig.Empty ? string.Empty : wtc.Status,
                                        versionComboBox.Text,
-                                       string.Empty,
-                                       string.Empty,
-                                       string.Empty,
-                                       string.Empty,
+                                       wtc == WebShellTaskConfig.Empty ? string.Empty : wtc.ProbeInfo,
+                                       wtc == WebShellTaskConfig.Empty ? string.Empty : wtc.IP,
+                                       wtc == WebShellTaskConfig.Empty ? string.Empty : wtc.Country,
+                                       wtc == WebShellTaskConfig.Empty ? string.Empty : wtc.Country2,
                                        databaseConfigTextBox.Text) : WebShellTaskConfig.Empty;
         }
 
         public WebShellTaskConfig ShowDialog(WebShellTaskConfig task)
         {
+            this.wtc = task;
             remarkTextBox.Text = task.Remark;
             urlTextBox.Text = task.Url;
             passwordTextBox.Text = task.Password;

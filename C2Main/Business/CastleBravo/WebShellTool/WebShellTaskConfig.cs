@@ -15,7 +15,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public string Status;          // 木马是否可连通并可用
         public string TrojanType;      // 木马类型, 如 php, asp, jsp
         public string ClientVersion;   // 客户端版本, 如 中国菜刀, 奥特曼, 哥斯拉 
-        public string SGInfoCollectionConfig;  // 后SG素描结果
+        public string ProbeInfo;       // 探针信息
         public string IP;              // IP地址
         public string Country;         // 归属地
         public string Country2;        // 归属地
@@ -33,7 +33,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 TrojanType = array[4];
                 Status = array[5];
                 ClientVersion = array[6];
-                SGInfoCollectionConfig = array[7];
+                ProbeInfo = array[7];
                 IP = "0.0.0.0";
                 Country = string.Empty;
                 Country2 = string.Empty;
