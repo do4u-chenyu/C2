@@ -359,14 +359,20 @@
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.Designer.cs">
       <DependentUpon>MysqlProbeSet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbe.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbeSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbe.Designer.cs">
-      <DependentUpon>MysqlUserTableProbe.cs</DependentUpon>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbeSet.Designer.cs">
+      <DependentUpon>MysqlUserTableProbeSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\SuperPingSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\WebShellTool\SettingsDialog\SuperPingSet.Designer.cs">
+      <DependentUpon>SuperPingSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.cs">
       <SubType>Form</SubType>
@@ -2175,8 +2181,8 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlProbeSet.resx">
       <DependentUpon>MysqlProbeSet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbe.resx">
-      <DependentUpon>MysqlUserTableProbe.cs</DependentUpon>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\MysqlUserTableProbeSet.resx">
+      <DependentUpon>MysqlUserTableProbeSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.resx">
       <DependentUpon>ReverseShellSet.cs</DependentUpon>

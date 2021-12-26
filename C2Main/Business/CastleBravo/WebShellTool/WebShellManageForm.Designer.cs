@@ -137,6 +137,7 @@
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.SuperPingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -169,62 +170,62 @@
             this.CopyToolStripMenuItem,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 408);
+            this.contextMenuStrip.Size = new System.Drawing.Size(149, 386);
             // 
             // EnterToolStripMenuItem
             // 
             this.EnterToolStripMenuItem.Name = "EnterToolStripMenuItem";
-            this.EnterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EnterToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.EnterToolStripMenuItem.Text = "进入";
             this.EnterToolStripMenuItem.Click += new System.EventHandler(this.EnterToolStripMenuItem_Click);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.EditToolStripMenuItem.Text = "编辑";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
             // 
             // SuscideMenuItem
             // 
             this.SuscideMenuItem.Name = "SuscideMenuItem";
-            this.SuscideMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SuscideMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SuscideMenuItem.Text = "一键Suscide";
             this.SuscideMenuItem.Click += new System.EventHandler(this.SuscideMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
             // 
             // CheckAliveSelectedItemMenuItem
             // 
             this.CheckAliveSelectedItemMenuItem.Name = "CheckAliveSelectedItemMenuItem";
-            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CheckAliveSelectedItemMenuItem.Text = "验活";
             this.CheckAliveSelectedItemMenuItem.Click += new System.EventHandler(this.CheckAliveSelectedItemMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
             // 
             // currentTaskMysqlMenuItem
             // 
             this.currentTaskMysqlMenuItem.Name = "currentTaskMysqlMenuItem";
-            this.currentTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentTaskMysqlMenuItem.Size = new System.Drawing.Size(148, 22);
             this.currentTaskMysqlMenuItem.Text = "Mysql K令";
             this.currentTaskMysqlMenuItem.ToolTipText = "取证固证: 尝试Mysql管理员27000次";
             this.currentTaskMysqlMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
@@ -235,13 +236,13 @@
             this.iniProbeMenu,
             this.userTableProbeMenu});
             this.mysqlProbeMenu.Name = "mysqlProbeMenu";
-            this.mysqlProbeMenu.Size = new System.Drawing.Size(180, 22);
+            this.mysqlProbeMenu.Size = new System.Drawing.Size(148, 22);
             this.mysqlProbeMenu.Text = "Mysql 探针";
             // 
             // iniProbeMenu
             // 
             this.iniProbeMenu.Name = "iniProbeMenu";
-            this.iniProbeMenu.Size = new System.Drawing.Size(180, 22);
+            this.iniProbeMenu.Size = new System.Drawing.Size(156, 22);
             this.iniProbeMenu.Text = "配置文件探针";
             this.iniProbeMenu.ToolTipText = "取证固证: 站点上关于Mysql的配置信息";
             this.iniProbeMenu.Click += new System.EventHandler(this.IniProbeMenu_Click);
@@ -249,7 +250,7 @@
             // userTableProbeMenu
             // 
             this.userTableProbeMenu.Name = "userTableProbeMenu";
-            this.userTableProbeMenu.Size = new System.Drawing.Size(180, 22);
+            this.userTableProbeMenu.Size = new System.Drawing.Size(156, 22);
             this.userTableProbeMenu.Text = "user.MYD探针";
             this.userTableProbeMenu.ToolTipText = "取证固证: 寻找Mysql的user.MYD表文件";
             this.userTableProbeMenu.Click += new System.EventHandler(this.UserTableProbeMenu_Click);
@@ -257,7 +258,7 @@
             // currentSysInfoMenuItem2
             // 
             this.currentSysInfoMenuItem2.Name = "currentSysInfoMenuItem2";
-            this.currentSysInfoMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.currentSysInfoMenuItem2.Size = new System.Drawing.Size(148, 22);
             this.currentSysInfoMenuItem2.Text = "系统信息";
             this.currentSysInfoMenuItem2.ToolTipText = "二进制装备";
             this.currentSysInfoMenuItem2.Click += new System.EventHandler(this.CurrentSysInfoMenuItem_Click);
@@ -265,7 +266,7 @@
             // currentProcessViewMenuItem
             // 
             this.currentProcessViewMenuItem.Name = "currentProcessViewMenuItem";
-            this.currentProcessViewMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentProcessViewMenuItem.Size = new System.Drawing.Size(148, 22);
             this.currentProcessViewMenuItem.Text = "进程列表";
             this.currentProcessViewMenuItem.ToolTipText = "二进制装备";
             this.currentProcessViewMenuItem.Click += new System.EventHandler(this.CurrentProcessView_Click);
@@ -273,7 +274,7 @@
             // currentScheduleTaskMenuItem
             // 
             this.currentScheduleTaskMenuItem.Name = "currentScheduleTaskMenuItem";
-            this.currentScheduleTaskMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentScheduleTaskMenuItem.Size = new System.Drawing.Size(148, 22);
             this.currentScheduleTaskMenuItem.Text = "定时任务";
             this.currentScheduleTaskMenuItem.ToolTipText = "二进制装备";
             this.currentScheduleTaskMenuItem.Click += new System.EventHandler(this.CurrentScheduleTask_Click);
@@ -281,7 +282,7 @@
             // currentLocationInfoMenuItem
             // 
             this.currentLocationInfoMenuItem.Name = "currentLocationInfoMenuItem";
-            this.currentLocationInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentLocationInfoMenuItem.Size = new System.Drawing.Size(148, 22);
             this.currentLocationInfoMenuItem.Text = "地理定位";
             this.currentLocationInfoMenuItem.ToolTipText = "D洞价值";
             this.currentLocationInfoMenuItem.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
@@ -289,45 +290,45 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
             // 
             // ReverseShellMenu
             // 
             this.ReverseShellMenu.Name = "ReverseShellMenu";
-            this.ReverseShellMenu.Size = new System.Drawing.Size(180, 22);
+            this.ReverseShellMenu.Size = new System.Drawing.Size(148, 22);
             this.ReverseShellMenu.Text = "反弹Shell";
             this.ReverseShellMenu.Click += new System.EventHandler(this.ReverseShellMenu_Click);
             // 
             // msfMenu
             // 
             this.msfMenu.Name = "msfMenu";
-            this.msfMenu.Size = new System.Drawing.Size(180, 22);
+            this.msfMenu.Size = new System.Drawing.Size(148, 22);
             this.msfMenu.Text = "MSF联动";
             this.msfMenu.Click += new System.EventHandler(this.MSFMenu_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
             // 
             // ClearAllToolStripMenuItem
             // 
             this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ClearAllToolStripMenuItem.Text = "全部清空";
             this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CopyToolStripMenuItem.Text = "复制到剪切板";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // SaveResultsMenuItem
             // 
             this.SaveResultsMenuItem.Name = "SaveResultsMenuItem";
-            this.SaveResultsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveResultsMenuItem.Size = new System.Drawing.Size(148, 22);
             this.SaveResultsMenuItem.Text = "导出结果";
             this.SaveResultsMenuItem.Click += new System.EventHandler(this.SaveResultsMenuItem_Click);
             // 
@@ -638,7 +639,8 @@
             this.systemInfoToolStripMenuItem,
             this.processViewToolStripMenuItem,
             this.timedTaskMenuItem,
-            this.locationInfoMenuItem});
+            this.locationInfoMenuItem,
+            this.SuperPingMenuItem});
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
@@ -660,28 +662,28 @@
             // allTaskMysqlMenuItem
             // 
             this.allTaskMysqlMenuItem.Name = "allTaskMysqlMenuItem";
-            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
             this.allTaskMysqlMenuItem.Text = "所有项";
             this.allTaskMysqlMenuItem.Click += new System.EventHandler(this.AllTaskMysqlMenuItem_Click);
             // 
             // aliveTaskMysqlMenuItem
             // 
             this.aliveTaskMysqlMenuItem.Name = "aliveTaskMysqlMenuItem";
-            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveTaskMysqlMenuItem.Size = new System.Drawing.Size(112, 22);
             this.aliveTaskMysqlMenuItem.Text = "验活项";
             this.aliveTaskMysqlMenuItem.Click += new System.EventHandler(this.AliveTaskMysqlMenuItem_Click);
             // 
             // currentMysqlTaskMenuItem
             // 
             this.currentMysqlTaskMenuItem.Name = "currentMysqlTaskMenuItem";
-            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentMysqlTaskMenuItem.Size = new System.Drawing.Size(112, 22);
             this.currentMysqlTaskMenuItem.Text = "选定项";
             this.currentMysqlTaskMenuItem.Click += new System.EventHandler(this.CurrentTaskMysqlMenuItem_Click);
             // 
             // mysqlTaskSetMenuItem
             // 
             this.mysqlTaskSetMenuItem.Name = "mysqlTaskSetMenuItem";
-            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(112, 22);
             this.mysqlTaskSetMenuItem.Text = "设置";
             this.mysqlTaskSetMenuItem.Click += new System.EventHandler(this.MysqlTaskSetMenuItem_Click);
             // 
@@ -791,21 +793,21 @@
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.aliveLocationInfo.Text = "验活项";
             this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.CurrentLocationInfo_Click);
             // 
@@ -943,7 +945,7 @@
             // 
             // lvInfoCollection
             // 
-            this.lvInfoCollection.Text = "探针";
+            this.lvInfoCollection.Text = "探针信息";
             this.lvInfoCollection.Width = 111;
             // 
             // lvIP
@@ -1030,6 +1032,12 @@
             this.CopyDirMenu.Size = new System.Drawing.Size(172, 22);
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
+            // 
+            // SuperPingMenuItem
+            // 
+            this.SuperPingMenuItem.Name = "SuperPingMenuItem";
+            this.SuperPingMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SuperPingMenuItem.Text = "超级Ping";
             // 
             // WebShellManageForm
             // 
@@ -1168,5 +1176,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem iniProbeMenu;
         private System.Windows.Forms.ToolStripMenuItem userTableProbeMenu;
+        private System.Windows.Forms.ToolStripMenuItem SuperPingMenuItem;
     }
 }
