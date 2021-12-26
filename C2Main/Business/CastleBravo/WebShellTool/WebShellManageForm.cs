@@ -429,15 +429,24 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
-        private void ResetProgressMenu()
+        private void ResetProgressMenu(bool checkAlive = false)
         {
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
-            this.progressBar.Maximum = LV.Items.Count;
+            this.progressBar.Maximum = checkAlive ? CountAliveItem() : LV.Items.Count;
             this.checkAliveNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
+        }
+
+        private int CountAliveItem()
+        {
+            int sum = 0;
+            foreach (ListViewItem lvi in LV.Items)
+                if (lvi.SubItems[5].Text == "√")
+                    sum++;
+            return sum;
         }
 
         private void UpdateAliveItems(ListViewItem lvi, bool safeMode = false)
@@ -742,7 +751,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
-            ResetProgressMenu();
+            ResetProgressMenu(checkAlive);
             ClearScanResult();
             DoInfoCollectionTask(checkAlive);
             EndCheckAlive();
