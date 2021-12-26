@@ -1,6 +1,7 @@
 ﻿using C2.Controls;
 using C2.Core;
 using C2.Utils;
+using System.Text;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
@@ -73,6 +74,19 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void DatabaseConfigTextBox_Focus(object sender, System.EventArgs e)
         {
             databaseConfigTextBox.ForeColor = System.Drawing.Color.Black;
+        }
+
+        private void SampleLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            if (databaseConfigTextBox.Text.Trim().IsNullOrEmpty())
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("TYPE:mysql")
+                  .AppendLine("HOST:localhost")
+                  .AppendLine("USER:root")
+                  .AppendLine("PASS:root");
+                databaseConfigTextBox.Text = sb.ToString();
+            }
         }
     }
 }
