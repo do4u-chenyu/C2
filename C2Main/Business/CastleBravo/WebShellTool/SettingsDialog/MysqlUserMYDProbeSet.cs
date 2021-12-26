@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
-    partial class UserTableProbe : StandardDialog
+    partial class UserMYDProbeSet : StandardDialog
     {
         public string DBUser { get; set; } = string.Empty;
         public string DBPassword { get; set; } = string.Empty;
-        public UserTableProbe()
+        public UserMYDProbeSet()
         {
             InitializeComponent();
             this.dbUser.GotFocus += OnGotFocus;

@@ -1,6 +1,6 @@
 ﻿namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
 {
-    partial class UserTableProbe
+    partial class UserMYDProbeSet
     {
         /// <summary>
         /// Required designer variable.

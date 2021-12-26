@@ -773,7 +773,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
             this.sgType = SGType.UserTable;
-            UserTableProbe utp = new UserTableProbe();
+            UserMYDProbeSet utp = new UserMYDProbeSet();
             if (utp.ShowDialog() != DialogResult.OK)
                 return;
             string payload = string.Format(ClientSetting.UserTablePayload,
