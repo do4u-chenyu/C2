@@ -97,12 +97,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 CheckAliveSelectedItemMenuItem.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
-                mysqlProbeMenu.Enabled = false;
-                currentTaskMysqlMenuItem.Enabled = false;
-                currentSysInfoMenuItem2.Enabled = false;
-                currentProcessViewMenuItem.Enabled = false;
-                currentScheduleTaskMenuItem.Enabled = false;
-                currentLocationInfoMenuItem.Enabled = false;
+                DDMenuItem.Enabled = false;
             }
         }
         private bool IsThreeGroup()
@@ -129,13 +124,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             CheckAliveSelectedItemMenuItem.Enabled = true;
             ReverseShellMenu.Enabled = true;
             msfMenu.Enabled = true;
-            mysqlProbeMenu.Enabled = true;
-            currentTaskMysqlMenuItem.Enabled = true;
-            currentSysInfoMenuItem2.Enabled = true;
-            currentProcessViewMenuItem.Enabled = true;
-            currentScheduleTaskMenuItem.Enabled = true;
-            currentLocationInfoMenuItem.Enabled = true;
-
+            DDMenuItem.Enabled = true;
             UnlockButton.Enabled = false;//按钮不可用
         }
 
@@ -677,11 +666,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sgType = SGType.MysqlBlasting;
             BatchInfoColletion(true);
         }
-        private void CurrentTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            DoCurrentItemTask();
-        }
+ 
         private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
         {
             new MysqlBlastingSet().ShowDialog();
@@ -697,11 +682,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sgType = SGType.SystemInfo;
             BatchInfoColletion(true);
         }
-        private void CurrentSysInfoMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.SystemInfo;
-            DoCurrentItemTask();
-        }
+
         // 进程信息
         private void AllProcessView_Click(object sender, EventArgs e)
         {
@@ -717,8 +698,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CurrentProcessView_Click(object sender, EventArgs e)
         {
-            this.sgType = SGType.ProcessView;
-            DoCurrentItemTask();
+
 
         }
         // 定时任务
@@ -733,12 +713,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sgType = SGType.ScheduleTask;
             BatchInfoColletion(true);
         }
-        private void CurrentScheduleTask_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.ScheduleTask;
-            DoCurrentItemTask();
 
-        }
         // 地理位置部分
         private void AllLocationInfoMenuItem_Click(object sender, EventArgs e)
         {
@@ -752,11 +727,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             BatchInfoColletion(true);
         }
 
-        private void CurrentLocationInfo_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.LocationInfo;
-            DoCurrentItemTask();
-        }
         private void DoCurrentItemTask()
         {
             this.checkAliveNeedStop = false;
@@ -767,21 +737,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 SingleInfoCollection(item);
             }
         }
-        // User表探针
-        private void UserTableProbeMenu_Click(object sender, EventArgs e)
-        {
-            if (this.LV.SelectedItems.Count == 0)
-                return;
-            this.sgType = SGType.UserTable;
-            UserMYDProbeSet utp = new UserMYDProbeSet();
-            if (utp.ShowDialog() != DialogResult.OK)
-                return;
-            string payload = string.Format(ClientSetting.UserTablePayload,
-                                         "{0}", utp.DBUser,utp.DBPassword);
 
-            ClientSetting.PayloadDict[SGType.UserTable] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0]);
-        }
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
@@ -952,7 +908,42 @@ namespace C2.Business.CastleBravo.WebShellTool
                 
         }
 
-        private void IniProbeMenu_Click(object sender, EventArgs e)
+        private void SuperPingMenuItem_Click(object sender, EventArgs e)
+        {
+            new SuperPingSet().ShowDialog();
+        }
+
+        private void 地理定位ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.LocationInfo;
+            DoCurrentItemTask();
+        }
+
+        private void 定时任务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.ScheduleTask;
+            DoCurrentItemTask();
+        }
+
+        private void 进程列表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.ProcessView;
+            DoCurrentItemTask();
+        }
+
+        private void 系统信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.SystemInfo;
+            DoCurrentItemTask();
+        }
+
+        private void MysqlBlastingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            DoCurrentItemTask();
+        }
+
+        private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
@@ -977,6 +968,20 @@ namespace C2.Business.CastleBravo.WebShellTool
             SingleInfoCollection(this.LV.SelectedItems[0], ts);
         }
 
-    
+        private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            this.sgType = SGType.UserTable;
+            UserMYDProbeSet utp = new UserMYDProbeSet();
+            if (utp.ShowDialog() != DialogResult.OK)
+                return;
+            string payload = string.Format(ClientSetting.UserTablePayload,
+                                         "{0}", utp.DBUser, utp.DBPassword);
+
+            ClientSetting.PayloadDict[SGType.UserTable] = payload;
+            SingleInfoCollection(this.LV.SelectedItems[0]);
+        }
+
     }
 }

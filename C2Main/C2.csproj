@@ -2187,6 +2187,9 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\ReverseShellSet.resx">
       <DependentUpon>ReverseShellSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\WebShellTool\SettingsDialog\SuperPingSet.resx">
+      <DependentUpon>SuperPingSet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\TrojanGeneratorForm.resx">
       <DependentUpon>TrojanGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
