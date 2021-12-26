@@ -459,12 +459,13 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} - 活 {2} - 站 {3} - IP {4}",
+            this.progressMenu.Text = string.Format("{0}/{1} {5} - 活 {2} - 站 {3} - IP {4}",
                 ++progressBar.Value,
                 progressBar.Maximum,
                 NumberOfAlive,
                 NumberOfHost,
-                NumberOfIPAddress);
+                NumberOfIPAddress,
+                progressBar.Value == progressBar.Maximum ? "完成" : string.Empty);
         }
 
         private static void ClearAliveSubItems(ListViewItem lvi)
@@ -576,8 +577,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void SaveResultsMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "文本文件|*.txt";
-            dialog.FileName = "D洞管理" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
+            dialog.Filter = "BCP文件|*.bcp";
+            dialog.FileName = "D洞管理" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
