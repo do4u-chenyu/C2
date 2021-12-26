@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace C2.Business.CastleBravo.Binary
 {
@@ -40,7 +41,12 @@ namespace C2.Business.CastleBravo.Binary
             // 加载字典
             // 尝试 XOR 解密
             // 尝试 AES 128解密            
-            Password dict = Password.GetInstance();
+            Password dict = Password.GetInstance();  
+            byte[] text_bytes = ST.DecodeBase64ToBytes(text);
+            string text_deb64 = ST.TryDecodeBase64(text);
+            if (text_bytes.IsNullOrEmpty() && text_deb64.IsNullOrEmpty())
+                return "格式错误:不是Base64编码";
+     
             foreach (string p in dict.Pass)
             {
                 IteratorCount++;
@@ -51,11 +57,11 @@ namespace C2.Business.CastleBravo.Binary
                 HitPassword = p;
                 string pass = ST.GenerateMD5(p).Substring(0, 16);
 
-                string ret = XOR_Decrypt(text, pass);
+                string ret = XOR_Decrypt(text_deb64, pass);
                 if (IsDecryptCorrect(ret))
                     return ret;
 
-                ret = AES128_Decrypt(text, pass);
+                ret = AES128_Decrypt(text_bytes, pass);
                 if (IsDecryptCorrect(ret))
                     return ret;
             }
@@ -66,13 +72,34 @@ namespace C2.Business.CastleBravo.Binary
             return string.Empty;
         }
 
+        // 原生的behinder报文一般人看不懂,需要格式化一下
+        public string Format(string plain)
+        {
+            string tpl = "assert\\|eval\\(base64_decode\\('([0-9A-Za-z+/]+=*)'";
+            Match mat = Regex.Match(plain, tpl);
+            if (mat.Success)
+            {
+                string payload = mat.Groups[1].Value;
+                payload = ST.TryDecodeBase64(payload);
+                if (!payload.IsNullOrEmpty())
+                {
+                    return "解密成功, 攻击载荷:" + Environment.NewLine +
+                        "=======================================" +
+                        string.Format("{1}{0}{1}", payload, Environment.NewLine) +
+                        "=================原生报文==============" +
+                        string.Format("{1}{0}{1}", plain, Environment.NewLine) +
+                        "=======================================";
+
+                }
+            }
+            return plain;
+        }
+
 
 
         private string XOR_Decrypt(string text, string pass)
         {
             StringBuilder sb = new StringBuilder(text.Length);
-            text = ST.TryDecodeBase64(text);
-
             for (int i = 0; i < text.Length; i++)
             {
                 sb.Append((char)(text[i] ^ pass[(i + 1) & 15]));
@@ -80,11 +107,9 @@ namespace C2.Business.CastleBravo.Binary
             return sb.ToString();
         }
 
-        private string AES128_Decrypt(string text, string pass)
+        private string AES128_Decrypt(byte[] text_bytes, string pass)
         {   // 默认密码 e45e329feb5d925b
             byte[] key_bytes = Encoding.ASCII.GetBytes(pass);  // 定然是128位
-            byte[] text_bytes = ST.DecodeBase64ToBytes(text);
-
             ICryptoTransform transform = cbc.CreateDecryptor(key_bytes, key_bytes);
             byte[] ret_bytes = transform.TransformFinalBlock(text_bytes, 0, text_bytes.Length);
             ret_bytes = ret_bytes.Skip(16).ToArray();  // 去掉前16位

@@ -55,7 +55,6 @@
             this.DictCountLabel = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.BehinderS1Button = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BehinderClearButton = new System.Windows.Forms.Button();
             this.BehinderDecryptButton = new System.Windows.Forms.Button();
@@ -296,7 +295,6 @@
             this.BehinderTabPage.Controls.Add(this.DictCountLabel);
             this.BehinderTabPage.Controls.Add(this.label15);
             this.BehinderTabPage.Controls.Add(this.BehinderS1Button);
-            this.BehinderTabPage.Controls.Add(this.label14);
             this.BehinderTabPage.Controls.Add(this.label2);
             this.BehinderTabPage.Controls.Add(this.BehinderClearButton);
             this.BehinderTabPage.Controls.Add(this.BehinderDecryptButton);
@@ -361,16 +359,6 @@
             this.BehinderS1Button.UseVisualStyleBackColor = true;
             this.BehinderS1Button.Click += new System.EventHandler(this.BehinderS1Button_Click);
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label14.Location = new System.Drawing.Point(552, 3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(131, 25);
-            this.label14.TabIndex = 15;
-            this.label14.Text = "施工中.。。。";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -418,7 +406,7 @@
             this.BehinderTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.BehinderTextBox.Size = new System.Drawing.Size(709, 347);
             this.BehinderTextBox.TabIndex = 7;
-            this.BehinderTextBox.Text = resources.GetString("BehinderTextBox.Text");
+            this.BehinderTextBox.Text = "\r\n";
             // 
             // label10
             // 
@@ -517,7 +505,6 @@
         private System.Windows.Forms.Button BehinderClearButton;
         private System.Windows.Forms.Button BehinderDecryptButton;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button BehinderS1Button;
         private System.Windows.Forms.Label DictCountLabel;
         private System.Windows.Forms.Label label15;

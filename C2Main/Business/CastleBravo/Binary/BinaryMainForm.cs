@@ -24,7 +24,8 @@ namespace C2.Business.CastleBravo.Binary
         private void InitializeOther()
         {
             this.XiseTextBox.GotFocus += TextBox_GotFocus;
-            this.BehinderTextBox.GotFocus += TextBox_GotFocus; 
+            this.BehinderTextBox.GotFocus += TextBox_GotFocus;
+            this.BehinderTextBox.Text = Settings.BehinderPlainText;
         }
 
         private void InitializeBehinderLabels()
@@ -164,9 +165,9 @@ namespace C2.Business.CastleBravo.Binary
             InitializeBehinderLabels();
             Behinder bh = new Behinder();
             bh.OnIteratorCount += Bh_OnIteratorCount;
-            BehinderTextBox.Text = bh.Descrypt(BehinderTextBox.Text.Trim());
+            BehinderTextBox.Text = bh.Format(bh.Descrypt(BehinderTextBox.Text.Trim()));
             HitPasswordLabel.Text = bh.HitPassword;
-            SuccessLabel.Text = bh.Success ? "成功" : "失败";
+            SuccessLabel.Text = bh.Success ? "成功" : "完成";
         }
 
         private void Bh_OnIteratorCount(object sender, System.EventArgs e)
