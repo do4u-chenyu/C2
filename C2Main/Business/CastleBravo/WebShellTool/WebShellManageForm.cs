@@ -993,5 +993,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             SingleInfoCollection(this.LV.SelectedItems[0]);
         }
 
+        private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

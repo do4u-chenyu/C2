@@ -139,6 +139,10 @@
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.重新开始ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.继续上次ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重新开始ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.继续上次ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -625,22 +629,26 @@
             // 
             // refreshAllShellMenu
             // 
+            this.refreshAllShellMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.重新开始ToolStripMenuItem1,
+            this.继续上次ToolStripMenuItem1});
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(136, 22);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(180, 22);
             this.refreshAllShellMenu.Text = "批量验活";
-            this.refreshAllShellMenu.Click += new System.EventHandler(this.CheckAliveAllMenuItem_Click);
             // 
             // refreshOtherMenu2
             // 
+            this.refreshOtherMenu2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.重新开始ToolStripMenuItem,
+            this.继续上次ToolStripMenuItem});
             this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(136, 22);
+            this.refreshOtherMenu2.Size = new System.Drawing.Size(180, 22);
             this.refreshOtherMenu2.Text = "境外站验活";
-            this.refreshOtherMenu2.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
             // 
             // secondRefreshMenu
             // 
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(136, 22);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(180, 22);
             this.secondRefreshMenu.Text = "二刷不活";
             this.secondRefreshMenu.Click += new System.EventHandler(this.SecondeCheckAliveMenu_Click);
             // 
@@ -712,21 +720,21 @@
             // allSysInfoMenuItem
             // 
             this.allSysInfoMenuItem.Name = "allSysInfoMenuItem";
-            this.allSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
             this.allSysInfoMenuItem.Text = "所有项";
             this.allSysInfoMenuItem.Click += new System.EventHandler(this.AllSysInfoMenuItem_Click);
             // 
             // aliveSysInfoMenuItem
             // 
             this.aliveSysInfoMenuItem.Name = "aliveSysInfoMenuItem";
-            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
             this.aliveSysInfoMenuItem.Text = "验活项";
             this.aliveSysInfoMenuItem.Click += new System.EventHandler(this.AliveSysInfoMenuItem_Click);
             // 
             // currentSysInfoMenuItem
             // 
             this.currentSysInfoMenuItem.Name = "currentSysInfoMenuItem";
-            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
             this.currentSysInfoMenuItem.Text = "选定项";
             this.currentSysInfoMenuItem.Click += new System.EventHandler(this.系统信息ToolStripMenuItem_Click);
             // 
@@ -774,21 +782,21 @@
             // allTimedTask
             // 
             this.allTimedTask.Name = "allTimedTask";
-            this.allTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.allTimedTask.Size = new System.Drawing.Size(112, 22);
             this.allTimedTask.Text = "所有项";
             this.allTimedTask.Click += new System.EventHandler(this.AllScheduleTask_Click);
             // 
             // aliveTimedTask
             // 
             this.aliveTimedTask.Name = "aliveTimedTask";
-            this.aliveTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.aliveTimedTask.Size = new System.Drawing.Size(112, 22);
             this.aliveTimedTask.Text = "验活项";
             this.aliveTimedTask.Click += new System.EventHandler(this.AliveScheduleTask_Click);
             // 
             // currentTimedTask
             // 
             this.currentTimedTask.Name = "currentTimedTask";
-            this.currentTimedTask.Size = new System.Drawing.Size(180, 22);
+            this.currentTimedTask.Size = new System.Drawing.Size(112, 22);
             this.currentTimedTask.Text = "选定项";
             this.currentTimedTask.Click += new System.EventHandler(this.定时任务ToolStripMenuItem_Click);
             // 
@@ -805,21 +813,21 @@
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.aliveLocationInfo.Text = "验活项";
             this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.地理定位ToolStripMenuItem_Click);
             // 
@@ -1052,6 +1060,34 @@
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
             // 
+            // 重新开始ToolStripMenuItem
+            // 
+            this.重新开始ToolStripMenuItem.Name = "重新开始ToolStripMenuItem";
+            this.重新开始ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.重新开始ToolStripMenuItem.Text = "重新开始";
+            this.重新开始ToolStripMenuItem.Click += new System.EventHandler(this.RefreshOtherMenu_Click);
+            // 
+            // 继续上次ToolStripMenuItem
+            // 
+            this.继续上次ToolStripMenuItem.Name = "继续上次ToolStripMenuItem";
+            this.继续上次ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.继续上次ToolStripMenuItem.Text = "继续上次";
+            this.继续上次ToolStripMenuItem.Click += new System.EventHandler(this.境外验活_继续上次ToolStripMenuItem_Click);
+            // 
+            // 重新开始ToolStripMenuItem1
+            // 
+            this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
+            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.重新开始ToolStripMenuItem1.Text = "重新开始";
+            this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.CheckAliveAllMenuItem_Click);
+            // 
+            // 继续上次ToolStripMenuItem1
+            // 
+            this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
+            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.继续上次ToolStripMenuItem1.Text = "继续上次";
+            this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.全部验活_继续上次ToolStripMenuItem_Click);
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1191,5 +1227,9 @@
         private System.Windows.Forms.ToolStripMenuItem 定时任务ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 地理定位ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 超级PingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem;
     }
 }
