@@ -395,7 +395,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void DoCheckAliveContinue(bool safeMode)
         {
             ResetProgressMenuValue(CountStatusBlankItem());
-            CheckAliveContinue(safeMode);
+
+            if (CountStatusBlankItem() == 0)
+                progressMenu.Text = "完成";
+
+            CheckAliveContinue(safeMode); 
             EndCheckAlive();
         }
 
@@ -434,7 +438,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 UpdateProgress();
                 CheckSavePoint(); // 5分钟保存一次
             }
-        InitializeLock();//验活不影响功能加锁
+            InitializeLock();//验活不影响功能加锁
         }
 
         private void EndCheckAlive()
