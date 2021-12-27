@@ -19,7 +19,7 @@ namespace C2.Business.CastleBravo.Binary
             {
                 BlockSize = 128,
                 Mode = CipherMode.CBC,
-                Padding = PaddingMode.PKCS7,
+                Padding = PaddingMode.Zeros,
             };
         }
         public int IteratorCount { get; set; }
