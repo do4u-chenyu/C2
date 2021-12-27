@@ -368,7 +368,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SecondCheckAliveTaskStatus()
         {
-            ResetProgressMenu();
+            ResetProgressMenuValue(LV.Items.Count);
 
             foreach (ListViewItem lvi in LV.Items)
             {   // 没启用跳过尸体, 清空 或 死状态 清空
@@ -383,12 +383,19 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void DoCheckAliveAllMenuItemClick(bool safeMode)
         {   // 刷新前先强制清空
-            ResetProgressMenu();
+            ResetProgressMenuValue(LV.Items.Count);
 
             foreach (ListViewItem lvi in LV.Items)
                 ClearAliveSubItems(lvi);
 
             CheckAliveAll(false, safeMode);
+            EndCheckAlive();
+        }
+
+        private void DoCheckAliveContinue(bool safeMode)
+        {
+            ResetProgressMenuValue(CountStatusBlankItem());
+            CheckAliveContinue(safeMode);
             EndCheckAlive();
         }
 
@@ -411,6 +418,24 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeLock();//验活不影响功能加锁
 
         }
+        private void CheckAliveContinue(bool safeMode)
+        {
+            s = DateTime.Now;
+            using (new ControlEnableGuarder(this.contextMenuStrip))
+            using (new ToolStripItemEnableGuarder(this.enableItems))
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                if (checkAliveNeedStop)
+                    break;
+                // 对留存的空状态验活
+                if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
+                    continue;
+                UpdateAliveItems(lvi, safeMode);
+                UpdateProgress();
+                CheckSavePoint(); // 5分钟保存一次
+            }
+        InitializeLock();//验活不影响功能加锁
+        }
 
         private void EndCheckAlive()
         {
@@ -429,22 +454,31 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
         }
 
-        private void ResetProgressMenu(bool checkAlive = false)
+        private void ResetProgressMenuValue(int progressMaxValue)
         {
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
-            this.progressBar.Maximum = checkAlive ? CountAliveItem() : LV.Items.Count;
+            this.progressBar.Maximum = progressMaxValue;
             this.checkAliveNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
         }
 
-        private int CountAliveItem()
+        private int CountStatusAliveItem()
         {
             int sum = 0;
             foreach (ListViewItem lvi in LV.Items)
                 if (lvi.SubItems[5].Text == "√")
+                    sum++;
+            return sum;
+        }
+
+        private int CountStatusBlankItem()
+        {
+            int sum = 0;
+            foreach (ListViewItem lvi in LV.Items)
+                if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
                     sum++;
             return sum;
         }
@@ -751,7 +785,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         //公共函数部分
         private void BatchInfoColletion(bool checkAlive)
         {   // 刷新前先强制清空
-            ResetProgressMenu(checkAlive);
+            ResetProgressMenuValue(checkAlive ? CountStatusAliveItem() : LV.Items.Count);
             ClearScanResult();
             DoInfoCollectionTask(checkAlive);
             EndCheckAlive();
@@ -995,12 +1029,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            DoCheckAliveContinue(false);
         }
 
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            DoCheckAliveContinue(true);
         }
     }
 }
