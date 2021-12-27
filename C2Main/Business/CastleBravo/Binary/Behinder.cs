@@ -46,7 +46,13 @@ namespace C2.Business.CastleBravo.Binary
             string text_deb64 = ST.TryDecodeBase64(text);
             if (text_bytes.IsNullOrEmpty() && text_deb64.IsNullOrEmpty())
                 return "格式错误:不是Base64编码";
-     
+
+            string des = text_bytes.Length % 16 == 0 ?
+                string.Empty : "报文有缺损,但勉强可以解码:" + Environment.NewLine;
+
+            // 缩进到128位整倍数
+            text_bytes = text_bytes.Take((text_bytes.Length >> 4) << 4).ToArray();
+
             foreach (string p in dict.Pass)
             {
                 IteratorCount++;
@@ -59,15 +65,11 @@ namespace C2.Business.CastleBravo.Binary
 
                 string ret = XOR_Decrypt(text_deb64, pass);
                 if (IsDecryptCorrect(ret))
-                    return ret;
-
-                // 不是128位, 不需要做AES解密, 肯定不是
-                if (text_bytes.Length % 16 != 0)
-                    continue;
+                    return des + ret;
 
                 ret = AES128_Decrypt(text_bytes, pass);
                 if (IsDecryptCorrect(ret))
-                    return ret;
+                    return des + ret;
             }
 
             HitPassword = string.Empty;
