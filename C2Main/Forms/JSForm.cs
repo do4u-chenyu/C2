@@ -190,5 +190,37 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(freshTitle) });
         }
         #endregion
+
+        private void SampleButton_Click(object sender, EventArgs e)
+        {
+            string selectedItem = tabBar1.SelectedItem.Tag.ToString();
+            if (doneGlueList.Contains(selectedItem))
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Excel文件|*.xlsx";
+                dialog.FileName = selectedItem.Replace("专项", "") + "模板-" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                using (GuarderUtil.WaitCursor)
+                {
+                    SaveResultToLocal(dialog.FileName, selectedItem.Replace("专项", ""));
+                }
+                HelpUtil.ShowMessageBox("模板保存完毕。");
+            }
+            else
+            {
+                HelpUtil.ShowMessageBox("该专项尚未完成，敬请期待!");
+                return;
+            }
+            
+        }
+
+        private void SaveResultToLocal(string path, string item)
+        {
+            string localExcelPath = Path.Combine(Application.StartupPath, "Resources", item + "模板.xlsx");
+            FileUtil.FileCopy(localExcelPath, path);
+        }
     }
 }

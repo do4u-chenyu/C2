@@ -112,6 +112,7 @@
             this.sampleButton.TabIndex = 4;
             this.sampleButton.Text = "模板样例";
             this.sampleButton.UseVisualStyleBackColor = false;
+            this.sampleButton.Click += new System.EventHandler(this.SampleButton_Click);
             // 
             // browserButton
             // 

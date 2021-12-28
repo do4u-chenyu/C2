@@ -4284,6 +4284,15 @@
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Resources\涉枪模板.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\涉赌模板.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\涉黄模板.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\词云样例.png" />
     <None Include="Resources\社交关系图样例.png" />
     <None Include="Resources\词云样例1.png" />
