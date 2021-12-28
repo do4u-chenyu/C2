@@ -182,6 +182,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
@@ -4402,6 +4403,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\IAOLab\Webbrowser\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserInstallSet\UserInstallSet.csproj">
+      <Project>{8587D0E2-E1F2-442D-B729-897391FB2881}</Project>
+      <Name>UserInstallSet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

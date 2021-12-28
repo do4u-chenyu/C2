@@ -69,14 +69,14 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(801, 349);
+            this.dataGridView.Size = new System.Drawing.Size(1034, 418);
             this.dataGridView.TabIndex = 0;
             // 
             // GlueDetailInfoDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 349);
+            this.ClientSize = new System.Drawing.Size(1034, 418);
             this.Controls.Add(this.dataGridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
