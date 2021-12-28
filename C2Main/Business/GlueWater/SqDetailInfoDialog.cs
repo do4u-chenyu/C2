@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.GlueWater
 {
-    public partial class DbDetailInfoDialog : Form
+    public partial class SqDetailInfoDialog : Form
     {
         public DataTable DetailTable;
         public DataTable dt;
@@ -20,7 +15,7 @@ namespace C2.Business.GlueWater
         public string postInfo;
 
 
-        public DbDetailInfoDialog()
+        public SqDetailInfoDialog()
         {
             InitializeComponent();
             DetailTable = new DataTable();
@@ -36,17 +31,23 @@ namespace C2.Business.GlueWater
             dt.Columns.Add(new DataColumn("时间", typeof(string)));
             dt.Columns.Add(new DataColumn("回帖信息", typeof(string)));
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("微软雅黑", 10, FontStyle.Bold);
+            
+            dataGridView1.Columns[0].FillWeight = 15; 
+            dataGridView1.Columns[1].FillWeight = 25; 
+            dataGridView1.Columns[2].FillWeight = 70;
         }
 
 
         public void RefreshDGV()
         {
+            dataGridView1.Refresh();
             dataGridView.DataSource = DetailTable;
+            
             dataGridView.Columns[0].Visible = false;
             dataGridView.Columns[1].Visible = false;
             dataGridView.Columns[5].Visible = false;
             dataGridView.Columns[6].Visible = false;
-
+            
             int width = 0;
             for (int i = 0; i < this.dataGridView.Columns.Count; i++)
             {
@@ -55,7 +56,16 @@ namespace C2.Business.GlueWater
 
                 this.dataGridView.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+
+            //默认展示第一行详情信息
+            topic = dataGridView.Rows[0].Cells["主题"].Value.ToString().Trim();
+            postInfo = dataGridView.Rows[0].Cells["发帖信息"].Value.ToString().Trim();
+            replyInfo = dataGridView.Rows[0].Cells["回帖信息"].Value.ToString().Trim();
+            CountReplyNums();
+            deatilGridView();
+
             dataGridView.Refresh();
+            
         }
 
         public void CountReplyNums()
@@ -100,13 +110,12 @@ namespace C2.Business.GlueWater
             }
         }
 
-       
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //object objCellValue = this.dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             try
             {
-                topic = dataGridView.Rows[e.RowIndex].Cells["发帖主题"].Value.ToString().Trim();
+                topic = dataGridView.Rows[e.RowIndex].Cells["主题"].Value.ToString().Trim();
                 postInfo = dataGridView.Rows[e.RowIndex].Cells["发帖信息"].Value.ToString().Trim();
                 replyInfo = dataGridView.Rows[e.RowIndex].Cells["回帖信息"].Value.ToString().Trim();
                 

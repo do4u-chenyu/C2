@@ -48,6 +48,13 @@ namespace MD5Plugin
                 rijndaelCipher.Padding = PaddingMode.Zeros;
             else if (paddingMode == "None")
                 rijndaelCipher.Padding = PaddingMode.None;
+            else if (paddingMode == "PKCS7")
+                rijndaelCipher.Padding = PaddingMode.PKCS7;
+            else if (paddingMode == "ANSIX923")
+                rijndaelCipher.Padding = PaddingMode.ANSIX923;
+            else if (paddingMode == "ISO10126")
+                rijndaelCipher.Padding = PaddingMode.ISO10126;
+
 
             if (dataBlockMode == "128位")
                 rijndaelCipher.BlockSize = 128;
@@ -90,7 +97,6 @@ namespace MD5Plugin
 
         public override void Decode(string DecryptStr)
         {
-
             string Key = textBoxEncryptionkey.Text;
             if (outputTextBox.Text == "请把你需要解密的内容粘贴在这里")
             {
@@ -99,13 +105,14 @@ namespace MD5Plugin
             else
             {
                 try
-                {
+                {           
                     Setting(rijndaelCipher);
                     byte[] encryptedData = Convert.FromBase64String(DecryptStr);
                     byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
                     byte[] keyBytes = new byte[16];
                     Array.Copy(pwdBytes, keyBytes, Math.Min(16, pwdBytes.Length));
                     rijndaelCipher.Key = keyBytes;
+                    //rijndaelCipher.Key = Convert.FromBase64String(Key); 
 
                     ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
                     byte[] plainText = transform.TransformFinalBlock(encryptedData, 0, encryptedData.Length);

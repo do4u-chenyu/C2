@@ -110,7 +110,10 @@
             this.PaddingcomboBox.FormattingEnabled = true;
             this.PaddingcomboBox.Items.AddRange(new object[] {
             "Zeros",
-            "None"});
+            "None",
+            "PKCS7",
+            "ANSIX923",
+            "ISO10126"});
             this.PaddingcomboBox.Location = new System.Drawing.Point(418, 353);
             this.PaddingcomboBox.Name = "PaddingcomboBox";
             this.PaddingcomboBox.Size = new System.Drawing.Size(74, 25);

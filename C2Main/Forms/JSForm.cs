@@ -17,7 +17,7 @@ namespace C2.Forms
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
         IGlueSetting glueSetting;
         GlueDetailInfoDialog detailDialog;
-        DbDetailInfoDialog dbDeatilDialog;
+        SqDetailInfoDialog dbDeatilDialog;
         private List<string> doneGlueList;
 
         public JSForm()
@@ -29,7 +29,7 @@ namespace C2.Forms
             webBrowser.ObjectForScripting = this;
 
             detailDialog = new GlueDetailInfoDialog();
-            dbDeatilDialog = new DbDetailInfoDialog();
+            dbDeatilDialog = new SqDetailInfoDialog();
             glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
             doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
 
