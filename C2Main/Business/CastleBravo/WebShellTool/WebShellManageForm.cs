@@ -990,14 +990,20 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.LV.SelectedItems.Count == 0)
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0) 
                 return;
+            SelectedInfoColletion(timeout);
+        }
+        private int ConfigPayloadOk()
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return 0;
 
             MysqlProbeSet mps = new MysqlProbeSet();
             if (mps.ShowDialog() != DialogResult.OK)
-                return;
+                return 0;
 
-            int ts = mps.TimeoutSeconds;
             int ps = mps.ProbeStrategy;
             string files = mps.SearchFiles.Trim();
             string fields = mps.SearchFields.Trim();
@@ -1010,9 +1016,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 ST.EncodeBase64(fields));
 
             ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
-            SelectedInfoColletion(ts);
+            return mps.TimeoutSeconds;
         }
-
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
