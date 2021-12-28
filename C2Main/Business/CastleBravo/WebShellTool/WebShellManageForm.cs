@@ -469,7 +469,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
-            this.actionStatusLabel.Text = "进行中";
         }
 
         private int CountStatusAliveItem()
@@ -777,15 +776,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             
             this.checkAliveNeedStop = false;
-            
+            ResetProgressMenuValue(LV.SelectedItems.Count);
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem item in this.LV.SelectedItems)
+                foreach (ListViewItem item in LV.SelectedItems)
                 {
                     if (checkAliveNeedStop)
                         break;
                     SingleInfoCollection(item);
+                    UpdateProgress();
                 }
         }
 

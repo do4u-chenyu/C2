@@ -214,7 +214,7 @@
             // 
             this.CheckAliveSelectedItemMenuItem.Name = "CheckAliveSelectedItemMenuItem";
             this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.CheckAliveSelectedItemMenuItem.Text = "验活";
+            this.CheckAliveSelectedItemMenuItem.Text = "当前项验活";
             this.CheckAliveSelectedItemMenuItem.Click += new System.EventHandler(this.CheckAliveSelectedItemMenuItem_Click);
             // 
             // DDMenuItem
