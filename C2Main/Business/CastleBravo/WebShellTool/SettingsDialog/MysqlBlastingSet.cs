@@ -8,6 +8,7 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         private string Account { get => this.mysqlAccount.Text.Trim(); }
         private string DictAddr { get => this.addrTextBox.Text.Trim(); }
+        private string Timeout { get => timeoutTB.Text.Trim(); }
 
         public MysqlBlastingSet()
         {
@@ -19,6 +20,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             this.mysqlAccount.Text = ClientSetting.MysqlAccount;
             this.addrTextBox.Text = ClientSetting.MysqlDictAddr;
+            this.timeoutTB.Text = ClientSetting.MysqlTimeout;
         }
         protected override bool OnOKButtonClick()
         {
@@ -27,8 +29,11 @@ namespace C2.Business.CastleBravo.WebShellTool
                 HelpUtil.ShowMessageBox("【账号】和【地址】不能为空。");
                 return false;
             }
+
             ClientSetting.MysqlDictAddr = DictAddr;
             ClientSetting.MysqlAccount = Account;
+            ClientSetting.MysqlTimeout = Timeout;
+
             return base.OnOKButtonClick();
         }
     }

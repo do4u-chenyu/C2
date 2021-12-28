@@ -98,6 +98,7 @@
             this.MB_所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MB_验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MB_选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MB_设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.配置文件探针ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.配置文件探针_所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.配置文件探针_验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,7 +107,6 @@
             this.UserMYD探针_所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserMYD探针_验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UserMYD探针_选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mysqlTaskSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aliveSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -711,8 +711,7 @@
             this.passwdBlastingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mysqlBlastingToolStripMenuItem1,
             this.配置文件探针ToolStripMenuItem1,
-            this.UserMYD探针ToolStripMenuItem1,
-            this.mysqlTaskSetMenuItem});
+            this.UserMYD探针ToolStripMenuItem1});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
             this.passwdBlastingMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwdBlastingMenuItem.Text = "Mysql 探针 ";
@@ -722,7 +721,8 @@
             this.mysqlBlastingToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MB_所有项ToolStripMenuItem,
             this.MB_验活项ToolStripMenuItem,
-            this.MB_选定项ToolStripMenuItem});
+            this.MB_选定项ToolStripMenuItem,
+            this.MB_设置ToolStripMenuItem});
             this.mysqlBlastingToolStripMenuItem1.Name = "mysqlBlastingToolStripMenuItem1";
             this.mysqlBlastingToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.mysqlBlastingToolStripMenuItem1.Text = "Mysql Blasting";
@@ -747,6 +747,13 @@
             this.MB_选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.MB_选定项ToolStripMenuItem.Text = "选定项";
             this.MB_选定项ToolStripMenuItem.Click += new System.EventHandler(this.MB_选定项ToolStripMenuItem_Click);
+            // 
+            // MB_设置ToolStripMenuItem
+            // 
+            this.MB_设置ToolStripMenuItem.Name = "MB_设置ToolStripMenuItem";
+            this.MB_设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.MB_设置ToolStripMenuItem.Text = "设置";
+            this.MB_设置ToolStripMenuItem.Click += new System.EventHandler(this.MB_设置ToolStripMenuItem_Click);
             // 
             // 配置文件探针ToolStripMenuItem1
             // 
@@ -810,13 +817,6 @@
             this.UserMYD探针_选定项ToolStripMenuItem.Text = "选定项";
             this.UserMYD探针_选定项ToolStripMenuItem.Click += new System.EventHandler(this.UserMYD探针_选定项ToolStripMenuItem_Click);
             // 
-            // mysqlTaskSetMenuItem
-            // 
-            this.mysqlTaskSetMenuItem.Name = "mysqlTaskSetMenuItem";
-            this.mysqlTaskSetMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mysqlTaskSetMenuItem.Text = "设置";
-            this.mysqlTaskSetMenuItem.Click += new System.EventHandler(this.MysqlTaskSetMenuItem_Click);
-            // 
             // systemInfoToolStripMenuItem
             // 
             this.systemInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -830,21 +830,21 @@
             // allSysInfoMenuItem
             // 
             this.allSysInfoMenuItem.Name = "allSysInfoMenuItem";
-            this.allSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.allSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
             this.allSysInfoMenuItem.Text = "所有项";
             this.allSysInfoMenuItem.Click += new System.EventHandler(this.AllSysInfoMenuItem_Click);
             // 
             // aliveSysInfoMenuItem
             // 
             this.aliveSysInfoMenuItem.Name = "aliveSysInfoMenuItem";
-            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
             this.aliveSysInfoMenuItem.Text = "验活项";
             this.aliveSysInfoMenuItem.Click += new System.EventHandler(this.AliveSysInfoMenuItem_Click);
             // 
             // currentSysInfoMenuItem
             // 
             this.currentSysInfoMenuItem.Name = "currentSysInfoMenuItem";
-            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(112, 22);
             this.currentSysInfoMenuItem.Text = "选定项";
             this.currentSysInfoMenuItem.Click += new System.EventHandler(this.系统信息ToolStripMenuItem_Click);
             // 
@@ -1269,7 +1269,6 @@
         private System.Windows.Forms.ToolStripMenuItem 变种14构造Base64DecodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton infoCollectionMenu;
         private System.Windows.Forms.ToolStripMenuItem passwdBlastingMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mysqlTaskSetMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看结果ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel infoConfigStatus;
         private System.Windows.Forms.ToolStripMenuItem msfMenu;
@@ -1330,5 +1329,6 @@
         private System.Windows.Forms.ToolStripMenuItem UserMYD探针_所有项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UserMYD探针_验活项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UserMYD探针_选定项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MB_设置ToolStripMenuItem;
     }
 }

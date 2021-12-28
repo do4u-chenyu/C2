@@ -712,12 +712,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         #region 后信息收集模块,该模块部分payload是存储在境外服务器103.43.17.9上的图片马
-        // mysql部分
- 
-        private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
-        {
-            new MysqlBlastingSet().ShowDialog();
-        }
         //系统信息
         private void AllSysInfoMenuItem_Click(object sender, EventArgs e)
         {
@@ -1090,6 +1084,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void UserMYD探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MB_设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new MysqlBlastingSet().ShowDialog();
         }
     }
 }
