@@ -408,17 +408,18 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (checkAliveNeedStop)
-                    break;
-                // 启用二刷
-                if (skipAlive && lvi.SubItems[5].Text != "待")
-                    continue;
-                UpdateAliveItems(lvi, safeMode);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    if (checkAliveNeedStop)
+                        break;
+                    // 启用二刷
+                    if (skipAlive && lvi.SubItems[5].Text != "待")
+                        continue;
+                    UpdateAliveItems(lvi, safeMode);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
             InitializeLock();//验活不影响功能加锁
 
         }
@@ -427,23 +428,23 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (checkAliveNeedStop)
-                    break;
-                // 对留存的空状态验活
-                if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                    continue;
-                UpdateAliveItems(lvi, safeMode);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    if (checkAliveNeedStop)
+                        break;
+                    // 对留存的空状态验活
+                    if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
+                        continue;
+                    UpdateAliveItems(lvi, safeMode);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
             InitializeLock();//验活不影响功能加锁
         }
 
         private void EndCheckAlive()
         {
-            actionStatusLabel.Text = "已停止";
             RefreshTasks();
             SaveDB();
         }
@@ -746,11 +747,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             BatchInfoColletion(true);
         }
 
-        private void CurrentProcessView_Click(object sender, EventArgs e)
-        {
-
-
-        }
         // 定时任务
         private void AllScheduleTask_Click(object sender, EventArgs e)
         {
@@ -779,13 +775,18 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void DoCurrentItemTask()
         {
+            
             this.checkAliveNeedStop = false;
-            foreach (ListViewItem item in this.LV.SelectedItems)
-            {
-                if (checkAliveNeedStop)
-                    break;
-                SingleInfoCollection(item);
-            }
+            
+            using (new ControlEnableGuarder(this.contextMenuStrip))
+            using (new ToolStripItemEnableGuarder(this.enableItems))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem item in this.LV.SelectedItems)
+                {
+                    if (checkAliveNeedStop)
+                        break;
+                    SingleInfoCollection(item);
+                }
         }
 
         //公共函数部分
@@ -801,6 +802,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in LV.Items)
                 {
                     if (checkAliveNeedStop)
