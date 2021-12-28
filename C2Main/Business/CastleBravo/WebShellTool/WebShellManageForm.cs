@@ -347,7 +347,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
-            this.checkAliveNeedStop = false;
+            this.actionNeedStop = false;
             if (this.LV.SelectedItems.Count == 0)
                 return;
             ResetProgressMenuValue(LV.SelectedItems.Count);
@@ -367,11 +367,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             DoCheckAliveAllMenuItemClick(false);
         }
 
-        private bool checkAliveNeedStop = false;
+        private bool actionNeedStop = false;
 
         private void CheckAliveStopMenu_Click(object sender, EventArgs e)
         {
-            checkAliveNeedStop = true;
+            actionNeedStop = true;
         }
 
         private void SecondCheckAliveTaskStatus()
@@ -421,7 +421,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in items)
                 {
-                    if (checkAliveNeedStop)
+                    if (actionNeedStop)
                         break;
                     // 启用二刷
                     if (skipAlive && lvi.SubItems[5].Text != "待")
@@ -440,7 +440,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in LV.Items)
                 {
-                    if (checkAliveNeedStop)
+                    if (actionNeedStop)
                         break;
                     // 对留存的空状态验活
                     if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
@@ -474,7 +474,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
             this.progressBar.Maximum = progressMaxValue;
-            this.checkAliveNeedStop = false;
+            this.actionNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
@@ -679,7 +679,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.checkAliveNeedStop = true;
+            this.actionNeedStop = true;
             using (GuarderUtil.WaitCursor)
             {
                 RefreshTasks();
@@ -784,14 +784,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void DoCurrentItemTask()
         {
             
-            this.checkAliveNeedStop = false;
+            this.actionNeedStop = false;
             ResetProgressMenuValue(LV.SelectedItems.Count);
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem item in LV.SelectedItems)
                 {
-                    if (checkAliveNeedStop)
+                    if (actionNeedStop)
                         break;
                     SingleInfoCollection(item);
                     UpdateProgress();
@@ -803,30 +803,38 @@ namespace C2.Business.CastleBravo.WebShellTool
         {   // 刷新前先强制清空
             ResetProgressMenuValue(checkAlive ? CountStatusAliveItem() : LV.Items.Count);
             ClearScanResult();
-            DoInfoCollectionTask(checkAlive);
+            DoInfoCollectionTask(LV.Items, checkAlive, 60);
             EndCheckAlive();
         }
-        private void DoInfoCollectionTask(bool checkAlive)
+
+        private void SelectedInfoColletion(int time = 60)
+        {
+            ResetProgressMenuValue(LV.SelectedItems.Count);
+            ClearScanResult();
+            DoInfoCollectionTask(LV.SelectedItems, false, time);
+            EndCheckAlive();
+        }
+        private void DoInfoCollectionTask(IList items, bool checkAlive, int time)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem lvi in LV.Items)
+                foreach (ListViewItem lvi in items)
                 {
-                    if (checkAliveNeedStop)
+                    if (actionNeedStop)
                         break;
                     if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
                     {
                         lvi.SubItems[7].Text = "跳";
                         continue;
                     }
-                    SingleInfoCollection(lvi);
+                    SingleInfoCollection(lvi, time);
                     UpdateProgress();
                     CheckSavePoint(); // 5分钟保存一次
                 }
         }
-        private void SingleInfoCollection(ListViewItem lvi,int time = 60)
+        private void SingleInfoCollection(ListViewItem lvi, int time = 60)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
             lvi.SubItems[7].Text = "进行中";
@@ -1026,7 +1034,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 ST.EncodeBase64(fields));
 
             ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0], ts);
+            SelectedInfoColletion(ts);
         }
 
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1041,7 +1049,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                          "{0}", utp.DBUser, utp.DBPassword);
 
             ClientSetting.PayloadDict[SGType.UserTable] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0]);
+            SelectedInfoColletion();
         }
 
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
