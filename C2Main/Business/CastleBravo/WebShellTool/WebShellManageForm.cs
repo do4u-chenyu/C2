@@ -2,6 +2,7 @@
 using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -349,9 +350,16 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.checkAliveNeedStop = false;
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            UpdateAliveItems(LV.SelectedItems[0]);
+            ResetProgressMenuValue(LV.SelectedItems.Count);
+
+            DoCheckAliveItems(LV.SelectedItems, false, false);
             RefreshTasks();
             SaveDB();
+        }
+
+        private void CheckAliveAll(bool skipAlive, bool safeMode)
+        {
+            DoCheckAliveItems(LV.Items, skipAlive, safeMode);
         }
 
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
@@ -403,13 +411,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             EndCheckAlive();
         }
 
-        private void CheckAliveAll(bool skipAlive, bool safeMode)
+
+
+        private void DoCheckAliveItems(IList items, bool skipAlive, bool safeMode)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem lvi in LV.Items)
+                foreach (ListViewItem lvi in items)
                 {
                     if (checkAliveNeedStop)
                         break;
@@ -421,7 +431,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                     CheckSavePoint(); // 5分钟保存一次
                 }
             InitializeLock();//验活不影响功能加锁
-
         }
         private void CheckAliveContinue(bool safeMode)
         {
