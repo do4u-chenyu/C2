@@ -443,6 +443,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void EndCheckAlive()
         {
+            actionStatusLabel.Text = "已停止";
             RefreshTasks();
             SaveDB();
         }
@@ -467,6 +468,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
+            this.actionStatusLabel.Text = "进行中";
         }
 
         private int CountStatusAliveItem()
