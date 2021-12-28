@@ -1020,19 +1020,25 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.LV.SelectedItems.Count == 0)
+            if (!UserMYDPayloadOK())
                 return;
-            this.sgType = SGType.UserTable;
+            SelectedInfoColletion();
+        }
+        private bool UserMYDPayloadOK()
+        {
+            bool buildOK = true;
+            if (this.LV.SelectedItems.Count == 0)
+                return !buildOK;           
             UserMYDProbeSet utp = new UserMYDProbeSet();
             if (utp.ShowDialog() != DialogResult.OK)
-                return;
+                return !buildOK;
+            this.sgType = SGType.UserTable;
             string payload = string.Format(ClientSetting.UserTablePayload,
                                          "{0}", utp.DBUser, utp.DBPassword);
 
             ClientSetting.PayloadDict[SGType.UserTable] = payload;
-            SelectedInfoColletion();
+            return buildOK;
         }
-
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DoCheckAliveContinue(false);
@@ -1087,17 +1093,23 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UserMYD探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (!UserMYDPayloadOK())
+                return;
+            BatchInfoColletion(false);
         }
 
         private void UserMYD探针_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (!UserMYDPayloadOK())
+                return;
+            BatchInfoColletion(true);
         }
 
         private void UserMYD探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (!UserMYDPayloadOK())
+                return;
+            SelectedInfoColletion();
         }
 
         private void MB_设置ToolStripMenuItem_Click(object sender, EventArgs e)
