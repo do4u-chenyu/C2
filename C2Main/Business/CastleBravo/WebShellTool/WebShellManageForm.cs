@@ -781,11 +781,11 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         //公共函数部分
-        private void BatchInfoColletion(bool checkAlive)
+        private void BatchInfoColletion(bool checkAlive,int time = 60)
         {   // 刷新前先强制清空
             ResetProgressMenuValue(checkAlive ? CountStatusAliveItem() : LV.Items.Count);
             ClearScanResult();
-            DoInfoCollectionTask(LV.Items, checkAlive, 60);
+            DoInfoCollectionTask(LV.Items, checkAlive, time);
             EndCheckAlive();
         }
 
@@ -1063,17 +1063,26 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 配置文件探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0)
+                return;
+            BatchInfoColletion(false, timeout);
         }
 
         private void 配置文件探针_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0)
+                return;
+            BatchInfoColletion(true, timeout);
         }
 
         private void 配置文件探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0)
+                return;
+            SelectedInfoColletion(timeout);
         }
 
         private void UserMYD探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
