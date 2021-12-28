@@ -817,7 +817,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     CheckSavePoint(); // 5分钟保存一次
                 }
         }
-        private void SingleInfoCollection(ListViewItem lvi,int time = 90)
+        private void SingleInfoCollection(ListViewItem lvi,int time = 60)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
             lvi.SubItems[7].Text = "进行中";
@@ -832,12 +832,12 @@ namespace C2.Business.CastleBravo.WebShellTool
                 string payload = string.Format(ClientSetting.PayloadDict[this.sgType], task.Password);
                 if (this.sgType == SGType.UserTable)
                 {
-                    byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
+                    byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 30000, Proxy);
                     task.ProbeInfo = ClientSetting.ProcessingResults(ret, task.Url, ClientSetting.InfoProbeItems[this.sgType]);
                 }
                 else
                 {
-                    string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
+                    string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 30000, Proxy);
                     task.ProbeInfo = ProcessingResults(ret, task.Url);
                 }
 
@@ -871,7 +871,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
             int index = new Random().Next(0, ClientSetting.BDLocationAK.Count - 1);
             string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
-            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
+            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 8000, Proxy));
             Match m = r.Match(jsonResult);
             return m.Success ? rawResult + ":" + m.Groups[1].Value : string.Empty;
         }
