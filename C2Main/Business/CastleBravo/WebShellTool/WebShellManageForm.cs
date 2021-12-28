@@ -990,6 +990,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
             int timeout = ConfigPayloadOk();
             if (timeout == 0) 
                 return;
@@ -997,9 +999,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private int ConfigPayloadOk()
         {
-            if (this.LV.SelectedItems.Count == 0)
-                return 0;
-
             MysqlProbeSet mps = new MysqlProbeSet();
             if (mps.ShowDialog() != DialogResult.OK)
                 return 0;
@@ -1020,15 +1019,15 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
             if (!UserMYDPayloadOK())
                 return;
             SelectedInfoColletion();
         }
         private bool UserMYDPayloadOK()
         {
-            bool buildOK = true;
-            if (this.LV.SelectedItems.Count == 0)
-                return !buildOK;           
+            bool buildOK = true;             
             UserMYDProbeSet utp = new UserMYDProbeSet();
             if (utp.ShowDialog() != DialogResult.OK)
                 return !buildOK;
@@ -1085,6 +1084,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 配置文件探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
             int timeout = ConfigPayloadOk();
             if (timeout == 0)
                 return;
@@ -1107,6 +1108,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UserMYD探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
             if (!UserMYDPayloadOK())
                 return;
             SelectedInfoColletion();
