@@ -80,8 +80,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.trojanMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
-                this.allTaskMysqlMenuItem,
-                this.aliveTaskMysqlMenuItem
             };
         }
         private void InitializeLock()
@@ -715,16 +713,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         #region 后信息收集模块,该模块部分payload是存储在境外服务器103.43.17.9上的图片马
         // mysql部分
-        private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            BatchInfoColletion(false);
-        }
-        private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            BatchInfoColletion(true);
-        }
  
         private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
         {
@@ -1006,12 +994,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             DoCurrentItemTask();
         }
 
-        private void MysqlBlastingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            DoCurrentItemTask();
-        }
-
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
@@ -1060,6 +1042,54 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DoCheckAliveContinue(true);
+        }
+
+        private void MB_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            BatchInfoColletion(false);
+        }
+
+        private void MB_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            BatchInfoColletion(true);
+        }
+
+        private void MB_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            DoCurrentItemTask();
+        }
+
+        private void 配置文件探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 配置文件探针_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 配置文件探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserMYD探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserMYD探针_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserMYD探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
