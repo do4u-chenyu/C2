@@ -37,7 +37,11 @@ namespace C2.Business.CastleBravo
         public bool StartTask(List<string> md5List, out CastleBravoAPIResponse cbaResp)
         {
             cbaResp = new CastleBravoAPIResponse();
-            string pairs = "md5List=" + string.Join(",", md5List);
+            List<string> transMd5List = new List<string>();
+            foreach(string md5 in md5List)
+                transMd5List.Add(ST.UrlEncode(md5));
+
+            string pairs = "md5List=" + string.Join(",", transMd5List);
             try
             {
                 Response resp = httpHandler.PostCode(SearchUrl, pairs);
