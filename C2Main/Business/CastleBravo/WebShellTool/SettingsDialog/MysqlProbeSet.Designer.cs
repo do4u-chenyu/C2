@@ -48,7 +48,7 @@
             this.timeoutTB.Name = "timeoutTB";
             this.timeoutTB.Size = new System.Drawing.Size(63, 22);
             this.timeoutTB.TabIndex = 1;
-            this.timeoutTB.Text = "600";
+            this.timeoutTB.Text = "120";
             // 
             // label1
             // 

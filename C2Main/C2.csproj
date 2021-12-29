@@ -4087,6 +4087,15 @@
     <None Include="Resources\Templates\DocxExample.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Templates\JS模板\涉枪模板.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\JS模板\涉赌模板.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\JS模板\涉黄模板.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Templates\JS自动化过滤流程.iao">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

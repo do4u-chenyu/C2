@@ -47,7 +47,7 @@ namespace C2.Utils
 
         public class ControlEnableGuarder : IDisposable
         {
-            private readonly Control[] cts;
+            protected readonly Control[] cts;
             public ControlEnableGuarder(Control ct)
             {
                 this.cts = new Control[] { ct };
@@ -59,7 +59,7 @@ namespace C2.Utils
                 foreach (Control ct in this.cts)
                     ct.Enabled = false;
             }
-            public void Dispose()
+            public virtual void Dispose()
             {
                 foreach (Control ct in this.cts)
                     ct.Enabled = true;
@@ -83,6 +83,42 @@ namespace C2.Utils
                 foreach (ToolStripItem item in this.items)
                     item.Enabled = !item.Enabled;
             }
+        }
+
+        public class ToolStripItemTextGuarder : IDisposable
+        {
+            private readonly ToolStripItem item;
+            private readonly string end;
+            public ToolStripItemTextGuarder(ToolStripItem item, string begin, string end)
+            {
+                this.item = item;
+                this.end = end;
+                this.item.Text = begin;
+            }
+
+            public void Dispose()
+            {
+                this.item.Text = end;
+            }
+
+        }
+
+        public class ControlTextGuarder : IDisposable
+        {
+            private readonly Control ct;
+            private readonly string end;
+            public ControlTextGuarder(Control ct, string begin, string end)
+            {
+                this.ct = ct;
+                this.end = end;
+                this.ct.Text = begin;
+            }
+
+            public void Dispose()
+            {
+                this.ct.Text = end;
+            }
+
         }
     }
 }

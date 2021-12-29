@@ -25,6 +25,8 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable YellowWebTable;
         private DataTable YellowMemberTable;
+        
+        private DataTable TempWebTable;
 
         private static YellowGlueSetting YellowGlueSettingInstance;
         public static YellowGlueSetting GetInstance()
@@ -54,7 +56,7 @@ namespace C2.Business.GlueWater.Settings
         {
             YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
-
+            //TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             RefreshHtmlTable();
         }
 
@@ -277,7 +279,7 @@ namespace C2.Business.GlueWater.Settings
                             WebMember[j][7] = WebMember[j][7] == string.Empty ? CityTrans(zipPath) : WebMember[j][7];
 
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
-                            YellowWebTable = TableFilter(webRows, WebMember[j], YellowWebTable);
+                            YellowWebTable = SortNewTable(webRows, WebMember[j], YellowWebTable);
 
                             WebMember[j].RemoveRange(len, cutWeb.Count());
                             webAndAuth[memberList[0]].Remove(memberList[1]);
@@ -369,7 +371,7 @@ namespace C2.Business.GlueWater.Settings
 
                 yellowPhotoEmpty = Trans(yellowPhotoEmpty);
                 DataRow[] webRows = YellowWebTable.Select("网站网址='" + yellowPhotoEmpty[9] + "'");
-                YellowWebTable = TableFilter(webRows, yellowPhotoEmpty, YellowWebTable);
+                YellowWebTable = SortNewTable(webRows, yellowPhotoEmpty, YellowWebTable);
                 ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
@@ -429,6 +431,32 @@ namespace C2.Business.GlueWater.Settings
                     YellowTable.Rows.Add(memberList.ToArray());
             }
             return YellowTable;
+        }
+
+        private DataTable SortNewTable(DataRow[] data, List<string> memberList, DataTable YellowTable)
+        {
+            TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
+            TempWebTable.Rows.Clear();
+            if (data.Length == 0)
+                TempWebTable.Rows.Add(memberList.ToArray());
+            else
+            {
+                List<string> rowContentList = new List<string>();
+                foreach (DataRow row in data)
+                {
+                    List<string> rowContent = new List<string>();
+                    for (int j = 0; j < YellowTable.Columns.Count; j++)
+                        rowContent.Add(row[j].ToString());
+                    rowContentList.Add(string.Join("\t", rowContent));
+                }
+
+                if (!rowContentList.Contains(string.Join("\t", memberList)))
+                    TempWebTable.Rows.Add(memberList.ToArray());
+            }
+
+            foreach (DataRow row in YellowTable.Rows)
+                TempWebTable.Rows.Add(row.ItemArray);
+            return TempWebTable;
         }
     }
 }

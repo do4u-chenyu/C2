@@ -13,7 +13,7 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
             this.probeStrategyCB.SelectedIndex = 1;
         }
 
-        public int TimeoutSeconds { get => ConvertUtil.TryParseInt(timeoutTB.Text.Trim(), 600); }
+        public int TimeoutSeconds { get => ConvertUtil.TryParseInt(timeoutTB.Text.Trim(), 120); }
         public string SearchFiles { get => fileList.Text.Trim(); }
         public string SearchFields { get => fieldList.Text.Trim(); }
         public int ProbeStrategy { get => Math.Max(0, probeStrategyCB.SelectedIndex); }
