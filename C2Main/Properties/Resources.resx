@@ -2292,13 +2292,4 @@
   <data name="intruder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\intruder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="涉黄模板" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\涉黄模板.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="涉枪模板" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\涉枪模板.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="涉赌模板" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\涉赌模板.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
 </root>

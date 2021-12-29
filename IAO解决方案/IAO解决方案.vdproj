@@ -39,7 +39,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_03AE9AA509B44E619079DBFD02CD7481"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_040342F4749B455F8A19AAC39D9AF208"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_046B36B83E42499C8752D50D1E7B827A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -389,6 +401,12 @@
         {
         "MsmKey" = "8:_20487ACA5CFE417184ECEE846C00D478"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2123605CD16C1A2DF1DEB545D136620B"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -796,6 +814,12 @@
         "Entry"
         {
         "MsmKey" = "8:_41C53831CB0946988FCD793126B671F5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_434774C6C9894D30967354A07CB42375"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3286,6 +3310,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2123605CD16C1A2DF1DEB545D136620B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_12F27BA9C0FE7FA1F8025AC5F47F7184"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3653,12 +3683,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03AE9AA509B44E619079DBFD02CD7481"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\涉赌模板.xlsx"
+            "TargetName" = "8:涉赌模板.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_040342F4749B455F8A19AAC39D9AF208"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\Languages\\_Template.xml"
             "TargetName" = "8:_Template.xml"
             "Tag" = "8:"
             "Folder" = "8:_F97747D08F1B4F8BB9D436FDEF02D4B7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_046B36B83E42499C8752D50D1E7B827A"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\涉黄模板.xlsx"
+            "TargetName" = "8:涉黄模板.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4806,6 +4876,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2123605CD16C1A2DF1DEB545D136620B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:UserInstallSet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2123605CD16C1A2DF1DEB545D136620B"
+                    {
+                    "Name" = "8:UserInstallSet.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:UserInstallSet.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2198B301B7484A0C99751032E1C4BC4D"
@@ -6022,6 +6123,26 @@
             "TargetName" = "8:dic_username_mysql.txt"
             "Tag" = "8:"
             "Folder" = "8:_30D87A175307459A8BC3E9D16C7F4967"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_434774C6C9894D30967354A07CB42375"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\涉枪模板.xlsx"
+            "TargetName" = "8:涉枪模板.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -14451,7 +14572,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Release\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -14479,7 +14600,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\开发调试\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\Debug\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"

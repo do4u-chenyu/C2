@@ -205,7 +205,8 @@ namespace C2.Forms
 
                 using (GuarderUtil.WaitCursor)
                 {
-                    SaveResultToLocal(dialog.FileName, selectedItem.Replace("专项", ""));
+                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates", selectedItem.Replace("专项", "") + "模板.xlsx");
+                    FileUtil.FileCopy(localExcelPath, dialog.FileName);
                 }
                 HelpUtil.ShowMessageBox("模板保存完毕。");
             }
@@ -215,12 +216,6 @@ namespace C2.Forms
                 return;
             }
             
-        }
-
-        private void SaveResultToLocal(string path, string item)
-        {
-            string localExcelPath = Path.Combine(Application.StartupPath, "Resources", item + "模板.xlsx");
-            FileUtil.FileCopy(localExcelPath, path);
         }
     }
 }
