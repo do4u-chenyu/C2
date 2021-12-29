@@ -197,15 +197,15 @@ namespace C2.Forms
             if (doneGlueList.Contains(selectedItem))
             {
                 SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "Excel文件|*.xlsx";
-                dialog.FileName = selectedItem.Replace("专项", "") + "模板-" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
+                dialog.Filter = "数据包|*.zip";
+                dialog.FileName = "XX省市-" + selectedItem.Replace("专项", "") + "模板-" + DateTime.Now.ToString("yyyyMMdd") + "-XX.zip";
 
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
 
                 using (GuarderUtil.WaitCursor)
                 {
-                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates", selectedItem.Replace("专项", "") + "模板.xlsx");
+                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板", selectedItem.Replace("专项", "") + "模板.zip");
                     FileUtil.FileCopy(localExcelPath, dialog.FileName);
                 }
                 HelpUtil.ShowMessageBox("模板保存完毕。");
