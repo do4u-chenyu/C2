@@ -17,7 +17,8 @@ namespace C2.Forms
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
         IGlueSetting glueSetting;
         GlueDetailInfoDialog detailDialog;
-        SqDetailInfoDialog dbDeatilDialog;
+        SqDetailInfoDialog sqDeatilDialog;
+        SqDetailInfoDialogReply dbDeatilDialogReply;
         private List<string> doneGlueList;
 
         public JSForm()
@@ -29,7 +30,8 @@ namespace C2.Forms
             webBrowser.ObjectForScripting = this;
 
             detailDialog = new GlueDetailInfoDialog();
-            dbDeatilDialog = new SqDetailInfoDialog();
+            sqDeatilDialog = new SqDetailInfoDialog();
+            dbDeatilDialogReply = new SqDetailInfoDialogReply();
             glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
             doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
 
@@ -158,11 +160,19 @@ namespace C2.Forms
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-        public void ShowDetailsMore(string item)
+        public void ShowDetailsTopic(string item)
         {
-            dbDeatilDialog.DetailTable = glueSetting.SearchInfo(item);
-            dbDeatilDialog.RefreshDGV();
-            dbDeatilDialog.ShowDialog();
+            sqDeatilDialog.DetailTable = glueSetting.SearchInfo(item);
+            sqDeatilDialog.RefreshDGV();
+            sqDeatilDialog.ShowDialog();
+        }
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+        public void ShowDetailsReply(string item)
+        {
+            dbDeatilDialogReply.DetailTable = glueSetting.SearchInfoReply(item);
+            dbDeatilDialogReply.RefreshDGV();
+            dbDeatilDialogReply.ShowDialog();
         }
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]

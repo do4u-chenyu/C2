@@ -47,6 +47,11 @@ namespace C2.Business.GlueWater
             return new DataTable();
         }
 
+        public virtual DataTable SearchInfoReply(string item)
+        {
+            return new DataTable();
+        }
+
         public virtual void SortDataTableByCol(string col, string sortType)
         {
             return;

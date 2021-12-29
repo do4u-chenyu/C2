@@ -73,8 +73,11 @@ td#th2{
         function ShowDetails(a) {
             window.external.ShowDetails(a.text);//ShowDetails为c#方法
         }
-		function ShowDetailsMore(a) {
-            window.external.ShowDetailsMore(a.name);//ShowDetailsMore为c#方法
+		function ShowDetailsTopic(a) {
+            window.external.ShowDetailsTopic(a.name);//ShowDetailsMore为c#方法
+        }
+		function ShowDetailsReply(a) {
+            window.external.ShowDetailsReply(a.name);//ShowDetailsMore为c#方法
         }
 		function WfToHtml(argStr) {
 		    $("#dataintable").append(argStr);
