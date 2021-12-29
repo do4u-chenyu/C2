@@ -1,5 +1,6 @@
 ﻿using C2.IAOLab.IDInfoGet;
 using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -47,7 +48,7 @@ namespace C2.Business.GlueWater.Settings
             SqMemberExcelColList = new List<string> {"论坛网址","认证账号","登入名","密码", "主题", "发帖时间","内容关键词", "内容", "评论" };
 
             SqWebColList = new string[] { "论坛名称", "网址", "IP", "认证账号", "登录IP", "登录账号", "登录密码", "论坛注册时间", "主题数", "回帖数", "发现地市","发现时间" };
-            SqMemberColList = new string[] { "论坛网址","用户名称", "发帖主题", "发帖时间", "涉枪关键词", "发帖信息", "回帖信息" };
+            SqMemberColList = new string[] { "论坛网址","用户名称", "主题", "发帖时间", "关键词", "发帖信息", "回帖信息" };
             
             InitDataTable();
         }
@@ -80,22 +81,26 @@ namespace C2.Business.GlueWater.Settings
             //先试试初始化
             foreach (DataRow dr in SqWebTable.Rows)
             {
-                sb.Append(string.Format(
-                            "<tr name=\"row\">" +
-                            "   <td>{0}<br>{1}<br>{2}</td>" +
-                            "   <td>{3}<br>{4}</td>" +
-                            "   <td>{5}<br>{6}</td>" +
-                            "   <td>{7}</td>" +
-                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">主题数：{8}</a><br>回帖数：{9}</td>" +
-                            "   <td>{10}<br>{11}</td>" +
-                            "</tr>",
-                            dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
-                            dr["认证账号"].ToString(), dr["登录IP"].ToString(),
-                            dr["登录账号"].ToString(), dr["登录密码"].ToString(),
-                            dr["论坛注册时间"].ToString(),
-                            dr["主题数"].ToString(), dr["回帖数"].ToString(),
-                            dr["发现地市"].ToString(), dr["发现时间"].ToString()
-                ));
+                string discoveryTime;
+                string registerTime;
+                try { registerTime = DateTime.FromOADate(double.Parse(dr["论坛注册时间"].ToString())).ToString().Replace("/", "-"); } catch { registerTime = dr["论坛注册时间"].ToString(); }
+                try {discoveryTime = DateTime.FromOADate(double.Parse(dr["发现时间"].ToString())).ToString().Replace("/","-");} catch { discoveryTime = dr["发现时间"].ToString(); }
+                    sb.Append(string.Format(
+                           "<tr name=\"row\">" +
+                           "   <td>{0}<br>{1}<br>{2}</td>" +
+                           "   <td>认证账号：{3}<br>登录IP：{4}</td>" +
+                           "   <td>登录账号：{5}<br>登录密码：{6}</td>" +
+                           "   <td>{7}</td>" +
+                           "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">主题数：{8}</a><br>回帖数：{9}</td>" +
+                           "   <td>{10}<br>{11}</td>" +
+                           "</tr>",
+                           dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
+                           dr["认证账号"].ToString(), dr["登录IP"].ToString(),
+                           dr["登录账号"].ToString(), dr["登录密码"].ToString(),
+                           registerTime,
+                           dr["主题数"].ToString(), dr["回帖数"].ToString(),
+                           dr["发现地市"].ToString(), discoveryTime
+               ));
             }
             return sb.ToString();
         }
@@ -113,8 +118,6 @@ namespace C2.Business.GlueWater.Settings
 
             foreach (DataRow row in rows)
                 resTable.Rows.Add(row.ItemArray);
-
-
 
             return resTable;
         }
@@ -216,6 +219,7 @@ namespace C2.Business.GlueWater.Settings
                         if (resultListFirst[0] == resultListSecond[0] && resultListFirst[1] == resultListSecond[1] 
                             && resultListFirst[2] == resultListSecond[2])
                         {
+                            try { resultListSecond[5] = DateTime.FromOADate(double.Parse(resultListSecond[5].ToString())).ToString().Replace("/","-"); } catch { }
                             //resultListSecond.Add(resultListFirst[4]);
                             resultListSecond.Remove(resultListSecond[1]);
                             resultListSecond.Remove(resultListSecond[2]);
@@ -224,13 +228,12 @@ namespace C2.Business.GlueWater.Settings
                             DataRow[] rows = SqMemberTable.Select(
                                 "发帖信息='" + resultListSecond[5] + "' " +
                                 "and 用户名称='" + resultListSecond[1] + "' " +
-                                "and 发帖主题='" + resultListSecond[2] + "'" +
+                                "and 主题='" + resultListSecond[2] + "'" +
                                  "and 发帖时间='" + resultListSecond[3] + "'"
                                 );
                             if (rows.Length > 0)
                                 SqMemberTable.Rows.Remove(rows[0]);
-                            
-                            
+
 
                             SqMemberTable.Rows.Add(resultListSecond.ToArray());
                         }

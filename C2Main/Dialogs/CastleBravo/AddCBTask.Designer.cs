@@ -145,7 +145,8 @@
             "SHA256",
             "SHA512",
             "宝塔面板",
-            "Mysql5"});
+            "Mysql5",
+            "三代冰蝎"});
             this.modeComboBox.Location = new System.Drawing.Point(383, 57);
             this.modeComboBox.Name = "modeComboBox";
             this.modeComboBox.Size = new System.Drawing.Size(73, 20);

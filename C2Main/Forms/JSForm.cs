@@ -17,7 +17,7 @@ namespace C2.Forms
         private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
         IGlueSetting glueSetting;
         GlueDetailInfoDialog detailDialog;
-        DbDetailInfoDialog dbDeatilDialog;
+        SqDetailInfoDialog dbDeatilDialog;
         private List<string> doneGlueList;
 
         public JSForm()
@@ -29,7 +29,7 @@ namespace C2.Forms
             webBrowser.ObjectForScripting = this;
 
             detailDialog = new GlueDetailInfoDialog();
-            dbDeatilDialog = new DbDetailInfoDialog();
+            dbDeatilDialog = new SqDetailInfoDialog();
             glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
             doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
 
@@ -190,5 +190,32 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(freshTitle) });
         }
         #endregion
+
+        private void SampleButton_Click(object sender, EventArgs e)
+        {
+            string selectedItem = tabBar1.SelectedItem.Tag.ToString();
+            if (doneGlueList.Contains(selectedItem))
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "数据包|*.zip";
+                dialog.FileName = "XX省市-" + selectedItem.Replace("专项", "") + "模板-" + DateTime.Now.ToString("yyyyMMdd") + "-XX.zip";
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                using (GuarderUtil.WaitCursor)
+                {
+                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板", selectedItem.Replace("专项", "") + "模板.zip");
+                    FileUtil.FileCopy(localExcelPath, dialog.FileName);
+                }
+                HelpUtil.ShowMessageBox("模板保存完毕。");
+            }
+            else
+            {
+                HelpUtil.ShowMessageBox("该专项尚未完成，敬请期待!");
+                return;
+            }
+            
+        }
     }
 }

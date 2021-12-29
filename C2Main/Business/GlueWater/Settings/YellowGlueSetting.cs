@@ -25,6 +25,8 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable YellowWebTable;
         private DataTable YellowMemberTable;
+        
+        private DataTable TempWebTable;
 
         private static YellowGlueSetting YellowGlueSettingInstance;
         public static YellowGlueSetting GetInstance()
@@ -54,7 +56,7 @@ namespace C2.Business.GlueWater.Settings
         {
             YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
-
+            //TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             RefreshHtmlTable();
         }
 
@@ -271,10 +273,14 @@ namespace C2.Business.GlueWater.Settings
                             List<string> cutWeb = new List<string> { Web[i][0], Web[i][1], Web[i][2], Web[i][3], Web[i][4], Web[i][5] };
                             int len = WebMember[j].Count;
                             WebMember[j].AddRange(cutWeb);
-                            WebMember[j][6] = WebMember[j][6] == string.Empty ? TimeTrans(zipPath) : WebMember[j][6];
+
+                            WebMember[j][6] = WebMember[j][6] == string.Empty ? TimeTrans(zipPath) : WebMember[j][6].Replace(" 00:00:00", "");
+                            WebMember[j][13] = WebMember[j][13].Replace(" 00:00:00", "");
+                            WebMember[j][7] = WebMember[j][7] == string.Empty ? CityTrans(zipPath) : WebMember[j][7];
+
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
-                            YellowWebTable = TableFilter(webRows, WebMember[j], YellowWebTable);
-                            //YellowWebTable.Rows.Add(WebMember[j].ToArray());
+                            YellowWebTable = SortNewTable(webRows, WebMember[j], YellowWebTable);
+
                             WebMember[j].RemoveRange(len, cutWeb.Count());
                             webAndAuth[memberList[0]].Remove(memberList[1]);
                             webAndAuth["remove"].Add(memberList[1]);
@@ -353,12 +359,19 @@ namespace C2.Business.GlueWater.Settings
                 }
                 if (yellowPhotoEmpty[9] != string.Empty && yellowPhotoEmpty[5] == string.Empty)
                     yellowPhotoEmpty[5] = "涉黄网站人员";
+
                 if (yellowPhotoEmpty[9] != string.Empty && yellowPhotoEmpty[6] == string.Empty)
                     yellowPhotoEmpty[6] = TimeTrans(zipPath);
+
+                yellowPhotoEmpty[13] = yellowPhotoEmpty[13].Replace(" 00:00:00", "");
+
                 yellowPhotoEmpty[7] = WebMember.Count > 0 ? WebMember[0][7] : yellowPhotoEmpty[7];
+                if (yellowPhotoEmpty[9] != string.Empty && yellowPhotoEmpty[7] == string.Empty)
+                    yellowPhotoEmpty[7] = CityTrans(zipPath);
+
                 yellowPhotoEmpty = Trans(yellowPhotoEmpty);
                 DataRow[] webRows = YellowWebTable.Select("网站网址='" + yellowPhotoEmpty[9] + "'");
-                YellowWebTable = TableFilter(webRows, yellowPhotoEmpty, YellowWebTable);
+                YellowWebTable = SortNewTable(webRows, yellowPhotoEmpty, YellowWebTable);
                 ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
@@ -380,13 +393,25 @@ namespace C2.Business.GlueWater.Settings
             if (regResult.Success)
             {
                 findTime = regResult.Groups["time"].ToString();
-                findTime = DateTime.ParseExact(findTime, "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture, DateTimeStyles.None).ToString().Replace(" 0:00:00", " 00:00:00");
+                findTime = DateTime.ParseExact(findTime, "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture, DateTimeStyles.None).ToString().Replace(" 0:00:00", "");
             }
             else
-                findTime = DateTime.Now.ToString();
+                findTime = DateTime.Now.ToString().Replace(" 00:00:00", "");
             findTime = findTime.Replace("/", "-");
             return findTime;
         }
+
+        private string CityTrans(string zipPath)
+        {
+            string findCity = string.Empty;
+            string fileName = Path.GetFileNameWithoutExtension(zipPath);
+            Match regResult = Regex.Match(fileName, @"(?<city>.*)-yellow");
+
+            if (regResult.Success)
+                findCity = regResult.Groups["city"].ToString();
+            return findCity;
+        }
+
         private DataTable TableFilter(DataRow[] data, List<string> memberList, DataTable YellowTable)
         {
             if (data.Length == 0)
@@ -406,6 +431,32 @@ namespace C2.Business.GlueWater.Settings
                     YellowTable.Rows.Add(memberList.ToArray());
             }
             return YellowTable;
+        }
+
+        private DataTable SortNewTable(DataRow[] data, List<string> memberList, DataTable YellowTable)
+        {
+            TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
+            TempWebTable.Rows.Clear();
+            if (data.Length == 0)
+                TempWebTable.Rows.Add(memberList.ToArray());
+            else
+            {
+                List<string> rowContentList = new List<string>();
+                foreach (DataRow row in data)
+                {
+                    List<string> rowContent = new List<string>();
+                    for (int j = 0; j < YellowTable.Columns.Count; j++)
+                        rowContent.Add(row[j].ToString());
+                    rowContentList.Add(string.Join("\t", rowContent));
+                }
+
+                if (!rowContentList.Contains(string.Join("\t", memberList)))
+                    TempWebTable.Rows.Add(memberList.ToArray());
+            }
+
+            foreach (DataRow row in YellowTable.Rows)
+                TempWebTable.Rows.Add(row.ItemArray);
+            return TempWebTable;
         }
     }
 }

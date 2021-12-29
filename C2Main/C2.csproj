@@ -401,11 +401,11 @@
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\GlueWater\BaseGlueSetting.cs" />
-    <Compile Include="Business\GlueWater\DbDetailInfoDialog.cs">
+    <Compile Include="Business\GlueWater\SqDetailInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\GlueWater\DbDetailInfoDialog.Designer.cs">
-      <DependentUpon>DbDetailInfoDialog.cs</DependentUpon>
+    <Compile Include="Business\GlueWater\SqDetailInfoDialog.Designer.cs">
+      <DependentUpon>SqDetailInfoDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\GlueWater\GlueDetailInfoDialog.cs">
       <SubType>Form</SubType>
@@ -2201,8 +2201,8 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\DbDetailInfoDialog.resx">
-      <DependentUpon>DbDetailInfoDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Business\GlueWater\SqDetailInfoDialog.resx">
+      <DependentUpon>SqDetailInfoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\GlueWater\GlueDetailInfoDialog.resx">
       <DependentUpon>GlueDetailInfoDialog.cs</DependentUpon>
@@ -4076,6 +4076,15 @@
     <Content Include="Resources\StartPage\tree.png" />
     <Content Include="Resources\StartPage\yellowGroup.png" />
     <None Include="Resources\Templates\DocxExample.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\JS模板\涉枪模板.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\JS模板\涉赌模板.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\JS模板\涉黄模板.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Templates\JS自动化过滤流程.iao">
