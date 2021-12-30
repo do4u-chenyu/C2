@@ -93,6 +93,7 @@
             this.editorCheckBox = new System.Windows.Forms.CheckBox();
             this.loopCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.HelpLabel = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -629,6 +630,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.HelpLabel);
             this.groupBox6.Controls.Add(this.loginCheckBox);
             this.groupBox6.Controls.Add(this.checkBox3);
             this.groupBox6.Controls.Add(this.editorCheckBox);
@@ -643,7 +645,7 @@
             // loginCheckBox
             // 
             this.loginCheckBox.AutoSize = true;
-            this.loginCheckBox.Location = new System.Drawing.Point(15, 143);
+            this.loginCheckBox.Location = new System.Drawing.Point(15, 119);
             this.loginCheckBox.Name = "loginCheckBox";
             this.loginCheckBox.Size = new System.Drawing.Size(72, 16);
             this.loginCheckBox.TabIndex = 3;
@@ -655,7 +657,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(15, 104);
+            this.checkBox3.Location = new System.Drawing.Point(15, 88);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 2;
@@ -666,7 +668,7 @@
             // editorCheckBox
             // 
             this.editorCheckBox.AutoSize = true;
-            this.editorCheckBox.Location = new System.Drawing.Point(15, 65);
+            this.editorCheckBox.Location = new System.Drawing.Point(15, 57);
             this.editorCheckBox.Name = "editorCheckBox";
             this.editorCheckBox.Size = new System.Drawing.Size(84, 16);
             this.editorCheckBox.TabIndex = 1;
@@ -685,6 +687,18 @@
             this.loopCheckBox.Text = "403遍历";
             this.toolTip1.SetToolTip(this.loopCheckBox, "利用403返回码和专用字典，高效遍历网站目录。");
             this.loopCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // HelpLabel
+            // 
+            this.HelpLabel.AutoSize = true;
+            this.HelpLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.HelpLabel.Location = new System.Drawing.Point(13, 146);
+            this.HelpLabel.Name = "HelpLabel";
+            this.HelpLabel.Size = new System.Drawing.Size(83, 12);
+            this.HelpLabel.TabIndex = 10;
+            this.HelpLabel.TabStop = true;
+            this.HelpLabel.Text = "必看帮助说明";
+            this.HelpLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLabel_LinkClicked);
             // 
             // WebScanForm
             // 
@@ -788,5 +802,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel HelpLabel;
     }
 }
