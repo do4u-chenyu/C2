@@ -181,5 +181,15 @@ namespace C2.Dialogs.CastleBravo
             else
                 FilePath = String.Empty;
         }
+
+        private void HelpLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "喝彩城堡帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            }
+            catch { };
+        }
     }
 }
