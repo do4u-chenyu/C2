@@ -37,26 +37,29 @@
             treeNode2,
             treeNode3,
             treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("MD5(128位)");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("MD5(64位)");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("AES(128位)");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("SHA-1");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("SHA-256");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("SHA-512");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("NTLM");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("加密/解密", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("AES(128位)");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("加密/解密", new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("MD5(128位)");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("MD5(64位)");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("SHA-1");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("SHA-256");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("SHA-512");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Mysql5");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("NTLM");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Hash", new System.Windows.Forms.TreeNode[] {
             treeNode8,
             treeNode9,
             treeNode10,
             treeNode11,
-            treeNode12});
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("十进制转十六");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("八进制转十六");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("进制转换", new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
+            treeNode12,
+            treeNode13,
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("十进制转十六");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("八进制转十六");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("进制转换", new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode17});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.commonPlugin = new MD5Plugin.CommonPlugin();
@@ -80,34 +83,39 @@
             treeNode5.ForeColor = System.Drawing.SystemColors.ControlDark;
             treeNode5.Name = "节点0";
             treeNode5.Text = "编码/解码";
-            treeNode6.Name = "MD5(128位)";
-            treeNode6.Text = "MD5(128位)";
-            treeNode7.Name = "MD5(64位)";
-            treeNode7.Text = "MD5(64位)";
-            treeNode8.Name = "AES(128位)";
-            treeNode8.Text = "AES(128位)";
-            treeNode9.Name = "SHA-1";
-            treeNode9.Text = "SHA-1";
-            treeNode10.Name = "SHA-256";
-            treeNode10.Text = "SHA-256";
-            treeNode11.Name = "SHA-512";
-            treeNode11.Text = "SHA-512";
-            treeNode12.Name = "NTLM";
-            treeNode12.Text = "NTLM";
-            treeNode13.ForeColor = System.Drawing.SystemColors.ControlDark;
-            treeNode13.Name = "节点1";
-            treeNode13.Text = "加密/解密";
-            treeNode14.Name = "十进制转十六";
-            treeNode14.Text = "十进制转十六";
-            treeNode15.Name = "八进制转十六";
-            treeNode15.Text = "八进制转十六";
-            treeNode16.ForeColor = System.Drawing.SystemColors.ControlDark;
-            treeNode16.Name = "节点0";
-            treeNode16.Text = "进制转换";
+            treeNode6.Name = "AES(128位)";
+            treeNode6.Text = "AES(128位)";
+            treeNode7.ForeColor = System.Drawing.SystemColors.ControlDark;
+            treeNode7.Name = "节点1";
+            treeNode7.Text = "加密/解密";
+            treeNode8.Name = "MD5(128位)";
+            treeNode8.Text = "MD5(128位)";
+            treeNode9.Name = "MD5(64位)";
+            treeNode9.Text = "MD5(64位)";
+            treeNode10.Name = "SHA-1";
+            treeNode10.Text = "SHA-1";
+            treeNode11.Name = "SHA-256";
+            treeNode11.Text = "SHA-256";
+            treeNode12.Name = "SHA-512";
+            treeNode12.Text = "SHA-512";
+            treeNode13.Name = "Mysql5";
+            treeNode13.Text = "Mysql5";
+            treeNode14.Name = "NTLM";
+            treeNode14.Text = "NTLM";
+            treeNode15.Name = "节点0";
+            treeNode15.Text = "Hash";
+            treeNode16.Name = "十进制转十六";
+            treeNode16.Text = "十进制转十六";
+            treeNode17.Name = "八进制转十六";
+            treeNode17.Text = "八进制转十六";
+            treeNode18.ForeColor = System.Drawing.SystemColors.ControlDark;
+            treeNode18.Name = "节点0";
+            treeNode18.Text = "进制转换";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode5,
-            treeNode13,
-            treeNode16});
+            treeNode7,
+            treeNode15,
+            treeNode18});
             this.treeView1.Size = new System.Drawing.Size(180, 493);
             this.treeView1.TabIndex = 12;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1_NodeMouseClick);

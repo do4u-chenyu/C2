@@ -92,6 +92,8 @@ namespace MD5Plugin
                 this.commonPlugin = new HexDecimal();
             else if (e.Node.Name == "八进制转十六")
                 this.commonPlugin = new OctDecimal();
+            else if (e.Node.Name == "Mysql5")
+                this.commonPlugin = new Mysql5Plugin();
             else
                 this.Text = "加密解密";
             AddControls();

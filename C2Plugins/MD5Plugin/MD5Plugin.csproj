@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9F165641-517E-47A2-A3E1-4CD783A8C6FD}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>MD5Plugin</RootNamespace>
     <AssemblyName>MD5Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -101,40 +101,43 @@
     <Compile Include="CommonPlugin.Designer.cs">
       <DependentUpon>CommonPlugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncryptDecrypt\SHA1Plugin.cs">
+    <Compile Include="Hash\Mysql5Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncryptDecrypt\SHA1Plugin.Designer.cs">
+    <Compile Include="Hash\SHA1Plugin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Hash\SHA1Plugin.Designer.cs">
       <DependentUpon>SHA1Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncryptDecrypt\MD564Plugin.cs">
+    <Compile Include="Hash\MD564Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncryptDecrypt\MD564Plugin.Designer.cs">
+    <Compile Include="Hash\MD564Plugin.Designer.cs">
       <DependentUpon>MD564Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncryptDecrypt\NTLMPlugin.cs">
+    <Compile Include="Hash\NTLMPlugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncryptDecrypt\NTLMPlugin.Designer.cs">
+    <Compile Include="Hash\NTLMPlugin.Designer.cs">
       <DependentUpon>NTLMPlugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncryptDecrypt\SHA512Plugin.cs">
+    <Compile Include="Hash\SHA512Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncryptDecrypt\SHA512Plugin.Designer.cs">
+    <Compile Include="Hash\SHA512Plugin.Designer.cs">
       <DependentUpon>SHA512Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncryptDecrypt\SHA256Plugin.cs">
+    <Compile Include="Hash\SHA256Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncryptDecrypt\SHA256Plugin.Designer.cs">
+    <Compile Include="Hash\SHA256Plugin.Designer.cs">
       <DependentUpon>SHA256Plugin.cs</DependentUpon>
     </Compile>
-    <Compile Include="EncryptDecrypt\MD5128Plugin.cs">
+    <Compile Include="Hash\MD5128Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EncryptDecrypt\MD5128Plugin.Designer.cs">
+    <Compile Include="Hash\MD5128Plugin.Designer.cs">
       <DependentUpon>MD5128Plugin.cs</DependentUpon>
     </Compile>
     <Compile Include="EncodeDecode\Base64Plugin.cs">
@@ -179,22 +182,25 @@
     <EmbeddedResource Include="CommonPlugin.resx">
       <DependentUpon>CommonPlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptDecrypt\MD564Plugin.resx">
+    <EmbeddedResource Include="Hash\MD564Plugin.resx">
       <DependentUpon>MD564Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptDecrypt\NTLMPlugin.resx">
+    <EmbeddedResource Include="Hash\Mysql5Plugin.resx">
+      <DependentUpon>Mysql5Plugin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hash\NTLMPlugin.resx">
       <DependentUpon>NTLMPlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptDecrypt\SHA1Plugin.resx">
+    <EmbeddedResource Include="Hash\SHA1Plugin.resx">
       <DependentUpon>SHA1Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptDecrypt\SHA512Plugin.resx">
+    <EmbeddedResource Include="Hash\SHA512Plugin.resx">
       <DependentUpon>SHA512Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptDecrypt\SHA256Plugin.resx">
+    <EmbeddedResource Include="Hash\SHA256Plugin.resx">
       <DependentUpon>SHA256Plugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncryptDecrypt\MD5128Plugin.resx">
+    <EmbeddedResource Include="Hash\MD5128Plugin.resx">
       <DependentUpon>MD5128Plugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EncodeDecode\Base64Plugin.resx">
