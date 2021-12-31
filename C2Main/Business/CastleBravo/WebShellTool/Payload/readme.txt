@@ -14,6 +14,7 @@
             2)conf.gif mysql探针
             3)db_dict  K令爆破使用的字典
             4)sysinfo.gif  系统信息
+            5）usertb.gif USER探测
 (2) payload文件修改方式
     以修改mysql探针的conf.gif文件为例：
 	1) 解压代码到当前路径下unzip_result.txt
