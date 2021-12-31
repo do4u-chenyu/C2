@@ -634,6 +634,18 @@ namespace C2.Core
             return Encoding.UTF8.GetString(arrByte);
         }
 
+        public static string BytesToString(byte[] bytes, bool isTrimInvisibleChar = false)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in bytes)
+            {
+                if (isTrimInvisibleChar && (b < 31 || b == 127)) 
+                    continue;
+                sb.Append((char)(b));
+            }
+            return sb.ToString();
+        }
+
         public static byte[] HexStringToBytes(string str)
         {
             str = str.ToLower().Trim();

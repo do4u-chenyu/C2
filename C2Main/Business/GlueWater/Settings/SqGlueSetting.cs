@@ -13,17 +13,21 @@ namespace C2.Business.GlueWater.Settings
     {
         private string SqWebPath;
         private string SqMemberPath;
+        private string SqMemberPath2;
 
         private List<string> SqWebExcelColList;//涉枪论坛人员用户信息
         private List<string> SqWebExcelColList1;//部分涉枪论坛人员用户信息
         private List<string> SqWebExcelColList2;//涉枪人员信息
         private List<string> SqMemberExcelColList;
+        private List<string> SqMemberExcelColList2;
 
         private string[] SqWebColList;//内存datatable里字段
         private string[] SqMemberColList;
+        private string[] SqMemberColList2;
 
         private DataTable SqWebTable;
         private DataTable SqMemberTable;
+        private DataTable SqMemberTableReply;
 
         private static SqGlueSetting SqGlueSettingInstance;
         public static SqGlueSetting GetInstance()
@@ -40,16 +44,19 @@ namespace C2.Business.GlueWater.Settings
             
             SqWebPath = Path.Combine(txtDirectory, "SQ_web.txt");
             SqMemberPath = Path.Combine(txtDirectory, "SQ_member.txt");
+            SqMemberPath2 = Path.Combine(txtDirectory, "SQ_member2.txt");
 
-            //  涉枪论坛人员用户信息 & 涉枪人员信息
+            //  涉枪论坛人员用户信息 & 涉枪人员信息 & 论坛发帖情况
             SqWebExcelColList = new List<string> { "论坛名称", "论坛网址", "源IP", "认证账号", "目的IP", "登录名", "登录密码", "注册时间", "主题数", "回帖数" };
             SqWebExcelColList2 = new List<string> { "归属地", "发现时间" };
             SqWebExcelColList1 = new List<string> { "论坛网址","认证账号", "登录名","登录密码","主题数" };
             SqMemberExcelColList = new List<string> {"论坛网址","认证账号","登入名","密码", "主题", "发帖时间","内容关键词", "内容", "评论" };
+            SqMemberExcelColList2 = new List<string> { "论坛网址", "认证账号", "登入名", "密码", "主题","回帖内容" };
 
             SqWebColList = new string[] { "论坛名称", "网址", "IP", "认证账号", "登录IP", "登录账号", "登录密码", "论坛注册时间", "主题数", "回帖数", "发现地市","发现时间" };
             SqMemberColList = new string[] { "论坛网址","用户名称", "主题", "发帖时间", "关键词", "发帖信息", "回帖信息" };
-            
+            SqMemberColList2 = new string[] { "论坛网址", "用户名称", "主题", "回帖内容" };
+
             InitDataTable();
         }
 
@@ -58,6 +65,7 @@ namespace C2.Business.GlueWater.Settings
             //空文件的话，这些table都只有colume表头信息
             SqWebTable = GenDataTable(SqWebPath, SqWebColList);
             SqMemberTable = GenDataTable(SqMemberPath, SqMemberColList);
+            SqMemberTableReply = GenDataTable(SqMemberPath2, SqMemberColList2);
 
             RefreshHtmlTable();
         }
@@ -91,7 +99,7 @@ namespace C2.Business.GlueWater.Settings
                            "   <td>认证账号：{3}<br>登录IP：{4}</td>" +
                            "   <td>登录账号：{5}<br>登录密码：{6}</td>" +
                            "   <td>{7}</td>" +
-                           "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsMore(this)\" style=\"cursor:pointer\">主题数：{8}</a><br>回帖数：{9}</td>" +
+                           "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsTopic(this)\" style=\"cursor:pointer\">主题数：{8}</a><br><a name=\"{1},{5}\" onmousedown=\"ShowDetailsReply(this)\" style=\"cursor:pointer\">回帖数：{9}</a></td>" +
                            "   <td>{10}<br>{11}</td>" +
                            "</tr>",
                            dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
@@ -105,21 +113,31 @@ namespace C2.Business.GlueWater.Settings
             return sb.ToString();
         }
 
-        public override DataTable SearchInfo(string memeber)
+        public DataTable SqInformation(string member, DataTable table)
         {
-            string url = memeber.Substring(0, memeber.IndexOf(","));
-            string username = memeber.Substring(memeber.IndexOf(",") +1, memeber.Length - memeber.IndexOf(",") -1);
-            DataTable resTable = SqMemberTable.Clone();
-            DataRow[] rows = SqMemberTable.Select(
-                //"主题数='" + memeber + "'"
+            string url = member.Substring(0, member.IndexOf(","));
+            string username = member.Substring(member.IndexOf(",") + 1, member.Length - member.IndexOf(",") - 1);
+            DataTable resTable = table.Clone();
+            DataRow[] rows = table.Select(
+                 //"主题数='" + memeber + "'"
                  "论坛网址='" + url + "' " +
-                 "and 用户名称='" + username + "' " 
+                 "and 用户名称='" + username + "' "
                 );
 
             foreach (DataRow row in rows)
                 resTable.Rows.Add(row.ItemArray);
 
             return resTable;
+        }
+
+        public override DataTable SearchInfo(string memeber)
+        {
+            return SqInformation(memeber, SqMemberTable);
+        }
+
+        public override DataTable SearchInfoReply(string memeber)
+        {
+            return SqInformation(memeber, SqMemberTableReply);
         }
 
         public override void SortDataTableByCol(string col, string sortType)
@@ -149,10 +167,14 @@ namespace C2.Business.GlueWater.Settings
             
             ReadRst rrst3 = FileUtil.ReadExcel(excelPath, maxRow, "论坛发帖情况");
             if (rrst3.ReturnCode != 0 || rrst3.Result.Count == 0)
-                return rrst2.Message;
+                return rrst3.Message;
 
+            ReadRst rrst4 = FileUtil.ReadExcel(excelPath, maxRow, "论坛回帖情况");
+            if (rrst4.ReturnCode != 0 || rrst4.Result.Count == 0)
+                return rrst4.Message;
 
-            if (DealWebContent(rrst1.Result, rrst2.Result) && DealMemberContent(rrst1.Result, rrst3.Result))
+            if (DealWebContent(rrst1.Result, rrst2.Result) && DealMemberContent(rrst1.Result, rrst3.Result)
+                && DealMemberContentReply(rrst1.Result, rrst4.Result))
             {
                 BackupZip(zipPath);
                 return "数据添加成功";
@@ -200,7 +222,6 @@ namespace C2.Business.GlueWater.Settings
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
             List<int> tailIndex = IndexFilter(SqMemberExcelColList, contentSecond);
 
-
             int i, j;
             for (i = 1, j = 1; i < contentsFirst.Count && j < contentSecond.Count; i++, j++)
             {
@@ -240,6 +261,54 @@ namespace C2.Business.GlueWater.Settings
                     }
                 }
                 ReWriteResult(SqMemberPath, SqMemberTable);
+            }
+            return true;
+        }
+
+        private bool DealMemberContentReply(List<List<string>> contentsFirst, List<List<string>> contentSecond)
+        {
+            List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
+            List<int> tailIndex = IndexFilter(SqMemberExcelColList2, contentSecond);
+
+
+            int i, j;
+            for (i = 1, j = 1; i < contentsFirst.Count && j < contentSecond.Count; i++, j++)
+            {
+                if (headIndex.Max() > contentsFirst[i].Count || tailIndex.Max() > contentSecond[j].Count)
+                    return false;
+            }
+
+            if (contentsFirst.Count < contentSecond.Count)
+            {
+                for (int k = 1; k < contentsFirst.Count; k++)
+                {
+                    List<string> resultListFirst = ContentFilter(headIndex, contentsFirst[k]);
+                    for (int m = 1; m < contentSecond.Count; m++)
+                    {
+                        List<string> resultListSecond = ContentFilter(tailIndex, contentSecond[m]);
+                        //论坛网址、认证账号、登录名
+                        if (resultListFirst[0] == resultListSecond[0] && resultListFirst[1] == resultListSecond[1]
+                            && resultListFirst[2] == resultListSecond[2])
+                        {
+                            //resultListSecond.Add(resultListFirst[4]);
+                            resultListSecond.Remove(resultListSecond[1]);
+                            resultListSecond.Remove(resultListSecond[2]);
+
+                            
+                            //重复数据筛选条件
+                            DataRow[] rows = SqMemberTableReply.Select(
+                                "论坛网址='" + resultListSecond[0] + "' " +
+                                "and 用户名称='" + resultListSecond[1] + "' " +
+                                "and 主题='" + resultListSecond[2] + "'" +
+                                 "and 回帖内容='" + resultListSecond[3] + "'"
+                                );
+                            if (rows.Length > 0)
+                                SqMemberTableReply.Rows.Remove(rows[0]);
+                            SqMemberTableReply.Rows.Add(resultListSecond.ToArray());
+                        }
+                    }
+                }
+                ReWriteResult(SqMemberPath2, SqMemberTableReply);
             }
             return true;
         }

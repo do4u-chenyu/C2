@@ -401,16 +401,16 @@
     <Compile Include="Business\Database\MysqlDAOImpl.cs" />
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\GlueWater\BaseGlueSetting.cs" />
-    <Compile Include="Business\GlueWater\SqDetailInfoDialog.cs">
+    <Compile Include="Business\GlueWater\DetailInfoDialog\SqDetailInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\GlueWater\SqDetailInfoDialog.Designer.cs">
+    <Compile Include="Business\GlueWater\DetailInfoDialog\SqDetailInfoDialog.Designer.cs">
       <DependentUpon>SqDetailInfoDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\GlueWater\GlueDetailInfoDialog.cs">
+    <Compile Include="Business\GlueWater\DetailInfoDialog\GlueDetailInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\GlueWater\GlueDetailInfoDialog.Designer.cs">
+    <Compile Include="Business\GlueWater\DetailInfoDialog\GlueDetailInfoDialog.Designer.cs">
       <DependentUpon>GlueDetailInfoDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\GlueWater\GlueSettingFactory.cs" />
@@ -418,6 +418,12 @@
     <Compile Include="Business\GlueWater\Settings\DbGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\SqGlueSetting.cs" />
     <Compile Include="Business\GlueWater\Settings\YellowGlueSetting.cs" />
+    <Compile Include="Business\GlueWater\DetailInfoDialog\SqDetailInfoDialogReply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\GlueWater\DetailInfoDialog\SqDetailInfoDialogReply.Designer.cs">
+      <DependentUpon>SqDetailInfoDialogReply.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\HIBU\ASR\ASRForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2201,11 +2207,14 @@
     <EmbeddedResource Include="Business\CastleBravo\WebShellTool\WebShellManageForm.resx">
       <DependentUpon>WebShellManageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\SqDetailInfoDialog.resx">
+    <EmbeddedResource Include="Business\GlueWater\DetailInfoDialog\SqDetailInfoDialog.resx">
       <DependentUpon>SqDetailInfoDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\GlueWater\GlueDetailInfoDialog.resx">
+    <EmbeddedResource Include="Business\GlueWater\DetailInfoDialog\GlueDetailInfoDialog.resx">
       <DependentUpon>GlueDetailInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\GlueWater\DetailInfoDialog\SqDetailInfoDialogReply.resx">
+      <DependentUpon>SqDetailInfoDialogReply.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\HIBU\FaceBeauty\FaceBeautyForm.resx">
       <DependentUpon>FaceBeautyForm.cs</DependentUpon>
@@ -3082,6 +3091,9 @@
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
     <Content Include="Resources\Help\C2帮助文档.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\WebScan帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Help\全文工具箱帮助文档.txt">
@@ -4051,18 +4063,14 @@
     <Content Include="Resources\Script\IAO_Web_validation\step5_finnaly.py" />
     <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
     <Content Include="Resources\Script\IAO_Web_validation\util.py" />
-    <None Include="Resources\StartPage\autoFilter.jpg" />
     <None Include="Resources\StartPage\autoFilter.png" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />
     <Content Include="Resources\StartPage\bussinessView.png" />
     <Content Include="Resources\StartPage\dataStorge.png" />
     <Content Include="Resources\StartPage\dbnet.png" />
-    <None Include="Resources\StartPage\groupAnalysis.jpg" />
     <None Include="Resources\StartPage\groupAnalysis.png" />
     <Content Include="Resources\StartPage\gunLuntan.png" />
-    <None Include="Resources\StartPage\keywordAnalysis.jpg" />
-    <None Include="Resources\StartPage\infoExtraction.jpg" />
     <None Include="Resources\StartPage\keywordAnalysis.png" />
     <None Include="Resources\StartPage\infoExtraction.png" />
     <Content Include="Resources\StartPage\logicMap.png" />
