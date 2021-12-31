@@ -11,6 +11,9 @@ namespace C2.Business.CastleBravo.Binary
     class Behinder
     {
         readonly RijndaelManaged cbc;  // AES128解密器 CBC模式
+        private const string BH = "assert|eval(base";
+        private byte[] BHB = new byte[] { 97, 115, 115, 101, 114, 116, 124, 101, 118, 97, 108, 40, 98, 97, 115, 101 };
+
         public Behinder()
         {
             IteratorCount = 0;
@@ -120,13 +123,22 @@ namespace C2.Business.CastleBravo.Binary
             ICryptoTransform transform = cbc.CreateDecryptor(key_bytes, key_bytes);
             byte[] ret_bytes = transform.TransformFinalBlock(text_bytes, 0, text_bytes.Length);
             ret_bytes = ret_bytes.Skip(16).ToArray();  // 去掉前16位
-            return "assert|eval(base" + Encoding.ASCII.GetString(ret_bytes);
+            return BH + Encoding.ASCII.GetString(ret_bytes);
         }
 
         private bool IsDecryptCorrect(string value)
         {
             Success = value.Contains("assert|eval(base64_decode");
             return Success;
+        }
+
+        public string Encrypt20(string password)
+        {
+            password = ST.GenerateMD5(password).Substring(0, 16);
+            byte[] pass_bytes = Encoding.ASCII.GetBytes(password);
+            ICryptoTransform ctf = cbc.CreateEncryptor(pass_bytes, new byte[16]);
+            byte[] ret_bytes = ctf.TransformFinalBlock(BHB, 0, BHB.Length).Take(15).ToArray();
+            return Convert.ToBase64String(ret_bytes);
         }
     }
 }

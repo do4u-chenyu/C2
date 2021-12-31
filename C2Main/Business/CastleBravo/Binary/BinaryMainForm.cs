@@ -25,8 +25,9 @@ namespace C2.Business.CastleBravo.Binary
         private void InitializeOther()
         {
             this.XiseTextBox.GotFocus += TextBox_GotFocus;
-            this.BehinderTextBox.GotFocus += TextBox_GotFocus;
-            this.BehinderTextBox.Text = Settings.BehinderPlainText;
+            this.BehinderDTextBox.GotFocus += TextBox_GotFocus;
+            this.BehinderETextBox.GotFocus += TextBox_GotFocus;
+            this.BehinderDTextBox.Text = Settings.BehinderPlainText;
         }
 
         private void InitializeBehinderLabels()
@@ -150,29 +151,29 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderS1Button_Click(object sender, System.EventArgs e)
         {
-            this.BehinderTextBox.Focus();
-            this.BehinderTextBox.Text = Settings.BehinderPlainText;
+            this.BehinderDTextBox.Focus();
+            this.BehinderDTextBox.Text = Settings.BehinderPlainText;
         }
 
         private void BehinderClearButton_Click(object sender, System.EventArgs e)
         {
             InitializeBehinderLabels();
-            this.BehinderTextBox.Clear(); 
+            this.BehinderDTextBox.Clear(); 
         }
 
         private void BehinderDecryptButton_Click(object sender, System.EventArgs e)
         {
-            BehinderTextBox.Focus();
+            BehinderDTextBox.Focus();
             InitializeBehinderLabels();
             Behinder bh = new Behinder();
             bh.OnIteratorCount += Bh_OnIteratorCount;
             try 
             {
-                BehinderTextBox.Text = bh.Format(bh.Descrypt(BehinderTextBox.Text.Trim()));
+                BehinderDTextBox.Text = bh.Format(bh.Descrypt(BehinderDTextBox.Text.Trim()));
             }
             catch (Exception ex)
             {
-                BehinderTextBox.Text = ex.Message;
+                BehinderDTextBox.Text = ex.Message;
             }
             
             HitPasswordLabel.Text = bh.HitPassword;
@@ -190,5 +191,35 @@ namespace C2.Business.CastleBravo.Binary
             this.XiseTextBox.Clear();
         }
 
+        private void BehinderEClearButton_Click(object sender, EventArgs e)
+        {
+            BehinderETextBox.Clear();
+        }
+
+        private void BehinderDGenButton_Click(object sender, EventArgs e)
+        {
+            Behinder bh = new Behinder();
+            StringBuilder sb = new StringBuilder();
+            string[] ss = BehinderETextBox.Text.SplitLine();
+            foreach (string s in ss)
+            {
+                sb.Append(s.Trim())
+                  .Append('\t')
+                  .AppendLine(bh.Encrypt20(s.Trim()));
+            }
+            BehinderETextBox.Text = sb.ToString();
+        }
+
+        private void BehinderES1Button_Click(object sender, EventArgs e)
+        {
+            BehinderETextBox.Focus();
+            BehinderETextBox.Clear();
+            BehinderETextBox.Text = new StringBuilder()
+                .AppendLine("rebeyond")
+                .AppendLine("123456")
+                .AppendLine("admin")
+                .AppendLine("hack")
+                .ToString();
+        }
     }
 }

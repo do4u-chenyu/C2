@@ -49,26 +49,35 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.XiseTextBox = new System.Windows.Forms.TextBox();
-            this.BehinderTabPage = new System.Windows.Forms.TabPage();
+            this.BehinderDTabPage = new System.Windows.Forms.TabPage();
+            this.SuccessLabel = new System.Windows.Forms.Label();
             this.HitPasswordLabel = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.DictCountLabel = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.BehinderS1Button = new System.Windows.Forms.Button();
+            this.BehinderDS1Button = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.BehinderClearButton = new System.Windows.Forms.Button();
+            this.BehinderDClearButton = new System.Windows.Forms.Button();
             this.BehinderDecryptButton = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.BehinderTextBox = new System.Windows.Forms.TextBox();
+            this.BehinderDTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.BehinderETabPage = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.BehinderEClearButton = new System.Windows.Forms.Button();
+            this.BehinderDGenButton = new System.Windows.Forms.Button();
+            this.BehinderES1Button = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.BehinderETextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.SuccessLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
-            this.BehinderTabPage.SuspendLayout();
+            this.BehinderDTabPage.SuspendLayout();
+            this.BehinderETabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -85,7 +94,8 @@
             // 
             this.tabControl1.Controls.Add(this.StringsTabPage);
             this.tabControl1.Controls.Add(this.XiseTabPage);
-            this.tabControl1.Controls.Add(this.BehinderTabPage);
+            this.tabControl1.Controls.Add(this.BehinderDTabPage);
+            this.tabControl1.Controls.Add(this.BehinderETabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -287,29 +297,38 @@
             this.XiseTextBox.TabIndex = 6;
             this.XiseTextBox.Text = resources.GetString("XiseTextBox.Text");
             // 
-            // BehinderTabPage
+            // BehinderDTabPage
             // 
-            this.BehinderTabPage.Controls.Add(this.SuccessLabel);
-            this.BehinderTabPage.Controls.Add(this.HitPasswordLabel);
-            this.BehinderTabPage.Controls.Add(this.label19);
-            this.BehinderTabPage.Controls.Add(this.DictCountLabel);
-            this.BehinderTabPage.Controls.Add(this.label15);
-            this.BehinderTabPage.Controls.Add(this.BehinderS1Button);
-            this.BehinderTabPage.Controls.Add(this.label2);
-            this.BehinderTabPage.Controls.Add(this.BehinderClearButton);
-            this.BehinderTabPage.Controls.Add(this.BehinderDecryptButton);
-            this.BehinderTabPage.Controls.Add(this.progressBar);
-            this.BehinderTabPage.Controls.Add(this.BehinderTextBox);
-            this.BehinderTabPage.Controls.Add(this.label10);
-            this.BehinderTabPage.Controls.Add(this.label8);
-            this.BehinderTabPage.Controls.Add(this.label3);
-            this.BehinderTabPage.Location = new System.Drawing.Point(4, 26);
-            this.BehinderTabPage.Name = "BehinderTabPage";
-            this.BehinderTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BehinderTabPage.Size = new System.Drawing.Size(715, 431);
-            this.BehinderTabPage.TabIndex = 2;
-            this.BehinderTabPage.Text = "冰蝎流量解密";
-            this.BehinderTabPage.UseVisualStyleBackColor = true;
+            this.BehinderDTabPage.Controls.Add(this.SuccessLabel);
+            this.BehinderDTabPage.Controls.Add(this.HitPasswordLabel);
+            this.BehinderDTabPage.Controls.Add(this.label19);
+            this.BehinderDTabPage.Controls.Add(this.DictCountLabel);
+            this.BehinderDTabPage.Controls.Add(this.label15);
+            this.BehinderDTabPage.Controls.Add(this.BehinderDS1Button);
+            this.BehinderDTabPage.Controls.Add(this.label2);
+            this.BehinderDTabPage.Controls.Add(this.BehinderDClearButton);
+            this.BehinderDTabPage.Controls.Add(this.BehinderDecryptButton);
+            this.BehinderDTabPage.Controls.Add(this.progressBar);
+            this.BehinderDTabPage.Controls.Add(this.BehinderDTextBox);
+            this.BehinderDTabPage.Controls.Add(this.label10);
+            this.BehinderDTabPage.Controls.Add(this.label8);
+            this.BehinderDTabPage.Controls.Add(this.label3);
+            this.BehinderDTabPage.Location = new System.Drawing.Point(4, 26);
+            this.BehinderDTabPage.Name = "BehinderDTabPage";
+            this.BehinderDTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BehinderDTabPage.Size = new System.Drawing.Size(715, 431);
+            this.BehinderDTabPage.TabIndex = 2;
+            this.BehinderDTabPage.Text = "冰蝎流量解密";
+            this.BehinderDTabPage.UseVisualStyleBackColor = true;
+            // 
+            // SuccessLabel
+            // 
+            this.SuccessLabel.AutoSize = true;
+            this.SuccessLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.SuccessLabel.Location = new System.Drawing.Point(285, 54);
+            this.SuccessLabel.Name = "SuccessLabel";
+            this.SuccessLabel.Size = new System.Drawing.Size(0, 17);
+            this.SuccessLabel.TabIndex = 23;
             // 
             // HitPasswordLabel
             // 
@@ -349,15 +368,15 @@
             this.label15.TabIndex = 17;
             this.label15.Text = "字典数据:";
             // 
-            // BehinderS1Button
+            // BehinderDS1Button
             // 
-            this.BehinderS1Button.Location = new System.Drawing.Point(288, 6);
-            this.BehinderS1Button.Name = "BehinderS1Button";
-            this.BehinderS1Button.Size = new System.Drawing.Size(42, 23);
-            this.BehinderS1Button.TabIndex = 16;
-            this.BehinderS1Button.Text = "例1";
-            this.BehinderS1Button.UseVisualStyleBackColor = true;
-            this.BehinderS1Button.Click += new System.EventHandler(this.BehinderS1Button_Click);
+            this.BehinderDS1Button.Location = new System.Drawing.Point(288, 6);
+            this.BehinderDS1Button.Name = "BehinderDS1Button";
+            this.BehinderDS1Button.Size = new System.Drawing.Size(42, 23);
+            this.BehinderDS1Button.TabIndex = 16;
+            this.BehinderDS1Button.Text = "例1";
+            this.BehinderDS1Button.UseVisualStyleBackColor = true;
+            this.BehinderDS1Button.Click += new System.EventHandler(this.BehinderS1Button_Click);
             // 
             // label2
             // 
@@ -368,15 +387,15 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "进度";
             // 
-            // BehinderClearButton
+            // BehinderDClearButton
             // 
-            this.BehinderClearButton.Location = new System.Drawing.Point(643, 51);
-            this.BehinderClearButton.Name = "BehinderClearButton";
-            this.BehinderClearButton.Size = new System.Drawing.Size(60, 23);
-            this.BehinderClearButton.TabIndex = 13;
-            this.BehinderClearButton.Text = "清空";
-            this.BehinderClearButton.UseVisualStyleBackColor = true;
-            this.BehinderClearButton.Click += new System.EventHandler(this.BehinderClearButton_Click);
+            this.BehinderDClearButton.Location = new System.Drawing.Point(643, 51);
+            this.BehinderDClearButton.Name = "BehinderDClearButton";
+            this.BehinderDClearButton.Size = new System.Drawing.Size(60, 23);
+            this.BehinderDClearButton.TabIndex = 13;
+            this.BehinderDClearButton.Text = "清空";
+            this.BehinderDClearButton.UseVisualStyleBackColor = true;
+            this.BehinderDClearButton.Click += new System.EventHandler(this.BehinderClearButton_Click);
             // 
             // BehinderDecryptButton
             // 
@@ -396,17 +415,17 @@
             this.progressBar.Size = new System.Drawing.Size(240, 23);
             this.progressBar.TabIndex = 11;
             // 
-            // BehinderTextBox
+            // BehinderDTextBox
             // 
-            this.BehinderTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BehinderTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.BehinderTextBox.Location = new System.Drawing.Point(3, 81);
-            this.BehinderTextBox.Multiline = true;
-            this.BehinderTextBox.Name = "BehinderTextBox";
-            this.BehinderTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.BehinderTextBox.Size = new System.Drawing.Size(709, 347);
-            this.BehinderTextBox.TabIndex = 7;
-            this.BehinderTextBox.Text = "\r\n";
+            this.BehinderDTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BehinderDTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.BehinderDTextBox.Location = new System.Drawing.Point(3, 81);
+            this.BehinderDTextBox.Multiline = true;
+            this.BehinderDTextBox.Name = "BehinderDTextBox";
+            this.BehinderDTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.BehinderDTextBox.Size = new System.Drawing.Size(709, 347);
+            this.BehinderDTextBox.TabIndex = 7;
+            this.BehinderDTextBox.Text = "\r\n";
             // 
             // label10
             // 
@@ -435,18 +454,96 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "施工中...";
             // 
+            // BehinderETabPage
+            // 
+            this.BehinderETabPage.Controls.Add(this.label17);
+            this.BehinderETabPage.Controls.Add(this.label16);
+            this.BehinderETabPage.Controls.Add(this.BehinderEClearButton);
+            this.BehinderETabPage.Controls.Add(this.BehinderDGenButton);
+            this.BehinderETabPage.Controls.Add(this.BehinderES1Button);
+            this.BehinderETabPage.Controls.Add(this.label14);
+            this.BehinderETabPage.Controls.Add(this.BehinderETextBox);
+            this.BehinderETabPage.Location = new System.Drawing.Point(4, 26);
+            this.BehinderETabPage.Name = "BehinderETabPage";
+            this.BehinderETabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BehinderETabPage.Size = new System.Drawing.Size(715, 431);
+            this.BehinderETabPage.TabIndex = 3;
+            this.BehinderETabPage.Text = "冰蝎流量加密";
+            this.BehinderETabPage.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(220, 33);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(56, 17);
+            this.label17.TabIndex = 21;
+            this.label17.Text = "一行一个";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(4, 33);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(214, 17);
+            this.label16.TabIndex = 20;
+            this.label16.Text = "根据密码生成20位冰蝎加密特征字符串";
+            // 
+            // BehinderEClearButton
+            // 
+            this.BehinderEClearButton.Location = new System.Drawing.Point(643, 51);
+            this.BehinderEClearButton.Name = "BehinderEClearButton";
+            this.BehinderEClearButton.Size = new System.Drawing.Size(60, 23);
+            this.BehinderEClearButton.TabIndex = 19;
+            this.BehinderEClearButton.Text = "清空";
+            this.BehinderEClearButton.UseVisualStyleBackColor = true;
+            this.BehinderEClearButton.Click += new System.EventHandler(this.BehinderEClearButton_Click);
+            // 
+            // BehinderDGenButton
+            // 
+            this.BehinderDGenButton.Location = new System.Drawing.Point(548, 51);
+            this.BehinderDGenButton.Name = "BehinderDGenButton";
+            this.BehinderDGenButton.Size = new System.Drawing.Size(60, 23);
+            this.BehinderDGenButton.TabIndex = 18;
+            this.BehinderDGenButton.Text = "生成";
+            this.BehinderDGenButton.UseVisualStyleBackColor = true;
+            this.BehinderDGenButton.Click += new System.EventHandler(this.BehinderDGenButton_Click);
+            // 
+            // BehinderES1Button
+            // 
+            this.BehinderES1Button.Location = new System.Drawing.Point(288, 6);
+            this.BehinderES1Button.Name = "BehinderES1Button";
+            this.BehinderES1Button.Size = new System.Drawing.Size(42, 23);
+            this.BehinderES1Button.TabIndex = 17;
+            this.BehinderES1Button.Text = "例1";
+            this.BehinderES1Button.UseVisualStyleBackColor = true;
+            this.BehinderES1Button.Click += new System.EventHandler(this.BehinderES1Button_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(4, 9);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(275, 17);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
+            // 
+            // BehinderETextBox
+            // 
+            this.BehinderETextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BehinderETextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.BehinderETextBox.Location = new System.Drawing.Point(3, 81);
+            this.BehinderETextBox.MaxLength = 131072;
+            this.BehinderETextBox.Multiline = true;
+            this.BehinderETextBox.Name = "BehinderETextBox";
+            this.BehinderETextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.BehinderETextBox.Size = new System.Drawing.Size(709, 347);
+            this.BehinderETextBox.TabIndex = 8;
+            this.BehinderETextBox.Text = "rebeyond\r\n123456\r\nadmin\r\nhack";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
-            // 
-            // SuccessLabel
-            // 
-            this.SuccessLabel.AutoSize = true;
-            this.SuccessLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.SuccessLabel.Location = new System.Drawing.Point(285, 54);
-            this.SuccessLabel.Name = "SuccessLabel";
-            this.SuccessLabel.Size = new System.Drawing.Size(0, 17);
-            this.SuccessLabel.TabIndex = 23;
             // 
             // BinaryMainForm
             // 
@@ -467,8 +564,10 @@
             this.StringsTabPage.PerformLayout();
             this.XiseTabPage.ResumeLayout(false);
             this.XiseTabPage.PerformLayout();
-            this.BehinderTabPage.ResumeLayout(false);
-            this.BehinderTabPage.PerformLayout();
+            this.BehinderDTabPage.ResumeLayout(false);
+            this.BehinderDTabPage.PerformLayout();
+            this.BehinderETabPage.ResumeLayout(false);
+            this.BehinderETabPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -479,7 +578,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage StringsTabPage;
         private System.Windows.Forms.TabPage XiseTabPage;
-        private System.Windows.Forms.TabPage BehinderTabPage;
+        private System.Windows.Forms.TabPage BehinderDTabPage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -500,16 +599,24 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button XiseS2Button;
         private System.Windows.Forms.Button XiseS1Button;
-        private System.Windows.Forms.TextBox BehinderTextBox;
+        private System.Windows.Forms.TextBox BehinderDTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BehinderClearButton;
+        private System.Windows.Forms.Button BehinderDClearButton;
         private System.Windows.Forms.Button BehinderDecryptButton;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Button BehinderS1Button;
+        private System.Windows.Forms.Button BehinderDS1Button;
         private System.Windows.Forms.Label DictCountLabel;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label HitPasswordLabel;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label SuccessLabel;
+        private System.Windows.Forms.TabPage BehinderETabPage;
+        private System.Windows.Forms.Button BehinderEClearButton;
+        private System.Windows.Forms.Button BehinderDGenButton;
+        private System.Windows.Forms.Button BehinderES1Button;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox BehinderETextBox;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }
