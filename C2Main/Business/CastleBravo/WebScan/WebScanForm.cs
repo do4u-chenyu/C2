@@ -696,5 +696,15 @@ namespace C2.Business.CastleBravo.WebScan
             editorCheckBox.Checked = false;
             loginCheckBox.Checked = false;
         }
+
+        private void HelpLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "WebScan帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            }
+            catch { };
+        }
     }
 }

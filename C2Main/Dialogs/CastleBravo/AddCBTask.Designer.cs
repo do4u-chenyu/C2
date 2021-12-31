@@ -40,6 +40,7 @@
             this.modeComboBox = new System.Windows.Forms.ComboBox();
             this.md5TextBox = new System.Windows.Forms.TextBox();
             this.pasteModeCB = new System.Windows.Forms.CheckBox();
+            this.helpLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -176,12 +177,25 @@
             this.pasteModeCB.UseVisualStyleBackColor = true;
             this.pasteModeCB.CheckedChanged += new System.EventHandler(this.PasteModeCB_CheckedChanged);
             // 
+            // linkLabel1
+            // 
+            this.helpLabel.AutoSize = true;
+            this.helpLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.helpLabel.Location = new System.Drawing.Point(314, 129);
+            this.helpLabel.Name = "linkLabel1";
+            this.helpLabel.Size = new System.Drawing.Size(57, 12);
+            this.helpLabel.TabIndex = 10014;
+            this.helpLabel.TabStop = true;
+            this.helpLabel.Text = "帮助说明";
+            this.helpLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLabel_LinkClicked);
+            // 
             // AddCBTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(470, 318);
+            this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.pasteModeCB);
             this.Controls.Add(this.md5TextBox);
             this.Controls.Add(this.modeComboBox);
@@ -208,6 +222,7 @@
             this.Controls.SetChildIndex(this.modeComboBox, 0);
             this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.pasteModeCB, 0);
+            this.Controls.SetChildIndex(this.helpLabel, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +242,6 @@
         private System.Windows.Forms.ComboBox modeComboBox;
         private System.Windows.Forms.TextBox md5TextBox;
         private System.Windows.Forms.CheckBox pasteModeCB;
+        private System.Windows.Forms.LinkLabel helpLabel;
     }
 }
