@@ -251,14 +251,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
 
-        public static String ProcessingResults(byte[] ret, string taskUrl, string type)
+        public static String ProcessingResults(byte[] ret, string url, string type)
         {
             if (ret.Length == 0)
                 return type + ":无结果";
             if (ret.Length < 40)
-                return ByteToString(ret);
+                return ST.BytesToString(ret, true);
             string time = DateTime.Now.ToString("yyyyMMdd");
-            Match m = new Regex("://(.*?)/").Match(taskUrl);
+            Match m = new Regex("://(.*?)/").Match(url);
             string fileName = m.Success ? string.Format("{0}_{1}", m.Groups[1].Value, time) : time;
             string path = Path.Combine(Global.UserWorkspacePath, "后信息采集", type);
             Directory.CreateDirectory(path);
@@ -268,19 +268,5 @@ namespace C2.Business.CastleBravo.WebShellTool
                 fs.Write(ret, 0, ret.Length);
             return filePath;
         }
-        public static String ByteToString(byte[] bytes)
-        {
-
-            StringBuilder strBuilder = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                if (bytes[i] < 32) continue;
-                strBuilder.Append(Convert.ToChar(bytes[i]));
-
-            }
-            return strBuilder.ToString();
-        }
-
-
     }
 }
