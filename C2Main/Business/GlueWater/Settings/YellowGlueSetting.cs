@@ -260,6 +260,7 @@ namespace C2.Business.GlueWater.Settings
                 {
                     if (memberList[0] != Web[i][1])
                         continue;
+                    saveWebIndex.Add(i);
                     if (memberList[2] == Web[i][6])
                     {
                         memberList[4] = Web[i][7];
@@ -342,7 +343,7 @@ namespace C2.Business.GlueWater.Settings
                     }
                 }
                 List<String> yellowPhotoEmpty = new List<string>();
-                if (saveWebIndex.Count() != 0 && !saveWebIndex.Contains(i))
+                if (saveWebIndex.Count() == 0 || (saveWebIndex.Count() != 0 && !saveWebIndex.Contains(i)))
                     continue;
 
                 yellowPhotoEmpty = GetEmptylist(YellowPhotoMemberExcelColList);

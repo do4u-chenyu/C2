@@ -198,7 +198,13 @@ namespace C2.Forms
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.Filter = "数据包|*.zip";
-                dialog.FileName = "XX省市-" + selectedItem.Replace("专项", "") + "模板-" + DateTime.Now.ToString("yyyyMMdd") + "-XX.zip";
+
+                string type = string.Empty;
+                type = selectedItem == "涉赌专项" ? "db-" : type;
+                type = selectedItem == "涉枪专项" ? "gun-" : type;
+                type = selectedItem == "涉黄专项" ? "yellow-" : type;
+
+                dialog.FileName = "XX省XX市-" + type + DateTime.Now.ToString("yyyyMMdd") + "-XX.zip";
 
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
