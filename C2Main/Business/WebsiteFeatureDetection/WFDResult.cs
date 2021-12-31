@@ -40,7 +40,8 @@ namespace C2.Business.WebsiteFeatureDetection
             prediction_ = predictionCodeDict.TryGetValue(prediction, out string tmpPre) ? tmpPre : prediction;
             Fraud_label = fraudCodeDict.TryGetValue(prediction, out string tmpFraud) ? tmpFraud : prediction;
             screen_shot = ResDict.TryGetValue("screen_shot", out string tmpScreenShot) ? tmpScreenShot : string.Empty;
-            login = ResDict.TryGetValue("login", out string tmpLogin) ? tmpLogin : string.Empty;
+            login = ResDict.TryGetValue("login", out string tmpLogin) ? "你好anti" : string.Empty;
+
             html_content_id = ResDict.TryGetValue("html_content_id", out string tmpContentId) ? tmpContentId : string.Empty;
             html_content = ResDict.TryGetValue("html_content", out string tmpContent) ? tmpContent : string.Empty;
             ip = ResDict.TryGetValue("ip", out string tmpIp) ? tmpIp : string.Empty;
