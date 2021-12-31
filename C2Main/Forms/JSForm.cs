@@ -213,7 +213,6 @@ namespace C2.Forms
                 type = selectedItem == "涉赌专项" ? "db-" : type;
                 type = selectedItem == "涉枪专项" ? "gun-" : type;
                 type = selectedItem == "涉黄专项" ? "yellow-" : type;
-
                 dialog.FileName = "XX省XX市-" + type + DateTime.Now.ToString("yyyyMMdd") + "-XX.zip";
 
                 if (dialog.ShowDialog() != DialogResult.OK)
