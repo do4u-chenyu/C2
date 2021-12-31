@@ -48,10 +48,10 @@ namespace C2.Business.WebsiteFeatureDetection
             //APIUrl = "https://10.1.203.15:12347/apis/";//测试
             APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
-            ProClassifierUrl = APIUrl + "pro_classifier_api";
-            TaskResultUrl = APIUrl + "detection/task/result";
-            ScreenshotUrl = APIUrl + "Screenshot";
-            CategoryUrl = APIUrl + "category";
+            ProClassifierUrl = APIUrl + "pro_classifier_api";//任务下发
+            TaskResultUrl = APIUrl + "detection/task/result";//获取任务结果
+            ScreenshotUrl = APIUrl + "Screenshot";//获取网站截图的base64值
+            CategoryUrl = APIUrl + "category";//获取类别编码字典
 
             httpHandler = new HttpHandler();
         }
@@ -83,7 +83,7 @@ namespace C2.Business.WebsiteFeatureDetection
             }
         }
 
-        // 网站分类
+        // 任务下发  网站分类
         public bool StartTask(List<string> urls, out WFDAPIResult result)
         {
             result = new WFDAPIResult();
