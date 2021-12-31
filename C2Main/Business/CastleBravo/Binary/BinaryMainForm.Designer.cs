@@ -73,6 +73,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.BehinderETextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
@@ -456,6 +457,7 @@
             // 
             // BehinderETabPage
             // 
+            this.BehinderETabPage.Controls.Add(this.label18);
             this.BehinderETabPage.Controls.Add(this.label17);
             this.BehinderETabPage.Controls.Add(this.label16);
             this.BehinderETabPage.Controls.Add(this.BehinderEClearButton);
@@ -545,6 +547,15 @@
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin|所有文件|*.*";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(4, 54);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(140, 17);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "输出: 加密特征串 \\t 密码";
+            // 
             // BinaryMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -618,5 +629,6 @@
         private System.Windows.Forms.TextBox BehinderETextBox;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }

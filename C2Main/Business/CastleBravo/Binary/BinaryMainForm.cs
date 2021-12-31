@@ -203,9 +203,9 @@ namespace C2.Business.CastleBravo.Binary
             string[] ss = BehinderETextBox.Text.SplitLine();
             foreach (string s in ss)
             {
-                sb.Append(s.Trim())
+                sb.Append(bh.Encrypt20(s.Trim()))  
                   .Append('\t')
-                  .AppendLine(bh.Encrypt20(s.Trim()));
+                  .AppendLine(s.Trim());
             }
             BehinderETextBox.Text = sb.ToString();
         }
