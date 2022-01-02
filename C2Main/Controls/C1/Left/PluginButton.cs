@@ -18,9 +18,9 @@ namespace C2.Controls.C1.Left
     class PluginButton : BaseLeftInnerButton
     {
         private ToolStripMenuItem OpenToolStripMenuItem;
-        private ToolStripMenuItem OpenMindMapMenuItem;
+        private ToolStripMenuItem JumpMindMapMenuItem;
 
-        private Dictionary<string, string> JST;
+        private readonly Dictionary<string, string> JST;
 
         private readonly string pluginType;
         public PluginButton(string name)
@@ -102,33 +102,31 @@ namespace C2.Controls.C1.Left
         }
         private void InitButtonMenu()
         {
+            contextMenuStrip.Opening += ContextMenuStrip_Opening;
+
             OpenToolStripMenuItem = new ToolStripMenuItem
             {
                 Name = "OpenToolStripMenuItem",
-                Size = new Size(196, 22),
                 Text = "打开"
             };
             OpenToolStripMenuItem.Click += new EventHandler(OpenToolStripMenuItem_Click);
 
-            this.contextMenuStrip.Items.Add(OpenToolStripMenuItem);
-            this.contextMenuStrip.Opening += ContextMenuStrip_Opening;
-
-            OpenMindMapMenuItem = new ToolStripMenuItem
+            JumpMindMapMenuItem = new ToolStripMenuItem
             {
                 Name = "OpenMindMapMenuItem",
-                Size = new Size(196, 22),
                 Text = "跳转业务视图(专项模型文档)",
             };
-            OpenMindMapMenuItem.Click += new EventHandler(OpenMindMapMenuItem_Click);
- 
+            JumpMindMapMenuItem.Click += new EventHandler(OpenMindMapMenuItem_Click);
+
+            contextMenuStrip.Items.Add(OpenToolStripMenuItem);
         }
 
         private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.contextMenuStrip.Items.Remove(OpenMindMapMenuItem);
-            bool ret = JST.ContainsKey(pluginType) && Exists(JST[pluginType]);
-            if (ret) 
-                this.contextMenuStrip.Items.Add(OpenMindMapMenuItem);
+            contextMenuStrip.Items.Remove(JumpMindMapMenuItem);
+            bool exs = JST.ContainsKey(pluginType) && Exists(JST[pluginType]);
+            if (exs)
+                contextMenuStrip.Items.Add(JumpMindMapMenuItem);
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
