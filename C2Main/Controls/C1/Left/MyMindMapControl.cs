@@ -57,6 +57,25 @@ namespace C2.Controls.Left
             return false;
         }
 
+        private string FindFFP(string modelTitle)
+        {
+            foreach (Control ct in this.MindMapPaintPanel.Controls)
+            {
+                if ((ct is MindMapModelButton) && (ct as MindMapModelButton).ModelTitle == modelTitle)
+                    return (ct as MindMapModelButton).FullFilePath;
+            }
+            return string.Empty;
+        }
+
+        public bool TryOpen(string modelTitle)
+        {
+            if (!ContainModel(modelTitle))
+                return false;
+            string ffp = FindFFP(modelTitle);
+            Global.GetMainForm().OpenDocument(ffp);
+            return true;
+        }
+
         public void RemoveMindMapButton(MindMapModelButton modelButton)
         {
             // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验

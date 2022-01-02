@@ -88,7 +88,7 @@ namespace C2.Controls
 
             return tabs.ToArray();
         }
-        public List<string> OpendDocuments<T>()
+        public List<string> OpenedDocuments<T>()
             where T : BaseForm
         {
             char[] Chars = new char[] { Utils.OpUtil.Blank, '*' };
@@ -99,14 +99,14 @@ namespace C2.Controls
             return tabs.ToList();
         }
 
-        public List<string> OpendDocuments()
+        public List<string> OpenedDocuments()
         {
-            return OpendDocuments<BaseDocumentForm>();
+            return OpenedDocuments<BaseDocumentForm>();
         }
 
-        public List<string> OpendMindMapDocuments()
+        public List<string> OpenedMindMapDocuments()
         {
-            return OpendDocuments<DocumentForm>();
+            return OpenedDocuments<DocumentForm>();
         }
 
         private void OnTaskBarChanged()

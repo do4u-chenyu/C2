@@ -159,7 +159,7 @@ namespace C2.Controls.MapViews
             {
                 StartPosition = FormStartPosition.CenterScreen,
                 RelateMindMapView = this,
-                OpenDocuments = Global.GetMainForm().OpendDocuments(),
+                OpenDocuments = Global.GetMainForm().OpenedDocuments(),
                 NewFormType = FormType.CanvasForm,
                 ModelType = "新建多维运算视图"
             };
