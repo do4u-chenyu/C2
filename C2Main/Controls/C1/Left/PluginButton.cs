@@ -10,7 +10,6 @@ using C2.Globalization;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
