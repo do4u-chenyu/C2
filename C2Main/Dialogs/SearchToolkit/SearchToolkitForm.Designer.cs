@@ -68,6 +68,7 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.helpLabel = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TaskConfigPB)).BeginInit();
@@ -309,6 +310,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.helpLabel);
             this.groupBox1.Controls.Add(this.TaskConfigPB);
             this.groupBox1.Controls.Add(this.taskInfoGB);
             this.groupBox1.Controls.Add(this.taskNameTB);
@@ -500,6 +502,18 @@
             this.saveFileDialog.Filter = "tgz压缩包 (*.tgz)|*.tgz|tar.gz压缩包|*.tar.gz|zip压缩包|*.zip|所有文件|*.*";
             this.saveFileDialog.Title = "全文模型结果下载";
             // 
+            // helpLabel
+            // 
+            this.helpLabel.AutoSize = true;
+            this.helpLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.helpLabel.ForeColor = System.Drawing.Color.Navy;
+            this.helpLabel.Location = new System.Drawing.Point(294, 84);
+            this.helpLabel.Name = "helpLabel";
+            this.helpLabel.Size = new System.Drawing.Size(61, 19);
+            this.helpLabel.TabIndex = 47;
+            this.helpLabel.Text = "帮助信息";
+            this.helpLabel.Visible = false;
+            // 
             // SearchToolkitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -570,5 +584,6 @@
         private System.Windows.Forms.TextBox searchPwdTB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label helpLabel;
     }
 }
