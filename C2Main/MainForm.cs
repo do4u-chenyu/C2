@@ -714,7 +714,7 @@ namespace C2
             {
                 StartPosition = FormStartPosition.CenterScreen,
                 Owner = this,
-                OpenDocuments = OpendDocuments(),
+                OpenDocuments = OpenedDocuments(),
                 NewFormType = FormType.DocumentForm,
                 ModelType = "新建业务视图"
             };

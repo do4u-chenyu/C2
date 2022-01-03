@@ -94,10 +94,7 @@ namespace C2.Controls.Left
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
                 return;
             // 双击打开对应模型
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            {
-                Global.GetMainForm().OpenDocument(FullFilePath);
-            }
+            Global.GetMainForm().OpenDocument(FullFilePath);
         }
 
 
@@ -161,7 +158,7 @@ namespace C2.Controls.Left
 
         private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Global.GetMainForm().OpendMindMapDocuments().Contains(ModelTitle))
+            if (Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle))
             {
                 this.OpenToolStripMenuItem.Enabled = false;
                 this.RenameToolStripMenuItem.Enabled = false;

@@ -43,7 +43,7 @@ namespace C2.Dialogs
         public bool CheckNameWord(string inputModelTitle) 
         {
             NewFormType = FormType.DocumentForm;
-            OpenDocuments = Global.GetMainForm().OpendDocuments();
+            OpenDocuments = Global.GetMainForm().OpenedDocuments();
             if ((NewFormType == FormType.DocumentForm && GetModelTitleList().Contains(inputModelTitle)))
             {
                 MessageBox.Show(inputModelTitle + "，同名文件已存在", "已存在", MessageBoxButtons.OK, MessageBoxIcon.Warning);

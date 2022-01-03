@@ -26,7 +26,7 @@ namespace C2.SearchToolkit
             ["秒播vps"] = "vps",
             //["测试模型"] = "test",
             ["购置境外网络资产模型"] = "email",
-            ["md5逆向"] = "md5",
+            ["PASS分析"] = "md5",
             ["黑吃黑模型"] = "hostDD",
             ["盗洞模型"] = "hackDD",
             ["自定义查询"] = "custom",
@@ -48,7 +48,7 @@ namespace C2.SearchToolkit
             ["秒播vps"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             //["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py",
             ["购置境外网络资产模型"] = "batchquery_email_accountPass_C2_20211111_{0}.py",
-            ["md5逆向"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
+            ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
             ["黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
@@ -69,11 +69,32 @@ namespace C2.SearchToolkit
             ["四方模型"] = @"([^\n\r]+000000_queryResult_sf_\d+_\d+.tgz)",
             ["秒播vps"] = @"([^\n\r]+000000_queryResult_vps_\d+_\d+.tgz)",
             //["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
-            ["md5逆向"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
+            ["PASS分析"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
             ["购置境外网络资产模型"] = @"([^\n\r]+000000_queryResult_email_\d+_\d+.tgz)",
             ["黑吃黑模型"] = @"([^\n\r]+000000_queryResult_hostDD_\d+_\d+.tgz)",
             ["盗洞模型"] = @"([^\n\r]+000000_queryResult_hackDD_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
+        };
+
+        public static readonly Dictionary<String, String> TaskHelpInfoTable = new Dictionary<String, String>
+        {
+            ["涉赌模型"] = "JS的经典涉赌模型",
+            ["涉枪模型"] = "JS的经典涉枪模型",
+            ["涉黄模型"] = "JS的经典涉黄模型",
+            ["飞机场模型"] = "私搭境外翻墙主机",
+            ["黑客模型"] = "传统黑客模型",
+            ["宝塔面板"] = "一键搭站,黑灰产领域的热门工具",
+            ["apk模型"] = "",
+            ["ddos模型"] = "传统黑客模型:有DDOS攻击行为",
+            ["xss模型"] = "传统黑客模型:有XSS攻击行为",
+            ["侵公模型"] = "外泄公民个人信息",
+            ["四方模型"] = "第四方支付,给黑灰产和上下游提供资金结算服务",
+            ["秒播vps"] = "",
+            ["PASS分析"] = "内部测试用,忽略",
+            ["购置境外网络资产模型"] = "购置境外域名,VPN,云主机,服务器和矿池用于黑灰产",
+            ["黑吃黑模型"] = "新一代黑客专项模型:黑客和黑产间的黑吃黑",
+            ["盗洞模型"] = "新一代黑客专项模型:木马打洞",
+            ["自定义查询"] = "上面详细设置里自己填查询关键词",
         };
 
         public String LocalPyScriptPath

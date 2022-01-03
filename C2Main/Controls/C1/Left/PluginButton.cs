@@ -9,20 +9,34 @@ using C2.Core;
 using C2.Globalization;
 using C2.Utils;
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
 {
     class PluginButton : BaseLeftInnerButton
     {
-        private string pluginType;
+        private ToolStripMenuItem OpenToolStripMenuItem;
+        private ToolStripMenuItem JumpMindMapMenuItem;
+
+        private readonly Dictionary<string, string> JST;
+
+        private readonly string pluginType;
         public PluginButton(string name)
         {
             pluginType = name;
             InitButtonMenu();
             InitButtonType();
             InitButtonDoubleClick();
+            JST = new Dictionary<string, string>()
+            {
+                {"涉赌专项", "涉赌胶水系统" },
+                {"涉枪专项", "涉枪胶水系统" },
+                {"涉黄专项", "涉黄胶水系统" },
+                {"盗洞专项", "盗洞模型" },
+                {"黑吃黑专项", "黑吃黑模型" },
+                {"境外网产专项", "购置境外网络资产模型" },
+            };
         }
 
         private void InitButtonType()
@@ -83,28 +97,50 @@ namespace C2.Controls.C1.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.WC;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.NetworkAssetsHelpInfo);
                     break;
-
-
             }
         }
         private void InitButtonMenu()
         {
-            ToolStripMenuItem OpenToolStripMenuItem = new ToolStripMenuItem
+            contextMenuStrip.Opening += ContextMenuStrip_Opening;
+
+            OpenToolStripMenuItem = new ToolStripMenuItem
             {
                 Name = "OpenToolStripMenuItem",
-                Size = new Size(196, 22),
                 Text = "打开"
             };
             OpenToolStripMenuItem.Click += new EventHandler(OpenToolStripMenuItem_Click);
 
-            this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {
-                    OpenToolStripMenuItem
-                 });
+            JumpMindMapMenuItem = new ToolStripMenuItem
+            {
+                Name = "OpenMindMapMenuItem",
+                Text = "跳转业务视图(专项模型文档)",
+            };
+            JumpMindMapMenuItem.Click += new EventHandler(OpenMindMapMenuItem_Click);
 
+            contextMenuStrip.Items.Add(OpenToolStripMenuItem);
         }
+
+        private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            contextMenuStrip.Items.Remove(JumpMindMapMenuItem);
+            bool exs = JST.ContainsKey(pluginType) && Exists(JST[pluginType]);
+            if (exs)
+                contextMenuStrip.Items.Add(JumpMindMapMenuItem);
+        }
+
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenPluginForm();
+        }
+
+        private void OpenMindMapMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.GetMindMapModelControl().TryOpen(JST[pluginType]);
+        }
+
+        private bool Exists(string modelTitle)
+        {
+            return Global.GetMindMapModelControl().ContainModel(modelTitle);
         }
 
         private void InitButtonDoubleClick()
