@@ -1,10 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
+import datetime
 block_cipher = None
 
 
-a = Analysis(['generate.C2F.py'],
+a = Analysis(['C2F.py'],
              pathex=['D:\\work\\C2\\tools\\C2F'],
              binaries=[],
              datas=[('D:\work\C2F\\apk模型.c2','c2f'),
@@ -40,7 +40,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,  
           [],
-          name='战法手册_1224',
+          name='战法手册' + '_' + datetime.datetime.now().strftime("%m%d"),
           icon='logo.ico',
           debug=False,
           bootloader_ignore_signals=False,
