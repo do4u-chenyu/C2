@@ -6,14 +6,15 @@ using System.Data;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace C2.Business.GlueWater
 {
     class BaseGlueSetting : IGlueSetting
     {
         public int maxRow = 65534;
-        public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
-        public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
+        public string txtDirectory = Path.Combine(Application.StartupPath, "Resources\\Templates\\JS模板", "胶水系统");
+        public string bakDirectory = Path.Combine(Application.StartupPath, "Resources\\Templates\\JS模板", "胶水系统", "backup");
         public List<string> doubleTypeColList; 
 
         public BaseGlueSetting()
