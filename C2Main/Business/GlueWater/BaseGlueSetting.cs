@@ -13,8 +13,8 @@ namespace C2.Business.GlueWater
     class BaseGlueSetting : IGlueSetting
     {
         public int maxRow = 65534;
-        public string txtDirectory = Path.Combine(Application.StartupPath, "Resources\\Templates\\JS模板", "胶水系统");
-        public string bakDirectory = Path.Combine(Application.StartupPath, "Resources\\Templates\\JS模板", "胶水系统", "backup");
+        public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
+        public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
         public List<string> doubleTypeColList; 
 
         public BaseGlueSetting()
@@ -25,7 +25,23 @@ namespace C2.Business.GlueWater
             if (!Directory.Exists(bakDirectory))
                 FileUtil.CreateDirectory(bakDirectory);
 
+            //加载默认涉赌/涉枪/涉黄数据包
+            string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/胶水系统");
+            if (!File.Exists(Path.Combine(txtDirectory, "DB_member.txt")))
+                CopyDirContentIntoDestDirectory(txtModelDirectory, txtDirectory, true);
+
             doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数", "涉黄人数" };
+        }
+        public static void CopyDirContentIntoDestDirectory(string srcdir, string dstdir, bool overwrite)
+        {
+            if (!Directory.Exists(dstdir))
+                Directory.CreateDirectory(dstdir);
+
+            foreach (var s in Directory.GetFiles(srcdir))
+                File.Copy(s, Path.Combine(dstdir, Path.GetFileName(s)), overwrite);
+
+            foreach (var s in Directory.GetDirectories(srcdir))
+                CopyDirContentIntoDestDirectory(s, Path.Combine(dstdir, Path.GetFileName(s)), overwrite);
         }
 
         public virtual void InitDataTable()

@@ -4124,6 +4124,27 @@
     </Content>
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
+    <Content Include="Resources\Templates\胶水系统\DB_member.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\DB_web.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\SQ_member.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\SQ_member2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\SQ_web.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\Yellow_member.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\Yellow_web.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>
