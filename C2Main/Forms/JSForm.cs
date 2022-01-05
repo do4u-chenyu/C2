@@ -4,6 +4,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -99,9 +100,19 @@ namespace C2.Forms
             return false;
         }
 
+        public void excelTextBoxSetting(int start, int end, Color color) 
+        {
+            this.excelTextBox.SelectionStart = start;
+            this.excelTextBox.SelectionLength = end;
+            this.excelTextBox.SelectionColor = color;
+        }
+    
+
         private void StyleChange(string selectedItem)
         {
             this.excelTextBox.Text = "未选择任何文件";
+            excelTextBoxSetting(0, this.excelTextBox.Text.Length, SystemColors.WindowText);
+
             selectedItem = selectedItem == "境外网产专项" ? "网产专项" : selectedItem;
             this.itemLabel.Text = selectedItem.Replace("专项", string.Empty);
             this.itemLabel.Location = selectedItem == "黑吃黑专项" ? new System.Drawing.Point(56, 14) : new System.Drawing.Point(72, 14);
@@ -124,12 +135,16 @@ namespace C2.Forms
                 string returnMsg = glueSetting.UpdateContent(excelPath);
                 if (returnMsg == "数据添加成功")
                 {
-                    this.excelTextBox.Text = Path.GetFileNameWithoutExtension(excelPath) + "数据添加成功";
+                    this.excelTextBox.Text = string.Empty;
+                    this.excelTextBox.Text = "[" + Path.GetFileNameWithoutExtension(excelPath) + "]" + "数据添加成功";
+                    excelTextBoxSetting(0, this.excelTextBox.Text.Length - "数据添加成功".Length, Color.DarkBlue);
                     RefreshHtmlTable();
                 }
                 else
                 {
-                    this.excelTextBox.Text = Path.GetFileNameWithoutExtension(excelPath) + "数据添加失败";
+                    this.excelTextBox.Text = string.Empty;
+                    this.excelTextBox.Text = "[" + Path.GetFileNameWithoutExtension(excelPath) + "]" + "数据添加失败";
+                    excelTextBoxSetting(0, this.excelTextBox.Text.Length - "数据添加失败".Length, Color.DarkBlue);
                     HelpUtil.ShowMessageBox(returnMsg);
                 }
             }
@@ -137,7 +152,7 @@ namespace C2.Forms
 
         public void SelectTabByName(string name)
         {
-            foreach(TabItem ti in tabBar1.Items)
+            foreach (TabItem ti in tabBar1.Items)
             {
                 if (ti.Tag.ToString() == name)
                 {

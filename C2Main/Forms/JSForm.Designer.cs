@@ -30,7 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.excelTextBox = new System.Windows.Forms.TextBox();
+            this.excelTextBox = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.itemLabel = new System.Windows.Forms.Label();
             this.sampleButton = new System.Windows.Forms.Button();
@@ -74,10 +74,12 @@
             // 
             this.excelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.excelTextBox.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.excelTextBox.Location = new System.Drawing.Point(249, 15);
+            this.excelTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.excelTextBox.SelectionColor = System.Drawing.SystemColors.WindowText;
+            this.excelTextBox.Location = new System.Drawing.Point(252, 11);
             this.excelTextBox.Name = "excelTextBox";
-            this.excelTextBox.Size = new System.Drawing.Size(284, 18);
-            this.excelTextBox.TabIndex = 7;
+            this.excelTextBox.Size = new System.Drawing.Size(284, 29);
+            this.excelTextBox.TabIndex = 3;
             this.excelTextBox.Text = "未选择任何文件";
             // 
             // label2
@@ -108,7 +110,7 @@
             this.sampleButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.sampleButton.Location = new System.Drawing.Point(542, 9);
             this.sampleButton.Name = "sampleButton";
-            this.sampleButton.Size = new System.Drawing.Size(76, 30);
+            this.sampleButton.Size = new System.Drawing.Size(89, 30);
             this.sampleButton.TabIndex = 4;
             this.sampleButton.Text = "数据包样例";
             this.sampleButton.UseVisualStyleBackColor = false;
@@ -214,7 +216,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private Controls.JSTabBar tabBar1;
-        private System.Windows.Forms.TextBox excelTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox excelTextBox;
     }
 }
