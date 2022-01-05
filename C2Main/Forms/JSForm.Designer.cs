@@ -110,7 +110,7 @@
             this.sampleButton.Name = "sampleButton";
             this.sampleButton.Size = new System.Drawing.Size(76, 30);
             this.sampleButton.TabIndex = 4;
-            this.sampleButton.Text = "模板样例";
+            this.sampleButton.Text = "数据包样例";
             this.sampleButton.UseVisualStyleBackColor = false;
             this.sampleButton.Click += new System.EventHandler(this.SampleButton_Click);
             // 
