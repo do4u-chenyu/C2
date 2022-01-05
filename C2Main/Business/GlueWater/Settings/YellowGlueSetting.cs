@@ -281,6 +281,7 @@ namespace C2.Business.GlueWater.Settings
 
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
                             YellowWebTable = SortNewTable(webRows, WebMember[j], YellowWebTable);
+                            ReWriteResult(YellowWebPath, YellowWebTable);
 
                             WebMember[j].RemoveRange(len, cutWeb.Count());
                             webAndAuth[memberList[0]].Remove(memberList[1]);
