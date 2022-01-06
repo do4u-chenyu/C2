@@ -242,6 +242,7 @@ namespace C2.Business.GlueWater.Settings
             List<string> removeList = new List<string>();
             webAndAuth.Add("remove", removeList);
             List<int> saveWebIndex = new List<int>();
+            List<List<string>> rowsList = new List<List<string>>();
 
             foreach (List<string> memberList in Member)
             {
@@ -280,7 +281,8 @@ namespace C2.Business.GlueWater.Settings
                             WebMember[j][7] = WebMember[j][7] == string.Empty ? CityTrans(zipPath) : WebMember[j][7];
 
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
-                            YellowWebTable = SortNewTable(webRows, WebMember[j], YellowWebTable);
+                            rowsList = TableFilter(webRows, rowsList, WebMember[j], YellowWebTable);
+                            YellowWebTable = SortNewTable(rowsList, YellowWebTable);
                             ReWriteResult(YellowWebPath, YellowWebTable);
 
                             WebMember[j].RemoveRange(len, cutWeb.Count());
@@ -296,7 +298,10 @@ namespace C2.Business.GlueWater.Settings
                 if (webAndAuth.ContainsKey(memberList[0]) && webAndAuth[memberList[0]].Count == 0)
                     webAndAuth.Remove(memberList[0]);
                 DataRow[] rows = YellowMemberTable.Select("网站='" + memberList[0] + "'");
-                YellowMemberTable = TableFilter(rows, memberList, YellowMemberTable);
+                List<List<string>> YellowMemberList = new List<List<string>>();
+                YellowMemberList = TableFilter(rows, YellowMemberList, memberList, YellowMemberTable);
+                foreach (List<string> YellowMember in YellowMemberList)
+                    YellowMemberTable.Rows.Add(YellowMember.ToArray());
                 ReWriteResult(YellowMemberPath, YellowMemberTable);
             }
             returnList.Add(webAndAuth);
@@ -323,6 +328,7 @@ namespace C2.Business.GlueWater.Settings
 
         private void WebToTable(List<List<string>> Web, List<List<string>> WebMember, List<List<string>> Member, List<int> saveWebIndex, Dictionary<string, List<string>> webAndAuth, string zipPath)
         {
+            List<List<string>> rowsList = new List<List<string>>();
             for (int i = 0; i < Web.Count(); i++)
             {
                 DataRow[] rows = YellowMemberTable.Select("网站='" + Web[i][1] + "'");
@@ -373,7 +379,8 @@ namespace C2.Business.GlueWater.Settings
 
                 yellowPhotoEmpty = Trans(yellowPhotoEmpty);
                 DataRow[] webRows = YellowWebTable.Select("网站网址='" + yellowPhotoEmpty[9] + "'");
-                YellowWebTable = SortNewTable(webRows, yellowPhotoEmpty, YellowWebTable);
+                rowsList = TableFilter(webRows, rowsList, yellowPhotoEmpty, YellowWebTable);
+                YellowWebTable = SortNewTable(rowsList, YellowWebTable);
                 ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
@@ -414,49 +421,35 @@ namespace C2.Business.GlueWater.Settings
             return findCity;
         }
 
-        private DataTable TableFilter(DataRow[] data, List<string> memberList, DataTable YellowTable)
+        private List<List<string>> TableFilter(DataRow[] data, List<List<string>> rowsList, List<string> memberList, DataTable dataTable)
         {
             if (data.Length == 0)
-                YellowTable.Rows.Add(memberList.ToArray());
+                rowsList.Add(memberList);
             else
             {
                 List<string> rowContentList = new List<string>();
                 foreach (DataRow row in data)
                 {
                     List<string> rowContent = new List<string>();
-                    for (int j = 0; j < YellowTable.Columns.Count; j++)
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
                         rowContent.Add(row[j].ToString());
                     rowContentList.Add(string.Join("\t", rowContent));
                 }
 
                 if (!rowContentList.Contains(string.Join("\t", memberList)))
-                    YellowTable.Rows.Add(memberList.ToArray());
+                    rowsList.Add(memberList);
             }
-            return YellowTable;
+            return rowsList;
         }
 
-        private DataTable SortNewTable(DataRow[] data, List<string> memberList, DataTable YellowTable)
+        public DataTable SortNewTable(List<List<string>> memberList, DataTable dataTable)
         {
-            TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
-            TempWebTable.Rows.Clear();
-            if (data.Length == 0)
-                TempWebTable.Rows.Add(memberList.ToArray());
-            else
-            {
-                List<string> rowContentList = new List<string>();
-                foreach (DataRow row in data)
-                {
-                    List<string> rowContent = new List<string>();
-                    for (int j = 0; j < YellowTable.Columns.Count; j++)
-                        rowContent.Add(row[j].ToString());
-                    rowContentList.Add(string.Join("\t", rowContent));
-                }
+            TempWebTable = dataTable.Clone();
 
-                if (!rowContentList.Contains(string.Join("\t", memberList)))
-                    TempWebTable.Rows.Add(memberList.ToArray());
-            }
+            foreach (List<string> member in memberList)
+                TempWebTable.Rows.Add(member.ToArray());
 
-            foreach (DataRow row in YellowTable.Rows)
+            foreach (DataRow row in dataTable.Rows)
                 TempWebTable.Rows.Add(row.ItemArray);
             return TempWebTable;
         }
