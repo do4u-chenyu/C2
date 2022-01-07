@@ -150,7 +150,7 @@ namespace C2.Utils
             if (ip != IPCheck(ip))
                 return IPCheck(ip);
 
-            string url = "http://58.213.190.82:8484/Castle/ip?ip=" + ip;
+            string url = "http://221.226.113.110:8484/Castle/ip?ip=" + ip;
             string result = "";
             WebRequest wrt = null;
             WebResponse wrp = null;
