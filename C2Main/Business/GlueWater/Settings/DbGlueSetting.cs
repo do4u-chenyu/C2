@@ -53,20 +53,28 @@ namespace C2.Business.GlueWater.Settings
             RefreshHtmlTable();
         }
 
+        
         public override string RefreshHtmlTable(bool freshTitle = true)
         {
             StringBuilder sb = new StringBuilder();
 
             if(freshTitle)
                 sb.Append("<tr name=\"title\">" +
-                      "    <th>网站名称/域名/IP</th>" +
-                      "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
-                      "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
-                      "    <th style=\"width:80px\">涉赌人数<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
-                      "    <th>赌博类型/运营时间</th>" +
-                      "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
-                      "</tr>"
+                          "    <th>网站名称/域名/IP</th>" +
+                          "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
+                          "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                          "    <th style=\"width:80px\">涉赌人数<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                          "    <th>赌博类型/运营时间</th>" +
+                          "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                          "    <th style=\"width:60px\">操作</th>" +
+                          "</tr>"
                       );
+            if (!freshTitle)
+            {
+                
+            }
+                
+
 
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
@@ -79,6 +87,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td id=\"th2\">{6}</td>" +
                             "   <td>{7}<br>{8}</td>" +
                             "   <td>{9}<br>{10}</td>" +
+                            "   <td><a title =\"删除\" name=\"{1}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                             "</tr>",
                             dr["网站名称"].ToString(), dr["域名"].ToString(), dr["IP"].ToString(),
                             dr["Refer对应Title"].ToString(), dr["Refer"].ToString(),
@@ -90,6 +99,7 @@ namespace C2.Business.GlueWater.Settings
             }
             return sb.ToString();
         }
+        
 
         public override DataTable SearchInfo(string memeber)
         {
@@ -101,6 +111,18 @@ namespace C2.Business.GlueWater.Settings
 
             return resTable;
         }
+        /*
+        public override DataTable DeleteInfo(string memeber)
+        {
+            DataTable resTable = DbWebTable.Clone();
+            DataRow[] rows = DbWebTable.Select("域名='" + memeber + "'");
+
+            foreach (DataRow row in rows)
+                resTable.Rows.Remove(row);
+
+            return resTable;
+        }
+        */
 
         public override void SortDataTableByCol(string col, string sortType)
         {
@@ -209,7 +231,6 @@ namespace C2.Business.GlueWater.Settings
 
             }
             foreach(List<string> li in needAddList)
-                //DbMemberTable.Rows.Add(li.ToArray());
                 tempResultList.Add(li); 
             DbMemberTable = SortNewTable(tempResultList, DbMemberTable);
 

@@ -65,6 +65,11 @@ namespace C2.Business.GlueWater
             return new DataTable();
         }
 
+        public virtual DataTable DeleteInfo(string item)
+        {
+            return new DataTable();
+        }
+
         public virtual DataTable SearchInfoReply(string item)
         {
             return new DataTable();

@@ -164,6 +164,20 @@ namespace C2.Forms
 
         #region 界面html版
 
+        /*
+        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+        public void refreshData(string item,bool freshTitle = false)
+        {
+            this.webBrowser.Document.InvokeScript("clearTable");
+            this.webBrowser.Document.InvokeScript("clearTableTitle");
+            glueSetting.DeleteInfo(item);
+
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(freshTitle) });
+
+        }
+        */
+
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void ShowDetails(string item)
