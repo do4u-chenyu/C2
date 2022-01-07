@@ -15,7 +15,8 @@ namespace C2.Business.GlueWater
         public int maxRow = 65534;
         public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
         public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
-        public List<string> doubleTypeColList; 
+        public List<string> doubleTypeColList;
+        private DataTable TempWebTable;
 
         public BaseGlueSetting()
         {
@@ -255,5 +256,16 @@ namespace C2.Business.GlueWater
             return dataTable;
         }
 
+        public DataTable SortNewTable(List<List<string>> memberList, DataTable dataTable)
+        {
+            TempWebTable = dataTable.Clone();
+
+            foreach (List<string> member in memberList)
+                TempWebTable.Rows.Add(member.ToArray());
+
+            foreach (DataRow row in dataTable.Rows)
+                TempWebTable.Rows.Add(row.ItemArray);
+            return TempWebTable;
+        }
     }
 }

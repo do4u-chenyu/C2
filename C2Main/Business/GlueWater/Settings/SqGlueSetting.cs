@@ -186,6 +186,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList, contentsFirst);
             List<int> tailIndex = IndexFilter(SqWebExcelColList2, contentSecond);
 
@@ -211,7 +212,9 @@ namespace C2.Business.GlueWater.Settings
                 if (rows.Length > 0)
                     SqWebTable.Rows.Remove(rows[0]);
 
-                SqWebTable.Rows.Add(resultList.ToArray());
+                //SqWebTable.Rows.Add(resultList.ToArray());
+                tempResultList.Add(resultList);
+                SqWebTable = SortNewTable(tempResultList, SqWebTable);
             }
             ReWriteResult(SqWebPath, SqWebTable);
             return true;
@@ -219,6 +222,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContent(List<List<string>> contentsFirst, List<List<string>> contentSecond)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
             List<int> tailIndex = IndexFilter(SqMemberExcelColList, contentSecond);
 
@@ -256,7 +260,9 @@ namespace C2.Business.GlueWater.Settings
                                 SqMemberTable.Rows.Remove(rows[0]);
 
 
-                            SqMemberTable.Rows.Add(resultListSecond.ToArray());
+                            //SqMemberTable.Rows.Add(resultListSecond.ToArray());
+                            tempResultList.Add(resultListSecond);
+                            SqMemberTable = SortNewTable(tempResultList, SqMemberTable);
                         }
                     }
                 }
@@ -267,6 +273,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContentReply(List<List<string>> contentsFirst, List<List<string>> contentSecond)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
             List<int> tailIndex = IndexFilter(SqMemberExcelColList2, contentSecond);
 
@@ -304,7 +311,10 @@ namespace C2.Business.GlueWater.Settings
                                 );
                             if (rows.Length > 0)
                                 SqMemberTableReply.Rows.Remove(rows[0]);
-                            SqMemberTableReply.Rows.Add(resultListSecond.ToArray());
+
+                            //SqMemberTableReply.Rows.Add(resultListSecond.ToArray());
+                            tempResultList.Add(resultListSecond);
+                            SqMemberTableReply = SortNewTable(tempResultList, SqMemberTableReply);
                         }
                     }
                 }

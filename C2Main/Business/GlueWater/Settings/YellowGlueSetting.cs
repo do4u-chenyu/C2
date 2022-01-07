@@ -25,8 +25,6 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable YellowWebTable;
         private DataTable YellowMemberTable;
-        
-        private DataTable TempWebTable;
 
         private static YellowGlueSetting YellowGlueSettingInstance;
         public static YellowGlueSetting GetInstance()
@@ -440,18 +438,6 @@ namespace C2.Business.GlueWater.Settings
                     rowsList.Add(memberList);
             }
             return rowsList;
-        }
-
-        public DataTable SortNewTable(List<List<string>> memberList, DataTable dataTable)
-        {
-            TempWebTable = dataTable.Clone();
-
-            foreach (List<string> member in memberList)
-                TempWebTable.Rows.Add(member.ToArray());
-
-            foreach (DataRow row in dataTable.Rows)
-                TempWebTable.Rows.Add(row.ItemArray);
-            return TempWebTable;
         }
     }
 }

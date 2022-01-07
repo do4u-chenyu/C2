@@ -139,6 +139,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contents)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             if (contents.Count == 0)
                 return false;
 
@@ -163,7 +164,9 @@ namespace C2.Business.GlueWater.Settings
                 string tmpMoney = resultList[DbWebColList.ToList().IndexOf("涉案金额")];
                 resultList[DbWebColList.ToList().IndexOf("涉案金额")] = tmpMoney == string.Empty ? "0" : tmpMoney;
 
-                DbWebTable.Rows.Add(resultList.ToArray());
+                //DbWebTable.Rows.Add(resultList.ToArray());
+                tempResultList.Add(resultList);
+                DbWebTable = SortNewTable(tempResultList, DbWebTable);
             }
             ReWriteResult(DbWebPath, DbWebTable);
             return true;
@@ -171,6 +174,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContent(List<List<string>> contents)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             if (contents.Count == 0)
                 return false;
 
@@ -205,7 +209,9 @@ namespace C2.Business.GlueWater.Settings
 
             }
             foreach(List<string> li in needAddList)
-                DbMemberTable.Rows.Add(li.ToArray());
+                //DbMemberTable.Rows.Add(li.ToArray());
+                tempResultList.Add(li); 
+            DbMemberTable = SortNewTable(tempResultList, DbMemberTable);
 
             ReWriteResult(DbMemberPath, DbMemberTable);
             return true;
