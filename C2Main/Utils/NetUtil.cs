@@ -149,8 +149,8 @@ namespace C2.Utils
             ip = ip.ToLower().Trim();
             if (ip != IPCheck(ip))
                 return IPCheck(ip);
-
-            string url = "http://58.213.190.82:8484/Castle/ip?ip=" + ip;
+            
+            string url = Global.IpUrl + ip;
             string result = "";
             WebRequest wrt = null;
             WebResponse wrp = null;

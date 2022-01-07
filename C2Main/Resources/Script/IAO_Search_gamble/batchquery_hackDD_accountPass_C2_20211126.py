@@ -189,7 +189,7 @@ class BatchQuery:
 
         qw_result = io.open(os.path.join(self.data_path,result_file), mode='r', encoding='utf-8').readlines()
         data1 = io.open(os.path.join(self.data_path,'request_post.txt'), mode='wb+')
-        data1.write('AUTH_ACCOUNT' + '\t' + 'CAPTURE_TIME' + '\t' + 'STRSRC_IP' '\t' + 'url' + '\t' + 'password' + '\n')
+        data1.write('AUTH_ACCOUNT' + '\t' + 'CAPTURE_TIME' + '\t' + 'STRSRC_IP' + '\t' + 'url' + '\t' + 'password' + '\n')
         for line in qw_result:
             l = line.strip().split('\t')
             # print(l)
