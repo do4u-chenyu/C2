@@ -169,8 +169,9 @@ namespace C2.Core
         public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update", "install");
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
 
-        public const string ServerHIUrl = @"http://58.213.190.82:8970";
-        public const string ServerUrl = @"http://58.213.190.82:8484";
+        public const string ServerHIUrl = @"http://221.226.113.110:8970";
+        public const string ServerUrl = @"http://221.226.113.110:8484";
+        public const string IpUrl = @"http://221.226.113.110:8484/Castle/ip?ip=";
         public const string DLLHostUrl = ServerUrl + "/C2Plugins/";
         public const string DLLPackageUrl = DLLHostUrl + "packages/";
         public const string SoftwareUrl = ServerUrl + "/C2Software/";

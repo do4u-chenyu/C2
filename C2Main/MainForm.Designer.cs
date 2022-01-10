@@ -56,7 +56,6 @@ namespace C2
             this.modelMarketButton = new C2.Controls.Common.NoFocusButton();
             this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.castleBravoControl = new C2.Controls.C1.Left.CastleBravoControl();
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
@@ -64,6 +63,7 @@ namespace C2
             this.modelMarketControl = new C2.Controls.Left.MyModelControl();
             this.websiteFeatureDetectionControl = new C2.Controls.C1.Left.WebsiteFeatureDetectionControl();
             this.searchToolkitControl = new C2.Controls.C1.Left.SearchToolkitControl();
+            this.castleBravoControl = new C2.Controls.C1.Left.CastleBravoControl();
             this.leftFoldButton = new C2.Controls.C1.Left.LeftFoldButton();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -188,7 +188,7 @@ namespace C2
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(258, 36);
             this.label1.TabIndex = 0;
-            this.label1.Text = "分析师单兵作战系统";
+            this.label1.Text = "分析师单兵作战装备";
             // 
             // leftMainMenuPanel
             // 
@@ -449,19 +449,6 @@ namespace C2
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
-            // castleBravoControl
-            // 
-            this.castleBravoControl.AllowDrop = true;
-            this.castleBravoControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.castleBravoControl.BackColor = System.Drawing.Color.White;
-            this.castleBravoControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.castleBravoControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.castleBravoControl.Location = new System.Drawing.Point(0, 0);
-            this.castleBravoControl.Name = "castleBravoControl";
-            this.castleBravoControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.castleBravoControl.Size = new System.Drawing.Size(185, 558);
-            this.castleBravoControl.TabIndex = 1;
-            // 
             // mindMapControl
             // 
             this.mindMapControl.AllowDrop = true;
@@ -513,7 +500,6 @@ namespace C2
             this.HIBUControl.Name = "HIBUControl";
             this.HIBUControl.Size = new System.Drawing.Size(185, 558);
             this.HIBUControl.TabIndex = 0;
-            this.HIBUControl.ItemLabel.Text = "HIBU";
             // 
             // modelMarketControl
             // 
@@ -551,6 +537,19 @@ namespace C2
             this.searchToolkitControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.searchToolkitControl.Size = new System.Drawing.Size(185, 558);
             this.searchToolkitControl.TabIndex = 0;
+            // 
+            // castleBravoControl
+            // 
+            this.castleBravoControl.AllowDrop = true;
+            this.castleBravoControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.castleBravoControl.BackColor = System.Drawing.Color.White;
+            this.castleBravoControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.castleBravoControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.castleBravoControl.Location = new System.Drawing.Point(0, 0);
+            this.castleBravoControl.Name = "castleBravoControl";
+            this.castleBravoControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.castleBravoControl.Size = new System.Drawing.Size(185, 558);
+            this.castleBravoControl.TabIndex = 1;
             // 
             // leftFoldButton
             // 

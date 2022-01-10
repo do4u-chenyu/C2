@@ -28,6 +28,8 @@ namespace C2.Business.GlueWater.Settings
         private DataTable SqWebTable;
         private DataTable SqMemberTable;
         private DataTable SqMemberTableReply;
+        private DataTable resTable = new DataTable();
+
 
         private static SqGlueSetting SqGlueSettingInstance;
         public static SqGlueSetting GetInstance()
@@ -67,25 +69,30 @@ namespace C2.Business.GlueWater.Settings
             SqMemberTable = GenDataTable(SqMemberPath, SqMemberColList);
             SqMemberTableReply = GenDataTable(SqMemberPath2, SqMemberColList2);
 
-            RefreshHtmlTable();
+            RefreshHtmlTable(resTable,true);
         }
 
-        public override string RefreshHtmlTable(bool freshTitle = true)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
         {
             
             StringBuilder sb = new StringBuilder();
-            if (freshTitle)
-                sb.Append("<tr name=\"title\">" +
+
+            
+            sb.Append("<tr name=\"title\">" +
                       "    <th>论坛名称/网址/IP</th>" +
                       "    <th>认证账号/登陆IP</th>" +
                       "    <th>登陆账号/登陆密码</th>" +
                       "    <th>论坛注册时间</th>" +
                       "    <th>主题数/回帖数</th>" +
                       "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                      "    <th style=\"width:60px\">操作</th>" +
                       "</tr>"
-                      );
-            
-        
+                  );
+
+            //删除操作，对表进行更新
+            if (freshTitle == false)
+                SqWebTable = resTable;
+
             //先试试初始化
             foreach (DataRow dr in SqWebTable.Rows)
             {
@@ -101,6 +108,7 @@ namespace C2.Business.GlueWater.Settings
                            "   <td>{7}</td>" +
                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsTopic(this)\" style=\"cursor:pointer\">主题数：{8}</a><br><a name=\"{1},{5}\" onmousedown=\"ShowDetailsReply(this)\" style=\"cursor:pointer\">回帖数：{9}</a></td>" +
                            "   <td>{10}<br>{11}</td>" +
+                           "   <td><a title =\"删除\" name=\"{1}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                            "</tr>",
                            dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
                            dr["认证账号"].ToString(), dr["登录IP"].ToString(),
@@ -133,6 +141,14 @@ namespace C2.Business.GlueWater.Settings
         public override DataTable SearchInfo(string memeber)
         {
             return SqInformation(memeber, SqMemberTable);
+        }
+
+        public override DataTable DeleteInfo(string memeber)
+        {
+            DataRow[] rows = SqWebTable.Select("网址='" + memeber + "'");
+            foreach (DataRow row in rows)
+                SqWebTable.Rows.Remove(row);
+            return SqWebTable;
         }
 
         public override DataTable SearchInfoReply(string memeber)
@@ -186,6 +202,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList, contentsFirst);
             List<int> tailIndex = IndexFilter(SqWebExcelColList2, contentSecond);
 
@@ -211,7 +228,9 @@ namespace C2.Business.GlueWater.Settings
                 if (rows.Length > 0)
                     SqWebTable.Rows.Remove(rows[0]);
 
-                SqWebTable.Rows.Add(resultList.ToArray());
+                //SqWebTable.Rows.Add(resultList.ToArray());
+                tempResultList.Add(resultList);
+                SqWebTable = SortNewTable(tempResultList, SqWebTable);
             }
             ReWriteResult(SqWebPath, SqWebTable);
             return true;
@@ -219,6 +238,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContent(List<List<string>> contentsFirst, List<List<string>> contentSecond)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
             List<int> tailIndex = IndexFilter(SqMemberExcelColList, contentSecond);
 
@@ -256,7 +276,9 @@ namespace C2.Business.GlueWater.Settings
                                 SqMemberTable.Rows.Remove(rows[0]);
 
 
-                            SqMemberTable.Rows.Add(resultListSecond.ToArray());
+                            //SqMemberTable.Rows.Add(resultListSecond.ToArray());
+                            tempResultList.Add(resultListSecond);
+                            SqMemberTable = SortNewTable(tempResultList, SqMemberTable);
                         }
                     }
                 }
@@ -267,6 +289,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContentReply(List<List<string>> contentsFirst, List<List<string>> contentSecond)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
             List<int> tailIndex = IndexFilter(SqMemberExcelColList2, contentSecond);
 
@@ -304,7 +327,10 @@ namespace C2.Business.GlueWater.Settings
                                 );
                             if (rows.Length > 0)
                                 SqMemberTableReply.Rows.Remove(rows[0]);
-                            SqMemberTableReply.Rows.Add(resultListSecond.ToArray());
+
+                            //SqMemberTableReply.Rows.Add(resultListSecond.ToArray());
+                            tempResultList.Add(resultListSecond);
+                            SqMemberTableReply = SortNewTable(tempResultList, SqMemberTableReply);
                         }
                     }
                 }

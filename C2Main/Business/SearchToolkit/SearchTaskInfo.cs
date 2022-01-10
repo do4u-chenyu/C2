@@ -29,6 +29,7 @@ namespace C2.SearchToolkit
             ["PASS分析"] = "md5",
             ["黑吃黑模型"] = "hostDD",
             ["盗洞模型"] = "hackDD",
+            ["大马模型"] = "dm",
             ["自定义查询"] = "custom",
         };
 
@@ -51,6 +52,7 @@ namespace C2.SearchToolkit
             ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
             ["黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
+            ["大马模型"] = "batchquery_dm_accountPass_C2_20220107.py_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
         };
 
@@ -73,6 +75,7 @@ namespace C2.SearchToolkit
             ["购置境外网络资产模型"] = @"([^\n\r]+000000_queryResult_email_\d+_\d+.tgz)",
             ["黑吃黑模型"] = @"([^\n\r]+000000_queryResult_hostDD_\d+_\d+.tgz)",
             ["盗洞模型"] = @"([^\n\r]+000000_queryResult_hackDD_\d+_\d+.tgz)",
+            ["大马模型"] = @"([^\n\r]+000000_queryResult_dm_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
         };
 
@@ -84,16 +87,16 @@ namespace C2.SearchToolkit
             ["飞机场模型"] = "私搭境外翻墙主机",
             ["黑客模型"] = "传统黑客模型",
             ["宝塔面板"] = "一键搭站,黑灰产领域的热门工具",
-            ["apk模型"] = "",
+            ["apk模型"] = "侦测黑灰黄赌诈APK",
             ["ddos模型"] = "传统黑客模型:有DDOS攻击行为",
             ["xss模型"] = "传统黑客模型:有XSS攻击行为",
             ["侵公模型"] = "外泄公民个人信息",
             ["四方模型"] = "第四方支付,给黑灰产和上下游提供资金结算服务",
-            ["秒播vps"] = "",
+            ["秒播vps"] = "侦测非正规VPS",
             ["PASS分析"] = "内部测试用,忽略",
             ["购置境外网络资产模型"] = "购置境外域名,VPN,云主机,服务器和矿池用于黑灰产",
-            ["黑吃黑模型"] = "新一代黑客专项模型:黑客和黑产间的黑吃黑",
-            ["盗洞模型"] = "新一代黑客专项模型:木马打洞",
+            ["黑吃黑模型"] = "新一代黑客专项模型:黑客和黑产之间的黑吃黑",
+            ["盗洞模型"] = "新一代黑客专项模型:侦测木马打洞后的各种痕迹",
             ["自定义查询"] = "上面详细设置里自己填查询关键词",
         };
 

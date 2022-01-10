@@ -4010,6 +4010,12 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_dm_accountPass_C2_20220107.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_dm_accountPass_C2_20220107.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_email_accountPass_C2_20211111.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4124,6 +4130,27 @@
     </Content>
     <Content Include="Resources\Templates\组织架构图.xml" />
     <None Include="Resources\Templates\逻辑图.xml" />
+    <Content Include="Resources\Templates\胶水系统\DB_member.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\DB_web.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\SQ_member.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\SQ_member2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\SQ_web.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\Yellow_member.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\胶水系统\Yellow_web.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\thanks.xml">
       <SubType>Designer</SubType>
     </Content>

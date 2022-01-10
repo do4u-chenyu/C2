@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace C2.Business.GlueWater
 {
@@ -14,7 +15,8 @@ namespace C2.Business.GlueWater
         public int maxRow = 65534;
         public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
         public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
-        public List<string> doubleTypeColList; 
+        public List<string> doubleTypeColList;
+        private DataTable TempWebTable;
 
         public BaseGlueSetting()
         {
@@ -24,7 +26,23 @@ namespace C2.Business.GlueWater
             if (!Directory.Exists(bakDirectory))
                 FileUtil.CreateDirectory(bakDirectory);
 
+            //加载默认涉赌/涉枪/涉黄数据包
+            string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/胶水系统");
+            if (!File.Exists(Path.Combine(txtDirectory, "DB_member.txt")))
+                CopyDirContentIntoDestDirectory(txtModelDirectory, txtDirectory, true);
+
             doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数", "涉黄人数" };
+        }
+        public static void CopyDirContentIntoDestDirectory(string srcdir, string dstdir, bool overwrite)
+        {
+            if (!Directory.Exists(dstdir))
+                Directory.CreateDirectory(dstdir);
+
+            foreach (var s in Directory.GetFiles(srcdir))
+                File.Copy(s, Path.Combine(dstdir, Path.GetFileName(s)), overwrite);
+
+            foreach (var s in Directory.GetDirectories(srcdir))
+                CopyDirContentIntoDestDirectory(s, Path.Combine(dstdir, Path.GetFileName(s)), overwrite);
         }
 
         public virtual void InitDataTable()
@@ -37,12 +55,22 @@ namespace C2.Business.GlueWater
             return string.Empty;
         }
 
-        public virtual string RefreshHtmlTable(bool freshTitle)
+        public virtual string RefreshHtmlTable(DataTable resTable,bool freshTitle)
+        {
+            return string.Empty;
+        }
+
+        public virtual string RefreshHtmlTable2(DataTable resTable)
         {
             return string.Empty;
         }
 
         public virtual DataTable SearchInfo(string item)
+        {
+            return new DataTable();
+        }
+
+        public virtual DataTable DeleteInfo(string item)
         {
             return new DataTable();
         }
@@ -238,5 +266,16 @@ namespace C2.Business.GlueWater
             return dataTable;
         }
 
+        public DataTable SortNewTable(List<List<string>> memberList, DataTable dataTable)
+        {
+            TempWebTable = dataTable.Clone();
+
+            foreach (List<string> member in memberList)
+                TempWebTable.Rows.Add(member.ToArray());
+
+            foreach (DataRow row in dataTable.Rows)
+                TempWebTable.Rows.Add(row.ItemArray);
+            return TempWebTable;
+        }
     }
 }

@@ -22,8 +22,7 @@ from threading import Thread
 from subprocess import Popen,PIPE
 import time
 import urllib
-import re
-import io 
+import re 
 import sys
 import datetime
 import os
@@ -31,6 +30,7 @@ import itertools
 import logging
 import urllib2
 from urllib import unquote
+
 from optparse import OptionParser
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -106,13 +106,14 @@ class BatchQuery:
             content = response.read().decode()
             pload = content.split('\n')[-1].replace('\t','').replace('\r','').replace('\n','').strip()
             method = content.split(' ')[0]
-            if(len(pload)>100 and len(pload)<1000):
-                return pload.strip(), method
+            if(len(pload)<2000):
+                return content, method
             else:
                 return 'http文件获取失败','http文件获取失败'
 
         except Exception, e:
             return 'http文件获取失败','http文件获取失败'
+
 
     def get_airport_user(self, content):
         user_key     = ['email']
@@ -133,94 +134,49 @@ class BatchQuery:
                     pass
         return user_str,pass_str
 
-    def find_keyword_position(self,kw, d):
-        lk = []
-        for k, v in d.items():
-            if kw in v:
-                lk.append(k)
-
-        lv = kw.strip().split(' ')
-        return lv, lk
-
-    def position_match(self,data, KEY_WORDS, pload, d):
-        lv, lk = self.find_keyword_position(KEY_WORDS, d)
-        for i in lk:
-            flag = 0
-            if (i == 'PAYLOAD'):
-                k = pload
-            else:
-                k = data.get(i, '')
-            for j in lv:
-                if j not in k:
-                    flag = 1
-                    break
-            if (flag == 0):
-                return data, pload
-        pload = 'http文件获取失败'
-        return data, pload
-
-    
-
     def handle_res(self):
-        ##df = pd.read_csv(r'C:\Users\Administrator\Desktop\ws_out.txt', sep='\t', dtype=str, error_bad_lines=False)
-        ##df1 = df[['_HOST', '_RELATIVEURL', 'PAYLOAD']]
-        ##df2 = df1.drop_duplicates()
-        # print(df2)
-        ##df2.to_csv('qw_res.txt', sep='\t', index=False, header=False)
-        tmplist = []
+        result = []
         out_file = 'ws_out.txt'
-        result_file = 'qw_res.txt'
-        with open(os.path.join(self.data_path, out_file), "r") as f:
-            with open(os.path.join(self.data_path,result_file), "w") as f1:
-                lines = f.readlines()
-                for line in lines[1:]:  ##跳过第一行title
-                    line = line.strip('\n')
-                    ##data = "{0}\t{1}{\t}{2}\n".format(line.split('\t')[8],line.split('\t')[9],line.split('\t')[16])
-                    try:
-                        data = line.split('\t')[0] + '\t' + line.split('\t')[2] + '\t'+ line.split('\t')[3] + '\t'+ line.split('\t')[7] + '\t' + line.split('\t')[8] + '\t' + line.split('\t')[13] + '\n'
-                    except:
-                        data = ""
-                    tmplist.append(data)
-                tmplist = list(set(tmplist))  ##去重
-                for line in tmplist:
-                    f1.writelines(line)
-            f1.close()
-        f.close()
+        result_file = 'cd_dama_res.txt'
+        data = open(os.path.join(self.data_path, out_file), mode='r', errors='ignore').read()
+        data1 = open(os.path.join(self.data_path,result_file), mode='w')
+        line = data.split('	POST ')
+        for i in line:
+            if ('	POST	' in i):
+                res = i.split('	POST	')[0]
+                res1 = data.split('\t')[0] + '\t' + data.split('\t')[2] + '\t' + data.split('\t')[3] + '\t' + 'POST ' + res.replace('\n', 'daman_replace').replace('\t', 'damat_replace')
+                result.append(res1)
+        uniq_res = set(result)
+        for i in uniq_res:
+            if ('.php' in i.split('POST ')[1].split(' HTTP')[0]):
+                if ('ip=127.0.0.1' not in i):
+                    data1.write(i + '\n')
+                elif ('_port' not in i):
+                    data1.write(i + '\n')
+                else:
+                    pass
+            else:
+                pass
 
-        qw_result = io.open(os.path.join(self.data_path,result_file), mode='r', encoding='utf-8').readlines()
-        data1 = io.open(os.path.join(self.data_path,'request_post.txt'), mode='wb+')
-        data1.write('AUTH_ACCOUNT' + '\t' + 'CAPTURE_TIME' + '\t' + 'STRSRC_IP' + '\t' + 'url' + '\t' + 'password' + '\n')
-        for line in qw_result:
-            l = line.strip().split('\t')
-            # print(l)
-            if (len(l) < 6):
-                continue
-            url = l[3] + l[4]
-            if 'http://' not in url:
-                url_res = 'http://' + url
-            l[5] = l[5].strip('"').replace('""', '"')
-            password = l[5].strip().split('=')[0]
-            if (len(l[5]) < 10000 and '.gov' not in url_res and '.edu' not in url_res):
-                data1.write(l[0] + '\t' + l[1] + '\t' + l[2] + '\t' + url_res + '\t' + password + '\n')
-        data1.close()
 
     def run_query(self):
+        
         QUREY_TYPE = 'airport_'
         out_file = 'ws_out.txt'
+        
         with open(os.path.join(self.data_path, out_file), 'a+') as f:
             f.write('\t'.join(ALL_ITEMS + ['PAYLOAD', 'METHOD', 'KEY_WORDS']) + '\n')
-            for KEY_WORDS in kwl:
+            for KEY_WORD in key_words:
                 try:
-                    LOGGER.info('OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(self.all_items, KEY_WORDS, self.startTime, self.endTime))
+                    LOGGER.info('OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(self.all_items, KEY_WORD, self.startTime, self.endTime))
                 except Exception, e:
                     LOGGER.info('QUERY_ERROR-{0}'.format(e))
-                for data in self.queryclient(KEY_WORDS,QUREY_TYPE):
+                for data in self.queryclient(KEY_WORD,QUREY_TYPE):
                     if data.get('_HOST', '') and data.get('_MAINFILE', ''):
                         pload, method = self.ext_mainfile(data.get('_MAINFILE', ''))
-                        
                         if pload != 'http文件获取失败':
                             try:
-                                f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ pload+'\t'+method+'\t'+KEY_WORDS+ '\n')
+                                f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ pload+'\t'+method+'\t'+KEY_WORD+ '\n')
                             except:
                                 pass
 
@@ -254,17 +210,17 @@ def zip_result(DATA_PATH,ZIP_PATH):
     else:
         LOGGER.info("Compress dirs success!.")
 
-
 def main():
+
     LOGGER.info('START BatchQuery QUERY BATCH....')
     ap = BatchQuery(DATA_PATH,startTime,endTime,ALL_ITEMS)
     ap.run_query()
-    ap.handle_res()
 
     ZIP_PATH = DATA_PATH + '_' + defaultStart + '.tgz.tmp'
     zip_result(DATA_PATH, ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)
+
 
     LOGGER.info('END BatchQuery QUERY BATCH')
 
@@ -285,14 +241,15 @@ if __name__ == '__main__':
     areacode    = option.areacode
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 15)
+    OneYear = datetime.timedelta(days = 90)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_hackDD_' + defaultEnd
-    kwl = ['eval _POST' , 'eval _REQUEST' , 'eval _SERVER' , 'eval BaSE64 dEcOdE' , 'assert _POST' , 'assert _REQUEST' , 'assert _SERVER' , 'assert BaSE64 dEcOdE' , 'create_function _POST' , 'create_function _REQUEST' , 'create_function _SERVER' , 'create_function BaSE64 dEcOdE' , 'preg_replace _POST' , 'preg_replace _REQUEST' , 'preg_replace _SERVER' , 'preg_replace BaSE64 dEcOdE' , 'system _POST' , 'system _REQUEST' , 'system _SERVER' , 'system BaSE64 dEcOdE' , 'array_map @ev' , 'ini_set display_errors dirname _SERVER' , 'response.write response.end' , 'eval POST stripslashes' , 'edoced_46esab z0=' , 'replace chr hen:bd' , 'ASPXSpy' , 'Action=getTerminalInfo' , 'DarkBladePass= goaction=' , 'JspSpyPwd' , 'eval System.Text.Encoding.GetEncoding' , 'filelist folder=' , 'Execute password= system' , 'exec request.getParameter']
+    DATA_PATH = './_queryResult_DM_' + defaultEnd
+    key_words = ['envlpass=','postpass=','admin_spiderpass=','admin_silicpass=','serveru= serverp=','eanver= .php','ip=127.0.0.1 port=2 3306','ip=localhost port=2 3306','host=localhost port= user= pass=','host=127.0.0.1 port= user= pass=','yourip= yourport= use=perl','yourip= yourport= use=nc','SUPort= SUUser= SUPass= SUCommand=net','phpspypass=','_COOKIE:loginpass=phpspy2014']
+
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     if startTime is None and endTime is None:

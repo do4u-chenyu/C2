@@ -25,8 +25,8 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable YellowWebTable;
         private DataTable YellowMemberTable;
-        
-        private DataTable TempWebTable;
+        private DataTable resTable = new DataTable();
+
 
         private static YellowGlueSetting YellowGlueSettingInstance;
         public static YellowGlueSetting GetInstance()
@@ -57,14 +57,14 @@ namespace C2.Business.GlueWater.Settings
             YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
             //TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
-            RefreshHtmlTable();
+            RefreshHtmlTable(resTable,true);
         }
 
-        public override string RefreshHtmlTable(bool freshTitle = true)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
         {
             StringBuilder sb = new StringBuilder();
-            if (freshTitle)
-                sb.Append("<tr name=\"title\">" +
+            
+            sb.Append("<tr name=\"title\">" +
                       "    <th>认证账号</th>" +
                       "    <th>身份信息</th>" +
                       "    <th>涉黄标签</th>" +
@@ -72,8 +72,14 @@ namespace C2.Business.GlueWater.Settings
                       "    <th>发现地市</th>" +
                       "    <th>关联涉黄网站</th>" +
                       "    <th style=\"width:200px\"> 网站类型/网站人数/运营时间</th>" +
+                      "    <th style=\"width:60px\">操作</th>" +
                       "</tr>"
-                      );
+                  );
+
+            //删除操作，对表进行更新
+            if (freshTitle == false)
+                YellowWebTable = resTable;
+
             foreach (DataRow dr in YellowWebTable.Rows)
             {
                 sb.Append(string.Format(
@@ -85,6 +91,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td>{7}</td>" +
                             "   <td id=\"th0\">{8}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{9}</a><br>{10}</td>" +
                             "   <td>{11}<br>{12}<br>{13}</td>" +
+                            "   <td><a title =\"删除\" name=\"{9}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                             "</tr>",
                             dr["认证账号"].ToString(),
                             dr["手机号"].ToString(), dr["QQ"].ToString(), dr["微信账号"].ToString(), dr["微信ID"].ToString(),
@@ -108,6 +115,15 @@ namespace C2.Business.GlueWater.Settings
 
             return resTable;
         }
+
+        public override DataTable DeleteInfo(string memeber)
+        {
+            DataRow[] rows = YellowWebTable.Select("网站网址='" + memeber + "'");
+            foreach (DataRow row in rows)
+                YellowWebTable.Rows.Remove(row);
+            return YellowWebTable;
+        }
+
         private List<List<String>> listData(List<List<String>> resultList)
         {
             return resultList;
@@ -242,6 +258,7 @@ namespace C2.Business.GlueWater.Settings
             List<string> removeList = new List<string>();
             webAndAuth.Add("remove", removeList);
             List<int> saveWebIndex = new List<int>();
+            List<List<string>> rowsList = new List<List<string>>();
 
             foreach (List<string> memberList in Member)
             {
@@ -280,7 +297,9 @@ namespace C2.Business.GlueWater.Settings
                             WebMember[j][7] = WebMember[j][7] == string.Empty ? CityTrans(zipPath) : WebMember[j][7];
 
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
-                            YellowWebTable = SortNewTable(webRows, WebMember[j], YellowWebTable);
+                            rowsList = TableFilter(webRows, rowsList, WebMember[j], YellowWebTable);
+                            YellowWebTable = SortNewTable(rowsList, YellowWebTable);
+                            ReWriteResult(YellowWebPath, YellowWebTable);
 
                             WebMember[j].RemoveRange(len, cutWeb.Count());
                             webAndAuth[memberList[0]].Remove(memberList[1]);
@@ -295,7 +314,10 @@ namespace C2.Business.GlueWater.Settings
                 if (webAndAuth.ContainsKey(memberList[0]) && webAndAuth[memberList[0]].Count == 0)
                     webAndAuth.Remove(memberList[0]);
                 DataRow[] rows = YellowMemberTable.Select("网站='" + memberList[0] + "'");
-                YellowMemberTable = TableFilter(rows, memberList, YellowMemberTable);
+                List<List<string>> YellowMemberList = new List<List<string>>();
+                YellowMemberList = TableFilter(rows, YellowMemberList, memberList, YellowMemberTable);
+                foreach (List<string> YellowMember in YellowMemberList)
+                    YellowMemberTable.Rows.Add(YellowMember.ToArray());
                 ReWriteResult(YellowMemberPath, YellowMemberTable);
             }
             returnList.Add(webAndAuth);
@@ -322,6 +344,7 @@ namespace C2.Business.GlueWater.Settings
 
         private void WebToTable(List<List<string>> Web, List<List<string>> WebMember, List<List<string>> Member, List<int> saveWebIndex, Dictionary<string, List<string>> webAndAuth, string zipPath)
         {
+            List<List<string>> rowsList = new List<List<string>>();
             for (int i = 0; i < Web.Count(); i++)
             {
                 DataRow[] rows = YellowMemberTable.Select("网站='" + Web[i][1] + "'");
@@ -372,7 +395,8 @@ namespace C2.Business.GlueWater.Settings
 
                 yellowPhotoEmpty = Trans(yellowPhotoEmpty);
                 DataRow[] webRows = YellowWebTable.Select("网站网址='" + yellowPhotoEmpty[9] + "'");
-                YellowWebTable = SortNewTable(webRows, yellowPhotoEmpty, YellowWebTable);
+                rowsList = TableFilter(webRows, rowsList, yellowPhotoEmpty, YellowWebTable);
+                YellowWebTable = SortNewTable(rowsList, YellowWebTable);
                 ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
@@ -413,51 +437,25 @@ namespace C2.Business.GlueWater.Settings
             return findCity;
         }
 
-        private DataTable TableFilter(DataRow[] data, List<string> memberList, DataTable YellowTable)
+        private List<List<string>> TableFilter(DataRow[] data, List<List<string>> rowsList, List<string> memberList, DataTable dataTable)
         {
             if (data.Length == 0)
-                YellowTable.Rows.Add(memberList.ToArray());
+                rowsList.Add(memberList);
             else
             {
                 List<string> rowContentList = new List<string>();
                 foreach (DataRow row in data)
                 {
                     List<string> rowContent = new List<string>();
-                    for (int j = 0; j < YellowTable.Columns.Count; j++)
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
                         rowContent.Add(row[j].ToString());
                     rowContentList.Add(string.Join("\t", rowContent));
                 }
 
                 if (!rowContentList.Contains(string.Join("\t", memberList)))
-                    YellowTable.Rows.Add(memberList.ToArray());
+                    rowsList.Add(memberList);
             }
-            return YellowTable;
-        }
-
-        private DataTable SortNewTable(DataRow[] data, List<string> memberList, DataTable YellowTable)
-        {
-            TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
-            TempWebTable.Rows.Clear();
-            if (data.Length == 0)
-                TempWebTable.Rows.Add(memberList.ToArray());
-            else
-            {
-                List<string> rowContentList = new List<string>();
-                foreach (DataRow row in data)
-                {
-                    List<string> rowContent = new List<string>();
-                    for (int j = 0; j < YellowTable.Columns.Count; j++)
-                        rowContent.Add(row[j].ToString());
-                    rowContentList.Add(string.Join("\t", rowContent));
-                }
-
-                if (!rowContentList.Contains(string.Join("\t", memberList)))
-                    TempWebTable.Rows.Add(memberList.ToArray());
-            }
-
-            foreach (DataRow row in YellowTable.Rows)
-                TempWebTable.Rows.Add(row.ItemArray);
-            return TempWebTable;
+            return rowsList;
         }
     }
 }

@@ -21,7 +21,8 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable DbWebTable;
         private DataTable DbMemberTable;
-
+        private DataTable resTable = new DataTable();
+        
         private static DbGlueSetting DbSettingInstance;
         public static DbGlueSetting GetInstance()
         {
@@ -50,23 +51,28 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = GenDataTable(DbWebPath, DbWebColList);
             DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
 
-            RefreshHtmlTable();
+            RefreshHtmlTable(resTable,true);
         }
 
-        public override string RefreshHtmlTable(bool freshTitle = true)
+        
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
         {
             StringBuilder sb = new StringBuilder();
 
-            if(freshTitle)
-                sb.Append("<tr name=\"title\">" +
-                      "    <th>网站名称/域名/IP</th>" +
-                      "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
-                      "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
-                      "    <th style=\"width:80px\">涉赌人数<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
-                      "    <th>赌博类型/运营时间</th>" +
-                      "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
-                      "</tr>"
-                      );
+            sb.Append("<tr name=\"title\">" +
+                          "    <th>网站名称/域名/IP</th>" +
+                          "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
+                          "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                          "    <th style=\"width:80px\">涉赌人数<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                          "    <th>赌博类型/运营时间</th>" +
+                          "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
+                          "    <th style=\"width:60px\">操作</th>" +
+                          "</tr>"
+                  );
+           
+            //删除操作，对表进行更新
+            if(freshTitle == false)
+                DbWebTable = resTable;
 
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
@@ -79,6 +85,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td id=\"th2\">{6}</td>" +
                             "   <td>{7}<br>{8}</td>" +
                             "   <td>{9}<br>{10}</td>" +
+                            "   <td><a title =\"删除\" name=\"{1}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                             "</tr>",
                             dr["网站名称"].ToString(), dr["域名"].ToString(), dr["IP"].ToString(),
                             dr["Refer对应Title"].ToString(), dr["Refer"].ToString(),
@@ -91,6 +98,7 @@ namespace C2.Business.GlueWater.Settings
             return sb.ToString();
         }
 
+        
         public override DataTable SearchInfo(string memeber)
         {
             DataTable resTable = DbMemberTable.Clone();
@@ -101,6 +109,15 @@ namespace C2.Business.GlueWater.Settings
 
             return resTable;
         }
+        
+        public override DataTable DeleteInfo(string memeber)
+        {
+            DataRow[] rows = DbWebTable.Select("域名='" + memeber + "'");
+            foreach (DataRow row in rows)
+                DbWebTable.Rows.Remove(row);
+            return DbWebTable;
+        }
+        
 
         public override void SortDataTableByCol(string col, string sortType)
         {
@@ -139,6 +156,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contents)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             if (contents.Count == 0)
                 return false;
 
@@ -163,7 +181,9 @@ namespace C2.Business.GlueWater.Settings
                 string tmpMoney = resultList[DbWebColList.ToList().IndexOf("涉案金额")];
                 resultList[DbWebColList.ToList().IndexOf("涉案金额")] = tmpMoney == string.Empty ? "0" : tmpMoney;
 
-                DbWebTable.Rows.Add(resultList.ToArray());
+                //DbWebTable.Rows.Add(resultList.ToArray());
+                tempResultList.Add(resultList);
+                DbWebTable = SortNewTable(tempResultList, DbWebTable);
             }
             ReWriteResult(DbWebPath, DbWebTable);
             return true;
@@ -171,6 +191,7 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealMemberContent(List<List<string>> contents)
         {
+            List<List<string>> tempResultList = new List<List<string>>();
             if (contents.Count == 0)
                 return false;
 
@@ -205,7 +226,8 @@ namespace C2.Business.GlueWater.Settings
 
             }
             foreach(List<string> li in needAddList)
-                DbMemberTable.Rows.Add(li.ToArray());
+                tempResultList.Add(li); 
+            DbMemberTable = SortNewTable(tempResultList, DbMemberTable);
 
             ReWriteResult(DbMemberPath, DbMemberTable);
             return true;
