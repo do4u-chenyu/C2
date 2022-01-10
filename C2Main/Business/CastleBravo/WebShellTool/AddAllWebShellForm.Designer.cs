@@ -35,10 +35,9 @@
             this.wsTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -76,7 +75,7 @@
             // 
             this.pasteModeCB.AutoSize = true;
             this.pasteModeCB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.pasteModeCB.Location = new System.Drawing.Point(12, 90);
+            this.pasteModeCB.Location = new System.Drawing.Point(11, 114);
             this.pasteModeCB.Name = "pasteModeCB";
             this.pasteModeCB.Size = new System.Drawing.Size(75, 21);
             this.pasteModeCB.TabIndex = 10015;
@@ -87,7 +86,7 @@
             // wsTextBox
             // 
             this.wsTextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.wsTextBox.Location = new System.Drawing.Point(95, 90);
+            this.wsTextBox.Location = new System.Drawing.Point(95, 111);
             this.wsTextBox.MaxLength = 4194304;
             this.wsTextBox.Multiline = true;
             this.wsTextBox.Name = "wsTextBox";
@@ -112,30 +111,29 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(3, 114);
+            this.label1.Location = new System.Drawing.Point(3, 141);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 10018;
             this.label1.Text = "* 最大 4M 文本";
             // 
-            // groupBox1
+            // label4
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(5, 178);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(87, 72);
-            this.groupBox1.TabIndex = 10019;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "木马类型";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(16, 83);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 19);
+            this.label4.TabIndex = 10019;
+            this.label4.Text = "木马类型：";
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 20);
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(109, 86);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(75, 16);
+            this.radioButton1.Size = new System.Drawing.Size(71, 16);
             this.radioButton1.TabIndex = 10020;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "通用木马";
@@ -144,12 +142,11 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(7, 50);
+            this.radioButton2.Location = new System.Drawing.Point(208, 86);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(75, 16);
+            this.radioButton2.Size = new System.Drawing.Size(71, 16);
             this.radioButton2.TabIndex = 10021;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "冰蝎三代";
+            this.radioButton2.Text = "三代冰蝎";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // AddAllWebShellForm
@@ -157,8 +154,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(437, 305);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(437, 325);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.wsTextBox);
@@ -175,9 +174,9 @@
             this.Controls.SetChildIndex(this.wsTextBox, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.groupBox1, 0);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.radioButton1, 0);
+            this.Controls.SetChildIndex(this.radioButton2, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,8 +191,8 @@
         private System.Windows.Forms.TextBox wsTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }
