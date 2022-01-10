@@ -21,7 +21,8 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable DbWebTable;
         private DataTable DbMemberTable;
-
+        private DataTable resTable = new DataTable();
+        
         private static DbGlueSetting DbSettingInstance;
         public static DbGlueSetting GetInstance()
         {
@@ -50,16 +51,15 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = GenDataTable(DbWebPath, DbWebColList);
             DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
 
-            RefreshHtmlTable();
+            RefreshHtmlTable(resTable,true);
         }
 
         
-        public override string RefreshHtmlTable(bool freshTitle = true)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
         {
             StringBuilder sb = new StringBuilder();
 
-            if(freshTitle)
-                sb.Append("<tr name=\"title\">" +
+            sb.Append("<tr name=\"title\">" +
                           "    <th>网站名称/域名/IP</th>" +
                           "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
                           "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
@@ -68,13 +68,11 @@ namespace C2.Business.GlueWater.Settings
                           "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                           "    <th style=\"width:60px\">操作</th>" +
                           "</tr>"
-                      );
-            if (!freshTitle)
-            {
-                
-            }
-                
-
+                  );
+           
+            //删除操作，对表进行更新
+            if(freshTitle == false)
+                DbWebTable = resTable;
 
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
@@ -99,8 +97,8 @@ namespace C2.Business.GlueWater.Settings
             }
             return sb.ToString();
         }
-        
 
+        
         public override DataTable SearchInfo(string memeber)
         {
             DataTable resTable = DbMemberTable.Clone();
@@ -111,18 +109,15 @@ namespace C2.Business.GlueWater.Settings
 
             return resTable;
         }
-        /*
+        
         public override DataTable DeleteInfo(string memeber)
         {
-            DataTable resTable = DbWebTable.Clone();
             DataRow[] rows = DbWebTable.Select("域名='" + memeber + "'");
-
             foreach (DataRow row in rows)
-                resTable.Rows.Remove(row);
-
-            return resTable;
+                DbWebTable.Rows.Remove(row);
+            return DbWebTable;
         }
-        */
+        
 
         public override void SortDataTableByCol(string col, string sortType)
         {

@@ -4,6 +4,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -164,19 +165,18 @@ namespace C2.Forms
 
         #region 界面html版
 
-        /*
+        
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-        public void refreshData(string item,bool freshTitle = false)
+        public void refreshData(string item)
         {
             this.webBrowser.Document.InvokeScript("clearTable");
             this.webBrowser.Document.InvokeScript("clearTableTitle");
-            glueSetting.DeleteInfo(item);
+            DataTable resTable = glueSetting.DeleteInfo(item);
 
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(freshTitle) });
-
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false) });
         }
-        */
+        
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -222,11 +222,12 @@ namespace C2.Forms
 
         private void RefreshHtmlTable(bool freshTitle = true)
         {
+            DataTable dt = new DataTable();//只是为了传参，无实际意义
             this.webBrowser.Document.InvokeScript("clearTable");
             if(freshTitle)
                 this.webBrowser.Document.InvokeScript("clearTableTitle"); 
 
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(freshTitle) });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true) });
         }
         #endregion
 

@@ -25,6 +25,8 @@ namespace C2.Business.GlueWater.Settings
 
         private DataTable YellowWebTable;
         private DataTable YellowMemberTable;
+        private DataTable resTable = new DataTable();
+
 
         private static YellowGlueSetting YellowGlueSettingInstance;
         public static YellowGlueSetting GetInstance()
@@ -55,14 +57,14 @@ namespace C2.Business.GlueWater.Settings
             YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
             //TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
-            RefreshHtmlTable();
+            RefreshHtmlTable(resTable,true);
         }
 
-        public override string RefreshHtmlTable(bool freshTitle = true)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
         {
             StringBuilder sb = new StringBuilder();
-            if (freshTitle)
-                sb.Append("<tr name=\"title\">" +
+            
+            sb.Append("<tr name=\"title\">" +
                       "    <th>认证账号</th>" +
                       "    <th>身份信息</th>" +
                       "    <th>涉黄标签</th>" +
@@ -70,8 +72,14 @@ namespace C2.Business.GlueWater.Settings
                       "    <th>发现地市</th>" +
                       "    <th>关联涉黄网站</th>" +
                       "    <th style=\"width:200px\"> 网站类型/网站人数/运营时间</th>" +
+                      "    <th style=\"width:60px\">操作</th>" +
                       "</tr>"
-                      );
+                  );
+
+            //删除操作，对表进行更新
+            if (freshTitle == false)
+                YellowWebTable = resTable;
+
             foreach (DataRow dr in YellowWebTable.Rows)
             {
                 sb.Append(string.Format(
@@ -83,6 +91,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td>{7}</td>" +
                             "   <td id=\"th0\">{8}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{9}</a><br>{10}</td>" +
                             "   <td>{11}<br>{12}<br>{13}</td>" +
+                            "   <td><a title =\"删除\" name=\"{9}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                             "</tr>",
                             dr["认证账号"].ToString(),
                             dr["手机号"].ToString(), dr["QQ"].ToString(), dr["微信账号"].ToString(), dr["微信ID"].ToString(),
@@ -106,6 +115,15 @@ namespace C2.Business.GlueWater.Settings
 
             return resTable;
         }
+
+        public override DataTable DeleteInfo(string memeber)
+        {
+            DataRow[] rows = YellowWebTable.Select("网站网址='" + memeber + "'");
+            foreach (DataRow row in rows)
+                YellowWebTable.Rows.Remove(row);
+            return YellowWebTable;
+        }
+
         private List<List<String>> listData(List<List<String>> resultList)
         {
             return resultList;

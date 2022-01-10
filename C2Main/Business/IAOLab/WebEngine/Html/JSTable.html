@@ -96,13 +96,13 @@ td#th2{
 			    $(this).remove();
 		    });
 	    }
-		function data_del(obj){
+		function data_del(a){
 			var res = confirm('确认要删除吗？');
 			if(res == true)
 			{
-				$(obj).parents("tr").remove();
+				$(a).parents("tr").remove();
 			}
-		    //window.external.refreshData();//ShowDetails为c#方法
+		    window.external.refreshData(a.name);//ShowDetails为c#方法
 		}
 		function SortCol(col){
 			var type=$(col).attr('class');
