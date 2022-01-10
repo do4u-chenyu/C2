@@ -156,7 +156,6 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contents)
         {
-            List<List<string>> tempResultList = new List<List<string>>();
             if (contents.Count == 0)
                 return false;
 
@@ -164,6 +163,7 @@ namespace C2.Business.GlueWater.Settings
 
             for (int i = 1; i < contents.Count; i++)
             {
+                List<List<string>> tempResultList = new List<List<string>>();
                 if (headIndex.Max() > contents[i].Count)
                     return false;
                 List<string> resultList = ContentFilter(headIndex, contents[i]);

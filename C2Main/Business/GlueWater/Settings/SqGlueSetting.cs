@@ -30,7 +30,6 @@ namespace C2.Business.GlueWater.Settings
         private DataTable SqMemberTableReply;
         private DataTable resTable = new DataTable();
 
-
         private static SqGlueSetting SqGlueSettingInstance;
         public static SqGlueSetting GetInstance()
         {
@@ -216,7 +215,6 @@ namespace C2.Business.GlueWater.Settings
 
         private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond)
         {
-            List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList, contentsFirst);
             List<int> tailIndex = IndexFilter(SqWebExcelColList2, contentSecond);
 
@@ -224,6 +222,8 @@ namespace C2.Business.GlueWater.Settings
             int i, j;
             for (i = 1,j = 1; i < contentsFirst.Count && j<contentSecond.Count; i++,j++)
             {
+                List<List<string>> tempResultList = new List<List<string>>();
+
                 if (headIndex.Max() > contentsFirst[i].Count || tailIndex.Max() > contentSecond[j].Count)
                     return false;
 
@@ -233,6 +233,7 @@ namespace C2.Business.GlueWater.Settings
                 //这里要对地市编码做转换 字典映射
                 resultList[10] = IDInfoGet.GetInstance().TransRegionCode(resultList[10]);
 
+                
                 DataRow[] rows = SqWebTable.Select(
                      "认证账号='" + resultList[3] + "' " +
                      "and 登录IP='" + resultList[4] + "' " +
@@ -241,7 +242,7 @@ namespace C2.Business.GlueWater.Settings
                     );
                 if (rows.Length > 0)
                     SqWebTable.Rows.Remove(rows[0]);
-
+                
                 //SqWebTable.Rows.Add(resultList.ToArray());
                 tempResultList.Add(resultList);
                 SqWebTable = SortNewTable(tempResultList, SqWebTable);
@@ -250,6 +251,7 @@ namespace C2.Business.GlueWater.Settings
             return true;
         }
 
+     
         private bool DealMemberContent(List<List<string>> contentsFirst, List<List<string>> contentSecond)
         {
             List<List<string>> tempResultList = new List<List<string>>();
