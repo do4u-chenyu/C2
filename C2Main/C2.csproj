@@ -4246,7 +4246,9 @@
     <None Include="Resources\WebShellConfig\ASP_Custom_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\WebShellConfig\Behinder3.0_Beta_Config.ini" />
+    <None Include="Resources\WebShellConfig\Behinder3.0_Beta_Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\WebShellConfig\Cknife11_EXE_Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
