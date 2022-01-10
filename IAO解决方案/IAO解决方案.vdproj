@@ -1155,6 +1155,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5B6EFBADEDBF4576ACD66D87397F47FE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5C51E9CB084946A4B6484585F9F1043C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1163,12 +1169,6 @@
         {
         "MsmKey" = "8:_5CE8DFD82C48491CA7BD08A42DABCFE3"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5CEB3349692B2DBC4DA656D78EF2BE74"
-        "OwnerKey" = "8:_3F564A048A4B05FA808B0CAC2010E329"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1353,6 +1353,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6D3F70BF0219EF00209FC914348487A5"
+        "OwnerKey" = "8:_3F564A048A4B05FA808B0CAC2010E329"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6D48E6D64E2B461C951FEC96546E7305"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1438,6 +1444,12 @@
         "Entry"
         {
         "MsmKey" = "8:_757CEEA52BB04CF4AD9DB3FC182EC17E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_757E3D09792544CE82230A3C6BC1DC6C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -7000,6 +7012,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B6EFBADEDBF4576ACD66D87397F47FE"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_dm_accountPass_C2_20220107.py.zip"
+            "TargetName" = "8:batchquery_dm_accountPass_C2_20220107.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C51E9CB084946A4B6484585F9F1043C"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\SQ_web.txt"
@@ -7038,26 +7070,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5CEB3349692B2DBC4DA656D78EF2BE74"
-            {
-            "SourcePath" = "8:mstscax.dll"
-            "TargetName" = "8:mstscax.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D2A76197FD84753965AE53E35A35200"
@@ -7582,6 +7594,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D3F70BF0219EF00209FC914348487A5"
+            {
+            "SourcePath" = "8:mstscax.dll"
+            "TargetName" = "8:mstscax.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D48E6D64E2B461C951FEC96546E7305"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\202_头像.png"
@@ -7890,6 +7922,26 @@
             "TargetName" = "8:76_微信.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_757E3D09792544CE82230A3C6BC1DC6C"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_dm_accountPass_C2_20220107.py"
+            "TargetName" = "8:batchquery_dm_accountPass_C2_20220107.py"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -14830,7 +14882,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\Release\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\开发调试\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
