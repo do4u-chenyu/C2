@@ -4010,6 +4010,12 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_dm_accountPass_C2_20220107.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_dm_accountPass_C2_20220107.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_email_accountPass_C2_20211111.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -29,6 +29,7 @@ namespace C2.SearchToolkit
             ["PASS分析"] = "md5",
             ["黑吃黑模型"] = "hostDD",
             ["盗洞模型"] = "hackDD",
+            ["大马模型"] = "dm",
             ["自定义查询"] = "custom",
         };
 
@@ -51,6 +52,7 @@ namespace C2.SearchToolkit
             ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
             ["黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
+            ["大马模型"] = "batchquery_dm_accountPass_C2_20220107.py_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
         };
 
@@ -73,6 +75,7 @@ namespace C2.SearchToolkit
             ["购置境外网络资产模型"] = @"([^\n\r]+000000_queryResult_email_\d+_\d+.tgz)",
             ["黑吃黑模型"] = @"([^\n\r]+000000_queryResult_hostDD_\d+_\d+.tgz)",
             ["盗洞模型"] = @"([^\n\r]+000000_queryResult_hackDD_\d+_\d+.tgz)",
+            ["大马模型"] = @"([^\n\r]+000000_queryResult_dm_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
         };
 
