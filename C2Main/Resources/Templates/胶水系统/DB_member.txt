@@ -1,5 +1,5 @@
-﻿qdmin.2344wan.com		123.456.78.9	admin	123456	123	http://qmadmin.2344wan.com/frame/mlogin.html
-qdmin.2344wan.com	10005612345		wxf8553	123456		http://qmadmin.2344wan.com/frame/mlogin.html
+﻿qdmin.2344wan.com(例)		123.456.78.9	admin	123456	123	http://qmadmin.2344wan.com/frame/mlogin.html
+qdmin.2344wan.com(例)	10005612345		wxf8553	123456		http://qmadmin.2344wan.com/frame/mlogin.html
 qdmin.2344wan.com	13143354321		fsfg45	65635		http://qmadmin.2344wan.com/frame/mlogin.html
 www.zhiyao0.com			小金贝	996323..		http://www.zhiyao0.com/login.aspx?ReturnUrl=/Admin/Common/FrameHome.aspx
 qmadmin.2344wan.com			wxaaa000	112233		http://qmadmin.2344wan.com/frame/mlogin.html
