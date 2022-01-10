@@ -36,8 +36,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.trojan = new System.Windows.Forms.RadioButton();
+            this.behinder3 = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -127,27 +129,41 @@
             this.label4.TabIndex = 10019;
             this.label4.Text = "木马类型：";
             // 
-            // radioButton1
+            // trojan
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(109, 86);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 16);
-            this.radioButton1.TabIndex = 10020;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "通用木马";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.trojan.AutoSize = true;
+            this.trojan.Checked = true;
+            this.trojan.Location = new System.Drawing.Point(6, 14);
+            this.trojan.Name = "trojan";
+            this.trojan.Size = new System.Drawing.Size(71, 16);
+            this.trojan.TabIndex = 10020;
+            this.trojan.TabStop = true;
+            this.trojan.Text = "通用木马";
+            this.trojan.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // behinder3
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(208, 86);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 16);
-            this.radioButton2.TabIndex = 10021;
-            this.radioButton2.Text = "三代冰蝎";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.behinder3.AutoSize = true;
+            this.behinder3.Location = new System.Drawing.Point(105, 14);
+            this.behinder3.Name = "behinder3";
+            this.behinder3.Size = new System.Drawing.Size(71, 16);
+            this.behinder3.TabIndex = 10021;
+            this.behinder3.Text = "三代冰蝎";
+            this.behinder3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.behinder3);
+            this.groupBox1.Controls.Add(this.trojan);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox1.Location = new System.Drawing.Point(96, 72);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(276, 36);
+            this.groupBox1.TabIndex = 10022;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
             // AddAllWebShellForm
             // 
@@ -155,8 +171,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(437, 325);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -165,8 +179,10 @@
             this.Controls.Add(this.browserButton);
             this.Controls.Add(this.filePathTextBox);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.groupBox1);
             this.Name = "AddAllWebShellForm";
             this.Text = "批量添加";
+            this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.browserButton, 0);
@@ -175,8 +191,8 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.radioButton1, 0);
-            this.Controls.SetChildIndex(this.radioButton2, 0);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,7 +208,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton trojan;
+        private System.Windows.Forms.RadioButton behinder3;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

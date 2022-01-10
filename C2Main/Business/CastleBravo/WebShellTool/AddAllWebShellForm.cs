@@ -82,12 +82,18 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              contentArray[1],
                                              WebShellTaskConfig.AutoDetectTrojanType(contentArray[0]),
                                              string.Empty,
-                                             WebShellTaskConfig.AutoDetectClientType(contentArray[0], ClientSetting.WSDict.Keys.First()),
+                                             DetectClientType(contentArray[0], ClientSetting.WSDict.Keys.First()),
                                              string.Empty,
                                              string.Empty,
                                              string.Empty,
                                              string.Empty,
                                              string.Empty));
+        }
+        private string DetectClientType(string url, string defaultVersion)
+        {
+            if (this.behinder3.Checked)
+                return this.behinder3.Text;
+            return WebShellTaskConfig.AutoDetectClientType(url, defaultVersion);
         }
 
         private bool GetTasksFromFile()
@@ -113,6 +119,11 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return false;
             }
             return true;
+        }
+
+        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
         }
     }
 }
