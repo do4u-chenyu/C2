@@ -108,7 +108,7 @@ namespace C2.Business.GlueWater.Settings
                            "   <td>{7}</td>" +
                            "   <td id=\"th0\"><a name=\"{1},{5}\" onmousedown=\"ShowDetailsTopic(this)\" style=\"cursor:pointer\">主题数：{8}</a><br><a name=\"{1},{5}\" onmousedown=\"ShowDetailsReply(this)\" style=\"cursor:pointer\">回帖数：{9}</a></td>" +
                            "   <td>{10}<br>{11}</td>" +
-                           "   <td><a title =\"删除\" name=\"{1}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
+                           "   <td><a title =\"删除\" name=\"{1},{3},{4},{5},{6}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                            "</tr>",
                            dr["论坛名称"].ToString(), dr["网址"].ToString(), dr["IP"].ToString(),
                            dr["认证账号"].ToString(), dr["登录IP"].ToString(),
@@ -145,7 +145,21 @@ namespace C2.Business.GlueWater.Settings
 
         public override DataTable DeleteInfo(string memeber)
         {
-            DataRow[] rows = SqWebTable.Select("网址='" + memeber + "'");
+            //网址，认证账号，登录IP，登录账号，登录密码
+            string address = memeber.Split(',')[0];
+            string certAccount = memeber.Split(',')[1];
+            string logIp = memeber.Split(',')[2];
+            string logAccount = memeber.Split(',')[3];
+            string logPassword = memeber.Split(',')[4];
+
+            DataRow[] rows = SqWebTable.Select(
+               "网址='" + address + "'" +
+                "and 认证账号='" + certAccount + "' " +
+                "and 登录IP='" + logIp + "' " +
+                "and 登录账号='" + logAccount + "' " +
+                "and 登录密码='" + logPassword + "' "
+               );
+
             foreach (DataRow row in rows)
                 SqWebTable.Rows.Remove(row);
             return SqWebTable;

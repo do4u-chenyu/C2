@@ -53,9 +53,103 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     return false;
             }
 
+            //任务下发，修改desc字段信息
+
+            /*
             if (result.RespMsg != "success")
             {
                 HelpUtil.ShowMessageBox(result.RespMsg);
+                return false;
+            }*/
+
+            if (result.RespMsg.Contains("Your quota for this type of task is full"))
+            {
+                /*
+                 * {'time': _time, 'version': version, 'attention': 'Your quota for this type of task is full'}
+                   {'时间':_time,'版本':version,'注意':'任务的配额已满，请等已经下发任务完成后再下发！'}   
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("our quota for this type of task is full", "任务的配额已满，请等已经下发任务完成后再下发"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("please use your own token"))
+            {
+                /*
+                 * {'time': _time, 'version': version,  'attention': 'please use your own token!'}
+                 * {'时间':_time,'版本':version,'注意':'请使用账号对应的token!'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("please use your own token", "请使用账号对应的token"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("Please enter the correct user_id"))
+            {
+                /*
+                 * {'time': _time, 'version': version, 'attention': 'Please enter the correct user_id'}
+                 * {'时间':_time,'版本':version,'注意':'请输入正确的工号！'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("Please enter the correct user_id", "请输入正确的工号"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("Please enter the correct user_id"))
+            {
+                /*
+                 * {'time': _time, 'version': version,'attention': 'Please make sure post urllist is json type.!'}
+                 * {'时间':_time,'版本':version,'注意':'请确认输入是否为json格式!'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("Please make sure post urllist is json type", "请确认输入是否为json格式"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("User should post at least one url"))
+            {
+                /*
+                 * {'time': _time, 'version': version,'attention': 'User should post at least one url.'}
+                 * {'时间':_time,'版本':version,'注意':'请输入至少一个url.'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("User should post at least one url", "请输入至少一个url"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("URLs are illega"))
+            {
+                /*
+                 * {'time': _time, 'version': version,'attention': 'URLs are illega'}
+                 * {'时间':_time,'版本':version,'注意':'url全部格式非法'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("URLs are illega", "url全部格式非法"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("Failed to calculate task quantity"))
+            {
+                /*
+                 * {'time': _time, 'version': version,'attention': 'Failed to calculate task quantity'}
+                 * {'时间':_time,'版本':version,'注意':'计算任务数量失败，请重试'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("Failed to calculate task quantity", "计算任务数量失败，请重试"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("Warehousing error"))
+            {
+                /*
+                 * {'time': _time, 'version': version, 'attention': 'Warehousing error'}
+                 * {'时间':_time,'版本':version,'注意':'入库错误，请重试'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("Warehousing error", "入库错误，请重试"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("tasks_in_pool") && result.RespMsg.Contains("shortuuid"))
+            {
+                /*
+                 * {'time':_time,'version':version,'tasks_in_pool':work_task+1,'shortuuid':short_id,'attention':desc}
+                 * {'时间':_time,'版本':version,'任务池任务数量':work_task+1,'任务id':short_id,'注意':desc}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("tasks_in_pool", "任务池任务数量").Replace("shortuuid", "任务id"));
+                return false;
+            }
+            else if (result.RespMsg.Contains("tasks_in_pool") && result.RespMsg.Contains("try_again"))
+            {
+                /*
+                 * {'time': _time, 'version': version,'tasks_in_pool':work_task, 'try_again': again_desc,               'attention':'task pool is full'}
+                 * {'时间':_time,'版本':version,     '任务池任务数量':work_task, '预计再次下发时间（分钟）':again_desc,  '注意':'任务池任务已满，请在预计再次下发时间后下发'}
+                 */
+                HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("tasks_in_pool", "任务池任务数量").Replace("try_again", "预计再次下发时间（分钟）").Replace("task pool is full", "任务池任务已满，请在预计再次下发时间后下发"));
                 return false;
             }
 

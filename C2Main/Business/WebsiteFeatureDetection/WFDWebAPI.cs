@@ -45,8 +45,8 @@ namespace C2.Business.WebsiteFeatureDetection
             PredictionCodeDict = new Dictionary<string, string>();
             FraudCodeDict = new Dictionary<string, string>();
 
-            //APIUrl = "https://10.1.203.15:12347/apis/";//测试
-            APIUrl = "https://113.31.119.85:53374/apis/";//正式
+            APIUrl = "https://113.31.114.239:53371/apis/";//测试    
+            //APIUrl = "https://113.31.119.85:53374/apis/";//正式
             LoginUrl = APIUrl + "Login";
             ProClassifierUrl = APIUrl + "pro_classifier_api";//任务下发
             TaskResultUrl = APIUrl + "detection/task/result";//获取任务结果
