@@ -30,6 +30,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"), "AntSword2114") },  // 2114版大部分参数都是每次随机变化的
             { "Xise19.9版", Tuple.Create(Path.Combine(WebShellFilePath, "Xise19_WAF_Config.ini"), "Xise19") },
             { "ASP通用版", Tuple.Create(Path.Combine(WebShellFilePath, "ASP_Custom_Config.ini"), "ASPCustom") },
+            { "三代冰蝎", Tuple.Create(Path.Combine(WebShellFilePath, "Behinder3.0_Beta_Config.ini"), "Common") },
         };
 
         public string SPL;
