@@ -174,7 +174,7 @@ namespace C2.Business.GlueWater.Settings
             //html的标题为发现地市/发现时间，排序此列需要去掉发现地市
             if (col.Contains("发现时间"))
                 col = "发现时间";
-            SqWebTable.DefaultView.Sort = col + " " + sortType;
+            try {SqWebTable.DefaultView.Sort = col + " " + sortType; } catch { }
             SqWebTable = SqWebTable.DefaultView.ToTable();
         }
 
@@ -229,11 +229,13 @@ namespace C2.Business.GlueWater.Settings
 
                 List<string> resultListFirst = ContentFilter(headIndex, contentsFirst[i]);
                 List<string> resultListSecond = ContentFilter(tailIndex, contentSecond[j]);
+                //针对导入数据包格式进行容错，有些数据会直接在excel中剪切数据，但是数据仍然存在，是空，针对这部分不规范的操作进行处理
+                if (CountNums.CountTimes(resultListFirst, "") == resultListFirst.Count && CountNums.CountTimes(resultListSecond, "") == resultListSecond.Count)
+                    continue;
                 List<string> resultList = resultListFirst.Concat(resultListSecond).ToList();
                 //这里要对地市编码做转换 字典映射
                 resultList[10] = IDInfoGet.GetInstance().TransRegionCode(resultList[10]);
 
-                
                 DataRow[] rows = SqWebTable.Select(
                      "认证账号='" + resultList[3] + "' " +
                      "and 登录IP='" + resultList[4] + "' " +
@@ -353,6 +355,13 @@ namespace C2.Business.GlueWater.Settings
                 ReWriteResult(SqMemberPath2, SqMemberTableReply);
             }
             return true;
+        }
+    }
+    static class CountNums
+    {
+        public static int CountTimes<T>(this List<T> inputList, T searchItem)
+        {
+            return ((from t in inputList where t.Equals(searchItem) select t).Count());
         }
     }
 }

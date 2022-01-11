@@ -231,18 +231,7 @@ namespace C2.Forms
             else 
             {
                 this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
-            }
-            /*    
-            if (freshTitle)
-            {
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true) });
-            }
-            else 
-            {
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
-            }
-            */
-                
+            }      
         }
         #endregion
 
@@ -276,6 +265,14 @@ namespace C2.Forms
                 return;
             }
             
+        }
+
+        private void deleteAllData_Click(object sender, EventArgs e)
+        {
+            this.webBrowser.Document.InvokeScript("clearTable");
+            this.webBrowser.Document.InvokeScript("clearTableTitle");
+            DataTable resTable = new DataTable();//读取空表，等价于清空操作
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable, false, true, true) });
         }
     }
 }

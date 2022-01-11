@@ -124,8 +124,7 @@ namespace C2.Business.GlueWater.Settings
             //html的标题为发现地市/发现时间，排序此列需要去掉发现地市
             if (col.Contains("发现时间"))
                 col = "发现时间";
-
-            DbWebTable.DefaultView.Sort = col + " " + sortType;
+            try { DbWebTable.DefaultView.Sort = col + " " + sortType; } catch { }
             DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
