@@ -2716,6 +2716,7 @@
     <Content Include="Business\CastleBravo\WebShellTool\Payload\conf.gif" />
     <Content Include="Business\CastleBravo\WebShellTool\Payload\readme.txt" />
     <Content Include="Business\CastleBravo\WebShellTool\Payload\sysinfo.gif" />
+    <Content Include="Business\CastleBravo\WebShellTool\Payload\usertb.gif" />
     <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

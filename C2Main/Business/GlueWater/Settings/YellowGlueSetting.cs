@@ -297,7 +297,7 @@ namespace C2.Business.GlueWater.Settings
                             WebMember[j][7] = WebMember[j][7] == string.Empty ? CityTrans(zipPath) : WebMember[j][7];
 
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
-                            rowsList = TableFilter(webRows, rowsList, WebMember[j], YellowWebTable);
+                            rowsList = TableFilter(webRows, WebMember[j], YellowWebTable);
                             YellowWebTable = SortNewTable(rowsList, YellowWebTable);
                             ReWriteResult(YellowWebPath, YellowWebTable);
 
@@ -315,7 +315,7 @@ namespace C2.Business.GlueWater.Settings
                     webAndAuth.Remove(memberList[0]);
                 DataRow[] rows = YellowMemberTable.Select("网站='" + memberList[0] + "'");
                 List<List<string>> YellowMemberList = new List<List<string>>();
-                YellowMemberList = TableFilter(rows, YellowMemberList, memberList, YellowMemberTable);
+                YellowMemberList = TableFilter(rows, memberList, YellowMemberTable);
                 foreach (List<string> YellowMember in YellowMemberList)
                     YellowMemberTable.Rows.Add(YellowMember.ToArray());
                 ReWriteResult(YellowMemberPath, YellowMemberTable);
@@ -395,7 +395,7 @@ namespace C2.Business.GlueWater.Settings
 
                 yellowPhotoEmpty = Trans(yellowPhotoEmpty);
                 DataRow[] webRows = YellowWebTable.Select("网站网址='" + yellowPhotoEmpty[9] + "'");
-                rowsList = TableFilter(webRows, rowsList, yellowPhotoEmpty, YellowWebTable);
+                rowsList = TableFilter(webRows, yellowPhotoEmpty, YellowWebTable);
                 YellowWebTable = SortNewTable(rowsList, YellowWebTable);
                 ReWriteResult(YellowWebPath, YellowWebTable);
             }
@@ -437,8 +437,10 @@ namespace C2.Business.GlueWater.Settings
             return findCity;
         }
 
-        private List<List<string>> TableFilter(DataRow[] data, List<List<string>> rowsList, List<string> memberList, DataTable dataTable)
+        private List<List<string>> TableFilter(DataRow[] data, List<string> memberList, DataTable dataTable)
         {
+            List<List<string>> rowsList = new List<List<string>>();
+
             if (data.Length == 0)
                 rowsList.Add(memberList);
             else
