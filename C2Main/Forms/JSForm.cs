@@ -231,18 +231,7 @@ namespace C2.Forms
             else 
             {
                 this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
-            }
-            /*    
-            if (freshTitle)
-            {
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true) });
-            }
-            else 
-            {
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
-            }
-            */
-                
+            }      
         }
         #endregion
 
