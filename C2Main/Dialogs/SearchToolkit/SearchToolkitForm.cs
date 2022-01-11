@@ -303,6 +303,7 @@ namespace C2.SearchToolkit
         {
             taskInfoGB.Visible = true;
             confirmButton.Enabled = false;
+            helpLabel.Visible = false;
 
             // 更新任务状态和界面元素
             using (GuarderUtil.WaitCursor)

