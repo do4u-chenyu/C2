@@ -123,11 +123,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(16, 83);
+            this.label4.Location = new System.Drawing.Point(19, 83);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 19);
+            this.label4.Size = new System.Drawing.Size(71, 19);
             this.label4.TabIndex = 10019;
-            this.label4.Text = "木马类型：";
+            this.label4.Text = "D洞类型：";
             // 
             // trojan
             // 
