@@ -266,5 +266,13 @@ namespace C2.Forms
             }
             
         }
+
+        private void deleteAllData_Click(object sender, EventArgs e)
+        {
+            this.webBrowser.Document.InvokeScript("clearTable");
+            this.webBrowser.Document.InvokeScript("clearTableTitle");
+            DataTable resTable = new DataTable();//读取空表，等价于清空操作
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable, false, true, true) });
+        }
     }
 }

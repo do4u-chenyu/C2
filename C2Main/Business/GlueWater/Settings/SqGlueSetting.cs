@@ -174,7 +174,7 @@ namespace C2.Business.GlueWater.Settings
             //html的标题为发现地市/发现时间，排序此列需要去掉发现地市
             if (col.Contains("发现时间"))
                 col = "发现时间";
-            SqWebTable.DefaultView.Sort = col + " " + sortType;
+            try {SqWebTable.DefaultView.Sort = col + " " + sortType; } catch { }
             SqWebTable = SqWebTable.DefaultView.ToTable();
         }
 
@@ -213,9 +213,6 @@ namespace C2.Business.GlueWater.Settings
                 return "非系统要求格式，请查看模板样例修改";
         }
 
-       
-
-
         private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond)
         {
             List<int> headIndex = IndexFilter(SqWebExcelColList, contentsFirst);
@@ -239,7 +236,6 @@ namespace C2.Business.GlueWater.Settings
                 //这里要对地市编码做转换 字典映射
                 resultList[10] = IDInfoGet.GetInstance().TransRegionCode(resultList[10]);
 
-                
                 DataRow[] rows = SqWebTable.Select(
                      "认证账号='" + resultList[3] + "' " +
                      "and 登录IP='" + resultList[4] + "' " +
