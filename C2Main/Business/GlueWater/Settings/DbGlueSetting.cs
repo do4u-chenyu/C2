@@ -51,15 +51,15 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = GenDataTable(DbWebPath, DbWebColList);
             DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
 
-            RefreshHtmlTable(resTable,true);
+            RefreshHtmlTable(resTable,true,true,true);
         }
 
         
-        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort)
         {
             StringBuilder sb = new StringBuilder();
-
-            sb.Append("<tr name=\"title\">" +
+            if (freshSort == true && freshColumn == true)
+                sb.Append("<tr name=\"title\">" +
                           "    <th>网站名称/域名/IP</th>" +
                           "    <th style=\"width:200px\"> Refer对应Title/Refer</th>" +
                           "    <th style=\"width:80px\">涉案金额<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +

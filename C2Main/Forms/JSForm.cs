@@ -174,10 +174,9 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("clearTableTitle");
             DataTable resTable = glueSetting.DeleteInfo(item);
 
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false) });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false,true,true) });
         }
         
-
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void ShowDetails(string item)
@@ -224,10 +223,26 @@ namespace C2.Forms
         {
             DataTable dt = new DataTable();//只是为了传参，无实际意义
             this.webBrowser.Document.InvokeScript("clearTable");
-            if(freshTitle)
-                this.webBrowser.Document.InvokeScript("clearTableTitle"); 
-
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true) });
+            if (freshTitle)
+            {
+                this.webBrowser.Document.InvokeScript("clearTableTitle");
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true) });
+            }
+            else 
+            {
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
+            }
+            /*    
+            if (freshTitle)
+            {
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true) });
+            }
+            else 
+            {
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
+            }
+            */
+                
         }
         #endregion
 

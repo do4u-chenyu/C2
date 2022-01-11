@@ -68,16 +68,16 @@ namespace C2.Business.GlueWater.Settings
             SqMemberTable = GenDataTable(SqMemberPath, SqMemberColList);
             SqMemberTableReply = GenDataTable(SqMemberPath2, SqMemberColList2);
 
-            RefreshHtmlTable(resTable,true);
+            RefreshHtmlTable(resTable,true,true,true);
         }
 
-        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle,bool freshColumn,bool freshSort)
         {
             
             StringBuilder sb = new StringBuilder();
 
-            
-            sb.Append("<tr name=\"title\">" +
+            if(freshSort == true && freshColumn == true)
+                sb.Append("<tr name=\"title\">" +
                       "    <th>论坛名称/网址/IP</th>" +
                       "    <th>认证账号/登陆IP</th>" +
                       "    <th>登陆账号/登陆密码</th>" +
@@ -86,7 +86,7 @@ namespace C2.Business.GlueWater.Settings
                       "    <th>发现地市/发现时间<img src=\"..\\img\\arrow.png\" class=\"arrow desc\" onmousedown=\"SortCol(this)\"></img></th>" +
                       "    <th style=\"width:60px\">操作</th>" +
                       "</tr>"
-                  );
+                 );
 
             //删除操作，对表进行更新
             if (freshTitle == false)

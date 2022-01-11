@@ -57,14 +57,14 @@ namespace C2.Business.GlueWater.Settings
             YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
             //TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
-            RefreshHtmlTable(resTable,true);
+            RefreshHtmlTable(resTable,true,true,true);
         }
 
-        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn,bool freshSort)
         {
             StringBuilder sb = new StringBuilder();
-            
-            sb.Append("<tr name=\"title\">" +
+            if (freshSort == true && freshColumn == true)
+                sb.Append("<tr name=\"title\">" +
                       "    <th>认证账号</th>" +
                       "    <th>身份信息</th>" +
                       "    <th>涉黄标签</th>" +
