@@ -827,6 +827,12 @@
     <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.Designer.cs">
       <DependentUpon>SearchToolkitModelSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SearchToolkit\SelectValidIPsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchToolkit\SelectValidIPsForm.Designer.cs">
+      <DependentUpon>SelectValidIPsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\UpdateProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2548,6 +2554,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.resx">
       <DependentUpon>SearchToolkitModelSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchToolkit\SelectValidIPsForm.resx">
+      <DependentUpon>SelectValidIPsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SortTopicDialog.resx">
       <DependentUpon>SortTopicDialog.cs</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using C2.Business.SSH;
+using C2.Dialogs.SearchToolkit;
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
@@ -44,6 +45,10 @@ namespace C2.Controls.C1.Left
             lastInfo.SearchAgentIP = task.SearchAgentIP;
             lastInfo.Username = task.Username;
             lastInfo.InterfaceIP = task.InterfaceIP;
+
+
+            //TODO  新增daemon机的IP选择
+            //new SelectValidIPsForm().ShowDialog();
 
             string message;
             if (taskManager.RunTask(task))
