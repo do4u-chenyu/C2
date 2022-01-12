@@ -174,7 +174,7 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("clearTableTitle");
             DataTable resTable = glueSetting.DeleteInfo(item);
 
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false,true,true) });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false,true,true,false) });
         }
         
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
@@ -226,11 +226,11 @@ namespace C2.Forms
             if (freshTitle)
             {
                 this.webBrowser.Document.InvokeScript("clearTableTitle");
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true) });
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true,false) });
             }
             else 
             {
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false,false) });
             }      
         }
         #endregion
@@ -272,7 +272,7 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("clearTable");
             this.webBrowser.Document.InvokeScript("clearTableTitle");
             DataTable resTable = new DataTable();//读取空表，等价于清空操作
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable, false, true, true) });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable, false, true, true,true) });
         }
     }
 }

@@ -55,7 +55,7 @@ namespace C2.Business.GlueWater
             return string.Empty;
         }
 
-        public virtual string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort)
+        public virtual string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort, bool clearAllData)
         {
             return string.Empty;
         }

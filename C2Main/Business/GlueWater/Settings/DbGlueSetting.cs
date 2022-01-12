@@ -51,11 +51,11 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = GenDataTable(DbWebPath, DbWebColList);
             DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
 
-            RefreshHtmlTable(resTable,true,true,true);
+            RefreshHtmlTable(resTable,true,true,true,false);
         }
 
         
-        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort, bool clearAllData)
         {
             StringBuilder sb = new StringBuilder();
             if (freshSort == true && freshColumn == true)
@@ -94,6 +94,14 @@ namespace C2.Business.GlueWater.Settings
                             dr["赌博类型"].ToString(), dr["运营时间"].ToString(),
                             dr["发现地市"].ToString(), dr["发现时间"].ToString() 
                 ));
+            }
+            //一键删除所有数据
+            if (clearAllData == true)
+            {
+                FileStream fsDw = new FileStream(DbWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                FileStream fsDm = new FileStream(DbMemberPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fsDw.Close();
+                fsDm.Close();
             }
             return sb.ToString();
         }
