@@ -103,10 +103,18 @@ namespace C2.Business.GlueWater.Settings
             //一键删除所有数据
             if (clearAllData == true)
             {
+                
                 FileStream fsDw = new FileStream(DbWebPath, FileMode.Truncate, FileAccess.ReadWrite);
                 FileStream fsDm = new FileStream(DbMemberPath, FileMode.Truncate, FileAccess.ReadWrite);
                 fsDw.Close();
                 fsDm.Close();
+                DbWebTable = GenDataTable(DbWebPath, DbWebColList);
+                DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
+                /*
+                File.Delete(DbWebPath);
+                File.Delete(DbMemberPath);
+                */
+
             }
             return sb.ToString();
         }

@@ -114,6 +114,8 @@ namespace C2.Business.GlueWater.Settings
                 FileStream fsYm = new FileStream(YellowMemberPath, FileMode.Truncate, FileAccess.ReadWrite);
                 fsYw.Close();
                 fsYm.Close();
+                YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
+                YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
             }
             return sb.ToString();
         }

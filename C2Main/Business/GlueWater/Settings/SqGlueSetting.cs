@@ -132,6 +132,9 @@ namespace C2.Business.GlueWater.Settings
                 fsSqw.Close();
                 fsSm.Close();
                 fsSm2.Close();
+                SqWebTable = GenDataTable(SqWebPath, SqWebColList);
+                SqMemberTable = GenDataTable(SqMemberPath, SqMemberColList);
+                SqMemberTableReply = GenDataTable(SqMemberPath2, SqMemberColList2);
             }
             return sb.ToString();
         }
