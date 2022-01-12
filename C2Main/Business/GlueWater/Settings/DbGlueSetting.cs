@@ -191,10 +191,13 @@ namespace C2.Business.GlueWater.Settings
                 resultList[9] = IDInfoGet.GetInstance().TransRegionCode(resultList[9]);
 
                 //这里要做判断了 对于web，url存在，替换掉
-                DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
-                if (rows.Length > 0)
-                    DbWebTable.Rows.Remove(rows[0]);
 
+                if (DbWebTable == null)
+                    DbWebTable = GenDataTable(DbWebPath, DbWebColList);
+                DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
+                 if (rows.Length > 0)
+                    DbWebTable.Rows.Remove(rows[0]);
+                
                 //由于人员和金额可能为空，需要额外判断
                 string tmpMember = resultList[DbWebColList.ToList().IndexOf("涉赌人数")];
                 resultList[DbWebColList.ToList().IndexOf("涉赌人数")] = tmpMember == string.Empty ? "0" : tmpMember;
@@ -225,6 +228,8 @@ namespace C2.Business.GlueWater.Settings
                 List<string> resultList = ContentFilter(headIndex, contents[i]);
 
                 //这里要做判断了 对于member，url存在，比较是否完全一致
+                if(DbMemberTable == null)
+                    DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
                 DataRow[] rows = DbMemberTable.Select("域名='" + resultList[0] + "'");
                 if (rows.Length == 0)
                     needAddList.Add(resultList);
@@ -243,7 +248,6 @@ namespace C2.Business.GlueWater.Settings
                     if (!rowContentList.Contains(string.Join("\t", resultList)))
                         needAddList.Add(resultList);
                 }
-
             }
             foreach(List<string> li in needAddList)
                 tempResultList.Add(li); 

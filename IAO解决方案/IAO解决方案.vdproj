@@ -393,6 +393,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2068B5EF3B38407AB15849295B99C711"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2198B301B7484A0C99751032E1C4BC4D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -442,12 +448,6 @@
         "Entry"
         {
         "MsmKey" = "8:_28C7AC7827F14008B53568A2E3C58798"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_28FD42DD60264358AB8255736C7EF155"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -813,6 +813,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_44FDB8C8C71B434D850C04E5CC101AC7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4505BD14174E4CDA878318C3A98FBC6C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1161,14 +1167,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5C51E9CB084946A4B6484585F9F1043C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5CE8DFD82C48491CA7BD08A42DABCFE3"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_5CEB3349692B2DBC4DA656D78EF2BE74"
+        "OwnerKey" = "8:_3F564A048A4B05FA808B0CAC2010E329"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1353,12 +1353,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6D3F70BF0219EF00209FC914348487A5"
-        "OwnerKey" = "8:_3F564A048A4B05FA808B0CAC2010E329"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6D48E6D64E2B461C951FEC96546E7305"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1408,12 +1402,6 @@
         "Entry"
         {
         "MsmKey" = "8:_71889C2A64F24679BBFC65CF41B1651A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_721BD94866574397A895A07BB8AA7F51"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2001,12 +1989,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2E8A521942948269229EE43C7D26853"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A4704107782F46D39F47A8237BD9A391"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2044,12 +2026,6 @@
         "Entry"
         {
         "MsmKey" = "8:_AAA9022D03F445B39A3317A2232EDB2C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AB31F6AF3D274C418B14CAF66620B2A7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2152,12 +2128,6 @@
         "Entry"
         {
         "MsmKey" = "8:_B15B9025DF994021A681D127DEFB8785"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B1B21A82DD6943A5B9E1DEB28B91F75C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2517,12 +2487,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D2D5729EA5884F098B9D0161DF4EFE62"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D3BB07EC2FD446F6B7F7BB4CC79EE179"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2697,6 +2661,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E0170D9F8A604E1295E9DEE22B6AB5FA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E05B82306CAA4C4992D61780E74A72DA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2716,12 +2686,6 @@
         "Entry"
         {
         "MsmKey" = "8:_E28B5907CB3B4BB6A34E70DE21CC6C19"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E2967E7C4D2D47C1A3576F21A85AF7DC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3123,12 +3087,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F4B268C27BDB4F6A8DA959FA749365E8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F53E38596DB3411BA4614195F03F63CD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3304,6 +3262,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DA14ED4BEFA84F6485DD7B5F1528BD50"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3365,12 +3329,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_04B5BB639F364F349A81AC8CCCB1A1FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4898,6 +4856,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2068B5EF3B38407AB15849295B99C711"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS模板\\涉枪模板0112.zip"
+            "TargetName" = "8:涉枪模板0112.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_B180ACEA5266430E804F71C3E8BF06D0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2198B301B7484A0C99751032E1C4BC4D"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\472_星期五.png"
@@ -5075,26 +5053,6 @@
             "TargetName" = "8:style_13.css"
             "Tag" = "8:"
             "Folder" = "8:_BEFA940BECE44955A75D2989A36D7679"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28FD42DD60264358AB8255736C7EF155"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\Yellow_member.txt"
-            "TargetName" = "8:Yellow_member.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6166,6 +6124,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_44FDB8C8C71B434D850C04E5CC101AC7"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS模板\\涉黄模板0112.zip"
+            "TargetName" = "8:涉黄模板0112.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_B180ACEA5266430E804F71C3E8BF06D0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4505BD14174E4CDA878318C3A98FBC6C"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\19_涉爆.png"
@@ -7032,12 +7010,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C51E9CB084946A4B6484585F9F1043C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5CEB3349692B2DBC4DA656D78EF2BE74"
             {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\SQ_web.txt"
-            "TargetName" = "8:SQ_web.txt"
+            "SourcePath" = "8:mstscax.dll"
+            "TargetName" = "8:mstscax.dll"
             "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7047,29 +7025,9 @@
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5CE8DFD82C48491CA7BD08A42DABCFE3"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS模板\\涉赌模板.zip"
-            "TargetName" = "8:涉赌模板.zip"
-            "Tag" = "8:"
-            "Folder" = "8:_B180ACEA5266430E804F71C3E8BF06D0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "Register" = "3:4"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D2A76197FD84753965AE53E35A35200"
@@ -7594,26 +7552,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D3F70BF0219EF00209FC914348487A5"
-            {
-            "SourcePath" = "8:mstscax.dll"
-            "TargetName" = "8:mstscax.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D48E6D64E2B461C951FEC96546E7305"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\202_头像.png"
@@ -7791,26 +7729,6 @@
             "TargetName" = "8:WebScan帮助文档.txt"
             "Tag" = "8:"
             "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_721BD94866574397A895A07BB8AA7F51"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\Yellow_web.txt"
-            "TargetName" = "8:Yellow_web.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -9571,26 +9489,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2E8A521942948269229EE43C7D26853"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\DB_member.txt"
-            "TargetName" = "8:DB_member.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4704107782F46D39F47A8237BD9A391"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\44_地下钱庄.png"
@@ -9717,26 +9615,6 @@
             "TargetName" = "8:dic_password_windows.txt"
             "Tag" = "8:"
             "Folder" = "8:_30D87A175307459A8BC3E9D16C7F4967"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AB31F6AF3D274C418B14CAF66620B2A7"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS模板\\涉黄模板.zip"
-            "TargetName" = "8:涉黄模板.zip"
-            "Tag" = "8:"
-            "Folder" = "8:_B180ACEA5266430E804F71C3E8BF06D0"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -10070,26 +9948,6 @@
             "TargetName" = "8:关键词分析.iao"
             "Tag" = "8:"
             "Folder" = "8:_4D947D5D35EB499ABC3ECB77AFDFD887"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B1B21A82DD6943A5B9E1DEB28B91F75C"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\SQ_member2.txt"
-            "TargetName" = "8:SQ_member2.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -11246,26 +11104,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D2D5729EA5884F098B9D0161DF4EFE62"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS模板\\涉枪模板.zip"
-            "TargetName" = "8:涉枪模板.zip"
-            "Tag" = "8:"
-            "Folder" = "8:_B180ACEA5266430E804F71C3E8BF06D0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D3BB07EC2FD446F6B7F7BB4CC79EE179"
             {
             "AssemblyRegister" = "3:1"
@@ -11879,6 +11717,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0170D9F8A604E1295E9DEE22B6AB5FA"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\JS模板\\涉赌模板0112.zip"
+            "TargetName" = "8:涉赌模板0112.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_B180ACEA5266430E804F71C3E8BF06D0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E05B82306CAA4C4992D61780E74A72DA"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_6.css"
@@ -11945,26 +11803,6 @@
             "TargetName" = "8:BossIndex14.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E2967E7C4D2D47C1A3576F21A85AF7DC"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\SQ_member.txt"
-            "TargetName" = "8:SQ_member.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -12925,26 +12763,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F4B268C27BDB4F6A8DA959FA749365E8"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\胶水系统\\DB_web.txt"
-            "TargetName" = "8:DB_web.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_547681076E6B496296FECCD780696BFC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F53E38596DB3411BA4614195F03F63CD"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Grass.xml"
@@ -13847,17 +13665,6 @@
                             "Property" = "8:_936A3C19A14B47AFBD7F5AA02674952F"
                                 "Folders"
                                 {
-                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_547681076E6B496296FECCD780696BFC"
-                                    {
-                                    "Name" = "8:胶水系统"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "Condition" = "8:"
-                                    "Transitive" = "11:FALSE"
-                                    "Property" = "8:_B8B7170F37B44D5E96845A5E355BC501"
-                                        "Folders"
-                                        {
-                                        }
-                                    }
                                     "{9EF0B969-E518-4E46-987F-47570745A589}:_B180ACEA5266430E804F71C3E8BF06D0"
                                     {
                                     "Name" = "8:JS模板"
@@ -14035,7 +13842,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{F9E9BC36-3423-4361-97BE-5D79260A6B18}"
+        "PackageCode" = "8:{A6E76ACC-C95A-4F83-A494-D23D376E071B}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -14854,7 +14661,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Release\\UserInstallSet.dll"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -14882,7 +14689,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\开发调试\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\Debug\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
