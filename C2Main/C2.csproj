@@ -827,6 +827,12 @@
     <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.Designer.cs">
       <DependentUpon>SearchToolkitModelSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SearchToolkit\SelectValidIPsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchToolkit\SelectValidIPsForm.Designer.cs">
+      <DependentUpon>SelectValidIPsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\UpdateProgressBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2549,6 +2555,9 @@
     <EmbeddedResource Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.resx">
       <DependentUpon>SearchToolkitModelSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchToolkit\SelectValidIPsForm.resx">
+      <DependentUpon>SelectValidIPsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SortTopicDialog.resx">
       <DependentUpon>SortTopicDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2707,6 +2716,7 @@
     <Content Include="Business\CastleBravo\WebShellTool\Payload\conf.gif" />
     <Content Include="Business\CastleBravo\WebShellTool\Payload\readme.txt" />
     <Content Include="Business\CastleBravo\WebShellTool\Payload\sysinfo.gif" />
+    <Content Include="Business\CastleBravo\WebShellTool\Payload\usertb.gif" />
     <Content Include="Business\IAOLab\WebEngine\css\DrawingManager.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -218,7 +218,26 @@ namespace C2.Business.SSH
             catch { }
 
         }
-        
+
+        public List<string> SearchDaemonIP()
+        {
+            List<string> daemonIPList = new List<string>() { "10.1.126.3", "10.1.126.2", "10.1.126.1", "10.1.126.6", "10.1.126.7"};
+            
+            /*
+             * 通过以下几步，生成daemon机的IP列表
+             * 
+             * /home/search/zookeeper/shell/
+             * sh ZKClient.sh
+             * ls /search/querydaemon/online
+             * 
+             * ./remote.sh -f ips_list.txt -c '. /home/search/search_profile;python -V;ls /storage/data/1;grep SEARCH_VERSION /home/search/search_profile_vars ' 2>&1 |tee 1>tmp
+             * ./remote.sh -x
+             * 
+             */
+
+            return daemonIPList;
+        }
+
         private String FindID(String ip, String list)
         {
             String pattern = String.Format(@"\[(a\d+)\]\s+{0}\b", ip);
@@ -532,6 +551,20 @@ namespace C2.Business.SSH
             }
                 
             return pid;
+        }
+
+        public String RunDSQTask()
+        {
+            if (Oops()) return String.Empty;
+
+            /*
+             * 脚本remotecopy.sh将工作目录下压缩包分发到全文机器上 ./remotecopy.sh -f valid_ips.txt -s ./queryScript.tar /storage/data/1
+             * ./remote.sh -f valid_ips.txt -c 'cd /storage/data/1; tar -xvf queryScript.tar'
+             * ./remote.sh -f valid_ips.txt -c ' du -sh /search/index* /sequence / general / '  > data.txt
+             * 脚本remote.sh运行全文机器上的程序
+             */
+
+            return string.Empty;
         }
 
         public BastionAPI EnterTaskDirectory()

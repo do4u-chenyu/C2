@@ -352,7 +352,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuCreateOrganization = new ToolStripMenuItem();
                 ToolStripMenuItem MenuDelete = new ToolStripMenuItem();
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
-                ToolStripMenuItem MenuRefresh = new ToolStripMenuItem();
+                ToolStripMenuItem MenuRefresh = new ToolStripMenuItem(); //xx
                 ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenDataSource = new ToolStripMenuItem();
                 MenuOpenDataSource.Image = Properties.Resources.数据挂件;
@@ -569,6 +569,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
                 ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
                 ToolStripMenuItem MenuOpenResult = new ToolStripMenuItem();
+                ToolStripMenuItem MenuRefresh = new ToolStripMenuItem();
                 MenuOpenResult.Image = Properties.Resources.结果;
 
                 MenuOpenResult.Text = String.Format("{0}[{1}]", dataItem.FileName, Path.GetExtension(dataItem.FilePath).Trim('.'));
@@ -576,6 +577,7 @@ namespace C2.Controls.MapViews
                 MenuPreViewData,
                 MenuProcessData,
                 MenuDelete,
+                MenuRefresh,
                 MenuJoinPool,
                 MenuCreateChart,
                 new ToolStripSeparator(),
@@ -609,6 +611,13 @@ namespace C2.Controls.MapViews
                 MenuDelete.Tag = dataItem;
                 MenuDelete.Click += MenuDeleteRes_Click;
 
+                MenuRefresh.Image = Properties.Resources.modelUpdate;
+                MenuRefresh.Text = "刷新";           //刷新
+                MenuRefresh.Tag = dataItem;
+                MenuRefresh.Click += MenuRefreshRes_Click;
+                //if (dataItem.IsDatabase())  // 外部数据源不存在刷新的概念
+                //    MenuRefresh.Enabled = false;
+
                 MenuFileSavaAs.Image = Properties.Resources.resultDone;
                 MenuFileSavaAs.Text = Lang._("Save As");
                 MenuFileSavaAs.Tag = dataItem.FilePath;
@@ -631,6 +640,11 @@ namespace C2.Controls.MapViews
         void MenuPreViewData_Click(object sender, EventArgs e)
         {
             C2BaseWidget.DoPreViewDataSource((sender as ToolStripMenuItem).Tag as DataItem);
+        }
+        void MenuRefreshRes_Click(object sender, EventArgs e)
+        {
+            DataItem hitItem = (sender as ToolStripMenuItem).Tag as DataItem;
+            Global.GetMainForm().PreViewDataByFullFilePath((sender as ToolStripMenuItem), hitItem.FilePath, hitItem.FileSep, hitItem.FileType, hitItem.FileEncoding, true);
         }
 
         void MenuProcessData_Click(object sender, EventArgs e)

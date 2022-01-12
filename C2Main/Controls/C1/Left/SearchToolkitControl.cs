@@ -1,4 +1,5 @@
 ﻿using C2.Business.SSH;
+using C2.Dialogs.SearchToolkit;
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
@@ -45,8 +46,18 @@ namespace C2.Controls.C1.Left
             lastInfo.Username = task.Username;
             lastInfo.InterfaceIP = task.InterfaceIP;
 
+
+            //TODO  新增daemon机的IP选择窗口
+            if(task.SearchMethod == SearchTaskMethod.DSQ)
+            {
+                taskManager.SearchDaemonIP(task);
+
+                new SelectValidIPsForm(task).ShowDialog();
+            }
+               
+
             string message;
-            if (taskManager.RunTask(task))
+            if (task.SearchMethod == SearchTaskMethod.DSQ ? taskManager.RunDSQTask(task) : taskManager.RunTask(task))
             {
                 AddInnerButton(new SearchToolkitButton(task));
                 message = String.Format("创建全文任务【{0}】 成功", task.TaskName);

@@ -8,6 +8,12 @@ using System.Windows.Forms;
 
 namespace C2.SearchToolkit
 {
+    public enum SearchTaskMethod
+    {
+        QueryClient,
+        DSQ
+    }
+
     public class SearchTaskInfo
     {
         public static readonly Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
@@ -31,6 +37,7 @@ namespace C2.SearchToolkit
             ["盗洞模型"] = "hackDD",
             ["大马模型"] = "dm",
             ["自定义查询"] = "custom",
+            ["DSQ查询"] = "dsq",
         };
 
         private static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -54,6 +61,7 @@ namespace C2.SearchToolkit
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
             ["大马模型"] = "batchquery_dm_accountPass_C2_20220107.py_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
+            ["DSQ查询"] = "main_rule_http_xxxx.py",
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -77,6 +85,7 @@ namespace C2.SearchToolkit
             ["盗洞模型"] = @"([^\n\r]+000000_queryResult_hackDD_\d+_\d+.tgz)",
             ["大马模型"] = @"([^\n\r]+000000_queryResult_dm_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
+            ["DSQ查询"] = @"([^\n\r]+000000_queryResult_dsq_\d+_\d+.tgz)",
         };
 
         public static readonly Dictionary<String, String> TaskHelpInfoTable = new Dictionary<String, String>
@@ -97,8 +106,12 @@ namespace C2.SearchToolkit
             ["购置境外网络资产模型"] = "购置境外域名,VPN,云主机,服务器和矿池用于黑灰产",
             ["黑吃黑模型"] = "新一代黑客专项模型:黑客和黑产之间的黑吃黑",
             ["盗洞模型"] = "新一代黑客专项模型:侦测木马打洞后的各种痕迹",
+            ["大马模型"] = "新一代黑客专项模型:侦测高端黑客使用的大马",
             ["自定义查询"] = "上面详细设置里自己填查询关键词",
+            ["DSQ查询"] = "内部施工中，忽略",
         };
+
+        public static readonly List<string> DSQRelateModelList = new List<string>() { "DSQ查询" };
 
         public String LocalPyScriptPath
         {
@@ -119,6 +132,8 @@ namespace C2.SearchToolkit
         public static readonly SearchTaskInfo EmptyTaskInfo = new SearchTaskInfo();
 
 
+        public SearchTaskMethod SearchMethod { get => DSQRelateModelList.Contains(TaskModel) ? SearchTaskMethod.DSQ : SearchTaskMethod.QueryClient; }
+        public List<string> DaemonIP { get; set; } = new List<string>();
 
         public String LastErrorMsg { get; set; } = String.Empty;
 

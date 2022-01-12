@@ -18,6 +18,19 @@ namespace C2.SearchToolkit
 
         public IEnumerable<SearchTaskInfo> Tasks { get => tasks; }
 
+        public void SearchDaemonIP(SearchTaskInfo task)
+        {
+            using (GuarderUtil.WaitCursor)
+            {
+                BastionAPI api = new BastionAPI(task);
+                task.DaemonIP = api.Login()
+                                   .SearchDaemonIP();
+
+                api.Close();
+            }
+        }
+
+
         public bool RunTask(SearchTaskInfo task) 
         {
             
@@ -42,6 +55,29 @@ namespace C2.SearchToolkit
             return task.Save();
         }
 
+        public bool RunDSQTask(SearchTaskInfo task)
+        {
+
+            using (GuarderUtil.WaitCursor)
+            {
+                BastionAPI api = new BastionAPI(task);
+                task.PID = api.Login()
+                              .DeleteTaskDirectory()
+                              .CreateTaskDirectory()
+                              .EnterTaskDirectory()
+                              .UploadTaskScript()
+                              .CheckHomeSearch()
+                              .RunDSQTask();
+                api.Close();
+            }
+
+
+            if (task.PID == String.Empty)
+                return false;
+
+            tasks.Add(task);
+            return task.Save();
+        }
 
         private String[] ListTaskBcpFiles()
         {
