@@ -198,12 +198,14 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderDGenButton_Click(object sender, EventArgs e)
         {
+            BehinderETextBox.Focus();
+
             Behinder bh = new Behinder();
             StringBuilder sb = new StringBuilder();
             string[] ss = BehinderETextBox.Text.SplitLine();
             foreach (string s in ss)
             {
-                sb.Append(bh.Encrypt20(s.Trim()))  
+                sb.Append(rb20.Checked ? bh.Encrypt20(s.Trim()) : bh.Encrypt40(s.Trim()))  
                   .Append('\t')
                   .AppendLine(s.Trim());
             }

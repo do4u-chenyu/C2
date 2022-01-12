@@ -12,7 +12,10 @@ namespace C2.Business.CastleBravo.Binary
     {
         readonly RijndaelManaged cbc;  // AES128解密器 CBC模式
         private const string BH = "assert|eval(base";
-        private byte[] BHB = new byte[] { 97, 115, 115, 101, 114, 116, 124, 101, 118, 97, 108, 40, 98, 97, 115, 101 };
+        private const string BH1 = "assert|eval(base64_decode('QGVyc";
+        private const string BH2 = "assert|eval(base64_decode('DQpAZ";
+        private const string BH3 = "assert|eval(base64_decode('ZXJyb";
+        private const string BH4 = "assert|eval(base64_decode('DQplc";
 
         public Behinder()
         {
@@ -134,10 +137,26 @@ namespace C2.Business.CastleBravo.Binary
 
         public string Encrypt20(string password)
         {
+            return Encrpyt(password, BH);
+        }
+
+        public string Encrypt40(string password)
+        {
+            return string.Format("{0}\t{1}\t{2}\t{3}", 
+                Encrpyt(password, BH1),
+                Encrpyt(password, BH2),
+                Encrpyt(password, BH3),
+                Encrpyt(password, BH4));
+        }
+
+        private string Encrpyt(string password, string text)
+        {
             password = ST.GenerateMD5(password).Substring(0, 16);
             byte[] pass_bytes = Encoding.ASCII.GetBytes(password);
+            byte[] text_bytes = Encoding.ASCII.GetBytes(text);
+            int takeLength = text.Length / 16 * 15;
             ICryptoTransform ctf = cbc.CreateEncryptor(pass_bytes, new byte[16]);
-            byte[] ret_bytes = ctf.TransformFinalBlock(BHB, 0, BHB.Length).Take(15).ToArray();
+            byte[] ret_bytes = ctf.TransformFinalBlock(text_bytes, 0, text.Length).Take(takeLength).ToArray();
             return Convert.ToBase64String(ret_bytes);
         }
     }
