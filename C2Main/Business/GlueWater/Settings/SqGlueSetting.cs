@@ -88,9 +88,15 @@ namespace C2.Business.GlueWater.Settings
                       "</tr>"
                  );
 
-            //删除操作，对表进行更新
+            //单次删除数据操作，对表进行更新
             if (freshTitle == false)
+            {
                 SqWebTable = resTable;
+                FileStream fs = new FileStream(SqWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fs.Close();
+                ReWriteResult(SqWebPath, SqWebTable);
+            }
+             
 
             //先试试初始化
             foreach (DataRow dr in SqWebTable.Rows)

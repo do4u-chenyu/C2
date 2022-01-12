@@ -69,10 +69,15 @@ namespace C2.Business.GlueWater.Settings
                           "    <th style=\"width:60px\">操作</th>" +
                           "</tr>"
                   );
-           
+
             //删除操作，对表进行更新
-            if(freshTitle == false)
+            if (freshTitle == false)
+            {
                 DbWebTable = resTable;
+                FileStream fs = new FileStream(DbWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fs.Close();
+                ReWriteResult(DbWebPath, DbWebTable);
+            } 
 
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)

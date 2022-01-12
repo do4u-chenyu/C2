@@ -78,7 +78,13 @@ namespace C2.Business.GlueWater.Settings
 
             //删除操作，对表进行更新
             if (freshTitle == false)
+            {
                 YellowWebTable = resTable;
+                FileStream fs = new FileStream(YellowWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fs.Close();
+                ReWriteResult(YellowWebPath, YellowWebTable);
+            }
+               
 
             foreach (DataRow dr in YellowWebTable.Rows)
             {
