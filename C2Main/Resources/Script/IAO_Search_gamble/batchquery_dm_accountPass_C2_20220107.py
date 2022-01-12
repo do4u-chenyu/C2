@@ -247,7 +247,7 @@ if __name__ == '__main__':
 
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_DM_' + defaultEnd
+    DATA_PATH = './_queryResult_dm_' + defaultEnd
     key_words = ['envlpass=','postpass=','admin_spiderpass=','admin_silicpass=','serveru= serverp=','eanver= .php','ip=127.0.0.1 port=2 3306','ip=localhost port=2 3306','host=localhost port= user= pass=','host=127.0.0.1 port= user= pass=','yourip= yourport= use=perl','yourip= yourport= use=nc','SUPort= SUUser= SUPass= SUCommand=net','phpspypass=','_COOKIE:loginpass=phpspy2014']
 
     init_path(DATA_PATH)

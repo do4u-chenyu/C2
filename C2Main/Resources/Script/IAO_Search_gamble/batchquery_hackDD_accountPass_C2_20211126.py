@@ -292,7 +292,7 @@ if __name__ == '__main__':
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
     DATA_PATH = './_queryResult_hackDD_' + defaultEnd
-    kwl = ['eval _POST' , 'eval _REQUEST' , 'eval _SERVER' , 'eval BaSE64 dEcOdE' , 'assert _POST' , 'assert _REQUEST' , 'assert _SERVER' , 'assert BaSE64 dEcOdE' , 'create_function _POST' , 'create_function _REQUEST' , 'create_function _SERVER' , 'create_function BaSE64 dEcOdE' , 'preg_replace _POST' , 'preg_replace _REQUEST' , 'preg_replace _SERVER' , 'preg_replace BaSE64 dEcOdE' , 'system _POST' , 'system _REQUEST' , 'system _SERVER' , 'system BaSE64 dEcOdE' , 'array_map @ev' , 'ini_set display_errors dirname _SERVER' , 'response.write response.end' , 'eval POST stripslashes' , 'edoced_46esab z0=' , 'replace chr hen:bd' , 'ASPXSpy' , 'Action=getTerminalInfo' , 'DarkBladePass= goaction=' , 'JspSpyPwd' , 'eval System.Text.Encoding.GetEncoding' , 'filelist folder=' , 'Execute password= system' , 'exec request.getParameter']
+    kwl = ['eval System.Text.Encoding.GetEncoding','edoced_46esab z0=', 'system _POST', 'array_map @ev', 'eval _SERVER', 'Function  To IsNumeric Else Response.Write Response.End z1=', 'BaSE64 %40eval%2F .27' ]
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     if startTime is None and endTime is None:
