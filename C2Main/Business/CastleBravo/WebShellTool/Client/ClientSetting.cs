@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -273,20 +272,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static string Encrypt(string encryptStr, string key)
         {
             key = ST.GenerateMD5(key).Substring(0, 16);
-            var _aes = new AesCryptoServiceProvider()
-            {
-                BlockSize = 128,
-                KeySize = 128,
-                Key = Encoding.UTF8.GetBytes(key),
-                IV = (byte[])(object)new sbyte[16],
-                Padding = PaddingMode.PKCS7,
-                Mode = CipherMode.CBC
-            };
-            var _crypto = _aes.CreateEncryptor(_aes.Key, _aes.IV);
-            byte[] encrypted = _crypto.TransformFinalBlock(Encoding.UTF8.GetBytes(encryptStr), 0, Encoding.UTF8.GetBytes(encryptStr).Length);
-            _crypto.Dispose();
-
-            return System.Convert.ToBase64String(encrypted);
+            return ST.AES128CBCEncrypt(encryptStr, key);
         }
+
+
     }
 }
