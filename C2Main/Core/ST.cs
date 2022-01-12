@@ -867,6 +867,32 @@ namespace C2.Core
             return Convert.ToBase64String(encrypted);
         }
 
+        public static string AES128ECBDecrypt(string DecryptStr, string key)
+        {
+            string base64Tmp = string.Empty;
+            using (StreamReader reader = new StreamReader(DecryptStr, Encoding.UTF8))
+            {
+                base64Tmp = reader.ReadLine();
+            }
+
+            RijndaelManaged rijndaelCipher = new RijndaelManaged();
+            rijndaelCipher.Mode = CipherMode.ECB;
+            rijndaelCipher.Padding = PaddingMode.Zeros;
+            rijndaelCipher.KeySize = 128;
+            rijndaelCipher.BlockSize = 128;
+            byte[] encryptedData = Convert.FromBase64String(base64Tmp);
+            byte[] pwdBytes = System.Text.Encoding.UTF8.GetBytes(key);
+            byte[] keyBytes = new byte[16];
+            int len = pwdBytes.Length;
+            if (len > keyBytes.Length)
+                len = keyBytes.Length;
+            System.Array.Copy(pwdBytes, keyBytes, len);
+            rijndaelCipher.Key = keyBytes;
+            ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
+            byte[] plainText = transform.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+            return Encoding.UTF8.GetString(plainText);
+        }
+
 
         public static string ImageBase64String(Image image)
         {

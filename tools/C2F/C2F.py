@@ -52,7 +52,7 @@ def backups_C2F(src_path,c2f_name):
 
 def rename_subfolders(path,name):       
     os.chdir(path)
-    if os.path.exists(name):     
+    if os.path.exists(name):
         add_name= name+'.bak'
         os.rename(name,add_name)
         mkdir(name)
@@ -90,6 +90,11 @@ def del_zipfile(path):
 if __name__ == "__main__":
     src_path = resource_path("c2f")
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\业务视图"
+    
+    print('已成功启动安装程序')
+    
+    if not path.exists(dst_path):
+        os.makedirs(dst_path)
 
     if isinstance(proc_exist('C2.exe'),int):
         print('C2正在运行，请关闭此运行程序')
@@ -101,7 +106,7 @@ if __name__ == "__main__":
             os.mkdir("C2F_back")
 
         #src_path = r"D:\work\C2F"
-        print('正在将C2文档拷贝到C2工作目录...')
+        print('正在安装...')
 
         for root, _, fnames in os.walk(src_path):
             for fname in fnames:  # sorted函数把遍历的文件按文件名排序
@@ -126,6 +131,8 @@ if __name__ == "__main__":
             path = os.path.join(dst_path, zipname)
             fz.extractall(path)
             change_name(path)
-        print('新版C2文档已全部拷贝到C2工作目录下,旧版C2文档已备份到 C:\C2F_back 文件夹下')
+        print('正在备份...')
+        print('备份完成')
+        print('安装成功')
         time.sleep(6)
     del_zipfile(dst_path)
