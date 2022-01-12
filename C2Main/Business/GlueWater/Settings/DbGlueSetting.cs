@@ -69,10 +69,15 @@ namespace C2.Business.GlueWater.Settings
                           "    <th style=\"width:60px\">操作</th>" +
                           "</tr>"
                   );
-           
+
             //删除操作，对表进行更新
-            if(freshTitle == false)
+            if (freshTitle == false)
+            {
                 DbWebTable = resTable;
+                FileStream fs = new FileStream(DbWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fs.Close();
+                ReWriteResult(DbWebPath, DbWebTable);
+            } 
 
             //先试试初始化
             foreach (DataRow dr in DbWebTable.Rows)
@@ -98,10 +103,18 @@ namespace C2.Business.GlueWater.Settings
             //一键删除所有数据
             if (clearAllData == true)
             {
+                
                 FileStream fsDw = new FileStream(DbWebPath, FileMode.Truncate, FileAccess.ReadWrite);
                 FileStream fsDm = new FileStream(DbMemberPath, FileMode.Truncate, FileAccess.ReadWrite);
                 fsDw.Close();
                 fsDm.Close();
+                DbWebTable = GenDataTable(DbWebPath, DbWebColList);
+                DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
+                /*
+                File.Delete(DbWebPath);
+                File.Delete(DbMemberPath);
+                */
+
             }
             return sb.ToString();
         }
