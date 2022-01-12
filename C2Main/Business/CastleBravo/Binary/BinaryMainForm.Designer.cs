@@ -73,6 +73,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.BehinderETextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
@@ -425,6 +426,7 @@
             // 
             // BehinderETabPage
             // 
+            this.BehinderETabPage.Controls.Add(this.label1);
             this.BehinderETabPage.Controls.Add(this.radioButton40);
             this.BehinderETabPage.Controls.Add(this.rb20);
             this.BehinderETabPage.Controls.Add(this.label18);
@@ -446,7 +448,7 @@
             // radioButton40
             // 
             this.radioButton40.AutoSize = true;
-            this.radioButton40.Location = new System.Drawing.Point(352, 36);
+            this.radioButton40.Location = new System.Drawing.Point(352, 32);
             this.radioButton40.Name = "radioButton40";
             this.radioButton40.Size = new System.Drawing.Size(52, 21);
             this.radioButton40.TabIndex = 24;
@@ -457,7 +459,7 @@
             // 
             this.rb20.AutoSize = true;
             this.rb20.Checked = true;
-            this.rb20.Location = new System.Drawing.Point(288, 36);
+            this.rb20.Location = new System.Drawing.Point(288, 32);
             this.rb20.Name = "rb20";
             this.rb20.Size = new System.Drawing.Size(52, 21);
             this.rb20.TabIndex = 23;
@@ -549,6 +551,15 @@
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin;*.*";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(399, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "(会对应4个特征串)";
+            // 
             // BinaryMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -622,5 +633,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.RadioButton radioButton40;
         private System.Windows.Forms.RadioButton rb20;
+        private System.Windows.Forms.Label label1;
     }
 }
