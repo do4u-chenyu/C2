@@ -68,10 +68,10 @@ namespace C2.Business.GlueWater.Settings
             SqMemberTable = GenDataTable(SqMemberPath, SqMemberColList);
             SqMemberTableReply = GenDataTable(SqMemberPath2, SqMemberColList2);
 
-            RefreshHtmlTable(resTable,true,true,true);
+            RefreshHtmlTable(resTable,true,true,true,false);
         }
 
-        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle,bool freshColumn,bool freshSort)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle,bool freshColumn,bool freshSort,bool clearAllData)
         {
             
             StringBuilder sb = new StringBuilder();
@@ -88,9 +88,15 @@ namespace C2.Business.GlueWater.Settings
                       "</tr>"
                  );
 
-            //删除操作，对表进行更新
+            //单次删除数据操作，对表进行更新
             if (freshTitle == false)
+            {
                 SqWebTable = resTable;
+                FileStream fs = new FileStream(SqWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fs.Close();
+                ReWriteResult(SqWebPath, SqWebTable);
+            }
+             
 
             //先试试初始化
             foreach (DataRow dr in SqWebTable.Rows)
@@ -116,6 +122,19 @@ namespace C2.Business.GlueWater.Settings
                            dr["主题数"].ToString(), dr["回帖数"].ToString(),
                            dr["发现地市"].ToString(), discoveryTime
                ));
+            }
+            //一键删除所有数据
+            if (clearAllData == true)
+            {
+                FileStream fsSqw = new FileStream(SqWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                FileStream fsSm = new FileStream(SqMemberPath, FileMode.Truncate, FileAccess.ReadWrite);
+                FileStream fsSm2 = new FileStream(SqMemberPath2, FileMode.Truncate, FileAccess.ReadWrite);
+                fsSqw.Close();
+                fsSm.Close();
+                fsSm2.Close();
+                SqWebTable = GenDataTable(SqWebPath, SqWebColList);
+                SqMemberTable = GenDataTable(SqMemberPath, SqMemberColList);
+                SqMemberTableReply = GenDataTable(SqMemberPath2, SqMemberColList2);
             }
             return sb.ToString();
         }

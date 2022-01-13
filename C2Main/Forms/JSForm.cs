@@ -22,6 +22,8 @@ namespace C2.Forms
         SqDetailInfoDialog sqDeatilDialog;
         SqDetailInfoDialogReply dbDeatilDialogReply;
         private List<string> doneGlueList;
+        public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
+        string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板");
 
         public JSForm()
         {
@@ -38,6 +40,24 @@ namespace C2.Forms
             doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
 
             this.label1.Visible = false;
+            // 默认加载涉赌数据
+            string backSdFile = Path.Combine(bakDirectory, "涉赌模板0112.zip");
+            if (!File.Exists(backSdFile))
+            {
+                string trueDbFile = Path.Combine(txtModelDirectory, "涉赌模板0112.zip");
+                File.Copy(trueDbFile, backSdFile, true);
+                initLoadModelData(backSdFile);
+            }
+        }
+
+        private void initLoadModelData(string excelPath)
+        {
+            using (GuarderUtil.WaitCursor)
+            {
+                string returnMsg = glueSetting.UpdateContent(excelPath);
+                if (returnMsg == "数据添加成功")
+                    RefreshHtmlTable();
+            }
         }
 
         #region tab页代码
@@ -74,6 +94,27 @@ namespace C2.Forms
             }
 
             StyleChange(selectedItem);
+         
+            if (selectedItem == "涉枪专项")
+            {
+                string backSqFile = Path.Combine(bakDirectory, "涉枪模板0112.zip");
+                if (!File.Exists(backSqFile))
+                {
+                    string trueSqFile = Path.Combine(txtModelDirectory, "涉枪模板0112.zip");
+                    File.Copy(trueSqFile, backSqFile, true);
+                    initLoadModelData(backSqFile);
+                }
+            }
+            else if (selectedItem == "涉黄专项")
+            {
+                string backShFile = Path.Combine(bakDirectory, "涉黄模板0112.zip");
+                if (!File.Exists(backShFile))
+                {
+                    string trueShFile = Path.Combine(txtModelDirectory, "涉黄模板0112.zip");
+                    File.Copy(trueShFile, backShFile, true);
+                    initLoadModelData(backShFile);
+                }
+            }
         }
 
         protected virtual void AddTabItem(string name, bool visiable = false)
@@ -174,7 +215,7 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("clearTableTitle");
             DataTable resTable = glueSetting.DeleteInfo(item);
 
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false,true,true) });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable,false,true,true,false) });
         }
         
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
@@ -226,11 +267,11 @@ namespace C2.Forms
             if (freshTitle)
             {
                 this.webBrowser.Document.InvokeScript("clearTableTitle");
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true) });
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, true, true,false) });
             }
             else 
             {
-                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false) });
+                this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(dt, true, false, false,false) });
             }      
         }
         #endregion
@@ -254,7 +295,7 @@ namespace C2.Forms
 
                 using (GuarderUtil.WaitCursor)
                 {
-                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板", selectedItem.Replace("专项", "") + "模板.zip");
+                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板", selectedItem.Replace("专项", "") + "模板0112.zip");
                     FileUtil.FileCopy(localExcelPath, dialog.FileName);
                 }
                 HelpUtil.ShowMessageBox("模板保存完毕。");
@@ -264,7 +305,6 @@ namespace C2.Forms
                 HelpUtil.ShowMessageBox("该专项尚未完成，敬请期待!");
                 return;
             }
-            
         }
 
         private void deleteAllData_Click(object sender, EventArgs e)
@@ -272,7 +312,7 @@ namespace C2.Forms
             this.webBrowser.Document.InvokeScript("clearTable");
             this.webBrowser.Document.InvokeScript("clearTableTitle");
             DataTable resTable = new DataTable();//读取空表，等价于清空操作
-            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable, false, true, true) });
+            this.webBrowser.Document.InvokeScript("WfToHtml", new object[] { glueSetting.RefreshHtmlTable(resTable, false, true, true,true) });
         }
     }
 }

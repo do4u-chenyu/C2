@@ -57,10 +57,10 @@ namespace C2.Business.GlueWater.Settings
             YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
             YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
             //TempWebTable = GenDataTable(YellowWebPath, YellowWebColList);
-            RefreshHtmlTable(resTable,true,true,true);
+            RefreshHtmlTable(resTable,true,true,true,false);
         }
 
-        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn,bool freshSort)
+        public override string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn,bool freshSort, bool clearAllData)
         {
             StringBuilder sb = new StringBuilder();
             if (freshSort == true && freshColumn == true)
@@ -78,7 +78,13 @@ namespace C2.Business.GlueWater.Settings
 
             //删除操作，对表进行更新
             if (freshTitle == false)
+            {
                 YellowWebTable = resTable;
+                FileStream fs = new FileStream(YellowWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fs.Close();
+                ReWriteResult(YellowWebPath, YellowWebTable);
+            }
+               
 
             foreach (DataRow dr in YellowWebTable.Rows)
             {
@@ -101,6 +107,15 @@ namespace C2.Business.GlueWater.Settings
                             dr["网站名称"].ToString(), dr["网站网址"].ToString(), dr["网站IP"].ToString(),
                             dr["网站类型"].ToString(), dr["网站人数"].ToString(), dr["运营时间"].ToString()
                 ));
+            }
+            if (clearAllData == true)
+            {
+                FileStream fsYw = new FileStream(YellowWebPath, FileMode.Truncate, FileAccess.ReadWrite);
+                FileStream fsYm = new FileStream(YellowMemberPath, FileMode.Truncate, FileAccess.ReadWrite);
+                fsYw.Close();
+                fsYm.Close();
+                YellowWebTable = GenDataTable(YellowWebPath, YellowWebColList);
+                YellowMemberTable = GenDataTable(YellowMemberPath, YellowMemberColList);
             }
             return sb.ToString();
         }
@@ -235,7 +250,7 @@ namespace C2.Business.GlueWater.Settings
         }
         public override void SortDataTableByCol(string col, string sortType)
         {
-            YellowWebTable.DefaultView.Sort = col + " " + sortType;
+            try { YellowWebTable.DefaultView.Sort = col + " " + sortType; }catch{ };
             YellowWebTable = YellowWebTable.DefaultView.ToTable();
         }
 

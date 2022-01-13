@@ -849,7 +849,49 @@ namespace C2.Core
             return builder.ToString().ToLower();
         }
 
+        public static string AES128CBCEncrypt(string encryptStr, string key)
+        {
+            var _aes = new AesCryptoServiceProvider()
+            {
+                BlockSize = 128,
+                KeySize = 128,
+                Key = Encoding.UTF8.GetBytes(key),
+                IV = (byte[])(object)new sbyte[16],
+                Padding = PaddingMode.PKCS7,
+                Mode = CipherMode.CBC
+            };
+            var _crypto = _aes.CreateEncryptor(_aes.Key, _aes.IV);
+            byte[] encrypted = _crypto.TransformFinalBlock(Encoding.UTF8.GetBytes(encryptStr), 0, Encoding.UTF8.GetBytes(encryptStr).Length);
+            _crypto.Dispose();
 
+            return Convert.ToBase64String(encrypted);
+        }
+
+        public static string AES128ECBDecrypt(string DecryptStr, string key)
+        {
+            string base64Tmp = string.Empty;
+            using (StreamReader reader = new StreamReader(DecryptStr, Encoding.UTF8))
+            {
+                base64Tmp = reader.ReadLine();
+            }
+
+            RijndaelManaged rijndaelCipher = new RijndaelManaged();
+            rijndaelCipher.Mode = CipherMode.ECB;
+            rijndaelCipher.Padding = PaddingMode.Zeros;
+            rijndaelCipher.KeySize = 128;
+            rijndaelCipher.BlockSize = 128;
+            byte[] encryptedData = Convert.FromBase64String(base64Tmp);
+            byte[] pwdBytes = System.Text.Encoding.UTF8.GetBytes(key);
+            byte[] keyBytes = new byte[16];
+            int len = pwdBytes.Length;
+            if (len > keyBytes.Length)
+                len = keyBytes.Length;
+            System.Array.Copy(pwdBytes, keyBytes, len);
+            rijndaelCipher.Key = keyBytes;
+            ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
+            byte[] plainText = transform.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+            return Encoding.UTF8.GetString(plainText);
+        }
 
 
         public static string ImageBase64String(Image image)

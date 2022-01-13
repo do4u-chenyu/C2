@@ -25,11 +25,12 @@ namespace C2.Business.GlueWater
 
             if (!Directory.Exists(bakDirectory))
                 FileUtil.CreateDirectory(bakDirectory);
-
+            /*
             //加载默认涉赌/涉枪/涉黄数据包
             string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/胶水系统");
             if (!File.Exists(Path.Combine(txtDirectory, "DB_member.txt")))
                 CopyDirContentIntoDestDirectory(txtModelDirectory, txtDirectory, true);
+            */
 
             doubleTypeColList = new List<string>() { "涉案金额", "涉赌人数", "涉黄人数" };
         }
@@ -55,7 +56,7 @@ namespace C2.Business.GlueWater
             return string.Empty;
         }
 
-        public virtual string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort)
+        public virtual string RefreshHtmlTable(DataTable resTable,bool freshTitle, bool freshColumn, bool freshSort, bool clearAllData)
         {
             return string.Empty;
         }

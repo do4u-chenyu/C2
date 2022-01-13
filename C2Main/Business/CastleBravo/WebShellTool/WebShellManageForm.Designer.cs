@@ -249,13 +249,13 @@
             this.配置文件探针ToolStripMenuItem,
             this.userMYD探针ToolStripMenuItem});
             this.mysqlProbeToolStripMenuItem.Name = "mysqlProbeToolStripMenuItem";
-            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.mysqlProbeToolStripMenuItem.Text = "Mysql 探针";
             // 
             // mysqlBlastingToolStripMenuItem
             // 
             this.mysqlBlastingToolStripMenuItem.Name = "mysqlBlastingToolStripMenuItem";
-            this.mysqlBlastingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mysqlBlastingToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.mysqlBlastingToolStripMenuItem.Text = "Mysql Blasting";
             this.mysqlBlastingToolStripMenuItem.ToolTipText = "取证固证: 尝试Mysql管理员27000次";
             this.mysqlBlastingToolStripMenuItem.Click += new System.EventHandler(this.MB_选定项ToolStripMenuItem_Click);
@@ -263,7 +263,7 @@
             // 配置文件探针ToolStripMenuItem
             // 
             this.配置文件探针ToolStripMenuItem.Name = "配置文件探针ToolStripMenuItem";
-            this.配置文件探针ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.配置文件探针ToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.配置文件探针ToolStripMenuItem.Text = "配置文件探针";
             this.配置文件探针ToolStripMenuItem.ToolTipText = "取证固证: 站点上关于Mysql的配置信息";
             this.配置文件探针ToolStripMenuItem.Click += new System.EventHandler(this.配置文件探针ToolStripMenuItem_Click);
@@ -271,7 +271,7 @@
             // userMYD探针ToolStripMenuItem
             // 
             this.userMYD探针ToolStripMenuItem.Name = "userMYD探针ToolStripMenuItem";
-            this.userMYD探针ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.userMYD探针ToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.userMYD探针ToolStripMenuItem.Text = "User.MYD探针";
             this.userMYD探针ToolStripMenuItem.ToolTipText = "取证固证: 寻找Mysql的user.MYD表文件";
             this.userMYD探针ToolStripMenuItem.Click += new System.EventHandler(this.UserMYD探针ToolStripMenuItem_Click);
@@ -279,7 +279,7 @@
             // 系统信息ToolStripMenuItem
             // 
             this.系统信息ToolStripMenuItem.Name = "系统信息ToolStripMenuItem";
-            this.系统信息ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.系统信息ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.系统信息ToolStripMenuItem.Text = "系统信息";
             this.系统信息ToolStripMenuItem.ToolTipText = "二进制装备";
             this.系统信息ToolStripMenuItem.Click += new System.EventHandler(this.系统信息ToolStripMenuItem_Click);
@@ -287,7 +287,7 @@
             // 进程列表ToolStripMenuItem
             // 
             this.进程列表ToolStripMenuItem.Name = "进程列表ToolStripMenuItem";
-            this.进程列表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.进程列表ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.进程列表ToolStripMenuItem.Text = "进程列表";
             this.进程列表ToolStripMenuItem.ToolTipText = "二进制装备";
             this.进程列表ToolStripMenuItem.Click += new System.EventHandler(this.进程列表ToolStripMenuItem_Click);
@@ -295,7 +295,7 @@
             // 定时任务ToolStripMenuItem
             // 
             this.定时任务ToolStripMenuItem.Name = "定时任务ToolStripMenuItem";
-            this.定时任务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.定时任务ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.定时任务ToolStripMenuItem.Text = "定时任务";
             this.定时任务ToolStripMenuItem.ToolTipText = "二进制装备";
             this.定时任务ToolStripMenuItem.Click += new System.EventHandler(this.定时任务ToolStripMenuItem_Click);
@@ -303,7 +303,7 @@
             // 地理定位ToolStripMenuItem
             // 
             this.地理定位ToolStripMenuItem.Name = "地理定位ToolStripMenuItem";
-            this.地理定位ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.地理定位ToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.地理定位ToolStripMenuItem.Text = "地理定位";
             this.地理定位ToolStripMenuItem.ToolTipText = "D洞价值";
             this.地理定位ToolStripMenuItem.Click += new System.EventHandler(this.地理定位ToolStripMenuItem_Click);
@@ -311,7 +311,7 @@
             // 超级PingToolStripMenuItem
             // 
             this.超级PingToolStripMenuItem.Name = "超级PingToolStripMenuItem";
-            this.超级PingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.超级PingToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.超级PingToolStripMenuItem.Text = "超级Ping";
             this.超级PingToolStripMenuItem.ToolTipText = "D洞价值";
             this.超级PingToolStripMenuItem.Click += new System.EventHandler(this.SuperPingMenuItem_Click);
@@ -727,34 +727,34 @@
             this.MB_选定项ToolStripMenuItem,
             this.MB_设置ToolStripMenuItem});
             this.mysqlBlastingToolStripMenuItem1.Name = "mysqlBlastingToolStripMenuItem1";
-            this.mysqlBlastingToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.mysqlBlastingToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.mysqlBlastingToolStripMenuItem1.Text = "Mysql Blasting";
             // 
             // MB_所有项ToolStripMenuItem
             // 
             this.MB_所有项ToolStripMenuItem.Name = "MB_所有项ToolStripMenuItem";
-            this.MB_所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.MB_所有项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.MB_所有项ToolStripMenuItem.Text = "所有项";
             this.MB_所有项ToolStripMenuItem.Click += new System.EventHandler(this.MB_所有项ToolStripMenuItem_Click);
             // 
             // MB_验活项ToolStripMenuItem
             // 
             this.MB_验活项ToolStripMenuItem.Name = "MB_验活项ToolStripMenuItem";
-            this.MB_验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.MB_验活项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.MB_验活项ToolStripMenuItem.Text = "验活项";
             this.MB_验活项ToolStripMenuItem.Click += new System.EventHandler(this.MB_验活项ToolStripMenuItem_Click);
             // 
             // MB_选定项ToolStripMenuItem
             // 
             this.MB_选定项ToolStripMenuItem.Name = "MB_选定项ToolStripMenuItem";
-            this.MB_选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.MB_选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.MB_选定项ToolStripMenuItem.Text = "选定项";
             this.MB_选定项ToolStripMenuItem.Click += new System.EventHandler(this.MB_选定项ToolStripMenuItem_Click);
             // 
             // MB_设置ToolStripMenuItem
             // 
             this.MB_设置ToolStripMenuItem.Name = "MB_设置ToolStripMenuItem";
-            this.MB_设置ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.MB_设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.MB_设置ToolStripMenuItem.Text = "设置";
             this.MB_设置ToolStripMenuItem.Click += new System.EventHandler(this.MB_设置ToolStripMenuItem_Click);
             // 
@@ -765,27 +765,27 @@
             this.配置文件探针_验活项ToolStripMenuItem,
             this.配置文件探针_选定项ToolStripMenuItem});
             this.配置文件探针ToolStripMenuItem1.Name = "配置文件探针ToolStripMenuItem1";
-            this.配置文件探针ToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.配置文件探针ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.配置文件探针ToolStripMenuItem1.Text = "配置文件探针";
             // 
             // 配置文件探针_所有项ToolStripMenuItem
             // 
             this.配置文件探针_所有项ToolStripMenuItem.Name = "配置文件探针_所有项ToolStripMenuItem";
-            this.配置文件探针_所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.配置文件探针_所有项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.配置文件探针_所有项ToolStripMenuItem.Text = "所有项";
             this.配置文件探针_所有项ToolStripMenuItem.Click += new System.EventHandler(this.配置文件探针_所有项ToolStripMenuItem_Click);
             // 
             // 配置文件探针_验活项ToolStripMenuItem
             // 
             this.配置文件探针_验活项ToolStripMenuItem.Name = "配置文件探针_验活项ToolStripMenuItem";
-            this.配置文件探针_验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.配置文件探针_验活项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.配置文件探针_验活项ToolStripMenuItem.Text = "验活项";
             this.配置文件探针_验活项ToolStripMenuItem.Click += new System.EventHandler(this.配置文件探针_验活项ToolStripMenuItem_Click);
             // 
             // 配置文件探针_选定项ToolStripMenuItem
             // 
             this.配置文件探针_选定项ToolStripMenuItem.Name = "配置文件探针_选定项ToolStripMenuItem";
-            this.配置文件探针_选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.配置文件探针_选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.配置文件探针_选定项ToolStripMenuItem.Text = "选定项";
             this.配置文件探针_选定项ToolStripMenuItem.Click += new System.EventHandler(this.配置文件探针_选定项ToolStripMenuItem_Click);
             // 
@@ -796,27 +796,27 @@
             this.UserMYD探针_验活项ToolStripMenuItem,
             this.UserMYD探针_选定项ToolStripMenuItem});
             this.UserMYD探针ToolStripMenuItem1.Name = "UserMYD探针ToolStripMenuItem1";
-            this.UserMYD探针ToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.UserMYD探针ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.UserMYD探针ToolStripMenuItem1.Text = "User.MYD探针";
             // 
             // UserMYD探针_所有项ToolStripMenuItem
             // 
             this.UserMYD探针_所有项ToolStripMenuItem.Name = "UserMYD探针_所有项ToolStripMenuItem";
-            this.UserMYD探针_所有项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.UserMYD探针_所有项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.UserMYD探针_所有项ToolStripMenuItem.Text = "所有项";
             this.UserMYD探针_所有项ToolStripMenuItem.Click += new System.EventHandler(this.UserMYD探针_所有项ToolStripMenuItem_Click);
             // 
             // UserMYD探针_验活项ToolStripMenuItem
             // 
             this.UserMYD探针_验活项ToolStripMenuItem.Name = "UserMYD探针_验活项ToolStripMenuItem";
-            this.UserMYD探针_验活项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.UserMYD探针_验活项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.UserMYD探针_验活项ToolStripMenuItem.Text = "验活项";
             this.UserMYD探针_验活项ToolStripMenuItem.Click += new System.EventHandler(this.UserMYD探针_验活项ToolStripMenuItem_Click);
             // 
             // UserMYD探针_选定项ToolStripMenuItem
             // 
             this.UserMYD探针_选定项ToolStripMenuItem.Name = "UserMYD探针_选定项ToolStripMenuItem";
-            this.UserMYD探针_选定项ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.UserMYD探针_选定项ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.UserMYD探针_选定项ToolStripMenuItem.Text = "选定项";
             this.UserMYD探针_选定项ToolStripMenuItem.Click += new System.EventHandler(this.UserMYD探针_选定项ToolStripMenuItem_Click);
             // 
@@ -926,21 +926,21 @@
             // allLocationInfo
             // 
             this.allLocationInfo.Name = "allLocationInfo";
-            this.allLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.allLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.allLocationInfo.Text = "所有项";
             this.allLocationInfo.Click += new System.EventHandler(this.AllLocationInfoMenuItem_Click);
             // 
             // aliveLocationInfo
             // 
             this.aliveLocationInfo.Name = "aliveLocationInfo";
-            this.aliveLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.aliveLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.aliveLocationInfo.Text = "验活项";
             this.aliveLocationInfo.Click += new System.EventHandler(this.AliveLocationInfo_Click);
             // 
             // currentLocationInfo
             // 
             this.currentLocationInfo.Name = "currentLocationInfo";
-            this.currentLocationInfo.Size = new System.Drawing.Size(180, 22);
+            this.currentLocationInfo.Size = new System.Drawing.Size(112, 22);
             this.currentLocationInfo.Text = "选定项";
             this.currentLocationInfo.Click += new System.EventHandler(this.地理定位ToolStripMenuItem_Click);
             // 
@@ -1177,7 +1177,7 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenFileMenu,
             this.OpenDirMenu,
