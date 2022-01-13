@@ -125,7 +125,7 @@
             this.checkBox28 = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -153,7 +153,7 @@
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -269,7 +269,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(582, 72);
+            this.button5.Location = new System.Drawing.Point(582, 69);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 8;
@@ -278,7 +278,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(498, 72);
+            this.button4.Location = new System.Drawing.Point(498, 69);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 7;
@@ -287,7 +287,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(414, 72);
+            this.button3.Location = new System.Drawing.Point(414, 69);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 6;
@@ -314,7 +314,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 78);
+            this.label2.Location = new System.Drawing.Point(7, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 1;
@@ -389,11 +389,13 @@
             // 
             // textBox4
             // 
+            this.textBox4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.textBox4.Location = new System.Drawing.Point(14, 43);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(381, 300);
             this.textBox4.TabIndex = 3;
+            this.textBox4.Text = "字符串|登陆成功\r\n字符串|登录成功\r\n正则|\\d{1,15}成功";
             // 
             // label3
             // 
@@ -427,11 +429,13 @@
             // 
             // textBox7
             // 
+            this.textBox7.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.textBox7.Location = new System.Drawing.Point(14, 43);
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(381, 300);
             this.textBox7.TabIndex = 31;
+            this.textBox7.Text = "字符串|登陆成功\r\n字符串|登录成功\r\n正则|\\d{1,15}成功";
             // 
             // label4
             // 
@@ -829,7 +833,7 @@
             // 
             this.tabPage3.Controls.Add(this.panel4);
             this.tabPage3.Controls.Add(this.panel3);
-            this.tabPage3.Controls.Add(this.statusStrip1);
+            this.tabPage3.Controls.Add(this.statusStrip);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -956,9 +960,9 @@
             // 
             this.groupBox13.Controls.Add(this.listView8);
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox13.Location = new System.Drawing.Point(5, 111);
+            this.groupBox13.Location = new System.Drawing.Point(5, 96);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(447, 381);
+            this.groupBox13.Size = new System.Drawing.Size(447, 396);
             this.groupBox13.TabIndex = 2;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "请求结果";
@@ -979,7 +983,7 @@
             this.listView8.HideSelection = false;
             this.listView8.Location = new System.Drawing.Point(3, 17);
             this.listView8.Name = "listView8";
-            this.listView8.Size = new System.Drawing.Size(441, 361);
+            this.listView8.Size = new System.Drawing.Size(441, 376);
             this.listView8.TabIndex = 0;
             this.listView8.UseCompatibleStateImageBehavior = false;
             this.listView8.View = System.Windows.Forms.View.Details;
@@ -1024,9 +1028,9 @@
             this.groupBox12.Controls.Add(this.button38);
             this.groupBox12.Controls.Add(this.button37);
             this.groupBox12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox12.Location = new System.Drawing.Point(5, 57);
+            this.groupBox12.Location = new System.Drawing.Point(5, 51);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(447, 54);
+            this.groupBox12.Size = new System.Drawing.Size(447, 45);
             this.groupBox12.TabIndex = 1;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "控制台";
@@ -1034,7 +1038,7 @@
             // button39
             // 
             this.button39.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button39.Location = new System.Drawing.Point(336, 22);
+            this.button39.Location = new System.Drawing.Point(336, 16);
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(75, 23);
             this.button39.TabIndex = 2;
@@ -1044,7 +1048,7 @@
             // button38
             // 
             this.button38.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button38.Location = new System.Drawing.Point(193, 22);
+            this.button38.Location = new System.Drawing.Point(193, 16);
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(75, 23);
             this.button38.TabIndex = 1;
@@ -1054,7 +1058,7 @@
             // button37
             // 
             this.button37.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button37.Location = new System.Drawing.Point(46, 22);
+            this.button37.Location = new System.Drawing.Point(46, 16);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(75, 23);
             this.button37.TabIndex = 0;
@@ -1071,21 +1075,21 @@
             this.groupBox11.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox11.Location = new System.Drawing.Point(5, 5);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(447, 52);
+            this.groupBox11.Size = new System.Drawing.Size(447, 46);
             this.groupBox11.TabIndex = 0;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "目标主机";
             // 
             // textBox21
             // 
-            this.textBox21.Location = new System.Drawing.Point(269, 21);
+            this.textBox21.Location = new System.Drawing.Point(269, 18);
             this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(85, 21);
+            this.textBox21.Size = new System.Drawing.Size(68, 21);
             this.textBox21.TabIndex = 4;
             // 
             // textBox20
             // 
-            this.textBox20.Location = new System.Drawing.Point(58, 20);
+            this.textBox20.Location = new System.Drawing.Point(58, 18);
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(146, 21);
             this.textBox20.TabIndex = 3;
@@ -1093,7 +1097,7 @@
             // checkBox28
             // 
             this.checkBox28.AutoSize = true;
-            this.checkBox28.Location = new System.Drawing.Point(375, 24);
+            this.checkBox28.Location = new System.Drawing.Point(375, 21);
             this.checkBox28.Name = "checkBox28";
             this.checkBox28.Size = new System.Drawing.Size(66, 16);
             this.checkBox28.TabIndex = 2;
@@ -1103,7 +1107,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(227, 25);
+            this.label24.Location = new System.Drawing.Point(227, 22);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(41, 12);
             this.label24.TabIndex = 1;
@@ -1112,21 +1116,21 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(15, 24);
+            this.label23.Location = new System.Drawing.Point(15, 22);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(41, 12);
+            this.label23.Size = new System.Drawing.Size(35, 12);
             this.label23.TabIndex = 0;
-            this.label23.Text = "主机：";
+            this.label23.Text = "URL：";
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 500);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(887, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip.Location = new System.Drawing.Point(3, 500);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(887, 22);
+            this.statusStrip.TabIndex = 0;
+            this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
@@ -1184,8 +1188,8 @@
             this.groupBox12.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1259,7 +1263,7 @@
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ListView listView8;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
