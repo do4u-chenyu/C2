@@ -153,6 +153,9 @@
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.allSuperPingInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.aliveSuperPingInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentSuperPingInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -943,10 +946,35 @@
             // 
             // SuperPingMenuItem
             // 
+            this.SuperPingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allSuperPingInfo,
+            this.aliveSuperPingInfo,
+            this.currentSuperPingInfo});
             this.SuperPingMenuItem.Name = "SuperPingMenuItem";
             this.SuperPingMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SuperPingMenuItem.Text = "超级Ping";
-            this.SuperPingMenuItem.Click += new System.EventHandler(this.SuperPingMenuItem_Click);
+            // 
+            // allLocationInfo
+            // 
+            this.allSuperPingInfo.Name = "allSuperPingInfo";
+            this.allSuperPingInfo.Size = new System.Drawing.Size(180, 22);
+            this.allSuperPingInfo.Text = "所有项";
+            this.allSuperPingInfo.Click += new System.EventHandler(this.AllSuperPing_Click);
+            // 
+            // aliveLocationInfo
+            // 
+            this.aliveSuperPingInfo.Name = "aliveSuperPingInfo";
+            this.aliveSuperPingInfo.Size = new System.Drawing.Size(180, 22);
+            this.aliveSuperPingInfo.Text = "验活项";
+            this.aliveSuperPingInfo.Click += new System.EventHandler(this.AlivSuperPing_Click);
+            // 
+            // currentLocationInfo
+            // 
+            this.currentSuperPingInfo.Name = "currentSuperPingInfo";
+            this.currentSuperPingInfo.Size = new System.Drawing.Size(180, 22);
+            this.currentSuperPingInfo.Text = "选定项";
+            this.currentSuperPingInfo.Click += new System.EventHandler(this.SuperPingMenuItem_Click);
+
             // 
             // refreshStopMenu
             // 
@@ -1178,6 +1206,24 @@
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
             // 
+            // allSuperPingInfo
+            // 
+            this.allSuperPingInfo.Name = "allSuperPingInfo";
+            this.allSuperPingInfo.Size = new System.Drawing.Size(180, 22);
+            this.allSuperPingInfo.Text = "所有项";
+            // 
+            // aliveSuperPingInfo
+            // 
+            this.aliveSuperPingInfo.Name = "aliveSuperPingInfo";
+            this.aliveSuperPingInfo.Size = new System.Drawing.Size(180, 22);
+            this.aliveSuperPingInfo.Text = "验活项";
+            // 
+            // currentSuperPingInfo
+            // 
+            this.currentSuperPingInfo.Name = "currentSuperPingInfo";
+            this.currentSuperPingInfo.Size = new System.Drawing.Size(180, 22);
+            this.currentSuperPingInfo.Text = "选定项";
+            // 
             // WebShellManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1331,5 +1377,8 @@
         private System.Windows.Forms.ToolStripMenuItem UserMYD探针_验活项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UserMYD探针_选定项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MB_设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allSuperPingInfo;
+        private System.Windows.Forms.ToolStripMenuItem aliveSuperPingInfo;
+        private System.Windows.Forms.ToolStripMenuItem currentSuperPingInfo;
     }
 }
