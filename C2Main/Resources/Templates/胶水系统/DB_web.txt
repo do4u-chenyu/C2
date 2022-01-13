@@ -1,3 +1,0 @@
-﻿(例)全民管理系统	qdmin.2344wan.com	138.111.22.44	(例)全民代理系统	http://qdmin.2344wan.com/frame/mlogin.html	100000000	3333	赌博推广类	2021-10-02 00:00:00	山西省太原市	2021-10-22 12:10:54
-(例)JB推广代理后台	www.zhiyao0.com	103.41.107.159	(例)代理登录	http://www.zhiyao0.com/login.aspx?ReturnUrl=/Admin/Common/FrameHome.aspx	2.23	1	赌博推广类	2021-02-07 00:00:00	山西省太原市	2021-10-19 02:44:11
-(例)全民管理系统	qmadmin.2344wan.com	138.113.99.45	(例)全民代理系统	http://qmadmin.2344wan.com/frame/mlogin.html	264.91	3	赌博推广类	2021-10-02 00:00:00	山西省太原市	2021-10-23 20:01:07

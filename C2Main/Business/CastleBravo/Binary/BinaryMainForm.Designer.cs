@@ -62,6 +62,9 @@
             this.BehinderDTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.BehinderETabPage = new System.Windows.Forms.TabPage();
+            this.radioButton40 = new System.Windows.Forms.RadioButton();
+            this.rb20 = new System.Windows.Forms.RadioButton();
+            this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.BehinderEClearButton = new System.Windows.Forms.Button();
@@ -70,7 +73,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.BehinderETextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label18 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
@@ -423,6 +426,9 @@
             // 
             // BehinderETabPage
             // 
+            this.BehinderETabPage.Controls.Add(this.label1);
+            this.BehinderETabPage.Controls.Add(this.radioButton40);
+            this.BehinderETabPage.Controls.Add(this.rb20);
             this.BehinderETabPage.Controls.Add(this.label18);
             this.BehinderETabPage.Controls.Add(this.label17);
             this.BehinderETabPage.Controls.Add(this.label16);
@@ -439,6 +445,37 @@
             this.BehinderETabPage.Text = "冰蝎流量加密";
             this.BehinderETabPage.UseVisualStyleBackColor = true;
             // 
+            // radioButton40
+            // 
+            this.radioButton40.AutoSize = true;
+            this.radioButton40.Location = new System.Drawing.Point(352, 32);
+            this.radioButton40.Name = "radioButton40";
+            this.radioButton40.Size = new System.Drawing.Size(52, 21);
+            this.radioButton40.TabIndex = 24;
+            this.radioButton40.Text = "40位";
+            this.radioButton40.UseVisualStyleBackColor = true;
+            // 
+            // rb20
+            // 
+            this.rb20.AutoSize = true;
+            this.rb20.Checked = true;
+            this.rb20.Location = new System.Drawing.Point(288, 32);
+            this.rb20.Name = "rb20";
+            this.rb20.Size = new System.Drawing.Size(52, 21);
+            this.rb20.TabIndex = 23;
+            this.rb20.TabStop = true;
+            this.rb20.Text = "20位";
+            this.rb20.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(4, 54);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(140, 17);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "输出: 加密特征串 \\t 密码";
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -453,9 +490,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(4, 33);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(214, 17);
+            this.label16.Size = new System.Drawing.Size(233, 17);
             this.label16.TabIndex = 20;
-            this.label16.Text = "根据密码生成20位冰蝎加密特征字符串";
+            this.label16.Text = "根据密码生成20/40位冰蝎加密特征字符串";
             // 
             // BehinderEClearButton
             // 
@@ -504,23 +541,24 @@
             this.BehinderETextBox.MaxLength = 131072;
             this.BehinderETextBox.Multiline = true;
             this.BehinderETextBox.Name = "BehinderETextBox";
-            this.BehinderETextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.BehinderETextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.BehinderETextBox.Size = new System.Drawing.Size(709, 347);
             this.BehinderETextBox.TabIndex = 8;
             this.BehinderETextBox.Text = "rebeyond\r\n123456\r\nadmin\r\nhack";
+            this.BehinderETextBox.WordWrap = false;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin;*.*";
             // 
-            // label18
+            // label1
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(4, 54);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(140, 17);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "输出: 加密特征串 \\t 密码";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(399, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "(会对应4个特征串)";
             // 
             // BinaryMainForm
             // 
@@ -593,5 +631,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.RadioButton radioButton40;
+        private System.Windows.Forms.RadioButton rb20;
+        private System.Windows.Forms.Label label1;
     }
 }
