@@ -32,18 +32,18 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.pasteTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.pasteTBCButton = new System.Windows.Forms.Button();
+            this.dictLV = new System.Windows.Forms.ListView();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.packageTBCbutton = new System.Windows.Forms.Button();
+            this.markCbutton = new System.Windows.Forms.Button();
+            this.markSbutton = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.hostTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -74,14 +74,14 @@
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button18 = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.proxyTestButton = new System.Windows.Forms.Button();
+            this.proxyTestUrlTB = new System.Windows.Forms.TextBox();
+            this.proxyPortTB = new System.Windows.Forms.TextBox();
+            this.proxyIPTB = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.enableProxyCB = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -116,17 +116,18 @@
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.button39 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.suspendButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.urlTB = new System.Windows.Forms.GroupBox();
+            this.portTB = new System.Windows.Forms.TextBox();
             this.textBox20 = new System.Windows.Forms.TextBox();
-            this.checkBox28 = new System.Windows.Forms.CheckBox();
+            this.sslCB = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,7 +153,7 @@
             this.panel3.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
-            this.groupBox11.SuspendLayout();
+            this.urlTB.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,10 +183,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.pasteTextBox);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.button10);
-            this.groupBox2.Controls.Add(this.listView1);
+            this.groupBox2.Controls.Add(this.pasteTBCButton);
+            this.groupBox2.Controls.Add(this.dictLV);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(667, 3);
@@ -195,13 +196,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典设置";
             // 
-            // textBox3
+            // pasteTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(9, 266);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(204, 248);
-            this.textBox3.TabIndex = 16;
+            this.pasteTextBox.Location = new System.Drawing.Point(9, 266);
+            this.pasteTextBox.Multiline = true;
+            this.pasteTextBox.Name = "pasteTextBox";
+            this.pasteTextBox.Size = new System.Drawing.Size(204, 248);
+            this.pasteTextBox.TabIndex = 16;
             // 
             // label6
             // 
@@ -212,23 +213,24 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "粘贴密码文本：";
             // 
-            // button10
+            // pasteTBCButton
             // 
-            this.button10.Location = new System.Drawing.Point(137, 237);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(76, 23);
-            this.button10.TabIndex = 13;
-            this.button10.Text = "清空";
-            this.button10.UseVisualStyleBackColor = true;
+            this.pasteTBCButton.Location = new System.Drawing.Point(137, 237);
+            this.pasteTBCButton.Name = "pasteTBCButton";
+            this.pasteTBCButton.Size = new System.Drawing.Size(76, 23);
+            this.pasteTBCButton.TabIndex = 13;
+            this.pasteTBCButton.Text = "清空";
+            this.pasteTBCButton.UseVisualStyleBackColor = true;
+            this.pasteTBCButton.Click += new System.EventHandler(this.pasteTBCButton_Click);
             // 
-            // listView1
+            // dictLV
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(8, 41);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(204, 186);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.dictLV.HideSelection = false;
+            this.dictLV.Location = new System.Drawing.Point(8, 41);
+            this.dictLV.Name = "dictLV";
+            this.dictLV.Size = new System.Drawing.Size(204, 186);
+            this.dictLV.TabIndex = 6;
+            this.dictLV.UseCompatibleStateImageBehavior = false;
             // 
             // label5
             // 
@@ -242,11 +244,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.packageTBCbutton);
+            this.groupBox1.Controls.Add(this.markCbutton);
+            this.groupBox1.Controls.Add(this.markSbutton);
             this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.hostTB);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -267,32 +269,35 @@
             this.label25.TabIndex = 9;
             this.label25.Text = "根据报文自动解析,默认不填";
             // 
-            // button5
+            // packageTBCbutton
             // 
-            this.button5.Location = new System.Drawing.Point(582, 69);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "清空报文";
-            this.button5.UseVisualStyleBackColor = true;
+            this.packageTBCbutton.Location = new System.Drawing.Point(582, 69);
+            this.packageTBCbutton.Name = "packageTBCbutton";
+            this.packageTBCbutton.Size = new System.Drawing.Size(75, 23);
+            this.packageTBCbutton.TabIndex = 8;
+            this.packageTBCbutton.Text = "清空报文";
+            this.packageTBCbutton.UseVisualStyleBackColor = true;
+            this.packageTBCbutton.Click += new System.EventHandler(this.packageTBCbutton_Click);
             // 
-            // button4
+            // markCbutton
             // 
-            this.button4.Location = new System.Drawing.Point(498, 69);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "清除标记";
-            this.button4.UseVisualStyleBackColor = true;
+            this.markCbutton.Location = new System.Drawing.Point(498, 69);
+            this.markCbutton.Name = "markCbutton";
+            this.markCbutton.Size = new System.Drawing.Size(75, 23);
+            this.markCbutton.TabIndex = 7;
+            this.markCbutton.Text = "清除标记";
+            this.markCbutton.UseVisualStyleBackColor = true;
+            this.markCbutton.Click += new System.EventHandler(this.markCbutton_Click);
             // 
-            // button3
+            // markSbutton
             // 
-            this.button3.Location = new System.Drawing.Point(414, 69);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "设置标记";
-            this.button3.UseVisualStyleBackColor = true;
+            this.markSbutton.Location = new System.Drawing.Point(414, 69);
+            this.markSbutton.Name = "markSbutton";
+            this.markSbutton.Size = new System.Drawing.Size(75, 23);
+            this.markSbutton.TabIndex = 6;
+            this.markSbutton.Text = "设置标记";
+            this.markSbutton.UseVisualStyleBackColor = true;
+            this.markSbutton.Click += new System.EventHandler(this.markSbutton_Click);
             // 
             // textBox2
             // 
@@ -303,13 +308,13 @@
             this.textBox2.Size = new System.Drawing.Size(649, 418);
             this.textBox2.TabIndex = 3;
             // 
-            // textBox1
+            // hostTB
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(648, 21);
-            this.textBox1.TabIndex = 2;
+            this.hostTB.Location = new System.Drawing.Point(9, 41);
+            this.hostTB.Name = "hostTB";
+            this.hostTB.ReadOnly = true;
+            this.hostTB.Size = new System.Drawing.Size(648, 21);
+            this.hostTB.TabIndex = 2;
             // 
             // label2
             // 
@@ -623,14 +628,14 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button18);
-            this.groupBox4.Controls.Add(this.textBox9);
-            this.groupBox4.Controls.Add(this.textBox6);
-            this.groupBox4.Controls.Add(this.textBox5);
+            this.groupBox4.Controls.Add(this.proxyTestButton);
+            this.groupBox4.Controls.Add(this.proxyTestUrlTB);
+            this.groupBox4.Controls.Add(this.proxyPortTB);
+            this.groupBox4.Controls.Add(this.proxyIPTB);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.label17);
             this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.checkBox2);
+            this.groupBox4.Controls.Add(this.enableProxyCB);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(5, 153);
             this.groupBox4.Name = "groupBox4";
@@ -639,38 +644,39 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "代理服务器设置";
             // 
-            // button18
+            // proxyTestButton
             // 
-            this.button18.Location = new System.Drawing.Point(366, 80);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(75, 23);
-            this.button18.TabIndex = 18;
-            this.button18.Text = "验证可用";
-            this.button18.UseVisualStyleBackColor = true;
+            this.proxyTestButton.Location = new System.Drawing.Point(366, 80);
+            this.proxyTestButton.Name = "proxyTestButton";
+            this.proxyTestButton.Size = new System.Drawing.Size(75, 23);
+            this.proxyTestButton.TabIndex = 18;
+            this.proxyTestButton.Text = "验证可用";
+            this.proxyTestButton.UseVisualStyleBackColor = true;
+            this.proxyTestButton.Click += new System.EventHandler(this.proxyTestButton_Click);
             // 
-            // textBox9
+            // proxyTestUrlTB
             // 
-            this.textBox9.Location = new System.Drawing.Point(79, 81);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(275, 21);
-            this.textBox9.TabIndex = 14;
-            this.textBox9.Text = "http://www.baidu.com";
+            this.proxyTestUrlTB.Location = new System.Drawing.Point(79, 81);
+            this.proxyTestUrlTB.Name = "proxyTestUrlTB";
+            this.proxyTestUrlTB.Size = new System.Drawing.Size(275, 21);
+            this.proxyTestUrlTB.TabIndex = 14;
+            this.proxyTestUrlTB.Text = "http://www.baidu.com";
             // 
-            // textBox6
+            // proxyPortTB
             // 
-            this.textBox6.Location = new System.Drawing.Point(288, 48);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(66, 21);
-            this.textBox6.TabIndex = 11;
-            this.textBox6.Text = "10809";
+            this.proxyPortTB.Location = new System.Drawing.Point(288, 48);
+            this.proxyPortTB.Name = "proxyPortTB";
+            this.proxyPortTB.Size = new System.Drawing.Size(66, 21);
+            this.proxyPortTB.TabIndex = 11;
+            this.proxyPortTB.Text = "10809";
             // 
-            // textBox5
+            // proxyIPTB
             // 
-            this.textBox5.Location = new System.Drawing.Point(79, 48);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(156, 21);
-            this.textBox5.TabIndex = 10;
-            this.textBox5.Text = "127.0.0.1";
+            this.proxyIPTB.Location = new System.Drawing.Point(79, 48);
+            this.proxyIPTB.Name = "proxyIPTB";
+            this.proxyIPTB.Size = new System.Drawing.Size(156, 21);
+            this.proxyIPTB.TabIndex = 10;
+            this.proxyIPTB.Text = "127.0.0.1";
             // 
             // label20
             // 
@@ -699,18 +705,20 @@
             this.label16.TabIndex = 1;
             this.label16.Text = "服务器：";
             // 
-            // checkBox2
+            // enableProxyCB
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(8, 23);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 16);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "使用代理";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.enableProxyCB.AutoSize = true;
+            this.enableProxyCB.Location = new System.Drawing.Point(8, 23);
+            this.enableProxyCB.Name = "enableProxyCB";
+            this.enableProxyCB.Size = new System.Drawing.Size(72, 16);
+            this.enableProxyCB.TabIndex = 0;
+            this.enableProxyCB.Text = "使用代理";
+            this.enableProxyCB.UseVisualStyleBackColor = true;
+            this.enableProxyCB.CheckedChanged += new System.EventHandler(this.enableProxyCB_CheckedChanged);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
@@ -759,6 +767,7 @@
             // 
             // domainUpDown4
             // 
+            this.domainUpDown4.Enabled = false;
             this.domainUpDown4.Location = new System.Drawing.Point(115, 100);
             this.domainUpDown4.Name = "domainUpDown4";
             this.domainUpDown4.Size = new System.Drawing.Size(120, 21);
@@ -768,6 +777,7 @@
             // 
             // domainUpDown3
             // 
+            this.domainUpDown3.Enabled = false;
             this.domainUpDown3.Location = new System.Drawing.Point(115, 73);
             this.domainUpDown3.Name = "domainUpDown3";
             this.domainUpDown3.Size = new System.Drawing.Size(120, 21);
@@ -777,6 +787,7 @@
             // 
             // domainUpDown2
             // 
+            this.domainUpDown2.Enabled = false;
             this.domainUpDown2.Location = new System.Drawing.Point(115, 46);
             this.domainUpDown2.Name = "domainUpDown2";
             this.domainUpDown2.Size = new System.Drawing.Size(120, 21);
@@ -786,6 +797,7 @@
             // 
             // domainUpDown1
             // 
+            this.domainUpDown1.Enabled = false;
             this.domainUpDown1.Location = new System.Drawing.Point(115, 19);
             this.domainUpDown1.Name = "domainUpDown1";
             this.domainUpDown1.Size = new System.Drawing.Size(120, 21);
@@ -948,7 +960,7 @@
             // 
             this.panel3.Controls.Add(this.groupBox13);
             this.panel3.Controls.Add(this.groupBox12);
-            this.panel3.Controls.Add(this.groupBox11);
+            this.panel3.Controls.Add(this.urlTB);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
@@ -1024,9 +1036,9 @@
             // 
             // groupBox12
             // 
-            this.groupBox12.Controls.Add(this.button39);
-            this.groupBox12.Controls.Add(this.button38);
-            this.groupBox12.Controls.Add(this.button37);
+            this.groupBox12.Controls.Add(this.stopButton);
+            this.groupBox12.Controls.Add(this.suspendButton);
+            this.groupBox12.Controls.Add(this.startButton);
             this.groupBox12.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox12.Location = new System.Drawing.Point(5, 51);
             this.groupBox12.Name = "groupBox12";
@@ -1035,92 +1047,97 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "控制台";
             // 
-            // button39
+            // stopButton
             // 
-            this.button39.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button39.Location = new System.Drawing.Point(336, 16);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(75, 23);
-            this.button39.TabIndex = 2;
-            this.button39.Text = "停  止";
-            this.button39.UseVisualStyleBackColor = true;
+            this.stopButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.stopButton.Location = new System.Drawing.Point(336, 16);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(75, 23);
+            this.stopButton.TabIndex = 2;
+            this.stopButton.Text = "停  止";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
-            // button38
+            // suspendButton
             // 
-            this.button38.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button38.Location = new System.Drawing.Point(193, 16);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(75, 23);
-            this.button38.TabIndex = 1;
-            this.button38.Text = "暂  停";
-            this.button38.UseVisualStyleBackColor = true;
+            this.suspendButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.suspendButton.Location = new System.Drawing.Point(193, 16);
+            this.suspendButton.Name = "suspendButton";
+            this.suspendButton.Size = new System.Drawing.Size(75, 23);
+            this.suspendButton.TabIndex = 1;
+            this.suspendButton.Text = "暂  停";
+            this.suspendButton.UseVisualStyleBackColor = true;
+            this.suspendButton.Click += new System.EventHandler(this.suspendButton_Click);
             // 
-            // button37
+            // startButton
             // 
-            this.button37.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button37.Location = new System.Drawing.Point(46, 16);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(75, 23);
-            this.button37.TabIndex = 0;
-            this.button37.Text = "启  动";
-            this.button37.UseVisualStyleBackColor = true;
+            this.startButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.startButton.Location = new System.Drawing.Point(46, 16);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 0;
+            this.startButton.Text = "启  动";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
-            // groupBox11
+            // urlTB
             // 
-            this.groupBox11.Controls.Add(this.textBox21);
-            this.groupBox11.Controls.Add(this.textBox20);
-            this.groupBox11.Controls.Add(this.checkBox28);
-            this.groupBox11.Controls.Add(this.label24);
-            this.groupBox11.Controls.Add(this.label23);
-            this.groupBox11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox11.Location = new System.Drawing.Point(5, 5);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(447, 46);
-            this.groupBox11.TabIndex = 0;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "目标主机";
+            this.urlTB.Controls.Add(this.portTB);
+            this.urlTB.Controls.Add(this.textBox20);
+            this.urlTB.Controls.Add(this.sslCB);
+            this.urlTB.Controls.Add(this.label24);
+            this.urlTB.Controls.Add(this.label23);
+            this.urlTB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.urlTB.Location = new System.Drawing.Point(5, 5);
+            this.urlTB.Name = "urlTB";
+            this.urlTB.Size = new System.Drawing.Size(447, 46);
+            this.urlTB.TabIndex = 0;
+            this.urlTB.TabStop = false;
+            this.urlTB.Text = "目标主机";
             // 
-            // textBox21
+            // portTB
             // 
-            this.textBox21.Location = new System.Drawing.Point(269, 18);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(68, 21);
-            this.textBox21.TabIndex = 4;
+            this.portTB.Location = new System.Drawing.Point(314, 18);
+            this.portTB.Name = "portTB";
+            this.portTB.Size = new System.Drawing.Size(57, 21);
+            this.portTB.TabIndex = 4;
             // 
             // textBox20
             // 
-            this.textBox20.Location = new System.Drawing.Point(58, 18);
+            this.textBox20.Location = new System.Drawing.Point(38, 18);
             this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(146, 21);
+            this.textBox20.Size = new System.Drawing.Size(230, 21);
             this.textBox20.TabIndex = 3;
             // 
-            // checkBox28
+            // sslCB
             // 
-            this.checkBox28.AutoSize = true;
-            this.checkBox28.Location = new System.Drawing.Point(375, 21);
-            this.checkBox28.Name = "checkBox28";
-            this.checkBox28.Size = new System.Drawing.Size(66, 16);
-            this.checkBox28.TabIndex = 2;
-            this.checkBox28.Text = "使用ssl";
-            this.checkBox28.UseVisualStyleBackColor = true;
+            this.sslCB.AutoSize = true;
+            this.sslCB.Enabled = false;
+            this.sslCB.Location = new System.Drawing.Point(379, 21);
+            this.sslCB.Name = "sslCB";
+            this.sslCB.Size = new System.Drawing.Size(66, 16);
+            this.sslCB.TabIndex = 2;
+            this.sslCB.Text = "使用ssl";
+            this.sslCB.UseVisualStyleBackColor = true;
+            this.sslCB.CheckedChanged += new System.EventHandler(this.sslCB_CheckedChanged);
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(227, 22);
+            this.label24.Location = new System.Drawing.Point(277, 22);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(41, 12);
+            this.label24.Size = new System.Drawing.Size(35, 12);
             this.label24.TabIndex = 1;
-            this.label24.Text = "端口：";
+            this.label24.Text = "端口:";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(15, 22);
+            this.label23.Location = new System.Drawing.Point(7, 22);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(35, 12);
+            this.label23.Size = new System.Drawing.Size(29, 12);
             this.label23.TabIndex = 0;
-            this.label23.Text = "URL：";
+            this.label23.Text = "URL:";
             // 
             // statusStrip
             // 
@@ -1137,6 +1154,15 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "就绪！";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(310, 73);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 12);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "默认值暂时不用改";
             // 
             // IntruderForm
             // 
@@ -1186,8 +1212,8 @@
             this.panel3.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
+            this.urlTB.ResumeLayout(false);
+            this.urlTB.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -1201,31 +1227,31 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button packageTBCbutton;
+        private System.Windows.Forms.Button markCbutton;
+        private System.Windows.Forms.Button markSbutton;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox hostTB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.ListView dictLV;
+        private System.Windows.Forms.Button pasteTBCButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button proxyTestButton;
+        private System.Windows.Forms.TextBox proxyTestUrlTB;
+        private System.Windows.Forms.TextBox proxyPortTB;
+        private System.Windows.Forms.TextBox proxyIPTB;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox enableProxyCB;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
@@ -1262,7 +1288,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.GroupBox urlTB;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ListView listView8;
         private System.Windows.Forms.ColumnHeader columnHeader6;
@@ -1272,12 +1298,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.Button button39;
-        private System.Windows.Forms.Button button38;
-        private System.Windows.Forms.Button button37;
-        private System.Windows.Forms.TextBox textBox21;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button suspendButton;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.TextBox portTB;
         private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.CheckBox checkBox28;
+        private System.Windows.Forms.CheckBox sslCB;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -1288,11 +1314,12 @@
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox pasteTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label11;
     }
 }
