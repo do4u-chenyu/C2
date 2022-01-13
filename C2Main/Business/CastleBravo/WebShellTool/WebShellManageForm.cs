@@ -789,14 +789,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void AliveLocationInfo_Click(object sender, EventArgs e)
         {
-
             this.sgType = SGType.LocationInfo;
             BatchInfoColletion(true);
         }
 
+        
+
         private void DoCurrentItemTask()
         {
-            
             this.actionNeedStop = false;
             ResetProgressMenuValue(LV.SelectedItems.Count);
             using (new ControlEnableGuarder(this.contextMenuStrip))
@@ -882,6 +882,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         private String ProcessingResults(string ret, string taskUrl)
         {
             Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
+            Regex p0 = new Regex(@"((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}");  
+            if (this.sgType == SGType.SuperPing)  //匹配ip
+                return p0.Match(ret).Value.IsNullOrEmpty() ? "无结果" : p0.Match(ret).Value;     
             Match m0 = r0.Match(ret);
             if (!m0.Success)
                 return ClientSetting.InfoProbeItems[this.sgType] + ":无结果";
@@ -905,6 +908,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             Match m = r.Match(jsonResult);
             return m.Success ? rawResult + ":" + m.Groups[1].Value : string.Empty;
         }
+
+        
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
@@ -990,11 +995,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 
         }
 
-        private void SuperPingMenuItem_Click(object sender, EventArgs e)
-        {
-            new SuperPingSet().ShowDialog();
-        }
-
         private void 地理定位ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.sgType = SGType.LocationInfo;
@@ -1018,6 +1018,32 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.sgType = SGType.SystemInfo;
             DoCurrentItemTask();
         }
+        // 超级ping部分
+        private void SuperPingMenuItem_Click(object sender, EventArgs e)
+        {
+            CreatePingPayload();
+            DoCurrentItemTask();
+        }     
+        private void AllSuperPing_Click(object sender, EventArgs e)
+        {
+            CreatePingPayload();
+            BatchInfoColletion(false);
+        }
+        private void AlivSuperPing_Click(object sender, EventArgs e)
+        {
+            CreatePingPayload();
+            BatchInfoColletion(true);
+        }
+        private void CreatePingPayload()
+        {
+            this.sgType = SGType.SuperPing;
+            SuperPingSet sps = new SuperPingSet();
+            if (sps.ShowDialog() != DialogResult.OK)
+                return;
+            string payload = string.Format(ClientSetting.SuperPingPayload, "{0}", ST.EncodeBase64(sps.Domain));
+            ClientSetting.PayloadDict[SGType.SuperPing] = payload;
+        }
+
 
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1069,6 +1095,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             ClientSetting.PayloadDict[SGType.UserTable] = payload;
             return buildOK;
         }
+
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DoCheckAliveContinue(false);
