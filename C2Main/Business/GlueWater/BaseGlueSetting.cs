@@ -51,7 +51,7 @@ namespace C2.Business.GlueWater
 
         }
 
-        public virtual string UpdateContent(string excelPath)
+        public virtual string UpdateContent(string excelPath,bool isWrite)
         {
             return string.Empty;
         }
