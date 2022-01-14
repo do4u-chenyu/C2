@@ -45,6 +45,7 @@ namespace C2.Business.GlueWater.Settings
             DbMemberColList = new string[] { "域名", "认证账号", "登陆IP", "登陆账号", "登陆密码", "安全码", "登陆地址" };
         }
 
+      
         public override void InitDataTable()
         {
             //空文件的话，这些table都只有colume表头信息
@@ -149,7 +150,7 @@ namespace C2.Business.GlueWater.Settings
             DbWebTable = DbWebTable.DefaultView.ToTable();
         }
 
-        public override string UpdateContent(string zipPath)
+        public override string UpdateContent(string zipPath,bool isWrite)
         {
             string excelPath = FindExcelFromZip(zipPath);
             if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
@@ -164,7 +165,7 @@ namespace C2.Business.GlueWater.Settings
             if (rrst2.ReturnCode != 0)
                 return rrst2.Message;
 
-            if (DealWebContent(rrst1.Result) && DealMemberContent(rrst2.Result))
+            if (DealWebContent(rrst1.Result,isWrite) && DealMemberContent(rrst2.Result,isWrite))
             {
                 BackupZip(zipPath);
                 return "数据添加成功";
@@ -174,7 +175,7 @@ namespace C2.Business.GlueWater.Settings
                 return "非系统要求格式，请查看模板样例修改";
         }
 
-        private bool DealWebContent(List<List<string>> contents)
+        private bool DealWebContent(List<List<string>> contents,bool isWrite=true)
         {
             if (contents.Count == 0)
                 return false;
@@ -192,11 +193,13 @@ namespace C2.Business.GlueWater.Settings
 
                 //这里要做判断了 对于web，url存在，替换掉
 
+
                 if (DbWebTable == null)
                     DbWebTable = GenDataTable(DbWebPath, DbWebColList);
                 DataRow[] rows = DbWebTable.Select("域名='" + resultList[1] + "'");
                  if (rows.Length > 0)
                     DbWebTable.Rows.Remove(rows[0]);
+                
                 
                 //由于人员和金额可能为空，需要额外判断
                 string tmpMember = resultList[DbWebColList.ToList().IndexOf("涉赌人数")];
@@ -208,11 +211,12 @@ namespace C2.Business.GlueWater.Settings
                 tempResultList.Add(resultList);
                 DbWebTable = SortNewTable(tempResultList, DbWebTable);
             }
-            ReWriteResult(DbWebPath, DbWebTable);
+            if (isWrite == true)
+                ReWriteResult(DbWebPath, DbWebTable);
             return true;
         }
 
-        private bool DealMemberContent(List<List<string>> contents)
+        private bool DealMemberContent(List<List<string>> contents,bool isWrite)
         {
             List<List<string>> tempResultList = new List<List<string>>();
             if (contents.Count == 0)
@@ -227,8 +231,9 @@ namespace C2.Business.GlueWater.Settings
                     return false;
                 List<string> resultList = ContentFilter(headIndex, contents[i]);
 
+
                 //这里要做判断了 对于member，url存在，比较是否完全一致
-                if(DbMemberTable == null)
+                if (DbMemberTable == null)
                     DbMemberTable = GenDataTable(DbMemberPath, DbMemberColList);
                 DataRow[] rows = DbMemberTable.Select("域名='" + resultList[0] + "'");
                 if (rows.Length == 0)
@@ -252,8 +257,8 @@ namespace C2.Business.GlueWater.Settings
             foreach(List<string> li in needAddList)
                 tempResultList.Add(li); 
             DbMemberTable = SortNewTable(tempResultList, DbMemberTable);
-
-            ReWriteResult(DbMemberPath, DbMemberTable);
+            if (isWrite == true)
+                ReWriteResult(DbMemberPath, DbMemberTable);
             return true;
         }
     }

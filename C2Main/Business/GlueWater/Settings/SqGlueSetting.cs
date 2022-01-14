@@ -197,7 +197,7 @@ namespace C2.Business.GlueWater.Settings
             SqWebTable = SqWebTable.DefaultView.ToTable();
         }
 
-        public override string UpdateContent(string zipPath)
+        public override string UpdateContent(string zipPath,bool isWrite = true)
         {
             string excelPath = FindExcelFromZip(zipPath);
             if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
@@ -221,8 +221,8 @@ namespace C2.Business.GlueWater.Settings
             if (rrst4.ReturnCode != 0 || rrst4.Result.Count == 0)
                 return rrst4.Message;
 
-            if (DealWebContent(rrst1.Result, rrst2.Result) && DealMemberContent(rrst1.Result, rrst3.Result)
-                && DealMemberContentReply(rrst1.Result, rrst4.Result))
+            if (DealWebContent(rrst1.Result, rrst2.Result,isWrite) && DealMemberContent(rrst1.Result, rrst3.Result,isWrite)
+                && DealMemberContentReply(rrst1.Result, rrst4.Result, isWrite))
             {
                 BackupZip(zipPath);
                 return "数据添加成功";
@@ -232,7 +232,7 @@ namespace C2.Business.GlueWater.Settings
                 return "非系统要求格式，请查看模板样例修改";
         }
 
-        private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond)
+        private bool DealWebContent(List<List<string>> contentsFirst,List<List<string>> contentSecond,bool isWrite)
         {
             List<int> headIndex = IndexFilter(SqWebExcelColList, contentsFirst);
             List<int> tailIndex = IndexFilter(SqWebExcelColList2, contentSecond);
@@ -268,12 +268,13 @@ namespace C2.Business.GlueWater.Settings
                 tempResultList.Add(resultList);
                 SqWebTable = SortNewTable(tempResultList, SqWebTable);
             }
-            ReWriteResult(SqWebPath, SqWebTable);
+            if(isWrite == true)
+                ReWriteResult(SqWebPath, SqWebTable);
             return true;
         }
 
      
-        private bool DealMemberContent(List<List<string>> contentsFirst, List<List<string>> contentSecond)
+        private bool DealMemberContent(List<List<string>> contentsFirst, List<List<string>> contentSecond, bool isWrite)
         {
             List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
@@ -319,12 +320,13 @@ namespace C2.Business.GlueWater.Settings
                         }
                     }
                 }
-                ReWriteResult(SqMemberPath, SqMemberTable);
+                if (isWrite == true)
+                    ReWriteResult(SqMemberPath, SqMemberTable);
             }
             return true;
         }
 
-        private bool DealMemberContentReply(List<List<string>> contentsFirst, List<List<string>> contentSecond)
+        private bool DealMemberContentReply(List<List<string>> contentsFirst, List<List<string>> contentSecond, bool isWrite)
         {
             List<List<string>> tempResultList = new List<List<string>>();
             List<int> headIndex = IndexFilter(SqWebExcelColList1, contentsFirst);
@@ -371,7 +373,8 @@ namespace C2.Business.GlueWater.Settings
                         }
                     }
                 }
-                ReWriteResult(SqMemberPath2, SqMemberTableReply);
+                if (isWrite == true)
+                    ReWriteResult(SqMemberPath2, SqMemberTableReply);
             }
             return true;
         }

@@ -152,7 +152,7 @@ namespace C2.Business.GlueWater.Settings
             return emptyList;
         }
 
-        public override string UpdateContent(string zipPath)
+        public override string UpdateContent(string zipPath,bool isWrite)
         {
             string excelPath = FindExcelFromZip(zipPath);
             if (!excelPath.EndsWith(".xlsx") && !excelPath.EndsWith(".xls"))
@@ -176,7 +176,7 @@ namespace C2.Business.GlueWater.Settings
             if (DealWebMemberContent(rrst0.Result, WebMember) && DealWebContent(rrst1.Result, Web) && DealMemberContent(rrst2.Result, Member))
             {
                 BackupZip(zipPath);
-                WriteToTable(WebMember, Web, Member, zipPath);
+                WriteToTable(WebMember, Web, Member, zipPath, isWrite);
                 return "数据添加成功";
             }
             else
@@ -254,18 +254,18 @@ namespace C2.Business.GlueWater.Settings
             YellowWebTable = YellowWebTable.DefaultView.ToTable();
         }
 
-        private void WriteToTable(List<List<string>> WebMember, List<List<string>> Web, List<List<string>> Member, string zipPath)
+        private void WriteToTable(List<List<string>> WebMember, List<List<string>> Web, List<List<string>> Member, string zipPath,bool isWrite)
         {
-            List<object> returnList = MemberToTable(WebMember, Web, Member, zipPath);
+            List<object> returnList = MemberToTable(WebMember, Web, Member, zipPath,isWrite);
             Dictionary<string, List<string>> webAndAuth = (Dictionary<string, List<string>>)returnList[0];
             List<int> removeWebMemberIndex = (List<int>)returnList[1];
             List<int> saveWebIndex = (List<int>)returnList[2];
-            WebToTable(Web, WebMember, Member, saveWebIndex, webAndAuth, zipPath);
-            WebMemberToTable(WebMember, removeWebMemberIndex);
+            WebToTable(Web, WebMember, Member, saveWebIndex, webAndAuth, zipPath,isWrite);
+            WebMemberToTable(WebMember, removeWebMemberIndex,isWrite);
 
         }
 
-        private List<object> MemberToTable(List<List<string>> WebMember, List<List<string>> Web, List<List<string>> Member, string zipPath)
+        private List<object> MemberToTable(List<List<string>> WebMember, List<List<string>> Web, List<List<string>> Member, string zipPath,bool isWrite)
         {
             List<object> returnList = new List<object>();
             Dictionary<string, List<string>> webAndAuth = new Dictionary<string, List<string>>();
@@ -314,7 +314,8 @@ namespace C2.Business.GlueWater.Settings
                             DataRow[] webRows = YellowWebTable.Select("网站网址='" + WebMember[j][9] + "'");
                             rowsList = TableFilter(webRows, WebMember[j], YellowWebTable);
                             YellowWebTable = SortNewTable(rowsList, YellowWebTable);
-                            ReWriteResult(YellowWebPath, YellowWebTable);
+                            if(isWrite == true)
+                                ReWriteResult(YellowWebPath, YellowWebTable);
 
                             WebMember[j].RemoveRange(len, cutWeb.Count());
                             webAndAuth[memberList[0]].Remove(memberList[1]);
@@ -333,7 +334,8 @@ namespace C2.Business.GlueWater.Settings
                 YellowMemberList = TableFilter(rows, memberList, YellowMemberTable);
                 foreach (List<string> YellowMember in YellowMemberList)
                     YellowMemberTable.Rows.Add(YellowMember.ToArray());
-                ReWriteResult(YellowMemberPath, YellowMemberTable);
+                if (isWrite == true)
+                    ReWriteResult(YellowMemberPath, YellowMemberTable);
             }
             returnList.Add(webAndAuth);
             returnList.Add(removeWebMemberIndex);
@@ -342,7 +344,7 @@ namespace C2.Business.GlueWater.Settings
         }
 
 
-        private void WebMemberToTable(List<List<string>> WebMember, List<int> removeWebMemberIndex)
+        private void WebMemberToTable(List<List<string>> WebMember, List<int> removeWebMemberIndex,bool isWrite)
         {
             for (int j = 0; j < WebMember.Count(); j++)
             {
@@ -353,11 +355,12 @@ namespace C2.Business.GlueWater.Settings
                 yellowWebEmpty = GetEmptylist(WebExcelCol);
                 WebMember[j].AddRange(yellowWebEmpty);
                 YellowWebTable.Rows.Add(WebMember[j].ToArray());
-                ReWriteResult(YellowWebPath, YellowWebTable);
+                if(isWrite == true)
+                    ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
 
-        private void WebToTable(List<List<string>> Web, List<List<string>> WebMember, List<List<string>> Member, List<int> saveWebIndex, Dictionary<string, List<string>> webAndAuth, string zipPath)
+        private void WebToTable(List<List<string>> Web, List<List<string>> WebMember, List<List<string>> Member, List<int> saveWebIndex, Dictionary<string, List<string>> webAndAuth, string zipPath,bool isWrite)
         {
             List<List<string>> rowsList = new List<List<string>>();
             for (int i = 0; i < Web.Count(); i++)
@@ -412,7 +415,8 @@ namespace C2.Business.GlueWater.Settings
                 DataRow[] webRows = YellowWebTable.Select("网站网址='" + yellowPhotoEmpty[9] + "'");
                 rowsList = TableFilter(webRows, yellowPhotoEmpty, YellowWebTable);
                 YellowWebTable = SortNewTable(rowsList, YellowWebTable);
-                ReWriteResult(YellowWebPath, YellowWebTable);
+                if(isWrite == true)
+                    ReWriteResult(YellowWebPath, YellowWebTable);
             }
         }
         private List<string> Trans(List<string> resultList)

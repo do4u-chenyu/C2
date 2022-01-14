@@ -22,6 +22,7 @@ namespace C2.Forms
         SqDetailInfoDialog sqDeatilDialog;
         SqDetailInfoDialogReply dbDeatilDialogReply;
         private List<string> doneGlueList;
+        public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
         public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
         string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板");
 
@@ -40,21 +41,25 @@ namespace C2.Forms
             doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
 
             this.label1.Visible = false;
-            // 默认加载涉赌数据
-            string backSdFile = Path.Combine(bakDirectory, "涉赌模板0112.zip");
-            if (!File.Exists(backSdFile))
-            {
-                string trueDbFile = Path.Combine(txtModelDirectory, "涉赌模板0112.zip");
-                File.Copy(trueDbFile, backSdFile, true);
-                initLoadModelData(backSdFile);
-            }
+             // 默认展示 加载涉赌数据
+             string backSdFile = Path.Combine(bakDirectory, "涉赌模板0112.zip");
+             if (
+                 !File.Exists(backSdFile) ||
+                 (!File.Exists(Path.Combine(txtDirectory, "DB_web.txt")) &&
+                 !File.Exists(Path.Combine(txtDirectory, "DB_member.txt"))
+                 ))
+             {
+                 string trueDbFile = Path.Combine(txtModelDirectory, "涉赌模板0112.zip");
+                 File.Copy(trueDbFile, backSdFile, true);
+                 initLoadModelData(backSdFile, true);
+             }
         }
 
-        private void initLoadModelData(string excelPath)
+        private void initLoadModelData(string excelPath,bool isWrite)
         {
             using (GuarderUtil.WaitCursor)
             {
-                string returnMsg = glueSetting.UpdateContent(excelPath);
+                string returnMsg = glueSetting.UpdateContent(excelPath,isWrite);
                 if (returnMsg == "数据添加成功")
                     RefreshHtmlTable();
             }
@@ -94,25 +99,37 @@ namespace C2.Forms
             }
 
             StyleChange(selectedItem);
-         
+
+            //默认加载 涉枪数模板据
             if (selectedItem == "涉枪专项")
             {
                 string backSqFile = Path.Combine(bakDirectory, "涉枪模板0112.zip");
-                if (!File.Exists(backSqFile))
+                if (
+                    !File.Exists(backSqFile) ||
+                    (!File.Exists(Path.Combine(txtDirectory, "SQ_web.txt")) &&
+                    !File.Exists(Path.Combine(txtDirectory, "SQ_member.txt")) &&
+                    !File.Exists(Path.Combine(txtDirectory, "SQ_member2.txt")))
+                    )
                 {
                     string trueSqFile = Path.Combine(txtModelDirectory, "涉枪模板0112.zip");
                     File.Copy(trueSqFile, backSqFile, true);
-                    initLoadModelData(backSqFile);
+                    initLoadModelData(backSqFile,false);
                 }
             }
+            
+            //默认加载 涉黄数模板据
             else if (selectedItem == "涉黄专项")
             {
                 string backShFile = Path.Combine(bakDirectory, "涉黄模板0112.zip");
-                if (!File.Exists(backShFile))
+                if (
+                    !File.Exists(backShFile) ||
+                    (!File.Exists(Path.Combine(txtDirectory, "Yellow_member.txt")) &&
+                    !File.Exists(Path.Combine(txtDirectory, "Yellow_web.txt")))
+                    )
                 {
                     string trueShFile = Path.Combine(txtModelDirectory, "涉黄模板0112.zip");
                     File.Copy(trueShFile, backShFile, true);
-                    initLoadModelData(backShFile);
+                    initLoadModelData(backShFile,false);
                 }
             }
         }
@@ -174,7 +191,7 @@ namespace C2.Forms
 
             using (GuarderUtil.WaitCursor)
             {
-                string returnMsg = glueSetting.UpdateContent(excelPath);
+                string returnMsg = glueSetting.UpdateContent(excelPath,true);
                 if (returnMsg == "数据添加成功")
                 {
                     this.excelTextBox.Text = string.Empty;
@@ -243,7 +260,8 @@ namespace C2.Forms
             dbDeatilDialogReply.RefreshDGV();
             dbDeatilDialogReply.ShowDialog();
         }
-
+        
+        
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
         public void InitDataTable()
@@ -251,6 +269,7 @@ namespace C2.Forms
             glueSetting.InitDataTable();
             RefreshHtmlTable();
         }
+        
 
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]

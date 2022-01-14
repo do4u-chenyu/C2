@@ -11,6 +11,7 @@
         MSF,
         NC,
         UserTable,
-        Empty
+        SuperPing,
+        Empty,
     }
 }
