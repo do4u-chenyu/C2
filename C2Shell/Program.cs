@@ -1,5 +1,4 @@
 ﻿using C2.Utils;
-using C2.Core;
 namespace C2Shell
 {
     class Program
