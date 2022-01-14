@@ -19,7 +19,7 @@ def C2F_install(c2f_path):
 if __name__ == '__main__':
     py_path = os.path.join(os.getcwd(), "C2F")
     if C2F_install(py_path) == 0:
-        print("C2F安装包成功生成到 D:\work\C2\tools\C2F\dist 文件夹下")
+        print(r"C2F安装包成功生成到 D:\work\C2\tools\C2F\dist 文件夹下")
     else:
         print("C2F安装包生成失败")
     

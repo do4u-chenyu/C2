@@ -88,25 +88,22 @@ def del_zipfile(path):
 
 
 if __name__ == "__main__":
+    print('正在安装中...' + '\r\n')
     src_path = resource_path("c2f")
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\业务视图"
-    
-    print('已成功启动安装程序')
     
     if not path.exists(dst_path):
         os.makedirs(dst_path)
 
     if isinstance(proc_exist('C2.exe'),int):
-        print('C2正在运行，请关闭此运行程序')
-        time.sleep(6)
-        sys.exit()
+        print('C2.exe正在运行，请关闭此运行程序')
+        os.system("pause")
     else:
         chdir(r"C:\\")
         if not path.exists("C2F_back"):
             os.mkdir("C2F_back")
 
         #src_path = r"D:\work\C2F"
-        print('正在安装...')
 
         for root, _, fnames in os.walk(src_path):
             for fname in fnames:  # sorted函数把遍历的文件按文件名排序
@@ -131,8 +128,9 @@ if __name__ == "__main__":
             path = os.path.join(dst_path, zipname)
             fz.extractall(path)
             change_name(path)
-        print('正在备份...')
-        print('备份完成')
-        print('安装成功')
-        time.sleep(6)
+
+    print('删除临时文件' + '\r\n')
     del_zipfile(dst_path)
+    print('安装成功')
+    os.system("pause")
+    
