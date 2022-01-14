@@ -7,48 +7,47 @@ import zipfile
 import time
 import shutil
 from os import path
-from ctypes import *
+# from ctypes import *
 
-#PSAPI.DLL
-psapi = windll.psapi
-#Kernel32.DLL
-kernel = windll.kernel32
+# #PSAPI.DLL
+# psapi = windll.psapi
+# #Kernel32.DLL
+# kernel = windll.kernel32
 
-def EnumProcesses():
-    arr = c_ulong * 256
-    lpidProcess= arr()
-    cb = sizeof(lpidProcess)
-    cbNeeded = c_ulong()
-    hModule = c_ulong()
-    count = c_ulong()
-    modname = c_buffer(1024)
-    PROCESS_QUERY_INFORMATION = 0x0400
-    PROCESS_VM_READ = 0x0010
+# def EnumProcesses():
+    # arr = c_ulong * 256
+    # lpidProcess= arr()
+    # cb = sizeof(lpidProcess)
+    # cbNeeded = c_ulong()
+    # hModule = c_ulong()
+    # count = c_ulong()
+    # modname = c_buffer(1024)
+    # PROCESS_QUERY_INFORMATION = 0x0400
+    # PROCESS_VM_READ = 0x0010
     
-    #Call Enumprocesses to get hold of process id's
-    psapi.EnumProcesses(byref(lpidProcess),
-                        cb,
-                        byref(cbNeeded))
+    # #Call Enumprocesses to get hold of process id's
+    # psapi.EnumProcesses(byref(lpidProcess),
+                        # cb,
+                        # byref(cbNeeded))
     
-    #Number of processes returned
-    nReturned = int(cbNeeded.value/sizeof(c_ulong()))
+    # #Number of processes returned
+    # nReturned = int(cbNeeded.value/sizeof(c_ulong()))
 
-    pidProcess = [i for i in lpidProcess][:nReturned]
+    # pidProcess = [i for i in lpidProcess][:nReturned]
     
-    for pid in pidProcess:
+    # for pid in pidProcess:
         
-        #Get handle to the process based on PID
-        hProcess = kernel.OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-                                      False, pid)
-        if hProcess:
-            psapi.EnumProcessModules(hProcess, byref(hModule), sizeof(hModule), byref(count))
-            psapi.GetModuleBaseNameA(hProcess, hModule.value, modname, sizeof(modname))
-            if str(modname.value, encoding="GBK") == 'C2.exe':
-                return 1
-            for i in range(modname._length_):
-                modname[i]=  0
-            
-            kernel.CloseHandle(hProcess)
+        # #Get handle to the process based on PID
+        # hProcess = kernel.OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+                                      # False, pid)
+        # if hProcess:
+            # psapi.EnumProcessModules(hProcess, byref(hModule), sizeof(hModule), byref(count))
+            # psapi.GetModuleBaseNameA(hProcess, hModule.value, modname, sizeof(modname))
+            # if str(modname.value, encoding="GBK") == 'C2.exe':
+                # return 1
+            # for i in range(modname._length_):
+                # modname[i]=  0
+            # kernel.CloseHandle(hProcess)
 
 #生成资源文件目录访问路径
 def resource_path(relative_path):
@@ -129,42 +128,42 @@ if __name__ == "__main__":
     if not path.exists(dst_path):
         os.makedirs(dst_path)
 
-    if EnumProcesses() == 1:
-        print('C2.exe正在运行，请关闭此运行程序')
-        os.system("pause")
-    else:
-        chdir(r"C:\\")
-        if not path.exists("C2F_back"):
-            os.mkdir("C2F_back")
+    # if EnumProcesses() == 1:
+        # print('C2.exe正在运行，请关闭此运行程序')
+        # os.system("pause")
+    # else:
+    chdir(r"C:\\")
+    if not path.exists("C2F_back"):
+        os.mkdir("C2F_back")
 
-        #src_path = r"D:\work\C2F"
+    #src_path = r"D:\work\C2F"
 
-        for root, _, fnames in os.walk(src_path):
-            for fname in fnames:  # sorted函数把遍历的文件按文件名排序
-                if '.c2' in fname:
-                    fpath = os.path.join(root, fname)
-                    shutil.copy(fpath, dst_path)  # 完成文件拷贝
+    for root, _, fnames in os.walk(src_path):
+        for fname in fnames:  # sorted函数把遍历的文件按文件名排序
+            if '.c2' in fname:
+                fpath = os.path.join(root, fname)
+                shutil.copy(fpath, dst_path)  # 完成文件拷贝
 
-        chdir(dst_path)
-        for filename in os.listdir("."):
-            if '.zip' in filename:
-                os.remove(os.path.join(dst_path,filename))
+    chdir(dst_path)
+    for filename in os.listdir("."):
+        if '.zip' in filename:
+            os.remove(os.path.join(dst_path,filename))
 
-        c2_list = glob("*.c2")
-        for c2f in c2_list:
-            rename_c2(os.path.join(dst_path,c2f))
+    c2_list = glob("*.c2")
+    for c2f in c2_list:
+        rename_c2(os.path.join(dst_path,c2f))
 
-        c2zip_list = glob("*.zip")
-        for c2zip in c2zip_list:
-            fz = zipfile.ZipFile(os.path.abspath(c2zip), 'r')
-            zipname = c2zip.split('.')[0]
-            rename_subfolders(dst_path,zipname)
-            path = os.path.join(dst_path, zipname)
-            fz.extractall(path)
-            change_name(path)
+    c2zip_list = glob("*.zip")
+    for c2zip in c2zip_list:
+        fz = zipfile.ZipFile(os.path.abspath(c2zip), 'r')
+        zipname = c2zip.split('.')[0]
+        rename_subfolders(dst_path,zipname)
+        path = os.path.join(dst_path, zipname)
+        fz.extractall(path)
+        change_name(path)
 
-        print('删除临时文件' + '\r\n')
-        del_zipfile(dst_path)
-        print('安装成功')
-        os.system("pause")
+    print('删除临时文件' + '\r\n')
+    del_zipfile(dst_path)
+    print('安装成功，请重新打开C2')
+    os.system("pause")
     
