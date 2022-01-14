@@ -109,3 +109,5 @@ C2Plugins/MD5Plugin/obj
 /packages
 /C2Plugins/QQSpiderPlugin/Resources/qrvfr7.dat
 C2打包程序/output
+/tools/C2F/build
+/tools/C2F/__pycache__
