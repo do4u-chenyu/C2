@@ -39,7 +39,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.packageTBCbutton = new System.Windows.Forms.Button();
+            this.clearReqMessageButton = new System.Windows.Forms.Button();
             this.markCbutton = new System.Windows.Forms.Button();
             this.markSbutton = new System.Windows.Forms.Button();
             this.textBoxRequestMessage = new System.Windows.Forms.TextBox();
@@ -244,7 +244,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.packageTBCbutton);
+            this.groupBox1.Controls.Add(this.clearReqMessageButton);
             this.groupBox1.Controls.Add(this.markCbutton);
             this.groupBox1.Controls.Add(this.markSbutton);
             this.groupBox1.Controls.Add(this.textBoxRequestMessage);
@@ -271,13 +271,13 @@
             // 
             // packageTBCbutton
             // 
-            this.packageTBCbutton.Location = new System.Drawing.Point(582, 69);
-            this.packageTBCbutton.Name = "packageTBCbutton";
-            this.packageTBCbutton.Size = new System.Drawing.Size(75, 23);
-            this.packageTBCbutton.TabIndex = 8;
-            this.packageTBCbutton.Text = "清空报文";
-            this.packageTBCbutton.UseVisualStyleBackColor = true;
-            this.packageTBCbutton.Click += new System.EventHandler(this.packageTBCbutton_Click);
+            this.clearReqMessageButton.Location = new System.Drawing.Point(582, 69);
+            this.clearReqMessageButton.Name = "packageTBCbutton";
+            this.clearReqMessageButton.Size = new System.Drawing.Size(75, 23);
+            this.clearReqMessageButton.TabIndex = 8;
+            this.clearReqMessageButton.Text = "清空报文";
+            this.clearReqMessageButton.UseVisualStyleBackColor = true;
+            this.clearReqMessageButton.Click += new System.EventHandler(this.packageTBCbutton_Click);
             // 
             // markCbutton
             // 
@@ -1228,7 +1228,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button packageTBCbutton;
+        private System.Windows.Forms.Button clearReqMessageButton;
         private System.Windows.Forms.Button markCbutton;
         private System.Windows.Forms.Button markSbutton;
         private System.Windows.Forms.TextBox textBoxRequestMessage;

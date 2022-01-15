@@ -14,10 +14,9 @@ namespace C2.Business.CastleBravo.Intruder
         private void textBoxRequestMessage_TextChanged(object sender, EventArgs e)
         {
             var lines = textBoxRequestMessage.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            var address = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host:", "").Trim();
-            var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
             if (textBoxRequestMessage.Text.Contains("Host")) 
             {
+                var address = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host:", "").Trim();
                 if (address.Contains(":"))
                 {
                     textBoxUrl.Text = address.Split(':')[0];
@@ -30,7 +29,11 @@ namespace C2.Business.CastleBravo.Intruder
                 }   
             }
             if (textBoxRequestMessage.Text.Contains("Referer"))
+            {
+                var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
                 TextBoxReferer.Text = referer;
+            }
+                
         }
 
         private void startButton_Click(object sender, System.EventArgs e)
@@ -68,9 +71,11 @@ namespace C2.Business.CastleBravo.Intruder
 
         }
 
+        //清空报文
         private void packageTBCbutton_Click(object sender, System.EventArgs e)
         {
-
+            TextBoxReferer.Text = string.Empty;
+            textBoxRequestMessage.Text = string.Empty;
         }
 
         private void pasteTBCButton_Click(object sender, System.EventArgs e)
