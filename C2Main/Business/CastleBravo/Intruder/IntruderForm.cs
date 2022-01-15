@@ -98,8 +98,15 @@ namespace C2.Business.CastleBravo.Intruder
         //设置标记
         private void markSbutton_Click(object sender, System.EventArgs e)
         {
-            tBReqMess.Text = tBReqMess.Text.Replace(tBReqMess.SelectedText, "§" + tBReqMess.SelectedText + "§");
-
+            try
+            {
+                tBReqMess.Text = tBReqMess.Text.Replace(tBReqMess.SelectedText, "§" + tBReqMess.SelectedText + "§");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        
             if (lastLine.Contains("=") && splitLine.Length >= 2 &&
                (splitLine[splitLine.Length - 2] == string.Empty || splitLine[splitLine.Length - 2] == "\r"))
             {
