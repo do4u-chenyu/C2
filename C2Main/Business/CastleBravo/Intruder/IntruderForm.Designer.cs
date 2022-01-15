@@ -42,7 +42,7 @@
             this.packageTBCbutton = new System.Windows.Forms.Button();
             this.markCbutton = new System.Windows.Forms.Button();
             this.markSbutton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxRequestMessage = new System.Windows.Forms.TextBox();
             this.hostTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -83,6 +83,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.enableProxyCB = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -120,14 +121,13 @@
             this.suspendButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.urlTB = new System.Windows.Forms.GroupBox();
-            this.portTB = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
+            this.textBoxUrl = new System.Windows.Forms.TextBox();
             this.sslCB = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -247,7 +247,7 @@
             this.groupBox1.Controls.Add(this.packageTBCbutton);
             this.groupBox1.Controls.Add(this.markCbutton);
             this.groupBox1.Controls.Add(this.markSbutton);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textBoxRequestMessage);
             this.groupBox1.Controls.Add(this.hostTB);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -299,14 +299,15 @@
             this.markSbutton.UseVisualStyleBackColor = true;
             this.markSbutton.Click += new System.EventHandler(this.markSbutton_Click);
             // 
-            // textBox2
+            // textBoxRequestMessage
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(9, 96);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(649, 418);
-            this.textBox2.TabIndex = 3;
+            this.textBoxRequestMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxRequestMessage.Location = new System.Drawing.Point(9, 96);
+            this.textBoxRequestMessage.Multiline = true;
+            this.textBoxRequestMessage.Name = "textBoxRequestMessage";
+            this.textBoxRequestMessage.Size = new System.Drawing.Size(649, 418);
+            this.textBoxRequestMessage.TabIndex = 3;
+            this.textBoxRequestMessage.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
             // 
             // hostTB
             // 
@@ -738,6 +739,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "线程设置";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(310, 73);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 12);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "默认值暂时不用改";
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -1082,8 +1092,8 @@
             // 
             // urlTB
             // 
-            this.urlTB.Controls.Add(this.portTB);
-            this.urlTB.Controls.Add(this.textBox20);
+            this.urlTB.Controls.Add(this.textBoxPort);
+            this.urlTB.Controls.Add(this.textBoxUrl);
             this.urlTB.Controls.Add(this.sslCB);
             this.urlTB.Controls.Add(this.label24);
             this.urlTB.Controls.Add(this.label23);
@@ -1095,19 +1105,19 @@
             this.urlTB.TabStop = false;
             this.urlTB.Text = "目标主机";
             // 
-            // portTB
+            // textBoxPort
             // 
-            this.portTB.Location = new System.Drawing.Point(314, 18);
-            this.portTB.Name = "portTB";
-            this.portTB.Size = new System.Drawing.Size(57, 21);
-            this.portTB.TabIndex = 4;
+            this.textBoxPort.Location = new System.Drawing.Point(314, 18);
+            this.textBoxPort.Name = "textBoxPort";
+            this.textBoxPort.Size = new System.Drawing.Size(57, 21);
+            this.textBoxPort.TabIndex = 4;
             // 
-            // textBox20
+            // textBoxUrl
             // 
-            this.textBox20.Location = new System.Drawing.Point(38, 18);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(230, 21);
-            this.textBox20.TabIndex = 3;
+            this.textBoxUrl.Location = new System.Drawing.Point(38, 18);
+            this.textBoxUrl.Name = "textBoxUrl";
+            this.textBoxUrl.Size = new System.Drawing.Size(230, 21);
+            this.textBoxUrl.TabIndex = 3;
             // 
             // sslCB
             // 
@@ -1154,15 +1164,6 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "就绪！";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(310, 73);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 12);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "默认值暂时不用改";
             // 
             // IntruderForm
             // 
@@ -1230,7 +1231,7 @@
         private System.Windows.Forms.Button packageTBCbutton;
         private System.Windows.Forms.Button markCbutton;
         private System.Windows.Forms.Button markSbutton;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxRequestMessage;
         private System.Windows.Forms.TextBox hostTB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -1301,8 +1302,8 @@
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button suspendButton;
         private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.TextBox portTB;
-        private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.TextBox textBoxPort;
+        private System.Windows.Forms.TextBox textBoxUrl;
         private System.Windows.Forms.CheckBox sslCB;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
