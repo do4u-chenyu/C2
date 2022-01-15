@@ -131,7 +131,7 @@ namespace C2.Business.CastleBravo.Intruder
 
         private void pasteTBCButton_Click(object sender, System.EventArgs e)
         {
-
+            this.pasteTextBox.Text = string.Empty;
         }
 
         private void sslCB_CheckedChanged(object sender, System.EventArgs e)
