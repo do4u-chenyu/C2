@@ -102,5 +102,11 @@ namespace C2.Controls.OS
 
         [DllImport(DllName, SetLastError = true)]
         public static extern bool CloseClipboard();
+
+        [DllImport(DllName, SetLastError = true)]
+        public static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
+
+        [DllImport(DllName, SetLastError = true)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
     }
 }

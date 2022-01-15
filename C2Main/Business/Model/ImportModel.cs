@@ -34,10 +34,8 @@ namespace C2.Business.Model
         public bool UnZipC2File(string fullFilePath, string userName, string password = "")
         {
             if (!File.Exists(fullFilePath))
-            {
-                //HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
                 return false;
-            }
+  
             if (!HasUnZipFile(fullFilePath, userName, password, true))
                 return false;
 
@@ -48,24 +46,6 @@ namespace C2.Business.Model
             // 将导入模型添加到左侧模型面板
             MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
             Global.GetMainForm().OpenDocument(this.modelFilePath);
-            return true;
-        }
-
-        public bool UnZipC2FileSingle(string fullFilePath, string userName, string password = "")
-        {
-            if (!File.Exists(fullFilePath))
-            {
-                //HelpUtil.ShowMessageBox("未能找到: " + fullFilePath);
-                return false;
-            }
-            
-            if (!HasUnZipFile(fullFilePath, userName, password, true))
-                return false;
-
-            // 脚本、数据源存储路径
-            string dirs = Path.Combine(this.modelDir, "_datas");
-            // 修改XML文件中数据源路径
-            RenameBmd(dirs, this.modelFilePath);
             return true;
         }
 
@@ -99,8 +79,6 @@ namespace C2.Business.Model
                 if (!fsinfo.Name.EndsWith(".bmd"))
                     dataSourcePath[fsinfo.Name] = fsinfo.FullName;
             }
-            //if (dataSourcePath.Count == 0)
-            //    return;
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(newModelFilePath);

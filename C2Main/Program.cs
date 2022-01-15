@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -32,13 +31,10 @@ namespace C2
                 MessageBox.Show("产品可用时间截止到2022年2月17号");
                 return;
             }
-            #region
+
             if (PreProcessApplicationArgs(args))
                 return;
 
-            // 如果需要打开文件, 偿试寻找是否有已经存在的应用实例打开
-            if (!args.IsNullOrEmpty() && TryOpenByOtherInstance(args))
-                return;
 
             Application.SetCompatibleTextRenderingDefault(false);
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
@@ -48,36 +44,19 @@ namespace C2
             UIColorThemeManage.Initialize();
             LanguageManage.Initialize();
             RecentFilesManage.Default.Initialize();
-          
-
             Current_OpitonsChanged(null, EventArgs.Empty);
-            #endregion
-
             ConfigProgram();
-            LanguageManage.Initialize();
             Application.EnableVisualStyles();//窗体启动前调用
+
+            string ffp = args.IsEmpty() ? string.Empty : args[0];
             Process instance = RunningInstance();
 
-
             if (instance == null)
-            {
-                //1.1 没有实例在运行
-                if (args.Length > 0)
-                {
-                    string path = args.JoinString(string.Empty).TrimEnd(OpUtil.Blank);
-                    RunByVersion(path);
-                }
-                else
-                    RunByVersionExtend(); 
-            }
-            else
-            {
-                //1.2 已经有一个实例在运行
-                instance.Kill();
-                string path = args.JoinString(string.Empty).TrimEnd(OpUtil.Blank);
-                RunByVersion(path);
-                //HandleRunningInstance(instance);
-            }      
+                RunByVersion(ffp);
+
+            if (instance != null)
+                HandleRunningInstance(ffp, instance);
+
             Options.Current.Save();
         }
 
@@ -113,12 +92,6 @@ namespace C2
             Application.Run(new MainForm(Global.GetUsername(), path));
         }
 
-        public static void RunByVersionExtend()
-        {
-            Global.SetUsername("IAO");
-            Application.Run(new MainForm(Global.GetUsername()));
-        }
-
         #region 确保程序只运行一个实例
         private static Process RunningInstance()
         {
@@ -134,26 +107,28 @@ namespace C2
                     if (Assembly.GetExecutingAssembly().Location.Replace("/", "\\") == current.MainModule.FileName)
                     {
                         //返回已经存在的进程
-                        return process;
+                        if (process.MainWindowHandle != IntPtr.Zero)
+                            return process;
                     }
                 }
             }
             return null;
         }
-        private static void HandleRunningInstance(Process instance)
+        private static void HandleRunningInstance(string path, Process instance)
         {
-            ShowWindowAsync(instance.MainWindowHandle, 1); //调用api函数，正常显示窗口
-            SetForegroundWindow(instance.MainWindowHandle); //将窗口放置最前端
+            User32.ShowWindowAsync(instance.MainWindowHandle, 1); //调用api函数，正常显示窗口
+            User32.SetForegroundWindow(instance.MainWindowHandle); //将窗口放置最前端
+            
+            if (path.IsEmpty())
+                return;
+
         }
-        [DllImport("User32.dll")]
-        private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
-        [DllImport("User32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+
         #endregion
-        static bool TryOpenByOtherInstance(string[] args)
+        static bool TryOpenByOtherInstance(string path)
         {
-            var files = args.Where(arg => !arg.StartsWith("-")).ToArray();
-            if (files.IsEmpty())
+            if (!File.Exists(path))
                 return false;
 
             var name = Process.GetCurrentProcess().ProcessName;
@@ -163,7 +138,7 @@ namespace C2
             if (!otherInstances.IsNullOrEmpty())
             {
                 var inst = otherInstances.First();
-                var data = Encoding.UTF8.GetBytes(files.JoinString(";"));
+                var data = Encoding.UTF8.GetBytes(path);
                 var buffer = OSHelper.IntPtrAlloc(data);
 
                 var cds = new COPYDATASTRUCT

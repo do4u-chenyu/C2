@@ -5,7 +5,9 @@ using C2.Configuration;
 using C2.Controls;
 using C2.Controls.Left;
 using C2.Controls.Move.Dt;
+using C2.Controls.OS;
 using C2.Core;
+using C2.Core.Win32Apis;
 using C2.Database;
 using C2.Dialogs;
 using C2.Forms;
@@ -20,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 
@@ -56,9 +59,16 @@ namespace C2
 
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
-        string fullFilePath;
-        string filename;
-        string password;
+        private string fullFilePath;
+        private string filename;
+        private string password;
+
+        private void InitializeOpenFile(string path)
+        {
+            fullFilePath = path;
+            filename = Path.GetFileNameWithoutExtension(path);
+            password = String.Empty;
+        }
 
         public MainForm(string userName, string path)
         {
@@ -72,33 +82,13 @@ namespace C2
             InitializeGlobalVariable();
             InitializeMdiClient();
             InitializeStartForm();
-            if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
-                OpenSavedTabs();
-            fullFilePath = path;
-            filename = fullFilePath.Substring(fullFilePath.LastIndexOf("\\") + 1, fullFilePath.Length - fullFilePath.LastIndexOf("\\") - 1).Replace(".c2", string.Empty);
-            password = String.Empty;
-        }
-        
-        public MainForm(string userName)
-        {
-            InitializeComponent();
-            InitializeUserName(userName);
-            InitializeInputDataForm();
-            InitializeBottomPrviewPanel();
-            InitializeLeftToolPanel();
-            InitializeTaskBar();
-            InitializeShortcutKeys();
-            InitializeGlobalVariable();
-            InitializeMdiClient();
-            InitializeStartForm();
-            if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) != SaveTabsType.No)
-                OpenSavedTabs();
+            OpenSavedTabs();
+            InitializeOpenFile(path);
         }
 
         private void InitializeUserName(string userName)
         {
             this.UserName = userName;
-            //this.usernamelabel.Text = this.UserName;
         }
         #region 初始化
         void InitializeInputDataForm()
@@ -909,6 +899,9 @@ namespace C2
         }
         private void OpenSavedTabs()
         {
+            if (Options.Current.GetValue<SaveTabsType>(OptionNames.Miscellaneous.SaveTabs) == SaveTabsType.No)
+                return;
+
             var tabs = Options.Current.GetValue<string[]>(OptionNames.Miscellaneous.LastOpenTabs);
             if (tabs.IsNullOrEmpty())
                 return;
@@ -916,6 +909,30 @@ namespace C2
             foreach (var filename in tabs)
                 if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
                     OpenDocument(filename);
+        }
+
+        protected override void DefWndProc(ref Message m)
+        {
+            switch(m.Msg)
+            {
+                case WinMessages.WM_COPYDATA:
+                    DoCopyData(m);
+                    break;
+                default:
+                    base.DefWndProc(ref m);
+                    break;
+            }
+            
+        }
+
+        private void DoCopyData(Message m)
+        {
+            COPYDATASTRUCT cd = (COPYDATASTRUCT)m.GetLParam(new COPYDATASTRUCT().GetType());
+            if (cd.dwData == new IntPtr(Program.OPEN_FILES_MESSAGE))
+            {
+                byte[] bytes = OSHelper.GetBuffer(cd.lpData, cd.cbData);
+                string path = Encoding.UTF8.GetString(bytes);
+            }
         }
     }
 }
