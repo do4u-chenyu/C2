@@ -40,7 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label25 = new System.Windows.Forms.Label();
             this.clearReqMessageButton = new System.Windows.Forms.Button();
-            this.markCbutton = new System.Windows.Forms.Button();
+            this.delSignButton = new System.Windows.Forms.Button();
             this.markSbutton = new System.Windows.Forms.Button();
             this.tBReqMess = new System.Windows.Forms.RichTextBox();
             this.TextBoxReferer = new System.Windows.Forms.TextBox();
@@ -245,7 +245,7 @@
             // 
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.clearReqMessageButton);
-            this.groupBox1.Controls.Add(this.markCbutton);
+            this.groupBox1.Controls.Add(this.delSignButton);
             this.groupBox1.Controls.Add(this.markSbutton);
             this.groupBox1.Controls.Add(this.tBReqMess);
             this.groupBox1.Controls.Add(this.TextBoxReferer);
@@ -281,13 +281,13 @@
             // 
             // markCbutton
             // 
-            this.markCbutton.Location = new System.Drawing.Point(498, 69);
-            this.markCbutton.Name = "markCbutton";
-            this.markCbutton.Size = new System.Drawing.Size(75, 23);
-            this.markCbutton.TabIndex = 7;
-            this.markCbutton.Text = "清除标记";
-            this.markCbutton.UseVisualStyleBackColor = true;
-            this.markCbutton.Click += new System.EventHandler(this.markCbutton_Click);
+            this.delSignButton.Location = new System.Drawing.Point(498, 69);
+            this.delSignButton.Name = "markCbutton";
+            this.delSignButton.Size = new System.Drawing.Size(75, 23);
+            this.delSignButton.TabIndex = 7;
+            this.delSignButton.Text = "清除标记";
+            this.delSignButton.UseVisualStyleBackColor = true;
+            this.delSignButton.Click += new System.EventHandler(this.delSignButton_Click);
             // 
             // markSbutton
             // 
@@ -1230,7 +1230,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button clearReqMessageButton;
-        private System.Windows.Forms.Button markCbutton;
+        private System.Windows.Forms.Button delSignButton;
         private System.Windows.Forms.Button markSbutton;
         private System.Windows.Forms.RichTextBox tBReqMess;
         private System.Windows.Forms.TextBox TextBoxReferer;

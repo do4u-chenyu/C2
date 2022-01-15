@@ -106,12 +106,13 @@ namespace C2.Business.CastleBravo.Intruder
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Purple);
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
             }
-            
         }
 
-        private void markCbutton_Click(object sender, System.EventArgs e)
+        //清除标记
+        private void delSignButton_Click(object sender, System.EventArgs e)
         {
-
+            if(tBReqMess.Text.Contains("§"))
+                tBReqMess.Text = tBReqMess.Text.Replace("§",string.Empty);
         }
 
         //清空报文
