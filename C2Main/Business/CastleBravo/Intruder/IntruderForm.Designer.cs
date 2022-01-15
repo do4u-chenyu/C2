@@ -42,7 +42,7 @@
             this.clearReqMessageButton = new System.Windows.Forms.Button();
             this.markCbutton = new System.Windows.Forms.Button();
             this.markSbutton = new System.Windows.Forms.Button();
-            this.textBoxRequestMessage = new System.Windows.Forms.TextBox();
+            this.tBReqMess = new System.Windows.Forms.RichTextBox();
             this.TextBoxReferer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -247,7 +247,7 @@
             this.groupBox1.Controls.Add(this.clearReqMessageButton);
             this.groupBox1.Controls.Add(this.markCbutton);
             this.groupBox1.Controls.Add(this.markSbutton);
-            this.groupBox1.Controls.Add(this.textBoxRequestMessage);
+            this.groupBox1.Controls.Add(this.tBReqMess);
             this.groupBox1.Controls.Add(this.TextBoxReferer);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -301,13 +301,13 @@
             // 
             // textBoxRequestMessage
             // 
-            this.textBoxRequestMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxRequestMessage.Location = new System.Drawing.Point(9, 96);
-            this.textBoxRequestMessage.Multiline = true;
-            this.textBoxRequestMessage.Name = "textBoxRequestMessage";
-            this.textBoxRequestMessage.Size = new System.Drawing.Size(649, 418);
-            this.textBoxRequestMessage.TabIndex = 3;
-            this.textBoxRequestMessage.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
+            this.tBReqMess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tBReqMess.Location = new System.Drawing.Point(9, 96);
+            this.tBReqMess.Multiline = true;
+            this.tBReqMess.Name = "textBoxRequestMessage";
+            this.tBReqMess.Size = new System.Drawing.Size(649, 418);
+            this.tBReqMess.TabIndex = 3;
+            this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
             // 
             // hostTB
             // 
@@ -1231,7 +1231,7 @@
         private System.Windows.Forms.Button clearReqMessageButton;
         private System.Windows.Forms.Button markCbutton;
         private System.Windows.Forms.Button markSbutton;
-        private System.Windows.Forms.TextBox textBoxRequestMessage;
+        private System.Windows.Forms.RichTextBox tBReqMess;
         private System.Windows.Forms.TextBox TextBoxReferer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
