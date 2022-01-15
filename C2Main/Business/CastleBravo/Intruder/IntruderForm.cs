@@ -7,7 +7,6 @@ namespace C2.Business.CastleBravo.Intruder
 {
     public partial class IntruderForm : Form
     {
-        Boolean flag = true;
         public IntruderForm()
         {
             InitializeComponent();
@@ -49,13 +48,12 @@ namespace C2.Business.CastleBravo.Intruder
             */
 
             
-            if (lastLine.Contains("=") && splitLine.Length >= 2 && flag &&
+            if (lastLine.Contains("=") && splitLine.Length >= 2 &&
                 (splitLine[splitLine.Length - 2] == string.Empty || splitLine[splitLine.Length - 2] == "\r"))
             {
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("\n") + 1, tBReqMess.Text.LastIndexOf("=") - tBReqMess.Text.LastIndexOf("\n") - 1, Color.Blue);
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Red);
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
-                //flag = false;
             }
                
         }
