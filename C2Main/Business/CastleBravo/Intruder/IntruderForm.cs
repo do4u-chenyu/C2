@@ -7,6 +7,9 @@ namespace C2.Business.CastleBravo.Intruder
 {
     public partial class IntruderForm : Form
     {
+        string[] splitLine;
+        string lastLine = string.Empty;
+        //Boolean flag = true;
         public IntruderForm()
         {
             InitializeComponent();
@@ -16,9 +19,9 @@ namespace C2.Business.CastleBravo.Intruder
         private void textBoxRequestMessage_TextChanged(object sender, EventArgs e)
         {
             var lines = tBReqMess.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] splitLine = tBReqMess.Text.Split(new char[] { '\n' });
-            string lastLine = splitLine[splitLine.Length - 1].Trim();
-           
+            splitLine = tBReqMess.Text.Split(new char[] { '\n' });
+            lastLine = splitLine[splitLine.Length - 1].Trim();
+
 
             if (tBReqMess.Text.Contains("Host")) 
             {
@@ -52,10 +55,11 @@ namespace C2.Business.CastleBravo.Intruder
                 (splitLine[splitLine.Length - 2] == string.Empty || splitLine[splitLine.Length - 2] == "\r"))
             {
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("\n") + 1, tBReqMess.Text.LastIndexOf("=") - tBReqMess.Text.LastIndexOf("\n") - 1, Color.Blue);
-                tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Red);
+                if(!tBReqMess.Text.Contains("§"))
+                    tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Red);
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
             }
-               
+            //flag = true;
         }
 
         public void tBReqMessSetting(int start, int end, Color color)
@@ -91,9 +95,18 @@ namespace C2.Business.CastleBravo.Intruder
 
         }
 
+        //设置标记
         private void markSbutton_Click(object sender, System.EventArgs e)
         {
+            tBReqMess.Text = tBReqMess.Text.Replace(tBReqMess.SelectedText, "§" + tBReqMess.SelectedText + "§");
 
+            if (lastLine.Contains("=") && splitLine.Length >= 2 &&
+               (splitLine[splitLine.Length - 2] == string.Empty || splitLine[splitLine.Length - 2] == "\r"))
+            {
+                tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Purple);
+                tBReqMessSetting(tBReqMess.Text.LastIndexOf("") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
+            }
+            
         }
 
         private void markCbutton_Click(object sender, System.EventArgs e)
@@ -118,5 +131,6 @@ namespace C2.Business.CastleBravo.Intruder
 
         }
 
+       
     }
 }

@@ -269,10 +269,10 @@
             this.label25.TabIndex = 9;
             this.label25.Text = "根据报文自动解析,默认不填";
             // 
-            // packageTBCbutton
+            // clearReqMessageButton
             // 
             this.clearReqMessageButton.Location = new System.Drawing.Point(582, 69);
-            this.clearReqMessageButton.Name = "packageTBCbutton";
+            this.clearReqMessageButton.Name = "clearReqMessageButton";
             this.clearReqMessageButton.Size = new System.Drawing.Size(75, 23);
             this.clearReqMessageButton.TabIndex = 8;
             this.clearReqMessageButton.Text = "清空报文";
@@ -299,20 +299,21 @@
             this.markSbutton.UseVisualStyleBackColor = true;
             this.markSbutton.Click += new System.EventHandler(this.markSbutton_Click);
             // 
-            // textBoxRequestMessage
+            // tBReqMess
             // 
             this.tBReqMess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tBReqMess.Location = new System.Drawing.Point(9, 96);
-            this.tBReqMess.Multiline = true;
-            this.tBReqMess.Name = "textBoxRequestMessage";
+            this.tBReqMess.Name = "tBReqMess";
             this.tBReqMess.Size = new System.Drawing.Size(649, 418);
             this.tBReqMess.TabIndex = 3;
+            this.tBReqMess.Text = "";
             this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
+           
             // 
-            // hostTB
+            // TextBoxReferer
             // 
             this.TextBoxReferer.Location = new System.Drawing.Point(9, 41);
-            this.TextBoxReferer.Name = "hostTB";
+            this.TextBoxReferer.Name = "TextBoxReferer";
             this.TextBoxReferer.ReadOnly = true;
             this.TextBoxReferer.Size = new System.Drawing.Size(648, 21);
             this.TextBoxReferer.TabIndex = 2;
