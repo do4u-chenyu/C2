@@ -13,21 +13,24 @@ namespace C2.Business.CastleBravo.Intruder
         //目标地址自动解析  Host && Ip
         private void textBoxRequestMessage_TextChanged(object sender, EventArgs e)
         {
+            var lines = textBoxRequestMessage.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var address = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host:", "").Trim();
+            var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
             if (textBoxRequestMessage.Text.Contains("Host")) 
             {
-                var lines = textBoxRequestMessage.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                var addressIpLine = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host:","").Trim();
-                if (addressIpLine.Contains(":"))
+                if (address.Contains(":"))
                 {
-                    textBoxUrl.Text = addressIpLine.Split(':')[0];
-                    textBoxPort.Text = addressIpLine.Substring(addressIpLine.IndexOf(':') + 1);
+                    textBoxUrl.Text = address.Split(':')[0];
+                    textBoxPort.Text = address.Substring(address.IndexOf(':') + 1);
                 }
                 else 
                 {
-                    textBoxUrl.Text = addressIpLine;
+                    textBoxUrl.Text = address;
                     textBoxPort.Text = "8080";
                 }   
             }
+            if (textBoxRequestMessage.Text.Contains("Referer"))
+                TextBoxReferer.Text = referer;
         }
 
         private void startButton_Click(object sender, System.EventArgs e)

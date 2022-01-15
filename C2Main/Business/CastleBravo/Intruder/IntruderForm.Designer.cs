@@ -43,7 +43,7 @@
             this.markCbutton = new System.Windows.Forms.Button();
             this.markSbutton = new System.Windows.Forms.Button();
             this.textBoxRequestMessage = new System.Windows.Forms.TextBox();
-            this.hostTB = new System.Windows.Forms.TextBox();
+            this.TextBoxReferer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -248,7 +248,7 @@
             this.groupBox1.Controls.Add(this.markCbutton);
             this.groupBox1.Controls.Add(this.markSbutton);
             this.groupBox1.Controls.Add(this.textBoxRequestMessage);
-            this.groupBox1.Controls.Add(this.hostTB);
+            this.groupBox1.Controls.Add(this.TextBoxReferer);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -311,11 +311,11 @@
             // 
             // hostTB
             // 
-            this.hostTB.Location = new System.Drawing.Point(9, 41);
-            this.hostTB.Name = "hostTB";
-            this.hostTB.ReadOnly = true;
-            this.hostTB.Size = new System.Drawing.Size(648, 21);
-            this.hostTB.TabIndex = 2;
+            this.TextBoxReferer.Location = new System.Drawing.Point(9, 41);
+            this.TextBoxReferer.Name = "hostTB";
+            this.TextBoxReferer.ReadOnly = true;
+            this.TextBoxReferer.Size = new System.Drawing.Size(648, 21);
+            this.TextBoxReferer.TabIndex = 2;
             // 
             // label2
             // 
@@ -1232,7 +1232,7 @@
         private System.Windows.Forms.Button markCbutton;
         private System.Windows.Forms.Button markSbutton;
         private System.Windows.Forms.TextBox textBoxRequestMessage;
-        private System.Windows.Forms.TextBox hostTB;
+        private System.Windows.Forms.TextBox TextBoxReferer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
