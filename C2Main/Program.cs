@@ -43,7 +43,7 @@ namespace C2
             ConfigProgram();
             Application.EnableVisualStyles();//窗体启动前调用
 
-            string ffp = args.IsEmpty() ? string.Empty : args[0];
+            string ffp = args.Length == 0 ? string.Empty : args[0];
             Process instance = RunningC2Instance();
 
             if (instance == null)
@@ -91,22 +91,17 @@ namespace C2
                 // 有窗体
                 if (proc.MainWindowHandle == IntPtr.Zero)
                     continue;
-
-                // 来自同一文件
-                if (proc.MainModule.FileName == curr.MainModule.FileName)
-                    return proc;
+                return proc;
             }
 
             return null;
         }
         private static void NotifyInstance(string ffp, Process instance)
         {
-            // 将窗口置顶
-            User32.ShowWindowAsync(instance.MainWindowHandle, (int)ShowWindowFlags.SW_MAXIMIZE);
-            User32.SetForegroundWindow(instance.MainWindowHandle);
-
-
-            _ = !ffp.IsNullOrEmpty() && Notify(ffp, instance);  
+            _ = !ffp.IsNullOrEmpty() && Notify(ffp, instance);
+            // TODO 这里会导致未知死循环, 需要立刻修复
+            //User32.ShowWindowAsync(instance.MainWindowHandle, ShowWindowFlags.SW_MAXIMIZE);
+            //User32.SetForegroundWindow(instance.MainWindowHandle);
         }
         static bool Notify(string ffp, Process instance)
         {

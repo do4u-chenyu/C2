@@ -74,7 +74,7 @@ namespace C2.Controls.OS
         public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport(DllName)]
-        public static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+        public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport(DllName)]
         public static extern bool PostMessage(IntPtr hWnd, uint Msg, uint wParam, int lParam);
@@ -104,7 +104,7 @@ namespace C2.Controls.OS
         public static extern bool CloseClipboard();
 
         [DllImport(DllName, SetLastError = true)]
-        public static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
+        public static extern bool ShowWindowAsync(IntPtr hWnd, ShowWindowFlags cmdShow);
 
         [DllImport(DllName, SetLastError = true)]
         public static extern bool SetForegroundWindow(IntPtr hWnd);

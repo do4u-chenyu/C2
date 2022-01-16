@@ -452,7 +452,7 @@ begin
   with lblWelcome do
   begin
     Parent := WizardForm;
-    Caption := '欢迎安装分析师单兵作战系统';
+    Caption := '欢迎安装分析师单兵作战装备';
     Transparent := true;
     Font.Size:= 20
     Font.Name:='黑体'
@@ -624,7 +624,7 @@ begin
   with lblTipWDir3 do
   begin
     Parent := WizardForm;
-    Caption := '安装程序将把  分析师单兵作战系统  安装到下面的文件夹中：';
+    Caption := '安装程序将把  分析师单兵作战装备  安装到下面的文件夹中：';
     Transparent := true;
     Font.Size:= 10
     Font.Name:='微软雅黑'
