@@ -10,9 +10,6 @@ EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IAO解决方案", "IAO解决方案\IAO解决方案.vdproj", "{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C2Plugins", "C2Plugins", "{347ABCF9-220C-4D65-9170-5689273E2F50}"
-	ProjectSection(SolutionItems) = preProject
-		C2Plugins\插件发布说明文档.txt = C2Plugins\插件发布说明文档.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RookieKnowledgePlugin", "C2Plugins\RookieKnowledgePlugin\RookieKnowledgePlugin.csproj", "{FABFB497-81E5-42DC-82DF-B30D71E030D0}"
 EndProject
@@ -21,8 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQSpiderPlugin", "C2Plugins\QQSpiderPlugin\QQSpiderPlugin.csproj", "{389687F6-5DCC-4198-8110-C1D42B23465E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Plugin", "C2Plugins\MD5Plugin\MD5Plugin.csproj", "{9F165641-517E-47A2-A3E1-4CD783A8C6FD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C2Shell", "C2Shell\C2Shell.csproj", "{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextAssistantPlugin", "C2Plugins\FullTextGrammarAssistant\FullTextAssistantPlugin.csproj", "{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}"
 EndProject
@@ -85,12 +80,6 @@ Global
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
 		{9F165641-517E-47A2-A3E1-4CD783A8C6FD}.开发调试|Any CPU.Build.0 = Release|Any CPU
-		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.开发调试|Any CPU.ActiveCfg = Release|Any CPU
-		{9DDF1CFD-71B8-4420-970C-A052A15C9C0D}.开发调试|Any CPU.Build.0 = Release|Any CPU
 		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD16B55-CB18-4073-AB6B-D054B8CA1F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
