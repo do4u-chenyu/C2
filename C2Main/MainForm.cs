@@ -911,8 +911,14 @@ namespace C2
             if (cd.dwData == new IntPtr(Program.OPEN_FILES_MESSAGE))
             {
                 byte[] bytes = OSHelper.GetBuffer(cd.lpData, cd.cbData);
-                string path = Encoding.UTF8.GetString(bytes);
+                string ffp = Encoding.UTF8.GetString(bytes);
+                DoOpenFile(ffp);
             }
+        }
+
+        private void DoOpenFile(string ffp)
+        {
+            MessageBox.Show(ffp);
         }
     }
 }

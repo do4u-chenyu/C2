@@ -33,7 +33,6 @@ namespace C2
             if (PreProcessApplicationArgs(args))
                 return;
 
-
             Application.SetCompatibleTextRenderingDefault(false);
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
@@ -108,10 +107,9 @@ namespace C2
             User32.ShowWindowAsync(instance.MainWindowHandle, 1);  
             User32.SetForegroundWindow(instance.MainWindowHandle);
 
-            _ = !ffp.IsNullOrEmpty() && TryOpenByOtherInstance(ffp, instance);
-            
+            _ = !ffp.IsNullOrEmpty() && Notify(ffp, instance);  
         }
-        static bool TryOpenByOtherInstance(string ffp, Process instance)
+        static bool Notify(string ffp, Process instance)
         {
             var data = Encoding.UTF8.GetBytes(ffp);
             var buffer = OSHelper.IntPtrAlloc(data);
@@ -123,10 +121,8 @@ namespace C2
                 lpData = buffer
             };
             var cbs_buffer = OSHelper.IntPtrAlloc(cds);
-            IntPtr result = User32.SendMessage(instance.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
-            OSHelper.IntPtrFree(cbs_buffer);
-            OSHelper.IntPtrFree(buffer);
-            return result != IntPtr.Zero;
+            User32.SendMessage(instance.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
+            return true;
         }
 
         static bool PreProcessApplicationArgs(string[] args)
