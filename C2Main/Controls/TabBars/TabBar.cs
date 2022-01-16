@@ -9,6 +9,7 @@ using C2.Core;
 using C2.Model;
 using C2.Globalization;
 using C2.Forms;
+using System.IO;
 
 namespace C2.Controls
 {
@@ -2363,15 +2364,17 @@ namespace C2.Controls
             return GetItemByTitle(modelName) != null;
         }
 
-        public TabItem GetItemByTitle(string title)
+        private TabItem GetItemByTitle(string title)
         {
             foreach (TabItem ti in Items)
             {
-                if (ti.Tag is StartForm)//首页不算在搜索范围内
+                if (ti.Tag is StartForm)  // 首页和JS首页不算在搜索范围内
                     continue;
                 if (ti.Tag is JSForm)
                     continue;
                 if ((ti.Tag as BaseDocumentForm).Text == title)
+                    return ti;            // 文档修改后 标题里有 *, 此时靠文件名来判断 
+                if (Path.GetFileNameWithoutExtension((ti.Tag as BaseDocumentForm).Filename) == title)
                     return ti;
             }
             return null;

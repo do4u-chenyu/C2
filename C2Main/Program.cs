@@ -102,8 +102,9 @@ namespace C2
         private static void NotifyInstance(string ffp, Process instance)
         {
             // 将窗口置顶
-            User32.ShowWindowAsync(instance.MainWindowHandle, 1);  
+            User32.ShowWindowAsync(instance.MainWindowHandle, (int)ShowWindowFlags.SW_MAXIMIZE);
             User32.SetForegroundWindow(instance.MainWindowHandle);
+
 
             _ = !ffp.IsNullOrEmpty() && Notify(ffp, instance);  
         }

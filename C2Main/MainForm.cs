@@ -60,12 +60,10 @@ namespace C2
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
         private string fullFilePath;
-        private string password;
 
         private void InitializeOpenFile(string path)
         {
             fullFilePath = path;
-            password = String.Empty;
         }
 
         public MainForm(string ffp)
@@ -319,7 +317,7 @@ namespace C2
 
         private void LoadFile()
         {
-            if (ImportModel.GetInstance().UnZipC2File(fullFilePath, UserName, password))
+            if (ImportModel.GetInstance().UnZipC2File(fullFilePath, UserName))
                 HelpUtil.ShowMessageBox(String.Format("[{0}] 导入 业务视图 成功", Path.GetFileNameWithoutExtension(fullFilePath)));
         }
 
@@ -917,8 +915,10 @@ namespace C2
         }
 
         private void DoOpenFile(string ffp)
-        {
-            MessageBox.Show(ffp);
+        {   // 这里没有支持加密的.c2, 后续要改进
+            fullFilePath = ffp;
+            using (GuarderUtil.WaitCursor)
+                LoadFile();
         }
     }
 }
