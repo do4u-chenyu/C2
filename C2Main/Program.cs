@@ -98,13 +98,6 @@ namespace C2
         }
         private static void NotifyInstance(string ffp, Process instance)
         {
-            _ = !ffp.IsNullOrEmpty() && Notify(ffp, instance);
-            // TODO 这里会导致未知死循环, 需要立刻修复
-            //User32.ShowWindowAsync(instance.MainWindowHandle, ShowWindowFlags.SW_MAXIMIZE);
-            //User32.SetForegroundWindow(instance.MainWindowHandle);
-        }
-        static bool Notify(string ffp, Process instance)
-        {
             var data = Encoding.UTF8.GetBytes(ffp);
             var buffer = OSHelper.IntPtrAlloc(data);
 
@@ -116,7 +109,6 @@ namespace C2
             };
             var cbs_buffer = OSHelper.IntPtrAlloc(cds);
             User32.SendMessage(instance.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
-            return true;
         }
 
         static bool PreProcessApplicationArgs(string[] args)

@@ -909,16 +909,23 @@ namespace C2
             if (cd.dwData == new IntPtr(Program.OPEN_FILES_MESSAGE))
             {
                 byte[] bytes = OSHelper.GetBuffer(cd.lpData, cd.cbData);
-                string ffp = Encoding.UTF8.GetString(bytes);
-                DoOpenFile(ffp);
+                fullFilePath = Encoding.UTF8.GetString(bytes);
+                SetForegroundWindow();
+                if (!fullFilePath.IsNullOrEmpty())
+                    DoOpenFile();
             }
         }
 
-        private void DoOpenFile(string ffp)
-        {   // 这里没有支持加密的.c2, 后续要改进
-            fullFilePath = ffp;
+        private void DoOpenFile()
+        {
+            // 这里没有支持加密的.c2, 后续要改进
             using (GuarderUtil.WaitCursor)
                 LoadFile();
+        }
+        private void SetForegroundWindow()
+        {
+            User32.ShowWindowAsync(this.Handle, ShowWindowFlags.SW_MAXIMIZE);
+            User32.SetForegroundWindow(this.Handle);
         }
     }
 }
