@@ -16,8 +16,6 @@ namespace C2
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
-        public const string Software_Version = "1.4.14";
-
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

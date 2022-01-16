@@ -157,7 +157,6 @@ namespace C2.Core
         public static string TempDirectory { get; set; }
         public const float Factor = 1.3F;
 
-        public static string VersionType { get; set; }
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
         public static string LocalPluginsPath = Path.Combine(Application.StartupPath, "plugins");
@@ -167,9 +166,6 @@ namespace C2.Core
         public const string ServerHIUrl = @"http://221.226.113.110:8970";
         public const string ServerUrl = @"http://221.226.113.110:8484";
         public const string IpUrl = @"http://221.226.113.110:8484/Castle/ip?ip=";
-        public const string DLLHostUrl = ServerUrl + "/C2Plugins/";
-        public const string DLLPackageUrl = DLLHostUrl + "packages/";
-        public const string SoftwareUrl = ServerUrl + "/C2Software/";
 
         public static Dictionary<string, string> WFDPredictionCodeDict = new Dictionary<string, string>
         {

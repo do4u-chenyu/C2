@@ -1,16 +1,11 @@
 ﻿using C2.Core;
-using C2.IAOLab.Plugins;
 using C2.Properties;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -29,30 +24,11 @@ namespace C2.Dialogs
         public string scaleStr;
         public string baiduAPIKeyStr;
         public string baiduHeatAPI;
-        private UpdateProgressBar progressBar;
-        private readonly PluginsDownloader downloader;
-        private string newSoftwareVersion;
-        private string packageLocation;
-        private string tmpPackageLocation;
-
 
         public ConfigForm()
         {
             InitializeComponent();
-           
-            this.FHGISHostTB.Text = Global.ServerUrl.Replace("http://", "");
-            this.textBox9.Text = Global.ServerUrl + "/C2Plugins/";
-            this.label12.Text = "插件下载主页：" + Global.ServerUrl + "/C2Plugins/，将dll复制到程序plugins目录即可完成手工安装。";
-            this.pluginsHostTB.Text = Global.ServerUrl.Replace("http://", "");
-
-            Icon = C2.Properties.Resources.logo;
-            progressBar = new UpdateProgressBar();
-            progressBar.FormClosed += FormClosedEventHandler;
-            downloader = new PluginsDownloader
-            {
-                Client_DownloadFileCompleted = this.Client_DownloadFileCompleted,
-                Client_DownloadProgressChanged = this.Client_DownloadProgressChanged
-            };
+            Icon = Properties.Resources.logo;
             lonStr = this.baiduLonTB.Text = Settings.Default.longitude;
             latStr = this.baiduLatTB.Text = Settings.Default.latitude;
             scaleStr = this.baiduScaleTB.Text = Settings.Default.scale;
@@ -64,20 +40,6 @@ namespace C2.Dialogs
         {
             Close();
         }
-        private void CancelUpdateButton_Click(object sender, EventArgs e)
-        {
-            if (this.progressBar.Visible)
-            {
-                MessageBox.Show("正在下载更新，无法关闭",
-                   "下载提示",
-                   MessageBoxButtons.OK,
-                   MessageBoxIcon.Information);
-                return;
-            }
-               
-            Close();
-        }
-
 
         private void PythonBrowseButton_Click(object sender, EventArgs e)
         {
@@ -235,40 +197,13 @@ namespace C2.Dialogs
         {
             UserModelTabPage_Load();
             PythonConfigTabPage_Load();
-            PluginsConfigTabPage_Load();
             WFDConfigTabPage_Load();
-        }
-
-        private void PluginsConfigTabPage_Load()
-        {
-            RefreshInstalledPlugins();
-            RefreshUpdatablePlugins();
         }
 
         private void UserModelTabPage_Load()
         {
             this.userModelTextBox.Text = Global.WorkspaceDirectory;
         }
-
-        private void RefreshUpdatablePlugins()
-        {
-            using (new GuarderUtil.CursorGuarder())
-            {
-                this.availableDGV.Rows.Clear();
-                List<string> updatableInfo = PluginsManager.Instance.UpdatablePluginList();
-                foreach (string info in updatableInfo)
-                {
-                    string[] info_split = info.Split(OpUtil.TabSeparator);
-                    if (info_split.Length < 3)
-                        continue;
-                    string pluginName = info_split[0];
-                    string pluginVersion = info_split[1];
-                    string pluginDesc = info_split[2];
-                    this.availableDGV.Rows.Add(new Object[] { pluginName, pluginVersion, false, pluginDesc }); // 第4列隐藏
-                }
-            }
-        }
-
 
         private void PythonConfigTabPage_Load()
         {
@@ -364,203 +299,6 @@ namespace C2.Dialogs
             this.chosenPythonLable.Text = String.Empty;
         }
 
-
-        private void PluginsCancelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        #region 插件
-        private void RefreshInstalledPlugins()
-        {
-            this.installedDGV.Rows.Clear();
-            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
-            {
-                this.installedDGV.Rows.Add(new Object[] { plugin.GetPluginName(), plugin.GetPluginVersion(), true });
-                this.installedDGV.Rows[this.installedDGV.Rows.Count - 1].ReadOnly = true;
-            }
-        }
-        #endregion
-        private void InstalledDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            String pluginName = this.installedDGV.Rows[e.RowIndex].Cells[0].Value as String;
-            IPlugin pg = PluginsManager.Instance.FindPlugin(pluginName);
-            this.installedTB.Text = pg.GetPluginDescription();
-        }
-
-
-
-        private void InstallButton_Click(object sender, EventArgs e)
-        {
-            using (GuarderUtil.WaitCursor)
-            {
-                foreach (DataGridViewRow row in this.availableDGV.Rows)
-                {
-
-                    if (row.Cells[2].Value == null || !(bool)row.Cells[2].Value)
-                        continue;
-                    try
-                    {
-                        PluginsManager.Instance.DownloadPlugin(GetPluginFullName(row));
-                        MessageBox.Show("插件下载成功，请重启软件加载新插件功能");
-                    }
-                    catch (Exception ex)
-                    {
-                        HelpUtil.ShowMessageBox(ex.Message);
-                    }
-                    return;
-                }
-            }
-
-
-        }
-        private string GetPluginFullName(DataGridViewRow row)
-        {
-            try
-            {
-                return row.Cells[0].Value.ToString() + "-" + row.Cells[1].Value.ToString() + ".dll";
-            }
-            catch
-            {
-                return string.Empty;
-            }
-
-        }
-        private void AvailableDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex != CheckBoxColumnIndex || e.RowIndex == -1) return;
-            // 所有第三列的checkbox只允许互斥单选
-            for (int i = 0; i < availableDGV.Rows.Count; i++)
-                if (i != e.RowIndex)
-                    (availableDGV.Rows[i].Cells[CheckBoxColumnIndex] as DataGridViewCheckBoxCell).Value = false;
-        }
-
-        private void AvailableDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            String pluginDesc = this.availableDGV.Rows[e.RowIndex].Cells[3].Value as String;
-            this.availableTB.Text = pluginDesc;
-        }
-
-        private void PluginsTabControl_Selected(object sender, TabControlEventArgs e)
-        {
-            if (e.TabPage == this.availableSubPage)
-                RefreshUpdatablePlugins(); // 头一个叫available,后一个偏要叫updatable,劝也不听
-            if (e.TabPage == this.installedSubPage)
-                RefreshInstalledPlugins();
-        }
-        #region 检查更新Tab
-
-        private void MainTabControl_Selected(object sender, TabControlEventArgs e)
-        {
-            if (!mainTabControl.SelectedTab.Text.Equals("检查更新"))
-                return;
-           
-            Task.Run(() => CheckUpdate());
-        }
-        private void CheckUpdate()
-        {
-            string currentVersion = Program.Software_Version;
-            this.Invoke((EventHandler)(delegate
-            {
-                this.currentVersion.Text = "V" + currentVersion;
-            }));
-            
-            this.newSoftwareVersion = NewSoftewareVersion();
-            if (IsFormNotExist())
-                return;
-            if (newSoftwareVersion.Contains(currentVersion))
-            {             
-                this.Invoke((EventHandler)(delegate
-                 {
-                     this.SuspendLayout();
-                     this.title.Text = "当前已为最新版本";
-                     this.versionLable.Text = @"当前版本:";
-                     this.version.Text = currentVersion;                    
-                     this.sizeLable.Visible = false;
-                     this.size.Visible = false;
-                     this.checking.Visible = false;
-                     this.button3.Enabled = false;
-                     this.ResumeLayout(false);
-                 }));
-            }
-            else if (newSoftwareVersion.IsNullOrEmpty())
-            {
-                FetchNewVersionFail();
-            }
-            else
-            {
-                string softwareInfo = NewSoftwareInfo(newSoftwareVersion);
-                string[] info_split = softwareInfo.Split(OpUtil.TabSeparator);
-                if (info_split.Length < 3)
-                {
-                    FetchNewVersionFail();
-                    return;
-                }
-                this.Invoke((EventHandler)(delegate
-                {
-                    this.SuspendLayout();
-                    this.version.Text = info_split[0];
-                    this.size.Text = info_split[1];
-                    this.description.Text = info_split[2];
-                    this.checking.Visible = false;
-                    this.ResumeLayout(false);
-                }));
-            }
-        }
-        private void FetchNewVersionFail()
-        {
-            this.Invoke((EventHandler)(delegate
-            {
-                this.currentModelRunLab.Visible = false;
-                this.checkStatus.Text = "联网检查更新失败";
-            }));
-        }
-        private bool IsFormNotExist()
-        {
-            return (!this.IsHandleCreated || this.IsDisposed);
-        }
-        private string NewSoftewareVersion()
-        {
-            string htmlContent = this.downloader.GetHtmlContent(Global.SoftwareUrl);
-            List<string> packageName = PluginsManager.Instance.GetPluginsNameList(htmlContent);
-            return packageName.IsNullOrEmpty() ? string.Empty : packageName[0];
-        }
-        private string NewSoftwareInfo(string name)
-        {
-            string packageDir = Path.Combine(Global.SoftwareUrl, @"software/");
-            return this.downloader.GetPluginInfo(name, packageDir);
-        }
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-            // 正在下载,不能点击更新
-            if (this.progressBar.Visible)
-                return;
-            
-            try
-            {                 
-                string softwareName = newSoftwareVersion.Replace(".info", String.Empty);
-                string packageDir = Path.Combine(Global.SoftwareUrl, @"software/", softwareName);
-                packageLocation = Path.Combine(Global.SoftwareSavePath, softwareName);
-                tmpPackageLocation = packageLocation + ".download";
-                if (File.Exists(packageLocation))
-                    HelpUtil.ShowMessageBox("下载成功，请重启更新软件");
-                else
-                {
-                    this.downloader.SoftwareDownload(packageDir, tmpPackageLocation);
-                    this.progressBar.Status = "下载中";
-                    this.progressBar.ShowDialog();
-                }
-                                                     
-            }
-            catch 
-            {
-                HelpUtil.ShowMessageBox("更新失败，请检查网络连接稍后重试");
-            }
-            
-           
-        }
-        #endregion
-
         private void GisMapOKButton_Click(object sender, EventArgs e)
         {
             if (!IsValidLatitude())
@@ -600,43 +338,6 @@ namespace C2.Dialogs
         {
             return int.TryParse(this.baiduScaleTB.Text, out int scale) && 0 < scale && scale < 20;
         }
-
-        //下载进度变化触发事件
-        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-
-            this.progressBar.MinimumValue = 0;//进度条最小值
-            this.progressBar.MaximumValue = (int)e.TotalBytesToReceive;//下载文件的总大小
-            this.progressBar.CurrentValue = (int)e.BytesReceived;//已经下载的大小
-            this.progressBar.ProgressPercentage = e.ProgressPercentage + "%";//更新界面展示
-            this.progressBar.ProgressValue = e.ProgressPercentage;
-
-        }
-
-        //下载完文件触发此事件
-        private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (this.progressBar.ProgressValue == 100)
-            {
-                this.progressBar.Status = "下载完成,请重启软件实现更新";
-                try 
-                {
-                    if (File.Exists(tmpPackageLocation))
-                        File.Move(tmpPackageLocation, packageLocation);
-                }
-                catch 
-                { }
-               
-            }
-            else
-                this.progressBar.Status = "下载失败，请检查网络重新下载";
-
-        }
-        private void FormClosedEventHandler(object sender, FormClosedEventArgs e)
-        {
-            this.downloader.StopDownloadAsync();
-        }
-
 
         public void UpdateHtmlTemplate()
         {

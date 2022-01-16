@@ -22,7 +22,7 @@ namespace C2.Utils
             {
                 value = defaultValue;
             }
-            return String.IsNullOrEmpty(value.Trim()) ? defaultValue : value.Trim();
+            return String.IsNullOrEmpty(value) ? defaultValue : value.Trim();
         }
         public static bool TrySetAppSettingsByKey(string key, string configValue)
         {

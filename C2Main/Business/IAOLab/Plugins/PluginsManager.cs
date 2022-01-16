@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace C2.IAOLab.Plugins
 {
@@ -15,8 +14,6 @@ namespace C2.IAOLab.Plugins
         private static PluginsManager pluginsManager;
         
         private readonly Dictionary<string, IPlugin> plugins;
-
-        private readonly PluginsDownloader downloader;
 
         public ICollection<IPlugin> Plugins 
         { 
@@ -32,58 +29,9 @@ namespace C2.IAOLab.Plugins
             }
         }
 
-        public List<string> BrowserPluginsInfo()
-        {
-            //访问下载列表
-            string htmlContent = downloader.GetHtmlContent(Global.DLLHostUrl);
-            List<string> pluginsName = GetPluginsNameList(htmlContent);
-
-            return downloader.GetPluginsInfoList(pluginsName, Global.DLLPackageUrl);
-        }
-        public List<string> GetPluginsNameList(string htmlContent)
-        {
-            List<string> result = new List<string>();
-            string dllPattern = string.Format(@"\>(.*?info)\<");
-            try
-            {
-                MatchCollection matchItems = Regex.Matches(htmlContent, dllPattern, RegexOptions.IgnoreCase);
-                foreach (Match match in matchItems)
-                {
-                    string pluginName = match.Groups[1].Value;
-                    result.Add(pluginName);
-                }
-            }
-            catch
-            { }
-            return result;
-        }
-        public List<string> UpdatablePluginList()
-        {
-            List<string> webPlugins = BrowserPluginsInfo();
-            // 例如: 2048111\tV3.1.4\t描述信息2049
-            foreach (IPlugin plugin in PluginsManager.Instance.Plugins)
-            {
-                webPlugins.RemoveAll(x => x.StartsWith(plugin.GetPluginName() + OpUtil.TabSeparator + plugin.GetPluginVersion()));
-            }
-            return webPlugins;
-        }
-
-        public void DownloadPlugin(string pluginName)
-        {
-            string selectedDll = Global.DLLPackageUrl + pluginName;
-            string savePath = Path.Combine(Global.LocalPluginsPath, pluginName);
-            downloader.PluginDownload(selectedDll, savePath);
-        }
-
         private PluginsManager()
         {
             plugins = new Dictionary<string, IPlugin>() { };
-            downloader = new PluginsDownloader();
-        }
-
-        public IPlugin FindPlugin(string pluginName)
-        {
-            return plugins.ContainsKey(pluginName) ? plugins[pluginName] : DLLPlugin.Empty;
         }
 
         public void Refresh()
