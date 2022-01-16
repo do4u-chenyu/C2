@@ -36,7 +36,7 @@ namespace C2.Core
 
 
 
-        public static string GetUsername() { return username; }
+        public static string GetUsername() { return "IAO"; }
         public static MainForm GetMainForm() { return mainForm; }
         public static TaskBar GetTaskBar() { return taskBar; }
         public static Panel GetLeftToolBoxPanel() { return leftToolBoxPanel; }
@@ -133,8 +133,6 @@ namespace C2.Core
                 ret = Global.GetCanvasForm().TopToolBarControl;
             return ret;
         }
-
-        public static void SetUsername(string un) { username = un; }
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetTaskBar(TaskBar tb) { taskBar = tb; }
         public static void SetLeftToolBoxPanel(Panel ltbp) { leftToolBoxPanel = ltbp; }
@@ -160,9 +158,6 @@ namespace C2.Core
         public const float Factor = 1.3F;
 
         public static string VersionType { get; set; }
-        public const string GreenLevel = "Green";
-        public const string GreenPath = "source";
-        public const string IAOLab = "APK, BaseStation, Wifi, Card, Tude, Ip ";
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
         public static string LocalPluginsPath = Path.Combine(Application.StartupPath, "plugins");

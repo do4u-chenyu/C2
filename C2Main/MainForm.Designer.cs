@@ -154,7 +154,6 @@ namespace C2
             this.helpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.helpPictureBox.TabIndex = 3;
             this.helpPictureBox.TabStop = false;
-            this.helpPictureBox.Click += new System.EventHandler(this.HelpPictureBox_Click);
             // 
             // portraitpictureBox
             // 

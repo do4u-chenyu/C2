@@ -38,7 +38,7 @@ namespace C2
     }
     public partial class MainForm: DocumentManageForm
     {
-        public string UserName { get; set; }
+        public string UserName { get => Global.GetUsername(); }
 
         SpecialTabItem TabNew;
         FindDialog MyFindDialog;
@@ -60,20 +60,17 @@ namespace C2
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
         private string fullFilePath;
-        private string filename;
         private string password;
 
         private void InitializeOpenFile(string path)
         {
             fullFilePath = path;
-            filename = Path.GetFileNameWithoutExtension(path);
             password = String.Empty;
         }
 
-        public MainForm(string userName, string path)
+        public MainForm(string ffp)
         {
             InitializeComponent();
-            InitializeUserName(userName);
             InitializeInputDataForm();
             InitializeBottomPrviewPanel();
             InitializeLeftToolPanel();
@@ -83,13 +80,9 @@ namespace C2
             InitializeMdiClient();
             InitializeStartForm();
             OpenSavedTabs();
-            InitializeOpenFile(path);
+            InitializeOpenFile(ffp);
         }
 
-        private void InitializeUserName(string userName)
-        {
-            this.UserName = userName;
-        }
         #region 初始化
         void InitializeInputDataForm()
         {
@@ -176,20 +169,11 @@ namespace C2
         #region Blumnd Hotkey
         void InitializeShortcutKeys()
         {
-            KeyMap.Default.KeyManChanged += new EventHandler(Default_KeyManChanged);
-            Default_KeyManChanged(null, EventArgs.Empty);
-
             ShortcutKeys = new ShortcutKeysTable();
             ShortcutKeys.Register(KeyMap.NextTab, delegate () { taskBar.SelectNextTab(false); });
             ShortcutKeys.Register(KeyMap.PreviousTab, delegate () { taskBar.SelectNextTab(true); });
         }
-        void Default_KeyManChanged(object sender, EventArgs e)
-        {
-            //MenuNew.ShortcutKeyDisplayString = KeyMap.New.ToString();
-            //MenuOpen.ShortcutKeyDisplayString = KeyMap.Open.ToString();
-            //MenuSave.ShortcutKeyDisplayString = KeyMap.Save.ToString();
-            //MenuQuickHelp.ShortcutKeys = KeyMap.Help.Keys;
-        }
+
         #endregion
         void InitializeGlobalVariable()
         {
@@ -326,14 +310,19 @@ namespace C2
             {
                 LoadHotModel();
                 LoadDocuments();
-                if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox(String.Format("[{0}]导入[业务视图]成功", filename));
+                LoadFile();
                 LoadDataSource();
                 LoadIAOLaboratory();
                 LoadHIBU();
             }
         }
-        
+
+        private void LoadFile()
+        {
+            if (ImportModel.GetInstance().UnZipC2File(fullFilePath, UserName, password))
+                HelpUtil.ShowMessageBox(String.Format("[{0}] 导入 业务视图 成功", Path.GetFileNameWithoutExtension(fullFilePath)));
+        }
+
         private void LoadHotModel()
         {
 
@@ -369,7 +358,7 @@ namespace C2
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);
             // 外部数据源加载
-            DataSourceInfo dataSource1 = new DataSourceInfo(this.UserName,"ExternalDataInformation.xml");
+            DataSourceInfo dataSource1 = new DataSourceInfo(this.UserName, "ExternalDataInformation.xml");
             List<LinkButton> linkButtons = dataSource1.LoadExternalData();
             foreach (LinkButton linkButton in linkButtons)
                 this.dataSourceControl.GenLinkButton(linkButton);
@@ -443,15 +432,6 @@ namespace C2
             else
                 HideLeftFold();
         }
-
-        private void HelpPictureBox_Click(object sender, EventArgs e)
-        {
-            if (Global.VersionType.Equals(Global.GreenLevel))
-                return;
-            string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "C2帮助文档.txt");
-            Help.ShowHelp(this, helpfile);
-        }
-
 
         private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {

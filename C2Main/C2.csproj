@@ -3100,9 +3100,6 @@
     <None Include="Resources\html_content.htm" />
     <None Include="Resources\Icons\Artificialintelligence.png" />
     <None Include="Resources\Icons\Businessvw.png" />
-    <Content Include="Resources\Help\C2帮助文档.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Help\WebScan帮助文档.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

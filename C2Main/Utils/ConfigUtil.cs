@@ -9,8 +9,7 @@ namespace C2.Utils
     class ConfigUtil
     {
         public static string DefaultWorkspaceDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/FiberHomeIAOModelDocument";
-        public static string DefaultVersionType = "NonGreen";
-        public static string DefaultIAOLab = "BigAPK, APK, Visualization, Wifi, Card, Tude, Ip";
+        public static string DefaultIAOLab = "BigAPK, APK, Visualization, Wifi, InformationSearch, Tude, PostAndGet ";
 
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")
         {
@@ -23,7 +22,7 @@ namespace C2.Utils
             {
                 value = defaultValue;
             }
-            return String.IsNullOrEmpty(value) ? defaultValue : value.Trim();
+            return String.IsNullOrEmpty(value.Trim()) ? defaultValue : value.Trim();
         }
         public static bool TrySetAppSettingsByKey(string key, string configValue)
         {

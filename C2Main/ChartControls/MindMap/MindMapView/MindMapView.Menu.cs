@@ -1,7 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Business.Option;
 using C2.Core;
-using C2.Database;
 using C2.Dialogs;
 using C2.Dialogs.Base;
 using C2.Dialogs.WidgetChart;
@@ -16,7 +15,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Windows.Forms;
 

@@ -90,8 +90,8 @@ namespace C2.IAOLab.Plugins
         {
             foreach (string dll in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.dll"))
                 TryLoadOne(dll);
-            foreach (string exe in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.exe"))
-                TryLoadOne(exe);
+            //foreach (string exe in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.exe"))
+            //    TryLoadOne(exe);
         }
 
         private void TryLoadOne(string ffp)

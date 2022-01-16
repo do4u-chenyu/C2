@@ -8,8 +8,6 @@ using C2.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -49,24 +47,20 @@ namespace C2
             Application.EnableVisualStyles();//窗体启动前调用
 
             string ffp = args.IsEmpty() ? string.Empty : args[0];
-            Process instance = RunningInstance();
+            Process instance = RunningC2Instance();
 
             if (instance == null)
-                RunByVersion(ffp);
+                RunNewInstance(ffp);
 
             if (instance != null)
-                HandleRunningInstance(ffp, instance);
+                NotifyInstance(ffp, instance);
 
             Options.Current.Save();
         }
 
         private static void ConfigProgram()
         {
-            // 不存在配置项,用默认值
             string workspaceDirectory = ConfigUtil.TryGetAppSettingsByKey("workspace", ConfigUtil.DefaultWorkspaceDirectory);
-            // 存在workspace配置项,但配置项为空
-            if (String.IsNullOrEmpty(workspaceDirectory))
-                workspaceDirectory = ConfigUtil.DefaultWorkspaceDirectory;
 
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
             // 如果硬盘不存在,用程序所在目录
@@ -74,9 +68,6 @@ namespace C2
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
-            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("RunLevel", ConfigUtil.DefaultVersionType);
-            if (Global.VersionType.Equals(Global.GreenLevel))
-                Global.WorkspaceDirectory = Path.Combine(Environment.CurrentDirectory, Global.GreenPath);
 
             //设置临时文件夹路径，默认操作系统临时文件夹路径。如果默认路径有访问权限，用程序的工作目录临时文件夹。
             string tempDir = FileUtil.TryGetSysTempDir();
@@ -86,84 +77,61 @@ namespace C2
                 Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
         }
 
-        public static void RunByVersion(string path)
+        public static void RunNewInstance(string ffp)
         {
-            Global.SetUsername("IAO");
-            Application.Run(new MainForm(Global.GetUsername(), path));
+            Application.Run(new MainForm(ffp));
         }
 
-        #region 确保程序只运行一个实例
-        private static Process RunningInstance()
+        private static Process RunningC2Instance()
         {
-            Process current = Process.GetCurrentProcess();
-            Process[] processes = Process.GetProcessesByName(current.ProcessName);
-            //遍历与当前进程名称相同的进程列表 
-            foreach (Process process in processes)
+            Process curr = Process.GetCurrentProcess();
+            Process[] all = Process.GetProcessesByName(curr.ProcessName);
+
+            foreach (Process proc in all)
             {
-                //如果实例已经存在则忽略当前进程 
-                if (process.Id != current.Id)
-                {
-                    //保证要打开的进程同已经存在的进程来自同一文件路径
-                    if (Assembly.GetExecutingAssembly().Location.Replace("/", "\\") == current.MainModule.FileName)
-                    {
-                        //返回已经存在的进程
-                        if (process.MainWindowHandle != IntPtr.Zero)
-                            return process;
-                    }
-                }
+                if (proc.Id == curr.Id)   
+                    continue;
+                // 有窗体
+                if (proc.MainWindowHandle == IntPtr.Zero)
+                    continue;
+
+                // 来自同一文件
+                if (proc.MainModule.FileName == curr.MainModule.FileName)
+                    return proc;
             }
+
             return null;
         }
-        private static void HandleRunningInstance(string path, Process instance)
+        private static void NotifyInstance(string ffp, Process instance)
         {
-            User32.ShowWindowAsync(instance.MainWindowHandle, 1); //调用api函数，正常显示窗口
-            User32.SetForegroundWindow(instance.MainWindowHandle); //将窗口放置最前端
+            // 将窗口置顶
+            User32.ShowWindowAsync(instance.MainWindowHandle, 1);  
+            User32.SetForegroundWindow(instance.MainWindowHandle);
+
+            _ = !ffp.IsNullOrEmpty() && TryOpenByOtherInstance(ffp, instance);
             
-            if (path.IsEmpty())
-                return;
-
         }
-
-
-        #endregion
-        static bool TryOpenByOtherInstance(string path)
+        static bool TryOpenByOtherInstance(string ffp, Process instance)
         {
-            if (!File.Exists(path))
-                return false;
+            var data = Encoding.UTF8.GetBytes(ffp);
+            var buffer = OSHelper.IntPtrAlloc(data);
 
-            var name = Process.GetCurrentProcess().ProcessName;
-            var otherInstances = Process.GetProcessesByName(name)
-                .Where(inst => inst != Process.GetCurrentProcess() && inst.MainWindowHandle != IntPtr.Zero)
-                .ToArray();
-            if (!otherInstances.IsNullOrEmpty())
+            var cds = new COPYDATASTRUCT
             {
-                var inst = otherInstances.First();
-                var data = Encoding.UTF8.GetBytes(path);
-                var buffer = OSHelper.IntPtrAlloc(data);
-
-                var cds = new COPYDATASTRUCT
-                {
-                    dwData = new IntPtr(OPEN_FILES_MESSAGE),
-                    cbData = data.Length,
-                    lpData = buffer
-                };
-                var cbs_buffer = OSHelper.IntPtrAlloc(cds);
-                IntPtr result = User32.SendMessage(inst.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
-                OSHelper.IntPtrFree(cbs_buffer);
-                OSHelper.IntPtrFree(buffer);
-
-                return result != IntPtr.Zero;
-            }
-
-            return false;
+                dwData = new IntPtr(OPEN_FILES_MESSAGE),
+                cbData = data.Length,
+                lpData = buffer
+            };
+            var cbs_buffer = OSHelper.IntPtrAlloc(cds);
+            IntPtr result = User32.SendMessage(instance.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
+            OSHelper.IntPtrFree(cbs_buffer);
+            OSHelper.IntPtrFree(buffer);
+            return result != IntPtr.Zero;
         }
 
         static bool PreProcessApplicationArgs(string[] args)
         {
-            if (AssociationHelper.PreProcessApplicationArgs(args))
-                return true;
-
-            return false;
+            return AssociationHelper.PreProcessApplicationArgs(args);
         }
 
         static void Current_OpitonsChanged(object sender, EventArgs e)
