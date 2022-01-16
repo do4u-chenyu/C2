@@ -13,7 +13,6 @@ namespace QQSpiderPlugin
     class QrLogin
     {
         private string jsVersion = "21073010";
-        private string sourceURL = "http://find.qq.com/index.html?version=1&im_version=5533&width=910&height=610&search_target=0";
         Session session;
         public Session Session
         {
