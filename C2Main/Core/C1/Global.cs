@@ -18,7 +18,7 @@ namespace C2.Core
 {
     class Global
     {
-        private static string username = "IAO";
+        
         private static MainForm mainForm;
         private static MyModelControl myModelControl;
         private static SearchToolkitControl searchToolkitControl;
@@ -37,6 +37,8 @@ namespace C2.Core
 
 
         public static string GetUsername() { return "IAO"; }
+
+        public static string GetMainWindowTitle() { return "烽步楼Febleau";  }
         public static MainForm GetMainForm() { return mainForm; }
         public static TaskBar GetTaskBar() { return taskBar; }
         public static Panel GetLeftToolBoxPanel() { return leftToolBoxPanel; }
@@ -150,7 +152,7 @@ namespace C2.Core
         public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
 
         public static string WorkspaceDirectory { get; set; } = string.Empty; // 用户空间根目录
-        public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, username); }
+        public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, GetUsername()); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "聚沙成塔"); }
         public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, "全文工具箱"); }

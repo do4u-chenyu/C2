@@ -32,11 +32,11 @@ namespace C2
             //    return;
 
             string ffp = args.Length == 0 ? string.Empty : args[0];
-            Process instance = RunningC2Instance();
+            IntPtr handle = RunningC2MainFormHandle();
             // 已存在C2进程,通知它加载文件或显现
-            if (instance != null)
+            if (handle != IntPtr.Zero)
             {
-                NotifyInstance(ffp, instance);
+                NotifyInstance(ffp, handle);
                 return;
             }
             Shell32.SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);//关联文件自动刷新c2默认图标
@@ -74,24 +74,30 @@ namespace C2
                 Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
         }
 
-        private static Process RunningC2Instance()
+        private static IntPtr RunningC2MainFormHandle()
         {
             Process curr = Process.GetCurrentProcess();
             Process[] all = Process.GetProcessesByName(curr.ProcessName);
+            IntPtr handle = IntPtr.Zero;
 
             foreach (Process proc in all)
             {
                 if (proc.Id == curr.Id)   
                     continue;
-                // 有窗体
+                
                 if (proc.MainWindowHandle == IntPtr.Zero)
                     continue;
-                return proc;
+                // 有窗体
+                handle = proc.MainWindowHandle;
+                // 找到的窗体不对时
+                if (proc.MainWindowTitle != Global.GetMainWindowTitle())  
+                    handle = User32.FindWindow(null, Global.GetMainWindowTitle());
+                
+                return handle == IntPtr.Zero ? proc.MainWindowHandle : handle;
             }
-
-            return null;
+            return handle;
         }
-        private static void NotifyInstance(string ffp, Process instance)
+        private static void NotifyInstance(string ffp, IntPtr instance)
         {
             var data = Encoding.UTF8.GetBytes(ffp);
             var buffer = OSHelper.IntPtrAlloc(data);
@@ -103,7 +109,7 @@ namespace C2
                 lpData = buffer
             };
             var cbs_buffer = OSHelper.IntPtrAlloc(cds);
-            User32.SendMessage(instance.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
+            User32.SendMessage(instance, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
         }
 
         static void Current_OpitonsChanged(object sender, EventArgs e)

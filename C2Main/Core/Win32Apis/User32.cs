@@ -108,5 +108,11 @@ namespace C2.Controls.OS
 
         [DllImport(DllName, SetLastError = true)]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport(DllName, SetLastError = true, EntryPoint = "FindWindowEx")]
+        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpClassName, string lpWindowName);
+
+        [DllImport(DllName, EntryPoint = "FindWindow")]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
     }
 }

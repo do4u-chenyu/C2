@@ -173,7 +173,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(26, 22);
+            this.usernamelabel.Size = new System.Drawing.Size(38, 31);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "BI";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -185,7 +185,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(258, 36);
+            this.label1.Size = new System.Drawing.Size(383, 52);
             this.label1.TabIndex = 0;
             this.label1.Text = "分析师单兵作战装备";
             // 
@@ -520,6 +520,7 @@ namespace C2
             this.websiteFeatureDetectionControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.websiteFeatureDetectionControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.websiteFeatureDetectionControl.Location = new System.Drawing.Point(0, 0);
+            this.websiteFeatureDetectionControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.websiteFeatureDetectionControl.Name = "websiteFeatureDetectionControl";
             this.websiteFeatureDetectionControl.Size = new System.Drawing.Size(185, 558);
             this.websiteFeatureDetectionControl.TabIndex = 0;
@@ -532,6 +533,7 @@ namespace C2
             this.searchToolkitControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.searchToolkitControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchToolkitControl.Location = new System.Drawing.Point(0, 0);
+            this.searchToolkitControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchToolkitControl.Name = "searchToolkitControl";
             this.searchToolkitControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.searchToolkitControl.Size = new System.Drawing.Size(185, 558);
@@ -545,6 +547,7 @@ namespace C2
             this.castleBravoControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.castleBravoControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.castleBravoControl.Location = new System.Drawing.Point(0, 0);
+            this.castleBravoControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.castleBravoControl.Name = "castleBravoControl";
             this.castleBravoControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.castleBravoControl.Size = new System.Drawing.Size(185, 558);
@@ -600,7 +603,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.logLabel.Location = new System.Drawing.Point(122, 5);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(74, 22);
+            this.logLabel.Size = new System.Drawing.Size(110, 31);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前多维运算流程运行情况的日志信息.");
@@ -613,7 +616,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyControlLabel.Location = new System.Drawing.Point(237, 5);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(58, 22);
+            this.pyControlLabel.Size = new System.Drawing.Size(86, 31);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -626,7 +629,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.previewLabel.Location = new System.Drawing.Point(14, 5);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(74, 22);
+            this.previewLabel.Size = new System.Drawing.Size(110, 31);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前视图对应数据源的部分数据预览.");
@@ -798,7 +801,7 @@ namespace C2
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = global::C2.Properties.Resources.logo;
             this.Name = "MainForm";
-            this.Text = "烽步楼Febleau";
+            this.Text = C2.Core.Global.GetMainWindowTitle();
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);
             this.Load += new System.EventHandler(this.MainForm_Load);

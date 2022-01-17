@@ -86,6 +86,7 @@ namespace C2
         {
             this.inputDataForm = new InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
+            this.Text = Global.GetMainWindowTitle();  // 标题用于关联快捷方式
         }
         void InitializeBottomPrviewPanel()
         {
