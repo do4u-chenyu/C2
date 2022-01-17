@@ -8,6 +8,7 @@ using C2.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -16,6 +17,8 @@ namespace C2
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
+        [DllImport("shell32.dll")]
+        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -45,6 +48,7 @@ namespace C2
 
             string ffp = args.Length == 0 ? string.Empty : args[0];
             Process instance = RunningC2Instance();
+            SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
 
             if (instance == null)
                 RunNewInstance(ffp);
