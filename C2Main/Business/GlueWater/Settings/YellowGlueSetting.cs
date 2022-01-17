@@ -95,7 +95,7 @@ namespace C2.Business.GlueWater.Settings
                             "   <td>{5}</td>" +
                             "   <td>{6}</td>" +
                             "   <td>{7}</td>" +
-                            "   <td id=\"th0\">{8}<br><a onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{9}</a><br>{10}</td>" +
+                            "   <td id=\"th0\">{8}<br><a name=\"{9}\" onmousedown=\"ShowDetails(this)\" style=\"cursor:pointer\">{9}</a><br>{10}</td>" +
                             "   <td>{11}<br>{12}<br>{13}</td>" +
                             "   <td><a title =\"删除\" name=\"{9}\" onClick = \"data_del(this)\" href = \"javascript:;\" >删除</ a ></ td >" +
                             "</tr>",
