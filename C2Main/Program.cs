@@ -39,7 +39,7 @@ namespace C2
                 NotifyInstance(ffp, instance);
                 return;
             }
-
+            Shell32.SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);//关联文件自动刷新c2默认图标
             //窗体启动前调用 
             Application.EnableVisualStyles();   
             Application.SetCompatibleTextRenderingDefault(false);
