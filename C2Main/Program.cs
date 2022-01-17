@@ -8,7 +8,6 @@ using C2.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -52,7 +51,6 @@ namespace C2
             RecentFilesManage.Default.Initialize();
             Current_OpitonsChanged(null, EventArgs.Empty);
             ConfigProgram();
-            //Shell32.SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
             Application.Run(new MainForm(ffp));
             Options.Current.Save();
         }
@@ -106,11 +104,6 @@ namespace C2
             };
             var cbs_buffer = OSHelper.IntPtrAlloc(cds);
             User32.SendMessage(instance.MainWindowHandle, WinMessages.WM_COPYDATA, IntPtr.Zero, cbs_buffer);
-        }
-
-        static bool PreProcessApplicationArgs(string[] args)
-        {
-            return AssociationHelper.PreProcessApplicationArgs(args);
         }
 
         static void Current_OpitonsChanged(object sender, EventArgs e)
