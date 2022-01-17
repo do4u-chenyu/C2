@@ -12,7 +12,6 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '开发调试|AnyCPU'">
-    <StartArguments>
-    </StartArguments>
+    <StartArguments>D:\work\C2F\apk模型.c2</StartArguments>
   </PropertyGroup>
 </Project>

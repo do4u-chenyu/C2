@@ -16,5 +16,8 @@ namespace C2.Controls.OS
 
         [DllImport(DllName)]
         public static extern void DragFinish(IntPtr hDrop);
+
+        [DllImport(DllName)]
+        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
     }
 }

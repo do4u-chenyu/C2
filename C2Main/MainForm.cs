@@ -911,8 +911,7 @@ namespace C2
                 byte[] bytes = OSHelper.GetBuffer(cd.lpData, cd.cbData);
                 fullFilePath = Encoding.UTF8.GetString(bytes);
                 SetForegroundWindow();
-                if (!fullFilePath.IsNullOrEmpty())
-                    DoOpenFile();
+                DoOpenFile();
             }
         }
 

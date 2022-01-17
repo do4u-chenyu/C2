@@ -17,8 +17,6 @@ namespace C2
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
-        [DllImport("shell32.dll")]
-        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -31,31 +29,31 @@ namespace C2
                 return;
             }
 
-            if (PreProcessApplicationArgs(args))
-                return;
+            //if (PreProcessApplicationArgs(args))
+            //    return;
 
+            string ffp = args.Length == 0 ? string.Empty : args[0];
+            Process instance = RunningC2Instance();
+            // 已存在C2进程,通知它加载文件或显现
+            if (instance != null)
+            {
+                NotifyInstance(ffp, instance);
+                return;
+            }
+
+            //窗体启动前调用 
+            Application.EnableVisualStyles();   
             Application.SetCompatibleTextRenderingDefault(false);
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
-
-            
+       
             UIColorThemeManage.Initialize();
             LanguageManage.Initialize();
             RecentFilesManage.Default.Initialize();
             Current_OpitonsChanged(null, EventArgs.Empty);
             ConfigProgram();
-            Application.EnableVisualStyles();//窗体启动前调用
-
-            string ffp = args.Length == 0 ? string.Empty : args[0];
-            Process instance = RunningC2Instance();
-            SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
-
-            if (instance == null)
-                RunNewInstance(ffp);
-
-            if (instance != null)
-                NotifyInstance(ffp, instance);
-
+            //Shell32.SHChangeNotify(0x8000000, 0, IntPtr.Zero, IntPtr.Zero);
+            Application.Run(new MainForm(ffp));
             Options.Current.Save();
         }
 
@@ -76,11 +74,6 @@ namespace C2
                 Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
             else
                 Global.TempDirectory = Path.Combine(Global.WorkspaceDirectory, "FiberHomeIAOTemp");
-        }
-
-        public static void RunNewInstance(string ffp)
-        {
-            Application.Run(new MainForm(ffp));
         }
 
         private static Process RunningC2Instance()
