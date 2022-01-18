@@ -89,7 +89,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.enableProxyCB = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBoxThread = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -149,7 +149,7 @@
             this.groupBox6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBoxThread.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -257,7 +257,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 242);
+            this.label6.Location = new System.Drawing.Point(7, 242);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 12);
             this.label6.TabIndex = 15;
@@ -265,7 +265,7 @@
             // 
             // pasteTBCButton
             // 
-            this.pasteTBCButton.Location = new System.Drawing.Point(137, 237);
+            this.pasteTBCButton.Location = new System.Drawing.Point(200, 237);
             this.pasteTBCButton.Name = "pasteTBCButton";
             this.pasteTBCButton.Size = new System.Drawing.Size(76, 23);
             this.pasteTBCButton.TabIndex = 13;
@@ -687,7 +687,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.groupBox4);
-            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Controls.Add(this.groupBoxThread);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
@@ -725,6 +725,7 @@
             // 
             // proxyTestUrlTB
             // 
+            this.proxyTestUrlTB.Enabled = false;
             this.proxyTestUrlTB.Location = new System.Drawing.Point(79, 81);
             this.proxyTestUrlTB.Name = "proxyTestUrlTB";
             this.proxyTestUrlTB.Size = new System.Drawing.Size(275, 21);
@@ -737,7 +738,7 @@
             this.proxyPortTB.Name = "proxyPortTB";
             this.proxyPortTB.Size = new System.Drawing.Size(66, 21);
             this.proxyPortTB.TabIndex = 11;
-            this.proxyPortTB.Text = "10809";
+            this.proxyPortTB.Text = "1080";
             // 
             // proxyIPTB
             // 
@@ -785,27 +786,27 @@
             this.enableProxyCB.UseVisualStyleBackColor = true;
             this.enableProxyCB.CheckedChanged += new System.EventHandler(this.enableProxyCB_CheckedChanged);
             // 
-            // groupBox3
+            // groupBoxThread
             // 
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.domainUpDown4);
-            this.groupBox3.Controls.Add(this.domainUpDown3);
-            this.groupBox3.Controls.Add(this.domainUpDown2);
-            this.groupBox3.Controls.Add(this.domainUpDown1);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(5, 5);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(447, 148);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "线程设置";
+            this.groupBoxThread.Controls.Add(this.label11);
+            this.groupBoxThread.Controls.Add(this.label14);
+            this.groupBoxThread.Controls.Add(this.label13);
+            this.groupBoxThread.Controls.Add(this.label12);
+            this.groupBoxThread.Controls.Add(this.domainUpDown4);
+            this.groupBoxThread.Controls.Add(this.domainUpDown3);
+            this.groupBoxThread.Controls.Add(this.domainUpDown2);
+            this.groupBoxThread.Controls.Add(this.domainUpDown1);
+            this.groupBoxThread.Controls.Add(this.label10);
+            this.groupBoxThread.Controls.Add(this.label9);
+            this.groupBoxThread.Controls.Add(this.label8);
+            this.groupBoxThread.Controls.Add(this.label7);
+            this.groupBoxThread.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxThread.Location = new System.Drawing.Point(5, 5);
+            this.groupBoxThread.Name = "groupBoxThread";
+            this.groupBoxThread.Size = new System.Drawing.Size(447, 148);
+            this.groupBoxThread.TabIndex = 0;
+            this.groupBoxThread.TabStop = false;
+            this.groupBoxThread.Text = "线程设置";
             // 
             // label11
             // 
@@ -1268,8 +1269,8 @@
             this.panel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.groupBoxThread.ResumeLayout(false);
+            this.groupBoxThread.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1311,7 +1312,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBoxThread;
         private System.Windows.Forms.Button proxyTestButton;
         private System.Windows.Forms.TextBox proxyTestUrlTB;
         private System.Windows.Forms.TextBox proxyPortTB;

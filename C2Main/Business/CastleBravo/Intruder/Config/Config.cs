@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Intruder.Config
 {
@@ -81,6 +83,31 @@ namespace C2.Business.CastleBravo.Intruder.Config
                 dictContent.Add(Path.GetFileName(path), contentList);
             }
             return lineCount.ToString();
+        }
+        public HttpWebRequest ConfigurationPostGet(HttpWebRequest req,string proxyIPTB,string proxyPortTB)
+        {
+            req.Method = "GET";
+            req.Timeout = 15 * 1000;
+            req.ContentType = "application/x-www-form-urlencoded";
+
+            WebProxy proxy = new WebProxy();
+            proxy.Address = new Uri(String.Format("{0}{1}{2}{3}", "http://", proxyIPTB, ":", proxyPortTB));
+            req.Proxy = proxy;
+            return req;
+        }
+        public void GetResultParam(HttpWebResponse resp)
+        {
+            try
+            {
+                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+                {
+                    MessageBox.Show("代理可用", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

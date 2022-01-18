@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Intruder
@@ -118,11 +120,34 @@ namespace C2.Business.CastleBravo.Intruder
         {
 
         }
-
+        //验证IP是否可用
         private void proxyTestButton_Click(object sender, System.EventArgs e)
         {
-
+            if (proxyIPTB.Text != string.Empty && proxyPortTB.Text != string.Empty)
+            {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(proxyTestUrlTB.Text);
+                config.ConfigurationPostGet(req, proxyIPTB.Text, proxyPortTB.Text);
+                try 
+                { 
+                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                    config.GetResultParam(resp);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else 
+            {
+                MessageBox.Show("请输入服务器地址或端口", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }  
         }
+
+       
+
+     
+        
+
 
         private void enableProxyCB_CheckedChanged(object sender, System.EventArgs e)
         {
