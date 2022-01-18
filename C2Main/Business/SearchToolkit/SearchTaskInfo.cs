@@ -59,7 +59,7 @@ namespace C2.SearchToolkit
             ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
             ["黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
-            ["大马模型"] = "batchquery_dm_accountPass_C2_20220107.py_{0}.py",
+            ["大马模型"] = "batchquery_dm_accountPass_C2_20220107_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
             ["DSQ查询"] = "main_rule_http_xxxx.py",
         };
