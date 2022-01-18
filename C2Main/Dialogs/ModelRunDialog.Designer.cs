@@ -40,9 +40,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 12);
+            this.label1.Size = new System.Drawing.Size(125, 12);
             this.label1.TabIndex = 10004;
-            this.label1.Text = "模型将重新运行，请确认：";
+            this.label1.Text = "模型将运行, 请确认：";
             // 
             // groupBox
             // 
@@ -65,7 +65,7 @@
             this.continueRun.Name = "continueRun";
             this.continueRun.Size = new System.Drawing.Size(71, 16);
             this.continueRun.TabIndex = 1;
-            this.continueRun.Text = "继续运行";
+            this.continueRun.Text = "继续上次";
             this.continueRun.UseVisualStyleBackColor = true;
             // 
             // restartRun
