@@ -1,5 +1,7 @@
-﻿using C2.Utils;
+﻿using C2.Business.CastleBravo.WebScan.Tools;
+using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -9,16 +11,44 @@ namespace C2.Business.CastleBravo.Intruder
 {
     public partial class IntruderForm : Form
     {
+        private Config.Config config;
         string[] splitLine;
         string lastLine = string.Empty;
         //Boolean flag = true;
         string dictDirectory;
+        Dictionary<string, List<string>> dictContent;
         public IntruderForm()
         {
             InitializeComponent();
+            config = new Config.Config();
             this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "IntruderDict");
+            RefreshDict();
         }
 
+        //字典配置
+        private void RefreshDict()
+        {
+            //TODO 考虑一下把文件内容加入字典，计算行数和放入字典可以写在一起
+            this.dictContent = new Dictionary<string, List<string>>();
+            this.dictLV.Items.Clear();
+
+            int dictCount = 0;
+
+            foreach (string dictPath in config.GetDictByPath(this.dictDirectory))
+            {
+                dictCount++;
+
+                ListViewItem lvi = new ListViewItem(dictCount + "");
+                lvi.Tag = Path.GetFileName(dictPath);
+                lvi.SubItems.Add(Path.GetFileName(dictPath));
+                lvi.SubItems.Add(config.GetFileLines(dictPath, this.dictContent));
+                lvi.SubItems.Add(config.GetFileSize(dictPath));
+
+                this.dictLV.Items.Add(lvi);
+            }
+        }
+        
+       
         //目标地址自动解析
         private void textBoxRequestMessage_TextChanged(object sender, EventArgs e)
         {
@@ -147,6 +177,28 @@ namespace C2.Business.CastleBravo.Intruder
         private void openDictPathBtn_Click(object sender, EventArgs e)
         {
             ProcessUtil.ProcessOpen(this.dictDirectory);
+        }
+
+        //刷新字典
+        private void refreshDictBtn_Click(object sender, EventArgs e)
+        {
+            RefreshDict();
+        }
+        //全选
+        private void allSelected_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in dictLV.Items)
+                lvi.Checked = true;
+        }
+        //全不选
+        private void noSelected_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in dictLV.Items)
+                lvi.Checked = false;
+        }
+        private void dictLV_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            groupBox2.Text = string.Format("字典（激活{0}个）", dictLV.CheckedItems.Count);
         }
     }
 }

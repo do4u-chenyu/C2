@@ -262,6 +262,7 @@
     <Compile Include="Business\CastleBravo\Cracker\SmartThread\WorkItemsQueue.cs" />
     <Compile Include="Business\CastleBravo\Cracker\Tools\FileTool.cs" />
     <Compile Include="Business\CastleBravo\Cracker\Tools\Tool.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\Config\Config.cs" />
     <Compile Include="Business\CastleBravo\Intruder\IntruderForm.cs">
       <SubType>Form</SubType>
     </Compile>

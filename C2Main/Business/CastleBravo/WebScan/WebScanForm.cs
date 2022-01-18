@@ -133,12 +133,12 @@ namespace C2.Business.CastleBravo.WebScan
         {
             groupBox2.Text = string.Format("字典（激活{0}个）", dictListView.CheckedItems.Count);
         }
-
+        //字典目录
         private void OpenDictPathBtn_Click(object sender, EventArgs e)
         {
             ProcessUtil.ProcessOpen(this.dictDirectory);
         }
-
+        //刷新字典
         private void RefreshDictBtn_Click(object sender, EventArgs e)
         {
             RefreshDict();
