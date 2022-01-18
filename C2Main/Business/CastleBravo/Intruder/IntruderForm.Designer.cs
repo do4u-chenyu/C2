@@ -32,11 +32,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.openDictPathBtn = new System.Windows.Forms.Button();
             this.pasteTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pasteTBCButton = new System.Windows.Forms.Button();
             this.dictLV = new System.Windows.Forms.ListView();
-            this.label5 = new System.Windows.Forms.Label();
+            this.dictID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dictName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label25 = new System.Windows.Forms.Label();
             this.clearReqMessageButton = new System.Windows.Forms.Button();
@@ -183,11 +185,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.openDictPathBtn);
             this.groupBox2.Controls.Add(this.pasteTextBox);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.pasteTBCButton);
             this.groupBox2.Controls.Add(this.dictLV);
-            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(667, 3);
             this.groupBox2.Name = "groupBox2";
@@ -195,6 +197,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典设置";
+            // 
+            // openDictPathBtn
+            // 
+            this.openDictPathBtn.Location = new System.Drawing.Point(9, 16);
+            this.openDictPathBtn.Name = "openDictPathBtn";
+            this.openDictPathBtn.Size = new System.Drawing.Size(63, 23);
+            this.openDictPathBtn.TabIndex = 17;
+            this.openDictPathBtn.Text = "字典目录";
+            this.openDictPathBtn.UseVisualStyleBackColor = true;
+            this.openDictPathBtn.Click += new System.EventHandler(this.openDictPathBtn_Click);
             // 
             // pasteTextBox
             // 
@@ -225,21 +237,24 @@
             // 
             // dictLV
             // 
+            this.dictLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dictID,
+            this.dictName});
             this.dictLV.HideSelection = false;
             this.dictLV.Location = new System.Drawing.Point(8, 41);
             this.dictLV.Name = "dictLV";
             this.dictLV.Size = new System.Drawing.Size(204, 186);
             this.dictLV.TabIndex = 6;
             this.dictLV.UseCompatibleStateImageBehavior = false;
+            this.dictLV.View = System.Windows.Forms.View.Details;
             // 
-            // label5
+            // dictID
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 12);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "选择内置字典：";
+            this.dictID.Text = "ID";
+            // 
+            // dictName
+            // 
+            this.dictName.Text = "字典名称";
             // 
             // groupBox1
             // 
@@ -279,10 +294,10 @@
             this.clearReqMessageButton.UseVisualStyleBackColor = true;
             this.clearReqMessageButton.Click += new System.EventHandler(this.packageTBCbutton_Click);
             // 
-            // markCbutton
+            // delSignButton
             // 
             this.delSignButton.Location = new System.Drawing.Point(498, 69);
-            this.delSignButton.Name = "markCbutton";
+            this.delSignButton.Name = "delSignButton";
             this.delSignButton.Size = new System.Drawing.Size(75, 23);
             this.delSignButton.TabIndex = 7;
             this.delSignButton.Text = "清除标记";
@@ -308,7 +323,6 @@
             this.tBReqMess.TabIndex = 3;
             this.tBReqMess.Text = "";
             this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
-           
             // 
             // TextBoxReferer
             // 
@@ -1227,7 +1241,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button clearReqMessageButton;
         private System.Windows.Forms.Button delSignButton;
@@ -1323,5 +1336,8 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ColumnHeader dictID;
+        private System.Windows.Forms.ColumnHeader dictName;
+        private System.Windows.Forms.Button openDictPathBtn;
     }
 }

@@ -3365,6 +3365,21 @@
     <Content Include="Resources\Images\WebScan.png" />
     <None Include="Resources\Images\webshell.png" />
     <None Include="Resources\Images\WidgetImage\organizationChart.png" />
+    <Content Include="Resources\IntruderDict\0-9数字.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\IntruderDict\3个字母单词.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\IntruderDict\4个字母的单词.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\IntruderDict\5个字母的单词.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\IntruderDict\6个字母的单词.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

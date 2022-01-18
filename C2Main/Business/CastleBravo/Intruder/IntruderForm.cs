@@ -1,6 +1,8 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Intruder
@@ -10,9 +12,11 @@ namespace C2.Business.CastleBravo.Intruder
         string[] splitLine;
         string lastLine = string.Empty;
         //Boolean flag = true;
+        string dictDirectory;
         public IntruderForm()
         {
             InitializeComponent();
+            this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "IntruderDict");
         }
 
         //目标地址自动解析
@@ -139,6 +143,10 @@ namespace C2.Business.CastleBravo.Intruder
 
         }
 
-       
+        //字典目录
+        private void openDictPathBtn_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.ProcessOpen(this.dictDirectory);
+        }
     }
 }
