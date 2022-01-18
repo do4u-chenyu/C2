@@ -822,6 +822,12 @@
     <Compile Include="Dialogs\IAOLab\InformationSearch.Designer.cs">
       <DependentUpon>InformationSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ModelRunDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ModelRunDialog.Designer.cs">
+      <DependentUpon>ModelRunDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SearchToolkit\SearchToolkitModelSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2537,6 +2543,9 @@
     <EmbeddedResource Include="Dialogs\InternetImageDialog.resx">
       <DependentUpon>InternetImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ModelRunDialog.resx">
+      <DependentUpon>ModelRunDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PictureViewDialog.resx">
       <DependentUpon>PictureViewDialog.cs</DependentUpon>
