@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IntruderForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -134,7 +135,20 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.scanTimer = new System.Windows.Forms.Timer(this.components);
+            this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressPercent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanUseTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanThreadStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.threadPoolStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -162,6 +176,7 @@
             this.groupBox12.SuspendLayout();
             this.urlTB.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -173,7 +188,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(960, 551);
+            this.tabControl1.Size = new System.Drawing.Size(956, 602);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -183,7 +198,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(952, 525);
+            this.tabPage1.Size = new System.Drawing.Size(952, 576);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "报文设置";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -201,7 +216,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(667, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(282, 519);
+            this.groupBox2.Size = new System.Drawing.Size(282, 570);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
@@ -322,7 +337,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(664, 519);
+            this.groupBox1.Size = new System.Drawing.Size(664, 570);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "报文数据";
@@ -370,7 +385,7 @@
             // tBReqMess
             // 
             this.tBReqMess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tBReqMess.Location = new System.Drawing.Point(9, 96);
+            this.tBReqMess.Location = new System.Drawing.Point(9, 122);
             this.tBReqMess.Name = "tBReqMess";
             this.tBReqMess.Size = new System.Drawing.Size(649, 418);
             this.tBReqMess.TabIndex = 3;
@@ -410,7 +425,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(952, 525);
+            this.tabPage2.Size = new System.Drawing.Size(952, 576);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "配置";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -424,7 +439,7 @@
             this.panel2.Location = new System.Drawing.Point(460, 3);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.panel2.Size = new System.Drawing.Size(489, 519);
+            this.panel2.Size = new System.Drawing.Size(489, 570);
             this.panel2.TabIndex = 1;
             // 
             // groupBox10
@@ -433,7 +448,7 @@
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(5, 114);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(479, 400);
+            this.groupBox10.Size = new System.Drawing.Size(479, 451);
             this.groupBox10.TabIndex = 4;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "HTTP返回数据处理";
@@ -443,7 +458,7 @@
             this.tabControl2.Controls.Add(this.tabPage4);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl2.Location = new System.Drawing.Point(3, 22);
+            this.tabControl2.Location = new System.Drawing.Point(3, 73);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(473, 375);
@@ -692,7 +707,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(457, 519);
+            this.panel1.Size = new System.Drawing.Size(457, 570);
             this.panel1.TabIndex = 0;
             // 
             // groupBox4
@@ -928,7 +943,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(952, 525);
+            this.tabPage3.Size = new System.Drawing.Size(948, 576);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "结果观察窗";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -940,7 +955,7 @@
             this.panel4.Location = new System.Drawing.Point(460, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5);
-            this.panel4.Size = new System.Drawing.Size(489, 497);
+            this.panel4.Size = new System.Drawing.Size(485, 548);
             this.panel4.TabIndex = 2;
             // 
             // tabControl3
@@ -953,7 +968,7 @@
             this.tabControl3.Location = new System.Drawing.Point(5, 5);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(479, 487);
+            this.tabControl3.Size = new System.Drawing.Size(475, 538);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage8
@@ -962,7 +977,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(471, 461);
+            this.tabPage8.Size = new System.Drawing.Size(467, 512);
             this.tabPage8.TabIndex = 0;
             this.tabPage8.Text = "请求包";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -977,8 +992,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listView9);
-            this.splitContainer1.Size = new System.Drawing.Size(465, 455);
-            this.splitContainer1.SplitterDistance = 293;
+            this.splitContainer1.Size = new System.Drawing.Size(461, 506);
+            this.splitContainer1.SplitterDistance = 292;
             this.splitContainer1.TabIndex = 0;
             // 
             // listView9
@@ -990,7 +1005,7 @@
             this.listView9.HideSelection = false;
             this.listView9.Location = new System.Drawing.Point(0, 0);
             this.listView9.Name = "listView9";
-            this.listView9.Size = new System.Drawing.Size(465, 158);
+            this.listView9.Size = new System.Drawing.Size(461, 210);
             this.listView9.TabIndex = 0;
             this.listView9.UseCompatibleStateImageBehavior = false;
             this.listView9.View = System.Windows.Forms.View.Details;
@@ -1010,7 +1025,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(471, 461);
+            this.tabPage9.Size = new System.Drawing.Size(471, 512);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "返回包";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1020,7 +1035,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(471, 461);
+            this.tabPage10.Size = new System.Drawing.Size(471, 512);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "页面浏览";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1030,13 +1045,14 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(471, 461);
+            this.tabPage11.Size = new System.Drawing.Size(471, 512);
             this.tabPage11.TabIndex = 3;
             this.tabPage11.Text = "状态信息";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.groupBox3);
             this.panel3.Controls.Add(this.groupBox13);
             this.panel3.Controls.Add(this.groupBox12);
             this.panel3.Controls.Add(this.urlTB);
@@ -1044,16 +1060,16 @@
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(457, 497);
+            this.panel3.Size = new System.Drawing.Size(457, 548);
             this.panel3.TabIndex = 1;
             // 
             // groupBox13
             // 
             this.groupBox13.Controls.Add(this.listView8);
-            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox13.Location = new System.Drawing.Point(5, 96);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(447, 396);
+            this.groupBox13.Size = new System.Drawing.Size(447, 279);
             this.groupBox13.TabIndex = 2;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "请求结果";
@@ -1069,12 +1085,12 @@
             this.columnHeader10,
             this.columnHeader11,
             this.columnHeader12});
-            this.listView8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView8.Dock = System.Windows.Forms.DockStyle.Top;
             this.listView8.GridLines = true;
             this.listView8.HideSelection = false;
             this.listView8.Location = new System.Drawing.Point(3, 17);
             this.listView8.Name = "listView8";
-            this.listView8.Size = new System.Drawing.Size(441, 376);
+            this.listView8.Size = new System.Drawing.Size(441, 427);
             this.listView8.TabIndex = 0;
             this.listView8.UseCompatibleStateImageBehavior = false;
             this.listView8.View = System.Windows.Forms.View.Details;
@@ -1128,7 +1144,7 @@
             // 
             // stopButton
             // 
-            this.stopButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.stopButton.Location = new System.Drawing.Point(336, 16);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 23);
@@ -1139,7 +1155,7 @@
             // 
             // suspendButton
             // 
-            this.suspendButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.suspendButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.suspendButton.Location = new System.Drawing.Point(193, 16);
             this.suspendButton.Name = "suspendButton";
             this.suspendButton.Size = new System.Drawing.Size(75, 23);
@@ -1150,7 +1166,7 @@
             // 
             // startButton
             // 
-            this.startButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.startButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.startButton.Location = new System.Drawing.Point(46, 16);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(75, 23);
@@ -1221,25 +1237,119 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip.Location = new System.Drawing.Point(3, 500);
+            this.toolStripStatusLabel1,
+            this.progressBar,
+            this.progressPercent,
+            this.toolStripStatusLabel2,
+            this.scanUseTime,
+            this.toolStripStatusLabel3,
+            this.scanThreadStatus,
+            this.toolStripStatusLabel4,
+            this.threadPoolStatus,
+            this.toolStripStatusLabel5,
+            this.scanSpeed});
+            this.statusStrip.Location = new System.Drawing.Point(3, 551);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(946, 22);
+            this.statusStrip.Size = new System.Drawing.Size(942, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip1";
+            // 
+            // scanTimer
+            // 
+            this.scanTimer.Interval = 1000;
+            this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
+            // 
+            // logTextBox
+            // 
+            this.logTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logTextBox.Location = new System.Drawing.Point(3, 17);
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.Size = new System.Drawing.Size(441, 142);
+            this.logTextBox.TabIndex = 3;
+            this.logTextBox.Text = "";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
-            this.toolStripStatusLabel1.Text = "就绪！";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusLabel1.Text = "进度";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(150, 16);
+            // 
+            // progressPercent
+            // 
+            this.progressPercent.Name = "progressPercent";
+            this.progressPercent.Size = new System.Drawing.Size(26, 17);
+            this.progressPercent.Text = "0%";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel2.Text = "用时：";
+            // 
+            // scanUseTime
+            // 
+            this.scanUseTime.Name = "scanUseTime";
+            this.scanUseTime.Size = new System.Drawing.Size(15, 17);
+            this.scanUseTime.Text = "0";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel3.Text = "线程：";
+            // 
+            // scanThreadStatus
+            // 
+            this.scanThreadStatus.Name = "scanThreadStatus";
+            this.scanThreadStatus.Size = new System.Drawing.Size(27, 17);
+            this.scanThreadStatus.Text = "0/0";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(92, 17);
+            this.toolStripStatusLabel4.Text = "预计检查队列：";
+            // 
+            // threadPoolStatus
+            // 
+            this.threadPoolStatus.Name = "threadPoolStatus";
+            this.threadPoolStatus.Size = new System.Drawing.Size(15, 17);
+            this.threadPoolStatus.Text = "0";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel5.Text = "速度：";
+            // 
+            // scanSpeed
+            // 
+            this.scanSpeed.Name = "scanSpeed";
+            this.scanSpeed.Size = new System.Drawing.Size(15, 17);
+            this.scanSpeed.Text = "0";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.logTextBox);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(5, 375);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(447, 162);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "日志";
             // 
             // IntruderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(960, 551);
+            this.ClientSize = new System.Drawing.Size(956, 602);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1286,6 +1396,7 @@
             this.urlTB.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1375,7 +1486,6 @@
         private System.Windows.Forms.CheckBox sslCB;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListView listView9;
         private System.Windows.Forms.ColumnHeader columnHeader13;
@@ -1398,5 +1508,19 @@
         private System.Windows.Forms.Button noSelected;
         private System.Windows.Forms.ColumnHeader Line;
         private System.Windows.Forms.ColumnHeader size;
+        private System.Windows.Forms.Timer scanTimer;
+        private System.Windows.Forms.RichTextBox logTextBox;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel progressPercent;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel scanUseTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel scanThreadStatus;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel threadPoolStatus;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel scanSpeed;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

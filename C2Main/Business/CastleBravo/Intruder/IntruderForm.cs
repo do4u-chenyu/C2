@@ -1,4 +1,5 @@
-﻿using C2.Business.CastleBravo.WebScan.Tools;
+﻿using Amib.Threading;
+using C2.Business.CastleBravo.WebScan.Tools;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,18 +8,31 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.Intruder
 {
     public partial class IntruderForm : Form
     {
+        private SmartThreadPool stp = new SmartThreadPool();
+        private Thread sThread = null;
         private Config.Config config;
+        delegate void VoidDelegate();
+        delegate void update();
+
+        private int scanRunTime = 0;//已扫描时间
+        private long lastCount = 0;
+        private long scanSumCount = 0;//扫描目录总数
+
         string[] splitLine;
         string lastLine = string.Empty;
         //Boolean flag = true;
         string dictDirectory;
         Dictionary<string, List<string>> dictContent;
+
+
+
         public IntruderForm()
         {
             InitializeComponent();
@@ -116,11 +130,131 @@ namespace C2.Business.CastleBravo.Intruder
 
         }
 
+
+        /*
+         * 停止功能
+         * stopButton_Click
+         */
         private void stopButton_Click(object sender, System.EventArgs e)
         {
-
+            Thread t = new Thread(BreakScan);
+            t.Start();
         }
-        //验证IP是否可用
+        public void BreakScan()
+        {
+            if (stp != null && !stp.IsShuttingdown && this.sThread != null)
+            {
+                LogWarning("等待线程结束...");
+                stp.Cancel();
+                this.sThread.Abort();
+                while (stp.InUseThreads > 0)
+                {
+                    Thread.Sleep(50);
+                }
+
+                //更新状态
+                this.Invoke(new VoidDelegate(StopScan));
+            }
+        }
+
+        public void StopScan()
+        {
+            this.Invoke(new VoidDelegate(this.scanTimer.Stop));
+            this.Invoke(new update(UpdateStatus));
+            this.startButton.Enabled = true;
+            LogMessage("扫描结束");
+        }
+
+        #region 日志
+        public delegate void LogAppendDelegate(Color color, string text);
+       /*
+        * 显示追加信息
+        * color:文本颜色
+        * text：显示文本
+        */
+        public void LogAppend(Color color, string text)
+        {
+            if (this.logTextBox.Text.Length > 10000)
+            {
+                this.logTextBox.Clear();
+            }
+            this.logTextBox.SelectionColor = color;
+            this.logTextBox.HideSelection = false;
+            this.logTextBox.AppendText(text + Environment.NewLine);
+        }
+
+
+        //显示一般信息 
+        public void LogMessage(string text)
+        {
+            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
+            this.logTextBox.Invoke(la, Color.Black, DateTime.Now + "----" + text);
+        }
+
+        
+        //显示警告信息 
+        public void LogWarning(string text)
+        {
+            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
+            this.logTextBox.Invoke(la, Color.Violet, DateTime.Now + "----" + text);
+        }
+
+        #endregion
+
+
+        #region 底部进度
+        private void ScanTimer_Tick(object sender, EventArgs e)
+        {
+            this.scanRunTime++;
+            this.Invoke(new update(UpdateStatus));
+        }
+
+        private void UpdateStatus()
+        {
+            try
+            {
+                if (stp != null)
+                {
+                    long processedCount = stp.WorkItemsProcessedCount;
+                    this.scanSpeed.Text = (processedCount - this.lastCount) + "";
+                    this.lastCount = processedCount;
+
+                    this.scanThreadStatus.Text = stp.InUseThreads + "/" + stp.Concurrency;
+                    this.threadPoolStatus.Text = processedCount.ToString() + "/" + scanSumCount;
+
+                    int c = 0;
+                    if (this.scanSumCount != 0)
+                    {
+                        c = (int)Math.Floor((processedCount * 100 / (double)this.scanSumCount));
+                        c = c >= 100 ? 100 : c;
+                    }
+                    this.progressPercent.Text = c + "%";
+                    this.progressBar.Value = c;
+                }
+
+                this.scanUseTime.Text = this.scanRunTime + "";
+            }
+            catch (Exception e)
+            {
+                LogWarning(e.Message);
+            }
+        }
+        #endregion
+
+       
+
+       
+
+
+
+
+
+
+
+        /*
+         * 验证IP是否可用
+         * proxyTestButton_Click
+         */
         private void proxyTestButton_Click(object sender, System.EventArgs e)
         {
             if (proxyIPTB.Text != string.Empty && proxyPortTB.Text != string.Empty)
@@ -143,12 +277,7 @@ namespace C2.Business.CastleBravo.Intruder
             }  
         }
 
-       
-
-     
-        
-
-
+      
         private void enableProxyCB_CheckedChanged(object sender, System.EventArgs e)
         {
 

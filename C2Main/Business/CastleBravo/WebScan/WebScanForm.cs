@@ -207,17 +207,17 @@ namespace C2.Business.CastleBravo.WebScan
         {
             //TODO 其他配置项待加入
 
-            config.ShowCodes = this.statusCodeTextBox.Text;
-            config.Method = this.httpMethodCombo.Text;
-            config.ThreadSize = int.Parse(this.threadSizeCombo.Text);
-            config.TimeOut = int.Parse(this.timeOutCombo.Text);
-            config.SleepTime = int.Parse(this.sleepTimeCombo.Text);
+            config.ShowCodes = this.statusCodeTextBox.Text;//状态码
+            config.Method = this.httpMethodCombo.Text;//http方法
+            config.ThreadSize = int.Parse(this.threadSizeCombo.Text);//线程数
+            config.TimeOut = int.Parse(this.timeOutCombo.Text);//超时
+            config.SleepTime = int.Parse(this.sleepTimeCombo.Text);//延时
         }
         private void ExportBtn_Click(object sender, EventArgs e)
         {
             ExportResults();
         }
-
+        //停止扫描
         private void StopBtn_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(BreakScan);
@@ -297,7 +297,7 @@ namespace C2.Business.CastleBravo.WebScan
 
             stp = new SmartThreadPool
             {
-                MaxThreads = config.ThreadSize
+                MaxThreads = config.ThreadSize//最大线程数
             };
 
             sThread = new Thread(new ThreadStart(ScanThread));
@@ -706,5 +706,6 @@ namespace C2.Business.CastleBravo.WebScan
             }
             catch { };
         }
+
     }
 }

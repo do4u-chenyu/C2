@@ -84,6 +84,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
             }
             return lineCount.ToString();
         }
+
         public HttpWebRequest ConfigurationPostGet(HttpWebRequest req,string proxyIPTB,string proxyPortTB)
         {
             req.Method = "GET";
@@ -95,6 +96,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
             req.Proxy = proxy;
             return req;
         }
+
         public void GetResultParam(HttpWebResponse resp)
         {
             try

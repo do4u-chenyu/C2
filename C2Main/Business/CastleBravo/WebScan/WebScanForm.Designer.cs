@@ -88,12 +88,12 @@
             this.exportBtn = new System.Windows.Forms.Button();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.HelpLabel = new System.Windows.Forms.LinkLabel();
             this.loginCheckBox = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.editorCheckBox = new System.Windows.Forms.CheckBox();
             this.loopCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.HelpLabel = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -642,6 +642,18 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "扫描策略_TODO";
             // 
+            // HelpLabel
+            // 
+            this.HelpLabel.AutoSize = true;
+            this.HelpLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.HelpLabel.Location = new System.Drawing.Point(13, 146);
+            this.HelpLabel.Name = "HelpLabel";
+            this.HelpLabel.Size = new System.Drawing.Size(83, 12);
+            this.HelpLabel.TabIndex = 10;
+            this.HelpLabel.TabStop = true;
+            this.HelpLabel.Text = "必看帮助说明";
+            this.HelpLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLabel_LinkClicked);
+            // 
             // loginCheckBox
             // 
             this.loginCheckBox.AutoSize = true;
@@ -687,18 +699,6 @@
             this.loopCheckBox.Text = "403遍历";
             this.toolTip1.SetToolTip(this.loopCheckBox, "利用403返回码和专用字典，高效遍历网站目录。");
             this.loopCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // HelpLabel
-            // 
-            this.HelpLabel.AutoSize = true;
-            this.HelpLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.HelpLabel.Location = new System.Drawing.Point(13, 146);
-            this.HelpLabel.Name = "HelpLabel";
-            this.HelpLabel.Size = new System.Drawing.Size(83, 12);
-            this.HelpLabel.TabIndex = 10;
-            this.HelpLabel.TabStop = true;
-            this.HelpLabel.Text = "必看帮助说明";
-            this.HelpLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLabel_LinkClicked);
             // 
             // WebScanForm
             // 
