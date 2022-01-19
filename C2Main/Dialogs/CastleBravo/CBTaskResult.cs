@@ -76,7 +76,7 @@ namespace C2.Dialogs.CastleBravo
             if (TaskInfo.Status == CastleBravoTaskStatus.Done)
                 statusDes = "Done ...点详情查看...";
             if (TaskInfo.Status == CastleBravoTaskStatus.Running)
-                statusDes = "Running ...请耐心等待...";
+                statusDes = "Running...彩虹表约需20分钟";
 
             taskStatusLabel.Text = String.Format("[{0}]     成功率 : {1}/{2} = {3:0.00%}",
                 statusDes, 

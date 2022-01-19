@@ -86,6 +86,7 @@
             // 
             this.taskStatusLabel.AutoSize = true;
             this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.taskStatusLabel.ForeColor = System.Drawing.Color.MidnightBlue;
             this.taskStatusLabel.Location = new System.Drawing.Point(161, 80);
             this.taskStatusLabel.Name = "taskStatusLabel";
             this.taskStatusLabel.Size = new System.Drawing.Size(63, 19);
