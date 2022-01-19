@@ -27,8 +27,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
-                //respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);
-                respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName));
+                respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);//填写熵情口令
+                //respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName));
             }
 
             if (respMsg == "success")

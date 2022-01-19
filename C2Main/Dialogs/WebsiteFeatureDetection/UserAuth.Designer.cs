@@ -100,7 +100,8 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 11);
             this.label3.TabIndex = 10008;
-            this.label3.Text = "(暂时不填）";
+            this.label3.Text = "(需要填写）";
+            this.label3.Visible = false;
             // 
             // UserAuth
             // 

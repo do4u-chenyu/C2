@@ -217,7 +217,8 @@ namespace C2.Business.CastleBravo.WebScan
         {
             ExportResults();
         }
-        //停止扫描
+
+        //停止扫描功能
         private void StopBtn_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(BreakScan);
@@ -275,6 +276,7 @@ namespace C2.Business.CastleBravo.WebScan
             return true;
         }
 
+        //开始扫描功能
         private void StartBtn_Click(object sender, EventArgs e)
         {
             if (!CheckStartOption())

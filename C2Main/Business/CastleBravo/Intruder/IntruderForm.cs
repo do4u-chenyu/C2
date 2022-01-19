@@ -30,6 +30,7 @@ namespace C2.Business.CastleBravo.Intruder
         //Boolean flag = true;
         string dictDirectory;
         Dictionary<string, List<string>> dictContent;
+        //private List<string> domainList;
 
 
 
@@ -46,7 +47,7 @@ namespace C2.Business.CastleBravo.Intruder
         {
             //TODO 考虑一下把文件内容加入字典，计算行数和放入字典可以写在一起
             this.dictContent = new Dictionary<string, List<string>>();
-            this.dictLV.Items.Clear();
+            this.dictListView.Items.Clear();
 
             int dictCount = 0;
 
@@ -60,7 +61,7 @@ namespace C2.Business.CastleBravo.Intruder
                 lvi.SubItems.Add(config.GetFileLines(dictPath, this.dictContent));
                 lvi.SubItems.Add(config.GetFileSize(dictPath));
 
-                this.dictLV.Items.Add(lvi);
+                this.dictListView.Items.Add(lvi);
             }
         }
         
@@ -118,12 +119,60 @@ namespace C2.Business.CastleBravo.Intruder
             this.tBReqMess.SelectionLength = end;
             this.tBReqMess.SelectionColor = color;
         }
-        
 
+
+        #region 开始扫描
+        /*
+         * 启动功能
+         */
         private void startButton_Click(object sender, System.EventArgs e)
         {
-
+            if (!CheckStartOption())
+                return;
         }
+
+        private bool CheckStartOption()
+        {
+            if (stp.InUseThreads > 0)
+            {
+                HelpUtil.ShowMessageBox("上次任务还没停止，请停止上次任务！");
+                return false;
+            }
+
+            /*
+            domainList.Clear();
+            
+            foreach (string domain in urlTextBox.Text.Split('\n'))
+            {
+                string tmpDomain = domain.Trim(new char[] { '\r', '\n' });
+                if (string.IsNullOrEmpty(tmpDomain))
+                    continue;
+
+                //TODO 这里可以考虑自动拼接一个http头
+                if (!tmpDomain.StartsWith("http"))
+                {
+                    HelpUtil.ShowMessageBox("域名:" + tmpDomain + "未包含http或https");
+                    return false;
+                }
+                domainList.Add(tmpDomain.Split('#')[0]);
+            }
+            */
+            
+
+            if (this.dictListView.CheckedItems.Count == 0)
+            {
+                HelpUtil.ShowMessageBox("请选择扫描字典！");
+                return false;
+            }
+            if (this.tBReqMess.Text == string.Empty)
+            {
+                HelpUtil.ShowMessageBox("请输入请求报文！");
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
 
         private void suspendButton_Click(object sender, System.EventArgs e)
         {
@@ -341,18 +390,18 @@ namespace C2.Business.CastleBravo.Intruder
         //全选
         private void allSelected_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem lvi in dictLV.Items)
+            foreach (ListViewItem lvi in dictListView.Items)
                 lvi.Checked = true;
         }
         //全不选
         private void noSelected_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem lvi in dictLV.Items)
+            foreach (ListViewItem lvi in dictListView.Items)
                 lvi.Checked = false;
         }
         private void dictLV_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            groupBox2.Text = string.Format("字典（激活{0}个）", dictLV.CheckedItems.Count);
+            groupBox2.Text = string.Format("字典（激活{0}个）", dictListView.CheckedItems.Count);
         }
     }
 }
