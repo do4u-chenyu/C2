@@ -11,6 +11,7 @@ using C2.Controls.Top;
 using C2.Core;
 using C2.Core.UndoRedo;
 using C2.Core.UndoRedo.Command;
+using C2.Dialogs;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
@@ -366,6 +367,14 @@ namespace C2.Forms
                 {
                     MessageBox.Show("当前算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
+                }
+                string runStatus = new ModelRunDialog().ShowDialog();
+                if (runStatus == "cancle") 
+                    return;
+                if(runStatus == "restart")
+                {
+                    currentManager.GetCurrentModelTripleList(Global.GetCurrentModelDocument(), "all");
+                    currentManager.Reset();
                 }
                 currentManager.Start();
                 int taskNum = currentManager.CountOpStatus(ElementStatus.Ready);
