@@ -36,6 +36,7 @@ namespace C2.SearchToolkit
             ["黑吃黑模型"] = "hostDD",
             ["盗洞模型"] = "hackDD",
             ["大马模型"] = "dm",
+            ["网赌受骗者模型"] = "dbqt",
             ["自定义查询"] = "custom",
             ["DSQ查询"] = "dsq",
         };
@@ -60,6 +61,7 @@ namespace C2.SearchToolkit
             ["黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
             ["大马模型"] = "batchquery_dm_accountPass_C2_20220107_{0}.py",
+            ["网赌受骗者模型"] = "batchquery_dbqt_accountPass_C2_20220121_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
             ["DSQ查询"] = "main_rule_http_xxxx.py",
         };
@@ -84,6 +86,7 @@ namespace C2.SearchToolkit
             ["黑吃黑模型"] = @"([^\n\r]+000000_queryResult_hostDD_\d+_\d+.tgz)",
             ["盗洞模型"] = @"([^\n\r]+000000_queryResult_hackDD_\d+_\d+.tgz)",
             ["大马模型"] = @"([^\n\r]+000000_queryResult_dm_\d+_\d+.tgz)",
+            ["网赌受骗者模型"] = @"([^\n\r]+000000_queryResult_dbqt_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
             ["DSQ查询"] = @"([^\n\r]+000000_queryResult_dsq_\d+_\d+.tgz)",
         };
