@@ -361,7 +361,7 @@
             // 
             // clearReqMessageButton
             // 
-            this.clearReqMessageButton.Location = new System.Drawing.Point(582, 69);
+            this.clearReqMessageButton.Location = new System.Drawing.Point(675, 69);
             this.clearReqMessageButton.Name = "clearReqMessageButton";
             this.clearReqMessageButton.Size = new System.Drawing.Size(75, 23);
             this.clearReqMessageButton.TabIndex = 8;
@@ -371,7 +371,7 @@
             // 
             // delSignButton
             // 
-            this.delSignButton.Location = new System.Drawing.Point(498, 69);
+            this.delSignButton.Location = new System.Drawing.Point(575, 69);
             this.delSignButton.Name = "delSignButton";
             this.delSignButton.Size = new System.Drawing.Size(75, 23);
             this.delSignButton.TabIndex = 7;
@@ -381,7 +381,7 @@
             // 
             // markSbutton
             // 
-            this.markSbutton.Location = new System.Drawing.Point(414, 69);
+            this.markSbutton.Location = new System.Drawing.Point(471, 69);
             this.markSbutton.Name = "markSbutton";
             this.markSbutton.Size = new System.Drawing.Size(75, 23);
             this.markSbutton.TabIndex = 6;
@@ -404,7 +404,7 @@
             this.TextBoxReferer.Location = new System.Drawing.Point(9, 41);
             this.TextBoxReferer.Name = "TextBoxReferer";
             this.TextBoxReferer.ReadOnly = true;
-            this.TextBoxReferer.Size = new System.Drawing.Size(648, 21);
+            this.TextBoxReferer.Size = new System.Drawing.Size(741, 21);
             this.TextBoxReferer.TabIndex = 2;
             // 
             // label2
