@@ -151,6 +151,7 @@
             this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.responseHeadersrichTextBox = new System.Windows.Forms.RichTextBox();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -175,6 +176,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.tabPage10.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox13.SuspendLayout();
@@ -192,7 +194,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(956, 602);
+            this.tabControl1.Size = new System.Drawing.Size(1124, 603);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -202,7 +204,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(948, 576);
+            this.tabPage1.Size = new System.Drawing.Size(1116, 577);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "报文设置";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -218,16 +220,16 @@
             this.groupBox2.Controls.Add(this.pasteTBCButton);
             this.groupBox2.Controls.Add(this.dictListView);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(667, 3);
+            this.groupBox2.Location = new System.Drawing.Point(739, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(278, 570);
+            this.groupBox2.Size = new System.Drawing.Size(374, 571);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
             // 
             // noSelected
             // 
-            this.noSelected.Location = new System.Drawing.Point(216, 15);
+            this.noSelected.Location = new System.Drawing.Point(258, 15);
             this.noSelected.Name = "noSelected";
             this.noSelected.Size = new System.Drawing.Size(63, 23);
             this.noSelected.TabIndex = 20;
@@ -237,7 +239,7 @@
             // 
             // allSelected
             // 
-            this.allSelected.Location = new System.Drawing.Point(147, 16);
+            this.allSelected.Location = new System.Drawing.Point(189, 16);
             this.allSelected.Name = "allSelected";
             this.allSelected.Size = new System.Drawing.Size(63, 23);
             this.allSelected.TabIndex = 19;
@@ -247,7 +249,7 @@
             // 
             // refreshDictBtn
             // 
-            this.refreshDictBtn.Location = new System.Drawing.Point(78, 16);
+            this.refreshDictBtn.Location = new System.Drawing.Point(120, 16);
             this.refreshDictBtn.Name = "refreshDictBtn";
             this.refreshDictBtn.Size = new System.Drawing.Size(63, 23);
             this.refreshDictBtn.TabIndex = 18;
@@ -257,7 +259,7 @@
             // 
             // openDictPathBtn
             // 
-            this.openDictPathBtn.Location = new System.Drawing.Point(9, 16);
+            this.openDictPathBtn.Location = new System.Drawing.Point(51, 16);
             this.openDictPathBtn.Name = "openDictPathBtn";
             this.openDictPathBtn.Size = new System.Drawing.Size(63, 23);
             this.openDictPathBtn.TabIndex = 17;
@@ -270,13 +272,13 @@
             this.pasteTextBox.Location = new System.Drawing.Point(9, 266);
             this.pasteTextBox.Multiline = true;
             this.pasteTextBox.Name = "pasteTextBox";
-            this.pasteTextBox.Size = new System.Drawing.Size(270, 248);
+            this.pasteTextBox.Size = new System.Drawing.Size(360, 248);
             this.pasteTextBox.TabIndex = 16;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 242);
+            this.label6.Location = new System.Drawing.Point(52, 242);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 12);
             this.label6.TabIndex = 15;
@@ -303,7 +305,7 @@
             this.dictListView.HideSelection = false;
             this.dictListView.Location = new System.Drawing.Point(8, 41);
             this.dictListView.Name = "dictListView";
-            this.dictListView.Size = new System.Drawing.Size(271, 186);
+            this.dictListView.Size = new System.Drawing.Size(361, 186);
             this.dictListView.TabIndex = 6;
             this.dictListView.UseCompatibleStateImageBehavior = false;
             this.dictListView.View = System.Windows.Forms.View.Details;
@@ -341,7 +343,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(664, 570);
+            this.groupBox1.Size = new System.Drawing.Size(736, 571);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "报文数据";
@@ -391,7 +393,7 @@
             this.tBReqMess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tBReqMess.Location = new System.Drawing.Point(9, 122);
             this.tBReqMess.Name = "tBReqMess";
-            this.tBReqMess.Size = new System.Drawing.Size(649, 418);
+            this.tBReqMess.Size = new System.Drawing.Size(721, 418);
             this.tBReqMess.TabIndex = 3;
             this.tBReqMess.Text = "";
             this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
@@ -429,7 +431,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(948, 576);
+            this.tabPage2.Size = new System.Drawing.Size(1116, 577);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "配置";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -443,7 +445,7 @@
             this.panel2.Location = new System.Drawing.Point(460, 3);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.panel2.Size = new System.Drawing.Size(485, 570);
+            this.panel2.Size = new System.Drawing.Size(653, 571);
             this.panel2.TabIndex = 1;
             // 
             // groupBox10
@@ -452,7 +454,7 @@
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(5, 114);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(475, 451);
+            this.groupBox10.Size = new System.Drawing.Size(643, 452);
             this.groupBox10.TabIndex = 4;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "HTTP返回数据处理";
@@ -462,10 +464,10 @@
             this.tabControl2.Controls.Add(this.tabPage4);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl2.Location = new System.Drawing.Point(3, 73);
+            this.tabControl2.Location = new System.Drawing.Point(3, 74);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(469, 375);
+            this.tabControl2.Size = new System.Drawing.Size(637, 375);
             this.tabControl2.TabIndex = 1;
             // 
             // tabPage4
@@ -475,7 +477,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(461, 349);
+            this.tabPage4.Size = new System.Drawing.Size(629, 349);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "匹配规则";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -627,7 +629,7 @@
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox9.Location = new System.Drawing.Point(5, 55);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(475, 59);
+            this.groupBox9.Size = new System.Drawing.Size(643, 59);
             this.groupBox9.TabIndex = 3;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "HTTP返回数据编码格式";
@@ -654,7 +656,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(5, 5);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(475, 50);
+            this.groupBox6.Size = new System.Drawing.Size(643, 50);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "HTTP重定向设置";
@@ -711,7 +713,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(457, 570);
+            this.panel1.Size = new System.Drawing.Size(457, 571);
             this.panel1.TabIndex = 0;
             // 
             // groupBox4
@@ -947,7 +949,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(948, 576);
+            this.tabPage3.Size = new System.Drawing.Size(1116, 577);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "结果观察窗";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -956,10 +958,10 @@
             // 
             this.panel4.Controls.Add(this.tabControl3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(460, 3);
+            this.panel4.Location = new System.Drawing.Point(521, 3);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5);
-            this.panel4.Size = new System.Drawing.Size(485, 548);
+            this.panel4.Size = new System.Drawing.Size(592, 549);
             this.panel4.TabIndex = 2;
             // 
             // tabControl3
@@ -972,7 +974,7 @@
             this.tabControl3.Location = new System.Drawing.Point(5, 5);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(475, 538);
+            this.tabControl3.Size = new System.Drawing.Size(582, 539);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage8
@@ -981,7 +983,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(467, 512);
+            this.tabPage8.Size = new System.Drawing.Size(574, 513);
             this.tabPage8.TabIndex = 0;
             this.tabPage8.Text = "请求包";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1000,7 +1002,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.requestHeadersLV);
-            this.splitContainer1.Size = new System.Drawing.Size(461, 506);
+            this.splitContainer1.Size = new System.Drawing.Size(568, 507);
             this.splitContainer1.SplitterDistance = 292;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -1009,7 +1011,7 @@
             this.requestHeaderTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.requestHeaderTextBox.Location = new System.Drawing.Point(0, 0);
             this.requestHeaderTextBox.Name = "requestHeaderTextBox";
-            this.requestHeaderTextBox.Size = new System.Drawing.Size(461, 292);
+            this.requestHeaderTextBox.Size = new System.Drawing.Size(568, 292);
             this.requestHeaderTextBox.TabIndex = 0;
             this.requestHeaderTextBox.Text = "";
             // 
@@ -1019,10 +1021,11 @@
             this.序号,
             this.name,
             this.value});
+            this.requestHeadersLV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.requestHeadersLV.HideSelection = false;
             this.requestHeadersLV.Location = new System.Drawing.Point(0, 0);
             this.requestHeadersLV.Name = "requestHeadersLV";
-            this.requestHeadersLV.Size = new System.Drawing.Size(461, 210);
+            this.requestHeadersLV.Size = new System.Drawing.Size(568, 211);
             this.requestHeadersLV.TabIndex = 0;
             this.requestHeadersLV.UseCompatibleStateImageBehavior = false;
             this.requestHeadersLV.View = System.Windows.Forms.View.Details;
@@ -1035,12 +1038,12 @@
             // name
             // 
             this.name.Text = "名称";
-            this.name.Width = 65;
+            this.name.Width = 67;
             // 
             // value
             // 
             this.value.Text = "值";
-            this.value.Width = 379;
+            this.value.Width = 558;
             // 
             // tabPage9
             // 
@@ -1048,17 +1051,18 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(467, 512);
+            this.tabPage9.Size = new System.Drawing.Size(635, 513);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "返回包";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.webBrowser);
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(467, 512);
+            this.tabPage10.Size = new System.Drawing.Size(635, 513);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "页面浏览";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1068,7 +1072,7 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(467, 512);
+            this.tabPage11.Size = new System.Drawing.Size(635, 513);
             this.tabPage11.TabIndex = 3;
             this.tabPage11.Text = "状态信息";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1083,7 +1087,7 @@
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(457, 548);
+            this.panel3.Size = new System.Drawing.Size(518, 549);
             this.panel3.TabIndex = 1;
             // 
             // groupBox3
@@ -1092,7 +1096,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(5, 375);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(447, 162);
+            this.groupBox3.Size = new System.Drawing.Size(508, 162);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "日志";
@@ -1102,7 +1106,7 @@
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logTextBox.Location = new System.Drawing.Point(3, 17);
             this.logTextBox.Name = "logTextBox";
-            this.logTextBox.Size = new System.Drawing.Size(441, 142);
+            this.logTextBox.Size = new System.Drawing.Size(502, 142);
             this.logTextBox.TabIndex = 3;
             this.logTextBox.Text = "";
             // 
@@ -1112,7 +1116,7 @@
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox13.Location = new System.Drawing.Point(5, 96);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(447, 279);
+            this.groupBox13.Size = new System.Drawing.Size(508, 279);
             this.groupBox13.TabIndex = 2;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "请求结果";
@@ -1133,7 +1137,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 17);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(441, 256);
+            this.listView1.Size = new System.Drawing.Size(502, 256);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -1179,7 +1183,7 @@
             this.groupBox12.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox12.Location = new System.Drawing.Point(5, 51);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(447, 45);
+            this.groupBox12.Size = new System.Drawing.Size(508, 45);
             this.groupBox12.TabIndex = 1;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "控制台";
@@ -1227,7 +1231,7 @@
             this.urlTB.Dock = System.Windows.Forms.DockStyle.Top;
             this.urlTB.Location = new System.Drawing.Point(5, 5);
             this.urlTB.Name = "urlTB";
-            this.urlTB.Size = new System.Drawing.Size(447, 46);
+            this.urlTB.Size = new System.Drawing.Size(508, 46);
             this.urlTB.TabIndex = 0;
             this.urlTB.TabStop = false;
             this.urlTB.Text = "目标主机";
@@ -1290,9 +1294,9 @@
             this.threadPoolStatus,
             this.toolStripStatusLabel5,
             this.scanSpeed});
-            this.statusStrip.Location = new System.Drawing.Point(3, 551);
+            this.statusStrip.Location = new System.Drawing.Point(3, 552);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(942, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1110, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -1371,16 +1375,25 @@
             this.responseHeadersrichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.responseHeadersrichTextBox.Location = new System.Drawing.Point(3, 3);
             this.responseHeadersrichTextBox.Name = "responseHeadersrichTextBox";
-            this.responseHeadersrichTextBox.Size = new System.Drawing.Size(461, 506);
+            this.responseHeadersrichTextBox.Size = new System.Drawing.Size(629, 507);
             this.responseHeadersrichTextBox.TabIndex = 0;
             this.responseHeadersrichTextBox.Text = "";
+            // 
+            // webBrowser
+            // 
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.Location = new System.Drawing.Point(3, 3);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(629, 507);
+            this.webBrowser.TabIndex = 0;
             // 
             // IntruderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(956, 602);
+            this.ClientSize = new System.Drawing.Size(1124, 603);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1422,6 +1435,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
+            this.tabPage10.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
@@ -1557,5 +1571,6 @@
         private System.Windows.Forms.ColumnHeader name;
         private System.Windows.Forms.ColumnHeader value;
         private System.Windows.Forms.RichTextBox responseHeadersrichTextBox;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }

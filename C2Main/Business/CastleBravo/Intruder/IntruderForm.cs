@@ -655,9 +655,16 @@ namespace C2.Business.CastleBravo.Intruder
 
         private void updateResponseHeadersTextBox(string password)
         {
-            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut, config.keeAlive, lastLine.Split('=')[0] + "=" + password);
+            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.host, config.TimeOut, config.keeAlive, lastLine.Split('=')[0] + "=" + password);
             responseHeadersrichTextBox.Text = result.responseHeaders + "\n" + result.body;
+        }
 
+        private void updatewebBrowser(string password)
+        {
+            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.host, config.TimeOut, config.keeAlive, lastLine.Split('=')[0] + "=" + password);
+            if (result.body.Contains("<script src='?login=geturl'></script><meta http-equiv='refresh' content='0;URL=?'>"))
+                result.body = result.body.Replace("<script src='?login=geturl'></script><meta http-equiv='refresh' content='0;URL=?'>", "");
+            this.webBrowser.DocumentText = result.body;
         }
 
         //点击listview事件
@@ -672,7 +679,8 @@ namespace C2.Business.CastleBravo.Intruder
 
                 updateRequestHeadersLV();
                 updateResponseHeadersTextBox(password);
-           
+
+                updatewebBrowser(password);
             }
         }
     }

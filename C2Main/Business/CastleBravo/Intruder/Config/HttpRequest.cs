@@ -195,7 +195,8 @@ namespace C2.Business.CastleBravo.Intruder.Config
                    
                     res.server = response.Server;
                     rs = response.GetResponseStream();
-                    sr = new StreamReader(rs, Encoding.GetEncoding("UTF-8"));
+                    Encoding readerEncode = Encoding.Default;
+                    sr = new StreamReader(rs, readerEncode);
                     res.body = sr.ReadToEnd();
                     try 
                     {
@@ -206,12 +207,14 @@ namespace C2.Business.CastleBravo.Intruder.Config
                     };
                     String encoding = getHTMLEncoding(response.ContentType, res.body);
 
+                    /*
                     if (!"".Equals(encoding) && !"UTF-8".Equals(encoding, StringComparison.OrdinalIgnoreCase))
                     {
                         rs = response.GetResponseStream();
                         sr = new StreamReader(rs, Encoding.GetEncoding(encoding));
                         res.body = sr.ReadToEnd();
                     };
+                    */
                 }
             }
             catch
