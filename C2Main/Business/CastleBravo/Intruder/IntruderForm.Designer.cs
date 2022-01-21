@@ -114,7 +114,9 @@
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.responseHeadersrichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -150,8 +152,6 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
-            this.responseHeadersrichTextBox = new System.Windows.Forms.RichTextBox();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -220,9 +220,9 @@
             this.groupBox2.Controls.Add(this.pasteTBCButton);
             this.groupBox2.Controls.Add(this.dictListView);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(739, 3);
+            this.groupBox2.Location = new System.Drawing.Point(759, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(374, 571);
+            this.groupBox2.Size = new System.Drawing.Size(354, 571);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "字典（激活0个）";
@@ -269,10 +269,10 @@
             // 
             // pasteTextBox
             // 
-            this.pasteTextBox.Location = new System.Drawing.Point(9, 266);
+            this.pasteTextBox.Location = new System.Drawing.Point(8, 266);
             this.pasteTextBox.Multiline = true;
             this.pasteTextBox.Name = "pasteTextBox";
-            this.pasteTextBox.Size = new System.Drawing.Size(360, 248);
+            this.pasteTextBox.Size = new System.Drawing.Size(340, 299);
             this.pasteTextBox.TabIndex = 16;
             // 
             // label6
@@ -305,7 +305,7 @@
             this.dictListView.HideSelection = false;
             this.dictListView.Location = new System.Drawing.Point(8, 41);
             this.dictListView.Name = "dictListView";
-            this.dictListView.Size = new System.Drawing.Size(361, 186);
+            this.dictListView.Size = new System.Drawing.Size(343, 186);
             this.dictListView.TabIndex = 6;
             this.dictListView.UseCompatibleStateImageBehavior = false;
             this.dictListView.View = System.Windows.Forms.View.Details;
@@ -319,16 +319,17 @@
             // dictName
             // 
             this.dictName.Text = "字典名称";
-            this.dictName.Width = 134;
+            this.dictName.Width = 157;
             // 
             // Line
             // 
             this.Line.Text = "行数";
-            this.Line.Width = 42;
+            this.Line.Width = 69;
             // 
             // size
             // 
             this.size.Text = "大小";
+            this.size.Width = 71;
             // 
             // groupBox1
             // 
@@ -343,7 +344,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(736, 571);
+            this.groupBox1.Size = new System.Drawing.Size(756, 571);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "报文数据";
@@ -393,7 +394,7 @@
             this.tBReqMess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tBReqMess.Location = new System.Drawing.Point(9, 122);
             this.tBReqMess.Name = "tBReqMess";
-            this.tBReqMess.Size = new System.Drawing.Size(721, 418);
+            this.tBReqMess.Size = new System.Drawing.Size(741, 443);
             this.tBReqMess.TabIndex = 3;
             this.tBReqMess.Text = "";
             this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
@@ -517,7 +518,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(461, 349);
+            this.tabPage5.Size = new System.Drawing.Size(629, 349);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "提取内容";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1051,10 +1052,19 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(635, 513);
+            this.tabPage9.Size = new System.Drawing.Size(574, 513);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "返回包";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // responseHeadersrichTextBox
+            // 
+            this.responseHeadersrichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.responseHeadersrichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.responseHeadersrichTextBox.Name = "responseHeadersrichTextBox";
+            this.responseHeadersrichTextBox.Size = new System.Drawing.Size(568, 507);
+            this.responseHeadersrichTextBox.TabIndex = 0;
+            this.responseHeadersrichTextBox.Text = "";
             // 
             // tabPage10
             // 
@@ -1062,17 +1072,26 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(635, 513);
+            this.tabPage10.Size = new System.Drawing.Size(574, 513);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "页面浏览";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // webBrowser
+            // 
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.Location = new System.Drawing.Point(3, 3);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(568, 507);
+            this.webBrowser.TabIndex = 0;
             // 
             // tabPage11
             // 
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(635, 513);
+            this.tabPage11.Size = new System.Drawing.Size(574, 513);
             this.tabPage11.TabIndex = 3;
             this.tabPage11.Text = "状态信息";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1369,24 +1388,6 @@
             // 
             this.scanTimer.Interval = 1000;
             this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
-            // 
-            // responseHeadersrichTextBox
-            // 
-            this.responseHeadersrichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.responseHeadersrichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.responseHeadersrichTextBox.Name = "responseHeadersrichTextBox";
-            this.responseHeadersrichTextBox.Size = new System.Drawing.Size(629, 507);
-            this.responseHeadersrichTextBox.TabIndex = 0;
-            this.responseHeadersrichTextBox.Text = "";
-            // 
-            // webBrowser
-            // 
-            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser.Location = new System.Drawing.Point(3, 3);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(629, 507);
-            this.webBrowser.TabIndex = 0;
             // 
             // IntruderForm
             // 
