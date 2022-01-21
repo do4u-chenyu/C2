@@ -1,15 +1,15 @@
 ﻿using Amib.Threading;
-using C2.Business.CastleBravo.WebScan.Tools;
+using C2.Business.CastleBravo.Intruder.Config;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+
 
 namespace C2.Business.CastleBravo.Intruder
 {
@@ -17,27 +17,41 @@ namespace C2.Business.CastleBravo.Intruder
     {
         private SmartThreadPool stp = new SmartThreadPool();
         private Thread sThread = null;
-        private Config.Config config;
-        delegate void VoidDelegate();
-        delegate void update();
+        private ToolIntruder tools;
+        private ConfigIntruder config = null;
 
-        private int scanRunTime = 0;//已扫描时间
-        private long lastCount = 0;
-        private long scanSumCount = 0;//扫描目录总数
-
-        string[] splitLine;
-        string lastLine = string.Empty;
-        //Boolean flag = true;
         string dictDirectory;
         Dictionary<string, List<string>> dictContent;
-        //private List<string> domainList;
+
+        private List<string> refererList;//存放报文中的Referer
+
+        //private string scanURL;
+        private long scanDirCount = 0;
+        private long scanSumCount = 0;//扫描目录总数
+        private List<string> selectedDict;
+
+        private long lastCount = 0;
+        private int scanRunTime = 0;//已扫描时间
+
+        delegate void VoidDelegate();
+        delegate void update();
+        delegate void DelegateAddItemToListView(Config.ServerInfo svinfo);
+
+        string[] lines;
+        string[] splitLine;
+        string lastLine = string.Empty;
+
+        bool markIsClick = false;//判断是否点击了标记按钮
 
 
 
         public IntruderForm()
         {
             InitializeComponent();
-            config = new Config.Config();
+            tools = new ToolIntruder();
+            config = new ConfigIntruder();
+            refererList = new List<string>();
+
             this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "IntruderDict");
             RefreshDict();
         }
@@ -65,11 +79,10 @@ namespace C2.Business.CastleBravo.Intruder
             }
         }
         
-       
         //目标地址自动解析
         private void textBoxRequestMessage_TextChanged(object sender, EventArgs e)
         {
-            var lines = tBReqMess.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            lines = tBReqMess.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             splitLine = tBReqMess.Text.Split(new char[] { '\n' });
             lastLine = splitLine[splitLine.Length - 1].Trim();
 
@@ -129,6 +142,181 @@ namespace C2.Business.CastleBravo.Intruder
         {
             if (!CheckStartOption())
                 return;
+
+            this.startButton.Enabled = false;
+            this.listView1.Items.Clear();
+            this.logTextBox.Text = string.Empty;
+
+            scanSumCount = 0;
+            selectedDict = new List<string>();//字典名称
+            foreach (ListViewItem name in this.dictListView.CheckedItems)
+            {
+                selectedDict.Add(name.Tag.ToString());
+                scanSumCount += int.Parse(name.SubItems[2].Text);
+            }
+            scanSumCount = scanSumCount * refererList.Count();//扫Referer本身和其字典目录
+
+            SetConfig();
+
+            stp = new SmartThreadPool
+            {
+                MaxThreads = config.ThreadSize//最大线程数
+            };
+
+            sThread = new Thread(new ThreadStart(ScanThread));
+            sThread.Start();
+        }
+
+        private void ScanThread()
+        {
+            this.scanRunTime = 0;
+            this.Invoke(new VoidDelegate(this.scanTimer.Start));
+
+            this.scanDirCount = 0;
+            foreach (string referer in refererList)
+            {
+                this.scanDirCount++;
+                ServerInfo tmpSvinfo = new ServerInfo
+                {
+                    host = tools.UpdateUrl(referer, false),
+                    id = scanDirCount,
+                    type = "指纹"  
+                };
+                tmpSvinfo.url = tmpSvinfo.host;
+                stp.WaitFor(1000, 10000);
+                stp.QueueWorkItem<ServerInfo>(ScanReferer, tmpSvinfo);
+                LogMessage(tmpSvinfo.url + "加载完成，开始扫描目录");
+                stp.WaitForIdle();
+
+                
+                foreach (string dictName in selectedDict)
+                {
+                    if (!this.dictContent.ContainsKey(dictName))
+                    {
+                        LogError("字典" + dictName + "未加载成功！");
+                        continue;
+                    }
+
+                    this.dictContent.TryGetValue(dictName, out List<string> passwordList);
+                    foreach (string singlePassword in passwordList)
+                    {
+                        this.scanDirCount++;
+
+                        ServerInfo svinfo = new ServerInfo();
+                        svinfo.target = referer;
+                        //svinfo.host = tools.UpdateUrl(referer, true);
+                        svinfo.host = referer;
+                        svinfo.id = this.scanDirCount;
+                        svinfo.type = "目录";
+                        svinfo.password = singlePassword;
+                        svinfo.url = svinfo.host + singlePassword;
+
+                        stp.WaitFor(1000, 10000);
+                        stp.QueueWorkItem<ServerInfo>(ScanExistsDirs, svinfo);
+                    }
+                }
+                
+            }
+
+            stp.WaitForIdle();
+            stp.Shutdown();
+            this.Invoke(new VoidDelegate(StopScan));
+
+        }
+
+        private void ScanExistsDirs(ServerInfo svinfo)
+        {
+            ServerInfo result = new ServerInfo();
+            LogInfo("开始扫描-----" + svinfo.password);
+            result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut, config.keeAlive, 
+                                                                    lastLine.Split('=')[0]+"="+svinfo.password);
+            if (result.code != 0)
+            {
+                svinfo.code = result.code;
+                String location = result.location;
+                svinfo.contentType = result.contentType;
+                svinfo.length = result.length == -1 ? result.body.Length : result.length;
+                svinfo.server = result.server;
+                svinfo.powerBy = result.powerBy;
+                svinfo.runTime = result.runTime;
+                svinfo.mistake = "否";
+                svinfo.timeout = "否";
+                this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+            }
+            else
+                LogError("扫描失败-----" + svinfo.password + "-----" + result.contentType);
+
+            Thread.Sleep(config.SleepTime * 1000);
+        }
+
+
+        private void ScanReferer(ServerInfo svinfo)
+        {
+            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut,config.keeAlive,lastLine.Replace("§", ""));
+
+            if (result.code != 0)
+            {
+                svinfo.password = (lastLine.Split('=')[1]).Replace("§", "");//密码
+                svinfo.code = result.code;//状态码
+                svinfo.ip = tools.GetIP(svinfo.host);
+                svinfo.contentType = result.contentType;
+                svinfo.length = result.length;//长度
+                svinfo.server = result.server;
+                svinfo.powerBy = result.powerBy;
+                svinfo.runTime = result.runTime;
+                svinfo.mistake = "否";
+                svinfo.timeout = "否";
+                this.Invoke(new DelegateAddItemToListView(AddItemToListView), svinfo);
+            }
+            else
+                LogError(svinfo.url + "-----" + result.contentType);
+        }
+
+        private void AddItemToListView(ServerInfo svinfo)
+        {
+            //过滤类型不符合的
+            if (!svinfo.contentType.StartsWith(config.contentType, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            ListViewItem lvi = new ListViewItem(svinfo.id + "");//序号
+            lvi.Tag = svinfo.type;
+            lvi.SubItems.Add(svinfo.password);//密码值
+            lvi.SubItems.Add(svinfo.code + "");//状态码
+            lvi.SubItems.Add(svinfo.mistake + "");//错误
+            lvi.SubItems.Add(svinfo.timeout + "");//超时
+            lvi.SubItems.Add(svinfo.length + "");//长度
+            //lvi.SubItems.Add(svinfo.ip + "");
+            if (svinfo.code.ToString().StartsWith("2"))
+            {
+                lvi.ForeColor = Color.Green;
+            }
+            else if (svinfo.code.ToString().StartsWith("3"))
+            {
+                lvi.ForeColor = Color.Blue;
+            }
+            else if (svinfo.code.ToString().StartsWith("4"))
+            {
+                lvi.ForeColor = Color.Gray;
+            }
+            else if (svinfo.code.ToString().StartsWith("5"))
+            {
+                lvi.ForeColor = Color.Red;
+            }
+            this.listView1.Items.Add(lvi);
+        }
+
+
+        private void SetConfig()
+        {
+            //TODO 其他配置项待加入
+
+            config.ShowCodes = "200,301,302,303,403,404";//状态码
+            config.Method = "POST";//http方法
+            config.ThreadSize = int.Parse(this.threadSizeDown.Text);//线程数
+            config.TimeOut = int.Parse(this.timeOutDown.Text);//超时
+            config.SleepTime = int.Parse(this.sleepTimeDown.Text);//延时
         }
 
         private bool CheckStartOption()
@@ -139,34 +327,34 @@ namespace C2.Business.CastleBravo.Intruder
                 return false;
             }
 
-            /*
-            domainList.Clear();
-            
-            foreach (string domain in urlTextBox.Text.Split('\n'))
+            refererList.Clear();
+            var lines = tBReqMess.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if (tBReqMess.Text.Contains("Referer"))
             {
-                string tmpDomain = domain.Trim(new char[] { '\r', '\n' });
-                if (string.IsNullOrEmpty(tmpDomain))
-                    continue;
-
-                //TODO 这里可以考虑自动拼接一个http头
-                if (!tmpDomain.StartsWith("http"))
-                {
-                    HelpUtil.ShowMessageBox("域名:" + tmpDomain + "未包含http或https");
-                    return false;
-                }
-                domainList.Add(tmpDomain.Split('#')[0]);
+                var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
+                refererList.Add(referer.Substring(referer.IndexOf(':') + 1).Trim());
             }
-            */
-            
+            else 
+            {
+                MessageBox.Show("请输入含有Referer的报文", "报文错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.tBReqMess.Text == string.Empty)
+            {
+                MessageBox.Show("请输入请求报文!", "配置错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
             if (this.dictListView.CheckedItems.Count == 0)
             {
-                HelpUtil.ShowMessageBox("请选择扫描字典！");
+      
+                MessageBox.Show("请选择扫描字典!", "配置错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (this.tBReqMess.Text == string.Empty)
+            if (!markIsClick)
             {
-                HelpUtil.ShowMessageBox("请输入请求报文！");
+                MessageBox.Show("没有标记变体!", "配置错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -174,11 +362,13 @@ namespace C2.Business.CastleBravo.Intruder
 
         #endregion
 
+
+
+
         private void suspendButton_Click(object sender, System.EventArgs e)
         {
 
         }
-
 
         /*
          * 停止功能
@@ -248,6 +438,25 @@ namespace C2.Business.CastleBravo.Intruder
             this.logTextBox.Invoke(la, Color.Violet, DateTime.Now + "----" + text);
         }
 
+        /// <summary> 
+        /// 显示错误日志 
+        /// </summary> 
+        /// <param name="text"></param> 
+        public void LogError(string text)
+        {
+            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
+            this.logTextBox.Invoke(la, Color.Red, DateTime.Now + "----" + text);
+        }
+
+        /// <summary> 
+        /// 显示正确信息 
+        /// </summary> 
+        /// <param name="text"></param> 
+        public void LogInfo(string text)
+        {
+            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
+            this.logTextBox.Invoke(la, Color.Green, DateTime.Now + "----" + text);
+        }
         #endregion
 
 
@@ -292,13 +501,6 @@ namespace C2.Business.CastleBravo.Intruder
 
        
 
-       
-
-
-
-
-
-
 
         /*
          * 验证IP是否可用
@@ -335,9 +537,13 @@ namespace C2.Business.CastleBravo.Intruder
         //设置标记
         private void markSbutton_Click(object sender, System.EventArgs e)
         {
+            markIsClick = true;
             try
             {
+                var originReferer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
                 tBReqMess.Text = tBReqMess.Text.Replace(tBReqMess.SelectedText, "§" + tBReqMess.SelectedText + "§");
+                var newReferer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
+                tBReqMess.Text = tBReqMess.Text.Replace(newReferer, originReferer);
             }
             catch (Exception ex)
             {

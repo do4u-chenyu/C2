@@ -381,6 +381,40 @@ namespace C2.Business.CastleBravo.WebScan
 
             //Thread.Sleep(config.SleepTime * 1000);
         }
+        public void AddItemToListView(ServerInfo svinfo)
+        {
+            //过滤类型不符合的
+            if (!svinfo.contentType.StartsWith(config.contentType, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            ListViewItem lvi = new ListViewItem(svinfo.id + "");
+            lvi.Tag = svinfo.type;
+            lvi.SubItems.Add(svinfo.url);
+            lvi.SubItems.Add(svinfo.code + "");
+            lvi.SubItems.Add(svinfo.contentType + "");
+            lvi.SubItems.Add(svinfo.length + "");
+            lvi.SubItems.Add(svinfo.runTime + "");
+            //lvi.SubItems.Add(svinfo.ip + "");
+            if (svinfo.code.ToString().StartsWith("2"))
+            {
+                lvi.ForeColor = Color.Green;
+            }
+            else if (svinfo.code.ToString().StartsWith("3"))
+            {
+                lvi.ForeColor = Color.Blue;
+            }
+            else if (svinfo.code.ToString().StartsWith("4"))
+            {
+                lvi.ForeColor = Color.Gray;
+            }
+            else if (svinfo.code.ToString().StartsWith("5"))
+            {
+                lvi.ForeColor = Color.Red;
+            }
+            this.listView1.Items.Add(lvi);
+        }
 
         private void ScanExistsDirs(ServerInfo svinfo)
         {
@@ -450,40 +484,7 @@ namespace C2.Business.CastleBravo.WebScan
         #endregion
 
         #region 结果展示相关
-        public void AddItemToListView(ServerInfo svinfo)
-        {
-            //过滤类型不符合的
-            if (!svinfo.contentType.StartsWith(config.contentType, StringComparison.OrdinalIgnoreCase))
-            {
-                return;
-            }
-
-            ListViewItem lvi = new ListViewItem(svinfo.id + "");
-            lvi.Tag = svinfo.type;
-            lvi.SubItems.Add(svinfo.url);
-            lvi.SubItems.Add(svinfo.code + "");
-            lvi.SubItems.Add(svinfo.contentType + "");
-            lvi.SubItems.Add(svinfo.length + "");
-            lvi.SubItems.Add(svinfo.runTime + "");
-            //lvi.SubItems.Add(svinfo.ip + "");
-            if (svinfo.code.ToString().StartsWith("2"))
-            {
-                lvi.ForeColor = Color.Green;
-            }
-            else if (svinfo.code.ToString().StartsWith("3"))
-            {
-                lvi.ForeColor = Color.Blue;
-            }
-            else if (svinfo.code.ToString().StartsWith("4"))
-            {
-                lvi.ForeColor = Color.Gray;
-            }
-            else if (svinfo.code.ToString().StartsWith("5"))
-            {
-                lvi.ForeColor = Color.Red;
-            }
-            this.listView1.Items.Add(lvi);
-        }
+       
 
         private void OpenUrl_Click(object sender, EventArgs e)
         {

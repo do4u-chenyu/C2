@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace C2.Business.CastleBravo.WebScan.Model
+namespace C2.Business.CastleBravo.Intruder.Config
 {
-    public class ServerInfo
+    class ServerInfo
     {
         public String target = "";//扫描目标
         public String host = "";//host主机头
@@ -25,11 +25,13 @@ namespace C2.Business.CastleBravo.WebScan.Model
         public String ip = "";
         public String type = "";
         public int code = 0;
+        public String password = "";
+        public String mistake = "";
         public int mode = 0;
         public String location = "";
         public long runTime = 0;//获取网页消耗时间，毫秒
         public int sleepTime = 0;//休息时间
         public String powerBy = "";
-        public Boolean timeout = false;
+        public String timeout = "";
     }
 }

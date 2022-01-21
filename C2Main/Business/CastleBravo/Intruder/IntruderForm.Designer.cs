@@ -96,9 +96,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.domainUpDown4 = new System.Windows.Forms.DomainUpDown();
-            this.domainUpDown3 = new System.Windows.Forms.DomainUpDown();
-            this.domainUpDown2 = new System.Windows.Forms.DomainUpDown();
-            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
+            this.timeOutDown = new System.Windows.Forms.DomainUpDown();
+            this.sleepTimeDown = new System.Windows.Forms.DomainUpDown();
+            this.threadSizeDown = new System.Windows.Forms.DomainUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -119,13 +119,12 @@
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.password = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.webStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.mistake = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.length = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timeout = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.stopButton = new System.Windows.Forms.Button();
             this.suspendButton = new System.Windows.Forms.Button();
@@ -808,9 +807,9 @@
             this.groupBoxThread.Controls.Add(this.label13);
             this.groupBoxThread.Controls.Add(this.label12);
             this.groupBoxThread.Controls.Add(this.domainUpDown4);
-            this.groupBoxThread.Controls.Add(this.domainUpDown3);
-            this.groupBoxThread.Controls.Add(this.domainUpDown2);
-            this.groupBoxThread.Controls.Add(this.domainUpDown1);
+            this.groupBoxThread.Controls.Add(this.timeOutDown);
+            this.groupBoxThread.Controls.Add(this.sleepTimeDown);
+            this.groupBoxThread.Controls.Add(this.threadSizeDown);
             this.groupBoxThread.Controls.Add(this.label10);
             this.groupBoxThread.Controls.Add(this.label9);
             this.groupBoxThread.Controls.Add(this.label8);
@@ -869,35 +868,35 @@
             this.domainUpDown4.Text = "3";
             this.domainUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // domainUpDown3
+            // timeOutDown
             // 
-            this.domainUpDown3.Enabled = false;
-            this.domainUpDown3.Location = new System.Drawing.Point(115, 73);
-            this.domainUpDown3.Name = "domainUpDown3";
-            this.domainUpDown3.Size = new System.Drawing.Size(120, 21);
-            this.domainUpDown3.TabIndex = 7;
-            this.domainUpDown3.Text = "30";
-            this.domainUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.timeOutDown.Enabled = false;
+            this.timeOutDown.Location = new System.Drawing.Point(115, 73);
+            this.timeOutDown.Name = "timeOutDown";
+            this.timeOutDown.Size = new System.Drawing.Size(120, 21);
+            this.timeOutDown.TabIndex = 7;
+            this.timeOutDown.Text = "30";
+            this.timeOutDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // domainUpDown2
+            // sleepTimeDown
             // 
-            this.domainUpDown2.Enabled = false;
-            this.domainUpDown2.Location = new System.Drawing.Point(115, 46);
-            this.domainUpDown2.Name = "domainUpDown2";
-            this.domainUpDown2.Size = new System.Drawing.Size(120, 21);
-            this.domainUpDown2.TabIndex = 6;
-            this.domainUpDown2.Text = "2";
-            this.domainUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.sleepTimeDown.Enabled = false;
+            this.sleepTimeDown.Location = new System.Drawing.Point(115, 46);
+            this.sleepTimeDown.Name = "sleepTimeDown";
+            this.sleepTimeDown.Size = new System.Drawing.Size(120, 21);
+            this.sleepTimeDown.TabIndex = 6;
+            this.sleepTimeDown.Text = "2";
+            this.sleepTimeDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // domainUpDown1
+            // threadSizeDown
             // 
-            this.domainUpDown1.Enabled = false;
-            this.domainUpDown1.Location = new System.Drawing.Point(115, 19);
-            this.domainUpDown1.Name = "domainUpDown1";
-            this.domainUpDown1.Size = new System.Drawing.Size(120, 21);
-            this.domainUpDown1.TabIndex = 5;
-            this.domainUpDown1.Text = "5";
-            this.domainUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.threadSizeDown.Enabled = false;
+            this.threadSizeDown.Location = new System.Drawing.Point(115, 19);
+            this.threadSizeDown.Name = "threadSizeDown";
+            this.threadSizeDown.Size = new System.Drawing.Size(120, 21);
+            this.threadSizeDown.TabIndex = 5;
+            this.threadSizeDown.Text = "10";
+            this.threadSizeDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
             // 
@@ -1098,56 +1097,53 @@
             // 
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11,
-            this.columnHeader12});
+            this.ID,
+            this.password,
+            this.webStatus,
+            this.mistake,
+            this.timeout,
+            this.length});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 17);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(441, 427);
+            this.listView1.Size = new System.Drawing.Size(441, 256);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader6
+            // ID
             // 
-            this.columnHeader6.Text = "序号";
-            this.columnHeader6.Width = 38;
+            this.ID.Text = "序号";
+            this.ID.Width = 38;
             // 
-            // columnHeader7
+            // password
             // 
-            this.columnHeader7.Text = "密码值";
-            this.columnHeader7.Width = 75;
+            this.password.Text = "密码值";
+            this.password.Width = 118;
             // 
-            // columnHeader8
+            // webStatus
             // 
-            this.columnHeader8.Text = "状态码";
-            this.columnHeader8.Width = 61;
+            this.webStatus.Text = "状态码";
+            this.webStatus.Width = 61;
             // 
-            // columnHeader9
+            // mistake
             // 
-            this.columnHeader9.Text = "错误";
-            this.columnHeader9.Width = 59;
+            this.mistake.Text = "错误";
+            this.mistake.Width = 66;
             // 
-            // columnHeader10
+            // length
             // 
-            this.columnHeader10.Text = "超时";
-            this.columnHeader10.Width = 57;
+            this.length.DisplayIndex = 4;
+            this.length.Text = "长度";
+            this.length.Width = 67;
             // 
-            // columnHeader11
+            // timeout
             // 
-            this.columnHeader11.Text = "长度";
-            this.columnHeader11.Width = 89;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "备注";
+            this.timeout.DisplayIndex = 5;
+            this.timeout.Text = "超时";
+            this.timeout.Width = 89;
             // 
             // groupBox12
             // 
@@ -1436,9 +1432,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DomainUpDown domainUpDown4;
-        private System.Windows.Forms.DomainUpDown domainUpDown3;
-        private System.Windows.Forms.DomainUpDown domainUpDown2;
-        private System.Windows.Forms.DomainUpDown domainUpDown1;
+        private System.Windows.Forms.DomainUpDown timeOutDown;
+        private System.Windows.Forms.DomainUpDown sleepTimeDown;
+        private System.Windows.Forms.DomainUpDown threadSizeDown;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
@@ -1471,13 +1467,12 @@
         private System.Windows.Forms.GroupBox urlTB;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.ColumnHeader password;
+        private System.Windows.Forms.ColumnHeader webStatus;
+        private System.Windows.Forms.ColumnHeader mistake;
+        private System.Windows.Forms.ColumnHeader length;
+        private System.Windows.Forms.ColumnHeader timeout;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button suspendButton;
         private System.Windows.Forms.Button startButton;
