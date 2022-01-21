@@ -108,9 +108,7 @@
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.listView9 = new System.Windows.Forms.ListView();
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.requestHeadersLV = new System.Windows.Forms.ListView();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
@@ -123,8 +121,8 @@
             this.password = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.webStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mistake = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.length = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timeout = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.length = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.stopButton = new System.Windows.Forms.Button();
             this.suspendButton = new System.Windows.Forms.Button();
@@ -148,6 +146,10 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
+            this.requestHeaderTextBox = new System.Windows.Forms.RichTextBox();
+            this.序号 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -168,6 +170,7 @@
             this.tabControl3.SuspendLayout();
             this.tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -988,36 +991,30 @@
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.requestHeaderTextBox);
+            // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.listView9);
+            this.splitContainer1.Panel2.Controls.Add(this.requestHeadersLV);
             this.splitContainer1.Size = new System.Drawing.Size(461, 506);
             this.splitContainer1.SplitterDistance = 292;
             this.splitContainer1.TabIndex = 0;
             // 
-            // listView9
+            // requestHeadersLV
             // 
-            this.listView9.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader13,
-            this.columnHeader14});
-            this.listView9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView9.HideSelection = false;
-            this.listView9.Location = new System.Drawing.Point(0, 0);
-            this.listView9.Name = "listView9";
-            this.listView9.Size = new System.Drawing.Size(461, 210);
-            this.listView9.TabIndex = 0;
-            this.listView9.UseCompatibleStateImageBehavior = false;
-            this.listView9.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "名称";
-            this.columnHeader13.Width = 218;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "值";
-            this.columnHeader14.Width = 274;
+            this.requestHeadersLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.序号,
+            this.name,
+            this.value});
+            this.requestHeadersLV.HideSelection = false;
+            this.requestHeadersLV.Location = new System.Drawing.Point(0, 0);
+            this.requestHeadersLV.Name = "requestHeadersLV";
+            this.requestHeadersLV.Size = new System.Drawing.Size(461, 210);
+            this.requestHeadersLV.TabIndex = 0;
+            this.requestHeadersLV.UseCompatibleStateImageBehavior = false;
+            this.requestHeadersLV.View = System.Windows.Forms.View.Details;
             // 
             // tabPage9
             // 
@@ -1104,6 +1101,7 @@
             this.timeout,
             this.length});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 17);
@@ -1112,6 +1110,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.Click += new System.EventHandler(this.listView1_Click);
             // 
             // ID
             // 
@@ -1133,17 +1132,17 @@
             this.mistake.Text = "错误";
             this.mistake.Width = 66;
             // 
-            // length
-            // 
-            this.length.DisplayIndex = 4;
-            this.length.Text = "长度";
-            this.length.Width = 67;
-            // 
             // timeout
             // 
             this.timeout.DisplayIndex = 5;
             this.timeout.Text = "超时";
             this.timeout.Width = 89;
+            // 
+            // length
+            // 
+            this.length.DisplayIndex = 4;
+            this.length.Text = "长度";
+            this.length.Width = 67;
             // 
             // groupBox12
             // 
@@ -1340,6 +1339,30 @@
             this.scanTimer.Interval = 1000;
             this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
             // 
+            // requestHeaderTextBox
+            // 
+            this.requestHeaderTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.requestHeaderTextBox.Location = new System.Drawing.Point(0, 0);
+            this.requestHeaderTextBox.Name = "requestHeaderTextBox";
+            this.requestHeaderTextBox.Size = new System.Drawing.Size(461, 292);
+            this.requestHeaderTextBox.TabIndex = 0;
+            this.requestHeaderTextBox.Text = "";
+            // 
+            // 序号
+            // 
+            this.序号.Text = "序号";
+            this.序号.Width = 0;
+            // 
+            // name
+            // 
+            this.name.Text = "名称";
+            this.name.Width = 65;
+            // 
+            // value
+            // 
+            this.value.Text = "值";
+            this.value.Width = 379;
+            // 
             // IntruderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1382,6 +1405,7 @@
             this.panel4.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -1482,9 +1506,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ListView listView9;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
-        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ListView requestHeadersLV;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.Label label25;
@@ -1517,5 +1539,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel scanSpeed;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RichTextBox requestHeaderTextBox;
+        private System.Windows.Forms.ColumnHeader 序号;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader value;
     }
 }
