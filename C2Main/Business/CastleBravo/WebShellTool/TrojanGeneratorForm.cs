@@ -30,6 +30,18 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.encryComboBox.SelectedIndex = 0;
                 this.encryComboBox.Enabled = true;
             }
+            switch (trojanType)
+            {
+                case "哥斯拉配套Trojan":
+                    this.passTextBox.Text = "pass";
+                    break;
+                case "三代冰蝎配套Trojan":
+                    this.passTextBox.Text = "rebeyond";
+                    break;
+                default:
+                    this.passTextBox.Text = "yxs";
+                    break;
+            }
         }
 
         protected override bool OnOKButtonClick()

@@ -94,7 +94,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(285, 21);
             this.passwordTextBox.TabIndex = 10005;
-            this.passwordTextBox.Text = "yxs";
+            this.passwordTextBox.Text = "rebeyond";
             // 
             // label5
             // 
