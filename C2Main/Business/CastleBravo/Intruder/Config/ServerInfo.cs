@@ -33,5 +33,8 @@ namespace C2.Business.CastleBravo.Intruder.Config
         public int sleepTime = 0;//休息时间
         public String powerBy = "";
         public String timeout = "";
+        public String content = "";
+        //public List<string> responseHeaders = new List<string>();
+        public String responseHeaders = "";
     }
 }

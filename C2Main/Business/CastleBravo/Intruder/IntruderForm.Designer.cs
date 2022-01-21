@@ -108,7 +108,11 @@
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.requestHeaderTextBox = new System.Windows.Forms.RichTextBox();
             this.requestHeadersLV = new System.Windows.Forms.ListView();
+            this.序号 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
@@ -146,10 +150,7 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
-            this.requestHeaderTextBox = new System.Windows.Forms.RichTextBox();
-            this.序号 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.responseHeadersrichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -173,6 +174,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabPage9.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox13.SuspendLayout();
@@ -1002,6 +1004,15 @@
             this.splitContainer1.SplitterDistance = 292;
             this.splitContainer1.TabIndex = 0;
             // 
+            // requestHeaderTextBox
+            // 
+            this.requestHeaderTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.requestHeaderTextBox.Location = new System.Drawing.Point(0, 0);
+            this.requestHeaderTextBox.Name = "requestHeaderTextBox";
+            this.requestHeaderTextBox.Size = new System.Drawing.Size(461, 292);
+            this.requestHeaderTextBox.TabIndex = 0;
+            this.requestHeaderTextBox.Text = "";
+            // 
             // requestHeadersLV
             // 
             this.requestHeadersLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -1016,8 +1027,24 @@
             this.requestHeadersLV.UseCompatibleStateImageBehavior = false;
             this.requestHeadersLV.View = System.Windows.Forms.View.Details;
             // 
+            // 序号
+            // 
+            this.序号.Text = "序号";
+            this.序号.Width = 0;
+            // 
+            // name
+            // 
+            this.name.Text = "名称";
+            this.name.Width = 65;
+            // 
+            // value
+            // 
+            this.value.Text = "值";
+            this.value.Width = 379;
+            // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.responseHeadersrichTextBox);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
@@ -1339,29 +1366,14 @@
             this.scanTimer.Interval = 1000;
             this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
             // 
-            // requestHeaderTextBox
+            // responseHeadersrichTextBox
             // 
-            this.requestHeaderTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.requestHeaderTextBox.Location = new System.Drawing.Point(0, 0);
-            this.requestHeaderTextBox.Name = "requestHeaderTextBox";
-            this.requestHeaderTextBox.Size = new System.Drawing.Size(461, 292);
-            this.requestHeaderTextBox.TabIndex = 0;
-            this.requestHeaderTextBox.Text = "";
-            // 
-            // 序号
-            // 
-            this.序号.Text = "序号";
-            this.序号.Width = 0;
-            // 
-            // name
-            // 
-            this.name.Text = "名称";
-            this.name.Width = 65;
-            // 
-            // value
-            // 
-            this.value.Text = "值";
-            this.value.Width = 379;
+            this.responseHeadersrichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.responseHeadersrichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.responseHeadersrichTextBox.Name = "responseHeadersrichTextBox";
+            this.responseHeadersrichTextBox.Size = new System.Drawing.Size(461, 506);
+            this.responseHeadersrichTextBox.TabIndex = 0;
+            this.responseHeadersrichTextBox.Text = "";
             // 
             // IntruderForm
             // 
@@ -1409,6 +1421,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabPage9.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
@@ -1543,5 +1556,6 @@
         private System.Windows.Forms.ColumnHeader 序号;
         private System.Windows.Forms.ColumnHeader name;
         private System.Windows.Forms.ColumnHeader value;
+        private System.Windows.Forms.RichTextBox responseHeadersrichTextBox;
     }
 }

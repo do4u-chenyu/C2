@@ -183,10 +183,16 @@ namespace C2.Business.CastleBravo.Intruder.Config
                 }
                 if (response != null)
                 {
+                    res.code = (int)(response.StatusCode);
+                    res.content = response.Headers.ToString();
+                    if(!res.content.Contains("Connection"))
+                        res.responseHeaders = ("HTTP / 1.1" + " " + res.code + "\n" + "Connection: close" + "\n" + res.content);
+                    else
+                        res.responseHeaders = ("HTTP / 1.1" + " " + res.code + "\n" + res.content);
                     res.contentType = response.ContentType;
                     res.powerBy = response.Headers["powerby"];
                     res.location = response.Headers["location"];
-                    res.code = (int)(response.StatusCode);
+                   
                     res.server = response.Server;
                     rs = response.GetResponseStream();
                     sr = new StreamReader(rs, Encoding.GetEncoding("UTF-8"));

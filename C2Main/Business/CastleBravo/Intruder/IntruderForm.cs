@@ -43,6 +43,9 @@ namespace C2.Business.CastleBravo.Intruder
 
         bool markIsClick = false;//判断是否点击了标记按钮
 
+        ServerInfo tmpSvinfo;
+        ServerInfo svinfo;
+
 
 
         public IntruderForm()
@@ -176,7 +179,7 @@ namespace C2.Business.CastleBravo.Intruder
             foreach (string referer in refererList)
             {
                 this.scanDirCount++;
-                ServerInfo tmpSvinfo = new ServerInfo
+                tmpSvinfo = new ServerInfo
                 {
                     host = tools.UpdateUrl(referer, false),
                     id = scanDirCount,
@@ -202,7 +205,7 @@ namespace C2.Business.CastleBravo.Intruder
                     {
                         this.scanDirCount++;
 
-                        ServerInfo svinfo = new ServerInfo();
+                        svinfo = new ServerInfo();
                         svinfo.target = referer;
                         //svinfo.host = tools.UpdateUrl(referer, true);
                         svinfo.host = referer;
@@ -650,7 +653,14 @@ namespace C2.Business.CastleBravo.Intruder
             this.requestHeadersLV.EndUpdate();
         }
 
-        //listview单机事件
+        private void updateResponseHeadersTextBox(string password)
+        {
+            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut, config.keeAlive, lastLine.Split('=')[0] + "=" + password);
+            responseHeadersrichTextBox.Text = result.responseHeaders + "\n" + result.body;
+
+        }
+
+        //点击listview事件
         private void listView1_Click(object sender, EventArgs e)
         {
             int selectCount = listView1.SelectedItems.Count;
@@ -661,7 +671,8 @@ namespace C2.Business.CastleBravo.Intruder
                 requestHeaderTextBox.Text = requestHeaderTextBox.Text.Replace(lastLine, lastLine.Split('=')[0] + "=" + password);
 
                 updateRequestHeadersLV();
-                
+                updateResponseHeadersTextBox(password);
+           
             }
         }
     }
