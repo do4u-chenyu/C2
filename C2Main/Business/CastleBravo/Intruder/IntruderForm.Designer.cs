@@ -114,7 +114,6 @@
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.responseHeadersrichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tabPage11 = new System.Windows.Forms.TabPage();
@@ -152,6 +151,8 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
+            this.myInstaller1 = new UserInstallSet.MyInstaller();
+            this.fctb = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -183,6 +184,7 @@
             this.groupBox12.SuspendLayout();
             this.urlTB.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctb)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1048,7 +1050,7 @@
             // 
             // tabPage9
             // 
-            this.tabPage9.Controls.Add(this.responseHeadersrichTextBox);
+            this.tabPage9.Controls.Add(this.fctb);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
@@ -1056,15 +1058,6 @@
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "返回包";
             this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // responseHeadersrichTextBox
-            // 
-            this.responseHeadersrichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.responseHeadersrichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.responseHeadersrichTextBox.Name = "responseHeadersrichTextBox";
-            this.responseHeadersrichTextBox.Size = new System.Drawing.Size(568, 507);
-            this.responseHeadersrichTextBox.TabIndex = 0;
-            this.responseHeadersrichTextBox.Text = "";
             // 
             // tabPage10
             // 
@@ -1389,6 +1382,48 @@
             this.scanTimer.Interval = 1000;
             this.scanTimer.Tick += new System.EventHandler(this.ScanTimer_Tick);
             // 
+            // fctb
+            // 
+            this.fctb.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctb.AutoScrollMinSize = new System.Drawing.Size(179, 14);
+            this.fctb.BackBrush = null;
+            this.fctb.CharHeight = 14;
+            this.fctb.CharWidth = 8;
+            this.fctb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctb.IsReplaceMode = false;
+            this.fctb.Location = new System.Drawing.Point(3, 3);
+            this.fctb.Name = "fctb";
+            this.fctb.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctb.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctb.Size = new System.Drawing.Size(568, 507);
+            this.fctb.TabIndex = 0;
+            this.fctb.Zoom = 100;
+
+            this.fctb.AutoIndentCharsPatterns = "";
+            this.fctb.CommentPrefix = null;
+            this.fctb.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fctb.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.fctb.Language = FastColoredTextBoxNS.Language.HTML;
+            this.fctb.LeftBracket = '<';
+            this.fctb.LeftBracket2 = '(';
+            this.fctb.Name = "fctb";
+            this.fctb.RightBracket = '>';
+            this.fctb.RightBracket2 = ')';
+            this.fctb.Text = "\r\n<html>\r\n<body>\r\n    <h1> Hello, this text is 你好writable! </h1>\r\n    <div class=re" +
+    "adonly_attribute> Writable text </div>\r\n</body>\r\n</html>";
+            // 
             // IntruderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1445,6 +1480,7 @@
             this.urlTB.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctb)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1571,7 +1607,8 @@
         private System.Windows.Forms.ColumnHeader 序号;
         private System.Windows.Forms.ColumnHeader name;
         private System.Windows.Forms.ColumnHeader value;
-        private System.Windows.Forms.RichTextBox responseHeadersrichTextBox;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private UserInstallSet.MyInstaller myInstaller1;
+        private FastColoredTextBoxNS.FastColoredTextBox fctb;
     }
 }

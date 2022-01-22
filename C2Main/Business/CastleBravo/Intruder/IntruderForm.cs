@@ -623,7 +623,7 @@ namespace C2.Business.CastleBravo.Intruder
         private void updateResponseHeadersTextBox(string password)
         {
             ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.host, config.TimeOut, config.keeAlive, lastLine.Split('=')[0] + "=" + password);
-            responseHeadersrichTextBox.Text = result.responseHeaders + "\n" + result.body;
+            fctb.Text = result.responseHeaders + "\n" + result.body;
         }
 
         private void updatewebBrowser(string password)
@@ -648,6 +648,8 @@ namespace C2.Business.CastleBravo.Intruder
                 updateResponseHeadersTextBox(password);
 
                 updatewebBrowser(password);
+
+               
             }
         }
     }

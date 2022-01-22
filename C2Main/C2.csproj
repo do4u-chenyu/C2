@@ -266,6 +266,54 @@
     <Compile Include="Business\CastleBravo\Intruder\Config\HttpRequest.cs" />
     <Compile Include="Business\CastleBravo\Intruder\Config\ServerInfo.cs" />
     <Compile Include="Business\CastleBravo\Intruder\Config\ToolIntruder.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\AutocompleteItem.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\AutocompleteMenu.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Bookmarks.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Char.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\CommandManager.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Commands.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\DocumentMap.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\EncodingDetector.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\ExportToHTML.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\ExportToRTF.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\FastColoredTextBox.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\FileTextSource.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\FindForm.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\FindForm.Designer.cs">
+      <DependentUpon>FindForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\GoToForm.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\GoToForm.Designer.cs">
+      <DependentUpon>GoToForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Hints.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Hotkeys.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\HotkeysEditorForm.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\HotkeysEditorForm.Designer.cs">
+      <DependentUpon>HotkeysEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\LimitedStack.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Line.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\LinesAccessor.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\MacrosManager.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Place.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\PlatformType.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Range.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\ReplaceForm.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\ReplaceForm.Designer.cs">
+      <DependentUpon>ReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Ruler.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Ruler.Designer.cs">
+      <DependentUpon>Ruler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\Style.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\SyntaxDescriptor.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\SyntaxHighlighter.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\TextSource.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\TypeDescriptor.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\UnfocusablePanel.cs" />
+    <Compile Include="Business\CastleBravo\Intruder\FastColoredTextBox\VisualMarker.cs" />
     <Compile Include="Business\CastleBravo\Intruder\IntruderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2162,8 +2210,24 @@
     <EmbeddedResource Include="Business\CastleBravo\Cracker\Dialogs\CrackerForm.resx">
       <DependentUpon>CrackerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\Intruder\FastColoredTextBox\FastColoredTextBox.resx">
+      <DependentUpon>FastColoredTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\Intruder\FastColoredTextBox\FindForm.resx">
+      <DependentUpon>FindForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\Intruder\FastColoredTextBox\GoToForm.resx">
+      <DependentUpon>GoToForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\Intruder\FastColoredTextBox\HotkeysEditorForm.resx">
+      <DependentUpon>HotkeysEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\Intruder\FastColoredTextBox\ReplaceForm.resx">
+      <DependentUpon>ReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\Intruder\IntruderForm.resx">
       <DependentUpon>IntruderForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdResultForm.resx">
       <DependentUpon>PwdResultForm.cs</DependentUpon>
@@ -2689,6 +2753,9 @@
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Business\CastleBravo\Intruder\FastColoredTextBox\FastColoredTextBox.csproj" />
+    <None Include="Business\CastleBravo\Intruder\FastColoredTextBox\FCTB_key.snk" />
+    <None Include="Business\CastleBravo\Intruder\FastColoredTextBox\SyntaxHighlighter.cs.old" />
     <None Include="Business\CastleBravo\WebShellTool\Payload\db_dict" />
     <None Include="Business\CastleBravo\WebShellTool\Payload\gzip.php" />
     <None Include="Business\CastleBravo\WebShellTool\Payload\unzip.php" />
