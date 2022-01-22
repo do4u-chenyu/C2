@@ -46,7 +46,7 @@
             this.ItemLabel.Name = "ItemLabel";
             this.ItemLabel.Size = new System.Drawing.Size(187, 30);
             this.ItemLabel.TabIndex = 0;
-            this.ItemLabel.Text = "我的业务视图";
+            this.ItemLabel.Text = "我的战术手册";
             this.ItemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ItemPanel
@@ -71,7 +71,7 @@
             this.AddMindMapButton.Name = "AddMindMapButton";
             this.AddMindMapButton.Size = new System.Drawing.Size(25, 25);
             this.AddMindMapButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.AddMindMapButton, "导入业务视图");
+            this.toolTip1.SetToolTip(this.AddMindMapButton, "导入战术手册");
             this.AddMindMapButton.UseVisualStyleBackColor = false;
             this.AddMindMapButton.Click += new System.EventHandler(this.AddMindMapButton_Click);
             // 

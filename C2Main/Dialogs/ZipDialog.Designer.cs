@@ -124,7 +124,7 @@
             this.Controls.Add(this.modelPathLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ZipDialog";
-            this.Text = "业务视图";
+            this.Text = "战术手册";
             this.Controls.SetChildIndex(this.modelPathLabel, 0);
             this.Controls.SetChildIndex(this.passwordLabel, 0);
             this.Controls.SetChildIndex(this.modelPathTextBox, 0);

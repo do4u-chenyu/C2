@@ -113,7 +113,7 @@ namespace C2.Controls.C1.Left
             JumpMindMapMenuItem = new ToolStripMenuItem
             {
                 Name = "OpenMindMapMenuItem",
-                Text = "跳转业务视图(专项模型文档)",
+                Text = "跳转战术手册",
             };
             JumpMindMapMenuItem.Click += new EventHandler(OpenMindMapMenuItem_Click);
 
