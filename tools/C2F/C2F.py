@@ -121,7 +121,7 @@ def del_zipfile(path):
 
 
 if __name__ == "__main__":
-    print('正在安装中...' + '\r\n')
+    print('战术手册正在安装中...' + '\r\n')
     src_path = resource_path("c2f")
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\业务视图"
     
@@ -161,9 +161,10 @@ if __name__ == "__main__":
         path = os.path.join(dst_path, zipname)
         fz.extractall(path)
         change_name(path)
-
+        
+    print(r"旧文档备份到 C:\C2F_back 完毕, 有需要自行前往" + '\r\n')
     print('删除临时文件' + '\r\n')
     del_zipfile(dst_path)
-    print('安装成功，请重新打开C2')
+    print('战术手册安装成功，请重启C2，务必重启C2才能生效')
     os.system("pause")
     
