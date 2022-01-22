@@ -614,41 +614,16 @@ namespace C2.Business.CastleBravo.Intruder
         public void updateRequestHeadersLV()
         {
             lines = requestHeaderTextBox.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string[][] responseHeaders = new string[lines.Length-1][];
             var post = Array.Find(lines, line => line.IndexOf("POST") != -1).Replace("POST", "").Trim();
-            var host = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host", "").Trim();
-            var proConnect = Array.Find(lines, line => line.IndexOf("Proxy-Connection") != -1).Replace("Proxy-Connection", "").Trim();
-            var length = Array.Find(lines, line => line.IndexOf("Content-Length") != -1).Replace("Content-Length", "").Trim();
-            var cacheControl = Array.Find(lines, line => line.IndexOf("Cache-Control") != -1).Replace("Cache-Control", "").Trim();
-            var origin = Array.Find(lines, line => line.IndexOf("Origin") != -1).Replace("Origin", "").Trim();
-            var UpInsecureRequests = Array.Find(lines, line => line.IndexOf("Upgrade-Insecure-Requests") != -1).Replace("Upgrade-Insecure-Requests", "").Trim();
-            var dnt = Array.Find(lines, line => line.IndexOf("DNT") != -1).Replace("DNT", "").Trim();
-            var contentType = Array.Find(lines, line => line.IndexOf("Content-Type") != -1).Replace("Content-Type", "").Trim();
-            var userAgent = Array.Find(lines, line => line.IndexOf("User-Agent") != -1).Replace("User-Agent", "").Trim();
-            var accept = Array.Find(lines, line => line.IndexOf("Accept") != -1).Replace("Accept", "").Trim();
-            var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Referer", "").Trim();
-            var AcEncoding = Array.Find(lines, line => line.IndexOf("Accept-Encoding") != -1).Replace("Accept-Encoding", "").Trim();
-            var AcLanguage = Array.Find(lines, line => line.IndexOf("Accept-Language") != -1).Replace("Accept-Language", "").Trim();
-            var cookie = Array.Find(lines, line => line.IndexOf("Cookie") != -1).Replace("Cookie", "").Trim();
-            requestHeadersLV.Items.Clear();
-            string[][] xxx = new string[15][];
-            xxx[0] = new string[] { "1", "POST", post };
-            xxx[1] = new string[] { "2", "Host", host };
-            xxx[2] = new string[] { "3", "Proxy-Connection", proConnect };
-            xxx[3] = new string[] { "4", "Content-Length", length };
-            xxx[4] = new string[] { "5", "Cache-Control", cacheControl };
-            xxx[5] = new string[] { "6", "Origin", origin };
-            xxx[6] = new string[] { "7", "Upgrade-Insecure-Requests", UpInsecureRequests };
-            xxx[7] = new string[] { "8", "DNT", dnt };
-            xxx[8] = new string[] { "9", "Content-Type", contentType };
-            xxx[9] = new string[] { "10", "User-Agent", userAgent };
-            xxx[10] = new string[] { "11", "Accept", accept };
-            xxx[11] = new string[] { "12", "Referer", referer };
-            xxx[12] = new string[] { "13", "Accept-Encoding", AcEncoding };
-            xxx[13] = new string[] { "14", "Accept-Language", AcLanguage };
-            xxx[14] = new string[] { "15", "Cookie", cookie };
-            for (int i = 0; i < xxx.Length; i++)
+            responseHeaders[0] = new string[] { "0", "POST", post };
+            for (int i = 1; i < lines.Length-1; i++)
             {
-                ListViewItem lvi = new ListViewItem(xxx[i]);
+                responseHeaders[i] = new string[] { i.ToString(), lines[i].Split(':')[0], lines[i].Split(':')[1] };
+            }
+            for (int i = 0; i < responseHeaders.Length; i++)
+            {
+                ListViewItem lvi = new ListViewItem(responseHeaders[i]);
                 requestHeadersLV.Items.Add(lvi);
             }
             this.requestHeadersLV.EndUpdate();
