@@ -21,9 +21,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         protected override bool OnOKButtonClick()
         {
             string respMsg = string.Empty;
-            //if (!IsValidityUser() || !IsValidityOtp())
-            //    return false;
-            if (!IsValidityUser())
+            if (!IsValidityUser() || !IsValidityOtp())
                 return false;
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {

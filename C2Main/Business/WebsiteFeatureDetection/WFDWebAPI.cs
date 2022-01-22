@@ -75,7 +75,7 @@ namespace C2.Business.WebsiteFeatureDetection
                     return "success";
                 }
                 else
-                    return "用户认证失败(用户名或动态口令错误)。";
+                    return "认证失败(工号没开权限或动态口令错误, 先检查下电脑时间不要有偏差)。";
             }
             catch (Exception ex)
             {
