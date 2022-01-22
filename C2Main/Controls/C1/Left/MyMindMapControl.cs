@@ -135,7 +135,7 @@ namespace C2.Controls.Left
                     return;
                 }
                 if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox(String.Format("[{0}]导入[业务视图]成功", filename));
+                    HelpUtil.ShowMessageBox(String.Format("[{0}]导入[战术手册仓库]成功", filename));
             }
         }
     }

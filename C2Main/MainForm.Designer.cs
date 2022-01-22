@@ -387,8 +387,8 @@ namespace C2
             this.mindMapButton.Size = new System.Drawing.Size(151, 42);
             this.mindMapButton.TabIndex = 1;
             this.mindMapButton.TabStop = false;
-            this.mindMapButton.Text = "   业务视图";
-            this.toolTip1.SetToolTip(this.mindMapButton, "当前用户的所有业务视图");
+            this.mindMapButton.Text = "   战术手册";
+            this.toolTip1.SetToolTip(this.mindMapButton, "当前导入的所有战术手册");
             this.mindMapButton.UseVisualStyleBackColor = true;
             this.mindMapButton.Click += new System.EventHandler(this.MindMapButton_Click);
             // 
@@ -801,7 +801,7 @@ namespace C2
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = global::C2.Properties.Resources.logo;
             this.Name = "MainForm";
-            this.Text = C2.Core.Global.GetMainWindowTitle();
+            this.Text = "烽步楼Febleau";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);
             this.Load += new System.EventHandler(this.MainForm_Load);

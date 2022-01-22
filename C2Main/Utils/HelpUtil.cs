@@ -43,7 +43,7 @@ namespace C2.Utils
         public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
         public static string ExportImageHelpInfo = "导出图片:支持导出成多种格式的图片";
 
-        public static string ReviewToolStripMenuItemInfo = "首页状态下无法预览数据，请点击左侧面板打开一个业务视图后再试";
+        public static string ReviewToolStripMenuItemInfo = "首页状态下无法预览数据，请点击左侧面板打开一个战术手册后再试";
         public static string DbInfoIsEmptyInfo = "输入信息不能为空，请检查输入后再次尝试添加信息";
         public static string DbServerInfoIsEmptyInfo = "需要一个有效的IP，请检查输入后再次尝试添加信息";
         public static string DbCannotBeConnectedInfo = "连接数据库发生错误，请检查信息后再次尝试连接";

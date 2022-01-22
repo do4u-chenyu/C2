@@ -110,7 +110,7 @@
             this.ExportModel.Enabled = false;
             this.ExportModel.Name = "ExportModel";
             this.ExportModel.Size = new System.Drawing.Size(196, 22);
-            this.ExportModel.Text = "导出业务视图";
+            this.ExportModel.Text = "导出战术手册";
             this.ExportModel.Click += new System.EventHandler(this.ExportModelButton_Click);
             // 
             // toolStripSeparator1
