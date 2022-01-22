@@ -111,13 +111,6 @@ namespace C2.Business.CastleBravo.Intruder
                 TextBoxReferer.Text = referer.Substring(referer.IndexOf(':') + 1);
             }
 
-            /*
-            int ss = tBReqMess.Text.LastIndexOf("=");
-            int sst = tBReqMess.Text.LastIndexOf("\n");
-            int ttt = tBReqMess.Text.Length;
-            */
-
-            
             if (lastLine.Contains("=") && splitLine.Length >= 2 &&
                 (splitLine[splitLine.Length - 2] == string.Empty || splitLine[splitLine.Length - 2] == "\r"))
             {
@@ -126,7 +119,6 @@ namespace C2.Business.CastleBravo.Intruder
                     tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Red);
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
             }
-            //flag = true;
         }
 
         public void tBReqMessSetting(int start, int end, Color color)
@@ -135,7 +127,6 @@ namespace C2.Business.CastleBravo.Intruder
             this.tBReqMess.SelectionLength = end;
             this.tBReqMess.SelectionColor = color;
         }
-
 
         #region 开始扫描
         /*
@@ -157,7 +148,7 @@ namespace C2.Business.CastleBravo.Intruder
                 selectedDict.Add(name.Tag.ToString());
                 scanSumCount += int.Parse(name.SubItems[2].Text);
             }
-            scanSumCount = scanSumCount * refererList.Count();//扫Referer本身和其字典目录
+            scanSumCount = scanSumCount * refererList.Count() + refererList.Count();//扫Referer本身和其字典目录
 
             SetConfig();
 
