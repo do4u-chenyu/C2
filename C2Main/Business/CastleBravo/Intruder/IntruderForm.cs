@@ -545,9 +545,10 @@ namespace C2.Business.CastleBravo.Intruder
                 var newReferer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
                 tBReqMess.Text = tBReqMess.Text.Replace(newReferer, originReferer);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
+                MessageBox.Show("请输入正确的报文", "报文错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         
             if (lastLine.Contains("=") && splitLine.Length >= 2 &&
