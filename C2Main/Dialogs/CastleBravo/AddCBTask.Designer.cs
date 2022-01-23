@@ -41,6 +41,8 @@
             this.md5TextBox = new System.Windows.Forms.TextBox();
             this.pasteModeCB = new System.Windows.Forms.CheckBox();
             this.helpLabel = new System.Windows.Forms.LinkLabel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +70,7 @@
             // taskNameTextBox
             // 
             this.taskNameTextBox.Location = new System.Drawing.Point(144, 84);
-            this.taskNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.taskNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.taskNameTextBox.Name = "taskNameTextBox";
             this.taskNameTextBox.Size = new System.Drawing.Size(416, 28);
             this.taskNameTextBox.TabIndex = 10005;
@@ -76,7 +78,7 @@
             // filePathTextBox
             // 
             this.filePathTextBox.Location = new System.Drawing.Point(144, 150);
-            this.filePathTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.filePathTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.Size = new System.Drawing.Size(416, 28);
             this.filePathTextBox.TabIndex = 10006;
@@ -85,7 +87,7 @@
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.browserButton.Location = new System.Drawing.Point(574, 150);
-            this.browserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.browserButton.Margin = new System.Windows.Forms.Padding(4);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(110, 36);
             this.browserButton.TabIndex = 10007;
@@ -128,7 +130,7 @@
             "Hash逆向分析",
             "目标侦察(施工中...)"});
             this.taskComboBox.Location = new System.Drawing.Point(144, 20);
-            this.taskComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.taskComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.taskComboBox.Name = "taskComboBox";
             this.taskComboBox.Size = new System.Drawing.Size(416, 26);
             this.taskComboBox.TabIndex = 10010;
@@ -157,7 +159,7 @@
             "Mysql5",
             "三代冰蝎"});
             this.modeComboBox.Location = new System.Drawing.Point(574, 86);
-            this.modeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.modeComboBox.Name = "modeComboBox";
             this.modeComboBox.Size = new System.Drawing.Size(108, 26);
             this.modeComboBox.TabIndex = 10011;
@@ -166,7 +168,7 @@
             // 
             this.md5TextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
             this.md5TextBox.Location = new System.Drawing.Point(144, 224);
-            this.md5TextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.md5TextBox.Margin = new System.Windows.Forms.Padding(4);
             this.md5TextBox.MaxLength = 4194304;
             this.md5TextBox.Multiline = true;
             this.md5TextBox.Name = "md5TextBox";
@@ -181,7 +183,7 @@
             this.pasteModeCB.AutoSize = true;
             this.pasteModeCB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.pasteModeCB.Location = new System.Drawing.Point(9, 224);
-            this.pasteModeCB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pasteModeCB.Margin = new System.Windows.Forms.Padding(4);
             this.pasteModeCB.Name = "pasteModeCB";
             this.pasteModeCB.Size = new System.Drawing.Size(110, 29);
             this.pasteModeCB.TabIndex = 10013;
@@ -202,12 +204,38 @@
             this.helpLabel.Text = "帮助说明";
             this.helpLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLabel_LinkClicked);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(6, 267);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(116, 18);
+            this.label5.TabIndex = 10016;
+            this.label5.Text = "* 最大4M文本";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(6, 294);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 18);
+            this.label6.TabIndex = 10017;
+            this.label6.Text = "* 约10万行MD5";
+            // 
             // AddCBTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(705, 477);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.pasteModeCB);
             this.Controls.Add(this.md5TextBox);
@@ -221,7 +249,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddCBTask";
             this.Text = "喝彩城堡-新建任务";
             this.Load += new System.EventHandler(this.AddCBTask_Load);
@@ -237,6 +265,8 @@
             this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.pasteModeCB, 0);
             this.Controls.SetChildIndex(this.helpLabel, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,5 +287,7 @@
         private System.Windows.Forms.TextBox md5TextBox;
         private System.Windows.Forms.CheckBox pasteModeCB;
         private System.Windows.Forms.LinkLabel helpLabel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
