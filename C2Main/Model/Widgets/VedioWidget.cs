@@ -58,7 +58,20 @@ namespace C2.Model.Widgets
 
         public static void DoOpenVedio(string ffp)
         {
+            string[] ext = { ".wmv", ".mp4", ".avi" };
 
+            if (File.Exists(ffp))
+            {
+
+                if (Array.IndexOf(ext, Path.GetExtension(ffp)) == -1)
+                {
+                    FileUtil.ExploreDirectory(ffp);
+                }
+                else
+                    ProcessUtil.ProcessOpen(ffp);
+            }
+            else
+                HelpUtil.ShowMessageBox("该文件已不存在.", "提示");
         }
     }
 

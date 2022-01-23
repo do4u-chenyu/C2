@@ -240,16 +240,16 @@ namespace C2.Controls.MapViews
             if (fd.ShowDialog() != DialogResult.OK)
                 return;
 
-            VedioWidget atw = hitTopic.FindWidget<VedioWidget>();
-            if (atw != null)
+            VedioWidget vw = hitTopic.FindWidget<VedioWidget>();
+            if (vw != null)
                 return;
 
-            atw = new VedioWidget()
+            vw = new VedioWidget()
             {
                 VedioFullFilePath = fd.FileName,
             };
 
-            hitTopic.Widgets.Add(atw);
+            hitTopic.Widgets.Add(vw);
         }
 
         public void AddMap()
