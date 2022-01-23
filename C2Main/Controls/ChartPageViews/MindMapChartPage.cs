@@ -429,7 +429,7 @@ namespace C2.ChartPageView
             MenuAddAttachment.Click += new System.EventHandler(MenuAddAttachment_Click);
 
             //MenuAddVedio
-            MenuAddVedio.Image = C2.Properties.Resources.附件;
+            MenuAddVedio.Image = C2.Properties.Resources.播放;
             MenuAddVedio.Name = "MenuAddVedio";
             MenuAddVedio.Text = "Vedio";
             MenuAddVedio.Click += new System.EventHandler(MenuAddVedio_Click);

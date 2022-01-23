@@ -782,7 +782,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuDeleteVedio = new ToolStripMenuItem();
 
 
-            MenuOpenVedio.Image = Properties.Resources.opendata;
+            MenuOpenVedio.Image = Properties.Resources.播放;
             MenuOpenVedio.Tag = vw.VedioFullFilePath;
             MenuOpenVedio.Text = Lang._("OpenVedio");
             MenuOpenVedio.Click += MenuOpenVedio_Click;

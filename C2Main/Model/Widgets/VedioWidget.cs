@@ -22,7 +22,7 @@ namespace C2.Model.Widgets
         {
             DisplayIndex = 11;
             Alignment = WidgetAlignment.Left;
-            widgetIcon = Properties.Resources.附件;
+            widgetIcon = Properties.Resources.播放;
         }
 
         public override string GetTypeID()
