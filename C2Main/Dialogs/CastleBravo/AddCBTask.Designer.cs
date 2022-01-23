@@ -47,9 +47,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(25, 58);
+            this.label1.Location = new System.Drawing.Point(38, 87);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 19);
+            this.label1.Size = new System.Drawing.Size(96, 28);
             this.label1.TabIndex = 10003;
             this.label1.Text = "任务名：";
             // 
@@ -57,32 +58,36 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(11, 101);
+            this.label2.Location = new System.Drawing.Point(16, 152);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 19);
+            this.label2.Size = new System.Drawing.Size(117, 28);
             this.label2.TabIndex = 10004;
             this.label2.Text = "查询文件：";
             // 
             // taskNameTextBox
             // 
-            this.taskNameTextBox.Location = new System.Drawing.Point(96, 56);
+            this.taskNameTextBox.Location = new System.Drawing.Point(144, 84);
+            this.taskNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.taskNameTextBox.Name = "taskNameTextBox";
-            this.taskNameTextBox.Size = new System.Drawing.Size(279, 21);
+            this.taskNameTextBox.Size = new System.Drawing.Size(416, 28);
             this.taskNameTextBox.TabIndex = 10005;
             // 
             // filePathTextBox
             // 
-            this.filePathTextBox.Location = new System.Drawing.Point(96, 100);
+            this.filePathTextBox.Location = new System.Drawing.Point(144, 150);
+            this.filePathTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.filePathTextBox.Name = "filePathTextBox";
-            this.filePathTextBox.Size = new System.Drawing.Size(279, 21);
+            this.filePathTextBox.Size = new System.Drawing.Size(416, 28);
             this.filePathTextBox.TabIndex = 10006;
             // 
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(383, 100);
+            this.browserButton.Location = new System.Drawing.Point(574, 150);
+            this.browserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(73, 24);
+            this.browserButton.Size = new System.Drawing.Size(110, 36);
             this.browserButton.TabIndex = 10007;
             this.browserButton.Text = "+浏览";
             this.browserButton.UseVisualStyleBackColor = true;
@@ -92,9 +97,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(94, 129);
+            this.label3.Location = new System.Drawing.Point(141, 194);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(203, 12);
+            this.label3.Size = new System.Drawing.Size(305, 18);
             this.label3.TabIndex = 10008;
             this.label3.Text = "*文件内容格式，一个hash字符串一行";
             // 
@@ -106,9 +112,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(11, 13);
+            this.label4.Location = new System.Drawing.Point(16, 20);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 19);
+            this.label4.Size = new System.Drawing.Size(117, 28);
             this.label4.TabIndex = 10009;
             this.label4.Text = "任务类型：";
             // 
@@ -116,13 +123,14 @@
             // 
             this.taskComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.taskComboBox.FormattingEnabled = true;
-            this.taskComboBox.ItemHeight = 12;
+            this.taskComboBox.ItemHeight = 18;
             this.taskComboBox.Items.AddRange(new object[] {
             "Hash逆向分析",
             "目标侦察(施工中...)"});
-            this.taskComboBox.Location = new System.Drawing.Point(96, 13);
+            this.taskComboBox.Location = new System.Drawing.Point(144, 20);
+            this.taskComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.taskComboBox.Name = "taskComboBox";
-            this.taskComboBox.Size = new System.Drawing.Size(279, 20);
+            this.taskComboBox.Size = new System.Drawing.Size(416, 26);
             this.taskComboBox.TabIndex = 10010;
             this.taskComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskComboBox_SelectedIndexChanged);
             // 
@@ -132,7 +140,7 @@
             this.modeComboBox.DropDownWidth = 105;
             this.modeComboBox.Font = new System.Drawing.Font("宋体", 9F);
             this.modeComboBox.FormattingEnabled = true;
-            this.modeComboBox.ItemHeight = 12;
+            this.modeComboBox.ItemHeight = 18;
             this.modeComboBox.Items.AddRange(new object[] {
             "自动",
             "MD5",
@@ -148,19 +156,22 @@
             "宝塔面板",
             "Mysql5",
             "三代冰蝎"});
-            this.modeComboBox.Location = new System.Drawing.Point(383, 57);
+            this.modeComboBox.Location = new System.Drawing.Point(574, 86);
+            this.modeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.modeComboBox.Name = "modeComboBox";
-            this.modeComboBox.Size = new System.Drawing.Size(73, 20);
+            this.modeComboBox.Size = new System.Drawing.Size(108, 26);
             this.modeComboBox.TabIndex = 10011;
             // 
             // md5TextBox
             // 
             this.md5TextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.md5TextBox.Location = new System.Drawing.Point(96, 149);
+            this.md5TextBox.Location = new System.Drawing.Point(144, 224);
+            this.md5TextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.md5TextBox.MaxLength = 4194304;
             this.md5TextBox.Multiline = true;
             this.md5TextBox.Name = "md5TextBox";
             this.md5TextBox.ReadOnly = true;
-            this.md5TextBox.Size = new System.Drawing.Size(279, 117);
+            this.md5TextBox.Size = new System.Drawing.Size(416, 174);
             this.md5TextBox.TabIndex = 10012;
             this.md5TextBox.Text = "粘贴模式可以直接Ctrl+V内容后创建任务";
             this.md5TextBox.WordWrap = false;
@@ -169,21 +180,23 @@
             // 
             this.pasteModeCB.AutoSize = true;
             this.pasteModeCB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.pasteModeCB.Location = new System.Drawing.Point(6, 149);
+            this.pasteModeCB.Location = new System.Drawing.Point(9, 224);
+            this.pasteModeCB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pasteModeCB.Name = "pasteModeCB";
-            this.pasteModeCB.Size = new System.Drawing.Size(75, 21);
+            this.pasteModeCB.Size = new System.Drawing.Size(110, 29);
             this.pasteModeCB.TabIndex = 10013;
             this.pasteModeCB.Text = "粘贴模式";
             this.pasteModeCB.UseVisualStyleBackColor = true;
             this.pasteModeCB.CheckedChanged += new System.EventHandler(this.PasteModeCB_CheckedChanged);
             // 
-            // linkLabel1
+            // helpLabel
             // 
             this.helpLabel.AutoSize = true;
             this.helpLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.helpLabel.Location = new System.Drawing.Point(314, 129);
-            this.helpLabel.Name = "linkLabel1";
-            this.helpLabel.Size = new System.Drawing.Size(57, 12);
+            this.helpLabel.Location = new System.Drawing.Point(471, 194);
+            this.helpLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.helpLabel.Name = "helpLabel";
+            this.helpLabel.Size = new System.Drawing.Size(84, 18);
             this.helpLabel.TabIndex = 10014;
             this.helpLabel.TabStop = true;
             this.helpLabel.Text = "帮助说明";
@@ -191,10 +204,10 @@
             // 
             // AddCBTask
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(470, 318);
+            this.ClientSize = new System.Drawing.Size(705, 477);
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.pasteModeCB);
             this.Controls.Add(this.md5TextBox);
@@ -208,6 +221,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AddCBTask";
             this.Text = "喝彩城堡-新建任务";
             this.Load += new System.EventHandler(this.AddCBTask_Load);
