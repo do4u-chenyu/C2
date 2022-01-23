@@ -136,17 +136,9 @@ namespace MD5Plugin
                 return String.Join("", ComputeHash(s).Select(h => h.ToString("x2")));
             }
         }
-
-        public override void Encode(string str)
+        protected override string EncodeLine(string str)
         {
-            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
-            {
-                ResetTextBox();
-            }
-            else
-            {
-                outputTextBox.Text = NTLM.ComputeHashHexString(str);
-            }
+            return NTLM.ComputeHashHexString(str);
         }
     }
 }

@@ -9,20 +9,12 @@ namespace MD5Plugin
         {
             InitializeComponent();
         }
-        public override void Encode(string str)
+
+        protected override string EncodeLine(string str)
         {
-            if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
-            {
-                ResetTextBox();
-            }
-            else
-            {
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                string t2 = BitConverter.ToString(md5.ComputeHash(GetBytes(str)), 4, 8);
-                t2 = t2.Replace("-", string.Empty);
-                t2 = t2.ToLower();
-                outputTextBox.Text = t2;
-            }
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(GetBytes(str)), 4, 8);
+            return t2.Replace("-", string.Empty).ToLower();
         }
     }
 }
