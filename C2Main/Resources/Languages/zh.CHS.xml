@@ -429,7 +429,9 @@
     <item name="AddMap">图上作战(网)</item>
     <item name="AddBoss">数据大屏</item>
     <item name="OpenAttachment">打开</item>
+	<item name="OpenVedio">播放</item>
     <item name="DeleteAttachment">删除</item>
+	<item name="DeleteVedio">删除</item>
     <item name="Rotate Left">向左旋转</item>
     <item name="Rotate Right">向右旋转</item>
     <item name="ExploreDirectory">打开所在文件夹</item>

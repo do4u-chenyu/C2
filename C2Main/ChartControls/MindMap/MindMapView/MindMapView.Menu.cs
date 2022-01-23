@@ -27,6 +27,7 @@ namespace C2.Controls.MapViews
         private DataSourceWidget dtw;
         private OperatorWidget opw;
         private AttachmentWidget atw;
+        private VedioWidget vw;
         private ResultWidget rsw;
         private ChartWidget cw;
         private MapWidget mw;
@@ -64,6 +65,10 @@ namespace C2.Controls.MapViews
                 case AttachmentWidget.TypeID:
                     atw = HoverObject.Widget as AttachmentWidget;
                     CreateAttachmentWidgetMenu(atw);
+                    break;
+                case VedioWidget.TypeID:
+                    vw = HoverObject.Widget as VedioWidget;
+                    CreateVedioWidgetMenu(vw);
                     break;
                 case MapWidget.TypeID:
                     mw = HoverObject.Widget as MapWidget;
@@ -767,6 +772,54 @@ namespace C2.Controls.MapViews
         }
         #endregion
 
+
+        #region 视频挂件
+        private void CreateVedioWidgetMenu(VedioWidget vw)
+        {
+            ToolStripMenuItem MenuOpenVedio = new ToolStripMenuItem();
+            ToolStripMenuItem MenuExploreDirectory = new ToolStripMenuItem();
+            ToolStripMenuItem MenuCopyFilePathToClipboard = new ToolStripMenuItem();
+            ToolStripMenuItem MenuDeleteVedio = new ToolStripMenuItem();
+
+
+            MenuOpenVedio.Image = Properties.Resources.opendata;
+            MenuOpenVedio.Tag = vw.VedioFullFilePath;
+            MenuOpenVedio.Text = Lang._("OpenVedio");
+            MenuOpenVedio.Click += MenuOpenVedio_Click;
+
+            MenuExploreDirectory.Image = Properties.Resources.dataDirectory;
+            MenuExploreDirectory.Text = Lang._("ExploreDirectory");
+            MenuExploreDirectory.Tag = vw.VedioFullFilePath;
+            MenuExploreDirectory.Click += MenuExploreDirectory_Click;
+
+            MenuCopyFilePathToClipboard.Image = Properties.Resources.copyFilePath;
+            MenuCopyFilePathToClipboard.Text = Lang._("CopyFilePathToClipboard");
+            MenuCopyFilePathToClipboard.Tag = vw.VedioFullFilePath;
+            MenuCopyFilePathToClipboard.Click += MenuCopyFilePathToClipboard_Click;
+
+            MenuDeleteVedio.Image = Properties.Resources.deleteAttachment;
+            MenuDeleteVedio.Text = Lang._("DeleteVedio");
+            MenuDeleteVedio.Tag = vw.VedioFullFilePath;
+            MenuDeleteVedio.Click += MenuDeleteVedio_Click;
+
+
+            WidgetMenuStrip.Items.Add(MenuOpenVedio);
+            WidgetMenuStrip.Items.Add(MenuExploreDirectory);
+            WidgetMenuStrip.Items.Add(MenuCopyFilePathToClipboard);
+            WidgetMenuStrip.Items.Add(MenuDeleteVedio);
+        }
+
+        void MenuOpenVedio_Click(object sender, EventArgs e)
+        {
+            VedioWidget.DoOpenVedio((sender as ToolStripMenuItem).Tag as string);
+        }
+
+        void MenuDeleteVedio_Click(object sender, EventArgs e)
+        {
+            (vw.Container as Topic).Widgets.Remove(vw);
+        }
+
+        #endregion
         #region 地图挂件
         private void CreateMapWidgetMenu(MapWidget mw)
         {

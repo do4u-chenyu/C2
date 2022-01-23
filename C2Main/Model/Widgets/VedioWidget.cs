@@ -56,7 +56,7 @@ namespace C2.Model.Widgets
             base.OnDoubleClick(e);
         }
 
-        private void DoOpenVedio(string ffp)
+        public static void DoOpenVedio(string ffp)
         {
 
         }
