@@ -214,6 +214,7 @@ namespace C2.ChartPageView
             MenuAddProgressBar.Text = Lang._("Progress Bar");
             MenuAddOperator.Text = Lang._("Operator");
             MenuAddAttachment.Text = Lang._("AddAttachment");
+            MenuAddVedio.Text = Lang._("AddVedio");
             MenuAddMap.Text = Lang._("AddMap");
             MenuAddBoss.Text = Lang._("AddBoss");
             MenuAddMaxOp.Text = Lang._("Max");
@@ -256,6 +257,7 @@ namespace C2.ChartPageView
         ToolStripMenuItem MenuAddProgressBar;
         ToolStripMenuItem MenuAddOperator;
         ToolStripMenuItem MenuAddAttachment;
+        ToolStripMenuItem MenuAddVedio;
         ToolStripMenuItem MenuAddMap;
         ToolStripMenuItem MenuAddBoss;
         ToolStripMenuItem MenuAddMaxOp;
@@ -308,6 +310,7 @@ namespace C2.ChartPageView
             MenuAddProgressBar = new ToolStripMenuItem();
             MenuAddOperator = new ToolStripMenuItem();
             MenuAddAttachment = new ToolStripMenuItem();
+            MenuAddVedio = new ToolStripMenuItem();
             MenuAddMap = new ToolStripMenuItem();
             MenuAddBoss = new ToolStripMenuItem();
             MenuAddMaxOp = new ToolStripMenuItem();
@@ -388,6 +391,7 @@ namespace C2.ChartPageView
                 MenuAddOperator,
                 MenuAddModelOp,
                 MenuAddAttachment,
+                MenuAddVedio,
                 MenuAddMap,
                 MenuAddBoss});
             MenuAdd.Name = "MenuAdd";
@@ -423,6 +427,12 @@ namespace C2.ChartPageView
             MenuAddAttachment.Name = "MenuAddAttachment";
             MenuAddAttachment.Text = "Attachment";
             MenuAddAttachment.Click += new System.EventHandler(MenuAddAttachment_Click);
+
+            //MenuAddVedio
+            MenuAddVedio.Image = C2.Properties.Resources.附件;
+            MenuAddVedio.Name = "MenuAddVedio";
+            MenuAddVedio.Text = "Vedio";
+            MenuAddVedio.Click += new System.EventHandler(MenuAddVedio_Click);
 
             MenuAddModelOp.Image = C2.Properties.Resources.模型视图1;
             MenuAddModelOp.Name = "MenuAddModelOp";
@@ -597,8 +607,9 @@ namespace C2.ChartPageView
                 MenuExpandAll.Enabled = topicCount > 0 && count == 1;
                 MenuCollapseAll.Enabled = topicCount > 0 && count == 1;
                 MenuAdd.Enabled = !ReadOnly && count == 1 && topicCount > 0;
-                MenuAddOperator.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图",chartName);
+                MenuAddOperator.Enabled = topicCount > 0 && count == 1 && string.Equals("业务拓展视图", chartName);
                 MenuAddAttachment.Enabled = topicCount > 0 && count == 1;
+                MenuAddVedio.Enabled = topicCount > 0 && count == 1;
                 MenuAddMap.Enabled = topicCount > 0 && count == 1;
                 MenuAddBoss.Enabled = topicCount > 0 && count == 1;
                 MenuAddProgressBar.Enabled = topicCount > 0;
@@ -733,6 +744,11 @@ namespace C2.ChartPageView
         void MenuAddAttachment_Click(object sender, EventArgs e)
         {
             mindMapView1.AddAttachment();
+        }
+
+        void MenuAddVedio_Click(object sender, EventArgs e)
+        {
+            mindMapView1.AddVedio();
         }
 
         void MenuAddModelOp_Click(object sender, EventArgs e)

@@ -207,7 +207,7 @@ namespace C2.Controls.MapViews
                     AttachmentWidget atw = hitTopic.FindWidget<AttachmentWidget>();
                     if (atw == null)
                     {
-                        hitTopic.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { fd.FileName} });
+                        hitTopic.Widgets.Add(new AttachmentWidget { AttachmentPaths = new List<string> { fd.FileName } });
                         /*
                         AttachmentWidget a = new AttachmentWidget();
                         List<string> l = new List<string>() { fd.FileName };
@@ -222,6 +222,34 @@ namespace C2.Controls.MapViews
                         HelpUtil.ShowMessageBox(String.Format("附件{0}已存在,可以删除后重新导入.", fd.FileName),  "附件已存在");
                 }
             }
+        }
+
+        public void AddVedio()
+        {
+            Topic hitTopic = SelectedTopic;
+            if (hitTopic == null)
+                return;
+
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "视频文件|*.mp4;*.avi;*.wmv;",
+                Title = Lang._("AddVedio"),
+                CheckFileExists = true
+            };
+
+            if (fd.ShowDialog() != DialogResult.OK)
+                return;
+
+            VedioWidget atw = hitTopic.FindWidget<VedioWidget>();
+            if (atw != null)
+                return;
+
+            atw = new VedioWidget()
+            {
+                VedioFullFilePath = fd.FileName,
+            };
+
+            hitTopic.Widgets.Add(atw);
         }
 
         public void AddMap()

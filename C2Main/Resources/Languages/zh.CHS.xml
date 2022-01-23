@@ -425,6 +425,7 @@
     <item name="RESULT">结果挂件</item>
     <item name="ATTACHMENT">附件挂件</item>
     <item name="AddAttachment">附件</item>
+    <item name="AddVedio">视频</item>
     <item name="AddMap">图上作战(网)</item>
     <item name="AddBoss">数据大屏</item>
     <item name="OpenAttachment">打开</item>

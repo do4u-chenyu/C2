@@ -428,6 +428,8 @@ namespace C2.Model.Widgets
                     return new ChartWidget();
                 case AttachmentWidget.TypeID:
                     return new AttachmentWidget();
+                case VedioWidget.TypeID:
+                    return new VedioWidget();
                 case MapWidget.TypeID:
                     return new MapWidget();
                 default:

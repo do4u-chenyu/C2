@@ -1039,6 +1039,7 @@
     <Compile Include="Model\MindMaps\WaterMarkType.cs" />
     <Compile Include="Model\MindMaps\XmindFile.cs" />
     <Compile Include="Model\Widgets\MapWidget.cs" />
+    <Compile Include="Model\Widgets\VedioWidget.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
