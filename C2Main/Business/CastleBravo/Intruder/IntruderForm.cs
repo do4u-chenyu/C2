@@ -55,7 +55,7 @@ namespace C2.Business.CastleBravo.Intruder
             config = new ConfigIntruder();
             refererList = new List<string>();
 
-            this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "IntruderDict");
+            this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "CommonDict");
             RefreshDict();
         }
 

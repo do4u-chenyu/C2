@@ -3150,6 +3150,7 @@
     <Content Include="Resources\CommonDict\JS_RKL_8000_26000.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CommonDict\JS_RKL_DM_16000.txt" />
     <Content Include="Resources\CrackerDict\dic_password_ftp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
