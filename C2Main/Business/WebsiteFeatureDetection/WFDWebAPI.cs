@@ -79,7 +79,7 @@ namespace C2.Business.WebsiteFeatureDetection
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return "用户认证：" + ex.Message;
             }
         }
 
@@ -115,7 +115,7 @@ namespace C2.Business.WebsiteFeatureDetection
             }
             catch (Exception ex)
             {
-                result.RespMsg = ex.Message;
+                result.RespMsg = "任务下发：" + ex.Message;
             }
             return true;
         }
