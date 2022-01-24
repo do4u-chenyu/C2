@@ -81,14 +81,36 @@ namespace C2.Business.CastleBravo.Intruder
                 this.dictListView.Items.Add(lvi);
             }
         }
+
+        private void anti()
+        {
+            if (tBReqMess.Text == "anti")
+                tBReqMess.Text = @"POST /webshell/123456_e10adc3949ba59abbe56e057f20f883e.php?A=1 HTTP/1.1
+Host: 221.226.113.110:8484
+Proxy-Connection: keep-alive
+Content-Length: 14
+Cache-Control: max-age=0
+Origin: http://221.226.113.110:8484
+Upgrade-Insecure-Requests: 1
+DNT: 1
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://221.226.113.110:8484/webshell/123456_e10adc3949ba59abbe56e057f20f883e.php?A=1
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Cookie: td_cookie=1889310135
+
+hbapass=111111";
+        }
         
         //目标地址自动解析
         private void textBoxRequestMessage_TextChanged(object sender, EventArgs e)
         {
+            anti();
             lines = tBReqMess.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             splitLine = tBReqMess.Text.Split(new char[] { '\n' });
             lastLine = splitLine[splitLine.Length - 1].Trim();
-
 
             if (tBReqMess.Text.Contains("Host")) 
             {
