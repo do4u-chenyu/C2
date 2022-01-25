@@ -292,14 +292,14 @@ def zip_result(DATA_PATH,ZIP_PATH):
         
 def produceKey(keywords):
     randomkeywords = []
-    num = [random.randint(0, len(keywords)) for i in range(0, len(keywords) % 3)]
+    num = [random.randint(0, len(keywords)) for i in range(0, len(keywords)//3)]
     keyword = ''
     j = 0
     for i in num:
         if keyword == '':
-            keyword = keywords[i].split('/')[0]
+            keyword = keywords[i]
         else:
-            keyword = keyword + ' OR ' + keywords[i].split('/')[0]
+            keyword = keyword + ' OR ' + keywords[i]
         j = j + 1
         if j == 10:
             randomkeywords.append(keyword)
