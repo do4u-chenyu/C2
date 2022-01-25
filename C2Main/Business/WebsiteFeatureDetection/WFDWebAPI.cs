@@ -245,7 +245,7 @@ namespace C2.Business.WebsiteFeatureDetection
             }
             catch (Exception ex)
             {
-                result.RespMsg = ex.Message;
+                result.RespMsg = "获取网站截图失败：" + ex.Message;
             }
             return result;
         }
