@@ -141,12 +141,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0E882A0F693C463881A075670BB75C54"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0EAE9FE3A25B4C548409C096DC893030"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -177,19 +171,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1065EB92923344EC905C12190DE58C82"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_112E9501D2EF484EBC6F787D2A3C2CD8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1154791A282F44AB9D72F47B23A23464"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -411,12 +393,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2123605CD16C1A2DF1DEB545D136620B"
-        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2198B301B7484A0C99751032E1C4BC4D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -561,12 +537,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_31034EFB2044425C951D2288C5DA46DC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_311FBF0832574405B33837269B968971"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -598,12 +568,6 @@
         "Entry"
         {
         "MsmKey" = "8:_33442486DA2445A3AED85B954C78D6D1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_336A0826EF964FE5AE2264A87C925E65"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -760,12 +724,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3E57BA2B6F6140C9A80754C312DFCB1C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3EA1932FCD144A618F10E6EF1D2ADAA7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1029,12 +987,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_50C0F35A80F744F5A77226F27D12A1A5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_510AE55C87684A1D8880B4F01DA9FC3E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1054,12 +1006,6 @@
         "Entry"
         {
         "MsmKey" = "8:_52F4A29C1C82420586EB167A23FFFA93"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5437BD49DA5647ED9AEA2C751FDF2FFD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1197,12 +1143,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5E0E2A214E1C4FCEA049F58695104676"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5E46A57DAC6541ACBCB795BB5B8F3266"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1325,12 +1265,6 @@
         {
         "MsmKey" = "8:_6617F03D751B7C30EB3EC812BD9E2C31"
         "OwnerKey" = "8:_F3584786DB84D72D066302566DDCC9A2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_671EE2AF12BD43069C8ADC11484A19D1"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1833,6 +1767,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_94F3F70C23FA400C9EDF4B11DE05747B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1905,12 +1851,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9E0CCB17C85F4587A6EDB1557C322DA8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9E204D2342434B529C1869147BB7A9D0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1966,12 +1906,6 @@
         "Entry"
         {
         "MsmKey" = "8:_A4704107782F46D39F47A8237BD9A391"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A5DDF73434414B5B810702C5E9E94C98"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2091,12 +2025,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B083B8AB62104F05967CACE0C08F3B6D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B095D53874934F85A217423696AB272B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2134,12 +2062,6 @@
         "Entry"
         {
         "MsmKey" = "8:_B36D81F5671446638D9D89DCBC9DEFD9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B3DC5814B44C4EAD90EC64BAE36B610F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2385,12 +2307,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CB093B3D9A354DFDA58E4FA2F852575A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CB51103A8B2D44FEBF4E53C6EBB3D27B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2398,12 +2314,6 @@
         "Entry"
         {
         "MsmKey" = "8:_CBAC5EDB14E14F2EBFF3E84F7209AA22"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CC247F186221418798BC95414DCAFCD6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2973,12 +2883,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F01EAC8E08484889B28D1C63DAE3D5B6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3220,6 +3124,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D8A6D030188D4DD390EB11B5BBB4DAD6"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3269,12 +3179,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_04B5BB639F364F349A81AC8CCCB1A1FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2123605CD16C1A2DF1DEB545D136620B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4009,26 +3913,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E882A0F693C463881A075670BB75C54"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\JS_RKL_1000_8000.txt"
-            "TargetName" = "8:JS_RKL_1000_8000.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EAE9FE3A25B4C548409C096DC893030"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\css\\style_8.css"
@@ -4129,52 +4013,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1065EB92923344EC905C12190DE58C82"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\中文姓名(简写、全拼).txt"
-            "TargetName" = "8:中文姓名(简写、全拼).txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_112E9501D2EF484EBC6F787D2A3C2CD8"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\Cknife16_Jar_Custom_Config.ini"
             "TargetName" = "8:Cknife16_Jar_Custom_Config.ini"
             "Tag" = "8:"
             "Folder" = "8:_DD466C3AE2AA4982AA0508BD0C3BA9AF"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1154791A282F44AB9D72F47B23A23464"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\70多个扩展名.txt"
-            "TargetName" = "8:70多个扩展名.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4902,37 +4746,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2123605CD16C1A2DF1DEB545D136620B"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:UserInstallSet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_2123605CD16C1A2DF1DEB545D136620B"
-                    {
-                    "Name" = "8:UserInstallSet.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:UserInstallSet.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2198B301B7484A0C99751032E1C4BC4D"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\472_星期五.png"
@@ -5424,26 +5237,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_31034EFB2044425C951D2288C5DA46DC"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\某集团下发的弱口令字典.txt"
-            "TargetName" = "8:某集团下发的弱口令字典.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_311FBF0832574405B33837269B968971"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Demo\\demo_txt.txt"
@@ -5561,26 +5354,6 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_336A0826EF964FE5AE2264A87C925E65"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\5个字母的单词.txt"
-            "TargetName" = "8:5个字母的单词.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6005,26 +5778,6 @@
             "TargetName" = "8:msiexec.exe"
             "Tag" = "8:"
             "Folder" = "8:_533DE9C66E7E47708D85C7A3AEF4342A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3EA1932FCD144A618F10E6EF1D2ADAA7"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\a-z小写字母.txt"
-            "TargetName" = "8:a-z小写字母.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6745,26 +6498,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50C0F35A80F744F5A77226F27D12A1A5"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\224条webshell密码.txt"
-            "TargetName" = "8:224条webshell密码.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_510AE55C87684A1D8880B4F01DA9FC3E"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Blue Gray.xml"
@@ -6831,26 +6564,6 @@
             "TargetName" = "8:8_第四方支付.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5437BD49DA5647ED9AEA2C751FDF2FFD"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\JS_RKL_0_1000.txt"
-            "TargetName" = "8:JS_RKL_0_1000.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7256,26 +6969,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5E0E2A214E1C4FCEA049F58695104676"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\JS_RKL_8000_26000.txt"
-            "TargetName" = "8:JS_RKL_8000_26000.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5E46A57DAC6541ACBCB795BB5B8F3266"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\WebShellConfig\\ASP_Custom_Config.ini"
@@ -7636,26 +7329,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_671EE2AF12BD43069C8ADC11484A19D1"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\4个字母的单词.txt"
-            "TargetName" = "8:4个字母的单词.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6881FCF475A54D6595F65193E50EE9F2"
@@ -9193,6 +8866,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94E4E632480C0800C6A219D633BA9E04"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:UserInstallSet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_94E4E632480C0800C6A219D633BA9E04"
+                    {
+                    "Name" = "8:UserInstallSet.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:UserInstallSet.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_94F3F70C23FA400C9EDF4B11DE05747B"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img11\\border.png"
@@ -9424,26 +9128,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E0CCB17C85F4587A6EDB1557C322DA8"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\3个字母单词.txt"
-            "TargetName" = "8:3个字母单词.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E204D2342434B529C1869147BB7A9D0"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Brilliant Yellow.xml"
@@ -9650,26 +9334,6 @@
             "TargetName" = "8:44_地下钱庄.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A5DDF73434414B5B810702C5E9E94C98"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\6个字母的单词.txt"
-            "TargetName" = "8:6个字母的单词.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -10077,26 +9741,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B083B8AB62104F05967CACE0C08F3B6D"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\常用用户名.txt"
-            "TargetName" = "8:常用用户名.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B095D53874934F85A217423696AB272B"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\20_涉爆.png"
@@ -10223,26 +9867,6 @@
             "TargetName" = "8:78_Telegram.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B3DC5814B44C4EAD90EC64BAE36B610F"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\A-Z大写字母.txt"
-            "TargetName" = "8:A-Z大写字母.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -11068,26 +10692,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB093B3D9A354DFDA58E4FA2F852575A"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\国外常用密码.txt"
-            "TargetName" = "8:国外常用密码.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB51103A8B2D44FEBF4E53C6EBB3D27B"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\174_后台.png"
@@ -11114,26 +10718,6 @@
             "TargetName" = "8:405_重点.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC247F186221418798BC95414DCAFCD6"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\200多个文件名.txt"
-            "TargetName" = "8:200多个文件名.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -12816,26 +12400,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F01EAC8E08484889B28D1C63DAE3D5B6"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\IntruderDict\\常用密码.txt"
-            "TargetName" = "8:常用密码.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_21F90B849DAE48EFB7A7D80EB7EF983F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1D57959E1D349789A7067A42DBC2849"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\思维导图.xml"
@@ -13889,17 +13453,6 @@
                                 {
                                 }
                             }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_21F90B849DAE48EFB7A7D80EB7EF983F"
-                            {
-                            "Name" = "8:IntruderDict"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_E7983E37DCF64288AEF4E8DE3BA43998"
-                                "Folders"
-                                {
-                                }
-                            }
                             "{9EF0B969-E518-4E46-987F-47570745A589}:_30D87A175307459A8BC3E9D16C7F4967"
                             {
                             "Name" = "8:CrackerDict"
@@ -14097,7 +13650,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{6DC5B797-CA9E-401D-A1D3-6860404DE337}"
+        "PackageCode" = "8:{1EA4EAA6-EB16-4D79-8504-4BE268D3BC49}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -14916,7 +14469,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
