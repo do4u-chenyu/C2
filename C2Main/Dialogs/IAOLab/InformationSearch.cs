@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using C2.Business.IAOLab.IMEI;
 
 namespace C2.Dialogs.IAOLab
 {
@@ -47,6 +48,10 @@ namespace C2.Dialogs.IAOLab
             else if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)
             {
                 fileType = "expressNum";
+            }
+            else if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+            {
+                fileType = "imei";
             }
             return fileType;
         }
@@ -137,6 +142,25 @@ namespace C2.Dialogs.IAOLab
                 }
             }
 
+            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)     // IMEI查询
+            {
+                string[] inputArray = this.richTextBox5.Text.Split('\n');
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "设备号\t设备号TAC字段\t设备号品牌\n";
+                tmpResult.Append(firstLine);
+                foreach (string imei in inputArray)
+                {
+                    ShowResult(imei, "imei", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        progressBar1.Value = 0;
+                    }
+                }
+
+            }
 
             this.Cursor = Cursors.Arrow;
         }
@@ -168,6 +192,10 @@ namespace C2.Dialogs.IAOLab
                     case "expressNum":
                         tmpResult.Append(ExpressNum.GetInstance().ExpressSearch(input.Split('\t')[0]));
                         richTextBox4.Text = tmpResult.ToString();
+                        break;
+                    case "imei":
+                        tmpResult.Append(IMEI.GetInstance().IMEISearch(input.Split('\t')[0]));
+                        richTextBox5.Text = tmpResult.ToString();
                         break;
 
                 }
@@ -227,6 +255,8 @@ namespace C2.Dialogs.IAOLab
                             richTextBox3.Text = sb.TrimEndN().ToString();
                         if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)
                             richTextBox4.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+                            richTextBox5.Text = sb.TrimEndN().ToString();
 
                         if (tabControl1.Visible == false)
                             richTextBox1.Text = sb.TrimEndN().ToString();
@@ -247,14 +277,14 @@ namespace C2.Dialogs.IAOLab
             saveDialog.Filter = "文本文件|*.txt";
             string formclass = FormClass();
             saveDialog.FileName = formclass + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
-            //saveDialog.ShowDialog();
+
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 string firstLine = null;
                 string text = string.Empty;
                 switch (formclass)
                 {
-                    case "Card":
+                    case "bankCard":
                         firstLine = "银行卡号\t银行名称\t卡种\t归属地\r\n";
                         text = richTextBox1.Text;
                         break;
@@ -264,9 +294,13 @@ namespace C2.Dialogs.IAOLab
                     case "idCard":
                         text = richTextBox3.Text;
                         break;
-                    case "ExpressNum":
+                    case "expressNum":
                         text = richTextBox4.Text;
                         break;
+                    case "imei":
+                        text = richTextBox5.Text;
+                        break;
+
 
                 }
                 string path = saveDialog.FileName;
