@@ -53,17 +53,24 @@
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // confirm
@@ -278,6 +285,7 @@
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -356,6 +364,17 @@
             this.tabPage9.Text = "快递单号查询";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 11F);
+            this.label10.Location = new System.Drawing.Point(5, 13);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(202, 15);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "请在下方输入待查询快递单号";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -396,16 +415,71 @@
             this.richTextBox4.TabIndex = 1;
             this.richTextBox4.Text = "";
             // 
-            // label10
+            // tabPage1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 11F);
-            this.label10.Location = new System.Drawing.Point(5, 13);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(202, 15);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "请在下方输入待查询快递单号";
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.richTextBox5);
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(652, 309);
+            this.tabPage1.TabIndex = 8;
+            this.tabPage1.Text = "设备型号(IMEI)查询";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 11F);
+            this.label11.Location = new System.Drawing.Point(5, 13);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(235, 15);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "请在下方输入待查询设备号(IMEI)";
+            // 
+            // richTextBox5
+            // 
+            this.richTextBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox5.Location = new System.Drawing.Point(3, 99);
+            this.richTextBox5.Name = "richTextBox5";
+            this.richTextBox5.Size = new System.Drawing.Size(646, 207);
+            this.richTextBox5.TabIndex = 17;
+            this.richTextBox5.Text = "";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label12.Location = new System.Drawing.Point(6, 61);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(342, 15);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "单次输入格式(15或17位IMEI)：868453042425696";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label14.Location = new System.Drawing.Point(6, 81);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(262, 15);
+            this.label14.TabIndex = 19;
+            this.label14.Text = "批量查询格式：多个设备号用换行分隔";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(292, 187);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(82, 15);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "正在施工中";
             // 
             // InformationSearch
             // 
@@ -434,6 +508,8 @@
             this.tabPage8.PerformLayout();
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,5 +546,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.RichTextBox richTextBox5;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
     }
 }

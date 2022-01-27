@@ -33,6 +33,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             }
                 
             one.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            one.Headers.Add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36");
             return one;
         }
 
