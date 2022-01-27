@@ -32,14 +32,14 @@ namespace C2.IAOLab.BankTool
         public string GetBankTool(string bankCard)
         {
             Thread.Sleep(500);
-            string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
-            //string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(" ", string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
-            //创建一个HTTP请求  
+            //string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
+            string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(" ", string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
+           
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
-            //Post请求方式  
             request.Method = "POST";
-            //内容类型
             request.ContentType = "application/x-www-form-urlencoded";
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
+            request.Headers.Set("cookie", "td_cookie=1206126369; t=ed9584c3ee86740383a6dd94af963b16; r=461; UM_distinctid=17e2f0d4f7950c-0b8d03a6e92b87-3b39580e-1fa400-17e2f0d4f7a530; ASPSESSIONIDSSRDRBDB=CAJABDJAFEBEAAAHIOFCLBBC; CNZZDATA1279885053=887337253-1641463516-null%7C1643249436; security_session_verify=d256ef371a6fb7ffda35fec7c01e5c64");
 
             Stream writer = null;
             try
@@ -77,22 +77,31 @@ namespace C2.IAOLab.BankTool
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
-            //List<string> cardInfo = new List<string>();
 
-            //cardInfo = subString(postContent, "<td>", "</td>"); 
+            /*
+             * 458123038888888
+             * <a href=http://www.guabu.com/bank/card/458123038888888.htm>吉林省 - 四平</a>
+             * 交通银行 - 太平洋双币贷记卡VISA
+             * 95559
+             * <a href="http://www.bankcomm.com" target="_blank">http://www.bankcomm.com</a>
+             */
 
-            //if(cardInfo.Count == 5) 
-            //{
+            List<string> cardInfo = new List<string>();
+            cardInfo = subString(postContent, "<td>", "</td>"); 
 
-            //    return String.Format("{0}\t{1}",
-            //                        cardInfo[2].Replace(@"""", ""),//卡种
-            //                        GetChinese(cardInfo[1])); //归属地，提取值中有噪音，需要处理
-            //}
-            //if (cardInfo.Count == 1)
-            //    return cardInfo[0];
+            if(cardInfo.Count == 5) 
+            {
+                return String.Format("{0}\t{1}\t{2}",
+                                    cardInfo[2].Split('-')[0].Trim(),//银行卡号
+                                    cardInfo[2].Split('-')[1].Trim(),//卡种
+                                    GetChinese(cardInfo[1])); //归属地
+            }
+            if (cardInfo.Count == 1)
+                return cardInfo[0];
 
-            //return "查询失败";
+            return "查询失败";
 
+            /*
             postContent = string.Join("", postContent.Split('\r', '\n', '\t'));
             postContent = postContent.Replace("<br />", "\t");
             String[] postContentArry = postContent.Split('\t', '?');
@@ -105,7 +114,9 @@ namespace C2.IAOLab.BankTool
             if (postContentArry.Length == 2)
                 return postContentArry[1];
             return "查询失败";
+            */
         }
+
         public string GetChinese(string str)
         {
             //声明存储结果的字符串
@@ -149,6 +160,4 @@ namespace C2.IAOLab.BankTool
             }
         }
     }
-    
-
 }
