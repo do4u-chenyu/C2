@@ -3448,6 +3448,7 @@
     <Content Include="Resources\Images\WebScan.png" />
     <None Include="Resources\Images\webshell.png" />
     <None Include="Resources\Images\WidgetImage\organizationChart.png" />
+    <None Include="Resources\Images\WidgetImage\play.png" />
     <Content Include="Resources\Languages\_Template.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

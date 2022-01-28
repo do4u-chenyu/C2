@@ -20,14 +20,14 @@
 ; 在注册表上记录上一次安装的位置
 #define MyRegInstallPath_sk "Software\我的应用\linxinfa\install"
 #define MyRegInstallPath_vn "installPath"
-; 点击license 打开的网页连接
-#define MyAppLkLicenseURL 'http://fh2020.gitee.io/c1platform/'
+; ; 点击license 打开的网页连接
+; #define MyAppLkLicenseURL 'http://fh2020.gitee.io/c1platform/'
 ; 安装目录至少需要的空间 100; 100 MB，TODO 要获取一些Minisize 之类的来计算，这里先写死
 #define MyAppNeedSpaceByte 45
 ; 外部程序调用本setup.exe时，会向外部传 安装进度的window api Message ID 
 #define WM_MY_INSTALL_PROGRESS 6364
 ; 安装时显示进度条，背景切换图的图片数
-#define InsBgAniPicCount 5
+#define InsBgAniPicCount 9
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -130,7 +130,8 @@ var
   // page welcome 
   btnOneKey,btnCustomInstall:HWND;     //一键安装按钮，自定义按钮
   chkLicense:HWND;          //选中欢迎访问链接
-  lblLicense,lblWelcome,lblAgree:TLabel;
+  //lblLicense,lblWelcome,lblAgree:TLabel;
+  lblWelcome:TLabel;
   imgBigIcon1, imgLogo1, imgOneKeySh:Longint;
 
   // page select dir 
@@ -155,7 +156,8 @@ var
   btnFinish:HWND;       //结束按钮
 
 var 
-  PageStateLbl1,PageStateLbl2,PageStateLbl3, PageStateLblK1,PageStateLblK2: TLabel; 
+  //PageStateLbl1,PageStateLbl2,PageStateLbl3, PageStateLblK1,PageStateLblK2: TLabel; 
+  PageStateLblK1,PageStateLblK2: TLabel; 
 
 //以管理员身份运行程序
 procedure ShoutcutRunAsAdmin(Filename:string);
@@ -288,32 +290,32 @@ begin
 end;
 
 //页面状态初始化 
-procedure PageState_Init();
-begin
-  PageStateLbl1  := PageState_CreateLabel('欢迎'    , DpiScale(501), DpiScale(69));
-  PageStateLblK1 := PageState_CreateLabel('>'       , DpiScale(532), DpiScale(69));
-  PageStateLbl2  := PageState_CreateLabel('部署安装', DpiScale(543), DpiScale(69));
-  PageStateLblK2 := PageState_CreateLabel('>'       , DpiScale(598), DpiScale(69));
-  PageStateLbl3  := PageState_CreateLabel('完成'    , DpiScale(610), DpiScale(69));
-end;
+//procedure PageState_Init();
+//begin
+//  PageStateLbl1  := PageState_CreateLabel('欢迎'    , DpiScale(501), DpiScale(69));
+//  PageStateLblK1 := PageState_CreateLabel('>'       , DpiScale(532), DpiScale(69));
+//  PageStateLbl2  := PageState_CreateLabel('部署安装', DpiScale(543), DpiScale(69));
+//  PageStateLblK2 := PageState_CreateLabel('>'       , DpiScale(598), DpiScale(69));
+//  PageStateLbl3  := PageState_CreateLabel('完成'    , DpiScale(610), DpiScale(69));
+//end;
 
 //设置标签内容为粗体
-procedure SetTLabelBold(lbl:TLabel; isBold:boolean);
-begin
- if isBold then begin 
-   lbl.Font.Style := lbl.Font.Style + [fsBold];
- end else begin 
-   lbl.Font.Style := lbl.Font.Style - [fsBold];
- end;
-end;
+//procedure SetTLabelBold(lbl:TLabel; isBold:boolean);
+//begin
+// if isBold then begin 
+//   lbl.Font.Style := lbl.Font.Style + [fsBold];
+// end else begin 
+//   lbl.Font.Style := lbl.Font.Style - [fsBold];
+// end;
+//end;
 
 //页面合集
-procedure PageState_Set(idx:integer);
-begin
-  SetTLabelBold(PageStateLbl1, idx = 1);
-  SetTLabelBold(PageStateLbl2, idx = 2);
-  SetTLabelBold(PageStateLbl3, idx = 3);
-end;
+//procedure PageState_Set(idx:integer);
+//begin
+//  SetTLabelBold(PageStateLbl1, idx = 1);
+//  SetTLabelBold(PageStateLbl2, idx = 2);
+//  SetTLabelBold(PageStateLbl3, idx = 3);
+//end;
 
 //设置空间是否可见
 procedure TconSetVisible(lbl:TControl; bVis:boolean);
@@ -359,30 +361,30 @@ begin
 end;
 
 //点击门户链接
-procedure lblLicenseClick(sender :TObject);
-var
-  ErrorCode: Integer;
-begin
-  ShellExec('open', '{#MyAppLkLicenseURL}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);  
-end; 
+//procedure lblLicenseClick(sender :TObject);
+//var
+//  ErrorCode: Integer;
+//begin
+//  ShellExec('open', '{#MyAppLkLicenseURL}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);  
+//end; 
 
 //点击是否选中门户按钮
-procedure chkLicenseOnClick(bBtn :HWND);
-var 
-   isCheck:boolean;
-begin
-   isCheck := BtnGetChecked(chkLicense);
-   if isCheck then 
-   begin 
-	   BtnSetEnabled(btnCustomInstall, True);
-	   BtnSetEnabled(btnOneKey, True);
-   end 
-   else 
-   begin 
-     BtnSetEnabled(btnCustomInstall, False);
-	   BtnSetEnabled(btnOneKey, False);
-   end;
-end;
+//procedure chkLicenseOnClick(bBtn :HWND);
+//var 
+//   isCheck:boolean;
+//begin
+//   isCheck := BtnGetChecked(chkLicense);
+//   if isCheck then 
+//   begin 
+//	   BtnSetEnabled(btnCustomInstall, True);
+//	   BtnSetEnabled(btnOneKey, True);
+//   end 
+//   else 
+//   begin 
+//     BtnSetEnabled(btnCustomInstall, False);
+//	   BtnSetEnabled(btnOneKey, False);
+//   end;
+//end;
 
 //点击一键安装按钮
 procedure btnOneKey_OnClick(hBtn:HWND);
@@ -393,20 +395,20 @@ begin
 end;
 
 //悬停控制更改
-procedure OnHoverControlChanged(Control: TControl);
-begin
-	if lblLicense <> nil then
-	begin
-		if lblLicense = Control then
-		begin
-			lblLicense.Font.Style := lblLicense.Font.Style + [fsUnderline];
-		end
-		else 
-		begin
-			lblLicense.Font.Style := lblLicense.Font.Style - [fsUnderline];
-		end;
-	end ;
-end;
+//procedure OnHoverControlChanged(Control: TControl);
+//begin
+//	if lblLicense <> nil then
+//	begin
+//		if lblLicense = Control then
+//		begin
+//			lblLicense.Font.Style := lblLicense.Font.Style + [fsUnderline];
+//		end
+//		else 
+//		begin
+//			lblLicense.Font.Style := lblLicense.Font.Style - [fsUnderline];
+//		end;
+//	end ;
+//end;
 
 //欢迎访问门户是否选中
 procedure InitGui_PageWelcome();
@@ -414,10 +416,10 @@ var
   BtnOneKeyFont:TFont;
   tmpFont:TFont;
 begin
-  chkLicense :=BtnCreate(WizardForm.Handle,DpiScale(33),DpiScale(410),
-  DpiScale(15),DpiScale(15), ExpandConstant('{tmp}\check.png'),1, True);
-  BtnSetChecked(chkLicense, True); 
-  BtnSetEvent(chkLicense,BtnClickEventID,WrapBtnCallback(@chkLicenseOnClick,1));
+  //icense :=BtnCreate(WizardForm.Handle,DpiScale(33),DpiScale(410),
+  //cale(15),DpiScale(15), ExpandConstant('{tmp}\check.png'),1, True);
+  //etChecked(chkLicense, True); 
+  //etEvent(chkLicense,BtnClickEventID,WrapBtnCallback(@chkLicenseOnClick,1));
   
   //btnCustomInstall := BtnCreate(WizardForm.Handle,DpiScale(543),DpiScale(409), DpiScale(87), DpiScale(15), ExpandConstant('{tmp}\btnCustomInstall.png'),1,False)
   //BtnSetEvent(btnCustomInstall,BtnClickEventID,WrapBtnCallback(@btnCustomInstallOnClick,1));
@@ -436,7 +438,7 @@ begin
   BtnSetFontColor(btnCustomInstall,$986800,$986800,$986800,$AFAFAF);
 
 //设置一键安装按钮的背景色
-  btnOneKey:=BtnCreate(WizardForm.Handle,DpiScale(240),DpiScale(260),DpiScale(177), DpiScale(43), ExpandConstant('{tmp}\btnOneKeyInstall.png'),1,False)
+  btnOneKey:=BtnCreate(WizardForm.Handle,DpiScale(240),DpiScale(330),DpiScale(177), DpiScale(43), ExpandConstant('{tmp}\btnOneKeyInstall.png'),1,False)
   
   BtnSetText(btnOneKey, '一键安装');
   BtnOneKeyFont := TFont.Create;
@@ -452,44 +454,44 @@ begin
   with lblWelcome do
   begin
     Parent := WizardForm;
-    Caption := '欢迎安装分析师单兵作战装备';
+    Caption := '';
     Transparent := true;
     Font.Size:= 20
     Font.Name:='黑体'
     Font.Color:=$ffffff
-    Left := DpiScale(150);
-    Top := DpiScale(195);
+    Left := DpiScale(200);
+    Top := DpiScale(225);
   end;
 
-  lblAgree := TLabel.Create(WizardForm);
-  with lblAgree do
-  begin
-    Parent := WizardForm;
-    Caption := '欢迎访问';
-    Transparent := true;
-    Font.Size:= 10
-    Font.Name:='微软雅黑'
-    Font.Color:=$ffffff
-    Left := DpiScale(90);
-    Top := DpiScale(408);
-  end;
+  //lblAgree := TLabel.Create(WizardForm);
+  //with lblAgree do
+  //begin
+  //  Parent := WizardForm;
+  //  Caption := '欢迎访问';
+  //  Transparent := true;
+  //  Font.Size:= 10
+  //  Font.Name:='微软雅黑'
+  //  Font.Color:=$ffffff
+  //  Left := DpiScale(90);
+  //  Top := DpiScale(408);
+  //end;
 
 //设置C2门户链接的字体和颜色  
-  lblLicense := TLabel.Create(WizardForm);
-  with lblLicense do
-  begin
-    Parent := WizardForm;
-    Caption := '《分析师单兵作战门户》';
-    Transparent := true;
-    Font.Size:= 10
-    Font.Name:='微软雅黑'
-    Font.Color:=$ffffff
-    Left:= DpiScale(143);
-    Top := DpiScale(408);
-    OnClick:=@lblLicenseClick;
-    Cursor:=crHand;
-  end;
-  HoverEvent_Init(@OnHoverControlChanged);
+  //lblLicense := TLabel.Create(WizardForm);
+  //with lblLicense do
+  //begin
+  //  Parent := WizardForm;
+  //  Caption := '《分析师单兵作战门户》';
+  //  Transparent := true;
+  //  Font.Size:= 10
+  //  Font.Name:='微软雅黑'
+  //  Font.Color:=$ffffff
+  //  Left:= DpiScale(143);
+  //  Top := DpiScale(408);
+  //  OnClick:=@lblLicenseClick;
+  //  Cursor:=crHand;
+  //end;
+  //HoverEvent_Init(@OnHoverControlChanged);
 end;
 
 //获取所需磁盘空间文本
@@ -899,7 +901,7 @@ procedure InitGui_PageFinish();
 var
    tmpFont:TFont;
 begin 
-  btnFinish:=BtnCreate(WizardForm.Handle, DpiScale(240), DpiScale(404), DpiScale(177),DpiScale(43), ExpandConstant('{tmp}\btnOneKeyInstall.png'),1,False)
+  btnFinish:=BtnCreate(WizardForm.Handle, DpiScale(240), DpiScale(330), DpiScale(177),DpiScale(43), ExpandConstant('{tmp}\btnOneKeyInstall.png'),1,False)
   BtnSetText(btnFinish, '完成安装');
   tmpFont := TFont.Create;
   with tmpFont do begin 
@@ -945,9 +947,9 @@ begin
   BtnSetVisibility(chkLicense,      isWpWelcome);
   ImgSetVisibility(imgBigIcon1,     isWpWelcome);
   ImgSetVisibility(imgOneKeySh,     isWpWelcome);
-  TconSetVisible(lblAgree,          isWpWelcome);
+  //TconSetVisible(lblAgree,          isWpWelcome);
   TconSetVisible(lblWelcome,        isWpWelcome);
-  TconSetVisible(lblLicense,        isWpWelcome);
+  //TconSetVisible(lblLicense,        isWpWelcome);
   
   ImgSetVisibility(imgBg1,   isWpWelcome or isWpSelectDir or isWpSelectWorkSpace);
   ImgSetVisibility(imgLogo1, isWpWelcome or isWpSelectDir or isWpSelectWorkSpace);
@@ -977,23 +979,23 @@ begin
   ImgSetVisibility(imgBg2,    isWpFinished);
   BtnSetVisibility(btnFinish, isWpFinished);
 
-  if CurPageID = wpWelcome then
-  begin
-    //Log('CurPageID = wpWelcome');
-    PageState_Set(1);
-  end;
+  //if CurPageID = wpWelcome then
+  //begin
+  //  Log('CurPageID = wpWelcome');
+  //  PageState_Set(1);
+  //end;
   
   if CurPageID = wpSelectDir then
   begin
 	  edtSelectDir1.Text:=WizardForm.DirEdit.Text;
     WhenInstallDirChangeCheckDiskSpace();
-    PageState_Set(1);
+    //PageState_Set(1);
   end;
 
   if isWpSelectWorkSpace then
   begin
 	  edtSelectDir2.Text:=WorkSpacePath;
-    PageState_Set(1);
+    //PageState_Set(1);
   end;
 
   if isWpInstalling then
@@ -1001,7 +1003,7 @@ begin
     SetTaskValueByDesc('quicklaunchicon', isSelectedQuickLaunch);
  
     Notify_Init();
-    PageState_Set(2);
+    //PageState_Set(2);
     InsBgAni_Time := 1;
   end
   else
@@ -1012,7 +1014,7 @@ begin
   if isWpFinished then
   begin
     //Log('CurPageID = wpFinished');
-    PageState_Set(3);
+    //PageState_Set(3);
     ReWriteAppConfig();
     ShellExec('taskbarpin', '{app}\{#MyAppExeName}', '', '', SW_SHOWNORMAL, ewNoWait, nErrCode);
     Notify_DoNotifyFinish();
@@ -1115,7 +1117,7 @@ begin
   InitGui_PageInstall();
   InitGui_PageFinish();
   
-  PageState_Init();
+  //PageState_Init();
   
   PBOldProc:=SetWindowLong(WizardForm.ProgressGauge.Handle,-4,PBCallBack(@PBProc,4));
   //应用图片更改

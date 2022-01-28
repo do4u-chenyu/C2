@@ -22,9 +22,9 @@ namespace C2
         [STAThread]
         static void Main(params string[] args)
         {
-            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2022021700000000") > 0)
+            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2022031700000000") > 0)
             {
-                MessageBox.Show("产品可用时间截止到2022年2月17号");
+                MessageBox.Show("产品可用时间截止到2022年3月17号");
                 return;
             }
 

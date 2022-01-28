@@ -32,12 +32,12 @@ namespace C2.Dialogs.IAOLab
             if (!string.IsNullOrEmpty(GetChromePath()))
             {
                 string chromePath = GetChromePath();
-                System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:5147/APK/login/");
+                System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:6663/ns/APPtest/home");
                 this.Close();
             }
             else
             {
-                this.webBrowser1.Url = new System.Uri(" http://113.31.110.244:5147/APK/login/", System.UriKind.Absolute);
+                this.webBrowser1.Url = new System.Uri("http://113.31.110.244:6663/ns/APPtest/home", System.UriKind.Absolute);
             }
         }
 
