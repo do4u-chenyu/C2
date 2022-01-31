@@ -196,9 +196,9 @@ namespace C2
             MdiClient = this.mdiWorkSpace;
         }
         void InitializeStartForm()
-        {
-            ShowForm(new StartForm(), true, false, true);      
-            ShowForm(new JSForm(), true, false, false);  
+        {  
+            ShowForm(new StartForm(), true, false, false);
+            ShowForm(new JSForm(), true, false, true);      // 默认展示JSForm,ZZ策略
         }
         #endregion
         

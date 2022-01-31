@@ -89,9 +89,9 @@
             this.excelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.excelTextBox.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.excelTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.excelTextBox.Location = new System.Drawing.Point(252, 11);
+            this.excelTextBox.Location = new System.Drawing.Point(268, 11);
             this.excelTextBox.Name = "excelTextBox";
-            this.excelTextBox.Size = new System.Drawing.Size(284, 26);
+            this.excelTextBox.Size = new System.Drawing.Size(228, 26);
             this.excelTextBox.TabIndex = 3;
             this.excelTextBox.Text = "未选择任何文件";
             // 
@@ -101,7 +101,7 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.label2.Location = new System.Drawing.Point(105, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.Size = new System.Drawing.Size(72, 27);
             this.label2.TabIndex = 5;
             this.label2.Text = "数据：";
             // 
@@ -112,18 +112,17 @@
             this.itemLabel.ForeColor = System.Drawing.Color.Red;
             this.itemLabel.Location = new System.Drawing.Point(72, 14);
             this.itemLabel.Name = "itemLabel";
-            this.itemLabel.Size = new System.Drawing.Size(39, 20);
+            this.itemLabel.Size = new System.Drawing.Size(57, 30);
             this.itemLabel.TabIndex = 0;
             this.itemLabel.Text = "涉赌";
             // 
             // sampleButton
             // 
-            this.sampleButton.AutoSize = true;
             this.sampleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.sampleButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.sampleButton.Location = new System.Drawing.Point(542, 9);
             this.sampleButton.Name = "sampleButton";
-            this.sampleButton.Size = new System.Drawing.Size(89, 30);
+            this.sampleButton.Size = new System.Drawing.Size(122, 30);
             this.sampleButton.TabIndex = 4;
             this.sampleButton.Text = "数据包样例";
             this.sampleButton.UseVisualStyleBackColor = false;
@@ -131,11 +130,10 @@
             // 
             // browserButton
             // 
-            this.browserButton.AutoSize = true;
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.browserButton.Location = new System.Drawing.Point(156, 9);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(85, 30);
+            this.browserButton.Size = new System.Drawing.Size(102, 30);
             this.browserButton.TabIndex = 1;
             this.browserButton.Text = "选择文件";
             this.browserButton.UseVisualStyleBackColor = true;
@@ -147,7 +145,7 @@
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.label3.Location = new System.Drawing.Point(41, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 20);
+            this.label3.Size = new System.Drawing.Size(52, 27);
             this.label3.TabIndex = 6;
             this.label3.Text = "导入";
             // 
@@ -185,7 +183,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label1.Location = new System.Drawing.Point(360, 169);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(387, 64);
+            this.label1.Size = new System.Drawing.Size(577, 97);
             this.label1.TabIndex = 2;
             this.label1.Text = "敬 请 期 待";
             // 
@@ -208,7 +206,7 @@
             this.Controls.Add(this.tabBar1);
             this.IconImage = global::C2.Properties.Resources.JS;
             this.Name = "JSForm";
-            this.Text = "胶水系统";
+            this.Text = "战术面板";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

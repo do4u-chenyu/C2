@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using C2.Core;
+﻿using C2.Core;
 using C2.Dialogs;
-using C2.Forms;
 using C2.Globalization;
 using C2.IAOLab.WebEngine;
 using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace C2.Controls.MapViews
 {
