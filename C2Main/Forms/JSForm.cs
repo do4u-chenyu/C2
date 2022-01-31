@@ -21,7 +21,15 @@ namespace C2.Forms
         GlueDetailInfoDialog detailDialog;
         SqDetailInfoDialog sqDeatilDialog;
         SqDetailInfoDialogReply dbDeatilDialogReply;
-        private List<string> doneGlueList;
+        private Dictionary<GlueType, string> doneGlueList = new Dictionary<GlueType, string>
+        {
+            [GlueType.Gamble] = "涉赌专项",
+            [GlueType.Gun] = "涉枪专项",
+            [GlueType.Yellow] = "涉黄专项",
+            [GlueType.BBanshee] = "黑吃黑专项",
+            [GlueType.Webshell] = "盗洞专项",
+            [GlueType.VB] = "境外网产专项"
+        };
         public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
         public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
         string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板");
@@ -37,22 +45,20 @@ namespace C2.Forms
             detailDialog = new GlueDetailInfoDialog();
             sqDeatilDialog = new SqDetailInfoDialog();
             dbDeatilDialogReply = new SqDetailInfoDialogReply();
-            glueSetting = GlueSettingFactory.GetSetting("涉赌专项");
-            doneGlueList = new List<string>() { "涉赌专项", "涉枪专项", "涉黄专项" };
-
+            glueSetting = GlueSettingFactory.GetSetting(GlueType.Gamble);
             this.label1.Visible = false;
-             // 默认展示 加载涉赌数据
-             string backSdFile = Path.Combine(bakDirectory, "涉赌模板0112.zip");
-             if (
-                 !File.Exists(backSdFile) ||
-                 (!File.Exists(Path.Combine(txtDirectory, "DB_web.txt")) &&
-                 !File.Exists(Path.Combine(txtDirectory, "DB_member.txt"))
-                 ))
-             {
-                 string trueDbFile = Path.Combine(txtModelDirectory, "涉赌模板0112.zip");
-                 File.Copy(trueDbFile, backSdFile, true);
-                 initLoadModelData(backSdFile, true);
-             }
+            // 默认展示 加载涉赌数据
+            string backSdFile = Path.Combine(bakDirectory, "涉赌模板0112.zip");
+            if (
+                !File.Exists(backSdFile) ||
+                (!File.Exists(Path.Combine(txtDirectory, "DB_web.txt")) &&
+                !File.Exists(Path.Combine(txtDirectory, "DB_member.txt"))
+                ))
+            {
+                string trueDbFile = Path.Combine(txtModelDirectory, "涉赌模板0112.zip");
+                File.Copy(trueDbFile, backSdFile, true);
+                initLoadModelData(backSdFile, true);
+            }
         }
 
         private void initLoadModelData(string excelPath,bool isWrite)
@@ -68,12 +74,12 @@ namespace C2.Forms
         #region tab页代码
         public void InitTabItems() 
         {
-            AddTabItem("涉赌专项", true); //第一个展示
-            AddTabItem("涉枪专项");
-            AddTabItem("涉黄专项");
-            AddTabItem("盗洞专项");
-            AddTabItem("黑吃黑专项");
-            AddTabItem("境外网产专项");
+            AddTabItem(GlueType.Gamble, true); //第一个展示
+            AddTabItem(GlueType.Gun);
+            AddTabItem(GlueType.Yellow);
+            AddTabItem(GlueType.Webshell);
+            AddTabItem(GlueType.BBanshee);
+            AddTabItem(GlueType.VB);
             OnTaskBarChanged();
         }
        
@@ -84,9 +90,9 @@ namespace C2.Forms
         }
         void TaskBar_SelectedItemChanged(object sender, EventArgs e)
         {
-            string selectedItem = tabBar1.SelectedItem.Tag.ToString();
-            glueSetting = GlueSettingFactory.GetSetting(selectedItem);
-            if (doneGlueList.Contains(selectedItem))
+            GlueType type = (GlueType)tabBar1.SelectedItem.Tag;
+            glueSetting = GlueSettingFactory.GetSetting(type);
+            if (doneGlueList.ContainsKey(type))
             {
                 RefreshHtmlTable();
                 this.webBrowser.Visible = true;
@@ -98,10 +104,10 @@ namespace C2.Forms
                 this.label1.Visible = true;
             }
 
-            StyleChange(selectedItem);
+            StyleChange(type);
 
             //默认加载 涉枪数模板据
-            if (selectedItem == "涉枪专项")
+            if (type == GlueType.Gun)
             {
                 string backSqFile = Path.Combine(bakDirectory, "涉枪模板0112.zip");
                 if (
@@ -118,7 +124,7 @@ namespace C2.Forms
             }
             
             //默认加载 涉黄数模板据
-            else if (selectedItem == "涉黄专项")
+            else if (type == GlueType.Yellow)
             {
                 string backShFile = Path.Combine(bakDirectory, "涉黄模板0112.zip");
                 if (
@@ -134,8 +140,9 @@ namespace C2.Forms
             }
         }
 
-        protected virtual void AddTabItem(string name, bool visiable = false)
+        protected virtual void AddTabItem(GlueType type, bool visiable = false)
         {
+            string name = doneGlueList[type];
             Global.GetWorkSpacePanel().SuspendLayout();
             if (tabBar1 != null)
             {
@@ -143,7 +150,7 @@ namespace C2.Forms
                 {
                     Text = name,
                     CanClose = false,
-                    Tag = name,
+                    Tag = type,
                 };
                 tabBar1.Items.Add(ti);
                 if (visiable)
@@ -167,15 +174,15 @@ namespace C2.Forms
         }
     
 
-        private void StyleChange(string selectedItem)
+        private void StyleChange(GlueType type)
         {
             this.excelTextBox.Text = "未选择任何文件";
             excelTextBoxSetting(0, this.excelTextBox.Text.Length, SystemColors.WindowText);
 
-            selectedItem = selectedItem == "境外网产专项" ? "网产专项" : selectedItem;
-            this.itemLabel.Text = selectedItem.Replace("专项", string.Empty);
-            this.itemLabel.Location = selectedItem == "黑吃黑专项" ? new System.Drawing.Point(56, 14) : new System.Drawing.Point(72, 14);
-            this.label3.Location = selectedItem == "黑吃黑专项" ? new System.Drawing.Point(24, 14) : new System.Drawing.Point(41, 14);
+            string name = doneGlueList[type];
+            this.itemLabel.Text = name;
+            this.itemLabel.Location = type == GlueType.VB ? new Point(56, 14) : new Point(72, 14);
+            this.label3.Location = type == GlueType.VB ? new Point(24, 14) : new Point(41, 14);
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
@@ -297,16 +304,18 @@ namespace C2.Forms
 
         private void SampleButton_Click(object sender, EventArgs e)
         {
-            string selectedItem = tabBar1.SelectedItem.Tag.ToString();
-            if (doneGlueList.Contains(selectedItem))
+            GlueType glueType = (GlueType)tabBar1.SelectedItem.Tag;
+            if (doneGlueList.ContainsKey(glueType))
             {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "数据包|*.zip";
+                SaveFileDialog dialog = new SaveFileDialog
+                {
+                    Filter = "数据包|*.zip"
+                };
 
                 string type = string.Empty;
-                type = selectedItem == "涉赌专项" ? "db-" : type;
-                type = selectedItem == "涉枪专项" ? "gun-" : type;
-                type = selectedItem == "涉黄专项" ? "yellow-" : type;
+                type = glueType == GlueType.Gamble ? "db-" : type;
+                type = glueType == GlueType.Gun ? "gun-" : type;
+                type = glueType == GlueType.Yellow ? "yellow-" : type;
                 dialog.FileName = "XX省XX市-" + type + DateTime.Now.ToString("yyyyMMdd") + "-XX.zip";
 
                 if (dialog.ShowDialog() != DialogResult.OK)
@@ -314,7 +323,23 @@ namespace C2.Forms
 
                 using (GuarderUtil.WaitCursor)
                 {
-                    string localExcelPath = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板", selectedItem.Replace("专项", "") + "模板0112.zip");
+                    string prefix = string.Empty;
+                    switch (glueType)
+                    {
+                        case GlueType.Gamble:
+                            prefix = "涉赌";
+                            break;
+                        case GlueType.Gun:
+                            prefix = "涉枪";
+                            break;
+                        case GlueType.Yellow:
+                            prefix = "涉黄";
+                            break;
+                        default:
+                            break;
+                    }
+                    string localExcelPath = Path.Combine(Application.StartupPath, 
+                        "Resources/Templates/JS模板", prefix + "模板0112.zip");
                     FileUtil.FileCopy(localExcelPath, dialog.FileName);
                 }
                 HelpUtil.ShowMessageBox("模板保存完毕。");

@@ -206,7 +206,7 @@
             this.Controls.Add(this.tabBar1);
             this.IconImage = global::C2.Properties.Resources.JS;
             this.Name = "JSForm";
-            this.Text = "战术面板";
+            this.Text = "胶水面板";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

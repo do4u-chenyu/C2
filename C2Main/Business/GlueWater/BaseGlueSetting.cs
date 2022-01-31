@@ -6,7 +6,6 @@ using System.Data;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
 
 namespace C2.Business.GlueWater
 {
