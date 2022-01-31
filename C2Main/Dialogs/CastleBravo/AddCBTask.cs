@@ -160,6 +160,9 @@ namespace C2.Dialogs.CastleBravo
             this.label3.Visible = this.taskComboBox.SelectedIndex == 0;
             this.browserButton.Visible = this.taskComboBox.SelectedIndex == 0;
             this.filePathTextBox.ReadOnly = this.taskComboBox.SelectedIndex != 0;
+
+            this.OKButton.Size = new System.Drawing.Size(75, 27);
+            this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
