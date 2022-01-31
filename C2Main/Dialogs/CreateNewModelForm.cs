@@ -1,13 +1,10 @@
-﻿using C2.Business.Model;
-using C2.Controls.MapViews;
+﻿using C2.Controls.MapViews;
 using C2.Core;
-using C2.Forms;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -104,14 +101,14 @@ namespace C2.Dialogs
         private void CreateNewModel_Load(object sender, EventArgs e)
         {
             //现在load的时候需要分两种
-            string title = "";
+            string title = string.Empty;
             if(NewFormType == FormType.DocumentForm)
             {
-                title = String.Format("业务视图{0}", TitlePostfix);
+                title = String.Format("分析笔记{0}", TitlePostfix);
                 List<string> currentTitles = GetModelTitleList();
 
                 while (currentTitles.Contains(title))
-                    title = String.Format("业务视图{0}", ++TitlePostfix);
+                    title = String.Format("分析笔记{0}", ++TitlePostfix);
             }
             else if(NewFormType == FormType.CanvasForm)
             {

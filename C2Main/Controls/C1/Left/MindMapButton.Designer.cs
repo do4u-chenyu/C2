@@ -67,7 +67,7 @@
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.lelfPictureBox, "业务视角的思维导图");
+            this.toolTip1.SetToolTip(this.lelfPictureBox, "分析视角的思维笔记");
             // 
             // contextMenuStrip
             // 

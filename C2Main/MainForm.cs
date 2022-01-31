@@ -685,7 +685,7 @@ namespace C2
                 Owner = this,
                 OpenDocuments = OpenedDocuments(),
                 NewFormType = FormType.DocumentForm,
-                ModelType = "新建业务视图"
+                ModelType = "新建分析笔记"
             };
 
             DialogResult dialogResult = createNewModelForm.ShowDialog();
