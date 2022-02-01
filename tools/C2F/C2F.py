@@ -6,6 +6,18 @@ import shutil
 import zipfile
 import datetime
 
+def change_name(dir_path):
+    os.chdir(dir_path)
+    for i in os.listdir("."):
+        try:
+            gbk_name = i.encode("cp437").decode("gbk")  #将文件名转为gbk中文编码
+            os.rename(i, gbk_name)#重命名
+        except:
+            pass           
+        if os.path.isdir(gbk_name): # 递归
+            change_name(gbk_name)
+    os.chdir('..')
+
 #生成资源文件目录访问路径
 def resource_path(relative_path):
     if getattr(sys, 'frozen', False): #是否Bundle Resource
@@ -46,7 +58,8 @@ if __name__ == "__main__":
         os.makedirs(path_to, exist_ok=True)
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
-     
+        change_name(path_to)        # 解决zipfile库解压中文乱码的问题,这个函数实现的极其丑陋
+
     print('战术手册安装成功，请重启C2，务必重启C2才能生效')
     os.system("pause")
     
