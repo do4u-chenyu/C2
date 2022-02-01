@@ -4431,6 +4431,8 @@
     <None Include="Resources\WidgetIcon\数据挂件.png" />
     <None Include="Resources\WidgetIcon\数据导入.png" />
     <None Include="Resources\WidgetIcon\播放.png" />
+    <None Include="Resources\匕首.png" />
+    <None Include="Resources\匕首 %281%29.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

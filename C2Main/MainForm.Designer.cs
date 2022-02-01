@@ -830,7 +830,7 @@ namespace C2
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox5.Image = global::C2.Properties.Resources.Businessvw;
+            this.pictureBox5.Image = global::C2.Properties.Resources.匕首;
             this.pictureBox5.Location = new System.Drawing.Point(12, 13);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(20, 20);
