@@ -28,18 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ImportButton = new System.Windows.Forms.Button();
             this.ItemPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemLabel
             // 
-            this.ItemLabel.Text = "我的分析笔记";
+            this.ItemLabel.Size = new System.Drawing.Size(169, 30);
+            this.ItemLabel.Text = "  我的分析笔记";
+            // 
+            // ItemPanel
+            // 
+            this.ItemPanel.Controls.Add(this.ImportButton);
+            this.ItemPanel.Controls.SetChildIndex(this.ItemLabel, 0);
+            this.ItemPanel.Controls.SetChildIndex(this.ImportButton, 0);
             // 
             // ImportButton
             // 
+            this.ImportButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ImportButton.BackColor = System.Drawing.Color.Transparent;
+            this.ImportButton.BackgroundImage = global::C2.Properties.Resources.add;
+            this.ImportButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ImportButton.FlatAppearance.BorderSize = 0;
+            this.ImportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ImportButton.Location = new System.Drawing.Point(144, 3);
+            this.ImportButton.Name = "ImportButton";
+            this.ImportButton.Size = new System.Drawing.Size(25, 25);
+            this.ImportButton.TabIndex = 2;
             this.toolTip1.SetToolTip(this.ImportButton, "导入分析笔记");
-            this.ImportButton.Visible = true;
+            this.ImportButton.UseVisualStyleBackColor = false;
+            this.ImportButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // MyMindMapControl
             // 
@@ -51,6 +69,7 @@
 
         }
 
+        protected System.Windows.Forms.Button ImportButton;
         #endregion
     }
 }

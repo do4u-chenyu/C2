@@ -351,8 +351,12 @@ namespace C2
             // 将用户本地保存的模型文档加载到左侧myModelControl	
             string[] bsTitles = ModelInfo.LoadAllModelTitle(Global.BusinessViewPath);
             string[] mtTitles = ModelInfo.LoadAllModelTitle(Global.MarketViewPath);
+            string[] mvTitles = ModelInfo.LoadAllModelTitle(Global.ManualViewPath);
+
             foreach (string title in bsTitles)
                 this.mindMapControl.AddButton(title);
+            foreach (string title in mvTitles)
+                this.manualControl.AddButton(title);
             foreach (string title in mtTitles)
                 this.modelMarketControl.AddModel(title);
         }

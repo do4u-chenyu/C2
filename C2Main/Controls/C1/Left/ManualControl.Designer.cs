@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.ItemLabel = new System.Windows.Forms.Label();
             this.ItemPanel = new System.Windows.Forms.Panel();
-            this.ImportButton = new System.Windows.Forms.Button();
             this.PaintPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ItemPanel.SuspendLayout();
@@ -51,29 +50,12 @@
             // 
             // ItemPanel
             // 
-            this.ItemPanel.Controls.Add(this.ImportButton);
             this.ItemPanel.Controls.Add(this.ItemLabel);
             this.ItemPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ItemPanel.Location = new System.Drawing.Point(0, 0);
             this.ItemPanel.Name = "ItemPanel";
             this.ItemPanel.Size = new System.Drawing.Size(185, 30);
             this.ItemPanel.TabIndex = 1;
-            // 
-            // ImportButton
-            // 
-            this.ImportButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ImportButton.BackColor = System.Drawing.Color.Transparent;
-            this.ImportButton.BackgroundImage = global::C2.Properties.Resources.add;
-            this.ImportButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ImportButton.FlatAppearance.BorderSize = 0;
-            this.ImportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ImportButton.Location = new System.Drawing.Point(144, 3);
-            this.ImportButton.Name = "ImportButton";
-            this.ImportButton.Size = new System.Drawing.Size(25, 25);
-            this.ImportButton.TabIndex = 2;
-            this.ImportButton.UseVisualStyleBackColor = false;
-            this.ImportButton.Visible = false;
-            this.ImportButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // PaintPanel
             // 
@@ -110,7 +92,6 @@
         protected System.Windows.Forms.Label ItemLabel;
         protected System.Windows.Forms.Panel ItemPanel;
         protected System.Windows.Forms.Panel PaintPanel;
-        protected System.Windows.Forms.Button ImportButton;
         protected System.Windows.Forms.ToolTip toolTip1;
     }
 }

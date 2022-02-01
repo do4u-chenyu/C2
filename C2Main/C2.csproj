@@ -758,6 +758,9 @@
     <Compile Include="Controls\C1\Left\BaseLeftInnerPanel.Designer.cs">
       <DependentUpon>BaseLeftInnerPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\C1\Left\ManualButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\C1\Left\ManualControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1560,11 +1563,11 @@
     </Compile>
     <Compile Include="Controls\IDropFilesHandler.cs" />
     <Compile Include="Controls\IIconProvider.cs" />
-    <Compile Include="Controls\C1\Left\MindMapButton.cs">
+    <Compile Include="Controls\C1\Left\C2Button.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\C1\Left\MindMapButton.Designer.cs">
-      <DependentUpon>MindMapButton.cs</DependentUpon>
+    <Compile Include="Controls\C1\Left\C2Button.Designer.cs">
+      <DependentUpon>C2Button.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\C1\Left\MyMindMapControl.cs">
       <SubType>UserControl</SubType>
@@ -2408,8 +2411,8 @@
     <EmbeddedResource Include="Controls\C1\Left\LeftFoldButton.resx">
       <DependentUpon>LeftFoldButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\C1\Left\MindMapButton.resx">
-      <DependentUpon>MindMapButton.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\C1\Left\C2Button.resx">
+      <DependentUpon>C2Button.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\MyMindMapControl.resx">
       <DependentUpon>MyMindMapControl.cs</DependentUpon>
@@ -4432,7 +4435,6 @@
     <None Include="Resources\WidgetIcon\数据导入.png" />
     <None Include="Resources\WidgetIcon\播放.png" />
     <None Include="Resources\匕首.png" />
-    <None Include="Resources\匕首 %281%29.png" />
     <Content Include="Resources\提示1.png" />
     <EmbeddedResource Include="sbin\apktool_2.3.0.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
