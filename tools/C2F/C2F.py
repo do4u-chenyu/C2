@@ -42,8 +42,8 @@ if __name__ == "__main__":
     print('ÕýÔÚ½âÑ¹Ëõ...\r\n')
     c2list = glob.glob(src_path + r"\*.c2")
     for c2 in c2list:
-        path_to = os.paht.join(dst_path, without_extension(c2))
-        os.makedirs(path_to, exists_ok=True)
+        path_to = os.path.join(dst_path, without_extension(c2))
+        os.makedirs(path_to, exist_ok=True)
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
      
