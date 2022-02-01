@@ -1,170 +1,52 @@
-#coding:utf-8
-import sys
+#coding:gbk
 import os
-from os import chdir, mkdir
-from glob import glob
-import zipfile
-import time
+import sys
+import glob
 import shutil
-from os import path
-# from ctypes import *
+import zipfile
+import datetime
 
-# #PSAPI.DLL
-# psapi = windll.psapi
-# #Kernel32.DLL
-# kernel = windll.kernel32
-
-# def EnumProcesses():
-    # arr = c_ulong * 256
-    # lpidProcess= arr()
-    # cb = sizeof(lpidProcess)
-    # cbNeeded = c_ulong()
-    # hModule = c_ulong()
-    # count = c_ulong()
-    # modname = c_buffer(1024)
-    # PROCESS_QUERY_INFORMATION = 0x0400
-    # PROCESS_VM_READ = 0x0010
-    
-    # #Call Enumprocesses to get hold of process id's
-    # psapi.EnumProcesses(byref(lpidProcess),
-                        # cb,
-                        # byref(cbNeeded))
-    
-    # #Number of processes returned
-    # nReturned = int(cbNeeded.value/sizeof(c_ulong()))
-
-    # pidProcess = [i for i in lpidProcess][:nReturned]
-    
-    # for pid in pidProcess:
-        
-        # #Get handle to the process based on PID
-        # hProcess = kernel.OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-                                      # False, pid)
-        # if hProcess:
-            # psapi.EnumProcessModules(hProcess, byref(hModule), sizeof(hModule), byref(count))
-            # psapi.GetModuleBaseNameA(hProcess, hModule.value, modname, sizeof(modname))
-            # if str(modname.value, encoding="GBK") == 'C2.exe':
-                # return 1
-            # for i in range(modname._length_):
-                # modname[i]=  0
-            # kernel.CloseHandle(hProcess)
-
-#ç”Ÿæˆèµ„æºæ–‡ä»¶ç›®å½•è®¿é—®è·¯å¾„
+#Éú³É×ÊÔ´ÎÄ¼şÄ¿Â¼·ÃÎÊÂ·¾¶
 def resource_path(relative_path):
-    if getattr(sys, 'frozen', False): #æ˜¯å¦Bundle Resource
+    if getattr(sys, 'frozen', False): #ÊÇ·ñBundle Resource
         base_path = sys._MEIPASS
     else:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
-
-
-def rename_c2(c2_file):
-    c2_filename = os.path.basename(c2_file)
-    c2_filepath = os.path.dirname(c2_file)
-    portion = os.path.splitext(c2_filename)
-    # å¦‚æœåç¼€æ˜¯.txt
-    if portion[1] == ".c2": 
-        # é‡æ–°ç»„åˆæ–‡ä»¶åå’Œåç¼€å  
-        c2_newname = portion[0] + ".zip"  
-        os.rename(c2_filename,c2_newname)
-
-
-def backups_C2F(src_path,c2f_name):
-    os.chdir(r"C:\C2F_back")
-    if os.path.exists(c2f_name):
-        new_name= c2f_name+'.bak'
-        if os.path.exists(new_name):
-            shutil.rmtree(new_name, ignore_errors=True)
-            os.rename(c2f_name,new_name)
-        else:
-            os.rename(c2f_name,new_name)
-        shutil.move(os.path.join(src_path,c2f_name),r"C:\C2F_back")
-    else:
-        shutil.move(os.path.join(src_path,c2f_name),r"C:\C2F_back")
-
-
-def rename_subfolders(path,name):       
-    os.chdir(path)
-    if os.path.exists(name):
-        add_name= name+'.bak'
-        os.rename(name,add_name)
-        mkdir(name)
-        backups_C2F(path,add_name)
-    else:
-        mkdir(name)
-
-
-def change_name(filename):
-    os.chdir(filename)
-    for i in os.listdir("."):
-        try:
-            test_name=i.encode("cp437")
-            test_name=test_name.decode("gbk")#å°†æ–‡ä»¶åè½¬ä¸ºgbkä¸­æ–‡ç¼–ç 
-            os.rename(i,test_name)#é‡å‘½å
-            i=test_name
-        except:
-            pass           
-        if os.path.isdir(i):#å¦‚æœè§£å‹åçš„æ˜¯ä¸€ä¸ªæ–‡ä»¶å¤¹
-            change_name(i)
-    os.chdir('..')
-
-
-def del_zipfile(path):
-    ls = os.listdir(path)
-    for i in ls:
-        if (i[-3:])=='zip':
-            c_path = os.path.join(path, i)
-            try:
-                os.unlink(c_path)
-            except:
-                pass
-
+       
+def without_extension(path):
+    return os.path.basename(path.split('.')[0])
 
 if __name__ == "__main__":
-    print('æˆ˜æœ¯æ‰‹å†Œæ­£åœ¨å®‰è£…ä¸­...' + '\r\n')
-    src_path = resource_path("c2f")
-    dst_path = r"C:\FiberHomeIAOModelDocument\IAO\ä¸šåŠ¡è§†å›¾"
+    print('Õ½ÊõÊÖ²áÕıÔÚ°²×°ÖĞ...' + '\r\n')
+    now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     
-    if not path.exists(dst_path):
-        os.makedirs(dst_path)
-
-    # if EnumProcesses() == 1:
-        # print('C2.exeæ­£åœ¨è¿è¡Œï¼Œè¯·å…³é—­æ­¤è¿è¡Œç¨‹åº')
-        # os.system("pause")
-    # else:
-    chdir(r"C:\\")
-    if not path.exists("C2F_back"):
-        os.mkdir("C2F_back")
-
-    #src_path = r"D:\work\C2F"
-
-    for root, _, fnames in os.walk(src_path):
-        for fname in fnames:  # sortedå‡½æ•°æŠŠéå†çš„æ–‡ä»¶æŒ‰æ–‡ä»¶åæ’åº
-            if '.c2' in fname:
-                fpath = os.path.join(root, fname)
-                shutil.copy(fpath, dst_path)  # å®Œæˆæ–‡ä»¶æ‹·è´
-
-    chdir(dst_path)
-    for filename in os.listdir("."):
-        if '.zip' in filename:
-            os.remove(os.path.join(dst_path,filename))
-
-    c2_list = glob("*.c2")
-    for c2f in c2_list:
-        rename_c2(os.path.join(dst_path,c2f))
-
-    c2zip_list = glob("*.zip")
-    for c2zip in c2zip_list:
-        fz = zipfile.ZipFile(os.path.abspath(c2zip), 'r')
-        zipname = c2zip.split('.')[0]
-        rename_subfolders(dst_path,zipname)
-        path = os.path.join(dst_path, zipname)
-        fz.extractall(path)
-        change_name(path)
-        
-    print(r"æ—§æ–‡æ¡£å¤‡ä»½åˆ° C:\C2F_back å®Œæ¯•, æœ‰éœ€è¦è‡ªè¡Œå‰å¾€" + '\r\n')
-    print('åˆ é™¤ä¸´æ—¶æ–‡ä»¶' + '\r\n')
-    del_zipfile(dst_path)
-    print('æˆ˜æœ¯æ‰‹å†Œå®‰è£…æˆåŠŸï¼Œè¯·é‡å¯C2ï¼ŒåŠ¡å¿…é‡å¯C2æ‰èƒ½ç”Ÿæ•ˆ')
+    src_path = resource_path("c2f")
+    dst_path = r"C:\FiberHomeIAOModelDocument\IAO\Õ½ÊõÊÖ²á"
+    bak_path = r"C:\FiberHomeIAOModelDocument\IAO\±¸·İÊı¾İ" + "\\" + now_string
+    
+    print('³õÊ¼»¯Ä¿Â¼...' + '\r\n')
+    shutil.rmtree(bak_path, ignore_errors=True)      # ±¸·İÄ¿Â¼²»Ó¦¸ÃÖØ¸´   
+    os.makedirs(dst_path, exist_ok=True)
+    os.makedirs(bak_path, exist_ok=True)
+    
+    # ±¸·İ¾ÉÊı¾İ
+    shutil.copytree(dst_path, bak_path, dirs_exist_ok=True)
+    print("±¸·İ¾ÉÎÄµµµ½ {0} Íê±Ï, ÓĞĞèÒª×ÔĞĞÇ°Íù\r\n".format(bak_path))
+       
+    # É¾³ıÁÙÊ±ÎÄ¼ş
+    shutil.rmtree(dst_path, ignore_errors=True)
+    os.makedirs(dst_path, exist_ok=True)
+    
+    # ½âÑ¹Ëõ
+    print('ÕıÔÚ½âÑ¹Ëõ...\r\n')
+    c2list = glob.glob(src_path + r"\*.c2")
+    for c2 in c2list:
+        path_to = os.paht.join(dst_path, without_extension(c2))
+        os.makedirs(path_to, exists_ok=True)
+        fzip = zipfile.ZipFile(c2)
+        fzip.extractall(path_to)
+     
+    print('Õ½ÊõÊÖ²á°²×°³É¹¦£¬ÇëÖØÆôC2£¬Îñ±ØÖØÆôC2²ÅÄÜÉúĞ§')
     os.system("pause")
     
