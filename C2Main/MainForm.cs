@@ -99,7 +99,9 @@ namespace C2
             this.leftToolBoxPanel.Width = 10;
 
             // 注册左侧一级按钮
-            this.leftMainButtons = new Control[] { this.mindMapButton,
+            this.leftMainButtons = new Control[] { 
+                this.manualButton,
+                this.mindMapButton,
                 this.modelMarketButton,
                 this.dataSourceButton,
                 this.iaoLabButton,
@@ -110,7 +112,9 @@ namespace C2
             };
 
             // 注册左侧二级面板
-            this.leftPanelControls = new Control[] { this.mindMapControl, 
+            this.leftPanelControls = new Control[] { 
+                this.manualControl,
+                this.mindMapControl, 
                 this.modelMarketControl,
                 this.dataSourceControl,
                 this.iaoLabControl,
@@ -187,7 +191,8 @@ namespace C2
             Global.SetLogView(this.bottomLogControl);
             Global.SetBottomViewPanel(this.bottomViewPanel);
             Global.SetWorkSpacePanel(this.workSpacePanel);
-            Global.SetMindMapModelControl(this.mindMapControl);
+            Global.SetManualControl(this.manualControl);
+            Global.SetMindMapControl(this.mindMapControl);
             Global.SetIAOLabControl (this.iaoLabControl);
             Global.SetHIBUControl(this.HIBUControl);
         }
@@ -255,6 +260,12 @@ namespace C2
         {
             if (!mindMapControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(mindMapButton, mindMapControl);
+        }
+
+        private void ManualButton_Click(object sender, EventArgs e)
+        {
+            if (!manualControl.Visible || isLeftViewPanelMinimum)
+                ShowLeftPanel(manualButton, manualControl);
         }
         
         private void DataSourceButton_Click(object sender, EventArgs e)
@@ -341,7 +352,7 @@ namespace C2
             string[] bsTitles = ModelInfo.LoadAllModelTitle(Global.BusinessViewPath);
             string[] mtTitles = ModelInfo.LoadAllModelTitle(Global.MarketViewPath);
             foreach (string title in bsTitles)
-                this.mindMapControl.AddMindMapModel(title);
+                this.mindMapControl.AddButton(title);
             foreach (string title in mtTitles)
                 this.modelMarketControl.AddModel(title);
         }

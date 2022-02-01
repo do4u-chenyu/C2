@@ -1213,8 +1213,8 @@ namespace C2.Forms
 
                 RecentFilesManage.Default.Push(Document.FileName, Document.CreateThumbImage());
             }
-            if(!Global.GetMindMapModelControl().ContainModel(Document.Name))
-                Global.GetMindMapModelControl().AddMindMapModel(Document.Name);
+            if(!Global.GetMindMapControl().ContainModel(Document.Name))
+                Global.GetMindMapControl().AddButton(Document.Name);
             return true;
         }
 

@@ -23,6 +23,12 @@ namespace C2.Dialogs
         public ZipDialog() 
         {
             InitializeComponent();
+            InitializeButton();
+        }
+        private void InitializeButton()
+        {
+            this.OKButton.Size = new System.Drawing.Size(75, 27);
+            this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
 
         private void BrowseButton_Click(object sender, System.EventArgs e)
@@ -74,7 +80,7 @@ namespace C2.Dialogs
 
     class ExportZipDialog : ZipDialog
     {
-        public ExportZipDialog() : this("战术手册")
+        public ExportZipDialog() : this("分析笔记")
         { }
 
         public ExportZipDialog(string fileName) : base()
@@ -82,11 +88,11 @@ namespace C2.Dialogs
             fd = new SaveFileDialog
             {
                 FileName = string.Format("{0}.c2", fileName),             // 保存时给一个默认的名字
-                Filter = "战术手册文件(*.c2)|*.c2",
-                Title = "导出战术手册",
+                Filter = "分析笔记文件(*.c2)|*.c2",
+                Title = "导出分析笔记",
                 AddExtension = true
             };
-            this.Text = "导出战术手册";
+            this.Text = "导出分析笔记";
         }
     }
 
@@ -97,10 +103,10 @@ namespace C2.Dialogs
             fd = new OpenFileDialog
             {
                 Filter = "文件类型|*.c2;*.docx;*.doc;*.xmind|zip压缩包(*.zip)|*.zip",
-                Title = "导入战术手册",
+                Title = "导入分析笔记",
                 AddExtension = true
             };
-            this.Text = "导入战术手册";
+            this.Text = "导入分析笔记";
         }
     }
 

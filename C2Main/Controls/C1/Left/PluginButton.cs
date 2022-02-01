@@ -135,12 +135,12 @@ namespace C2.Controls.C1.Left
 
         private void OpenMindMapMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMindMapModelControl().TryOpen(JST[pluginType]);
+            Global.GetMindMapControl().TryOpen(JST[pluginType]);
         }
 
         private bool Exists(string modelTitle)
         {
-            return Global.GetMindMapModelControl().ContainModel(modelTitle);
+            return Global.GetMindMapControl().ContainModel(modelTitle);
         }
 
         private void InitButtonDoubleClick()

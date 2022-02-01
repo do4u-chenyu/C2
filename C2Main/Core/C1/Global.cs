@@ -30,7 +30,8 @@ namespace C2.Core
         private static Panel workSpacePanel;
         private static Panel leftToolBoxPanel;
         private static TaskBar taskBar;
-        private static MyMindMapControl mindMapModelControl;
+        private static ManualControl manualControl;
+        private static MyMindMapControl mindMapControl;
         private static IAOLabControl iaoLabControl;
         private static IAOLabControl HIBUControl;
 
@@ -53,7 +54,9 @@ namespace C2.Core
         public static BottomLogControl GetLogView() { return logView; }
         public static Control GetBottomViewPanel() { return bottomViewPanle; }
         public static Control GetWorkSpacePanel() { return workSpacePanel; }
-        public static MyMindMapControl GetMindMapModelControl() { return mindMapModelControl; }
+        public static MyMindMapControl GetMindMapControl() { return mindMapControl; }
+
+        public static ManualControl GetManualControl() { return manualControl; }
         public static CanvasForm GetCanvasForm()
         {
             CanvasForm cf = null;
@@ -149,8 +152,8 @@ namespace C2.Core
         public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetBottomViewPanel(Panel bv) { bottomViewPanle = bv; }
         public static void SetWorkSpacePanel(Panel ws) { workSpacePanel = ws; }
-        public static void SetMindMapModelControl(MyMindMapControl mmmc) { mindMapModelControl = mmmc; }
-
+        public static void SetMindMapControl(MyMindMapControl mmc) { mindMapControl = mmc; }
+        public static void SetManualControl(ManualControl mc) { manualControl = mc; }
         public static string WorkspaceDirectory { get; set; } = string.Empty; // 用户空间根目录
         public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, GetUsername()); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }

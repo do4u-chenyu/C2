@@ -41,9 +41,10 @@
             // 
             this.modelPathLabel.AutoSize = true;
             this.modelPathLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.modelPathLabel.Location = new System.Drawing.Point(23, 42);
+            this.modelPathLabel.Location = new System.Drawing.Point(34, 63);
+            this.modelPathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.modelPathLabel.Name = "modelPathLabel";
-            this.modelPathLabel.Size = new System.Drawing.Size(77, 14);
+            this.modelPathLabel.Size = new System.Drawing.Size(73, 21);
             this.modelPathLabel.TabIndex = 10003;
             this.modelPathLabel.Text = "路径：";
             // 
@@ -51,36 +52,39 @@
             // 
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.passwordLabel.Location = new System.Drawing.Point(23, 96);
+            this.passwordLabel.Location = new System.Drawing.Point(34, 144);
+            this.passwordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(49, 14);
+            this.passwordLabel.Size = new System.Drawing.Size(73, 21);
             this.passwordLabel.TabIndex = 10004;
             this.passwordLabel.Text = "密码：";
             // 
             // modelPathTextBox
             // 
             this.modelPathTextBox.BackColor = System.Drawing.Color.White;
-            this.modelPathTextBox.Location = new System.Drawing.Point(106, 40);
+            this.modelPathTextBox.Location = new System.Drawing.Point(159, 60);
+            this.modelPathTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.modelPathTextBox.Name = "modelPathTextBox";
             this.modelPathTextBox.ReadOnly = true;
-            this.modelPathTextBox.Size = new System.Drawing.Size(187, 21);
+            this.modelPathTextBox.Size = new System.Drawing.Size(278, 28);
             this.modelPathTextBox.TabIndex = 10005;
             // 
             // passwordTextBox
             // 
             this.passwordTextBox.Enabled = false;
-            this.passwordTextBox.Location = new System.Drawing.Point(106, 94);
+            this.passwordTextBox.Location = new System.Drawing.Point(159, 141);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(187, 21);
+            this.passwordTextBox.Size = new System.Drawing.Size(278, 28);
             this.passwordTextBox.TabIndex = 10006;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // browseButton
             // 
-            this.browseButton.Location = new System.Drawing.Point(299, 39);
+            this.browseButton.Location = new System.Drawing.Point(448, 58);
             this.browseButton.Margin = new System.Windows.Forms.Padding(0);
             this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(48, 24);
+            this.browseButton.Size = new System.Drawing.Size(72, 36);
             this.browseButton.TabIndex = 10007;
             this.browseButton.Text = "浏览";
             this.browseButton.UseVisualStyleBackColor = true;
@@ -89,9 +93,10 @@
             // passwordCheckBox
             // 
             this.passwordCheckBox.AutoSize = true;
-            this.passwordCheckBox.Location = new System.Drawing.Point(302, 97);
+            this.passwordCheckBox.Location = new System.Drawing.Point(453, 146);
+            this.passwordCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.passwordCheckBox.Name = "passwordCheckBox";
-            this.passwordCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.passwordCheckBox.Size = new System.Drawing.Size(70, 22);
             this.passwordCheckBox.TabIndex = 10009;
             this.passwordCheckBox.Text = "密码";
             this.passwordCheckBox.UseVisualStyleBackColor = true;
@@ -100,9 +105,10 @@
             // showPasswordCheckBox
             // 
             this.showPasswordCheckBox.AutoSize = true;
-            this.showPasswordCheckBox.Location = new System.Drawing.Point(302, 125);
+            this.showPasswordCheckBox.Location = new System.Drawing.Point(453, 188);
+            this.showPasswordCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.showPasswordCheckBox.Name = "showPasswordCheckBox";
-            this.showPasswordCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.showPasswordCheckBox.Size = new System.Drawing.Size(70, 22);
             this.showPasswordCheckBox.TabIndex = 10010;
             this.showPasswordCheckBox.Text = "显示";
             this.showPasswordCheckBox.UseVisualStyleBackColor = true;
@@ -111,10 +117,10 @@
             // 
             // ZipDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(370, 201);
+            this.ClientSize = new System.Drawing.Size(555, 302);
             this.Controls.Add(this.showPasswordCheckBox);
             this.Controls.Add(this.passwordCheckBox);
             this.Controls.Add(this.browseButton);
@@ -123,8 +129,9 @@
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.modelPathLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ZipDialog";
-            this.Text = "战术手册";
+            this.Text = "分析笔记";
             this.Controls.SetChildIndex(this.modelPathLabel, 0);
             this.Controls.SetChildIndex(this.passwordLabel, 0);
             this.Controls.SetChildIndex(this.modelPathTextBox, 0);

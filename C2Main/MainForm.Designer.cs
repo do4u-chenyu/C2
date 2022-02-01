@@ -56,6 +56,7 @@ namespace C2
             this.modelMarketButton = new C2.Controls.Common.NoFocusButton();
             this.ModelButtonPictureBox = new System.Windows.Forms.PictureBox();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
+            this.manualControl = new C2.Controls.Left.ManualControl();
             this.mindMapControl = new C2.Controls.Left.MyMindMapControl();
             this.dataSourceControl = new C2.Controls.Left.DataSourceControl();
             this.iaoLabControl = new C2.Controls.Left.IAOLabControl();
@@ -89,6 +90,8 @@ namespace C2
             this.taskBar = new C2.Controls.TaskBar();
             this.blankButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.manualButton = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -120,6 +123,8 @@ namespace C2
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tabPanel.SuspendLayout();
+            this.manualButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // headPanel
@@ -192,6 +197,7 @@ namespace C2
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(60)))), ((int)(((byte)(85)))));
+            this.leftMainMenuPanel.Controls.Add(this.manualButton);
             this.leftMainMenuPanel.Controls.Add(this.HIBUButton);
             this.leftMainMenuPanel.Controls.Add(this.castleBravoButton);
             this.leftMainMenuPanel.Controls.Add(this.searchToolkitButton);
@@ -213,7 +219,7 @@ namespace C2
             this.HIBUButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HIBUButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.HIBUButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.HIBUButton.Location = new System.Drawing.Point(0, 422);
+            this.HIBUButton.Location = new System.Drawing.Point(0, 482);
             this.HIBUButton.Name = "HIBUButton";
             this.HIBUButton.Size = new System.Drawing.Size(151, 42);
             this.HIBUButton.TabIndex = 7;
@@ -242,7 +248,7 @@ namespace C2
             this.castleBravoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.castleBravoButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.castleBravoButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.castleBravoButton.Location = new System.Drawing.Point(0, 362);
+            this.castleBravoButton.Location = new System.Drawing.Point(0, 422);
             this.castleBravoButton.Name = "castleBravoButton";
             this.castleBravoButton.Size = new System.Drawing.Size(151, 42);
             this.castleBravoButton.TabIndex = 6;
@@ -270,7 +276,7 @@ namespace C2
             this.searchToolkitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchToolkitButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.searchToolkitButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.searchToolkitButton.Location = new System.Drawing.Point(0, 242);
+            this.searchToolkitButton.Location = new System.Drawing.Point(0, 302);
             this.searchToolkitButton.Name = "searchToolkitButton";
             this.searchToolkitButton.Size = new System.Drawing.Size(151, 42);
             this.searchToolkitButton.TabIndex = 5;
@@ -298,7 +304,7 @@ namespace C2
             this.detectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.detectionButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.detectionButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.detectionButton.Location = new System.Drawing.Point(0, 182);
+            this.detectionButton.Location = new System.Drawing.Point(0, 242);
             this.detectionButton.Name = "detectionButton";
             this.detectionButton.Size = new System.Drawing.Size(151, 42);
             this.detectionButton.TabIndex = 4;
@@ -326,7 +332,7 @@ namespace C2
             this.iaoLabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iaoLabButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.iaoLabButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.iaoLabButton.Location = new System.Drawing.Point(0, 302);
+            this.iaoLabButton.Location = new System.Drawing.Point(0, 362);
             this.iaoLabButton.Name = "iaoLabButton";
             this.iaoLabButton.Size = new System.Drawing.Size(151, 42);
             this.iaoLabButton.TabIndex = 3;
@@ -354,7 +360,7 @@ namespace C2
             this.dataSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dataSourceButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.dataSourceButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataSourceButton.Location = new System.Drawing.Point(0, 122);
+            this.dataSourceButton.Location = new System.Drawing.Point(0, 182);
             this.dataSourceButton.Name = "dataSourceButton";
             this.dataSourceButton.Size = new System.Drawing.Size(151, 42);
             this.dataSourceButton.TabIndex = 2;
@@ -382,13 +388,13 @@ namespace C2
             this.mindMapButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mindMapButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.mindMapButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.mindMapButton.Location = new System.Drawing.Point(0, 2);
+            this.mindMapButton.Location = new System.Drawing.Point(0, 62);
             this.mindMapButton.Name = "mindMapButton";
             this.mindMapButton.Size = new System.Drawing.Size(151, 42);
             this.mindMapButton.TabIndex = 1;
             this.mindMapButton.TabStop = false;
-            this.mindMapButton.Text = "   战术手册";
-            this.toolTip1.SetToolTip(this.mindMapButton, "当前导入的所有战术手册");
+            this.mindMapButton.Text = "   分析笔记";
+            this.toolTip1.SetToolTip(this.mindMapButton, "分析师思路笔记");
             this.mindMapButton.UseVisualStyleBackColor = true;
             this.mindMapButton.Click += new System.EventHandler(this.MindMapButton_Click);
             // 
@@ -410,7 +416,7 @@ namespace C2
             this.modelMarketButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.modelMarketButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.modelMarketButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.modelMarketButton.Location = new System.Drawing.Point(0, 62);
+            this.modelMarketButton.Location = new System.Drawing.Point(0, 122);
             this.modelMarketButton.Name = "modelMarketButton";
             this.modelMarketButton.Size = new System.Drawing.Size(151, 42);
             this.modelMarketButton.TabIndex = 0;
@@ -434,6 +440,7 @@ namespace C2
             // leftToolBoxPanel
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.leftToolBoxPanel.Controls.Add(this.manualControl);
             this.leftToolBoxPanel.Controls.Add(this.mindMapControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Controls.Add(this.iaoLabControl);
@@ -460,6 +467,19 @@ namespace C2
             this.mindMapControl.Name = "mindMapControl";
             this.mindMapControl.Size = new System.Drawing.Size(185, 558);
             this.mindMapControl.TabIndex = 0;
+            // 
+            // manualControl
+            // 
+            this.manualControl.AllowDrop = true;
+            this.manualControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.manualControl.BackColor = System.Drawing.Color.White;
+            this.manualControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.manualControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.manualControl.Location = new System.Drawing.Point(0, 0);
+            this.manualControl.Margin = new System.Windows.Forms.Padding(4);
+            this.manualControl.Name = "manualControl";
+            this.manualControl.Size = new System.Drawing.Size(185, 558);
+            this.manualControl.TabIndex = 0;
             // 
             // dataSourceControl
             // 
@@ -789,6 +809,34 @@ namespace C2
             // 
             this.openFileDialog1.FileName = "openFileDialog2";
             // 
+            // manualButton
+            // 
+            this.manualButton.Controls.Add(this.pictureBox5);
+            this.manualButton.FlatAppearance.BorderSize = 0;
+            this.manualButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manualButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.manualButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.manualButton.Location = new System.Drawing.Point(0, 2);
+            this.manualButton.Name = "manualButton";
+            this.manualButton.Size = new System.Drawing.Size(151, 42);
+            this.manualButton.TabIndex = 8;
+            this.manualButton.TabStop = false;
+            this.manualButton.Text = "   战术手册";
+            this.toolTip1.SetToolTip(this.manualButton, "当前导入的所有战术手册");
+            this.manualButton.UseVisualStyleBackColor = true;
+            this.manualButton.Click += ManualButton_Click;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox5.Image = global::C2.Properties.Resources.Businessvw;
+            this.pictureBox5.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox5.TabIndex = 13;
+            this.pictureBox5.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -839,9 +887,12 @@ namespace C2
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
+            this.manualButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
 
@@ -856,6 +907,7 @@ namespace C2
         private System.Windows.Forms.Panel leftToolBoxPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel commonPanel;
+        private Controls.Left.ManualControl manualControl;
         private Controls.Left.MyMindMapControl mindMapControl;
         private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.IAOLabControl iaoLabControl;
@@ -902,5 +954,7 @@ namespace C2
         private Controls.C1.Left.CastleBravoControl castleBravoControl;
         private Controls.Common.NoFocusButton HIBUButton;
         private PictureBox pictureBox4;
+        private Controls.Common.NoFocusButton manualButton;
+        private PictureBox pictureBox5;
     }
 }

@@ -71,7 +71,7 @@ namespace C2.Controls.Left
 
             string modelDic = Path.Combine(Global.UserWorkspacePath, "业务视图", ModelTitle);
             FileUtil.DeleteDirectory(modelDic);
-            Global.GetMindMapModelControl().RemoveMindMapButton(this);
+            Global.GetMindMapControl().RemoveButton(this);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)

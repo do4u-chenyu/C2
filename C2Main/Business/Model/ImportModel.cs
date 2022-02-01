@@ -51,10 +51,10 @@ namespace C2.Business.Model
 
         public void MindMapControlAddItem(string modelTitle)
         {
-            if (Global.GetMindMapModelControl().ContainModel(modelTitle))
+            if (Global.GetMindMapControl().ContainModel(modelTitle))
                 return;
 
-            Global.GetMindMapModelControl().AddMindMapModel(modelTitle);
+            Global.GetMindMapControl().AddButton(modelTitle);
         }
 
         public void RenameBmd(string dirs, string newModelFilePath)
@@ -257,7 +257,7 @@ namespace C2.Business.Model
         public bool IsSameModelTitle(string modelTitle, bool isC2Model)
         {
             if (isC2Model)   
-                return (Global.GetMindMapModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));          
+                return (Global.GetMindMapControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));          
             else
                 return (Global.GetMyModelControl().ContainModel(modelTitle) || Global.GetTaskBar().ContainModel(modelTitle));
         }
