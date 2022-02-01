@@ -156,6 +156,7 @@ namespace C2.Core
         public static void SetManualControl(ManualControl mc) { manualControl = mc; }
         public static string WorkspaceDirectory { get; set; } = string.Empty; // 用户空间根目录
         public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, GetUsername()); }
+        public static string ManualViewPath { get => Path.Combine(UserWorkspacePath, "战术手册"); }
         public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "聚沙成塔"); }
         public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, "全文工具箱"); }

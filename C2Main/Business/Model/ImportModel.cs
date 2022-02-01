@@ -219,7 +219,7 @@ namespace C2.Business.Model
             // 是否包含同名模型文档
             if (IsSameModelTitle(modelName, isC2Model))
             {
-                result = MessageBox.Show("文件: [" + modelName + "] 已在战术手册仓库中，是否重新导入并覆盖", "导入", MessageBoxButtons.OKCancel);
+                result = MessageBox.Show("文件: [" + modelName + "] 已在分析笔记仓库中，是否重新导入并覆盖", "导入", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.Cancel)
                 {
                     HelpUtil.ShowMessageBox(String.Format("导入取消, 打开已经存在的 [{0}]", modelName));

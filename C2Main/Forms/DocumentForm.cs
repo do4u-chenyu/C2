@@ -1204,7 +1204,7 @@ namespace C2.Forms
                     //MindMapIO.Save(Map, Map.Filename);
                     //mapView1.Modified = false;
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     Helper.WriteLog(ex);
                     this.ShowMessage(ex.Message, MessageBoxIcon.Error);

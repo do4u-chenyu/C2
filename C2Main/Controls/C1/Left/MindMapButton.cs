@@ -10,15 +10,19 @@ namespace C2.Controls.Left
 {
     public partial class MindMapModelButton : UserControl
     {
+        protected string desc;
         private string oldTextString;
 
         public MindMapModelButton(string modelTitle)
         {
             InitializeComponent();
+            
             this.textButton.Text = modelTitle;
             this.toolTip1.SetToolTip(this.textButton, ModelTitle);
             this.oldTextString = modelTitle;
+
             FullFilePath = Path.Combine(Global.BusinessViewPath, this.textButton.Text, this.textButton.Text + ".bmd");
+            this.desc = "分析笔记";
         }
 
         public string ModelTitle => this.textButton.Text;
@@ -61,7 +65,7 @@ namespace C2.Controls.Left
             if (Global.GetTaskBar().ContainModel(this.ModelTitle))
                 return;
             // 删除前用对话框确认
-            DialogResult rs = MessageBox.Show(String.Format("删除战术手册: {0}, 继续删除请点击 \"确定\"", ModelTitle),
+            DialogResult rs = MessageBox.Show(String.Format("删除{1}: {0}, 继续删除请点击 \"确定\"", ModelTitle, desc),
                     "删除 " + this.ModelTitle,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
@@ -69,7 +73,7 @@ namespace C2.Controls.Left
             if (rs != DialogResult.OK)
                 return;
 
-            string modelDic = Path.Combine(Global.UserWorkspacePath, "业务视图", ModelTitle);
+            string modelDic = Path.Combine(Global.BusinessViewPath, ModelTitle);
             FileUtil.DeleteDirectory(modelDic);
             Global.GetMindMapControl().RemoveButton(this);
         }
@@ -150,7 +154,7 @@ namespace C2.Controls.Left
             {
                 string exportFullPath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
-                if (C2.Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
+                if (Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
                     HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
                 FileUtil.DeleteDirectory(Path.Combine(Global.TempDirectory));
             }
