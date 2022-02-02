@@ -1,31 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import glob
 import datetime
 from os import path
 block_cipher = None
 
+C2F_LIST = [(c2f, 'c2f') for c2f in glob.glob(r'..\..\..\..\work\C2F\*.c2')]
 
 a = Analysis(['C2F.py'],
              pathex=['work\\C2\\tools\\C2F'],
              binaries=[],
-             datas=[(os.path.abspath(r'..\..\..\..\work\C2F\apk模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\ddos模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\侵公模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\第四方支付侦察报告模板.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\xss模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\四方模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\宝塔面板.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\机场模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\涉枪胶水系统.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\涉赌模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\涉黄胶水系统.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\盗洞模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\秒播vps.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\购置境外网络资产模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\黑吃黑模型.c2'),'c2f'),
-                    (os.path.abspath(r'..\..\..\..\work\C2F\黑客模型.c2'),'c2f'),
-					(os.path.abspath(r'..\..\..\..\work\C2F\大马模型.c2'),'c2f'),
-					(os.path.abspath(r'..\..\..\..\work\C2F\网赌受害者模型.c2'),'c2f')],
+             datas= C2F_LIST,
              hiddenimports=[],
              hookspath=[],
              hooksconfig={},
