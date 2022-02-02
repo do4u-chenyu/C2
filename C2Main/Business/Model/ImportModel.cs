@@ -45,7 +45,7 @@ namespace C2.Business.Model
             RenameBmd(dirs, this.modelFilePath);
             // 将导入模型添加到左侧模型面板
             MindMapControlAddItem(Path.GetFileNameWithoutExtension(this.modelFilePath));
-            Global.GetMainForm().OpenDocument(this.modelFilePath);
+            Global.GetMainForm().OpenMindMapDocument(this.modelFilePath);
             return true;
         }
 
@@ -223,7 +223,7 @@ namespace C2.Business.Model
                 if (result == DialogResult.Cancel)
                 {
                     HelpUtil.ShowMessageBox(String.Format("导入取消, 打开已经存在的 [{0}]", modelName));
-                    Global.GetMainForm().OpenDocument(this.modelFilePath);
+                    Global.GetMainForm().OpenMindMapDocument(this.modelFilePath);
                     return false;
                 }   
                     //return !hasUnZip;

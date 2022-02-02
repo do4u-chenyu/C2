@@ -571,7 +571,12 @@ namespace C2
                 MyFindDialog.Show(this);
             MyFindDialog.ResetFocus();
         }
-        public void OpenDocument(string filename)
+        public void OpenMindMapDocument(string filename)
+        {
+            OpenDocument(filename, false);
+        }
+
+        private void OpenDocument(string filename, bool isManual)
         {
             if (string.IsNullOrEmpty(filename))
                 return;
@@ -585,8 +590,13 @@ namespace C2
             if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
             {
                 FileInfo fif = new FileInfo(filename);
-                OpenDocument(filename, fif.IsReadOnly);
+                DoOpenDocument(filename, fif.IsReadOnly, isManual);
             }
+        }
+
+        public void OpenManualDocument(string filename)
+        {
+            OpenDocument(filename, true);
         }
 
         public void OpenJSTab(string tabName)
@@ -596,7 +606,7 @@ namespace C2
             (item.Tag as JSForm).SelectTabByName(tabName);
         }
 
-        public void OpenDocument(string filename, bool readOnly)
+        private void DoOpenDocument(string filename, bool readOnly, bool isManual = false)
         {
             BaseDocumentForm form = FindDocumentForm(filename);
             if (form != null)
@@ -617,7 +627,7 @@ namespace C2
 
                     if (doc != null)
                     {
-                        form = OpenDocument(doc, readOnly);
+                        form = OpenDocument(doc, readOnly, isManual);
                         if (form != null)
                             form.Filename = filename;
                     }
@@ -634,12 +644,16 @@ namespace C2
             }
         }
 
-        public BaseDocumentForm OpenDocument(Document doc, bool readOnly)
+        public BaseDocumentForm OpenDocument(Document doc, bool readOnly, bool isManual = false)
         {
             if (doc != null)
             {
-                BaseDocumentForm form = new DocumentForm(doc);
-                form.ReadOnly = readOnly;
+                BaseDocumentForm form = new DocumentForm(doc)
+                {
+                    ReadOnly = readOnly,
+                };
+                if (isManual)
+                    form.IconImage = global::C2.Properties.Resources.战术手册;
                 ShowForm(form);
                 return form;
             }
@@ -895,7 +909,7 @@ namespace C2
 
             foreach (var filename in tabs)
                 if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
-                    OpenDocument(filename);
+                    OpenMindMapDocument(filename);
         }
 
         protected override void DefWndProc(ref Message m)

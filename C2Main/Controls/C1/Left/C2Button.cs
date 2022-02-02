@@ -29,9 +29,9 @@ namespace C2.Controls.Left
 
         public string FullFilePath { get; set; }
 
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().OpenDocument(FullFilePath);
+            Global.GetMainForm().OpenMindMapDocument(FullFilePath);
         }
 
         private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace C2.Controls.Left
         }
 
 
-        private void TextButton_MouseDown(object sender, MouseEventArgs e)
+        protected virtual void TextButton_MouseDown(object sender, MouseEventArgs e)
         {
             // 鼠标左键双击触发
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
@@ -73,7 +73,7 @@ namespace C2.Controls.Left
             if (Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle))
                 return;
             // 双击打开对应模型
-            Global.GetMainForm().OpenDocument(FullFilePath);
+            Global.GetMainForm().OpenMindMapDocument(FullFilePath);
         }
 
 

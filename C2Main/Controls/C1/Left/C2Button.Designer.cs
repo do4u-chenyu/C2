@@ -49,7 +49,7 @@
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
             this.rightPictureBox.Location = new System.Drawing.Point(163, 8);
-            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(21, 20);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -145,8 +145,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ContextMenuStrip = this.contextMenuStrip;
-            this.Controls.Add(this.textButton);
             this.Controls.Add(this.lelfPictureBox);
+            this.Controls.Add(this.textButton);
             this.Controls.Add(this.rightPictureBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "C2Button";
@@ -162,9 +162,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox rightPictureBox;
-        private System.Windows.Forms.PictureBox lelfPictureBox;
+        protected System.Windows.Forms.PictureBox lelfPictureBox;
         private C2.Controls.Common.AutoEllipsisButton textButton;
-        private System.Windows.Forms.ToolTip toolTip1;
+        protected System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         protected System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
         protected System.Windows.Forms.ContextMenuStrip contextMenuStrip;

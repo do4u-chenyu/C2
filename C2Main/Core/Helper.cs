@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using C2.Configuration;
+using C2.Controls;
+using C2.Core;
+using C2.Model.Documents;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using C2.Configuration;
-using C2.Controls;
-using C2.Core;
-using C2.Model.Documents;
 
 namespace C2
 {
     static class Helper
     {
-        public static short LOWORD(int value)
-        {
-            return (short)value;
-        }
 
         public static void OpenUrl(string url)
         {
@@ -26,7 +20,7 @@ namespace C2
                 try
                 {
                     if (File.Exists(url) && StringComparer.OrdinalIgnoreCase.Equals(Path.GetExtension(url), Document.Extension))
-                        Global.GetMainForm().OpenDocument(url);
+                        Global.GetMainForm().OpenMindMapDocument(url);
                     else
                         Process.Start(url);
                 }
@@ -160,20 +154,6 @@ namespace C2
         public static void WriteLog(Exception ex)
         {
             WriteLog(ex.Message);
-        }
-
-        public static bool HasQuickHelp()
-        {
-            return File.Exists(Path.Combine(Application.StartupPath, "C2 Quick Help.bmd"));
-        }
-
-        public static void OpenQuickHelp()
-        {
-            string file = Path.Combine(Application.StartupPath, "C2 Quick Help.bmd");
-            if (File.Exists(file))
-            {
-                Global.GetMainForm().OpenDocument(file, true);
-            }
         }
     }
 }

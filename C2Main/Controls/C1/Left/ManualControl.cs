@@ -72,7 +72,7 @@ namespace C2.Controls.Left
             if (!ContainModel(modelTitle))
                 return false;
             string ffp = FindFFP(modelTitle);
-            Global.GetMainForm().OpenDocument(ffp);
+            Global.GetMainForm().OpenManualDocument(ffp);
             return true;
         }
 

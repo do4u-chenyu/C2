@@ -3153,6 +3153,7 @@
     </Content>
     <None Include="Resources\Block.png" />
     <Content Include="logo.ico" />
+    <None Include="Resources\战术手册.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
     <None Include="Resources\document.bmp" />
