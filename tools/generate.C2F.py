@@ -1,10 +1,7 @@
 #! env/python.exe
-from os.path import join
-from os import chdir,getcwd, path
 import os
 import sys
 import datetime
-from glob import glob
 
 
 def C2F_install(c2f_path):
