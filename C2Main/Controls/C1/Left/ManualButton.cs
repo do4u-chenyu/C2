@@ -11,12 +11,8 @@ namespace C2.Controls.C1.Left
         {
             FullFilePath = Path.Combine(Global.ManualViewPath, ModelTitle, ModelTitle + ".bmd");
             this.desc = "战术手册";
-        }
-
-        protected override void ContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            base.ContextMenuStrip_Opening(sender, e);
-            this.DeleteToolStripMenuItem.Enabled = false;
+            this.contextMenuStrip.Items.Remove(DeleteToolStripMenuItem);
+            this.contextMenuStrip.Items.Remove(RenameToolStripMenuItem);
         }
     }
 }
