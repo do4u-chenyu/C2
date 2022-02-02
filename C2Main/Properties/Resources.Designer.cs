@@ -3297,26 +3297,6 @@ namespace C2.Properties {
         }
         
         /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap 业务视图 {
-            get {
-                object obj = ResourceManager.GetObject("业务视图", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap 业务视图1 {
-            get {
-                object obj = ResourceManager.GetObject("业务视图1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Icon 主体分析 {
@@ -3383,6 +3363,26 @@ namespace C2.Properties {
             get {
                 object obj = ResourceManager.GetObject("关联分析", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 分析笔记 {
+            get {
+                object obj = ResourceManager.GetObject("分析笔记", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 分析笔记1 {
+            get {
+                object obj = ResourceManager.GetObject("分析笔记1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -3579,26 +3579,6 @@ namespace C2.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap 模型视图 {
-            get {
-                object obj = ResourceManager.GetObject("模型视图", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap 模型视图1 {
-            get {
-                object obj = ResourceManager.GetObject("模型视图1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         public static System.Drawing.Bitmap 社交关系图样例 {
             get {
                 object obj = ResourceManager.GetObject("社交关系图样例", resourceCulture);
@@ -3682,6 +3662,26 @@ namespace C2.Properties {
         public static System.Drawing.Bitmap 结果 {
             get {
                 object obj = ResourceManager.GetObject("结果", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 聚沙成塔 {
+            get {
+                object obj = ResourceManager.GetObject("聚沙成塔", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap 聚沙成塔1 {
+            get {
+                object obj = ResourceManager.GetObject("聚沙成塔1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -58,7 +58,7 @@
             // 
             // lelfPictureBox
             // 
-            this.lelfPictureBox.Image = global::C2.Properties.Resources.业务视图;
+            this.lelfPictureBox.Image = global::C2.Properties.Resources.分析笔记;
             this.lelfPictureBox.Location = new System.Drawing.Point(1, 1);
             this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lelfPictureBox.Name = "lelfPictureBox";

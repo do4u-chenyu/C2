@@ -3301,6 +3301,8 @@
     <None Include="Resources\Images\WidgetImage\deletewidget.png" />
     <None Include="Resources\Images\WidgetImage\dealData.png" />
     <None Include="Resources\Images\dictGenerator.png" />
+    <Content Include="Resources\Images\DB.png" />
+    <Content Include="Resources\Images\DD.png" />
     <Content Include="Resources\Images\DrugTextRecognition.png" />
     <Content Include="Resources\Images\FaceAgeGender.png" />
     <Content Include="Resources\Images\FaceBeauty.png" />
@@ -3421,6 +3423,10 @@
     <None Include="Resources\Images\TabBarImage\WIFI.png" />
     <None Include="Resources\Images\TabBarImage\Hive.png" />
     <None Include="Resources\Images\TabBarImage\post.png" />
+    <Content Include="Resources\Images\SH.png" />
+    <Content Include="Resources\Images\SQ.png" />
+    <Content Include="Resources\Images\TabBarImage\InformationSearch.png" />
+    <Content Include="Resources\Images\TabBarImage\Mysql.png" />
     <Content Include="Resources\Images\TabBarImage\PostgreSQL.png" />
     <Content Include="Resources\Images\TabBarImage\word.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3428,10 +3434,10 @@
     <Content Include="Resources\Images\TabBarImage\xmind.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\TabBarImage\业务视图.png" />
-    <None Include="Resources\Images\TabBarImage\业务视图1.png" />
-    <Content Include="Resources\Images\TabBarImage\模型视图.png" />
-    <None Include="Resources\Images\TabBarImage\模型视图1.png" />
+    <Content Include="Resources\Images\TabBarImage\分析笔记.png" />
+    <None Include="Resources\Images\TabBarImage\分析笔记1.png" />
+    <Content Include="Resources\Images\TabBarImage\聚沙成塔.png" />
+    <None Include="Resources\Images\TabBarImage\聚沙成塔1.png" />
     <Content Include="Resources\Images\TabBarImage\首页.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />

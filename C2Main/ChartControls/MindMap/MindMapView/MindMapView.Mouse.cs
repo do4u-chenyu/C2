@@ -147,7 +147,7 @@ namespace C2.Controls.MapViews
         {
             // 模型市场信息
             string modelFullFilePath = (string)e.Data.GetData("Path");
-            string modelTitle = (string)e.Data.GetData("Text");
+
             // 获取topic
             Point pointToClient = this.ChartBox.PointToClient(new Point(e.X, e.Y));
             var htr = HitTest(pointToClient.X, pointToClient.Y);

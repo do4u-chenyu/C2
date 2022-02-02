@@ -434,7 +434,7 @@ namespace C2.ChartPageView
             MenuAddVedio.Text = "Vedio";
             MenuAddVedio.Click += new System.EventHandler(MenuAddVedio_Click);
 
-            MenuAddModelOp.Image = C2.Properties.Resources.模型视图1;
+            MenuAddModelOp.Image = C2.Properties.Resources.聚沙成塔1;
             MenuAddModelOp.Name = "MenuAddModelOp";
             MenuAddModelOp.Text = "Model";
             MenuAddModelOp.Click += new System.EventHandler(MenuAddModelOp_Click);

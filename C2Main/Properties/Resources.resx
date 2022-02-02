@@ -1485,9 +1485,6 @@
   <data name="globe_network" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\globe_network.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="模型视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\模型视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Datamanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Datamanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2187,9 +2184,6 @@
   <data name="opendata" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WidgetImage\opendata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="业务视图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\业务视图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BossStyle11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Business\IAOLab\WebEngine\img\BossStyle11.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2280,14 +2274,8 @@
   <data name="数据挂件" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\数据挂件.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="业务视图1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\业务视图1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="数据导入" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WidgetIcon\数据导入.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="模型视图1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\TabBarImage\模型视图1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="intruder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\intruder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -2303,5 +2291,17 @@
   </data>
   <data name="战术手册" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\战术手册.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="分析笔记" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\tabbarimage\分析笔记.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="分析笔记1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\tabbarimage\分析笔记1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="聚沙成塔" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\tabbarimage\聚沙成塔.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="聚沙成塔1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\tabbarimage\聚沙成塔1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
