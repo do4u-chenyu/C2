@@ -94,7 +94,7 @@ namespace C2.Controls.Left
             }
         }
 
-        private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        protected virtual void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             bool val = !Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle);
             this.OpenToolStripMenuItem.Enabled = val;
