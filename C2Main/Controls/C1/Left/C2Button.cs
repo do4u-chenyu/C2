@@ -69,9 +69,6 @@ namespace C2.Controls.Left
             // 鼠标左键双击触发
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
                 return;
-            // 已经打开过了
-            if (Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle))
-                return;
             // 双击打开对应模型
             Global.GetMainForm().OpenMindMapDocument(FullFilePath);
         }
@@ -100,11 +97,10 @@ namespace C2.Controls.Left
         private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // 文档打开时不能删除
-            if (Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle))
+            if (Global.GetMainForm().OpenedDocumentsFFP().Contains(FullFilePath))
             {
                 this.OpenToolStripMenuItem.Enabled = false;
                 this.DeleteToolStripMenuItem.Enabled = false;
-
                 this.DeleteToolStripMenuItem.Text = "删除(先关闭)";
             }
             else

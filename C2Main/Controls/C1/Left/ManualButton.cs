@@ -29,9 +29,6 @@ namespace C2.Controls.C1.Left
             // 鼠标左键双击触发
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
                 return;
-            // 已经打开过了, 目前还没实现战术手册和业务视图完全分离的效果
-            if (Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle))
-                return;
             // 双击打开对应模型
             Global.GetMainForm().OpenManualDocument(FullFilePath);
         }

@@ -104,9 +104,9 @@ namespace C2.Controls
             return OpenedDocuments<BaseDocumentForm>();
         }
 
-        public List<string> OpenedMindMapDocuments()
+        public List<string> OpenedDocumentsFFP()
         {
-            return OpenedDocuments<DocumentForm>();
+            return GetOpendDocuments().ToList();
         }
 
         private void OnTaskBarChanged()
