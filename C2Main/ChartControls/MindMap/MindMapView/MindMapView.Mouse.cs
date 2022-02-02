@@ -167,13 +167,15 @@ namespace C2.Controls.MapViews
             if (dialogResult != DialogResult.OK)
                 return;
 
+            //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
+            Global.GetDocumentForm().Save();
+
             OperatorWidget opw = htr.Topic.FindWidget<OperatorWidget>();
             string modelDocumentName = createNewModelForm.ModelTitle;
             string modelUserPath = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name);
             string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
 
-            //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
-            Global.GetDocumentForm().Save();
+
 
             if(opw != null && opw.HasModelOperator)
             {

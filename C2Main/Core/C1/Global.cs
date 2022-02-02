@@ -112,10 +112,7 @@ namespace C2.Core
         public static string GetDocumentDirectory()
         {
             string val = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name);
-
-            DocumentForm form = GetDocumentForm();
-            if (form == null)
-                return val;
+            return val;
         }
 
         public static OperatorControl GetOperatorControl()
