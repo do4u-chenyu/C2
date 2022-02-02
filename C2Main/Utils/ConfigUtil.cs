@@ -8,7 +8,6 @@ namespace C2.Utils
 {
     class ConfigUtil
     {
-        public static string DefaultWorkspaceDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/FiberHomeIAOModelDocument";
         public static string DefaultIAOLab = "BigAPK, APK, Visualization, Wifi, InformationSearch, Tude, PostAndGet ";
 
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")

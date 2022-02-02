@@ -57,7 +57,7 @@ namespace C2
 
         private static void ConfigProgram()
         {
-            string workspaceDirectory = ConfigUtil.TryGetAppSettingsByKey("workspace", ConfigUtil.DefaultWorkspaceDirectory);
+            string workspaceDirectory = ConfigUtil.TryGetAppSettingsByKey("workspace", Global.WorkspaceDirectory);
 
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
             // 如果硬盘不存在,用程序所在目录
