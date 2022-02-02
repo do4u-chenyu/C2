@@ -86,7 +86,7 @@ namespace C2.Controls.Left
                 return;
             }
 
-            ZipDialog zipDialog = new ExportZipDialog(ModelTitle);
+            ZipDialog zipDialog = new ExportZipDialog(ModelTitle, desc);
             if (zipDialog.ShowDialog() == DialogResult.OK)
             {
                 string exportFullPath = zipDialog.ModelPath;

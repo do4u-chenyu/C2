@@ -123,8 +123,8 @@ namespace C2
                 this.castleBravoControl,
                 this.HIBUControl,
             };
-            // 默认业务视图为初始选中状态
-            this.mindMapButton.BackColor = LeftFocusColor;
+            // 默认战术手册为初始选中状态
+            this.manualButton.BackColor = LeftFocusColor;
         }
         void InitializeTaskBar()
         {

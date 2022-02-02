@@ -80,19 +80,18 @@ namespace C2.Dialogs
 
     class ExportZipDialog : ZipDialog
     {
-        public ExportZipDialog() : this("分析笔记")
-        { }
 
-        public ExportZipDialog(string fileName) : base()
+        public ExportZipDialog(string fileName, string desc = "分析笔记")
         {
+            this.Text = "导出" + desc;
             fd = new SaveFileDialog
             {
                 FileName = string.Format("{0}.c2", fileName),             // 保存时给一个默认的名字
-                Filter = "分析笔记文件(*.c2)|*.c2",
-                Title = "导出分析笔记",
+                Filter = desc + "文件(*.c2)|*.c2",
+                Title = this.Text,
                 AddExtension = true
             };
-            this.Text = "导出分析笔记";
+            
         }
     }
 
