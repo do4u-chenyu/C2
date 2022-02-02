@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Core;
+﻿using C2.Core;
 using C2.Dialogs.Base;
 using C2.Globalization;
 using C2.IAOLab.PythonOP;
 using C2.Model;
 using C2.Model.Widgets;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.C2OperatorViews
 {
@@ -48,7 +42,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (string.IsNullOrEmpty(oldOutFilePath))
             {
                 operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
-                string tmpOutFilePath = Path.Combine(Global.UserWorkspacePath, "业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                string tmpOutFilePath = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                 this.fullOutputFilePath = tmpOutFilePath;
                 this.operatorWidget.Option.SetOption("browseChosen", this.fullOutputFilePath);
                 this.browseChosenTextBox.Text = fullOutputFilePath;

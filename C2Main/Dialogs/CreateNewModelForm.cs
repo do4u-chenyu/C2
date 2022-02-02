@@ -164,7 +164,7 @@ namespace C2.Dialogs
             List<string> titles = new List<string>();
             try
             {
-                DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName,"业务视图"));
+                DirectoryInfo di = new DirectoryInfo(Global.BusinessViewPath);
                 DirectoryInfo[] titleList = di.GetDirectories();
                 foreach (DirectoryInfo title in titleList)
                     titles.Add(title.ToString());

@@ -161,7 +161,7 @@ namespace C2.Controls.MapViews
 
                 // 新建模型视图
                 string modelDocumentName = createNewModelForm.ModelTitle;
-                string modelUserPath = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "业务视图", Global.GetCurrentDocument().Name);
+                string modelUserPath = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name);
                 string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
                 DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
 

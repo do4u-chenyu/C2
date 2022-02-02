@@ -120,7 +120,7 @@ namespace C2.Dialogs.Base
             this.DialogResult = DialogResult.OK;
 
             operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
-            string path = Path.Combine(Global.UserWorkspacePath,"业务视图", Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+            string path = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
             if (!File.Exists(path))
             {
                 FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);

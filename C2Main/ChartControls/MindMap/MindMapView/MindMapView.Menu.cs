@@ -291,11 +291,11 @@ namespace C2.Controls.MapViews
             string modelNewName = createNewModelForm.ModelTitle;
             string modelPath = opw.ModelDataItem.FilePath;
 
-            if (!ExportModel.GetInstance().Export(modelPath, modelNewName, Path.Combine(Global.UserWorkspacePath, "聚沙成塔")))
+            if (!ExportModel.GetInstance().Export(modelPath, modelNewName, Global.MarketViewPath))
                 return;
 
             //复制之后修改XML文件中数据源路径
-            string modelDir = Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName, "聚沙成塔", modelNewName);
+            string modelDir = Path.Combine(Global.MarketViewPath, modelNewName);
             string modelFilePath = Path.Combine(modelDir, modelNewName + ".xml");
             string dirs = Path.Combine(modelDir, "_datas");
             ImportModel.GetInstance().RenameFile(dirs, modelFilePath);

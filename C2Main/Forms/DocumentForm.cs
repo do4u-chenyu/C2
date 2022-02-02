@@ -1177,7 +1177,7 @@ namespace C2.Forms
         //}
         private string GetModelPath()
         {
-            string modelPath = Path.Combine(Global.UserWorkspacePath, "业务视图",Document.Name);
+            string modelPath = Path.Combine(Global.BusinessViewPath, Document.Name);
             if (!modelPath.EndsWith("\\"))
                 modelPath += "\\";
             return modelPath;

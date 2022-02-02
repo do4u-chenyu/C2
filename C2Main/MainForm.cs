@@ -169,7 +169,6 @@ namespace C2
                 SetAGoodLocation();
             }
         }
-        #region Blumnd Hotkey
         void InitializeShortcutKeys()
         {
             ShortcutKeys = new ShortcutKeysTable();
@@ -177,7 +176,6 @@ namespace C2
             ShortcutKeys.Register(KeyMap.PreviousTab, delegate () { taskBar.SelectNextTab(true); });
         }
 
-        #endregion
         void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
@@ -202,8 +200,8 @@ namespace C2
         }
         void InitializeStartForm()
         {  
-            ShowForm(new StartForm(), true, false, false);
-            ShowForm(new JSForm(), true, false, true);      // 默认展示JSForm,ZZ策略
+            ShowForm(new StartForm(), true, false, true);
+            ShowForm(new JSForm(), true, false, false);      // 想默认展示JSForm,ZZ策略,但JSForm鬼影太严重,支楞不起来
         }
         #endregion
         
@@ -409,9 +407,12 @@ namespace C2
         private void LoadHIBU()
         {
             // 加载固定工具
-            string[] HIArr = { "图片文本识别", "涉赌文本识别","涉政文本识别","涉黄图像识别","涉恐图像识别","涉藏图像检测","涉枪图像检测","颜值打分","人脸年龄性别识别",
-                               "银行卡图像识别","红包转账图像识别","卡证识别","语种识别","语音转文本","二维码识别","二维码图像识别","红头文件识别",
-                               "命名实体识别", "信息抽取","轨迹联通类图像识别","表情识别","人脸检测","人脸识别"};
+            string[] HIArr = { "图片文本识别", "涉赌文本识别", "涉政文本识别", " 涉黄图像识别", 
+                               "涉恐图像识别", "涉藏图像检测", "涉枪图像检测", "颜值打分", 
+                               "人脸年龄性别识别", "银行卡图像识别", "红包转账图像识别", "卡证识别", 
+                               "语种识别", "语音转文本", "二维码识别", "二维码图像识别", 
+                               "红头文件识别", "命名实体识别", "信息抽取", "轨迹联通类图像识别", 
+                               "表情识别", "人脸检测", "人脸识别"};
             foreach (string name in HIArr)
                 this.HIBUControl.GenIAOButton(name.Trim());
         }
@@ -473,9 +474,9 @@ namespace C2
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)
             {
-                SavePath = Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName, modelDocumentName)
+                SavePath = Path.Combine(Global.BusinessViewPath, mindMapName, modelDocumentName)
             };
-            CanvasForm form = new CanvasForm(doc,topic, Global.GetDocumentForm());
+            CanvasForm form = new CanvasForm(doc, topic, Global.GetDocumentForm());
             ShowForm(form);
             form.GenMindMapDataSources(topic);
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
@@ -486,7 +487,7 @@ namespace C2
 
         public void LoadCanvasFormByXml(string savePath ,string modelTitle)
         {
-            ModelDocument doc = new ModelDocument(modelTitle, this.UserName)
+            ModelDocument doc = new ModelDocument(modelTitle, UserName)
             {
                 SavePath = Path.Combine(savePath, modelTitle)
             };
@@ -500,9 +501,9 @@ namespace C2
 
         public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
         {
-            ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)
+            ModelDocument doc = new ModelDocument(modelDocumentName, UserName)
             {
-                SavePath = Path.Combine(Global.WorkspaceDirectory, this.UserName, "业务视图", mindMapName, modelDocumentName)
+                SavePath = Path.Combine(Global.BusinessViewPath, mindMapName, modelDocumentName)
             };
             CanvasForm form = new CanvasForm(doc, topic, Global.GetDocumentForm());
             ShowForm(form);
@@ -696,7 +697,7 @@ namespace C2
         void NewDocumentForm_Click(object sender, System.EventArgs e)
         {
             // 文档重命名
-            NewDocumentForm_Click("");
+            NewDocumentForm_Click(string.Empty);
         }
         public void NewDocumentForm_Click(string templateName)
         {
