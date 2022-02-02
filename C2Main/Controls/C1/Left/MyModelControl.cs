@@ -58,11 +58,7 @@ namespace C2.Controls.Left
         {
             foreach (ModelButton mb in this.MyModelPaintPanel.Controls)
                 if (mb.ModelTitle == modelTitle)
-                {
                     mb.EnableOpenDocumentMenu();
-                    mb.EnableDeleteDocumentMenu();
-                    mb.EnableRenameDocumentMenu();
-                }
         }
 
 

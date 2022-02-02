@@ -96,9 +96,21 @@ namespace C2.Controls.Left
 
         private void ContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool val = !Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle);
-            this.OpenToolStripMenuItem.Enabled = val;
-            this.DeleteToolStripMenuItem.Enabled = val;
+            // 文档打开时不能删除
+            if (Global.GetMainForm().OpenedMindMapDocuments().Contains(ModelTitle))
+            {
+                this.OpenToolStripMenuItem.Enabled = false;
+                this.DeleteToolStripMenuItem.Enabled = false;
+
+                this.DeleteToolStripMenuItem.Text = "删除(先关闭)";
+            }
+            else
+            {
+                this.OpenToolStripMenuItem.Enabled = true;
+                this.DeleteToolStripMenuItem.Enabled = true;
+                this.DeleteToolStripMenuItem.Text = "删除";
+            }
+
         }
 
         private void MindMapModelButton_Load(object sender, EventArgs e)
