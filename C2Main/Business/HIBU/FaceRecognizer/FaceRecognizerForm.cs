@@ -177,7 +177,7 @@ namespace C2.Business.HIBU.FaceRecognizer
                 {
                     embeddings = ja[0]["embeddings"].ToString().Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("'", "");
                 }
-                if (ja[0]["_notice"].ToString() != "")
+                if (!string.IsNullOrEmpty(ja[0]["_notice"].ToString()))
                 {
                     notice = ja[0]["_notice"].ToString();
                 }

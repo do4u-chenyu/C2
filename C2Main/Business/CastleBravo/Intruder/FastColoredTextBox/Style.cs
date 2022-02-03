@@ -272,13 +272,13 @@ namespace FastColoredTextBoxNS
             if (BackgroundBrush is SolidBrush)
             {
                 var s =  ExportToHTML.GetColorAsString((BackgroundBrush as SolidBrush).Color);
-                if (s != "")
+                if (!string.IsNullOrEmpty(s))
                     result += "background-color:" + s + ";";
             }
             if (ForeBrush is SolidBrush)
             {
                 var s = ExportToHTML.GetColorAsString((ForeBrush as SolidBrush).Color);
-                if (s != "")
+                if (!string.IsNullOrEmpty(s))
                     result += "color:" + s + ";";
             }
             if ((FontStyle & FontStyle.Bold) != 0)
@@ -449,7 +449,7 @@ namespace FastColoredTextBoxNS
             if (BackgroundBrush is SolidBrush)
             {
                 var s = ExportToHTML.GetColorAsString((BackgroundBrush as SolidBrush).Color);
-                if (s != "")
+                if (!string.IsNullOrEmpty(s))
                     result += "background-color:" + s + ";";
             }
 

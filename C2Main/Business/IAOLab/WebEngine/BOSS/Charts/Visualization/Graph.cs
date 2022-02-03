@@ -153,7 +153,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                     for (int j = 0; j < 2; j++)
                     {
                         string edgeNode = dataList[0].Rows[i][int.Parse(chartOptions[j])].ToString();
-                        if (!edgeNodeList.Contains(edgeNode) && edgeNode != "")
+                        if (!edgeNodeList.Contains(edgeNode) && !string.IsNullOrEmpty(edgeNode))
                         {
                             edgeNodeList.Add(edgeNode);
                             Dictionary<string, object> nodeDictionary = new Dictionary<string, object>();
@@ -183,7 +183,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                 List<string> allNodeList = new List<string>();
                 foreach(string item in edgeUnionList.Union(nodeList))
                 {
-                    if(item != "")
+                    if(!string.IsNullOrEmpty(item))
                     {
                         allNodeList.Add(item);
                     }   

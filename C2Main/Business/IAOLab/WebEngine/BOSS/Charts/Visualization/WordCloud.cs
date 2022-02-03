@@ -87,7 +87,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
             string testData = "[";
             for (int i=0; i < dataTable.Rows.Count; i++)
             {
-                if (dataTable.Rows[i][int.Parse(chartOptions[1])].ToString() != "")
+                if (!string.IsNullOrEmpty(dataTable.Rows[i][int.Parse(chartOptions[1])].ToString()))
                 {
                     Dictionary<string, string> wordDictionary = new Dictionary<string, string>();
                     Regex rx = new Regex("[^0-9]");

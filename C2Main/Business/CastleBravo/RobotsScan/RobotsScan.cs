@@ -190,7 +190,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                 for (int i = 0; i < inputtext1.Count; i++)
                 {
                     string[] input1 = inputtext1[i].Split('/');
-                    int j = input1.ToList<string>().FindLastIndex(str => str != "");
+                    int j = input1.ToList<string>().FindLastIndex(str => !string.IsNullOrEmpty(str));
 
                     special_result.Add(input1[j]);
                 }
@@ -238,7 +238,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                     for (int i = 0; i < inputtext1.Count; i++)
                     {
                         string[] input1 = inputtext1[i].Split('/');
-                        int j = input1.ToList<string>().FindLastIndex(str => str != "");
+                        int j = input1.ToList<string>().FindLastIndex(str => !string.IsNullOrEmpty(str));
 
                         if (i == inputtext1.Count - 1 && obj[item1].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Contains(input1[j]))
                         {

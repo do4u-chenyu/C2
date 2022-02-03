@@ -1357,7 +1357,7 @@ namespace FastColoredTextBoxNS
 
             set
             {
-                if (value == Text && value != "")
+                if (value == Text && !string.IsNullOrEmpty(value))
                     return;
 
                 SetAsCurrentTB();
@@ -4562,7 +4562,7 @@ namespace FastColoredTextBoxNS
                 var args = new AutoIndentEventArgs(i, lines[i].Text, i > 0 ? lines[i - 1].Text : "", TabLength, 0);
                 calculator(this, args);
                 stack.Push(args);
-                if (args.Shift == 0 && args.AbsoluteIndentation == 0 && args.LineText.Trim() != "")
+                if (args.Shift == 0 && args.AbsoluteIndentation == 0 && !string.IsNullOrEmpty(args.LineText.Trim()))
                     break;
             }
             int indent = lines[i >= 0 ? i : 0].StartSpacesCount;
