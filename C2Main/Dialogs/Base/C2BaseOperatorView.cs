@@ -53,7 +53,7 @@ namespace C2.Dialogs.Base
             this.dataSourceTB0.Text = dataInfo.FileName;
             BcpInfo bcpInfo = new BcpInfo(dataSourceFFP0, dataInfo.FileEncoding, dataInfo.FileSep.ToString().ToCharArray());
             firstDataSourceColumns = bcpInfo.ColumnArray;
-            if (!(bcpInfo.ColumnArray.Length == 1 && bcpInfo.ColumnArray[0] == ""))//排除表头为空的情况
+            if (!(bcpInfo.ColumnArray.Length == 1 && bcpInfo.ColumnArray[0] == string.Empty))//排除表头为空的情况
                 this.nowColumnsName0 = bcpInfo.ColumnArray;
             SetTextBoxName(this.dataSourceTB0);
 

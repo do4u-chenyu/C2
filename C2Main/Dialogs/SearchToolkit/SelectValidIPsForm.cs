@@ -29,7 +29,7 @@ namespace C2.Dialogs.SearchToolkit
             {
                 ipCount++;
 
-                ListViewItem lvi = new ListViewItem(ipCount + "");
+                ListViewItem lvi = new ListViewItem(ipCount.ToString());
                 lvi.Tag = ip;
                 lvi.SubItems.Add(ip);
                 lvi.SubItems.Add(defualtPort);

@@ -33,8 +33,8 @@ namespace C2.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            if (this.dataSourceTB0.Text == "") return notReady;
-            if (this.comboBox0.Text == "")
+            if (this.dataSourceTB0.Text == string.Empty) return notReady;
+            if (this.comboBox0.Text == string.Empty)
             {
                 HelpUtil.ShowMessageBox("请选择平均值字段");
                 return notReady;

@@ -51,7 +51,7 @@ namespace C2.OperatorViews
             List<string> types = new List<string>() { this.comboBox0.GetType().Name, this.outListCCBL0.GetType().Name };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == string.Empty)
                 {
                     HelpUtil.ShowMessageBox("请填写碰撞条件");
                     return notReady;
@@ -59,7 +59,7 @@ namespace C2.OperatorViews
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == string.Empty)
                 {
                     HelpUtil.ShowMessageBox("请填写碰撞条件");
                     return notReady;

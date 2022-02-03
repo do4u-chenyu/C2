@@ -153,7 +153,7 @@ namespace C2.Dialogs.C2OperatorViews
             };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == string.Empty)
                 {
                     HelpUtil.ShowMessageBox("请填写分组字段");
                     return notReady;
@@ -161,7 +161,7 @@ namespace C2.Dialogs.C2OperatorViews
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == string.Empty)
                 {
                     HelpUtil.ShowMessageBox("请填写分组字段");
                     return notReady;

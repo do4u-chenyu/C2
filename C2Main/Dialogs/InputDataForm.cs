@@ -101,7 +101,7 @@ namespace C2.Dialogs
              * 1. 先没有表头的文件可以预览但是不能导入
              */
             string name = this.textBox1.Text;
-            if (name == "请输入数据名称" || name == "" || String.IsNullOrEmpty(name))
+            if (name == "请输入数据名称" || name == string.Empty || String.IsNullOrEmpty(name))
                 HelpUtil.ShowMessageBox("请输入数据名称！");
             else if (FileUtil.IsContainIllegalCharacters(name, "数据名称", false))
                 HelpUtil.ShowMessageBox("数据名称中存在非法字符，请检查数据名称！非法字符" + System.Environment.NewLine + "非法字符包含：*, \\, $, [, ], +, -, &, %, #, !, ~, `, \\t, \\n, \\r, :, 空格");
@@ -294,7 +294,7 @@ namespace C2.Dialogs
                 return;
             this.radioButton3.Checked = true;
             this.textBoxEx1.Focus();
-            if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
+            if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == string.Empty)
             {
                 this.separator = this.emptySep;
                 return;

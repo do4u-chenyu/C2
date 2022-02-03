@@ -264,7 +264,7 @@ namespace C2.Utils
             PointF location = new PointF();
             try
             {
-                if (point == "")
+                if (point == string.Empty)
                     return location;
                 string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
                 string[] xy = coordinate.Split(',');

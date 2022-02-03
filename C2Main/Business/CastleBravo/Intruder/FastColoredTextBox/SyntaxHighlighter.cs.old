@@ -180,7 +180,7 @@ namespace FastColoredTextBoxNS
             if (brackets != null)
             {
                 if (brackets.Attributes["left"] == null || brackets.Attributes["right"] == null ||
-                    brackets.Attributes["left"].Value == "" || brackets.Attributes["right"].Value == "")
+                    brackets.Attributes["left"].Value == string.Empty || brackets.Attributes["right"].Value == string.Empty)
                 {
                     desc.leftBracket = '\x0';
                     desc.rightBracket = '\x0';
@@ -192,7 +192,7 @@ namespace FastColoredTextBoxNS
                 }
 
                 if (brackets.Attributes["left2"] == null || brackets.Attributes["right2"] == null ||
-    brackets.Attributes["left2"].Value == "" || brackets.Attributes["right2"].Value == "")
+    brackets.Attributes["left2"].Value == "" || brackets.Attributes["right2"].Value == string.Empty)
                 {
                     desc.leftBracket2 = '\x0';
                     desc.rightBracket2 = '\x0';

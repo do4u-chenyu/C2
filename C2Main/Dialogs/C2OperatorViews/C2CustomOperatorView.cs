@@ -136,7 +136,7 @@ namespace C2.Dialogs.C2OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            if (this.dataSourceTB0.Text == "") return true;
+            if (this.dataSourceTB0.Text == string.Empty) return true;
 
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
@@ -144,7 +144,7 @@ namespace C2.Dialogs.C2OperatorViews
                 return notReady;
             }
 
-            if (this.rsFullFilePathTextBox.Text == "")
+            if (this.rsFullFilePathTextBox.Text == string.Empty)
             {
                 HelpUtil.ShowMessageBox("请选择结果文件路径");
                 return notReady;

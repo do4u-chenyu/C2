@@ -218,8 +218,8 @@ namespace C2.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            if (this.dataSourceTB0.Text == "") return true;
-            if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
+            if (this.dataSourceTB0.Text == string.Empty) return true;
+            if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == string.Empty) return true;
 
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
@@ -236,7 +236,7 @@ namespace C2.OperatorViews
                 return notReady;
             }
 
-            if (this.rsFullFilePathTextBox.Text == "")
+            if (this.rsFullFilePathTextBox.Text == string.Empty)
             {
                 HelpUtil.ShowMessageBox("请选择结果文件路径");
                 return notReady;
