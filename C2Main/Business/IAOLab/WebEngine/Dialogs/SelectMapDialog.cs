@@ -49,7 +49,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             InitializeComponent();
             mapPoints = new List<MapPoint>();
-            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
+            WebUrl = Path.Combine(Global.WebEnginePath, "Html", "StartMap.html");
             DataItems = dataItems;
             foreach (DataItem dataItem in DataItems)
             {

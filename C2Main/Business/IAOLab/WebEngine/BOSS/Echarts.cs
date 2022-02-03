@@ -1,4 +1,5 @@
-﻿using C2.IAOLab.WebEngine.Boss.Charts;
+﻿using C2.Core;
+using C2.IAOLab.WebEngine.Boss.Charts;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -57,7 +58,7 @@ namespace C2.IAOLab.WebEngine.Boss
 
             htmlContent += "});";
 
-            string tempName = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\JS", "BossOptions.js");
+            string tempName = Path.Combine(Global.WebEnginePath, "JS", "BossOptions.js");
             File.WriteAllText(tempName, htmlContent);
             return tempName;            
         }
@@ -78,7 +79,7 @@ namespace C2.IAOLab.WebEngine.Boss
 
             htmlContent += "});";
 
-            string tempName = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\JS", "VisualOptions.js");
+            string tempName = Path.Combine(Global.WebEnginePath, "JS", "VisualOptions.js");
             File.WriteAllText(tempName, htmlContent);
             return tempName;
         }

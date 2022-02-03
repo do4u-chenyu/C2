@@ -1,5 +1,6 @@
 ﻿using Amib.Threading;
 using C2.Business.CastleBravo.Intruder.Config;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace C2.Business.CastleBravo.Intruder
 
         delegate void VoidDelegate();
         delegate void update();
-        delegate void DelegateAddItemToListView(Config.ServerInfo svinfo);
+        delegate void DelegateAddItemToListView(ServerInfo svinfo);
 
         string[] lines;
         string[] splitLine;
@@ -54,9 +55,9 @@ namespace C2.Business.CastleBravo.Intruder
             tools = new ToolIntruder();
             config = new ConfigIntruder();
             refererList = new List<string>();
-
-            this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "CommonDict");
+            this.dictDirectory = Path.Combine(Global.ResourcesPath, "CommonDict");
             RefreshDict();
+            allSelected_Click(null, null);  // 为啥还要用户手工再点，他们能知道选哪个不选哪个?
         }
 
         //字典配置
@@ -621,7 +622,7 @@ hbapass=111111";
         }
         private void dictLV_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            groupBox2.Text = string.Format("字典（激活{0}个）", dictListView.CheckedItems.Count);
+            groupBox2.Text = string.Format("字典（已选{0}个）", dictListView.CheckedItems.Count);
         }
 
         public void updateRequestHeadersLV()

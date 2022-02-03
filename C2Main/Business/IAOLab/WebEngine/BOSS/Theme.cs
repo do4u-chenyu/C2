@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace C2.IAOLab.WebEngine.Boss
         //public readonly static Theme infographic = new Theme("infographic", "./theme/infographic.js");
         //public readonly static Theme shine = new Theme("shine", "./theme/shine.js");
         //public readonly static Theme roma = new Theme("roma", "./theme/roma.js");
-        public readonly static Theme phx = new Theme("phx", Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\JS", "phx.js"));
+        public readonly static Theme phx = new Theme("phx", Path.Combine(Global.WebEnginePath, "JS", "phx.js"));
 
         public Theme(string name, string scriptPath)
         {

@@ -28,7 +28,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private HashSet<string> setOfHost;
 
         List<WebShellTaskConfig> tasks = new List<WebShellTaskConfig>();
-        readonly string configFFP = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "config.db");
+        readonly string configFFP = Path.Combine(Global.ResourcesPath, "WebShellConfig", "config.db");
 
         private ToolStripItem[] enableItems;
         private DateTime s; // 自动保存

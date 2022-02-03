@@ -1,6 +1,7 @@
 ﻿using Amib.Threading;
 using C2.Business.CastleBravo.WebScan.Model;
 using C2.Business.CastleBravo.WebScan.Tools;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections;
@@ -50,7 +51,7 @@ namespace C2.Business.CastleBravo.WebScan
             this.timeOutCombo.SelectedIndex = 2;
             this.sleepTimeCombo.SelectedIndex = 0;
 
-            this.dictDirectory = Path.Combine(Application.StartupPath, "Resources", "WebScanDict");
+            this.dictDirectory = Path.Combine(Global.ResourcesPath, "WebScanDict");
             RefreshDict();
         }
 
@@ -704,7 +705,7 @@ namespace C2.Business.CastleBravo.WebScan
         {
             try
             {
-                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "WebScan帮助文档.txt");
+                string helpfile = Path.Combine(Global.ResourcesPath, "Help", "WebScan帮助文档.txt");
                 Help.ShowHelp(this, helpfile);
             }
             catch { };

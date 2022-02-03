@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using C2.Core;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace C2.Model
 
         static MyIconLibrary()
         {
-            BaseDirectory = Path.Combine(Application.StartupPath, "Resources", "PictureIconLib");
+            BaseDirectory = Path.Combine(Global.ResourcesPath, "PictureIconLib");
             Share = new MyIconLibrary();
         }
 

@@ -1,4 +1,5 @@
 ﻿using C2.Business.SSH;
+using C2.Core;
 using C2.Dialogs.SearchToolkit;
 using C2.SearchToolkit;
 using C2.Utils;
@@ -91,7 +92,7 @@ namespace C2.Controls.C1.Left
         {
             try
             {
-                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "全文工具箱帮助文档.txt");
+                string helpfile = Path.Combine(Global.ResourcesPath, "Help", "全文工具箱帮助文档.txt");
                 Help.ShowHelp(this, helpfile);
             }
             catch { };

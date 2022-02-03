@@ -345,7 +345,7 @@ namespace C2.Dialogs
             StringBuilder htmlSb = new StringBuilder();
             try
             {
-                string url = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
+                string url = Path.Combine(Global.WebEnginePath, "Html", "StartMap.html");
                 using (StreamReader sr = new StreamReader(url)) //模板页路径
                 {
                     String line;
@@ -370,8 +370,8 @@ namespace C2.Dialogs
             //----------生成htm文件------------------
             try
             {
-                string url = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
-                using (StreamWriter sw = new StreamWriter(url, false, System.Text.Encoding.GetEncoding("GB2312"))) //保存地址
+                string url = Path.Combine(Global.WebEnginePath, "Html", "StartMap.html");
+                using (StreamWriter sw = new StreamWriter(url, false, Encoding.GetEncoding("GB2312"))) //保存地址
                 {
                     sw.WriteLine(htmlText);
                     sw.Flush();

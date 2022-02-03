@@ -39,6 +39,7 @@ namespace C2.Core
         public const string ManualDesc = "战术手册";
         public const string MindMapDesc = "业务视图";
         public const string SearchDesc = "全文工具箱";
+        public const string JSDesc = "胶水系统";
         
 
 
@@ -176,13 +177,20 @@ namespace C2.Core
         public static string MindMapViewPath { get => Path.Combine(UserWorkspacePath, MindMapDesc); }
         public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, ModelDesc); }
         public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, SearchDesc); }
+        public static string JSViewPath { get => Path.Combine(UserWorkspacePath, JSDesc); }
         public static string TempDirectory { get; set; }
         public const float Factor = 1.3F;
 
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
         public const int ChartNum = 3;
+
+        public static string BusinessPath = Path.Combine(Application.StartupPath, "Business");
         public static string LocalPluginsPath = Path.Combine(Application.StartupPath, "plugins");
         public static string SoftwareSavePath = Path.Combine(Application.StartupPath, "update", "install");
+        public static string ResourcesPath =  Path.Combine(Application.StartupPath, "Resources");
+        public static string TemplatesPath = Path.Combine(ResourcesPath, "Templates");  
+        public static string WebEnginePath = Path.Combine(BusinessPath, "IAOLab", "WebEngine");
+
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
 
         public const string ServerHIUrl = @"http://221.226.113.110:8970";

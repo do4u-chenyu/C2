@@ -263,7 +263,7 @@ namespace C2.Controls.C1.Left
         {
             try
             {
-                string helpfile = Path.Combine(Application.StartupPath, "Resources", "Help", "喝彩城堡帮助文档.txt");
+                string helpfile = Path.Combine(Global.ResourcesPath, "Help", "喝彩城堡帮助文档.txt");
                 Help.ShowHelp(this, helpfile);
             }
             catch { };

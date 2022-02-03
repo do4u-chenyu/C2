@@ -16,7 +16,7 @@ namespace C2.Forms
     public partial class JSForm : BaseForm
     {
         private string excelPath;
-        private readonly string webUrl = Path.Combine(Application.StartupPath, "Business/IAOLab/WebEngine/Html", "JSTable.html");
+        private readonly string webUrl = Path.Combine(Global.WebEnginePath, "Html", "JSTable.html");
         IGlueSetting glueSetting;
         GlueDetailInfoDialog detailDialog;
         SqDetailInfoDialog sqDeatilDialog;
@@ -30,9 +30,9 @@ namespace C2.Forms
             [GlueType.Webshell] = "盗洞专项",
             [GlueType.VB] = "境外网产专项"
         };
-        public string txtDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统");
-        public string bakDirectory = Path.Combine(Global.UserWorkspacePath, "胶水系统", "backup");
-        string txtModelDirectory = Path.Combine(Application.StartupPath, "Resources/Templates/JS模板");
+        public string txtDirectory = Global.JSViewPath;
+        public string bakDirectory = Path.Combine(Global.JSViewPath, "backup");
+        string txtModelDirectory = Path.Combine(Global.TemplatesPath, "JS模板");
 
         public JSForm()
         {
