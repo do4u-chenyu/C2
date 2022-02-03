@@ -5,8 +5,8 @@ namespace MD5Plugin
 {
     partial class OctDecimal : URLPlugin
     {
-
-        protected string sepType = " ";
+        private const string blank = " ";
+        protected string sepType = blank;
         protected int decimalBase;
         public OctDecimal()
         {
@@ -27,7 +27,7 @@ namespace MD5Plugin
         {
             sepType = sepComboBox.SelectedItem as string;
             if (sepType == "空格分割")
-                sepType = " ";
+                sepType = blank;
         }
 
         public override void Encode(string str)

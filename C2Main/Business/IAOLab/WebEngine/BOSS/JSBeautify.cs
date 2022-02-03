@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Text.RegularExpressions;
+using C2.Utils;
 
 namespace C2.IAOLab.WebEngine.Boss
 {
@@ -65,10 +66,10 @@ namespace C2.IAOLab.WebEngine.Boss
 
         private void print_space()
         {
-            var last_output = " ";
+            var last_output = OpUtil.StringBlank;
             if (output.Length > 0)
                 last_output = output[output.Length - 1].ToString();
-            if ((last_output != " ") && (last_output != "\n") && (last_output != indent_string))
+            if ((last_output != OpUtil.StringBlank) && (last_output != "\n") && (last_output != indent_string))
             {
                 output.Append(' ');
             }

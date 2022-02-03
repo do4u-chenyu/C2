@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using C2.Core;
+using C2.Utils;
 
 namespace C2.Canvas.Svg
 {
@@ -74,7 +75,7 @@ namespace C2.Canvas.Svg
             if ((Style & FontStyle.Strikeout) == FontStyle.Strikeout)
             {
                 if (decoration != null)
-                    decoration += " ";
+                    decoration += OpUtil.StringBlank;
                 decoration += "line-through";
             }
             if (decoration != string.Empty)

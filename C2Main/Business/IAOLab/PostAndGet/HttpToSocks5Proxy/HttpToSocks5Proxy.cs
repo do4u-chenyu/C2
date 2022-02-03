@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using MihaZupan.Dns;
 using MihaZupan.Enums;
+using C2.Utils;
 
 namespace MihaZupan
 {
@@ -241,7 +242,7 @@ namespace MihaZupan
                 return false;
             }
             string method = methodLine[0];
-            httpVersion = methodLine[2].Trim() + " ";
+            httpVersion = methodLine[2].Trim() + OpUtil.StringBlank;
             connect = method.Equals("Connect", StringComparison.OrdinalIgnoreCase);
             string hostHeader = null;
 

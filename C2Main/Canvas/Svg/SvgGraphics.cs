@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using C2.Controls;
 using C2.Core;
+using C2.Utils;
 
 namespace C2.Canvas.Svg
 {
@@ -249,7 +250,7 @@ namespace C2.Canvas.Svg
             foreach(var p in points)
             {
                 if(sb.Length > 0)
-                    sb.Append(" ");
+                    sb.Append(OpUtil.StringBlank);
                 sb.AppendFormat("{0},{1}", p.X, p.Y);
             }
 

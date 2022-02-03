@@ -525,7 +525,7 @@ namespace C2.Utils
 
         public static bool IsContainIllegalCharacters(String userName, String target, bool isShowMsg=true)
         {
-            String[] illegalCharacters = new String[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
+            String[] illegalCharacters = new String[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", OpUtil.StringBlank, "\\t", "\\n", "\\r", ":" };
             foreach (String character in illegalCharacters)
             {
                 if (userName.Contains(character))

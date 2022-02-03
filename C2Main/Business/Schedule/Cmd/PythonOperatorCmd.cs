@@ -31,16 +31,16 @@ namespace C2.Business.Schedule.Cmd
             {
                 if (ele.EndsWith(".exe"))
                 {
-                    exePath = sb.Append(" " + ele).ToString().TrimStart(OpUtil.Blank);
+                    exePath = sb.Append(OpUtil.StringBlank + ele).ToString().TrimStart(OpUtil.Blank);
                     sb.Clear();
                 }
                 else if (ele.EndsWith(".py"))
                 {
-                    pyPath = sb.Append(" " + ele).ToString().TrimStart(OpUtil.Blank);
+                    pyPath = sb.Append(OpUtil.StringBlank + ele).ToString().TrimStart(OpUtil.Blank);
                     sb.Clear();
                 }
                 else
-                    sb.Append(" " + ele);
+                    sb.Append(OpUtil.StringBlank + ele);
             }
             pyParam = sb.ToString().TrimStart(OpUtil.Blank);
             exePath = GetRealExePath(pythonExePaths, exePath);

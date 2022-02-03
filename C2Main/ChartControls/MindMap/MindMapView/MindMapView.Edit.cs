@@ -513,11 +513,11 @@ namespace C2.Controls.MapViews
 
             string text = Lang._("Sub Topic");
             int i = parentTopic.Children.Count+1;
-            string title = text + " " + i.ToString();
+            string title = text + OpUtil.StringBlank + i.ToString();
             while(parentTopic.FindChildByText(title) != null)
             {
                 i++;
-                title = text + " " + i.ToString();
+                title = text + OpUtil.StringBlank + i.ToString();
             }
 
             return title;

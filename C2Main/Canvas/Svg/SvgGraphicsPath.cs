@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -96,7 +97,7 @@ namespace C2.Canvas.Svg
                 foreach (var n in Nodes)
                 {
                     if (sb.Length > 0)
-                        sb.Append(" ");
+                        sb.Append(OpUtil.StringBlank);
 
                     sb.Append(n.Command.ToString());
                     if (n.Points != null)

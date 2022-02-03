@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using C2.Core;
+using C2.Utils;
 
 namespace C2.Canvas.Svg
 {
@@ -72,7 +73,7 @@ namespace C2.Canvas.Svg
                 }
                 if (!pattern.IsNullOrEmpty())
                 {
-                    element.SetAttribute("stroke-dasharray", pattern.JoinString(" "));
+                    element.SetAttribute("stroke-dasharray", pattern.JoinString(OpUtil.StringBlank));
                 }
             }
 

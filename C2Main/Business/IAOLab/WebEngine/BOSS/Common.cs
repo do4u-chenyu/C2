@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace C2.IAOLab.WebEngine.Boss
             var header = String.IsNullOrWhiteSpace(includeStr) ? string.Empty : includeStr[0].ToString();
             var end = String.IsNullOrWhiteSpace(includeStr) ? string.Empty : includeStr[1].ToString();
 
-            return header + string.Join(splitStr.ToString() + (HaveNewLine ? Environment.NewLine : " "),
+            return header + string.Join(splitStr.ToString() + (HaveNewLine ? Environment.NewLine : OpUtil.StringBlank),
                 data.Select(x => quoteStr + x + quoteStr).ToArray()).TrimEnd(splitStr) + end;
         }
         //01 {...,...,...,}

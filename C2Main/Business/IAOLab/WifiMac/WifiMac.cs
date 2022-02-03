@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using C2.Business.IAOLab.WifiMac;
 using C2.Core;
+using C2.Utils;
 using Newtonsoft.Json;
 
 namespace C2.IAOLab.WifiMac
@@ -38,7 +39,7 @@ namespace C2.IAOLab.WifiMac
 
             //设置参数，并进行URL编码 
 
-            string paraUrlCoded = type + "=" + mac.Replace(" ",string.Empty);
+            string paraUrlCoded = type + "=" + mac.Replace(OpUtil.StringBlank, string.Empty);
 
             //将Json字符串转化为字节  
             byte[] payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);

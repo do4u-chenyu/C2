@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Net.Http;
+using C2.Utils;
 
 namespace C2.IAOLab.BaseAddress
 {
@@ -87,7 +88,7 @@ namespace C2.IAOLab.BaseAddress
                 return string.Empty;
             var address = Convert.ToString(locationResult["result"]["formatted_address"]);
             if (locationResult["result"]["sematic_description"] != null)
-                address += " " + Convert.ToString(locationResult["result"]["sematic_description"]);
+                address += OpUtil.StringBlank + Convert.ToString(locationResult["result"]["sematic_description"]);
             return address;
         }
     }

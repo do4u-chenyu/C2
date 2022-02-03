@@ -212,7 +212,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "是否涉政" + " " + "准确率" + "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "是否涉政" + OpUtil.StringBlank + "准确率" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)

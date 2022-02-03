@@ -12,6 +12,7 @@ namespace FullTextGrammarAssistant
     {
         private readonly List<string> queryclientTextList = new List<string>(new string[] { "","", "", "", "", "", "", "", "" });
         private readonly List<string> jarTextList = new List<string>(new string[] { "", "", "", "", "" });
+        private const string blank = " ";
         public Form1()
         {
             InitializeComponent();
@@ -101,11 +102,11 @@ namespace FullTextGrammarAssistant
             else if (AndOrNotOne.SelectedIndex == -1 & AndOrNotTwo.SelectedIndex == -1)
                 this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + "\'";
             else if (AndOrNotTwo.SelectedIndex == -1)
-                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.AndOrNotOne.Text + " " + attrText2 + conText2 + newTextBox5 + "\'";
+                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + blank + this.AndOrNotOne.Text + blank + attrText2 + conText2 + newTextBox5 + "\'";
             else
-                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + " " + this.AndOrNotOne.Text + " " + attrText2 + conText2 + newTextBox5 + " " + this.AndOrNotTwo.Text + " " + attrText3 + conText3 + " " + newTextBox6 + "\'";
-            this.previewqueryText.Text = String.Join(" ", this.queryclientTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
-            this.previewjarText.Text = String.Join(" ", this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择查询方式及数据类型,且数据类型只能查normal类型,不能查garbage类型#";
+                this.queryclientTextList[5] = "--dbfilter \'" + attrText1 + conText1 + newTextBox2 + blank + this.AndOrNotOne.Text + blank + attrText2 + conText2 + newTextBox5 + blank + this.AndOrNotTwo.Text + blank + attrText3 + conText3 + " " + newTextBox6 + "\'";
+            this.previewqueryText.Text = String.Join(blank, this.queryclientTextList) + "\r\n\r\n#登陆全文主节点执行#全文主节点当前针对每个查询条件一次限制返回10W行";
+            this.previewjarText.Text = String.Join(blank, this.jarTextList) + "\r\n\r\n#batchQueryAndExport_1.7.jar不支持全文的dbfilter语法\r\n##全文主节点当前针对每个查询条件一次限制返回10W行\r\n##batchQueryAndExport_1.7.jar不支持选择查询方式及数据类型,且数据类型只能查normal类型,不能查garbage类型#";
         }
 
         private string Condition_filter(string condition)
@@ -200,7 +201,7 @@ namespace FullTextGrammarAssistant
                     {
                         if (proto.Key == ch.Text)
                         {
-                            protoTypeText += proto.Value + " ";
+                            protoTypeText += proto.Value + blank;
                         }
                     }
                 }
@@ -310,7 +311,7 @@ namespace FullTextGrammarAssistant
                     {
                         if (option.Key == ch.Text)
                         {
-                            OptionTypeText += option.Value + " ";
+                            OptionTypeText += option.Value + blank;
                         }
                     }
                 }

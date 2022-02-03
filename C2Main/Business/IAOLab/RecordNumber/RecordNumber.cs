@@ -6,6 +6,7 @@ using System.Net;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using C2.Utils;
 
 namespace C2.IAOLab.BaseAddress
 {
@@ -53,7 +54,7 @@ namespace C2.IAOLab.BaseAddress
             if (locationResult.Property("info") != null)
             {
                 address = Convert.ToString(locationResult["info"]["icp"]);
-                address = " " + address;
+                address = OpUtil.StringBlank + address;
             }
             return address;
         }

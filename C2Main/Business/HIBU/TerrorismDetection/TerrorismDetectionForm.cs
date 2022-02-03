@@ -194,10 +194,10 @@ namespace C2.Business.HIBU.TerrorismDetection
                 data = data.ToString().Replace(@"\", "").Replace(@"""", "").Replace("'[", "[").Replace("]'", "]");
                 data = "[" + data + "]";
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                string pred = ja[0]["pred"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
-                string pred_type = ja[0]["pred_type"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
-                string confidence = ja[0]["confidence"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
-                string box = ja[0]["box"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string pred = ja[0]["pred"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
+                string pred_type = ja[0]["pred_type"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
+                string confidence = ja[0]["confidence"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
+                string box = ja[0]["box"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
                 resultList.Add(pred);
                 resultList.Add(pred_type);
                 resultList.Add(confidence);
@@ -243,14 +243,14 @@ namespace C2.Business.HIBU.TerrorismDetection
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "是否涉恐" + " " + "涉恐类别" + " " + "准确率" +" " + "图像位置" + " "+ "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "是否涉恐" + OpUtil.StringBlank + "涉恐类别" + OpUtil.StringBlank + "准确率" + OpUtil.StringBlank + "图像位置" + OpUtil.StringBlank + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString() + " " + row.Cells[3].Value.ToString()+ " " + row.Cells[4].Value.ToString()+ " " + "\r\n");
+                        sw.Write(row.Cells[0].Value.ToString() + OpUtil.StringBlank + row.Cells[1].Value.ToString() + OpUtil.StringBlank + row.Cells[2].Value.ToString() + OpUtil.StringBlank + row.Cells[3].Value.ToString()+ OpUtil.StringBlank + row.Cells[4].Value.ToString()+ OpUtil.StringBlank + "\r\n");
                     }
                 }
                 if (sw != null)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -230,7 +231,7 @@ namespace C2.Core
         }
         public static string[] SplitWhitespace(this string str)
         {
-            return str.Split(new string[] { "\t", " " }, StringSplitOptions.None);
+            return str.Split(new string[] { "\t", OpUtil.StringBlank }, StringSplitOptions.None);
         }
 
         public static string[] SplitLine(this string str)

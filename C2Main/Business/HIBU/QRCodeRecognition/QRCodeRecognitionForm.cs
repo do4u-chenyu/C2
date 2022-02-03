@@ -212,14 +212,14 @@ namespace C2.Business.HIBU.QRCodeRecognition
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "是否含有二维码" + " " + "准确率" + "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "是否含有二维码" + OpUtil.StringBlank + "准确率" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString() + "\r\n");
+                        sw.Write(row.Cells[0].Value.ToString() + OpUtil.StringBlank + row.Cells[1].Value.ToString() + OpUtil.StringBlank + row.Cells[2].Value.ToString() + "\r\n");
                     }
                 }
                 if (sw != null)
