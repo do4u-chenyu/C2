@@ -1215,8 +1215,10 @@ namespace C2.Forms
 
                 RecentFilesManage.Default.Push(Document.FileName, Document.CreateThumbImage());
             }
-            if(!Global.GetMindMapControl().ContainModel(Document.Name))
+            if (Description == Global.MindMapDesc && !Global.GetMindMapControl().ContainModel(Document.Name))
                 Global.GetMindMapControl().AddButton(Document.Name);
+            if (Description == Global.ManualDesc && !Global.GetManualControl().ContainModel(Document.Name))
+                Global.GetManualControl().AddButton(Document.Name);
             return true;
         }
 
