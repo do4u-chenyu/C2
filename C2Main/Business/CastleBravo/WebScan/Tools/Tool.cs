@@ -45,7 +45,7 @@ namespace C2.Business.CastleBravo.WebScan.Tools
 
             }
             catch { }
-            return "";
+            return string.Empty;
         }
 
         public string GetFileSize(string sFullName)

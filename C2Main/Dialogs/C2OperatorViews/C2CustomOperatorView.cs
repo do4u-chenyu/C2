@@ -218,7 +218,7 @@ namespace C2.Dialogs.C2OperatorViews
                 }
             }
             //TODO默认返回一个
-            return "";
+            return string.Empty;
         }
 
         private void SetControlRadioCheck(Control group, string radioName, RadioButton defaulRb)

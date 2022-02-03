@@ -168,7 +168,7 @@ namespace FastColoredTextBoxNS
         public static string GetColorAsString(Color color)
         {
             if (color == Color.Transparent)
-                return "";
+                return string.Empty;
             return string.Format(@"\red{0}\green{1}\blue{2}", color.R, color.G, color.B);
         }
 

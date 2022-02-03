@@ -291,7 +291,7 @@ namespace FastColoredTextBoxNS
             string line;
             var filePos = sourceFileLinePositions[i];
             if (filePos < 0)
-                return "";
+                return string.Empty;
             fs.Seek(filePos, SeekOrigin.Begin);
             sr.DiscardBufferedData();
             line = sr.ReadLine();

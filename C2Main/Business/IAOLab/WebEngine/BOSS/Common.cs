@@ -16,7 +16,7 @@ namespace C2.IAOLab.WebEngine.Boss
         
         public static string GetPro(string str, string repalce = null)
         {
-            if (String.IsNullOrWhiteSpace(str)) return "";
+            if (String.IsNullOrWhiteSpace(str)) return string.Empty;
             if (String.IsNullOrWhiteSpace(repalce)) return str;
             return repalce.Replace("{$}", str);
 

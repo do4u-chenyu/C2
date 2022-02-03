@@ -1596,7 +1596,7 @@ namespace FastColoredTextBoxNS
             {
                 StringBuilder sb = new StringBuilder();
                 var bounds = Bounds;
-                if (bounds.iStartLine < 0) return "";
+                if (bounds.iStartLine < 0) return string.Empty;
                 //
                 for (int y = bounds.iStartLine; y <= bounds.iEndLine; y++)
                 {

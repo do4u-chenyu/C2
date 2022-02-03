@@ -214,7 +214,7 @@ namespace C2.IAOLab.ApkToolStart
         {
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
-                return "";
+                return string.Empty;
             string errorMessage = String.Empty;
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";

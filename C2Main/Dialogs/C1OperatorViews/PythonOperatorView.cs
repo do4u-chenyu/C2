@@ -273,7 +273,7 @@ namespace C2.Dialogs
                     return pii.PythonFFP;
                 }
             }
-            return "";
+            return string.Empty;
         }
         #endregion
 

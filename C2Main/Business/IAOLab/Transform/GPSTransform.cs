@@ -34,7 +34,7 @@ namespace C2.IAOLab.Transform
             double[] result;
             if(input.Trim() == string.Empty)
             {
-                return "";
+                return string.Empty;
             }
             else
             {

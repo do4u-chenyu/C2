@@ -122,7 +122,7 @@ namespace C2.IAOLab.WebEngine.Boss
         string GetTheme(string theme = null)
         {
             if (!EchartsInitialize.UseTheme || (themes == null || themes.Count <= 0))
-                return "";
+                return string.Empty;
             if (string.IsNullOrWhiteSpace(theme))
                 return ",'" + themes.First().Value.Name+"'";
             if(!themes.ContainsKey(theme))

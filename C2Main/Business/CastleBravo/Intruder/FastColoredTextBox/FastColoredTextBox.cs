@@ -1349,7 +1349,7 @@ namespace FastColoredTextBoxNS
             get
             {
                 if (LinesCount == 0)
-                    return "";
+                    return string.Empty;
                 var sel = new Range(this);
                 sel.SelectAll();
                 return sel.Text;

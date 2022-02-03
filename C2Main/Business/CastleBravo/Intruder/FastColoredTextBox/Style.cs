@@ -83,7 +83,7 @@ namespace FastColoredTextBoxNS
         /// <returns></returns>
         public virtual string GetCSS()
         {
-            return "";
+            return string.Empty;
         }
 
         /// <summary>

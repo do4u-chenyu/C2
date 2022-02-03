@@ -456,7 +456,7 @@ namespace C2.Business.Schedule
         {
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
-                return "";
+                return string.Empty;
             string errorMessage = String.Empty;
 
             Process p = new Process();

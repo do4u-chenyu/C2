@@ -16,7 +16,7 @@ namespace C2.Business.CastleBravo.WebScan.Model
         {
             if (String.IsNullOrEmpty(contenType) && String.IsNullOrEmpty(body))
             {
-                return "";
+                return string.Empty;
             }
             body = body.ToUpper();
 
@@ -30,7 +30,7 @@ namespace C2.Business.CastleBravo.WebScan.Model
             {
                 if (String.IsNullOrEmpty(body))
                 {
-                    return "";
+                    return string.Empty;
                 }
                 m = Regex.Match(body, @"charset=['""]{0,1}(?<charset>[\w\-]+)['""]{0,1}", RegexOptions.IgnoreCase);
                 if (m.Success)

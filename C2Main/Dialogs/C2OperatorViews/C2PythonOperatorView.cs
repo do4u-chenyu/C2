@@ -225,7 +225,7 @@ namespace C2.Dialogs.C2OperatorViews
                     return pii.PythonFFP;
                 }
             }
-            return "";
+            return string.Empty;
         }
         #endregion
 
