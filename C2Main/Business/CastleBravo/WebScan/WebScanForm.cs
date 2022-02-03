@@ -68,7 +68,7 @@ namespace C2.Business.CastleBravo.WebScan
             {
                 dictCount++;
 
-                ListViewItem lvi = new ListViewItem(dictCount + "");
+                ListViewItem lvi = new ListViewItem(dictCount.ToString());
                 lvi.Tag = Path.GetFileName(dictPath);
                 lvi.SubItems.Add(Path.GetFileName(dictPath));
                 lvi.SubItems.Add(GetFileLines(dictPath));
@@ -108,7 +108,7 @@ namespace C2.Business.CastleBravo.WebScan
 
                 while ((lineStr = reader.ReadLine()) != null)
                 {
-                    if (!lineStr.Equals(""))
+                    if (!string.IsNullOrEmpty(lineStr))
                     {
                         contentList.Add(lineStr);
                         lineCount++;
@@ -390,13 +390,13 @@ namespace C2.Business.CastleBravo.WebScan
                 return;
             }
 
-            ListViewItem lvi = new ListViewItem(svinfo.id + "");
+            ListViewItem lvi = new ListViewItem(svinfo.id.ToString());
             lvi.Tag = svinfo.type;
             lvi.SubItems.Add(svinfo.url);
-            lvi.SubItems.Add(svinfo.code + "");
-            lvi.SubItems.Add(svinfo.contentType + "");
-            lvi.SubItems.Add(svinfo.length + "");
-            lvi.SubItems.Add(svinfo.runTime + "");
+            lvi.SubItems.Add(svinfo.code.ToString());
+            lvi.SubItems.Add(svinfo.contentType.ToString());
+            lvi.SubItems.Add(svinfo.length.ToString());
+            lvi.SubItems.Add(svinfo.runTime.ToString());
             //lvi.SubItems.Add(svinfo.ip + "");
             if (svinfo.code.ToString().StartsWith("2"))
             {

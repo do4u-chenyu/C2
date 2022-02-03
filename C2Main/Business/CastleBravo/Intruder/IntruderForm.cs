@@ -490,7 +490,7 @@ hbapass=111111";
                 if (stp != null)
                 {
                     long processedCount = stp.WorkItemsProcessedCount;
-                    this.scanSpeed.Text = (processedCount - this.lastCount) + "";
+                    this.scanSpeed.Text = (processedCount - this.lastCount).ToString();
                     this.lastCount = processedCount;
 
                     this.scanThreadStatus.Text = stp.InUseThreads + "/" + stp.Concurrency;
@@ -506,7 +506,7 @@ hbapass=111111";
                     this.progressBar.Value = c;
                 }
 
-                this.scanUseTime.Text = this.scanRunTime + "";
+                this.scanUseTime.Text = this.scanRunTime.ToString();
             }
             catch (Exception e)
             {

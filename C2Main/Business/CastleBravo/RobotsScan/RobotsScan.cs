@@ -183,7 +183,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                 List<string> inputtext1 = inputtext.ToList<string>();
                 for (int k = inputtext1.Count - 1; k >= 0; k--)
                 {
-                    if (inputtext1[k].Contains("#") || inputtext1[k] == "" || inputtext1[k].Contains("Sitemap") || inputtext1[k].Contains("User-agent: *"))
+                    if (inputtext1[k].Contains("#") || inputtext1[k] == string.Empty || inputtext1[k].Contains("Sitemap") || inputtext1[k].Contains("User-agent: *"))
                     {
                         inputtext1.Remove(inputtext1[k]);
                     }
@@ -229,7 +229,7 @@ namespace C2.Business.CastleBravo.RobotsScan
                 List<string> inputtext1 = inputtext.ToList<string>();
                 for (int k = inputtext1.Count - 1; k >= 0; k--)
                 {
-                    if (inputtext1[k].Contains("#") || inputtext1[k] == "" || inputtext1[k].Contains("Sitemap"))
+                    if (inputtext1[k].Contains("#") || inputtext1[k] == string.Empty || inputtext1[k].Contains("Sitemap"))
                     {
                         inputtext1.Remove(inputtext1[k]);
                     }
