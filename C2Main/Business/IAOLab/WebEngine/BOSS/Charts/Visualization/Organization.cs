@@ -170,7 +170,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                     {
                         int infoLength = 8;
                         secondFormatter = secondFormatter + "  " + colName[j] + ":" + colList[j][i];
-                        if (colList[j][i] == "")
+                        if (string.IsNullOrEmpty(colList[j][i]))
                         {
                             infoLength = colList[j][i].Length;
                             secondList = secondList + colList[j][i];

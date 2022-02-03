@@ -693,7 +693,7 @@ namespace C2.Controls.MapViews
                 ToolStripMenuItem MenuAttachment = new ToolStripMenuItem();
 
                 MenuAttachment.Text = String.Format("{0}[{1}]", Path.GetFileNameWithoutExtension(path), Path.GetExtension(path).TrimStart('.'));
-                if (System.IO.Path.GetExtension(Path.GetExtension(path)) == "")
+                if (string.IsNullOrEmpty(System.IO.Path.GetExtension(Path.GetExtension(path))))
                 {
                     MenuAttachment.Image = Properties.Resources.kbData;
                 }

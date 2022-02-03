@@ -67,7 +67,7 @@ namespace C2.Controls.Common
             if(SelectedTopic == null)
             {
                 this.topicName.Text = "未选中节点";
-                DcToolTip.SetToolTip(this.topicName, "");
+                DcToolTip.SetToolTip(this.topicName, string.Empty);
                 this.dataSourceCombo.Text = String.Empty;
                 this.dataSourceCombo.Items.Clear();
                 this.operatorCombo.Text = String.Empty;
@@ -191,7 +191,7 @@ namespace C2.Controls.Common
                 string message = FileUtil.FileExistOrUse(SelectedDataSource.FilePath);
                 if (!string.IsNullOrEmpty(message))
                 {
-                    MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }

@@ -187,7 +187,7 @@ namespace C2.Business.HIBU.InfoExtraction
                 string lineStr;
                 while ((lineStr = reader.ReadLine()) != null)
                 {
-                    if (!lineStr.Equals(""))
+                    if (!string.IsNullOrEmpty(lineStr))
                     {
                         contentList.Add(lineStr);
                         lineCount++;

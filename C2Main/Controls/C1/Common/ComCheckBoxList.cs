@@ -225,7 +225,7 @@ namespace C2.Controls.Common
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            if (this.textBox1.Text == "")
+            if (string.IsNullOrEmpty(this.textBox1.Text))
             {
                 checkListBoxTmp.Hide();
                 checkListBox.Show();

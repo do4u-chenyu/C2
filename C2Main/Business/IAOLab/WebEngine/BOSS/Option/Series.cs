@@ -25,7 +25,7 @@ namespace C2.IAOLab.WebEngine.Boss.Option
                         : Common.GetPropertyValue(this, di.Key)));
                 }
             }
-            return (list == null || list.Count <= 0) ? "[]" : Common.Join(list.ToArray(), "", ',', "[]", true);
+            return (list == null || list.Count <= 0) ? "[]" : Common.Join(list.ToArray(), string.Empty, ',', "[]", true);
             //return Common.GetOptionValue(this, this.FlagDic, this.TypeDic, "[]", "["+ seriesType + "]");
         }
         public Series(ISeries[] series)

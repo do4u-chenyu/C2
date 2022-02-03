@@ -253,7 +253,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                                 if (nodeList[j] == allNodeList[i])
                                 {
                                     string category = dataList[1].Rows[j][int.Parse(chartOptions[4])].ToString();
-                                    if (category == "")
+                                    if (string.IsNullOrEmpty(category))
                                     {
                                         category = "其他";
                                     }

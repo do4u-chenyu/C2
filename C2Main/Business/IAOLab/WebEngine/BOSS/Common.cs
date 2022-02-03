@@ -31,8 +31,8 @@ namespace C2.IAOLab.WebEngine.Boss
         }
         public static string Join(string[] data, string quoteStr = "'", char splitStr = ',', string includeStr = "[]", bool HaveNewLine = false)
         {
-            var header = String.IsNullOrWhiteSpace(includeStr) ? "" : includeStr[0] + "";
-            var end = String.IsNullOrWhiteSpace(includeStr) ? "" : includeStr[1] + "";
+            var header = String.IsNullOrWhiteSpace(includeStr) ? string.Empty : includeStr[0].ToString();
+            var end = String.IsNullOrWhiteSpace(includeStr) ? string.Empty : includeStr[1].ToString();
 
             return header + string.Join(splitStr.ToString() + (HaveNewLine ? Environment.NewLine : " "),
                 data.Select(x => quoteStr + x + quoteStr).ToArray()).TrimEnd(splitStr) + end;
@@ -87,7 +87,7 @@ namespace C2.IAOLab.WebEngine.Boss
                         : Common.GetPropertyValue(obj, di.Key)));
                 }
             }
-            return (list == null || list.Count <= 0) ? defaultStr : Join(list.ToArray(), "", ',', includeStr, true);
+            return (list == null || list.Count <= 0) ? defaultStr : Join(list.ToArray(), string.Empty, ',', includeStr, true);
         }
         /// <summary>
         /// 

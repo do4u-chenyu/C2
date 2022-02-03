@@ -290,7 +290,7 @@ namespace C2.Business.Model
         {
             if (!File.Exists(fullFilePath))
                 return false;
-            if (!HasUnZipFile(fullFilePath, userName, "", false))
+            if (!HasUnZipFile(fullFilePath, userName, string.Empty, false))
                 return false;
 
             // 脚本、数据源存储路径

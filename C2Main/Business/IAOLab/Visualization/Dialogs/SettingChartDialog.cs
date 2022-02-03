@@ -131,7 +131,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 List<string> tmpRowList = new List<string>();
                 for (int j = 0; j < bcpInfo.ColumnArray.Length; j++)
                 {
-                    string cellValue = j < rowList.Length ? rowList[j] : "";
+                    string cellValue = j < rowList.Length ? rowList[j] : string.Empty;
                     tmpRowList.Add(cellValue);
                 }
                 dataTable.Rows.Add(tmpRowList.ToArray());
@@ -152,7 +152,7 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
                 string lineStr;
                 while ((lineStr = reader.ReadLine()) != null && lineCount < 1001)
                 {
-                    if (!lineStr.Equals(""))
+                    if (!string.IsNullOrEmpty(lineStr))
                     {
                         contentList.Add(lineStr);
                         lineCount++;

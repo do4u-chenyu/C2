@@ -861,7 +861,7 @@ namespace C2.Controls
                 }
                 else
                 {
-                    ShowToolTip("");
+                    ShowToolTip(string.Empty);
                     //ShowToolTip(HoverHitResult.Item.Text);
                 }
             }

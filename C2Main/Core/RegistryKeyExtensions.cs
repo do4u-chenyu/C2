@@ -34,7 +34,7 @@ namespace C2.Core
 
         public static void SetSubKeyDefaultValue(this RegistryKey regKey, string subKeyName, object value)
         {
-            SetSubKeyValue(regKey, subKeyName, "", value);
+            SetSubKeyValue(regKey, subKeyName, string.Empty, value);
         }
 
         public static void SetSubKeyValue(this RegistryKey regKey, string subKeyName, string itemName, object value)
