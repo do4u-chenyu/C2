@@ -102,7 +102,8 @@ namespace C2.Model.MindMaps
             }
 
             RecursionTopic(xmindName, firstTopic, mindMapRoot, xmlns);
-            
+
+            FileUtil.DeleteDirectory(tmpDir);
         }
 
 
