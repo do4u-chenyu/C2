@@ -137,7 +137,7 @@ namespace C2.Dialogs.C2OperatorViews
             //虚拟机是否勾选
             if (string.IsNullOrEmpty(this.pythonChosenComboBox.Text))
             {
-                HelpUtil.ShowMessageBox("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
+                HelpUtil.ShowMessageBox("未指定python虚拟机，在‘【右上角】-【首选项】-【python引擎】’中配置。");
                 return notReady;
             }
             //脚本是否导入
