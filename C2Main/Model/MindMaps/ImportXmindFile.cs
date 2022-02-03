@@ -45,9 +45,9 @@ namespace C2.Model.MindMaps
             // 防止同名文件出现
             if (createNewModelForm.CheckNameExist(xmindName))
                 return;
-            tmpXmlFile = "C:\\c2"; //xmind临时存放地址
+            tmpXmlFile = Path.Combine(Global.TempDirectory, "xmind");  // 导入 xmind 临时地址
             tmpDir = Path.Combine(tmpXmlFile, xmindName);
-            FileUtil.DeleteDirectory(Global.TempDirectory);
+            FileUtil.DeleteDirectory(tmpDir);
             FileUtil.CreateDirectory(tmpDir);
             string zipFilePath = path;
             string errMsg = ZipUtil.UnZipFile(zipFilePath, tmpDir);
@@ -70,7 +70,7 @@ namespace C2.Model.MindMaps
             xmlRoot.Text = firstTitle;
 
             
-            C2.Model.Documents.Document newDoc = Global.GetMainForm().CreateNewMapForWord(xmindName);
+            Documents.Document newDoc = Global.GetMainForm().CreateNewMapForWord(xmindName);
             newDoc.FileName = xmindName;
             DocumentForm form = new DocumentForm(newDoc);
             Global.GetMainForm().ShowFormWord(form);
