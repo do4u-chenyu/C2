@@ -182,7 +182,7 @@ namespace C2.Business.CastleBravo.WebScan.Model
                     res.body = sr.ReadToEnd();
                     String encoding = getHTMLEncoding(response.ContentType, res.body);
 
-                    if (!"".Equals(encoding) && !"UTF-8".Equals(encoding, StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrEmpty(encoding) && !"UTF-8".Equals(encoding, StringComparison.OrdinalIgnoreCase))
                     {
                         rs = response.GetResponseStream();
                         sr = new StreamReader(rs, Encoding.GetEncoding(encoding));
@@ -241,7 +241,7 @@ namespace C2.Business.CastleBravo.WebScan.Model
 
 
                 //读取服务器端返回的消息 
-                String encode = getHTMLEncoding(response.Headers["Content-Type"], "");
+                String encode = getHTMLEncoding(response.Headers["Content-Type"], string.Empty);
                 if (!String.IsNullOrEmpty(encode))
                 {
                     sr = new StreamReader(s, Encoding.GetEncoding(encode));
