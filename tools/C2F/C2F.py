@@ -28,10 +28,10 @@ def resource_path(relative_path):
        
 def without_extension(path):
     return os.path.basename(path.split('.')[0])
-
-if __name__ == "__main__":
+    
+def install():
     print('战术手册正在安装中...' + '\r\n')
-    now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    now_string = datetime.datetime.now().strftime('%Y%m%d%H%M')
     
     src_path = resource_path("c2f")
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
@@ -59,7 +59,14 @@ if __name__ == "__main__":
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
         change_name(path_to)        # 解决zipfile库解压中文乱码的问题,这个函数实现的极其丑陋
+        
+    print('战术手册安装成功，请重启C2，务必重启C2才能生效\r\n')
 
-    print('战术手册安装成功，请重启C2，务必重启C2才能生效')
+if __name__ == "__main__":
+    try:
+        install()    
+    except:
+        print('战术手册安装出现错误，截图发售后群获得技术支持\r\n')
+        
     os.system("pause")
     
