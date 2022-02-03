@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Drawing;
 using System.Collections.Generic;
+using C2.Utils;
 
 namespace FastColoredTextBoxNS
 {
@@ -191,13 +192,13 @@ namespace FastColoredTextBoxNS
         public static string GetColorAsString(Color color)
         {
             if(color==Color.Transparent)
-                return "";
+                return string.Empty;
             return string.Format("#{0:x2}{1:x2}{2:x2}", color.R, color.G, color.B);
         }
 
         string GetStyleName(StyleIndex styleIndex)
         {
-            return styleIndex.ToString().Replace(" ", "").Replace(",", "");
+            return styleIndex.ToString().Replace(OpUtil.StringBlank, string.Empty).Replace(",", string.Empty);
         }
 
         private void Flush(StringBuilder sb, StringBuilder tempSB, StyleIndex currentStyle)
@@ -210,11 +211,10 @@ namespace FastColoredTextBoxNS
             else
             {
                 string css = GetCss(currentStyle);
-                if(css!="")
-                    sb.AppendFormat("<font style=\"{0}\">", css);
-                sb.Append(tempSB.ToString());
-                if (css != "")
-                    sb.Append("</font>");
+                if (string.IsNullOrEmpty(css))
+                    sb.Append(tempSB.ToString());
+                else
+                    sb.AppendFormat("<font style=\"{0}\">{1}</font>", css, tempSB.ToString());            
             }
             tempSB.Length = 0;
         }

@@ -344,7 +344,7 @@ namespace FastColoredTextBoxNS
                 tb.Selection.End = ranges[i].End;
                 prevText.Add(tb.Selection.Text);
                 ClearSelected(ts);
-                if (insertedText  != "")
+                if (!string.IsNullOrEmpty(insertedText))
                     InsertTextCommand.InsertText(insertedText, ts);
             }
             if(ranges.Count > 0)
@@ -424,7 +424,7 @@ namespace FastColoredTextBoxNS
 
             string temp = null;
             ts.OnTextChanging(ref temp);
-            if (temp == "")
+            if (string.IsNullOrEmpty(temp))
                 throw new ArgumentOutOfRangeException();
 
             deletedText = tb.Selection.Text;
@@ -717,7 +717,7 @@ namespace FastColoredTextBoxNS
                 if (!lineIsEmpty)
                 {
                     var insertedText = lines[iLine%lines.Length];
-                    if (r.End < r.Start && insertedText!="")
+                    if (r.End < r.Start && !string.IsNullOrEmpty(insertedText))
                     {
                         //add forwarding spaces
                         insertedText = new string(' ', r.Start.iChar - r.End.iChar) + insertedText;

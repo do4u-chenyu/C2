@@ -59,7 +59,7 @@ namespace C2.Business.Cracker.Tools
                     RegistryKey rk = Registry.LocalMachine.OpenSubKey(fRegistryKey, false);
                     if (rk != null)
                     {
-                        String fPnpInstanceID = rk.GetValue("PnpInstanceID", "").ToString();
+                        String fPnpInstanceID = rk.GetValue("PnpInstanceID", string.Empty).ToString();
                         int fMediaSubType = Convert.ToInt32(rk.GetValue("MediaSubType", 0));
                         if (!String.IsNullOrEmpty(fPnpInstanceID) && fPnpInstanceID.StartsWith("PCI"))
                         {
