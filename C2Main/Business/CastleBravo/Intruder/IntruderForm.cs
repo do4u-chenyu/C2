@@ -298,10 +298,10 @@ hbapass=111111";
             ListViewItem lvi = new ListViewItem(svinfo.id.ToString());//序号
             lvi.Tag = svinfo.type;
             lvi.SubItems.Add(svinfo.password);//密码值
-            lvi.SubItems.Add(svinfo.code + "");//状态码
-            lvi.SubItems.Add(svinfo.mistake + "");//错误
-            lvi.SubItems.Add(svinfo.timeout + "");//超时
-            lvi.SubItems.Add(svinfo.length + "");//长度
+            lvi.SubItems.Add(svinfo.code.ToString());//状态码
+            lvi.SubItems.Add(svinfo.mistake.ToString());//错误
+            lvi.SubItems.Add(svinfo.timeout.ToString());//超时
+            lvi.SubItems.Add(svinfo.length.ToString());//长度
             //lvi.SubItems.Add(svinfo.ip + "");
             if (svinfo.code.ToString().StartsWith("2"))
             {
@@ -346,7 +346,7 @@ hbapass=111111";
             var lines = tBReqMess.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             if (tBReqMess.Text.Contains("Referer"))
             {
-                var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
+                var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", string.Empty).Trim();
                 refererList.Add(referer.Substring(referer.IndexOf(':') + 1).Trim());
             }
             else 
