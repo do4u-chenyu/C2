@@ -233,7 +233,7 @@ namespace C2.Controls.MapViews
                 string message = FileUtil.FileExistOrUse(opw.DataSourceItem.FilePath);
                 if (!string.IsNullOrEmpty(message))
                 {
-                    MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
