@@ -154,14 +154,14 @@ namespace FastColoredTextBoxNS
     {
         public SnippetAutocompleteItem(string snippet)
         {
-            Text = snippet.Replace("\r", "");
+            Text = snippet.Replace("\r", string.Empty);
             ToolTipTitle = "Code snippet:";
             ToolTipText = Text;
         }
 
         public override string ToString()
         {
-            return MenuText ?? Text.Replace("\n", " ").Replace("^", "");
+            return MenuText ?? Text.Replace("\n", " ").Replace("^", string.Empty);
         }
 
         public override string GetTextForReplace()
@@ -192,7 +192,7 @@ namespace FastColoredTextBoxNS
                     break;
             //remove char ^
             e.Tb.Selection.GoLeft(true);
-            e.Tb.InsertText("");
+            e.Tb.InsertText(string.Empty);
             //
             e.Tb.Selection.EndUpdate();
             e.Tb.EndUpdate();
@@ -233,7 +233,7 @@ namespace FastColoredTextBoxNS
             string lastPart = fragmentText.Substring(i + 1);
             firstPart = fragmentText.Substring(0, i);
 
-            if(lastPart=="") return CompareResult.Visible;
+            if(string.IsNullOrEmpty(lastPart)) return CompareResult.Visible;
             if(Text.StartsWith(lastPart, StringComparison.InvariantCultureIgnoreCase))
                 return CompareResult.VisibleAndSelected;
             if(lowercaseText.Contains(lastPart.ToLower()))

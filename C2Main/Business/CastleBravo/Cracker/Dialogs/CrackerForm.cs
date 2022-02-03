@@ -65,7 +65,7 @@ namespace C2.Business.Cracker.Dialogs
                     Port = servicesPort[i]
                 };
                 //SSL和非SSL采用一个字典
-                string dicname = sm.Name.ToLower().Replace("_ssl", "");
+                string dicname = sm.Name.ToLower().Replace("_ssl", string.Empty);
                 sm.DicUserNamePath = "/Resources/CrackerDict/dic_username_" + dicname + ".txt";
                 sm.DicPasswordPath = "/Resources/CrackerDict/dic_password_" + dicname + ".txt";
                 services.Add(sm.Name, sm);
@@ -141,7 +141,7 @@ namespace C2.Business.Cracker.Dialogs
                 {
                     long workCount = allCrackCount;
 
-                    this.stxt_speed.Text = (workCount - this.lastCount) + "";
+                    this.stxt_speed.Text = (workCount - this.lastCount) + string.Empty;
                     this.lastCount = workCount;
                     this.stxt_threadStatus.Text = stp.InUseThreads + "/" + stp.Concurrency;
 
@@ -162,9 +162,9 @@ namespace C2.Business.Cracker.Dialogs
                     this.stxt_percent.Text = c + "%";
                     this.tools_proBar.Value = c;
                 }
-                this.stxt_crackerSuccessCount.Text = successCount + "";
-                this.stxt_useTime.Text = runTime + "";
-                this.tssl_notScanPortsSumCount.Text = this.scanPortsSumCount + "";
+                this.stxt_crackerSuccessCount.Text = successCount + string.Empty;
+                this.stxt_useTime.Text = runTime + string.Empty;
+                this.tssl_notScanPortsSumCount.Text = this.scanPortsSumCount + string.Empty;
             }
             catch (Exception e)
             {
@@ -593,7 +593,7 @@ namespace C2.Business.Cracker.Dialogs
         private Boolean InitDic()
         {
 
-            if ("".Equals(this.txt_target.Text))
+            if (string.IsNullOrEmpty(this.txt_target.Text))
             {
                 MessageBox.Show("请设置需要检查的目标的IP地址");
                 return false;
@@ -605,7 +605,7 @@ namespace C2.Business.Cracker.Dialogs
             }
             else
             {
-                if (!"".Equals(this.txt_target.Text))
+                if (!string.IsNullOrEmpty(this.txt_target.Text))
                 {
 
                     bool isTrue = Regex.IsMatch(this.txt_target.Text, "^([\\w\\-\\.]{1,100}[a-zA-Z]{1,8})$|^(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})$");

@@ -42,7 +42,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
 
             }
             catch { }
-            return "";
+            return string.Empty;
         }
     }
 }

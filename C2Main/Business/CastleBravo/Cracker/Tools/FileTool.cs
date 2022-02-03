@@ -44,7 +44,7 @@ namespace C2.Business.Cracker.Tools
 
                 while ((lineStr = reader.ReadLine()) != null)
                 {
-                    if (!lineStr.Equals(""))
+                    if (!string.IsNullOrEmpty(lineStr))
                     {
                         list.Add(lineStr);
                     }
@@ -119,7 +119,7 @@ namespace C2.Business.Cracker.Tools
             {
                 log(e.Message);
             }
-            return "";
+            return string.Empty;
         }
     }
 }

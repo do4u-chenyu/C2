@@ -15,7 +15,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
         {
             if (String.IsNullOrEmpty(contenType) && String.IsNullOrEmpty(body))
             {
-                return "";
+                return string.Empty;
             }
             body = body.ToUpper();
 
@@ -29,7 +29,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
             {
                 if (String.IsNullOrEmpty(body))
                 {
-                    return "";
+                    return string.Empty;
                 }
                 m = Regex.Match(body, @"charset=['""]{0,1}(?<charset>[\w\-]+)['""]{0,1}", RegexOptions.IgnoreCase);
                 if (m.Success)
@@ -268,7 +268,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
 
 
                 //读取服务器端返回的消息 
-                String encode = getHTMLEncoding(response.Headers["Content-Type"], "");
+                String encode = getHTMLEncoding(response.Headers["Content-Type"], string.Empty);
                 if (!String.IsNullOrEmpty(encode))
                 {
                     sr = new StreamReader(s, Encoding.GetEncoding(encode));

@@ -84,7 +84,7 @@ namespace C2.Business.CastleBravo.Intruder.Config
 
                 while ((lineStr = reader.ReadLine()) != null)
                 {
-                    if (!lineStr.Equals(""))
+                    if (!string.IsNullOrEmpty(lineStr))
                     {
                         contentList.Add(lineStr);
                         lineCount++;
