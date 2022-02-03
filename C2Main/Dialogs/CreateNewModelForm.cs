@@ -37,7 +37,7 @@ namespace C2.Dialogs
         {
             CheckName();
         }
-        public bool CheckNameWord(string inputModelTitle) 
+        public bool CheckNameExist(string inputModelTitle) 
         {
             NewFormType = FormType.DocumentForm;
             OpenDocuments = Global.GetMainForm().OpenedDocuments();
@@ -160,10 +160,11 @@ namespace C2.Dialogs
         }
 
         private List<string> GetModelTitleList()
-        {
+        {   
             List<string> titles = new List<string>();
             try
             {
+                // 暂时只有导入逻辑使用, 战术手册不支持导入,避免问题
                 DirectoryInfo di = new DirectoryInfo(Global.BusinessViewPath);
                 DirectoryInfo[] titleList = di.GetDirectories();
                 foreach (DirectoryInfo title in titleList)

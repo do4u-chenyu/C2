@@ -219,7 +219,7 @@ namespace C2.Controls.MapViews
             {
                 Topic topic = opw.Container as Topic;
                 string modelDocumentName = opw.ModelDataItem.FileName;
-                Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
+                Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, topic);
             }
         }
         void MenuDesignOp_DoubleClick(object sender, EventArgs e) 

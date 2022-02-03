@@ -109,10 +109,14 @@ namespace C2.Core
             return ret;
         }
 
-        public static string GetDocumentDirectory()
+        public static string GetDefaultDocumentDirectory()
         {
-            string val = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name);
-            return val;
+            DocumentForm ret = Global.GetDocumentForm();
+            if (ret.Description == "战术手册")
+                return Path.Combine(Global.ManualViewPath, ret.Document.Name);
+            if (ret.Description == "业务视图")
+                return Path.Combine(Global.BusinessViewPath, ret.Document.Name);
+            return string.Empty;
         }
 
         public static OperatorControl GetOperatorControl()

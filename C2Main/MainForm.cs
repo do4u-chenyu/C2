@@ -470,11 +470,11 @@ namespace C2
             ShowForm(form);
         }
 
-        public void NewCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
+        public void NewCanvasFormByMindMap(string modelDocumentName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, this.UserName)
             {
-                SavePath = Path.Combine(Global.BusinessViewPath, mindMapName, modelDocumentName)
+                SavePath = Path.Combine(Global.GetDefaultDocumentDirectory(), modelDocumentName)
             };
             CanvasForm form = new CanvasForm(doc, topic, Global.GetDocumentForm());
             ShowForm(form);
@@ -499,11 +499,11 @@ namespace C2
             Global.GetCanvasForm().Save();
         }
 
-        public void LoadCanvasFormByMindMap(string modelDocumentName, string mindMapName, Topic topic)
+        public void LoadCanvasFormByMindMap(string modelDocumentName, Topic topic)
         {
             ModelDocument doc = new ModelDocument(modelDocumentName, UserName)
             {
-                SavePath = Path.Combine(Global.BusinessViewPath, mindMapName, modelDocumentName)
+                SavePath = Path.Combine(Global.GetDefaultDocumentDirectory(), modelDocumentName)
             };
             CanvasForm form = new CanvasForm(doc, topic, Global.GetDocumentForm());
             ShowForm(form);
@@ -652,9 +652,9 @@ namespace C2
                 BaseDocumentForm form = new DocumentForm(doc)
                 {
                     ReadOnly = readOnly,
+                    Description = isManual ? "战术手册" : "业务试图",
+                    IconImage = isManual ? Properties.Resources.战术手册 : Properties.Resources.分析笔记1
                 };
-                if (isManual)
-                    form.IconImage = global::C2.Properties.Resources.战术手册;
                 ShowForm(form);
                 return form;
             }

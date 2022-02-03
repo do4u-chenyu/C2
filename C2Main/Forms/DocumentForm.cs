@@ -31,7 +31,7 @@ namespace C2.Forms
         DataTreeView objectTree2;
         ChartOverviewBox cob;
         TimerDialog MyTimerDialog;
-        ChartPageView.BaseChartPage _ActivedChartPage;
+        BaseChartPage _ActivedChartPage;
         List<PropertyBox> PropertyBoxies = new List<PropertyBox>();
         NormalPropertyBox _NormalPropertyBox;
         PropertyBox CurrentPropertyBox;
@@ -49,7 +49,9 @@ namespace C2.Forms
         List<ToolStripItem> CurrentChartBoxItems = new List<ToolStripItem>();
 
         public event EventHandler ReadOnlyChanged;
-        private C2.Dialogs.InputDataForm inputDataForm;
+        private InputDataForm inputDataForm;
+
+        public string Description { get; set; } = "业务视图";
 
         public DocumentForm()
         {
@@ -102,7 +104,7 @@ namespace C2.Forms
             }
         }
 
-        public ChartPageView.BaseChartPage ActivedChartPage
+        public BaseChartPage ActivedChartPage
         {
             get { return _ActivedChartPage; }
 
@@ -1177,7 +1179,7 @@ namespace C2.Forms
         //}
         private string GetModelPath()
         {
-            string modelPath = Path.Combine(Global.BusinessViewPath, Document.Name);
+            string modelPath = Path.Combine(Global.UserWorkspacePath, Description, Document.Name);
             if (!modelPath.EndsWith("\\"))
                 modelPath += "\\";
             return modelPath;
@@ -1185,7 +1187,7 @@ namespace C2.Forms
         public override bool Save()
         {
             string modelPath = GetModelPath();
-            string filePath = string.Join("", modelPath, Document.Name, ".bmd");
+            string filePath = string.Join(string.Empty, modelPath, Document.Name, ".bmd");
             Directory.CreateDirectory(modelPath);
 
             Filename = Document.FileName = filePath;     // bug-Fixed:这里文件名存在2个变量里，外层检查Form是否打开用的是Filename

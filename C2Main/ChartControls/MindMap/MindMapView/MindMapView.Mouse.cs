@@ -172,7 +172,7 @@ namespace C2.Controls.MapViews
 
             OperatorWidget opw = htr.Topic.FindWidget<OperatorWidget>();
             string modelDocumentName = createNewModelForm.ModelTitle;
-            string modelUserPath = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name);
+            string modelUserPath = Global.GetDefaultDocumentDirectory();
             string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
 
 

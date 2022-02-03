@@ -15,7 +15,7 @@ namespace C2.Controls.C1.Left
             this.contextMenuStrip.Items.Remove(DeleteToolStripMenuItem);
             this.toolTip1.SetToolTip(this.lelfPictureBox, "经典分析战术");
             this.lelfPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            this.lelfPictureBox.Image = global::C2.Properties.Resources.战术手册;
+            this.lelfPictureBox.Image = Properties.Resources.战术手册;
         }
 
 

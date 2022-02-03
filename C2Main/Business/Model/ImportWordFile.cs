@@ -100,7 +100,7 @@ namespace C2.Business.Model
             }   
             string name = Path.GetFileNameWithoutExtension(path);
             CreateNewModelForm createNewModelForm = new CreateNewModelForm();
-            if(createNewModelForm.CheckNameWord(name))
+            if(createNewModelForm.CheckNameExist(name))
                 return;
             C2.Model.Documents.Document doc = Global.GetMainForm().CreateNewMapForWord(name);
             doc.FileName = name;

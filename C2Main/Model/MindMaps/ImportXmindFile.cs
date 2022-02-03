@@ -43,7 +43,7 @@ namespace C2.Model.MindMaps
             string xmindName = Path.GetFileNameWithoutExtension(path);
             CreateNewModelForm createNewModelForm = new CreateNewModelForm();
             // 防止同名文件出现
-            if (createNewModelForm.CheckNameWord(xmindName))
+            if (createNewModelForm.CheckNameExist(xmindName))
                 return;
             tmpXmlFile = "C:\\c2"; //xmind临时存放地址
             tmpDir = Path.Combine(tmpXmlFile, xmindName);

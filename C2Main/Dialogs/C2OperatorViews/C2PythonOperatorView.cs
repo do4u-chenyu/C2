@@ -42,7 +42,7 @@ namespace C2.Dialogs.C2OperatorViews
             if (string.IsNullOrEmpty(oldOutFilePath))
             {
                 operatorWidget.OpName = operatorWidget.DataSourceItem.FileName + "-" + Lang._(operatorWidget.OpType.ToString());
-                string tmpOutFilePath = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name, String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
+                string tmpOutFilePath = Path.Combine(Global.GetDefaultDocumentDirectory(), String.Format("{0}_结果{1}.bcp", operatorWidget.OpName, DateTime.Now.ToString("yyyyMMdd_hhmmss")));
                 this.fullOutputFilePath = tmpOutFilePath;
                 this.operatorWidget.Option.SetOption("browseChosen", this.fullOutputFilePath);
                 this.browseChosenTextBox.Text = fullOutputFilePath;

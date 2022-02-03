@@ -161,7 +161,7 @@ namespace C2.Controls.MapViews
 
                 // 新建模型视图
                 string modelDocumentName = createNewModelForm.ModelTitle;
-                string modelUserPath = Path.Combine(Global.BusinessViewPath, Global.GetCurrentDocument().Name);
+                string modelUserPath = Global.GetDefaultDocumentDirectory();
                 string modelSavePath = Path.Combine(modelUserPath, modelDocumentName, modelDocumentName + ".xml");
                 DataItem modelDataItem = new DataItem(modelSavePath, modelDocumentName, '\t', OpUtil.Encoding.NoNeed, OpUtil.ExtType.Unknow);
 
@@ -185,7 +185,7 @@ namespace C2.Controls.MapViews
                 //新建模型前保存一次，防止出现用户一直未保存导致模型视图路径逻辑出错
                 Global.GetDocumentForm().Save();
 
-                Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, Global.GetCurrentDocument().Name, topic);
+                Global.GetMainForm().NewCanvasFormByMindMap(modelDocumentName, topic);
             }
         }
         public void AddAttachment()
