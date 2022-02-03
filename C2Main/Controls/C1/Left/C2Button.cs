@@ -90,7 +90,6 @@ namespace C2.Controls.Left
                 string password = zipDialog.Password;
                 if (Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
                     HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
-                FileUtil.DeleteDirectory(Path.Combine(Global.TempDirectory));
             }
         }
 

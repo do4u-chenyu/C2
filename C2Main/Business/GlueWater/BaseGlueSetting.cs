@@ -90,7 +90,7 @@ namespace C2.Business.GlueWater
             //return DealWebContent(excelPath) && DealMemberContent(excelPath);
             //先将压缩包解压到临时文件夹，防止解压失败时原模型文件被覆盖
             string tmpDir = Path.Combine(Global.TempDirectory, Path.GetFileNameWithoutExtension(zipPath));
-            FileUtil.DeleteDirectory(Global.TempDirectory);
+            FileUtil.DeleteDirectory(tmpDir);
             FileUtil.CreateDirectory(tmpDir);
             string errMsg = ZipUtil.UnZipFile(zipPath, tmpDir);
             if (!string.IsNullOrEmpty(errMsg))

@@ -10,10 +10,10 @@ namespace C2.Business.Model
 {
     public class ExportModel
     {
-        private string dataPath;                 //创建存储数据的_data文件夹
+        private string dataPath;         //创建存储数据的_data文件夹
         private string finallyName;
-        private string tmpModelPath;        //临时模型的路径（文件夹）
-        private string xmlFullPath;             //模型文件（.bmd .xml）原始路径
+        private string tmpModelPath;     //临时模型的路径（文件夹）
+        private string xmlFullPath;      //模型文件（.bmd .xml）原始路径
         private string newModelName;     //重命名后的模型名称
 
         public ExportModel()
@@ -52,7 +52,7 @@ namespace C2.Business.Model
                 HelpUtil.ShowMessageBox(error);
                 return false;
             }
-
+            FileUtil.DeleteDirectory(tmpModelPath);
             return true;
         }
 
@@ -212,11 +212,10 @@ namespace C2.Business.Model
 
         private bool CopyModelAndDataFiles(string exportFilePath, bool isC2Model)
         {
-            FileUtil.DeleteDirectory(Global.TempDirectory);
-
+            
             this.tmpModelPath = Path.Combine(exportFilePath, newModelName); //待压缩的文件先放入公共临时文件夹
             this.dataPath = Path.Combine(tmpModelPath, "_datas");// 创建存储数据的_data文件夹
-            FileUtil.CreateDirectory(this.tmpModelPath);
+            FileUtil.DeleteDirectory(this.tmpModelPath);
             FileUtil.CreateDirectory(this.dataPath);
 
             string destFileName;
