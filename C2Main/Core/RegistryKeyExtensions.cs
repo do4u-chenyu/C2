@@ -11,7 +11,7 @@ namespace C2.Core
     {
         public static object GetSubKeyDefaultValue(this RegistryKey regKey, string subKeyName)
         {
-            return GetSubKeyValue(regKey, subKeyName, "");
+            return GetSubKeyValue(regKey, subKeyName, string.Empty);
         }
 
         public static object GetSubKeyValue(this RegistryKey regKey, string subKeyName, string itemName)

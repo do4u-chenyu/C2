@@ -166,7 +166,7 @@ namespace C2.Dialogs
             {
                 this.portTextBox.Text = "5432" ;
                 this.userTextBox.Text =  "postgres";
-                this.passwordTextBox.Text =  "";
+                this.passwordTextBox.Text =  string.Empty;
                 //this.schemaTextBox.Text = "postgres";
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;

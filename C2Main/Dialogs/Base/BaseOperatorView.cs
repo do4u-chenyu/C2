@@ -135,7 +135,7 @@ namespace C2.Dialogs.Base
             comboBox.SelectedIndex = -1;
             comboBox.Tag = null;
             int count = nowColumns.Length;
-            if (comboBox.Text == "" || count == 0)
+            if (string.IsNullOrEmpty(comboBox.Text) || count == 0)
             {
                 comboBox.DroppedDown = false;
                 return;
