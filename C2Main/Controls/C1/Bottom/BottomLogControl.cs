@@ -35,7 +35,7 @@ namespace C2.Controls.Bottom
         }
         private void MenuItemClearAll_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = "";
+            this.textBox1.Text = string.Empty;
         }
 
         private void MenuItemSelectAll_Click(object sender, EventArgs e)

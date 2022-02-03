@@ -906,7 +906,7 @@ namespace C2.Business.Cracker.Dialogs
                 {
                     FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, System.IO.FileAccess.Write);
                     StreamWriter sw = new StreamWriter(fs);
-                    string columns = "";
+                    string columns = string.Empty;
                     foreach (ColumnHeader dc in this.list_lvw.Columns)
                     {
                         columns += ("\"" + dc.Text + "\",");

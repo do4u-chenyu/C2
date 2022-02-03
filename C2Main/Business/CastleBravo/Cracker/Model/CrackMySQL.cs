@@ -25,7 +25,7 @@ namespace C2.Business.Cracker.Model
             {
                 if (password.Equals("空"))
                 {
-                    password = "";
+                    password = string.Empty;
                 }
                 conn.ConnectionString = "server=" + ip + ";port=" + port + ";user id=" + username + ";password=" + password + ";pooling=true;ConnectionTimeout=" + timeOut;
 

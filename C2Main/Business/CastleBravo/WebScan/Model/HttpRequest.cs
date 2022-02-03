@@ -20,7 +20,7 @@ namespace C2.Business.CastleBravo.WebScan.Model
             }
             body = body.ToUpper();
 
-            String encode = "";
+            String encode = string.Empty;
             Match m = Regex.Match(contenType, @"charset=(?<charset>[\w\-]+)", RegexOptions.IgnoreCase);
             if (m.Success)
             {
@@ -221,7 +221,7 @@ namespace C2.Business.CastleBravo.WebScan.Model
 
         public static String getHTML(String url, int timeout)
         {
-            String html = "";
+            String html = string.Empty;
             HttpWebResponse response = null;
             StreamReader sr = null;
             HttpWebRequest request = null;

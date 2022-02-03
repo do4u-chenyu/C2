@@ -280,7 +280,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.richTextBoxResponse.ReadOnly = true;
             this.richTextBoxResponse.Size = new System.Drawing.Size(722, 254);
             this.richTextBoxResponse.TabIndex = 11;
-            this.richTextBoxResponse.Text = "";
+            this.richTextBoxResponse.Text = string.Empty;
             // 
             // tabPageHeaders
             // 
@@ -304,7 +304,7 @@ namespace C2.Business.IAOLab.PostAndGet
             this.richTextBoxHeaders.ReadOnly = true;
             this.richTextBoxHeaders.Size = new System.Drawing.Size(722, 254);
             this.richTextBoxHeaders.TabIndex = 0;
-            this.richTextBoxHeaders.Text = "";
+            this.richTextBoxHeaders.Text = string.Empty;
             // 
             // textBoxTime
             // 

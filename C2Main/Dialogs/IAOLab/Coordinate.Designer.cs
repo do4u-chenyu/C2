@@ -102,7 +102,7 @@
             this.inputAndResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.inputAndResult.Size = new System.Drawing.Size(618, 207);
             this.inputAndResult.TabIndex = 10;
-            this.inputAndResult.Text = "";
+            this.inputAndResult.Text = string.Empty;
             this.inputAndResult.WordWrap = false;
             // 
             // tip0
@@ -231,7 +231,7 @@
             this.inputAndResult1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.inputAndResult1.Size = new System.Drawing.Size(618, 256);
             this.inputAndResult1.TabIndex = 1;
-            this.inputAndResult1.Text = "";
+            this.inputAndResult1.Text = string.Empty;
             this.inputAndResult1.WordWrap = false;
             // 
             // tabPage3
@@ -289,7 +289,7 @@
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.richTextBox1.Size = new System.Drawing.Size(618, 207);
             this.richTextBox1.TabIndex = 11;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = string.Empty;
             this.richTextBox1.WordWrap = false;
             // 
             // tabPage4
@@ -347,7 +347,7 @@
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.richTextBox2.Size = new System.Drawing.Size(618, 207);
             this.richTextBox2.TabIndex = 11;
-            this.richTextBox2.Text = "";
+            this.richTextBox2.Text = string.Empty;
             this.richTextBox2.WordWrap = false;
             // 
             // panel3

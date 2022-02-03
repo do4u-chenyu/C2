@@ -662,7 +662,7 @@ namespace C2.Utils
                     for (int colIndex = 0; colIndex < row.Count; colIndex++)
                         newRow[colIndex] = row[colIndex];
                     for (int colIndex = row.Count; colIndex < maxNumOfCol; colIndex++)
-                        newRow[colIndex] = "";
+                        newRow[colIndex] = string.Empty;
                     table.Rows.Add(newRow);
                 }
 

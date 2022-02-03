@@ -13,12 +13,12 @@ namespace C2.Business.Cracker.Model
     {
         public long id = 0;
         public bool isSuccess = false;
-        public string banner = "";
-        public string ip = "";
-        public string serverName = "";
+        public string banner = string.Empty;
+        public string ip = string.Empty;
+        public string serverName = string.Empty;
         public int port = 0;
-        public string username = "";
-        public string password = "";
+        public string username = string.Empty;
+        public string password = string.Empty;
         public Boolean isDisConnected = false;
         public int timeout = 10;
         public AutoResetEvent isEndMRE = new AutoResetEvent(false);

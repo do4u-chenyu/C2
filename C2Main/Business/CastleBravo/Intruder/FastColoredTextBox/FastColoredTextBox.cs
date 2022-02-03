@@ -7657,7 +7657,7 @@ window.status = ""#print"";
             if (iLines.Count > 0)
                 IsChanged = true;
             if (LinesCount == 0)
-                Text = "";
+                Text = string.Empty;
             NeedRecalc();
             Invalidate();
         }
@@ -8380,9 +8380,9 @@ window.status = ""#print"";
         public PrintDialogSettings()
         {
             ShowPrintPreviewDialog = true;
-            Title = "";
-            Footer = "";
-            Header = "";
+            Title = string.Empty;
+            Footer = string.Empty;
+            Header = string.Empty;
         }
 
         public bool ShowPageSetupDialog { get; set; }

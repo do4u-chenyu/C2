@@ -9,7 +9,7 @@ namespace C2.Business.Cracker.rdp
     public class RdpClient : AxMsRdpClient7NotSafeForScripting
     {
         public Server server = null;
-        public String name = "";
+        public String name = string.Empty;
         public delegate void OnResponseDelegate(ResponseType type, RdpClient rdp, ref Server server);
         public event OnResponseDelegate OnResponse;
 

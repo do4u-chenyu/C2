@@ -326,7 +326,7 @@ namespace C2.Controls.Common
                 Rectangle rec = this.RectangleToScreen(this.ClientRectangle);
                 this.frmCheckList.Location = new Point(rec.X, rec.Y + this.pnlBack.Height);
                 this.frmCheckList.Show();
-                this.textBox1.Text = "";
+                this.textBox1.Text = string.Empty;
                 this.frmCheckList.BringToFront();
 
                 ReloationGrip();

@@ -79,11 +79,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
         private void ClearComBox() 
         {
             lonComboBox.Items.Clear();
-            lonComboBox.Text = "";
+            lonComboBox.Text = string.Empty;
             latComboBox.Items.Clear();
-            latComboBox.Text = "";
+            latComboBox.Text = string.Empty;
             countComboBox.Items.Clear();
-            countComboBox.Text = "";
+            countComboBox.Text = string.Empty;
 
         }
 

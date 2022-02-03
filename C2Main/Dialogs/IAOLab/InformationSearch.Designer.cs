@@ -206,7 +206,7 @@
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.richTextBox2.Size = new System.Drawing.Size(646, 207);
             this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.richTextBox2.Text = string.Empty;
             this.richTextBox2.WordWrap = false;
             // 
             // label19
@@ -276,7 +276,7 @@
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.richTextBox1.Size = new System.Drawing.Size(646, 207);
             this.richTextBox1.TabIndex = 13;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = string.Empty;
             this.richTextBox1.WordWrap = false;
             // 
             // tabControl1
@@ -347,7 +347,7 @@
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(646, 207);
             this.richTextBox3.TabIndex = 0;
-            this.richTextBox3.Text = "";
+            this.richTextBox3.Text = string.Empty;
             // 
             // tabPage9
             // 
@@ -413,7 +413,7 @@
             this.richTextBox4.Name = "richTextBox4";
             this.richTextBox4.Size = new System.Drawing.Size(646, 207);
             this.richTextBox4.TabIndex = 1;
-            this.richTextBox4.Text = "";
+            this.richTextBox4.Text = string.Empty;
             // 
             // tabPage1
             // 
@@ -448,7 +448,7 @@
             this.richTextBox5.Name = "richTextBox5";
             this.richTextBox5.Size = new System.Drawing.Size(646, 207);
             this.richTextBox5.TabIndex = 17;
-            this.richTextBox5.Text = "";
+            this.richTextBox5.Text = string.Empty;
             // 
             // label12
             // 

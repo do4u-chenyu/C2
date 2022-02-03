@@ -300,7 +300,7 @@
             this.txt_log.Name = "txt_log";
             this.txt_log.Size = new System.Drawing.Size(848, 207);
             this.txt_log.TabIndex = 1;
-            this.txt_log.Text = "";
+            this.txt_log.Text = string.Empty;
             // 
             // list_lvw
             // 

@@ -49,7 +49,7 @@ namespace C2.IAOLab.PhoneLocation
                 return "网络连接失败 ";
             }
             writer.Close();//关闭请求流
-                           // String strValue = "";//strValue为http响应所返回的字符流
+                           // String strValue = string.Empty;//strValue为http响应所返回的字符流
             HttpWebResponse response;
             try
             {

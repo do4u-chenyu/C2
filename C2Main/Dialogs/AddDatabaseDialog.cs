@@ -151,15 +151,15 @@ namespace C2.Dialogs
                 this.sidTextBox.Enabled = true;
                 this.schemaTextBox.Enabled = false;
                 this.sidTextBox.Text = "orcl";
-                this.schemaTextBox.Text = "";
+                this.schemaTextBox.Text = string.Empty;
                 this.serviceRadiobutton.Enabled = true;
                 this.sidRadiobutton.Enabled = true;
                 this.schemaLabel.Visible = false;
                 this.schemaTextBox.Visible = false;
                 this.serviceRadiobutton.Visible = true;
                 this.serviceTextBox.Visible = true;
-                this.userTextBox.Text = "";
-                this.passwordTextBox.Text = "";
+                this.userTextBox.Text = string.Empty;
+                this.passwordTextBox.Text = string.Empty;
             }
 
             if (databaseTypeComboBox.SelectedItem.ToString().Contains("PostgreSQL"))
@@ -171,7 +171,7 @@ namespace C2.Dialogs
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;
                 this.schemaTextBox.Enabled = true;
-                this.sidTextBox.Text = "";
+                this.sidTextBox.Text = string.Empty;
                 this.serviceRadiobutton.Enabled = false;
                 this.sidRadiobutton.Enabled = false;
                 this.schemaLabel.Visible = true;
@@ -186,11 +186,11 @@ namespace C2.Dialogs
                 this.serverTextBox.Text = "10.1.126.4";
                 this.userTextBox.Text = "None";
                 this.passwordTextBox.Text = "None";
-                this.schemaTextBox.Text = "";
+                this.schemaTextBox.Text = string.Empty;
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;
                 this.schemaTextBox.Enabled = false;
-                this.sidTextBox.Text = "";
+                this.sidTextBox.Text = string.Empty;
                 this.serviceRadiobutton.Enabled = false;
                 this.sidRadiobutton.Enabled = false;
                 this.serviceRadiobutton.Visible = true;
@@ -206,16 +206,16 @@ namespace C2.Dialogs
                 this.serviceTextBox.Enabled = false;
                 this.sidTextBox.Enabled = false;
                 this.schemaTextBox.Enabled = false;
-                this.sidTextBox.Text = "";//SID
-                this.serverTextBox.Text = "";//服务器
+                this.sidTextBox.Text = string.Empty;//SID
+                this.serverTextBox.Text = string.Empty;//服务器
                 this.serviceRadiobutton.Enabled = false;
                 this.sidRadiobutton.Enabled = false;
                 this.schemaLabel.Visible = false;
                 this.schemaTextBox.Visible = false;
                 this.serviceRadiobutton.Visible = true;
                 this.serviceTextBox.Visible = true;
-                this.userTextBox.Text = ""; //用户名
-                this.passwordTextBox.Text = "";//密码
+                this.userTextBox.Text = string.Empty; //用户名
+                this.passwordTextBox.Text = string.Empty;//密码
             }
 
         }

@@ -58,7 +58,7 @@ namespace C2.IAOLab.WifiMac
             //将请求参数写入流
             writer.Write(payload, 0, payload.Length);
             writer.Close();//关闭请求流
-                           // String strValue = "";//strValue为http响应所返回的字符流
+                           // String strValue = string.Empty;//strValue为http响应所返回的字符流
             HttpWebResponse response;
             try
             {

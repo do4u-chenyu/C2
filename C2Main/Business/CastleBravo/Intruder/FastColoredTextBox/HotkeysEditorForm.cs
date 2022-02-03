@@ -151,7 +151,7 @@ namespace FastColoredTextBoxNS
         {
             get
             {
-                var res = "";
+                var res = string.Empty;
                 if (Ctrl) res += "Ctrl + ";
                 if (Shift) res += "Shift + ";
                 if (Alt) res += "Alt + ";

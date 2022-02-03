@@ -266,7 +266,7 @@ namespace C2.IAOLab.WebEngine.Boss
             }
 
             if (c=="/") {
-                var comment = "";
+                var comment = string.Empty;
                 if (input[parser_pos]=='*') {
                     parser_pos++;
                     if (parser_pos<input.Length){
@@ -442,7 +442,7 @@ namespace C2.IAOLab.WebEngine.Boss
 
             
 
-            indent_string = "";
+            indent_string = string.Empty;
             
             while (opt_indent_size > 0) {
                 indent_string += opt_indent_char;
@@ -460,9 +460,9 @@ namespace C2.IAOLab.WebEngine.Boss
                 add_script_tags = true;
             }
 
-            last_word = ""; // last 'TK_WORD' passed
+            last_word = string.Empty; // last 'TK_WORD' passed
             last_type = "TK_START_EXPR"; // last token type
-            last_text = ""; // last token text
+            last_text = string.Empty; // last token text
             
             do_block_just_closed = false;
             var_line = false;         // currently drawing var .... ;

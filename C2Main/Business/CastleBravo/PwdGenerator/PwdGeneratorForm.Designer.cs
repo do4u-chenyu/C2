@@ -123,7 +123,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.tBName.Name = "tBName";
             this.tBName.Size = new System.Drawing.Size(170, 26);
             this.tBName.TabIndex = 1;
-            this.tBName.Tag = "";
+            this.tBName.Tag = string.Empty;
             this.tBName.Text = "姓名简拼";
             this.tBName.Enter += new System.EventHandler(this.Name_Click);
             // 

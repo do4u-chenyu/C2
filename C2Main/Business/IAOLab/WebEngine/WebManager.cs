@@ -26,7 +26,7 @@ namespace C2.IAOLab.WebEngine
         public Topic HitTopic;
         private WebBrowserDialog wbDialog;
         private string defaultMapUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
-        private string defaultBossUrl = "";
+        private string defaultBossUrl = string.Empty;
 
         public WebManager()
         {

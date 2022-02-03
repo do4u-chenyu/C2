@@ -398,7 +398,7 @@
             this.tBReqMess.Name = "tBReqMess";
             this.tBReqMess.Size = new System.Drawing.Size(741, 443);
             this.tBReqMess.TabIndex = 3;
-            this.tBReqMess.Text = "";
+            this.tBReqMess.Text = string.Empty;
             this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
             // 
             // TextBoxReferer
@@ -1016,7 +1016,7 @@
             this.requestHeaderTextBox.Name = "requestHeaderTextBox";
             this.requestHeaderTextBox.Size = new System.Drawing.Size(568, 292);
             this.requestHeaderTextBox.TabIndex = 0;
-            this.requestHeaderTextBox.Text = "";
+            this.requestHeaderTextBox.Text = string.Empty;
             // 
             // requestHeadersLV
             // 
@@ -1120,7 +1120,7 @@
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.Size = new System.Drawing.Size(502, 142);
             this.logTextBox.TabIndex = 3;
-            this.logTextBox.Text = "";
+            this.logTextBox.Text = string.Empty;
             // 
             // groupBox13
             // 
@@ -1411,7 +1411,7 @@
             this.fctb.TabIndex = 0;
             this.fctb.Zoom = 100;
 
-            this.fctb.AutoIndentCharsPatterns = "";
+            this.fctb.AutoIndentCharsPatterns = string.Empty;
             this.fctb.CommentPrefix = null;
             this.fctb.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fctb.ImeMode = System.Windows.Forms.ImeMode.On;

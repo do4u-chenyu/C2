@@ -18,7 +18,7 @@ namespace C2.Business.Cracker.Model
             Server server = new Server();
             if ("空".Equals(password))
             {
-                password = "";
+                password = string.Empty;
             }
             try
             {

@@ -47,7 +47,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(448, 332);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = string.Empty;
             // 
             // button1
             // 

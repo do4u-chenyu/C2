@@ -267,7 +267,7 @@ namespace FastColoredTextBoxNS
  
         public override string GetCSS()
         {
-            string result = "";
+            string result = string.Empty;
 
             if (BackgroundBrush is SolidBrush)
             {
@@ -444,7 +444,7 @@ namespace FastColoredTextBoxNS
 
         public override string GetCSS()
         {
-            string result = "";
+            string result = string.Empty;
 
             if (BackgroundBrush is SolidBrush)
             {

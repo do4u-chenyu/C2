@@ -162,7 +162,7 @@ namespace C2.Business.IAOLab.WebEngine.Boss.Charts.Visualization
                 if (chartOptions.Length == 2)
                 {
                     lengthList.Add(0);
-                    //secondList = "";
+                    //secondList = string.Empty;
                 }
                 else if (chartOptions.Length > 2)
                 {

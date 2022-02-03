@@ -29,7 +29,7 @@ namespace C2.Controls.DataCharts
             Chart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = false;
             Chart1.ChartAreas[0].AxisY.LabelStyle.Enabled = false;
             Legend legend4 = new Legend();
-            legend4.Title = "";
+            legend4.Title = string.Empty;
             legend4.TitleBackColor = Color.Transparent;
             legend4.BackColor = Color.Transparent;
             legend4.TitleForeColor = Color.White;

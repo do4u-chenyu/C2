@@ -505,7 +505,7 @@
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.Size = new System.Drawing.Size(959, 140);
             this.logTextBox.TabIndex = 0;
-            this.logTextBox.Text = "";
+            this.logTextBox.Text = string.Empty;
             // 
             // statusStrip1
             // 

@@ -21,7 +21,7 @@ namespace C2.Controls.DataCharts
             Chart1.ChartAreas[0].BackGradientStyle = GradientStyle.None;
             //图例样式
             Legend legend2 = new Legend("#VALX");
-            legend2.Title = "";
+            legend2.Title = string.Empty;
             legend2.TitleBackColor = Color.Transparent;
             legend2.BackColor = Color.Transparent;
             legend2.TitleForeColor = Color.White;

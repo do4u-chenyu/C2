@@ -113,7 +113,7 @@ namespace C2.Utils
                 return IPCheck(ip);
 
             string url = "http://whois.pconline.com.cn/jsFunction.jsp?callback=jsShow&ip=" + ip;
-            string result = "";
+            string result = string.Empty;
             WebRequest wrt = null;
             WebResponse wrp = null;
             try
@@ -151,7 +151,7 @@ namespace C2.Utils
                 return IPCheck(ip);
             
             string url = Global.IpUrl + ip;
-            string result = "";
+            string result = string.Empty;
             WebRequest wrt = null;
             WebResponse wrp = null;
             try
@@ -195,7 +195,7 @@ namespace C2.Utils
                 return IPCheck(ip);
 
             string url = "http://ip-api.com/json/" + ip + "?lang=zh-CN";
-            string result = "";
+            string result = string.Empty;
             WebRequest wrt = null;
             WebResponse wrp = null;
             try

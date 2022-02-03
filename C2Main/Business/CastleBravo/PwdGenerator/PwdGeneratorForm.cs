@@ -397,7 +397,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
            
             Clean(birthday);
 
-            //string t = "";
+            //string t = string.Empty;
         }
 
         private void QQ_KeyPress(object sender, KeyPressEventArgs e)

@@ -120,7 +120,7 @@ namespace C2.IAOLab.BankTool
         public string GetChinese(string str)
         {
             //声明存储结果的字符串
-            string chineseString = "";
+            string chineseString = string.Empty;
             //将传入参数中的中文字符添加到结果字符串中
             for (int i = 0; i < str.Length; i++)
             {

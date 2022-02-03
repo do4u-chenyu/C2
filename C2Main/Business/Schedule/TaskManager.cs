@@ -371,7 +371,7 @@ namespace C2.Business.Schedule
             List<string> cmds = new List<string>();
 
             int retryCount = 3;//最多重试次数
-            string errorMessage = "";
+            string errorMessage = string.Empty;
             bool isTaskMethodError = false;
             while (retryCount > 0)
             {

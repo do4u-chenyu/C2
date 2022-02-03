@@ -81,7 +81,7 @@
             this.wifiMacIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.wifiMacIR.Size = new System.Drawing.Size(587, 207);
             this.wifiMacIR.TabIndex = 0;
-            this.wifiMacIR.Text = "";
+            this.wifiMacIR.Text = string.Empty;
             this.wifiMacIR.WordWrap = false;
             // 
             // inputLabel
@@ -229,7 +229,7 @@
             this.baseStationIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.baseStationIR.Size = new System.Drawing.Size(587, 207);
             this.baseStationIR.TabIndex = 9;
-            this.baseStationIR.Text = "";
+            this.baseStationIR.Text = string.Empty;
             this.baseStationIR.WordWrap = false;
             // 
             // label4
@@ -278,7 +278,7 @@
             this.baseAddressIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.baseAddressIR.Size = new System.Drawing.Size(587, 207);
             this.baseAddressIR.TabIndex = 9;
-            this.baseAddressIR.Text = "";
+            this.baseAddressIR.Text = string.Empty;
             this.baseAddressIR.WordWrap = false;
             // 
             // label7
@@ -336,7 +336,7 @@
             this.IPStationIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.IPStationIR.Size = new System.Drawing.Size(587, 207);
             this.IPStationIR.TabIndex = 11;
-            this.IPStationIR.Text = "";
+            this.IPStationIR.Text = string.Empty;
             this.IPStationIR.WordWrap = false;
             // 
             // label12
@@ -394,7 +394,7 @@
             this.PhoneLocationIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.PhoneLocationIR.Size = new System.Drawing.Size(587, 207);
             this.PhoneLocationIR.TabIndex = 12;
-            this.PhoneLocationIR.Text = "";
+            this.PhoneLocationIR.Text = string.Empty;
             this.PhoneLocationIR.WordWrap = false;
             // 
             // label16
@@ -460,7 +460,7 @@
             this.bankCardIR.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bankCardIR.Size = new System.Drawing.Size(602, 207);
             this.bankCardIR.TabIndex = 15;
-            this.bankCardIR.Text = "";
+            this.bankCardIR.Text = string.Empty;
             this.bankCardIR.WordWrap = false;
             // 
             // WifiLocation

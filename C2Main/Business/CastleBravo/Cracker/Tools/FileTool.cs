@@ -73,7 +73,7 @@ namespace C2.Business.Cracker.Tools
         {
             return File.ReadAllText(path);
         }
-        public static object c = "";
+        public static object c = string.Empty;
         public static void AppendLogToFile(String path, String log)
         {
             lock (c)

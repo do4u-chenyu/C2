@@ -540,7 +540,7 @@ namespace C2.Business.CastleBravo.WebScan
                 {
                     FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, System.IO.FileAccess.Write);
                     StreamWriter sw = new StreamWriter(fs);
-                    string columns = "";
+                    string columns = string.Empty;
                     foreach (ColumnHeader dc in this.listView1.Columns)
                     {
                         columns += (dc.Text + "\t");

@@ -19,7 +19,7 @@ namespace C2.Business.Cracker.Tools
         public static String getSystemSid()
         {
 
-            String sid = "";
+            String sid = string.Empty;
             try
             {
                 //获得系统名称
@@ -48,7 +48,7 @@ namespace C2.Business.Cracker.Tools
             {
                 sid += "ex_";
             }
-            String mac = "";
+            String mac = string.Empty;
             try
             {
                 NetworkInterface[] fNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
@@ -111,7 +111,7 @@ namespace C2.Business.Cracker.Tools
         }
         public static String getHtml(String url, int timeout)
         {
-            String html = "";
+            String html = string.Empty;
             HttpWebResponse response = null;
             StreamReader sr = null;
             HttpWebRequest request = null;

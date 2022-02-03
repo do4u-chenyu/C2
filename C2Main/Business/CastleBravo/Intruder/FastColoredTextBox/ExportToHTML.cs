@@ -168,7 +168,7 @@ namespace FastColoredTextBoxNS
                 mask = mask << 1;
             }
             //add TextStyle css
-            string result = "";
+            string result = string.Empty;
             
             if (!hasTextStyle)
             {

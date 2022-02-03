@@ -330,7 +330,7 @@ namespace FastColoredTextBoxNS
 
             var s = sr.ReadLine();
             if (s == null)
-                s = "";
+                s = string.Empty;
 
             //call event handler
             if(LineNeeded!=null)
