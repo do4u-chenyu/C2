@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Aspose.Words.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using C2.Core;
 
 namespace C2.Model.MindMaps
 {
@@ -441,7 +442,7 @@ namespace C2.Model.MindMaps
                 imgNo = 0;//word中图片编号初始化
                 Document docx = new Document();
                 
-                string examplePath = Path.Combine(Application.StartupPath, "Resources", "Templates", "DocxExample.dotx");//获得模板样式
+                string examplePath = Path.Combine(Global.TemplatesPath, "DocxExample.dotx");//获得模板样式
                 if (!File.Exists(examplePath))
                 {
                     MessageBox.Show("word模板文件不存在", "ERROR");

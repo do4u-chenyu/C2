@@ -334,7 +334,7 @@ namespace C2
         private void LoadHotModel()
         {
 
-            string HotModelPath = Path.Combine(Application.StartupPath, "Resources\\Templates");
+            string HotModelPath = Global.TemplatesPath;
             string[] ModelFiles = Directory.GetFiles(HotModelPath, "*.iao");
             
             foreach (string file in ModelFiles)

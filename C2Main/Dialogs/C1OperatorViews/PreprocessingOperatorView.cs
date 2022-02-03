@@ -1,4 +1,5 @@
 ﻿using C2.Controls.Move.Op;
+using C2.Core;
 using C2.Dialogs.Base;
 using C2.Utils;
 using System;
@@ -17,8 +18,8 @@ namespace C2.OperatorViews
             InitializeComponent();
             InitializeDataSource();//初始化配置内容
             LoadOption();
-            fileSamplePath = Path.Combine(Application.StartupPath, "Resources", "Templates", "数据预处理文件模板.txt");
-            dirSamplePath = Path.Combine(Application.StartupPath, "Resources", "Templates", "数据预处理文件夹模板.txt");
+            fileSamplePath = Path.Combine(Global.TemplatesPath, "数据预处理文件模板.txt");
+            dirSamplePath = Path.Combine(Global.TemplatesPath, "数据预处理文件夹模板.txt");
         }
 
 

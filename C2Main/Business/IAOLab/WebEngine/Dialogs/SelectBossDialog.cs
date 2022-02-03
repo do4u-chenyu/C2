@@ -180,7 +180,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
             this.pictureBox1.Image = bossTypeDict[bossType.SelectedIndex];
             this.label19.Text = bossType.Text.Substring(bossType.Text.IndexOf("（") + 1, bossType.Text.IndexOf("）") - 1 - bossType.Text.IndexOf("（"));
-            this.WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", string.Format("BossIndex{0}.html", (bossType.SelectedIndex + 1).ToString()));
+            this.WebUrl = Path.Combine(Global.WebEnginePath, "Html", string.Format("BossIndex{0}.html", (bossType.SelectedIndex + 1).ToString()));
             ChangeConfigContent(selectBossTemplate);
         }
 

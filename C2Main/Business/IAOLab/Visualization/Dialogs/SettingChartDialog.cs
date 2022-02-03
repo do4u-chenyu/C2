@@ -3,17 +3,12 @@ using C2.Business.Option;
 using C2.Controls;
 using C2.Controls.Common;
 using C2.Core;
-using C2.IAOLab.WebEngine.Boss;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Business.IAOLab.Visualization.Dialogs
@@ -36,11 +31,11 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         public SettingChartDialog()
         {
             InitializeComponent();
-            WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html\\Visual.html");
+            WebUrl = Path.Combine(Global.WebEnginePath, "Html", "Visual.html");
             Options = new Dictionary<string, string[]>();
             this.styleComboBox.SelectedIndex = 0;
             this.chartType.SelectedIndex = 0;
-            chartTypeList = new List<string> { "Organization", "WordCloud","Graph"}; 
+            chartTypeList = new List<string> { "Organization", "WordCloud", "Graph"}; 
         }
 
         public SettingChartDialog(Dictionary<string, string[]> options, WebBrowser browser) : this()

@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using C2.Core;
 using C2.Model.Widgets;
 using C2.Utils;
 using NPOI.OpenXmlFormats.Dml;
@@ -200,7 +201,7 @@ namespace C2.Model.MindMaps
             try
             {
                 XWPFDocument DocxExample;
-                using (var dotStream = new FileStream(Path.Combine(Application.StartupPath, "Resources", "Templates", "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
+                using (var dotStream = new FileStream(Path.Combine(Global.TemplatesPath, "DocxExample.dotx"), FileMode.Open, FileAccess.Read))
                 {
 
                     DocxExample = new XWPFDocument(dotStream);

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using C2.Core;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,8 @@ namespace C2.Business.CastleBravo.RobotsScan
         //读取json文件
         public static JObject ReadJson()
         {
-            string jsonfile = Path.Combine(Application.StartupPath, "Resources/Templates/WebRobots.json"); 
-            using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
+            string jsonfile = Path.Combine(Global.TemplatesPath, "WebRobots.json"); 
+            using (System.IO.StreamReader file = File.OpenText(jsonfile))
             {
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {

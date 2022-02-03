@@ -7,8 +7,6 @@ using C2.Model.Widgets;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -414,7 +412,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 HideSourceCodeMap();
                 MapConfig.MapType = MapType.StartMap;
 
-                WebUrl = Path.Combine(Application.StartupPath, "Business\\IAOLab\\WebEngine\\Html", "StartMap.html");
+                WebUrl = Path.Combine(Global.WebEnginePath, "Html", "StartMap.html");
                 webBrowser1.Navigate(WebUrl);
 
                 LoadStartMapByConfig();

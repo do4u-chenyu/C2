@@ -15,9 +15,9 @@ namespace C2.Business.CastleBravo.WebShellTool
         //[DllImport("kernel32")]
         //private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
-        public static string UnlockFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig", "SuperPowerConfig.ini");//DD功能解锁文件地址
+        public static string UnlockFilePath = Path.Combine(Global.ResourcesPath, "WebShellConfig", "SuperPowerConfig.ini");//DD功能解锁文件地址
 
-        private static readonly string WebShellFilePath = Path.Combine(Application.StartupPath, "Resources", "WebShellConfig");
+        private static readonly string WebShellFilePath = Path.Combine(Global.ResourcesPath, "WebShellConfig");
         public static readonly Dictionary<string, Tuple<string, string>> WSDict = new Dictionary<string, Tuple<string, string>>
         {
             { "中国菜刀16_自定义版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini"),"Common") },

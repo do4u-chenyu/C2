@@ -588,7 +588,7 @@ namespace C2.Model.MindMaps
                 attachments.Count.ToString(),
                 attachmentTag + attachments.Count.ToString() + ".png",
                 attachments.Count.ToString() + ".png",
-                IsInternalImage(widget) ? Path.Combine(Application.StartupPath, "Resources", "PictureIconLib", widget.ImageUrl) : widget.ImageUrl
+                IsInternalImage(widget) ? Path.Combine(Global.ResourcesPath, "PictureIconLib", widget.ImageUrl) : widget.ImageUrl
                 );
 
             attachments.Add(attachment);
@@ -807,7 +807,7 @@ namespace C2.Model.MindMaps
                 attachments.Count.ToString(),
                 attachmentTag + attachments.Count.ToString(),
                 attachments.Count.ToString() + ".png",
-                IsInternalImage(widget) ? Path.Combine(Application.StartupPath, "Resources", "PictureIconLib", widget.ImageUrl) : widget.ImageUrl
+                IsInternalImage(widget) ? Path.Combine(Global.ResourcesPath, "PictureIconLib", widget.ImageUrl) : widget.ImageUrl
                 );
             attachments.Add(attachment);
             XmlElement xe = CreateElementWithNs("xhtml", "img");

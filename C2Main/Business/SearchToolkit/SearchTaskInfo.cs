@@ -122,7 +122,7 @@ namespace C2.SearchToolkit
             get
             {
                 String s = TaskScriptTable[TaskModel].Replace("_{0}", String.Empty);
-                return Path.Combine(Application.StartupPath, "Resources", "Script", "IAO_Search_gamble", s);
+                return Path.Combine(Global.ResourcesPath, "Script", "IAO_Search_gamble", s);
             }
         }
         private SearchTaskInfo() { }
