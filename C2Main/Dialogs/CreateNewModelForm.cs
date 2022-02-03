@@ -165,7 +165,7 @@ namespace C2.Dialogs
             try
             {
                 // 暂时只有导入逻辑使用, 战术手册不支持导入,避免问题
-                DirectoryInfo di = new DirectoryInfo(Global.BusinessViewPath);
+                DirectoryInfo di = new DirectoryInfo(Global.MindMapViewPath);
                 DirectoryInfo[] titleList = di.GetDirectories();
                 foreach (DirectoryInfo title in titleList)
                     titles.Add(title.ToString());

@@ -21,7 +21,7 @@ namespace C2.Controls.Left
         {
             this.textButton.Text = modelTitle;
             this.toolTip1.SetToolTip(this.textButton, ModelTitle);
-            FullFilePath = Path.Combine(Global.BusinessViewPath, ModelTitle, ModelTitle + ".bmd");
+            FullFilePath = Path.Combine(Global.MindMapViewPath, ModelTitle, ModelTitle + ".bmd");
             this.desc = "分析笔记";
         }
 

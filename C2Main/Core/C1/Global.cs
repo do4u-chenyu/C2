@@ -35,6 +35,12 @@ namespace C2.Core
         private static IAOLabControl iaoLabControl;
         private static IAOLabControl HIBUControl;
 
+        public const string ModelDesc = "聚沙成塔";
+        public const string ManualDesc = "战术手册";
+        public const string MindMapDesc = "业务视图";
+        public const string SearchDesc = "全文工具箱";
+        
+
 
 
         public static string GetUsername() { return "IAO"; }
@@ -112,10 +118,10 @@ namespace C2.Core
         public static string GetDefaultDocumentDirectory()
         {
             DocumentForm ret = Global.GetDocumentForm();
-            if (ret.Description == "战术手册")
+            if (ret.Description == ManualDesc)
                 return Path.Combine(Global.ManualViewPath, ret.Document.Name);
-            if (ret.Description == "业务视图")
-                return Path.Combine(Global.BusinessViewPath, ret.Document.Name);
+            if (ret.Description == MindMapDesc)
+                return Path.Combine(Global.MindMapViewPath, ret.Document.Name);
             return string.Empty;
         }
 
@@ -166,10 +172,10 @@ namespace C2.Core
         public static void SetManualControl(ManualControl mc) { manualControl = mc; }
         public static string WorkspaceDirectory { get; set; } = @"C:\FiberHomeIAOModelDocument"; // 用户空间根目录
         public static string UserWorkspacePath { get => Path.Combine(WorkspaceDirectory, GetUsername()); }
-        public static string ManualViewPath { get => Path.Combine(UserWorkspacePath, "战术手册"); }
-        public static string BusinessViewPath { get => Path.Combine(UserWorkspacePath, "业务视图"); }
-        public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, "聚沙成塔"); }
-        public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, "全文工具箱"); }
+        public static string ManualViewPath { get => Path.Combine(UserWorkspacePath, ManualDesc); }
+        public static string MindMapViewPath { get => Path.Combine(UserWorkspacePath, MindMapDesc); }
+        public static string MarketViewPath { get => Path.Combine(UserWorkspacePath, ModelDesc); }
+        public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, SearchDesc); }
         public static string TempDirectory { get; set; }
         public const float Factor = 1.3F;
 

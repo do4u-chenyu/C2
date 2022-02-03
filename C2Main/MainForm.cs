@@ -347,7 +347,7 @@ namespace C2
         private void LoadDocuments()
         {
             // 将用户本地保存的模型文档加载到左侧myModelControl	
-            string[] bsTitles = ModelInfo.LoadAllModelTitle(Global.BusinessViewPath);
+            string[] bsTitles = ModelInfo.LoadAllModelTitle(Global.MindMapViewPath);
             string[] mtTitles = ModelInfo.LoadAllModelTitle(Global.MarketViewPath);
             string[] mvTitles = ModelInfo.LoadAllModelTitle(Global.ManualViewPath);
 
@@ -652,7 +652,7 @@ namespace C2
                 BaseDocumentForm form = new DocumentForm(doc)
                 {
                     ReadOnly = readOnly,
-                    Description = isManual ? "战术手册" : "业务试图",
+                    Description = isManual ? Global.ManualDesc : Global.MindMapDesc,
                     IconImage = isManual ? Properties.Resources.战术手册 : Properties.Resources.分析笔记1
                 };
                 ShowForm(form);

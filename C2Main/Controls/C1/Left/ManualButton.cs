@@ -11,7 +11,7 @@ namespace C2.Controls.C1.Left
         public ManualButton(string c2Title) : base(c2Title)
         {
             FullFilePath = Path.Combine(Global.ManualViewPath, ModelTitle, ModelTitle + ".bmd");
-            this.desc = "战术手册";
+            this.desc = Global.ManualDesc;
             this.contextMenuStrip.Items.Remove(DeleteToolStripMenuItem);
             this.toolTip1.SetToolTip(this.lelfPictureBox, "经典分析战术");
             this.lelfPictureBox.SizeMode = PictureBoxSizeMode.Zoom;

@@ -175,7 +175,7 @@ namespace C2.Business.Model
             string errMsg; 
             string tmpDir;
             string fileExtension = isC2Model ? ".bmd" : ".xml";
-            string fileParentDir = isC2Model ? "业务视图" : "聚沙成塔";
+            string fileParentDir = isC2Model ? Global.MindMapDesc : Global.ModelDesc;
             DialogResult result;
             ZipInputStream s = null;
             try

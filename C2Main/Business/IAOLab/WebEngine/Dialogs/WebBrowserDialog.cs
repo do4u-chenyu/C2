@@ -504,8 +504,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
         {
             ClearOverlap();
             this.MapConfig.SourceCode = this.htmlEditorControlEx1.Text;
-            string tempDir = FileUtil.TryGetSysTempDir();
-            Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
+            //string tempDir = FileUtil.TryGetSysTempDir();
+            //Global.TempDirectory = Path.Combine(tempDir, "FiberHomeIAOTemp");
             string tmpHtmlFilePath = Path.Combine(Global.TempDirectory, "editorMap.html");
             if (File.Exists(tmpHtmlFilePath))
                 File.Delete(tmpHtmlFilePath);

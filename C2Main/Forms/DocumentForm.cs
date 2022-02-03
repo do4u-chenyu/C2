@@ -51,7 +51,7 @@ namespace C2.Forms
         public event EventHandler ReadOnlyChanged;
         private InputDataForm inputDataForm;
 
-        public string Description { get; set; } = "业务视图";
+        public string Description { get; set; } = Global.MindMapDesc;
 
         public DocumentForm()
         {
