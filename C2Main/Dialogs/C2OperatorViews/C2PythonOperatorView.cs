@@ -59,7 +59,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.previewTextList[0] = GetVirtualMachinFullPath(this.pythonChosenComboBox.Text);
             this.previewTextList[1] = this.pyFullFilePathTextBox.Text;
             this.previewTextList[2] = this.pyParamTextBox.Text;
-            this.previewCmdText.Text = string.Join(" ", this.previewTextList);
+            this.previewCmdText.Text = string.Join(OpUtil.StringBlank, this.previewTextList);
         }
         #endregion
 
@@ -83,7 +83,7 @@ namespace C2.Dialogs.C2OperatorViews
             this.operatorWidget.Option.SetOption("outputSeparator", outputSeparator);
             this.operatorWidget.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
-            this.operatorWidget.Option.SetOption("cmd", String.Join(" ", this.previewTextList));
+            this.operatorWidget.Option.SetOption("cmd", String.Join(OpUtil.StringBlank, this.previewTextList));
         }
 
         private void LoadOption()
@@ -268,7 +268,7 @@ namespace C2.Dialogs.C2OperatorViews
 
         private void UpdatePreviewText()
         {
-            this.previewCmdText.Text = String.Join(" ", this.previewTextList);
+            this.previewCmdText.Text = String.Join(OpUtil.StringBlank, this.previewTextList);
         }
         #endregion
 

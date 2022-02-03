@@ -9,6 +9,7 @@ using Aspose.Words.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using C2.Core;
+using C2.Utils;
 
 namespace C2.Model.MindMaps
 {
@@ -214,7 +215,7 @@ namespace C2.Model.MindMaps
                         string name = Path.GetFileName(path);
                         olePackage.FileName = string.Format("dataSource{0}.{1}{2}", layer, i, Path.GetExtension(path));
                         i++;
-                        builder.Write(" ");
+                        builder.Write(OpUtil.StringBlank);
                     }
                 }
                 catch (Exception ex)
@@ -260,7 +261,7 @@ namespace C2.Model.MindMaps
                         string name = Path.GetFileName(path);
                         olePackage.FileName = string.Format("{0}.{1}{2}",layer,i, Path.GetExtension(path));
                         i++;
-                        builder.Write(" ");
+                        builder.Write(OpUtil.StringBlank);
                     }
                 }
                 catch(Exception ex)

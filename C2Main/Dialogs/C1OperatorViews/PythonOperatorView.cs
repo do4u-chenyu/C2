@@ -66,7 +66,7 @@ namespace C2.Dialogs
             //this.previewTextList[3] = previewInput;
             //string previewOutput = GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" ? this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text : GetControlRadioName(this.outputFileSettingTab) == "stdoutRadioButton" ? " > " + this.fullOutputFilePath : "";
             //this.previewTextList[4] = previewOutput;
-            this.previewCmdText.Text = string.Join(" ", this.previewTextList);
+            this.previewCmdText.Text = string.Join(OpUtil.StringBlank, this.previewTextList);
         }
         #endregion
 
@@ -90,7 +90,7 @@ namespace C2.Dialogs
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
-            this.opControl.Option.SetOption("cmd", String.Join(" ", this.previewTextList));
+            this.opControl.Option.SetOption("cmd", String.Join(OpUtil.StringBlank, this.previewTextList));
             //更新子图所有节点状态
             UpdateSubGraphStatus();
         }
@@ -316,7 +316,7 @@ namespace C2.Dialogs
 
         private void UpdatePreviewText()
         {
-            this.previewCmdText.Text = String.Join(" ", this.previewTextList);
+            this.previewCmdText.Text = String.Join(OpUtil.StringBlank, this.previewTextList);
         }
         #endregion
 

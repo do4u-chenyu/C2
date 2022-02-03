@@ -249,7 +249,7 @@ namespace C2.Dialogs
             // 特殊字符判断
             if (value.IndexOfAny(IllegalCharacter) != -1)
             {
-                dataGridView.Rows[e.RowIndex].ErrorText = "别名不能含有特殊字符 " + String.Join(" ", IllegalCharacter);
+                dataGridView.Rows[e.RowIndex].ErrorText = "别名不能含有特殊字符 " + String.Join(OpUtil.StringBlank, IllegalCharacter);
                 e.Cancel = true;
                 return;
             }

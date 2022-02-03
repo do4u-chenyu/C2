@@ -147,7 +147,6 @@ namespace C2.OperatorViews
         private const string defaultInfo = "发生未知的原因，关键词组合失败，检查您的关键词输入是否有问题";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
         private const string blankKeyColInfo = "当前尚未指定关键词列";
-        private const string blankSpace = " ";
         private readonly List<string> datas = new List<string>();
 
         public string KeywordPreView(string keywordFile,
@@ -157,7 +156,7 @@ namespace C2.OperatorViews
                                      string encoding)
         {
             string result = String.Empty;
-            if (separator.Equals(blankSpace))
+            if (separator.Equals(OpUtil.StringBlank))
             {
                 
                 return blankSpaceSepInfo;
