@@ -359,8 +359,10 @@ namespace FastColoredTextBoxNS
             XmlNode brackets = doc.SelectSingleNode("doc/brackets");
             if (brackets != null)
             {
-                if (brackets.Attributes["left"] == null || brackets.Attributes["right"] == null ||
-                    brackets.Attributes["left"].Value == "" || brackets.Attributes["right"].Value == "")
+                if (brackets.Attributes["left"] == null || 
+                    brackets.Attributes["right"] == null ||
+                   string.IsNullOrEmpty(brackets.Attributes["left"].Value) ||
+                   string.IsNullOrEmpty(brackets.Attributes["right"].Value))
                 {
                     desc.leftBracket = '\x0';
                     desc.rightBracket = '\x0';
@@ -371,8 +373,10 @@ namespace FastColoredTextBoxNS
                     desc.rightBracket = brackets.Attributes["right"].Value[0];
                 }
 
-                if (brackets.Attributes["left2"] == null || brackets.Attributes["right2"] == null ||
-                    brackets.Attributes["left2"].Value == "" || brackets.Attributes["right2"].Value == "")
+                if (brackets.Attributes["left2"] == null ||
+                    brackets.Attributes["right2"] == null ||
+                    string.IsNullOrEmpty(brackets.Attributes["left2"].Value)|| 
+                    string.IsNullOrEmpty(brackets.Attributes["right2"].Value))
                 {
                     desc.leftBracket2 = '\x0';
                     desc.rightBracket2 = '\x0';
@@ -383,7 +387,7 @@ namespace FastColoredTextBoxNS
                     desc.rightBracket2 = brackets.Attributes["right2"].Value[0];
                 }
 
-                if (brackets.Attributes["strategy"] == null || brackets.Attributes["strategy"].Value == "")
+                if (brackets.Attributes["strategy"] == null || string.IsNullOrEmpty(brackets.Attributes["strategy"].Value))
                     desc.bracketsHighlightStrategy = BracketsHighlightStrategy.Strategy2;
                 else
                     desc.bracketsHighlightStrategy = (BracketsHighlightStrategy)Enum.Parse(typeof(BracketsHighlightStrategy), brackets.Attributes["strategy"].Value);

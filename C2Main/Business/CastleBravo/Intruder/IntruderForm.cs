@@ -72,7 +72,7 @@ namespace C2.Business.CastleBravo.Intruder
             {
                 dictCount++;
 
-                ListViewItem lvi = new ListViewItem(dictCount + "");
+                ListViewItem lvi = new ListViewItem(dictCount.ToString());
                 lvi.Tag = Path.GetFileName(dictPath);
                 lvi.SubItems.Add(Path.GetFileName(dictPath));
                 lvi.SubItems.Add(config.GetFileLines(dictPath, this.dictContent));
@@ -114,7 +114,7 @@ hbapass=111111";
 
             if (tBReqMess.Text.Contains("Host")) 
             {
-                var address = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host:", "").Trim();
+                var address = Array.Find(lines, line => line.IndexOf("Host") != -1).Replace("Host:", string.Empty).Trim();
                 if (address.Contains(":"))
                 {
                     textBoxUrl.Text = address.Split(':')[0];
@@ -129,7 +129,7 @@ hbapass=111111";
 
             if (tBReqMess.Text.Contains("Referer"))
             {
-                var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", "").Trim();
+                var referer = Array.Find(lines, line => line.IndexOf("Referer") != -1).Replace("Host:", string.Empty).Trim();
                 TextBoxReferer.Text = referer.Substring(referer.IndexOf(':') + 1);
             }
 
@@ -139,7 +139,7 @@ hbapass=111111";
                 tBReqMessSetting(tBReqMess.Text.LastIndexOf("\n") + 1, tBReqMess.Text.LastIndexOf("=") - tBReqMess.Text.LastIndexOf("\n") - 1, Color.Blue);
                 if(!tBReqMess.Text.Contains("§"))
                     tBReqMessSetting(tBReqMess.Text.LastIndexOf("=") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Red);
-                tBReqMessSetting(tBReqMess.Text.LastIndexOf("") + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
+                tBReqMessSetting(tBReqMess.Text.LastIndexOf(string.Empty) + 1, tBReqMess.Text.Length - tBReqMess.Text.LastIndexOf("=") - 1, Color.Black);
             }
         }
 
@@ -267,11 +267,11 @@ hbapass=111111";
 
         private void ScanReferer(ServerInfo svinfo)
         {
-            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut,config.keeAlive,lastLine.Replace("§", ""));
+            ServerInfo result = HttpRequest.SendRequestGetBody(config, svinfo.url, config.TimeOut,config.keeAlive,lastLine.Replace("§", string.Empty));
 
             if (result.code != 0)
             {
-                svinfo.password = (lastLine.Split('=')[1]).Replace("§", "");//密码
+                svinfo.password = (lastLine.Split('=')[1]).Replace("§", string.Empty);//密码
                 svinfo.code = result.code;//状态码
                 svinfo.ip = tools.GetIP(svinfo.host);
                 svinfo.contentType = result.contentType;
@@ -295,7 +295,7 @@ hbapass=111111";
                 return;
             }
 
-            ListViewItem lvi = new ListViewItem(svinfo.id + "");//序号
+            ListViewItem lvi = new ListViewItem(svinfo.id.ToString());//序号
             lvi.Tag = svinfo.type;
             lvi.SubItems.Add(svinfo.password);//密码值
             lvi.SubItems.Add(svinfo.code + "");//状态码

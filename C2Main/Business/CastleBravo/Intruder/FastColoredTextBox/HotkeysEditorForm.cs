@@ -60,7 +60,7 @@ namespace FastColoredTextBoxNS
         {
             var cell = (dgv[0, e.RowIndex] as DataGridViewComboBoxCell);
             if(cell.Items.Count == 0)
-            foreach(var item in new string[]{"", "Ctrl", "Ctrl + Shift", "Ctrl + Alt", "Shift", "Shift + Alt", "Alt", "Ctrl + Shift + Alt"})
+            foreach(var item in new string[]{string.Empty, "Ctrl", "Ctrl + Shift", "Ctrl + Alt", "Shift", "Shift + Alt", "Alt", "Ctrl + Shift + Alt"})
                 cell.Items.Add(item);
 
             cell = (dgv[1, e.RowIndex] as DataGridViewComboBoxCell);

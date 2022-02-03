@@ -3476,7 +3476,7 @@ namespace FastColoredTextBoxNS
                     break;
 
                 case FCTBAction.FindNext:
-                    if (findForm == null || findForm.tbFind.Text == "")
+                    if (findForm == null || string.IsNullOrEmpty(findForm.tbFind.Text))
                         ShowFindDialog();
                     else
                         findForm.FindNext(findForm.tbFind.Text);
@@ -4450,7 +4450,7 @@ namespace FastColoredTextBoxNS
             else
                 if (Selection.IsEmpty)
                 {
-                    InsertText(left + "" + right);
+                    InsertText(left + string.Empty + right);
                     Selection.GoLeft();
                 }
                 else
@@ -4559,7 +4559,7 @@ namespace FastColoredTextBoxNS
             int i;
             for (i = iLine - 1; i >= 0; i--)
             {
-                var args = new AutoIndentEventArgs(i, lines[i].Text, i > 0 ? lines[i - 1].Text : "", TabLength, 0);
+                var args = new AutoIndentEventArgs(i, lines[i].Text, i > 0 ? lines[i - 1].Text : string.Empty, TabLength, 0);
                 calculator(this, args);
                 stack.Push(args);
                 if (args.Shift == 0 && args.AbsoluteIndentation == 0 && !string.IsNullOrEmpty(args.LineText.Trim()))
@@ -4575,7 +4575,7 @@ namespace FastColoredTextBoxNS
                     indent += arg.ShiftNextLines;
             }
             //clalc shift for current line
-            var a = new AutoIndentEventArgs(iLine, lines[iLine].Text, iLine > 0 ? lines[iLine - 1].Text : "", TabLength, indent);
+            var a = new AutoIndentEventArgs(iLine, lines[iLine].Text, iLine > 0 ? lines[iLine - 1].Text : string.Empty, TabLength, indent);
             calculator(this, a);
             needSpaces = a.AbsoluteIndentation + a.Shift;
 
