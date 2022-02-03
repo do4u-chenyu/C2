@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Drawing;
 using System.Drawing.Printing;
 
@@ -161,7 +162,7 @@ namespace FastColoredTextBoxNS
 
         public override string ToString()
         {
-            return MenuText ?? Text.Replace("\n", " ").Replace("^", string.Empty);
+            return MenuText ?? Text.Replace("\n", OpUtil.StringBlank).Replace("^", string.Empty);
         }
 
         public override string GetTextForReplace()

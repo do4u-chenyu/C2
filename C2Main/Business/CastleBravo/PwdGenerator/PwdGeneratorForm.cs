@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using C2.Utils;
 
 namespace C2.Business.CastleBravo.PwdGenerator
 {
@@ -291,7 +292,7 @@ namespace C2.Business.CastleBravo.PwdGenerator
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if(tBName.Text == "姓名简拼" || tBName.Text == string.Empty || tBName.Text.Substring(0,1) ==" ") 
+            if(tBName.Text == "姓名简拼" || tBName.Text == string.Empty || tBName.Text.Substring(0,1) == OpUtil.StringBlank) 
             {
                 MessageBox.Show("请输入姓名简拼");
                 return;

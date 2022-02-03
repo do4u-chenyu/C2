@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -186,9 +187,9 @@ namespace C2.Business.CastleBravo.Intruder.Config
                     res.code = (int)(response.StatusCode);
                     res.content = response.Headers.ToString();
                     if(!res.content.Contains("Connection"))
-                        res.responseHeaders = ("HTTP / 1.1" + " " + res.code + "\n" + "Connection: close" + "\n" + res.content);
+                        res.responseHeaders = ("HTTP / 1.1" + OpUtil.StringBlank + res.code + "\n" + "Connection: close" + "\n" + res.content);
                     else
-                        res.responseHeaders = ("HTTP / 1.1" + " " + res.code + "\n" + res.content);
+                        res.responseHeaders = ("HTTP / 1.1" + OpUtil.StringBlank + res.code + "\n" + res.content);
                     res.contentType = response.ContentType;
                     res.powerBy = response.Headers["powerby"];
                     res.location = response.Headers["location"];

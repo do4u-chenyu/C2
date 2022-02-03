@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using C2.Utils;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -90,7 +91,7 @@ namespace C2.Business.GlueWater
             }
 
             textBox1.Text = topic;
-            textBox2.Text = " " + " " + postInfo;
+            textBox2.Text = OpUtil.StringBlank + OpUtil.StringBlank + postInfo;
         }
 
         public void deatilGridView()
@@ -105,7 +106,7 @@ namespace C2.Business.GlueWater
             foreach (string i in sArray)
             {
                 string nickname = i.Split(' ')[0].Replace("[", "");
-                try {time = i.Split(' ')[2] + " " + i.Split(' ')[3].Split(',')[0]; } catch {time = i.Split(' ')[2].Split(',')[0];};
+                try {time = i.Split(' ')[2] + OpUtil.StringBlank + i.Split(' ')[3].Split(',')[0]; } catch {time = i.Split(' ')[2].Split(',')[0];};
                 
                 //string replyContent = i.Split(' ')[3].Substring(9).Trim();
                 string replyContent = i.Substring(i.IndexOf(',') + 1).Trim();

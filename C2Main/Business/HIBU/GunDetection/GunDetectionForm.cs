@@ -182,10 +182,10 @@ namespace C2.Business.HIBU.GunDetection
                 data = data.ToString().Replace(@"\","").Replace(@"""", "").Replace("'[","[").Replace("]'", "]");
                 data = "[" + data + "]";
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                string box = ja[0]["boxes"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string box = ja[0]["boxes"].ToString().Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
                 string boxes = box =="[]" ?string.Empty:box;
-                string confidence = ja[0]["confidence"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
-                string categories = ja[0]["categories"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string confidence = ja[0]["confidence"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
+                string categories = ja[0]["categories"].ToString().Replace("[", "").Replace("]", "").Replace(@"""", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
                 resultList.Add(boxes);
                 resultList.Add(confidence);
                 resultList.Add(categories);
@@ -230,14 +230,14 @@ namespace C2.Business.HIBU.GunDetection
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "图片位置" + " " + "准确率" + " " + "种类" + "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "图片位置" + OpUtil.StringBlank + "准确率" + OpUtil.StringBlank + "种类" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString() + " " + row.Cells[3].Value.ToString() + "\r\n");
+                        sw.Write(row.Cells[0].Value.ToString() + OpUtil.StringBlank + row.Cells[1].Value.ToString() + OpUtil.StringBlank + row.Cells[2].Value.ToString() + OpUtil.StringBlank + row.Cells[3].Value.ToString() + "\r\n");
                     }
                 }
                 if (sw != null)

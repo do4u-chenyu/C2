@@ -200,7 +200,7 @@ namespace C2.Business.HIBU.QRCode
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + " " + "解析地址" + "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "解析地址" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)

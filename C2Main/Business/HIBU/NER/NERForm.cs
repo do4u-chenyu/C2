@@ -187,11 +187,11 @@ namespace C2.Business.HIBU.NER
             try
             {
                 JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                string location = ja[0]["LOC"].ToString().Replace("[", "").Replace("]", "").Replace('"', ' ').Replace(",", "").Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string location = ja[0]["LOC"].ToString().Replace("[", "").Replace("]", "").Replace('"', ' ').Replace(",", "").Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
                  //location = System.Text.RegularExpressions.Regex.Replace(location, @"\d", "");
-                string orgazation = ja[0]["ORG"].ToString().Replace('[', ' ').Replace(']', ' ').Replace('"', ' ').Replace(',', ' ').Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string orgazation = ja[0]["ORG"].ToString().Replace('[', ' ').Replace(']', ' ').Replace('"', ' ').Replace(',', ' ').Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
                 //orgazation = System.Text.RegularExpressions.Regex.Replace(orgazation, @"\d", "");
-                string person = ja[0]["PER"].ToString().Replace('[', ' ').Replace(']', ' ').Replace(',', ' ').Replace('"', ' ').Replace("\n", "").Replace("\r", "").Replace(" ", "");
+                string person = ja[0]["PER"].ToString().Replace('[', ' ').Replace(']', ' ').Replace(',', ' ').Replace('"', ' ').Replace("\n", "").Replace("\r", "").Replace(OpUtil.StringBlank, "");
                 //person = System.Text.RegularExpressions.Regex.Replace(person, @"\d", "");
                 resultList.Add(location);
                 resultList.Add(orgazation);
@@ -238,14 +238,14 @@ namespace C2.Business.HIBU.NER
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path,true);
-            sw.Write("文件名称" + " " + "地址" + " " + "机构" + " " + "姓名" + "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "地址" + OpUtil.StringBlank + "机构" + OpUtil.StringBlank + "姓名" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() + " "+ row.Cells[2].Value.ToString()+" "+ row.Cells[3].Value.ToString()+ "\r\n");
+                        sw.Write(row.Cells[0].Value.ToString() + OpUtil.StringBlank + row.Cells[1].Value.ToString() + OpUtil.StringBlank + row.Cells[2].Value.ToString()+ OpUtil.StringBlank + row.Cells[3].Value.ToString()+ "\r\n");
                     }
                 }
                 if (sw != null)

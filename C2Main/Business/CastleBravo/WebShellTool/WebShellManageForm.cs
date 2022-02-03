@@ -663,7 +663,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 {
                     tmpLists.Clear();
                     for (int i = 0; i < lvi.SubItems.Count; i++)
-                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", " "));
+                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", OpUtil.StringBlank));
                     sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
                 }
             }

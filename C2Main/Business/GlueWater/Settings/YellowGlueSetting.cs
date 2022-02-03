@@ -250,7 +250,7 @@ namespace C2.Business.GlueWater.Settings
         }
         public override void SortDataTableByCol(string col, string sortType)
         {
-            try { YellowWebTable.DefaultView.Sort = col + " " + sortType; }catch{ };
+            try { YellowWebTable.DefaultView.Sort = col + OpUtil.StringBlank + sortType; }catch{ };
             YellowWebTable = YellowWebTable.DefaultView.ToTable();
         }
 

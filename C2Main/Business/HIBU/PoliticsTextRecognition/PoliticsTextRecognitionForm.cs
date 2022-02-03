@@ -219,7 +219,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
                 {
                     if (row.Cells[0].Value != null)
                     {
-                        sw.Write(row.Cells[0].Value.ToString() + " " + row.Cells[1].Value.ToString() + " " + row.Cells[2].Value.ToString() + "\r\n");
+                        sw.Write(row.Cells[0].Value.ToString() + OpUtil.StringBlank + row.Cells[1].Value.ToString() + OpUtil.StringBlank + row.Cells[2].Value.ToString() + "\r\n");
                     }
                 }
                 if (sw != null)
