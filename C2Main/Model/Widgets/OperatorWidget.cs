@@ -41,7 +41,7 @@ namespace C2.Model.Widgets
     {
         private OpStatus _status;
         public const string TypeID = "OPERATOR";
-        public override string Description => HelpUtil.OperatorWidgetHelpInfo;
+        public override string Description => HasModelOperator ? HelpUtil.ModelWidgetHelpInfo : HelpUtil.OperatorWidgetHelpInfo;
         private bool isModelOperator = false;
         public OperatorWidget()
         {

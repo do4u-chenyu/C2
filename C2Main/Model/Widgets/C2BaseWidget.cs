@@ -14,7 +14,7 @@ namespace C2.Model.Widgets
     {
         private static readonly LogUtil log = LogUtil.GetInstance("C2BaseWidget");
         [Browsable(false)]
-        public virtual string Description { get;}
+        public virtual string Description { get; }
 
         [Browsable(false)]
         public List<DataItem> DataItems { get; set; } = new List<DataItem>();

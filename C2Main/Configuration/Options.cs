@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using C2.Configuration.Formaters;
+﻿using C2.Configuration.Formaters;
 using C2.Configuration.Models;
 using C2.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 
 namespace C2.Configuration
 {
