@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using C2.Business.Schedule.Cmd;
-using C2.Core;
+﻿using C2.Business.Schedule.Cmd;
 using C2.Database;
 using C2.Dialogs;
 using C2.Dialogs.Base;
@@ -15,6 +7,11 @@ using C2.Model;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace C2.Controls.MapViews
 {
@@ -183,12 +180,15 @@ namespace C2.Controls.MapViews
                         log.Info(cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
-                    log.Info("=====运算结束=====");
+                    
                     p.BeginErrorReadLine();
                     p.BeginOutputReadLine();
 
+                    //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");
-                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
+                    p.WaitForExit(); 
+
+                    log.Info("=====运算结束=====");
 
                     message = "算子成功执行完毕";
 
