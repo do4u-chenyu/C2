@@ -42,6 +42,7 @@ namespace C2.Model.Widgets
         private OpStatus _status;
         public const string TypeID = "OPERATOR";
         public override string Description => HelpUtil.OperatorWidgetHelpInfo;
+        private bool isModelOperator = false;
         public OperatorWidget()
         {
             DisplayIndex = 1;
@@ -57,7 +58,16 @@ namespace C2.Model.Widgets
         }
         [Browsable(false)]
         #region 模型算子属性
-        public bool HasModelOperator { get; set; }//是否包含模型算子
+        public bool HasModelOperator
+        {
+            get => this.isModelOperator;
+            set
+            {
+                this.isModelOperator = value;
+                if (value) widgetIcon = Properties.Resources.聚沙成塔;
+            }
+
+        }//是否包含模型算子
         [Browsable(false)]
         public TabItem ModelRelateTab { get; set; }//模型对应的tab
         [Browsable(false)]
