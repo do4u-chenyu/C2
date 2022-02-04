@@ -1,4 +1,5 @@
 ﻿using C2.Business.Schedule.Cmd;
+using C2.Core;
 using C2.Database;
 using C2.Dialogs;
 using C2.Dialogs.Base;
@@ -37,13 +38,17 @@ namespace C2.Controls.MapViews
             if (cmds == null)
                 return;
 
-            this.Cursor = Cursors.WaitCursor;
-            string runMessage = RunLinuxCommand(cmds);
+            string runMessage = string.Empty;
+            using (GuarderUtil.WaitCursor)
+                runMessage = RunLinuxCommand(cmds);
             opw.Status = runMessage == "算子成功执行完毕" ? OpStatus.Done : OpStatus.Warn;
-            HelpUtil.ShowMessageBox(runMessage, "运行"); // 这个对话框还是挺丑的.后面要优化
-            this.Cursor = Cursors.Default;
+            HelpUtil.ShowMessageBox(runMessage, "运行结束"); // 这个对话框还是挺丑的.后面要优化
 
-            //没能成功运行，直接返回
+            // 没能成功运行, 自动蹦出日志面板
+            if (opw.Status == OpStatus.Warn)
+                Global.GetMainForm()?.ShowLogViewG();
+           
+            // 没能成功运行，直接返回
             if (opw.Status != OpStatus.Done)
                 return;
 
@@ -174,32 +179,33 @@ namespace C2.Controls.MapViews
             {
                 if (p.Start())//开始进程  
                 {
-                    log.Info("=====运算开始=====");
+                    log.Info("===========运算开始==========");
                     foreach (string cmd in cmds)
                     {
                         log.Info(cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
                     
-                    p.BeginErrorReadLine();
+                    //p.BeginErrorReadLine();  // 让后续可以读取到错误流
                     p.BeginOutputReadLine();
-
+                    
                     //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");
                     p.WaitForExit(); 
 
-                    log.Info("=====运算结束=====");
-
+                    log.Info("===========运算结束===========");
+     
                     message = "算子成功执行完毕";
 
                     if (p.ExitCode != 0)
                     {
-                        message = string.Format("运算出现问题,ExitCode:{0},点击下方面板【运行日志】查看出错信息,反馈售后群", p.ExitCode);
+                        log.Warn(ProcessUtil.ProcessStandErrorMessage(p));
+                        message = string.Format("运算出现问题,ExitCode:{0}, 【运行日志】面板查看出错信息,反馈SH群", p.ExitCode);   
                     }
 
                 }
             }
-            catch (System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
                 //UpdateLogDelegate("InvalidOperationException: " + ex.Message);

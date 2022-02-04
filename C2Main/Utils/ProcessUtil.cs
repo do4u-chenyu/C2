@@ -26,5 +26,17 @@ namespace C2.Utils
             }
             catch { }
         }
+
+        public static string ProcessStandErrorMessage(Process p)
+        {
+            try
+            {
+                return p.StandardError.ReadToEnd();
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
     }
 }
