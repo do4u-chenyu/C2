@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace C2.Controls.OS
 {
@@ -11,16 +10,6 @@ namespace C2.Controls.OS
         [DllImport(DllName)]
         public static extern Int32 GetLastError();
 
-//        [DllImport(DllName)]
-//        public static extern int WideCharToMultiByte(uint CodePage,            // code page
-//  uint dwFlags,            // performance and mapping flags
-//  char lpWideCharStr,    // wide-character string
-//  int cchWideChar,          // number of chars in string.
-//  StringBuilder lpMultiByteStr,     // buffer for new string
-//  int cbMultiByte,          // size of buffer
-//  LPCSTR lpDefaultChar,     // default for unmappable chars
-//  LPBOOL lpUsedDefaultChar  // set when default char used
-//);
         [DllImport(DllName)]
         public static extern bool Beep(uint dwFreq, uint dwDuration);
 
@@ -29,5 +18,29 @@ namespace C2.Controls.OS
 
         [DllImport(DllName)]
         public static extern IntPtr GlobalLock(IntPtr hMem);
+
+        [DllImport(DllName)]
+        public static extern bool AttachConsole(uint dwProcessId);
+
+        [DllImport(DllName)]
+        public static extern bool FreeConsole();
+
+        public enum CtrlTypes : uint
+        {
+            CTRL_C_EVENT = 0,
+            CTRL_BREAK_EVENT,
+            CTRL_CLOSE_EVENT,
+            CTRL_LOGOFF_EVENT = 5,
+            CTRL_SHUTDOWN_EVENT
+        }
+
+        public delegate bool ConsoleCtrlDelegate(CtrlTypes CtrlType);
+
+        [DllImport(DllName)]
+        public static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate HandlerRoutine, bool Add);
+
+        [DllImport(DllName)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GenerateConsoleCtrlEvent(CtrlTypes dwCtrlEvent, uint dwProcessGroupId);
     }
 }

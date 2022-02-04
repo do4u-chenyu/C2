@@ -1,6 +1,7 @@
 ﻿using C2.Business.Model;
 using C2.Business.Schedule.Cmd;
 using C2.Controls.Move.Op;
+using C2.Controls.OS;
 using C2.Dialogs;
 using C2.Utils;
 using System;
@@ -30,20 +31,27 @@ namespace C2.Business.Schedule
     public class TaskManager
     {
 
-        public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
+        public delegate void UpdateLog(string log);               //声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
 
-        public delegate void AccomplishTask(TaskManager manager);//声明一个在完成任务时通知主线程的委托
+        public delegate void AccomplishTask(TaskManager manager); //声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;
 
-        public delegate void UpdateGif(TaskManager manager);//声明一个更新运作动图的委托
+        public delegate void UpdateGif(TaskManager manager);      //声明一个更新运作动图的委托
         public UpdateGif UpdateGifDelegate;
 
-        public delegate void UpdateBar(TaskManager manager);//声明一个更新进度条的委托
+        public delegate void UpdateBar(TaskManager manager);      //声明一个更新进度条的委托
         public UpdateBar UpdateBarDelegate;
 
-        public delegate void UpdateMask(TaskManager manager);//声明一个运行遮罩的委托
+        public delegate void UpdateMask(TaskManager manager);     //声明一个运行遮罩的委托
         public UpdateMask UpdateMaskDelegate;
+
+        public delegate void ShowLogPanel();   //声明一个打开日志面板的委托 
+        public ShowLogPanel ShowLogPanelDelegate;
+
+        public delegate void ShowMessageBox(string message);      //声明一个弹窗
+        public ShowMessageBox ShowMessageBoxDelegate;
+
 
         public delegate void UpdateOpError(TaskManager manager, int id, string errorMessage);//声明一个op算子异常时修改提示内容的委托
         public UpdateOpError UpdateOpErrorDelegate;
@@ -166,30 +174,6 @@ namespace C2.Business.Schedule
          * 现在终止的问题是 只能kill控制台进程，在上面执行的脚本进程不会kill，导致资源无法正常释放
          * 目前解决办法：获取控制台进程，键入ctrl+c，最多等待2秒后kill控制台进程
          */
-        [DllImport("kernel32.dll")]
-        private static extern bool AttachConsole(uint dwProcessId);
-
-        [DllImport("kernel32.dll")]
-        private static extern bool FreeConsole();
-
-        [DllImport("kernel32.dll")]
-        private static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate HandlerRoutine, bool Add);
-
-        enum CtrlTypes : uint
-        {
-            CTRL_C_EVENT = 0,
-            CTRL_BREAK_EVENT,
-            CTRL_CLOSE_EVENT,
-            CTRL_LOGOFF_EVENT = 5,
-            CTRL_SHUTDOWN_EVENT
-        }
-
-        private delegate bool ConsoleCtrlDelegate(CtrlTypes CtrlType);
-
-        [DllImport("kernel32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GenerateConsoleCtrlEvent(CtrlTypes dwCtrlEvent, uint dwProcessGroupId);
-
         public void Stop()
         {
             try
@@ -203,7 +187,7 @@ namespace C2.Business.Schedule
                 lock (_objLock)
                 {
                     // 我们自己的进程需要忽略掉 Ctrl+C 信号，否则自己也会退出。
-                    SetConsoleCtrlHandler(null, true);
+                    Kernel32.SetConsoleCtrlHandler(null, true);
 
                     foreach (Process p in cmdProcessList)
                     {
@@ -211,13 +195,13 @@ namespace C2.Business.Schedule
                         {
                             UpdateLogDelegate("关闭进程" + p.Id + "  " + p.ProcessName);
 
-                            if (AttachConsole((uint)p.Id))
+                            if (Kernel32.AttachConsole((uint)p.Id))
                             {
                                 // 将 Ctrl+C 信号发送到前面已关联（附加）的控制台进程中。
-                                GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0);
+                                Kernel32.GenerateConsoleCtrlEvent(Kernel32.CtrlTypes.CTRL_C_EVENT, 0);
 
                                 // 拾前面已经附加的控制台。
-                                FreeConsole();
+                                Kernel32.FreeConsole();
 
                                 // 如果没有超时处理，则一直等待，直到最终进程停止。
                                 p.WaitForExit(2000);
@@ -232,7 +216,7 @@ namespace C2.Business.Schedule
                         }
                     }
                     // 重新恢复我们自己的进程对 Ctrl+C 信号的响应。
-                    SetConsoleCtrlHandler(null, false);
+                    Kernel32.SetConsoleCtrlHandler(null, false);
                     //cmdProcessList.ForEach(p => { p.Kill(); p.Dispose(); p.Close(); });
                 }
             }
@@ -484,7 +468,7 @@ namespace C2.Business.Schedule
                     }
 
                     //多线程下异步读取 
-                    p.ErrorDataReceived += new DataReceivedEventHandler(p_ErrorDataReceived);
+                    p.ErrorDataReceived += new DataReceivedEventHandler(P_ErrorDataReceived);
 
                     p.BeginErrorReadLine();
                     p.BeginOutputReadLine();
@@ -495,14 +479,14 @@ namespace C2.Business.Schedule
                     UpdateLogDelegate("退出码" + p.ExitCode.ToString());
                     if (p.ExitCode != 0)
                     {
-
-                        errorMessage = string.Format("执行算子出现问题, ExitCode:{0}，请点击下方面板【运行日志】查看出错信息", p.ExitCode);
+                        errorMessage = string.Format("执行算子出现问题, ExitCode:{0}", p.ExitCode);
                         UpdateLogDelegate(errorMessage);
+                        ShowLogPanelDelegate();
                     }
 
                 }
             }
-            catch (System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
                 //UpdateLogDelegate("InvalidOperationException: " + ex.Message);
@@ -526,7 +510,7 @@ namespace C2.Business.Schedule
             return errorMessage;
         }
 
-        void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        void P_ErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Data))
             {

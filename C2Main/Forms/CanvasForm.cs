@@ -43,11 +43,8 @@ namespace C2.Forms
         public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
         #region 运行委托
         delegate void AsynUpdateLog(string logContent);
-        delegate void AsynUpdateGif();
-        delegate void TaskCallBack();
-        delegate void AsynUpdateProgressBar();
-        delegate void AsynUpdateMask();
-        delegate void AsynUpdateOpErrorMessage();
+        delegate void AsynCallback();
+
         #endregion
         private static readonly LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
         public CanvasForm()
@@ -419,13 +416,14 @@ namespace C2.Forms
                 currentManager.UpdateBarDelegate = UpdateProgressBar;
                 currentManager.UpdateOpErrorDelegate = UpdateOpErrorMessage;
                 currentManager.UpdateMaskDelegate = EnableRunningControl;
+                currentManager.ShowLogPanelDelegate = ShowBottomLogPanel;
             }
         }
 
         //更新op算子错误信息
         private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
         {
-            string message = ControlUtil.Invoke(this,new AsynUpdateOpErrorMessage(delegate ()
+            string message = ControlUtil.Invoke(this,new AsynCallback(delegate ()
             {
                 MoveOpControl op = Document.SearchElementByID(id).InnerControl as MoveOpControl;
                 op.SetStatusBoxErrorContent(error);
@@ -439,7 +437,7 @@ namespace C2.Forms
         {
             string error = string.Empty;
             if (manager.ModelStatus == ModelStatus.Running)
-                error = ControlUtil.Invoke(this,new AsynUpdateProgressBar(delegate ()
+                error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
                 {
                     this.progressBar.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar.Value.ToString() + "%";
@@ -471,7 +469,7 @@ namespace C2.Forms
             if(Global.GetCanvasForm() == null)
                 return;
 
-            string error = ControlUtil.Invoke(this,new AsynUpdateLog(delegate (string tlog)
+            string error = ControlUtil.Invoke(this, new AsynUpdateLog(delegate (string tlog)
             {
                 log.Info(tlog);
             }), logContent);
@@ -484,14 +482,14 @@ namespace C2.Forms
         {
             string error = string.Empty;
             if (manager.ModelStatus == ModelStatus.GifDone)
-                error = ControlUtil.Invoke(this,new AsynUpdateGif(delegate ()
+                error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
                 {
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Show();
                 }));
             else if (manager.ModelStatus == ModelStatus.Done)
-                error = ControlUtil.Invoke(this,new AsynUpdateGif(delegate ()
+                error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
                 {
                     this.progressBar.Hide();
                     this.progressBarLabel.Hide();
@@ -505,7 +503,7 @@ namespace C2.Forms
         private void Accomplish(TaskManager manager)
         {
             Save();
-            string error = ControlUtil.Invoke(this,new TaskCallBack(delegate ()
+            string error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
             {
                 UpdateRunbuttonImageInfo();
                 UpdateTopicResults(RelateTopic);
@@ -640,7 +638,7 @@ namespace C2.Forms
         }
         private void EnableRunningControl(TaskManager manager)
         {
-            string error = ControlUtil.Invoke(this,new AsynUpdateMask(delegate ()
+            string error = ControlUtil.Invoke(this, new AsynCallback(delegate ()
             {
                 Document.Enable();
                 EnableCommonControl(true);
@@ -655,6 +653,14 @@ namespace C2.Forms
 
             this.operatorControl.Enabled = status;
             Global.GetLeftToolBoxPanel().Enabled = status;
+        }
+
+        private void ShowBottomLogPanel()
+        {
+            string error = ControlUtil.Invoke(this, new AsynCallback(delegate()
+            {
+                Global.GetMainForm()?.ShowLogViewG();
+            }));
         }
         #endregion
 

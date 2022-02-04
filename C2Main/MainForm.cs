@@ -820,6 +820,12 @@ namespace C2
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
+            ShowLogViewG();
+        }
+
+        // 全局, 供其他人调用
+        public void ShowLogViewG()
+        {
             this.ShowBottomPanel();
             this.ShowLogView();
         }
