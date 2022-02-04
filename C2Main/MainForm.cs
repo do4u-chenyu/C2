@@ -574,7 +574,8 @@ namespace C2
         }
         public void OpenMindMapDocument(string filename)
         {
-            OpenDocument(filename, false);
+            bool isManual = filename.StartsWith(Global.ManualViewPath);
+            OpenDocument(filename, isManual);
         }
 
         private void OpenDocument(string filename, bool isManual)

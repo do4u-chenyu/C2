@@ -215,6 +215,8 @@ namespace C2.Controls.MapViews
         }
         void OpenDocumentTab()
         {
+            if (opw == null)
+                opw = HoverObject.Widget as OperatorWidget;
             TabItem tab = opw.ModelRelateTab;
             TabBar tabBar = Global.GetMainForm().TaskBar;
             if (tabBar.Items.Contains(tab))
