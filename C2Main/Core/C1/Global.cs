@@ -228,8 +228,8 @@ namespace C2.Core
         {
             if (GetCurrentDocument() == null)
                 return;
-            if (!GetCurrentDocument().Modified)
-                GetCurrentDocument().Modified = true;
+    
+            GetCurrentDocument().Modified = true;
         }
 
         public static List<BaseDocumentForm> SearchDocumentForm(string formName)

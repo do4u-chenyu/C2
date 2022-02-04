@@ -1,14 +1,12 @@
-﻿using System;
+﻿using C2.Configuration;
+using C2.Core;
+using C2.Globalization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Printing;
-using System.Text;
-using C2.Configuration;
-using C2.Controls;
-using C2.Core;
-using C2.Globalization;
 
 namespace C2.Model.Documents
 {

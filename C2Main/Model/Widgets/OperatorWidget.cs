@@ -87,8 +87,10 @@ namespace C2.Model.Widgets
                 _status = value;
             }
         }  //算子状态
-
-
+        public void InitStatus(OpStatus status)
+        {
+            _status = status;
+        }
         #endregion
         public override string GetTypeID()
         {
@@ -193,9 +195,8 @@ namespace C2.Model.Widgets
                     // 读取单算子
                     this.OpName = opItem.SelectSingleNode("name").InnerText;
                     this.OpType = OpUtil.OpType(opItem.SelectSingleNode("subtype").InnerText);
-                    this.Status = OpUtil.OpStatus(opItem.SelectSingleNode("status").InnerText);
-
-
+                    //this.Status = OpUtil.OpStatus(opItem.SelectSingleNode("status").InnerText);   文档加载100%后,这个值才能用
+                    this.InitStatus(OpUtil.OpStatus(opItem.SelectSingleNode("status").InnerText));
 
                     XmlNode option = opItem.SelectSingleNode("option");
                     if (option != null)
