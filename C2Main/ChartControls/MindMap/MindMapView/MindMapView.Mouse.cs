@@ -562,7 +562,8 @@ namespace C2.Controls.MapViews
                         var he = new HandledEventArgs();
                         //if (ChartMouseDownButton == MouseButtons.Left)
                         hr.Widget.OnDoubleClick(he);
-
+                        // 多维算子双击打开视图
+                        WidgetInteractDocument(hr.Widget);
                         if (!he.Handled)
                         {
                             EditWidget(hr.Widget);
@@ -579,7 +580,11 @@ namespace C2.Controls.MapViews
                 }
             }
         }
-
+        void WidgetInteractDocument(Widget w)
+        {
+            if (OperatorWidget.TypeID == w.GetTypeID() && (w as OperatorWidget).HasModelOperator)
+                OpenDocumentTab();
+        }
         void ShowRemarkDialog(Topic topic)
         {
             var dialog = new NoteWidgetDialog();

@@ -211,6 +211,10 @@ namespace C2.Controls.MapViews
 
         void MenuDesignModel_Click(object sender, EventArgs e)
         {
+            OpenDocumentTab();
+        }
+        void OpenDocumentTab()
+        {
             TabItem tab = opw.ModelRelateTab;
             TabBar tabBar = Global.GetMainForm().TaskBar;
             if (tabBar.Items.Contains(tab))
