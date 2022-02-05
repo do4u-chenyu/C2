@@ -217,16 +217,7 @@ namespace C2.Controls.MapViews
         {
             if (opw == null)
                 opw = HoverObject.Widget as OperatorWidget;
-            TabItem tab = opw.ModelRelateTab;
-            TabBar tabBar = Global.GetMainForm().TaskBar;
-            if (tabBar.Items.Contains(tab))
-                tabBar.SelectedItem = tab;
-            else
-            {
-                Topic topic = opw.Container as Topic;
-                string modelDocumentName = opw.ModelDataItem.FileName;
-                Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, topic);
-            }
+            opw.OpenModelDocumentTab();
         }
         void MenuDesignOp_DoubleClick(object sender, EventArgs e) 
         { 

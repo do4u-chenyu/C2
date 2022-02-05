@@ -4,6 +4,7 @@ using C2.Controls;
 using C2.Core;
 using C2.Dialogs.Base;
 using C2.Dialogs.C2OperatorViews;
+using C2.Model.MindMaps;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -159,11 +160,26 @@ namespace C2.Model.Widgets
         }
         public override void OnDoubleClick(HandledEventArgs e) 
         {
-            if (Status != OpStatus.Null)
+            // 多维算子双击打开
+            if (HasModelOperator)
+                OpenModelDocumentTab();
+            // 非多维算子弹出配置对话框
+            else if (Status != OpStatus.Null)
+                GenType(this)?.ShowDialog();      
+        }
+
+        public void OpenModelDocumentTab()
+        {
+            TabItem tab = this.ModelRelateTab;
+            TabBar tabBar = Global.GetMainForm().TaskBar;
+            if (tabBar.Items.Contains(tab))
+                tabBar.SelectedItem = tab;
+            else
             {
-                GenType(this)?.ShowDialog();
+                Topic topic = this.Container as Topic;
+                string modelDocumentName = this.ModelDataItem.FileName;
+                Global.GetMainForm().LoadCanvasFormByMindMap(modelDocumentName, topic);
             }
-                
         }
         public static C2BaseOperatorView GenType(OperatorWidget operatorWidget)
         {
