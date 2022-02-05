@@ -65,7 +65,7 @@ namespace C2.Model.Widgets
             set
             {
                 this.isModelOperator = value;
-                if (value) widgetIcon = Properties.Resources.聚沙成塔;
+                if (value) widgetIcon = Properties.Resources.聚沙成塔1;
             }
 
         }//是否包含模型算子

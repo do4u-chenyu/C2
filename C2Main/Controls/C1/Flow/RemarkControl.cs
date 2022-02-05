@@ -6,6 +6,7 @@ namespace C2.Controls.Flow
     public delegate void RemarkChangeEventHandler(RemarkControl ct);
     public partial class RemarkControl : UserControl
     {
+        public bool RemarkChangeEventStop = false;
         public event RemarkChangeEventHandler RemarkChangeEvent;
         public RemarkControl()
         {
@@ -15,6 +16,8 @@ namespace C2.Controls.Flow
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
+            if (stop)
+                return;
             RemarkChangeEvent?.Invoke(this);
         }
     }

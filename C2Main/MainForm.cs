@@ -509,7 +509,11 @@ namespace C2
             ShowForm(form);
 
             doc.Load();
+            // 加载时暂停事件,不然导致非期望的文档dirty
+            form.RemarkControl.RemarkChangeEventStop = true;
             form.RemarkControl.RemarkDescription = doc.RemarkDescription;
+            form.RemarkControl.RemarkChangeEventStop = false;
+
             form.CanvasAddElement(doc);
             form.GenMindMapDataSources(topic);
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
