@@ -42,7 +42,9 @@ namespace C2.Model.Widgets
     {
         private OpStatus _status;
         public const string TypeID = "OPERATOR";
-        public override string Description => HasModelOperator ? HelpUtil.ModelWidgetHelpInfo : HelpUtil.OperatorWidgetHelpInfo;
+        public override string Description => HasModelOperator ? 
+            string.Format(HelpUtil.ModelWidgetHelpInfo, ModelDataItem.FileName) : 
+            HelpUtil.OperatorWidgetHelpInfo;
         private bool isModelOperator = false;
         public OperatorWidget()
         {

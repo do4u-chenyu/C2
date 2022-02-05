@@ -40,7 +40,7 @@ namespace C2.Utils
         public static string VedioWidgetHelpInfo = "视频:【{0}】 使用Windows自带播放器";
         public static string ChartWidgetHelpInfo = "图表:柱状图,折线图,饼图,环形图,雷达图等";
         public static string OperatorWidgetHelpInfo = "单算子:内置多种算子,支持Python脚本";
-        public static string ModelWidgetHelpInfo = "多维运算:支持各种算子的组合,支持Python脚本";
+        public static string ModelWidgetHelpInfo = "多维运算:【{0}】支持各种算子的组合,支持Python脚本";
         public static string ResultWidgetHelpInfo = "运算结果:算子和多维运算后生成的结果,支持预览";
         public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
         public static string ExportImageHelpInfo = "导出图片:支持导出成多种格式的图片";

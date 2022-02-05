@@ -16,9 +16,8 @@ namespace C2.Controls.Flow
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            if (stop)
-                return;
-            RemarkChangeEvent?.Invoke(this);
+            if (!RemarkChangeEventStop)
+                RemarkChangeEvent?.Invoke(this);
         }
     }
 }
