@@ -23,6 +23,8 @@ namespace C2.Model.Widgets
                     attachList = Path.GetFileName(AttachmentPaths[0]);
                 if (AttachmentPaths.Count > 1)
                     attachList += "," + Path.GetFileName(AttachmentPaths[1]);
+                if (AttachmentPaths.Count > 2)
+                    attachList += ",..."; 
                 return string.Format(HelpUtil.AttachmentWidgetHelpInfo, attachList);
             }
         }

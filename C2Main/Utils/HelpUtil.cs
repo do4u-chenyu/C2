@@ -42,7 +42,7 @@ namespace C2.Utils
         public static string OperatorWidgetHelpInfo = "单算子:内置多种算子,支持Python脚本";
         public static string ModelWidgetHelpInfo = "多维运算:【{0}】支持各种算子的组合,支持Python脚本";
         public static string ResultWidgetHelpInfo = "运算结果:算子和多维运算后生成的结果,支持预览";
-        public static string DataSourceWidgetHelpInfo = "数据源:支持添加多个数据源,支持多种类型文档";
+        public static string DataSourceWidgetHelpInfo = "数据源【{0}】:支持添加多个数据源,支持多种类型文档";
         public static string ExportImageHelpInfo = "导出图片:支持导出成多种格式的图片";
 
         public static string ReviewToolStripMenuItemInfo = "首页状态下无法预览数据，请点击左侧面板打开一个战术手册后再试";

@@ -3,6 +3,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Xml;
 
 namespace C2.Model.Widgets
@@ -10,7 +11,21 @@ namespace C2.Model.Widgets
     public class DataSourceWidget : C2BaseWidget, IRemark
     {
         public const string TypeID = "DATASOURCE";
-        public override string Description => HelpUtil.DataSourceWidgetHelpInfo;
+        public override string Description
+        {
+            get
+            {
+                string dataSourceList = string.Empty;
+                if (DataItems.Count > 0)
+                    dataSourceList = Path.GetFileName(DataItems[0].FileName);
+                if (DataItems.Count > 1)
+                    dataSourceList += "," + Path.GetFileName(DataItems[1].FileName);
+                if (DataItems.Count > 2)
+                    dataSourceList += ",...";
+                return string.Format(HelpUtil.DataSourceWidgetHelpInfo, dataSourceList);
+            }
+        }
+
         public DataSourceWidget()
         {
             DisplayIndex = 0;
