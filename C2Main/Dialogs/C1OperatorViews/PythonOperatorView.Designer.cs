@@ -66,8 +66,8 @@
             // 
             // dataSourceTB0
             // 
-            this.dataSourceTB0.Location = new System.Drawing.Point(137, 15);
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.Location = new System.Drawing.Point(105, 15);
+            this.dataSourceTB0.Size = new System.Drawing.Size(217, 23);
             this.dataSourceTB0.TabIndex = 12;
             // 
             // cancelButton
@@ -96,16 +96,16 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(16, 19);
+            this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Size = new System.Drawing.Size(63, 14);
             // 
             // pythonChosenComboBox
             // 
             this.pythonChosenComboBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.pythonChosenComboBox.FormattingEnabled = true;
-            this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 57);
+            this.pythonChosenComboBox.Location = new System.Drawing.Point(105, 57);
             this.pythonChosenComboBox.Name = "pythonChosenComboBox";
-            this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 25);
+            this.pythonChosenComboBox.Size = new System.Drawing.Size(217, 25);
             this.pythonChosenComboBox.TabIndex = 3;
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
@@ -114,7 +114,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 10F);
-            this.label2.Location = new System.Drawing.Point(19, 61);
+            this.label2.Location = new System.Drawing.Point(12, 61);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 14);
@@ -126,7 +126,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 10F);
-            this.label4.Location = new System.Drawing.Point(17, 148);
+            this.label4.Location = new System.Drawing.Point(12, 148);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 14);
@@ -137,10 +137,10 @@
             // pyParamTextBox
             // 
             this.pyParamTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pyParamTextBox.Location = new System.Drawing.Point(137, 143);
+            this.pyParamTextBox.Location = new System.Drawing.Point(105, 143);
             this.pyParamTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyParamTextBox.Name = "pyParamTextBox";
-            this.pyParamTextBox.Size = new System.Drawing.Size(311, 23);
+            this.pyParamTextBox.Size = new System.Drawing.Size(343, 23);
             this.pyParamTextBox.TabIndex = 17;
             this.pyParamTextBox.TextChanged += new System.EventHandler(this.PyParamTextBox_TextChanged);
             // 
@@ -148,7 +148,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 10F);
-            this.label6.Location = new System.Drawing.Point(19, 106);
+            this.label6.Location = new System.Drawing.Point(12, 106);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 14);
@@ -180,11 +180,11 @@
             this.pyFullFilePathTextBox.BackColor = System.Drawing.Color.White;
             this.pyFullFilePathTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyFullFilePathTextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pyFullFilePathTextBox.Location = new System.Drawing.Point(137, 102);
+            this.pyFullFilePathTextBox.Location = new System.Drawing.Point(105, 102);
             this.pyFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyFullFilePathTextBox.Name = "pyFullFilePathTextBox";
             this.pyFullFilePathTextBox.ReadOnly = true;
-            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(311, 23);
+            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(343, 23);
             this.pyFullFilePathTextBox.TabIndex = 25;
             // 
             // openFileDialog1
@@ -430,7 +430,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::C2.Properties.Resources.designer;
-            this.pictureBox2.Location = new System.Drawing.Point(361, 59);
+            this.pictureBox2.Location = new System.Drawing.Point(396, 59);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -441,28 +441,28 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(385, 63);
+            this.label13.Location = new System.Drawing.Point(420, 63);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(141, 17);
+            this.label13.Size = new System.Drawing.Size(108, 17);
             this.label13.TabIndex = 47;
-            this.label13.Text = "来添加本机已有Py虚拟机";
+            this.label13.Text = "新增python虚拟机";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(296, 63);
+            this.label12.Location = new System.Drawing.Point(330, 63);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(68, 17);
             this.label12.TabIndex = 46;
-            this.label12.Text = "通过右上角";
+            this.label12.Text = "单机右上角";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(286, 61);
+            this.label11.Location = new System.Drawing.Point(320, 61);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(16, 19);
             this.label11.TabIndex = 45;

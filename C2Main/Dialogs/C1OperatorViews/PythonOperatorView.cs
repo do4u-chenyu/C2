@@ -18,7 +18,7 @@ namespace C2.Dialogs
     {
         private readonly string oldPath;
         private string fullOutputFilePath;
-        private readonly List<string> previewTextList = new List<string>(new string[] { "", "", "" });
+        private readonly List<string> previewTextList = new List<string>(new string[] { string.Empty, string.Empty, string.Empty });
 
         public PythonOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -52,20 +52,17 @@ namespace C2.Dialogs
                 this.opControl.Option.SetOption("browseChosen", this.fullOutputFilePath);
                 this.browseChosenTextBox.Text = fullOutputFilePath;
             }
-            //this.paramInputFileFullPath.Text = dataInfo["dataPath0"];
-            //this.rsFullFileNameTextBox.Text = noChangedOutputFilePath;
         }
-
+        protected override void SetTextBoxName(TextBox textBox, int width = 18)
+        {
+            //base.SetTextBoxName(textBox, 39);
+        }
         private void InitPreViewText()
         {
             //初始化预览文件 //[虚拟机全路径，脚本全路径，其他参数，输入文件相关，输出文件相关]
             this.previewTextList[0] = GetVirtualMachinFullPath(this.pythonChosenComboBox.Text);
             this.previewTextList[1] = this.pyFullFilePathTextBox.Text;
             this.previewTextList[2] = this.pyParamTextBox.Text;
-            //string previewInput = GetControlRadioName(this.inputFileSettingTab) == "paramInputFileRadio" ? this.paramInputFileTextBox.Text + " " + this.paramInputFileFullPath.Text : "";
-            //this.previewTextList[3] = previewInput;
-            //string previewOutput = GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" ? this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text : GetControlRadioName(this.outputFileSettingTab) == "stdoutRadioButton" ? " > " + this.fullOutputFilePath : "";
-            //this.previewTextList[4] = previewOutput;
             this.previewCmdText.Text = string.Join(OpUtil.StringBlank, this.previewTextList);
         }
         #endregion

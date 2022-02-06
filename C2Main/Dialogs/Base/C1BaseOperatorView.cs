@@ -140,16 +140,16 @@ namespace C2.Dialogs.Base
             Global.GetOptionDao().DoOutputCompare(oldOutNames, this.selectedColumns, this.opControl.ID);
         }
 
-        protected void SetTextBoxName(TextBox textBox)
+        protected virtual void SetTextBoxName(TextBox textBox, int width = 18)
         {
             string dataName = textBox.Text;
-            int maxLength = 18;
+            int maxLength = width;
             MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
             int sumcount = chs.Count * 2;
             int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
 
             //防止截取字符串时中文乱码
-            foreach (System.Text.RegularExpressions.Match mc in chs)
+            foreach (Match mc in chs)
             {
                 if (dataName.IndexOf(mc.ToString()) == maxLength)
                 {
