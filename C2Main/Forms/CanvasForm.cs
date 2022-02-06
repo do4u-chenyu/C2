@@ -191,15 +191,13 @@ namespace C2.Forms
 
         public void SaveDocAndTopic()
         {
-            bool oldStatus = false; 
-            if (Global.GetCurrentModelDocument()!=null)
-            {
-                oldStatus = Global.GetCurrentModelDocument().Modified;
-            }        
+            ModelDocument doc = Global.GetCurrentModelDocument();
+            if (doc == null)
+                return;
+            if (!doc.Modified)
+                return;
             Save();
-            // 父文档dirty
-            if (Global.GetCurrentModelDocument() != null && oldStatus && !Global.GetCurrentModelDocument().Modified)
-                DocumentFormDirty(this.mindMapName,this.mindMapType);
+            // 同步更新父文档
             UpdateTopicResults(RelateTopic);
         }
 
@@ -266,7 +264,7 @@ namespace C2.Forms
                     //MindMapIO.Save(Map, Map.Filename);
                     //mapView1.Modified = false;
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     Helper.WriteLog(ex);
                     this.ShowMessage(ex.Message, MessageBoxIcon.Error);
@@ -392,7 +390,7 @@ namespace C2.Forms
 
             UpdateRunbuttonImageInfo();
         }
-        private void DocumentFormDirty(string formName,string formType)
+        private void DocumentFormDirty(string formName, string formType)
         {
             List<BaseDocumentForm> parentDocumentForm = Global.SearchDocumentForm(formName);
             foreach (BaseDocumentForm form in parentDocumentForm)
