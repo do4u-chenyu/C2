@@ -35,6 +35,7 @@ namespace C2.Forms
         private string userName;
         private string mindMapName;
         private DocumentForm mindMapDoc;
+        private string mindMapType;
         public CanvasPanel CanvasPanel{ get { return this.canvasPanel; }}
         public RemarkControl RemarkControl {  get { return this.remarkControl; }  }
         public OperatorControl OperatorControl { get { return this.operatorControl; } }
@@ -125,6 +126,7 @@ namespace C2.Forms
             Document = document;
             RelateTopic = topic;
             FormNameToolTip = string.Format("{0}-{1}-{2}", mindMapName, topic.Text,document.Name);
+            this.mindMapType = mindMapForm.Description;
         }
         public Topic RelateTopic { set; get; }
 
@@ -201,7 +203,7 @@ namespace C2.Forms
             Save();
             // 父文档dirty
             if (Global.GetCurrentModelDocument() != null && oldStatus && !Global.GetCurrentModelDocument().Modified)
-                DocumentFormDirty(this.mindMapName);
+                DocumentFormDirty(this.mindMapName,this.mindMapType);
             UpdateTopicResults(RelateTopic);
         }
 
@@ -381,7 +383,7 @@ namespace C2.Forms
                 this.progressBarLabel.Text = "0%";
                 // 业务视图Dirty
                 if (!string.IsNullOrEmpty(this.mindMapName))
-                    DocumentFormDirty(this.mindMapName);
+                    DocumentFormDirty(this.mindMapName, this.mindMapType);
             }
             else if (this.runButton.Name == "pauseButton")
             {
@@ -394,13 +396,12 @@ namespace C2.Forms
 
             UpdateRunbuttonImageInfo();
         }
-        private void DocumentFormDirty(string formName)
+        private void DocumentFormDirty(string formName,string formType)
         {
             List<BaseDocumentForm> parentDocumentForm = Global.SearchDocumentForm(formName);
             foreach (BaseDocumentForm form in parentDocumentForm)
             {
-                
-                if (form is DocumentForm && !form.Document.Modified)
+                if (form is DocumentForm && (form as DocumentForm).Description.Equals(formType) && !form.Document.Modified)
                     form.Document.Modified = true;
             }
         }
