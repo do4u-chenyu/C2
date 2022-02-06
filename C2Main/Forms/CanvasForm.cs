@@ -19,7 +19,6 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace C2.Forms
@@ -31,8 +30,6 @@ namespace C2.Forms
         private OptionDao optionDao;
         private UndoRedoManager undoRedoManager;
         private ModelDocument document;
-        private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
-        private string userName;
         private string mindMapName;
         private DocumentForm mindMapDoc;
         private string mindMapType;
@@ -61,7 +58,6 @@ namespace C2.Forms
         private void InitializeDao()
         {
             this.optionDao = new OptionDao();
-            this.userName = Global.GetMainForm().UserName;
         }
         private void InitializeEventHandler()
         {
