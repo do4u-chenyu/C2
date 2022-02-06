@@ -16,7 +16,7 @@ namespace C2.Dialogs.C2OperatorViews
     {
         private readonly string oldPath;
         private string fullOutputFilePath;
-        private readonly List<string> previewTextList = new List<string>(new string[] { "", "", "" });
+        private readonly List<string> previewTextList = new List<string>(new string[] { string.Empty, string.Empty, string.Empty });
         public C2PythonOperatorView(OperatorWidget operatorWidget) : base(operatorWidget)
         {
             InitializeComponent();
@@ -314,22 +314,6 @@ namespace C2.Dialogs.C2OperatorViews
             return false;
         }
 
-        //public void CreateNewBlankBCPFile(string fullFilePath)
-        //{
-        //    if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
-        //    {
-        //        Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
-        //        FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
-        //    }
-
-        //    if (!File.Exists(fullFilePath))
-        //    {
-        //        using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
-        //        {
-        //            sw.Write(String.Empty); //TODO 这一行应该不需要
-        //        }
-        //    }
-        //}
 
         private void OtherSeparatorText_TextChanged(object sender, EventArgs e)
         {
