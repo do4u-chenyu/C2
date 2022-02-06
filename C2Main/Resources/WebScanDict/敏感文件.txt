@@ -34,3 +34,8 @@
 /cron.zip
 /cookie.txt
 /public.tar.gz
+/u.php
+/www.zip
+/www.rar
+/www.tar
+/www.tar.gz
