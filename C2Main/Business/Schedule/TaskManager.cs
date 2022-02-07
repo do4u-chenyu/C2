@@ -32,7 +32,8 @@ namespace C2.Business.Schedule
     {
 
         public delegate void UpdateLog(string log);               //声明一个更新主线程日志的委托
-        public UpdateLog UpdateLogDelegate;
+        public UpdateLog UpdateLogInfoDelegate;
+        public UpdateLog UpdateLogWarnDelegate;
 
         public delegate void AccomplishTask(TaskManager manager); //声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;
@@ -96,7 +97,7 @@ namespace C2.Business.Schedule
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
             {
                 triple.OperateElement.Status = newStatus;
-                UpdateLogDelegate(triple.TripleName + "的状态由" + oldStatus.ToString() + "变更为" + newStatus.ToString());
+                UpdateLogInfoDelegate(triple.TripleName + "的状态由" + oldStatus.ToString() + "变更为" + newStatus.ToString());
             }
         }
 
@@ -116,7 +117,7 @@ namespace C2.Business.Schedule
         {
             if (CurrentModelTripleStatusNum(ElementStatus.Done) == this.currentModelTripleList.Count())
             {
-                UpdateLogDelegate("当前算子均已运算完毕");
+                UpdateLogInfoDelegate("当前算子均已运算完毕");
                 return true;
             }
             return false;
@@ -193,7 +194,7 @@ namespace C2.Business.Schedule
                     {
                         if (p != null)
                         {
-                            UpdateLogDelegate("关闭进程" + p.Id + "  " + p.ProcessName);
+                            UpdateLogInfoDelegate("关闭进程" + p.Id + "  " + p.ProcessName);
 
                             if (Kernel32.AttachConsole((uint)p.Id))
                             {
@@ -222,7 +223,7 @@ namespace C2.Business.Schedule
             }
             catch (Exception ex)
             {
-                UpdateLogDelegate("终止异常:" + ex.Message);
+                UpdateLogWarnDelegate("终止异常:" + ex.Message);
             }
             finally
             {
@@ -342,7 +343,7 @@ namespace C2.Business.Schedule
         {
             if (resetEvent.SafeWaitHandle.IsClosed)
             {
-                UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
+                UpdateLogInfoDelegate(triple.TripleName + "该resetEvent已被释放");
                 return true;
             }
             //阻止当前线程
@@ -351,7 +352,7 @@ namespace C2.Business.Schedule
 
 
             triple.OperateElement.Status = ElementStatus.Runnnig;
-            UpdateLogDelegate(triple.TripleName + "开始运行");
+            UpdateLogInfoDelegate(triple.TripleName + "开始运行");
             List<string> cmds = new List<string>();
 
             int retryCount = 3;//最多重试次数
@@ -386,17 +387,17 @@ namespace C2.Business.Schedule
                     }
                     break;
                 }
-                catch (System.IO.IOException ex)
+                catch (IOException ex)
                 {
                     errorMessage = ex.Message;
-                    UpdateLogDelegate("TaskMethod异常: " + ex.Message);
+                    UpdateLogWarnDelegate("TaskMethod异常: " + ex.Message);
                     Thread.Sleep(5000);
                     retryCount--;
                 }
                 catch (Exception ex)
                 {
                     errorMessage = ex.Message;
-                    UpdateLogDelegate("TaskMethod其他异常: " + ex.Message);
+                    UpdateLogWarnDelegate("TaskMethod其他异常: " + ex.Message);
                     isTaskMethodError = true;
                     break;
                 }
@@ -421,7 +422,7 @@ namespace C2.Business.Schedule
 
             if (resetEvent.SafeWaitHandle.IsClosed)
             {
-                UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
+                UpdateLogInfoDelegate(triple.TripleName + "该resetEvent已被释放");
                 return true;
             }
             //阻止当前线程
@@ -431,7 +432,7 @@ namespace C2.Business.Schedule
             triple.OperateElement.Status = ElementStatus.Done;
             triple.ResultElement.Status = ElementStatus.Done;
             UpdateBarDelegate(this);
-            UpdateLogDelegate(triple.TripleName + "结束运行");
+            UpdateLogInfoDelegate(triple.TripleName + "结束运行");
 
             return true;
         }
@@ -463,7 +464,7 @@ namespace C2.Business.Schedule
                     }
                     foreach (string cmd in cmds)
                     {
-                        UpdateLogDelegate("执行命令: " + cmd);
+                        UpdateLogInfoDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
 
@@ -476,11 +477,11 @@ namespace C2.Business.Schedule
                     p.StandardInput.WriteLine("exit");
                     p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
 
-                    UpdateLogDelegate("退出码" + p.ExitCode.ToString());
+                    UpdateLogInfoDelegate("退出码" + p.ExitCode.ToString());
                     if (p.ExitCode != 0)
                     {
                         errorMessage = string.Format("执行算子出现问题, ExitCode:{0}", p.ExitCode);
-                        UpdateLogDelegate(errorMessage);
+                        UpdateLogWarnDelegate(errorMessage);
                         ShowLogPanelDelegate();
                     }
 
@@ -495,7 +496,7 @@ namespace C2.Business.Schedule
             {
                 //异常停止的处理方法
                 errorMessage = ex.Message;
-                UpdateLogDelegate("RunLinuxCommand进程异常: " + ex.Message);
+                UpdateLogWarnDelegate("RunLinuxCommand进程异常: " + ex.Message);
             }
             finally
             {
@@ -514,7 +515,7 @@ namespace C2.Business.Schedule
         {
             if (!string.IsNullOrEmpty(e.Data))
             {
-                UpdateLogDelegate(e.Data);
+                UpdateLogInfoDelegate(e.Data);
             }
         }
         #endregion

@@ -30,7 +30,7 @@ namespace C2.Utils
         {
             log.WarnFormat("{0}:{1}", this.ModuleName, content);
             if (Global.GetLogView() != null)
-                Global.GetLogView().LogUpdate(content);
+                Global.GetLogView().LogUpdateWarn(content);
             return this;
         }
 
@@ -38,7 +38,7 @@ namespace C2.Utils
         {
             log.InfoFormat("{0}:{1}", this.ModuleName, content);
             if (Global.GetLogView() != null)
-                Global.GetLogView().LogUpdate(content);
+                Global.GetLogView().LogUpdateInfo(content);
             return this;
         }
 
@@ -46,7 +46,7 @@ namespace C2.Utils
         {
             log.DebugFormat("{0}:{1}", this.ModuleName, content);
             if (Global.GetLogView() != null)
-                Global.GetLogView().LogUpdate(content);
+                Global.GetLogView().LogUpdateDebug(content);
             return this;
         }
 
@@ -54,7 +54,7 @@ namespace C2.Utils
         {
             log.ErrorFormat("{0}:{1}", this.ModuleName, content);
             if (Global.GetLogView() != null)
-                Global.GetLogView().LogUpdate(content);
+                Global.GetLogView().LogUpdateError(content);
             return this;
         }
         public LogUtil ErrorFromDataBase(string content) 
@@ -68,7 +68,7 @@ namespace C2.Utils
         {
             log.FatalFormat("{0}:{1}", this.ModuleName, content);
             if (Global.GetLogView() != null)
-                Global.GetLogView().LogUpdate(content);
+                Global.GetLogView().LogUpdateFatal(content);
             return this;
         }
     }

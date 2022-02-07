@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItemSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +45,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(1011, 137);
             this.textBox1.TabIndex = 0;
             // 
@@ -86,7 +86,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem MenuItemClearAll;
         private System.Windows.Forms.ToolStripMenuItem MenuItemSelectAll;

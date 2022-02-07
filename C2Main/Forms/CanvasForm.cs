@@ -39,11 +39,7 @@ namespace C2.Forms
         public OptionDao OptionDao { get { return this.optionDao; } }
         public UndoRedoManager UndoRedoManager { get { return this.undoRedoManager; } }
         public NaviViewControl NaviViewControl { get { return this.naviViewControl; } }
-        #region 运行委托
-        delegate void AsynUpdateLog(string logContent);
-        delegate void AsynCallback();
 
-        #endregion
         private static readonly LogUtil log = LogUtil.GetInstance("CanvasForm-i"); // 获取日志模块
         public CanvasForm()
         {
@@ -405,7 +401,8 @@ namespace C2.Forms
             //初次运行时，绑定线程与ui交互的委托
             if (currentManager.ModelStatus == ModelStatus.Null)
             {
-                currentManager.UpdateLogDelegate = UpdateLogStatus;
+                currentManager.UpdateLogInfoDelegate = UpdateLogInfoStatus;
+                currentManager.UpdateLogWarnDelegate = UpdateLogWarnStatus;
                 currentManager.TaskCallBack = Accomplish;
                 currentManager.UpdateGifDelegate = UpdateRunningGif;
                 currentManager.UpdateBarDelegate = UpdateProgressBar;
@@ -418,7 +415,7 @@ namespace C2.Forms
         //更新op算子错误信息
         private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
         {
-            string message = ControlUtil.Invoke(this,new AsynCallback(delegate ()
+            string message = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate ()
             {
                 MoveOpControl op = Document.SearchElementByID(id).InnerControl as MoveOpControl;
                 op.SetStatusBoxErrorContent(error);
@@ -432,7 +429,7 @@ namespace C2.Forms
         {
             string error = string.Empty;
             if (manager.ModelStatus == ModelStatus.Running)
-                error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
+                error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate ()
                 {
                     this.progressBar.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar.Value.ToString() + "%";
@@ -459,15 +456,29 @@ namespace C2.Forms
         }
 
         //更新log
-        private void UpdateLogStatus(string logContent)
+        private void UpdateLogInfoStatus(string logContent)
         {
             if(Global.GetCanvasForm() == null)
                 return;
 
-            string error = ControlUtil.Invoke(this, new AsynUpdateLog(delegate (string tlog)
+            string error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback_S1(delegate (string tlog)
             {
                 log.Info(tlog);
             }), logContent);
+            if (!string.IsNullOrEmpty(error))
+                HelpUtil.ShowMessageBox(error);
+        }
+
+        private void UpdateLogWarnStatus(string logContent)
+        {
+            if (Global.GetCanvasForm() == null)
+                return;
+
+            string error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback_S1(delegate (string tlog)
+            {
+                log.Warn(tlog);
+            }), logContent);
+
             if (!string.IsNullOrEmpty(error))
                 HelpUtil.ShowMessageBox(error);
         }
@@ -477,14 +488,14 @@ namespace C2.Forms
         {
             string error = string.Empty;
             if (manager.ModelStatus == ModelStatus.GifDone)
-                error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
+                error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate ()
                 {
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Show();
                 }));
             else if (manager.ModelStatus == ModelStatus.Done)
-                error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
+                error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate ()
                 {
                     this.progressBar.Hide();
                     this.progressBarLabel.Hide();
@@ -498,7 +509,7 @@ namespace C2.Forms
         private void Accomplish(TaskManager manager)
         {
             Save();
-            string error = ControlUtil.Invoke(this,new AsynCallback(delegate ()
+            string error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate ()
             {
                 UpdateRunbuttonImageInfo();
                 UpdateTopicResults(RelateTopic);
@@ -633,7 +644,7 @@ namespace C2.Forms
         }
         private void EnableRunningControl(TaskManager manager)
         {
-            string error = ControlUtil.Invoke(this, new AsynCallback(delegate ()
+            string error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate ()
             {
                 Document.Enable();
                 EnableCommonControl(true);
@@ -652,7 +663,7 @@ namespace C2.Forms
 
         private void ShowBottomLogPanel()
         {
-            string error = ControlUtil.Invoke(this, new AsynCallback(delegate()
+            string error = InvokeUtil.Invoke(this, new InvokeUtil.AsynCallback(delegate()
             {
                 Global.GetMainForm()?.ShowLogViewG();
             }));
