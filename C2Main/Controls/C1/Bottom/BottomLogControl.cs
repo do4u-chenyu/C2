@@ -82,5 +82,11 @@ namespace C2.Controls.Bottom
             string copy = this.textBox1.SelectedText;
             Clipboard.SetDataObject(copy);
         }
+
+        // 定位到最后一行
+        public void FocusLocation()
+        {
+            this.textBox1.ScrollToCaret();
+        }
     }
 }

@@ -780,6 +780,7 @@ namespace C2
             this.bottomLogControl.Visible = true;
             this.bottomPyConsole.Visible = false;
             this.bottomPreview.Visible = false;
+            this.bottomLogControl.FocusLocation();
         }
         private void ShowPyConsole()
         {
