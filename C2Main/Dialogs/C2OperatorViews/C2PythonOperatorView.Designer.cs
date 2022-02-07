@@ -69,7 +69,7 @@
             this.dataSourceTB0.Location = new System.Drawing.Point(105, 15);
             this.dataSourceTB0.Size = new System.Drawing.Size(217, 23);
             this.dataSourceTB0.TabIndex = 12;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cancelButton
             // 
