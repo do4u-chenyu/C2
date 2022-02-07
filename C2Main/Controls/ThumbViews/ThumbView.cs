@@ -1,14 +1,12 @@
-﻿using System;
+﻿using C2.Core;
+using C2.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using C2.Controls.DataCharts;
-using C2.Core;
-using C2.Forms;
 
 namespace C2.Controls
 {
@@ -44,7 +42,7 @@ namespace C2.Controls
             Items = new XList<ThumbItem>();
             Items.ItemAdded += Items_ItemAdded;
             Items.ItemRemoved += Items_ItemRemoved;
-            initItems();
+            InitItems();
             this.BackColor = SystemColors.ControlLightLight;
             CellBackColor = SystemColors.ControlLightLight;
             CellForeColor = SystemColors.ControlText;
@@ -53,18 +51,18 @@ namespace C2.Controls
 
             toolTip1 = new ToolTip();
         }
-        void initItems()
+        void InitItems()
         {
             Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.logicMap, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap, ThumbItem.ModelTypes.Business));
             Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.autoFilter, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("信息抽取", global::C2.Properties.Resources.infoExtraction1, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("YHK提取", global::C2.Properties.Resources.infoExtraction1, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("关键词分析", global::C2.Properties.Resources.keywordAnalysis, ThumbItem.ModelTypes.Model));
             Items.Add(new ThumbItem("同群分析", global::C2.Properties.Resources.groupAnalysis, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
-            Items.Add(new ThumbItem("", global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
+            Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
+            Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
         }
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension
@@ -553,16 +551,11 @@ namespace C2.Controls
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
                     break;
                 case ThumbItem.ModelTypes.Model:
-                    CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.UserWorkspacePath, "聚沙成塔", item.Text));
+                    CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.MarketViewPath, item.Text));
                     if (cf != null)
-                    {
-                        TabBar tabBar = Global.GetMainForm().TaskBar;
-                        TabItem tab = tabBar.GetItemByTag(cf);
-                        if (tab != null)
-                            tabBar.SelectedItem = tab;
-                    }
+                        Global.GetMainForm().SelectForm(cf);
                     else
-                        Global.GetMainForm().LoadCanvasFormByXml(Path.Combine(Global.UserWorkspacePath, "聚沙成塔"), item.Text);
+                        Global.GetMainForm().LoadCanvasFormByXml(Global.MarketViewPath, item.Text);
                     break;
                 default:
                     break;
@@ -625,7 +618,7 @@ namespace C2.Controls
         {
             base.OnMouseDown(e);
 
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 PressedObject = HitTest(e.X, e.Y);
             }

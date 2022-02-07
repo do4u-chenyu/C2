@@ -478,7 +478,7 @@ namespace C2
             form.Save();
         }
 
-        public void LoadCanvasFormByXml(string savePath ,string modelTitle)
+        public void LoadCanvasFormByXml(string savePath, string modelTitle)
         {
             ModelDocument doc = new ModelDocument(modelTitle, UserName)
             {
