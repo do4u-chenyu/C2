@@ -12,7 +12,6 @@ namespace C2.Database
         #region 构造函数
 
         protected string Name, User, Pass, Host, Sid, Service, Port, Schema;
-        public delegate void UpdateLog(string log);
         protected struct QueryResult
         {
             public string content;

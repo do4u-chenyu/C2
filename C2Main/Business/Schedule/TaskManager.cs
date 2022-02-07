@@ -30,10 +30,8 @@ namespace C2.Business.Schedule
     /// </summary> 
     public class TaskManager
     {
-
-        public delegate void UpdateLog(string log);               //声明一个更新主线程日志的委托
-        public UpdateLog UpdateLogInfoDelegate;
-        public UpdateLog UpdateLogWarnDelegate;
+        public InvokeUtil.AsynCallback_S1 UpdateLogInfoDelegate;
+        public InvokeUtil.AsynCallback_S1 UpdateLogWarnDelegate;
 
         public delegate void AccomplishTask(TaskManager manager); //声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;

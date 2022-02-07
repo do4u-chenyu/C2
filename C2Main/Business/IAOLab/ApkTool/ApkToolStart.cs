@@ -10,9 +10,6 @@ namespace C2.IAOLab.ApkToolStart
 {
     public class ApkToolStart
     {
-        public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
-
-        
         private static ApkToolStart instance;
         public static ApkToolStart GetInstance()  // 单例模式
         {
@@ -253,7 +250,7 @@ namespace C2.IAOLab.ApkToolStart
 
                 }
             }
-            catch (System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
                 //UpdateLogDelegate("InvalidOperationException: " + ex.Message);

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using C2.Controls.MapViews;
+﻿using C2.Controls.MapViews;
 using C2.Core;
 using C2.Model;
 using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Styles;
+using C2.Utils;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace C2.Controls
 {
@@ -205,10 +205,9 @@ namespace C2.Controls
         #endregion
 
         #region Selection
-        public delegate void NeedShowEventHandler(bool isNeedShow);
-        public event System.EventHandler SelectionChanged;
+        public event EventHandler SelectionChanged;
 
-        public event NeedShowEventHandler NeedShowDesigner;
+        public event InvokeUtil.AsynCallback_B1 NeedShowDesigner;
 
         protected ChartSelection Selection { get; private set; }
 

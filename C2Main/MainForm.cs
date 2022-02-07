@@ -50,13 +50,6 @@ namespace C2
         private Control[] leftPanelControls;
         private Control[] leftMainButtons;
    
-        delegate void AsynUpdateLog(string logContent);
-        delegate void AsynUpdateGif();
-        delegate void TaskCallBack();
-        delegate void AsynUpdateProgressBar();
-        delegate void AsynUpdateMask();
-        delegate void AsynUpdateOpErrorMessage();
-
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
         private string fullFilePath;

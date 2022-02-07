@@ -7,6 +7,7 @@ namespace C2.Utils
     {
         public delegate void AsynCallback();
         public delegate void AsynCallback_S1(string val);
+        public delegate void AsynCallback_B1(bool val);
 
         public static string Invoke(Control ctl, Delegate method)
         {
