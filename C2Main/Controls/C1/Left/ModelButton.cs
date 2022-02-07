@@ -1,5 +1,6 @@
 ﻿using C2.Business.Model;
 using C2.Core;
+using C2.Forms;
 using C2.Utils;
 using System;
 using System.IO;
@@ -41,6 +42,12 @@ namespace C2.Controls.Left
             this.OpenToolStripMenuItem.Enabled = false;
         }
 
+        private void SelectCanvasForm()
+        {
+            CanvasForm form = SearchCanvasForm();
+            Global.GetMainForm().SelectForm(form);
+        }
+
         private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileUtil.ExploreDirectory(FullFilePath);
@@ -64,9 +71,12 @@ namespace C2.Controls.Left
                 dragDropData.SetData("Type", ElementType.Empty); // 模型为了统一逻辑，暂定为empty
                 dragDropData.SetData("Text", ModelTitle); 
             }
-            else if (e.Clicks == 2 && !IsCanvasFormOpened()) // 双击打开
-            {
-                OpenModelDocument();
+            else if (e.Clicks == 2) // 双击打开
+            {   
+                if (IsCanvasFormOpened())
+                    SelectCanvasForm();  // 切换Tab
+                else
+                    OpenModelDocument(); // 打开文档
             }
         }
 
@@ -82,7 +92,12 @@ namespace C2.Controls.Left
 
         private bool IsCanvasFormOpened()
         {
-            return Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.MarketViewPath, ModelTitle)) != null;
+            return SearchCanvasForm() != null;
+        }
+
+        private CanvasForm SearchCanvasForm()
+        {
+            return Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.MarketViewPath, ModelTitle));
         }
 
         private void ModelButton_Load(object sender, EventArgs e)

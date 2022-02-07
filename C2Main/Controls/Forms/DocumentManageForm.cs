@@ -138,7 +138,7 @@ namespace C2.Controls
             ShowForm(form, true, true);
         }
 
-        protected void SelectForm(BaseForm form)
+        public void SelectForm(BaseForm form)
         {
             if (form != null && Forms.Contains(form))
             {

@@ -34,7 +34,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExportModel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +47,7 @@
             // 
             this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
             this.rightPictureBox.Location = new System.Drawing.Point(163, 8);
-            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(21, 20);
             this.rightPictureBox.TabIndex = 0;
@@ -71,12 +70,11 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
-            this.ExportModel,
             this.toolStripSeparator1,
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 106);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 110);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
             // OpenToolStripMenuItem
@@ -85,14 +83,6 @@
             this.OpenToolStripMenuItem.Size = new System.Drawing.Size(228, 24);
             this.OpenToolStripMenuItem.Text = "打开";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
-            // 
-            // ExportModel
-            // 
-            this.ExportModel.Enabled = false;
-            this.ExportModel.Name = "ExportModel";
-            this.ExportModel.Size = new System.Drawing.Size(228, 24);
-            this.ExportModel.Text = "导出";
-            this.ExportModel.Click += new System.EventHandler(this.ExportModelButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -121,7 +111,7 @@
             this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textButton.Location = new System.Drawing.Point(39, 4);
-            this.textButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textButton.Margin = new System.Windows.Forms.Padding(4);
             this.textButton.Name = "textButton";
             this.textButton.Size = new System.Drawing.Size(121, 31);
             this.textButton.TabIndex = 9;
@@ -140,7 +130,7 @@
             this.Controls.Add(this.textButton);
             this.Controls.Add(this.lelfPictureBox);
             this.Controls.Add(this.rightPictureBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ModelButton";
             this.Size = new System.Drawing.Size(187, 34);
             this.Load += new System.EventHandler(this.ModelButton_Load);
@@ -163,6 +153,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ExportModel;
     }
 }
