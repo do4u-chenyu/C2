@@ -220,7 +220,7 @@ namespace C2.Forms
         {
             foreach (TabItem ti in tabBar1.Items)
             {
-                if (ti.Tag.ToString() == name)
+                if (ti.Text == name)
                 {
                     tabBar1.SelectedItem = ti;
                     break;
