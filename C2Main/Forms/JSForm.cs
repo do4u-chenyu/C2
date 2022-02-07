@@ -17,11 +17,11 @@ namespace C2.Forms
     {
         private string excelPath;
         private readonly string webUrl = Path.Combine(Global.WebEnginePath, "Html", "JSTable.html");
-        IGlueSetting glueSetting;
-        GlueDetailInfoDialog detailDialog;
-        SqDetailInfoDialog sqDeatilDialog;
-        SqDetailInfoDialogReply dbDeatilDialogReply;
-        private Dictionary<GlueType, string> doneGlueList = new Dictionary<GlueType, string>
+        private IGlueSetting glueSetting;
+        readonly GlueDetailInfoDialog detailDialog;
+        readonly SqDetailInfoDialog sqDeatilDialog;
+        readonly SqDetailInfoDialogReply dbDeatilDialogReply;
+        private readonly static Dictionary<GlueType, string> GlueListDesc = new Dictionary<GlueType, string>
         {
             [GlueType.Gamble] = "涉赌专项",
             [GlueType.Gun] = "涉枪专项",
@@ -30,9 +30,9 @@ namespace C2.Forms
             [GlueType.Webshell] = "盗洞专项",
             [GlueType.VB] = "境外网产专项"
         };
-        public string txtDirectory = Global.JSViewPath;
-        public string bakDirectory = Path.Combine(Global.JSViewPath, "backup");
-        string txtModelDirectory = Path.Combine(Global.TemplatesPath, "JS模板");
+        private readonly string txtDirectory = Global.JSViewPath;
+        private readonly string bakDirectory = Path.Combine(Global.JSViewPath, "backup");
+        private readonly string txtModelDirectory = Path.Combine(Global.TemplatesPath, "JS模板");
 
         public JSForm()
         {
@@ -57,15 +57,15 @@ namespace C2.Forms
             {
                 string trueDbFile = Path.Combine(txtModelDirectory, "涉赌模板0112.zip");
                 File.Copy(trueDbFile, backSdFile, true);
-                initLoadModelData(backSdFile, true);
+                InitLoadModelData(backSdFile, true);
             }
         }
 
-        private void initLoadModelData(string excelPath,bool isWrite)
+        private void InitLoadModelData(string excelPath, bool isWrite)
         {
             using (GuarderUtil.WaitCursor)
             {
-                string returnMsg = glueSetting.UpdateContent(excelPath,isWrite);
+                string returnMsg = glueSetting.UpdateContent(excelPath, isWrite);
                 if (returnMsg == "数据添加成功")
                     RefreshHtmlTable();
             }
@@ -88,11 +88,11 @@ namespace C2.Forms
             if (tabBar1 != null)
                 tabBar1.SelectedItemChanged += new EventHandler(TaskBar_SelectedItemChanged);
         }
-        void TaskBar_SelectedItemChanged(object sender, EventArgs e)
+        private void TaskBar_SelectedItemChanged(object sender, EventArgs e)
         {
             GlueType type = (GlueType)tabBar1.SelectedItem.Tag;
             glueSetting = GlueSettingFactory.GetSetting(type);
-            if (doneGlueList.ContainsKey(type))
+            if (GlueListDesc.ContainsKey(type))
             {
                 RefreshHtmlTable();
                 this.webBrowser.Visible = true;
@@ -119,7 +119,7 @@ namespace C2.Forms
                 {
                     string trueSqFile = Path.Combine(txtModelDirectory, "涉枪模板0112.zip");
                     File.Copy(trueSqFile, backSqFile, true);
-                    initLoadModelData(backSqFile,false);
+                    InitLoadModelData(backSqFile,false);
                 }
             }
             
@@ -135,20 +135,19 @@ namespace C2.Forms
                 {
                     string trueShFile = Path.Combine(txtModelDirectory, "涉黄模板0112.zip");
                     File.Copy(trueShFile, backShFile, true);
-                    initLoadModelData(backShFile,false);
+                    InitLoadModelData(backShFile,false);
                 }
             }
         }
 
         protected virtual void AddTabItem(GlueType type, bool visiable = false)
         {
-            string name = doneGlueList[type];
             Global.GetWorkSpacePanel().SuspendLayout();
             if (tabBar1 != null)
             {
                 var ti = new TabItem
                 {
-                    Text = name,
+                    Text = GlueListDesc[type],
                     CanClose = false,
                     Tag = type,
                 };
@@ -166,7 +165,7 @@ namespace C2.Forms
             return false;
         }
 
-        public void excelTextBoxSetting(int start, int end, Color color) 
+        private void ExcelTextBoxSetting(int start, int end, Color color) 
         {
             this.excelTextBox.SelectionStart = start;
             this.excelTextBox.SelectionLength = end;
@@ -177,12 +176,8 @@ namespace C2.Forms
         private void StyleChange(GlueType type)
         {
             this.excelTextBox.Text = "未选择任何文件";
-            excelTextBoxSetting(0, this.excelTextBox.Text.Length, SystemColors.WindowText);
-
-            string name = doneGlueList[type];
-            this.itemLabel.Text = name;
-            this.itemLabel.Location = type == GlueType.VB ? new Point(56, 14) : new Point(72, 14);
-            this.label3.Location = type == GlueType.VB ? new Point(24, 14) : new Point(41, 14);
+            ExcelTextBoxSetting(0, this.excelTextBox.Text.Length, SystemColors.WindowText);
+            this.itemLabel.Text = GlueListDesc[type].Replace("专项", string.Empty);
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
@@ -194,6 +189,7 @@ namespace C2.Forms
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
+
             excelPath = OpenFileDialog.FileName;
 
             using (GuarderUtil.WaitCursor)
@@ -201,16 +197,14 @@ namespace C2.Forms
                 string returnMsg = glueSetting.UpdateContent(excelPath,true);
                 if (returnMsg == "数据添加成功")
                 {
-                    this.excelTextBox.Text = string.Empty;
-                    this.excelTextBox.Text = "[" + Path.GetFileNameWithoutExtension(excelPath) + "]" + "数据添加成功";
-                    excelTextBoxSetting(0, this.excelTextBox.Text.Length - "数据添加成功".Length, Color.DarkBlue);
+                    this.excelTextBox.Text = "[" + Path.GetFileNameWithoutExtension(excelPath) + "]" + OpUtil.Blank + "成功";
+                    ExcelTextBoxSetting(0, this.excelTextBox.Text.Length - "成功".Length, Color.DarkBlue);
                     RefreshHtmlTable();
                 }
                 else
                 {
-                    this.excelTextBox.Text = string.Empty;
-                    this.excelTextBox.Text = "[" + Path.GetFileNameWithoutExtension(excelPath) + "]" + "数据添加失败";
-                    excelTextBoxSetting(0, this.excelTextBox.Text.Length - "数据添加失败".Length, Color.DarkBlue);
+                    this.excelTextBox.Text = "[" + Path.GetFileNameWithoutExtension(excelPath) + "]" + OpUtil.Blank + "失败";
+                    ExcelTextBoxSetting(0, this.excelTextBox.Text.Length - "失败".Length, Color.Red);
                     HelpUtil.ShowMessageBox(returnMsg);
                 }
             }
@@ -233,7 +227,7 @@ namespace C2.Forms
         
         [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
         [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-        public void refreshData(string item)
+        public void RefreshData(string item)
         {
             this.webBrowser.Document.InvokeScript("clearTable");
             this.webBrowser.Document.InvokeScript("clearTableTitle");
@@ -305,11 +299,12 @@ namespace C2.Forms
         private void SampleButton_Click(object sender, EventArgs e)
         {
             GlueType glueType = (GlueType)tabBar1.SelectedItem.Tag;
-            if (doneGlueList.ContainsKey(glueType))
+            if (GlueListDesc.ContainsKey(glueType))
             {
                 SaveFileDialog dialog = new SaveFileDialog
                 {
-                    Filter = "数据包|*.zip"
+                    Title = "数据包样例",
+                    Filter = "数据包|*.zip",
                 };
 
                 string type = string.Empty;
@@ -338,8 +333,7 @@ namespace C2.Forms
                         default:
                             break;
                     }
-                    string localExcelPath = Path.Combine(Application.StartupPath, 
-                        "Resources/Templates/JS模板", prefix + "模板0112.zip");
+                    string localExcelPath = Path.Combine(Global.TemplatesPath, "JS模板", prefix + "模板0112.zip");
                     FileUtil.FileCopy(localExcelPath, dialog.FileName);
                 }
                 HelpUtil.ShowMessageBox("模板保存完毕。");
