@@ -332,14 +332,6 @@ begin
   SendMessage(WizardForm.Handle,WM_SYSCOMMAND,61472,0);
 end;
 
-//点击门户链接
-//procedure lblLicenseClick(sender :TObject);
-//var
-//  ErrorCode: Integer;
-//begin
-//  ShellExec('open', '{#MyAppLkLicenseURL}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);  
-//end; 
-
 //点击一键安装按钮
 procedure btnOneKey_OnClick(hBtn:HWND);
 begin
@@ -692,9 +684,9 @@ end;
 
 Const 
   //保持时间
-  InsBgAni_HoldTime = 3000;
+  InsBgAni_HoldTime = 2000;
   //切换时间
-  InsBgAni_SwitchTime = 400;
+  InsBgAni_SwitchTime = 600;
   //图片数目
   InsBgAni_ImgCount = {#InsBgAniPicCount};
 var 
@@ -730,14 +722,14 @@ begin
 	end 
 	else 
 	begin
-	  alpha := (t0 -InsBgAni_HoldTime) *255 / InsBgAni_SwitchTime;
-    nIdx := (Idx + 1) mod  InsBgAni_ImgCount;
+	  alpha := (t0 - InsBgAni_HoldTime) * 255 / InsBgAni_SwitchTime;
+       nIdx := (Idx + 1) mod  InsBgAni_ImgCount;
 	  for i:= 0 to InsBgAni_ImgCount do 
 		begin 
-		   tImg :=InsBgAni_ImgArr[i] 
+		   tImg := InsBgAni_ImgArr[i] 
 		   if i = idx then 
 		   begin 
-		      ImgSetTransparent(tImg, 255-alpha);
+		      ImgSetTransparent(tImg, 255 - alpha);
 		   end
 		   else if i = nIdx then 
 		   begin
@@ -759,7 +751,7 @@ var
   w:longint;
 begin
   w:=Round(577*pr/100);
-  ImgSetPosition(imgProgressBar, DpiScale(38), DpiScale(429), DpiScale(w),DpiScale(29));
+  ImgSetPosition(imgProgressBar, DpiScale(38), DpiScale(429), DpiScale(w), DpiScale(29));
   ImgSetVisiblePart(imgProgressBar,0,0, w, 29);
   ImgApplyChanges(WizardForm.Handle);
   lblTipProgress.Caption := Format('正在为您安装 %d%%',[Round(pr)]);
