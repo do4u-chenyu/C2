@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.pythonConfigPage = new System.Windows.Forms.TabPage();
             this.chosenPythonLable = new System.Windows.Forms.Label();
@@ -126,10 +127,10 @@
             this.pythonConfigPage.Controls.Add(this.browseButton);
             this.pythonConfigPage.Controls.Add(this.pythonFFPTextBox);
             this.pythonConfigPage.Controls.Add(this.label1);
-            this.pythonConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.pythonConfigPage.Location = new System.Drawing.Point(4, 34);
             this.pythonConfigPage.Name = "pythonConfigPage";
             this.pythonConfigPage.Padding = new System.Windows.Forms.Padding(3);
-            this.pythonConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.pythonConfigPage.Size = new System.Drawing.Size(634, 372);
             this.pythonConfigPage.TabIndex = 1;
             this.pythonConfigPage.Text = "Python引擎";
             this.pythonConfigPage.ToolTipText = "导入本地的Python虚拟机,用来运行使用者导入的外部自定义PY脚本,支持导入多种版本的Python虚拟机";
@@ -150,7 +151,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 355);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(119, 17);
+            this.label7.Size = new System.Drawing.Size(177, 25);
             this.label7.TabIndex = 6;
             this.label7.Text = "默认Python虚拟机 :";
             this.toolTip1.SetToolTip(this.label7, "Py算子默认使用的虚拟机");
@@ -266,7 +267,7 @@
             this.pythonFFPTextBox.Location = new System.Drawing.Point(5, 49);
             this.pythonFFPTextBox.Name = "pythonFFPTextBox";
             this.pythonFFPTextBox.ReadOnly = true;
-            this.pythonFFPTextBox.Size = new System.Drawing.Size(572, 23);
+            this.pythonFFPTextBox.Size = new System.Drawing.Size(572, 31);
             this.pythonFFPTextBox.TabIndex = 1;
             // 
             // label1
@@ -274,7 +275,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 17);
+            this.label1.Size = new System.Drawing.Size(349, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Pyhton虚拟机路径(Python Interpreter)";
             // 
@@ -283,9 +284,9 @@
             this.gisMapConfigPage.Controls.Add(this.gisMapCancelButton);
             this.gisMapConfigPage.Controls.Add(this.gisMapOKButton);
             this.gisMapConfigPage.Controls.Add(this.tabControl1);
-            this.gisMapConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.gisMapConfigPage.Location = new System.Drawing.Point(4, 34);
             this.gisMapConfigPage.Name = "gisMapConfigPage";
-            this.gisMapConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.gisMapConfigPage.Size = new System.Drawing.Size(634, 372);
             this.gisMapConfigPage.TabIndex = 5;
             this.gisMapConfigPage.Text = "图上作战";
             this.gisMapConfigPage.ToolTipText = "将数据展示到地图上的简易工具";
@@ -332,10 +333,10 @@
             this.tabPage1.Controls.Add(this.baiduLatTB);
             this.tabPage1.Controls.Add(this.baiduLonTB);
             this.tabPage1.Controls.Add(this.baiduGISTB);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(626, 313);
+            this.tabPage1.Size = new System.Drawing.Size(626, 305);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "百度地图(外网)";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -344,7 +345,7 @@
             // 
             this.baiduAPIKey.Location = new System.Drawing.Point(104, 14);
             this.baiduAPIKey.Name = "baiduAPIKey";
-            this.baiduAPIKey.Size = new System.Drawing.Size(460, 23);
+            this.baiduAPIKey.Size = new System.Drawing.Size(460, 31);
             this.baiduAPIKey.TabIndex = 16;
             this.toolTip1.SetToolTip(this.baiduAPIKey, "百度地图服务所需的Key");
             // 
@@ -353,7 +354,7 @@
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(12, 18);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(91, 17);
+            this.label24.Size = new System.Drawing.Size(135, 25);
             this.label24.TabIndex = 14;
             this.label24.Text = "百度API Key：";
             // 
@@ -361,7 +362,7 @@
             // 
             this.baiduScaleTB.Location = new System.Drawing.Point(104, 103);
             this.baiduScaleTB.Name = "baiduScaleTB";
-            this.baiduScaleTB.Size = new System.Drawing.Size(460, 23);
+            this.baiduScaleTB.Size = new System.Drawing.Size(460, 31);
             this.baiduScaleTB.TabIndex = 13;
             this.toolTip1.SetToolTip(this.baiduScaleTB, "初始缩放比值请设置5-9区间");
             // 
@@ -370,7 +371,7 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(46, 107);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 17);
+            this.label15.Size = new System.Drawing.Size(84, 25);
             this.label15.TabIndex = 12;
             this.label15.Text = "缩放比：";
             // 
@@ -379,7 +380,7 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(35, 77);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(63, 17);
+            this.label16.Size = new System.Drawing.Size(94, 25);
             this.label16.TabIndex = 11;
             this.label16.Text = "初始纬度 :";
             // 
@@ -388,7 +389,7 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(35, 47);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(63, 17);
+            this.label17.Size = new System.Drawing.Size(94, 25);
             this.label17.TabIndex = 10;
             this.label17.Text = "初始经度 :";
             // 
@@ -396,7 +397,7 @@
             // 
             this.baiduLatTB.Location = new System.Drawing.Point(104, 72);
             this.baiduLatTB.Name = "baiduLatTB";
-            this.baiduLatTB.Size = new System.Drawing.Size(460, 23);
+            this.baiduLatTB.Size = new System.Drawing.Size(460, 31);
             this.baiduLatTB.TabIndex = 9;
             this.toolTip1.SetToolTip(this.baiduLatTB, "请输入正确纬度！");
             // 
@@ -404,7 +405,7 @@
             // 
             this.baiduLonTB.Location = new System.Drawing.Point(104, 43);
             this.baiduLonTB.Name = "baiduLonTB";
-            this.baiduLonTB.Size = new System.Drawing.Size(460, 23);
+            this.baiduLonTB.Size = new System.Drawing.Size(460, 31);
             this.baiduLonTB.TabIndex = 8;
             this.toolTip1.SetToolTip(this.baiduLonTB, "请输入正确经度！");
             // 
@@ -426,10 +427,10 @@
             this.userModelConfigPage.Controls.Add(this.userModelOkButton);
             this.userModelConfigPage.Controls.Add(this.userModelTextBox);
             this.userModelConfigPage.Controls.Add(this.label2);
-            this.userModelConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.userModelConfigPage.Location = new System.Drawing.Point(4, 34);
             this.userModelConfigPage.Name = "userModelConfigPage";
             this.userModelConfigPage.Padding = new System.Windows.Forms.Padding(3);
-            this.userModelConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.userModelConfigPage.Size = new System.Drawing.Size(634, 372);
             this.userModelConfigPage.TabIndex = 0;
             this.userModelConfigPage.Text = "用户文档路径";
             this.userModelConfigPage.UseVisualStyleBackColor = true;
@@ -439,7 +440,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 161);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(128, 17);
+            this.label4.Size = new System.Drawing.Size(192, 25);
             this.label4.TabIndex = 5;
             this.label4.Text = "由程序在安装时指定。";
             // 
@@ -448,7 +449,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 132);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(371, 17);
+            this.label3.Size = new System.Drawing.Size(557, 25);
             this.label3.TabIndex = 4;
             this.label3.Text = "用户文档目录存储了当前所有用户的文档,配置信息和运算临时文件。";
             // 
@@ -477,7 +478,7 @@
             this.userModelTextBox.Location = new System.Drawing.Point(6, 77);
             this.userModelTextBox.Name = "userModelTextBox";
             this.userModelTextBox.ReadOnly = true;
-            this.userModelTextBox.Size = new System.Drawing.Size(620, 23);
+            this.userModelTextBox.Size = new System.Drawing.Size(620, 31);
             this.userModelTextBox.TabIndex = 1;
             // 
             // label2
@@ -485,7 +486,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 17);
+            this.label2.Size = new System.Drawing.Size(161, 25);
             this.label2.TabIndex = 0;
             this.label2.Text = "用户文档存储路径:";
             // 
@@ -499,10 +500,10 @@
             this.aboutConfigPage.Controls.Add(this.aboutOkButton);
             this.aboutConfigPage.Controls.Add(this.label6);
             this.aboutConfigPage.Controls.Add(this.label5);
-            this.aboutConfigPage.Location = new System.Drawing.Point(4, 26);
+            this.aboutConfigPage.Location = new System.Drawing.Point(4, 34);
             this.aboutConfigPage.Name = "aboutConfigPage";
             this.aboutConfigPage.Padding = new System.Windows.Forms.Padding(3);
-            this.aboutConfigPage.Size = new System.Drawing.Size(634, 380);
+            this.aboutConfigPage.Size = new System.Drawing.Size(634, 372);
             this.aboutConfigPage.TabIndex = 3;
             this.aboutConfigPage.Text = "关于和注册";
             this.aboutConfigPage.UseVisualStyleBackColor = true;
@@ -512,7 +513,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(9, 295);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 17);
+            this.label8.Size = new System.Drawing.Size(187, 25);
             this.label8.TabIndex = 9;
             this.label8.Text = "到期时间 2025.12.31";
             // 
@@ -525,9 +526,7 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(537, 172);
             this.textBox4.TabIndex = 8;
-            this.textBox4.Text = "分析师单兵作战装备,旨在提升分析师的单兵和小团队作战能力,在独立环境下能够以一当十,快速展开各类型分析实战攻坚任务;其轻量精干携带方便,沉淀了历史战例中各种成功经验,统一融合了部门的" +
-    "四大类服务入口(网站侦察兵,APK大眼睛,HI部AI服务,知识库)、51个小工具、17种WA社工ST和24个经典线索类技战法:一系列网络安全工具、Payload和Trojan样本、信息收集工具、加密解密工具、HASH彩虹表工具、数据转换工具、文本" +
-    "分析工具、互联网取证模块和二进制模块。\r\n";
+            this.textBox4.Text = resources.GetString("textBox4.Text");
             // 
             // button7
             // 
@@ -546,7 +545,7 @@
             this.textBox3.Location = new System.Drawing.Point(11, 256);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(463, 23);
+            this.textBox3.Size = new System.Drawing.Size(463, 31);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = "AH8F-6H7C-9VMF-4UOP";
             // 
@@ -575,7 +574,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(8, 225);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 17);
+            this.label6.Size = new System.Drawing.Size(152, 25);
             this.label6.TabIndex = 1;
             this.label6.Text = "注册(填写注册码)";
             // 
@@ -585,7 +584,7 @@
             this.label5.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
             this.label5.Location = new System.Drawing.Point(8, 23);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 19);
+            this.label5.Size = new System.Drawing.Size(57, 30);
             this.label5.TabIndex = 0;
             this.label5.Text = "关于";
             // 
@@ -635,7 +634,7 @@
             // 
             this.WFDScreenshotTB.Location = new System.Drawing.Point(128, 176);
             this.WFDScreenshotTB.Name = "WFDScreenshotTB";
-            this.WFDScreenshotTB.Size = new System.Drawing.Size(463, 21);
+            this.WFDScreenshotTB.Size = new System.Drawing.Size(463, 28);
             this.WFDScreenshotTB.TabIndex = 13;
             this.WFDScreenshotTB.Text = "https://113.31.119.85:53374/apis/Screenshot";
             // 
@@ -643,7 +642,7 @@
             // 
             this.WFDResultTB.Location = new System.Drawing.Point(128, 126);
             this.WFDResultTB.Name = "WFDResultTB";
-            this.WFDResultTB.Size = new System.Drawing.Size(463, 21);
+            this.WFDResultTB.Size = new System.Drawing.Size(463, 28);
             this.WFDResultTB.TabIndex = 12;
             this.WFDResultTB.Text = "https://113.31.119.85:53374/apis/detection/task/result";
             // 
@@ -651,7 +650,7 @@
             // 
             this.WFDClassifierTB.Location = new System.Drawing.Point(128, 77);
             this.WFDClassifierTB.Name = "WFDClassifierTB";
-            this.WFDClassifierTB.Size = new System.Drawing.Size(463, 21);
+            this.WFDClassifierTB.Size = new System.Drawing.Size(463, 28);
             this.WFDClassifierTB.TabIndex = 11;
             this.WFDClassifierTB.Text = "https://113.31.119.85:53374/apis/pro_classifier_api";
             // 
@@ -659,7 +658,7 @@
             // 
             this.WFDLoginTB.Location = new System.Drawing.Point(128, 28);
             this.WFDLoginTB.Name = "WFDLoginTB";
-            this.WFDLoginTB.Size = new System.Drawing.Size(463, 21);
+            this.WFDLoginTB.Size = new System.Drawing.Size(463, 28);
             this.WFDLoginTB.TabIndex = 10;
             this.WFDLoginTB.Text = "https://113.31.119.85:53374/apis/Login";
             // 
@@ -668,7 +667,7 @@
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(38, 179);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(65, 12);
+            this.label29.Size = new System.Drawing.Size(98, 18);
             this.label29.TabIndex = 9;
             this.label29.Text = "获取截图：";
             // 
@@ -677,7 +676,7 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(38, 129);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(65, 12);
+            this.label28.Size = new System.Drawing.Size(98, 18);
             this.label28.TabIndex = 8;
             this.label28.Text = "获取结果：";
             // 
@@ -686,7 +685,7 @@
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(38, 80);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(65, 12);
+            this.label27.Size = new System.Drawing.Size(98, 18);
             this.label27.TabIndex = 7;
             this.label27.Text = "任务下发：";
             // 
@@ -695,7 +694,7 @@
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(38, 31);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 12);
+            this.label25.Size = new System.Drawing.Size(98, 18);
             this.label25.TabIndex = 6;
             this.label25.Text = "登陆验证：";
             // 

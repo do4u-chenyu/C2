@@ -4,7 +4,7 @@
 #define MyAppName "分析师单兵作战装备"
 #define MyAppVersion "1.4.14"
 #define MyAppPublisher "FiberHome"
-#define MyAppURL "http://fh2020.gitee.io/c1platform/"
+#define MyAppURL ""
 #define MyAppPkgDir "C:\Program Files\FiberHome\IAO解决方案"
 
 #define MyAppExeName "C2.exe"
@@ -23,7 +23,7 @@
 ; ; 点击license 打开的网页连接
 ; #define MyAppLkLicenseURL 'http://fh2020.gitee.io/c1platform/'
 ; 安装目录至少需要的空间 100; 100 MB，TODO 要获取一些Minisize 之类的来计算，这里先写死
-#define MyAppNeedSpaceByte 45
+#define MyAppNeedSpaceByte 100
 ; 外部程序调用本setup.exe时，会向外部传 安装进度的window api Message ID 
 #define WM_MY_INSTALL_PROGRESS 6364
 ; 安装时显示进度条，背景切换图的图片数
@@ -289,34 +289,6 @@ begin
   result := lbl;
 end;
 
-//页面状态初始化 
-//procedure PageState_Init();
-//begin
-//  PageStateLbl1  := PageState_CreateLabel('欢迎'    , DpiScale(501), DpiScale(69));
-//  PageStateLblK1 := PageState_CreateLabel('>'       , DpiScale(532), DpiScale(69));
-//  PageStateLbl2  := PageState_CreateLabel('部署安装', DpiScale(543), DpiScale(69));
-//  PageStateLblK2 := PageState_CreateLabel('>'       , DpiScale(598), DpiScale(69));
-//  PageStateLbl3  := PageState_CreateLabel('完成'    , DpiScale(610), DpiScale(69));
-//end;
-
-//设置标签内容为粗体
-//procedure SetTLabelBold(lbl:TLabel; isBold:boolean);
-//begin
-// if isBold then begin 
-//   lbl.Font.Style := lbl.Font.Style + [fsBold];
-// end else begin 
-//   lbl.Font.Style := lbl.Font.Style - [fsBold];
-// end;
-//end;
-
-//页面合集
-//procedure PageState_Set(idx:integer);
-//begin
-//  SetTLabelBold(PageStateLbl1, idx = 1);
-//  SetTLabelBold(PageStateLbl2, idx = 2);
-//  SetTLabelBold(PageStateLbl3, idx = 3);
-//end;
-
 //设置空间是否可见
 procedure TconSetVisible(lbl:TControl; bVis:boolean);
 begin
@@ -368,24 +340,6 @@ end;
 //  ShellExec('open', '{#MyAppLkLicenseURL}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);  
 //end; 
 
-//点击是否选中门户按钮
-//procedure chkLicenseOnClick(bBtn :HWND);
-//var 
-//   isCheck:boolean;
-//begin
-//   isCheck := BtnGetChecked(chkLicense);
-//   if isCheck then 
-//   begin 
-//	   BtnSetEnabled(btnCustomInstall, True);
-//	   BtnSetEnabled(btnOneKey, True);
-//   end 
-//   else 
-//   begin 
-//     BtnSetEnabled(btnCustomInstall, False);
-//	   BtnSetEnabled(btnOneKey, False);
-//   end;
-//end;
-
 //点击一键安装按钮
 procedure btnOneKey_OnClick(hBtn:HWND);
 begin
@@ -394,35 +348,12 @@ begin
   WizardForm.NextButton.OnClick(WizardForm);
 end;
 
-//悬停控制更改
-//procedure OnHoverControlChanged(Control: TControl);
-//begin
-//	if lblLicense <> nil then
-//	begin
-//		if lblLicense = Control then
-//		begin
-//			lblLicense.Font.Style := lblLicense.Font.Style + [fsUnderline];
-//		end
-//		else 
-//		begin
-//			lblLicense.Font.Style := lblLicense.Font.Style - [fsUnderline];
-//		end;
-//	end ;
-//end;
-
 //欢迎访问门户是否选中
 procedure InitGui_PageWelcome();
 var
   BtnOneKeyFont:TFont;
   tmpFont:TFont;
 begin
-  //icense :=BtnCreate(WizardForm.Handle,DpiScale(33),DpiScale(410),
-  //cale(15),DpiScale(15), ExpandConstant('{tmp}\check.png'),1, True);
-  //etChecked(chkLicense, True); 
-  //etEvent(chkLicense,BtnClickEventID,WrapBtnCallback(@chkLicenseOnClick,1));
-  
-  //btnCustomInstall := BtnCreate(WizardForm.Handle,DpiScale(543),DpiScale(409), DpiScale(87), DpiScale(15), ExpandConstant('{tmp}\btnCustomInstall.png'),1,False)
-  //BtnSetEvent(btnCustomInstall,BtnClickEventID,WrapBtnCallback(@btnCustomInstallOnClick,1));
   tmpFont := TFont.Create;
   with tmpFont do begin 
     Size := 12;
@@ -462,36 +393,6 @@ begin
     Left := DpiScale(200);
     Top := DpiScale(225);
   end;
-
-  //lblAgree := TLabel.Create(WizardForm);
-  //with lblAgree do
-  //begin
-  //  Parent := WizardForm;
-  //  Caption := '欢迎访问';
-  //  Transparent := true;
-  //  Font.Size:= 10
-  //  Font.Name:='微软雅黑'
-  //  Font.Color:=$ffffff
-  //  Left := DpiScale(90);
-  //  Top := DpiScale(408);
-  //end;
-
-//设置C2门户链接的字体和颜色  
-  //lblLicense := TLabel.Create(WizardForm);
-  //with lblLicense do
-  //begin
-  //  Parent := WizardForm;
-  //  Caption := '《分析师单兵作战门户》';
-  //  Transparent := true;
-  //  Font.Size:= 10
-  //  Font.Name:='微软雅黑'
-  //  Font.Color:=$ffffff
-  //  Left:= DpiScale(143);
-  //  Top := DpiScale(408);
-  //  OnClick:=@lblLicenseClick;
-  //  Cursor:=crHand;
-  //end;
-  //HoverEvent_Init(@OnHoverControlChanged);
 end;
 
 //获取所需磁盘空间文本
@@ -791,9 +692,9 @@ end;
 
 Const 
   //保持时间
-  InsBgAni_HoldTime = 5000;
+  InsBgAni_HoldTime = 3000;
   //切换时间
-  InsBgAni_SwitchTime = 500;
+  InsBgAni_SwitchTime = 400;
   //图片数目
   InsBgAni_ImgCount = {#InsBgAniPicCount};
 var 
@@ -813,7 +714,7 @@ begin
     InsBgAni_Time := (InsBgAni_Time + 50) mod allAniTime; 
 	//取整数商
 	idx := InsBgAni_Time div (InsBgAni_HoldTime + InsBgAni_SwitchTime);
-  t0 := InsBgAni_Time mod (InsBgAni_HoldTime + InsBgAni_SwitchTime);
+     t0 := InsBgAni_Time mod (InsBgAni_HoldTime + InsBgAni_SwitchTime);
 	if t0 < InsBgAni_HoldTime then 
 	begin 
 		for i:= 0 to InsBgAni_ImgCount do 
@@ -1110,7 +1011,7 @@ begin
   //初始化缩小按钮并绑定相关事件
   btnMin:=BtnCreate(WizardForm.Handle,DpiScale(585),DpiScale(2),DpiScale(39),DpiScale(19),ExpandConstant('{tmp}\btmin.png'),1,False)
   BtnSetEvent(btnMin,BtnClickEventID,WrapBtnCallback(@btnMin_OnClick,1));
-
+  
   InitGui_PageWelcome();
   InitGui_PageSelectDir();
   InitGui_PageSelectWorkSpace();
