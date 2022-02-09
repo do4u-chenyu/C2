@@ -52,7 +52,9 @@ LicenseFile={#MyResDir}\License.txt
 OutputDir={#MySetupOutDir}
 OutputBaseFilename={#MySetupOutBaseFilename}
 SetupIconFile={#MyResDir}\SetupIcon.ico
-Compression=lzma2
+;这个不能用的话就用下面的
+Compression=lzma2/ultra64
+;Compression=lzma2 
 SolidCompression=yes
 
 UsePreviousAppDir=no
@@ -686,7 +688,7 @@ Const
   //保持时间
   InsBgAni_HoldTime = 2000;
   //切换时间
-  InsBgAni_SwitchTime = 600;
+  InsBgAni_SwitchTime = 400;
   //图片数目
   InsBgAni_ImgCount = {#InsBgAniPicCount};
 var 
@@ -780,7 +782,7 @@ begin
   end;
 
   InsBgAni_Time := -1;//Stop ani;  
-  SetTimer(0, 0, 50, WrapTimerProc(@PageInstall_TimerProc, 4));
+  SetTimer(0, 0, 2, WrapTimerProc(@PageInstall_TimerProc, 4));
 end;
 
 //点击“完成安装”按钮
