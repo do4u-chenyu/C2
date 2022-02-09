@@ -465,7 +465,7 @@
             this.变种13无结尾假变量ToolStripMenuItem,
             this.变种14构造Base64DecodeToolStripMenuItem});
             this.OneWordToolStripMenuItem.Name = "OneWordToolStripMenuItem";
-            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.OneWordToolStripMenuItem.Size = new System.Drawing.Size(262, 34);
             this.OneWordToolStripMenuItem.Text = "一句话Trojan变种";
             this.OneWordToolStripMenuItem.ToolTipText = "一句话Trojan的变种版本";
             // 
@@ -584,7 +584,7 @@
             // behinderToolStripMenuItem
             // 
             this.behinderToolStripMenuItem.Name = "behinderToolStripMenuItem";
-            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.behinderToolStripMenuItem.Size = new System.Drawing.Size(262, 34);
             this.behinderToolStripMenuItem.Text = "三代冰蝎";
             this.behinderToolStripMenuItem.ToolTipText = "三代冰蝎配套Trojan|AES128加密";
             this.behinderToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -592,7 +592,7 @@
             // BypassToolStripMenuItem
             // 
             this.BypassToolStripMenuItem.Name = "BypassToolStripMenuItem";
-            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.BypassToolStripMenuItem.Size = new System.Drawing.Size(262, 34);
             this.BypassToolStripMenuItem.Text = "凯撒变种";
             this.BypassToolStripMenuItem.ToolTipText = "凯撒变种Trojan|凯撒加密Payload引导段";
             this.BypassToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -600,7 +600,7 @@
             // PHPEvalToolStripMenuItem
             // 
             this.PHPEvalToolStripMenuItem.Name = "PHPEvalToolStripMenuItem";
-            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.PHPEvalToolStripMenuItem.Size = new System.Drawing.Size(262, 34);
             this.PHPEvalToolStripMenuItem.Text = "通用型PHPEVAL";
             this.PHPEvalToolStripMenuItem.ToolTipText = "PHP通用型一句话Trojan|最常见的PHP_EVAL一句话";
             this.PHPEvalToolStripMenuItem.Click += new System.EventHandler(this.TrojanGeneratorMenuItem_Click);
@@ -608,7 +608,7 @@
             // GodzillaToolStripMenuItem
             // 
             this.GodzillaToolStripMenuItem.Name = "GodzillaToolStripMenuItem";
-            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.GodzillaToolStripMenuItem.Size = new System.Drawing.Size(262, 34);
             this.GodzillaToolStripMenuItem.Text = "哥斯拉";
             this.GodzillaToolStripMenuItem.ToolTipText = "哥斯拉配套Trojan|与Godzilla配套的Trojan";
             this.GodzillaToolStripMenuItem.Click += new System.EventHandler(this.GodzillaTrojanGeneratorMenuItem_Click);
@@ -1061,7 +1061,7 @@
             this.LV.HideSelection = false;
             this.LV.LabelWrap = false;
             this.LV.Location = new System.Drawing.Point(0, 38);
-            this.LV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LV.Margin = new System.Windows.Forms.Padding(4);
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
@@ -1209,17 +1209,17 @@
             // 
             // WebShellManageForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1924, 764);
+            this.ClientSize = new System.Drawing.Size(1336, 509);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "WebShellManageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
