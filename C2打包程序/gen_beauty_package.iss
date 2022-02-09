@@ -782,7 +782,7 @@ begin
   end;
 
   InsBgAni_Time := -1;//Stop ani;  
-  SetTimer(0, 0, 2, WrapTimerProc(@PageInstall_TimerProc, 4));
+  SetTimer(0, 0, 50, WrapTimerProc(@PageInstall_TimerProc, 4));
 end;
 
 //点击“完成安装”按钮
