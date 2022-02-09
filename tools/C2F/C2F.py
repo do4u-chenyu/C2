@@ -6,6 +6,8 @@ import shutil
 import zipfile
 import datetime
 
+
+
 def change_name(dir_path):
     os.chdir(dir_path)
     for i in os.listdir("."):
@@ -28,16 +30,23 @@ def resource_path(relative_path):
        
 def without_extension(path):
     return os.path.basename(path.split('.')[0])
+
+def roll_rmtree(path, ignore_path):
+    backuplist = glob.glob(os.path.join(path + r'\202*'))
+    if ignore_path in backuplist:
+        backuplist.remove(ignore_path)
+    backuplist.sort()
+    if (len(backuplist) >= 5):            # 删除多于5个且日期最旧的
+        shutil.rmtree(backuplist[0], ignore_errors=True)   
     
 def install():
     print('战术手册正在安装中...' + '\r\n')
-    now_string = datetime.datetime.now().strftime('%Y%m%d%H%M')
-    
+    now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     src_path = resource_path("c2f")
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
-    bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据" + "\\" + now_string
-    
+    bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据"
     print('初始化目录...' + '\r\n')
+    bak_path = bak_path + "\\" + now_string
     shutil.rmtree(bak_path, ignore_errors=True)      # 备份目录不应该重复   
     os.makedirs(dst_path, exist_ok=True)
     os.makedirs(bak_path, exist_ok=True)
@@ -59,6 +68,10 @@ def install():
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
         change_name(path_to)        # 解决zipfile库解压中文乱码的问题,这个函数实现的极其丑陋
+        
+    # roll策略删除多余的备份
+    print('删除过期备份...\r\n')
+    roll_rmtree(os.path.dirname(bak_path), bak_path)
         
     print('战术手册安装成功，请重启C2，务必重启C2才能生效\r\n')
 
