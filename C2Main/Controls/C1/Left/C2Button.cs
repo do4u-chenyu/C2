@@ -82,6 +82,18 @@ namespace C2.Controls.Left
                 HelpUtil.ShowMessageBox("文档不存在，可能已被删除");
                 return;
             }
+            // 文档被打开且被修改没保存时导出,给提示
+            if (Global.GetMainForm().OpenedDocumentsFFP().Contains(FullFilePath))
+            {
+                BaseDocumentForm bdf = Global.GetMainForm().FindDocumentForm(FullFilePath);
+                if (bdf != null && bdf.Document.Modified)
+                {
+                    HelpUtil.ShowMessageBox("文档没保存，保存后再导出");
+                    return;
+                }
+            }
+            
+   
 
             ZipDialog zipDialog = new ExportZipDialog(ModelTitle, desc);
             if (zipDialog.ShowDialog() == DialogResult.OK)

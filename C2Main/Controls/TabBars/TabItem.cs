@@ -319,10 +319,17 @@ namespace C2.Controls
 
         void ExportModel_Click(object sender, EventArgs e)
         {
-            string fullFilePath = (this.Tag as BaseDocumentForm).Filename;
+            BaseDocumentForm bdf = this.Tag as BaseDocumentForm;
+            string fullFilePath = bdf.Filename;
             if (!File.Exists(fullFilePath))
             {
                 HelpUtil.ShowMessageBox("文档不存在，可能已被删除");
+                return;
+            }
+
+            if (bdf.Document.Modified)
+            {
+                HelpUtil.ShowMessageBox("文档没保存，保存后再导出");
                 return;
             }
 
