@@ -660,7 +660,7 @@ namespace C2
             return null;
         }
 
-        BaseDocumentForm FindDocumentForm(string filename)
+        public BaseDocumentForm FindDocumentForm(string filename)
         {
             foreach (Form form in Forms)
             {
