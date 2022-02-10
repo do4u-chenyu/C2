@@ -30,6 +30,14 @@ namespace C2.Forms
             [GlueType.Webshell] = "盗洞专项",
             [GlueType.VB] = "境外网产专项"
         };
+        // 这个是临时, 等黑吃黑，盗洞，等实现完毕后就删除
+        private readonly static Dictionary<GlueType, string> GlueListTmpDesc = new Dictionary<GlueType, string>
+        {
+            [GlueType.Gamble] = "涉赌专项",
+            [GlueType.Gun] = "涉枪专项",
+            [GlueType.Yellow] = "涉黄专项",
+        };
+
         private readonly string txtDirectory = Global.JSViewPath;
         private readonly string bakDirectory = Path.Combine(Global.JSViewPath, "backup");
         private readonly string txtModelDirectory = Path.Combine(Global.TemplatesPath, "JS模板");
@@ -90,20 +98,18 @@ namespace C2.Forms
         }
         private void TaskBar_SelectedItemChanged(object sender, EventArgs e)
         {
+
+            this.webBrowser.Visible = false;
+            this.label1.Visible = true;
+
             GlueType type = (GlueType)tabBar1.SelectedItem.Tag;
             glueSetting = GlueSettingFactory.GetSetting(type);
-            if (GlueListDesc.ContainsKey(type))
+            if (GlueListTmpDesc.ContainsKey(type))
             {
                 RefreshHtmlTable();
                 this.webBrowser.Visible = true;
                 this.label1.Visible = false;
             }
-            else
-            {
-                this.webBrowser.Visible = false;
-                this.label1.Visible = true;
-            }
-
             StyleChange(type);
 
             //默认加载 涉枪数模板据
