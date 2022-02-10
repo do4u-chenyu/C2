@@ -143,7 +143,7 @@ begin
   Result := IsAppRunning('{#MyAppExeName}');
   if Result then
   begin
-      MsgBox('程序正在运行,请先关闭程序后再下载! ', mbError, MB_OK); 
+      MsgBox('分析师单兵作战装备正在运行,请先关闭程序后再运行安装! ', mbError, MB_OK); 
     result:=false;
   end
   else
