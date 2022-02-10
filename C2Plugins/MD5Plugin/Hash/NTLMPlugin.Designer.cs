@@ -35,6 +35,20 @@
             this.label1.Location = new System.Drawing.Point(420, 235);
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.Text = "NTLM不可逆";
+            this.label1.Visible = false;
+            //
+            // label2
+            //
+            this.label2.Visible = false;
+            //
+            // label3
+            //
+            this.label3.Visible = false;
+            //
+            // label4
+            //
+            this.label4.Visible = false;
+
             // 
             // encodeTypeCB
             // 

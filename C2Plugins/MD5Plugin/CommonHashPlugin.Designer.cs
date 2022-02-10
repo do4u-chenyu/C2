@@ -138,11 +138,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        protected System.Windows.Forms.Label label3;
+        protected System.Windows.Forms.Label label2;
         protected System.Windows.Forms.Label label1;
         protected System.Windows.Forms.ComboBox encodeTypeCB;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox multlineCB;
+        protected System.Windows.Forms.Label label4;
+        protected System.Windows.Forms.CheckBox multlineCB;
     }
 }
