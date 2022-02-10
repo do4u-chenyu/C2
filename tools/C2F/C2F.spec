@@ -38,6 +38,7 @@ exe = EXE(pyz,
           upx_exclude=[],
           runtime_tmpdir=None,
           console=True,
+          uac_admin=True,                  # 管理员权限
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,

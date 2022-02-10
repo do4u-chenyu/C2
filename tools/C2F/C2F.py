@@ -6,7 +6,31 @@ import shutil
 import zipfile
 import datetime
 
+from ctypes import *
 
+psapi = windll.psapi
+kernel = windll.kernel32
+
+def EnumProcesses():
+    lpidProcess = (c_ulong * 256)()
+    cbNeeded = c_ulong() 
+    psapi.EnumProcesses(byref(lpidProcess), sizeof(lpidProcess), byref(cbNeeded))
+    nReturned = int(cbNeeded.value/sizeof(c_ulong()))
+    pidProcess = [i for i in lpidProcess][:nReturned]
+    
+    p_list = []
+    mod_name = c_buffer(1024)
+    hModule, count = c_ulong(), c_ulong()
+    for pid in pidProcess:
+        hProcess = kernel.OpenProcess(0x0400 | 0x0010, False, pid)
+        if hProcess:
+            psapi.EnumProcessModules(hProcess, byref(hModule), sizeof(hModule), byref(count))
+            psapi.GetModuleBaseNameA(hProcess, hModule.value, mod_name, sizeof(mod_name))
+            p_list.append(str(mod_name.value, encoding = "GBK"))
+            for i in range(mod_name._length_):
+                mod_name[i]= 0
+            kernel.CloseHandle(hProcess)
+    return p_list
 
 def change_name(dir_path):
     os.chdir(dir_path)
@@ -38,16 +62,31 @@ def roll_rmtree(path, ignore_path):
     backuplist.sort()
     if (len(backuplist) >= 5):            # 删除多于5个且日期最旧的
         shutil.rmtree(backuplist[0], ignore_errors=True)   
+
+
+def check_c2_running():
+    pList = EnumProcesses()
+    pList = [i.lower() for i in pList]
+    if 'c2.exe' in pList:
+        print('分析师单兵作战装备(C2.exe)-正在运行中, 请先关闭C2再安装战术手册\r\n')
+        print('\r\n')
+        print('分析师单兵作战装备(C2.exe)-正在运行中, 请先关闭C2再安装战术手册\r\n')
+        print('\r\n')
+        print('分析师单兵作战装备(C2.exe)-正在运行中, 请先关闭C2再安装战术手册\r\n')
+        os.system("pause")
+        sys.exit()
     
+
 def install():
     print('战术手册正在安装中...' + '\r\n')
     now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     src_path = resource_path("c2f")
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
     bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据"
+    
     print('初始化目录...' + '\r\n')
     bak_path = bak_path + "\\" + now_string
-    shutil.rmtree(bak_path, ignore_errors=True)      # 备份目录不应该重复   
+    shutil.rmtree(bak_path, ignore_errors=True)
     os.makedirs(dst_path, exist_ok=True)
     os.makedirs(bak_path, exist_ok=True)
     
@@ -67,7 +106,7 @@ def install():
         os.makedirs(path_to, exist_ok=True)
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
-        change_name(path_to)        # 解决zipfile库解压中文乱码的问题,这个函数实现的极其丑陋
+        change_name(path_to)        # 解决zipfile库解压中文乱码的问题
         
     # roll策略删除多余的备份
     print('删除过期备份...\r\n')
@@ -76,10 +115,11 @@ def install():
     print('战术手册安装成功，请重启C2，务必重启C2才能生效\r\n')
 
 if __name__ == "__main__":
+
+    check_c2_running()
     try:
         install()    
     except:
         print('战术手册安装出现错误，截图发售后群获得技术支持\r\n')
-        
     os.system("pause")
     
