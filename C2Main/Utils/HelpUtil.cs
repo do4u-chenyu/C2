@@ -68,7 +68,7 @@ namespace C2.Utils
         public static string TimeAndIPTransformFormHelpInfo = "IP和整形IP之间的转换，绝对时间和真实时间之间的转换";
         public static string BigAPKFormHelpInfo = "APK检测系统";
         public static string FraudFormHelpInfo = "诈骗模拟器";
-        public static string PostAndGetFormHelpInfo = "POST工具,向目标发送构造的HTTP/HHTPS报文,支持POST,GET,HEAD,PUT";
+        public static string PostAndGetFormHelpInfo = "POST工具,向目标发送构造的HTTP/HTTPS报文,支持POST,GET,HEAD,PUT";
 
         public static string OCRFormHelpInfo = "OCR图片检测文字";
         public static string NERFormHelpInfo = "将输入句子中的人名、地点、机构识别并定位";
