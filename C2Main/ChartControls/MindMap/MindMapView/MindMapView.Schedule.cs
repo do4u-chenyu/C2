@@ -28,7 +28,7 @@ namespace C2.Controls.MapViews
             //运行前，先判断要运算的是否有python算子，且虚拟机配置了，若未配置，结束，同时弹窗
             if (opw.OpType == OpType.PythonOperator && OpUtil.GetPythonConfigPaths().Count == 0)
             {
-                HelpUtil.ShowMessageBox("未配置python运行环境，点击确定跳转至虚拟机配置界面。");
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidPythonENV2);
                 new ConfigForm().ShowDialog();
                 return;
             }

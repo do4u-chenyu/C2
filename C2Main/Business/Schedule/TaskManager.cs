@@ -253,7 +253,7 @@ namespace C2.Business.Schedule
             if(this.currentModelTripleList.FindAll(c => c.OperateElement.SubType == ElementSubType.PythonOperator).Count > 0 
                 && OpUtil.GetPythonConfigPaths().Count == 0)
             {
-                HelpUtil.ShowMessageBox("未配置python运行环境，点击确定跳转至虚拟机配置界面。");
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidPythonENV2);
                 new ConfigForm().ShowDialog();
                 return;
             }

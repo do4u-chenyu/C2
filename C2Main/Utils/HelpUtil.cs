@@ -121,7 +121,9 @@ namespace C2.Utils
         public static string InvalidInputMapInfo = "输入数据有误，文件内容为空或经度、纬度、权重列格式有误";
         public static string InvalidDataType = "数据格式有误，目前内部数据仅支持文本数据和excel数据，外部数据仅支持oracle, Hive, postgres库";
 
-
+        public static string InvalidPythonENV0 = "未配置python虚拟机，在‘【右上角】-【首选项】-【python引擎】’中配置。";
+        public static string InvalidPythonENV1 = "选择一个运行Python脚本的虚拟机";
+        public static string InvalidPythonENV2 = "未配置python虚拟机，点击确定跳转至虚拟机配置界面。";
 
         #region IAO基站批量查询
         public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G) 或 37b900018bd0(电信2G)
