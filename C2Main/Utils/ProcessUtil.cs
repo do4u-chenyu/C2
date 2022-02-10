@@ -31,6 +31,7 @@ namespace C2.Utils
         {
             try
             {
+                p.StandardInput.Close();//关闭输入流，否则会造成假死状态
                 return p.StandardError.ReadToEnd();
             }
             catch

@@ -185,26 +185,44 @@ namespace C2.Controls.MapViews
                         log.Info(cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
-                    
+
                     //p.BeginErrorReadLine();  // 让后续可以读取到错误流
                     p.BeginOutputReadLine();
-                    
+
                     //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");
-                    p.WaitForExit(); 
-
+                    log.Warn(ProcessUtil.ProcessStandErrorMessage(p));
+                if (p.ExitCode != 0)
+                {
+                    message = string.Format("运算出现问题,ExitCode:{0}, 【运行日志】面板查看出错信息,反馈SH群", p.ExitCode);
+                }
+                else 
+                {
                     log.Info("===========运算结束===========");
-     
                     message = "算子成功执行完毕";
+                }
+                   
+                   
+                    //Console.WriteLine(ProcessUtil.ProcessStandErrorMessage(p));
 
-                    if (p.ExitCode != 0)
-                    {
-                        log.Warn(ProcessUtil.ProcessStandErrorMessage(p));
-                        message = string.Format("运算出现问题,ExitCode:{0}, 【运行日志】面板查看出错信息,反馈SH群", p.ExitCode);   
-                    }
+               
+                    p.WaitForExit();
+                    //p.Close();
 
+                    //log.Info("===========运算结束===========");
+
+                    //message = "算子成功执行完毕";
+
+
+                    //if (p.ExitCode != 0)
+                    //{
+                        //log.Warn(ProcessUtil.ProcessStandErrorMessage(p));
+                        //MessageBox.Show(ProcessUtil.ProcessStandErrorMessage(p));
+                        //message = string.Format("运算出现问题,ExitCode:{0}, 【运行日志】面板查看出错信息,反馈SH群", p.ExitCode);
+                    //}
                 }
             }
+            
             catch (InvalidOperationException)
             {
                 //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
@@ -223,6 +241,5 @@ namespace C2.Controls.MapViews
             }
             return message;
         }
-
     }
 }
