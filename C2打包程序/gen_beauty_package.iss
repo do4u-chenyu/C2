@@ -71,6 +71,8 @@ DisableDirPage=no
 [Languages]
 Name: "chs"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
+
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checkablealone; 
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -111,10 +113,49 @@ Root: HKCR; Subkey: "C2File\shell\open"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "C2File\shell\open\command"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "C2File\shell\open\command"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName} ""%1"""; Flags:
 
+
+
 [Code]
 #include "DllsImport.iss"  
 #include "HoverEvent.iss"
 #include "SetupMisc.iss"
+
+//;判断进程是否存在
+function IsAppRunning(const FileName : string): Boolean;
+var
+    FSWbemLocator: Variant;
+    FWMIService   : Variant;
+    FWbemObjectSet: Variant;
+begin
+    Result := false;
+    FSWbemLocator := CreateOleObject('WBEMScripting.SWBEMLocator');
+    FWMIService := FSWbemLocator.ConnectServer('', 'root\CIMV2', '', '');
+    FWbemObjectSet := FWMIService.ExecQuery(Format('SELECT Name FROM Win32_Process Where Name="%s"',[FileName]));
+    Result := (FWbemObjectSet.Count > 0);
+    FWbemObjectSet := Unassigned;
+    FWMIService := Unassigned;
+    FSWbemLocator := Unassigned;
+end;
+
+//安装的时候判断进程是否存在
+function InitializeSetup(): Boolean;
+begin
+  Result := IsAppRunning('{#MyAppExeName}');
+  if Result then
+  begin
+      MsgBox('程序正在运行,请先关闭程序后再下载! ', mbError, MB_OK); 
+    result:=false;
+  end
+  else
+    begin
+      result := true;
+      if FileOrDirExists(ExpandConstant('{localappdata}\FeikuaBrowser\UserDataDefault')) then
+        DelTree(ExpandConstant('{localappdata}\FeikuaBrowser\UserDataDefault'), True, True, True);
+    end;
+end;
+
+
+
 
 var 
   g_notifyWnd : HWND;               // 发送通知的回调窗口
