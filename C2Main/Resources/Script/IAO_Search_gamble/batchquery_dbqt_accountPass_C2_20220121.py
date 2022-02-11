@@ -292,7 +292,7 @@ def zip_result(DATA_PATH,ZIP_PATH):
         
 def produceKey(keywords):
     randomkeywords = []
-    num = [random.randint(0, len(keywords)) for i in range(0, len(keywords)//3)]
+    num = [random.randint(0, len(keywords)-1) for i in range(0, len(keywords)//3)]
     keyword = ''
     j = 0
     for i in num:
