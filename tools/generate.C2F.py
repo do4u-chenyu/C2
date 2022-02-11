@@ -5,7 +5,8 @@ import datetime
 
 
 def C2F_install(c2f_path):
-    install_cmd = r"chdir /d {} & pyinstaller -F C2F.spec".format(c2f_path)
+    install_cmd = r'chdir /d {} & pyinstaller -F C2F.spec --upx-dir upx394w'.format(c2f_path)
+    #install_cmd = r'chdir /d {} & pyinstaller -F C2F.spec'.format(c2f_path)
     print(install_cmd)
     if os.system(install_cmd) == 0:
         return 0;
