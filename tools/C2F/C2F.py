@@ -107,6 +107,7 @@ def install():
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
         change_name(path_to)        # 解决zipfile库解压中文乱码的问题
+        print('安装完毕:\t【{0}】{1}'.format(os.path.basename(c2), os.linesep))
         
     # roll策略删除多余的备份
     print('删除过期备份...\r\n')
