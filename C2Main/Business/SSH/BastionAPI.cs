@@ -606,21 +606,43 @@ namespace C2.Business.SSH
 
         private bool IsAliveTask()
         {
-            String ret = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
-            return Regex.IsMatch(ret, String.Format(@"python\s+{0}", TargetScript));
+            if (task.SearchMethod == SearchTaskMethod.DSQ)
+            {
+                String ret = RunCommand(String.Format("ps -ef | grep --color=never {0}", task.RemoteWorkspace), shell);//执行脚本里需要传工作执行路径，可以作为进程存在的判断条件
+                return Regex.IsMatch(ret, String.Format(@"sh\s+remote.sh"));
+            }
+            else
+            {
+                String ret = RunCommand(String.Format("ps -p {0} -o cmd | grep --color=never {1}", task.PID, TargetScript), shell);
+                return Regex.IsMatch(ret, String.Format(@"python\s+{0}", TargetScript));
+            }
         }
 
         private bool IsResultFileReady()
         {
-            String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-            return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|code|hostDD|hackDD|dm|custom|)_\d+_\d+.tgz\r?\n");
+            if (task.SearchMethod == SearchTaskMethod.DSQ)
+            {
+                String result = RunCommand(String.Format("ls {0} | grep tgz | wc -l", TaskDirectory), shell);
+                Match mat = Regex.Match(result, Wrap(@"(\d+)\r?\n")); // 匹配压缩包个数，大于总下发个数的70%认为结果文件已经全部处理完成
+                if (mat.Success && mat.Groups[1].Success)
+                    return ConvertUtil.TryParseInt(mat.Groups[1].Value) * 100 / task.DaemonIP.Count > 70;
+
+                return false;
+            }
+            else
+            {
+                String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
+                return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|code|hostDD|hackDD|dm|custom|)_\d+_\d+.tgz\r?\n");
+            }
+
         }
 
         private bool IsTaskTimeout()
         {
             DateTime born = ConvertUtil.TryParseDateTime(task.TaskCreateTime, "yyyyMMddHHmmss");
             TimeSpan ts = DateTime.Now.Subtract(born);
-            return Math.Abs(ts.TotalHours) >= 24 * 3;
+            double timeout = task.SearchMethod == SearchTaskMethod.DSQ ? 10 : 24 * 3;//dsq超时限制在10小时
+            return Math.Abs(ts.TotalHours) >= timeout;
         }
 
         private bool IsSafePath(String v)
