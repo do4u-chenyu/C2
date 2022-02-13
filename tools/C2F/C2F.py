@@ -32,21 +32,21 @@ def EnumProcesses():
             kernel.CloseHandle(hProcess)
     return p_list
 
-def change_name(dir_path):
-    os.chdir(dir_path)
-    for i in os.listdir("."):
+def decode_cp437_gbk(dir_path):
+    for i in os.listdir(dir_path):
         try:
-            gbk_name = i.encode("cp437").decode("gbk")  #将文件名转为gbk中文编码
-            os.rename(i, gbk_name)#重命名
+            gbk = i.encode("cp437").decode("gbk")
+            src = os.path.join(dir_path, i)
+            dst = os.path.join(dir_path, gbk)
+            os.rename(src, dst)
         except:
-            pass           
-        if os.path.isdir(gbk_name): # 递归
-            change_name(gbk_name)
-    os.chdir('..')
+            pass
+        if os.path.isdir(dst):
+            decode_cp437_gbk(dst)
 
 #生成资源文件目录访问路径
 def resource_path(relative_path):
-    if getattr(sys, 'frozen', False): #是否Bundle Resource
+    if getattr(sys, 'frozen', False): #是否 Bundle Resource
         base_path = sys._MEIPASS
     else:
         base_path = os.path.abspath(".")
@@ -81,6 +81,7 @@ def install():
     print('战术手册正在安装中...' + '\r\n')
     now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     src_path = resource_path("c2f")
+    #src_path = "C:\\work\\C2F"    # 调试用
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
     bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据"
     
@@ -106,7 +107,7 @@ def install():
         os.makedirs(path_to, exist_ok=True)
         fzip = zipfile.ZipFile(c2)
         fzip.extractall(path_to)
-        change_name(path_to)        # 解决zipfile库解压中文乱码的问题
+        decode_cp437_gbk(path_to)          # 解决zipfile库解压中文乱码的问题
         print('安装完毕:\t【{0}】{1}'.format(os.path.basename(c2), os.linesep))
         
     # roll策略删除多余的备份
