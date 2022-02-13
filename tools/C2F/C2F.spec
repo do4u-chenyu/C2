@@ -5,7 +5,8 @@ import datetime
 from os import path
 block_cipher = None
 
-C2F_LIST = [(c2f, 'c2f') for c2f in glob.glob(r'..\..\..\..\work\C2F\*.c2')]
+#C2F_LIST = [(c2f, 'c2f') for c2f in glob.glob(r'..\..\..\..\work\C2F\*.c2')]
+C2F_LIST = [(c2f, 'c2f') for c2f in glob.glob(r'build\zssc.exe')]
 
 a = Analysis(['C2F.py'],
              pathex=['work\\C2\\tools\\C2F'],
