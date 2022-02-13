@@ -3,6 +3,7 @@ namespace C2.Utils
 {
     class HelpUtil
     {
+        public static string C2HelpInfo = "分析师单兵作战装备,是历史分析工具的沉淀集合,旨在提升分析师的单兵和小团队作战能力,在独立环境下能够以一当十,快速展开各类型分析实战攻坚任务;其轻量精干携带方便,并覆了历史战例中各种成功经验,统一融合了四大专项服务入口(网站侦察兵,APK大眼睛,HI部AI服务,知识库)、52个小工具、17种WA社工ST工具和24个经典线索类技战法,包括但不限于:一系列网络安全工具、常见WS类Payload和Trojan样本、基站和WIFI查询、临战信息收集工具、加密解密工具、不可逆HASH撞库和彩虹表工具、数据转换工具、文本分析工具、互联网取证固证模块和二进制分析模块";
         public static string AvgOperatorHelpInfo = "取平均值:计算选择字段的平均值.";
         public static string MinOperatorHelpInfo = "取最小值:提取选择字段的最小值,查看相关数据信息.";
         public static string MaxOperatorHelpInfo = "取最大值:提取选择字段的最大值,查看相关数据信息.";

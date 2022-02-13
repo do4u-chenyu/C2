@@ -526,7 +526,7 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(537, 172);
             this.textBox4.TabIndex = 8;
-            this.textBox4.Text = resources.GetString("textBox4.Text");
+            this.textBox4.Text = Utils.HelpUtil.C2HelpInfo;
             // 
             // button7
             // 
