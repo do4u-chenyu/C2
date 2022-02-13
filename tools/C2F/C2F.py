@@ -81,7 +81,7 @@ def check_c2_running():
     
 
 def install():
-    print('战术手册正在安装中...' + '\r\n')
+    print('战术手册开始安装...' + '\r\n')
     now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     src_path = resource_path("c2f")
     sfx_path = os.path.join(src_path, 'zssc.exe')
@@ -89,7 +89,7 @@ def install():
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
     bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据"
     
-    print('解压缩临时文件 : {0} \r\n'.format(sfx_path))
+    print('解压临时文件 : {0} \r\n'.format(sfx_path))
     self_extract(sfx_path)
     
     print('初始化目录...' + '\r\n')
@@ -100,28 +100,35 @@ def install():
     
     # 备份旧数据
     shutil.copytree(dst_path, bak_path, dirs_exist_ok=True)
-    print("备份旧文档到 {0} 完毕, 有需要自行前往\r\n".format(bak_path))
+    print("备份旧数据到 {0} 完毕, 有需要自行前往\r\n".format(bak_path))
        
     # 删除临时文件
     shutil.rmtree(dst_path, ignore_errors=True)
     os.makedirs(dst_path, exist_ok=True)
     
     # 解压缩
-    print('正在解压缩...\r\n')
+    print('正在安装...\r\n')
     c2list = glob.glob(src_path + r"\*.c2")
+    nr_succ, nr_total = 0, len(c2list)
     for c2 in c2list:
-        path_to = os.path.join(dst_path, without_extension(c2))
-        os.makedirs(path_to, exist_ok=True)
-        fzip = zipfile.ZipFile(c2)
-        fzip.extractall(path_to)
-        decode_cp437_gbk(path_to)          # 解决zipfile库解压中文乱码的问题
-        print('安装完毕:\t【{0}】{1}'.format(os.path.basename(c2), os.linesep))
+        try:
+            path_to = os.path.join(dst_path, without_extension(c2))
+            os.makedirs(path_to, exist_ok=True)
+            fzip = zipfile.ZipFile(c2)
+            fzip.extractall(path_to)
+            decode_cp437_gbk(path_to)          # 解决zipfile库解压中文乱码的问题
+            nr_succ = nr_succ + 1
+            print('安装成功:\t【{0}】{1}'.format(os.path.basename(c2), os.linesep))
+        except:
+            print('安装失败:\t【{0}】{1}'.format(os.path.basename(c2), os.linesep))
         
     # roll策略删除多余的备份
-    print('删除过期备份...\r\n')
+    print('删除过期备份数据...\r\n')
     roll_rmtree(os.path.dirname(bak_path), bak_path)
-        
-    print('战术手册安装成功，请重启C2，务必重启C2才能生效\r\n')
+    msg_succ = '战术手册安装成功: {0}(成功)/{1}(总)，请重启C2，务必重启C2才能生效\r\n'.format(nr_succ, nr_total)
+    print(msg_succ) # 重要的事情说三遍
+    print(msg_succ)
+    print(msg_succ)
 
 if __name__ == "__main__":
 
