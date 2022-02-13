@@ -44,6 +44,9 @@ def decode_cp437_gbk(dir_path):
         if os.path.isdir(dst):
             decode_cp437_gbk(dst)
 
+def self_extract(sfx_path):
+    return os.system("cd /d {0} && {1}".format(os.path.dirname(sfx_path), sfx_path))
+    
 #生成资源文件目录访问路径
 def resource_path(relative_path):
     if getattr(sys, 'frozen', False): #是否 Bundle Resource
@@ -81,9 +84,13 @@ def install():
     print('战术手册正在安装中...' + '\r\n')
     now_string = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     src_path = resource_path("c2f")
+    sfx_path = os.path.join(src_path, 'zssc.exe')
     #src_path = "C:\\work\\C2F"    # 调试用
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
     bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据"
+    
+    print('解压缩临时文件 : {0} \r\n'.format(sfx_path))
+    self_extract(sfx_path)
     
     print('初始化目录...' + '\r\n')
     bak_path = bak_path + "\\" + now_string
