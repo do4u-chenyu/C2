@@ -155,7 +155,7 @@ namespace C2.Controls.MapViews
             ToolStripMenuItem MenuOpPublic = new ToolStripMenuItem();
             ToolStripMenuItem MenuOpDelete = new ToolStripMenuItem();
 
-            MenuOpenOperator.Image = type == "single" ? opw.GetOpOpenOperatorImage() : Properties.Resources.算子; 
+            MenuOpenOperator.Image = type == "single" ? opw.GetOpOpenOperatorImage() : Properties.Resources.聚沙成塔; 
             MenuOpenOperator.Text = type == "single" ? opw.OpName: opw.ModelDataItem.FileName;
             MenuOpenOperator.DropDownItems.AddRange(new ToolStripItem[] {
                 MenuOpDesign,
