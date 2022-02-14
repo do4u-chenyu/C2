@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
@@ -163,6 +164,15 @@ namespace C2.Business.Model
             }
         }
 
+        private bool IsOpenedMindMapDocument(string modelName)
+        {
+            // TODO 后续再优化吧
+            return Global.GetMainForm().
+                          OpenedDocumentsFFP().
+                          FindAll(e => e.Contains("业务视图")).
+                          Exists(e => e.Contains(modelName));
+        }
+
         public bool HasUnZipFile(string zipFilePath, string userName, string password, bool isC2Model)
         {
             /*
@@ -210,7 +220,9 @@ namespace C2.Business.Model
             if (string.IsNullOrEmpty(fileName))
                 return !hasUnZip;
 
-            if (Global.GetTaskBar().ContainModel(modelName))
+            // 如果是业务视图且同名,不能导入
+            if (IsOpenedMindMapDocument(modelName))
+            //if (Global.GetTaskBar().ContainModel(modelName))
             {
                 HelpUtil.ShowMessageBox("文件: [" + modelName + "] 已打开，请关闭该文档并重新进行导入", "关闭文档");
                 return !hasUnZip;
