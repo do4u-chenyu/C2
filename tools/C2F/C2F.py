@@ -135,7 +135,7 @@ if __name__ == "__main__":
     try:
         install()    
     except IOError as e:
-        print(e.strerror)
+        print('错误:' + e.strerror)
         print('战术手册安装出现错误，截图发售后群获得技术支持\r\n')
     os.system("pause")
     
