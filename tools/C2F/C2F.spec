@@ -9,7 +9,7 @@ block_cipher = None
 C2F_LIST = [(c2f, 'c2f') for c2f in glob.glob(r'build\zssc.exe')]
 
 a = Analysis(['C2F.py'],
-             pathex=['work\\C2\\tools\\C2F'],
+             pathex=[],
              binaries=[],
              datas= C2F_LIST,
              hiddenimports=[],

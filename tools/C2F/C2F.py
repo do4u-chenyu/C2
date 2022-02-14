@@ -87,19 +87,18 @@ def install():
     sfx_path = os.path.join(src_path, 'zssc.exe')
     #src_path = "C:\\work\\C2F"    # 调试用
     dst_path = r"C:\FiberHomeIAOModelDocument\IAO\战术手册"
-    bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据"
+    bak_path = r"C:\FiberHomeIAOModelDocument\IAO\备份数据" + "\\" + now_string
     
     print('解压临时文件 : {0} \r\n'.format(sfx_path))
     self_extract(sfx_path)
     
     print('初始化目录...' + '\r\n')
-    bak_path = bak_path + "\\" + now_string
-    shutil.rmtree(bak_path, ignore_errors=True)
     os.makedirs(dst_path, exist_ok=True)
-    os.makedirs(bak_path, exist_ok=True)
+    shutil.rmtree(bak_path, ignore_errors=True)
+    
     
     # 备份旧数据
-    shutil.copytree(dst_path, bak_path, dirs_exist_ok=True)
+    shutil.copytree(dst_path, bak_path)
     print("备份旧数据到 {0} 完毕, 有需要自行前往\r\n".format(bak_path))
        
     # 删除临时文件
@@ -135,7 +134,8 @@ if __name__ == "__main__":
     check_c2_running()
     try:
         install()    
-    except:
+    except IOError as e:
+        print(e.strerror)
         print('战术手册安装出现错误，截图发售后群获得技术支持\r\n')
     os.system("pause")
     
