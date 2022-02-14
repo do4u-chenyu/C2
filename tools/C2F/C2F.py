@@ -45,7 +45,14 @@ def decode_cp437_gbk(dir_path):
             decode_cp437_gbk(dst)
 
 def self_extract(sfx_path):
-    return os.system("cd /d {0} && {1}".format(os.path.dirname(sfx_path), sfx_path))
+    if not os.path.exists(sfx_path):
+        # 调试用, 写死
+        if os.path.exists(r'C:\work\C2\tools\C2F\build\zssc.exe'):
+            sfx_path = r'C:\work\C2\tools\C2F\build\zssc.exe'
+        if os.path.exists(r'D:\work\C2\tools\C2F\build\zssc.exe'):
+            sfx_path = r'D:\work\C2\tools\C2F\build\zssc.exe'
+            
+    return os.system("cd /d {0} && {1} -y".format(os.path.dirname(sfx_path), sfx_path))
     
 #生成资源文件目录访问路径
 def resource_path(relative_path):
