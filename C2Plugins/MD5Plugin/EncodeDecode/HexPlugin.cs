@@ -105,11 +105,11 @@ namespace MD5Plugin
 
         byte[] HexDecode_10(string str, string sep)
         {
-            string[] arr = Regex.Split(str, Regex.Escape(sep));
+            string[] arr = str.Split(new string[] { sep }, StringSplitOptions.RemoveEmptyEntries);
             byte[] arrByte = new byte[arr.Length];
             for (int i = 0; i < arr.Length; i++)
             {
-                arrByte[i] = TryConvertToByte(arr[i], 10);
+                arrByte[i] = Convert.ToByte(arr[i], 10);
             }
 
             return arrByte;
@@ -144,7 +144,7 @@ namespace MD5Plugin
                         bytes = HexDecode_8(str, sep);
                         break;
                     case "十进制":  // 十进制必须有分隔符才能转换
-                        bytes = string.IsNullOrEmpty(sep) ? new byte[0] : HexDecode_10(str, sep);
+                        bytes = HexDecode_10(str, sep);
                         break;
                     case "十六进制":
                     default:
