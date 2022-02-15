@@ -44,8 +44,7 @@ namespace MD5Plugin
                 StringBuilder sb = new StringBuilder();
                 byte[] arrByte = GetEncodingBytes(str);
 
-                string sep = splitType == "无分隔符" ? string.Empty :
-                    splitType == "空格分割"? " " : splitType.Trim();
+                string sep = Sep();
 
                 int radix = 16;
                 if (radixType == "十进制")
@@ -64,9 +63,15 @@ namespace MD5Plugin
             }
         }
 
-        byte[] HexDecode_8(string str)
+        private string Sep()
         {
-            if (splitType == "无分隔符")
+            return splitType == "无分隔符" ? string.Empty :
+                splitType == "空格分割" ? " " : splitType.Trim();
+        }
+
+        byte[] HexDecode_8(string str, string sep)
+        {
+            if (string.IsNullOrEmpty(sep))
             {
                 if (str.Length % 3 != 0)
                     str = str.Substring(0, str.Length - str.Length % 3);
@@ -78,16 +83,29 @@ namespace MD5Plugin
             }
             else
             {
-                string[] arr = str.Split(new string[] { splitType }, StringSplitOptions.RemoveEmptyEntries);
+                string[] arr = str.Split(new string[] { sep }, StringSplitOptions.RemoveEmptyEntries);
                 byte[] arrByte = new byte[arr.Length];
                 for (int i = 0; i < arr.Length; i++)
                     arrByte[i] = Convert.ToByte(arr[i], 8);
                 return arrByte;
             }
         }
-        byte[] HexDecode_10(string str)
+
+        byte TryConvertToByte(string value, int fromBase)
         {
-            string[] arr = Regex.Split(str, Regex.Escape(splitType));
+            try
+            {
+                return Convert.ToByte(value, 10);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        byte[] HexDecode_10(string str, string sep)
+        {
+            string[] arr = str.Split(new string[] { sep }, StringSplitOptions.RemoveEmptyEntries);
             byte[] arrByte = new byte[arr.Length];
             for (int i = 0; i < arr.Length; i++)
             {
@@ -96,9 +114,10 @@ namespace MD5Plugin
 
             return arrByte;
         }
-        byte[] HexDecode_16(string str)
+        byte[] HexDecode_16(string str, string sep)
         {
-            str = str.Replace(splitType, string.Empty);
+            if (!string.IsNullOrEmpty(sep))
+                str = str.Replace(sep, string.Empty);
 
             if (str.Length % 2 != 0)
                 str = str.Substring(0, str.Length - 1);
@@ -114,6 +133,7 @@ namespace MD5Plugin
 
         public override void Decode(string str)
         {
+            string sep = Sep();
             try
             {
                 // 处理十六进制
@@ -121,14 +141,14 @@ namespace MD5Plugin
                 switch (radixType)
                 {
                     case "八进制":
-                        bytes = HexDecode_8(str);
+                        bytes = HexDecode_8(str, sep);
                         break;
                     case "十进制":  // 十进制必须有分隔符才能转换
-                        bytes = splitType == "无分隔符" ? new byte[0] : HexDecode_10(str);
+                        bytes = HexDecode_10(str, sep);
                         break;
                     case "十六进制":
                     default:
-                        bytes = HexDecode_16(str);
+                        bytes = HexDecode_16(str, sep);
                         break;
                 }
 
@@ -136,7 +156,12 @@ namespace MD5Plugin
             }
             catch
             {
-                MessageBox.Show("请选择正确的分隔符号", "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string errorMessage = "请选择正确的分隔符号";
+                if (radixType == "八进制" && string.IsNullOrEmpty(sep))
+                    errorMessage = "八进制Hex解码必须要有分隔符,因为八进制每个值1-3个字符不固定";
+                if (radixType == "十进制" && string.IsNullOrEmpty(sep))
+                    errorMessage = "十进制Hex解码必须要有分隔符,因为十进制每个值1-3个字符不固定";
+                MessageBox.Show(errorMessage, "information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
