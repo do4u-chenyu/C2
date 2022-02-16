@@ -3439,6 +3439,7 @@
     <None Include="Resources\Images\TabBarImage\分析笔记1.png" />
     <Content Include="Resources\Images\TabBarImage\聚沙成塔.png" />
     <None Include="Resources\Images\TabBarImage\聚沙成塔1.png" />
+    <None Include="Resources\Images\TabBarImage\聚沙成塔2.png" />
     <Content Include="Resources\Images\TabBarImage\首页.png" />
     <Content Include="Resources\Images\tabs.png" />
     <Content Include="Resources\Images\taskbar_close_button.png" />
