@@ -63,7 +63,7 @@
             this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.lelfPictureBox, "高级技战法");
+            this.toolTip1.SetToolTip(this.lelfPictureBox, "复杂运算流程");
             // 
             // contextMenuStrip1
             // 

@@ -167,6 +167,7 @@ namespace C2.Dialogs.CastleBravo
 
             foreach (CastleBravoResultOne data in datas)
             {
+                // 0000000000000000000000000000000	half	没有跑彩虹表	控制信息
                 // 跳过
                 if (data.Mode == "half")
                     continue;
@@ -176,7 +177,7 @@ namespace C2.Dialogs.CastleBravo
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.MD5 });
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Model(data.Mode) });
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.Result });
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Salt(data.Mode) });
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = CastleBravoTaskInfo.Salt(data.Salt) });
 
                 dataGridView.Rows.Add(dr);
             }
