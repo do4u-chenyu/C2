@@ -7,8 +7,9 @@ namespace C2.Business.CastleBravo
     public enum CastleBravoTaskStatus
     {
         Null,       
-        Running,    
-        Done,       
+        Running,
+        Half,
+        Done,
         Fail        
     }
 
@@ -20,7 +21,7 @@ namespace C2.Business.CastleBravo
             ["behinder"]  = "三代冰蝎",
             ["md5"]       = "MD5",
             ["md5md5"]    = "MD5(MD5($pass))",
-            ["md5md5md5"] = "MD5(MD5(MD5($pass)))"
+            ["md5md5md5"] = "MD5(MD5(MD5($pass)))",
         };
 
         public static readonly CastleBravoTaskInfo Empty = new CastleBravoTaskInfo();
@@ -55,7 +56,8 @@ namespace C2.Business.CastleBravo
 
         public static string Salt(string key)
         {
-            return key == "btpwd" ? "_bt.cn" : string.Empty;
+            _ = key; //暂时用不上
+            return string.Empty;
         }
 
     }

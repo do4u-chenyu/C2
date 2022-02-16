@@ -69,12 +69,24 @@ namespace C2.Dialogs.CastleBravo
             return true;
         }
 
+
+
         private void UpdateTaskStatusLabel()
         {
+            foreach(CastleBravoResultOne resOne in TaskInfo.PreviewResults)
+            {
+                if (resOne.Mode == "half")  // 遇到控制行
+                {
+                    TaskInfo.Status = CastleBravoTaskStatus.Half;
+                    break;
+                }
+            }
             String statusDes = TaskInfo.Status.ToString();
 
             if (TaskInfo.Status == CastleBravoTaskStatus.Done)
                 statusDes = "Done ...点详情查看...";
+            if (TaskInfo.Status == CastleBravoTaskStatus.Half)
+                statusDes = "Done ...点详情查看...全量彩虹表太忙,只返回基础表数据,空闲时间再下发";
             if (TaskInfo.Status == CastleBravoTaskStatus.Running)
                 statusDes = "Running...彩虹表约需45-55分钟,查到一条返回一条";
 
@@ -155,6 +167,10 @@ namespace C2.Dialogs.CastleBravo
 
             foreach (CastleBravoResultOne data in datas)
             {
+                // 跳过
+                if (data.Mode == "half")
+                    continue;
+
                 DataGridViewRow dr = new DataGridViewRow();
 
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.MD5 });

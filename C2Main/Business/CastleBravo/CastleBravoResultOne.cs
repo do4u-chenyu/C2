@@ -24,6 +24,7 @@ namespace C2.Business.CastleBravo
         public string MD5 { get => ResDict.TryGetValue("md5", out string md5) ? md5 : string.Empty;}
         public string Mode { get => ResDict.TryGetValue("mode", out string mode) ? mode : string.Empty;}
         public string Result { get => ResDict.TryGetValue("result", out string res) ? res : string.Empty;}
+        // 开始被设计为盐值,但实际中被当作备注字段使用
         public string Salt { get => ResDict.TryGetValue("salt", out string salt) ? salt  : string.Empty;}
 }
 
