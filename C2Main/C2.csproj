@@ -4195,16 +4195,6 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Resources\Script\IAO_Web_validation\global_method.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\Noesis.Javascript.dll" />
-    <Content Include="Resources\Script\IAO_Web_validation\screenshot.js" />
-    <Content Include="Resources\Script\IAO_Web_validation\step1_unzip.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step2_filter.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step3_screen_capture.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step4_classify.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\step5_finnaly.py" />
-    <Content Include="Resources\Script\IAO_Web_validation\TrifleJS.exe" />
-    <Content Include="Resources\Script\IAO_Web_validation\util.py" />
     <None Include="Resources\StartPage\autoFilter.png" />
     <Content Include="Resources\StartPage\bank.png" />
     <Content Include="Resources\StartPage\BusinessViewLabel.png" />

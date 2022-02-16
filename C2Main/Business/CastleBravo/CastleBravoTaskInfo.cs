@@ -26,13 +26,13 @@ namespace C2.Business.CastleBravo
         // 版本兼容, 经常会修改描述信息
         private static readonly Dictionary<String, String> MD5SaltTable = new Dictionary<string, string>
         {
-            ["base"] = "快简表",
-            ["基础库"] = "快简表",
-            ["基础表"] = "快简表",
+            ["base"] = "快剑表",
+            ["基础库"] = "快剑表",
+            ["基础表"] = "快剑表",
             ["彩虹表"] = "彩虹表",
             ["rainbow"] = "彩虹表",
             ["控制信息"] = "控制信息",
-            ["快简表"] = "快简表"
+            ["快简表"] = "快剑表"
         };
 
         public static readonly CastleBravoTaskInfo Empty = new CastleBravoTaskInfo();
