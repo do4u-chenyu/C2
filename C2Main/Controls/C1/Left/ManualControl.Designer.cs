@@ -89,7 +89,7 @@
             this.textBox1.ShortcutsEnabled = false;
             this.textBox1.Size = new System.Drawing.Size(177, 236);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "\r\n没有安装<<战术手册>>插件包\r\n\r\n联系售后群\r\n\r\n获取最新战术手册安装包\r\n\r\n本活动与苹果公司无关";
+            this.textBox1.Text = "\r\n没有安装<<战术手册>>插件\r\n\r\n联系售后群\r\n\r\n获取最新<<战术手册>>安装包\r\n\r\n本活动与苹果公司无关";
             // 
             // ManualControl
             // 
