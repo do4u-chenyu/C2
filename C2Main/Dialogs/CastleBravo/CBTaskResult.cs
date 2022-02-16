@@ -80,15 +80,22 @@ namespace C2.Dialogs.CastleBravo
                     TaskInfo.Status = CastleBravoTaskStatus.Half;
                     break;
                 }
+                if (resOne.Mode == "rainbow")
+                {
+                    TaskInfo.Status = CastleBravoTaskStatus.Rainbow;
+                    break;
+                }
             }
             String statusDes = TaskInfo.Status.ToString();
 
             if (TaskInfo.Status == CastleBravoTaskStatus.Done)
                 statusDes = "Done ...点详情查看...";
             if (TaskInfo.Status == CastleBravoTaskStatus.Half)
-                statusDes = "Done ...点详情查看...全量彩虹表太忙,只返回基础表数据,空闲时间再下发";
+                statusDes = "Done ...点详情查看...全量彩虹表太忙,只返回快剑表数据,空闲时间再下发";
             if (TaskInfo.Status == CastleBravoTaskStatus.Running)
-                statusDes = "Running...彩虹表约需45-55分钟,查到一条返回一条";
+                statusDes = "Running...在查快剑表,秒返,查到一条返回一条";
+            if (TaskInfo.Status == CastleBravoTaskStatus.Rainbow)
+                statusDes = "Running...在查彩虹表,约需45-55分钟,查到一条返回一条";
 
             taskStatusLabel.Text = String.Format("[{0}]     成功率 : {1}/{2} = {3:0.00%}",
                 statusDes, 
@@ -169,7 +176,7 @@ namespace C2.Dialogs.CastleBravo
             {
                 // 0000000000000000000000000000000	half	没有跑彩虹表	控制信息
                 // 跳过
-                if (data.Mode == "half")
+                if (data.Salt == "控制信息")
                     continue;
 
                 DataGridViewRow dr = new DataGridViewRow();

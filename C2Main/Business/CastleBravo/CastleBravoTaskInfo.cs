@@ -8,6 +8,7 @@ namespace C2.Business.CastleBravo
     {
         Null,       
         Running,
+        Rainbow,
         Half,
         Done,
         Fail        
