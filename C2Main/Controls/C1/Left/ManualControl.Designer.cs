@@ -32,8 +32,10 @@
             this.ItemLabel = new System.Windows.Forms.Label();
             this.ItemPanel = new System.Windows.Forms.Panel();
             this.PaintPanel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ItemPanel.SuspendLayout();
+            this.PaintPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemLabel
@@ -66,10 +68,28 @@
             this.PaintPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PaintPanel.BackColor = System.Drawing.Color.White;
             this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PaintPanel.Controls.Add(this.textBox1);
             this.PaintPanel.Location = new System.Drawing.Point(3, 35);
             this.PaintPanel.Name = "PaintPanel";
             this.PaintPanel.Size = new System.Drawing.Size(179, 621);
             this.PaintPanel.TabIndex = 2;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
+            this.textBox1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ShortcutsEnabled = false;
+            this.textBox1.Size = new System.Drawing.Size(177, 236);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "\r\n没有安装<<战术手册>>插件包\r\n\r\n联系售后群\r\n\r\n获取最新战术手册安装包\r\n\r\n本活动与苹果公司无关";
             // 
             // ManualControl
             // 
@@ -84,6 +104,8 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ManualControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ManualControl_MouseDown);
             this.ItemPanel.ResumeLayout(false);
+            this.PaintPanel.ResumeLayout(false);
+            this.PaintPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -93,5 +115,6 @@
         protected System.Windows.Forms.Panel ItemPanel;
         protected System.Windows.Forms.Panel PaintPanel;
         protected System.Windows.Forms.ToolTip toolTip1;
+        protected System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -14,6 +14,12 @@ namespace C2.Controls.Left
         public MyMindMapControl()
         {
             InitializeComponent();
+            InitializeOther();
+        }
+
+        private void InitializeOther()
+        {
+            PaintPanel.Controls.Remove(textBox1);
         }
 
         public override void AddButton(string modelName)

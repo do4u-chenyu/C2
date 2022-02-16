@@ -26,10 +26,17 @@ namespace C2.Controls.Left
         private Point startPoint;
         public virtual void AddButton(string modelName)
         {
+            RemoveLabel();
+
             ManualButton mb = new ManualButton(modelName);
             // 获得当前要添加的model button的初始位置
             LayoutButton(mb);
             this.PaintPanel.Controls.Add(mb);
+        }
+
+        private void RemoveLabel()
+        {
+            this.PaintPanel.Controls.Remove(this.textBox1);
         }
 
         protected void LayoutButton(Control ct)
