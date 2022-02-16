@@ -97,11 +97,13 @@ namespace C2.Dialogs.CastleBravo
             if (TaskInfo.Status == CastleBravoTaskStatus.Rainbow)
                 statusDes = "Running...在查彩虹表,约需45-55分钟,查到一条返回一条";
 
+            int succCount = TaskInfo.PreviewResults.FindAll(e => e.Salt != "控制信息").Count;
+
             taskStatusLabel.Text = String.Format("[{0}]     成功率 : {1}/{2} = {3:0.00%}",
-                statusDes, 
-                TaskInfo.PreviewResults.Count, 
+                statusDes,
+                succCount, 
                 TaskInfo.TaskCount,
-                TaskInfo.PreviewResults.Count / Math.Max(1.0, ConvertUtil.TryParseDouble(TaskInfo.TaskCount)));
+                succCount / Math.Max(1.0, ConvertUtil.TryParseDouble(TaskInfo.TaskCount)));
         }
 
         private List<CastleBravoResultOne> TransListToCBResult(Tuple<List<string>, List<List<string>>> headersAndRows)
