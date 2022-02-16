@@ -23,6 +23,15 @@ namespace C2.Business.CastleBravo
             ["md5md5"]    = "MD5(MD5($pass))",
             ["md5md5md5"] = "MD5(MD5(MD5($pass)))",
         };
+        // 版本兼容, 经常会修改描述信息
+        private static readonly Dictionary<String, String> MD5SaltTable = new Dictionary<string, string>
+        {
+            ["base"] = "基础库",
+            ["基础库"] = "基础库",
+            ["彩虹表"] = "彩虹表",
+            ["rainbow"] = "彩虹表",
+            ["控制信息"] = "控制信息"
+        };
 
         public static readonly CastleBravoTaskInfo Empty = new CastleBravoTaskInfo();
 
@@ -56,8 +65,7 @@ namespace C2.Business.CastleBravo
 
         public static string Salt(string key)
         {
-            _ = key; //暂时用不上
-            return string.Empty;
+            return MD5SaltTable.ContainsKey(key) ? MD5SaltTable[key] : key;
         }
 
     }

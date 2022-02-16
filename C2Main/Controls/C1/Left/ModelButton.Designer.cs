@@ -59,11 +59,11 @@
             this.lelfPictureBox.Location = new System.Drawing.Point(1, 1);
             this.lelfPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lelfPictureBox.Name = "lelfPictureBox";
-            this.lelfPictureBox.Size = new System.Drawing.Size(24, 24);
-            this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.lelfPictureBox.Size = new System.Drawing.Size(32, 30);
+            this.lelfPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.lelfPictureBox.TabIndex = 1;
             this.lelfPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.lelfPictureBox, "高级技战法");
+            this.toolTip1.SetToolTip(this.lelfPictureBox, "复杂运算流程");
             // 
             // contextMenuStrip1
             // 
