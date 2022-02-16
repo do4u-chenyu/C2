@@ -32,7 +32,8 @@ namespace C2.Business.CastleBravo
             ["彩虹表"] = "彩虹表",
             ["rainbow"] = "彩虹表",
             ["控制信息"] = "控制信息",
-            ["快简表"] = "快剑表"
+            ["快简表"] = "快剑表",
+            ["快剑表"] = "快剑表"
         };
 
         public static readonly CastleBravoTaskInfo Empty = new CastleBravoTaskInfo();
