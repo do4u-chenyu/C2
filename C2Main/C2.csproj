@@ -3154,6 +3154,9 @@
     </Content>
     <None Include="Resources\Block.png" />
     <Content Include="logo.ico" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_behinder-godzilla_accountPass_C2_20220125.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\战术手册.png" />
     <Content Include="Resources\C1\datasource\dataButton.png" />
     <None Include="Resources\C1\menu\leftcontrolhelp.png" />
@@ -4181,6 +4184,9 @@
     </None>
     <None Include="Resources\tab_button.png" />
     <None Include="Resources\Robots.png" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_behinder-godzilla_accountPass_C2_20220125.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
