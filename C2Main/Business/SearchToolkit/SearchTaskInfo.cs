@@ -39,6 +39,7 @@ namespace C2.SearchToolkit
             ["网赌受骗者模型"] = "dbqt",
             ["自定义查询"] = "custom",
             ["DSQ查询"] = "dsq",
+            ["冰蝎哥斯拉模型"] = "bxgsl"
         };
 
         public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -64,6 +65,7 @@ namespace C2.SearchToolkit
             ["网赌受骗者模型"] = "batchquery_dbqt_accountPass_C2_20220121_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
             ["DSQ查询"] = "main_rule_http_xxxx.py",
+            ["冰蝎哥斯拉模型"] = "batchquery_behinder-godzilla_accountPass_C2_20220125_{0}.py"
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -89,6 +91,7 @@ namespace C2.SearchToolkit
             ["网赌受骗者模型"] = @"([^\n\r]+000000_queryResult_dbqt_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
             ["DSQ查询"] = @"([^\n\r]+000000_queryResult_dsq_\d+_\d+.tgz)",
+            ["冰蝎哥斯拉模型"] = @"([^\n\r]+000000_queryResult_behinder-godzilla_\d+_\d+.tgz)",
         };
 
         public static readonly Dictionary<String, String> TaskHelpInfoTable = new Dictionary<String, String>
@@ -113,6 +116,7 @@ namespace C2.SearchToolkit
             ["网赌受骗者模型"] = "涉赌模型针对网赌受骗者特殊优化,关键词每月更新",
             ["自定义查询"] = "上面详细设置里自己填查询关键词",
             ["DSQ查询"] = "内部施工中，忽略",
+            ["冰蝎哥斯拉模型"] = "冰蝎哥斯拉加密流量检测模型"
         };
 
         public static readonly List<string> DSQRelateModelList = new List<string>() { "DSQ查询" };
