@@ -543,11 +543,7 @@ namespace C2.Business.SSH
             // Base64果然比shell硬转码好用多了,感谢lxf的脑洞
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
-            String command = string.Empty;
-            if (task.SearchMethod == SearchTaskMethod.DSQ)
-                command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip {1}", b64, dZip);
-            else
-                command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy); 
+            String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy); 
             if (RunCommand(command, shell, SecondsTimeout * 2, false).IsEmpty())  // 上传脚本会回显内容，超时时间要长
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);

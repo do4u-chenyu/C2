@@ -28,6 +28,7 @@ namespace C2.SearchToolkit
                               .CreateTaskDirectory()
                               .EnterTaskDirectory()
                               .UploadTaskScript()
+                              .UploadRemote()
                               .CheckHomeSearch()
                               .SearchDaemonIP();
 
