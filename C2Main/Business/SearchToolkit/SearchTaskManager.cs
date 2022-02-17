@@ -18,18 +18,36 @@ namespace C2.SearchToolkit
 
         public IEnumerable<SearchTaskInfo> Tasks { get => tasks; }
 
-        public void SearchDaemonIP(SearchTaskInfo task)
+        public bool SearchDaemonIP(SearchTaskInfo task)
         {
             using (GuarderUtil.WaitCursor)
             {
                 BastionAPI api = new BastionAPI(task);
                 task.DaemonIP = api.Login()
-                                   .SearchDaemonIP();
+                              .DeleteTaskDirectory()
+                              .CreateTaskDirectory()
+                              .EnterTaskDirectory()
+                              .UploadTaskScript()
+                              .CheckHomeSearch()
+                              .SearchDaemonIP();
 
                 api.Close();
             }
+
+            if (task.DaemonIP.Count == 0)
+                return false;
+            return true;
         }
 
+        public void SelectDaemonIP(SearchTaskInfo task)
+        {
+            using (GuarderUtil.WaitCursor)
+            {
+                BastionAPI api = new BastionAPI(task);
+                api.Login().EnterTaskDirectory().UploadSelectValidIP();
+                api.Close();
+            }
+        }
 
         public bool RunTask(SearchTaskInfo task) 
         {
@@ -61,22 +79,17 @@ namespace C2.SearchToolkit
             using (GuarderUtil.WaitCursor)
             {
                 BastionAPI api = new BastionAPI(task);
-                task.PID = api.Login()
-                              .DeleteTaskDirectory()
-                              .CreateTaskDirectory()
-                              .EnterTaskDirectory()
-                              .UploadTaskScript()
-                              .CheckHomeSearch()
-                              .RunDSQTask();
+                if (!api.Login().EnterTaskDirectory().RunDSQTask())
+                {
+                    api.Close();
+                    return false;
+                }
                 api.Close();
             }
 
-
-            if (task.PID == String.Empty)
-                return false;
-
             tasks.Add(task);
             return task.Save();
+
         }
 
         private String[] ListTaskBcpFiles()

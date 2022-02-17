@@ -5,6 +5,7 @@ using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -218,26 +219,46 @@ namespace C2.Business.SSH
             catch { }
 
         }
+        
+        public static string availSize = string.Empty;
 
         public List<string> SearchDaemonIP()
         {
-            List<string> daemonIPList = new List<string>() { "10.1.126.3", "10.1.126.2", "10.1.126.1", "10.1.126.6", "10.1.126.7"};
-            
-            /*
-             * 通过以下几步，生成daemon机的IP列表
-             * 
-             * /home/search/zookeeper/shell/
-             * sh ZKClient.sh
-             * ls /search/querydaemon/online
-             * 
-             * ./remote.sh -f ips_list.txt -c '. /home/search/search_profile;python -V;ls /storage/data/1;grep SEARCH_VERSION /home/search/search_profile_vars ' 2>&1 |tee 1>tmp
-             * ./remote.sh -x
-             * 
-             */
+            List<string> daemonIPList = new List<string>() { };
+            if (Oops()) return daemonIPList;
 
+            //判断工作路径下是否有remote.sh和main_rule_http_xxxx.py文件
+            string commandPath = String.Format("cd {0};head -n1 main_rule_http_xxxx.py;head -n1 remote.sh", TaskDirectory);
+            string dirFile = RunCommand(commandPath, shell);
+            if (dirFile.Contains("No such file or directory"))
+            {
+                HelpUtil.ShowMessageBox(string.Format("{0}目录下未找到remote.sh和main_rule_http_xxxx.py文件", TaskDirectory));
+                return daemonIPList;
+            }
+
+
+            // 生成daemon机的有效IP列表
+            string defualtPort = ConvertUtil.GetPort(task.SearchAgentIP);
+            string commandValidIP = String.Format("sh remote.sh -s 1 -p {0}", defualtPort);
+            RunCommand(commandValidIP, shell);
+
+            string validIps = RunCommand("cat valid_ips.txt", shell);
+            List<string> resultList = new List<string>(validIps.Split("\r\n"));
+            resultList.Remove(task.SearchAgentIP);
+            foreach (string ip in resultList)
+            {
+                if (ip.Contains(":" + defualtPort))
+                    daemonIPList.Add(ip);
+            }
+            if (daemonIPList.Count == 0)
+                HelpUtil.ShowMessageBox("无有效Deaemon机，请检查是否为全文主节点!");
+
+            string size = RunCommand("cat size.txt", shell);
+            if (size.Split("\r\n").Count() >= 2)
+                availSize = size.Split("\r\n")[1];
             return daemonIPList;
         }
-
+        
         private String FindID(String ip, String list)
         {
             String pattern = String.Format(@"\[(a\d+)\]\s+{0}\b", ip);
@@ -268,7 +289,34 @@ namespace C2.Business.SSH
 
             return String.Empty;
         }
+        private String RunDSQCommand(String command, ShellStream ssm, int timeout = SecondsTimeout, bool writeLog = true)
+        {
+            try
+            {
+                // 清理缓存
+                _ = ssm.Read();
+                // 执行命令
+                ssm.WriteLine(command);
+                // 根据分隔符和timeout确定任务输出结束
+                String pwd = ssm.Expect("password:", TimeSpan.FromSeconds(timeout));
 
+                if (pwd == null)
+                    return string.Empty;
+                for (int i =0;i<10; i++)
+                {
+                    string ret = ssm.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(timeout));
+                    if (ret != null)
+                        break;
+                    else
+                        ssm.WriteLine(SeparatorString);                
+                }
+                if (writeLog)
+                    log.Info(Shell.Format(pwd));
+                return pwd;
+            }
+            catch { }
+            return String.Empty;
+        }
         private bool CatTgzFile(String ffp, FileStream fs, long fileLength, ShellStream ssm)
         {
             try
@@ -392,6 +440,18 @@ namespace C2.Business.SSH
 
         public bool DownloadTaskResult(String d)
         {
+            if (task.SearchMethod == SearchTaskMethod.DSQ)
+            {
+                String result = RunCommand(String.Format("cd {2};tar -zcvf 000000_queryResult_{0}_{1}_0.tgz results", task.TaskModel, task.TaskCreateTime, TaskDirectory), shell);
+                if (!Regex.IsMatch(result, String.Format(@"result")))
+                {
+                    task.LastErrorMsg = String.Format("任务【{0}】: 文件不存在或空文件", task.TaskName);
+                    task.LastErrorCode = BastionCodePage.DownloadFileNotExists;
+                    log.Warn(task.LastErrorMsg);
+                    return false;
+                }
+            }
+
             // 000000_queryResult_db_开始时间_结束时间.tgz
             String s = TaskDirectory + "/" + TaskResultShellPattern;
             //String s = TaskDirectory + "/" + "000000_queryResult_plane_20210604094525_20210902094525.tgz";
@@ -430,6 +490,27 @@ namespace C2.Business.SSH
             return !(ssh.IsConnected && task.LastErrorMsg.IsEmpty());
         }
 
+        public BastionAPI UploadSelectValidIP()
+        {
+            string SelectValidIP = "select_valid_ips.txt";
+            if (Oops()) return this;
+            log.Info(String.Format("任务:{0} 开始上传模型脚本 {1}", task.TaskName, SelectValidIP));
+
+            String d = TaskDirectory + "/" + SelectValidIP;
+            string txtPath = Path.Combine(Global.TempDirectory, "select_valid_ips.txt");
+            return UploadScript(txtPath, d);
+        }
+
+        public BastionAPI UploadRemote()
+        {
+            string remote = "remote.sh";
+            if (Oops()) return this;
+            log.Info(String.Format("任务:{0} 开始上传模型脚本 {1}", task.TaskName, remote));
+
+            String d = TaskDirectory + "/" + remote;
+            string txtPath = Path.Combine(Global.ResourcesPath, "Script", "IAO_Search_gamble", remote);
+            return UploadScript(txtPath, d);
+        }
 
         public BastionAPI UploadTaskScript()
         {
@@ -462,7 +543,11 @@ namespace C2.Business.SSH
             // Base64果然比shell硬转码好用多了,感谢lxf的脑洞
             String b64 = Convert.ToBase64String(buf);
             // 解码，解压
-            String command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy);
+            String command = string.Empty;
+            if (task.SearchMethod == SearchTaskMethod.DSQ)
+                command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip {1}", b64, dZip);
+            else
+                command = String.Format("echo -e \"{0}\" | base64 -di > {1}; unzip -op {1}>{2}", b64, dZip, dPy); 
             if (RunCommand(command, shell, SecondsTimeout * 2, false).IsEmpty())  // 上传脚本会回显内容，超时时间要长
             {
                 task.LastErrorMsg = String.Format("上传脚本到全文机【{0}】失败", task.SearchAgentIP);
@@ -553,18 +638,39 @@ namespace C2.Business.SSH
             return pid;
         }
 
-        public String RunDSQTask()
+        public bool RunDSQTask()
         {
-            if (Oops()) return String.Empty;
+            if (Oops()) return false;
 
-            /*
-             * 脚本remotecopy.sh将工作目录下压缩包分发到全文机器上 ./remotecopy.sh -f valid_ips.txt -s ./queryScript.tar /storage/data/1
-             * ./remote.sh -f valid_ips.txt -c 'cd /storage/data/1; tar -xvf queryScript.tar'
-             * ./remote.sh -f valid_ips.txt -c ' du -sh /search/index* /sequence / general / '  > data.txt
-             * 脚本remote.sh运行全文机器上的程序
-             */
+            string sendCommand = string.Format("sh remote.sh -s 2 -f {0} -r {1}" + task.TaskDirectory, SearchTaskInfo.TaskScriptTable[task.TaskModel].Replace("_{0}", String.Empty));
+            log.Info(string.Format("任务【{0}】: 全文主节点执行任务下发命令 {1}", task.TaskName, sendCommand));
 
-            return string.Empty;
+            string sendRet = RunCommand(sendCommand, shell);
+            if (sendRet == string.Empty)
+                sendRet = RunDSQCommand(sendCommand, shell);
+            List<string> invalidIPList = new List<string>();
+            List<string> noFileIPList = new List<string>();
+            List<string> sshFailIPList = new List<string>();
+            foreach (string invalidIP in sendRet.Split("\r\n"))
+            {
+                if (invalidIP.Contains(" connection refused") || invalidIP.Contains(" connection timed out"))
+                    invalidIPList.Add(invalidIP.Replace(" connection refused", "").Replace(" connection timed out", ""));
+                else if (invalidIP.Contains(" No runmaxtimemonitor.py"))
+                    noFileIPList.Add(invalidIP.Replace(" No runmaxtimemonitor.py", ""));
+                else if (invalidIP.Contains("'s password: ") && invalidIP.Contains("root@"))
+                    sshFailIPList.Add(invalidIP.Replace("'s password: ", "").Replace("root@", ""));
+            }
+            string invalidIPMessage = invalidIPList.Count() > 0 ? string.Format("Daemon机{0}连接失败，请检查ip和端口号是否正确。", invalidIPList.JoinString("、")) : string.Empty;
+            string noFileMessage = noFileIPList.Count() > 0 ? string.Format("Daemon机{0}的home/search/bin/路径下无runmaxtimemonitor.py文件。", noFileIPList.JoinString("、")) : string.Empty;
+            string sshFailMessage = sshFailIPList.Count() > 0 ? string.Format("Daemon机{0}无法建立ssh信任，连接失败。", sshFailIPList.JoinString("、")) : string.Empty;
+            if (invalidIPMessage + noFileMessage + sshFailMessage != string.Empty)
+                HelpUtil.ShowMessageBox(invalidIPMessage + noFileMessage + sshFailMessage);
+            if (invalidIPList.Count() + noFileIPList.Count() + sshFailIPList.Count() == ConvertUtil.TryParseInt(task.SelectDaemonIPCount))
+            {
+                task.LastErrorMsg = "无有效daemond机";
+                return false;
+            }
+            return true;
         }
 
         public BastionAPI EnterTaskDirectory()
@@ -589,6 +695,8 @@ namespace C2.Business.SSH
             log.Info(String.Format("任务【{0}】: 删除 TaskDirectory", task.TaskName));
             // 删除 临时目录
             if (IsSafePath(TaskDirectory))
+                if (task.SearchMethod == SearchTaskMethod.DSQ)
+                    RunCommand(String.Format("cd {0}; sh remote.sh -s 3 -f {0}", TaskDirectory), shell);
                 RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
             return this;
         }

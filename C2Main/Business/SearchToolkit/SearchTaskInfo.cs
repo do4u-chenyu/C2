@@ -41,7 +41,7 @@ namespace C2.SearchToolkit
             ["DSQ查询"] = "dsq",
         };
 
-        private static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
+        public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
         {
             ["涉赌模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
             ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
@@ -174,7 +174,8 @@ namespace C2.SearchToolkit
             "Settings.StartTime",
             "Settings.EndTime",
             "Settings.QueryStr",
-            "SearchPassword"
+            "SearchPassword",
+            "SelectDaemonIPCount"
         });
 
         public String Username { get; private set; }
@@ -187,6 +188,7 @@ namespace C2.SearchToolkit
         public String InterfaceIP { get; private set; }  // 这个是后期加的,为了兼容性只能追到屁股后面
 
         public String SearchPassword { get; private set; }  // 这个是后期加的,为了兼容性只能追到屁股后面
+        public String SelectDaemonIPCount { get; set; }  // 这个是后期加的,为了兼容性只能追到屁股后面
 
         public String TaskModel { get; private set; }
 
@@ -235,7 +237,8 @@ namespace C2.SearchToolkit
                 Settings.StartTime,
                 Settings.EndTime,
                 Settings.QueryStr,
-                EncryptPassword(SearchPassword) // 密码要加密保存
+                EncryptPassword(SearchPassword), // 密码要加密保存
+                SelectDaemonIPCount
             });
         }
 
@@ -282,7 +285,9 @@ namespace C2.SearchToolkit
                 Settings    = buf.Length < 13 ? new SearchModelSettingsInfo() : 
                               buf.Length < 14 ? new SearchModelSettingsInfo(buf[11], buf[12]) : new SearchModelSettingsInfo(buf[11], buf[12], buf[13]),
                 SearchPassword = buf.Length < 15 ? String.Empty : 
-                                 needDecryptPass ? DecryptPassword(buf[14]) : buf[14]        // 兼容早期版本
+                                 needDecryptPass ? DecryptPassword(buf[14]) : buf[14],        // 兼容早期版本
+                SelectDaemonIPCount = buf.Length < 16 ? String.Empty : buf[15]                // 兼容大杀器字段
+            
             };
             return taskInfo;
         }

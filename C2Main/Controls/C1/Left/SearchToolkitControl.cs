@@ -49,13 +49,16 @@ namespace C2.Controls.C1.Left
 
 
             //TODO  新增daemon机的IP选择窗口
-            if(task.SearchMethod == SearchTaskMethod.DSQ)
+            if (task.SearchMethod == SearchTaskMethod.DSQ)
             {
-                taskManager.SearchDaemonIP(task);
-
-                new SelectValidIPsForm(task).ShowDialog();
+                if (!taskManager.SearchDaemonIP(task))
+                    return;
+                DialogResult dialog = new SelectValidIPsForm(task).ShowDialog();
+                taskManager.SelectDaemonIP(task);
+                if (dialog != DialogResult.OK)
+                    return;
             }
-               
+
 
             string message;
             if (task.SearchMethod == SearchTaskMethod.DSQ ? taskManager.RunDSQTask(task) : taskManager.RunTask(task))
