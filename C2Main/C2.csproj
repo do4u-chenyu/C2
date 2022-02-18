@@ -3166,12 +3166,6 @@
     <None Include="Resources\Script\IAO_Search_gamble\dsqquery_http_EncryptedTraffic_C2.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\main_rule_http_xxxx.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Script\IAO_Search_gamble\main_rule_http_xxxx.py.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Script\IAO_Search_gamble\remote.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
