@@ -44,7 +44,7 @@
             this.helpLabel = new System.Windows.Forms.LinkLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.queryButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -234,18 +234,19 @@
             this.label6.TabIndex = 10017;
             this.label6.Text = "* 约10万行MD5";
             // 
-            // button1
+            // queryButton
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(574, 224);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 36);
-            this.button1.TabIndex = 10018;
-            this.button1.Text = "排队咨询";
-            this.toolTip1.SetToolTip(this.button1, "快剑表-速度快但成功率低;彩虹表-速度慢但成功率高;咨询服务器彩虹表是否有额度");
-            this.button1.UseVisualStyleBackColor = true;
+            this.queryButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.queryButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.queryButton.Location = new System.Drawing.Point(574, 224);
+            this.queryButton.Margin = new System.Windows.Forms.Padding(4);
+            this.queryButton.Name = "queryButton";
+            this.queryButton.Size = new System.Drawing.Size(110, 36);
+            this.queryButton.TabIndex = 10018;
+            this.queryButton.Text = "排队咨询";
+            this.toolTip1.SetToolTip(this.queryButton, "快剑表-速度快但成功率低;彩虹表-速度慢但成功率高;咨询服务器彩虹表是否有额度");
+            this.queryButton.UseVisualStyleBackColor = true;
+            this.queryButton.Click += new System.EventHandler(this.QueryButton_Click);
             // 
             // label7
             // 
@@ -290,7 +291,7 @@
             this.ClientSize = new System.Drawing.Size(705, 477);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.queryButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.helpLabel);
@@ -327,7 +328,7 @@
             this.Controls.SetChildIndex(this.helpLabel, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.queryButton, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.label9, 0);
             this.ResumeLayout(false);
@@ -352,7 +353,7 @@
         private System.Windows.Forms.LinkLabel helpLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button queryButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
