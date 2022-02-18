@@ -3510,12 +3510,10 @@
     <None Include="Resources\NativeResources.res" />
     <None Include="Resources\operator_back.png" />
     <None Include="Resources\nav_small_first_black.bmp" />
-    <None Include="Resources\mindMap.png" />
     <None Include="Resources\map_setting.png" />
     <None Include="Resources\map_sourceCode.png" />
     <None Include="Resources\map_save.png" />
     <None Include="Resources\map_clear.png" />
-    <None Include="Resources\logicMap.png" />
     <Content Include="Resources\Opcontrol_ico\AI.ico" />
     <Content Include="Resources\Opcontrol_ico\python.ico" />
     <None Include="Resources\Opcontrol_ico\sql.ico" />
@@ -3554,7 +3552,6 @@
     <None Include="Resources\Operators\subtra_op.png" />
     <None Include="Resources\Operators\union_op.png" />
     <None Include="Resources\Operators\word_op.png" />
-    <None Include="Resources\organization.png" />
     <None Include="Resources\Operators\control_play_blue.png" />
     <None Include="Resources\Operators\sql_help.png" />
     <None Include="Resources\Operators\db_connect.png" />
@@ -4210,28 +4207,9 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\StartPage\autoFilter.png" />
     <Content Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\dsqquery_http_EncryptedTraffic_C2.py" />
-    <Content Include="Resources\StartPage\bank.png" />
-    <Content Include="Resources\StartPage\BusinessViewLabel.png" />
-    <Content Include="Resources\StartPage\bussinessView.png" />
-    <Content Include="Resources\StartPage\dataStorge.png" />
-    <Content Include="Resources\StartPage\dbnet.png" />
-    <None Include="Resources\StartPage\groupAnalysis.png" />
-    <Content Include="Resources\StartPage\gunLuntan.png" />
-    <None Include="Resources\StartPage\keywordAnalysis.png" />
-    <None Include="Resources\StartPage\infoExtraction.png" />
-    <Content Include="Resources\StartPage\logicMap.png" />
-    <Content Include="Resources\StartPage\mindMap.png" />
-    <Content Include="Resources\StartPage\modelTop.png" />
-    <Content Include="Resources\StartPage\modelTopLabel.png" />
-    <None Include="Resources\StartPage\nothing.jpg" />
-    <Content Include="Resources\StartPage\organization.png" />
-    <Content Include="Resources\StartPage\ram.png" />
     <Content Include="Resources\StartPage\startPageTitle.png" />
-    <Content Include="Resources\StartPage\tree.png" />
-    <Content Include="Resources\StartPage\yellowGroup.png" />
     <None Include="Resources\Templates\DocxExample.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4265,6 +4243,14 @@
     <None Include="Resources\Templates\RegionalismCode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\StartPage\首页_APK检测站.png" />
+    <Content Include="Resources\StartPage\首页_HIBU.png" />
+    <Content Include="Resources\StartPage\首页_分析笔记.png" />
+    <Content Include="Resources\StartPage\首页_喝彩城堡.png" />
+    <Content Include="Resources\StartPage\首页_实验楼.png" />
+    <Content Include="Resources\StartPage\首页_战术手册.png" />
+    <Content Include="Resources\StartPage\首页_知识库.png" />
+    <Content Include="Resources\StartPage\首页_网站侦察兵.png" />
     <Content Include="Resources\Templates\数据预处理文件夹模板.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -4280,7 +4266,6 @@
     <None Include="Resources\tip_close_button.png" />
     <None Include="Resources\tip_pin_button.png" />
     <None Include="Resources\tip_pin_pressed_button.png" />
-    <None Include="Resources\tree.png" />
     <Content Include="Resources\UIThemes\Blackish Green.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
