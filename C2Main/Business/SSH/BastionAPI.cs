@@ -228,11 +228,11 @@ namespace C2.Business.SSH
             if (Oops()) return daemonIPList;
 
             //判断工作路径下是否有remote.sh和main_rule_http_xxxx.py文件
-            string commandPath = String.Format("cd {0};head -n1 main_rule_http_xxxx.py;head -n1 remote.sh", TaskDirectory);
+            string commandPath = String.Format("cd {0};head -n1 {1};head -n1 remote.sh", TaskDirectory, SearchTaskInfo.TaskScriptTable[task.TaskModel]);
             string dirFile = RunCommand(commandPath, shell);
             if (dirFile.Contains("No such file or directory"))
             {
-                HelpUtil.ShowMessageBox(string.Format("{0}目录下未找到remote.sh和main_rule_http_xxxx.py文件", TaskDirectory));
+                HelpUtil.ShowMessageBox(string.Format("{0}目录下未找到remote.sh和{1}文件", TaskDirectory, SearchTaskInfo.TaskScriptTable[task.TaskModel]));
                 return daemonIPList;
             }
 

@@ -23,7 +23,7 @@ done
 
 getDaemonIps(){
     netstat -ntpa | grep "queryagent" | grep 9871 |awk -F ' ' '{print $5}' | sort | awk -va=: -F ':' '{print $1a}'|awk -vb=$defaultPort '{print $1b}' > valid_ips.txt
-    df -h /tmp/iao/search_toolkit/dsq | grep "/" | awk -F ' ' '{print $4}' > size.txt
+    df -h /tmp/iao/search_toolkit | grep "/" | awk -F ' ' '{print $4}' > size.txt
 }
 
 judgeConnect(){
