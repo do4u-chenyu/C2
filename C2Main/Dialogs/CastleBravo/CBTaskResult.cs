@@ -213,5 +213,10 @@ namespace C2.Dialogs.CastleBravo
             if (FileUtil.TryClipboardSetText(TaskInfo.TaskID))
                 HelpUtil.ShowMessageBox(String.Format("已复制任务ID[{0}]到剪切板", TaskInfo.TaskID));
         }
+
+        private void TaskNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

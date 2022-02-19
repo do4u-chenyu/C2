@@ -11,8 +11,6 @@ from struct import unpack
 import zlib
 import re
 
-gReExcel = re.compile('\.(xlsx|xlsm|xlsb|xls|xltx|xltm|xlt|csv|tsv)')
-
 def handle_file_path(current_path):
     isSeqFile = lambda filePath: isfile(filePath) and filePath[-4:] == '.seq'
     fileList = []
@@ -40,41 +38,28 @@ def convert_content(srcBuffer):
         desBuffer[key] = srcBuffer[curInd - valueLen:curInd]
     return desBuffer
 
-def judge_container(content):
-    pattern_container = re.compile(r'\b[A-Z]{3}U\d{7}\b')
-    num_dict = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "A": 10, "B": 12, "C": 13, "D": 14, "E": 15, "F": 16, "G": 17, "H": 18, "I": 19, "J": 20, "K": 21, "L": 23, "M": 24, "N": 25, "O": 26, "P": 27, "Q": 28, "R": 29, "S": 30, "T": 31, "U": 32, "V": 34, "W": 35, "X": 36, "Y": 37, "Z": 38}
-    res_list = pattern_container.findall(content)
-    for res in res_list:
-        sum = 0
-        for i in range(len(res[:-1])):
-            sum = sum + (num_dict[res[i]] * (2 ** i))
-        if sum % 11 == int(res[-1]):
-            return True
-    return False
-
 def process_rule(fieldDict):
     mainFile = fieldDict['_MAINFILE'] if '_MAINFILE' in fieldDict else ''
-    isEml = True if mainFile.endswith('.eml') else False
-    #print isEml, mainFile
-    if not isEml or not mainFile:
+    isHttp = True if mainFile.endswith('.http') else False
+    if not isHttp or not mainFile:
         return 0
 
+    _HOST = fieldDict['_HOST'] if '_HOST' in fieldDict else ''
     capturetime = fieldDict['CAPTURE_TIME'] if 'CAPTURE_TIME' in fieldDict else ''
-    strsrc_ip = fieldDict['STRSRC_IP'] if 'STRSRC_IP' in fieldDict else ''
-    strdst_ip = fieldDict['STRDST_IP'] if 'STRDST_IP' in fieldDict else ''
-    _FROM = fieldDict['_FROM'].replace('\n', '').replace('\t', '').replace('\r', '') if '_FROM' in fieldDict else ''
-    _RCPTTO = fieldDict['_RCPTTO'].replace('\n', '').replace('\t', '').replace('\r', '') if '_RCPTTO' in fieldDict else ''
-    _attachment = fieldDict['_ATTACHTEXT'] if '_ATTACHTEXT' in fieldDict else ''
-    _text = fieldDict['_TEXT'] if '_TEXT' in fieldDict else ''
-    _subject = fieldDict['_SUBJECT'] if '_SUBJECT' in fieldDict else ''
+    _RELATIVEURL = fieldDict['_RELATIVEURL'] if '_RELATIVEURL' in fieldDict else ''
+    _TEXT = fieldDict['_TEXT'] if '_TEXT' in fieldDict else ''
+    _USERAGENT = fieldDict['_USERAGENT'] if '_USERAGENT' in fieldDict else ''
+    AUTH_ACCOUNT = fieldDict['AUTH_ACCOUNT'] if 'AUTH_ACCOUNT' in fieldDict else ''
+    STRSRC_IP = fieldDict['STRSRC_IP'] if 'STRSRC_IP' in fieldDict else ''
+    STRDST_IP = fieldDict['STRDST_IP'] if 'STRDST_IP' in fieldDict else ''
+    _REFERER = fieldDict['_REFERER'] if '_REFERER' in fieldDict else ''
 
-    if judge_container(_attachment) or judge_container(_text) or judge_container(_subject):
-        otherStr = '\t'.join([capturetime, strsrc_ip, strdst_ip, mainFile, _FROM, _RCPTTO])
+    if ( _RELATIVEURL.endswith("asp") or _RELATIVEURL.endswith("jsp") or _RELATIVEURL.endswith("php")) and re.search("^[0-9a-zA-Z+/ ]{1000,25000}={0,2}$",_TEXT):
+        otherStr = '\t'.join([_HOST, mainFile, capturetime, _RELATIVEURL, _USERAGENT, AUTH_ACCOUNT, STRSRC_IP, STRDST_IP, _REFERER])
         return otherStr
     return 0
 
 def slaver_one_file(oneSeq, curNumCount):
-    returnum = 0
     if not isfile(oneSeq):
         raise IOError(oneSeq + " has been removed before handling it")
         sys.stderr.write(datetime.datetime.now().strftime("%Y%m%d%H%M%S") + " - LOGGER WARNING: " + oneSeq + " has been removed before handling it" + "\n")
@@ -106,20 +91,18 @@ def slaver_one_file(oneSeq, curNumCount):
                 if content_str == 0:
                     continue
 
-                curNumCount += 1
-                returnum += 1
-                if curNumCount > 100000:
-                    returnum = -1
+                if curNumCount >= 100000:
                     break
+                curNumCount += 1
                 sys.stdout.write(content_str+ "\n")
                 sys.stdout.flush()
             except Exception, e:
                 sys.stderr.write(datetime.datetime.now().strftime("%Y%m%d%H%M%S") + " - LOGGER WARNING: process rule failed with error: {0}".format(e) + "\n")
-    return returnum
+    return curNumCount
 
 def producer_run(oneProFiles):
     curNumCount = 0
-    header = ["CAPTURE_TIME", "SRC_IP", "DST_IP", "MAINFILE", "FROM", "RCPTTO"]
+    header = ["_HOST", "mainFile", "capturetime", "_RELATIVEURL", "_USERAGENT", "AUTH_ACCOUNT", "STRSRC_IP", "STRDST_IP", "_REFERER"]
     #path = os.path.join(DATA_PATH, 'dsq_result_' + datetime.datetime.now().strftime("%Y%m%d") + '.txt')
     #with open(path, 'w') as f:
     sys.stdout.write("\t".join(header) + "\n")
@@ -127,12 +110,9 @@ def producer_run(oneProFiles):
     for oneFile in oneProFiles:
         sys.stderr.write(datetime.datetime.now().strftime("%Y%m%d%H%M%S") + ' - LOGGER INFO: current handling file: ' + oneFile + "\n")
         try:
-            returnum = slaver_one_file(oneFile, curNumCount)
-            if returnum==-1:
-                curNumCount = 100000
+            curNumCount = slaver_one_file(oneFile, curNumCount)
+            if curNumCount >= 100000:
                 break
-            else:
-                curNumCount += returnum
         except Exception, e:
             sys.stderr.write(datetime.datetime.now().strftime("%Y%m%d%H%M%S") + " - LOGGER WARNING: " + str(e) + "\n")
     sys.stderr.write(datetime.datetime.now().strftime("%Y%m%d%H%M%S") + " - All results: " + str(curNumCount) + "\n")

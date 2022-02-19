@@ -194,5 +194,10 @@ namespace C2.Dialogs.CastleBravo
             }
             catch { };
         }
+
+        private void QueryButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

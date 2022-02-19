@@ -227,12 +227,12 @@ namespace C2.Business.SSH
             List<string> daemonIPList = new List<string>() { };
             if (Oops()) return daemonIPList;
 
-            //判断工作路径下是否有remote.sh和main_rule_xxxx_xxxx.py文件
-            string commandPath = String.Format("cd {0};head -n1 {1};head -n1 remote.sh", TaskDirectory, SearchTaskInfo.TaskScriptTable[task.TaskModel]);
+            //判断工作路径下是否有remote.sh和main_rule_http_xxxx.py文件
+            string commandPath = String.Format("cd {0};head -n1 {1};head -n1 remote.sh", TaskDirectory, TargetScript);
             string dirFile = RunCommand(commandPath, shell);
             if (dirFile.Contains("No such file or directory"))
             {
-                HelpUtil.ShowMessageBox(string.Format("{0}目录下未找到remote.sh和{1}文件", TaskDirectory, SearchTaskInfo.TaskScriptTable[task.TaskModel]));
+                HelpUtil.ShowMessageBox(string.Format("{0}目录下未找到remote.sh和{1}文件", TaskDirectory, TargetScript));
                 return daemonIPList;
             }
 
@@ -638,7 +638,7 @@ namespace C2.Business.SSH
         {
             if (Oops()) return false;
 
-            string sendCommand = string.Format("sh remote.sh -s 2 -f {0} -r {1}" + task.TaskDirectory, SearchTaskInfo.TaskScriptTable[task.TaskModel].Replace("_{0}", String.Empty));
+            string sendCommand = string.Format("sh remote.sh -s 2 -f {0} -r {1}" + task.TaskDirectory, task.TargetScript);
             log.Info(string.Format("任务【{0}】: 全文主节点执行任务下发命令 {1}", task.TaskName, sendCommand));
 
             string sendRet = RunCommand(sendCommand, shell);
@@ -713,7 +713,7 @@ namespace C2.Business.SSH
             if (task.SearchMethod == SearchTaskMethod.DSQ)
             {
                 String ret = RunCommand(String.Format("ps -ef | grep --color=never {0}", task.RemoteWorkspace), shell);//执行脚本里需要传工作执行路径，可以作为进程存在的判断条件
-                return Regex.IsMatch(ret, String.Format(@"sh\s+remote.sh"));
+                return Regex.IsMatch(ret, String.Format(@"python\s+{0}", TargetScript));
             }
             else
             {

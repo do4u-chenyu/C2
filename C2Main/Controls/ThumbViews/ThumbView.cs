@@ -53,16 +53,16 @@ namespace C2.Controls
         }
         void InitItems()
         {
-            Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.logicMap, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.tree, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.organization, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.mindMap, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.autoFilter, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("YHK提取", global::C2.Properties.Resources.infoExtraction1, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("关键词分析", global::C2.Properties.Resources.keywordAnalysis, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("同群分析", global::C2.Properties.Resources.groupAnalysis, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
-            Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
+            Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.首页_分析笔记, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.首页_战术手册, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.首页_喝彩城堡, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.Business));
+            Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("YHK提取", global::C2.Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("关键词分析", global::C2.Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("同群分析", global::C2.Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.Model));
+            //Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
+            //Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
         }
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension

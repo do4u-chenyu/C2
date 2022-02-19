@@ -38,8 +38,9 @@ namespace C2.SearchToolkit
             ["大马模型"] = "dm",
             ["网赌受骗者模型"] = "dbqt",
             ["自定义查询"] = "custom",
-            ["DSQ查询"] = "dsq",
-            ["冰蝎哥斯拉模型"] = "bxgsl"
+            ["冰蝎哥斯拉模型"] = "bxgsl",
+            ["海运走私模型"] = "billoflading",
+            ["加密流量发现"] = "encryptedTraffic"
         };
 
         public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -64,7 +65,8 @@ namespace C2.SearchToolkit
             ["大马模型"] = "batchquery_dm_accountPass_C2_20220107_{0}.py",
             ["网赌受骗者模型"] = "batchquery_dbqt_accountPass_C2_20220121_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
-            ["DSQ查询"] = "main_rule_http_xxxx.py",
+            ["海运走私模型"] = "dsqquery_email_BillofLading_C2_{0}.py",
+            ["加密流量发现"] = "dsqquery_http_EncryptedTraffic_C2_{0}.py",
             ["冰蝎哥斯拉模型"] = "batchquery_behinder-godzilla_accountPass_C2_20220125_{0}.py"
         };
 
@@ -90,7 +92,8 @@ namespace C2.SearchToolkit
             ["大马模型"] = @"([^\n\r]+000000_queryResult_dm_\d+_\d+.tgz)",
             ["网赌受骗者模型"] = @"([^\n\r]+000000_queryResult_dbqt_\d+_\d+.tgz)",
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
-            ["DSQ查询"] = @"([^\n\r]+000000_queryResult_dsq_\d+_\d+.tgz)",
+            ["海运走私模型"] = @"([^\n\r]+000000_queryResult_海运走私模型_\d+_\d+.tgz)",
+            ["加密流量发现"] = @"([^\n\r]+000000_queryResult_加密流量发现_\d+_\d+.tgz)",
             ["冰蝎哥斯拉模型"] = @"([^\n\r]+000000_queryResult_behinder-godzilla_\d+_\d+.tgz)",
         };
 
@@ -115,11 +118,12 @@ namespace C2.SearchToolkit
             ["大马模型"] = "新一代黑客专项模型:侦测高端黑客使用的大型专业木马",
             ["网赌受骗者模型"] = "涉赌模型针对网赌受骗者特殊优化,关键词每月更新",
             ["自定义查询"] = "上面详细设置里自己填查询关键词",
-            ["DSQ查询"] = "内部施工中，忽略",
+            ["海运走私模型"] = "用于发现异常海运单",
+            ["加密流量发现"] = "用于发现正文体加密的http报文",
             ["冰蝎哥斯拉模型"] = "冰蝎哥斯拉加密流量检测模型"
         };
 
-        public static readonly List<string> DSQRelateModelList = new List<string>() { "DSQ查询" };
+        public static readonly List<string> DSQRelateModelList = new List<string>() { "海运走私模型", "加密流量发现" };
 
         public String LocalPyScriptPath
         {
