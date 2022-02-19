@@ -47,12 +47,16 @@ namespace C2.Controls.C1.Left
             lastInfo.Username = task.Username;
             lastInfo.InterfaceIP = task.InterfaceIP;
 
-
+            string message;
             //TODO  新增daemon机的IP选择窗口
             if (task.SearchMethod == SearchTaskMethod.DSQ)
             {
                 if (!taskManager.SearchDaemonIP(task))
+                {
+                    message = String.Format("创建全文任务【{0}】 失败：{1}", task.TaskName, task.LastErrorMsg);
+                    HelpUtil.ShowMessageBox(message);
                     return;
+                }
                 DialogResult dialog = new SelectValidIPsForm(task).ShowDialog();
                 taskManager.SelectDaemonIP(task);
                 if (dialog != DialogResult.OK)
@@ -60,7 +64,7 @@ namespace C2.Controls.C1.Left
             }
 
 
-            string message;
+            
             if (task.SearchMethod == SearchTaskMethod.DSQ ? taskManager.RunDSQTask(task) : taskManager.RunTask(task))
             {
                 AddInnerButton(new SearchToolkitButton(task));
