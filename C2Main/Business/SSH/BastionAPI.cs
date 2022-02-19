@@ -289,6 +289,7 @@ namespace C2.Business.SSH
 
             return String.Empty;
         }
+
         private String RunDSQCommand(String command, ShellStream ssm, int timeout = SecondsTimeout, bool writeLog = true)
         {
             try
@@ -298,24 +299,52 @@ namespace C2.Business.SSH
                 // 执行命令
                 ssm.WriteLine(command);
                 // 根据分隔符和timeout确定任务输出结束
-                String pwd = ssm.Expect("password:", TimeSpan.FromSeconds(timeout));
+                string ip = string.Empty;
+                List<string> sshFailList = new List<string>();
+                int selectIPCount = ConvertUtil.TryParseInt(task.SelectDaemonIPCount);
 
+                String pwd = ssm.Expect("password:", TimeSpan.FromSeconds(timeout));
                 if (pwd == null)
                     return string.Empty;
-                for (int i =0;i<10; i++)
+
+                sshFailList = MatchIP(sshFailList, pwd);
+                ssm.WriteLine(SeparatorString);
+                for (int i =0;i<5*selectIPCount; i++)
                 {
+                    pwd = ssm.Expect("password:", TimeSpan.FromSeconds(timeout));
                     string ret = ssm.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(timeout));
                     if (ret != null)
                         break;
                     else
-                        ssm.WriteLine(SeparatorString);                
+                    {
+                        sshFailList = MatchIP(sshFailList, pwd);
+                        ssm.WriteLine(SeparatorString);
+                    }
                 }
-                if (writeLog)
-                    log.Info(Shell.Format(pwd));
-                return pwd;
+                if (sshFailList.Count > 0)
+                {
+                    task.LastErrorMsg = "Daemon机连接失败";
+                    return sshFailList.JoinString("、");
+                }
+                
             }
-            catch { }
-            return String.Empty;
+            catch (Exception e)
+            {
+                HelpUtil.ShowMessageBox(e.Message);
+            }
+            return "其他异常情况";
+        }
+
+        private List<string> MatchIP(List<string> sshFailList, string pwd)
+        {
+            Match match = Regex.Match(pwd, @"root@(?<ip>.*?)'s password");
+            if (match.Success)
+            {
+                string ip = match.Groups["ip"].Value;
+                if (!sshFailList.Contains(ip))
+                    sshFailList.Add(ip);
+            }
+            return sshFailList;
         }
         private bool CatTgzFile(String ffp, FileStream fs, long fileLength, ShellStream ssm)
         {
@@ -638,30 +667,45 @@ namespace C2.Business.SSH
         {
             if (Oops()) return false;
 
-            string sendCommand = string.Format("sh remote.sh -s 2 -f {0} -r {1}" + task.TaskDirectory, task.TargetScript);
-            log.Info(string.Format("任务【{0}】: 全文主节点执行任务下发命令 {1}", task.TaskName, sendCommand));
+            string judgeCommand = "sh remote.sh -s 2";
+            string judgeRet = RunCommand(judgeCommand, shell);
+            if (judgeCommand == string.Empty)
+            {
+                judgeCommand = RunDSQCommand(judgeCommand, shell);
+                if (judgeCommand != string.Empty && judgeCommand != "其他异常情况")
+                {
+                    string sshFailMessage = string.Format("Daemon机{0}无法建立ssh信任，连接失败。", judgeRet);
+                    HelpUtil.ShowMessageBox(sshFailMessage);
+                    task.LastErrorMsg = "Daemon机建立ssh信任失败";
+                    return false;
+                }
+                else if (judgeCommand == "其他异常情况")
+                {
+                    task.LastErrorMsg = "Daemon机建立ssh信任失败";
+                    return false;
+                }
+            }
 
+            string sendCommand = string.Format("sh remote.sh -s 3 -f {0} -r {1}" + task.TaskDirectory, task.TargetScript);
+            log.Info(string.Format("任务【{0}】: 全文主节点执行任务下发命令 {1}", task.TaskName, sendCommand));
             string sendRet = RunCommand(sendCommand, shell);
-            if (sendRet == string.Empty)
-                sendRet = RunDSQCommand(sendCommand, shell);
+
             List<string> invalidIPList = new List<string>();
             List<string> noFileIPList = new List<string>();
-            List<string> sshFailIPList = new List<string>();
+            
             foreach (string invalidIP in sendRet.Split("\r\n"))
             {
                 if (invalidIP.Contains(" connection refused") || invalidIP.Contains(" connection timed out"))
-                    invalidIPList.Add(invalidIP.Replace(" connection refused", "").Replace(" connection timed out", ""));
+                    invalidIPList.Add(invalidIP.Replace(" connection refused", string.Empty).Replace(" connection timed out", string.Empty).Replace("adding: -", string.Empty).Trim());
                 else if (invalidIP.Contains(" No runmaxtimemonitor.py"))
-                    noFileIPList.Add(invalidIP.Replace(" No runmaxtimemonitor.py", ""));
-                else if (invalidIP.Contains("'s password: ") && invalidIP.Contains("root@"))
-                    sshFailIPList.Add(invalidIP.Replace("'s password: ", "").Replace("root@", ""));
+                    noFileIPList.Add(invalidIP.Replace(" No runmaxtimemonitor.py", string.Empty));
             }
             string invalidIPMessage = invalidIPList.Count() > 0 ? string.Format("Daemon机{0}连接失败，请检查ip和端口号是否正确。", invalidIPList.JoinString("、")) : string.Empty;
             string noFileMessage = noFileIPList.Count() > 0 ? string.Format("Daemon机{0}的home/search/bin/路径下无runmaxtimemonitor.py文件。", noFileIPList.JoinString("、")) : string.Empty;
-            string sshFailMessage = sshFailIPList.Count() > 0 ? string.Format("Daemon机{0}无法建立ssh信任，连接失败。", sshFailIPList.JoinString("、")) : string.Empty;
-            if (invalidIPMessage + noFileMessage + sshFailMessage != string.Empty)
-                HelpUtil.ShowMessageBox(invalidIPMessage + noFileMessage + sshFailMessage);
-            if (invalidIPList.Count() + noFileIPList.Count() + sshFailIPList.Count() == ConvertUtil.TryParseInt(task.SelectDaemonIPCount))
+            
+            if (invalidIPMessage + noFileMessage != string.Empty)
+                HelpUtil.ShowMessageBox(invalidIPMessage + noFileMessage);
+            if (invalidIPList.Count() + noFileIPList.Count() == ConvertUtil.TryParseInt(task.SelectDaemonIPCount))
             {
                 task.LastErrorMsg = "无有效daemond机";
                 return false;
@@ -690,10 +734,13 @@ namespace C2.Business.SSH
             if (Oops()) return this;
             log.Info(String.Format("任务【{0}】: 删除 TaskDirectory", task.TaskName));
             // 删除 临时目录
+
             if (IsSafePath(TaskDirectory))
+            {
                 if (task.SearchMethod == SearchTaskMethod.DSQ)
-                    RunCommand(String.Format("cd {0}; sh remote.sh -s 3 -f {0}", TaskDirectory), shell);
+                    RunCommand(String.Format("cd {0}; sh remote.sh -s 4 -f {0} -r {1}", TaskDirectory, TargetScript), shell);
                 RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
+            }   
             return this;
         }
 

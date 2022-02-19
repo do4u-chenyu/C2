@@ -28,6 +28,20 @@ getDaemonIps(){
 
 judgeConnect(){
     hosts="$hosts `cat select_valid_ips.txt`"
+    for host in $hosts; do
+        ip=`echo $host   | awk -F':' '{print $1}'`
+        port=`echo $host | awk -F':' '{print $2}'`
+        if [ "" = "$port" ] ;then
+            port=22
+        fi
+        ssh -p $port -lroot $ip "REMOTEHOST=$ip"
+    done
+    rm -f size.txt
+    rm -f valid_ips.txt
+}
+
+runTask(){
+    hosts="$hosts `cat select_valid_ips.txt`"
     result_path="results"
     mkdir -p ./$result_path
 
@@ -54,10 +68,10 @@ judgeConnect(){
 
     cat invalidIP
     rm -f result
-    rm -f valid_ips.txt
 }
 
 rmDaemonWorkSpace(){
+    ps -ef | | grep "python $rule" | grep -v grep| awk -F ' ' '{print $2}' | xargs kill 9
     hosts="$hosts `cat select_valid_ips.txt`"
     for host in $hosts; do
         ip=`echo $host   | awk -F':' '{print $1}'`
@@ -74,5 +88,7 @@ if [ $step -eq 1 ] ; then
 elif [ $step -eq 2 ] ; then
     judgeConnect
 elif [ $step -eq 3 ] ; then
+    runTask
+elif [ $step -eq 4 ] ; then
     rmDaemonWorkSpace
 fi
