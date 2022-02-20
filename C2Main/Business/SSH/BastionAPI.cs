@@ -739,7 +739,8 @@ namespace C2.Business.SSH
             {
                 if (task.SearchMethod == SearchTaskMethod.DSQ)
                     RunCommand(String.Format("cd {0}; sh remote.sh -s 4 -f {0} -r {1}", TaskDirectory, TargetScript), shell);
-                RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
+                else
+                    RunCommand(String.Format("rm -rf {0};", TaskDirectory), shell);
             }   
             return this;
         }

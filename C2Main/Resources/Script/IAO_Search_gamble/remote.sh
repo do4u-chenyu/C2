@@ -81,6 +81,7 @@ rmDaemonWorkSpace(){
         fi
         ssh -p $port -lroot $ip "REMOTEHOST=$ip; rm -rf $workspace"
     done
+    rm -rf $workspace
 }
 
 if [ $step -eq 1 ] ; then
