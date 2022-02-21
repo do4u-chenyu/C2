@@ -71,7 +71,7 @@ runTask(){
 }
 
 rmDaemonWorkSpace(){
-    ps -ef | | grep "python $rule" | grep -v grep| awk -F ' ' '{print $2}' | xargs kill 9
+    ps -ef | grep "python $rule" | grep -v grep| awk -F ' ' '{print $2}' | xargs kill 9
     hosts="$hosts `cat select_valid_ips.txt`"
     for host in $hosts; do
         ip=`echo $host   | awk -F':' '{print $1}'`

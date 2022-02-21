@@ -669,24 +669,24 @@ namespace C2.Business.SSH
 
             string judgeCommand = "sh remote.sh -s 2";
             string judgeRet = RunCommand(judgeCommand, shell);
-            if (judgeCommand == string.Empty)
+            if (judgeRet == string.Empty)
             {
-                judgeCommand = RunDSQCommand(judgeCommand, shell);
-                if (judgeCommand != string.Empty && judgeCommand != "其他异常情况")
+                judgeRet = RunDSQCommand(judgeCommand, shell);
+                if (judgeRet != string.Empty && judgeRet != "其他异常情况")
                 {
                     string sshFailMessage = string.Format("Daemon机{0}无法建立ssh信任，连接失败。", judgeRet);
                     HelpUtil.ShowMessageBox(sshFailMessage);
                     task.LastErrorMsg = "Daemon机建立ssh信任失败";
                     return false;
                 }
-                else if (judgeCommand == "其他异常情况")
+                else if (judgeRet == "其他异常情况")
                 {
                     task.LastErrorMsg = "Daemon机建立ssh信任失败";
                     return false;
                 }
             }
 
-            string sendCommand = string.Format("sh remote.sh -s 3 -f {0} -r {1}" + task.TaskDirectory, task.TargetScript);
+            string sendCommand = string.Format("sh remote.sh -s 3 -f {0} -r {1}", task.TaskDirectory, task.TargetScript);
             log.Info(string.Format("任务【{0}】: 全文主节点执行任务下发命令 {1}", task.TaskName, sendCommand));
             string sendRet = RunCommand(sendCommand, shell);
 
