@@ -45,7 +45,7 @@ namespace C2
         ShortcutKeysTable ShortcutKeys;
 
         private bool isBottomViewPanelMinimum;
-        private bool isLeftViewPanelMinimum;
+        public bool isLeftViewPanelMinimum;
         private InputDataForm inputDataForm;
         private Control[] leftPanelControls;
         private Control[] leftMainButtons;
@@ -224,7 +224,7 @@ namespace C2
             this.blankButton.Focus();
         }
 
-        private void ShowLeftPanel(Control leftButton, Control leftPanel)
+        public void ShowLeftPanel(Control leftButton, Control leftPanel)
         {
             using (new GuarderUtil.LayoutGuarder(leftPanel))
             {
@@ -714,6 +714,7 @@ namespace C2
             if (dialogResult == DialogResult.OK)
                 this.NewDocumentForm(templateName, createNewModelForm.ModelTitle);
         }
+
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
         {
             RefreshFunctionTaskBarItems();
@@ -955,5 +956,6 @@ namespace C2
             User32.ShowWindowAsync(this.Handle, ShowWindowFlags.SW_MAXIMIZE);
             User32.SetForegroundWindow(this.Handle);
         }
+
     }
 }

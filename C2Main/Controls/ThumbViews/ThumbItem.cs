@@ -25,7 +25,15 @@ namespace C2.Controls
         public enum ModelTypes
         {
             Null,
-            Business,
+            AnalysisNotes,
+            TacticalManual,
+            CastleBravo,
+            Laboratory,
+            WebsiteScout,
+            Business, 
+            APKMonitor,
+            Knowledge,
+            HIBU,
             Model
         }
         public ModelTypes Types { get; set; }

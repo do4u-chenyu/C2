@@ -39,6 +39,8 @@ namespace C2
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
+            this.manualButton = new C2.Controls.Common.NoFocusButton();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.HIBUButton = new C2.Controls.Common.NoFocusButton();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.castleBravoButton = new C2.Controls.Common.NoFocusButton();
@@ -90,13 +92,13 @@ namespace C2
             this.taskBar = new C2.Controls.TaskBar();
             this.blankButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.manualButton = new C2.Controls.Common.NoFocusButton();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
+            this.manualButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.HIBUButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.castleBravoButton.SuspendLayout();
@@ -123,8 +125,6 @@ namespace C2
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tabPanel.SuspendLayout();
-            this.manualButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // headPanel
@@ -178,7 +178,7 @@ namespace C2
             this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.usernamelabel.Size = new System.Drawing.Size(38, 31);
+            this.usernamelabel.Size = new System.Drawing.Size(26, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "BI";
             this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
@@ -190,7 +190,7 @@ namespace C2
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(383, 52);
+            this.label1.Size = new System.Drawing.Size(258, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "分析师单兵作战装备";
             // 
@@ -211,6 +211,34 @@ namespace C2
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(145, 560);
             this.leftMainMenuPanel.TabIndex = 1;
+            // 
+            // manualButton
+            // 
+            this.manualButton.Controls.Add(this.pictureBox5);
+            this.manualButton.FlatAppearance.BorderSize = 0;
+            this.manualButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manualButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.manualButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.manualButton.Location = new System.Drawing.Point(0, 2);
+            this.manualButton.Name = "manualButton";
+            this.manualButton.Size = new System.Drawing.Size(151, 42);
+            this.manualButton.TabIndex = 8;
+            this.manualButton.TabStop = false;
+            this.manualButton.Text = "   战术手册";
+            this.toolTip1.SetToolTip(this.manualButton, "当前导入的所有战术手册");
+            this.manualButton.UseVisualStyleBackColor = true;
+            this.manualButton.Click += new System.EventHandler(this.ManualButton_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox5.Image = global::C2.Properties.Resources.匕首;
+            this.pictureBox5.Location = new System.Drawing.Point(12, 13);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox5.TabIndex = 13;
+            this.pictureBox5.TabStop = false;
             // 
             // HIBUButton
             // 
@@ -455,19 +483,6 @@ namespace C2
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
-            // mindMapControl
-            // 
-            this.mindMapControl.AllowDrop = true;
-            this.mindMapControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mindMapControl.BackColor = System.Drawing.Color.White;
-            this.mindMapControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.mindMapControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mindMapControl.Location = new System.Drawing.Point(0, 0);
-            this.mindMapControl.Margin = new System.Windows.Forms.Padding(4);
-            this.mindMapControl.Name = "mindMapControl";
-            this.mindMapControl.Size = new System.Drawing.Size(185, 558);
-            this.mindMapControl.TabIndex = 0;
-            // 
             // manualControl
             // 
             this.manualControl.AllowDrop = true;
@@ -480,6 +495,19 @@ namespace C2
             this.manualControl.Name = "manualControl";
             this.manualControl.Size = new System.Drawing.Size(185, 558);
             this.manualControl.TabIndex = 0;
+            // 
+            // mindMapControl
+            // 
+            this.mindMapControl.AllowDrop = true;
+            this.mindMapControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mindMapControl.BackColor = System.Drawing.Color.White;
+            this.mindMapControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.mindMapControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mindMapControl.Location = new System.Drawing.Point(0, 0);
+            this.mindMapControl.Margin = new System.Windows.Forms.Padding(4);
+            this.mindMapControl.Name = "mindMapControl";
+            this.mindMapControl.Size = new System.Drawing.Size(185, 558);
+            this.mindMapControl.TabIndex = 0;
             // 
             // dataSourceControl
             // 
@@ -540,7 +568,7 @@ namespace C2
             this.websiteFeatureDetectionControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.websiteFeatureDetectionControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.websiteFeatureDetectionControl.Location = new System.Drawing.Point(0, 0);
-            this.websiteFeatureDetectionControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.websiteFeatureDetectionControl.Margin = new System.Windows.Forms.Padding(4);
             this.websiteFeatureDetectionControl.Name = "websiteFeatureDetectionControl";
             this.websiteFeatureDetectionControl.Size = new System.Drawing.Size(185, 558);
             this.websiteFeatureDetectionControl.TabIndex = 0;
@@ -553,7 +581,7 @@ namespace C2
             this.searchToolkitControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.searchToolkitControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchToolkitControl.Location = new System.Drawing.Point(0, 0);
-            this.searchToolkitControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchToolkitControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchToolkitControl.Name = "searchToolkitControl";
             this.searchToolkitControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.searchToolkitControl.Size = new System.Drawing.Size(185, 558);
@@ -567,7 +595,7 @@ namespace C2
             this.castleBravoControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.castleBravoControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.castleBravoControl.Location = new System.Drawing.Point(0, 0);
-            this.castleBravoControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.castleBravoControl.Margin = new System.Windows.Forms.Padding(4);
             this.castleBravoControl.Name = "castleBravoControl";
             this.castleBravoControl.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.castleBravoControl.Size = new System.Drawing.Size(185, 558);
@@ -623,7 +651,7 @@ namespace C2
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.logLabel.Location = new System.Drawing.Point(122, 5);
             this.logLabel.Name = "logLabel";
-            this.logLabel.Size = new System.Drawing.Size(110, 31);
+            this.logLabel.Size = new System.Drawing.Size(74, 22);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
             this.toolTip1.SetToolTip(this.logLabel, "当前多维运算流程运行情况的日志信息.");
@@ -636,7 +664,7 @@ namespace C2
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyControlLabel.Location = new System.Drawing.Point(237, 5);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(86, 31);
+            this.pyControlLabel.Size = new System.Drawing.Size(58, 22);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
             this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本.");
@@ -649,7 +677,7 @@ namespace C2
             this.previewLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.previewLabel.Location = new System.Drawing.Point(14, 5);
             this.previewLabel.Name = "previewLabel";
-            this.previewLabel.Size = new System.Drawing.Size(110, 31);
+            this.previewLabel.Size = new System.Drawing.Size(74, 22);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.toolTip1.SetToolTip(this.previewLabel, "当前视图对应数据源的部分数据预览.");
@@ -809,34 +837,6 @@ namespace C2
             // 
             this.openFileDialog1.FileName = "openFileDialog2";
             // 
-            // manualButton
-            // 
-            this.manualButton.Controls.Add(this.pictureBox5);
-            this.manualButton.FlatAppearance.BorderSize = 0;
-            this.manualButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.manualButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.manualButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.manualButton.Location = new System.Drawing.Point(0, 2);
-            this.manualButton.Name = "manualButton";
-            this.manualButton.Size = new System.Drawing.Size(151, 42);
-            this.manualButton.TabIndex = 8;
-            this.manualButton.TabStop = false;
-            this.manualButton.Text = "   战术手册";
-            this.toolTip1.SetToolTip(this.manualButton, "当前导入的所有战术手册");
-            this.manualButton.UseVisualStyleBackColor = true;
-            this.manualButton.Click += ManualButton_Click;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox5.Image = global::C2.Properties.Resources.匕首;
-            this.pictureBox5.Location = new System.Drawing.Point(12, 13);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox5.TabIndex = 13;
-            this.pictureBox5.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -860,6 +860,8 @@ namespace C2
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
+            this.manualButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.HIBUButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.castleBravoButton.ResumeLayout(false);
@@ -887,8 +889,6 @@ namespace C2
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.tabPanel.ResumeLayout(false);
-            this.manualButton.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -907,16 +907,16 @@ namespace C2
         private System.Windows.Forms.Panel leftToolBoxPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel commonPanel;
-        private Controls.Left.ManualControl manualControl;
+        public Controls.Left.ManualControl manualControl;
         private Controls.Left.MyMindMapControl mindMapControl;
         private Controls.Left.DataSourceControl dataSourceControl;
-        private Controls.Left.IAOLabControl iaoLabControl;
-        private Controls.Left.IAOLabControl HIBUControl;
+        public Controls.Left.IAOLabControl iaoLabControl;
+        public Controls.Left.IAOLabControl HIBUControl;
         private Controls.Left.MyModelControl modelMarketControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private System.Windows.Forms.Label label7;
-        private Controls.Common.NoFocusButton iaoLabButton;
+        public Controls.Common.NoFocusButton iaoLabButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private Panel MainPanel;
         private Panel tabPanel;
@@ -943,18 +943,18 @@ namespace C2
         private PictureBox DataButtonPictureBox;
         private OpenFileDialog openFileDialog1;
         private Panel panel1;
-        private Controls.Common.NoFocusButton detectionButton;
+        public Controls.Common.NoFocusButton detectionButton;
         private PictureBox pictureBox1;
         private Controls.Common.NoFocusButton searchToolkitButton;
         private PictureBox pictureBox2;
-        private Controls.C1.Left.WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
+        public Controls.C1.Left.WebsiteFeatureDetectionControl websiteFeatureDetectionControl;
         private Controls.C1.Left.SearchToolkitControl searchToolkitControl;
-        private Controls.Common.NoFocusButton castleBravoButton;
+        public Controls.Common.NoFocusButton castleBravoButton;
         private PictureBox pictureBox3;
-        private Controls.C1.Left.CastleBravoControl castleBravoControl;
-        private Controls.Common.NoFocusButton HIBUButton;
+        public Controls.C1.Left.CastleBravoControl castleBravoControl;
+        public Controls.Common.NoFocusButton HIBUButton;
         private PictureBox pictureBox4;
-        private Controls.Common.NoFocusButton manualButton;
+        public Controls.Common.NoFocusButton manualButton;
         private PictureBox pictureBox5;
     }
 }

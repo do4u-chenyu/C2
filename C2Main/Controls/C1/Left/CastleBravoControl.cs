@@ -32,6 +32,13 @@ namespace C2.Controls.C1.Left
             }
         }
 
+        public void AddLabelClick()
+        {
+            var dialog = new AddCBTask();
+            dialog.ShowDialog();
+        }
+
+
         public void Save()
         {
             List<CastleBravoButton> buttons = FindControls<CastleBravoButton>();

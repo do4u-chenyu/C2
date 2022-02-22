@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.Forms;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-
 namespace C2.Controls
 {
     class ThumbView : BaseControl
@@ -29,6 +29,7 @@ namespace C2.Controls
 
         public event ThumbViewItemCancelEventHandler ItemClosing;
         public event ThumbViewItemEventHandler ItemClosed;
+        
 
         public ThumbView()
         {
@@ -53,14 +54,14 @@ namespace C2.Controls
         }
         void InitItems()
         {
-            Items.Add(new ThumbItem("逻辑图", global::C2.Properties.Resources.首页_分析笔记, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("树状图", global::C2.Properties.Resources.首页_战术手册, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("组织架构图", global::C2.Properties.Resources.首页_喝彩城堡, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("思维导图", global::C2.Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.Business));
-            Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("YHK提取", global::C2.Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("关键词分析", global::C2.Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Model));
-            Items.Add(new ThumbItem("同群分析", global::C2.Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.Model));
+            Items.Add(new ThumbItem("逻辑图",           global::C2.Properties.Resources.首页_分析笔记, ThumbItem.ModelTypes.AnalysisNotes));
+            Items.Add(new ThumbItem("树状图",           global::C2.Properties.Resources.首页_战术手册, ThumbItem.ModelTypes.TacticalManual));
+            Items.Add(new ThumbItem("组织架构图",       global::C2.Properties.Resources.首页_喝彩城堡, ThumbItem.ModelTypes.CastleBravo));
+            Items.Add(new ThumbItem("思维导图",         global::C2.Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.Laboratory));
+            Items.Add(new ThumbItem("JS自动化过滤流程", global::C2.Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WebsiteScout));
+            Items.Add(new ThumbItem("YHK提取",          global::C2.Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APKMonitor));
+            Items.Add(new ThumbItem("关键词分析",       global::C2.Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+            Items.Add(new ThumbItem("同群分析",         global::C2.Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.HIBU));
             //Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.modelTopLabel, ThumbItem.ModelTypes.Null));
             //Items.Add(new ThumbItem(string.Empty, global::C2.Properties.Resources.BusinessViewLabel, ThumbItem.ModelTypes.Null));
         }
@@ -543,12 +544,89 @@ namespace C2.Controls
             }
         }
 
+        public string GetChromePath()
+        {
+            RegistryKey regKey = Registry.ClassesRoot;
+            string path = string.Empty;
+            List<string> chromeKeyList = new List<string>();
+            foreach (var chrome in regKey.GetSubKeyNames())
+            {
+                if (chrome.ToUpper().Contains("CHROMEHTML"))
+                {
+                    chromeKeyList.Add(chrome);
+                }
+            }
+            foreach (string chromeKey in chromeKeyList)
+            {
+                path = Registry.GetValue(@"HKEY_CLASSES_ROOT\" + chromeKey + @"\shell\open\command", null, null) as string;
+                if (path != null)
+                {
+                    var split = path.Split('\"');
+                    path = split.Length >= 2 ? split[1] : null;
+                    if (File.Exists(path))
+                        return path;
+                }
+            }
+            return string.Empty;
+        }
+
         protected virtual void OnItemClick(ThumbItem item)
         {
+            String chromePath = GetChromePath();
             switch (item.Types)
             {
-                case ThumbItem.ModelTypes.Business:
+                //分析笔记
+                case ThumbItem.ModelTypes.AnalysisNotes:
                     Global.GetMainForm().NewDocumentForm_Click(item.Text);
+                    break;
+                //战术手册
+                case ThumbItem.ModelTypes.TacticalManual:
+                    if (!Global.GetMainForm().manualControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().manualButton, Global.GetMainForm().manualControl);
+                    break;
+                //喝彩城堡
+                case ThumbItem.ModelTypes.CastleBravo:
+                    if (!Global.GetMainForm().castleBravoControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().castleBravoButton, Global.GetMainForm().castleBravoControl);
+                    Global.GetCastleBravoControl().AddLabelClick();
+                    break;
+                //实验楼
+                case ThumbItem.ModelTypes.Laboratory:
+                    if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
+                    break;
+                //侦察兵
+                case ThumbItem.ModelTypes.WebsiteScout:
+                    if (!Global.GetMainForm().websiteFeatureDetectionControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().detectionButton, Global.GetMainForm().websiteFeatureDetectionControl);
+                    Global.GetWebsiteFeatureDetectionControl().AddLabelClick();
+                    break;
+                //APK监测站
+                case ThumbItem.ModelTypes.APKMonitor:
+                    if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
+                    if (!string.IsNullOrEmpty(chromePath))
+                    {
+                        System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:6663/ns/APPtest/home");
+                    }
+                    else
+                        MessageBox.Show("未能找到chrome启动路径");
+                    break;
+                //知识库
+                case ThumbItem.ModelTypes.Knowledge:
+                    if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
+                    if (!string.IsNullOrEmpty(chromePath))
+                    {
+                        System.Diagnostics.Process.Start(chromePath, "15.73.3.241:19001/KnowledgeBase/");
+                    }
+                    else
+                        MessageBox.Show("未能找到chrome启动路径");
+                    break;
+                //HIBU
+                case ThumbItem.ModelTypes.HIBU:
+                    if (!Global.GetMainForm().HIBUControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
+                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().HIBUButton, Global.GetMainForm().HIBUControl);
                     break;
                 case ThumbItem.ModelTypes.Model:
                     CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.MarketViewPath, item.Text));
@@ -560,7 +638,6 @@ namespace C2.Controls
                 default:
                     break;
             }
-
         }
 
         void OnItemClose(ThumbItem item)

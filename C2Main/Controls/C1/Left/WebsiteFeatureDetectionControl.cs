@@ -30,6 +30,12 @@ namespace C2.Controls.C1.Left
             }
         }
 
+        public void AddLabelClick()
+        {
+            var dialog = new AddWFDTask();
+            dialog.ShowDialog();
+        }
+
         #region 持久化保存/加载
         public void Save()
         {
