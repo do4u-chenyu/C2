@@ -152,7 +152,7 @@
             this.scanSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.myInstaller1 = new UserInstallSet.MyInstaller();
-            this.fctb = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.fctb = new ICSharpCode.TextEditor.TextEditorControlEx();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -184,7 +184,6 @@
             this.groupBox12.SuspendLayout();
             this.urlTB.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctb)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -398,7 +397,7 @@
             this.tBReqMess.Name = "tBReqMess";
             this.tBReqMess.Size = new System.Drawing.Size(741, 443);
             this.tBReqMess.TabIndex = 3;
-            this.tBReqMess.Text = string.Empty;
+            this.tBReqMess.Text = "";
             this.tBReqMess.TextChanged += new System.EventHandler(this.textBoxRequestMessage_TextChanged);
             // 
             // TextBoxReferer
@@ -1016,7 +1015,7 @@
             this.requestHeaderTextBox.Name = "requestHeaderTextBox";
             this.requestHeaderTextBox.Size = new System.Drawing.Size(568, 292);
             this.requestHeaderTextBox.TabIndex = 0;
-            this.requestHeaderTextBox.Text = string.Empty;
+            this.requestHeaderTextBox.Text = "";
             // 
             // requestHeadersLV
             // 
@@ -1120,7 +1119,7 @@
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.Size = new System.Drawing.Size(502, 142);
             this.logTextBox.TabIndex = 3;
-            this.logTextBox.Text = string.Empty;
+            this.logTextBox.Text = "";
             // 
             // groupBox13
             // 
@@ -1384,45 +1383,17 @@
             // 
             // fctb
             // 
-            this.fctb.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctb.AutoScrollMinSize = new System.Drawing.Size(179, 14);
-            this.fctb.BackBrush = null;
-            this.fctb.CharHeight = 14;
-            this.fctb.CharWidth = 8;
-            this.fctb.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctb.IsReplaceMode = false;
+            this.fctb.FoldingStrategy = "XML";
+            this.fctb.Font = new System.Drawing.Font("Courier New", 10F);
             this.fctb.Location = new System.Drawing.Point(3, 3);
             this.fctb.Name = "fctb";
-            this.fctb.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctb.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctb.ShowSpaces = true;
+            this.fctb.ShowTabs = true;
             this.fctb.Size = new System.Drawing.Size(568, 507);
-            this.fctb.TabIndex = 0;
-            this.fctb.Zoom = 100;
-
-            this.fctb.AutoIndentCharsPatterns = string.Empty;
-            this.fctb.CommentPrefix = null;
-            this.fctb.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fctb.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.fctb.Language = FastColoredTextBoxNS.Language.HTML;
-            this.fctb.LeftBracket = '<';
-            this.fctb.LeftBracket2 = '(';
-            this.fctb.Name = "fctb";
-            this.fctb.RightBracket = '>';
-            this.fctb.RightBracket2 = ')';
-            this.fctb.Text = "\r\n<html>\r\n<body>\r\n    <h1> Hello, this text is 你好writable! </h1>\r\n    <div class=re" +
-    "adonly_attribute> Writable text </div>\r\n</body>\r\n</html>";
+            this.fctb.SyntaxHighlighting = "HTML";
+            this.fctb.TabIndex = 3;
+            this.fctb.VRulerRow = 120;
             // 
             // IntruderForm
             // 
@@ -1480,7 +1451,6 @@
             this.urlTB.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctb)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1609,6 +1579,6 @@
         private System.Windows.Forms.ColumnHeader value;
         private System.Windows.Forms.WebBrowser webBrowser;
         private UserInstallSet.MyInstaller myInstaller1;
-        private FastColoredTextBoxNS.FastColoredTextBox fctb;
+        private ICSharpCode.TextEditor.TextEditorControlEx fctb;
     }
 }
