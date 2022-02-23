@@ -1,14 +1,8 @@
-﻿using C2.IAOLab.Plugins;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.IAOLab
@@ -21,12 +15,7 @@ namespace C2.Dialogs.IAOLab
             IntPtr Hicon = global::C2.Properties.Resources.BigAPK.GetHicon();
             this.Icon = Icon.FromHandle(Hicon);
         }
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
-        }
-
-
+        
         private void BigApkForm_Load(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(GetChromePath()))
@@ -44,7 +33,6 @@ namespace C2.Dialogs.IAOLab
         public string GetChromePath()
         {
             RegistryKey regKey = Registry.ClassesRoot;
-            string path = string.Empty;
             List<string> chromeKeyList = new List<string>();
             foreach (var chrome in regKey.GetSubKeyNames())
             {
@@ -55,7 +43,7 @@ namespace C2.Dialogs.IAOLab
             }
             foreach (string chromeKey in chromeKeyList)
             {
-                path = Registry.GetValue(@"HKEY_CLASSES_ROOT\" + chromeKey + @"\shell\open\command", null, null) as string;
+                string path = Registry.GetValue(@"HKEY_CLASSES_ROOT\" + chromeKey + @"\shell\open\command", null, null) as string;
                 if (path != null)
                 {
                     var split = path.Split('\"');
