@@ -2,13 +2,8 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KnowledgeBase
@@ -61,7 +56,6 @@ namespace KnowledgeBase
         public string GetChromePath()
         {
             RegistryKey regKey = Registry.ClassesRoot;
-            string path = string.Empty;
             List<string> chromeKeyList = new List<string>();
             foreach (var chrome in regKey.GetSubKeyNames())
             {
@@ -72,7 +66,7 @@ namespace KnowledgeBase
             }
             foreach(string chromeKey in chromeKeyList)
             {
-                path = Registry.GetValue(@"HKEY_CLASSES_ROOT\" + chromeKey + @"\shell\open\command", null, null) as string;
+                string path = Registry.GetValue(@"HKEY_CLASSES_ROOT\" + chromeKey + @"\shell\open\command", null, null) as string;
                 if (path != null)
                 {
                     var split = path.Split('\"');
