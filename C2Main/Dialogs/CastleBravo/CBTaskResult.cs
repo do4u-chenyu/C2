@@ -73,19 +73,23 @@ namespace C2.Dialogs.CastleBravo
 
         private void UpdateTaskStatusLabel()
         {
-            foreach(CastleBravoResultOne resOne in TaskInfo.PreviewResults)
+            if (TaskInfo.Status != CastleBravoTaskStatus.Done)
             {
-                if (resOne.Mode == "half")  // 遇到控制行
+                foreach (CastleBravoResultOne resOne in TaskInfo.PreviewResults)
                 {
-                    TaskInfo.Status = CastleBravoTaskStatus.Half;
-                    break;
-                }
-                if (resOne.Mode == "rainbow")
-                {
-                    TaskInfo.Status = CastleBravoTaskStatus.Rainbow;
-                    break;
+                    if (resOne.Mode == "half")  // 遇到控制行
+                    {
+                        TaskInfo.Status = CastleBravoTaskStatus.Half;
+                        break;
+                    }
+                    if (resOne.Mode == "rainbow")
+                    {
+                        TaskInfo.Status = CastleBravoTaskStatus.Rainbow;
+                        break;
+                    }
                 }
             }
+
             String statusDes = TaskInfo.Status.ToString();
 
             if (TaskInfo.Status == CastleBravoTaskStatus.Done)
