@@ -121,9 +121,10 @@ namespace C2.Business.CastleBravo.WebShellTool
             return true;
         }
 
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
+
     }
 }
