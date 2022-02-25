@@ -196,6 +196,7 @@ namespace C2.Core
         public const string ServerHIUrl = @"http://221.226.113.110:8970";
         public const string ServerUrl = @"http://221.226.113.110:8484";
         public const string IpUrl = @"http://221.226.113.110:8484/Castle/ip?ip=";
+        public const string CastleIDLEUrl = @"http://221.226.113.110:8484/Castle/check";
 
         public static Dictionary<string, string> WFDPredictionCodeDict = new Dictionary<string, string>
         {

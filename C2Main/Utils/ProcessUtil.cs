@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace C2.Utils
@@ -13,6 +14,12 @@ namespace C2.Utils
                 FileUtil.ExploreDirectory(ffp);
             else
                 ProcessExplorer(ffp);
+        }
+
+        public static void TryProcessOpen(string ffp)
+        {
+            if (File.Exists(ffp))
+                ProcessOpen(ffp);
         }
 
         private static void ProcessExplorer(string ffp)

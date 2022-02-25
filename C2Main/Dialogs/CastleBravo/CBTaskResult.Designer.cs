@@ -43,7 +43,7 @@
             this.salt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exploreButton = new System.Windows.Forms.Button();
             this.browserButton = new System.Windows.Forms.Button();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.taskIdLabel = new System.Windows.Forms.Label();
@@ -167,7 +167,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.exploreButton);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.taskStatusLabel);
             this.panel1.Controls.Add(this.taskIdLabel);
@@ -196,18 +196,19 @@
             this.label5.Text = "先快剑表后彩虹表,单次小于5个或快剑表成功率超80%,则不再查彩虹表";
             this.toolTip1.SetToolTip(this.label5, "快剑表-速度快但成功率低;彩虹表-速度慢但成功率高;");
             // 
-            // button1
+            // exploreButton
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("宋体", 9F);
-            this.button1.Location = new System.Drawing.Point(393, 163);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 42);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "打开文件目录";
-            this.button1.UseVisualStyleBackColor = false;
+            this.exploreButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.exploreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exploreButton.Font = new System.Drawing.Font("宋体", 9F);
+            this.exploreButton.Location = new System.Drawing.Point(393, 163);
+            this.exploreButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exploreButton.Name = "exploreButton";
+            this.exploreButton.Size = new System.Drawing.Size(134, 42);
+            this.exploreButton.TabIndex = 8;
+            this.exploreButton.Text = "打开文件目录";
+            this.exploreButton.UseVisualStyleBackColor = false;
+            this.exploreButton.Click += new System.EventHandler(this.ExploreButton_Click);
             // 
             // browserButton
             // 
@@ -258,7 +259,7 @@
             this.taskNameLabel.Size = new System.Drawing.Size(73, 27);
             this.taskNameLabel.TabIndex = 4;
             this.taskNameLabel.Text = "Name";
-            this.toolTip1.SetToolTip(this.taskNameLabel, "双击打开待查MD5列表文件");
+            this.toolTip1.SetToolTip(this.taskNameLabel, "双击复制MD5列表文件路径到剪切板");
             this.taskNameLabel.Click += new System.EventHandler(this.TaskNameLabel_Click);
             // 
             // label4
@@ -342,7 +343,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn salt;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exploreButton;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

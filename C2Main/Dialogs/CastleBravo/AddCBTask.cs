@@ -197,8 +197,8 @@ namespace C2.Dialogs.CastleBravo
 
         private void QueryButton_Click(object sender, EventArgs e)
         {
-            string result = "";
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://221.226.113.110:8484/Castle/check");
+            string result = string.Empty;
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(Global.CastleIDLEUrl);
             req.Method = "POST";
             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
             Stream stream = resp.GetResponseStream();
@@ -210,7 +210,7 @@ namespace C2.Dialogs.CastleBravo
             if(result.Contains("True"))
                 MessageBox.Show("彩虹表在忙", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("彩虹表空闲", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("彩虹表空闲, 欢迎使用", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

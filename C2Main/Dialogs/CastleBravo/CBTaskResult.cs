@@ -220,7 +220,13 @@ namespace C2.Dialogs.CastleBravo
 
         private void TaskNameLabel_Click(object sender, EventArgs e)
         {
+            if (FileUtil.TryClipboardSetText(TaskInfo.MD5FilePath))
+                HelpUtil.ShowMessageBox(String.Format("已复制MD5列表文件路径[{0}]到剪切板", TaskInfo.MD5FilePath));
+        }
 
+        private void ExploreButton_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(this.TaskInfo.ResultFilePath);
         }
     }
 }
