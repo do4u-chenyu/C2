@@ -16,15 +16,17 @@ namespace C2
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
+        public const string LinceseDeadLine = "2022031700000000";
+        public const string LinceseDeadLineDesc = "可用时间截止到2022年3月17号";
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main(params string[] args)
         {
-            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), "2022031700000000") > 0)
+            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), LinceseDeadLine) > 0)
             {
-                MessageBox.Show("产品可用时间截止到2022年3月17号");
+                MessageBox.Show(LinceseDeadLineDesc);
                 return;
             }
 
