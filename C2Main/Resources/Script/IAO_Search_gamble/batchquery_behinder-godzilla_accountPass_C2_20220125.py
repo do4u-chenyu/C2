@@ -91,7 +91,7 @@ class BatchQuery:
             if query_type =='partial_req_content':
                 pload = "请求体前50字符：" + content.split('\n')[-1][:50]
             else:
-                pload = content
+                pload = content.replace('\r','').replace('\n','')
             method = content.split(' ')[0]            
             return pload, method
         except Exception, e:
@@ -104,23 +104,27 @@ class BatchQuery:
                     LOGGER.info('OUTITMES:{0}\nQUERY_KEYS:{1}\nQUERYTIME:{2}_{3}'.format(self.all_items, KEY_WORD, self.startTime, self.endTime))
                 except Exception, e:
                     LOGGER.info('QUERY_ERROR-{0}'.format(e))
-                for data in self.queryclient(KEY_WORD):
+                query_result = self.queryclient(KEY_WORD)
+                for data in query_result:
                     if not (data.get('_HOST', '') and data.get('_MAINFILE', '')):
+                        continue
+                    if not self.result_filter(data, trojan_type):
                         continue
                     pload, method = self.ext_mainfile(data.get('_MAINFILE', ''),query_type)
                     if pload == 'http文件获取失败':
                         continue
                     try:
-                        mark_field = self.deal_result_fields(pload, method,query_type,trojan_type)
+                        mark_field =  pload + '\t' + method + '\t' + trojan_type
                         f.write('\t'.join([data.get(item, '') for item in self.all_items]) +'\t'+ mark_field + '\n')
                     except:
                         pass
-    def deal_result_fields(self, pload, method, query_type, trojan_type):
-        tmp = pload + '\t' + method + '\t' + trojan_type
-        if query_type == "partial_req_content":
-            return tmp + "加密连接报文"
-        else:
-            return tmp + "上传木马"
+    def result_filter(self,data, trojan_type):
+        url = data.get('_RELATIVEURL', '')
+        if not trojan_type.endswith("加密流量"):
+            return True
+        if not (url.endswith("php") or url.endswith('jsp')):
+            return False
+        return True
     def create_result_file(self):
         with open(os.path.join(self.data_path, self.out_file), 'a+') as f:
             f.write('\t'.join(ALL_ITEMS + ['PAYLOAD_KEYWORD', 'HTTP_REQ_METHOD', 'LABEL']) + '\n')
@@ -189,7 +193,7 @@ if __name__ == '__main__':
     areacode    = option.areacode
     ##set default Time[ one year]
     NowTime = datetime.datetime.now()
-    OneYear = datetime.timedelta(days = 30)
+    OneYear = datetime.timedelta(days = 90)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
