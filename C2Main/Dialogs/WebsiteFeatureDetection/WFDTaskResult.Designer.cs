@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -59,6 +60,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.screenShotGroupBox.SuspendLayout();
@@ -69,9 +71,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(78, 9);
+            this.label1.Location = new System.Drawing.Point(117, 14);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 19);
+            this.label1.Size = new System.Drawing.Size(92, 27);
             this.label1.TabIndex = 10003;
             this.label1.Text = "任务名：";
             // 
@@ -79,9 +82,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(78, 44);
+            this.label2.Location = new System.Drawing.Point(117, 66);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 19);
+            this.label2.Size = new System.Drawing.Size(95, 27);
             this.label2.TabIndex = 10004;
             this.label2.Text = "任务ID：";
             // 
@@ -89,9 +93,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(66, 79);
+            this.label3.Location = new System.Drawing.Point(99, 118);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 19);
+            this.label3.Size = new System.Drawing.Size(112, 27);
             this.label3.TabIndex = 10005;
             this.label3.Text = "任务状态：";
             // 
@@ -99,9 +104,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(66, 114);
+            this.label4.Location = new System.Drawing.Point(99, 171);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 19);
+            this.label4.Size = new System.Drawing.Size(112, 27);
             this.label4.TabIndex = 10006;
             this.label4.Text = "结果预览：";
             // 
@@ -109,9 +115,10 @@
             // 
             this.browserButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.browserButton.Location = new System.Drawing.Point(156, 109);
+            this.browserButton.Location = new System.Drawing.Point(234, 164);
+            this.browserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(77, 28);
+            this.browserButton.Size = new System.Drawing.Size(116, 42);
             this.browserButton.TabIndex = 10007;
             this.browserButton.Text = "详情";
             this.browserButton.UseVisualStyleBackColor = false;
@@ -157,6 +164,7 @@
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -173,7 +181,7 @@
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(999, 428);
+            this.dataGridView.Size = new System.Drawing.Size(1498, 642);
             this.dataGridView.TabIndex = 10008;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             // 
@@ -182,6 +190,7 @@
             this.url.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.url.FillWeight = 18F;
             this.url.HeaderText = "url";
+            this.url.MinimumWidth = 8;
             this.url.Name = "url";
             this.url.ReadOnly = true;
             this.url.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -192,6 +201,7 @@
             this.prediction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.prediction.FillWeight = 11F;
             this.prediction.HeaderText = "分类情况";
+            this.prediction.MinimumWidth = 8;
             this.prediction.Name = "prediction";
             this.prediction.ReadOnly = true;
             this.prediction.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -202,6 +212,7 @@
             this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.title.FillWeight = 14F;
             this.title.HeaderText = "网站标题";
+            this.title.MinimumWidth = 8;
             this.title.Name = "title";
             this.title.ReadOnly = true;
             this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -212,6 +223,7 @@
             this.screenShot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.screenShot.FillWeight = 10F;
             this.screenShot.HeaderText = "网站截图";
+            this.screenShot.MinimumWidth = 8;
             this.screenShot.Name = "screenShot";
             this.screenShot.ReadOnly = true;
             this.screenShot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -221,6 +233,7 @@
             this.webContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.webContent.FillWeight = 26F;
             this.webContent.HeaderText = "网页文本";
+            this.webContent.MinimumWidth = 8;
             this.webContent.Name = "webContent";
             this.webContent.ReadOnly = true;
             this.webContent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -231,6 +244,7 @@
             this.ip.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ip.FillWeight = 12F;
             this.ip.HeaderText = "ip";
+            this.ip.MinimumWidth = 8;
             this.ip.Name = "ip";
             this.ip.ReadOnly = true;
             this.ip.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -241,6 +255,7 @@
             this.ipAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ipAddress.FillWeight = 17F;
             this.ipAddress.HeaderText = "归属地";
+            this.ipAddress.MinimumWidth = 8;
             this.ipAddress.Name = "ipAddress";
             this.ipAddress.ReadOnly = true;
             this.ipAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -250,9 +265,10 @@
             // 
             this.taskNameLabel.AutoSize = true;
             this.taskNameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskNameLabel.Location = new System.Drawing.Point(161, 11);
+            this.taskNameLabel.Location = new System.Drawing.Point(242, 16);
+            this.taskNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.taskNameLabel.Name = "taskNameLabel";
-            this.taskNameLabel.Size = new System.Drawing.Size(49, 19);
+            this.taskNameLabel.Size = new System.Drawing.Size(73, 27);
             this.taskNameLabel.TabIndex = 10009;
             this.taskNameLabel.Text = "Name";
             // 
@@ -260,21 +276,24 @@
             // 
             this.taskIDLabel.AutoSize = true;
             this.taskIDLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskIDLabel.Location = new System.Drawing.Point(161, 46);
+            this.taskIDLabel.Location = new System.Drawing.Point(242, 68);
+            this.taskIDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.taskIDLabel.Name = "taskIDLabel";
-            this.taskIDLabel.Size = new System.Drawing.Size(23, 19);
+            this.taskIDLabel.Size = new System.Drawing.Size(35, 27);
             this.taskIDLabel.TabIndex = 10010;
             this.taskIDLabel.Text = "ID";
             this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.taskIDLabel, "双击复制任务ID到剪切板");
             this.taskIDLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskIDLabel_MouseDoubleClick);
             // 
             // taskStatusLabel
             // 
             this.taskStatusLabel.AutoSize = true;
             this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskStatusLabel.Location = new System.Drawing.Point(161, 80);
+            this.taskStatusLabel.Location = new System.Drawing.Point(242, 118);
+            this.taskStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.taskStatusLabel.Name = "taskStatusLabel";
-            this.taskStatusLabel.Size = new System.Drawing.Size(48, 19);
+            this.taskStatusLabel.Size = new System.Drawing.Size(72, 27);
             this.taskStatusLabel.TabIndex = 10011;
             this.taskStatusLabel.Text = "运行中";
             this.taskStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -296,24 +315,27 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(999, 152);
+            this.panel1.Size = new System.Drawing.Size(1498, 228);
             this.panel1.TabIndex = 10012;
             // 
             // taskInfoLabel
             // 
             this.taskInfoLabel.AutoSize = true;
-            this.taskInfoLabel.Location = new System.Drawing.Point(420, 51);
+            this.taskInfoLabel.Location = new System.Drawing.Point(630, 76);
+            this.taskInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.taskInfoLabel.Name = "taskInfoLabel";
-            this.taskInfoLabel.Size = new System.Drawing.Size(0, 12);
+            this.taskInfoLabel.Size = new System.Drawing.Size(0, 18);
             this.taskInfoLabel.TabIndex = 10016;
             // 
             // statusInfoLabel
             // 
             this.statusInfoLabel.AutoSize = true;
-            this.statusInfoLabel.Location = new System.Drawing.Point(250, 85);
+            this.statusInfoLabel.Location = new System.Drawing.Point(375, 128);
+            this.statusInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.statusInfoLabel.Name = "statusInfoLabel";
-            this.statusInfoLabel.Size = new System.Drawing.Size(0, 12);
+            this.statusInfoLabel.Size = new System.Drawing.Size(0, 18);
             this.statusInfoLabel.TabIndex = 10015;
             // 
             // screenShotGroupBox
@@ -323,9 +345,11 @@
             this.screenShotGroupBox.Controls.Add(this.label6);
             this.screenShotGroupBox.Controls.Add(this.label5);
             this.screenShotGroupBox.Controls.Add(this.progressBar1);
-            this.screenShotGroupBox.Location = new System.Drawing.Point(693, 19);
+            this.screenShotGroupBox.Location = new System.Drawing.Point(1040, 28);
+            this.screenShotGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.screenShotGroupBox.Name = "screenShotGroupBox";
-            this.screenShotGroupBox.Size = new System.Drawing.Size(299, 89);
+            this.screenShotGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.screenShotGroupBox.Size = new System.Drawing.Size(448, 134);
             this.screenShotGroupBox.TabIndex = 10014;
             this.screenShotGroupBox.TabStop = false;
             this.screenShotGroupBox.Text = "截图下载";
@@ -333,44 +357,49 @@
             // progressNum
             // 
             this.progressNum.AutoSize = true;
-            this.progressNum.Location = new System.Drawing.Point(266, 27);
+            this.progressNum.Location = new System.Drawing.Point(399, 40);
+            this.progressNum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.progressNum.Name = "progressNum";
-            this.progressNum.Size = new System.Drawing.Size(17, 12);
+            this.progressNum.Size = new System.Drawing.Size(26, 18);
             this.progressNum.TabIndex = 10017;
             this.progressNum.Text = "0%";
             // 
             // progressInfo
             // 
             this.progressInfo.AutoSize = true;
-            this.progressInfo.Location = new System.Drawing.Point(69, 64);
+            this.progressInfo.Location = new System.Drawing.Point(104, 96);
+            this.progressInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.progressInfo.Name = "progressInfo";
-            this.progressInfo.Size = new System.Drawing.Size(125, 12);
+            this.progressInfo.Size = new System.Drawing.Size(188, 18);
             this.progressInfo.TabIndex = 10016;
             this.progressInfo.Text = "已完成0张，失败0张。";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 63);
+            this.label6.Location = new System.Drawing.Point(9, 94);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.Size = new System.Drawing.Size(98, 18);
             this.label6.TabIndex = 10015;
             this.label6.Text = "详细信息：";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 28);
+            this.label5.Location = new System.Drawing.Point(45, 42);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(62, 18);
             this.label5.TabIndex = 10014;
             this.label5.Text = "进度：";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(71, 23);
+            this.progressBar1.Location = new System.Drawing.Point(106, 34);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(189, 23);
+            this.progressBar1.Size = new System.Drawing.Size(284, 34);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 10013;
             // 
@@ -378,9 +407,10 @@
             // 
             this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.downloadPicsButton.Location = new System.Drawing.Point(885, 114);
+            this.downloadPicsButton.Location = new System.Drawing.Point(1328, 171);
+            this.downloadPicsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.downloadPicsButton.Name = "downloadPicsButton";
-            this.downloadPicsButton.Size = new System.Drawing.Size(107, 28);
+            this.downloadPicsButton.Size = new System.Drawing.Size(160, 42);
             this.downloadPicsButton.TabIndex = 10012;
             this.downloadPicsButton.Text = "下载全部截图";
             this.downloadPicsButton.UseVisualStyleBackColor = false;
@@ -390,20 +420,22 @@
             // 
             this.panel2.Controls.Add(this.dataGridView);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 152);
+            this.panel2.Location = new System.Drawing.Point(0, 228);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(999, 428);
+            this.panel2.Size = new System.Drawing.Size(1498, 642);
             this.panel2.TabIndex = 10013;
             // 
             // WFDTaskResult
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(999, 580);
+            this.ClientSize = new System.Drawing.Size(1498, 870);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "WFDTaskResult";
             this.Text = "侦察兵-任务结果";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WFDTaskResult_FormClosing);
@@ -447,5 +479,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ip;
         private System.Windows.Forms.DataGridViewTextBoxColumn ipAddress;
         private System.Windows.Forms.Label taskInfoLabel;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
