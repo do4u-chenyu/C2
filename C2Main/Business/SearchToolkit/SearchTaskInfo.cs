@@ -4,7 +4,6 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 
 namespace C2.SearchToolkit
 {
@@ -32,15 +31,15 @@ namespace C2.SearchToolkit
             ["秒播vps"] = "vps",
             //["测试模型"] = "test",
             ["购置境外网络资产模型"] = "email",
-            ["PASS分析"] = "md5",
-            ["黑吃黑模型"] = "hostDD",
+            ["肉鸡黑吃黑模型"] = "hostDD",
             ["盗洞模型"] = "hackDD",
             ["大马模型"] = "dm",
             ["网赌受骗者模型"] = "dbqt",
             ["自定义查询"] = "custom",
             ["冰蝎哥斯拉模型"] = "bxgsl",
             ["海运走私模型"] = "billoflading",
-            ["加密流量发现"] = "encryptedTraffic"
+            ["加密流量发现"] = "encryptedTraffic",
+            ["PASS分析"] = "md5",
         };
 
         public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -59,15 +58,15 @@ namespace C2.SearchToolkit
             ["秒播vps"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             //["测试模型"] = "batchquery_db_accountPass_C2_Test_Running_{0}.py",
             ["购置境外网络资产模型"] = "batchquery_email_accountPass_C2_20211111_{0}.py",
-            ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
-            ["黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
+            ["肉鸡黑吃黑模型"] = "batchquery_hostDD_accountPass_C2_20211126_{0}.py",
             ["盗洞模型"] = "batchquery_hackDD_accountPass_C2_20211126_{0}.py",
             ["大马模型"] = "batchquery_dm_accountPass_C2_20220107_{0}.py",
             ["网赌受骗者模型"] = "batchquery_dbqt_accountPass_C2_20220121_{0}.py",
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
             ["海运走私模型"] = "dsqquery_email_BillofLading_C2_{0}.py",
             ["加密流量发现"] = "dsqquery_http_EncryptedTraffic_C2_{0}.py",
-            ["冰蝎哥斯拉模型"] = "batchquery_behinder-godzilla_accountPass_C2_20220125_{0}.py"
+            ["冰蝎哥斯拉模型"] = "batchquery_behinder-godzilla_accountPass_C2_20220125_{0}.py",
+            ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -85,9 +84,8 @@ namespace C2.SearchToolkit
             ["四方模型"] = @"([^\n\r]+000000_queryResult_sf_\d+_\d+.tgz)",
             ["秒播vps"] = @"([^\n\r]+000000_queryResult_vps_\d+_\d+.tgz)",
             //["测试模型"] = @"([^\n\r]+000000_queryResult_test_\d+_\d+.tgz)",
-            ["PASS分析"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
             ["购置境外网络资产模型"] = @"([^\n\r]+000000_queryResult_email_\d+_\d+.tgz)",
-            ["黑吃黑模型"] = @"([^\n\r]+000000_queryResult_hostDD_\d+_\d+.tgz)",
+            ["肉鸡黑吃黑模型"] = @"([^\n\r]+000000_queryResult_hostDD_\d+_\d+.tgz)",
             ["盗洞模型"] = @"([^\n\r]+000000_queryResult_hackDD_\d+_\d+.tgz)",
             ["大马模型"] = @"([^\n\r]+000000_queryResult_dm_\d+_\d+.tgz)",
             ["网赌受骗者模型"] = @"([^\n\r]+000000_queryResult_dbqt_\d+_\d+.tgz)",
@@ -95,6 +93,7 @@ namespace C2.SearchToolkit
             ["海运走私模型"] = @"([^\n\r]+000000_queryResult_海运走私模型_\d+_\d+.tgz)",
             ["加密流量发现"] = @"([^\n\r]+000000_queryResult_加密流量发现_\d+_\d+.tgz)",
             ["冰蝎哥斯拉模型"] = @"([^\n\r]+000000_queryResult_behinder-godzilla_\d+_\d+.tgz)",
+            ["PASS分析"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
         };
 
         public static readonly Dictionary<String, String> TaskHelpInfoTable = new Dictionary<String, String>
@@ -111,16 +110,16 @@ namespace C2.SearchToolkit
             ["侵公模型"] = "外泄公民个人信息",
             ["四方模型"] = "第四方支付,给黑灰产和上下游提供资金结算服务",
             ["秒播vps"] = "侦测非正规VPS",
-            ["PASS分析"] = "内部测试用,忽略",
             ["购置境外网络资产模型"] = "购置境外域名,VPN,云主机,服务器和矿池用于黑灰产",
-            ["黑吃黑模型"] = "新一代黑客专项模型:黑客和黑产之间的黑吃黑",
-            ["盗洞模型"] = "新一代黑客专项模型:侦测木马打洞后的各种痕迹",
-            ["大马模型"] = "新一代黑客专项模型:侦测高端黑客使用的大型专业木马",
+            ["肉鸡黑吃黑模型"] = "新一代黑客专项:肉鸡争夺战,黑客和黑产之间黑吃黑",
+            ["盗洞模型"] = "新一代黑客专项:侦测木马打洞后的各种痕迹",
+            ["大马模型"] = "新一代黑客专项:侦测高端黑客使用的大型专业木马",
             ["网赌受骗者模型"] = "涉赌模型针对网赌受骗者特殊优化,关键词每月更新",
             ["自定义查询"] = "上面详细设置里自己填查询关键词",
             ["海运走私模型"] = "用于发现异常海运单",
             ["加密流量发现"] = "用于发现正文体加密的http报文",
-            ["冰蝎哥斯拉模型"] = "冰蝎哥斯拉加密流量检测模型"
+            ["冰蝎哥斯拉模型"] = "冰蝎哥斯拉加密流量检测模型",
+            ["PASS分析"] = "内部测试用,忽略",
         };
 
         public static readonly List<string> DSQRelateModelList = new List<string>() { "海运走私模型", "加密流量发现" };
