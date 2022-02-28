@@ -59,10 +59,23 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static string AutoDetectTrojanType(string url)
         {
             url = url.Trim().ToLower();
-            if (url.EndsWith(".asp"))
-                return "aspEval";
             if (url.EndsWith(".php"))
                 return "phpEval";
+            if (url.EndsWith(".aspx"))
+                return "aspxEval";
+            if (url.EndsWith(".asp"))
+                return "aspEval";
+            if (url.EndsWith(".jsp"))
+                return "jspEval";
+            // 不能精确判断时,就靠猜了
+            if (url.Contains(".php"))
+                return "phpEval";
+            if (url.Contains(".aspx"))
+                return "aspxEval";
+            if (url.Contains(".asp"))
+                return "aspEval";
+            if (url.Contains(".jsp"))
+                return "jspEval";
             return "自动判断";
         }
         public static string AutoDetectClientType(string url, string defaultVersion)

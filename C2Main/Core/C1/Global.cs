@@ -40,7 +40,7 @@ namespace C2.Core
         public const string MindMapDesc = "业务视图";
         public const string SearchDesc = "全文工具箱";
         public const string JSDesc = "胶水系统";
-        
+        public static List<string> TrojanTypes = new List<string>() { "phpEval", "jspEval", "aspEval","aspxEval" };
 
 
 
