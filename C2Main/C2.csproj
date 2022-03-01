@@ -3157,6 +3157,7 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_behinder-godzilla_accountPass_C2_20220125.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_behinder-godzilla_accountPass_C2_20220125.py.zip" />
     <None Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
