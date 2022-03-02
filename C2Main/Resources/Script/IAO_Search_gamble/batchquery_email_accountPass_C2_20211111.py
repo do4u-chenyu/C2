@@ -117,30 +117,25 @@ def main():
 
 
 if __name__ == '__main__':
-    usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode] --query [queryContent]'
+    usage = 'python bathquery_db_password.py --start [start_time] --end [end_time] --areacode [areacode]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
-    queryformat = '<queryContent> eg:key and password'
 
     parser = OptionParser(usage)
     parser.add_option('--start', dest='startTime', help=dataformat)
     parser.add_option('--end', dest='endTime', help=dataformat)
     parser.add_option('--areacode', dest='areacode', help=areaformat)
-    parser.add_option('-t', '--test', action='store_true', dest='test', help='test mode')
-    parser.add_option('--query', dest='queryContent', help=queryformat)
     
     option, args = parser.parse_args()
     startTime = option.startTime
     endTime = option.endTime
     areacode = option.areacode
-    queryContent = option.queryContent
-    IS_TEST_MODE = option.test
 
     NowTime = datetime.datetime.now()
     OneYear = datetime.timedelta(days=360)
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd = NowTime.strftime("%Y%m%d%H%M%S")
-    PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
+
     LOGIN_VALUE = ["订单", "账户信息", "Thank you for your order", "Order Finished"]
     
     DATA_PATH = './_queryResult_email_'
@@ -155,8 +150,7 @@ if __name__ == '__main__':
         sys.exit(1)
     if areacode is None:
         areacode = '000000'
-    if queryContent is None:
-        pass
+
     if len(areacode) != 6:
         LOGGER.info('areacode error:' + areaformat)
         sys.exit(1)
