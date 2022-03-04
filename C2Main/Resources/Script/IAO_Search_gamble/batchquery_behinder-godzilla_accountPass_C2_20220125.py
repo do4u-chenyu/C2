@@ -91,8 +91,8 @@ class BatchQuery:
             if query_type =='partial_req_content':
                 pload = "请求体前50字符：" + content.split('\n')[-1][:50]
             else:
-                pload = content.split('\n')[-1].replace('\r','').replace('\n','').replace('\t','')
-                pload = pload[:4000]
+                pload = content.replace('\r','').replace('\n','').replace('\t','')
+                pload = pload[:9000]
             method = content.split(' ')[0]            
             return pload, method
         except Exception, e:

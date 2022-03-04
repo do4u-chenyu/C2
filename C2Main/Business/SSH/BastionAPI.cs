@@ -309,13 +309,13 @@ namespace C2.Business.SSH
 
                 sshFailList = MatchIP(sshFailList, pwd);
                 ssm.WriteLine(SeparatorString);
-                for (int i =0;i<5*selectIPCount; i++)
+                for (int i =0; i < 5*selectIPCount; i++)
                 {
                     pwd = ssm.Expect("password:", TimeSpan.FromSeconds(timeout));
                     string ret = ssm.Expect(new Regex(@"\[root@[^\]]+\]#"), TimeSpan.FromSeconds(timeout));
-                    if (ret != null)
+                    if (pwd == null || ret != null)
                         break;
-                    else
+                    else if (pwd != null)
                     {
                         sshFailList = MatchIP(sshFailList, pwd);
                         ssm.WriteLine(SeparatorString);
@@ -676,7 +676,7 @@ namespace C2.Business.SSH
                 {
                     string sshFailMessage = string.Format("Daemon机{0}无法建立ssh信任，连接失败。", judgeRet);
                     HelpUtil.ShowMessageBox(sshFailMessage);
-                    task.LastErrorMsg = "Daemon机建立ssh信任失败";
+                    task.LastErrorMsg = "Daemon机无法建立ssh信任";
                     return false;
                 }
                 else if (judgeRet == "其他异常情况")

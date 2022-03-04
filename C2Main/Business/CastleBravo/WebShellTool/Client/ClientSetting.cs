@@ -237,12 +237,22 @@ namespace C2.Business.CastleBravo.WebShellTool
                 fs.Write(ret, 0, ret.Length);
             return filePath;
         }
-        public static string Encrypt(string encryptStr, string key)
+        public static string AES128Encrypt(string encryptStr, string key)
         {
             key = ST.GenerateMD5(key).Substring(0, 16);
             return ST.AES128CBCEncrypt(encryptStr, key);
         }
 
+        public static string XOREncrypt(string encryptStr, string key, bool encodeKey = true)
+        {
+            List<char> result = new List<char> { };
+            if (encodeKey)
+                key = ST.GenerateMD5(key).Substring(0, 16);
 
+            for (int i = 0; i < encryptStr.Length; i++)
+                result.Add(Convert.ToChar(encryptStr[i]^key[(i + 1) & 15]));
+            string tmp = string.Join("", result); ;
+            return ST.EncodeBase64(tmp);
+        }
     }
 }

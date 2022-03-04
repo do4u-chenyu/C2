@@ -27,6 +27,9 @@ namespace C2.Dialogs.SearchToolkit
             int ipCount = 0;
             this.dictDataGridView.Rows.Clear();
 
+            if (task.DaemonIP.Count == 1)
+                this.label4.Text = "1个)";
+
             for (int i = 0; i < task.DaemonIP.Count; i++)
             {
                 string ipAndPort = task.DaemonIP[i];
