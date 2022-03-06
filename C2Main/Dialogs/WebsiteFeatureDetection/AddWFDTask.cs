@@ -25,6 +25,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void InitTaskName()
         {
             TaskName = String.Format("网站侦察兵{0}", DateTime.Now.ToString("MMdd"));
+            this.OKButton.Size = new System.Drawing.Size(75, 27);
+            this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
 
 
