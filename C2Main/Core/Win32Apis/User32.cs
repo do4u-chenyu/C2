@@ -38,6 +38,10 @@ namespace C2.Controls.OS
         public static extern IntPtr GetCapture();
 
         [DllImport(DllName)]
+        public static extern IntPtr SetCapture(IntPtr hWnd);
+
+
+        [DllImport(DllName)]
         public static extern bool IsChild(IntPtr hWndParent, IntPtr hWnd);
 
         [DllImport(DllName)]

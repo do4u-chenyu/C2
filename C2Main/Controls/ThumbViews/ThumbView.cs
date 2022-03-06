@@ -584,6 +584,7 @@ namespace C2.Controls
                 case ThumbItem.ModelTypes.TacticalManual:
                     if (!Global.GetMainForm().manualControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
                         Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().manualButton, Global.GetMainForm().manualControl);
+                    new ManualSplashForm().ShowDialog();
                     break;
                 //喝彩城堡
                 case ThumbItem.ModelTypes.CastleBravo:
@@ -595,8 +596,7 @@ namespace C2.Controls
                 case ThumbItem.ModelTypes.Laboratory:
                     if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
                         Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
-                    //IAOLabelSplashForm form = new IAOLabelSplashForm();
-                    //form.ShowDialog();
+                    new IAOLabelSplashForm().ShowDialog();
                     break;
                 //侦察兵
                 case ThumbItem.ModelTypes.WebsiteScout:
@@ -630,6 +630,7 @@ namespace C2.Controls
                 case ThumbItem.ModelTypes.HIBU:
                     if (!Global.GetMainForm().HIBUControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
                         Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().HIBUButton, Global.GetMainForm().HIBUControl);
+                    new HIBUSplashForm().ShowDialog();
                     break;
                 case ThumbItem.ModelTypes.Model:
                     CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.MarketViewPath, item.Text));

@@ -1,5 +1,4 @@
-﻿using C2.Business.CastleBravo.Binary;
-using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
+﻿using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
 using System;
@@ -8,7 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
