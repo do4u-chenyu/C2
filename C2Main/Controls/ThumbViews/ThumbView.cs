@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.Forms;
+using C2.Forms.Splash;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -594,6 +595,8 @@ namespace C2.Controls
                 case ThumbItem.ModelTypes.Laboratory:
                     if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
                         Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
+                    //IAOLabelSplashForm form = new IAOLabelSplashForm();
+                    //form.ShowDialog();
                     break;
                 //侦察兵
                 case ThumbItem.ModelTypes.WebsiteScout:
