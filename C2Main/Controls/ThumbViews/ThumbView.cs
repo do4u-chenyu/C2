@@ -583,7 +583,7 @@ namespace C2.Controls
                 //战术手册
                 case ThumbItem.ModelTypes.TacticalManual:
                     if (!Global.GetMainForm().manualControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
-                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().manualButton, Global.GetMainForm().manualControl);
+                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().manualButton, Global.GetMainForm().manualControl);
                     new ManualSplashForm().ShowDialog();
                     break;
                 //喝彩城堡
@@ -595,7 +595,7 @@ namespace C2.Controls
                 //实验楼
                 case ThumbItem.ModelTypes.Laboratory:
                     if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
-                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
+                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
                     new IAOLabelSplashForm().ShowDialog();
                     break;
                 //侦察兵
@@ -629,7 +629,7 @@ namespace C2.Controls
                 //HIBU
                 case ThumbItem.ModelTypes.HIBU:
                     if (!Global.GetMainForm().HIBUControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
-                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().HIBUButton, Global.GetMainForm().HIBUControl);
+                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().HIBUButton, Global.GetMainForm().HIBUControl);
                     new HIBUSplashForm().ShowDialog();
                     break;
                 case ThumbItem.ModelTypes.Model:

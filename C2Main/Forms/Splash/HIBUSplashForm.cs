@@ -1,12 +1,17 @@
-﻿using System;
+﻿using C2.Controls.Left;
+using C2.Core;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C2.Forms.Splash
 {
-    class HIBUSplashForm : BaseSplashForm 
+    public class HIBUSplashForm : BaseSplashForm 
     {
+        public new void ShowDialog()
+        {
+            List<IAOButton> buttons = Global.GetHIBUControl().IAOButtons;
+            foreach (IAOButton button in buttons)
+                AddItem(button.Icon, button.Type, button.Desc);
+            base.ShowDialog();
+        }
     }
 }

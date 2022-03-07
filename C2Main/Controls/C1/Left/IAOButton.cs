@@ -37,7 +37,12 @@ namespace C2.Controls.Left
     {
 
         private OpenToolFormDelegate openToolForm;
-        private string buttonType;
+        private readonly string buttonType;
+
+        public string Type { get => buttonType; }
+        public string Desc { get => toolTip1.GetToolTip(this.rightPictureBox); }
+
+        public Bitmap Icon { get => new Bitmap(this.leftPictureBox.Image); }
 
         public OpenToolFormDelegate ShowDialogDelegate { get => openToolForm; set => openToolForm = value; }
 
@@ -92,10 +97,6 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GPSTransformFormHelpInfo);
                     break;
-                //case "Ip":
-                //    this.leftPictureBox.Image = global::C2.Properties.Resources.Ip;
-                //    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TimeAndIPTransformFormHelpInfo);
-                //    break;
                 case "BigAPK":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
@@ -201,16 +202,6 @@ namespace C2.Controls.Left
         }
         
         #region 定义弹窗
-        private Form BaseStationForm(string formType)
-        {
-            return new WifiLocation()
-            {
-                TabControlVisible = true,
-                TipBS = HelpUtil.BaseStationHelpInfo,
-                FormType = formType
-            };
-
-        }
 
         private Form BankToolForm(string formType)
         {
@@ -347,15 +338,12 @@ namespace C2.Controls.Left
                 case "颜值打分":
                     new FaceBeautyForm().ShowDialog();
                     break;
-
                 case "表情识别":
                     new FaceExpressionForm().ShowDialog();  
                     break;
                 case "人脸识别":
                     new FaceRecognizerForm().ShowDialog();
                     break;
-                    
-
                 default:
                     openToolForm?.Invoke();
                     break;

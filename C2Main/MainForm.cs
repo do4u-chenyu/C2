@@ -228,17 +228,21 @@ namespace C2
         {
             using (new GuarderUtil.LayoutGuarder(leftPanel))
             {
-                foreach (Control ct in this.leftPanelControls)
-                    ct.Visible = false;
-                foreach (Control ct in this.leftMainButtons)
-                    ct.BackColor = LeftLeaveColor;
-
-                leftPanel.Visible = true;
-                leftButton.BackColor = LeftFocusColor;
-
+                SelectLeftPanel(leftButton, leftPanel);
                 if (isLeftViewPanelMinimum)
                     this.ShowLeftFold();
             }   
+        }
+
+        public void SelectLeftPanel(Control leftButton, Control leftPanel)
+        {
+            foreach (Control ct in this.leftPanelControls)
+                ct.Visible = false;
+            foreach (Control ct in this.leftMainButtons)
+                ct.BackColor = LeftLeaveColor;
+
+            leftPanel.Visible = true;
+            leftButton.BackColor = LeftFocusColor;
         }
 
         private void ModelMarketButton_Click(object sender, EventArgs e)

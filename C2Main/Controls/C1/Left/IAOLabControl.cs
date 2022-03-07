@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Controls.Left
@@ -10,6 +11,20 @@ namespace C2.Controls.Left
             InitializeComponent();
             startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
             startPoint.Y -= 12;
+        }
+
+        public List<IAOButton> IAOButtons 
+        {
+            get 
+            {
+                List<IAOButton> buttons = new List<IAOButton>();
+                foreach (Control ct in IAOLabPanel.Controls)
+                {
+                    if (ct is IAOButton)
+                        buttons.Add(ct as IAOButton);
+                }
+                return buttons;
+            }
         }
 
         public IAOLabControl(string title) : this()

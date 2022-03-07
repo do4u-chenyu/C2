@@ -2,6 +2,7 @@
 using C2.Dialogs;
 using C2.Utils;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -16,6 +17,11 @@ namespace C2.Controls.Left
             InitializeComponent();
             InitializeOther(c2Title);
         }
+
+        public string Desc { get => FullFilePath; }
+        public Bitmap Icon { get => new Bitmap(lelfPictureBox.Image); }
+
+        public string Type { get => this.textButton.Text; }
 
         private void InitializeOther(string modelTitle)
         {

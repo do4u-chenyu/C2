@@ -1,6 +1,7 @@
 ﻿using C2.Controls.C1.Left;
 using C2.Core;
 using C2.Utils;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -32,6 +33,20 @@ namespace C2.Controls.Left
             // 获得当前要添加的model button的初始位置
             LayoutButton(mb);
             this.PaintPanel.Controls.Add(mb);
+        }
+
+        public List<ManualButton> ManualButtons
+        {
+            get
+            {
+                List<ManualButton> buttons = new List<ManualButton>();
+                foreach (Control ct in PaintPanel.Controls)
+                {
+                    if (ct is ManualButton)
+                        buttons.Add(ct as ManualButton);
+                }
+                return buttons;
+            }
         }
 
         private void RemoveLabel()

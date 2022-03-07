@@ -24,19 +24,17 @@ namespace C2.Forms.Splash
                 Value = icon
             };
 
-            DataGridViewTextBoxCell dgvtbc1 = new DataGridViewTextBoxCell
+            DataGridViewTextBoxCell dgvtbc = new DataGridViewTextBoxCell
             {
                 Value = name
             };
 
-            DataGridViewTextBoxCell dgvtbc2 = new DataGridViewTextBoxCell
-            {
-                Value = desc
-            };
-
             dgvr.Cells.Add(gdvic);
-            dgvr.Cells.Add(dgvtbc1);
-            dgvr.Cells.Add(dgvtbc2);
+            dgvr.Cells.Add(dgvtbc);
+            gdvic.ToolTipText = desc;
+            dgvtbc.ToolTipText = desc;
+
+            DGV.Rows.Add(dgvr);
         }
 
         private void BaseSplashForm_MouseClick(object sender, MouseEventArgs e)
