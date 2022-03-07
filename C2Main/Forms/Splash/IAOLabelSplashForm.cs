@@ -17,5 +17,10 @@ namespace C2.Forms.Splash
                 AddItem(button.Type, button.Desc);
             base.ShowDialog();
         }
+
+        protected override void OpenItem(string name)
+        {
+            
+        }
     }
 }
