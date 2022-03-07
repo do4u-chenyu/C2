@@ -78,12 +78,12 @@ namespace C2.Forms.Splash
             this.DGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.DGV.RowTemplate.DividerHeight = 1;
-            this.DGV.RowTemplate.Height = 50;
+            this.DGV.RowTemplate.Height = 55;
             this.DGV.RowTemplate.ReadOnly = true;
             this.DGV.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV.Size = new System.Drawing.Size(335, 770);
+            this.DGV.Size = new System.Drawing.Size(350, 770);
             this.DGV.TabIndex = 0;
             this.DGV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BaseSplashForm_KeyPress);
             this.DGV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BaseSplashForm_MouseClick);
@@ -102,7 +102,7 @@ namespace C2.Forms.Splash
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(335, 30);
+            this.panel1.Size = new System.Drawing.Size(350, 30);
             this.panel1.TabIndex = 1;
             // 
             // panel3
@@ -111,14 +111,14 @@ namespace C2.Forms.Splash
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(306, 30);
+            this.panel3.Size = new System.Drawing.Size(321, 30);
             this.panel3.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(306, 0);
+            this.panel2.Location = new System.Drawing.Point(321, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(29, 30);
             this.panel2.TabIndex = 1;
@@ -137,6 +137,9 @@ namespace C2.Forms.Splash
             // 
             this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.SlateGray;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.NameColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.NameColumn.HeaderText = "";
             this.NameColumn.MinimumWidth = 8;
@@ -148,7 +151,7 @@ namespace C2.Forms.Splash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 800);
+            this.ClientSize = new System.Drawing.Size(350, 800);
             this.ControlBox = false;
             this.Controls.Add(this.DGV);
             this.Controls.Add(this.panel1);
