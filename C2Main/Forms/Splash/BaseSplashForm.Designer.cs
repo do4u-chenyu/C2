@@ -85,6 +85,7 @@ namespace C2.Forms.Splash
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV.Size = new System.Drawing.Size(350, 770);
             this.DGV.TabIndex = 0;
+            this.DGV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_CellMouseDoubleClick);
             this.DGV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BaseSplashForm_KeyPress);
             this.DGV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BaseSplashForm_MouseClick);
             this.DGV.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BaseSplashForm_MouseMove);
