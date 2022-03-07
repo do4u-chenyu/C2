@@ -15,23 +15,15 @@ namespace C2.Forms.Splash
             InitializeComponent();
         }
 
-        public void AddItem(Bitmap icon, string name, string desc)
+        public void AddItem(string name, string desc)
         {
             DataGridViewRow dgvr = new DataGridViewRow();
-
-            DataGridViewImageCell gdvic = new DataGridViewImageCell
-            {
-                Value = icon
-            };
-
             DataGridViewTextBoxCell dgvtbc = new DataGridViewTextBoxCell
             {
                 Value = name
             };
 
-            dgvr.Cells.Add(gdvic);
             dgvr.Cells.Add(dgvtbc);
-            gdvic.ToolTipText = desc;
             dgvtbc.ToolTipText = desc;
 
             DGV.Rows.Add(dgvr);

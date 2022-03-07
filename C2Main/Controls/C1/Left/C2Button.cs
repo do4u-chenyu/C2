@@ -19,8 +19,6 @@ namespace C2.Controls.Left
         }
 
         public string Desc { get => FullFilePath; }
-        public Bitmap Icon { get => new Bitmap(lelfPictureBox.Image); }
-
         public string Type { get => this.textButton.Text; }
 
         private void InitializeOther(string modelTitle)

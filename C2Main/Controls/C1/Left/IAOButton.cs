@@ -39,10 +39,8 @@ namespace C2.Controls.Left
         private OpenToolFormDelegate openToolForm;
         private readonly string buttonType;
 
-        public string Type { get => buttonType; }
+        public string Type { get => this.txtButton.Text; }
         public string Desc { get => toolTip1.GetToolTip(this.rightPictureBox); }
-
-        public Bitmap Icon { get => new Bitmap(this.leftPictureBox.Image); }
 
         public OpenToolFormDelegate ShowDialogDelegate { get => openToolForm; set => openToolForm = value; }
 
@@ -255,7 +253,6 @@ namespace C2.Controls.Left
                     break;
                 case "Wifi":
                     new WifiLocation() { FormType = buttonType }.ShowDialog();
-                    //new WifiLocation().ShowDialog();
                     break;
                 case "InformationSearch":
                     new InformationSearch() { FormType = buttonType }.ShowDialog();

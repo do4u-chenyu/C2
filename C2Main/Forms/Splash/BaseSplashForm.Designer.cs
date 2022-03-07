@@ -39,7 +39,6 @@ namespace C2.Forms.Splash
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.IconColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.panel1.SuspendLayout();
@@ -59,7 +58,6 @@ namespace C2.Forms.Splash
             this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV.ColumnHeadersVisible = false;
             this.DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IconColumn,
             this.NameColumn});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -85,7 +83,7 @@ namespace C2.Forms.Splash
             this.DGV.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV.Size = new System.Drawing.Size(450, 994);
+            this.DGV.Size = new System.Drawing.Size(335, 770);
             this.DGV.TabIndex = 0;
             this.DGV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BaseSplashForm_KeyPress);
             this.DGV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BaseSplashForm_MouseClick);
@@ -104,7 +102,7 @@ namespace C2.Forms.Splash
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(450, 30);
+            this.panel1.Size = new System.Drawing.Size(335, 30);
             this.panel1.TabIndex = 1;
             // 
             // panel3
@@ -113,14 +111,14 @@ namespace C2.Forms.Splash
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(421, 30);
+            this.panel3.Size = new System.Drawing.Size(306, 30);
             this.panel3.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(421, 0);
+            this.panel2.Location = new System.Drawing.Point(306, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(29, 30);
             this.panel2.TabIndex = 1;
@@ -135,24 +133,11 @@ namespace C2.Forms.Splash
             this.label1.Text = "×";
             this.label1.Click += new System.EventHandler(this.CloseLabel_Click);
             // 
-            // IconColumn
-            // 
-            this.IconColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.IconColumn.FillWeight = 10F;
-            this.IconColumn.HeaderText = "";
-            this.IconColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.IconColumn.MinimumWidth = 8;
-            this.IconColumn.Name = "IconColumn";
-            this.IconColumn.ReadOnly = true;
-            this.IconColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.IconColumn.Width = 8;
-            // 
             // NameColumn
             // 
             this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.NameColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.NameColumn.FillWeight = 90F;
             this.NameColumn.HeaderText = "";
             this.NameColumn.MinimumWidth = 8;
             this.NameColumn.Name = "NameColumn";
@@ -163,7 +148,7 @@ namespace C2.Forms.Splash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 1024);
+            this.ClientSize = new System.Drawing.Size(335, 800);
             this.ControlBox = false;
             this.Controls.Add(this.DGV);
             this.Controls.Add(this.panel1);
@@ -173,7 +158,7 @@ namespace C2.Forms.Splash
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BaseSplashForm";
-            this.Opacity = 0.9D;
+            this.Opacity = 0.85D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -198,7 +183,6 @@ namespace C2.Forms.Splash
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridViewImageColumn IconColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
     }
 }
