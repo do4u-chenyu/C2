@@ -16,12 +16,6 @@ namespace C2.Forms.Splash
         {
             InitializeComponent();
         }
-
-        protected virtual void OpenItem(string name)
-        {
-
-        }
-
         private DataGridViewRow AddItem(string name, string desc)
         {
             DataGridViewRow dgvr = new DataGridViewRow();
@@ -95,15 +89,22 @@ namespace C2.Forms.Splash
 
         private void DGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
-                return;
-            if (e.Clicks != 2)
-                return;
-            if (e.RowIndex < DGV.Rows.Count)
-                return;
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.Clicks != 2)
+                    return;
+                if (e.RowIndex > DGV.Rows.Count - 1)
+                    return;
 
-            DataGridViewCell dgvc = DGV.Rows[e.RowIndex].Cells[0];
-            OpenItem((string)dgvc.Value);
+                DataGridViewRow dgvc = DGV.Rows[e.RowIndex];
+                OpenItem(dgvc.Tag);
+            }
+        }
+
+        protected virtual void OpenItem(object button)
+        {
+            if (button is IAOButton)
+                (button as IAOButton).OpenToolForm();        
         }
     }
 }

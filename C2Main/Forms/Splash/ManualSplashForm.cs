@@ -1,5 +1,6 @@
 ﻿using C2.Controls.C1.Left;
 using C2.Core;
+using C2.Utils;
 using System.Collections.Generic;
 
 namespace C2.Forms.Splash
@@ -18,9 +19,15 @@ namespace C2.Forms.Splash
             base.ShowDialog();
         }
 
-        protected override void OpenItem(string name)
+        protected override void OpenItem(object button)
         {
-            base.OpenItem(name);
+            if (button is ManualButton)
+            {
+                using (GuarderUtil.WaitCursor)
+                    (button as ManualButton).Open();
+                this.Close();
+            }
+                
         }
     }
 }

@@ -21,7 +21,7 @@ namespace C2.Controls.C1.Left
 
         protected override void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().OpenManualDocument(FullFilePath);
+            Open();
         }
 
         protected override void TextButton_MouseDown(object sender, MouseEventArgs e)
@@ -30,6 +30,11 @@ namespace C2.Controls.C1.Left
             if (e.Button != MouseButtons.Left || e.Clicks != 2)
                 return;
             // 双击打开对应模型
+            Open();
+        }
+
+        public void Open()
+        {
             Global.GetMainForm().OpenManualDocument(FullFilePath);
         }
     }

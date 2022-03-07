@@ -241,7 +241,7 @@ namespace C2.Controls.Left
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
                 OpenToolForm();
         }
-        private void OpenToolForm()
+        public void OpenToolForm()
         {
             switch (buttonType)
             {
