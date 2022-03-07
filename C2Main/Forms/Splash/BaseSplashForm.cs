@@ -49,6 +49,10 @@ namespace C2.Forms.Splash
         {
             this.closeTimer.Enabled = true;
             this.active = false;
+
+            int mid = this.DGV.Rows.Count / 2;
+            if (mid < this.DGV.Rows.Count)
+                this.DGV.Rows[mid].Selected = true;
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)
