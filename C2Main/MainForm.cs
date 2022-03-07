@@ -244,11 +244,16 @@ namespace C2
             leftPanel.Visible = true;
             leftButton.BackColor = LeftFocusColor;
         }
-
+        //聚沙成塔
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
-            if (!modelMarketControl.Visible || isLeftViewPanelMinimum )
+            if (!modelMarketControl.Visible || isLeftViewPanelMinimum)
+            {
                 ShowLeftPanel(modelMarketButton, modelMarketControl);
+                //StartForm startForm = new StartForm();
+                //startForm.label5.Location += 187 ;
+                //startForm.test2();
+            }
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
