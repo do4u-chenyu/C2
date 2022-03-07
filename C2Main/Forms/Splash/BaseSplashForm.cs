@@ -1,4 +1,6 @@
-﻿using System;
+﻿using C2.Controls.C1.Left;
+using C2.Controls.Left;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,18 +22,27 @@ namespace C2.Forms.Splash
 
         }
 
-        public void AddItem(string name, string desc)
+        private DataGridViewRow AddItem(string name, string desc)
         {
             DataGridViewRow dgvr = new DataGridViewRow();
             DataGridViewTextBoxCell dgvtbc = new DataGridViewTextBoxCell
             {
                 Value = name
             };
-
             dgvr.Cells.Add(dgvtbc);
             dgvtbc.ToolTipText = desc;
-
             DGV.Rows.Add(dgvr);
+            return dgvr;
+        }
+
+        public void AddItem(string name, string desc, IAOButton button)
+        {
+            AddItem(name, desc).Tag = button;
+        }
+
+        public void AddItem(string name, string desc, ManualButton button)
+        {
+            AddItem(name, desc).Tag = button;
         }
 
         private void BaseSplashForm_MouseClick(object sender, MouseEventArgs e)

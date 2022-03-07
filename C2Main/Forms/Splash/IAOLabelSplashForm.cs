@@ -14,7 +14,7 @@ namespace C2.Forms.Splash
         {
             List<IAOButton> buttons = Global.GetIAOLabControl().IAOButtons;
             foreach (IAOButton button in buttons)
-                AddItem(button.Type, button.Desc);
+                AddItem(button.Type, button.Desc, button);
             base.ShowDialog();
         }
 

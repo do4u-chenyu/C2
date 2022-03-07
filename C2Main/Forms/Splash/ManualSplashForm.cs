@@ -14,7 +14,7 @@ namespace C2.Forms.Splash
         {
             List<ManualButton> buttons = Global.GetManualControl().ManualButtons;
             foreach (ManualButton button in buttons)
-                AddItem(button.Type, button.Desc);
+                AddItem(button.Type, button.Desc, button);
             base.ShowDialog();
         }
 
