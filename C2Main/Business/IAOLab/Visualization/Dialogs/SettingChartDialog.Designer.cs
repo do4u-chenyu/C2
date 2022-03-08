@@ -625,7 +625,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "SettingChartDialog";
-            this.Text = "配置窗口-数据可视化";
+            this.Text = "配置窗口-词云和组织架构";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.chartType, 0);

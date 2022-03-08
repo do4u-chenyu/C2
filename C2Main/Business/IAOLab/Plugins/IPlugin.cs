@@ -108,7 +108,7 @@ namespace C2.IAOLab.Plugins
 
         public string GetPluginName()
         {
-            return "数据可视化";
+            return "词云和组织架构";
         }
 
         public string GetPluginVersion()

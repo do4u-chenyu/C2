@@ -438,7 +438,7 @@
     <item name="CopyFilePathToClipboard">复制文件路径到剪切板</item>
     <item name="APK">APK小眼睛</item>
     <item name="BaseStation">(网)基站查询</item>
-    <item name="Visualization">数据可视化</item>
+    <item name="Visualization">词云和组织架构</item>
     <item name="Fraud">诈骗模拟器</item>
     <item name="Wifi">(网)定位工具</item>
     <item name="InformationSearch">(网)信息查询</item>
