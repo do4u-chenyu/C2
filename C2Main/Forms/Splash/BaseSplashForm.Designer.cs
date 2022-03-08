@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Windows.Forms;
+
 namespace C2.Forms.Splash
 {
     partial class BaseSplashForm
@@ -34,15 +37,15 @@ namespace C2.Forms.Splash
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseSplashForm));
             this.DGV = new System.Windows.Forms.DataGridView();
-            this.closeTimer = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.closeTimer = new System.Windows.Forms.Timer(this.components);
+            this.topPanel = new System.Windows.Forms.Panel();
+            this.titlePanel = new System.Windows.Forms.Panel();
+            this.closePanel = new System.Windows.Forms.Panel();
+            this.closeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.topPanel.SuspendLayout();
+            this.closePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV
@@ -90,57 +93,13 @@ namespace C2.Forms.Splash
             this.DGV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BaseSplashForm_MouseClick);
             this.DGV.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BaseSplashForm_MouseMove);
             // 
-            // closeTimer
-            // 
-            this.closeTimer.Interval = 2500;
-            this.closeTimer.Tick += new System.EventHandler(this.CloseTimer_Tick);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 30);
-            this.panel1.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(321, 30);
-            this.panel3.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(321, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(29, 30);
-            this.panel2.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "×";
-            this.label1.Click += new System.EventHandler(this.CloseLabel_Click);
-            // 
             // NameColumn
             // 
             this.NameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.SlateGray;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 1);
             this.NameColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.NameColumn.HeaderText = "";
             this.NameColumn.MinimumWidth = 8;
@@ -148,14 +107,59 @@ namespace C2.Forms.Splash
             this.NameColumn.ReadOnly = true;
             this.NameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // closeTimer
+            // 
+            this.closeTimer.Interval = 3000;
+            this.closeTimer.Tick += new System.EventHandler(this.CloseTimer_Tick);
+            // 
+            // topPanel
+            // 
+            this.topPanel.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.topPanel.Controls.Add(this.titlePanel);
+            this.topPanel.Controls.Add(this.closePanel);
+            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topPanel.Location = new System.Drawing.Point(0, 0);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(350, 30);
+            this.topPanel.TabIndex = 1;
+            // 
+            // titlePanel
+            // 
+            this.titlePanel.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.titlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.titlePanel.Location = new System.Drawing.Point(0, 0);
+            this.titlePanel.Name = "titlePanel";
+            this.titlePanel.Size = new System.Drawing.Size(321, 30);
+            this.titlePanel.TabIndex = 2;
+            // 
+            // closePanel
+            // 
+            this.closePanel.Controls.Add(this.closeLabel);
+            this.closePanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.closePanel.Location = new System.Drawing.Point(321, 0);
+            this.closePanel.Name = "closePanel";
+            this.closePanel.Size = new System.Drawing.Size(29, 30);
+            this.closePanel.TabIndex = 1;
+            // 
+            // closeLabel
+            // 
+            this.closeLabel.AutoSize = true;
+            this.closeLabel.Location = new System.Drawing.Point(2, 6);
+            this.closeLabel.Name = "closeLabel";
+            this.closeLabel.Size = new System.Drawing.Size(26, 18);
+            this.closeLabel.TabIndex = 0;
+            this.closeLabel.Text = "×";
+            this.closeLabel.Click += new System.EventHandler(this.CloseLabel_Click);
+            // 
             // BaseSplashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(350, 800);
             this.ControlBox = false;
             this.Controls.Add(this.DGV);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.topPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -166,27 +170,24 @@ namespace C2.Forms.Splash
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "BaseSplashForm";
+            this.Text = "快捷入口";
             this.Shown += new System.EventHandler(this.BaseSplashForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.topPanel.ResumeLayout(false);
+            this.closePanel.ResumeLayout(false);
+            this.closePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
-
-
-
 
         #endregion
 
         private System.Windows.Forms.DataGridView DGV;
         private System.Windows.Forms.Timer closeTimer;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel topPanel;
+        private System.Windows.Forms.Label closeLabel;
+        private System.Windows.Forms.Panel closePanel;
+        private System.Windows.Forms.Panel titlePanel;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
     }
 }

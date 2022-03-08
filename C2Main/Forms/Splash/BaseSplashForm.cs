@@ -1,7 +1,5 @@
-﻿using C2.Controls.C1.Left;
-using C2.Controls.Left;
+﻿using C2.Controls.Left;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Forms.Splash
@@ -16,6 +14,7 @@ namespace C2.Forms.Splash
         {
             InitializeComponent();
         }
+
         private DataGridViewRow AddItem(string name, string desc)
         {
             DataGridViewRow dgvr = new DataGridViewRow();
@@ -29,12 +28,7 @@ namespace C2.Forms.Splash
             return dgvr;
         }
 
-        public void AddItem(string name, string desc, IAOButton button)
-        {
-            AddItem(name, desc).Tag = button;
-        }
-
-        public void AddItem(string name, string desc, ManualButton button)
+        protected void AddItem(string name, string desc, UserControl button)
         {
             AddItem(name, desc).Tag = button;
         }
@@ -59,10 +53,17 @@ namespace C2.Forms.Splash
         {
             this.closeTimer.Enabled = true;
             this.active = false;
+            this.Height = 800;
 
             int mid = this.DGV.Rows.Count / 2;
             if (mid < this.DGV.Rows.Count)
+            {
                 this.DGV.Rows[mid].Selected = true;
+                int height = DGV.Rows[mid].Height * DGV.Rows.Count;
+                height += topPanel.Height + 5;
+                this.Height = Math.Min(height, Height);
+            }
+                    
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)
