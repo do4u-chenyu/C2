@@ -86,7 +86,7 @@ namespace C2.Forms.Splash
             this.DGV.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV.Size = new System.Drawing.Size(350, 770);
+            this.DGV.Size = new System.Drawing.Size(350, 650);
             this.DGV.TabIndex = 0;
             this.DGV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_CellMouseDoubleClick);
             this.DGV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BaseSplashForm_KeyPress);
@@ -134,6 +134,7 @@ namespace C2.Forms.Splash
             // 
             // closePanel
             // 
+            this.closePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(227)))), ((int)(((byte)(237)))));
             this.closePanel.Controls.Add(this.closeLabel);
             this.closePanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.closePanel.Location = new System.Drawing.Point(321, 0);
@@ -157,7 +158,7 @@ namespace C2.Forms.Splash
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(350, 800);
+            this.ClientSize = new System.Drawing.Size(350, 680);
             this.ControlBox = false;
             this.Controls.Add(this.DGV);
             this.Controls.Add(this.topPanel);
@@ -170,7 +171,7 @@ namespace C2.Forms.Splash
             this.Opacity = 0.85D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "快捷入口";
             this.Shown += new System.EventHandler(this.BaseSplashForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();

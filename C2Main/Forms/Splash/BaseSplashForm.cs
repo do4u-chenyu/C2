@@ -18,12 +18,11 @@ namespace C2.Forms.Splash
         private DataGridViewRow AddItem(string name, string desc)
         {
             DataGridViewRow dgvr = new DataGridViewRow();
-            DataGridViewTextBoxCell dgvtbc = new DataGridViewTextBoxCell
+            dgvr.Cells.Add(new DataGridViewTextBoxCell
             {
-                Value = name
-            };
-            dgvr.Cells.Add(dgvtbc);
-            dgvtbc.ToolTipText = desc;
+                Value = name,
+                ToolTipText = desc,
+            });
             DGV.Rows.Add(dgvr);
             return dgvr;
         }
@@ -51,20 +50,17 @@ namespace C2.Forms.Splash
 
         private void BaseSplashForm_Shown(object sender, EventArgs e)
         {
-            this.closeTimer.Enabled = true;
-            this.active = false;
-            this.Height = 800;
-            this.Location.Offset(0, 50);
-
-            int mid = this.DGV.Rows.Count / 2;
-            if (mid < this.DGV.Rows.Count)
+            closeTimer.Enabled = true;
+            active = false;
+            Height = 800;
+            int cnt = DGV.Rows.Count;
+            int mid = cnt / 2;
+            if (mid < cnt)
             {
-                this.DGV.Rows[mid].Selected = true;
-                int height = DGV.Rows[mid].Height * DGV.Rows.Count;
-                height += topPanel.Height + 5;
-                this.Height = Math.Min(height, Height);
-            }
-                    
+                DGV.Rows[mid].Selected = true;
+                int height = DGV.Rows[mid].Height * cnt;
+                Height = Math.Min(height + topPanel.Height + 5, Height);
+            }            
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)
@@ -91,16 +87,13 @@ namespace C2.Forms.Splash
 
         private void DGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (e.Clicks != 2)
-                    return;
-                if (e.RowIndex > DGV.Rows.Count - 1)
-                    return;
-
-                DataGridViewRow dgvc = DGV.Rows[e.RowIndex];
-                OpenItem(dgvc.Tag);
-            }
+            if (e.Button != MouseButtons.Left)
+                return;
+            if (e.Clicks != 2)
+                return;
+            if (e.RowIndex > DGV.Rows.Count - 1)
+                return;
+            OpenItem(DGV.Rows[e.RowIndex].Tag);
         }
 
         protected virtual void OpenItem(object button)
