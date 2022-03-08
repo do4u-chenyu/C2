@@ -54,6 +54,7 @@ namespace C2.Forms.Splash
             this.closeTimer.Enabled = true;
             this.active = false;
             this.Height = 800;
+            this.Location.Offset(0, 50);
 
             int mid = this.DGV.Rows.Count / 2;
             if (mid < this.DGV.Rows.Count)

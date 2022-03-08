@@ -66,8 +66,8 @@ namespace C2.Forms.Splash
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV.DefaultCellStyle = dataGridViewCellStyle2;
             this.DGV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -125,7 +125,7 @@ namespace C2.Forms.Splash
             // 
             // titlePanel
             // 
-            this.titlePanel.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.titlePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(227)))), ((int)(((byte)(237)))));
             this.titlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.titlePanel.Location = new System.Drawing.Point(0, 0);
             this.titlePanel.Name = "titlePanel";
@@ -144,6 +144,7 @@ namespace C2.Forms.Splash
             // closeLabel
             // 
             this.closeLabel.AutoSize = true;
+            this.closeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(227)))), ((int)(((byte)(237)))));
             this.closeLabel.Location = new System.Drawing.Point(2, 6);
             this.closeLabel.Name = "closeLabel";
             this.closeLabel.Size = new System.Drawing.Size(26, 18);
