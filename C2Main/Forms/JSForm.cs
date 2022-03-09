@@ -26,7 +26,7 @@ namespace C2.Forms
             [GlueType.Gamble] = "涉赌专项",
             [GlueType.Gun] = "涉枪专项",
             [GlueType.Yellow] = "涉黄专项",
-            [GlueType.BBanshee] = "黑吃黑专项",
+            [GlueType.BBanshee] = "肉鸡黑吃黑",
             [GlueType.Webshell] = "盗洞专项",
             [GlueType.VB] = "境外网产专项"
         };

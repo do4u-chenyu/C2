@@ -2,7 +2,6 @@
 using C2.Dialogs;
 using C2.Utils;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 

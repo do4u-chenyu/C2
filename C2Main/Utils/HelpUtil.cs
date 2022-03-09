@@ -62,7 +62,7 @@ namespace C2.Utils
         public static string InvalidMaxNum = "提取条数输入有误，请输入整数类型，不支持浮点数、非数字符号等";
 
         public static string ApkToolFormHelpInfo = "对Apk进行反编译并获取Apk的图标，安装名称，包名，入口函数名和文件大小，解析结果右键导出xls";
-        public static string VisualizationFormHelpInfo = "数据可视化，包括组织架构图、词云等，需要IE浏览器版本大于8";
+        public static string VisualizationFormHelpInfo = "数据可视化，从数据中生成组织架构图、社交关系图和词云图，需要IE浏览器版本大于8";
         public static string WifiLocationFormHelpInfo = "根据WIFI热点的MAC或基站号进行定位，获取经纬度，覆盖范围和详细地址，需要网络";
         public static string BankToolFormHelpInfo = "根据银行卡号获取银行卡的卡种，开户行和其他信息，需要网络";
         public static string GPSTransformFormHelpInfo = "经纬度坐标系转换(百度、火星和WGS);计算两经纬度坐标之间的距离";

@@ -156,7 +156,7 @@
             this.itemLabel.AutoSize = true;
             this.itemLabel.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.itemLabel.ForeColor = System.Drawing.Color.Red;
-            this.itemLabel.Location = new System.Drawing.Point(46, 14);
+            this.itemLabel.Location = new System.Drawing.Point(38, 14);
             this.itemLabel.Name = "itemLabel";
             this.itemLabel.Size = new System.Drawing.Size(39, 20);
             this.itemLabel.TabIndex = 0;
@@ -166,7 +166,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.label3.Location = new System.Drawing.Point(8, 14);
+            this.label3.Location = new System.Drawing.Point(3, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 20);
             this.label3.TabIndex = 6;

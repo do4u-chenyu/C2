@@ -1,7 +1,5 @@
-﻿using C2.Controls.C1.Left;
-using C2.Controls.Left;
+﻿using C2.Controls.Left;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Forms.Splash
@@ -16,25 +14,20 @@ namespace C2.Forms.Splash
         {
             InitializeComponent();
         }
+
         private DataGridViewRow AddItem(string name, string desc)
         {
             DataGridViewRow dgvr = new DataGridViewRow();
-            DataGridViewTextBoxCell dgvtbc = new DataGridViewTextBoxCell
+            dgvr.Cells.Add(new DataGridViewTextBoxCell
             {
-                Value = name
-            };
-            dgvr.Cells.Add(dgvtbc);
-            dgvtbc.ToolTipText = desc;
+                Value = name,
+                ToolTipText = desc,
+            });
             DGV.Rows.Add(dgvr);
             return dgvr;
         }
 
-        public void AddItem(string name, string desc, IAOButton button)
-        {
-            AddItem(name, desc).Tag = button;
-        }
-
-        public void AddItem(string name, string desc, ManualButton button)
+        protected void AddItem(string name, string desc, UserControl button)
         {
             AddItem(name, desc).Tag = button;
         }
@@ -57,12 +50,17 @@ namespace C2.Forms.Splash
 
         private void BaseSplashForm_Shown(object sender, EventArgs e)
         {
-            this.closeTimer.Enabled = true;
-            this.active = false;
-
-            int mid = this.DGV.Rows.Count / 2;
-            if (mid < this.DGV.Rows.Count)
-                this.DGV.Rows[mid].Selected = true;
+            closeTimer.Enabled = true;
+            active = false;
+            Height = 800;
+            int cnt = DGV.Rows.Count;
+            int mid = cnt / 2;
+            if (mid < cnt)
+            {
+                DGV.Rows[mid].Selected = true;
+                int height = DGV.Rows[mid].Height * cnt;
+                Height = Math.Min(height + topPanel.Height + 5, Height);
+            }            
         }
 
         private void CloseTimer_Tick(object sender, EventArgs e)
@@ -89,16 +87,13 @@ namespace C2.Forms.Splash
 
         private void DGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (e.Clicks != 2)
-                    return;
-                if (e.RowIndex > DGV.Rows.Count - 1)
-                    return;
-
-                DataGridViewRow dgvc = DGV.Rows[e.RowIndex];
-                OpenItem(dgvc.Tag);
-            }
+            if (e.Button != MouseButtons.Left)
+                return;
+            if (e.Clicks != 2)
+                return;
+            if (e.RowIndex > DGV.Rows.Count - 1)
+                return;
+            OpenItem(DGV.Rows[e.RowIndex].Tag);
         }
 
         protected virtual void OpenItem(object button)

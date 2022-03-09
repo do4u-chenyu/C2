@@ -6,10 +6,6 @@ namespace C2.Forms.Splash
 {
     public class HIBUSplashForm : BaseSplashForm 
     {
-        public HIBUSplashForm()
-        {
-            this.Height += 80;
-        }
         public new void ShowDialog()
         {
             List<IAOButton> buttons = Global.GetHIBUControl().IAOButtons;

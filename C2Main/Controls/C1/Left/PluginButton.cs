@@ -30,11 +30,11 @@ namespace C2.Controls.C1.Left
             InitButtonDoubleClick();
             JST = new Dictionary<string, string>()
             {
-                {"涉赌专项", "涉赌胶水系统" },
-                {"涉枪专项", "涉枪胶水系统" },
-                {"涉黄专项", "涉黄胶水系统" },
+                {"涉赌专项", "涉赌模型" },
+                {"涉枪专项", "涉枪模型" },
+                {"涉黄专项", "涉黄模型" },
                 {"盗洞专项", "盗洞模型" },
-                {"黑吃黑专项", "肉鸡黑吃黑模型" },
+                {"肉鸡黑吃黑", "肉鸡黑吃黑模型" },
                 {"境外网产专项", "购置境外网络资产模型" },
             };
         }
@@ -89,7 +89,7 @@ namespace C2.Controls.C1.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dd;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DDFormHelpInfo);
                     break;
-                case "黑吃黑专项":
+                case "肉鸡黑吃黑":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.HM;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.XiseBackdoorHelpInfo);
                     break;
@@ -182,7 +182,7 @@ namespace C2.Controls.C1.Left
                 case "涉枪专项":
                 case "涉黄专项":
                 case "盗洞专项":
-                case "黑吃黑专项":
+                case "肉鸡黑吃黑":
                 case "境外网产专项":
                     Global.GetMainForm().OpenJSTab(pluginType);
                     break;

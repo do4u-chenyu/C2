@@ -7,10 +7,6 @@ namespace C2.Forms.Splash
 {
     public class  ManualSplashForm : BaseSplashForm
     {
-        public ManualSplashForm()
-        {
-            this.Height -= 20;
-        }
         public new void ShowDialog()
         {
             List<ManualButton> buttons = Global.GetManualControl().ManualButtons;
