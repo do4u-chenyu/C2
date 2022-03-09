@@ -215,12 +215,12 @@ namespace C2.Controls
                     fontSizeContent = 10f;
                     break;
                 case "1366":
-                    fontSizeTitle = 10f;
-                    fontSizeContent = 7f;
+                    fontSizeTitle = 12f;
+                    fontSizeContent = 9f;
                     break;
                 default:
-                    fontSizeTitle = 10f;
-                    fontSizeContent = 7f;
+                    fontSizeTitle = 12f;
+                    fontSizeContent = 9f;
                     break;
             }
             float[] T = { fontSizeTitle, fontSizeContent };

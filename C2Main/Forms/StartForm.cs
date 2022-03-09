@@ -26,7 +26,6 @@ namespace C2.Forms
             this.recentFilesView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentFilesView1.CellBackColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentFilesView1.CellSpace = new System.Drawing.Size(20, 60);
-            this.recentFilesView1.Dimension = new System.Drawing.Size(4, 2);
             this.recentFilesView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentFilesView1.Location = new System.Drawing.Point(0, 0);
             this.recentFilesView1.Name = "recentFilesView1";
@@ -35,6 +34,8 @@ namespace C2.Forms
             // 
             // StartForm
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(784, 462);
             this.Controls.Add(this.recentFilesView1);
             this.IconImage = global::C2.Properties.Resources.首页;

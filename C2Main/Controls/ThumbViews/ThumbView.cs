@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -31,10 +30,6 @@ namespace C2.Controls
 
         public event ThumbViewItemCancelEventHandler ItemClosing;
         public event ThumbViewItemEventHandler ItemClosed;
-        public string filePath;
-        public string savePath;
-        public bool isPaint = false;
-
 
 
         public ThumbView()
@@ -49,7 +44,6 @@ namespace C2.Controls
             Items = new XList<ThumbItem>();
             Items.ItemAdded += Items_ItemAdded;
             Items.ItemRemoved += Items_ItemRemoved;
-            //StartPaint();
             InitItems();
             this.BackColor = SystemColors.ControlLightLight;
             CellBackColor = SystemColors.ControlLightLight;
@@ -66,106 +60,10 @@ namespace C2.Controls
             Items.Add(new ThumbItem("喝彩城堡", "模型闭环配套的安全工具",      global::C2.Properties.Resources.首页_喝彩城堡, ThumbItem.ModelTypes.CastleBravo));
             Items.Add(new ThumbItem("实验楼",  "常用分析小工具集合",       global::C2.Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.Laboratory));
             Items.Add(new ThumbItem("网站侦察兵", "对网站进行爬取、分类并截图，最终将判别结果返回给用户",    global::C2.Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WebsiteScout));
-            Items.Add(new ThumbItem("APK监测站","通过上传APK文件、创建项目、下载结果，使用APK检测服务",          global::C2.Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APKMonitor));
+            Items.Add(new ThumbItem("APK大眼睛","通过上传APK文件、创建项目、下载结果，使用检测服务",          global::C2.Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APKMonitor));
             Items.Add(new ThumbItem("知识库", "各业务方向关键词、线索查询、上传、下载",      global::C2.Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
             Items.Add(new ThumbItem("HIBU",   "提供23种AI能力",      global::C2.Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.HIBU));
         }
-
-        public void StartPaint()
-        {
-            string dir = Application.StartupPath;
-            //string dir = Path.GetFullPath(@"..//..");
-            //MessageBox.Show(dir);
-            string inPut = Path.Combine(dir, "Resources", "StartPage", "example");
-            string[] inDirs = Directory.GetFiles(inPut, "首页*.png");
-
-            string outPut = Path.Combine(dir, "Resources", "StartPage");
-            string[] outDirs = Directory.GetFiles(outPut, "首页*.png");
-
-            for (int i = 0; i < inDirs.Length; i++)
-            {
-                filePath = inDirs[i];
-                savePath = outDirs[i];
-                if (i == 0 )
-                {
-                    isPaint = true;
-                    AddTextToImage("分析笔记", "承载分析师的分析思路，落地分析过程，记录分析结果");
-                }
-
-                else if (i == 1 )
-                {
-                    isPaint = true;
-                    AddTextToImage("战术手册", "流程化的战法指导，供选择，可参考，可复用");
-                }
-                else if (i == 2 )
-                {
-                    isPaint = true;
-                    AddTextToImage("喝彩城堡", "模型闭环配套的安全工具");
-                }
-                else if (i == 3)
-                {
-                    //isPaint = true;
-                    AddTextToImage("常用分析小工具集合", "实验楼");
-                }
-                else if (i == 4 )
-                {
-                    isPaint = true;
-                    AddTextToImage("网站侦察兵", "对网站进行爬取，分类并截图，最终将判断结果返回给客户");
-                }  
-                else if (i == 5 )
-                {
-                    isPaint = true;
-                    AddTextToImage("APK监测站", "通过上传APK文件、创建项目、下载结果，使用APK监测服务");
-                }  
-                else if (i == 6 )
-                {
-                    isPaint = true;
-                    AddTextToImage("知识库", "各业务方向关键词、线索查询、上传、下载");
-                }        
-                else if (i == 7 )
-                {
-                    isPaint = true;
-                    AddTextToImage("HIBU", "提供23种AI能力");
-                }     
-            }
-            isPaint = false;
-        }
-
-        
-        private void AddTextToImage(string text, string text2)
-        {
-            /*
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException("文件不存在");
-            */
-            
-            if (string.IsNullOrEmpty(text))
-                return;
-
-            Image image = Image.FromFile(filePath);
-            Bitmap bitmap = new Bitmap(image, image.Width, image.Height);
-            Graphics g = Graphics.FromImage(bitmap);
-
-            Font fontTitle = new Font("微软雅黑", 15f, FontStyle.Bold);
-            Font fontContent = new Font("微软雅黑", 10f);
-
-            float rectWidth = text.Length * 15f + fontTitle.Height * 2;
-
-            RectangleF textAreaTitle = new RectangleF(15, 245, rectWidth, image.Height - 60);
-            RectangleF textAreaContent = new RectangleF(15, 280, 400, image.Height - 60);
-
-            Brush whiteBrush = new SolidBrush(Color.Black);
-
-            g.DrawString(text, fontTitle, whiteBrush, textAreaTitle);
-            g.DrawString(text2, fontContent, whiteBrush, textAreaContent);
-            bitmap.Save(savePath, ImageFormat.Png);
-
-            g.Dispose();
-            bitmap.Dispose();
-            image.Dispose();
-        }
-    
-
 
         [DefaultValue(typeof(Size), "4, 2")]
         public Size Dimension
