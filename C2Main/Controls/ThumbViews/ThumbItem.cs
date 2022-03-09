@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace C2.Controls
 {
@@ -10,7 +11,9 @@ namespace C2.Controls
         Color _BackColor;
         Color _ForeColor;
         string _Text;
+        string _TextContent;
         Image _Image;
+        
 
         public event EventHandler Click;
 
@@ -38,9 +41,10 @@ namespace C2.Controls
         }
         public ModelTypes Types { get; set; }
 
-        public ThumbItem(string text, Image image, ModelTypes types)
+        public ThumbItem(string text, string textContent, Image image, ModelTypes types)
         {
             Text = text;
+            TextContent = textContent;
             Image = image;
             Types = types;
         }
@@ -107,6 +111,19 @@ namespace C2.Controls
                 if (_Text != value)
                 {
                     _Text = value;
+                    OnTextChanged();
+                }
+            }
+        }
+
+        public string TextContent
+        {
+            get { return _TextContent; }
+            set
+            {
+                if (_TextContent != value)
+                {
+                    _TextContent = value;
                     OnTextChanged();
                 }
             }
@@ -186,25 +203,34 @@ namespace C2.Controls
             return OnPaint(e);
         }
 
+        public Tuple<float, float> autoFont()
+        {
+            string scrWidth = Screen.PrimaryScreen.Bounds.Width.ToString();
+            float fontSizeTitle;
+            float fontSizeContent;
+            switch (scrWidth)
+            {
+                case "1920":
+                    fontSizeTitle = 15f;
+                    fontSizeContent = 10f;
+                    break;
+                case "1366":
+                    fontSizeTitle = 10f;
+                    fontSizeContent = 7f;
+                    break;
+                default:
+                    fontSizeTitle = 10f;
+                    fontSizeContent = 7f;
+                    break;
+            }
+            float[] T = { fontSizeTitle, fontSizeContent };
+            Tuple<float, float> tup = new Tuple<float, float>(T[0], T[1]);
+            return tup;
+        }
+
         protected virtual bool OnPaint(ThumbViewPaintEventArgs e)
         {
             e.PaintBackground();
-
-            // text
-            //var textHeight = e.Font.Height + 6;
-            //var rectText = new Rectangle(Left, Bottom - textHeight, Width, textHeight);
-            //if (!string.IsNullOrEmpty(Text))
-            //{
-            //    var sf = PaintHelper.SFCenter;
-            //    sf.Trimming = StringTrimming.EllipsisCharacter;
-            //    sf.FormatFlags |= StringFormatFlags.NoWrap;
-
-            //    e.Graphics.DrawString(Text,
-            //        e.Font,
-            //        Selected ? new SolidBrush(e.View.ActiveCellForeColor) : new SolidBrush(e.View.CellForeColor),
-            //        rectText,
-            //        sf);
-            //}
 
             // image
             if (Image != null)
@@ -213,8 +239,46 @@ namespace C2.Controls
                 // modified by DK: 小白的缩略图需要放大。
                 // 图标大小修改，需要改一下PaintHelp方法
                 PaintHelper.DrawImageInRange(e.Graphics, Image, rectImg, true);
+                //e.Graphics.DrawImage(Image,rectImg);
             }
 
+
+            // text
+            Font fontTitle = new Font("微软雅黑", autoFont().Item1, FontStyle.Bold);
+            Font fontContent = new Font("微软雅黑", autoFont().Item2);
+
+            var textHeight = fontTitle.Height;
+            var rectText = new Rectangle(Left+15, ((Top+Bottom)/2+Bottom)/2-textHeight*2, Width-15, Height-40);
+            Brush whiteBrush = new SolidBrush(Color.Black);
+            e.Graphics.DrawString(Text,fontTitle, whiteBrush,rectText);
+
+
+            var textHeightContent = fontContent.Height+6;
+            var rectTextContent = new Rectangle(Left+15, ((Top + Bottom) / 2 + Bottom) / 2 - textHeightContent, Width-15, Height-100);
+            e.Graphics.DrawString(TextContent,fontContent, whiteBrush,rectTextContent);
+
+
+            /*
+            if (!string.IsNullOrEmpty(Text) && !string.IsNullOrEmpty(TextContent))
+            {
+                var sf = PaintHelper.SFCenter;
+                sf.Trimming = StringTrimming.EllipsisCharacter;
+                sf.FormatFlags |= StringFormatFlags.NoWrap;
+
+                e.Graphics.DrawString(Text,
+                    fontTitle,
+                    Selected ? new SolidBrush(e.View.ActiveCellForeColor) : new SolidBrush(e.View.CellForeColor),
+                    rectText,
+                    sf);
+                
+                e.Graphics.DrawString(TextContent,
+                    fontContent,
+                    Selected ? new SolidBrush(e.View.ActiveCellForeColor) : new SolidBrush(e.View.CellForeColor),
+                    rectTextContent,
+                    sf);
+                
+            }
+            */
             return true;
         }
 
