@@ -55,14 +55,14 @@ namespace C2.Controls
         }
         void InitItems()
         {
-            Items.Add(new ThumbItem("分析笔记", "承载分析师的分析思路、过程和结果",          global::C2.Properties.Resources.首页_分析笔记, ThumbItem.ModelTypes.AnalysisNotes));
-            Items.Add(new ThumbItem("战术手册","流程化的战术模型和操作指导",          global::C2.Properties.Resources.首页_战术手册, ThumbItem.ModelTypes.TacticalManual));
-            Items.Add(new ThumbItem("喝彩城堡", "模型闭环配套的安全工具",      global::C2.Properties.Resources.首页_喝彩城堡, ThumbItem.ModelTypes.CastleBravo));
-            Items.Add(new ThumbItem("实验楼",  "常用分析小工具集合",       global::C2.Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.Laboratory));
-            Items.Add(new ThumbItem("网站侦察兵", "对网站进行爬取、分类并截图",    global::C2.Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WebsiteScout));
-            Items.Add(new ThumbItem("APK大眼睛","APK解析与信息提取",          global::C2.Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APKMonitor));
-            Items.Add(new ThumbItem("知识库", "各业务方向关键词库、线索库",      global::C2.Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
-            Items.Add(new ThumbItem("HIBU",   "提供23种AI能力",      global::C2.Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.HIBU));
+            Items.Add(new ThumbItem("分析笔记", "承载分析师的分析思路、过程和结果", Properties.Resources.首页_分析笔记, ThumbItem.ModelTypes.AnalysisNotes));
+            Items.Add(new ThumbItem("战术手册","流程化的战术模型和操作指导",        Properties.Resources.首页_战术手册, ThumbItem.ModelTypes.TacticalManual));
+            Items.Add(new ThumbItem("喝彩城堡", "模型闭环配套的安全工具",           Properties.Resources.首页_喝彩城堡, ThumbItem.ModelTypes.CastleBravo));
+            Items.Add(new ThumbItem("实验楼",  "常用分析小工具集合",                Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.Laboratory));
+            Items.Add(new ThumbItem("网站侦察兵", "对网站进行爬取、分类并截图",     Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WebsiteScout));
+            Items.Add(new ThumbItem("APK大眼睛","APK解析与信息提取",                Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APKMonitor));
+            Items.Add(new ThumbItem("知识库", "各业务方向关键词库、线索库",         Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+            Items.Add(new ThumbItem("HIBU",   "提供23种AI能力",                     Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.HIBU));
         }
 
         [DefaultValue(typeof(Size), "4, 2")]
@@ -360,7 +360,7 @@ namespace C2.Controls
             foreach (var item in Items)
             {
                 PaintItem(e, item);
-                e.Graphics.DrawRectangle(new Pen(Color.Red), item.Bounds);
+                //e.Graphics.DrawRectangle(new Pen(Color.Red), item.Bounds);
             }
             
             if (DesignMode)
