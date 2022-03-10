@@ -37,12 +37,12 @@ namespace C2.Controls
             float f1 = 10f;
             float f2 = 8f;
 
-            if (Width > 200 && Width < 300 && scaleX == 150)
+            if (Width > 200 && Width < 300 && scaleX >= 150)
             {
                 f1 = 12f;
                 f2 = 9f;
             }
-            else if (Width > 350 && Width < 500 && scaleX != 150)
+            else if (Width > 350 && Width < 500 && scaleX < 150)
             {
                 f1 = 15f;
                 f2 = 10f;
