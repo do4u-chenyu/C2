@@ -29,15 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.browserButton = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prediction = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,83 +41,35 @@
             this.webContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ipAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskNameLabel = new System.Windows.Forms.Label();
-            this.taskIDLabel = new System.Windows.Forms.Label();
-            this.taskStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.taskInfoLabel = new System.Windows.Forms.Label();
-            this.statusInfoLabel = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.browserButton = new System.Windows.Forms.Button();
+            this.taskStatusLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.taskIDLabel = new System.Windows.Forms.Label();
+            this.taskNameLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.screenShotGroupBox = new System.Windows.Forms.GroupBox();
             this.progressNum = new System.Windows.Forms.Label();
             this.progressInfo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
             this.downloadPicsButton = new System.Windows.Forms.Button();
+            this.taskInfoLabel = new System.Windows.Forms.Label();
+            this.statusInfoLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.screenShotGroupBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(117, 14);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 27);
-            this.label1.TabIndex = 10003;
-            this.label1.Text = "任务名：";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(117, 66);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 27);
-            this.label2.TabIndex = 10004;
-            this.label2.Text = "任务ID：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(99, 118);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 27);
-            this.label3.TabIndex = 10005;
-            this.label3.Text = "任务状态：";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(99, 171);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 27);
-            this.label4.TabIndex = 10006;
-            this.label4.Text = "结果预览：";
-            // 
-            // browserButton
-            // 
-            this.browserButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.browserButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.browserButton.Location = new System.Drawing.Point(234, 164);
-            this.browserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.browserButton.Name = "browserButton";
-            this.browserButton.Size = new System.Drawing.Size(116, 42);
-            this.browserButton.TabIndex = 10007;
-            this.browserButton.Text = "详情";
-            this.browserButton.UseVisualStyleBackColor = false;
-            this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
             // dataGridView
             // 
@@ -130,19 +77,19 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(225)))), ((int)(((byte)(242)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(225)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(198)))), ((int)(((byte)(231)))));
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(78)))), ((int)(((byte)(120)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(78)))), ((int)(((byte)(120)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridView.ColumnHeadersHeight = 30;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -153,29 +100,29 @@
             this.webContent,
             this.ip,
             this.ipAddress});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 10F);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridView.RowHeadersWidth = 4;
             this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView.RowTemplate.Height = 23;
@@ -261,96 +208,153 @@
             this.ipAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ipAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // taskNameLabel
+            // panel1
             // 
-            this.taskNameLabel.AutoSize = true;
-            this.taskNameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskNameLabel.Location = new System.Drawing.Point(242, 16);
-            this.taskNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.taskNameLabel.Name = "taskNameLabel";
-            this.taskNameLabel.Size = new System.Drawing.Size(73, 27);
-            this.taskNameLabel.TabIndex = 10009;
-            this.taskNameLabel.Text = "Name";
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.taskInfoLabel);
+            this.panel1.Controls.Add(this.statusInfoLabel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1498, 228);
+            this.panel1.TabIndex = 10012;
             // 
-            // taskIDLabel
+            // panel4
             // 
-            this.taskIDLabel.AutoSize = true;
-            this.taskIDLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskIDLabel.Location = new System.Drawing.Point(242, 68);
-            this.taskIDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.taskIDLabel.Name = "taskIDLabel";
-            this.taskIDLabel.Size = new System.Drawing.Size(35, 27);
-            this.taskIDLabel.TabIndex = 10010;
-            this.taskIDLabel.Text = "ID";
-            this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.taskIDLabel, "双击复制任务ID到剪切板");
-            this.taskIDLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskIDLabel_MouseDoubleClick);
+            this.panel4.Controls.Add(this.browserButton);
+            this.panel4.Controls.Add(this.taskStatusLabel);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.taskIDLabel);
+            this.panel4.Controls.Add(this.taskNameLabel);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.label4);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(951, 228);
+            this.panel4.TabIndex = 10018;
+            // 
+            // browserButton
+            // 
+            this.browserButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.browserButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.browserButton.Location = new System.Drawing.Point(158, 163);
+            this.browserButton.Margin = new System.Windows.Forms.Padding(4);
+            this.browserButton.Name = "browserButton";
+            this.browserButton.Size = new System.Drawing.Size(116, 42);
+            this.browserButton.TabIndex = 10016;
+            this.browserButton.Text = "详情";
+            this.browserButton.UseVisualStyleBackColor = false;
+            this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
             // taskStatusLabel
             // 
             this.taskStatusLabel.AutoSize = true;
             this.taskStatusLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskStatusLabel.Location = new System.Drawing.Point(242, 118);
+            this.taskStatusLabel.Location = new System.Drawing.Point(166, 117);
             this.taskStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.taskStatusLabel.Name = "taskStatusLabel";
             this.taskStatusLabel.Size = new System.Drawing.Size(72, 27);
-            this.taskStatusLabel.TabIndex = 10011;
+            this.taskStatusLabel.TabIndex = 10019;
             this.taskStatusLabel.Text = "运行中";
             this.taskStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel1
+            // label1
             // 
-            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Controls.Add(this.taskInfoLabel);
-            this.panel1.Controls.Add(this.statusInfoLabel);
-            this.panel1.Controls.Add(this.screenShotGroupBox);
-            this.panel1.Controls.Add(this.browserButton);
-            this.panel1.Controls.Add(this.taskStatusLabel);
-            this.panel1.Controls.Add(this.downloadPicsButton);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.taskIDLabel);
-            this.panel1.Controls.Add(this.taskNameLabel);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1498, 228);
-            this.panel1.TabIndex = 10012;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(41, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 27);
+            this.label1.TabIndex = 10012;
+            this.label1.Text = "任务名：";
             // 
-            // taskInfoLabel
+            // taskIDLabel
             // 
-            this.taskInfoLabel.AutoSize = true;
-            this.taskInfoLabel.Location = new System.Drawing.Point(630, 76);
-            this.taskInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.taskInfoLabel.Name = "taskInfoLabel";
-            this.taskInfoLabel.Size = new System.Drawing.Size(0, 18);
-            this.taskInfoLabel.TabIndex = 10016;
+            this.taskIDLabel.AutoSize = true;
+            this.taskIDLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.taskIDLabel.Location = new System.Drawing.Point(166, 67);
+            this.taskIDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.taskIDLabel.Name = "taskIDLabel";
+            this.taskIDLabel.Size = new System.Drawing.Size(35, 27);
+            this.taskIDLabel.TabIndex = 10018;
+            this.taskIDLabel.Text = "ID";
+            this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.taskIDLabel, "双击复制任务ID到剪切板");
+            this.taskIDLabel.Click += new System.EventHandler(this.TaskIDLabel_MouseDoubleClick);
             // 
-            // statusInfoLabel
+            // taskNameLabel
             // 
-            this.statusInfoLabel.AutoSize = true;
-            this.statusInfoLabel.Location = new System.Drawing.Point(375, 128);
-            this.statusInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.statusInfoLabel.Name = "statusInfoLabel";
-            this.statusInfoLabel.Size = new System.Drawing.Size(0, 18);
-            this.statusInfoLabel.TabIndex = 10015;
+            this.taskNameLabel.AutoSize = true;
+            this.taskNameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.taskNameLabel.Location = new System.Drawing.Point(166, 15);
+            this.taskNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.taskNameLabel.Name = "taskNameLabel";
+            this.taskNameLabel.Size = new System.Drawing.Size(73, 27);
+            this.taskNameLabel.TabIndex = 10017;
+            this.taskNameLabel.Text = "Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(41, 65);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 27);
+            this.label2.TabIndex = 10013;
+            this.label2.Text = "任务ID：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(23, 117);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(112, 27);
+            this.label3.TabIndex = 10014;
+            this.label3.Text = "任务状态：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(23, 170);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 27);
+            this.label4.TabIndex = 10015;
+            this.label4.Text = "结果预览：";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.screenShotGroupBox);
+            this.panel3.Controls.Add(this.downloadPicsButton);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(951, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(547, 228);
+            this.panel3.TabIndex = 10017;
             // 
             // screenShotGroupBox
             // 
             this.screenShotGroupBox.Controls.Add(this.progressNum);
             this.screenShotGroupBox.Controls.Add(this.progressInfo);
             this.screenShotGroupBox.Controls.Add(this.label6);
-            this.screenShotGroupBox.Controls.Add(this.label5);
             this.screenShotGroupBox.Controls.Add(this.progressBar1);
-            this.screenShotGroupBox.Location = new System.Drawing.Point(1040, 28);
-            this.screenShotGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.screenShotGroupBox.Controls.Add(this.label5);
+            this.screenShotGroupBox.Location = new System.Drawing.Point(79, 22);
+            this.screenShotGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.screenShotGroupBox.Name = "screenShotGroupBox";
-            this.screenShotGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.screenShotGroupBox.Padding = new System.Windows.Forms.Padding(4);
             this.screenShotGroupBox.Size = new System.Drawing.Size(448, 134);
-            this.screenShotGroupBox.TabIndex = 10014;
+            this.screenShotGroupBox.TabIndex = 10016;
             this.screenShotGroupBox.TabStop = false;
             this.screenShotGroupBox.Text = "截图下载";
             // 
@@ -384,6 +388,15 @@
             this.label6.TabIndex = 10015;
             this.label6.Text = "详细信息：";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(106, 34);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(284, 34);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 10013;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -394,34 +407,43 @@
             this.label5.TabIndex = 10014;
             this.label5.Text = "进度：";
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(106, 34);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(284, 34);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 10013;
-            // 
             // downloadPicsButton
             // 
             this.downloadPicsButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.downloadPicsButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.downloadPicsButton.Location = new System.Drawing.Point(1328, 171);
-            this.downloadPicsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.downloadPicsButton.Location = new System.Drawing.Point(367, 165);
+            this.downloadPicsButton.Margin = new System.Windows.Forms.Padding(4);
             this.downloadPicsButton.Name = "downloadPicsButton";
             this.downloadPicsButton.Size = new System.Drawing.Size(160, 42);
-            this.downloadPicsButton.TabIndex = 10012;
+            this.downloadPicsButton.TabIndex = 10015;
             this.downloadPicsButton.Text = "下载全部截图";
             this.downloadPicsButton.UseVisualStyleBackColor = false;
             this.downloadPicsButton.Click += new System.EventHandler(this.DownloadPicsButton_Click);
+            // 
+            // taskInfoLabel
+            // 
+            this.taskInfoLabel.AutoSize = true;
+            this.taskInfoLabel.Location = new System.Drawing.Point(630, 76);
+            this.taskInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.taskInfoLabel.Name = "taskInfoLabel";
+            this.taskInfoLabel.Size = new System.Drawing.Size(0, 18);
+            this.taskInfoLabel.TabIndex = 10016;
+            // 
+            // statusInfoLabel
+            // 
+            this.statusInfoLabel.AutoSize = true;
+            this.statusInfoLabel.Location = new System.Drawing.Point(375, 128);
+            this.statusInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusInfoLabel.Name = "statusInfoLabel";
+            this.statusInfoLabel.Size = new System.Drawing.Size(0, 18);
+            this.statusInfoLabel.TabIndex = 10015;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dataGridView);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 228);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1498, 642);
             this.panel2.TabIndex = 10013;
@@ -435,7 +457,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WFDTaskResult";
             this.Text = "侦察兵-任务结果";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WFDTaskResult_FormClosing);
@@ -443,6 +465,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.screenShotGroupBox.ResumeLayout(false);
             this.screenShotGroupBox.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -451,25 +476,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button browserButton;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Label taskNameLabel;
-        private System.Windows.Forms.Label taskIDLabel;
-        private System.Windows.Forms.Label taskStatusLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button downloadPicsButton;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.GroupBox screenShotGroupBox;
-        private System.Windows.Forms.Label progressInfo;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label progressNum;
         private System.Windows.Forms.Label statusInfoLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn url;
         private System.Windows.Forms.DataGridViewTextBoxColumn prediction;
@@ -480,5 +489,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ipAddress;
         private System.Windows.Forms.Label taskInfoLabel;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button browserButton;
+        private System.Windows.Forms.Label taskStatusLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label taskIDLabel;
+        private System.Windows.Forms.Label taskNameLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.GroupBox screenShotGroupBox;
+        private System.Windows.Forms.Label progressNum;
+        private System.Windows.Forms.Label progressInfo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button downloadPicsButton;
     }
 }
