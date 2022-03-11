@@ -254,7 +254,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (results == null || !WFDWebAPI.GetInstance().ReAuthBeforeQuery())
                 return;
 
-            var dialog = new FolderBrowserDialog();
+            var dialog = new FolderBrowserDialog
+            {
+                SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures)
+            };
+
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
             string destPath = dialog.SelectedPath;
@@ -376,8 +380,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //e.cancel为true表示取消关闭，为false表示可以关闭窗口
             e.Cancel = !CanFormClose();
         }
-
-        private void TaskIDLabel_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void TaskIDLabel_MouseDoubleClick(object sender, EventArgs e)
         {
             if (FileUtil.TryClipboardSetText(TaskInfo.TaskID))
                 HelpUtil.ShowMessageBox(String.Format("已复制任务ID[{0}]到剪切板", TaskInfo.TaskID));

@@ -592,13 +592,13 @@ namespace C2.Business.CastleBravo.WebShellTool
             try
             {
                 string url = NetUtil.FormatUrl(task.Url);
-                string seed = RandomUtil.RandomInt(31415000, 31415926).ToString();
-                string result = "";
+                int seed = RandomUtil.RandomInt(31415000, 31415926);
+                string result = string.Empty;
                 List<string> payloads = GenWebshellPayload(task, seed);
                 foreach (string payload in payloads)
                 {
                     result = WebClientEx.Post(url, payload, 1500, Proxy);
-                    if (result.Contains(seed))
+                    if (result.Contains(seed.ToString()))
                         return true;
                 }
                 return false;
@@ -606,24 +606,26 @@ namespace C2.Business.CastleBravo.WebShellTool
             catch { return false; }
 
         }
-        private string GenPayload(string trojanType, string seed)
+        private string GenPayload(string trojanType, int seed)
         {
             switch (trojanType)
             {
+                // 有些网站会直接回显,这里加入运算逻辑
+                // 报文用减法运算,加号容易被url转码成空格
                 case "phpEval":
-                    return string.Format("print({0});", seed);
+                    return string.Format("print({0}-1);", seed + 1);
                 case "aspEval":
-                    return string.Format("response.write({0})", seed);
+                    return string.Format("response.write({0}-1)", seed + 1);
                 case "aspxEval":
-                     return string.Format("response.write({0})", seed);
+                     return string.Format("response.write({0}-1)", seed + 1);
                 case "jspEval":
-                    return string.Format("out.println({0})", seed);
+                    return string.Format("out.println({0}-1)", seed + 1);
                 default:
-                    return string.Format("print({0});", seed);
+                    return string.Format("print({0}-1);", seed + 1);
 
             }
         }
-        private List<string> GenWebshellPayload(WebShellTaskConfig task, string seed)
+        private List<string> GenWebshellPayload(WebShellTaskConfig task, int seed)
         {
             List<string> payloads = new List<string>();
             string pass = task.Password;
