@@ -89,7 +89,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "网站域名\t接口备案号\t网页备案号\t网页备案号查询\n";
+                firstLine = "网站域名\t接口备案号\t网页备案号\n";
                 tmpResult.Append(firstLine);
                 foreach (string webUrl in inputArray)
                 {
