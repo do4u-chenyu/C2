@@ -72,6 +72,9 @@ namespace C2.Business.IAOLab.PostAndGet
                 case 1:
                     contentType = "multipart/form-data";
                     break;
+                case 2:
+                    contentType = "text/plain";
+                    break;
             }
         }
 
@@ -228,7 +231,7 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             req.Method = splitType;
             req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
-            req.ContentType = contentType == "application/x-www-form-urlencoded" ? "application/x-www-form-urlencoded" : "multipart/form-data";
+            req.ContentType = contentType;
             req.Headers.Set("cookie", textBoxCookie.Text);
             if (textBoxIp.Text != string.Empty)
                 _ = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
