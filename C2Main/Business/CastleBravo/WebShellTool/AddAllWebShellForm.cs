@@ -84,7 +84,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                                              contentArray[1],
                                              WebShellTaskConfig.AutoDetectTrojanType(contentArray[0]),
                                              string.Empty,
-                                             DetectClientType(contentArray[0], ClientSetting.WSDict.Keys.First()),
+                                             DetectClientType(contentArray[0], ClientSetting.PHP_Default_Version),
                                              string.Empty,
                                              string.Empty,
                                              string.Empty,
@@ -94,7 +94,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string DetectClientType(string url, string defaultVersion)
         {
             if (this.behinder3.Checked)
-                return this.behinder3.Text;
+                return ClientSetting.Behinder_Version;
             return WebShellTaskConfig.AutoDetectClientType(url, defaultVersion);
         }
 

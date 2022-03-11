@@ -15,12 +15,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         //[DllImport("kernel32")]
         //private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
+        public static string PHP_Default_Version = "中国菜刀16_自定义版";
+        public static string ASP_Default_Version = "ASP通用版";
+        public static string Behinder_Version = "三代冰蝎";
+
         public static string UnlockFilePath = Path.Combine(Global.ResourcesPath, "WebShellConfig", "SuperPowerConfig.ini");//DD功能解锁文件地址
 
         private static readonly string WebShellFilePath = Path.Combine(Global.ResourcesPath, "WebShellConfig");
         public static readonly Dictionary<string, Tuple<string, string>> WSDict = new Dictionary<string, Tuple<string, string>>
         {
-            { "中国菜刀16_自定义版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini"),"Common") },
+            { PHP_Default_Version, Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Custom_Config.ini"),"Common") },
             { "中国菜刀16_JAR版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_Jar_Config.ini"),"Common") },
             { "中国菜刀16_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife16_EXE_Config.ini"),"CKnife16EXE") },
             { "中国菜刀11_EXE版", Tuple.Create(Path.Combine(WebShellFilePath, "Cknife11_EXE_Config.ini"),"Common") },
@@ -29,8 +33,8 @@ namespace C2.Business.CastleBravo.WebShellTool
             { "奥特曼2015_PHP版", Tuple.Create(Path.Combine(WebShellFilePath, "Altman15_PHP_Config.ini"),"Common") },
             { "蚁剑2.1.14版", Tuple.Create(Path.Combine(WebShellFilePath, "AntSword_2114_Config.ini"), "AntSword2114") },  // 2114版大部分参数都是每次随机变化的
             { "Xise19.9版", Tuple.Create(Path.Combine(WebShellFilePath, "Xise19_WAF_Config.ini"), "Xise19") },
-            { "ASP通用版", Tuple.Create(Path.Combine(WebShellFilePath, "ASP_Custom_Config.ini"), "ASPCustom") },
-            { "三代冰蝎", Tuple.Create(Path.Combine(WebShellFilePath, "Behinder3.0_Beta_Config.ini"), "Common") },
+            { ASP_Default_Version, Tuple.Create(Path.Combine(WebShellFilePath, "ASP_Custom_Config.ini"), "ASPCustom") },
+            { Behinder_Version, Tuple.Create(Path.Combine(WebShellFilePath, "Behinder3.0_Beta_Config.ini"), "Common") },
         };
 
         public string SPL;

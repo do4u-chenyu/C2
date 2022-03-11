@@ -80,9 +80,25 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         public static string AutoDetectClientType(string url, string defaultVersion)
         {
-            if (url.ToLower().Trim().EndsWith(".asp"))
-                return "ASP通用版";
-            return defaultVersion;
+            string version = defaultVersion;
+            switch(AutoDetectTrojanType(url))
+            {
+                case "phpEval":
+                    version = ClientSetting.PHP_Default_Version;
+                    break;
+                case "aspEval":
+                    version = ClientSetting.ASP_Default_Version;
+                    break;
+                case "aspxEval":
+                    version = "Aspx未实现";
+                    break;
+                case "jspEval":
+                    version = "Jsp未实现";
+                    break;
+                default:
+                    break;
+            }
+            return version;
         }
     }
 }
