@@ -26,13 +26,12 @@ namespace C2.Controls
         public enum ModelTypes
         {
             Null,
-            AnalysisNotes,
-            TacticalManual,
+            Business,
+            Manual,
             CastleBravo,
-            Laboratory,
-            WebsiteScout,
-            Business, 
-            APKMonitor,
+            IAOLab,
+            WTD,
+            APK,
             Knowledge,
             HIBU,
             Model

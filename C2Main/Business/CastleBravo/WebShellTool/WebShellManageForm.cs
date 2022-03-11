@@ -618,7 +618,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return string.Format("response.write({0}-1)", seed + 1);
                 case "aspxEval":
                      return string.Format("response.write({0}-1)", seed + 1);
-                case "jspEval":
+                case "jspEval":  //TODO 重写，这压根没用
                     return string.Format("out.println({0}-1)", seed + 1);
                 default:
                     return string.Format("print({0}-1);", seed + 1);

@@ -15,15 +15,17 @@ namespace C2.Business.CastleBravo.WebShellTool
     {
         readonly int maxRow;
         //string pattern;
-        string filePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
+        string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<WebShellTaskConfig> Tasks;
 
         public AddAllWebShellForm()
         {
             InitializeComponent();
             maxRow = 100000;
-            filePath = string.Empty;
+            FilePath = string.Empty;
             Tasks = new List<WebShellTaskConfig>();
+            OKButton.Size = new System.Drawing.Size(75, 27);
+            CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
 
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
@@ -42,12 +44,12 @@ namespace C2.Business.CastleBravo.WebShellTool
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
                 Filter = "文件 | *.txt",
-                FileName = filePath
+                FileName = FilePath
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            this.filePath = OpenFileDialog.FileName;
+            this.FilePath = OpenFileDialog.FileName;
         }
         protected override bool OnOKButtonClick()
         {
@@ -100,7 +102,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             Tasks.Clear();
 
-            if (!File.Exists(filePath))
+            if (!File.Exists(FilePath))
             {
                 HelpUtil.ShowMessageBox("该数据文件不存在");
                 return false;
@@ -108,14 +110,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             try
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 using (StreamReader sr = new StreamReader(fs, Encoding.Default))
                 for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
                     AddTasksByLine(sr.ReadLine());
             }
             catch
             {
-                HelpUtil.ShowMessageBox(filePath + ",文件加载出错，请检查文件内容。");
+                HelpUtil.ShowMessageBox(FilePath + ",文件加载出错，请检查文件内容。");
                 return false;
             }
             return true;

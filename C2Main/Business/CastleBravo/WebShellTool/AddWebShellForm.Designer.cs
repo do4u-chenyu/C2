@@ -112,7 +112,9 @@
             this.trojanTypeCombox.Items.AddRange(new object[] {
             "自动判断",
             "phpEval",
-            "aspEval"});
+            "aspEval",
+            "aspxEval",
+            "jspEval",});
             this.trojanTypeCombox.Location = new System.Drawing.Point(96, 127);
             this.trojanTypeCombox.Name = "trojanTypeCombox";
             this.trojanTypeCombox.Size = new System.Drawing.Size(285, 20);
@@ -212,7 +214,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddWebShellForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DD Setting";
+            this.Text = "盗洞专项工具设置";
             this.Controls.SetChildIndex(this.remarkTextBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.urlTextBox, 0);
