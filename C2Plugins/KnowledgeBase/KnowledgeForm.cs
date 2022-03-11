@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace KnowledgeBase
 {
-    public partial class Form1 : Form, IPlugin
+    public partial class KnowledgeForm : Form, IPlugin
     {
-        public Form1()
+        public KnowledgeForm()
         {
             InitializeComponent();
         }

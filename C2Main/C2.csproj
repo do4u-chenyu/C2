@@ -4576,9 +4576,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\IAOLab\Webbrowser\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\UserInstallSet\UserInstallSet.csproj">
       <Project>{8587D0E2-E1F2-442D-B729-897391FB2881}</Project>

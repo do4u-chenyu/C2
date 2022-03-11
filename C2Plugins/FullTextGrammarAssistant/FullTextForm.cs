@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace FullTextGrammarAssistant
 {
-    public partial class Form1 : Form, IPlugin
+    public partial class FullTextForm : Form, IPlugin
     {
         private readonly List<string> queryclientTextList = new List<string>(new string[] { "","", "", "", "", "", "", "", "" });
         private readonly List<string> jarTextList = new List<string>(new string[] { "", "", "", "", "" });
         private const string blank = " ";
-        public Form1()
+        public FullTextForm()
         {
             InitializeComponent();
         }

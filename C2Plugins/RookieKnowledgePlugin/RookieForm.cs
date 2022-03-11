@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace RookieKnowledgePlugin
 {
-    public partial class Form1 : Form, IPlugin
+    public partial class RookieForm : Form, IPlugin
     {
         private TreeNode linuxRoot;
         private TreeNode pythonRoot;
         private String tempPath;
 
-        public Form1()
+        public RookieForm()
         {
             InitializeComponent();
             InitializeTempPath();

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace QQSpiderPlugin
 {
-    public partial class Form1 : Form, IPlugin
+    public partial class QQSpiderForm : Form, IPlugin
     {
         private static readonly string wxid_prefix = @"weixin://contacts/profile/";
         delegate void CloseQrForm();
@@ -24,7 +24,7 @@ namespace QQSpiderPlugin
             get { return Path.Combine(Util.TryGetSysTempDir(), tmpPath); }
         }
 
-        public Form1()
+        public QQSpiderForm()
         {
             InitializeComponent();
             InitializeForm();

@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeBase
 {
-    partial class Form1
+    partial class KnowledgeForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnowledgeForm));
             this.SuspendLayout();
             // 
             // Form1

@@ -2,7 +2,7 @@
 
 namespace FullTextGrammarAssistant
 {
-    partial class Form1
+    partial class FullTextForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -31,7 +31,7 @@ namespace FullTextGrammarAssistant
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FullTextForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.KeyWordsBox = new System.Windows.Forms.TextBox();
