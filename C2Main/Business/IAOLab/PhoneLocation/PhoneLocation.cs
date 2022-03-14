@@ -46,7 +46,7 @@ namespace C2.IAOLab.PhoneLocation
             }
             catch (Exception)
             {
-                return "网络连接失败 ";
+                return "网络连接失败\n";
             }
             writer.Close();//关闭请求流
                            // String strValue = string.Empty;//strValue为http响应所返回的字符流
@@ -67,17 +67,22 @@ namespace C2.IAOLab.PhoneLocation
             }
             catch
             {
-                return "网络连接中断";
+                return "网络连接中断\n";
             }
-            //  Stream postData = Request.InputStream;
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
-            PhoneInfo rt = JsonConvert.DeserializeObject<PhoneInfo>(postContent);
-            if (rt.city != string.Empty)
-                return string.Format("{0}\t{1}\n",
-                                        rt.phoneType,
-                                        rt.city);
-            return "查询失败";
+            try
+            {
+                PhoneInfo rt = JsonConvert.DeserializeObject<PhoneInfo>(postContent);
+                if (!string.IsNullOrEmpty(rt.city))
+                    return string.Format("{0}\t{1}\n",
+                                            rt.phoneType,
+                                            rt.city);
+            }
+            catch { }
+            
+
+            return "查询失败\n";
         }
     }
 }

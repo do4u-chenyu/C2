@@ -1,19 +1,17 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.IAOLab.BankTool;
-using C2.IAOLab.BaseStation;
 using C2.IAOLab.BaseAddress;
+using C2.IAOLab.BaseStation;
 using C2.IAOLab.IPAddress;
-using C2.IAOLab.WebEngine.Boss.Option;
-using C2.IAOLab.WifiMac;
 using C2.IAOLab.PhoneLocation;
+using C2.IAOLab.WifiMac;
 using C2.Utils;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using C2.Core;
 
 namespace C2.Dialogs.IAOLab
 {
