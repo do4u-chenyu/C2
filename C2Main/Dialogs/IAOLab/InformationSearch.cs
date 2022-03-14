@@ -178,7 +178,7 @@ namespace C2.Dialogs.IAOLab
                     case "webUrl":
                         if (input.Contains("网站域名"))
                             input = String.Empty;
-                        tmpResult.Append(RecordNumber.GetInstance().WebUrlLocate(input.Split('\t')[0]));
+                        tmpResult.Append(RecordNumber.GetInstance((int)numericUpDown1.Value).WebUrlLocate(input.Split('\t')[0]));
                         richTextBox2.Text = tmpResult.ToString();
                         break;
                     case "bankCard":

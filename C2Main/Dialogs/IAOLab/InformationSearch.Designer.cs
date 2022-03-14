@@ -59,11 +59,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -71,6 +73,7 @@
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // confirm
@@ -114,7 +117,7 @@
             this.label1.ForeColor = System.Drawing.Color.SkyBlue;
             this.label1.Location = new System.Drawing.Point(9, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 27);
+            this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 9;
             this.label1.Text = "查询进度";
             // 
@@ -143,7 +146,7 @@
             this.label5.Location = new System.Drawing.Point(9, 24);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(230, 22);
+            this.label5.Size = new System.Drawing.Size(157, 15);
             this.label5.TabIndex = 13;
             this.label5.Text = "请在下方输入银行卡号";
             // 
@@ -154,21 +157,23 @@
             this.label6.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label6.Location = new System.Drawing.Point(10, 94);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(758, 44);
+            this.label6.Size = new System.Drawing.Size(542, 30);
             this.label6.TabIndex = 14;
             this.label6.Text = "单次输入格式：04a1518006c2 或 04-a1-51-80-06-c2 或 04:a1:51:80:06:c2\r\n批量查询格式：多个mac间用换行分割，最" +
     "大支持5000条";
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.label16);
+            this.tabPage7.Controls.Add(this.numericUpDown1);
             this.tabPage7.Controls.Add(this.textBox1);
             this.tabPage7.Controls.Add(this.label20);
             this.tabPage7.Controls.Add(this.richTextBox2);
             this.tabPage7.Controls.Add(this.label19);
-            this.tabPage7.Location = new System.Drawing.Point(4, 32);
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(652, 301);
+            this.tabPage7.Size = new System.Drawing.Size(652, 309);
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "备案号查询";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -181,7 +186,7 @@
             this.textBox1.Location = new System.Drawing.Point(9, 79);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(351, 25);
+            this.textBox1.Size = new System.Drawing.Size(351, 17);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "域名查询接口：https://api.vvhan.com/api/icp?url=";
             // 
@@ -192,7 +197,7 @@
             this.label20.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label20.Location = new System.Drawing.Point(6, 61);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(692, 22);
+            this.label20.Size = new System.Drawing.Size(479, 15);
             this.label20.TabIndex = 2;
             this.label20.Text = "单次输入格式：www.baidu.com;批量查询格式：多个备案号用换行分隔";
             // 
@@ -200,7 +205,7 @@
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.White;
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 91);
+            this.richTextBox2.Location = new System.Drawing.Point(3, 99);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -216,7 +221,7 @@
             this.label19.Location = new System.Drawing.Point(5, 13);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(274, 22);
+            this.label19.Size = new System.Drawing.Size(187, 15);
             this.label19.TabIndex = 0;
             this.label19.Text = "请在下方输入待查询备案号";
             // 
@@ -226,10 +231,10 @@
             this.tabPage6.Controls.Add(this.label17);
             this.tabPage6.Controls.Add(this.label13);
             this.tabPage6.Controls.Add(this.richTextBox1);
-            this.tabPage6.Location = new System.Drawing.Point(4, 32);
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(652, 301);
+            this.tabPage6.Size = new System.Drawing.Size(652, 309);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "银行卡号查询";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -240,7 +245,7 @@
             this.label18.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label18.Location = new System.Drawing.Point(6, 81);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(582, 22);
+            this.label18.Size = new System.Drawing.Size(399, 15);
             this.label18.TabIndex = 16;
             this.label18.Text = "批量查询格式：多个银行卡间用换行分隔，最大支持5000条";
             // 
@@ -251,7 +256,7 @@
             this.label17.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label17.Location = new System.Drawing.Point(6, 61);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(373, 22);
+            this.label17.Size = new System.Drawing.Size(264, 15);
             this.label17.TabIndex = 15;
             this.label17.Text = "单次输入格式：6210857100018896476";
             // 
@@ -262,7 +267,7 @@
             this.label13.Location = new System.Drawing.Point(5, 13);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(296, 22);
+            this.label13.Size = new System.Drawing.Size(202, 15);
             this.label13.TabIndex = 14;
             this.label13.Text = "请在下方输入待查询银行卡号";
             // 
@@ -270,7 +275,7 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.White;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 91);
+            this.richTextBox1.Location = new System.Drawing.Point(3, 99);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -300,10 +305,10 @@
             this.tabPage8.Controls.Add(this.label2);
             this.tabPage8.Controls.Add(this.label3);
             this.tabPage8.Controls.Add(this.richTextBox3);
-            this.tabPage8.Location = new System.Drawing.Point(4, 32);
+            this.tabPage8.Location = new System.Drawing.Point(4, 24);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(652, 301);
+            this.tabPage8.Size = new System.Drawing.Size(652, 309);
             this.tabPage8.TabIndex = 6;
             this.tabPage8.Text = "身份证号查询";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -315,7 +320,7 @@
             this.label4.Location = new System.Drawing.Point(5, 13);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(296, 22);
+            this.label4.Size = new System.Drawing.Size(202, 15);
             this.label4.TabIndex = 6;
             this.label4.Text = "请在下方输入待查询身份证号";
             // 
@@ -325,7 +330,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label2.Location = new System.Drawing.Point(6, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(406, 22);
+            this.label2.Size = new System.Drawing.Size(277, 15);
             this.label2.TabIndex = 5;
             this.label2.Text = "批量查询格式：多个身份证号用换行分隔";
             // 
@@ -336,14 +341,14 @@
             this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label3.Location = new System.Drawing.Point(6, 61);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(362, 22);
+            this.label3.Size = new System.Drawing.Size(256, 15);
             this.label3.TabIndex = 4;
             this.label3.Text = "单次输入格式：321321166605005515";
             // 
             // richTextBox3
             // 
             this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox3.Location = new System.Drawing.Point(3, 91);
+            this.richTextBox3.Location = new System.Drawing.Point(3, 99);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(646, 207);
             this.richTextBox3.TabIndex = 0;
@@ -356,10 +361,10 @@
             this.tabPage9.Controls.Add(this.label9);
             this.tabPage9.Controls.Add(this.label7);
             this.tabPage9.Controls.Add(this.richTextBox4);
-            this.tabPage9.Location = new System.Drawing.Point(4, 32);
+            this.tabPage9.Location = new System.Drawing.Point(4, 24);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(652, 301);
+            this.tabPage9.Size = new System.Drawing.Size(652, 309);
             this.tabPage9.TabIndex = 7;
             this.tabPage9.Text = "快递单号查询";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -371,7 +376,7 @@
             this.label10.Location = new System.Drawing.Point(5, 13);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(296, 22);
+            this.label10.Size = new System.Drawing.Size(202, 15);
             this.label10.TabIndex = 15;
             this.label10.Text = "请在下方输入待查询快递单号";
             // 
@@ -382,7 +387,7 @@
             this.label8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label8.Location = new System.Drawing.Point(6, 81);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(318, 22);
+            this.label8.Size = new System.Drawing.Size(226, 15);
             this.label8.TabIndex = 9;
             this.label8.Text = "单次输入：321321166605005515";
             // 
@@ -392,7 +397,7 @@
             this.label9.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label9.Location = new System.Drawing.Point(6, 61);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(560, 22);
+            this.label9.Size = new System.Drawing.Size(384, 15);
             this.label9.TabIndex = 8;
             this.label9.Text = "当前支持查询申通，中通，百世，天天快递，共500次/天";
             // 
@@ -402,14 +407,14 @@
             this.label7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label7.Location = new System.Drawing.Point(240, 81);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(362, 22);
+            this.label7.Size = new System.Drawing.Size(247, 15);
             this.label7.TabIndex = 6;
             this.label7.Text = "批量查询：多个快递单号用换行分隔";
             // 
             // richTextBox4
             // 
             this.richTextBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox4.Location = new System.Drawing.Point(3, 91);
+            this.richTextBox4.Location = new System.Drawing.Point(3, 99);
             this.richTextBox4.Name = "richTextBox4";
             this.richTextBox4.Size = new System.Drawing.Size(646, 207);
             this.richTextBox4.TabIndex = 1;
@@ -422,13 +427,22 @@
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.richTextBox5);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(652, 301);
+            this.tabPage1.Size = new System.Drawing.Size(652, 309);
             this.tabPage1.TabIndex = 8;
             this.tabPage1.Text = "设备型号(IMEI)查询";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(285, 172);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(100, 15);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "...施工中...";
             // 
             // label14
             // 
@@ -436,7 +450,7 @@
             this.label14.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label14.Location = new System.Drawing.Point(6, 81);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(384, 22);
+            this.label14.Size = new System.Drawing.Size(262, 15);
             this.label14.TabIndex = 19;
             this.label14.Text = "批量查询格式：多个设备号用换行分隔";
             // 
@@ -447,14 +461,14 @@
             this.label12.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label12.Location = new System.Drawing.Point(6, 61);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(483, 22);
+            this.label12.Size = new System.Drawing.Size(342, 15);
             this.label12.TabIndex = 18;
             this.label12.Text = "单次输入格式(15或17位IMEI)：868453042425696";
             // 
             // richTextBox5
             // 
             this.richTextBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox5.Location = new System.Drawing.Point(3, 91);
+            this.richTextBox5.Location = new System.Drawing.Point(3, 99);
             this.richTextBox5.Name = "richTextBox5";
             this.richTextBox5.Size = new System.Drawing.Size(646, 207);
             this.richTextBox5.TabIndex = 17;
@@ -467,18 +481,47 @@
             this.label11.Location = new System.Drawing.Point(5, 13);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(340, 22);
+            this.label11.Size = new System.Drawing.Size(235, 15);
             this.label11.TabIndex = 16;
             this.label11.Text = "请在下方输入待查询设备号(IMEI)";
             // 
-            // label15
+            // numericUpDown1
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(285, 172);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(142, 22);
-            this.label15.TabIndex = 20;
-            this.label15.Text = "...施工中...";
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown1.Font = new System.Drawing.Font("宋体", 10F);
+            this.numericUpDown1.Location = new System.Drawing.Point(502, 70);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(34, 23);
+            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("宋体", 11F);
+            this.label16.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label16.Location = new System.Drawing.Point(541, 74);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(90, 15);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "秒 反爬间隔";
             // 
             // InformationSearch
             // 
@@ -509,6 +552,7 @@
             this.tabPage9.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -551,5 +595,7 @@
         private System.Windows.Forms.RichTextBox richTextBox5;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label16;
     }
 }
