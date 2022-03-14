@@ -82,7 +82,7 @@ namespace C2.IAOLab.PhoneLocation
             catch { }
             
 
-            return "查询失败\n";
+            return "无此手机号段归属地信息\n";
         }
     }
 }
