@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using C2.Configuration;
+﻿using C2.Configuration;
+using System;
 
 namespace C2.Controls
 {

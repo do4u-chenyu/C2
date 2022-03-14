@@ -848,6 +848,9 @@
     </Compile>
     <Compile Include="Controls\TabBars\Renderers\JSTabBarRenderer.cs" />
     <Compile Include="Controls\ThumbViews\C2ThumbItem.cs" />
+    <Compile Include="Controls\ThumbViews\C2ThumbView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Core\Exports\DocxEngine.cs" />
     <Compile Include="Core\Exports\XmindEngine.cs" />
     <Compile Include="Business\Database\BaseDAOImpl.cs" />

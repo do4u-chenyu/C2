@@ -26,6 +26,7 @@ namespace C2.Controls
         public enum ModelTypes
         {
             Null,
+            RecentFile,   // 向上兼容
             Business,
             Manual,
             CastleBravo,

@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Controls.ThumbViews;
 using C2.Globalization;
 
 namespace C2.Forms
@@ -17,7 +18,7 @@ namespace C2.Forms
 
         void InitializeComponent()
         {
-            this.recentFilesView1 = new C2.Controls.RecentFilesView();
+            this.recentFilesView1 = new C2ThumbView();
             this.SuspendLayout();
             // 
             // recentFilesView1
