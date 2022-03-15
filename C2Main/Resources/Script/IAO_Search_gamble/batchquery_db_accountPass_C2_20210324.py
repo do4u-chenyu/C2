@@ -50,7 +50,7 @@ class Scheduler:
 class Query(Thread):
     def __init__(self, queryclient_keyWordQueue, queryclient_resultQueue,start_time,end_time):
         Thread.__init__(self)
-        self.configDict   = {'AUTH_ACCOUNT': 0,'STRDST_IP': 1,'STRSRC_IP': 2,'_REFERER': 3,'_QUERY_CONTENT': 4,'SRC_IPID': 5,'DST_IPID': 6,'CAPTURE_TIME': 7}
+        self.configDict   = {'AUTH_ACCOUNT': 0,'STRDST_IP': 1,'STRSRC_IP': 2,'DST_PORT': 3,'SRC_PORT': 4,'_REFERER': 5,'_QUERY_CONTENT': 6,'SRC_IPID': 7,'DST_IPID': 8,'CAPTURE_TIME': 9}
         self.lineEnd      = '_USERAGENT'
         self.user_key     = ['account','uid','name','phone','username','userid']
         self.password_key = ['password','pwd','pass','key']

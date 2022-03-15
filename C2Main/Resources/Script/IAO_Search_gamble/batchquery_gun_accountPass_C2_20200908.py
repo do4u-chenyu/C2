@@ -283,7 +283,7 @@ if __name__ == '__main__':
         'DATA_PATH': areacode + '_queryResult_gun_' + defaultStart + '_' + defaultEnd,
         'OUT_PASSWORD' : 'out_gun',
         'OUT_HTTP': 'out_http',
-        'ALL_ITEMS' : ['_HOST','AUTH_ACCOUNT','AUTH_TYPE','CAPTURE_TIME','STRDST_IP','STRSRC_IP','CONTENT','USERNAME','PASSWORD'],
+        'ALL_ITEMS' : ['_HOST','AUTH_ACCOUNT','AUTH_TYPE','CAPTURE_TIME','STRDST_IP','STRSRC_IP','DST_PORT','SRC_PORT','CONTENT','USERNAME','PASSWORD'],
         'AUTH_ITEMS' : ['_HOST','AUTH_ACCOUNT','AUTH_TYPE','CAPTURE_TIME','FROM_PROTYPE','IM_TYPE','UPAREAID','USERNAME'],
         'KEY_YLIE' : ['www.ylie' + str(i) + '.com' for i in range(24,100)],
         'KEY_LIEYOU' : ['www.lieyou' + str(i) + '.com' for i in range(24,100)],
