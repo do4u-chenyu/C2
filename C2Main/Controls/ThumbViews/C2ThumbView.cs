@@ -1,10 +1,7 @@
 ﻿using C2.Core;
-using C2.Forms;
 using C2.Forms.Splash;
 using C2.Utils;
 using System;
-using System.IO;
-using System.Windows.Forms;
 
 namespace C2.Controls.ThumbViews
 {
@@ -38,62 +35,31 @@ namespace C2.Controls.ThumbViews
                     break;
                 //战术手册
                 case ThumbItem.ModelTypes.Manual:
-                    if (!Global.GetMainForm().manualControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
-                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().manualButton, Global.GetMainForm().manualControl);
                     new ManualSplashForm().ShowDialog();
                     break;
                 //喝彩城堡
                 case ThumbItem.ModelTypes.CastleBravo:
-                    if (!Global.GetMainForm().castleBravoControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
-                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().castleBravoButton, Global.GetMainForm().castleBravoControl);
                     Global.GetCastleBravoControl().AddLabelClick();
                     break;
                 //实验楼
                 case ThumbItem.ModelTypes.IAOLab:
-                    if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
-                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
                     new IAOLabelSplashForm().ShowDialog();
                     break;
                 //侦察兵
                 case ThumbItem.ModelTypes.WTD:
-                    if (!Global.GetMainForm().websiteFeatureDetectionControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)
-                        Global.GetMainForm().ShowLeftPanel(Global.GetMainForm().detectionButton, Global.GetMainForm().websiteFeatureDetectionControl);
                     Global.GetWebsiteFeatureDetectionControl().AddLabelClick();
                     break;
-                //APK监测站
+                //APK大眼睛
                 case ThumbItem.ModelTypes.APK:
-                    if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
-                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
-                    if (!string.IsNullOrEmpty(chromePath))
-                    {
-                        System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:6663/ns/APPtest/home");
-                    }
-                    else
-                        MessageBox.Show("未能找到chrome启动路径");
+                    System.Diagnostics.Process.Start(chromePath, Global.APKUrl);
                     break;
                 //知识库
                 case ThumbItem.ModelTypes.Knowledge:
-                    if (!Global.GetMainForm().iaoLabControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
-                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().iaoLabButton, Global.GetMainForm().iaoLabControl);
-                    if (!string.IsNullOrEmpty(chromePath))
-                    {
-                        System.Diagnostics.Process.Start(chromePath, "15.73.3.241:19001/KnowledgeBase/");
-                    }
-                    else
-                        MessageBox.Show("未能找到chrome启动路径");
+                    System.Diagnostics.Process.Start(chromePath, Global.KnowledgeUrl);
                     break;
                 //HIBU
                 case ThumbItem.ModelTypes.HIBU:
-                    if (!Global.GetMainForm().HIBUControl.Visible || Global.GetMainForm().isLeftViewPanelMinimum)  // 避免反复点击时的闪烁
-                        Global.GetMainForm().SelectLeftPanel(Global.GetMainForm().HIBUButton, Global.GetMainForm().HIBUControl);
                     new HIBUSplashForm().ShowDialog();
-                    break;
-                case ThumbItem.ModelTypes.Model:
-                    CanvasForm cf = Global.GetMainForm().SearchCanvasForm(Path.Combine(Global.MarketViewPath, item.Text));
-                    if (cf != null)
-                        Global.GetMainForm().SelectForm(cf);
-                    else
-                        Global.GetMainForm().LoadCanvasFormByXml(Global.MarketViewPath, item.Text);
                     break;
                 default:
                     break;
