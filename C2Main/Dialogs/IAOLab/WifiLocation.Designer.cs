@@ -338,6 +338,7 @@
             this.IPStationIR.TabIndex = 11;
             this.IPStationIR.Text = string.Empty;
             this.IPStationIR.WordWrap = false;
+            this.IPStationIR.DetectUrls = false;
             // 
             // label12
             // 
