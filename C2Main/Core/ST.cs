@@ -667,6 +667,19 @@ namespace C2.Core
             return arrByte;
         }
 
+        public static string BytesToHexString(byte[] bytes, string prefix = "")
+        {
+            StringBuilder sb = new StringBuilder();
+            // 0x 0X等前缀
+            sb.Append(prefix);
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                sb.Append(string.Format("{0:X2}", bytes[i]));
+            }
+            return sb.ToString();
+        }
+
         public static byte[] DecimalHexStringToBytes(string str, string sep)
         {   
             string[] s = str.Split(sep, StringSplitOptions.RemoveEmptyEntries);
