@@ -167,6 +167,16 @@
     <Compile Include="IPlugin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSEncryption\EncryptorBase.cs" />
+    <Compile Include="SSEncryption\EncryptorFactory.cs" />
+    <Compile Include="SSEncryption\IEncryptor.cs" />
+    <Compile Include="SSEncryption\IVEncryptor.cs" />
+    <Compile Include="SSEncryption\PolarSSL.cs" />
+    <Compile Include="SSEncryption\PolarSSLEncryptor.cs" />
+    <Compile Include="SSEncryption\Sodium.cs" />
+    <Compile Include="SSEncryption\SodiumEncryptor.cs" />
+    <Compile Include="SSEncryption\TableEncryptor.cs" />
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="CommonHashPlugin.resx">
       <DependentUpon>CommonHashPlugin.cs</DependentUpon>
     </EmbeddedResource>
@@ -223,7 +233,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Data\libsscrypto.dll.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
