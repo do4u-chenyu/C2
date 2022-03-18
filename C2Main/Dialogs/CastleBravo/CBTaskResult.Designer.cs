@@ -193,7 +193,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(639, 27);
             this.label5.TabIndex = 9;
-            this.label5.Text = "先快剑表后彩虹表,单次小于5个或快剑表成功率超80%,则不再查彩虹表";
+            this.label5.Text = "先快剑表后彩虹表,快剑表成功率超80%,则不再查彩虹表";
             this.toolTip1.SetToolTip(this.label5, "快剑表-速度快但成功率低;彩虹表-速度慢但成功率高;");
             // 
             // exploreButton
