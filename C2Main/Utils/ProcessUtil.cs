@@ -8,7 +8,7 @@ namespace C2.Utils
 {
     class ProcessUtil
     {
-
+        private static LogUtil log = LogUtil.GetInstance("MindMapView");
         public static string GetChromePath()
         {
             RegistryKey regKey = Registry.ClassesRoot;
@@ -58,19 +58,6 @@ namespace C2.Utils
                 Process.Start(processStartInfo);
             }
             catch { }
-        }
-
-        public static string ProcessStandErrorMessage(Process p)
-        {
-            try
-            {
-                p.StandardInput.Close();//关闭输入流，否则会造成假死状态
-                return p.StandardError.ReadToEnd();
-            }
-            catch
-            {
-                return string.Empty;
-            }
         }
     }
 }

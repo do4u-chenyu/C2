@@ -19,6 +19,13 @@ namespace C2.Controls.MapViews
     public partial class MindMapView
     {
         private static LogUtil log = LogUtil.GetInstance("MindMapView");
+        public delegate void DelReadStdOutput(string result);
+        public delegate void DelReadErrOutput(string result);
+        // 定义委托事件
+        public event DelReadStdOutput ReadStdOutput;
+        public event DelReadErrOutput ReadErrOutput;
+        bool flag = false;
+        string message = string.Empty;
         private void GenRunCmds()
         {
             //除了未配置状态，其余情况下全部重新运行
@@ -42,10 +49,10 @@ namespace C2.Controls.MapViews
             using (GuarderUtil.WaitCursor)
                 runMessage = RunLinuxCommand(cmds);
             opw.Status = runMessage == "算子成功执行完毕" ? OpStatus.Done : OpStatus.Warn;
-            HelpUtil.ShowMessageBox(runMessage, "运行结束"); // 这个对话框还是挺丑的.后面要优化
+            //HelpUtil.ShowMessageBox(runMessage, "运行结束"); // 这个对话框还是挺丑的.后面要优化
 
             // 没能成功运行, 自动蹦出日志面板
-            if (opw.Status == OpStatus.Warn)
+            if (opw.Status == OpStatus.Warn || opw.Status == OpStatus.Done)
                 Global.GetMainForm()?.ShowLogViewG();
            
             // 没能成功运行，直接返回
@@ -157,9 +164,58 @@ namespace C2.Controls.MapViews
             }
         }
 
+        private void ReadStdOutputAction(string result)
+        {
+            log.Info(result);
+            
+            if (flag == false)
+            {
+                message = string.Format("运算进行中, 【运行日志】面板查看具体信息");
+                HelpUtil.ShowMessageBox(message, "运行中");
+                flag = true;
+            }
+        }
+
+        private void ReadErrOutputAction(string result)
+        {
+            log.Warn(result);
+            if (flag == false)
+            {
+                message = string.Format("运算出现问题, 【运行日志】面板查看出错信息,反馈SH群");
+                HelpUtil.ShowMessageBox(message, "运行结束");
+                flag = true;
+            }
+        }
+
+        private void p_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                // 异步调用，需要invoke
+                this.Invoke(ReadStdOutput, new object[] { e.Data });
+                Console.WriteLine(e.Data);
+            }
+        }
+
+        private void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                this.Invoke(ReadErrOutput, new object[] { e.Data });
+                Console.WriteLine(e.Data);
+            }
+        }
+
+        private void Process_Exited(object sender, EventArgs e)
+        { Console.WriteLine("命令执行完毕"); }
+
+        
 
         public string RunLinuxCommand(List<string> cmds)
         {
+            ReadStdOutput += new DelReadStdOutput(ReadStdOutputAction);
+            ReadErrOutput += new DelReadErrOutput(ReadErrOutputAction);
+
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
                 return "执行命令为空";
@@ -167,42 +223,38 @@ namespace C2.Controls.MapViews
 
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
-            //p.StartInfo.Arguments = "/c " + string.Join(";",cmds);
             p.StartInfo.UseShellExecute = false; // 不显示用户界面
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.RedirectStandardInput = true;//可以重定向输入  
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
 
+            p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+            p.ErrorDataReceived += new DataReceivedEventHandler(p_ErrorDataReceived);
+
+            p.EnableRaisingEvents = true;
+            p.Exited += new EventHandler(Process_Exited);
 
             try
             {
                 if (p.Start())//开始进程  
                 {
                     log.Info("===========运算开始==========");
-                    foreach (string cmd in cmds)
-                    {
-                        log.Info(cmd);
-                        p.StandardInput.WriteLine(cmd);
-                    }
-
-                    //p.BeginErrorReadLine();  // 让后续可以读取到错误流
                     p.BeginOutputReadLine();
+                    p.BeginErrorReadLine();  // 让后续可以读取到错误流
+                    p.StandardInput.AutoFlush = true;
+                    string cmd = string.Empty;
+                    int count = cmds.Count;
 
+                    for (int i = 0; i < cmds.Count; i++)
+                    {
+                        cmd = cmds[i] + string.Empty;
+                    }
+                    log.Info(cmd);
+                    p.StandardInput.WriteLine(cmd);
                     //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");
-                    log.Warn(ProcessUtil.ProcessStandErrorMessage(p));
-
-                if (p.ExitCode != 0)
-                {
-                    message = string.Format("运算出现问题,ExitCode:{0}, 【运行日志】面板查看出错信息,反馈SH群", p.ExitCode);
-                }
-                else 
-                {
-                    log.Info("===========运算结束===========");
-                    message = "算子成功执行完毕";
-                }
-                 p.WaitForExit();
                 }
             }
             catch (InvalidOperationException)
@@ -210,6 +262,7 @@ namespace C2.Controls.MapViews
                 //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
                 //UpdateLogDelegate("InvalidOperationException: " + ex.Message);
             }
+            
             catch (Exception ex)
             {
                 //异常停止的处理方法
