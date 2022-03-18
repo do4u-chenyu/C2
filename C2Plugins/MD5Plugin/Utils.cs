@@ -29,5 +29,20 @@ namespace MD5Plugin
             }
             destinationFile.Close();
         }
+
+        public static string TryGetTempDir()
+        {
+            string tempDir = string.Empty;
+            try
+            {
+                tempDir = Path.GetTempPath();
+            }
+            catch  { }
+
+            if (string.IsNullOrEmpty(tempDir))
+                return Path.Combine(@"C:\FiberHomeIAOModelDocument", "FiberHomeIAOTemp");
+            return Path.Combine(tempDir, "FiberHomeIAOTemp");
+            
+        }
     }
 }

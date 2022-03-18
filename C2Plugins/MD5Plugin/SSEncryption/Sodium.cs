@@ -12,7 +12,7 @@ namespace Shadowsocks.Encryption
 
         static Sodium()
         {
-            string tempPath = Path.GetTempPath();
+            string tempPath = Utils.TryGetTempDir();
             string dllPath = tempPath + "/libsscrypto.dll";
             try
             {

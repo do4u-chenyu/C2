@@ -16,7 +16,7 @@ namespace Shadowsocks.Encryption
 
         static PolarSSL()
         {   // libsscrypto.dll作为资源嵌入,运行时解压缩
-            string tempPath = Path.GetTempPath();
+            string tempPath = Utils.TryGetTempDir();
             string dllPath = tempPath + "/libsscrypto.dll";
             try
             {
