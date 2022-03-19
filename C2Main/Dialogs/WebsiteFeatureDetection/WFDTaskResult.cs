@@ -117,8 +117,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             else if (respMsg == "wait") 
             {
                 TaskInfo.Status = WFDTaskStatus.Running;
-                this.statusInfoLabel.Text = "[ " + datas.Replace("\"","").Replace("{","").Replace("}","") + " ]";
-                this.taskInfoLabel.Text = "[ " + taskInfo.Replace("\'", "").Replace("{", "").Replace("}", "").Replace("ahead_task", "排队任务数").Replace("will_finished", "预计完成的时间") + " ]";
+                this.statusInfoLabel.Text = "[已处理" + datas.Replace("\"", string.Empty)
+                                                             .Replace("{",  string.Empty)
+                                                             .Replace("}",  string.Empty) + "]";
+                // 改这段的时候,莫名其妙的难过
+                this.taskInfoLabel.Text = "[" + taskInfo.Replace("\'", string.Empty)
+                                                        .Replace("{",  string.Empty)
+                                                        .Replace("}",  string.Empty)
+                                                        .Replace("ahead_task", "排队数")
+                                                        .Replace("will_finished", "预计等待") + "分钟]";
             }
             else if (respMsg == "fail")
             {
@@ -171,43 +178,26 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             {
                 DataGridViewRow dr = new DataGridViewRow();
 
-                DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
-                textCell0.Value = data.url;
-                dr.Cells.Add(textCell0);
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.url });
 
-                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = data.prediction_;
-                dr.Cells.Add(textCell1);
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.prediction_ });
 
-                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-                textCell2.Value = data.title;
-                dr.Cells.Add(textCell2);
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.title });
 
                 if(string.IsNullOrEmpty(data.screen_shot))
-                {
-                    DataGridViewTextBoxCell textCell3 = new DataGridViewTextBoxCell();
-                    textCell3.Value = string.Empty;
-                    dr.Cells.Add(textCell3);
-                }
+                    dr.Cells.Add(new DataGridViewTextBoxCell { Value = string.Empty });
                 else
-                {
-                    DataGridViewLinkCell link = new DataGridViewLinkCell();
-                    link.Value = "下载截图";
-                    link.Tag = data.screen_shot;
-                    dr.Cells.Add(link);
-                }
+                    dr.Cells.Add(new DataGridViewLinkCell
+                    {
+                        Value = "下载截图",
+                        Tag = data.screen_shot
+                    });
 
-                DataGridViewTextBoxCell textCell4 = new DataGridViewTextBoxCell();
-                textCell4.Value = data.html_content;
-                dr.Cells.Add(textCell4);
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.html_content });
 
-                DataGridViewTextBoxCell textCell5 = new DataGridViewTextBoxCell();
-                textCell5.Value = data.ip;
-                dr.Cells.Add(textCell5);
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.ip });
 
-                DataGridViewTextBoxCell textCell6 = new DataGridViewTextBoxCell();
-                textCell6.Value = data.ip_address;
-                dr.Cells.Add(textCell6);
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = data.ip_address });
 
                 dataGridView.Rows.Add(dr);
             }
@@ -293,7 +283,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 progressNum.Text = (progressBar1.Value * 100 / progressBar1.Maximum).ToString() + "%";
                 //progressNum.Text = progressBar1.Value.ToString() + "%";
 
-                string picUrl = Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, result.url.Replace("http://", "").Replace("https://", "").Split('/')[0]));
+                string picUrl = Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, result.url.Replace("http://", string.Empty).Replace("https://", string.Empty).Split('/')[0]));
                 if (files._Contains(picUrl))//跳过已存在的文件
                 {
                     doneNum++;
