@@ -83,6 +83,12 @@
     <Compile Include="DecimalConvert\OctDecimal.Designer.cs">
       <DependentUpon>OctDecimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="EncryptDecrypt\RC4Plugin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EncryptDecrypt\RC4Plugin.Designer.cs">
+      <DependentUpon>RC4Plugin.cs</DependentUpon>
+    </Compile>
     <Compile Include="EncryptDecrypt\AES128Plugin.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DecimalConvert\OctDecimal.resx">
       <DependentUpon>OctDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EncryptDecrypt\RC4Plugin.resx">
+      <DependentUpon>RC4Plugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EncryptDecrypt\AES128Plugin.resx">
       <DependentUpon>AES128Plugin.cs</DependentUpon>

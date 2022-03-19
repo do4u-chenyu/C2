@@ -40,34 +40,40 @@
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
+            // buttonDecode
+            // 
+            this.buttonDecode.Text = "<= 解密";
+            // 
             // inputTextBox
             // 
-            this.inputTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.inputTextBox.Size = new System.Drawing.Size(611, 1091);
+            this.inputTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputTextBox.Size = new System.Drawing.Size(408, 728);
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.outputTextBox.Size = new System.Drawing.Size(611, 1091);
+            this.outputTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.outputTextBox.Size = new System.Drawing.Size(408, 728);
+            // 
+            // buttonEncode
+            // 
+            this.buttonEncode.Text = "加密 =>";
             // 
             // textBoxEncryptionkey
             // 
             this.textBoxEncryptionkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxEncryptionkey.ForeColor = System.Drawing.Color.Black;
-            this.textBoxEncryptionkey.Location = new System.Drawing.Point(626, 150);
-            this.textBoxEncryptionkey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxEncryptionkey.Location = new System.Drawing.Point(417, 100);
             this.textBoxEncryptionkey.Name = "textBoxEncryptionkey";
-            this.textBoxEncryptionkey.Size = new System.Drawing.Size(110, 28);
+            this.textBoxEncryptionkey.Size = new System.Drawing.Size(74, 21);
             this.textBoxEncryptionkey.TabIndex = 5;
             // 
             // labelEncryptionkey
             // 
             this.labelEncryptionkey.AutoSize = true;
             this.labelEncryptionkey.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelEncryptionkey.Location = new System.Drawing.Point(657, 120);
-            this.labelEncryptionkey.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelEncryptionkey.Location = new System.Drawing.Point(438, 80);
             this.labelEncryptionkey.Name = "labelEncryptionkey";
-            this.labelEncryptionkey.Size = new System.Drawing.Size(46, 24);
+            this.labelEncryptionkey.Size = new System.Drawing.Size(32, 17);
             this.labelEncryptionkey.TabIndex = 6;
             this.labelEncryptionkey.Text = "密钥";
             // 
@@ -75,10 +81,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(639, 46);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(426, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 24);
+            this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "加密模式";
             // 
@@ -90,10 +95,9 @@
             this.EncryModeComboBox.Items.AddRange(new object[] {
             "ECB",
             "CBC"});
-            this.EncryModeComboBox.Location = new System.Drawing.Point(627, 78);
-            this.EncryModeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.EncryModeComboBox.Location = new System.Drawing.Point(418, 52);
             this.EncryModeComboBox.Name = "EncryModeComboBox";
-            this.EncryModeComboBox.Size = new System.Drawing.Size(108, 32);
+            this.EncryModeComboBox.Size = new System.Drawing.Size(73, 25);
             this.EncryModeComboBox.TabIndex = 9;
             this.EncryModeComboBox.SelectedIndexChanged += new System.EventHandler(this.Encry_SelectedIndexChanged);
             // 
@@ -101,21 +105,19 @@
             // 
             this.IvtextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IvtextBox.ForeColor = System.Drawing.Color.Black;
-            this.IvtextBox.Location = new System.Drawing.Point(626, 464);
-            this.IvtextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.IvtextBox.Location = new System.Drawing.Point(417, 309);
             this.IvtextBox.Multiline = true;
             this.IvtextBox.Name = "IvtextBox";
-            this.IvtextBox.Size = new System.Drawing.Size(110, 30);
+            this.IvtextBox.Size = new System.Drawing.Size(74, 21);
             this.IvtextBox.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(634, 434);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(423, 289);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 24);
+            this.label2.Size = new System.Drawing.Size(64, 17);
             this.label2.TabIndex = 11;
             this.label2.Text = "偏移量(IV)";
             // 
@@ -130,10 +132,9 @@
             "PKCS7",
             "ANSIX923",
             "ISO10126"});
-            this.PaddingcomboBox.Location = new System.Drawing.Point(627, 530);
-            this.PaddingcomboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PaddingcomboBox.Location = new System.Drawing.Point(418, 353);
             this.PaddingcomboBox.Name = "PaddingcomboBox";
-            this.PaddingcomboBox.Size = new System.Drawing.Size(109, 32);
+            this.PaddingcomboBox.Size = new System.Drawing.Size(74, 25);
             this.PaddingcomboBox.TabIndex = 12;
             this.PaddingcomboBox.SelectedIndexChanged += new System.EventHandler(this.Padding_SelectedIndexChanged);
             // 
@@ -141,10 +142,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(657, 500);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(438, 333);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 24);
+            this.label3.Size = new System.Drawing.Size(32, 17);
             this.label3.TabIndex = 13;
             this.label3.Text = "填充";
             // 
@@ -157,10 +157,9 @@
             "128位",
             "192位",
             "256位"});
-            this.DataBlockComboBox.Location = new System.Drawing.Point(626, 602);
-            this.DataBlockComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataBlockComboBox.Location = new System.Drawing.Point(417, 401);
             this.DataBlockComboBox.Name = "DataBlockComboBox";
-            this.DataBlockComboBox.Size = new System.Drawing.Size(110, 32);
+            this.DataBlockComboBox.Size = new System.Drawing.Size(75, 25);
             this.DataBlockComboBox.TabIndex = 14;
             this.DataBlockComboBox.SelectedIndexChanged += new System.EventHandler(this.DataBlock_SelectedIndexChanged);
             // 
@@ -168,16 +167,15 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(651, 572);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(434, 381);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 24);
+            this.label4.Size = new System.Drawing.Size(44, 17);
             this.label4.TabIndex = 15;
             this.label4.Text = "数据块";
             // 
             // AES128Plugin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Controls.Add(this.label4);
@@ -190,7 +188,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelEncryptionkey);
             this.Controls.Add(this.textBoxEncryptionkey);
-            this.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "AES128Plugin";
             this.Controls.SetChildIndex(this.textBoxEncryptionkey, 0);
             this.Controls.SetChildIndex(this.labelEncryptionkey, 0);

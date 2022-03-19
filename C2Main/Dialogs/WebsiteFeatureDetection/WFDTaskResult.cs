@@ -375,5 +375,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (FileUtil.TryClipboardSetText(TaskInfo.TaskID))
                 HelpUtil.ShowMessageBox(String.Format("已复制任务ID[{0}]到剪切板", TaskInfo.TaskID));
         }
+
+        private void SFileButton_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.TryProcessOpen(this.TaskInfo.DatasourceFilePath);
+        }
     }
 }

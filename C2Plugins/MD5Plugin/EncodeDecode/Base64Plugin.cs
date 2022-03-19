@@ -19,6 +19,8 @@ namespace MD5Plugin
         {
             inputTextBox.Select(inputTextBox.TextLength, 0);
             inputTextBox.Select(0, 0);
+            encodingComboBox.Items.Clear();
+            encodingComboBox.Items.Add("HEX");
             encodingComboBox.SelectedIndex = 0;
         }
 

@@ -94,6 +94,8 @@ namespace MD5Plugin
                 this.commonPlugin = new OctDecimal();
             else if (e.Node.Name == "Mysql5")
                 this.commonPlugin = new Mysql5Plugin();
+            else if (e.Node.Name == "RC4")
+                this.commonPlugin = new RC4Plugin();
             else
                 this.Text = "加密解密";
             AddControls();
