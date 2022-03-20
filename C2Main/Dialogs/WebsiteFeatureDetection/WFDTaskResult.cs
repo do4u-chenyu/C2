@@ -19,11 +19,16 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public WFDTaskInfo TaskInfo;
         private static readonly LogUtil log = LogUtil.GetInstance("WFDTaskResult");
         private bool isDownloading;
+        private bool needStop;
+
+        private string lastErrorMessage;
         public WFDTaskResult()
         {
             InitializeComponent();
             this.dataGridView.DoubleBuffered(true);
             this.isDownloading = false;
+            this.needStop = false;
+            this.lastErrorMessage = string.Empty;
         }
 
         public WFDTaskResult(WFDTaskInfo taskInfo) : this()
@@ -99,6 +104,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             return results;
         }
+
+        private string FormatProgressString(string str)
+        {
+            
+            float val = ConvertUtil.TryParseFloat(str);
+            if (float.IsNaN(val))
+                return str;
+            return string.Format("{0:F}%", val * 100);
+        }
         
         private void UpdateTaskInfoByResp(WFDAPIResult result)
         {
@@ -117,9 +131,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             else if (respMsg == "wait") 
             {
                 TaskInfo.Status = WFDTaskStatus.Running;
-                this.statusInfoLabel.Text = "[已处理" + datas.Replace("\"", string.Empty)
-                                                             .Replace("{",  string.Empty)
-                                                             .Replace("}",  string.Empty) + "]";
+                this.statusInfoLabel.Text = "[已处理:" + FormatProgressString(datas.Replace("\"", string.Empty)
+                                                                                   .Replace("{",  string.Empty)
+                                                                                   .Replace("}",  string.Empty)) + "]";
                 // 改这段的时候,莫名其妙的难过
                 this.taskInfoLabel.Text = "[" + taskInfo.Replace("\'", string.Empty)
                                                         .Replace("{",  string.Empty)
@@ -275,6 +289,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             int errorNum = 0;
             string finMsg = string.Empty;
             isDownloading = true;
+            needStop = false;
+            lastErrorMessage = string.Empty;
+
             string[] files = Directory.GetFiles(destPath);
 
             foreach (WFDResult result in results)
@@ -283,7 +300,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 progressNum.Text = (progressBar1.Value * 100 / progressBar1.Maximum).ToString() + "%";
                 //progressNum.Text = progressBar1.Value.ToString() + "%";
 
-                string picUrl = Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, result.url.Replace("http://", string.Empty).Replace("https://", string.Empty).Split('/')[0]));
+                string picUrl = result.url.Replace("http://", string.Empty).Replace("https://", string.Empty).Split('/')[0];
+                picUrl = picUrl.Replace(":", "_");
+                picUrl = Path.Combine(destPath, string.Format("{0}_{1}.png", result.prediction_, picUrl));
                 if (files._Contains(picUrl))//跳过已存在的文件
                 {
                     doneNum++;
@@ -300,17 +319,19 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 }
 
                 progressInfo.Text = string.Format("已完成{0}张，失败{1}张。", doneNum, errorNum);
-                
+                if (needStop)
+                    break;
             }
 
             progressBar1.Value = progressBar1.Maximum;
             progressNum.Text = "100%";
             isDownloading = false;
+            needStop = false;
             //单个网站下载时，弹窗提示错误信息
-            if (results.Count > 1 || finMsg == "success")
+            if (results.Count > 1 || (finMsg == "success" && lastErrorMessage.IsNullOrEmpty()))
                 HelpUtil.ShowMessageBox("网站截图下载完毕");
             else
-                HelpUtil.ShowMessageBox(finMsg);
+                HelpUtil.ShowMessageBox(lastErrorMessage.IsNullOrEmpty() ? finMsg : lastErrorMessage);
         }
 
         private bool Base64StringToImage(string txtFileName, string base64)
@@ -326,7 +347,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch (Exception ex)
             {
-                log.Error(txtFileName + "生成图片失败。" + ex.Message);
+                lastErrorMessage = txtFileName + "生成图片失败。" + ex.Message;
+                log.Error(lastErrorMessage);
                 return false;
             }
         }
@@ -379,6 +401,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void SFileButton_Click(object sender, EventArgs e)
         {
             ProcessUtil.TryProcessOpen(this.TaskInfo.DatasourceFilePath);
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            needStop = true;
         }
     }
 }

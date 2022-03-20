@@ -86,6 +86,19 @@ namespace C2.Utils
             }
         }
 
+        public static float TryParseFloat(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return float.NaN;
+            try
+            {
+                return float.Parse(value);
+            }
+            catch
+            {
+                return float.NaN;
+            }
+        }
+
         public static bool IsInt(string value)
         {
             try
