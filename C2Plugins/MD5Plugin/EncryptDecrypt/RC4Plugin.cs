@@ -34,7 +34,7 @@ namespace MD5Plugin
             else
             {
                 string plainText = inputTextBox.Text.Trim();
-                //string password = textBoxEncryptionkey.Text.Trim();
+                string password = textBoxEncryptionkey.Text.Trim();
                 try
                 {
 
@@ -51,7 +51,8 @@ namespace MD5Plugin
                             break;
                     }
 
-                    byte[] passwordBytes = Encoding.UTF8.GetBytes(textBoxEncryptionkey.Text);
+                    byte[] passwordBytes = Encoding.ASCII.GetBytes(password);
+                    //byte[] passwordBytes = Utils.HexStringToBytes("FACE3D7FE9FDCC4EE855B7759BE18EA0");
                     byte[] retBytes = RC4.Apply(plainBytes, passwordBytes);
 
                     outputTextBox.Text = Utils.BytesToHexString(retBytes);
@@ -73,12 +74,15 @@ namespace MD5Plugin
             }
             else
             {
+                string plainText = outputTextBox.Text.Trim();
+                string password = textBoxEncryptionkey.Text.Trim();
                 try
-                {           
-
-
-
-        
+                {
+                    byte[] plainBytes = Utils.HexStringToBytes(plainText);
+                    byte[] passwordBytes = Encoding.ASCII.GetBytes(password);
+                    //byte[] passwordBytes = Utils.HexStringToBytes("FACE3D7FE9FDCC4EE855B7759BE18EA0");
+                    byte[] retBytes = RC4.Apply(plainBytes, passwordBytes);
+                    inputTextBox.Text = Encoding.UTF8.GetString(retBytes);
                 }
                 catch (Exception ex)
                 {
