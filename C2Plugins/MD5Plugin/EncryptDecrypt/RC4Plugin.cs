@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Shadowsocks.Encryption;
+using System;
 using System.Text;
 
 namespace MD5Plugin
 {
     partial class RC4Plugin : Base64Plugin
     {
+        private byte[] encrypBytes = new byte[16384 + 32];
+        private int encrypLength = 0;
 
         public RC4Plugin()
         {
@@ -25,15 +28,18 @@ namespace MD5Plugin
             }
             else
             {
+                string plainText = inputTextBox.Text.Trim();
+                string password = textBoxEncryptionkey.Text.Trim();
                 try
                 {
-                    byte[] pwdBytes = Encoding.UTF8.GetBytes(Key);
-                    byte[] keyBytes = new byte[16];
-                    int len = pwdBytes.Length;
-                    if (len > keyBytes.Length) len = keyBytes.Length;
-                    Array.Copy(pwdBytes, keyBytes, len);
- 
-                    byte[] plainText = GetEncodingBytes(EncryptStr);
+                    
+                    byte[] plainBytes = Utils.HexStringToBytes(plainText);
+                    
+                    IEncryptor encryptor = EncryptorFactory.GetEncryptor("RC4", password);
+
+                    encryptor.Encrypt(plainBytes, plainBytes.Length, encrypBytes, out encrypLength);
+
+                    outputTextBox.Text = Utils.BytesToHexString(encrypBytes, encrypLength);
 
                 }
                 catch (Exception ex)

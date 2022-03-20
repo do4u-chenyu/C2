@@ -17,10 +17,11 @@ namespace Shadowsocks.Encryption
         static PolarSSL()
         {   // libsscrypto.dll作为资源嵌入,运行时解压缩
             string tempPath = Utils.TryGetTempDir();
-            string dllPath = tempPath + "/libsscrypto.dll";
+            string dllPath = Path.Combine(tempPath, "libsscrypto.dll");
             try
             {
                 Utils.UncompressFile(dllPath, Resources.libsscrypto_dll);
+                LoadLibrary(dllPath);
             }
             catch (IOException)
             {
@@ -29,7 +30,6 @@ namespace Shadowsocks.Encryption
             {
                 Console.WriteLine(e.ToString());
             }
-            LoadLibrary(dllPath);  // 加载libsscrypto.dll
         }
 
         [DllImport("Kernel32.dll")]

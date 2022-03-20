@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
+using System.Text;
 
 namespace MD5Plugin
 {
@@ -43,6 +45,44 @@ namespace MD5Plugin
                 return Path.Combine(@"C:\FiberHomeIAOModelDocument", "FiberHomeIAOTemp");
             return Path.Combine(tempDir, "FiberHomeIAOTemp");
             
+        }
+
+        public static byte[] HexStringToBytes(string str)
+        {
+            str = str.ToLower().Trim();
+            str = str.StartsWith("0x") ? str.Substring(2) : str;
+
+            byte[] arrByte = new byte[str.Length >> 1];
+            str = str.Substring(0, arrByte.Length << 1);
+
+            try
+            {
+                for (int i = 0; i < arrByte.Length; i++)
+                    arrByte[i] = Convert.ToByte(str.Substring(i << 1, 2), 16);
+            }
+            catch
+            {
+                return new byte[0];
+            }
+
+            return arrByte;
+        }
+
+        public static string BytesToHexString(byte[] bytes, int length = -1, string prefix = "")
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(prefix);
+
+            if (length < 0)
+                length = bytes.Length;
+            else
+                length = Math.Min(length, bytes.Length);
+
+            for (int i = 0; i < length; i++)
+            {
+                sb.Append(string.Format("{0:X2}", bytes[i]));
+            }
+            return sb.ToString();
         }
     }
 }

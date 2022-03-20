@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using C2.Core;
+﻿using C2.Core;
 using C2.Utils;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace C2.Business.IAOLab.IMEI
 {

@@ -39,10 +39,10 @@
             treeNode4});
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("AES(128位)");
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("RC4");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("RC4-MD5");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("chacha20");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("salsa20");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("shadowsocks-table");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("RC4-MD5(施工中)");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("chacha20(施工中)");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("salsa20(施工中)");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("ss-table(施工中)");
             System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("加密/解密", new System.Windows.Forms.TreeNode[] {
             treeNode6,
             treeNode7,
@@ -98,13 +98,13 @@
             treeNode7.Name = "RC4";
             treeNode7.Text = "RC4";
             treeNode8.Name = "RC4-MD5";
-            treeNode8.Text = "RC4-MD5";
+            treeNode8.Text = "RC4-MD5(施工中)";
             treeNode9.Name = "chacha20";
-            treeNode9.Text = "chacha20";
+            treeNode9.Text = "chacha20(施工中)";
             treeNode10.Name = "salsa20";
-            treeNode10.Text = "salsa20";
+            treeNode10.Text = "salsa20(施工中)";
             treeNode11.Name = "shadowsocks-table";
-            treeNode11.Text = "shadowsocks-table";
+            treeNode11.Text = "ss-table(施工中)";
             treeNode12.ForeColor = System.Drawing.SystemColors.ControlDark;
             treeNode12.Name = "节点1";
             treeNode12.Text = "加密/解密";

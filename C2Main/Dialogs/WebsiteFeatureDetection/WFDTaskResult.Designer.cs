@@ -43,6 +43,7 @@
             this.ipAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.sFileButton = new System.Windows.Forms.Button();
             this.browserButton = new System.Windows.Forms.Button();
             this.taskStatusLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.downloadPicsButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.sFileButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -238,6 +238,19 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(523, 152);
             this.panel4.TabIndex = 10018;
+            // 
+            // sFileButton
+            // 
+            this.sFileButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sFileButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.sFileButton.Location = new System.Drawing.Point(191, 109);
+            this.sFileButton.Name = "sFileButton";
+            this.sFileButton.Size = new System.Drawing.Size(77, 28);
+            this.sFileButton.TabIndex = 10020;
+            this.sFileButton.Text = "源文件";
+            this.toolTip1.SetToolTip(this.sFileButton, "查看任务源文件");
+            this.sFileButton.UseVisualStyleBackColor = false;
+            this.sFileButton.Click += new System.EventHandler(this.SFileButton_Click);
             // 
             // browserButton
             // 
@@ -430,18 +443,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(856, 315);
             this.panel2.TabIndex = 10013;
-            // 
-            // sFileButton
-            // 
-            this.sFileButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.sFileButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.sFileButton.Location = new System.Drawing.Point(191, 109);
-            this.sFileButton.Name = "sFileButton";
-            this.sFileButton.Size = new System.Drawing.Size(77, 28);
-            this.sFileButton.TabIndex = 10020;
-            this.sFileButton.Text = "源文件";
-            this.sFileButton.UseVisualStyleBackColor = false;
-            this.sFileButton.Click += new System.EventHandler(this.SFileButton_Click);
             // 
             // WFDTaskResult
             // 

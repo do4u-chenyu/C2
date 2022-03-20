@@ -8,12 +8,12 @@ namespace Shadowsocks.Encryption
 {
     public class Sodium
     {
-        const string DLLNAME = "libsscrypto";
+        const string DLLNAME = @"libsscrypto";
 
         static Sodium()
         {
             string tempPath = Utils.TryGetTempDir();
-            string dllPath = tempPath + "/libsscrypto.dll";
+            string dllPath = Path.Combine(tempPath, "libsscrypto.dll");
             try
             {
                 Utils.UncompressFile(dllPath, Resources.libsscrypto_dll);
@@ -26,7 +26,6 @@ namespace Shadowsocks.Encryption
             {
                 Console.WriteLine(e.ToString());
             }
-            LoadLibrary(dllPath);
         }
 
         [DllImport("Kernel32.dll")]
