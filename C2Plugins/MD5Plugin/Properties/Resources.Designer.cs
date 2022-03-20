@@ -59,15 +59,5 @@ namespace MD5Plugin.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] libsscrypto_dll {
-            get {
-                object obj = ResourceManager.GetObject("libsscrypto_dll", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
