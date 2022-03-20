@@ -173,6 +173,7 @@
     <Compile Include="IPlugin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSEncryption\RC4.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="CommonHashPlugin.resx">
       <DependentUpon>CommonHashPlugin.cs</DependentUpon>
@@ -262,9 +263,7 @@
       <Name>UserInstallSet</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SSEncryption\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md $(SolutionDir)\C2Main\bin\Release\plugins  
