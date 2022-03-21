@@ -82,7 +82,14 @@ namespace C2.Business.IAOLab.PostAndGet
         {
             using (Stream reqStream = req.GetRequestStream())
             reqStream.Write(bytesToPost, 0, bytesToPost.Length);
-            cnblogsResponse = (HttpWebResponse)req.GetResponse();
+            try
+            {
+                cnblogsResponse = (HttpWebResponse)req.GetResponse();
+            }
+            catch(WebException ex) 
+            {
+                cnblogsResponse = (HttpWebResponse)ex.Response;
+            }
             GetResultParam(cnblogsResponse);
         }
         public void GetResultParam(HttpWebResponse resp)
@@ -90,7 +97,7 @@ namespace C2.Business.IAOLab.PostAndGet
             string responseResult = string.Empty;
             try
             {
-                if (resp != null && resp.StatusCode == HttpStatusCode.OK)
+                if (resp != null)
                 {
                     Encoding readerEncode = encodeOutput == "UTF-8" ? Encoding.UTF8 : Encoding.Default;
                     using (StreamReader sr = new StreamReader(resp.GetResponseStream(), readerEncode))
@@ -233,6 +240,15 @@ namespace C2.Business.IAOLab.PostAndGet
             req.Timeout = ConvertUtil.TryParseInt(textBoxTime.Text) * 1000;
             req.ContentType = contentType;
             req.Headers.Set("cookie", textBoxCookie.Text);
+            string[] arr = new string[textBoxHeader.Lines.Length];
+            
+            for (int i = 0; i<textBoxHeader.Lines.Length; i++)
+            {
+                arr[i] = textBoxHeader.Lines[i];
+                string autoKey = arr[i].Split(':')[0];
+                string autoValue = arr[i].Split(':')[1];
+                try {req.Headers.Add(autoKey, autoValue);} catch { }
+            }
             if (textBoxIp.Text != string.Empty)
                 _ = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
             HistoryPost(textBoxPost.Text);
@@ -284,10 +300,10 @@ namespace C2.Business.IAOLab.PostAndGet
             try
             {
                 req = WebRequest.Create(textBoxUrl.Text) as HttpWebRequest;
-                ConfigurationPostGet(req);
                 // urlencode + 还是 +，手动解析成%2B
                 textBoxPost.Text = contentType == "application/x-www-form-urlencoded" ? textBoxPost.Text.Replace("+", "%2B") : textBoxPost.Text;
                 byte[] bytesToPost = Encoding.UTF8.GetBytes(textBoxPost.Text);
+                ConfigurationPostGet(req);
                 PostText(req, bytesToPost);
             }
             catch (Exception ex)
