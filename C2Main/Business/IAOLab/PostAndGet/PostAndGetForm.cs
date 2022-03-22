@@ -241,13 +241,37 @@ namespace C2.Business.IAOLab.PostAndGet
             req.ContentType = contentType;
             req.Headers.Set("cookie", textBoxCookie.Text);
             string[] arr = new string[textBoxHeader.Lines.Length];
-            
             for (int i = 0; i<textBoxHeader.Lines.Length; i++)
             {
                 arr[i] = textBoxHeader.Lines[i];
                 string autoKey = arr[i].Split(':')[0];
-                string autoValue = arr[i].Split(':')[1];
-                try {req.Headers.Add(autoKey, autoValue);} catch { }
+                //string autoValue = arr[i].Split(':')[1];
+                string autoValue = arr[i].Replace(autoKey + ":", string.Empty);
+
+                if (autoKey == "Content-Type")
+                {
+                    req.ContentType = autoValue;
+                }
+                else if (autoKey == "User-Agent")
+                {
+                    req.UserAgent = autoValue;
+                }
+                else if (autoKey == "Accept")
+                {
+                    req.Accept = autoValue;
+                }
+                else if (autoKey == "Referer")
+                {
+                    req.Referer = autoValue;
+                }
+                else if (autoKey == "Connection")
+                {
+                    break;
+                }
+                else
+                {
+                    req.Headers.Add(autoKey, autoValue);
+                }
             }
             if (textBoxIp.Text != string.Empty)
                 _ = IpProtocol == "HTTP" ? WeatherIpProHttp(req) : WeatherIpProSocks(req);
