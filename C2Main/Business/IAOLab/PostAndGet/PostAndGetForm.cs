@@ -245,9 +245,8 @@ namespace C2.Business.IAOLab.PostAndGet
             {
                 arr[i] = textBoxHeader.Lines[i];
                 string autoKey = arr[i].Split(':')[0];
-                //string autoValue = arr[i].Split(':')[1];
                 string autoValue = arr[i].Replace(autoKey + ":", string.Empty);
-
+                //自定义header
                 if (autoKey == "Content-Type")
                 {
                     req.ContentType = autoValue;

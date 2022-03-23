@@ -91,7 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            //this.tabPage2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel5.SuspendLayout();
@@ -103,7 +103,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            //this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage2);
             //this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -313,7 +313,7 @@
             // 
             // tabPage2
             // 
-            /*
+            
             this.tabPage2.Controls.Add(this.panel6);
             this.tabPage2.Controls.Add(this.panel5);
             this.tabPage2.Controls.Add(this.panel4);
@@ -324,7 +324,7 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "QQ群爬虫";
             this.tabPage2.UseVisualStyleBackColor = true;
-            */
+            
             // 
             // panel6
             // 
