@@ -52,10 +52,21 @@ namespace MD5Plugin
                             break;
                     }
 
-                    byte[] passwordBytes = Encoding.ASCII.GetBytes(password);
-                    //byte[] passwordBytes = Utils.HexStringToBytes("FACE3D7FE9FDCC4EE855B7759BE18EA0");
-                    byte[] retBytes = RC4.Apply(plainBytes, passwordBytes);
+                    byte[] passwordBytes = new byte[0];
 
+                    switch (EncryModeComboBox.SelectedIndex)
+                    {
+                        case 0:        // 文本
+                            passwordBytes = Encoding.ASCII.GetBytes(password);
+                            break;
+                        case 1:        // HEX
+                            passwordBytes = Utils.HexStringToBytes(password);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    byte[] retBytes = RC4.Apply(plainBytes, passwordBytes);
                     outputTextBox.Text = Utils.BytesToHexString(retBytes);
 
                 }
@@ -80,7 +91,20 @@ namespace MD5Plugin
                 try
                 {
                     byte[] plainBytes = Utils.HexStringToBytes(plainText);
-                    byte[] passwordBytes = Encoding.ASCII.GetBytes(password);
+                    byte[] passwordBytes = new byte[0];
+
+                    switch (EncryModeComboBox.SelectedIndex)
+                    {
+                        case 0:        // 文本
+                            passwordBytes = Encoding.ASCII.GetBytes(password);
+                            break;
+                        case 1:        // HEX
+                            passwordBytes = Utils.HexStringToBytes(password);
+                            break;
+                        default:
+                            break;
+                    }
+
                     //byte[] passwordBytes = Utils.HexStringToBytes("FACE3D7FE9FDCC4EE855B7759BE18EA0");
                     byte[] retBytes = RC4.Apply(plainBytes, passwordBytes);
                     inputTextBox.Text = Encoding.UTF8.GetString(retBytes);
