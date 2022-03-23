@@ -20,6 +20,7 @@ namespace MD5Plugin
             encodingComboBox.Items.Add("文本");
             encodingComboBox.Items.Add("HEX");
             encodingComboBox.SelectedIndex = 0;
+            EncryModeComboBox.SelectedIndex = 0;
         }
 
 
