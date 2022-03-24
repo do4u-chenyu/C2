@@ -27,7 +27,11 @@ namespace KnowledgeBase
 
         public string GetPluginName()
         {
+#if DEBUG
+            return string.Empty;
+#else
             return "知识库";
+#endif
         }
 
         public string GetPluginVersion()
