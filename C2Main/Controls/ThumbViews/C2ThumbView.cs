@@ -53,10 +53,14 @@ namespace C2.Controls.ThumbViews
                 case ThumbItem.ModelTypes.APK:
                     System.Diagnostics.Process.Start(chromePath, Global.APKUrl);
                     break;
+
                 //知识库
+#if !DEBUG
                 case ThumbItem.ModelTypes.Knowledge:
                     System.Diagnostics.Process.Start(chromePath, Global.KnowledgeUrl);
                     break;
+#endif
+                    
                 //HIBU
                 case ThumbItem.ModelTypes.HIBU:
                     new HIBUSplashForm().ShowDialog();
