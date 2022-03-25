@@ -30,11 +30,7 @@ namespace FullTextGrammarAssistant
 
         public string GetPluginName()
         {
-#if DEBUG
-            return string.Empty;
-#else
             return "全文语法助手";
-#endif
         }
 
         public string GetPluginVersion()
