@@ -20,7 +20,11 @@ namespace C2.Controls.ThumbViews
             Items.Add(new C2ThumbItem("实验楼", "常用分析小工具集合", Properties.Resources.首页_实验楼, ThumbItem.ModelTypes.IAOLab));
             Items.Add(new C2ThumbItem("网站侦察兵", "对网站分类、爬取、截图和信息侦察", Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WTD));
             Items.Add(new C2ThumbItem("APK大眼睛", "APK逆向、信息提取和分析报告", Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APK));
-            Items.Add(new C2ThumbItem("知识库", "各业务方向关键词库和线索库", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+#if DEBUG
+            Items.Add(new C2ThumbItem("待开发", "待开发", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+#else
+             Items.Add(new C2ThumbItem("知识库", "各业务方向关键词库和线索库", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+#endif
             Items.Add(new C2ThumbItem("HIBU", "HI部23种人工智能分析工具", Properties.Resources.首页_HIBU, ThumbItem.ModelTypes.HIBU));
         }
 
