@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.CastleBravo.Intruder;
+using C2.Core;
 using C2.Forms.Splash;
 using C2.Utils;
 using System;
@@ -21,7 +22,7 @@ namespace C2.Controls.ThumbViews
             Items.Add(new C2ThumbItem("网站侦察兵", "对网站分类、爬取、截图和信息侦察", Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WTD));
             Items.Add(new C2ThumbItem("APK大眼睛", "APK逆向、信息提取和分析报告", Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APK));
 #if DEBUG
-            Items.Add(new C2ThumbItem("待开发", "待开发", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+            Items.Add(new C2ThumbItem("大马破门锤", "为大马模型定制化的破门锤工具", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
 #else
              Items.Add(new C2ThumbItem("知识库", "各业务方向关键词库和线索库", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
 #endif
@@ -59,12 +60,15 @@ namespace C2.Controls.ThumbViews
                     break;
 
                 //知识库
-#if !DEBUG
+#if DEBUG
+                case ThumbItem.ModelTypes.Knowledge:
+                    new IntruderForm().ShowDialog();
+                    break;
+#else
                 case ThumbItem.ModelTypes.Knowledge:
                     System.Diagnostics.Process.Start(chromePath, Global.KnowledgeUrl);
                     break;
 #endif
-                    
                 //HIBU
                 case ThumbItem.ModelTypes.HIBU:
                     new HIBUSplashForm().ShowDialog();
