@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Core;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Management;
@@ -95,6 +96,12 @@ namespace C2.Utils
             return possiblePythonPath;
         }
 
+        
+        public static bool IsTG()
+        {
+            return Global.ThreeGroupBios.Contains(ConfigUtil.GetBIOSSerialNumber());
+        }
+        
         //获取主板串号
         public static string GetBIOSSerialNumber()
         {

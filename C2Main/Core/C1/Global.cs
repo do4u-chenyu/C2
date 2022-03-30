@@ -242,6 +242,17 @@ namespace C2.Core
             return GetMainForm().SearchDocument(formName);
         }
 
-       
+        public static readonly List<string> ThreeGroupBios = new List<string>(){
+            "L1HF58S04Y6",    // LQ
+            "L1HF1B505E0",    // LQ2
+            "L1HF68F046A",    // SQY
+            "PF2Z4F9W",       // HZH
+            "L1HF68F02VM",    // MHD
+            "L1HF5AL00EV",    // LXF
+            "L1HF68F04XB",    // WLY
+            "/7KFL4S2/CNWS20088P013N/" ,   // XX
+            "/7W9Q8M2/CNWS2007A500S5/" };  // WL
+
+
     }
 }
