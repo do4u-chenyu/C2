@@ -49,6 +49,7 @@ namespace C2.Controls.C1.Left
                 case "Cracker":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.CrackerFormHelpInfo);
+                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "PwdGenerator":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dictGenerator;
@@ -57,14 +58,17 @@ namespace C2.Controls.C1.Left
                 case "WebScan":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebScanHelpInfo);
+                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "RobotsScan":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Robots;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RobotsScanHelpInfo);
+                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "WebShell":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
+                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "Binary":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.二进制;
@@ -73,6 +77,7 @@ namespace C2.Controls.C1.Left
                 case "Intruder":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.intruder;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.IntruderHelpInfo);
+                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "VPN":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.v2rayN.ToBitmap();
