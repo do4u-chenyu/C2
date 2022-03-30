@@ -83,6 +83,7 @@ namespace C2.Business.CastleBravo.VPN
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
             this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
+            this.UnlockButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,10 +107,11 @@ namespace C2.Business.CastleBravo.VPN
             this.refreshStopMenu,
             this.progressBar,
             this.progressMenu,
-            this.proxySettingMenu});
+            this.proxySettingMenu,
+            this.UnlockButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1070, 47);
+            this.toolStrip1.Size = new System.Drawing.Size(1924, 47);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -122,7 +124,7 @@ namespace C2.Business.CastleBravo.VPN
             this.editDDB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.editDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editDDB.Name = "editDDB";
-            this.editDDB.Size = new System.Drawing.Size(66, 29);
+            this.editDDB.Size = new System.Drawing.Size(66, 42);
             this.editDDB.Text = "常规";
             this.editDDB.ToolTipText = "常规操作";
             // 
@@ -219,8 +221,8 @@ namespace C2.Business.CastleBravo.VPN
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(98, 29);
-            this.infoCollectionMenu.Text = "D洞探针";
+            this.infoCollectionMenu.Size = new System.Drawing.Size(102, 42);
+            this.infoCollectionMenu.Text = "主动探针";
             this.infoCollectionMenu.ToolTipText = "各种信息探针";
             // 
             // passwdBlastingMenuItem
@@ -231,7 +233,7 @@ namespace C2.Business.CastleBravo.VPN
             this.UserMYD探针ToolStripMenuItem1});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
             this.passwdBlastingMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.passwdBlastingMenuItem.Text = "Mysql 探针 ";
+            this.passwdBlastingMenuItem.Text = "随机探针";
             // 
             // mysqlBlastingToolStripMenuItem1
             // 
@@ -241,7 +243,7 @@ namespace C2.Business.CastleBravo.VPN
             this.MB_选定项ToolStripMenuItem,
             this.MB_设置ToolStripMenuItem});
             this.mysqlBlastingToolStripMenuItem1.Name = "mysqlBlastingToolStripMenuItem1";
-            this.mysqlBlastingToolStripMenuItem1.Size = new System.Drawing.Size(246, 34);
+            this.mysqlBlastingToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.mysqlBlastingToolStripMenuItem1.Text = "Mysql Blasting";
             // 
             // MB_所有项ToolStripMenuItem
@@ -275,7 +277,7 @@ namespace C2.Business.CastleBravo.VPN
             this.配置文件探针_验活项ToolStripMenuItem,
             this.配置文件探针_选定项ToolStripMenuItem});
             this.配置文件探针ToolStripMenuItem1.Name = "配置文件探针ToolStripMenuItem1";
-            this.配置文件探针ToolStripMenuItem1.Size = new System.Drawing.Size(246, 34);
+            this.配置文件探针ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.配置文件探针ToolStripMenuItem1.Text = "配置文件探针";
             // 
             // 配置文件探针_所有项ToolStripMenuItem
@@ -303,7 +305,7 @@ namespace C2.Business.CastleBravo.VPN
             this.UserMYD探针_验活项ToolStripMenuItem,
             this.UserMYD探针_选定项ToolStripMenuItem});
             this.UserMYD探针ToolStripMenuItem1.Name = "UserMYD探针ToolStripMenuItem1";
-            this.UserMYD探针ToolStripMenuItem1.Size = new System.Drawing.Size(246, 34);
+            this.UserMYD探针ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.UserMYD探针ToolStripMenuItem1.Text = "User.MYD探针";
             // 
             // UserMYD探针_所有项ToolStripMenuItem
@@ -332,24 +334,24 @@ namespace C2.Business.CastleBravo.VPN
             this.currentSysInfoMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
             this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.systemInfoToolStripMenuItem.Text = "系统信息";
+            this.systemInfoToolStripMenuItem.Text = "重放探针";
             // 
             // allSysInfoMenuItem
             // 
             this.allSysInfoMenuItem.Name = "allSysInfoMenuItem";
-            this.allSysInfoMenuItem.Size = new System.Drawing.Size(168, 34);
+            this.allSysInfoMenuItem.Size = new System.Drawing.Size(270, 34);
             this.allSysInfoMenuItem.Text = "所有项";
             // 
             // aliveSysInfoMenuItem
             // 
             this.aliveSysInfoMenuItem.Name = "aliveSysInfoMenuItem";
-            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(168, 34);
+            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(270, 34);
             this.aliveSysInfoMenuItem.Text = "验活项";
             // 
             // currentSysInfoMenuItem
             // 
             this.currentSysInfoMenuItem.Name = "currentSysInfoMenuItem";
-            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(168, 34);
+            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(270, 34);
             this.currentSysInfoMenuItem.Text = "选定项";
             // 
             // processViewToolStripMenuItem
@@ -365,19 +367,19 @@ namespace C2.Business.CastleBravo.VPN
             // allProcessView
             // 
             this.allProcessView.Name = "allProcessView";
-            this.allProcessView.Size = new System.Drawing.Size(168, 34);
+            this.allProcessView.Size = new System.Drawing.Size(270, 34);
             this.allProcessView.Text = "所有项";
             // 
             // aliveProcessView
             // 
             this.aliveProcessView.Name = "aliveProcessView";
-            this.aliveProcessView.Size = new System.Drawing.Size(168, 34);
+            this.aliveProcessView.Size = new System.Drawing.Size(270, 34);
             this.aliveProcessView.Text = "验活项";
             // 
             // currentProcessView
             // 
             this.currentProcessView.Name = "currentProcessView";
-            this.currentProcessView.Size = new System.Drawing.Size(168, 34);
+            this.currentProcessView.Size = new System.Drawing.Size(270, 34);
             this.currentProcessView.Text = "选定项";
             // 
             // timedTaskMenuItem
@@ -468,7 +470,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.refreshStopMenu.Name = "refreshStopMenu";
-            this.refreshStopMenu.Size = new System.Drawing.Size(84, 29);
+            this.refreshStopMenu.Size = new System.Drawing.Size(84, 42);
             this.refreshStopMenu.Text = "停止任务";
             // 
             // progressBar
@@ -498,11 +500,25 @@ namespace C2.Business.CastleBravo.VPN
             this.proxySettingMenu.Size = new System.Drawing.Size(84, 42);
             this.proxySettingMenu.Text = "代理设置";
             // 
+            // UnlockButton
+            // 
+            this.UnlockButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.UnlockButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.UnlockButton.Enabled = false;
+            this.UnlockButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.UnlockButton.ForeColor = System.Drawing.Color.Black;
+            this.UnlockButton.Image = ((System.Drawing.Image)(resources.GetObject("UnlockButton.Image")));
+            this.UnlockButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UnlockButton.Name = "UnlockButton";
+            this.UnlockButton.Size = new System.Drawing.Size(88, 42);
+            this.UnlockButton.Text = "功能解锁";
+            this.UnlockButton.ToolTipText = "SG高级功能默认不开放, 需要手工解锁";
+            // 
             // VPNMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 602);
+            this.ClientSize = new System.Drawing.Size(1924, 764);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
@@ -575,5 +591,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripLabel progressMenu;
         private System.Windows.Forms.ToolStripLabel proxySettingMenu;
+        private System.Windows.Forms.ToolStripButton UnlockButton;
     }
 }
