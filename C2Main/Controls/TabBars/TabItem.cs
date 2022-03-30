@@ -338,8 +338,9 @@ namespace C2.Controls
             {
                 string exportFullPath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
-                if (C2.Business.Model.ExportModel.GetInstance().ExportC2Model(fullFilePath, exportFullPath, password))
-                    HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
+                using (GuarderUtil.WaitCursor)
+                    if (Business.Model.ExportModel.GetInstance().ExportC2Model(fullFilePath, exportFullPath, password))
+                        HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
             }
         }
 

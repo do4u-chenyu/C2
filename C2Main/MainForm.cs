@@ -331,8 +331,9 @@ namespace C2
 
         private void LoadFile()
         {
-            if (ImportModel.GetInstance().UnZipC2File(fullFilePath, UserName))
-                HelpUtil.ShowMessageBox(String.Format("[{0}] 导入 分析笔记 成功", Path.GetFileNameWithoutExtension(fullFilePath)));
+            using (GuarderUtil.WaitCursor)
+                if (ImportModel.GetInstance().UnZipC2File(fullFilePath, UserName))
+                    HelpUtil.ShowMessageBox(String.Format("[{0}] 导入 分析笔记 成功", Path.GetFileNameWithoutExtension(fullFilePath)));
         }
 
         private void LoadHotModel()

@@ -48,8 +48,9 @@ namespace C2.Controls.Left
                     ImportXmindFile.GetInstance().LoadXml(fullFilePath);
                     return;
                 }
-                if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    HelpUtil.ShowMessageBox(String.Format("[{0}]导入[分析笔记仓库]成功", filename));
+                using (GuarderUtil.WaitCursor)
+                    if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
+                        HelpUtil.ShowMessageBox(String.Format("[{0}] 导入 分析笔记 成功", filename));
             }
         }
     }
