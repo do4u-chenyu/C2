@@ -33,6 +33,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private SGType sgType;
         readonly List<string> threeGroupBios = new List<string>(){
             "L1HF58S04Y6",    // LQ
+            "L1HF1B505E0",    // LQ2
             "L1HF68F046A",    // SQY
             "PF2Z4F9W",       // HZH
             "L1HF68F02VM",    // MHD
