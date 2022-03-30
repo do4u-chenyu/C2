@@ -356,6 +356,12 @@
     <Compile Include="Business\CastleBravo\RobotsScan\RobotsScan.Designer.cs">
       <DependentUpon>RobotsScan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\VPN\VPNMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\VPNMainForm.Designer.cs">
+      <DependentUpon>VPNMainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\WebScan\Model\HttpRequest.cs" />
     <Compile Include="Business\CastleBravo\WebScan\Model\ServerInfo.cs" />
     <Compile Include="Business\CastleBravo\WebScan\Tools\Config.cs" />
@@ -2287,6 +2293,9 @@
     <EmbeddedResource Include="Business\CastleBravo\RobotsScan\RobotsScan.resx">
       <DependentUpon>RobotsScan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\VPN\VPNMainForm.resx">
+      <DependentUpon>VPNMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\WebScan\WebScanForm.resx">
       <DependentUpon>WebScanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -3293,6 +3302,7 @@
     <None Include="Resources\Images\back_color.png" />
     <None Include="Resources\Images\balloon_small.png" />
     <None Include="Resources\Images\arrow_query.png" />
+    <None Include="Resources\Icons\v2rayN.ico" />
     <Content Include="Resources\Images\ASR.png" />
     <Content Include="Resources\Images\BankCardRecognition.png" />
     <Content Include="Resources\Images\bar.png" />

@@ -977,8 +977,7 @@ namespace C2.Properties {
         ///		&lt;item name=&quot;Show Line Arrow&quot;&gt;Show Line Arrow Cap&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Add&quot;&gt;+&lt;/item&gt;
         ///		&lt;item name=&quot;Key_Subtract&quot;&gt;-&lt;/item&gt;
-        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/item&gt;
-        ///		&lt;item na [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/ [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string en_US {
             get {
@@ -1384,8 +1383,7 @@ namespace C2.Properties {
         ///            }
         ///		    .clsTextBox 
         ///		    {
-        ///		        width:100%;
-        ///		  [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///		       [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string html_content {
             get {
@@ -2952,6 +2950,16 @@ namespace C2.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon v2rayN {
+            get {
+                object obj = ResourceManager.GetObject("v2rayN", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap viewData {
@@ -3110,8 +3118,7 @@ namespace C2.Properties {
         ///    &lt;words&gt;        
         ///    &lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
         ///    &lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
-        ///    &lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
-        ///    &lt;item name [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;item name=&quot;Open&quot;&gt;打开&lt;/item [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string zh_CHS {
             get {

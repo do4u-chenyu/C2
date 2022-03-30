@@ -99,9 +99,10 @@ namespace C2.Utils
         public static string PwdGeneratorHelpInfo = "SG生成器，输入目标信息，猜测可能使用的数字字符组合";
         public static string WebScanHelpInfo = "Web目录素描，敏感文件素描和前后台入口素描";
         public static string RobotsScanHelpInfo = "对目标网站的几个通用特征进行素描";
-        public static string WebShellHelpInfo = "D洞工具集";
+        public static string WebShellHelpInfo = "盗洞专项配套工具集";
         public static string BinaryHelpInfo = "二进制逆向、分析和解密专项";
         public static string IntruderHelpInfo = "为大马模型定制化的登陆破门锤发包工具";
+        public static string VPNHelpoInfo = "VPN和翻墙流量专项配套工具集";
 
         public static string DBFormHelpInfo = "涉赌专项分析";
         public static string SQFormHelpInfo = "涉枪专项分析";
