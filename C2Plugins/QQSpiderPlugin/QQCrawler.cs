@@ -114,6 +114,34 @@ namespace QQSpiderPlugin
             }
             return defaultResult.result.ToString();
         }
+        
+        public List<string> QueryKeyWord(string id)
+        {
+            List<string> resultList = new List<string> { };
+            string url = "http://47.94.39.209:8899/api/spider/group_info";
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "keyword", id } };
+            try
+            {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Timeout = 200000;
+                string content = JsonConvert.SerializeObject(pairs);
+                byte[] data = Encoding.UTF8.GetBytes(content);
+
+                req.Method = "POST";
+                req.ContentType = "application/json";
+                req.ContentLength = data.Length;
+
+                using (var stream = req.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+                Response resp = new Response((HttpWebResponse)req.GetResponse());
+                resultList = this.ParseKeyWord(id, resp.Text);
+                Thread.Sleep(1000);
+            }
+            catch // 这里是捕获不到异常的
+            {
+            }
+            return resultList;
+        }
 
         private QueryResult ParseGroup(string id, string text)
         {
@@ -155,6 +183,35 @@ namespace QQSpiderPlugin
         /// <param name="id"></param>
         /// <param name="text"></param>
         /// <returns></returns>
+        /// 
+
+        private List<string> ParseKeyWord(string id, string text)
+        {
+            List<string> resultList = new List<string>();
+            try
+            {
+                JObject json = JObject.Parse(text);
+                var gList = json["group_list"];
+
+                foreach (var g in gList)
+                {
+                    GroupInfo groupInfo = new GroupInfo();
+                    try
+                    {
+                        groupInfo = new GroupInfo(g);
+                    }
+                    catch
+                    {
+                        groupInfo = new GroupInfo(id);
+                     }
+                    resultList.Add(groupInfo.ToString());
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return resultList;
+        }
         private QueryResult ParseAct(string id, string text)
         {
             QueryResult qResult = new QueryResult();
@@ -329,8 +386,8 @@ namespace QQSpiderPlugin
             try
             {
                 StringBuilder labelSb = new StringBuilder();
-                foreach (var l in g["group_label"])
-                    labelSb.Append(l["item"].ToString()).Append("|");
+                foreach (var l in g["labels"])
+                    labelSb.Append(l["label"].ToString()).Append("|");
                 labels = Util.GenRwWTS(labelSb.ToString().Trim('|'));
             }
             catch

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 
 namespace QQSpiderPlugin
 {
@@ -77,6 +79,26 @@ namespace QQSpiderPlugin
             }
             return resp;
         }
+        
+        public byte[] GetKeyWordQRCode()
+        {
+            Response resp;
+            byte[] imgBytes = Response.Empty.Content;
+            try
+            {
+                string url = "http://47.94.39.209:8899/api/spider/get_qr";
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "GET";
+                req.Timeout = 20000;
+                resp = new Response((HttpWebResponse)req.GetResponse());
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                Dictionary<string, object> obj = (Dictionary<string, object>)serializer.DeserializeObject(resp.Text);
+                if (obj.ContainsKey("success") && obj["success"].ToString() == "1")
+                    imgBytes = Convert.FromBase64String(obj["img_data"].ToString());
+            }
+            catch { }
+            return imgBytes;
+        }
         public Dictionary<string, object> Login()
         {
             string loginSig = this.session.Cookies.GetCookieValue("pt_login_sig");
@@ -151,6 +173,39 @@ namespace QQSpiderPlugin
                     else
                         errorMsg = "unknow";
                 }
+            }
+            loginResult.Add("status", status);
+            loginResult.Add("time", Util.GetTimeStamp());
+            loginResult.Add("errorMsg", errorMsg);
+            return loginResult;
+        }
+        public Dictionary<string, object> GetScanStatus()
+        {
+           
+            Dictionary<string, object> loginResult = new Dictionary<string, object>();
+
+            int status = -1;
+            string errorMsg = String.Empty;
+
+            string url = "http://47.94.39.209:8899/api/spider/get_scan_status";
+            Response resp = null;
+            try
+            {
+                resp = new Response(this.session.Get(url));
+                string result = resp.Text;
+                if (result == "false")
+                    status = 0;
+                else if (result == "true")
+                    status = 1;
+                else
+                    errorMsg = result;
+            }
+            catch
+            {
+                if (resp != null)
+                    errorMsg = resp.StatusCode.ToString();
+                else
+                    errorMsg = "unknow";
             }
             loginResult.Add("status", status);
             loginResult.Add("time", Util.GetTimeStamp());

@@ -2,9 +2,11 @@
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -218,9 +220,130 @@ namespace QQSpiderPlugin
             }
             return result;
         }
+        public static bool KeyWordSaveToExcel(string filePath, Dictionary<string, List<string>> resultDic)
+        {
+            short rowHeight = 800;
+            bool result = true;
+            List<string> headList = new List<string> { "群头像", "群ID", "群名称", "群人数", "群人数上限", "群主QQ", "群地址", "群分类", "群标签", "群简介" };
+            FileStream fs = null;
+            HSSFWorkbook workbook = null;
+            HSSFSheet sheet = null;
+            
+            try
+            {
+                fs = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+                workbook = new HSSFWorkbook();
+                foreach (string key in resultDic.Keys) 
+                {
+                    sheet = (HSSFSheet)workbook.CreateSheet(key);
+                    IRow row = sheet.CreateRow(0);
+                    List<string> resultList = resultDic[key];
+                    for (int j = 0; j < headList.Count; j++)
+                    {
+                        ICell cell = row.CreateCell(j);
+                        cell.SetCellValue(headList[j]); 
+                    }
+                    for (int i = 0; i < resultList.Count; i++)
+                    {
+                        if (i >= 65536)
+                        {
+                            result = false;
+                            break;
+                        }
+                        IRow rows = sheet.CreateRow(1 + i);
+                        rows.Height = rowHeight;
+                        string[] resultarray = resultList[i].Split('\t');
+                        for (int j = 0; j < resultarray.Length; j++)
+                        {
+                            // 头像
+                            if (j == resultarray.Length - 1)
+                            {
+                                ICell pngcell = rows.CreateCell(0);
+                                Image image;
+                                try
+                                {
+                                    image = (Image)GetImage(resultarray[j]);
+                                    byte[] bytes;
+                                    using (var ms = new MemoryStream())
+                                    {
+                                        image.Save(ms, ImageFormat.Png);
+                                        bytes = ms.ToArray();
+                                    }
+                                    int pictureIndex = workbook.AddPicture(bytes, PictureType.PNG);
+                                    ICreationHelper helper = workbook.GetCreationHelper();
+                                    IDrawing drawing = sheet.CreateDrawingPatriarch();
+                                    IClientAnchor anchor = helper.CreateClientAnchor();
+                                    anchor.Col1 = 0;//0 index based column
+                                    anchor.Row1 = i + 1;//0 index based row
+                                    IPicture picture = drawing.CreatePicture(anchor, pictureIndex);
+                                    picture.Resize();
+                                }
+                                catch (Exception)
+                                {
+                                }
+                            }
+                            else
+                            {
+                                ICell pngcell = rows.CreateCell(j+1);
+                                pngcell.SetCellValue(resultarray[j]);   // TODO Insert image 
+                            }
+                                          
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception)
+            {
+                result = false;
+                return result;
+            }
+            
+            try
+            {
+                workbook.Write(fs);
+            }
+            catch
+            {
+                result = false;
+                return result;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+                workbook = null;
+            }
+            return result;
+        }
+
         public static Image ResizeImage(Image imgToResize, Size size)
         {
             return (Image)(new Bitmap(imgToResize, size));
+        }
+
+        public static Image GetImage(string url)
+        {
+            byte[] data = new byte[0];
+            int imgSize = 50;
+            Image img;
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    data = client.DownloadData(url);
+                    using (MemoryStream mem = new MemoryStream(data))
+                        img = Image.FromStream(mem);
+                }
+            }
+            catch (Exception)
+            {
+                img = (Image)Properties.Resources.not_found;
+            }
+            return Util.ResizeImage(img, new Size(imgSize, imgSize));
         }
     }
     static class DgvUtil

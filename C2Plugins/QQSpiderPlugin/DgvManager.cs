@@ -39,6 +39,12 @@ namespace QQSpiderPlugin
                 this.dataGridView.Update();
             }
         }
+        public void AppendLineList(List<string> lines)
+        {
+            int minRow = Math.Min(lines.Count,10);
+            for(int i = 1; i < minRow; i++)
+                AppendLine(lines[i]);
+        }
 
         private Image GetImage(string url)
         {
