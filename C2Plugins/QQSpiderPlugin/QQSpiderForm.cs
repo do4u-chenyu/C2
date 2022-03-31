@@ -255,7 +255,7 @@ namespace QQSpiderPlugin
         {
             DgvManager dgvMgr = new DgvManager(this.dataGridView3);
             List<string> dataSource = this.keyWordDataSource;
-            
+            this.resultDictionary = new Dictionary<string, List<string>>();
             ResetProgressBar(2, dataSource.Count);
             if (dataSource.Count == 0)
             {
