@@ -11,6 +11,7 @@ using C2.Globalization;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
@@ -26,10 +27,10 @@ namespace C2.Controls.C1.Left
         public PluginButton(string name)
         {
             pluginType = name;
-            InitializeComponent();
             InitButtonMenu();
             InitButtonType();
             InitButtonDoubleClick();
+            InitializeComponent();
             JST = new Dictionary<string, string>()
             {
                 {"涉赌专项", "涉赌模型" },
@@ -44,7 +45,7 @@ namespace C2.Controls.C1.Left
         // 按钮功能关闭
         public void Disable()
         {
-            this.noFocusButton.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.noFocusButton.ForeColor = SystemColors.InactiveCaption;
             this.noFocusButton.Enabled = false;
         }
 

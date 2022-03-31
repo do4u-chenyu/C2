@@ -79,12 +79,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 trojanMenu.Enabled = false;
                 infoCollectionMenu.Enabled = false;
-                refreshAllShellMenu.Enabled = false;
-                secondRefreshMenu.Enabled = false;
                 //右键菜单
                 EnterToolStripMenuItem.Enabled = false;
                 SuscideMenuItem.Enabled = false;
-                CheckAliveSelectedItemMenuItem.Enabled = false;
                 ReverseShellMenu.Enabled = false;
                 msfMenu.Enabled = false;
                 DDMenuItem.Enabled = false;

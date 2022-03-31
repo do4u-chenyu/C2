@@ -239,10 +239,10 @@ namespace C2.Controls.C1.Left
         private void LoadCBPlugins()
         {
             List<string> CBPlugins = new List<string>() { 
-                "PwdGenerator", 
                 "WebShell", 
                 "VPN",
                 "Binary",
+                "PwdGenerator",
                 "Cracker",
                 /*"RobotsScan",*/ 
                 "WebScan",
