@@ -2423,6 +2423,9 @@
     <EmbeddedResource Include="Controls\C1\Left\ManualControl.resx">
       <DependentUpon>ManualControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\PluginButton.resx">
+      <DependentUpon>PluginButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\C1\Left\SearchToolkitControl.resx">
       <DependentUpon>SearchToolkitControl.cs</DependentUpon>
     </EmbeddedResource>

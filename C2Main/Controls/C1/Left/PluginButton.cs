@@ -26,6 +26,7 @@ namespace C2.Controls.C1.Left
         public PluginButton(string name)
         {
             pluginType = name;
+            InitializeComponent();
             InitButtonMenu();
             InitButtonType();
             InitButtonDoubleClick();
@@ -40,6 +41,13 @@ namespace C2.Controls.C1.Left
             };
         }
 
+        // 按钮功能关闭
+        public void Disable()
+        {
+            this.noFocusButton.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.noFocusButton.Enabled = false;
+        }
+
         private void InitButtonType()
         {
             ButtonText = Lang._(this.pluginType);
@@ -49,7 +57,6 @@ namespace C2.Controls.C1.Left
                 case "Cracker":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.CrackerFormHelpInfo);
-                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "PwdGenerator":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dictGenerator;
@@ -58,17 +65,14 @@ namespace C2.Controls.C1.Left
                 case "WebScan":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebScanHelpInfo);
-                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "RobotsScan":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Robots;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RobotsScanHelpInfo);
-                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "WebShell":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.webshell;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WebShellHelpInfo);
-                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "Binary":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.二进制;
@@ -77,7 +81,6 @@ namespace C2.Controls.C1.Left
                 case "Intruder":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.intruder;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.IntruderHelpInfo);
-                    this.Enabled = ConfigUtil.IsTG();
                     break;
                 case "VPN":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.v2rayN.ToBitmap();
@@ -204,5 +207,23 @@ namespace C2.Controls.C1.Left
                    
             }
         }
+
+        private void InitializeComponent()
+        {
+            if (ConfigUtil.IsTG())
+                return;
+
+            switch (this.pluginType)
+            {
+                case "Cracker":
+                case "WebScan":
+                case "RobotsScan":
+                case "Intruder":
+                    Disable();
+                    break;
+            }
+        }
+
+
     }
 }

@@ -99,7 +99,7 @@ namespace C2.Utils
         
         public static bool IsTG()
         {
-            return Global.ThreeGroupBios.Contains(ConfigUtil.GetBIOSSerialNumber());
+            return Global.SNS.ContainsKey(ConfigUtil.GetBIOSSerialNumber());
         }
         
         //获取主板串号
@@ -107,11 +107,16 @@ namespace C2.Utils
         {
             try
             {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BaseBoard");
+                // 获取BIOS SN特别慢, 第一次获取就记住
+                if (!Global.SN.IsEmpty())
+                    return Global.SN;
+
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select SerialNumber From Win32_BaseBoard");
                 string sBIOSSerialNumber = string.Empty;
                 foreach (ManagementObject mo in searcher.Get())
                 {
                     sBIOSSerialNumber = mo.GetPropertyValue("SerialNumber").ToString().Trim();
+                    Global.SN = sBIOSSerialNumber;
                     break;
                 }
                 return sBIOSSerialNumber;
