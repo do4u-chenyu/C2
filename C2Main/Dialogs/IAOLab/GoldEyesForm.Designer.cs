@@ -205,10 +205,11 @@
             this.ClientSize = new System.Drawing.Size(647, 380);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("宋体", 10.5F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GoldEyesForm";
-            this.Text = "火眼晶晶";
+            this.Text = "火眼金睛";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);

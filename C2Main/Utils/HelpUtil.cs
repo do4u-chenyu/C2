@@ -70,7 +70,7 @@ namespace C2.Utils
         public static string BigAPKFormHelpInfo = "APK检测系统";
         public static string FraudFormHelpInfo = "诈骗模拟器";
         public static string PostAndGetFormHelpInfo = "POST工具,向目标发送构造的HTTP/HTTPS报文,支持POST,GET,HEAD,PUT";
-        public static string GoldEyesFormHelpInfo = "火眼晶晶相关接口";
+        public static string GoldEyesFormHelpInfo = "火眼金睛相关接口";
 
         public static string OCRFormHelpInfo = "OCR图片检测文字";
         public static string NERFormHelpInfo = "将输入句子中的人名、地点、机构识别并定位";
