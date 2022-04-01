@@ -338,6 +338,20 @@
     <Compile Include="Business\CastleBravo\Intruder\IntruderForm.Designer.cs">
       <DependentUpon>IntruderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\VPN\AddVPNServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\AddVPNServerForm.Designer.cs">
+      <DependentUpon>AddVPNServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\BatchAddVPNServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\BatchAddVPNServerForm.Designer.cs">
+      <DependentUpon>BatchAddVPNServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
+    <Compile Include="Business\CastleBravo\VPN\VPNTaskConfig.cs" />
     <Compile Include="Business\IAOLab\PwdGenerator\PwdResultForm.cs">
       <SubType>Form</SubType>
     </Compile>

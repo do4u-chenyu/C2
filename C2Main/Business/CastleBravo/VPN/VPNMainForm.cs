@@ -1,5 +1,6 @@
 ﻿using C2.Business.CastleBravo.WebShellTool;
 using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
+using C2.Core;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.VPN
@@ -41,7 +42,9 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 添加ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-
+            VPNTaskConfig config = new AddVPNServerForm().ShowDialog(ST.NowString());
+            if (config == VPNTaskConfig.Empty)
+                return;
         }
 
         private void 批量添加ToolStripMenuItem_Click(object sender, System.EventArgs e)
