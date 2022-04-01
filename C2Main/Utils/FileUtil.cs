@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -162,6 +163,33 @@ namespace C2.Utils
 
             }
             
+        }
+
+        public static bool WriteToDisk<T>(string file, T obj)
+        {
+            try
+            {
+                using (Stream stream = File.Create(file))
+                    new BinaryFormatter().Serialize(stream, obj);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static T ReadFromDisk<T>(string file, object defaultValue = null)
+        {
+            try
+            {
+                using (Stream stream = File.Open(file, FileMode.Open))
+                    return (T) new BinaryFormatter().Deserialize(stream);
+            }
+            catch
+            {
+                return (T) defaultValue;
+            }
         }
 
         public static void TryExploreDirectory(String fullFilePath)
