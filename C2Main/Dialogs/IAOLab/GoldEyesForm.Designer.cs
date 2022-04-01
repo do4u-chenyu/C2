@@ -63,23 +63,25 @@
             // export
             // 
             this.export.Font = new System.Drawing.Font("宋体", 11F);
-            this.export.Location = new System.Drawing.Point(515, 8);
+            this.export.Location = new System.Drawing.Point(568, 8);
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(56, 23);
             this.export.TabIndex = 12;
             this.export.Text = "导出";
             this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.Export_Click);
             // 
             // confirm
             // 
             this.confirm.Font = new System.Drawing.Font("宋体", 11F);
-            this.confirm.Location = new System.Drawing.Point(420, 7);
+            this.confirm.Location = new System.Drawing.Point(478, 7);
             this.confirm.Margin = new System.Windows.Forms.Padding(2);
             this.confirm.Name = "confirm";
             this.confirm.Size = new System.Drawing.Size(56, 24);
             this.confirm.TabIndex = 3;
             this.confirm.Text = "查询";
             this.confirm.UseVisualStyleBackColor = true;
+            this.confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
             // panel2
             // 
@@ -122,19 +124,20 @@
             // import
             // 
             this.import.Font = new System.Drawing.Font("宋体", 11F);
-            this.import.Location = new System.Drawing.Point(515, 27);
+            this.import.Location = new System.Drawing.Point(564, 27);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(56, 23);
             this.import.TabIndex = 23;
             this.import.Text = "导入";
             this.import.UseVisualStyleBackColor = true;
+            this.import.Click += new System.EventHandler(this.Import_Click);
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(88, 27);
             this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(388, 23);
+            this.progressBar1.Size = new System.Drawing.Size(442, 23);
             this.progressBar1.TabIndex = 22;
             // 
             // label1
