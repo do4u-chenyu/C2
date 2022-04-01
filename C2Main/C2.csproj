@@ -905,6 +905,12 @@
     <Compile Include="Dialogs\IAOLab\FraudDialog.Designer.cs">
       <DependentUpon>FraudDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\IAOLab\GoldEyesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IAOLab\GoldEyesForm.Designer.cs">
+      <DependentUpon>GoldEyesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\IAOLab\InformationSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2660,6 +2666,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\FraudDialog.resx">
       <DependentUpon>FraudDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IAOLab\GoldEyesForm.resx">
+      <DependentUpon>GoldEyesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\IAOLab\InformationSearch.resx">
       <DependentUpon>InformationSearch.cs</DependentUpon>
@@ -4482,6 +4491,7 @@
     <None Include="Resources\词云样例3.png" />
     <None Include="Resources\词云样例4.png" />
     <None Include="Resources\组织架构图样例.png" />
+    <Content Include="Resources\火眼晶晶.png" />
     <Content Include="sbin\analysis.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

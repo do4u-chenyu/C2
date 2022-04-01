@@ -87,6 +87,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PostAndGet;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PostAndGetFormHelpInfo);
                     break;
+                case "GoldEyes": 
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.GoldEyes;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GoldEyesFormHelpInfo);
+                    break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
@@ -265,6 +269,9 @@ namespace C2.Controls.Left
                     break;
                 case "PostAndGet":
                     new PostAndGetForm().ShowDialog();
+                    break;
+                case "GoldEyes":
+                    new GoldEyesForm().ShowDialog();
                     break;
                 case "Fraud":
                     new FraudDialog().ShowDialog();
