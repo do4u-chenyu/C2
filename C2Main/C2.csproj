@@ -338,16 +338,16 @@
     <Compile Include="Business\CastleBravo\Intruder\IntruderForm.Designer.cs">
       <DependentUpon>IntruderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\PwdGenerator\PwdResultForm.cs">
+    <Compile Include="Business\IAOLab\PwdGenerator\PwdResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\PwdGenerator\PwdResultForm.Designer.cs">
+    <Compile Include="Business\IAOLab\PwdGenerator\PwdResultForm.Designer.cs">
       <DependentUpon>PwdResultForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.cs">
+    <Compile Include="Business\IAOLab\PwdGenerator\PwdGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.Designer.cs">
+    <Compile Include="Business\IAOLab\PwdGenerator\PwdGeneratorForm.Designer.cs">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\RobotsScan\RobotsScan.cs">
@@ -2290,10 +2290,10 @@
       <DependentUpon>IntruderForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdResultForm.resx">
+    <EmbeddedResource Include="Business\IAOLab\PwdGenerator\PwdResultForm.resx">
       <DependentUpon>PwdResultForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Business\CastleBravo\PwdGenerator\PwdGeneratorForm.resx">
+    <EmbeddedResource Include="Business\IAOLab\PwdGenerator\PwdGeneratorForm.resx">
       <DependentUpon>PwdGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\RobotsScan\RobotsScan.resx">
