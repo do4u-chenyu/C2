@@ -37,7 +37,7 @@ namespace C2.IAOLab.BankTool
             Thread.Sleep(500);
             //string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
             //string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(OpUtil.StringBlank, string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
-            string url = "http://47.94.39.209:8899/api/spider/bank_info";
+            string url = "http://113.31.114.239:53373/api/spider/bank_info";
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "keyword", bankCard } };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Timeout = 200000;

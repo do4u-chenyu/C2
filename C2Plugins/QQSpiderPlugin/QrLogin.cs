@@ -86,7 +86,7 @@ namespace QQSpiderPlugin
             byte[] imgBytes = Response.Empty.Content;
             try
             {
-                string url = "http://47.94.39.209:8899/api/spider/get_qr";
+                string url = "http://113.31.114.239:53373/api/spider/get_qr";
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "GET";
                 req.Timeout = 20000;
@@ -187,7 +187,7 @@ namespace QQSpiderPlugin
             int status = -1;
             string errorMsg = String.Empty;
 
-            string url = "http://47.94.39.209:8899/api/spider/get_scan_status";
+            string url = "http://113.31.114.239:53373/api/spider/get_scan_status";
             Response resp = null;
             try
             {

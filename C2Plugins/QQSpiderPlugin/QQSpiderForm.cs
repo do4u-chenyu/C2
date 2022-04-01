@@ -338,16 +338,6 @@ namespace QQSpiderPlugin
         {
             this.Close();
         }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         public static DialogResult ShowMessageBox(string message, string caption = "提示信息", MessageBoxIcon type = MessageBoxIcon.Information)
         {
             return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
@@ -568,7 +558,7 @@ namespace QQSpiderPlugin
             this.grpDataSource = input;
         }
 
-        private void richTextBox1_TextChanged_1(object sender, EventArgs e)
+        private void RichTextBox1_TextChanged(object sender, EventArgs e)
         {
             List<string> input = new List<string>();
             try
@@ -584,8 +574,9 @@ namespace QQSpiderPlugin
                 ShowMessageBox("输出有误");
             }
             this.idDataSource = input;
+
         }
-        
+
         private void KeyWordRichTextBox_TextChanged(object sender, EventArgs e)
         {
             List<string> input = new List<string>();
