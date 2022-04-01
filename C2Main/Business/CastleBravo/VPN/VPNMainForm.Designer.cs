@@ -41,29 +41,10 @@ namespace C2.Business.CastleBravo.VPN
             this.refreshAllShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.重新开始ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.继续上次ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshOtherMenu2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.重新开始ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.继续上次ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.secondRefreshMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.passwdBlastingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mysqlBlastingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MB_所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MB_验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MB_选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MB_设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.配置文件探针ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.配置文件探针_所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.配置文件探针_验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.配置文件探针_选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserMYD探针ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserMYD探针_所有项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserMYD探针_验活项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserMYD探针_选定项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aliveSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentSysInfoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
@@ -90,11 +71,11 @@ namespace C2.Business.CastleBravo.VPN
             this.mysqlBlastingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.配置文件探针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userMYD探针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.随机探针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveResultsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.随机探针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -131,7 +112,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1113, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(1153, 34);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -151,28 +132,30 @@ namespace C2.Business.CastleBravo.VPN
             // 添加ToolStripMenuItem
             // 
             this.添加ToolStripMenuItem.Name = "添加ToolStripMenuItem";
-            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.添加ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
             this.添加ToolStripMenuItem.Text = "单个添加";
+            this.添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // 批量添加ToolStripMenuItem
             // 
             this.批量添加ToolStripMenuItem.Name = "批量添加ToolStripMenuItem";
-            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
             this.批量添加ToolStripMenuItem.Text = "批量添加";
+            this.批量添加ToolStripMenuItem.Click += new System.EventHandler(this.批量添加ToolStripMenuItem_Click);
             // 
             // 查找ToolStripMenuItem
             // 
             this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
             this.查找ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
             this.查找ToolStripMenuItem.Text = "查找";
+            this.查找ToolStripMenuItem.Click += new System.EventHandler(this.查找ToolStripMenuItem_Click);
             // 
             // checkAliveDDB
             // 
             this.checkAliveDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.checkAliveDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshAllShellMenu,
-            this.refreshOtherMenu2,
             this.secondRefreshMenu});
             this.checkAliveDDB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.checkAliveDDB.Image = ((System.Drawing.Image)(resources.GetObject("checkAliveDDB.Image")));
@@ -187,7 +170,7 @@ namespace C2.Business.CastleBravo.VPN
             this.重新开始ToolStripMenuItem1,
             this.继续上次ToolStripMenuItem1});
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(270, 34);
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(186, 34);
             this.refreshAllShellMenu.Text = "批量验活";
             // 
             // 重新开始ToolStripMenuItem1
@@ -195,38 +178,19 @@ namespace C2.Business.CastleBravo.VPN
             this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
             this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.重新开始ToolStripMenuItem1.Text = "重新开始";
+            this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.重新开始_批量验活_ToolStripMenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem1
             // 
             this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
             this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
-            // 
-            // refreshOtherMenu2
-            // 
-            this.refreshOtherMenu2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.重新开始ToolStripMenuItem,
-            this.继续上次ToolStripMenuItem});
-            this.refreshOtherMenu2.Name = "refreshOtherMenu2";
-            this.refreshOtherMenu2.Size = new System.Drawing.Size(270, 34);
-            this.refreshOtherMenu2.Text = "境外站验活";
-            // 
-            // 重新开始ToolStripMenuItem
-            // 
-            this.重新开始ToolStripMenuItem.Name = "重新开始ToolStripMenuItem";
-            this.重新开始ToolStripMenuItem.Size = new System.Drawing.Size(186, 34);
-            this.重新开始ToolStripMenuItem.Text = "重新开始";
-            // 
-            // 继续上次ToolStripMenuItem
-            // 
-            this.继续上次ToolStripMenuItem.Name = "继续上次ToolStripMenuItem";
-            this.继续上次ToolStripMenuItem.Size = new System.Drawing.Size(186, 34);
-            this.继续上次ToolStripMenuItem.Text = "继续上次";
+            this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.继续上次_二刷不活_ToolStripMenuItem_Click);
             // 
             // secondRefreshMenu
             // 
             this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(270, 34);
+            this.secondRefreshMenu.Size = new System.Drawing.Size(186, 34);
             this.secondRefreshMenu.Text = "二刷不活";
             // 
             // infoCollectionMenu
@@ -243,132 +207,15 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // passwdBlastingMenuItem
             // 
-            this.passwdBlastingMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mysqlBlastingToolStripMenuItem1,
-            this.配置文件探针ToolStripMenuItem1,
-            this.UserMYD探针ToolStripMenuItem1});
             this.passwdBlastingMenuItem.Name = "passwdBlastingMenuItem";
-            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.passwdBlastingMenuItem.Size = new System.Drawing.Size(186, 34);
             this.passwdBlastingMenuItem.Text = "随机探针";
-            // 
-            // mysqlBlastingToolStripMenuItem1
-            // 
-            this.mysqlBlastingToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MB_所有项ToolStripMenuItem,
-            this.MB_验活项ToolStripMenuItem,
-            this.MB_选定项ToolStripMenuItem,
-            this.MB_设置ToolStripMenuItem});
-            this.mysqlBlastingToolStripMenuItem1.Name = "mysqlBlastingToolStripMenuItem1";
-            this.mysqlBlastingToolStripMenuItem1.Size = new System.Drawing.Size(246, 34);
-            this.mysqlBlastingToolStripMenuItem1.Text = "Mysql Blasting";
-            // 
-            // MB_所有项ToolStripMenuItem
-            // 
-            this.MB_所有项ToolStripMenuItem.Name = "MB_所有项ToolStripMenuItem";
-            this.MB_所有项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.MB_所有项ToolStripMenuItem.Text = "所有项";
-            // 
-            // MB_验活项ToolStripMenuItem
-            // 
-            this.MB_验活项ToolStripMenuItem.Name = "MB_验活项ToolStripMenuItem";
-            this.MB_验活项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.MB_验活项ToolStripMenuItem.Text = "验活项";
-            // 
-            // MB_选定项ToolStripMenuItem
-            // 
-            this.MB_选定项ToolStripMenuItem.Name = "MB_选定项ToolStripMenuItem";
-            this.MB_选定项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.MB_选定项ToolStripMenuItem.Text = "选定项";
-            // 
-            // MB_设置ToolStripMenuItem
-            // 
-            this.MB_设置ToolStripMenuItem.Name = "MB_设置ToolStripMenuItem";
-            this.MB_设置ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.MB_设置ToolStripMenuItem.Text = "设置";
-            // 
-            // 配置文件探针ToolStripMenuItem1
-            // 
-            this.配置文件探针ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.配置文件探针_所有项ToolStripMenuItem,
-            this.配置文件探针_验活项ToolStripMenuItem,
-            this.配置文件探针_选定项ToolStripMenuItem});
-            this.配置文件探针ToolStripMenuItem1.Name = "配置文件探针ToolStripMenuItem1";
-            this.配置文件探针ToolStripMenuItem1.Size = new System.Drawing.Size(246, 34);
-            this.配置文件探针ToolStripMenuItem1.Text = "配置文件探针";
-            // 
-            // 配置文件探针_所有项ToolStripMenuItem
-            // 
-            this.配置文件探针_所有项ToolStripMenuItem.Name = "配置文件探针_所有项ToolStripMenuItem";
-            this.配置文件探针_所有项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.配置文件探针_所有项ToolStripMenuItem.Text = "所有项";
-            // 
-            // 配置文件探针_验活项ToolStripMenuItem
-            // 
-            this.配置文件探针_验活项ToolStripMenuItem.Name = "配置文件探针_验活项ToolStripMenuItem";
-            this.配置文件探针_验活项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.配置文件探针_验活项ToolStripMenuItem.Text = "验活项";
-            // 
-            // 配置文件探针_选定项ToolStripMenuItem
-            // 
-            this.配置文件探针_选定项ToolStripMenuItem.Name = "配置文件探针_选定项ToolStripMenuItem";
-            this.配置文件探针_选定项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.配置文件探针_选定项ToolStripMenuItem.Text = "选定项";
-            // 
-            // UserMYD探针ToolStripMenuItem1
-            // 
-            this.UserMYD探针ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.UserMYD探针_所有项ToolStripMenuItem,
-            this.UserMYD探针_验活项ToolStripMenuItem,
-            this.UserMYD探针_选定项ToolStripMenuItem});
-            this.UserMYD探针ToolStripMenuItem1.Name = "UserMYD探针ToolStripMenuItem1";
-            this.UserMYD探针ToolStripMenuItem1.Size = new System.Drawing.Size(246, 34);
-            this.UserMYD探针ToolStripMenuItem1.Text = "User.MYD探针";
-            // 
-            // UserMYD探针_所有项ToolStripMenuItem
-            // 
-            this.UserMYD探针_所有项ToolStripMenuItem.Name = "UserMYD探针_所有项ToolStripMenuItem";
-            this.UserMYD探针_所有项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.UserMYD探针_所有项ToolStripMenuItem.Text = "所有项";
-            // 
-            // UserMYD探针_验活项ToolStripMenuItem
-            // 
-            this.UserMYD探针_验活项ToolStripMenuItem.Name = "UserMYD探针_验活项ToolStripMenuItem";
-            this.UserMYD探针_验活项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.UserMYD探针_验活项ToolStripMenuItem.Text = "验活项";
-            // 
-            // UserMYD探针_选定项ToolStripMenuItem
-            // 
-            this.UserMYD探针_选定项ToolStripMenuItem.Name = "UserMYD探针_选定项ToolStripMenuItem";
-            this.UserMYD探针_选定项ToolStripMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.UserMYD探针_选定项ToolStripMenuItem.Text = "选定项";
             // 
             // systemInfoToolStripMenuItem
             // 
-            this.systemInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allSysInfoMenuItem,
-            this.aliveSysInfoMenuItem,
-            this.currentSysInfoMenuItem});
             this.systemInfoToolStripMenuItem.Name = "systemInfoToolStripMenuItem";
-            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.systemInfoToolStripMenuItem.Size = new System.Drawing.Size(186, 34);
             this.systemInfoToolStripMenuItem.Text = "重放探针";
-            // 
-            // allSysInfoMenuItem
-            // 
-            this.allSysInfoMenuItem.Name = "allSysInfoMenuItem";
-            this.allSysInfoMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.allSysInfoMenuItem.Text = "所有项";
-            // 
-            // aliveSysInfoMenuItem
-            // 
-            this.aliveSysInfoMenuItem.Name = "aliveSysInfoMenuItem";
-            this.aliveSysInfoMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.aliveSysInfoMenuItem.Text = "验活项";
-            // 
-            // currentSysInfoMenuItem
-            // 
-            this.currentSysInfoMenuItem.Name = "currentSysInfoMenuItem";
-            this.currentSysInfoMenuItem.Size = new System.Drawing.Size(168, 34);
-            this.currentSysInfoMenuItem.Text = "选定项";
             // 
             // refreshStopMenu
             // 
@@ -376,6 +223,7 @@ namespace C2.Business.CastleBravo.VPN
             this.refreshStopMenu.Name = "refreshStopMenu";
             this.refreshStopMenu.Size = new System.Drawing.Size(84, 29);
             this.refreshStopMenu.Text = "停止任务";
+            this.refreshStopMenu.Click += new System.EventHandler(this.StopMenu_Click);
             // 
             // progressBar
             // 
@@ -403,6 +251,7 @@ namespace C2.Business.CastleBravo.VPN
             this.proxySettingMenu.Name = "proxySettingMenu";
             this.proxySettingMenu.Size = new System.Drawing.Size(84, 29);
             this.proxySettingMenu.Text = "代理设置";
+            this.proxySettingMenu.Click += new System.EventHandler(this.ProxySettingMenu_Click);
             // 
             // LV
             // 
@@ -433,7 +282,7 @@ namespace C2.Business.CastleBravo.VPN
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1113, 458);
+            this.LV.Size = new System.Drawing.Size(1153, 458);
             this.LV.TabIndex = 4;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -461,12 +310,12 @@ namespace C2.Business.CastleBravo.VPN
             // lvMethod
             // 
             this.lvMethod.Text = "加密算法";
-            this.lvMethod.Width = 74;
+            this.lvMethod.Width = 107;
             // 
             // lvStatus
             // 
             this.lvStatus.Text = "验活";
-            this.lvStatus.Width = 42;
+            this.lvStatus.Width = 53;
             // 
             // lvVersion
             // 
@@ -548,29 +397,35 @@ namespace C2.Business.CastleBravo.VPN
             this.配置文件探针ToolStripMenuItem,
             this.userMYD探针ToolStripMenuItem});
             this.mysqlProbeToolStripMenuItem.Name = "mysqlProbeToolStripMenuItem";
-            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.mysqlProbeToolStripMenuItem.Text = "重放探针";
             // 
             // mysqlBlastingToolStripMenuItem
             // 
             this.mysqlBlastingToolStripMenuItem.Name = "mysqlBlastingToolStripMenuItem";
-            this.mysqlBlastingToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.mysqlBlastingToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
             this.mysqlBlastingToolStripMenuItem.Text = "Mysql Blasting";
             this.mysqlBlastingToolStripMenuItem.ToolTipText = "取证固证: 尝试Mysql管理员27000次";
             // 
             // 配置文件探针ToolStripMenuItem
             // 
             this.配置文件探针ToolStripMenuItem.Name = "配置文件探针ToolStripMenuItem";
-            this.配置文件探针ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.配置文件探针ToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
             this.配置文件探针ToolStripMenuItem.Text = "配置文件探针";
             this.配置文件探针ToolStripMenuItem.ToolTipText = "取证固证: 站点上关于Mysql的配置信息";
             // 
             // userMYD探针ToolStripMenuItem
             // 
             this.userMYD探针ToolStripMenuItem.Name = "userMYD探针ToolStripMenuItem";
-            this.userMYD探针ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.userMYD探针ToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
             this.userMYD探针ToolStripMenuItem.Text = "User.MYD探针";
             this.userMYD探针ToolStripMenuItem.ToolTipText = "取证固证: 寻找Mysql的user.MYD表文件";
+            // 
+            // 随机探针ToolStripMenuItem
+            // 
+            this.随机探针ToolStripMenuItem.Name = "随机探针ToolStripMenuItem";
+            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
+            this.随机探针ToolStripMenuItem.Text = "随机探针";
             // 
             // toolStripSeparator4
             // 
@@ -595,12 +450,6 @@ namespace C2.Business.CastleBravo.VPN
             this.SaveResultsMenuItem.Size = new System.Drawing.Size(188, 30);
             this.SaveResultsMenuItem.Text = "导出结果";
             // 
-            // 随机探针ToolStripMenuItem
-            // 
-            this.随机探针ToolStripMenuItem.Name = "随机探针ToolStripMenuItem";
-            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.随机探针ToolStripMenuItem.Text = "随机探针";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
@@ -614,7 +463,7 @@ namespace C2.Business.CastleBravo.VPN
             this.statusStrip1.Location = new System.Drawing.Point(0, 461);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 32, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1113, 31);
+            this.statusStrip1.Size = new System.Drawing.Size(1153, 31);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 6;
             // 
@@ -653,7 +502,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 492);
+            this.ClientSize = new System.Drawing.Size(1153, 492);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
@@ -690,29 +539,9 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem refreshAllShellMenu;
         private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem refreshOtherMenu2;
-        private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem secondRefreshMenu;
         private System.Windows.Forms.ToolStripDropDownButton infoCollectionMenu;
-        private System.Windows.Forms.ToolStripMenuItem passwdBlastingMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mysqlBlastingToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem MB_所有项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MB_验活项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MB_选定项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MB_设置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 配置文件探针ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 配置文件探针_所有项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 配置文件探针_验活项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 配置文件探针_选定项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem UserMYD探针ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem UserMYD探针_所有项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem UserMYD探针_验活项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem UserMYD探针_选定项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemInfoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allSysInfoMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aliveSysInfoMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem currentSysInfoMenuItem;
         private System.Windows.Forms.ToolStripLabel refreshStopMenu;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripLabel progressMenu;
@@ -750,5 +579,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripStatusLabel infoConfigStatus;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel actionStatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem passwdBlastingMenuItem;
     }
 }

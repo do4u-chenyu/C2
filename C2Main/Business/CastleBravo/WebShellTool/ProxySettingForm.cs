@@ -9,10 +9,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         public ProxySettingForm(ProxySetting proxy)
         {
             InitializeComponent();
-            InitializeWebShell(proxy);
+            InitializeProxySetting(proxy);
         }
 
-        private void InitializeWebShell(ProxySetting proxy)
+        private void InitializeProxySetting(ProxySetting proxy)
         {
             if (proxy == ProxySetting.Empty)
             {
