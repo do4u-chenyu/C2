@@ -1,11 +1,13 @@
 ﻿using C2.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Web.Script.Serialization;
 
 namespace C2.IAOLab.BankTool
 {
@@ -32,13 +34,13 @@ namespace C2.IAOLab.BankTool
             return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");
         }
 
-        public string GetBankTool(string bankCard)
+        public string GetBankTool(string bankCardNum)
         {
             Thread.Sleep(500);
             //string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
             //string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(OpUtil.StringBlank, string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
             string url = "http://113.31.114.239:53373/api/spider/bank_info";
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "keyword", bankCard } };
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "bankcard", bankCardNum } };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Timeout = 200000;
             string content = JsonConvert.SerializeObject(pairs);
@@ -46,38 +48,22 @@ namespace C2.IAOLab.BankTool
 
             request.Method = "POST";
             request.ContentType = "application/json";
-            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
-            request.Headers.Set("cookie", "td_cookie=1206126369; t=ed9584c3ee86740383a6dd94af963b16; r=461; UM_distinctid=17e2f0d4f7950c-0b8d03a6e92b87-3b39580e-1fa400-17e2f0d4f7a530; ASPSESSIONIDSSRDRBDB=CAJABDJAFEBEAAAHIOFCLBBC; CNZZDATA1279885053=887337253-1641463516-null%7C1643249436; security_session_verify=d256ef371a6fb7ffda35fec7c01e5c64");
+            //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
+            //request.Headers.Set("cookie", "td_cookie=1206126369; t=ed9584c3ee86740383a6dd94af963b16; r=461; UM_distinctid=17e2f0d4f7950c-0b8d03a6e92b87-3b39580e-1fa400-17e2f0d4f7a530; ASPSESSIONIDSSRDRBDB=CAJABDJAFEBEAAAHIOFCLBBC; CNZZDATA1279885053=887337253-1641463516-null%7C1643249436; security_session_verify=d256ef371a6fb7ffda35fec7c01e5c64");
 
             HttpWebResponse response;
+            string postContent;
             try
             {
                 using (var stream = request.GetRequestStream())
                     stream.Write(data, 0, data.Length);
-                //获得响应流
                 response = (HttpWebResponse)request.GetResponse();
-            }
-            catch (WebException ex)
-            {
-                response = ex.Response as HttpWebResponse;
-            }
-            Stream s;
-            try
-            {
-                if(response == null)
-                    return "网络连接中断";
-                s = response.GetResponseStream();
-  
+                postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
             }
             catch
             {
                 return "网络连接中断";
             }
-            //  Stream postData = Request.InputStream;
-            StreamReader sRead = new StreamReader(s);
-            string postContent = sRead.ReadToEnd();
-            sRead.Close();
-
             /*
              * 458123038888888
              * <a href=http://www.guabu.com/bank/card/458123038888888.htm>吉林省 - 四平</a>
@@ -86,18 +72,25 @@ namespace C2.IAOLab.BankTool
              * <a href="http://www.bankcomm.com" target="_blank">http://www.bankcomm.com</a>
              */
 
+            JObject json = JObject.Parse(postContent);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            Dictionary<string, object> obj = (Dictionary<string, object>)serializer.DeserializeObject(postContent);
+            if (json["success"].ToString() == "0")
+                return "银行卡查询接口错误";
+            var gList = json["card_info"];
             List<string> cardInfo = new List<string>();
-            cardInfo = subString(postContent, "<td>", "</td>"); 
-
-            if(cardInfo.Count == 5) 
+            try
             {
-                return String.Format("{0}\t{1}\t{2}",
-                                    cardInfo[2].Split('-')[0].Trim(),//银行卡号
-                                    cardInfo[2].Split('-')[1].Trim(),//卡种
-                                    GetChinese(cardInfo[1])); //归属地
+                cardInfo.Add(gList["card"].ToString().Trim());
+                cardInfo.Add(gList["type"].ToString().Replace("-", string.Empty).Replace(" ", string.Empty));
+                cardInfo.Add(gList["city"].ToString().Replace("-", string.Empty).Replace(" ", string.Empty));
             }
-            if (cardInfo.Count == 1)
-                return cardInfo[0];
+            catch { }
+
+            if(cardInfo.Count ==3)
+            {
+                return string.Join("\t", cardInfo);
+            }
 
             return "查询失败";
 
@@ -117,6 +110,7 @@ namespace C2.IAOLab.BankTool
             */
         }
 
+        /*
         public string GetChinese(string str)
         {
             //声明存储结果的字符串
@@ -159,5 +153,6 @@ namespace C2.IAOLab.BankTool
                 return info;
             }
         }
+        */
     }
 }
