@@ -133,8 +133,8 @@
             this.taskComboBox.FormattingEnabled = true;
             this.taskComboBox.ItemHeight = 18;
             this.taskComboBox.Items.AddRange(new object[] {
-            "Hash逆向分析",
-            "目标侦察(施工中...)"});
+            "常规MD5",
+            "带盐MD5"});
             this.taskComboBox.Location = new System.Drawing.Point(144, 20);
             this.taskComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.taskComboBox.Name = "taskComboBox";
