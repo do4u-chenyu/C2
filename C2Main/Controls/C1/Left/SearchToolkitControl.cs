@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
 {
+    [Serializable]
     struct LastOptionInfo
     {
+        public static readonly LastOptionInfo Empty = new LastOptionInfo();
         public string BastionIP;
         public string SearchAgentIP;
         public string Username;
@@ -20,12 +22,12 @@ namespace C2.Controls.C1.Left
     };
     public partial class SearchToolkitControl : BaseLeftInnerPanel
     {
-        private readonly SearchTaskManager taskManager;
         private LastOptionInfo lastInfo;
+        private SearchTaskManager taskManager;
+        private readonly string loi = Path.Combine(Global.TempDirectory, "LastOptionInfo.ini");
+
         public SearchToolkitControl()
         {
-            taskManager = new SearchTaskManager();
-            lastInfo = new LastOptionInfo();
             InitializeComponent();     
             SearchToolkitControlLoad();
             PluginsButtonLoad();
@@ -46,6 +48,8 @@ namespace C2.Controls.C1.Left
             lastInfo.SearchAgentIP = task.SearchAgentIP;
             lastInfo.Username = task.Username;
             lastInfo.InterfaceIP = task.InterfaceIP;
+            SaveLastOptionInfo();
+            
 
             string message;
             //TODO  新增daemon机的IP选择窗口
@@ -82,10 +86,13 @@ namespace C2.Controls.C1.Left
 
         private void SearchToolkitControlLoad()
         {
+            taskManager = new SearchTaskManager();
             taskManager.Refresh();
 
             foreach (SearchTaskInfo task in taskManager.Tasks)
                 AddInnerButton(new SearchToolkitButton(task));
+
+            LoadLastOptionInfo();
         }
 
         public void DeleteButton(SearchToolkitButton button, SearchTaskInfo task)
@@ -147,6 +154,16 @@ namespace C2.Controls.C1.Left
         private void SearchToolkitControl_Resize(object sender, EventArgs e)
         {
             ResizeCBLocation();
+        }
+
+        private void SaveLastOptionInfo()
+        {
+            FileUtil.WriteToDisk<LastOptionInfo>(loi, lastInfo);
+        }
+
+        private void LoadLastOptionInfo()
+        {
+            lastInfo = FileUtil.ReadFromDisk<LastOptionInfo>(loi, LastOptionInfo.Empty);
         }
     }
 }

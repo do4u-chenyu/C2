@@ -80,6 +80,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
@@ -610,6 +611,7 @@
             // 
             // BaiduLBSTabPage
             // 
+            this.BaiduLBSTabPage.Controls.Add(this.label8);
             this.BaiduLBSTabPage.Controls.Add(this.textBox1);
             this.BaiduLBSTabPage.Controls.Add(this.button1);
             this.BaiduLBSTabPage.Controls.Add(this.button2);
@@ -683,6 +685,15 @@
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin;*.*";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(524, 346);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 24);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "施工中";
             // 
             // BinaryMainForm
             // 
@@ -767,5 +778,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label8;
     }
 }

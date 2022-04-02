@@ -118,7 +118,7 @@ namespace QQSpiderPlugin
         public List<string> QueryKeyWord(string id)
         {
             List<string> resultList = new List<string> { };
-            string url = "http://47.94.39.209:8899/api/spider/group_info";
+            string url = "http://113.31.114.239:53373/api/spider/group_info";
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "keyword", id } };
             try
             {

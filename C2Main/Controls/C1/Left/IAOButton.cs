@@ -29,6 +29,7 @@ using C2.Business.HIBU.FaceDetector;
 using C2.Business.HIBU.FaceBeauty;
 using C2.Business.HIBU.FaceExpression;
 using C2.Business.HIBU.FaceRecognizer;
+using C2.Business.IAOLab.PwdGenerator;
 
 namespace C2.Controls.Left
 {
@@ -87,6 +88,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PostAndGet;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PostAndGetFormHelpInfo);
                     break;
+                case "GoldEyes": 
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.GoldEyes;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GoldEyesFormHelpInfo);
+                    break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
@@ -102,6 +107,10 @@ namespace C2.Controls.Left
                 case "Fraud":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.fraud;
                     toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FraudFormHelpInfo);
+                    break;
+                case "PwdGenerator":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.dictGenerator;
+                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
                     break;
                 case "图片文本识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
@@ -266,8 +275,14 @@ namespace C2.Controls.Left
                 case "PostAndGet":
                     new PostAndGetForm().ShowDialog();
                     break;
+                case "GoldEyes":
+                    new GoldEyesForm().ShowDialog();
+                    break;
                 case "Fraud":
                     new FraudDialog().ShowDialog();
+                    break;
+                case "PwdGenerator":
+                    new PwdGeneratorForm().ShowDialog();
                     break;
                 case "BigAPK":
                     BigAPKForm().ShowDialog();

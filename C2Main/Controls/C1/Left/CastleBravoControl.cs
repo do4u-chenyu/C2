@@ -242,7 +242,6 @@ namespace C2.Controls.C1.Left
                 "WebShell", 
                 "VPN",
                 "Binary",
-                "PwdGenerator",
                 "Cracker",
                 /*"RobotsScan",*/ 
                 "WebScan",

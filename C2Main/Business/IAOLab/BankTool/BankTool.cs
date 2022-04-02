@@ -1,8 +1,10 @@
 ﻿using C2.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading;
 
 namespace C2.IAOLab.BankTool
@@ -34,27 +36,24 @@ namespace C2.IAOLab.BankTool
         {
             Thread.Sleep(500);
             //string strURL = "http://www.teldata2018.com/cha/kapost.php?ka="+ bankCard.Replace(" ", string.Empty);
-            string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(OpUtil.StringBlank, string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
-           
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
+            //string strURL = "http://www.guabu.com/bank/?cardid=" + bankCard.Replace(OpUtil.StringBlank, string.Empty);//新接口，不好用，查得慢，输入中文会返回锟斤拷
+            string url = "http://113.31.114.239:53373/api/spider/bank_info";
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "keyword", bankCard } };
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Timeout = 200000;
+            string content = JsonConvert.SerializeObject(pairs);
+            byte[] data = Encoding.UTF8.GetBytes(content);
+
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/json";
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
             request.Headers.Set("cookie", "td_cookie=1206126369; t=ed9584c3ee86740383a6dd94af963b16; r=461; UM_distinctid=17e2f0d4f7950c-0b8d03a6e92b87-3b39580e-1fa400-17e2f0d4f7a530; ASPSESSIONIDSSRDRBDB=CAJABDJAFEBEAAAHIOFCLBBC; CNZZDATA1279885053=887337253-1641463516-null%7C1643249436; security_session_verify=d256ef371a6fb7ffda35fec7c01e5c64");
-
-            Stream writer = null;
-            try
-            {
-                writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
-            }
-            catch (Exception)
-            {
-                return "网络连接失败 ";
-            }
 
             HttpWebResponse response;
             try
             {
+                using (var stream = request.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
                 //获得响应流
                 response = (HttpWebResponse)request.GetResponse();
             }

@@ -1,6 +1,5 @@
 ﻿using C2.Business.CastleBravo.Binary;
 using C2.Business.CastleBravo.Intruder;
-using C2.Business.CastleBravo.PwdGenerator;
 using C2.Business.CastleBravo.RobotsScan;
 using C2.Business.CastleBravo.VPN;
 using C2.Business.CastleBravo.WebScan;
@@ -58,10 +57,6 @@ namespace C2.Controls.C1.Left
                 case "Cracker":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.cracker;
                     this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.CrackerFormHelpInfo);
-                    break;
-                case "PwdGenerator":
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.dictGenerator;
-                    this.toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
                     break;
                 case "WebScan":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.WebScan;
@@ -173,9 +168,6 @@ namespace C2.Controls.C1.Left
             {
                 case "Cracker":
                     new CrackerForm().ShowDialog();
-                    break;
-                case "PwdGenerator":
-                    new PwdGeneratorForm().ShowDialog();
                     break;
                 case "WebScan":
                     new WebScanForm().ShowDialog();
