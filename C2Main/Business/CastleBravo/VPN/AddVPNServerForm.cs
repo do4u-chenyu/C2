@@ -16,6 +16,8 @@ namespace C2.Business.CastleBravo.VPN
         public AddVPNServerForm()
         {
             InitializeComponent();
+            this.OKButton.Size = new Size(75, 27);
+            this.CancelBtn.Size = new Size(75, 27);
         }
 
         public VPNTaskConfig ShowDialog(string createTime)
