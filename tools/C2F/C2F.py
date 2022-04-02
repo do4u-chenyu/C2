@@ -63,7 +63,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
        
 def without_extension(path):
-    return os.path.basename(path.split('.')[0])
+    return os.path.basename(path).split('.')[0]
 
 def roll_rmtree(path, ignore_path):
     backuplist = glob.glob(os.path.join(path + r'\202*'))
