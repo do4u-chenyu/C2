@@ -79,10 +79,12 @@ namespace C2.Business.CastleBravo.VPN
             ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
         }
 
-        private bool actionNeedStop = false;
+        
+       // private bool actionNeedStop = false;
         private void StopMenu_Click(object sender, System.EventArgs e)
         {
-            actionNeedStop = true;
+            //actionNeedStop = true;
         }
+        
     }
 }
