@@ -150,19 +150,18 @@ namespace C2.Dialogs.CastleBravo
         private void AddCBTask_Load(object sender, EventArgs e)
         {
             Reset();
+            this.OKButton.Size = new System.Drawing.Size(75, 27);
+            this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
 
         private void Reset(int i = 0)
         {
             this.taskComboBox.SelectedIndex = i;
-            this.modeComboBox.SelectedIndex = 0;
-            this.modeComboBox.Visible = this.taskComboBox.SelectedIndex == 0;
-            this.label3.Visible = this.taskComboBox.SelectedIndex == 0;
-            this.browserButton.Visible = this.taskComboBox.SelectedIndex == 0;
-            this.filePathTextBox.ReadOnly = this.taskComboBox.SelectedIndex != 0;
-
-            this.OKButton.Size = new System.Drawing.Size(75, 27);
-            this.CancelBtn.Size = new System.Drawing.Size(75, 27);
+            this.modeComboBox.SelectedIndex = i == 0 ? -1 : 0;
+            this.modeComboBox.Enabled = i == 1;
+            
+            this.md5Label.Visible  = i == 0;
+            this.saltLabel.Visible = i == 1;
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -34,7 +34,7 @@
             this.taskNameTextBox = new System.Windows.Forms.TextBox();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.browserButton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.md5Label = new System.Windows.Forms.Label();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.label4 = new System.Windows.Forms.Label();
             this.taskComboBox = new System.Windows.Forms.ComboBox();
@@ -49,6 +49,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.saltLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -101,16 +102,16 @@
             this.browserButton.UseVisualStyleBackColor = true;
             this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
-            // label3
+            // md5Label
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(141, 194);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(305, 18);
-            this.label3.TabIndex = 10008;
-            this.label3.Text = "*文件内容格式，一个hash字符串一行";
+            this.md5Label.AutoSize = true;
+            this.md5Label.ForeColor = System.Drawing.Color.Red;
+            this.md5Label.Location = new System.Drawing.Point(141, 194);
+            this.md5Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.md5Label.Name = "md5Label";
+            this.md5Label.Size = new System.Drawing.Size(179, 18);
+            this.md5Label.TabIndex = 10008;
+            this.md5Label.Text = "*格式: MD5 一行一个";
             // 
             // ofd
             // 
@@ -133,12 +134,12 @@
             this.taskComboBox.FormattingEnabled = true;
             this.taskComboBox.ItemHeight = 18;
             this.taskComboBox.Items.AddRange(new object[] {
-            "常规MD5",
-            "带盐MD5"});
+            "常规MD5分析",
+            "带盐MD5分析"});
             this.taskComboBox.Location = new System.Drawing.Point(144, 20);
             this.taskComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.taskComboBox.Name = "taskComboBox";
-            this.taskComboBox.Size = new System.Drawing.Size(416, 26);
+            this.taskComboBox.Size = new System.Drawing.Size(284, 26);
             this.taskComboBox.TabIndex = 10010;
             this.taskComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskComboBox_SelectedIndexChanged);
             // 
@@ -150,24 +151,13 @@
             this.modeComboBox.FormattingEnabled = true;
             this.modeComboBox.ItemHeight = 18;
             this.modeComboBox.Items.AddRange(new object[] {
-            "自动",
-            "MD5",
             "MD5(SHA1($pwd))",
-            "MD5(MD5($pwd))",
-            "MD5(MD5(MD5($pwd)))",
             "MD5(SHA256($pwd))",
-            "MD5(SHA512($pwd))",
-            "SHA1",
-            "SHA1(MD5($pwd))",
-            "SHA256",
-            "SHA512",
-            "宝塔面板",
-            "Mysql5",
-            "三代冰蝎"});
-            this.modeComboBox.Location = new System.Drawing.Point(574, 86);
+            "MD5(SHA512($pwd))"});
+            this.modeComboBox.Location = new System.Drawing.Point(474, 20);
             this.modeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.modeComboBox.Name = "modeComboBox";
-            this.modeComboBox.Size = new System.Drawing.Size(108, 26);
+            this.modeComboBox.Size = new System.Drawing.Size(210, 26);
             this.modeComboBox.TabIndex = 10011;
             // 
             // md5TextBox
@@ -283,12 +273,25 @@
             this.label9.Size = new System.Drawing.Size(0, 18);
             this.label9.TabIndex = 10021;
             // 
+            // saltLabel
+            // 
+            this.saltLabel.AutoSize = true;
+            this.saltLabel.ForeColor = System.Drawing.Color.Red;
+            this.saltLabel.Location = new System.Drawing.Point(141, 194);
+            this.saltLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.saltLabel.Name = "saltLabel";
+            this.saltLabel.Size = new System.Drawing.Size(305, 18);
+            this.saltLabel.TabIndex = 10022;
+            this.saltLabel.Text = "*格式: MD5 Salt 空格分割,一行一个";
+            this.saltLabel.Visible = false;
+            // 
             // AddCBTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(705, 477);
+            this.Controls.Add(this.saltLabel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.queryButton);
@@ -300,7 +303,7 @@
             this.Controls.Add(this.modeComboBox);
             this.Controls.Add(this.taskComboBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.md5Label);
             this.Controls.Add(this.browserButton);
             this.Controls.Add(this.filePathTextBox);
             this.Controls.Add(this.taskNameTextBox);
@@ -319,7 +322,7 @@
             this.Controls.SetChildIndex(this.taskNameTextBox, 0);
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.browserButton, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.md5Label, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.taskComboBox, 0);
             this.Controls.SetChildIndex(this.modeComboBox, 0);
@@ -331,6 +334,7 @@
             this.Controls.SetChildIndex(this.queryButton, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.saltLabel, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,7 +347,7 @@
         private System.Windows.Forms.TextBox taskNameTextBox;
         private System.Windows.Forms.TextBox filePathTextBox;
         private System.Windows.Forms.Button browserButton;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label md5Label;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox taskComboBox;
@@ -358,5 +362,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label saltLabel;
     }
 }
