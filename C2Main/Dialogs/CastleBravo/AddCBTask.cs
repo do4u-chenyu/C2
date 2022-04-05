@@ -18,6 +18,7 @@ namespace C2.Dialogs.CastleBravo
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
 
         private static readonly int MaxRowNumber = 2000;   // 单任务最大处理数
+        private static readonly int MaxSaltRowNumber = 5;  // Salt模式最大处理数
 
         public AddCBTask()
         {
@@ -39,19 +40,26 @@ namespace C2.Dialogs.CastleBravo
 
         protected override bool OnOKButtonClick()
         {
-            TaskName = TaskName.Trim(); //去掉首尾空白符
+            int mode = this.taskComboBox.SelectedIndex;
 
-            if (this.pasteModeCB.Checked)
+            TaskName = TaskName.Trim(); //去掉首尾空白符
+            if (!IsValidityTaskName())
+                return false;
+
+            if (mode == 0 && this.pasteModeCB.Checked)
             {
                 if (this.md5TextBox.Text.Trim().IsEmpty())
                     return false;
                 GenPasteCBFile();
             }
 
-            if (!IsValidityTaskName() || !IsValidityFilePath())
+            if (mode == 0 && !IsValidityFilePath())
                 return false;
 
-            List<string> md5List = GetUrlsFromFile(FilePath);
+            if (mode == 1 && !IsValidityDGV())
+                return false;
+
+            List<string> md5List = mode == 0 ? GenMD5ListFromFile(FilePath) : GenMD5ListFromDGV();
             if (md5List.Count == 0)
                 return false;
 
@@ -89,7 +97,16 @@ namespace C2.Dialogs.CastleBravo
         {
             FileUtil.FileWriteToEnd(FilePath, this.md5TextBox.Text);
         }
-        private List<string> GetUrlsFromFile(string filePath)
+
+        private List<string> GenMD5ListFromDGV()
+        {
+            for (int i = 0; i < Math.Min(MaxSaltRowNumber, DGV.Rows.Count); i++)
+            {
+
+            }
+            return new List<string>();
+        }
+        private List<string> GenMD5ListFromFile(string filePath)
         {
 
             List<string> md5List = new List<string>();
@@ -149,6 +166,19 @@ namespace C2.Dialogs.CastleBravo
             return true;
         }
 
+        private bool IsValidityDGV()
+        {
+            bool empty = true;
+            for (int i = 0; i < DGV.Rows.Count; i++)
+                for (int j = 0; j < DGV.Rows[i].Cells.Count; j++)
+                    empty = empty && DGV.Rows[i].Cells[j].Value == null;
+
+            if (empty)
+                HelpUtil.ShowMessageBox("列表为空,没有在列表中填写需要分析的MD5");
+      
+            return !empty;
+        }
+
         private void AddCBTask_Load(object sender, EventArgs e)
         {
             Reset();
@@ -159,6 +189,9 @@ namespace C2.Dialogs.CastleBravo
         private void Reset(int i = 0)
         {
             this.taskComboBox.SelectedIndex = i;
+            // Salt模式时, mode必须选一个
+            if (i == 1 && this.modeComboBox.SelectedIndex < 0)
+                this.modeComboBox.SelectedIndex = 1;
 
             // 常规MD5模式
             this.md5Label.Visible = i == 0;
@@ -183,7 +216,7 @@ namespace C2.Dialogs.CastleBravo
         private void InitializeDGV()
         {
             this.DGV.SetAutoScaleMode(AutoScaleMode.None);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < MaxSaltRowNumber; i++)
                 this.DGV.Rows.Add();
         }
 
@@ -238,9 +271,9 @@ namespace C2.Dialogs.CastleBravo
                 result = reader.ReadToEnd();
             }
             if(result.Contains("True"))
-                MessageBox.Show("远程服务器-彩虹表在忙", "查询结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("远程服务器-彩虹表在忙", "查询结果");
             else
-                MessageBox.Show("远程服务器-彩虹表空闲, 欢迎使用", "查询结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                HelpUtil.ShowMessageBox("远程服务器-彩虹表空闲, 欢迎使用", "查询结果");
         }
     }
 }
