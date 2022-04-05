@@ -100,11 +100,19 @@ namespace C2.Dialogs.CastleBravo
 
         private List<string> GenMD5ListFromDGV()
         {
-            for (int i = 0; i < Math.Min(MaxSaltRowNumber, DGV.Rows.Count); i++)
-            {
+            List<string> ret = new List<string>();
+            // 添加Salt模式的第一行控制信息
+            // @@@  Mode    ###
+            ret.Add(string.Format("@@@\t{0}\t###", modeComboBox.Text));
 
+            for (int i = 0; i < DGV.Rows.Count; i++)
+            {
+                string pass = ST.GetValue<string>(DGV.Rows[i].Cells[0].Value, string.Empty);
+                string salt = ST.GetValue<string>(DGV.Rows[i].Cells[1].Value, string.Empty);
+                string user = ST.GetValue<string>(DGV.Rows[i].Cells[2].Value, string.Empty);
+                ret.Add(string.Format("{0}\t{1}\t{2}", pass, salt, user));
             }
-            return new List<string>();
+             return ret;
         }
         private List<string> GenMD5ListFromFile(string filePath)
         {
