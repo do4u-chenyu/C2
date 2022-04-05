@@ -23,6 +23,8 @@ namespace C2.Dialogs.CastleBravo
         {
             InitializeComponent();
             InitTaskName();
+            InitializeDGV();
+            InitializeSaltMode();
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace C2.Dialogs.CastleBravo
 
         protected override bool OnOKButtonClick()
         {
-            TaskName = TaskName.Trim();//去掉首尾空白符
+            TaskName = TaskName.Trim(); //去掉首尾空白符
 
             if (this.pasteModeCB.Checked)
             {
@@ -157,11 +159,40 @@ namespace C2.Dialogs.CastleBravo
         private void Reset(int i = 0)
         {
             this.taskComboBox.SelectedIndex = i;
-            this.modeComboBox.SelectedIndex = i == 0 ? -1 : 0;
-            this.modeComboBox.Enabled = i == 1;
-            
-            this.md5Label.Visible  = i == 0;
+
+            // 常规MD5模式
+            this.md5Label.Visible = i == 0;
+            this.fileLabel.Visible = i == 0;
+            this.md5TextBox.Visible = i == 0;
+            this.browserButton.Visible = i == 0;
+            this.filePathTextBox.Visible = i == 0;
+            this.pasteModeCB.Visible = i == 0;
+            this.label5.Visible = i == 0;
+            this.label6.Visible = i == 0;
+            // 加盐MD5模式
+            this.label2.Visible = i == 1;
+            this.label3.Visible = i == 1;
+            this.label10.Visible = i == 1;
+            this.label11.Visible = i == 1;
+            this.DGV.Visible = i == 1;
+            this.modeLabel.Visible = i == 1;
             this.saltLabel.Visible = i == 1;
+            this.modeComboBox.Visible = i == 1;
+        }
+
+        private void InitializeDGV()
+        {
+            this.DGV.SetAutoScaleMode(AutoScaleMode.None);
+            for (int i = 0; i < 5; i++)
+                this.DGV.Rows.Add();
+        }
+
+        private void InitializeSaltMode()
+        {
+            this.modeComboBox.Items.AddRange(new object[] {
+            "MD5(SHA1($Pass))",
+            "MD5(SHA256($Pass))",
+            "MD5(SHA512($Pass))"});
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,9 +238,9 @@ namespace C2.Dialogs.CastleBravo
                 result = reader.ReadToEnd();
             }
             if(result.Contains("True"))
-                MessageBox.Show("彩虹表在忙", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("远程服务器-彩虹表在忙", "查询结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show("彩虹表空闲, 欢迎使用", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("远程服务器-彩虹表空闲, 欢迎使用", "查询结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

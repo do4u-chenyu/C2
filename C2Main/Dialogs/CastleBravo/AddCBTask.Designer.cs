@@ -29,8 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.fileLabel = new System.Windows.Forms.Label();
             this.taskNameTextBox = new System.Windows.Forms.TextBox();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.browserButton = new System.Windows.Forms.Button();
@@ -50,33 +54,44 @@
             this.label9 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saltLabel = new System.Windows.Forms.Label();
+            this.DGV = new System.Windows.Forms.DataGridView();
+            this.PassColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaltColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modeLabel = new System.Windows.Forms.Label();
+            this.saltDescLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(38, 87);
+            this.label1.Location = new System.Drawing.Point(37, 84);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 28);
             this.label1.TabIndex = 10003;
             this.label1.Text = "任务名：";
             // 
-            // label2
+            // fileLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(16, 152);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 28);
-            this.label2.TabIndex = 10004;
-            this.label2.Text = "查询文件：";
+            this.fileLabel.AutoSize = true;
+            this.fileLabel.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.fileLabel.Location = new System.Drawing.Point(16, 150);
+            this.fileLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fileLabel.Name = "fileLabel";
+            this.fileLabel.Size = new System.Drawing.Size(117, 28);
+            this.fileLabel.TabIndex = 10004;
+            this.fileLabel.Text = "查询文件：";
             // 
             // taskNameTextBox
             // 
-            this.taskNameTextBox.Location = new System.Drawing.Point(144, 84);
+            this.taskNameTextBox.Location = new System.Drawing.Point(144, 85);
             this.taskNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.taskNameTextBox.Name = "taskNameTextBox";
             this.taskNameTextBox.Size = new System.Drawing.Size(416, 28);
@@ -93,7 +108,7 @@
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(574, 150);
+            this.browserButton.Location = new System.Drawing.Point(574, 147);
             this.browserButton.Margin = new System.Windows.Forms.Padding(4);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(110, 36);
@@ -139,7 +154,7 @@
             this.taskComboBox.Location = new System.Drawing.Point(144, 20);
             this.taskComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.taskComboBox.Name = "taskComboBox";
-            this.taskComboBox.Size = new System.Drawing.Size(284, 26);
+            this.taskComboBox.Size = new System.Drawing.Size(416, 26);
             this.taskComboBox.TabIndex = 10010;
             this.taskComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskComboBox_SelectedIndexChanged);
             // 
@@ -150,14 +165,10 @@
             this.modeComboBox.Font = new System.Drawing.Font("宋体", 9F);
             this.modeComboBox.FormattingEnabled = true;
             this.modeComboBox.ItemHeight = 18;
-            this.modeComboBox.Items.AddRange(new object[] {
-            "MD5(SHA1($pwd))",
-            "MD5(SHA256($pwd))",
-            "MD5(SHA512($pwd))"});
-            this.modeComboBox.Location = new System.Drawing.Point(474, 20);
+            this.modeComboBox.Location = new System.Drawing.Point(144, 150);
             this.modeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.modeComboBox.Name = "modeComboBox";
-            this.modeComboBox.Size = new System.Drawing.Size(210, 26);
+            this.modeComboBox.Size = new System.Drawing.Size(416, 26);
             this.modeComboBox.TabIndex = 10011;
             // 
             // md5TextBox
@@ -280,10 +291,181 @@
             this.saltLabel.Location = new System.Drawing.Point(141, 194);
             this.saltLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.saltLabel.Name = "saltLabel";
-            this.saltLabel.Size = new System.Drawing.Size(305, 18);
+            this.saltLabel.Size = new System.Drawing.Size(260, 18);
             this.saltLabel.TabIndex = 10022;
-            this.saltLabel.Text = "*格式: MD5 Salt 空格分割,一行一个";
+            this.saltLabel.Text = "*格式: 填表 MD5,Salt 最多5行";
             this.saltLabel.Visible = false;
+            // 
+            // DGV
+            // 
+            this.DGV.AllowUserToAddRows = false;
+            this.DGV.AllowUserToDeleteRows = false;
+            this.DGV.AllowUserToResizeColumns = false;
+            this.DGV.AllowUserToResizeRows = false;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            this.DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            this.DGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGV.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
+            this.DGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.DGV.ColumnHeadersHeight = 20;
+            this.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PassColumn,
+            this.SaltColumn,
+            this.UColumn});
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 8F);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV.DefaultCellStyle = dataGridViewCellStyle15;
+            this.DGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.DGV.Location = new System.Drawing.Point(144, 224);
+            this.DGV.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
+            this.DGV.MultiSelect = false;
+            this.DGV.Name = "DGV";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.Format = "N0";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.DGV.RowHeadersVisible = false;
+            this.DGV.RowHeadersWidth = 10;
+            this.DGV.RowTemplate.Height = 30;
+            this.DGV.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DGV.ShowCellErrors = false;
+            this.DGV.ShowCellToolTips = false;
+            this.DGV.ShowEditingIcon = false;
+            this.DGV.ShowRowErrors = false;
+            this.DGV.Size = new System.Drawing.Size(416, 174);
+            this.DGV.TabIndex = 10023;
+            this.DGV.Visible = false;
+            // 
+            // PassColumn
+            // 
+            this.PassColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PassColumn.FillWeight = 50F;
+            this.PassColumn.HeaderText = "Pass";
+            this.PassColumn.MinimumWidth = 8;
+            this.PassColumn.Name = "PassColumn";
+            this.PassColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.PassColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.PassColumn.ToolTipText = "待分析的MD5值";
+            // 
+            // SaltColumn
+            // 
+            this.SaltColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SaltColumn.FillWeight = 40F;
+            this.SaltColumn.HeaderText = "Salt";
+            this.SaltColumn.MinimumWidth = 8;
+            this.SaltColumn.Name = "SaltColumn";
+            this.SaltColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.SaltColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SaltColumn.ToolTipText = "Pass(MD5)对应的盐值";
+            // 
+            // UColumn
+            // 
+            this.UColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UColumn.FillWeight = 10F;
+            this.UColumn.HeaderText = "U";
+            this.UColumn.MinimumWidth = 8;
+            this.UColumn.Name = "UColumn";
+            this.UColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.UColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.UColumn.ToolTipText = "Pass(MD5)对应的用户名";
+            // 
+            // modeLabel
+            // 
+            this.modeLabel.AutoSize = true;
+            this.modeLabel.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.modeLabel.Location = new System.Drawing.Point(16, 150);
+            this.modeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.modeLabel.Name = "modeLabel";
+            this.modeLabel.Size = new System.Drawing.Size(117, 28);
+            this.modeLabel.TabIndex = 10024;
+            this.modeLabel.Text = "加密模式：";
+            this.modeLabel.Visible = false;
+            // 
+            // saltDescLabel
+            // 
+            this.saltDescLabel.AutoSize = true;
+            this.saltDescLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.saltDescLabel.ForeColor = System.Drawing.Color.Red;
+            this.saltDescLabel.Location = new System.Drawing.Point(6, 267);
+            this.saltDescLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.saltDescLabel.Name = "saltDescLabel";
+            this.saltDescLabel.Size = new System.Drawing.Size(125, 18);
+            this.saltDescLabel.TabIndex = 10025;
+            this.saltDescLabel.Text = "* 最多一次5个";
+            this.saltDescLabel.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(6, 267);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 18);
+            this.label2.TabIndex = 10026;
+            this.label2.Text = "* 带盐模式";
+            this.label2.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(6, 294);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 18);
+            this.label3.TabIndex = 10027;
+            this.label3.Text = "* Salt填盐值";
+            this.label3.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(6, 322);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 18);
+            this.label10.TabIndex = 10028;
+            this.label10.Text = "* U(可选)";
+            this.label10.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(571, 156);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 18);
+            this.label11.TabIndex = 10029;
+            this.label11.Text = "*(必选)";
+            this.label11.Visible = false;
             // 
             // AddCBTask
             // 
@@ -291,6 +473,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(705, 477);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.saltLabel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
@@ -299,34 +484,42 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.pasteModeCB);
-            this.Controls.Add(this.md5TextBox);
-            this.Controls.Add(this.modeComboBox);
             this.Controls.Add(this.taskComboBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.md5Label);
             this.Controls.Add(this.browserButton);
             this.Controls.Add(this.filePathTextBox);
             this.Controls.Add(this.taskNameTextBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.fileLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label8);
+            this.Controls.Add(this.md5TextBox);
+            this.Controls.Add(this.modeComboBox);
+            this.Controls.Add(this.modeLabel);
+            this.Controls.Add(this.saltDescLabel);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.DGV);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddCBTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "喝彩城堡-新建任务";
             this.Load += new System.EventHandler(this.AddCBTask_Load);
+            this.Controls.SetChildIndex(this.DGV, 0);
+            this.Controls.SetChildIndex(this.label11, 0);
+            this.Controls.SetChildIndex(this.saltDescLabel, 0);
+            this.Controls.SetChildIndex(this.modeLabel, 0);
+            this.Controls.SetChildIndex(this.modeComboBox, 0);
+            this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.fileLabel, 0);
             this.Controls.SetChildIndex(this.taskNameTextBox, 0);
             this.Controls.SetChildIndex(this.filePathTextBox, 0);
             this.Controls.SetChildIndex(this.browserButton, 0);
             this.Controls.SetChildIndex(this.md5Label, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.taskComboBox, 0);
-            this.Controls.SetChildIndex(this.modeComboBox, 0);
-            this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.pasteModeCB, 0);
             this.Controls.SetChildIndex(this.helpLabel, 0);
             this.Controls.SetChildIndex(this.label5, 0);
@@ -335,6 +528,10 @@
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.label9, 0);
             this.Controls.SetChildIndex(this.saltLabel, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,7 +540,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label fileLabel;
         private System.Windows.Forms.TextBox taskNameTextBox;
         private System.Windows.Forms.TextBox filePathTextBox;
         private System.Windows.Forms.Button browserButton;
@@ -363,5 +560,15 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label saltLabel;
+        private System.Windows.Forms.DataGridView DGV;
+        private System.Windows.Forms.Label modeLabel;
+        private System.Windows.Forms.Label saltDescLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PassColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaltColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UColumn;
+        private System.Windows.Forms.Label label11;
     }
 }

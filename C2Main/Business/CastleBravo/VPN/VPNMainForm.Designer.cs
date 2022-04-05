@@ -53,6 +53,7 @@ namespace C2.Business.CastleBravo.VPN
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvPass = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvMethod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -60,7 +61,6 @@ namespace C2.Business.CastleBravo.VPN
             this.lvInfoCollection = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +112,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1153, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(1153, 38);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -161,7 +161,7 @@ namespace C2.Business.CastleBravo.VPN
             this.checkAliveDDB.Image = ((System.Drawing.Image)(resources.GetObject("checkAliveDDB.Image")));
             this.checkAliveDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.checkAliveDDB.Name = "checkAliveDDB";
-            this.checkAliveDDB.Size = new System.Drawing.Size(102, 29);
+            this.checkAliveDDB.Size = new System.Drawing.Size(102, 33);
             this.checkAliveDDB.Text = "验活功能";
             // 
             // refreshAllShellMenu
@@ -277,12 +277,12 @@ namespace C2.Business.CastleBravo.VPN
             this.LV.GridLines = true;
             this.LV.HideSelection = false;
             this.LV.LabelWrap = false;
-            this.LV.Location = new System.Drawing.Point(0, 34);
+            this.LV.Location = new System.Drawing.Point(0, 38);
             this.LV.Margin = new System.Windows.Forms.Padding(6);
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1153, 458);
+            this.LV.Size = new System.Drawing.Size(1153, 454);
             this.LV.TabIndex = 4;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -301,6 +301,11 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.lvUrl.Text = "主机地址";
             this.lvUrl.Width = 120;
+            // 
+            // lvPort
+            // 
+            this.lvPort.Text = "端口";
+            this.lvPort.Width = 74;
             // 
             // lvPass
             // 
@@ -336,11 +341,6 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.lvCountry.Text = "归属地";
             this.lvCountry.Width = 134;
-            // 
-            // lvPort
-            // 
-            this.lvPort.Text = "端口";
-            this.lvPort.Width = 74;
             // 
             // contextMenuStrip
             // 
