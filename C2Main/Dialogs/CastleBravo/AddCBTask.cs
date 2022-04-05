@@ -230,23 +230,7 @@ namespace C2.Dialogs.CastleBravo
 
         private void InitializeSaltMode()
         {
-            this.modeComboBox.Items.AddRange(new object[] {
-                "md5($pass.$salt)",
-                "md5($salt.$pass)",
-                "md5($salt.$pass.$salt)",
-                "md5(md5($pass).$salt)",
-                "md5($salt.md5($pass))",
-                "md5(md5($pass.$salt))",
-                "md5(md5($salt.$pass))",
-                "md5(md5($pass).md5($salt))",
-                "md5(md5($salt).md5($pass)) ",
-                "md5($salt.md5($salt.$pass))",
-                "md5($salt.md5($pass.$salt)) ",
-                "md5(md5($salt.$pass).$salt)",
-                "md5(md5($pass.$salt).$salt) ",
-                "md5(md5($user.md5($pass)).$salt)",
-                "md5($user.$pass.md5($salt))",
-                "md5(md5($user.$pass).$salt)"});
+
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -165,6 +165,31 @@
             this.modeComboBox.Font = new System.Drawing.Font("宋体", 9F);
             this.modeComboBox.FormattingEnabled = true;
             this.modeComboBox.ItemHeight = 18;
+            this.modeComboBox.Items.AddRange(new object[] {
+            "MD5($Pass.$Salt)",
+            "MD5($Salt.$Pass)",
+            "MD5($Salt.$Pass.$Salt)",
+            "MD5(MD5($Pass).$Salt)",
+            "MD5($Salt.MD5($Pass))",
+            "MD5(MD5($Pass.$Salt))",
+            "MD5(MD5($Salt.$Pass))",
+            "MD5(MD5($Pass).MD5($Salt))",
+            "MD5(MD5($Salt).MD5($Pass)) ",
+            "MD5($Salt.MD5($Salt.$Pass))",
+            "MD5($Salt.MD5($Pass.$Salt)) ",
+            "MD5(MD5($Salt.$Pass).$Salt)",
+            "MD5(MD5($Pass.$Salt).$Salt) ",
+            "MD5($U.$Pass.$Salt)",
+            "MD5($Salt.$U.$Pass)",
+            "MD5($Pass.$U.$Salt)",
+            "MD5($Salt.$U.$Pass)",
+            "MD5($U.$Pass.MD5($Salt))",
+            "MD5($U.MD5($Pass).$Salt)",
+            "MD5(MD5($U).$Pass.$Salt)",
+            "MD5(MD5($U.$Pass).$Salt)",
+            "MD5(MD5($U.$Pass.$Salt))",
+            "MD5(MD5($U.MD5($Pass)).$Salt)",
+            "MD5(MD5($U).MD5($Pass).MD5($Salt))"});
             this.modeComboBox.Location = new System.Drawing.Point(144, 150);
             this.modeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.modeComboBox.Name = "modeComboBox";
