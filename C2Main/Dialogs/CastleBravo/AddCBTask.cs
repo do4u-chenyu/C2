@@ -100,10 +100,12 @@ namespace C2.Dialogs.CastleBravo
 
         private List<string> GenMD5ListFromDGV()
         {
-            List<string> ret = new List<string>();
-            // 添加Salt模式的第一行控制信息
-            // @@@  Mode    ###
-            ret.Add(string.Format("@@@\t{0}\t###", modeComboBox.Text.Trim().ToLower()));
+            List<string> ret = new List<string>
+            {
+                // 添加Salt模式的第一行控制信息
+                // @@@  Mode    ###
+                string.Format("@@@\t{0}\t###", modeComboBox.Text.Trim().ToLower())
+            };
 
             for (int i = 0; i < DGV.Rows.Count; i++)
             {
@@ -279,6 +281,11 @@ namespace C2.Dialogs.CastleBravo
                 HelpUtil.ShowMessageBox("远程服务器-彩虹表在忙", "查询结果");
             else
                 HelpUtil.ShowMessageBox("远程服务器-彩虹表空闲, 欢迎使用", "查询结果");
+        }
+
+        private void ModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
