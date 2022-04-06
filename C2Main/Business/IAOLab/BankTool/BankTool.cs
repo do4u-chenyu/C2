@@ -73,22 +73,34 @@ namespace C2.IAOLab.BankTool
              */
 
             JObject json = JObject.Parse(postContent);
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            Dictionary<string, object> obj = (Dictionary<string, object>)serializer.DeserializeObject(postContent);
+           
             if (json["success"].ToString() == "0")
                 return "银行卡查询接口错误";
             var gList = json["card_info"];
+            string nameAndType = gList["type"].ToString();
+            string cardName = string.Empty;
+            string cardType = string.Empty;
+            
+            if (nameAndType.Length > 1)
+            {
+                cardName = nameAndType.Split('-')[0];
+                cardType = nameAndType.Replace(cardName + "-", string.Empty).Replace(" ", string.Empty);
+            }
             List<string> cardInfo = new List<string>();
             try
             {
-                cardInfo.Add(gList["card"].ToString().Trim());
-                cardInfo.Add(gList["type"].ToString().Replace("-", string.Empty).Replace(" ", string.Empty));
+                cardInfo.Add(cardName.Replace(" ", string.Empty));
+                cardInfo.Add(cardType);
                 cardInfo.Add(gList["city"].ToString().Replace("-", string.Empty).Replace(" ", string.Empty));
             }
+           
             catch { }
 
             if(cardInfo.Count ==3)
             {
+                cardInfo[0] = cardInfo[0] == string.Empty ? "未知" : cardInfo[0];
+                cardInfo[1] = cardInfo[1] == string.Empty ? "未知" : cardInfo[1];
+                cardInfo[2] = cardInfo[2] == string.Empty ? "未知" : cardInfo[2];
                 return string.Join("\t", cardInfo);
             }
 
