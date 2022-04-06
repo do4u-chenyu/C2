@@ -270,15 +270,27 @@ namespace QQSpiderPlugin
             if(!KeyWordLogin())
                 return;
 
+            if (this.session.Ldw != "true")
+            {
+                ShowMessageBox("登录失败，请重新扫描登录");
+                session = new Session();
+                return;
+            }
+
             QQCrawler crawler = new QQCrawler(session);
 
             this.Cursor = Cursors.WaitCursor;
             foreach (string id in dataSource)
             {
                 List<string> resultList = crawler.QueryKeyWord(id);
+                if (resultList.Count == 0)
+                {
+                    ShowMessageBox(string.Format("关键词{0}无查询结果，请检查爬虫是否被限制",id));
+                    continue;
+                }
                 dgvMgr.AppendLineList(resultList);
-                this.progressBar3.Value += 1;
                 this.resultDictionary.Add(id, resultList);
+                this.progressBar3.Value += 1;
             }
             this.Cursor = Cursors.Arrow;
         }
@@ -521,6 +533,7 @@ namespace QQSpiderPlugin
                         qrCodeForm.Close();
                         _thread.Abort();
                     })));
+                    this.session.Ldw = "true";
                     break;
                 }
                 Console.WriteLine(result.ToString(), "请使用QQ手机客户端扫码登录！");
@@ -530,12 +543,12 @@ namespace QQSpiderPlugin
             if (count == maxTimes)
             {
                 Console.WriteLine("扫码超时!");
-                ShowMessageBox("扫码超时!");
                 this.Invoke(new CloseQrForm(new CloseQrForm(delegate ()
                 {
                     qrCodeForm.Close();
                     _thread.Abort();
                 })));
+                //ShowMessageBox("扫码超时!");
                 return false;
             }
             return true;
