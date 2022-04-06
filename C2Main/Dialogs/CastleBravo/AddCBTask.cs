@@ -20,6 +20,43 @@ namespace C2.Dialogs.CastleBravo
         private static readonly int MaxRowNumber = 2000;   // 单任务最大处理数
         private static readonly int MaxSaltRowNumber = 5;  // Salt模式最大处理数
 
+
+        private static readonly string[] ML = new string[] {
+                "模式01: MD5($Pass.$Salt)",
+                "模式02: MD5($Salt.$Pass)",
+                "模式03: MD5($Salt.$Pass.$Salt)",
+                "模式04: MD5(MD5($Pass).$Salt)",           // 默认模式
+                "模式05: MD5($Salt.MD5($Pass))",
+                "模式06: MD5(MD5($Pass.$Salt))",
+                "模式07: MD5(MD5($Salt.$Pass))",
+                "模式08: MD5(MD5($Pass).MD5($Salt))",
+                "模式09: MD5(MD5($Salt).MD5($Pass))",
+                "模式10: MD5($Salt.MD5($Salt.$Pass))",
+                "模式11: MD5($Salt.MD5($Pass.$Salt))",
+                "模式12: MD5(MD5($Salt.$Pass).$Salt)",
+                "模式13: MD5(MD5($Pass.$Salt).$Salt)",
+                "模式14: MD5($U.$Pass.$Salt)",
+                "模式15: MD5($U.$Salt.$Pass)",
+                "模式16: MD5($Salt.$U.$Pass)",
+                "模式17: MD5($Salt.$Pass.$U)",
+                "模式18: MD5($Pass.$Salt.$U)",
+                "模式19: MD5($Pass.$U.$Salt)",
+                "模式20: MD5($U.$Pass.MD5($Salt))",
+                "模式21: MD5($U.MD5($Pass).$Salt)",
+                "模式22: MD5(MD5($U).$Pass.$Salt)",
+                "模式23: MD5(MD5($U.$Pass).$Salt)",
+                "模式24: MD5(MD5($U.$Pass.$Salt))",
+                "模式25: MD5(MD5($U.MD5($Pass)).$Salt)",
+                "模式26: MD5(MD5($U).MD5($Pass).MD5($Salt))",
+                "模式27: MD5(MD5($U).$Pass.MD5($Salt))",
+                "模式28: MD5($U.MD5($Pass).MD5($Salt))",
+                "模式29: MD5($U.MD5($Pass.$Salt))",
+                "模式30: MD5(MD5($Salt).$Pass)",
+                "模式31: MD5(SHA1($Pass))",
+                "模式32: MD5(SHA256($Pass))",
+                "模式33: MD5(SHA512($Pass))",
+            };
+
         public AddCBTask()
         {
             InitializeComponent();
@@ -231,11 +268,11 @@ namespace C2.Dialogs.CastleBravo
             this.label2.Visible = i == 1;
             this.label3.Visible = i == 1;
             this.label10.Visible = i == 1;
-            this.label11.Visible = i == 1;
             this.DGV.Visible = i == 1;
             this.modeLabel.Visible = i == 1;
             this.saltLabel.Visible = i == 1;
             this.modeComboBox.Visible = i == 1;
+            this.modeListButton.Visible = i == 1;
         }
 
         private void InitializeDGV()
@@ -247,41 +284,7 @@ namespace C2.Dialogs.CastleBravo
 
         private void InitializeSaltMode()
         {
-            this.modeComboBox.Items.AddRange(new object[] {
-                "模式01: MD5($Pass.$Salt)",
-                "模式02: MD5($Salt.$Pass)",
-                "模式03: MD5($Salt.$Pass.$Salt)",
-                "模式04: MD5(MD5($Pass).$Salt)",
-                "模式05: MD5($Salt.MD5($Pass))",
-                "模式06: MD5(MD5($Pass.$Salt))",
-                "模式07: MD5(MD5($Salt.$Pass))",
-                "模式08: MD5(MD5($Pass).MD5($Salt))",
-                "模式09: MD5(MD5($Salt).MD5($Pass))",
-                "模式10: MD5($Salt.MD5($Salt.$Pass))",
-                "模式11: MD5($Salt.MD5($Pass.$Salt))",
-                "模式12: MD5(MD5($Salt.$Pass).$Salt)",
-                "模式13: MD5(MD5($Pass.$Salt).$Salt)",
-                "模式14: MD5($U.$Pass.$Salt)",
-                "模式15: MD5($U.$Salt.$Pass)",
-                "模式16: MD5($Salt.$U.$Pass)",
-                "模式17: MD5($Salt.$Pass.$U)",
-                "模式18: MD5($Pass.$Salt.$U)",
-                "模式19: MD5($Pass.$U.$Salt)",
-                "模式20: MD5($U.$Pass.MD5($Salt))",
-                "模式21: MD5($U.MD5($Pass).$Salt)",
-                "模式22: MD5(MD5($U).$Pass.$Salt)",
-                "模式23: MD5(MD5($U.$Pass).$Salt)",
-                "模式24: MD5(MD5($U.$Pass.$Salt))",
-                "模式25: MD5(MD5($U.MD5($Pass)).$Salt)",
-                "模式26: MD5(MD5($U).MD5($Pass).MD5($Salt))",
-                "模式27: MD5(MD5($U).$Pass.MD5($Salt))",
-                "模式28: MD5($U.MD5($Pass).MD5($Salt))",
-                "模式29: MD5($U.MD5($Pass.$Salt))",
-                "模式30: MD5(MD5($Salt).$Pass)",
-                "模式31: MD5(SHA1($Pass))",
-                "模式32: MD5(SHA256($Pass))",
-                "模式33: MD5(SHA512($Pass))",
-            });
+            this.modeComboBox.Items.AddRange(ML);
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -340,6 +343,11 @@ namespace C2.Dialogs.CastleBravo
                 return string.Empty;
 
             return s[1];
+        }
+
+        private void ModeListButton_Click(object sender, EventArgs e)
+        {
+            new MLForm(ML).ShowDialog();
         }
     }
 }

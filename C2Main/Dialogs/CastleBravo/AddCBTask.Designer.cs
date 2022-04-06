@@ -53,6 +53,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.modeListButton = new System.Windows.Forms.Button();
             this.saltLabel = new System.Windows.Forms.Label();
             this.DGV = new System.Windows.Forms.DataGridView();
             this.PassColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +64,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -284,6 +284,21 @@
             this.label9.Size = new System.Drawing.Size(0, 18);
             this.label9.TabIndex = 10021;
             // 
+            // modeListButton
+            // 
+            this.modeListButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.modeListButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.modeListButton.Location = new System.Drawing.Point(574, 147);
+            this.modeListButton.Margin = new System.Windows.Forms.Padding(4);
+            this.modeListButton.Name = "modeListButton";
+            this.modeListButton.Size = new System.Drawing.Size(110, 36);
+            this.modeListButton.TabIndex = 10030;
+            this.modeListButton.Text = "模式速查";
+            this.toolTip1.SetToolTip(this.modeListButton, "模式列表速查");
+            this.modeListButton.UseVisualStyleBackColor = true;
+            this.modeListButton.Visible = false;
+            this.modeListButton.Click += new System.EventHandler(this.ModeListButton_Click);
+            // 
             // saltLabel
             // 
             this.saltLabel.AutoSize = true;
@@ -455,24 +470,13 @@
             this.label10.Text = "* U(可选)";
             this.label10.Visible = false;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(571, 156);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(71, 18);
-            this.label11.TabIndex = 10029;
-            this.label11.Text = "*(必选)";
-            this.label11.Visible = false;
-            // 
             // AddCBTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(705, 477);
+            this.Controls.Add(this.modeListButton);
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
@@ -497,7 +501,6 @@
             this.Controls.Add(this.modeComboBox);
             this.Controls.Add(this.modeLabel);
             this.Controls.Add(this.saltDescLabel);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.DGV);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -507,7 +510,6 @@
             this.Text = "喝彩城堡-新建任务";
             this.Load += new System.EventHandler(this.AddCBTask_Load);
             this.Controls.SetChildIndex(this.DGV, 0);
-            this.Controls.SetChildIndex(this.label11, 0);
             this.Controls.SetChildIndex(this.saltDescLabel, 0);
             this.Controls.SetChildIndex(this.modeLabel, 0);
             this.Controls.SetChildIndex(this.modeComboBox, 0);
@@ -532,6 +534,7 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.helpLabel, 0);
+            this.Controls.SetChildIndex(this.modeListButton, 0);
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -570,6 +573,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PassColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaltColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn UColumn;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button modeListButton;
     }
 }

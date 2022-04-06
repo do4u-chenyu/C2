@@ -907,6 +907,12 @@
     <Compile Include="Dialogs\CastleBravo\CBTaskResult.Designer.cs">
       <DependentUpon>CBTaskResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CastleBravo\MLForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CastleBravo\MLForm.Designer.cs">
+      <DependentUpon>MLForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\IAOLab\BigAPKForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2661,6 +2667,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CastleBravo\CBTaskResult.resx">
       <DependentUpon>CBTaskResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CastleBravo\MLForm.resx">
+      <DependentUpon>MLForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
