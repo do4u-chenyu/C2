@@ -165,43 +165,11 @@
             this.modeComboBox.Font = new System.Drawing.Font("宋体", 9F);
             this.modeComboBox.FormattingEnabled = true;
             this.modeComboBox.ItemHeight = 18;
-            this.modeComboBox.Items.AddRange(new object[] {
-            "模式:01    MD5($Pass.$Salt)",
-            "模式:02    MD5($Salt.$Pass)",
-            "模式:03    MD5($Salt.$Pass.$Salt)",
-            "模式:04    MD5(MD5($Pass).$Salt)",
-            "模式:05    MD5($Salt.MD5($Pass))",
-            "模式:06    MD5(MD5($Pass.$Salt))",
-            "模式:07    MD5(MD5($Salt.$Pass))",
-            "模式:08    MD5(MD5($Pass).MD5($Salt))",
-            "模式:09    MD5(MD5($Salt).MD5($Pass)) ",
-            "模式:10    MD5($Salt.MD5($Salt.$Pass))",
-            "模式:11    MD5($Salt.MD5($Pass.$Salt)) ",
-            "模式:12    MD5(MD5($Salt.$Pass).$Salt)",
-            "模式:13    MD5(MD5($Pass.$Salt).$Salt) ",
-            "模式:14    MD5($U.$Pass.$Salt)",
-            "模式:15    MD5($Salt.$U.$Pass)",
-            "模式:16    MD5($Pass.$U.$Salt)",
-            "模式:17    MD5($Salt.$U.$Pass)",
-            "模式:18    MD5($U.$Pass.MD5($Salt))",
-            "模式:19    MD5($U.MD5($Pass).$Salt)",
-            "模式:20    MD5(MD5($U).$Pass.$Salt)",
-            "模式:21    MD5(MD5($U.$Pass).$Salt)",
-            "模式:22    MD5(MD5($U.$Pass.$Salt))",
-            "模式:23    MD5(MD5($U.MD5($Pass)).$Salt)",
-            "模式:24    MD5(MD5($U).MD5($Pass).MD5($Salt))",
-            "模式:25    MD5(MD5($U).$Pass.MD5($Salt))",
-            "模式:26    MD5($U.MD5($Pass).MD5($Salt))",
-            "模式:27    MD5($U.MD5($Pass.$Salt))",
-            "模式:28    MD5($Pass.$Salt.$U)",
-            "模式:29    MD5($Salt.$Pass.$U)",
-            "模式:30    MD5(MD5($Salt).$Pass)"});
             this.modeComboBox.Location = new System.Drawing.Point(144, 150);
             this.modeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.modeComboBox.Name = "modeComboBox";
             this.modeComboBox.Size = new System.Drawing.Size(416, 26);
             this.modeComboBox.TabIndex = 10011;
-            this.modeComboBox.SelectedIndexChanged += new System.EventHandler(this.ModeComboBox_SelectedIndexChanged);
             // 
             // md5TextBox
             // 
@@ -323,9 +291,9 @@
             this.saltLabel.Location = new System.Drawing.Point(141, 194);
             this.saltLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.saltLabel.Name = "saltLabel";
-            this.saltLabel.Size = new System.Drawing.Size(260, 18);
+            this.saltLabel.Size = new System.Drawing.Size(332, 18);
             this.saltLabel.TabIndex = 10022;
-            this.saltLabel.Text = "*格式: 填表 MD5,Salt 最多5行";
+            this.saltLabel.Text = "*格式: 填表 MD5,Salt,U(可选) 上限5个";
             this.saltLabel.Visible = false;
             // 
             // DGV
@@ -505,6 +473,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(705, 477);
+            this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -514,7 +483,6 @@
             this.Controls.Add(this.queryButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.pasteModeCB);
             this.Controls.Add(this.taskComboBox);
             this.Controls.Add(this.label4);
@@ -554,7 +522,6 @@
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.taskComboBox, 0);
             this.Controls.SetChildIndex(this.pasteModeCB, 0);
-            this.Controls.SetChildIndex(this.helpLabel, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.queryButton, 0);
@@ -564,6 +531,7 @@
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.helpLabel, 0);
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -104,7 +104,7 @@ namespace C2.Dialogs.CastleBravo
             {
                 // 添加Salt模式的第一行控制信息
                 // @@@  Mode    ###
-                string.Format("@@@\t{0}\t###", modeComboBox.Text.Trim().ToLower())
+                string.Format("@@@\t{0}\t###", GenSelectedModeString().Trim().ToLower())
             };
 
             for (int i = 0; i < DGV.Rows.Count; i++)
@@ -232,7 +232,37 @@ namespace C2.Dialogs.CastleBravo
 
         private void InitializeSaltMode()
         {
-
+            this.modeComboBox.Items.AddRange(new object[] {
+                "模式01: MD5($Pass.$Salt)",
+                "模式02: MD5($Salt.$Pass)",
+                "模式03: MD5($Salt.$Pass.$Salt)",
+                "模式04: MD5(MD5($Pass).$Salt)",
+                "模式05: MD5($Salt.MD5($Pass))",
+                "模式06: MD5(MD5($Pass.$Salt))",
+                "模式07: MD5(MD5($Salt.$Pass))",
+                "模式08: MD5(MD5($Pass).MD5($Salt))",
+                "模式09: MD5(MD5($Salt).MD5($Pass)) ",
+                "模式10: MD5($Salt.MD5($Salt.$Pass))",
+                "模式11: MD5($Salt.MD5($Pass.$Salt)) ",
+                "模式12: MD5(MD5($Salt.$Pass).$Salt)",
+                "模式13: MD5(MD5($Pass.$Salt).$Salt) ",
+                "模式14: MD5($U.$Pass.$Salt)",
+                "模式15: MD5($Salt.$U.$Pass)",
+                "模式16: MD5($Pass.$U.$Salt)",
+                "模式17: MD5($Salt.$U.$Pass)",
+                "模式18: MD5($U.$Pass.MD5($Salt))",
+                "模式19: MD5($U.MD5($Pass).$Salt)",
+                "模式20: MD5(MD5($U).$Pass.$Salt)",
+                "模式21: MD5(MD5($U.$Pass).$Salt)",
+                "模式22: MD5(MD5($U.$Pass.$Salt))",
+                "模式23: MD5(MD5($U.MD5($Pass)).$Salt)",
+                "模式24: MD5(MD5($U).MD5($Pass).MD5($Salt))",
+                "模式25: MD5(MD5($U).$Pass.MD5($Salt))",
+                "模式26: MD5($U.MD5($Pass).MD5($Salt))",
+                "模式27: MD5($U.MD5($Pass.$Salt))",
+                "模式28: MD5($Pass.$Salt.$U)",
+                "模式29: MD5($Salt.$Pass.$U)",
+                "模式30: MD5(MD5($Salt).$Pass)"});
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -283,9 +313,14 @@ namespace C2.Dialogs.CastleBravo
                 HelpUtil.ShowMessageBox("远程服务器-彩虹表空闲, 欢迎使用", "查询结果");
         }
 
-        private void ModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private string GenSelectedModeString()
         {
+            string selectString = ST.GetValue<string>(this.modeComboBox.SelectedItem, string.Empty);
+            string[] s = selectString.Split(new char[] { OpUtil.Blank }, StringSplitOptions.RemoveEmptyEntries);
+            if (s.Length < 2)
+                return string.Empty;
 
+            return s[1];
         }
     }
 }
