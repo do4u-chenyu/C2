@@ -48,12 +48,12 @@ namespace C2.Business.CastleBravo
         public List<CastleBravoResultOne> PreviewResults = new List<CastleBravoResultOne>();
         public CastleBravoTaskStatus Status;
 
-        public CastleBravoTaskInfo() : this("0", string.Empty, string.Empty, string.Empty, string.Empty, CastleBravoTaskStatus.Null)
+        public CastleBravoTaskInfo() : this(0, string.Empty, string.Empty, string.Empty, string.Empty, CastleBravoTaskStatus.Null)
         { }
 
-        public CastleBravoTaskInfo(string taskCount, string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status)
+        public CastleBravoTaskInfo(int taskCount, string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status)
         {
-            TaskCount = taskCount;
+            TaskCount = taskCount.ToString();
             TaskName = taskName;
             TaskID = taskId;
             MD5FilePath = md5FilePath;

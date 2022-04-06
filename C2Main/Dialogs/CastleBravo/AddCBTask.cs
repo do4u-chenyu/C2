@@ -86,7 +86,7 @@ namespace C2.Dialogs.CastleBravo
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
 
-            TaskInfo = new CastleBravoTaskInfo(md5List.Count.ToString(), 
+            TaskInfo = new CastleBravoTaskInfo(md5List.Count - mode,      // 省if
                                                TaskName, 
                                                result.Data, 
                                                FilePath,
@@ -119,9 +119,14 @@ namespace C2.Dialogs.CastleBravo
                 string pass = ST.GetValue<string>(DGV.Rows[i].Cells[0].Value, string.Empty);
                 string salt = ST.GetValue<string>(DGV.Rows[i].Cells[1].Value, string.Empty);
                 string user = ST.GetValue<string>(DGV.Rows[i].Cells[2].Value, string.Empty);
+                // 不符合条件的跳过
+                string su = salt + user;
+                if (pass.IsNullOrEmpty() || su.IsNullOrEmpty())
+                    continue;
+                
                 ret.Add(string.Format("{0}\t{1}\t{2}", pass, salt, user));
             }
-             return ret;
+            return ret;
         }
         private List<string> GenMD5ListFromFile(string filePath)
         {
