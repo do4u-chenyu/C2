@@ -103,7 +103,7 @@ namespace C2.Dialogs.CastleBravo
             List<string> ret = new List<string>();
             // 添加Salt模式的第一行控制信息
             // @@@  Mode    ###
-            ret.Add(string.Format("@@@\t{0}\t###", modeComboBox.Text));
+            ret.Add(string.Format("@@@\t{0}\t###", modeComboBox.Text.Trim().ToLower()));
 
             for (int i = 0; i < DGV.Rows.Count; i++)
             {
