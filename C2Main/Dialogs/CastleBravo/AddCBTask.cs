@@ -199,9 +199,9 @@ namespace C2.Dialogs.CastleBravo
         private void Reset(int i = 0)
         {
             this.taskComboBox.SelectedIndex = i;
-            // Salt模式时, mode必须选一个
+            // Salt模式时, mode必须选一个, 模式04最常用
             if (i == 1 && this.modeComboBox.SelectedIndex < 0)
-                this.modeComboBox.SelectedIndex = 1;
+                this.modeComboBox.SelectedIndex = 3;
 
             // 常规MD5模式
             this.md5Label.Visible = i == 0;
@@ -262,7 +262,11 @@ namespace C2.Dialogs.CastleBravo
                 "模式27: MD5($U.MD5($Pass.$Salt))",
                 "模式28: MD5($Pass.$Salt.$U)",
                 "模式29: MD5($Salt.$Pass.$U)",
-                "模式30: MD5(MD5($Salt).$Pass)"});
+                "模式30: MD5(MD5($Salt).$Pass)",
+                "模式31: MD5(SHA1($Pass))",
+                "模式32: MD5(SHA256($Pass))",
+                "模式33: MD5(SHA512($Pass))",
+            });
         }
 
         private void TaskComboBox_SelectedIndexChanged(object sender, EventArgs e)
