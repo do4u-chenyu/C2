@@ -59,6 +59,9 @@ namespace C2.Dialogs.CastleBravo
             if (mode == 1 && !IsValidityDGV())
                 return false;
 
+            if (mode == 1 && IsValidityDGV())
+                GenPasteDGVFile();
+
             List<string> md5List = mode == 0 ? GenMD5ListFromFile(FilePath) : GenMD5ListFromDGV();
             if (md5List.Count == 0)
                 return false;
@@ -96,6 +99,10 @@ namespace C2.Dialogs.CastleBravo
         private void GenPasteCBFile()
         {
             FileUtil.FileWriteToEnd(FilePath, this.md5TextBox.Text);
+        }
+        private void GenPasteDGVFile()
+        {
+            FileUtil.FileWriteToEnd(FilePath, string.Join(Environment.NewLine, GenMD5ListFromDGV()));
         }
 
         private List<string> GenMD5ListFromDGV()
@@ -202,6 +209,9 @@ namespace C2.Dialogs.CastleBravo
             // Salt模式时, mode必须选一个, 模式04最常用
             if (i == 1 && this.modeComboBox.SelectedIndex < 0)
                 this.modeComboBox.SelectedIndex = 3;
+            // Salt模式时, 必须有一个临时文件
+            if (i == 1 && FilePath.IsNullOrEmpty())
+                FilePath = Path.Combine(Global.TempDirectory, Guid.NewGuid().ToString("N") + ".txt");
 
             // 常规MD5模式
             this.md5Label.Visible = i == 0;
