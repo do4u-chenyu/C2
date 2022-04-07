@@ -67,7 +67,7 @@ namespace C2.SearchToolkit
             }
 
         
-            if (task.PID == String.Empty)
+            if (task.PID == string.Empty)
                 return false;
 
             tasks.Add(task);
@@ -93,12 +93,12 @@ namespace C2.SearchToolkit
 
         }
 
-        private String[] ListTaskBcpFiles()
+        private string[] ListTaskBcpFiles()
         {
             return FileUtil.TryListFiles(Global.SearchToolkitPath, "*.bcp");
         }
 
-        private SearchTaskInfo LoadTaskBcp(String taskFFP)
+        private SearchTaskInfo LoadTaskBcp(string taskFFP)
         {
             try 
             {
@@ -114,7 +114,7 @@ namespace C2.SearchToolkit
         public bool Refresh() 
         {
             tasks.Clear();
-            foreach (String taskFFP in ListTaskBcpFiles())
+            foreach (string taskFFP in ListTaskBcpFiles())
             {
                 SearchTaskInfo task = LoadTaskBcp(taskFFP);
                 if (task != SearchTaskInfo.EmptyTaskInfo)

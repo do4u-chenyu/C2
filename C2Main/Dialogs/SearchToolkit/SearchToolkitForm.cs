@@ -11,7 +11,7 @@ namespace C2.SearchToolkit
     public partial class SearchToolkitForm : Form
     {
         private SearchTaskInfo task;
-        private String validateMessage;
+        private string validateMessage;
         private Control[] inputControls;
         private SearchToolkitModelSettingsForm modelSettingsForm;
 
@@ -31,7 +31,7 @@ namespace C2.SearchToolkit
         private void InitializeInputControls()
         {
             task = SearchTaskInfo.EmptyTaskInfo;
-            validateMessage = String.Empty;
+            validateMessage = string.Empty;
 
             inputControls = new Control[] { 
                 this.usernameTB, 
@@ -68,7 +68,7 @@ namespace C2.SearchToolkit
         }
         private SearchTaskInfo GenTaskInfo()
         {
-            String value = String.Join(OpUtil.TabSeparatorString, new string[] {
+            string value = string.Join(OpUtil.TabSeparatorString, new string[] {
                                             this.taskNameTB.Text,  // 刚开始创建时，没有ID
                                             this.taskNameTB.Text,
                                             DateTime.Now.ToString("yyyyMMddHHmmss"),
@@ -100,13 +100,13 @@ namespace C2.SearchToolkit
             if (task == SearchTaskInfo.EmptyTaskInfo)
                 return;
 
-            this.saveFileDialog.FileName = String.Format("{0}_{1}", task.TaskName, task.TaskCreateTime);
+            this.saveFileDialog.FileName = string.Format("{0}_{1}", task.TaskName, task.TaskCreateTime);
             DialogResult ret = this.saveFileDialog.ShowDialog();
             if (ret != DialogResult.OK)
                 return;
 
 
-            String ffp = this.saveFileDialog.FileName;
+            string ffp = this.saveFileDialog.FileName;
             // TODO ProgressBar 处理
             BastionDownloadProgressBar progressBar = new BastionDownloadProgressBar(task, ffp)
             {
@@ -116,7 +116,7 @@ namespace C2.SearchToolkit
                 MinimumValue = 0,   
                 MaximumValue = 100,
             };
-            task.LastErrorMsg = String.Empty; // 清空错误信息
+            task.LastErrorMsg = string.Empty; // 清空错误信息
             progressBar.Show(this);
 
             bool succ = progressBar.Download();
@@ -126,7 +126,7 @@ namespace C2.SearchToolkit
                 return;
 
             if (succ)
-                progressBar.Status = String.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName);
+                progressBar.Status = string.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName);
             else
                 progressBar.Status = task.LastErrorMsg;
 
@@ -170,19 +170,19 @@ namespace C2.SearchToolkit
             return SearchTaskInfo.TaskHelpInfoTable[key];
         }
 
-        private String GenTaskName()
+        private string GenTaskName()
         {
              return this.taskModelComboBox.Text + DateTime.Now.ToString("MMdd");
         }
 
-        private String GenWorkspace()
+        private string GenWorkspace()
         {
             return SearchTaskInfo.SearchWorkspace + SearchTaskInfo.TaskDescriptionTable[this.taskModelComboBox.Text];
         }
 
-        private bool ValidateIP(String value)
+        private bool ValidateIP(string value)
         {
-            if (String.IsNullOrEmpty(value))  // 有专门的不为空检测，为空时，认为符号要求, 用于可选项的校验
+            if (string.IsNullOrEmpty(value))  // 有专门的不为空检测，为空时，认为符号要求, 用于可选项的校验
                 return true;
 
             bool match0 = Regex.IsMatch(value, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$") &&
@@ -192,24 +192,24 @@ namespace C2.SearchToolkit
             return match0 || match1;
         }
 
-        private bool ValidateTooLong(String value, int defaultMaxLength = 128)
+        private bool ValidateTooLong(string value, int defaultMaxLength = 128)
         {
             return value.Length < defaultMaxLength;
         }
 
-        private bool ValidateSpecialChars(String value, String specialChars = "!@#$%^&*()<>?:;\"+=\\/'~`|[],")
+        private bool ValidateSpecialChars(string value, string specialChars = "!@#$%^&*()<>?:;\"+=\\/'~`|[],")
         {
             return value.IndexOfAny(specialChars.ToCharArray()) == -1;
         }
 
-        private bool ValidateNotEmpty(String value)
+        private bool ValidateNotEmpty(string value)
         {
-            return !String.IsNullOrEmpty(value) && !String.IsNullOrWhiteSpace(value);
+            return !string.IsNullOrEmpty(value) && !string.IsNullOrWhiteSpace(value);
         }
 
         private bool ValidateTaskName()
         {
-            String value = this.taskNameTB.Text;
+            string value = this.taskNameTB.Text;
             return ValidateNotEmpty(value) && ValidateTooLong(value) && ValidateSpecialChars(value);
         }
 
@@ -230,13 +230,13 @@ namespace C2.SearchToolkit
 
         private bool ValidateUsername()
         {
-            String value = this.usernameTB.Text;
+            string value = this.usernameTB.Text;
             return ValidateNotEmpty(value) && ValidateTooLong(value) && ValidateSpecialChars(value);
         }
 
         private bool ValidatePassword()
         {
-            String value = this.passwordTB.Text;
+            string value = this.passwordTB.Text;
             return ValidateNotEmpty(value) && ValidateTooLong(value);
         }
 
@@ -249,7 +249,7 @@ namespace C2.SearchToolkit
         {
             TrimInputControls(); 
 
-            validateMessage = String.Empty;
+            validateMessage = string.Empty;
             // 从后往前验证
             validateMessage = ValidateSearchAgentIP() ? validateMessage : "全文机【IP:Port】格式不对，标准端口时Port可不填";
             validateMessage = ValidateInterfaceIP()   ? validateMessage : "界面机【IP:Port】格式不对，标准端口时Port可不填";
@@ -258,7 +258,7 @@ namespace C2.SearchToolkit
             validateMessage = ValidateUsername()      ? validateMessage : "堡垒机 【用户名】不能为空, 不能超过128个字符";
             validateMessage = ValidateTaskName()      ? validateMessage : "任务名称 不能为空,不能超过128个字符,不能含有特殊字符";
             
-            return String.IsNullOrEmpty(validateMessage);
+            return string.IsNullOrEmpty(validateMessage);
         }
         public SearchTaskInfo ShowTaskConfigDialog()
         {
@@ -286,7 +286,7 @@ namespace C2.SearchToolkit
             this.taskModelComboBox.Text      = task.TaskModel;
             this.interfaceIPTB.Text          = task.InterfaceIP;
             this.searchAgentIPTB.Text        = task.SearchAgentIP;
-            this.remoteWorkspaceTB.Text      = String.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime);
+            this.remoteWorkspaceTB.Text      = string.Format("{0}/{1}_{2}", task.RemoteWorkspace, task.TaskName, task.TaskCreateTime);
             this.taskStatusLabel.Text        = task.TaskStatus;
             this.downloadButton.Enabled      = task.TaskStatus == "DONE";
             this.modelSettingsForm.StartTime = task.Settings.StartTime;
@@ -318,12 +318,12 @@ namespace C2.SearchToolkit
             if (ValidateInputControls())
             {
                 SearchTaskInfo task = this.GenTaskInfo();
-                log.Info(String.Format("=========== 任务:{0} 开始连接测试 ===========", task.TaskName));
+                log.Info(string.Format("=========== 任务:{0} 开始连接测试 ===========", task.TaskName));
                 using (GuarderUtil.WaitCursor)
                     if (new BastionAPI(task).TestConn())
                         HelpUtil.ShowMessageBox("登陆堡垒机测试成功");
                     else
-                        HelpUtil.ShowMessageBox(String.Format("连接失败:{0}", task.LastErrorMsg));
+                        HelpUtil.ShowMessageBox(string.Format("连接失败:{0}", task.LastErrorMsg));
             }
             else
                 HelpUtil.ShowMessageBox(validateMessage);
@@ -332,7 +332,7 @@ namespace C2.SearchToolkit
         private void Label4_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (FileUtil.TryClipboardSetText(this.remoteWorkspaceTB.Text))
-                HelpUtil.ShowMessageBox(String.Format("[{0}] 已复制到剪切板", this.remoteWorkspaceTB.Text));
+                HelpUtil.ShowMessageBox(string.Format("[{0}] 已复制到剪切板", this.remoteWorkspaceTB.Text));
         }
 
         private void TaskConfigPB_MouseClick(object sender, MouseEventArgs e)
