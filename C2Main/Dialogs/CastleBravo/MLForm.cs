@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using System.Collections.Generic;
 
 namespace C2.Dialogs.CastleBravo
 {
@@ -39,6 +40,10 @@ namespace C2.Dialogs.CastleBravo
 
         private void DigButton_Click(object sender, System.EventArgs e)
         {
+            // string[] ml = new List<string>(ML).ToArray();
+            
+            // int ln = 0;    // 输入样例的编号
+            // int mn = 0;    // 模式编号
             // 遍历 列表
             // 选取合适的行
             // 挨个尝试
