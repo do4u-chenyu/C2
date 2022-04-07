@@ -194,9 +194,8 @@ namespace C2
         void InitializeStartForm()
         {  
             ShowForm(new StartForm(), true, false, true);
-#if !DEBUG
             ShowForm(new JSForm(), true, false, false);      // 想默认展示JSForm,ZZ策略,但JSForm鬼影太严重,支楞不起来
-#endif
+
         }
 #endregion
         

@@ -259,11 +259,8 @@ namespace C2
             this.HIBUButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HIBUButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.HIBUButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-#if DEBUG
-            this.HIBUButton.Location = new System.Drawing.Point(0, 422);
-#else
             this.HIBUButton.Location = new System.Drawing.Point(0, 482);
-#endif
+
             this.HIBUButton.Name = "HIBUButton";
             this.HIBUButton.Size = new System.Drawing.Size(151, 42);
             this.HIBUButton.TabIndex = 7;
@@ -292,11 +289,8 @@ namespace C2
             this.castleBravoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.castleBravoButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.castleBravoButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-#if DEBUG
-            this.castleBravoButton.Location = new System.Drawing.Point(0, 362);
-#else
             this.castleBravoButton.Location = new System.Drawing.Point(0, 422);
-#endif
+
             this.castleBravoButton.Name = "castleBravoButton";
             this.castleBravoButton.Size = new System.Drawing.Size(151, 42);
             this.castleBravoButton.TabIndex = 6;
@@ -333,9 +327,7 @@ namespace C2
             this.toolTip1.SetToolTip(this.searchToolkitButton, "全文工具箱: FH内网全文上的各种经典模型");
             this.searchToolkitButton.UseVisualStyleBackColor = true;
             this.searchToolkitButton.Click += new System.EventHandler(this.SearchToolkitButton_Click);
-#if DEBUG
-            this.searchToolkitButton.Visible = false;
-#endif
+
             // 
             // pictureBox2
             // 
@@ -383,11 +375,8 @@ namespace C2
             this.iaoLabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iaoLabButton.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.iaoLabButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-#if DEBUG
-            this.iaoLabButton.Location = new System.Drawing.Point(0, 302);
-#else
             this.iaoLabButton.Location = new System.Drawing.Point(0, 362);
-#endif
+
             this.iaoLabButton.Name = "iaoLabButton";
             this.iaoLabButton.Size = new System.Drawing.Size(151, 42);
             this.iaoLabButton.TabIndex = 3;
