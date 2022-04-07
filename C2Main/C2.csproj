@@ -913,6 +913,7 @@
     <Compile Include="Dialogs\CastleBravo\MLForm.Designer.cs">
       <DependentUpon>MLForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CastleBravo\Mode\ML.cs" />
     <Compile Include="Dialogs\IAOLab\BigAPKForm.cs">
       <SubType>Form</SubType>
     </Compile>

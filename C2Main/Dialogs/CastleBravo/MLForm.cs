@@ -39,7 +39,11 @@ namespace C2.Dialogs.CastleBravo
 
         private void DigButton_Click(object sender, System.EventArgs e)
         {
-
+            // 遍历 列表
+            // 选取合适的行
+            // 挨个尝试
+            // 成功 输出 成功行
+            // 失败 输出 失败行
         }
 
         private void ResetButton_Click(object sender, System.EventArgs e)
