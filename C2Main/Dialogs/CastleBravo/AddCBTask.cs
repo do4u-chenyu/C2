@@ -153,9 +153,9 @@ namespace C2.Dialogs.CastleBravo
 
             for (int i = 0; i < DGV.Rows.Count; i++)
             {
-                string pass = ST.GetValue<string>(DGV.Rows[i].Cells[0].Value, string.Empty);
-                string salt = ST.GetValue<string>(DGV.Rows[i].Cells[1].Value, string.Empty);
-                string user = ST.GetValue<string>(DGV.Rows[i].Cells[2].Value, string.Empty);
+                string pass = ST.GetValue<string>(DGV.Rows[i].Cells[0].Value, string.Empty).Trim();
+                string salt = ST.GetValue<string>(DGV.Rows[i].Cells[1].Value, string.Empty).Trim();
+                string user = ST.GetValue<string>(DGV.Rows[i].Cells[2].Value, string.Empty).Trim();
                 // 不符合条件的跳过
                 string su = salt + user;
                 if (pass.IsNullOrEmpty() || su.IsNullOrEmpty())

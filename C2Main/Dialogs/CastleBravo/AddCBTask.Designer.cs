@@ -346,7 +346,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.DGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV.Location = new System.Drawing.Point(144, 224);
+            this.DGV.Location = new System.Drawing.Point(144, 222);
             this.DGV.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.DGV.MultiSelect = false;
             this.DGV.Name = "DGV";
@@ -369,14 +369,14 @@
             this.DGV.ShowCellToolTips = false;
             this.DGV.ShowEditingIcon = false;
             this.DGV.ShowRowErrors = false;
-            this.DGV.Size = new System.Drawing.Size(416, 174);
+            this.DGV.Size = new System.Drawing.Size(416, 178);
             this.DGV.TabIndex = 10023;
             this.DGV.Visible = false;
             // 
             // PassColumn
             // 
             this.PassColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PassColumn.FillWeight = 50F;
+            this.PassColumn.FillWeight = 55F;
             this.PassColumn.HeaderText = "Pass";
             this.PassColumn.MinimumWidth = 8;
             this.PassColumn.Name = "PassColumn";
@@ -387,7 +387,7 @@
             // SaltColumn
             // 
             this.SaltColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SaltColumn.FillWeight = 40F;
+            this.SaltColumn.FillWeight = 35F;
             this.SaltColumn.HeaderText = "Salt";
             this.SaltColumn.MinimumWidth = 8;
             this.SaltColumn.Name = "SaltColumn";
@@ -497,10 +497,10 @@
             this.Controls.Add(this.fileLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.md5TextBox);
             this.Controls.Add(this.modeComboBox);
             this.Controls.Add(this.modeLabel);
             this.Controls.Add(this.saltDescLabel);
+            this.Controls.Add(this.md5TextBox);
             this.Controls.Add(this.DGV);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -510,10 +510,10 @@
             this.Text = "喝彩城堡-新建任务";
             this.Load += new System.EventHandler(this.AddCBTask_Load);
             this.Controls.SetChildIndex(this.DGV, 0);
+            this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.saltDescLabel, 0);
             this.Controls.SetChildIndex(this.modeLabel, 0);
             this.Controls.SetChildIndex(this.modeComboBox, 0);
-            this.Controls.SetChildIndex(this.md5TextBox, 0);
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.fileLabel, 0);
@@ -570,9 +570,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button modeListButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn PassColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaltColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn UColumn;
-        private System.Windows.Forms.Button modeListButton;
     }
 }
