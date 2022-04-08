@@ -858,8 +858,28 @@ namespace C2.Core
             byte[] hash = System.Security.Cryptography.SHA256.Create().ComputeHash(bytes);
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
-                builder.Append(hash[i].ToString("X2"));
-            return builder.ToString().ToLower();
+                builder.Append(hash[i].ToString("x2"));
+            return builder.ToString();
+        }
+
+        public static string SHA512(string data)    //sha256加密
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            byte[] hash = System.Security.Cryptography.SHA512.Create().ComputeHash(bytes);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                builder.Append(hash[i].ToString("x2"));
+            return builder.ToString();
+        }
+
+        public static string SHA1(string data)    //sha256加密
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(data);
+            byte[] hash = System.Security.Cryptography.SHA1.Create().ComputeHash(bytes);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+                builder.Append(hash[i].ToString("x2"));
+            return builder.ToString();
         }
 
         public static string AES128CBCEncrypt(string encryptStr, string key)
