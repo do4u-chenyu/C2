@@ -62,6 +62,12 @@ namespace C2
         public MainForm(string ffp)
         {
             InitializeComponent();
+#if C2_Outer
+            this.searchToolkitButton.Visible = false;
+            this.HIBUButton.Location = new Point(0, 422);
+            this.castleBravoButton.Location = new Point(0, 362);
+            this.iaoLabButton.Location = new Point(0, 302);
+#endif
             InitializeInputDataForm();
             InitializeBottomPrviewPanel();
             InitializeLeftToolPanel();
@@ -194,8 +200,9 @@ namespace C2
         void InitializeStartForm()
         {  
             ShowForm(new StartForm(), true, false, true);
+#if !C2_Outer
             ShowForm(new JSForm(), true, false, false);      // 想默认展示JSForm,ZZ策略,但JSForm鬼影太严重,支楞不起来
-
+#endif
         }
 #endregion
         

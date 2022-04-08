@@ -238,14 +238,21 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() { 
-                "WebShell", 
+            List<string> CBPlugins = new List<string>() {
+#if C2_Outer
+                 "WebScan",
+                "Intruder",
+                 "Cracker"
+#else
+                "WebShell",
                 "VPN",
                 "Binary",
                 "Cracker",
                 /*"RobotsScan",*/ 
                 "WebScan",
-                "Intruder"};
+                "Intruder"
+#endif
+            };
             CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
         }
         private void ResizeCBLocation()

@@ -82,6 +82,12 @@
   <PropertyGroup>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Outer|AnyCPU'">
+    <OutputPath>bin\C2_Outer\</OutputPath>
+    <DefineConstants>C2_Outer</DefineConstants>
+    <Optimize>true</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Words">
       <HintPath>..\ThirdPartyLibrary\Aspose18.4\Aspose.Words.dll</HintPath>
