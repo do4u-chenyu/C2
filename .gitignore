@@ -110,3 +110,7 @@ C2打包程序/output
 /tools/C2F/build
 /tools/C2F/dist
 /tools/C2F/__pycache__
+C2Plugins/FullTextGrammarAssistant/obj/
+C2Plugins/KnowledgeBase/obj/
+tools/analysis/obj/
+tools/preprocessing/obj/
