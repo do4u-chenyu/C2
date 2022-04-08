@@ -239,7 +239,7 @@ namespace C2.Controls.C1.Left
         private void LoadCBPlugins()
         {
             List<string> CBPlugins = new List<string>() {
-#if C2_Outer
+#if C2_Outer || C2_Inner
                  "WebScan",
                 "Intruder",
                  "Cracker"
