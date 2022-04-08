@@ -13,7 +13,7 @@
 ; 生成 目录setup.exe 所在文件夹
 #define MySetupOutDir ".\output"
 ;生成安装包的名称
-#define MySetupOutBaseFilename "单兵作战(" + "全量版" + ")" + "_" + GetDateTimeString('mmdd','',':')
+#define MySetupOutBaseFilename "单兵作战(" + "内网版" + ")" + "_" + GetDateTimeString('mmdd','',':')
 
 ; 制作setup.exe所用的资源文件夹
 #define MyResDir ".\res"
