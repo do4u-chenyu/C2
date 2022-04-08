@@ -80,6 +80,7 @@ namespace C2.Dialogs.IAOLab
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
+                    progressBar1.Value += 1;
                 }
             }
 
@@ -108,7 +109,8 @@ namespace C2.Dialogs.IAOLab
 
         private void Export_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true && richTextBox1.Text == string.Empty)
+            if ((tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true && richTextBox1.Text == string.Empty) ||
+                (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && richTextBox2.Text == string.Empty))
             {
                 MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
