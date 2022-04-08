@@ -70,7 +70,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "域名\t备案号\t机构名称\tIP\n";
+                firstLine = "域名\t备案号\t机构名称\tIP\tIP归属地\n";
                 tmpResult.Append(firstLine);
                 foreach (string seo in inputArray)
                 {
@@ -124,7 +124,7 @@ namespace C2.Dialogs.IAOLab
                 string text = string.Empty;
                 switch (formclass)
                 {
-                    case "seo":
+                    case "SEO":
                         text = richTextBox1.Text;
                         break;
 
@@ -191,54 +191,55 @@ namespace C2.Dialogs.IAOLab
 
         public string GetSEOTool(string host)
         {
-            //Thread.Sleep(500);
-            //string url = "http://47.94.39.209:22222/api/fhge/seo_query";
-            //Dictionary<string, string> pairs = new Dictionary<string, string> { { "seo", host } };
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //string content = JsonConvert.SerializeObject(pairs);
-            //byte[] data = Encoding.UTF8.GetBytes(content);
-            //request.Timeout = 200000;
-            //request.Method = "POST";
-            //request.ContentType = "application/json";
-            
-            //HttpWebResponse response;
-            //string postContent;
-            //try
-            //{
-            //    using (var stream = request.GetRequestStream())
-            //        stream.Write(data, 0, data.Length);
-            //    response = (HttpWebResponse)request.GetResponse();
-            //    postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            //}
-            //catch
-            //{
-            //    return "网络连接中断";
-            //}
+            Thread.Sleep(500);
+            string url = "http://47.94.39.209:22222/api/fhge/seo_query";
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "seo", host } };
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            string content = JsonConvert.SerializeObject(pairs);
+            byte[] data = Encoding.UTF8.GetBytes(content);
+            request.Timeout = 200000;
+            request.Method = "POST";
+            request.ContentType = "application/json";
 
-            //JObject json = JObject.Parse(postContent);
+            HttpWebResponse response;
+            string postContent;
+            try
+            {
+                using (var stream = request.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+                response = (HttpWebResponse)request.GetResponse();
+                postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            }
+            catch
+            {
+                return "网络连接中断";
+            }
 
-            //if (json["success"].ToString() == "0")
-            //    return "SEO查询接口错误";
-            //var gList = json["seo_info"];
-            //string icp = gList["备案号"].ToString();
-            //string name = gList["机构名称"].ToString();
-            //string ip = gList["IP"].ToString();
+            JObject json = JObject.Parse(postContent);
 
-            //List<string> cardInfo = new List<string>();
-            //try
-            //{
-            //    cardInfo.Add(icp.Replace(" ", string.Empty));
-            //    cardInfo.Add(name);
-            //    cardInfo.Add(ip);
-            //}
+            if (json["success"].ToString() == "0")
+                return "SEO查询接口错误";
+            var gList = json["seo_info"];
+            string icp = gList["备案号"].ToString();
+            string name = gList["机构名称"].ToString();
+            string ip = gList["IP"].ToString();
+            string ipAddress = gList["IP归属地"].ToString();
 
-            //catch { }
-            List<string> cardInfo = new List<string> {"123","淘宝网","10.1.126.24" };
-            if (cardInfo.Count == 3)
+            List<string> cardInfo = new List<string>();
+            try
+            {
+                cardInfo.Add(icp.Replace(" ", string.Empty));
+                cardInfo.Add(name.Replace(" ", string.Empty));
+                cardInfo.Add(ip.Replace(" ", string.Empty));
+                cardInfo.Add(ipAddress.Replace("|", "-").Replace("0-", string.Empty).Replace(" ", string.Empty));
+            }
+            catch { }
+            if (cardInfo.Count == 4)
             {
                 cardInfo[0] = cardInfo[0] == string.Empty ? "未知" : cardInfo[0];
                 cardInfo[1] = cardInfo[1] == string.Empty ? "未知" : cardInfo[1];
                 cardInfo[2] = cardInfo[2] == string.Empty ? "未知" : cardInfo[2];
+                cardInfo[3] = cardInfo[3] == string.Empty ? "未知" : cardInfo[3];
                 return string.Join("\t", cardInfo);
             }
 
@@ -250,7 +251,7 @@ namespace C2.Dialogs.IAOLab
             string fileType = String.Empty;
             if (tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true)
             {
-                fileType = "seo";
+                fileType = "SEO";
             }
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
             {
