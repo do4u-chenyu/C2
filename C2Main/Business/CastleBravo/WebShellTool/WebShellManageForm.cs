@@ -41,6 +41,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             InitializeToolStrip();
             InitializeOther();
             InitializeLock();
+
         }
 
         private void ResetSLabel()
@@ -72,6 +73,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
             };
+            this.Size = new Size(1275, 500);
+            this.threadNumberButton.SelectedIndex = 3;
         }
         private void InitializeLock()
         {
