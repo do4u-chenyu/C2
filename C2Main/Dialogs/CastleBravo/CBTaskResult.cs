@@ -98,6 +98,8 @@ namespace C2.Dialogs.CastleBravo
                 statusDes = "Done ...点详情查看...全量彩虹表太忙,只返回快剑表数据,空闲时间再下发";
             if (TaskInfo.Status == CastleBravoTaskStatus.Running)
                 statusDes = "Running...在查快剑表,秒返,查到一条返回一条";
+            if (TaskInfo.Status == CastleBravoTaskStatus.Running && TaskInfo.TaskType == "salt")
+                statusDes = "Running...红莲模式,约需35分钟/条,查到一条返回一条";
             if (TaskInfo.Status == CastleBravoTaskStatus.Rainbow)
                 statusDes = "Running...在查彩虹表,约需45-55分钟,查到一条返回一条";
 

@@ -124,12 +124,13 @@ namespace C2.Dialogs.CastleBravo
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
 
-            TaskInfo = new CastleBravoTaskInfo(md5List.Count - mode,      // 省if
+            TaskInfo = new CastleBravoTaskInfo(md5List.Count - mode,            // 省if
                                                TaskName, 
                                                result.Data, 
                                                FilePath,
                                                destFilePath, 
-                                               CastleBravoTaskStatus.Null);
+                                               CastleBravoTaskStatus.Null,
+                                               mode == 0 ? "default" : "salt"); // 默认模式 或者 加盐模式
 
             return base.OnOKButtonClick();
         }

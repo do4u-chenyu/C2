@@ -1,6 +1,11 @@
 ﻿using C2.Controls;
+using C2.Core;
+using C2.Dialogs.CastleBravo.Mode;
 using C2.Utils;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
+using System.Windows.Forms;
 
 namespace C2.Dialogs.CastleBravo
 {
@@ -32,7 +37,7 @@ namespace C2.Dialogs.CastleBravo
         private void Reset()
         {
             this.DGV.Rows.Clear();
-            this.DGV.Rows.Add(new string[] { string.Empty, "123456"});
+            this.DGV.Rows.Add(new string[] { string.Empty, "123456", "salt"});
             this.DGV.Rows.Add(new string[] { string.Empty, "123456", string.Empty, "admin" });
             this.DGV.Rows.Add();
             this.resultDGV.Rows.Clear();
@@ -42,15 +47,68 @@ namespace C2.Dialogs.CastleBravo
 
         private void DigButton_Click(object sender, System.EventArgs e)
         {
-            // string[] ml = new List<string>(ML).ToArray();
+            string message = string.Empty;
+            foreach(DataGridViewRow row in DGV.Rows)
+            {
+                if (row.Cells.Count < 4)
+                    continue;
+
+                string md5  = ST.GetValue<string>(row.Cells[0].Value, string.Empty);
+                string pass = ST.GetValue<string>(row.Cells[1].Value, string.Empty);
+                string salt = ST.GetValue<string>(row.Cells[2].Value, string.Empty);
+                string user = ST.GetValue<string>(row.Cells[3].Value, string.Empty);
+
+                if (md5.IsNullOrEmpty())
+                    continue;
+                if (pass.IsNullOrEmpty())
+                    continue;
+                if (salt.IsNullOrEmpty() && user.IsNullOrEmpty())
+                    continue;
+
+                message += Process(row.Index, md5, pass, salt, user);
+            }
+
+            if (message.Replace(',', '\x0').Trim().IsNullOrEmpty())
+                HelpUtil.ShowMessageBox(string.Format("不符合当前{0}种加密模式的任一个", MLD.Count));
+            else
+                HelpUtil.ShowMessageBox(string.Format("命中模式:{0}, 细节查看结果表", message.Trim(',')));
             
-            // int ln = 0;    // 输入样例的编号
-            // int mn = 0;    // 模式编号
-            // 遍历 列表
-            // 选取合适的行
-            // 挨个尝试
-            // 成功 输出 成功行
-            // 失败 输出 失败行
+        }
+
+        private string Process(int cIndex, string md5, string pass, string salt, string user)
+        {
+            int rIndex = 0;
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> kv in MLD)
+            {
+                rIndex++;
+                // 没用到user字段,带$U参数的就可以跳过了
+                if (user.IsNullOrEmpty() && kv.Key.Contains("$U"))
+                    continue;
+                string ret = TryProcess(kv.Value, pass, salt, user);
+
+                if (!ret.Equals(md5))
+                    continue;
+
+                // 找到了, 确定resultDGV中打标的单元格
+                this.resultDGV.Rows[rIndex - 1].Cells[cIndex + 1].Value = "√";
+                sb.Append(',')
+                  .Append(rIndex);
+            }
+            return sb.ToString();
+        }
+
+        private string TryProcess(string method, string pass, string salt, string user)
+        {
+            try
+            {
+                MethodInfo mi = typeof(ML).GetMethod(method, BindingFlags.Public | BindingFlags.Static);
+                return (string)mi.Invoke(null, new object[] { pass, salt, user });
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private void ResetButton_Click(object sender, System.EventArgs e)

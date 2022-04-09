@@ -67,7 +67,8 @@ namespace C2.Controls.C1.Left
                .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.MD5FilePath)
                .Write("resultFilePath", taskInfo.ResultFilePath)
-               .Write("status", taskInfo.Status);
+               .Write("status", taskInfo.Status)
+               .Write("type", taskInfo.TaskType);
         }
 
         private void LoadTasks(string xmlDirectory)
@@ -104,7 +105,8 @@ namespace C2.Controls.C1.Left
                     TaskCreateTime = XmlUtil.Read(xn, "taskCreateTime"),
                     MD5FilePath = XmlUtil.Read(xn, "datasourceFilePath"),
                     ResultFilePath = XmlUtil.Read(xn, "resultFilePath"),
-                    Status = CastleBravoTaskStatusEnum(XmlUtil.Read(xn, "status"))
+                    Status = CastleBravoTaskStatusEnum(XmlUtil.Read(xn, "status")),
+                    TaskType = XmlUtil.ReadDefault(xn, "type", "default"),
                 };
 
                 AddInnerButton(new CastleBravoButton(taskInfo));

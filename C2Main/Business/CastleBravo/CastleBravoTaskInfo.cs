@@ -47,11 +47,12 @@ namespace C2.Business.CastleBravo
         public string ResultFilePath;
         public List<CastleBravoResultOne> PreviewResults = new List<CastleBravoResultOne>();
         public CastleBravoTaskStatus Status;
+        public string TaskType;
 
         public CastleBravoTaskInfo() : this(0, string.Empty, string.Empty, string.Empty, string.Empty, CastleBravoTaskStatus.Null)
         { }
 
-        public CastleBravoTaskInfo(int taskCount, string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status)
+        public CastleBravoTaskInfo(int taskCount, string taskName, string taskId, string md5FilePath, string resultFilePath, CastleBravoTaskStatus status, string taskType = "default")
         {
             TaskCount = taskCount.ToString();
             TaskName = taskName;
@@ -60,6 +61,7 @@ namespace C2.Business.CastleBravo
             ResultFilePath = resultFilePath;
             Status = status;
             TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            TaskType = taskType;
         }
 
         public static string Model(string key)
