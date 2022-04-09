@@ -36,10 +36,20 @@ namespace C2.Dialogs.CastleBravo
 
         private void Reset()
         {
+            ResetDGV1();
+            ResetDGV2();
+        }
+
+        private void ResetDGV1()
+        {
             this.DGV.Rows.Clear();
-            this.DGV.Rows.Add(new string[] { string.Empty, "123456", "salt"});
+            this.DGV.Rows.Add(new string[] { string.Empty, "123456", "salt" });
             this.DGV.Rows.Add(new string[] { string.Empty, "123456", string.Empty, "admin" });
             this.DGV.Rows.Add();
+        }
+
+        private void ResetDGV2()
+        {
             this.resultDGV.Rows.Clear();
             foreach (string m in MLD.Keys)
                 this.resultDGV.Rows.Add(new string[] { m });
@@ -47,22 +57,21 @@ namespace C2.Dialogs.CastleBravo
 
         private void DigButton_Click(object sender, System.EventArgs e)
         {
+            ResetDGV2();
             string message = string.Empty;
             foreach(DataGridViewRow row in DGV.Rows)
             {
                 if (row.Cells.Count < 4)
                     continue;
 
-                string md5  = ST.GetValue<string>(row.Cells[0].Value, string.Empty);
-                string pass = ST.GetValue<string>(row.Cells[1].Value, string.Empty);
-                string salt = ST.GetValue<string>(row.Cells[2].Value, string.Empty);
-                string user = ST.GetValue<string>(row.Cells[3].Value, string.Empty);
+                string md5  = ST.GetValue<string>(row.Cells[0].Value, string.Empty).Trim();
+                string pass = ST.GetValue<string>(row.Cells[1].Value, string.Empty).Trim();
+                string salt = ST.GetValue<string>(row.Cells[2].Value, string.Empty).Trim();
+                string user = ST.GetValue<string>(row.Cells[3].Value, string.Empty).Trim();
 
                 if (md5.IsNullOrEmpty())
                     continue;
                 if (pass.IsNullOrEmpty())
-                    continue;
-                if (salt.IsNullOrEmpty() && user.IsNullOrEmpty())
                     continue;
 
                 message += Process(row.Index, md5, pass, salt, user);
@@ -71,7 +80,7 @@ namespace C2.Dialogs.CastleBravo
             if (message.Replace(',', '\x0').Trim().IsNullOrEmpty())
                 HelpUtil.ShowMessageBox(string.Format("不符合当前{0}种加密模式的任一个", MLD.Count));
             else
-                HelpUtil.ShowMessageBox(string.Format("命中模式:{0}, 细节查看结果表", message.Trim(',')));
+                HelpUtil.ShowMessageBox(string.Format("符合加密模式:{0}, 细节查看结果表", message.Trim(',')));
             
         }
 

@@ -189,7 +189,7 @@ namespace C2.Dialogs.CastleBravo
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(395, 18);
             this.label1.TabIndex = 10027;
-            this.label1.Text = "表中填入几组已知样例,速查可能对应的加密模式";
+            this.label1.Text = "表中填入几组已知带盐加密样例,速查对应的加密模式";
             // 
             // panel2
             // 
