@@ -1,14 +1,15 @@
 ﻿using C2.Controls;
+using C2.Utils;
 using System.Collections.Generic;
 
 namespace C2.Dialogs.CastleBravo
 {
     partial class MLForm : StandardDialog
     {
-        private readonly string[] ML;
-        public MLForm(string[] ml)
+        private readonly Dictionary<string, string> MLD;
+        public MLForm(Dictionary<string, string> mld)
         {
-            this.ML = ml;
+            this.MLD = mld;
             InitializeComponent();
             InitializeOther();
             InitializeDGV();
@@ -31,11 +32,12 @@ namespace C2.Dialogs.CastleBravo
         private void Reset()
         {
             this.DGV.Rows.Clear();
-            this.DGV.Rows.Add(new string[] { string.Empty, "123456", string.Empty, "admin"});
+            this.DGV.Rows.Add(new string[] { string.Empty, "123456"});
+            this.DGV.Rows.Add(new string[] { string.Empty, "123456", string.Empty, "admin" });
             this.DGV.Rows.Add();
-            this.DGV.Rows.Add();
-            this.DGV.Rows.Add();
-            this.textBox1.Text = string.Join(System.Environment.NewLine, ML);
+            this.resultDGV.Rows.Clear();
+            foreach (string m in MLD.Keys)
+                this.resultDGV.Rows.Add(new string[] { m });
         }
 
         private void DigButton_Click(object sender, System.EventArgs e)
@@ -54,6 +56,12 @@ namespace C2.Dialogs.CastleBravo
         private void ResetButton_Click(object sender, System.EventArgs e)
         {
             Reset();
+        }
+
+        private void PasteButton_Click(object sender, System.EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(string.Join(System.Environment.NewLine, MLD.Keys));
+            HelpUtil.ShowMessageBox("模式列表已经复制到内存剪切板");
         }
     }
 }
