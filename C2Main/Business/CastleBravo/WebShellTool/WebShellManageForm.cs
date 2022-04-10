@@ -15,8 +15,31 @@ using static C2.Utils.GuarderUtil;
 
 namespace C2.Business.CastleBravo.WebShellTool
 {
+
     public partial class WebShellManageForm : Form
     {
+
+        class CheckAliveResult
+        {
+            public bool done = false;
+            public bool alive = false;
+            public bool safeM = false;
+            public CheckAliveResult(bool s = false)
+            {
+                safeM = s;
+            }
+        }
+
+        enum ResetTypeEnum
+        {
+            重新开始,
+            重新开始_境外站,
+            继续上次,
+            继续上次_境外,
+            选中项验活,
+            二刷不活
+        }
+
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         private int NumberOfAlive { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
@@ -35,19 +58,60 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private FindSet finder;
 
+        // 并发验活缓存项
+        // 加速原理: 开始前先根据验活场景构造待验活项缓存
+        //           主线程从前往后逐项验活
+        //           其他线程对缓存中记录从后往前N线程并发验活,并把结果记录入缓存
+        //           主线程每次验活前,先查看是否在缓存中此项是否已经被验过了
+        //           
+        // 因为并发验活涉及到层层反馈结果到界面更新,这样设计,改动最小
+        private Dictionary<ListViewItem, CheckAliveResult> cache;
+
         public WebShellManageForm()
         {
             InitializeComponent();
             InitializeToolStrip();
             InitializeOther();
             InitializeLock();
-
         }
 
         private void ResetSLabel()
         {
             ItemCountSLabel.Text = string.Format("共{0}项", LV.Items.Count);
             ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
+        }
+
+        // 根据不同的场景设置加速缓存里的内容
+        private void ResetCheckCache(ResetTypeEnum type)
+        {
+            cache.Clear();
+            foreach (ListViewItem lvi in this.LV.Items)
+                switch (type)
+                {
+                    case ResetTypeEnum.重新开始:
+                        cache.Add(lvi, new CheckAliveResult());
+                        break;
+                    case ResetTypeEnum.重新开始_境外站:
+                        cache.Add(lvi, new CheckAliveResult(true));
+                        break;
+                    case ResetTypeEnum.继续上次:
+                        if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
+                            cache.Add(lvi, new CheckAliveResult());
+                        break;
+                    case ResetTypeEnum.继续上次_境外:
+                        if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
+                            cache.Add(lvi, new CheckAliveResult(true));
+                        break;
+                    case ResetTypeEnum.选中项验活:
+                        if (lvi.Selected)
+                            cache.Add(lvi, new CheckAliveResult());
+                        break;
+                    case ResetTypeEnum.二刷不活:
+                        if (lvi.SubItems[5].Text.Trim().In(new string[] { "×", "待" }))
+                            cache.Add(lvi, new CheckAliveResult());
+                        break;
+                }
+                
         }
         private void InitializeOther()
         {
@@ -56,6 +120,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             NumberOfAlive = 0;
             finder = new FindSet(LV);
             LV.ListViewItemSorter = new LVComparer();
+            cache = new Dictionary<ListViewItem, CheckAliveResult>();
         }
 
         private void InitializeToolStrip()
@@ -65,9 +130,9 @@ namespace C2.Business.CastleBravo.WebShellTool
             {
                 this.editDDB,
                 this.proxySettingMenu,
-                this.refreshAllShellMenu,
-                this.refreshOtherMenu2,
-                this.secondRefreshMenu,
+                this.批量验活Menu,
+                this.境外站验活Menu,
+                this.二刷不活Menu,
                 this.checkAliveDDB,
                 this.trojanMenu,
                 this.infoCollectionMenu,
@@ -106,8 +171,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             trojanMenu.Enabled = true;
             infoCollectionMenu.Enabled = true;
-            refreshAllShellMenu.Enabled = true;
-            secondRefreshMenu.Enabled = true;
+            批量验活Menu.Enabled = true;
+            二刷不活Menu.Enabled = true;
             //右键菜单
             EnterToolStripMenuItem.Enabled = true;
             SuscideMenuItem.Enabled = true;
@@ -340,7 +405,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (this.LV.SelectedItems.Count == 0)
                 return;
             ResetProgressMenuValue(LV.SelectedItems.Count);
-
+            ResetCheckCache(ResetTypeEnum.选中项验活);
             DoCheckAliveItems(LV.SelectedItems, false, false);
             RefreshTasks();
             SaveDB();
@@ -353,6 +418,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
         {
+            // 清空加速缓存
+            ResetCheckCache(ResetTypeEnum.重新开始);  
             DoCheckAliveAllMenuItemClick(false);
         }
 
@@ -361,6 +428,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CheckAliveStopMenu_Click(object sender, EventArgs e)
         {
             actionNeedStop = true;
+
         }
 
         private void SecondCheckAliveTaskStatus()
@@ -707,11 +775,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SecondeCheckAliveMenu_Click(object sender, EventArgs e)
         {
+            ResetCheckCache(ResetTypeEnum.二刷不活);
             SecondCheckAliveTaskStatus();
         }
 
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
+            // 清空加速缓存
+            ResetCheckCache(ResetTypeEnum.重新开始_境外站);
             DoCheckAliveAllMenuItemClick(true);
         }
 
@@ -1107,11 +1178,13 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ResetCheckCache(ResetTypeEnum.继续上次);
             DoCheckAliveContinue(false);
         }
 
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ResetCheckCache(ResetTypeEnum.继续上次_境外);
             DoCheckAliveContinue(true);
         }
 
