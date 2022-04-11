@@ -137,7 +137,7 @@ namespace QQSpiderPlugin
                 resultList = this.ParseKeyWord(id, resp.Text);
                 Thread.Sleep(1000);
             }
-            catch // 这里是捕获不到异常的
+            catch
             {
             }
             return resultList;
