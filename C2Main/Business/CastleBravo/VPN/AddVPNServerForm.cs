@@ -1,4 +1,6 @@
 ﻿using C2.Controls;
+using C2.Core;
+using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +26,18 @@ namespace C2.Business.CastleBravo.VPN
         {
             base.ShowDialog();
             return VPNTaskConfig.Empty;
+        }
+
+        protected override bool OnOKButtonClick()
+        {
+            //TODO 判断必填是否有值
+            if (ipTextBox.Text.IsNullOrEmpty() || portTextBox.Text.IsNullOrEmpty() || versionCombox.Text.IsNullOrEmpty() ||
+                pwdTextBox.Text.IsNullOrEmpty() || encryptComboBox.Text.IsNullOrEmpty())
+            {
+                HelpUtil.ShowMessageBox("IP、端口等必填项不能为空。");
+                return false;
+            }
+            return base.OnOKButtonClick();
         }
     }
 }

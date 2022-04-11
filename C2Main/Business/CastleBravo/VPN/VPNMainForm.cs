@@ -1,6 +1,8 @@
 ﻿using C2.Business.CastleBravo.WebShellTool;
 using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace C2.Business.CastleBravo.VPN
@@ -8,7 +10,7 @@ namespace C2.Business.CastleBravo.VPN
     public partial class VPNMainForm : Form
     {
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
-
+        List<VPNTaskConfig> tasks = new List<VPNTaskConfig>();
         private FindSet finder;
 
         private ToolStripItem[] enableItems;
@@ -45,11 +47,15 @@ namespace C2.Business.CastleBravo.VPN
             VPNTaskConfig config = new AddVPNServerForm().ShowDialog(ST.NowString());
             if (config == VPNTaskConfig.Empty)
                 return;
+            LV.Items.Add(NewLVI(config));
+            tasks.Add(config);
         }
 
         private void 批量添加ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-
+            BatchAddVPNServerForm dialog = new BatchAddVPNServerForm();
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
         }
 
         private void 查找ToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -85,6 +91,30 @@ namespace C2.Business.CastleBravo.VPN
         {
             //actionNeedStop = true;
         }
-        
+
+        static bool isAlertnatingRows = true;
+        static readonly Color SingleRowColor = Color.FromArgb(255, 217, 225, 242);
+        static readonly Color AltertnatingRowColor = Color.FromArgb(255, 208, 206, 206);
+        private ListViewItem NewLVI(VPNTaskConfig config)
+        {
+            ListViewItem lvi = new ListViewItem(config.CreateTime);
+            lvi.SubItems.Add(config.Remark);
+            lvi.SubItems.Add(config.Host);
+            lvi.SubItems.Add(config.Port);
+            lvi.SubItems.Add(config.Password);
+            lvi.SubItems.Add(config.Method);
+            lvi.SubItems.Add(config.Status);
+            lvi.SubItems.Add(config.SSVersion);
+            lvi.SubItems.Add(config.ProbeInfo);
+            lvi.SubItems.Add(config.Country);
+            lvi.SubItems.Add(config.IP);
+
+            // 指针关联
+            lvi.Tag = config;
+            // 设置间隔行背景色
+            lvi.BackColor = isAlertnatingRows ? SingleRowColor : AltertnatingRowColor;
+            isAlertnatingRows = !isAlertnatingRows;
+            return lvi;
+        }
     }
 }
