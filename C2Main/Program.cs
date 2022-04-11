@@ -16,8 +16,8 @@ namespace C2
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
-        public const string LinceseDeadLine = "2022041700000000";
-        public const string LinceseDeadLineDesc = "本次迭代装备使用期截止到 2022年4月17号";
+        public const string LinceseDeadLine = "2022052000000000";
+        public const string LinceseDeadLineDesc = "本次迭代装备使用期截止到 2022年5月20号";
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
