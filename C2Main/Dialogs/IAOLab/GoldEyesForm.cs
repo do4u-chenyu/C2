@@ -205,23 +205,23 @@ namespace C2.Dialogs.IAOLab
 
             HttpWebResponse response;
             string postContent;
+            JObject json;
             try
             {
                 using (var stream = request.GetRequestStream())
                     stream.Write(data, 0, data.Length);
                 response = (HttpWebResponse)request.GetResponse();
                 postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                json = JObject.Parse(postContent); 
             }
             catch
             {
                 return "网络连接中断";
             }
-
-            JObject json = JObject.Parse(postContent);
-
-            if (json["success"].ToString() == "0")
-                return "SEO查询接口错误";
             var gList = json["seo_info"];
+            if (json["success"].ToString() == "0" || gList == null)
+                return "SEO查询接口错误";
+            
             string icp = gList["备案号"].ToString();
             string name = gList["机构名称"].ToString();
             string ip = gList["IP"].ToString();
@@ -262,7 +262,67 @@ namespace C2.Dialogs.IAOLab
             return fileType;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void IPShowResult(string input, StringBuilder tmpResult)
+        {
+            if (!string.IsNullOrEmpty(input) && progressBar2.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
+            {
+                if (progressBar2.Value % 100 == 0)
+                {
+                    Thread.Sleep(100);
+                }
+
+                tmpResult.Append(GetInfo(input.Split('\t')[0]));
+                richTextBox2.Text = tmpResult.ToString();
+
+                progressBar2.Value += 1;
+            }
+        }
+
+        private string GetInfo(string Ip)
+        {
+            List<string> resultList = new List<string> { };
+            string url = "http://47.94.39.209:8899/api/fhge/capture_host_by_ip";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "POST";
+            req.Timeout = 20000;
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", Ip } };
+
+            string content = JsonConvert.SerializeObject(pairs);
+            byte[] data = Encoding.UTF8.GetBytes(content);
+
+            req.ContentType = "application/json";
+            req.ContentLength = data.Length;
+            HttpWebResponse resp = null;
+
+            try
+            {
+                using (var stream = req.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+
+                resp = (HttpWebResponse)req.GetResponse();
+            }
+            catch
+            {
+                return Ip + '\t' + "网络连接中断" + '\n';
+            }
+
+            JObject json = JObject.Parse(new StreamReader(resp.GetResponseStream()).ReadToEnd());
+
+            if (json["status"].ToString() == "失败")
+                return Ip + '\t' + "IP反查查询错误" + '\n';
+
+            var dat = json["data"];
+            string resp_data = JsonConvert.SerializeObject(dat);
+            if (resp_data.Length == 0) 
+            {
+                return Ip + '\t' + "未查询到绑定过的域名" + '\n';
+            }
+            string res = Ip + '\t' + resp_data + '\n';
+
+            return res;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog1 = new OpenFileDialog
             {
@@ -294,58 +354,6 @@ namespace C2.Dialogs.IAOLab
                     MessageBox.Show(ex.Message, "ERROR");
                 }
             }
-        }
-
-        private void IPShowResult(string input, StringBuilder tmpResult)
-        {
-            if (!string.IsNullOrEmpty(input) && progressBar2.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
-            {
-                if (progressBar2.Value % 100 == 0)
-                {
-                    Thread.Sleep(100);
-                }
-
-                tmpResult.Append(GetInfo(input.Split('\t')[0]));
-                richTextBox2.Text = tmpResult.ToString();
-
-                progressBar2.Value += 1;
-            }
-        }
-
-        private string GetInfo(string Ip)
-        {
-            List<string> resultList = new List<string> { };
-            string url = "http://47.94.39.209:8899/api/fhge/capture_host_by_ip";
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Method = "POST";
-            req.Timeout = 20000;
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", Ip } };
-
-            string content = JsonConvert.SerializeObject(pairs);
-            byte[] data = Encoding.UTF8.GetBytes(content);
-
-            req.ContentType = "application/json";
-            req.ContentLength = data.Length;
-
-            using (var stream = req.GetRequestStream())
-                stream.Write(data, 0, data.Length);
-
-            HttpWebResponse resp = null;
-            try
-            {
-                resp = (HttpWebResponse)req.GetResponse();
-            }
-            catch
-            {
-                return "网络连接中断";
-            }
-
-            JObject json = JObject.Parse(new StreamReader(resp.GetResponseStream()).ReadToEnd());
-            var dat = json["data"];
-            string resp_data = JsonConvert.SerializeObject(dat);
-            string res = Ip + '\t' + resp_data + '\n';
-
-            return res;
         }
     }
 }

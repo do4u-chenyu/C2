@@ -2327,6 +2327,9 @@
     <EmbeddedResource Include="Business\CastleBravo\VPN\AddVPNServerForm.resx">
       <DependentUpon>AddVPNServerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\VPN\BatchAddVPNServerForm.resx">
+      <DependentUpon>BatchAddVPNServerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Business\IAOLab\PwdGenerator\PwdResultForm.resx">
       <DependentUpon>PwdResultForm.cs</DependentUpon>
     </EmbeddedResource>
