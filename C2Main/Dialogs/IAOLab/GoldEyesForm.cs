@@ -262,40 +262,6 @@ namespace C2.Dialogs.IAOLab
             return fileType;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog OpenFileDialog1 = new OpenFileDialog
-            {
-                Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv"
-            };
-            if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    string path = OpenFileDialog1.FileName;
-                    using (StreamReader sr = new StreamReader(path))
-                    {
-                        string line;
-                        StringBuilder sb = new StringBuilder();
-                        // 从文件读取并显示行，直到文件的末尾 
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            sb.Append(line);
-                            sb.Append("\n");
-                        }
-
-                        richTextBox2.Text = sb.TrimEndN().ToString();
-                        if (tabControl1.Visible == false)
-                            richTextBox2.Text = sb.TrimEndN().ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "ERROR");
-                }
-            }
-        }
-
         private void IPShowResult(string input, StringBuilder tmpResult)
         {
             if (!string.IsNullOrEmpty(input) && progressBar2.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
@@ -327,25 +293,68 @@ namespace C2.Dialogs.IAOLab
             req.ContentType = "application/json";
             req.ContentLength = data.Length;
 
-            using (var stream = req.GetRequestStream())
-                stream.Write(data, 0, data.Length);
-
             HttpWebResponse resp = null;
+
             try
             {
+                using (var stream = req.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+
                 resp = (HttpWebResponse)req.GetResponse();
             }
             catch
             {
-                return "网络连接中断";
+                return Ip + '\t' + "网络连接中断" + '\n';
             }
 
             JObject json = JObject.Parse(new StreamReader(resp.GetResponseStream()).ReadToEnd());
+
+            if (json["status"].ToString() == "失败")
+                return Ip + '\t' + "IP反查查询错误" + '\n';
+
             var dat = json["data"];
             string resp_data = JsonConvert.SerializeObject(dat);
+            if (resp_data.Length == 0) 
+            {
+                return Ip + '\t' + "未查询到绑定过的域名" + '\n';
+            }
             string res = Ip + '\t' + resp_data + '\n';
 
             return res;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog
+            {
+                Filter = "文本文档 | *.txt;*.csv;*.bcp;*.tsv"
+            };
+            if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string path = OpenFileDialog1.FileName;
+                    using (StreamReader sr = new StreamReader(path))
+                    {
+                        string line;
+                        StringBuilder sb = new StringBuilder();
+                        // 从文件读取并显示行，直到文件的末尾 
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            sb.Append(line);
+                            sb.Append("\n");
+                        }
+
+                        richTextBox2.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.Visible == false)
+                            richTextBox2.Text = sb.TrimEndN().ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR");
+                }
+            }
         }
     }
 }
