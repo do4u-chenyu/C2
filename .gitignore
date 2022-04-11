@@ -52,6 +52,7 @@ UserInstallSet/bin
 UserInstallSet/obj
 IAO解决方案/Debug
 IAO解决方案/Release
+IAO解决方案/C2_Outer
 UserInstallSet/bin/Debug/UserInstallSet.dll
 UserInstallSet/bin/Debug/UserInstallSet.pdb
 UserInstallSet/obj/Debug/UserInstallSet.csprojAssemblyReference.cache
@@ -114,3 +115,6 @@ C2Plugins/FullTextGrammarAssistant/obj/
 C2Plugins/KnowledgeBase/obj/
 tools/analysis/obj/
 tools/preprocessing/obj/
+tools/analysis/bin/C2_Outer
+C2Plugins/FullTextGrammarAssistant/bin/C2_Outer
+C2Plugins/KnowledgeBase/bin/C2_Outer

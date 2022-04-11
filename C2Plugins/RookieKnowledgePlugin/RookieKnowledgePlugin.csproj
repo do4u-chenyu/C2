@@ -33,6 +33,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Outer|AnyCPU'">
+    <OutputPath>bin\C2_Outer\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\ThirdPartyLibrary\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -90,6 +93,9 @@ if not exist plugins md $(SolutionDir)\C2Main\bin\Debug\plugins
 copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\Debug\plugins  
 
 if not exist plugins md $(SolutionDir)\C2Main\bin\开发调试\plugins    
-copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\开发调试\plugins</PostBuildEvent>
+copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\开发调试\plugins
+
+if not exist plugins md $(SolutionDir)\C2Main\bin\C2_Outer\plugins    
+copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\C2_Outer\plugins</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -255,6 +255,7 @@ namespace C2.Core
             { "L1HF5AL00EV", "LXF"},
             { "L1HF68F04XB", "WLY"},
             { "/7KFL4S2/CNWS20088P013N/" , "XX" },
-            { "/7W9Q8M2/CNWS2007A500S5/" , "WL"}}; 
+            { "/7W9Q8M2/CNWS2007A500S5/" , "WL"}
+        }; 
     }
 }
