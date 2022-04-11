@@ -205,23 +205,23 @@ namespace C2.Dialogs.IAOLab
 
             HttpWebResponse response;
             string postContent;
+            JObject json;
             try
             {
                 using (var stream = request.GetRequestStream())
                     stream.Write(data, 0, data.Length);
                 response = (HttpWebResponse)request.GetResponse();
                 postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                json = JObject.Parse(postContent); 
             }
             catch
             {
                 return "网络连接中断";
             }
-
-            JObject json = JObject.Parse(postContent);
-
-            if (json["success"].ToString() == "0")
-                return "SEO查询接口错误";
             var gList = json["seo_info"];
+            if (json["success"].ToString() == "0" || gList == null)
+                return "SEO查询接口错误";
+            
             string icp = gList["备案号"].ToString();
             string name = gList["机构名称"].ToString();
             string ip = gList["IP"].ToString();
