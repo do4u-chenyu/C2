@@ -655,7 +655,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
         private bool PostCheckAlive(WebShellTaskConfig task)
-        {   
+        {
+            // 先检查是否命中缓存
+            if (cache.ContainsKey(task))
+                if (cache[task].done)
+                    return cache[task].alive;
+
             // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
             return DoEventsWait(5, Task.Run(() => CheckAlive(task)));
         }
