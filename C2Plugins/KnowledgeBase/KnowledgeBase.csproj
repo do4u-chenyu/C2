@@ -37,6 +37,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Outer|AnyCPU'">
     <OutputPath>bin\C2_Outer\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Inner|AnyCPU'">
+    <OutputPath>bin\C2_Inner\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -98,6 +101,9 @@ if not exist plugins md $(SolutionDir)\C2Main\bin\开发调试\plugins
 copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\开发调试\plugins
 
 if not exist plugins md $(SolutionDir)\C2Main\bin\C2_Outer\plugins    
-copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\C2_Outer\plugins</PostBuildEvent>
+copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\C2_Outer\plugins
+
+if not exist plugins md $(SolutionDir)\C2Main\bin\C2_Inner\plugins    
+copy  /Y $(TargetPath) $(SolutionDir)\C2Main\bin\C2_Inner\plugins</PostBuildEvent>
   </PropertyGroup>
 </Project>

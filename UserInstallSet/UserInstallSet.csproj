@@ -34,6 +34,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Outer|AnyCPU'">
     <OutputPath>bin\C2_Outer\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Inner|AnyCPU'">
+    <OutputPath>bin\C2_Inner\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />

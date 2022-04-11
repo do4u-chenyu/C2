@@ -99,6 +99,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_084876CB236D427F93330ABA13F00DFE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_09ECB41BC30BEA80B1B1183F0C7A6FAD"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
@@ -610,7 +616,7 @@
         "Entry"
         {
         "MsmKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
-        "OwnerKey" = "8:_382C0A7EE98F4B6FA2BBAD8437CAC5B6"
+        "OwnerKey" = "8:_F096859F59A440A9989C25F87A0BA303"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -640,12 +646,6 @@
         "Entry"
         {
         "MsmKey" = "8:_37B7D0A3B2544DE791C464841F3B0C3E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_382C0A7EE98F4B6FA2BBAD8437CAC5B6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -682,6 +682,12 @@
         "Entry"
         {
         "MsmKey" = "8:_3A69AC2E56104BBBA99C3C1ADB95A926"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3A8C0EA97D644AC4A890C5CCD0D483AD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1234,12 +1240,6 @@
         "Entry"
         {
         "MsmKey" = "8:_61C1CDD9926E4765942F4949AE5264EF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_62697EAEAAF245E5BFA230F308F931AA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1821,6 +1821,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_98434BA071794AEB8BA7F5672828F72D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9A41724CA2294A6DBA1D2E75D650E69D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1923,12 +1929,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A0CD969D8D724764B4EB4E75A0FE16BF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A2593A27B6AC4EB9A5FF27B22B7FC764"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1942,12 +1942,6 @@
         "Entry"
         {
         "MsmKey" = "8:_A5EF434D5F43415A92F2539258162951"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A67AFEA090444CF986F83391FBA867E6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2895,6 +2889,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F096859F59A440A9989C25F87A0BA303"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3136,25 +3136,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_62697EAEAAF245E5BFA230F308F931AA"
+        "OwnerKey" = "8:_98434BA071794AEB8BA7F5672828F72D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_382C0A7EE98F4B6FA2BBAD8437CAC5B6"
+        "OwnerKey" = "8:_F096859F59A440A9989C25F87A0BA303"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A67AFEA090444CF986F83391FBA867E6"
+        "OwnerKey" = "8:_084876CB236D427F93330ABA13F00DFE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A0CD969D8D724764B4EB4E75A0FE16BF"
+        "OwnerKey" = "8:_3A8C0EA97D644AC4A890C5CCD0D483AD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3370,6 +3370,22 @@
     }
     "Configurations"
     {
+        "C2_Inner"
+        {
+        "DisplayName" = "8:C2_Inner"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:C2_Inner\\IAO解决方案.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+        }
         "C2_Outer"
         {
         "DisplayName" = "8:C2_Outer"
@@ -3753,6 +3769,37 @@
             "TargetName" = "8:254_黄旗.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_084876CB236D427F93330ABA13F00DFE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MD5Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_084876CB236D427F93330ABA13F00DFE"
+                    {
+                    "Name" = "8:MD5Plugin.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\C2Main\\bin\\C2_Inner\\plugins\\MD5Plugin.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5564,37 +5611,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_382C0A7EE98F4B6FA2BBAD8437CAC5B6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:QQSpiderPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_382C0A7EE98F4B6FA2BBAD8437CAC5B6"
-                    {
-                    "Name" = "8:QQSpiderPlugin.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\C2Main\\bin\\C2_Outer\\plugins\\QQSpiderPlugin.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_38337DF6B27D458390CAF1675A9D4DA8"
             {
             "SourcePath" = "8:..\\C2Main\\bin\\Release\\Resources\\UIThemes\\Light a way.xml"
@@ -5701,6 +5717,37 @@
             "TargetName" = "8:236_done.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3A8C0EA97D644AC4A890C5CCD0D483AD"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:2048, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3A8C0EA97D644AC4A890C5CCD0D483AD"
+                    {
+                    "Name" = "8:2048.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\C2Main\\bin\\C2_Inner\\plugins\\2048.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7282,37 +7329,6 @@
             "TargetName" = "8:195_开锁.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_62697EAEAAF245E5BFA230F308F931AA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:RookieKnowledgePlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_62697EAEAAF245E5BFA230F308F931AA"
-                    {
-                    "Name" = "8:RookieKnowledgePlugin.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\C2Main\\bin\\C2_Outer\\plugins\\RookieKnowledgePlugin.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -9113,6 +9129,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_98434BA071794AEB8BA7F5672828F72D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:RookieKnowledgePlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_98434BA071794AEB8BA7F5672828F72D"
+                    {
+                    "Name" = "8:RookieKnowledgePlugin.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\C2Main\\bin\\C2_Inner\\plugins\\RookieKnowledgePlugin.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A41724CA2294A6DBA1D2E75D650E69D"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img8\\title_3.png"
@@ -9464,37 +9511,6 @@
                 "Vital" = "11:TRUE"
                 }
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A0CD969D8D724764B4EB4E75A0FE16BF"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:2048, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A0CD969D8D724764B4EB4E75A0FE16BF"
-                    {
-                    "Name" = "8:2048.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\C2Main\\bin\\C2_Outer\\plugins\\2048.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2593A27B6AC4EB9A5FF27B22B7FC764"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\WebScanDict\\通用PHP字典.txt"
@@ -9541,37 +9557,6 @@
             "TargetName" = "8:dic_username_ftp.txt"
             "Tag" = "8:"
             "Folder" = "8:_30D87A175307459A8BC3E9D16C7F4967"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A67AFEA090444CF986F83391FBA867E6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MD5Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A67AFEA090444CF986F83391FBA867E6"
-                    {
-                    "Name" = "8:MD5Plugin.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\C2Main\\bin\\C2_Outer\\plugins\\MD5Plugin.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -12514,6 +12499,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F096859F59A440A9989C25F87A0BA303"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:QQSpiderPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F096859F59A440A9989C25F87A0BA303"
+                    {
+                    "Name" = "8:QQSpiderPlugin.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\C2Main\\bin\\C2_Inner\\plugins\\QQSpiderPlugin.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E5AAA6C64D2B45C98B99F6E04B835DFC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1D57959E1D349789A7067A42DBC2849"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\Templates\\思维导图.xml"
@@ -13775,7 +13791,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{0B91C331-FDF3-42B3-B0A7-768134E496FC}"
+        "PackageCode" = "8:{374ABCDF-C18D-4F31-BE23-3AA654F7EF6F}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -14594,7 +14610,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\C2_Outer\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\C2_Inner\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -14622,7 +14638,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\C2_Outer\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\C2_Inner\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
