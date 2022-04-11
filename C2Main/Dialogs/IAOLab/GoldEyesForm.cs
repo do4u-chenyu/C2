@@ -292,7 +292,6 @@ namespace C2.Dialogs.IAOLab
 
             req.ContentType = "application/json";
             req.ContentLength = data.Length;
-
             HttpWebResponse resp = null;
 
             try
