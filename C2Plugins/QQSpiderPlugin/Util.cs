@@ -225,9 +225,9 @@ namespace QQSpiderPlugin
             short rowHeight = 800;
             bool result = true;
             List<string> headList = new List<string> { "群头像", "群ID", "群名称", "群人数", "群人数上限", "群主QQ", "群地址", "群分类", "群标签", "群简介" };
-            FileStream fs = null;
-            HSSFWorkbook workbook = null;
-            HSSFSheet sheet = null;
+            FileStream fs;
+            HSSFWorkbook workbook;
+            HSSFSheet sheet;
             
             try
             {

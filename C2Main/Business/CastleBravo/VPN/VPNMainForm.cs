@@ -116,5 +116,15 @@ namespace C2.Business.CastleBravo.VPN
             isAlertnatingRows = !isAlertnatingRows;
             return lvi;
         }
+
+        private void 重新开始ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void 继续上次ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

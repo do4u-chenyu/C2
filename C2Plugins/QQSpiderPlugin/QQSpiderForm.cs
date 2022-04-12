@@ -285,7 +285,7 @@ namespace QQSpiderPlugin
                 List<string> resultList = crawler.QueryKeyWord(id);
                 if (resultList.Count == 0)
                 {
-                    ShowMessageBox(string.Format("关键词{0}无查询结果，请检查爬虫是否被限制",id));
+                    ShowMessageBox(string.Format("关键词{0}无查询结果",id));
                     continue;
                 }
                 dgvMgr.AppendLineList(resultList);
