@@ -80,7 +80,6 @@ namespace C2.Dialogs.IAOLab
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
-                    progressBar1.Value += 1;
                 }
             }
 
@@ -105,6 +104,7 @@ namespace C2.Dialogs.IAOLab
                     }
                 }
             }
+            this.Cursor = Cursors.Arrow;
         }
 
         private void Export_Click(object sender, EventArgs e)
@@ -186,9 +186,8 @@ namespace C2.Dialogs.IAOLab
 
         public string GetSEOTool(string host)
         {
-            Thread.Sleep(500);
             string url = "http://47.94.39.209:22222/api/fhge/seo_query";
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "seo", host } };
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "domain", host } };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             string content = JsonConvert.SerializeObject(pairs);
             byte[] data = Encoding.UTF8.GetBytes(content);
@@ -211,9 +210,9 @@ namespace C2.Dialogs.IAOLab
             {
                 return "网络连接中断";
             }
-            var gList = json["seo_info"];
-            if (json["success"].ToString() == "0" || gList == null)
-                return "SEO查询接口错误";
+            var gList = json["data"];
+            if (json["status"].ToString() == "失败" || gList == null)
+                return string.Format("SEO查询接口错误,{0}",json["msg"]);
 
             List<string> cardInfo = new List<string>();
             try
@@ -271,7 +270,6 @@ namespace C2.Dialogs.IAOLab
 
         private string GetInfo(string Ip)
         {
-            List<string> resultList = new List<string> { };
             string url = "http://47.94.39.209:8899/api/fhge/capture_host_by_ip";
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "POST";

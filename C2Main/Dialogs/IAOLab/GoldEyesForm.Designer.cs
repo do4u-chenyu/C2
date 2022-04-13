@@ -128,7 +128,7 @@
             this.SEOTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.SEOTabPage.Size = new System.Drawing.Size(639, 313);
             this.SEOTabPage.TabIndex = 0;
-            this.SEOTabPage.Text = "SEO综合查询(施工中)";
+            this.SEOTabPage.Text = "SEO综合查询";
             this.SEOTabPage.UseVisualStyleBackColor = true;
             // 
             // import
@@ -222,7 +222,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(639, 313);
             this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "IP反查域名(施工中)";
+            this.tabPage1.Text = "IP反查域名";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // button1
