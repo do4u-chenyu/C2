@@ -9,6 +9,7 @@ using C2.Model.MindMaps;
 using C2.Model.Widgets;
 using C2.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace C2.Controls.MapViews
         public event DelReadErrOutput ReadErrOutput;
         bool flag = false;
         string message = string.Empty;
+        string tempResult = string.Empty;
+
         private void GenRunCmds()
         {
             //除了未配置状态，其余情况下全部重新运行
@@ -166,8 +169,12 @@ namespace C2.Controls.MapViews
 
         private void ReadStdOutputAction(string result)
         {
-            log.Info(result);
-            
+            if (result != tempResult)
+            {
+                log.Info(result);
+                tempResult = result;
+            }
+
             if (flag == false)
             {
                 message = string.Format("运算进行中, 【运行日志】面板查看具体信息");
@@ -178,7 +185,12 @@ namespace C2.Controls.MapViews
 
         private void ReadErrOutputAction(string result)
         {
-            log.Warn(result);
+            if (result != tempResult)
+            {
+                log.Warn(result);
+                tempResult = result;
+            }
+
             if (flag == false)
             {
                 message = string.Format("运算出现问题, 【运行日志】面板查看出错信息,反馈SH群");
@@ -207,7 +219,10 @@ namespace C2.Controls.MapViews
         }
 
         private void Process_Exited(object sender, EventArgs e)
-        { Console.WriteLine("命令执行完毕"); }
+        { 
+            message = string.Format("运算完成");
+            HelpUtil.ShowMessageBox(message, "运行完毕");
+        }
 
         
 
@@ -251,10 +266,11 @@ namespace C2.Controls.MapViews
                     {
                         cmd = cmds[i] + string.Empty;
                     }
-                    log.Info(cmd);
                     p.StandardInput.WriteLine(cmd);
                     //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");
+                    p.StandardOutput.ReadToEnd();
+                    p.WaitForExit();
                 }
             }
             catch (InvalidOperationException)
@@ -265,7 +281,6 @@ namespace C2.Controls.MapViews
             
             catch (Exception ex)
             {
-                //异常停止的处理方法
                 message = ex.Message;
             }
             finally

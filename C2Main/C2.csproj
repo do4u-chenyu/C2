@@ -364,6 +364,8 @@
       <DependentUpon>BatchAddVPNServerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
+    <Compile Include="Business\CastleBravo\VPN\Probe\ProbeFactory.cs" />
+    <Compile Include="Business\CastleBravo\VPN\Probe\SocketClient.cs" />
     <Compile Include="Business\CastleBravo\VPN\VPNTaskConfig.cs" />
     <Compile Include="Business\IAOLab\PwdGenerator\PwdResultForm.cs">
       <SubType>Form</SubType>
