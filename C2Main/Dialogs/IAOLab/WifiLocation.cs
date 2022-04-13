@@ -1,4 +1,5 @@
-﻿using C2.Controls;
+﻿using C2.Business.IAOLab.LngAndLat;
+using C2.Controls;
 using C2.Core;
 using C2.IAOLab.BankTool;
 using C2.IAOLab.BaseAddress;
@@ -56,6 +57,10 @@ namespace C2.Dialogs.IAOLab
             else if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
             {
                 fileType = "PhoneLocation";
+            }
+            else if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true)
+            {
+                fileType = "LngAndLat";
             }
             return fileType;
         }
@@ -157,6 +162,25 @@ namespace C2.Dialogs.IAOLab
                 }
             }
 
+            if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true)
+            {
+                string[] inputArray = this.LngAndLatRichTextBox.Text.Split('\n');
+                progressBar1.Value = 0;
+                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Minimum = 0;
+                firstLine = "经度\t纬度\t定位地址\n";
+                tmpResult.Append(firstLine);
+                foreach (string lngandlat in inputArray)
+                {
+                    ShowResult(lngandlat, "LngAndLat", tmpResult);
+                    if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
+                    {
+                        MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        progressBar1.Value = 0;
+                    }
+                }
+            }
+
             if (tabControl1.Visible == false)
             {
                 string[] inputArray = this.bankCardIR.Text.Split('\n');
@@ -213,6 +237,10 @@ namespace C2.Dialogs.IAOLab
                     case "PhoneLocation":
                         tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), PhoneLocation.GetInstance().GetPhoneLocation(CollectionExtensions.SplitWhitespace(input)[0])));
                         PhoneLocationIR.Text = tmpResult.ToString();
+                        break;
+                    case "LngAndLat":
+                        tmpResult.Append(LngAndLat.GetInstance().GetLocation(input.Trim('\n')));
+                        LngAndLatRichTextBox.Text = tmpResult.ToString();
                         break;
                 }
 
@@ -274,6 +302,8 @@ namespace C2.Dialogs.IAOLab
                             IPStationIR.Text = sb.TrimEndN().ToString();
                         if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
                             PhoneLocationIR.Text = sb.TrimEndN().ToString();
+                        if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true)
+                            LngAndLatRichTextBox.Text = sb.TrimEndN().ToString();
                         if (tabControl1.Visible == false)
                             bankCardIR.Text = sb.TrimEndN().ToString();
                     }
@@ -321,6 +351,10 @@ namespace C2.Dialogs.IAOLab
                     case "PhoneLocation":
                         text = PhoneLocationIR.Text;
                         break;
+                    case "LngAndLat":
+                        firstLine = "经度\t纬度\t定位地址\r\n";
+                        text = LngAndLatRichTextBox.Text;
+                        break;
 
                 }
                 string path = saveDialog.FileName;
@@ -345,6 +379,8 @@ namespace C2.Dialogs.IAOLab
                                 continue;
                             if (line.Contains("IP"))
                                 continue;
+                            if (line.Contains("经度") || line.Contains("纬度"))
+                                continue;
                             fs.WriteLine(line);
                             fs.Flush();
                         }
@@ -366,7 +402,8 @@ namespace C2.Dialogs.IAOLab
                 (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true && baseAddressIR.Text == string.Empty) ||
                 (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true && baseStationIR.Text == string.Empty) ||
                 (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true && IPStationIR.Text == string.Empty) ||
-                (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true && PhoneLocationIR.Text == string.Empty))
+                (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true && PhoneLocationIR.Text == string.Empty) ||
+                (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true && LngAndLatRichTextBox.Text == string.Empty))
             {
                 MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
