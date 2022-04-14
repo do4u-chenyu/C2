@@ -235,6 +235,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IP,
@@ -242,8 +244,10 @@
             this.addtime,
             this.uptime,
             this.memo});
+            this.dataGridView1.GridColor = System.Drawing.Color.White;
             this.dataGridView1.Location = new System.Drawing.Point(121, 103);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(510, 207);
             this.dataGridView1.TabIndex = 31;
@@ -326,26 +330,36 @@
             // 
             // IP
             // 
+            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IP.FillWeight = 24F;
             this.IP.HeaderText = "IP";
             this.IP.Name = "IP";
             // 
             // domain
             // 
+            this.domain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.domain.FillWeight = 24F;
             this.domain.HeaderText = "域名";
             this.domain.Name = "domain";
             // 
             // addtime
             // 
+            this.addtime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.addtime.FillWeight = 20F;
             this.addtime.HeaderText = "绑定时间";
             this.addtime.Name = "addtime";
             // 
             // uptime
             // 
+            this.uptime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.uptime.FillWeight = 20F;
             this.uptime.HeaderText = "解绑时间";
             this.uptime.Name = "uptime";
             // 
             // memo
             // 
+            this.memo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.memo.FillWeight = 12F;
             this.memo.HeaderText = "备注";
             this.memo.Name = "memo";
             // 
