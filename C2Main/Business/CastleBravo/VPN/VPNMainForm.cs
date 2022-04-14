@@ -56,6 +56,8 @@ namespace C2.Business.CastleBravo.VPN
             BatchAddVPNServerForm dialog = new BatchAddVPNServerForm();
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
+            LV.Items.AddRange(NewLVIS(dialog.Tasks));
+            tasks.AddRange(dialog.Tasks);
         }
 
         private void 查找ToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -115,6 +117,14 @@ namespace C2.Business.CastleBravo.VPN
             lvi.BackColor = isAlertnatingRows ? SingleRowColor : AltertnatingRowColor;
             isAlertnatingRows = !isAlertnatingRows;
             return lvi;
+        }
+
+        private ListViewItem[] NewLVIS(IList<VPNTaskConfig> tasks)
+        {
+            ListViewItem[] lvis = new ListViewItem[tasks.Count];
+            for (int i = 0; i < lvis.Length; i++)
+                lvis[i] = NewLVI(tasks[i]);
+            return lvis;
         }
 
         private void 重新开始ToolStripMenuItem_Click(object sender, System.EventArgs e)
