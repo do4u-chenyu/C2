@@ -43,6 +43,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,11 +51,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uptime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SEOTabPage.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -210,6 +217,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.progressBar2);
             this.tabPage1.Controls.Add(this.label2);
@@ -224,6 +232,21 @@
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "IP反查域名";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IP,
+            this.domain,
+            this.addtime,
+            this.uptime,
+            this.memo});
+            this.dataGridView1.Location = new System.Drawing.Point(121, 103);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(510, 207);
+            this.dataGridView1.TabIndex = 31;
             // 
             // button1
             // 
@@ -292,15 +315,39 @@
             // richTextBox2
             // 
             this.richTextBox2.BackColor = System.Drawing.Color.White;
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.richTextBox2.Location = new System.Drawing.Point(3, 103);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox2.Size = new System.Drawing.Size(633, 207);
+            this.richTextBox2.Size = new System.Drawing.Size(113, 207);
             this.richTextBox2.TabIndex = 24;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
+            // 
+            // IP
+            // 
+            this.IP.HeaderText = "IP";
+            this.IP.Name = "IP";
+            // 
+            // domain
+            // 
+            this.domain.HeaderText = "域名";
+            this.domain.Name = "domain";
+            // 
+            // addtime
+            // 
+            this.addtime.HeaderText = "绑定时间";
+            this.addtime.Name = "addtime";
+            // 
+            // uptime
+            // 
+            this.uptime.HeaderText = "解绑时间";
+            this.uptime.Name = "uptime";
+            // 
+            // memo
+            // 
+            this.memo.HeaderText = "备注";
+            this.memo.Name = "memo";
             // 
             // GoldEyesForm
             // 
@@ -321,6 +368,7 @@
             this.SEOTabPage.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -347,5 +395,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn domain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addtime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn uptime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn memo;
     }
 }

@@ -86,17 +86,16 @@ namespace C2.Dialogs.IAOLab
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
             {
                 string[] inputArray = richTextBox2.Text.Split('\n');
-                tmpResult = new StringBuilder();
 
                 progressBar2.Value = 0;
                 progressBar2.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar2.Minimum = 0;
-                firstLine = "IP\t域名绑定信息\n";
+                //firstLine = "IP\t域名绑定信息\n";
 
-                tmpResult.Append(firstLine);
+                //tmpResult.Append(firstLine);
                 foreach (string Ip in inputArray)
                 {
-                    IPShowResult(Ip, tmpResult);
+                    IPShowResult(Ip);
                     if (progressBar2.Value == progressBar2.Maximum && progressBar2.Maximum != 0)
                     {
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -110,7 +109,7 @@ namespace C2.Dialogs.IAOLab
         private void Export_Click(object sender, EventArgs e)
         {
             if ((tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true && richTextBox1.Text == string.Empty) ||
-                (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && richTextBox2.Text == string.Empty))
+                (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && dataGridView1.RowCount == 0))
             {
                 MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -131,7 +130,23 @@ namespace C2.Dialogs.IAOLab
                         break;
 
                     case "IP反查":
-                        text = richTextBox2.Text;
+
+                        foreach (DataGridViewRow row in this.dataGridView1.Rows)
+                        {
+                            for (int i = 0; i < row.Cells.Count; i++)
+                            {
+
+                                if (row.Cells[i].Value == null)
+                                {
+                                    text = text + "\t";
+                                }
+                                else
+                                {
+                                    text = text + row.Cells[i].Value.ToString() + "\t";
+                                }
+                            }
+                            text = text + "\n";
+                        }
                         break;
 
                 }
@@ -252,7 +267,7 @@ namespace C2.Dialogs.IAOLab
             return fileType;
         }
 
-        private void IPShowResult(string input, StringBuilder tmpResult)
+        private void IPShowResult(string input)
         {
             if (!string.IsNullOrEmpty(input) && progressBar2.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
@@ -261,14 +276,15 @@ namespace C2.Dialogs.IAOLab
                     Thread.Sleep(100);
                 }
 
-                tmpResult.Append(GetInfo(input.Split('\t')[0]));
-                richTextBox2.Text = tmpResult.ToString();
+                List<Dictionary<string, string>> res = GetInfo(input.Split('\t')[0]);
+
+                FillDGV(res);
 
                 progressBar2.Value += 1;
             }
         }
 
-        private string GetInfo(string Ip)
+        private List<Dictionary<string, string>> GetInfo(string Ip)
         {
             string url = "http://47.94.39.209:8899/api/fhge/capture_host_by_ip";
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
@@ -283,6 +299,14 @@ namespace C2.Dialogs.IAOLab
             req.ContentLength = data.Length;
             HttpWebResponse resp = null;
 
+            List<Dictionary<string, string>> res = new List<Dictionary<string, string>>();
+            Dictionary<string, string> tmp = new Dictionary<string, string>();
+            tmp.Add("IP", Ip);
+            tmp.Add("domain", "");
+            tmp.Add("addtime", "");
+            tmp.Add("uptime", "");
+            tmp.Add("memo", "");
+
             try
             {
                 using (var stream = req.GetRequestStream())
@@ -292,22 +316,40 @@ namespace C2.Dialogs.IAOLab
             }
             catch
             {
-                return Ip + '\t' + "网络连接中断" + '\n';
+                tmp["memo"] = "网络连接中断";
+                res.Add(tmp);
+                return res;
             }
 
             JObject json = JObject.Parse(new StreamReader(resp.GetResponseStream()).ReadToEnd());
 
-            if (json["status"].ToString() == "失败")
-                return Ip + '\t' + "IP反查查询错误" + '\n';
+            if (json["status"].ToString() == "fail")
+            {
+                tmp["memo"] = "未查询到绑定过的域名";  // todo 这里后续需要根据接口的返回值进行优化
+                res.Add(tmp);
+                return res;
+            }
 
             var dat = json["data"];
-            string resp_data = JsonConvert.SerializeObject(dat);
-            if (resp_data.Length == 0) 
-            {
-                return Ip + '\t' + "未查询到绑定过的域名" + '\n';
-            }
-            string res = Ip + '\t' + resp_data + '\n';
 
+            string resp_data = JsonConvert.SerializeObject(dat);
+            if (resp_data.Length == 0)
+            {
+                tmp["memo"] = "未查询到绑定过的域名";
+                res.Add(tmp);
+                return res;
+            }
+
+            foreach (var one in dat) 
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("IP", Ip);
+                dict.Add("domain", (string)one["domain"]);
+                dict.Add("addtime", (string)one["addtime"]);
+                dict.Add("uptime", (string)one["uptime"]);
+                dict.Add("memo", "");
+                res.Add(dict);
+            }
             return res;
         }
 
@@ -342,6 +384,29 @@ namespace C2.Dialogs.IAOLab
                 {
                     MessageBox.Show(ex.Message, "ERROR");
                 }
+            }
+        }
+
+        List<string> contentList = new List<string>() { "IP", "domain", "addtime", "uptime", "memo" };
+
+        private void FillDGV(List<Dictionary<string, string>> result)
+        {
+            try
+            {
+                foreach (Dictionary<string, string> tmp in result) 
+                {
+                    DataGridViewRow dr = new DataGridViewRow();
+                    foreach (string content in contentList)
+                    {
+                        DataGridViewTextBoxCell textCell = new DataGridViewTextBoxCell();
+                        textCell.Value = tmp[content];
+                        dr.Cells.Add(textCell);
+                    }
+                    dataGridView1.Rows.Add(dr);
+                }
+            }
+            catch
+            {
             }
         }
     }
