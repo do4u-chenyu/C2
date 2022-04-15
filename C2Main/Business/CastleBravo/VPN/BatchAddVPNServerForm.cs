@@ -106,7 +106,6 @@ namespace C2.Business.CastleBravo.VPN
                 HelpUtil.ShowMessageBox("该数据文件不存在");
                 return false;
             }
-
             try
             {
                 using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
