@@ -30,6 +30,10 @@ namespace C2.Business.IAOLab.LngAndLat
             string lng = lngandlat[0];
             string lat = lngandlat[1];
             string currentkey = "sxv5P7yMawt6vFIG0Gv5Lhps5Cefk0C7";
+            // 备用key
+            // "FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9";
+
+
 
             string formatted_address = string.Empty;
             string sematic_description = string.Empty;
@@ -47,7 +51,18 @@ namespace C2.Business.IAOLab.LngAndLat
                 string result = client.GetStringAsync(bdUrl).Result;
                 var locationResult = (JObject)JsonConvert.DeserializeObject(result);
                 if (locationResult == null || locationResult["result"] == null || locationResult["result"]["formatted_address"].ToString() == string.Empty)
-                    return string.Format("{0}\t{1}\n", input, "查询失败");
+                {
+                    string errMsg = string.Format("{0}\t{1}\n", input, "查询失败");
+                    if (locationResult != null && locationResult["status"] != null && locationResult["message"] != null)
+                        errMsg = string.Format("{0}\t{1}\t{2}\t{3}\n", 
+                            input, 
+                            "查询失败", 
+                            locationResult["status"].ToString(),
+                            locationResult["message"].ToString()
+                            );
+                    return errMsg;
+                }
+                    
                 formatted_address = Convert.ToString(locationResult["result"]["formatted_address"]);
                 if (locationResult["result"]["sematic_description"].ToString() != string.Empty)
                     formatted_address += OpUtil.StringBlank + Convert.ToString(locationResult["result"]["sematic_description"]);
