@@ -92,11 +92,6 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
-        //private string DetectClientType(string url, string defaultVersion)
-        //{
-        //    return VPNTaskConfig.AutoDetectClientType(url, defaultVersion);
-        //}
-
         private bool GetTasksFromFile()
         {
             Tasks.Clear();
