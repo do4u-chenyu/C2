@@ -129,15 +129,15 @@ namespace C2.Business.CastleBravo.VPN
             array[3] = ipAndport[1].Split(':')[1].Replace("/", string.Empty);
             array[4] = methodAndPwd.Split(':')[1];
             array[5] = methodAndPwd.Split(':')[0];
-            array[6] = "√";
             array[7] = "Shadowsocks";
             array[8] = "probeInfo";
+            array[6] = CheckAliveOneTaskAsyn(array);
             return array;
         }
 
         private string[] GetSSRLine(string[] array, string[] contentArray)
         {
-            string info = Encoding.UTF8.GetString(Convert.FromBase64String(contentArray[1]));
+            string info = GetBase64Str(contentArray[1]);
             if (info.Contains(":") == false)
                 return array;
             string[] infoArray = info.Split(':');
@@ -153,6 +153,57 @@ namespace C2.Business.CastleBravo.VPN
             array[7] = "ShadowsocksR";
             array[8] = "probeInfo";
             return array;
+        }
+
+        public string GetBase64Str(string base64Str)
+        {
+            string info = string.Empty;
+            base64Str = Uri.UnescapeDataString(Uri.UnescapeDataString(Uri.UnescapeDataString(base64Str)));
+            if (IsBase64Formatted(base64Str))
+                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str));
+            else
+            {
+                int baseLengh = base64Str.Length;
+                int i;
+                for (i = 0; i < baseLengh; i++)
+                {
+                    base64Str = base64Str.Substring(0, baseLengh - i);
+                    if (!IsBase64Formatted(base64Str))
+                        continue;
+                    info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str));
+                    break;
+                }
+            }
+            return info;
+        }
+
+        public static bool IsBase64Formatted(string input)
+        {
+            try
+            {
+                Convert.FromBase64String(input);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private string CheckAliveOneTaskAsyn(string[] array)
+        {
+            if (CheckAlive(array))
+                return "√";
+            return "×";
+        }
+
+        private bool CheckAlive(string[] array)
+        {
+            try
+            {
+                return true;
+            }
+            catch { return false; }
         }
     }
 }
