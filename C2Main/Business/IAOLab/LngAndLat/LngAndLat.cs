@@ -1,12 +1,8 @@
-﻿using System;
-using System.Net;
+﻿using C2.Utils;
 using Newtonsoft.Json;
-using System.Text;
 using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
+using System;
 using System.Net.Http;
-using C2.Utils;
-using System.Windows.Forms;
 
 namespace C2.Business.IAOLab.LngAndLat
 {
@@ -34,7 +30,16 @@ namespace C2.Business.IAOLab.LngAndLat
             string lng = lngandlat[0];
             string lat = lngandlat[1];
             string currentkey = "sxv5P7yMawt6vFIG0Gv5Lhps5Cefk0C7";
-            string address = string.Empty;
+
+            string formatted_address = string.Empty;
+            string sematic_description = string.Empty;
+
+            string country = string.Empty;
+            string province = string.Empty;
+            string city = string.Empty;
+            string district = string.Empty;
+            string adcode = string.Empty;
+
             HttpClient client = new HttpClient();
             string bdUrl = string.Format("http://api.map.baidu.com/reverse_geocoding/v3/?ak={0}&output=json&coordtype=wgs84ll&location={1},{2}", currentkey, lat, lng);
             try
@@ -43,9 +48,28 @@ namespace C2.Business.IAOLab.LngAndLat
                 var locationResult = (JObject)JsonConvert.DeserializeObject(result);
                 if (locationResult == null || locationResult["result"] == null || locationResult["result"]["formatted_address"].ToString() == string.Empty)
                     return string.Format("{0}\t{1}\n", input, "查询失败");
-                address = Convert.ToString(locationResult["result"]["formatted_address"]);
+                formatted_address = Convert.ToString(locationResult["result"]["formatted_address"]);
                 if (locationResult["result"]["sematic_description"].ToString() != string.Empty)
-                    address += OpUtil.StringBlank + Convert.ToString(locationResult["result"]["sematic_description"]);
+                    formatted_address += OpUtil.StringBlank + Convert.ToString(locationResult["result"]["sematic_description"]);
+
+                if (locationResult["result"]["addressComponent"] != null)
+                {
+                    if (locationResult["result"]["addressComponent"]["country"] != null)
+                        country = locationResult["result"]["addressComponent"]["country"].ToString();
+
+                    if (locationResult["result"]["addressComponent"]["province"] != null)
+                        province = locationResult["result"]["addressComponent"]["province"].ToString();
+
+                    if (locationResult["result"]["addressComponent"]["city"] != null)
+                        city = locationResult["result"]["addressComponent"]["city"].ToString();
+
+                    if (locationResult["result"]["addressComponent"]["district"] != null)
+                        district = locationResult["result"]["addressComponent"]["district"].ToString();
+
+                    if (locationResult["result"]["addressComponent"]["adcode"] != null)
+                        adcode = locationResult["result"]["addressComponent"]["adcode"].ToString();
+                }
+
             }
             catch
             {
@@ -55,7 +79,13 @@ namespace C2.Business.IAOLab.LngAndLat
                 }
                 return string.Format("{0}\t{1}\n", input, "查询失败");
             }
-            return string.Format("{0}\t{1}\n", input, address);
+            return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\n", input, 
+                formatted_address,
+                country,
+                province,
+                city,
+                district,
+                adcode);
         }
     }
 }

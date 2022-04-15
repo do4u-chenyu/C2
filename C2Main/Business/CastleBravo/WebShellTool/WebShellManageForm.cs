@@ -122,7 +122,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
 
             // 任务太少,不需要启动多线程
-            if (cache.Count < NumberOfThread * 10)
+            if (cache.Count < Math.Min(NumberOfThread * 10, 100))
                 cache.Clear();
         }
 

@@ -168,7 +168,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "经度\t纬度\t定位地址\n";
+                firstLine = "经度\t纬度\t定位地址\t国家\t省\t市\t行政区\t地区编码\n";
                 tmpResult.Append(firstLine);
                 foreach (string lngandlat in inputArray)
                 {
@@ -204,7 +204,7 @@ namespace C2.Dialogs.IAOLab
         }
         private void ShowResult(string input, string type, StringBuilder tmpResult)
         {
-            if (!string.IsNullOrEmpty(input) && progressBar1.Value < 5001 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
+            if (!string.IsNullOrEmpty(input) && progressBar1.Value < progressBar1.Maximum + 1 && !string.IsNullOrEmpty(input.Split('\t')[0].Replace(OpUtil.Blank.ToString(), string.Empty)))
             {
                 if (progressBar1.Value % 100 == 0)
                 {
