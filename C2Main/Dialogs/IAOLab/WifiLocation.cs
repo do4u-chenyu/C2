@@ -24,13 +24,9 @@ namespace C2.Dialogs.IAOLab
             InitializeComponent();
             tabControl1.Visible = true;
         }
-
-        public string Tip { set { this.tipLable.Text = value; } }
-        public string TipBS { set { this.label4.Text = value; } }
         public string TipBank { set { this.label6.Text = value; } }
 
         public bool TabControlVisible { set { this.tabControl1.Visible = value; } }
-        public string InputLable { set { this.inputLabel.Text = value; } }
 
 
         public string FormType { get { return this.formType; } set { this.formType = value; } }
@@ -38,30 +34,21 @@ namespace C2.Dialogs.IAOLab
         public string FormClass()
         {
             string fileType = String.Empty;
-            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
-            {
+            if (!tabControl1.Visible)
+                return fileType;
+
+            if (tabControl1.SelectedTab == tabPage1)
                 fileType = "mac";
-            }
-            else if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true)
-            {
+            else if (tabControl1.SelectedTab == tabPage2)
                 fileType = "BaseStation";
-            }
-            else if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
-            {
+            else if (tabControl1.SelectedTab == tabPage3)
                 fileType = "BaseAddress";
-            }
-            else if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true)
-            {
+            else if (tabControl1.SelectedTab == tabPage4)
                 fileType = "IPAddress";
-            }
-            else if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
-            {
+            else if (tabControl1.SelectedTab == tabPage5)
                 fileType = "PhoneLocation";
-            }
-            else if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true)
-            {
+            else if (tabControl1.SelectedTab == tabPage6)
                 fileType = "LngAndLat";
-            }
             return fileType;
         }
 
@@ -73,128 +60,161 @@ namespace C2.Dialogs.IAOLab
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
 
-            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible)
             {
                 string[] inputArray = this.wifiMacIR.Text.Split('\n');
+                this.wifiMacIR.Clear();
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
                 firstLine = "WiFiMac号\t纬度\t经度\t范围\ttgdid\t地址\n";
                 tmpResult.Append(firstLine);
+                this.wifiMacIR.AppendText(firstLine);
+
                 foreach (string mac in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(mac, "mac", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
             }
 
-            if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible)
             {
                 string[] inputArray = this.baseStationIR.Text.Split('\n');
+                this.baseStationIR.Clear();
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
                 firstLine = "基站号\t纬度\t经度\t范围\ttgdid\t地址\n";
                 tmpResult.Append(firstLine);
+                this.baseStationIR.AppendText(firstLine);
+
                 foreach (string baseStation in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(baseStation, "baseStation", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
             }
 
-            if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible)
             {
                 string[] inputArray = this.baseAddressIR.Text.Split('\n');
+                this.baseAddressIR.Clear();
+
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
                 firstLine = "地址\t纬度\t经度\t反查地址\n";
                 tmpResult.Append(firstLine);
+                this.baseAddressIR.AppendText(firstLine);
+
                 foreach (string baseAddress in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(baseAddress, "baseAddress", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
             }
-            if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible)
             {
                 string[] inputArray = this.IPStationIR.Text.Split('\n');
+                this.IPStationIR.Clear();
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
+                
                 foreach (string baseAddress in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(baseAddress, "IPAddress", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
             }
-            if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible)
             {
                 string[] inputArray = this.PhoneLocationIR.Text.Split('\n');
+                this.PhoneLocationIR.Clear();
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
+                
                 foreach (string phoneNum in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(phoneNum, "PhoneLocation", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
             }
 
-            if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible)
             {
                 string[] inputArray = this.LngAndLatRichTextBox.Text.Split('\n');
+                this.LngAndLatRichTextBox.Clear();
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
                 firstLine = "经度\t纬度\t定位地址\t国家\t省\t市\t行政区\t地区编码\n";
                 tmpResult.Append(firstLine);
-                foreach (string lngandlat in inputArray)
+                this.LngAndLatRichTextBox.AppendText(firstLine);
+
+                foreach (string lngLat in inputArray)
                 {
                     Application.DoEvents();
-                    ShowResult(lngandlat, "LngAndLat", tmpResult);
+                    ShowResult(lngLat, "LngAndLat", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
                 }
             }
 
-            if (tabControl1.Visible == false)
+            if (!tabControl1.Visible)
             {
                 string[] inputArray = this.bankCardIR.Text.Split('\n');
+                this.bankCardIR.Clear();
                 progressBar1.Value = 0;
-                progressBar1.Maximum = GetRelLengthOfArry(inputArray);
+                progressBar1.Maximum = GetRelLengthOfArray(inputArray);
                 progressBar1.Minimum = 0;
                 firstLine = "银行卡号\t银行名称\t卡种\t归属地\n";
                 tmpResult.Append(firstLine);
+                this.bankCardIR.AppendText(firstLine);
+
                 foreach (string bankCard in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(bankCard, "bankCard", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
+                        this.label1.Text = "查询进度 : 100%";
                         MessageBox.Show("查询完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         progressBar1.Value = 0;
                     }
@@ -210,38 +230,49 @@ namespace C2.Dialogs.IAOLab
                 if (progressBar1.Value % 100 == 0)
                 {
                     Thread.Sleep(500);
+                    this.label1.Text = string.Format("查询进度 : {0}%", progressBar1.Value * 100.0 / progressBar1.Maximum);
                 }
+                    
+
+                string line = string.Empty;
                 switch (type)
                 {
                     case "baseStation":
-                        tmpResult.Append(BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]));
-                        baseStationIR.Text = tmpResult.ToString();
+                        line = BaseStation.GetInstance().BaseStationLocate(input.Split('\t')[0]);
+                        tmpResult.Append(line);
+                        baseStationIR.AppendText(line);
                         break;
                     case "baseAddress":
                         if (input.Contains("地址"))
                             input = String.Empty;
-                        tmpResult.Append(BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]));
-                        baseAddressIR.Text = tmpResult.ToString();
-                        ; break;
+                        line = BaseAddress.GetInstance().BaseAddressLocate(input.Split('\t')[0]);
+                        tmpResult.Append(line);
+                        baseAddressIR.AppendText(line);
+                        break;
                     case "mac":
-                        tmpResult.Append(WifiMac.GetInstance().MacLocate(input.Split('\t')[0]));
-                        wifiMacIR.Text = tmpResult.ToString();
+                        line = WifiMac.GetInstance().MacLocate(input.Split('\t')[0]);
+                        tmpResult.Append(line);
+                        wifiMacIR.AppendText(line);
                         break;
                     case "bankCard":
-                        tmpResult.Append(BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]));
-                        bankCardIR.Text = tmpResult.ToString();
+                        line = BankTool.GetInstance().BankToolSearch(input.Split('\t')[0]);
+                        tmpResult.Append(line);
+                        bankCardIR.AppendText(line);
                         break;
                     case "IPAddress":
-                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0])));
-                        IPStationIR.Text = tmpResult.ToString();
+                        line = string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0]));
+                        tmpResult.Append(line);
+                        IPStationIR.AppendText(line);
                         break;
                     case "PhoneLocation":
-                        tmpResult.Append(string.Format("{0}\t{1}", input.Trim('\n'), PhoneLocation.GetInstance().GetPhoneLocation(CollectionExtensions.SplitWhitespace(input)[0])));
-                        PhoneLocationIR.Text = tmpResult.ToString();
+                        line = string.Format("{0}\t{1}", input.Trim('\n'), PhoneLocation.GetInstance().GetPhoneLocation(CollectionExtensions.SplitWhitespace(input)[0]));
+                        tmpResult.Append(line);
+                        PhoneLocationIR.AppendText(line);
                         break;
                     case "LngAndLat":
-                        tmpResult.Append(LngAndLat.GetInstance().GetLocation(input.Trim('\n')));
-                        LngAndLatRichTextBox.Text = tmpResult.ToString();
+                        line = LngAndLat.GetInstance().GetLocation(input.Trim('\n'));
+                        tmpResult.Append(line);
+                        LngAndLatRichTextBox.AppendText(line);
                         break;
                 }
 
@@ -250,7 +281,7 @@ namespace C2.Dialogs.IAOLab
         }
 
 
-        private int GetRelLengthOfArry(string[] arry)
+        private int GetRelLengthOfArray(string[] arry)
         {
             int relLength = 0;
             foreach (string i in arry)
@@ -259,11 +290,6 @@ namespace C2.Dialogs.IAOLab
                     relLength++;
             }
             return relLength;
-        }
-        private void Cancle_Click(object sender, EventArgs e)
-        {
-            progressBar1.Value = 0;
-            Close();
         }
 
         private void WifiLocation_FormClosed(object sender, FormClosedEventArgs e)
@@ -308,7 +334,7 @@ namespace C2.Dialogs.IAOLab
                         if (tabControl1.Visible == false)
                             bankCardIR.Text = sb.TrimEndN().ToString();
 
-                        this.toolTip1.SetToolTip(this.progressBar1, Path.GetFileName(path));
+                        this.toolTip1.SetToolTip(this.progressBar1, path);
                     }
                 }
                 catch (Exception ex)
@@ -355,7 +381,7 @@ namespace C2.Dialogs.IAOLab
                         text = PhoneLocationIR.Text;
                         break;
                     case "LngAndLat":
-                        firstLine = "经度\t纬度\t定位地址\r\n";
+                        firstLine = "经度\t纬度\t定位地址\t国家\t省\t市\t行政区\t地区编码\r\n";
                         text = LngAndLatRichTextBox.Text;
                         break;
 
