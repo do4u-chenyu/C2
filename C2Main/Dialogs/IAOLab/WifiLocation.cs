@@ -172,6 +172,7 @@ namespace C2.Dialogs.IAOLab
                 tmpResult.Append(firstLine);
                 foreach (string lngandlat in inputArray)
                 {
+                    Application.DoEvents();
                     ShowResult(lngandlat, "LngAndLat", tmpResult);
                     if (progressBar1.Value == progressBar1.Maximum && progressBar1.Maximum != 0)
                     {
@@ -306,6 +307,8 @@ namespace C2.Dialogs.IAOLab
                             LngAndLatRichTextBox.Text = sb.TrimEndN().ToString();
                         if (tabControl1.Visible == false)
                             bankCardIR.Text = sb.TrimEndN().ToString();
+
+                        this.toolTip1.SetToolTip(this.progressBar1, Path.GetFileName(path));
                     }
                 }
                 catch (Exception ex)

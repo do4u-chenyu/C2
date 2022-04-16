@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.wifiMacIR = new System.Windows.Forms.RichTextBox();
             this.inputLabel = new System.Windows.Forms.Label();
             this.confirm = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.bankCardIR = new System.Windows.Forms.RichTextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -479,9 +481,9 @@
             this.label17.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label17.Location = new System.Drawing.Point(6, 61);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(604, 22);
+            this.label17.Size = new System.Drawing.Size(516, 22);
             this.label17.TabIndex = 12;
-            this.label17.Text = "查询结果以TAB为分隔符追加在每行最后一列,最大支持1万行.";
+            this.label17.Text = "查询结果TAB分隔,单次最大1万行,推荐5000,单日30W";
             // 
             // label13
             // 
@@ -607,5 +609,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

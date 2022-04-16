@@ -29,9 +29,13 @@ namespace C2.Business.IAOLab.LngAndLat
                 return string.Format("{0}\t{1}\n", input, "输入的数据格式不正确, 可能有多个空格或\\t分隔符");
             string lng = lngandlat[0];
             string lat = lngandlat[1];
-            string currentkey = "sxv5P7yMawt6vFIG0Gv5Lhps5Cefk0C7";
+            // string currentkey = "sxv5P7yMawt6vFIG0Gv5Lhps5Cefk0C7"; 
             // 备用key
-            // "FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9";
+            // FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9; 目测只有单日6000
+            // VSg8iL3koEZzG1FeDLmeVvYbvmecTP1W
+            // string currentkey = "FtB873TFjPPzgs7M3fs4oxTPqxr7MGn9";
+             string currentkey = "VSg8iL3koEZzG1FeDLmeVvYbvmecTP1W"; // 卢琪158的,单日30W
+
 
 
 
