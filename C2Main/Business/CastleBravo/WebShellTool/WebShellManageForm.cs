@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
@@ -46,7 +47,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         private int NumberOfHost { get => setOfHost.Count; }
         private int NumberOfIPAddress { get => setOfIPAddress.Count; }
 
-        private int NumberOfThread { get => this.threadNumberButton.SelectedIndex + 1; }
+        private int NumberOfThread { get => this.threadNumberButton.SelectedIndex; }
 
         private HashSet<string> setOfIPAddress;
         private HashSet<string> setOfHost;
@@ -68,7 +69,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         //           主线程每次验活前,先查看是否在缓存中此项是否已经被验过了
         //           
         // 因为并发验活涉及到层层反馈结果到界面更新,这样设计,改动最小
-        private Dictionary<WebShellTaskConfig, CheckAliveResult> cache;
+        private Dictionary<object, CheckAliveResult> cache;
 
         public WebShellManageForm()
         {
@@ -89,63 +90,61 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             cache.Clear();
             // 跳过初始几项
-            for (int i = 10; i < LV.Items.Count; i++)
+            for (int i = 0; i < LV.Items.Count; i++)
             {
                 ListViewItem lvi = LV.Items[i];
-                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
                 switch (type)
                 {
                     case ResetTypeEnum.重新开始:
-                        cache.Add(task, new CheckAliveResult());
+                        cache.Add(lvi.Tag, new CheckAliveResult());
                         break;
                     case ResetTypeEnum.重新开始_境外站:
-                        cache.Add(task, new CheckAliveResult(true));
+                        cache.Add(lvi.Tag, new CheckAliveResult(true));
                         break;
                     case ResetTypeEnum.继续上次:
                         if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                            cache.Add(task, new CheckAliveResult());
+                            cache.Add(lvi.Tag, new CheckAliveResult());
                         break;
                     case ResetTypeEnum.继续上次_境外:
                         if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                            cache.Add(task, new CheckAliveResult(true));
+                            cache.Add(lvi.Tag, new CheckAliveResult(true));
                         break;
                     case ResetTypeEnum.选中项验活:
                         if (lvi.Selected)
-                            cache.Add(task, new CheckAliveResult());
+                            cache.Add(lvi.Tag, new CheckAliveResult());
                         break;
                     case ResetTypeEnum.二刷不活:
                         if (lvi.SubItems[5].Text.Trim().In(new string[] { "×", "待" }))
-                            cache.Add(task, new CheckAliveResult());
+                            cache.Add(lvi.Tag, new CheckAliveResult());
                         break;
                 }
             }
-
-
-            // 任务太少,不需要启动多线程
-            if (cache.Count < Math.Min(NumberOfThread * 10, 100))
-                cache.Clear();
         }
 
         private void CheckAliveSpeedUpBackground()
         {
-            for (int nt = 0; nt < NumberOfThread; nt++)
+            // 创建copy
+            int numberOfThread = NumberOfThread;
+            for (int nt = 0; nt < numberOfThread; nt++)
             {
+                int threadID = nt;  // 复刻
                 Task.Run(() =>
                 {
-                    int nr = 0;
+                    //Console.WriteLine(string.Format("启动验活后台线程 : {0}", threadID));
+                    int id = 0;
                     foreach (var kv in cache)
                     {
-                        if (actionNeedStop)
+                        if (actionNeedStop.IsCancellationRequested)
                             break;
-
-                        if (nr++ % nt == 0)
-                            continue;
-
-                        WebShellTaskConfig task = kv.Key;
-                        kv.Value.alive = CheckAliveOneTaskAsyn(task, kv.Value.safeM) == "√";
-                        kv.Value.done = true;
+                        // 分发任务
+                        if (id++ % numberOfThread == threadID)
+                        {
+                            //Console.WriteLine(string.Format("验活后台线程 {0} : 验活任务ID - {1}" , threadID, id - 1));
+                            kv.Value.alive = CheckAliveOneTaskAsyn(kv.Key as WebShellTaskConfig, kv.Value.safeM) == "√";
+                            kv.Value.done = true;
+                        }
                     }
-                });
+                }, actionNeedStop.Token);
             }
         }
         private void InitializeOther()
@@ -155,7 +154,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             NumberOfAlive = 0;
             finder = new FindSet(LV);
             LV.ListViewItemSorter = new LVComparer();
-            cache = new Dictionary<WebShellTaskConfig, CheckAliveResult>();
+            cache = new Dictionary<object, CheckAliveResult>();
         }
 
         private void InitializeToolStrip()
@@ -174,7 +173,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 this.passwdBlastingMenuItem,
             };
             this.Size = new Size(1275, 500);
-            this.threadNumberButton.SelectedIndex = 3;
+            this.threadNumberButton.SelectedIndex = 8;
         }
         private void InitializeLock()
         {
@@ -436,11 +435,15 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
-            this.actionNeedStop = false;
+            this.actionNeedStop = new CancellationTokenSource();
             if (this.LV.SelectedItems.Count == 0)
                 return;
             ResetProgressMenuValue(LV.SelectedItems.Count);
+            
             ResetCheckCache(ResetTypeEnum.选中项验活);
+            // 启动加速
+            CheckAliveSpeedUpBackground();
+
             DoCheckAliveItems(LV.SelectedItems, false, false);
             RefreshTasks();
             SaveDB();
@@ -456,16 +459,15 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 清空加速缓存
             ResetCheckCache(ResetTypeEnum.重新开始);
             // 启动加速
-            // CheckAliveSpeedUpBackground();
+            CheckAliveSpeedUpBackground();
             DoCheckAliveAllMenuItemClick(false);
         }
 
-        private bool actionNeedStop = false;
+        private CancellationTokenSource actionNeedStop = new CancellationTokenSource();
 
         private void CheckAliveStopMenu_Click(object sender, EventArgs e)
         {
-            actionNeedStop = true;
-
+            actionNeedStop.Cancel();
         }
 
         private void SecondCheckAliveTaskStatus()
@@ -515,7 +517,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in items)
                 {
-                    if (actionNeedStop)
+                    if (actionNeedStop.IsCancellationRequested)
                         break;
                     // 启用二刷
                     if (skipAlive && lvi.SubItems[5].Text != "待")
@@ -534,7 +536,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in LV.Items)
                 {
-                    if (actionNeedStop)
+                    if (actionNeedStop.IsCancellationRequested)
                         break;
                     // 对留存的空状态验活
                     if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
@@ -568,7 +570,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
             this.progressBar.Maximum = progressMaxValue;
-            this.actionNeedStop = false;
+            this.actionNeedStop = new CancellationTokenSource();
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
@@ -632,7 +634,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             if (safeMode && RefreshIPAddress(task))
                 return "跳";
-            if (CheckAlive(task))
+            if (PostCheckAlive(task))
                 return "√";
 
             return "×";
@@ -648,21 +650,21 @@ namespace C2.Business.CastleBravo.WebShellTool
                     return "跳";
 
                 // 我总结的print穿透WAF大法
-                if (PostCheckAlive(task))
+                if (CacheCheckAlive(task))
                     return "√";
             }
             return status;
         }
 
-        private bool PostCheckAlive(WebShellTaskConfig task)
+        private bool CacheCheckAlive(WebShellTaskConfig task)
         {
+            object key = task;
             // 先检查是否命中缓存
-            if (cache.ContainsKey(task))
-                if (cache[task].done)
-                    return cache[task].alive;
+            if (cache.ContainsKey(key) && cache[key].done)
+                return cache[key].alive;
 
             // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
-            return DoEventsWait(5, Task.Run(() => CheckAlive(task)));
+            return DoEventsWait(5, Task.Run(() => PostCheckAlive(task)));
         }
 
 
@@ -698,7 +700,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
         }
 
-        private bool CheckAlive(WebShellTaskConfig task)
+        private bool PostCheckAlive(WebShellTaskConfig task)
         {
             try
             {
@@ -830,6 +832,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void SecondeCheckAliveMenu_Click(object sender, EventArgs e)
         {
             ResetCheckCache(ResetTypeEnum.二刷不活);
+            // 启动加速
+            CheckAliveSpeedUpBackground();
             SecondCheckAliveTaskStatus();
         }
 
@@ -837,12 +841,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             // 清空加速缓存
             ResetCheckCache(ResetTypeEnum.重新开始_境外站);
+            // 启动加速
+            CheckAliveSpeedUpBackground();
             DoCheckAliveAllMenuItemClick(true);
         }
 
         private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.actionNeedStop = true;
+            this.actionNeedStop.Cancel();
             using (GuarderUtil.WaitCursor)
             {
                 RefreshTasks();
@@ -931,14 +937,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void DoCurrentItemTask()
         {
-            this.actionNeedStop = false;
+            this.actionNeedStop = new CancellationTokenSource();
             ResetProgressMenuValue(LV.SelectedItems.Count);
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem item in LV.SelectedItems)
                 {
-                    if (actionNeedStop)
+                    if (actionNeedStop.IsCancellationRequested)
                         break;
                     SingleInfoCollection(item);
                     UpdateProgress();
@@ -969,7 +975,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in items)
                 {
-                    if (actionNeedStop)
+                    if (actionNeedStop.IsCancellationRequested)
                         break;
                     if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
                     {
@@ -1233,12 +1239,16 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetCheckCache(ResetTypeEnum.继续上次);
+            // 启动加速
+            CheckAliveSpeedUpBackground();
             DoCheckAliveContinue(false);
         }
 
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetCheckCache(ResetTypeEnum.继续上次_境外);
+            // 启动加速
+            CheckAliveSpeedUpBackground();
             DoCheckAliveContinue(true);
         }
 
