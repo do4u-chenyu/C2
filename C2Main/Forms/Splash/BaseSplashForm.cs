@@ -101,10 +101,12 @@ namespace C2.Forms.Splash
             OpenItem(DGV.Rows[e.RowIndex].Tag);
         }
 
-        protected virtual void OpenItem(object button)
+        protected virtual void OpenItem(object item)
         {
-            if (button is IAOButton)
-                (button as IAOButton).OpenToolForm();        
+            if (item is IAOButton)
+                (item as IAOButton).OpenToolForm();
+            if (item is Form)
+                (item as Form).ShowDialog();
         }
     }
 }
