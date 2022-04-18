@@ -127,6 +127,10 @@ namespace C2.Utils
         public static string InvalidPythonENV0 = "未配置python虚拟机，在‘【右上角】-【首选项】-【python引擎】’中配置。";
         public static string InvalidPythonENV1 = "选择一个运行Python脚本的虚拟机";
         public static string InvalidPythonENV2 = "未配置python虚拟机，点击确定跳转至虚拟机配置界面。";
+        public static string MD5CrackerInfo     = "常规MD5批爆";
+        public static string MD5SaltCrackerInfo = "带盐MD5单爆";
+        public static string MD5CrackerDesc = "不带盐MD5批量爆(针对宝塔特殊优化),成功率大于80%";
+        public static string MD5SaltCrackerDesc = "带盐MD5单个爆,成功率大于73%";
 
         #region IAO基站批量查询
         public static string BaseStationHelpInfo = @"单次输入格式：4600051162c01(2G/3G) 或 46001590a8089407(4G) 或 37b900018bd0(电信2G)

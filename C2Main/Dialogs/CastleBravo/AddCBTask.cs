@@ -61,9 +61,18 @@ namespace C2.Dialogs.CastleBravo
         public AddCBTask()
         {   
             InitializeComponent();
+            InitializeTaskComboBox();
             InitTaskName();
             InitializeDGV();
             InitializeSaltMode();
+        }
+
+        public void InitializeTaskComboBox()
+        {
+            this.taskComboBox.Items.AddRange(new object[] {
+            HelpUtil.MD5CrackerInfo,
+            HelpUtil.MD5SaltCrackerInfo
+            });
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
@@ -256,6 +265,10 @@ namespace C2.Dialogs.CastleBravo
             // Salt模式时, 必须有一个临时文件
             if (i == 1 && FilePath.IsNullOrEmpty())
                 FilePath = Path.Combine(Global.TempDirectory, Guid.NewGuid().ToString("N") + ".txt");
+
+
+            this.label11.Text = string.Format("*说明: {0}",  
+                i == 0 ? HelpUtil.MD5CrackerDesc : HelpUtil.MD5SaltCrackerDesc); 
 
             // 常规MD5模式
             this.md5Label.Visible = i == 0;

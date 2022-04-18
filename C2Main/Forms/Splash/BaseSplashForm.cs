@@ -32,6 +32,11 @@ namespace C2.Forms.Splash
             AddItem(name, desc).Tag = button;
         }
 
+        protected void AddItem(string name, string desc, Form form)
+        {
+            AddItem(name, desc).Tag = form;
+        }
+
         private void BaseSplashForm_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
