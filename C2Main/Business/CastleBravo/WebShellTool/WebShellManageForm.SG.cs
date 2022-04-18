@@ -30,7 +30,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in items)
                 {
-                    if (actionNeedStop.IsCancellationRequested)
+                    if (actionNeedStop)
                         break;
                     if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
                     {

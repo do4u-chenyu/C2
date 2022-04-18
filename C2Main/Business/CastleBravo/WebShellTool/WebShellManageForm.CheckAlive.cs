@@ -46,6 +46,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         // 根据不同的场景设置加速缓存里的内容
         private void ResetCheckCache(ResetTypeEnum type)
         {
+            actionNeedStop = false;
             cache.Clear();
             // 跳过初始几项
             for (int i = 0; i < LV.Items.Count; i++)
@@ -92,7 +93,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     int id = 0;
                     foreach (var kv in cache)
                     {
-                        if (actionNeedStop.IsCancellationRequested)
+                        if (actionNeedStop)
                             break;
                         // 分发任务
                         if (id++ % numberOfThread == threadID)
@@ -102,7 +103,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                             kv.Value.done = true;
                         }
                     }
-                }, actionNeedStop.Token);
+                });
             }
         }
 
@@ -119,7 +120,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in items)
                 {
-                    if (actionNeedStop.IsCancellationRequested)
+                    if (actionNeedStop)
                         break;
                     // 启用二刷
                     if (skipAlive && lvi.SubItems[5].Text != "待")
@@ -262,7 +263,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem lvi in LV.Items)
                 {
-                    if (actionNeedStop.IsCancellationRequested)
+                    if (actionNeedStop)
                         break;
                     // 对留存的空状态验活
                     if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())

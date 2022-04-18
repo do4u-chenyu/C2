@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
@@ -337,7 +336,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
-            this.actionNeedStop = new CancellationTokenSource();
             if (this.LV.SelectedItems.Count == 0)
                 return;
             ResetProgressMenuValue(LV.SelectedItems.Count);
@@ -362,11 +360,11 @@ namespace C2.Business.CastleBravo.WebShellTool
             DoCheckAliveAllMenuItemClick(false);
         }
 
-        private CancellationTokenSource actionNeedStop = new CancellationTokenSource();
+        private bool actionNeedStop = false;
 
         private void CheckAliveStopMenu_Click(object sender, EventArgs e)
         {
-            actionNeedStop.Cancel();
+            actionNeedStop = true;
         }
 
         private void SecondCheckAliveTaskStatus()
@@ -411,7 +409,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             this.progressMenu.Text = string.Empty;
             this.progressBar.Value = 0;
             this.progressBar.Maximum = progressMaxValue;
-            this.actionNeedStop = new CancellationTokenSource();
+            this.actionNeedStop = false;
             this.NumberOfAlive = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
@@ -580,7 +578,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void WebShellManageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.actionNeedStop.Cancel();
+            this.actionNeedStop = true;
             using (GuarderUtil.WaitCursor)
             {
                 RefreshTasks();
@@ -669,14 +667,14 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void DoCurrentItemTask()
         {
-            this.actionNeedStop = new CancellationTokenSource();
+            this.actionNeedStop = false;
             ResetProgressMenuValue(LV.SelectedItems.Count);
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 foreach (ListViewItem item in LV.SelectedItems)
                 {
-                    if (actionNeedStop.IsCancellationRequested)
+                    if (actionNeedStop)
                         break;
                     SingleInfoCollection(item);
                     UpdateProgress();
