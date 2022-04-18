@@ -270,6 +270,20 @@ namespace C2.Controls.C1.Left
             this.Controls.Add(plugin);
         }
 
+        public List<PluginButton> CBPluginButtons
+        {
+            get
+            {
+                List<PluginButton> buttons = new List<PluginButton>();
+                foreach (Control ct in this.Controls)
+                {
+                    if (ct is PluginButton)
+                        buttons.Add(ct as PluginButton);
+                }
+                return buttons;
+            }
+        }
+
         private int ComputeSplitLineLocation()
         {
             return this.titleLabel.Height + this.Controls.Find("BaseLeftInnerButton", false).Length * 40 + 10;

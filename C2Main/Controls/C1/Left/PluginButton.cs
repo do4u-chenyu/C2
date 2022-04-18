@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace C2.Controls.C1.Left
 {
-    class PluginButton : BaseLeftInnerButton
+    public class PluginButton : BaseLeftInnerButton
     {
         private ToolStripMenuItem OpenToolStripMenuItem;
         private ToolStripMenuItem JumpMindMapMenuItem;

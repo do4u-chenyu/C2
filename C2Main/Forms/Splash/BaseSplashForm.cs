@@ -1,4 +1,5 @@
-﻿using C2.Controls.Left;
+﻿using C2.Controls.C1.Left;
+using C2.Controls.Left;
 using System;
 using System.Windows.Forms;
 
@@ -31,6 +32,11 @@ namespace C2.Forms.Splash
         {
             AddItem(name, desc).Tag = button;
         }
+        protected void AddItem(string name, string desc, PluginButton button)
+        {
+            AddItem(name, desc).Tag = button;
+        }
+        
 
         protected void AddItem(string name, string desc, Form form)
         {
