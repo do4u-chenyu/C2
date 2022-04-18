@@ -270,6 +270,12 @@ namespace C2.Controls.C1.Left
             this.Controls.Add(plugin);
         }
 
+        public PluginButton VPNButton { get; } = new PluginButton("VPN");
+        public PluginButton BinaryButton { get; } = new PluginButton("Binary");
+        public PluginButton WebShellButton { get; } = new PluginButton("WebShell");
+
+        public PluginButton IntruderButton { get; } = new PluginButton("Intruder");
+
         public List<PluginButton> CBPluginButtons
         {
             get

@@ -19,9 +19,9 @@ namespace C2.Forms.Splash
         {
             AddItem(HelpUtil.MD5CrackerInfo,     HelpUtil.MD5CrackerDesc, (Form)null);
             AddItem(HelpUtil.MD5SaltCrackerInfo, HelpUtil.MD5SaltCrackerDesc, (Form)null);
-            //List<PluginButton> buttons = Global.GetCastleBravoControl().CBPluginButtons;
-            //foreach (PluginButton button in buttons)
-            //    AddItem(button., button.Desc, button);
+            AddItem("盗洞模拟器", "盗洞模型的配套工具集", Global.GetCastleBravoControl().WebShellButton);
+            AddItem("VPN专项", "VPN模型的配套工具集", Global.GetCastleBravoControl().VPNButton);
+            AddItem("大马破门锤", "大马模型的配套工具集", Global.GetCastleBravoControl().IntruderButton);
             base.ShowDialog();
         }
     }
