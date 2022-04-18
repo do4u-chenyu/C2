@@ -21,6 +21,7 @@ namespace C2.Forms.Splash
             AddItem(HelpUtil.MD5SaltCrackerInfo, HelpUtil.MD5SaltCrackerDesc, (Form)null);
             AddItem("盗洞模拟器", "盗洞模型的配套工具集", Global.GetCastleBravoControl().WebShellButton);
             AddItem("VPN专项", "VPN模型的配套工具集", Global.GetCastleBravoControl().VPNButton);
+            AddItem("二进制逆向", "二进制分析时的各种配套攻击", Global.GetCastleBravoControl().BinaryButton);
             AddItem("大马破门锤", "大马模型的配套工具集", Global.GetCastleBravoControl().IntruderButton);
             base.ShowDialog();
         }
