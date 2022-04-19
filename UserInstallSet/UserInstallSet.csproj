@@ -33,9 +33,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Outer|AnyCPU'">
     <OutputPath>bin\C2_Outer\</OutputPath>
+    <DefineConstants>C2_Outer</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Inner|AnyCPU'">
     <OutputPath>bin\C2_Inner\</OutputPath>
+    <DefineConstants>C2_Inner</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

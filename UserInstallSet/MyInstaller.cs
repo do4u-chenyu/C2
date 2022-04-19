@@ -78,7 +78,15 @@ namespace UserInstallSet
             node = doc.SelectSingleNode("/configuration/appSettings/add[@key='BuildDay']");
             if (node != null && node.Attributes["value"] != null)
                 node.Attributes["value"].Value = DateTime.Now.ToString();
-            
+
+            node = doc.SelectSingleNode("/configuration/appSettings/add[@key='version']");
+            if (node != null && node.Attributes["value"] != null)
+                node.Attributes["value"].Value = "全量版";
+#if C2_Outer
+            node.Attributes["value"].Value = "外网版";
+#elif C2_Inner
+            node.Attributes["value"].Value = "内网版";
+#endif
             // TODO
             // 替换全量
 
