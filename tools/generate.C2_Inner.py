@@ -67,7 +67,7 @@ def C2_install():
 
 def beauty_product():
     beauty_path = "C:\Program Files (x86)\Inno Setup 5"
-    beauty_cmd = "chdir /d {} & compil32 /cc \"".format(beauty_path) + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\gen_beauty_package_inner.iss\""
+    beauty_cmd = "chdir /d {} & compil32 /cc \"".format(beauty_path) + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\gen_beauty_inner_package.iss\""
     print(beauty_cmd)
     if os.system(beauty_cmd) == 0:
         return 0;
