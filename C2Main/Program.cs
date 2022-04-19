@@ -21,8 +21,8 @@ namespace C2
 
         public static string HeadLineDesc()
         {
-            string v = ConfigUtil.TryGetAppSettingsByKey("version", Global.V);
-            string b = ConfigUtil.TryGetAppSettingsByKey("BuildDay", Global.BuildDay);
+            string v = ConfigUtil.TryGetAppSettingsByKey("version",  string.Empty);
+            string b = ConfigUtil.TryGetAppSettingsByKey("BuildDay", string.Empty);
             return string.Format("{0}|编译日期:{1}|{2}", v, b, LinceseDeadLineDesc());
         }
         public static string LinceseDeadLineDesc()

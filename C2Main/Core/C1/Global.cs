@@ -259,8 +259,5 @@ namespace C2.Core
             { "/7W9Q8M2/CNWS2007A500S5/" , "WL"},
             { "1ZM4A2764MG", "XRC"}
         };
-
-        public static string V = "全量版";
-        public static string BuildDay = DateTime.Now.ToString();
     }
 }

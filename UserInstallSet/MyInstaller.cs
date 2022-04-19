@@ -74,6 +74,14 @@ namespace UserInstallSet
             if (node != null && node.Attributes["value"] != null)
                 node.Attributes["value"].Value = s;
 
+            // 替换编译日期
+            node = doc.SelectSingleNode("/configuration/appSettings/add[@key='BuildDay']");
+            if (node != null && node.Attributes["value"] != null)
+                node.Attributes["value"].Value = DateTime.Now.ToString();
+            
+            // TODO
+            // 替换全量
+
             string configPath = System.IO.Path.Combine(this.Context.Parameters["targetdir"], @"C2.exe.config");
 
             doc.Save(configPath);
