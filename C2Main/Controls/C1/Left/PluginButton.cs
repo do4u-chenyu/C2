@@ -23,6 +23,10 @@ namespace C2.Controls.C1.Left
         private readonly Dictionary<string, string> JST;
 
         private readonly string pluginType;
+
+        public string Type { get => this.ButtonText; }
+        public string Desc { get => toolTip.GetToolTip(this.rightPictureBox); }
+
         public PluginButton(string name)
         {
             pluginType = name;
@@ -162,7 +166,7 @@ namespace C2.Controls.C1.Left
                 OpenPluginForm();
         }
 
-        private void OpenPluginForm()
+        public void OpenPluginForm()
         {
             switch (pluginType)
             {

@@ -111,7 +111,9 @@ namespace C2.Forms.Splash
         {
             if (item is IAOButton)
                 (item as IAOButton).OpenToolForm();
-            if (item is Form)
+            else if (item is PluginButton)
+                (item as PluginButton).OpenPluginForm();
+            else if (item is Form)
                 (item as Form).ShowDialog();
         }
     }
