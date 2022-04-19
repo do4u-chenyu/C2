@@ -41,13 +41,13 @@ namespace C2.Controls.Left
         private readonly string buttonType;
 
         public string Type { get => this.txtButton.Text; }
-        public string Desc { get => toolTip1.GetToolTip(this.rightPictureBox); }
+        public string Desc { get => toolTip.GetToolTip(this.rightPictureBox); }
 
         public OpenToolFormDelegate ShowDialogDelegate { get => openToolForm; set => openToolForm = value; }
 
         public void SetToolTip(string desc)
         {
-            toolTip1.SetToolTip(this.rightPictureBox, desc);
+            toolTip.SetToolTip(this.rightPictureBox, desc);
         }
 
         public void SetIcon(Image icon)
@@ -61,148 +61,148 @@ namespace C2.Controls.Left
             buttonType = ffp;
             this.ContextMenuStrip = contextMenuStrip1;
             this.txtButton.Text = Lang._(ffp);
-            toolTip1.SetToolTip(this.txtButton, this.txtButton.Text);
+            toolTip.SetToolTip(this.txtButton, this.txtButton.Text);
             switch (ffp)
             {
                 case "APK":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Apk;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ApkToolFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.ApkToolFormHelpInfo);
                     break;
                 case "Visualization":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Visualization;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.VisualizationFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.VisualizationFormHelpInfo);
                     break;
                 case "Wifi":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
                     break;
                 case "InformationSearch":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.InformationSearch;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
                     break;
                 case "Address":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Wifi;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.WifiLocationFormHelpInfo);
                     break;
                 case "PostAndGet":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PostAndGet;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PostAndGetFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PostAndGetFormHelpInfo);
                     break;
                 case "GoldEyes": 
                     this.leftPictureBox.Image = global::C2.Properties.Resources.GoldEyes;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GoldEyesFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.GoldEyesFormHelpInfo);
                     break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
                     break;
                 case "Tude":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Tude;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GPSTransformFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.GPSTransformFormHelpInfo);
                     break;
                 case "BigAPK":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BigAPK;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BigAPKFormHelpInfo);
                     break;
                 case "Fraud":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.fraud;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FraudFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.FraudFormHelpInfo);
                     break;
                 case "PwdGenerator":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.dictGenerator;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PwdGeneratorHelpInfo);
                     break;
                 case "图片文本识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.OCR;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.OCRFormHelpInfo);
                     break;
                 case "命名实体识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.NER;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.NERFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.NERFormHelpInfo);
                     break;
                 case "语音转文本":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.ASR;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.ASRFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.ASRFormHelpInfo);
                     break;
                 case "二维码识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.QRCode;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeFormHelpInfo);
                     break;
                 case "人脸年龄性别识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceAgeGender;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.FaceAgeGenderFormHelpInfo);
                     break;
                 case "信息抽取":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.InfoExtraction;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.InfoExtractionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.InfoExtractionFormHelpInfo);
                     break;
                 case "语种识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.LanguageDetect;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.LanguageDetectFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.LanguageDetectFormHelpInfo);
                     break;
                 case "涉赌文本识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.DrugTextRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.DrugTextRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DrugTextRecognitionFormHelpInfo);
                     break;
                 case "涉政文本识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PoliticsTextRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PoliticsTextRecognitionFormHelpInfo);
                     break;
                 case "涉黄图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.PornRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.PornRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.PornRecognitionFormHelpInfo);
                     break;
                 case "轨迹联通类图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.TrackRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TrackRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.TrackRecognitionFormHelpInfo);
                     break;
                 case "红包转账图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.RedPocketRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedPocketRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RedPocketRecognitionFormHelpInfo);
                     break;
                 case "二维码图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.QRCodeRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.QRCodeRecognitionFormHelpInfo);
                     break;
                 case "银行卡图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.BankCardRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.BankCardRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BankCardRecognitionFormHelpInfo);
                     break;
                 case "卡证识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.CardRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.CardRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.CardRecognitionFormHelpInfo);
                     break;
                 case "红头文件识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.RedHeaderRecognition;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.RedHeaderRecognitionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.RedHeaderRecognitionFormHelpInfo);
                     break;
                 case "涉枪图像检测":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.GunDetection;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.GunDetectionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.GunDetectionFormHelpInfo);
                     break;
                 case "涉恐图像识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.TerrorismDetection;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TerrorismDetectionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.TerrorismDetectionFormHelpInfo);
                     break;
                 case "涉藏图像检测":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.TibetanDetection;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.TibetanDetectionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.TibetanDetectionFormHelpInfo);
                     break;
                 case "人脸检测":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceDetector;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceDetectorFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.FaceDetectorFormHelpInfo);
                     break;
                 case "颜值打分":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceBeauty;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceBeautyFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.FaceBeautyFormHelpInfo);
                     break;
                 case "表情识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceExpression;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceExpressionFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.FaceExpressionFormHelpInfo);
                     break;
                 case "人脸识别":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.FaceRecognizer;
-                    toolTip1.SetToolTip(this.rightPictureBox, HelpUtil.FaceRecognizerFormHelpInfo);
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.FaceRecognizerFormHelpInfo);
                     break;
             }
 

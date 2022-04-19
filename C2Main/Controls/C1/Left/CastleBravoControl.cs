@@ -14,6 +14,7 @@ namespace C2.Controls.C1.Left
 {
     public partial class CastleBravoControl : BaseLeftInnerPanel
     {
+        Dictionary<string, PluginButton> CBPlugins;
         public CastleBravoControl()
         {
             InitializeComponent();
@@ -240,22 +241,25 @@ namespace C2.Controls.C1.Left
 
         private void LoadCBPlugins()
         {
-            List<string> CBPlugins = new List<string>() {
-#if C2_Outer
-                 "Binary",
-                 "WebShell",
-#elif C2_Inner
-                 "Binary",
-#else
-                "WebShell",
-                "VPN",
-                "Binary",
-                "Cracker",
-                "WebScan",
-                "Intruder"
-#endif
+            CBPlugins = new Dictionary<string, PluginButton>() 
+            {
+                { "WebShell", new PluginButton("WebShell")},
+                { "VPN",      new PluginButton("VPN")     },
+                { "Binary"  , new PluginButton("Binary")  },
+                { "Cracker",  new PluginButton("Cracker") },
+                { "WebScan",  new PluginButton("WebScan") },
+                { "Intruder", new PluginButton("Intruder")},
             };
-            CBPlugins.ForEach(pname => this.AddCBPlugin(new PluginButton(pname)));
+
+
+
+#if (C2_Outer || C2_Inner)
+            AddCBPlugin(CBPlugins["WebShell"]);
+            AddCBPlugin(CBPlugins["VPN"]);
+            AddCBPlugin(CBPlugins["Binary"]);
+#else
+            foreach(var kv in CBPlugins) AddCBPlugin(kv.Value);
+#endif
         }
         private void ResizeCBLocation()
         {
@@ -270,11 +274,13 @@ namespace C2.Controls.C1.Left
             this.Controls.Add(plugin);
         }
 
-        public PluginButton VPNButton { get; } = new PluginButton("VPN");
-        public PluginButton BinaryButton { get; } = new PluginButton("Binary");
-        public PluginButton WebShellButton { get; } = new PluginButton("WebShell");
+        public PluginButton WebShellButton { get => CBPlugins["WebShell"]; }
 
-        public PluginButton IntruderButton { get; } = new PluginButton("Intruder");
+        public PluginButton VPNButton { get => CBPlugins["VPN"]; }
+        public PluginButton BinaryButton { get => CBPlugins["Binary"]; }
+        public PluginButton CrackerButton { get => CBPlugins["Cracker"]; }
+        public PluginButton WebScanButton { get => CBPlugins["WebScan"]; }
+        public PluginButton IntruderButton { get => CBPlugins["Intruder"]; }
 
         public List<PluginButton> CBPluginButtons
         {
