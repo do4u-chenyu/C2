@@ -286,11 +286,8 @@ namespace C2.Dialogs.IAOLab
             List<Dictionary<string, string>> res = new List<Dictionary<string, string>>();
             Dictionary<string, string> tmp = new Dictionary<string, string>
             {
-                { "IP", ip },
-                { "domain", string.Empty },
-                { "addtime", string.Empty },
-                { "uptime", string.Empty },
-                { "memo", string.Empty }
+                { "IP", ip },{ "domain", string.Empty },{ "addtime", string.Empty },
+                { "uptime", string.Empty },{ "memo", string.Empty }
             };
 
             try
