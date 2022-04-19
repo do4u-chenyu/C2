@@ -4,15 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.IAOLab
@@ -90,9 +85,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar2.Value = 0;
                 progressBar2.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar2.Minimum = 0;
-                //firstLine = "IP\t域名绑定信息\n";
 
-                //tmpResult.Append(firstLine);
                 foreach (string Ip in inputArray)
                 {
                     IPShowResult(Ip);
@@ -135,7 +128,6 @@ namespace C2.Dialogs.IAOLab
                         {
                             for (int i = 0; i < row.Cells.Count; i++)
                             {
-
                                 if (row.Cells[i].Value == null)
                                 {
                                     text = text + "\t";
@@ -145,10 +137,9 @@ namespace C2.Dialogs.IAOLab
                                     text = text + row.Cells[i].Value.ToString() + "\t";
                                 }
                             }
-                            text = text + "\n";
+                            text += "\n";
                         }
                         break;
-
                 }
                 string path = saveDialog.FileName;
 
@@ -161,8 +152,6 @@ namespace C2.Dialogs.IAOLab
                         string[] lines = text.Split('\n');
                         foreach (string line in lines)
                         {
-                            //if (line.Contains("SEO"))
-                            //    continue;
                             fs.WriteLine(line);
                             fs.Flush();
                         }
@@ -255,7 +244,7 @@ namespace C2.Dialogs.IAOLab
 
         public string FormClass()
         {
-            string fileType = String.Empty;
+            string fileType = string.Empty;
             if (tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true)
             {
                 fileType = "SEO";
@@ -275,11 +264,8 @@ namespace C2.Dialogs.IAOLab
                 {
                     Thread.Sleep(100);
                 }
-
                 List<Dictionary<string, string>> res = GetInfo(input.Split('\t')[0]);
-
                 FillDGV(res);
-
                 progressBar2.Value += 1;
             }
         }
@@ -297,8 +283,6 @@ namespace C2.Dialogs.IAOLab
 
             req.ContentType = "application/json";
             req.ContentLength = data.Length;
-            HttpWebResponse resp = null;
-
             List<Dictionary<string, string>> res = new List<Dictionary<string, string>>();
             Dictionary<string, string> tmp = new Dictionary<string, string>();
             tmp.Add("IP", Ip);
@@ -307,6 +291,7 @@ namespace C2.Dialogs.IAOLab
             tmp.Add("uptime", "");
             tmp.Add("memo", "");
 
+            HttpWebResponse resp;
             try
             {
                 using (var stream = req.GetRequestStream())
