@@ -7,19 +7,56 @@ using System.Windows.Forms;
 using System.Drawing;
 using C2.Business.CastleBravo.Binary.Info;
 using System;
+using System.Drawing.Drawing2D;
 
 namespace C2.Business.CastleBravo.Binary
 {
     public partial class BinaryMainForm : Form
     {
+        public static int BinaryStringsIndex = 0;
+        public static int XiseDecryptIndex = 1;
+        public static int BehinderDecryptIndex = 2;
+        public static int BehinderEncryptIndex = 3;
+        public static int BaiduLBSDecryptIndex = 4;
+        public static int GaodeLBSDecryptIndex = 5;
+
         private string[] strings;
         private readonly List<string> list = new List<string>();
         private readonly StringBuilder sb = new StringBuilder();
-        public BinaryMainForm()
+        public BinaryMainForm(int selectedIndex = 0)
         {
             InitializeComponent();
             InitializeOther();
             InitializeBehinderLabels();
+            InitializeSelectedTab(selectedIndex);
+        }
+
+        private void InitializeText()
+        {
+            this.StringsTabPage.Text = HelpUtil.BinaryStringsInfo;
+            this.label4.Text = HelpUtil.BinaryStringsDesc;
+
+            this.XiseTabPage.Text = HelpUtil.XiseDecryptInfo;
+            this.label9.Text = HelpUtil.XiseDecryptDesc;
+
+            this.BehinderDTabPage.Text = HelpUtil.BehinderDecryptInfo;
+            this.label10.Text = HelpUtil.BehinderDecryptDesc;
+            this.label14.Text = HelpUtil.BehinderDecryptDesc;
+
+            this.BehinderETabPage.Text = HelpUtil.BehinderEncryptInfo;
+            this.label16.Text = HelpUtil.BehinderEncryptDesc;
+
+            this.BaiduLBSTabPage.Text = HelpUtil.BaiduLBSDecryptInfo;
+            this.label3.Text = HelpUtil.BaiduLBSDecryptDesc;
+
+            this.tabPage1.Text = HelpUtil.GaodeLBSDecryptInfo;
+
+
+
+        }
+        private void InitializeSelectedTab(int selectedIndex)
+        {
+            this.tabControl1.SelectedIndex = selectedIndex;
         }
 
         private void InitializeOther()

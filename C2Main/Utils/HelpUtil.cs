@@ -113,7 +113,23 @@ namespace C2.Utils
         public static string XiseBackdoorHelpInfo = "肉鸡黑吃黑专项分析";
         public static string NetworkAssetsHelpInfo  = "购置境外网络资产专项分析";
 
+        public static string BinaryStringsInfo = "二进制分析";
+        public static string BinaryStringsDesc = "从二进制(exe,dll,.so,.lib,.a, ...)中提取文本,IP,域名,手机号,用户名...";
 
+        public static string XiseDecryptInfo = "Xise流量解密";
+        public static string XiseDecryptDesc = "破解Xise后门加密流量,配套黑吃黑战法";
+        
+        public static string BehinderDecryptInfo = "冰蝎流量解密";
+        public static string BehinderDecryptDesc = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
+
+        public static string BehinderEncryptInfo = "冰蝎流量加密";
+        public static string BehinderEncryptDesc = "根据密码生成20/40位冰蝎加密特征字符串";
+
+        public static string BaiduLBSDecryptInfo = "百度LBS报文解密(施工中)";
+        public static string BaiduLBSDecryptDesc = "百度LBS报文解密,配套IP定位";
+
+        public static string GaodeLBSDecryptInfo = "高德LBS报文解密(施工中)";
+        public static string GaodeLBSDecryptDesc = "高德LBS报文解密,配套IP定位";
 
         public static string FileNotFoundHelpInfo = "文件不存在";
         public static string InvalidScaleHelpInfo = "输入的缩放比有误。缩放比仅支持大于0且小于20的整数";
@@ -127,8 +143,10 @@ namespace C2.Utils
         public static string InvalidPythonENV0 = "未配置python虚拟机，在‘【右上角】-【首选项】-【python引擎】’中配置。";
         public static string InvalidPythonENV1 = "选择一个运行Python脚本的虚拟机";
         public static string InvalidPythonENV2 = "未配置python虚拟机，点击确定跳转至虚拟机配置界面。";
-        public static string MD5CrackerInfo     = "常规MD5批爆";
-        public static string MD5SaltCrackerInfo = "带盐MD5单爆";
+        public static string MLFormInfo = "MD5加盐速查表";
+        public static string MLFormDesc = "根据输入的MD5,Salt,用户名和明文密码,推算出所采用的加盐模式";
+        public static string MD5CrackerInfo     = "常规-MD5-批爆";
+        public static string MD5SaltCrackerInfo = "带盐-MD5-单爆";
         public static string MD5CrackerDesc = "不带盐MD5批量爆(针对宝塔特殊优化),成功率大于80%";
         public static string MD5SaltCrackerDesc = "带盐MD5单个爆,成功率大于73%";
 

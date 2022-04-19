@@ -12,6 +12,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 {
     public partial class WebShellManageForm
     {
+        private int cacheHit = 0;
         class CheckAliveResult
         {
             public bool done = false;
@@ -41,40 +42,42 @@ namespace C2.Business.CastleBravo.WebShellTool
         //           主线程每次验活前,先查看是否在缓存中此项是否已经被验过了
         //           
         // 因为并发验活涉及到层层反馈结果到界面更新,这样设计,改动最小
-        private Dictionary<object, CheckAliveResult> cache;
+        private Dictionary<WebShellTaskConfig, CheckAliveResult> cache;
 
         // 根据不同的场景设置加速缓存里的内容
         private void ResetCheckCache(ResetTypeEnum type)
         {
             actionNeedStop = false;
+            cacheHit = 0;
             cache.Clear();
             // 跳过初始几项
             for (int i = 0; i < LV.Items.Count; i++)
             {
                 ListViewItem lvi = LV.Items[i];
+                WebShellTaskConfig task = lvi.Tag as WebShellTaskConfig;
                 switch (type)
                 {
                     case ResetTypeEnum.重新开始:
-                        cache.Add(lvi.Tag, new CheckAliveResult());
+                        cache.Add(task, new CheckAliveResult());
                         break;
                     case ResetTypeEnum.重新开始_境外站:
-                        cache.Add(lvi.Tag, new CheckAliveResult(true));
+                        cache.Add(task, new CheckAliveResult(true));
                         break;
                     case ResetTypeEnum.继续上次:
                         if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                            cache.Add(lvi.Tag, new CheckAliveResult());
+                            cache.Add(task, new CheckAliveResult());
                         break;
                     case ResetTypeEnum.继续上次_境外:
                         if (lvi.SubItems[5].Text.Trim().IsNullOrEmpty())
-                            cache.Add(lvi.Tag, new CheckAliveResult(true));
+                            cache.Add(task, new CheckAliveResult(true));
                         break;
                     case ResetTypeEnum.选中项验活:
                         if (lvi.Selected)
-                            cache.Add(lvi.Tag, new CheckAliveResult());
+                            cache.Add(task, new CheckAliveResult());
                         break;
                     case ResetTypeEnum.二刷不活:
                         if (lvi.SubItems[5].Text.Trim().In(new string[] { "×", "待" }))
-                            cache.Add(lvi.Tag, new CheckAliveResult());
+                            cache.Add(task, new CheckAliveResult());
                         break;
                 }
             }
@@ -82,11 +85,11 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveSpeedUpBackground()
         {
-            // 创建copy
+            // 上下文变量复刻
             int numberOfThread = NumberOfThread;
             for (int nt = 0; nt < numberOfThread; nt++)
             {
-                int threadID = nt;  // 上下文复刻
+                int threadID = nt;  // 上下文变量复刻
                 Task.Run(() =>
                 {
                     //Console.WriteLine(string.Format("启动验活后台线程 : {0}", threadID));
@@ -134,11 +137,10 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private bool CacheCheckAlive(WebShellTaskConfig task)
         {
-            object key = task;
             // 先检查是否命中缓存
-            if (cache.ContainsKey(key) && cache[key].done)
-                return cache[key].alive;
-
+            if (cache.ContainsKey(task) && cache[task].done && ++cacheHit > 0)
+                return cache[task].alive;
+                
             // WebClient的超时是响应超时, 但有时候网页会有响应,但加载慢, 需要整体超时控制
             return DoEventsWait(5, Task.Run(() => PostCheckAlive(task)));
         }
