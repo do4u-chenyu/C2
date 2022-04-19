@@ -17,10 +17,11 @@ namespace C2.Forms.Splash
                            Width, Height);
         }
 
-        private PluginButton WebShellButton = Global.GetCastleBravoControl().WebShellButton;
-        private PluginButton VPNButton      = Global.GetCastleBravoControl().VPNButton;
-        private PluginButton BinaryButton   = Global.GetCastleBravoControl().BinaryButton;
-        private PluginButton IntruderButton = Global.GetCastleBravoControl().IntruderButton;
+        private readonly PluginButton WebShellButton = Global.GetCastleBravoControl().WebShellButton;
+        private readonly PluginButton VPNButton      = Global.GetCastleBravoControl().VPNButton;
+        private readonly PluginButton BinaryButton   = Global.GetCastleBravoControl().BinaryButton;
+        private readonly PluginButton IntruderButton = Global.GetCastleBravoControl().IntruderButton;
+
         public new void ShowDialog()
         {
             AddItem(HelpUtil.MD5CrackerInfo,     HelpUtil.MD5CrackerDesc, (Form)null);
