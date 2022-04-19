@@ -127,8 +127,10 @@ namespace C2.Utils
         public static string InvalidPythonENV0 = "未配置python虚拟机，在‘【右上角】-【首选项】-【python引擎】’中配置。";
         public static string InvalidPythonENV1 = "选择一个运行Python脚本的虚拟机";
         public static string InvalidPythonENV2 = "未配置python虚拟机，点击确定跳转至虚拟机配置界面。";
-        public static string MD5CrackerInfo     = "常规MD5批爆";
-        public static string MD5SaltCrackerInfo = "带盐MD5单爆";
+        public static string MLFormInfo = "MD5加盐速查表";
+        public static string MLFormDesc = "根据输入的MD5,Salt,用户名和明文密码,推算出所采用的加盐模式";
+        public static string MD5CrackerInfo     = "常规-MD5-批爆";
+        public static string MD5SaltCrackerInfo = "带盐-MD5-单爆";
         public static string MD5CrackerDesc = "不带盐MD5批量爆(针对宝塔特殊优化),成功率大于80%";
         public static string MD5SaltCrackerDesc = "带盐MD5单个爆,成功率大于73%";
 

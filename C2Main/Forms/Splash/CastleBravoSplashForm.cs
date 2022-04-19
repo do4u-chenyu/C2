@@ -1,5 +1,6 @@
 ﻿using C2.Controls.C1.Left;
 using C2.Core;
+using C2.Dialogs.CastleBravo;
 using C2.Utils;
 using System.Windows.Forms;
 
@@ -24,8 +25,9 @@ namespace C2.Forms.Splash
 
         public new void ShowDialog()
         {
-            AddItem(HelpUtil.MD5CrackerInfo,     HelpUtil.MD5CrackerDesc, (Form)null);
-            AddItem(HelpUtil.MD5SaltCrackerInfo, HelpUtil.MD5SaltCrackerDesc, (Form)null);
+            AddItem(HelpUtil.MD5CrackerInfo,     HelpUtil.MD5CrackerDesc, new AddCBTask(0));
+            AddItem(HelpUtil.MD5SaltCrackerInfo, HelpUtil.MD5SaltCrackerDesc, new AddCBTask(1));
+            AddItem(HelpUtil.MLFormInfo, HelpUtil.MLFormDesc, new MLForm(AddCBTask.MLD));
             AddItem(WebShellButton.Type, WebShellButton.Desc, WebShellButton);
             AddItem(VPNButton.Type, VPNButton.Desc, VPNButton);
             AddItem(BinaryButton.Type, BinaryButton.Desc, BinaryButton);

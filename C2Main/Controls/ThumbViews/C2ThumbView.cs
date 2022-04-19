@@ -45,7 +45,6 @@ namespace C2.Controls.ThumbViews
                 //喝彩城堡
                 case ThumbItem.ModelTypes.CastleBravo:
                     new CastleBravoSplashForm().ShowDialog();
-                    // Global.GetCastleBravoControl().AddLabelClick();
                     break;
                 //实验楼
                 case ThumbItem.ModelTypes.IAOLab:

@@ -1,4 +1,6 @@
 ﻿
+using C2.Utils;
+
 namespace C2.Dialogs.CastleBravo
 {
     partial class MLForm
@@ -47,11 +49,11 @@ namespace C2.Dialogs.CastleBravo
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.resultDGV = new System.Windows.Forms.DataGridView();
-            this.pasteButton = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pasteButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV)).BeginInit();
             this.panel2.SuspendLayout();
@@ -187,7 +189,7 @@ namespace C2.Dialogs.CastleBravo
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(395, 18);
+            this.label1.Size = new System.Drawing.Size(431, 18);
             this.label1.TabIndex = 10027;
             this.label1.Text = "表中填入几组已知带盐加密样例,速查对应的加密模式";
             // 
@@ -248,17 +250,6 @@ namespace C2.Dialogs.CastleBravo
             this.resultDGV.Size = new System.Drawing.Size(519, 473);
             this.resultDGV.TabIndex = 10025;
             // 
-            // pasteButton
-            // 
-            this.pasteButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.pasteButton.Location = new System.Drawing.Point(4, 599);
-            this.pasteButton.Name = "pasteButton";
-            this.pasteButton.Size = new System.Drawing.Size(143, 27);
-            this.pasteButton.TabIndex = 10026;
-            this.pasteButton.Text = "复制模式列表";
-            this.pasteButton.UseVisualStyleBackColor = true;
-            this.pasteButton.Click += new System.EventHandler(this.PasteButton_Click);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -310,6 +301,17 @@ namespace C2.Dialogs.CastleBravo
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // pasteButton
+            // 
+            this.pasteButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.pasteButton.Location = new System.Drawing.Point(4, 599);
+            this.pasteButton.Name = "pasteButton";
+            this.pasteButton.Size = new System.Drawing.Size(143, 27);
+            this.pasteButton.TabIndex = 10026;
+            this.pasteButton.Text = "复制模式列表";
+            this.pasteButton.UseVisualStyleBackColor = true;
+            this.pasteButton.Click += new System.EventHandler(this.PasteButton_Click);
+            // 
             // MLForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -322,7 +324,7 @@ namespace C2.Dialogs.CastleBravo
             this.Font = new System.Drawing.Font("宋体", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MLForm";
-            this.Text = "MD5加密模式速查表";
+            this.Text = HelpUtil.MLFormInfo;
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panel2, 0);
             this.Controls.SetChildIndex(this.pasteButton, 0);

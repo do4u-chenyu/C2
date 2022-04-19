@@ -14,14 +14,17 @@ namespace C2.Dialogs.CastleBravo
 {
     partial class AddCBTask : StandardDialog
     {
+
         public CastleBravoTaskInfo TaskInfo { set; get; }
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
 
+        private int initMode = 0;                          // 窗体Load时的选择模式
+
         private static readonly int MaxRowNumber = 2000;   // 单任务最大处理数
         private static readonly int MaxSaltRowNumber = 5;  // Salt模式最大处理数
 
-        private static readonly Dictionary<string, string> MLD = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> MLD = new Dictionary<string, string>
         {
                 { "模式01: MD5($Pass.$Salt)"                    , "MD5_Pass_Salt" },
                 { "模式02: MD5($Salt.$Pass)"                    , "MD5_Salt_Pass" },
@@ -65,6 +68,11 @@ namespace C2.Dialogs.CastleBravo
             InitTaskName();
             InitializeDGV();
             InitializeSaltMode();
+        }
+
+        public AddCBTask(int mode) : this()
+        {
+            initMode = mode;
         }
 
         public void InitializeTaskComboBox()
@@ -251,7 +259,7 @@ namespace C2.Dialogs.CastleBravo
 
         private void AddCBTask_Load(object sender, EventArgs e)
         {
-            Reset();
+            Reset(initMode);
             this.OKButton.Size = new System.Drawing.Size(75, 27);
             this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
