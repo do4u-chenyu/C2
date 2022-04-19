@@ -46,6 +46,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         {
             ItemCountSLabel.Text = string.Format("共{0}项", LV.Items.Count);
             ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
+            HitCacheSLabel.Text = string.Format("加速命中:{0}", cacheHit);
         }
 
         private void InitializeOther()
@@ -55,7 +56,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             NumberOfAlive = 0;
             finder = new FindSet(LV);
             LV.ListViewItemSorter = new LVComparer();
-            cache = new Dictionary<object, CheckAliveResult>();
+            cache = new Dictionary<WebShellTaskConfig, CheckAliveResult>();
         }
 
         private void InitializeToolStrip()
@@ -452,13 +453,14 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} {5} - 活 {2} - 站 {3} - IP {4}",
+            this.progressMenu.Text = string.Format("{0}/{1} {5} - 活 {2} - 站 {3} - IP {4} - CH {6}",
                 ++progressBar.Value,
                 progressBar.Maximum,
                 NumberOfAlive,
                 NumberOfHost,
                 NumberOfIPAddress,
-                progressBar.Value == progressBar.Maximum ? "完成" : string.Empty);
+                progressBar.Value == progressBar.Maximum ? "完成" : string.Empty,
+                cacheHit);
         }
 
         private static void ClearAliveSubItems(ListViewItem lvi)

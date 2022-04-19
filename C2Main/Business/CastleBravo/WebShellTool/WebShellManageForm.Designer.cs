@@ -160,6 +160,7 @@
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.HitCacheSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -392,7 +393,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1924, 35);
+            this.toolStrip1.Size = new System.Drawing.Size(1924, 38);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -405,7 +406,7 @@
             this.editDDB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.editDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editDDB.Name = "editDDB";
-            this.editDDB.Size = new System.Drawing.Size(66, 30);
+            this.editDDB.Size = new System.Drawing.Size(66, 33);
             this.editDDB.Text = "常规";
             this.editDDB.ToolTipText = "常规操作";
             // 
@@ -434,12 +435,12 @@
             // settingMenu
             // 
             this.settingMenu.Name = "settingMenu";
-            this.settingMenu.Size = new System.Drawing.Size(0, 30);
+            this.settingMenu.Size = new System.Drawing.Size(0, 33);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
             // 
             // trojanMenu
             // 
@@ -451,7 +452,7 @@
             this.GodzillaToolStripMenuItem});
             this.trojanMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.trojanMenu.Name = "trojanMenu";
-            this.trojanMenu.Size = new System.Drawing.Size(120, 30);
+            this.trojanMenu.Size = new System.Drawing.Size(120, 33);
             this.trojanMenu.Text = "特洛伊生成";
             this.trojanMenu.ToolTipText = "特洛伊样本集合";
             // 
@@ -624,14 +625,14 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
             // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(0, 30);
+            this.toolStripButton1.Size = new System.Drawing.Size(0, 33);
             this.toolStripButton1.Text = "dddd";
             // 
             // checkAliveDDB
@@ -645,7 +646,7 @@
             this.checkAliveDDB.Image = ((System.Drawing.Image)(resources.GetObject("checkAliveDDB.Image")));
             this.checkAliveDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.checkAliveDDB.Name = "checkAliveDDB";
-            this.checkAliveDDB.Size = new System.Drawing.Size(102, 30);
+            this.checkAliveDDB.Size = new System.Drawing.Size(102, 33);
             this.checkAliveDDB.Text = "验活功能";
             // 
             // 批量验活Menu
@@ -704,7 +705,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(82, 30);
+            this.toolStripLabel1.Size = new System.Drawing.Size(82, 33);
             this.toolStripLabel1.Text = "验活线程";
             // 
             // threadNumberButton
@@ -729,12 +730,12 @@
             this.threadNumberButton.MaxDropDownItems = 9;
             this.threadNumberButton.Name = "threadNumberButton";
             this.threadNumberButton.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.threadNumberButton.Size = new System.Drawing.Size(75, 35);
+            this.threadNumberButton.Size = new System.Drawing.Size(75, 38);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 38);
             // 
             // infoCollectionMenu
             // 
@@ -748,7 +749,7 @@
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(98, 30);
+            this.infoCollectionMenu.Size = new System.Drawing.Size(98, 33);
             this.infoCollectionMenu.Text = "D洞探针";
             this.infoCollectionMenu.ToolTipText = "各种信息探针";
             // 
@@ -1022,7 +1023,7 @@
             // 
             this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.refreshStopMenu.Name = "refreshStopMenu";
-            this.refreshStopMenu.Size = new System.Drawing.Size(84, 30);
+            this.refreshStopMenu.Size = new System.Drawing.Size(84, 33);
             this.refreshStopMenu.Text = "停止任务";
             this.refreshStopMenu.Click += new System.EventHandler(this.CheckAliveStopMenu_Click);
             // 
@@ -1042,27 +1043,27 @@
             this.progressMenu.Enabled = false;
             this.progressMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.progressMenu.Name = "progressMenu";
-            this.progressMenu.Size = new System.Drawing.Size(37, 30);
+            this.progressMenu.Size = new System.Drawing.Size(37, 33);
             this.progressMenu.Text = "-/-";
             this.progressMenu.ToolTipText = "验活进度";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 38);
             // 
             // proxySettingMenu
             // 
             this.proxySettingMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.proxySettingMenu.Name = "proxySettingMenu";
-            this.proxySettingMenu.Size = new System.Drawing.Size(84, 30);
+            this.proxySettingMenu.Size = new System.Drawing.Size(84, 33);
             this.proxySettingMenu.Text = "代理设置";
             this.proxySettingMenu.Click += new System.EventHandler(this.ProxyMenu_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 38);
             // 
             // UnlockButton
             // 
@@ -1109,11 +1110,11 @@
             this.LV.GridLines = true;
             this.LV.HideSelection = false;
             this.LV.LabelWrap = false;
-            this.LV.Location = new System.Drawing.Point(0, 35);
+            this.LV.Location = new System.Drawing.Point(0, 38);
             this.LV.Margin = new System.Windows.Forms.Padding(6);
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
-            this.LV.Size = new System.Drawing.Size(1924, 698);
+            this.LV.Size = new System.Drawing.Size(1924, 695);
             this.LV.TabIndex = 3;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -1185,7 +1186,8 @@
             this.ProxyEnableSLabel,
             this.infoConfigStatus,
             this.StatusLabel,
-            this.actionStatusLabel});
+            this.actionStatusLabel,
+            this.HitCacheSLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 733);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 32, 0);
@@ -1254,6 +1256,11 @@
             this.CopyDirMenu.Size = new System.Drawing.Size(224, 30);
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenuItem_Click);
+            // 
+            // hitCacheSLabel
+            // 
+            this.HitCacheSLabel.Name = "hitCacheSLabel";
+            this.HitCacheSLabel.Size = new System.Drawing.Size(0, 24);
             // 
             // WebShellManageForm
             // 
@@ -1416,5 +1423,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripStatusLabel HitCacheSLabel;
     }
 }
