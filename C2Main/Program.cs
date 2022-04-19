@@ -16,19 +16,27 @@ namespace C2
     static class Program
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
-        public const string LinceseDeadLine = "2022052000000000";
-        public const string LinceseDeadLineDesc = "本次迭代装备使用期截止到 2022年5月20号";
+        public const string DateTimeFormat = "yyyy年MM月dd号";
+        public const string LinceseDeadLine = "2022年05月20号";
+
+        public static string HeadLineDesc()
+        {
+            string v = ConfigUtil.TryGetAppSettingsByKey("version", Global.V);
+            string b = ConfigUtil.TryGetAppSettingsByKey("BuildDay", Global.BuildDay);
+            return string.Format("{0}|编译日期:{1}|{2}", v, b, LinceseDeadLineDesc());
+        }
+        public static string LinceseDeadLineDesc()
+        {
+            return string.Format("本次迭代装备使用期截止到 {0}", LinceseDeadLine);
+        }
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main(params string[] args)
         {
-            if (string.Compare(DateTime.Now.ToString("yyyyMMddHHmmss"), LinceseDeadLine) > 0)
-            {
-                MessageBox.Show(LinceseDeadLineDesc);
+            if (MeetDeadline())
                 return;
-            }
 
             string ffp = args.Length == 0 ? string.Empty : args[0];
             IntPtr handle = RunningC2MainFormHandle();
@@ -52,6 +60,19 @@ namespace C2
             ConfigProgram();
             Application.Run(new MainForm(ffp));
             Options.Current.Save();
+        }
+
+        private static bool MeetDeadline()
+        {
+            DateTime deadline = ConvertUtil.TryParseDateTime(LinceseDeadLine, DateTimeFormat);
+            DateTime now = DateTime.Now;
+
+            if (now > deadline)
+            {
+                MessageBox.Show(LinceseDeadLineDesc());
+                return true;
+            }
+            return false;
         }
 
         private static void ConfigProgram()
