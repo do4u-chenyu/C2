@@ -188,18 +188,23 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value += 1;
             }
         }
-
-        public string GetSEOTool(string host)
+        private HttpWebRequest ConfigPost(string url)
         {
-            string url = "http://47.94.39.209:22222/api/fhge/seo_query";
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "domain", host } };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            string content = JsonConvert.SerializeObject(pairs);
-            byte[] data = Encoding.UTF8.GetBytes(content);
             request.Timeout = 200000;
             request.Method = "POST";
             request.ContentType = "application/json";
+            return request;
+        }
 
+        public string GetSEOTool(string host)
+        {
+            string url =  Global.SEOUrl;
+            HttpWebRequest request = ConfigPost(url);
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "domain", host } };
+            string content = JsonConvert.SerializeObject(pairs);
+            byte[] data = Encoding.UTF8.GetBytes(content);
+           
             HttpWebResponse response;
             string postContent;
             JObject json;
@@ -274,11 +279,8 @@ namespace C2.Dialogs.IAOLab
         private List<Dictionary<string, string>> IpConvertHost(string ip)
         {
             string url = Global.IpToHostUrl;
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest req = ConfigPost(url);
             HttpWebResponse resp;
-            req.Method = "POST";
-            req.Timeout = 100000;//设置100s超时时间是针对查询域名较多的情况，采取的一个较为合适的值  180.101.49.11
-            req.ContentType = "application/json";
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", ip } };
             byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(pairs));
             req.ContentLength = data.Length;
