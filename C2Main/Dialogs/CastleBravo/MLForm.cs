@@ -43,8 +43,8 @@ namespace C2.Dialogs.CastleBravo
         private void ResetDGV1()
         {
             this.DGV.Rows.Clear();
-            this.DGV.Rows.Add(new string[] { string.Empty, "123456", "salt" });
-            this.DGV.Rows.Add(new string[] { string.Empty, "123456", string.Empty, "admin" });
+            this.DGV.Rows.Add(new string[] { string.Empty, "123456", "salt", "admin" });
+            this.DGV.Rows.Add();
             this.DGV.Rows.Add();
         }
 
@@ -52,7 +52,7 @@ namespace C2.Dialogs.CastleBravo
         {
             this.resultDGV.Rows.Clear();
             foreach (string m in MLD.Keys)
-                this.resultDGV.Rows.Add(new string[] { m });
+                resultDGV.Rows.Add(new string[] { m });
         }
 
         private void DigButton_Click(object sender, System.EventArgs e)
