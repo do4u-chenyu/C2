@@ -1,4 +1,5 @@
-﻿using C2.Controls.C1.Left;
+﻿using C2.Business.CastleBravo.Binary;
+using C2.Controls.C1.Left;
 using C2.Core;
 using C2.Dialogs.CastleBravo;
 using C2.Utils;
@@ -20,7 +21,6 @@ namespace C2.Forms.Splash
 
         private readonly PluginButton WebShellButton = Global.GetCastleBravoControl().WebShellButton;
         private readonly PluginButton VPNButton      = Global.GetCastleBravoControl().VPNButton;
-        private readonly PluginButton BinaryButton   = Global.GetCastleBravoControl().BinaryButton;
         private readonly PluginButton IntruderButton = Global.GetCastleBravoControl().IntruderButton;
 
         public new void ShowDialog()
@@ -30,7 +30,11 @@ namespace C2.Forms.Splash
             AddItem(HelpUtil.MLFormInfo, HelpUtil.MLFormDesc, new MLForm(AddCBTask.MLD));
             AddItem(WebShellButton.Type, WebShellButton.Desc, WebShellButton);
             AddItem(VPNButton.Type, VPNButton.Desc, VPNButton);
-            AddItem(BinaryButton.Type, BinaryButton.Desc, BinaryButton);
+            AddItem(HelpUtil.BinaryStringsInfo, HelpUtil.BinaryStringsDesc, new BinaryMainForm());
+            AddItem(HelpUtil.XiseDecryptInfo, HelpUtil.XiseDecryptDesc, new BinaryMainForm());
+            AddItem(HelpUtil.BehinderDecryptInfo, HelpUtil.BehinderDecryptDesc, new BinaryMainForm());
+            AddItem(HelpUtil.BaiduLBSDecryptInfo, HelpUtil.BaiduLBSDecryptDesc, new BinaryMainForm());
+            AddItem(HelpUtil.GaodeLBSDecryptInfo, HelpUtil.GaodeLBSDecryptDesc, new BinaryMainForm());
             AddItem(IntruderButton.Type, IntruderButton.Desc, IntruderButton);
             base.ShowDialog();
         }

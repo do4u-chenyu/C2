@@ -1,4 +1,6 @@
-﻿namespace C2.Business.CastleBravo.Binary
+﻿using C2.Utils;
+
+namespace C2.Business.CastleBravo.Binary
 {
     partial class BinaryMainForm
     {
@@ -119,7 +121,7 @@
             this.StringsTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.StringsTabPage.Size = new System.Drawing.Size(1076, 655);
             this.StringsTabPage.TabIndex = 0;
-            this.StringsTabPage.Text = "提取字符串";
+            this.StringsTabPage.Text = HelpUtil.BinaryStringsInfo;
             this.StringsTabPage.UseVisualStyleBackColor = true;
             // 
             // label6
@@ -185,7 +187,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(635, 48);
             this.label4.TabIndex = 1;
-            this.label4.Text = "从二进制文件(.exe,.dll,.so,.lib,.a, ...)中提取文本,尤其是IP,域名,手机号和用户名...\r\n\r\n";
+            this.label4.Text = HelpUtil.BinaryStringsDesc;
             // 
             // XiseTabPage
             // 
@@ -205,7 +207,7 @@
             this.XiseTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.XiseTabPage.Size = new System.Drawing.Size(1076, 655);
             this.XiseTabPage.TabIndex = 1;
-            this.XiseTabPage.Text = "Xise流量解密";
+            this.XiseTabPage.Text = HelpUtil.XiseDecryptInfo;
             this.XiseTabPage.UseVisualStyleBackColor = true;
             // 
             // XiseS2Button
@@ -300,7 +302,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(355, 24);
             this.label9.TabIndex = 5;
-            this.label9.Text = "针对Xise系列后门加密流量进行定制化解密,";
+            this.label9.Text = HelpUtil.XiseDecryptDesc;
             // 
             // XiseTextBox
             // 
@@ -335,7 +337,7 @@
             this.BehinderDTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.BehinderDTabPage.Size = new System.Drawing.Size(1076, 655);
             this.BehinderDTabPage.TabIndex = 2;
-            this.BehinderDTabPage.Text = "冰蝎流量解密";
+            this.BehinderDTabPage.Text = HelpUtil.BehinderDecryptInfo;
             this.BehinderDTabPage.UseVisualStyleBackColor = true;
             // 
             // SuccessLabel
@@ -463,7 +465,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(411, 24);
             this.label10.TabIndex = 6;
-            this.label10.Text = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
+            this.label10.Text = HelpUtil.BehinderDecryptDesc;
             // 
             // BehinderETabPage
             // 
@@ -592,7 +594,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(411, 24);
             this.label14.TabIndex = 9;
-            this.label14.Text = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
+            this.label14.Text = HelpUtil.BehinderDecryptDesc;
             // 
             // BehinderETextBox
             // 
@@ -622,7 +624,7 @@
             this.BaiduLBSTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.BaiduLBSTabPage.Size = new System.Drawing.Size(1076, 655);
             this.BaiduLBSTabPage.TabIndex = 4;
-            this.BaiduLBSTabPage.Text = "百度LBS报文解密";
+            this.BaiduLBSTabPage.Text = HelpUtil.BaiduLBSDecryptInfo;
             this.BaiduLBSTabPage.UseVisualStyleBackColor = true;
             // 
             // textBox1
