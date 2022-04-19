@@ -200,6 +200,7 @@ namespace C2.Core
         public const string CastleIDLEUrl = @"http://221.226.113.110:8484/Castle/check";
         public const string APKUrl = @"http://113.31.110.244:6663/ns/APPtest/home";
         public const string KnowledgeUrl = @"http://15.73.3.241:19001/KnowledgeBase/";
+        public const string IpToHostUrl = @"http://113.31.114.239:53373/api/fhge/capture_host_by_ip";
 
         public static Dictionary<string, string> WFDPredictionCodeDict = new Dictionary<string, string>
         {

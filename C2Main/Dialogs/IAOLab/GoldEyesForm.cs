@@ -1,4 +1,5 @@
 ﻿using C2.Controls;
+using C2.Core;
 using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -264,76 +265,66 @@ namespace C2.Dialogs.IAOLab
                 {
                     Thread.Sleep(100);
                 }
-                List<Dictionary<string, string>> res = GetInfo(input.Split('\t')[0]);
+                List<Dictionary<string, string>> res = IpConvertHost(input.Split('\t')[0]);
                 FillDGV(res);
                 progressBar2.Value += 1;
             }
         }
 
-        private List<Dictionary<string, string>> GetInfo(string Ip)
+        private List<Dictionary<string, string>> IpConvertHost(string ip)
         {
-            string url = "http://47.94.39.209:8899/api/fhge/capture_host_by_ip";
+            string url = Global.IpToHostUrl;
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Method = "POST";
-            req.Timeout = 20000;
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", Ip } };
-
-            string content = JsonConvert.SerializeObject(pairs);
-            byte[] data = Encoding.UTF8.GetBytes(content);
-
-            req.ContentType = "application/json";
-            req.ContentLength = data.Length;
-            List<Dictionary<string, string>> res = new List<Dictionary<string, string>>();
-            Dictionary<string, string> tmp = new Dictionary<string, string>();
-            tmp.Add("IP", Ip);
-            tmp.Add("domain", "");
-            tmp.Add("addtime", "");
-            tmp.Add("uptime", "");
-            tmp.Add("memo", "");
-
             HttpWebResponse resp;
+            req.Method = "POST";
+            req.Timeout = 100000;//设置100s超时时间是针对查询域名较多的情况，采取的一个较为合适的值  180.101.49.11
+            req.ContentType = "application/json";
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", ip } };
+            byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(pairs));
+            req.ContentLength = data.Length;
+
+            List<Dictionary<string, string>> res = new List<Dictionary<string, string>>();
+            Dictionary<string, string> tmp = new Dictionary<string, string>
+            {
+                { "IP", ip },{ "domain", string.Empty },{ "addtime", string.Empty },
+                { "uptime", string.Empty },{ "memo", string.Empty }
+            };
+
             try
             {
                 using (var stream = req.GetRequestStream())
                     stream.Write(data, 0, data.Length);
-
                 resp = (HttpWebResponse)req.GetResponse();
             }
-            catch
+            catch (Exception ex)
             {
-                tmp["memo"] = "网络连接中断";
+                tmp["memo"] = ex.Message;
                 res.Add(tmp);
                 return res;
             }
 
             JObject json = JObject.Parse(new StreamReader(resp.GetResponseStream()).ReadToEnd());
 
-            if (json["status"].ToString() == "fail")
+            if (json["status"].ToString() == "fail" || JsonConvert.SerializeObject(json["data"]) == "[]")
             {
                 tmp["memo"] = "未查询到绑定过的域名";  // todo 这里后续需要根据接口的返回值进行优化
                 res.Add(tmp);
                 return res;
             }
-
-            var dat = json["data"];
-
-            string resp_data = JsonConvert.SerializeObject(dat);
-            if (resp_data.Length == 0)
+            else
             {
-                tmp["memo"] = "未查询到绑定过的域名";
-                res.Add(tmp);
-                return res;
-            }
-
-            foreach (var one in dat) 
-            {
-                Dictionary<string, string> dict = new Dictionary<string, string>();
-                dict.Add("IP", Ip);
-                dict.Add("domain", (string)one["domain"]);
-                dict.Add("addtime", (string)one["addtime"]);
-                dict.Add("uptime", (string)one["uptime"]);
-                dict.Add("memo", "");
-                res.Add(dict);
+                foreach (var dat in json["data"])
+                {
+                    Dictionary<string, string> dict = new Dictionary<string, string>
+                {
+                    { "IP", ip },
+                    { "domain", dat["domain"].ToString() },
+                    { "addtime", dat["addtime"].ToString() },
+                    { "uptime", dat["uptime"].ToString() },
+                    { "memo", string.Empty }
+                };
+                    res.Add(dict);
+                }
             }
             return res;
         }
