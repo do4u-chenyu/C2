@@ -10,15 +10,6 @@ namespace C2.Forms.Splash
     public partial class CastleBravoSplashForm : BaseSplashForm
     {
 
-        public CastleBravoSplashForm()
-        {
-            this.StartPosition = FormStartPosition.Manual;
-            // 网上抄来的
-            this.SetBounds((Screen.GetBounds(this).Width  / 2) - Width  / 2,
-                           (Screen.GetBounds(this).Height / 2) - Height / 4,
-                           Width, Height);
-        }
-
         private readonly PluginButton WebShellButton = Global.GetCastleBravoControl().WebShellButton;
         private readonly PluginButton VPNButton      = Global.GetCastleBravoControl().VPNButton;
         private readonly PluginButton IntruderButton = Global.GetCastleBravoControl().IntruderButton;
@@ -30,11 +21,12 @@ namespace C2.Forms.Splash
             AddItem(HelpUtil.MLFormInfo, HelpUtil.MLFormDesc, new MLForm(AddCBTask.MLD));
             AddItem(WebShellButton.Type, WebShellButton.Desc, WebShellButton);
             AddItem(VPNButton.Type, VPNButton.Desc, VPNButton);
-            AddItem(HelpUtil.BinaryStringsInfo, HelpUtil.BinaryStringsDesc, new BinaryMainForm());
-            AddItem(HelpUtil.XiseDecryptInfo, HelpUtil.XiseDecryptDesc, new BinaryMainForm());
-            AddItem(HelpUtil.BehinderDecryptInfo, HelpUtil.BehinderDecryptDesc, new BinaryMainForm());
-            AddItem(HelpUtil.BaiduLBSDecryptInfo, HelpUtil.BaiduLBSDecryptDesc, new BinaryMainForm());
-            AddItem(HelpUtil.GaodeLBSDecryptInfo, HelpUtil.GaodeLBSDecryptDesc, new BinaryMainForm());
+            AddItem(HelpUtil.BinaryStringsInfo, HelpUtil.BinaryStringsDesc, new BinaryMainForm(BinaryMainForm.BinaryStringsIndex));
+            AddItem(HelpUtil.XiseDecryptInfo, HelpUtil.XiseDecryptDesc, new BinaryMainForm(BinaryMainForm.XiseDecryptIndex));
+            AddItem(HelpUtil.BehinderEncryptInfo, HelpUtil.BehinderEncryptDesc, new BinaryMainForm(BinaryMainForm.BehinderEncryptIndex));
+            AddItem(HelpUtil.BehinderDecryptInfo, HelpUtil.BehinderDecryptDesc, new BinaryMainForm(BinaryMainForm.BehinderDecryptIndex));
+            AddItem(HelpUtil.BaiduLBSDecryptInfo, HelpUtil.BaiduLBSDecryptDesc, new BinaryMainForm(BinaryMainForm.BaiduLBSDecryptIndex));
+            AddItem(HelpUtil.GaodeLBSDecryptInfo, HelpUtil.GaodeLBSDecryptDesc, new BinaryMainForm(BinaryMainForm.GaodeLBSDecryptIndex));
             AddItem(IntruderButton.Type, IntruderButton.Desc, IntruderButton);
             base.ShowDialog();
         }

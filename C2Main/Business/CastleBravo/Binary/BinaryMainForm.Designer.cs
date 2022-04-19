@@ -76,19 +76,22 @@ namespace C2.Business.CastleBravo.Binary
             this.label14 = new System.Windows.Forms.Label();
             this.BehinderETextBox = new System.Windows.Forms.TextBox();
             this.BaiduLBSTabPage = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.StringsTabPage.SuspendLayout();
             this.XiseTabPage.SuspendLayout();
             this.BehinderDTabPage.SuspendLayout();
             this.BehinderETabPage.SuspendLayout();
             this.BaiduLBSTabPage.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -98,6 +101,7 @@ namespace C2.Business.CastleBravo.Binary
             this.tabControl1.Controls.Add(this.BehinderDTabPage);
             this.tabControl1.Controls.Add(this.BehinderETabPage);
             this.tabControl1.Controls.Add(this.BaiduLBSTabPage);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -121,7 +125,7 @@ namespace C2.Business.CastleBravo.Binary
             this.StringsTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.StringsTabPage.Size = new System.Drawing.Size(1076, 655);
             this.StringsTabPage.TabIndex = 0;
-            this.StringsTabPage.Text = HelpUtil.BinaryStringsInfo;
+            this.StringsTabPage.Text = "二进制分析";
             this.StringsTabPage.UseVisualStyleBackColor = true;
             // 
             // label6
@@ -185,9 +189,9 @@ namespace C2.Business.CastleBravo.Binary
             this.label4.Location = new System.Drawing.Point(3, 10);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(635, 48);
+            this.label4.Size = new System.Drawing.Size(523, 24);
             this.label4.TabIndex = 1;
-            this.label4.Text = HelpUtil.BinaryStringsDesc;
+            this.label4.Text = "从二进制(exe,dll,.so,.lib,.a, ...)中提取文本,IP,域名,手机号,用户名...";
             // 
             // XiseTabPage
             // 
@@ -207,7 +211,7 @@ namespace C2.Business.CastleBravo.Binary
             this.XiseTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.XiseTabPage.Size = new System.Drawing.Size(1076, 655);
             this.XiseTabPage.TabIndex = 1;
-            this.XiseTabPage.Text = HelpUtil.XiseDecryptInfo;
+            this.XiseTabPage.Text = "Xise流量解密";
             this.XiseTabPage.UseVisualStyleBackColor = true;
             // 
             // XiseS2Button
@@ -300,9 +304,9 @@ namespace C2.Business.CastleBravo.Binary
             this.label9.Location = new System.Drawing.Point(4, 6);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(355, 24);
+            this.label9.Size = new System.Drawing.Size(319, 24);
             this.label9.TabIndex = 5;
-            this.label9.Text = HelpUtil.XiseDecryptDesc;
+            this.label9.Text = "破解Xise后门加密流量,配套黑吃黑战法";
             // 
             // XiseTextBox
             // 
@@ -337,7 +341,7 @@ namespace C2.Business.CastleBravo.Binary
             this.BehinderDTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.BehinderDTabPage.Size = new System.Drawing.Size(1076, 655);
             this.BehinderDTabPage.TabIndex = 2;
-            this.BehinderDTabPage.Text = HelpUtil.BehinderDecryptInfo;
+            this.BehinderDTabPage.Text = "冰蝎流量解密";
             this.BehinderDTabPage.UseVisualStyleBackColor = true;
             // 
             // SuccessLabel
@@ -465,7 +469,7 @@ namespace C2.Business.CastleBravo.Binary
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(411, 24);
             this.label10.TabIndex = 6;
-            this.label10.Text = HelpUtil.BehinderDecryptDesc;
+            this.label10.Text = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
             // 
             // BehinderETabPage
             // 
@@ -594,7 +598,7 @@ namespace C2.Business.CastleBravo.Binary
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(411, 24);
             this.label14.TabIndex = 9;
-            this.label14.Text = HelpUtil.BehinderDecryptDesc;
+            this.label14.Text = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
             // 
             // BehinderETextBox
             // 
@@ -624,8 +628,17 @@ namespace C2.Business.CastleBravo.Binary
             this.BaiduLBSTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.BaiduLBSTabPage.Size = new System.Drawing.Size(1076, 655);
             this.BaiduLBSTabPage.TabIndex = 4;
-            this.BaiduLBSTabPage.Text = HelpUtil.BaiduLBSDecryptInfo;
+            this.BaiduLBSTabPage.Text = "百度LBS报文解密";
             this.BaiduLBSTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(524, 346);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 24);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "施工中";
             // 
             // textBox1
             // 
@@ -684,18 +697,29 @@ namespace C2.Business.CastleBravo.Binary
             this.label3.TabIndex = 20;
             this.label3.Text = "破解百度LBS定位服务的加密流量报文";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label20);
+            this.tabPage1.Location = new System.Drawing.Point(4, 33);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1076, 655);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "高德LBS报文解密";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(498, 237);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(64, 24);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "施工中";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "二进制文件|*.exe;*.so;*.dll;*.lib;*.a;*.dat;*.bin;*.*";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(524, 346);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 24);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "施工中";
             // 
             // BinaryMainForm
             // 
@@ -723,6 +747,8 @@ namespace C2.Business.CastleBravo.Binary
             this.BehinderETabPage.PerformLayout();
             this.BaiduLBSTabPage.ResumeLayout(false);
             this.BaiduLBSTabPage.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -781,5 +807,7 @@ namespace C2.Business.CastleBravo.Binary
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label20;
     }
 }

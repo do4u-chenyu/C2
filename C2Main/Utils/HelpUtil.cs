@@ -118,12 +118,17 @@ namespace C2.Utils
 
         public static string XiseDecryptInfo = "Xise流量解密";
         public static string XiseDecryptDesc = "破解Xise后门加密流量,配套黑吃黑战法";
+        
         public static string BehinderDecryptInfo = "冰蝎流量解密";
         public static string BehinderDecryptDesc = "破解三代冰蝎(Behinder)的加密流量报文(AES128)";
-        public static string BaiduLBSDecryptInfo = "百度LBS报文解密";
+
+        public static string BehinderEncryptInfo = "冰蝎流量加密";
+        public static string BehinderEncryptDesc = "根据密码生成20/40位冰蝎加密特征字符串";
+
+        public static string BaiduLBSDecryptInfo = "百度LBS报文解密(施工中)";
         public static string BaiduLBSDecryptDesc = "百度LBS报文解密,配套IP定位";
 
-        public static string GaodeLBSDecryptInfo = "高德LBS报文解密(施工中...)";
+        public static string GaodeLBSDecryptInfo = "高德LBS报文解密(施工中)";
         public static string GaodeLBSDecryptDesc = "高德LBS报文解密,配套IP定位";
 
         public static string FileNotFoundHelpInfo = "文件不存在";
