@@ -47,15 +47,15 @@ namespace C2.Business.CastleBravo.VPN
             this.label3.Location = new System.Drawing.Point(4, 98);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(332, 18);
+            this.label3.Size = new System.Drawing.Size(413, 18);
             this.label3.TabIndex = 10029;
-            this.label3.Text = "* 内容格式:一行一个订阅链接,最多1w行";
+            this.label3.Text = "* 格式:一行一个,支持ss,ssr,vmess,vless,trojan";
             // 
             // wsTextBox
             // 
             this.wsTextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
             this.wsTextBox.Location = new System.Drawing.Point(142, 166);
-            this.wsTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wsTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.wsTextBox.MaxLength = 16777216;
             this.wsTextBox.Multiline = true;
             this.wsTextBox.Name = "wsTextBox";
@@ -69,7 +69,7 @@ namespace C2.Business.CastleBravo.VPN
             this.pasteModeCB.AutoSize = true;
             this.pasteModeCB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.pasteModeCB.Location = new System.Drawing.Point(16, 171);
-            this.pasteModeCB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pasteModeCB.Margin = new System.Windows.Forms.Padding(4);
             this.pasteModeCB.Name = "pasteModeCB";
             this.pasteModeCB.Size = new System.Drawing.Size(110, 29);
             this.pasteModeCB.TabIndex = 10027;
@@ -81,7 +81,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.browserButton.Location = new System.Drawing.Point(548, 45);
-            this.browserButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.browserButton.Margin = new System.Windows.Forms.Padding(4);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(88, 34);
             this.browserButton.TabIndex = 10026;
@@ -94,7 +94,7 @@ namespace C2.Business.CastleBravo.VPN
             this.filePathTextBox.BackColor = System.Drawing.Color.White;
             this.filePathTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.filePathTextBox.Location = new System.Drawing.Point(144, 44);
-            this.filePathTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.filePathTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
             this.filePathTextBox.Size = new System.Drawing.Size(392, 33);
@@ -115,19 +115,19 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label1.Location = new System.Drawing.Point(4, 212);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 18);
+            this.label1.Size = new System.Drawing.Size(125, 18);
             this.label1.TabIndex = 10030;
-            this.label1.Text = "*最大[16M]文本";
+            this.label1.Text = "最大[16M]文本";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label5.Location = new System.Drawing.Point(4, 241);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
@@ -150,7 +150,7 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.Add(this.filePathTextBox);
             this.Controls.Add(this.label2);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchAddVPNServerForm";
             this.Text = "批量添加";
             this.Controls.SetChildIndex(this.label2, 0);

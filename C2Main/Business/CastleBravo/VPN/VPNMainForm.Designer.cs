@@ -137,14 +137,14 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.单个添加ToolStripMenuItem.Enabled = false;
             this.单个添加ToolStripMenuItem.Name = "单个添加ToolStripMenuItem";
-            this.单个添加ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.单个添加ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
             this.单个添加ToolStripMenuItem.Text = "单个添加";
             this.单个添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
             // 
             // 批量添加ToolStripMenuItem
             // 
             this.批量添加ToolStripMenuItem.Name = "批量添加ToolStripMenuItem";
-            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
             this.批量添加ToolStripMenuItem.Text = "批量添加";
             this.批量添加ToolStripMenuItem.Click += new System.EventHandler(this.批量添加ToolStripMenuItem_Click);
             // 
@@ -152,7 +152,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
             this.查找ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
             this.查找ToolStripMenuItem.Text = "查找";
             this.查找ToolStripMenuItem.Click += new System.EventHandler(this.查找ToolStripMenuItem_Click);
             // 
@@ -393,29 +393,31 @@ namespace C2.Business.CastleBravo.VPN
             this.CopyToolStripMenuItem,
             this.SaveResultsMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(189, 226);
+            this.contextMenuStrip.Size = new System.Drawing.Size(241, 259);
             // 
             // EditToolStripMenuItem
             // 
+            this.EditToolStripMenuItem.Enabled = false;
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
             this.EditToolStripMenuItem.Text = "编辑";
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
             this.RemoveToolStripMenuItem.Text = "删除";
+            this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(237, 6);
             // 
             // CheckAliveSelectedItemMenuItem
             // 
             this.CheckAliveSelectedItemMenuItem.Name = "CheckAliveSelectedItemMenuItem";
-            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(240, 30);
             this.CheckAliveSelectedItemMenuItem.Text = "选定项验活";
             // 
             // DDMenuItem
@@ -424,7 +426,7 @@ namespace C2.Business.CastleBravo.VPN
             this.mysqlProbeToolStripMenuItem,
             this.随机探针ToolStripMenuItem});
             this.DDMenuItem.Name = "DDMenuItem";
-            this.DDMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.DDMenuItem.Size = new System.Drawing.Size(240, 30);
             this.DDMenuItem.Text = "主动探针";
             // 
             // mysqlProbeToolStripMenuItem
@@ -467,25 +469,28 @@ namespace C2.Business.CastleBravo.VPN
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(237, 6);
             // 
             // ClearAllToolStripMenuItem
             // 
             this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
             this.ClearAllToolStripMenuItem.Text = "全部清空";
+            this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(240, 30);
             this.CopyToolStripMenuItem.Text = "复制到剪切板";
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // SaveResultsMenuItem
             // 
             this.SaveResultsMenuItem.Name = "SaveResultsMenuItem";
-            this.SaveResultsMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.SaveResultsMenuItem.Size = new System.Drawing.Size(240, 30);
             this.SaveResultsMenuItem.Text = "导出结果";
+            this.SaveResultsMenuItem.Click += new System.EventHandler(this.SaveResultsMenuItem_Click);
             // 
             // statusStrip1
             // 
