@@ -128,17 +128,36 @@ namespace C2.Business.CastleBravo.VPN
             }
             return true;
         }
+
         private string[] GetSSLine(string[] array, string[] contentArray)
         {
-            string[] ipAndport = contentArray[1].Split('@');
-            if (ipAndport.Length < 2 || ipAndport[0].IsNullOrEmpty() || ipAndport[1].IsNullOrEmpty())
+            string info;
+            string ipAndport = string.Empty;
+            string methodAndPwd = string.Empty;
+            if (contentArray[1].Contains("#"))
+            {
+                info = GetBase64Str(contentArray[1].Split("#")[0]);
+                ipAndport = info.Split('@')[1];
+                methodAndPwd = info.Split('@')[0];
+            }
+            else if(contentArray[1].Contains("@"))
+            {
+                ipAndport = contentArray[1].Split('@')[1];
+                info = contentArray[1].Split('@')[0];
+                methodAndPwd = GetBase64Str(info);
+            }
+            if (methodAndPwd.Contains(":") == false && ipAndport.Contains(":") == false)
                 return array;
-            string methodAndPwd = Encoding.UTF8.GetString(Convert.FromBase64String(ipAndport[0]));
-            if (methodAndPwd.Contains(":") == false)
-                return array;
-            array[1] = string.Empty;
-            array[2] = ipAndport[1].Split(':')[0];
-            array[3] = ipAndport[1].Split(':')[1].Replace("/", string.Empty);
+            try
+            {
+                array[1] = HexDecode_16(contentArray[1].Split("#")[1].Split('-')[1].Replace("+",string.Empty));
+            }
+            catch
+            {
+                array[1] = string.Empty;
+            }
+            array[2] = ipAndport.Split(':')[0];
+            array[3] = ipAndport.Split(':')[1].Replace("/", string.Empty);
             array[4] = methodAndPwd.Split(':')[1];
             array[5] = methodAndPwd.Split(':')[0];
             array[7] = "Shadowsocks";
