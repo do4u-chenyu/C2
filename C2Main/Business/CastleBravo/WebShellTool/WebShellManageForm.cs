@@ -341,7 +341,8 @@ namespace C2.Business.CastleBravo.WebShellTool
                 return;
             ResetProgressMenuValue(LV.SelectedItems.Count);
             
-            ResetCheckCache(ResetTypeEnum.选中项验活);
+            using (WaitCursor)
+                ResetCheckCache(ResetTypeEnum.选中项验活);
             // 启动加速
             CheckAliveSpeedUpBackground();
 
@@ -355,7 +356,8 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
         {
             // 清空加速缓存
-            ResetCheckCache(ResetTypeEnum.重新开始);
+            using (WaitCursor)
+                ResetCheckCache(ResetTypeEnum.重新开始);
             // 启动加速
             CheckAliveSpeedUpBackground();
             DoCheckAliveAllMenuItemClick(false);
@@ -563,7 +565,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SecondeCheckAliveMenu_Click(object sender, EventArgs e)
         {
-            ResetCheckCache(ResetTypeEnum.二刷不活);
+            using (WaitCursor)
+                ResetCheckCache(ResetTypeEnum.二刷不活);
             // 启动加速
             CheckAliveSpeedUpBackground();
             SecondCheckAliveTaskStatus();
@@ -571,8 +574,9 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
-            // 清空加速缓存
-            ResetCheckCache(ResetTypeEnum.重新开始_境外站);
+            using (WaitCursor)
+                // 清空加速缓存
+                ResetCheckCache(ResetTypeEnum.重新开始_境外站);
             // 启动加速
             CheckAliveSpeedUpBackground();
             DoCheckAliveAllMenuItemClick(true);
@@ -832,7 +836,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResetCheckCache(ResetTypeEnum.继续上次);
+            using (WaitCursor)
+                ResetCheckCache(ResetTypeEnum.继续上次);
             // 启动加速
             CheckAliveSpeedUpBackground();
             DoCheckAliveContinue(false);
@@ -840,7 +845,8 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResetCheckCache(ResetTypeEnum.继续上次_境外);
+            using (WaitCursor)
+                ResetCheckCache(ResetTypeEnum.继续上次_境外);
             // 启动加速
             CheckAliveSpeedUpBackground();
             DoCheckAliveContinue(true);

@@ -87,6 +87,7 @@
     <DefineConstants>C2_Outer</DefineConstants>
     <Optimize>true</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'C2_Inner|AnyCPU'">
     <OutputPath>bin\C2_Inner\</OutputPath>

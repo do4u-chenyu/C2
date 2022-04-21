@@ -42,7 +42,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         public WebShellTaskConfig ShowDialog(WebShellTaskConfig task)
         {
-            this.wtc = task;
+            wtc = task;
             remarkTextBox.Text = task.Remark;
             urlTextBox.Text = task.Url;
             passwordTextBox.Text = task.Password;
