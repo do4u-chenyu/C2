@@ -16,27 +16,33 @@ namespace C2.Business.CastleBravo.VPN
         public string Status;          // 验活结果
         public string SSVersion;       // 服务器版本, 如 ss/ssr/vmess
         public string ProbeInfo;       // 探针信息
+        public string OtherInfo;       // 其他信息
         public string IP;              // IP地址
         public string Country;         // 归属地
 
-        public VPNTaskConfig()
-        {
+        public VPNTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
-        }
+        public VPNTaskConfig(string cTime, string remark, string host, string port, string pwd, string method, string status, string SSVersion, string probeinfo, string otherinfo, string ip, string c1)
+        : this(new string[] { cTime, remark, host, port, pwd, method, status, SSVersion, probeinfo, otherinfo, ip, c1})
+        { }
         public VPNTaskConfig(string[] array)
         {
-            CreateTime = array[0];
-            Remark = array[1];
-            Host = array[2];
-            Port = array[3];
-            Password = array[4];
-            Method = array[5];
-            Status = array[6];
-            SSVersion = array[7];
-            ProbeInfo = array[8];
-    
-            IP = array.Length > 9 ? array[9] : "0.0.0.0";
-            Country = array.Length > 10 ? array[10] : string.Empty;
+            if(array.Length > 9)
+            {
+                CreateTime = array[0];
+                Remark = array[1];
+                Host = array[2];
+                Port = array[3];
+                Password = array[4];
+                Method = array[5];
+                Status = array[6];
+                SSVersion = array[7];
+                ProbeInfo = array[8];
+                OtherInfo = array[9];
+            }
+
+            IP = array.Length > 10 ? array[10] : "0.0.0.0";
+            Country = array.Length > 11 ? array[11] : string.Empty;
         }
     }
 }

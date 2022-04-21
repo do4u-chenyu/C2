@@ -114,9 +114,10 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems.Add(config.Status);
             lvi.SubItems.Add(config.SSVersion);
             lvi.SubItems.Add(config.ProbeInfo);
-            lvi.SubItems.Add(config.Country);
+            lvi.SubItems.Add(config.OtherInfo);
             lvi.SubItems.Add(config.IP);
-
+            lvi.SubItems.Add(config.Country);
+            
             // 指针关联
             lvi.Tag = config;
             // 设置间隔行背景色
@@ -155,16 +156,17 @@ namespace C2.Business.CastleBravo.VPN
                 return;
 
             LV.SelectedItems[0].Tag = cur;
-            LV.SelectedItems[0].SubItems[1].Text = cur.Remark;     
-            LV.SelectedItems[0].SubItems[2].Text = cur.Host;       
-            LV.SelectedItems[0].SubItems[3].Text = cur.Port;       
-            LV.SelectedItems[0].SubItems[4].Text = cur.Password;   
+            LV.SelectedItems[0].SubItems[1].Text = cur.Remark;
+            LV.SelectedItems[0].SubItems[2].Text = cur.Host;
+            LV.SelectedItems[0].SubItems[3].Text = cur.Port;   
+            LV.SelectedItems[0].SubItems[4].Text = cur.Password; 
             LV.SelectedItems[0].SubItems[5].Text = cur.Method;
             LV.SelectedItems[0].SubItems[6].Text = cur.Status;
             LV.SelectedItems[0].SubItems[7].Text = cur.SSVersion;
-            LV.SelectedItems[0].SubItems[7].Text = cur.ProbeInfo;
-            LV.SelectedItems[0].SubItems[9].Text = cur.IP;         
-            LV.SelectedItems[0].SubItems[9].Text = cur.Country;    
+            LV.SelectedItems[0].SubItems[8].Text = cur.ProbeInfo;
+            LV.SelectedItems[0].SubItems[9].Text = cur.OtherInfo;
+            LV.SelectedItems[0].SubItems[10].Text = cur.IP;
+            LV.SelectedItems[0].SubItems[11].Text = cur.Country;
             // 按道理不会出现索引越界
             tasks[tasks.IndexOf(old)] = cur;
         }

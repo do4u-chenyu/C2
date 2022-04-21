@@ -86,6 +86,7 @@ namespace C2.Business.CastleBravo.VPN
             this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lvOtherInfo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -116,7 +117,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1153, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1253, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -305,6 +306,7 @@ namespace C2.Business.CastleBravo.VPN
             this.lvStatus,
             this.lvVersion,
             this.lvInfoCollection,
+            this.lvOtherInfo,
             this.lvIP,
             this.lvCountry});
             this.LV.ContextMenuStrip = this.contextMenuStrip;
@@ -319,7 +321,7 @@ namespace C2.Business.CastleBravo.VPN
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1153, 467);
+            this.LV.Size = new System.Drawing.Size(1253, 467);
             this.LV.TabIndex = 4;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -481,7 +483,7 @@ namespace C2.Business.CastleBravo.VPN
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CopyToolStripMenuItem.Text = "复制到剪切板";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
@@ -505,7 +507,7 @@ namespace C2.Business.CastleBravo.VPN
             this.statusStrip1.Location = new System.Drawing.Point(0, 461);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 32, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1153, 31);
+            this.statusStrip1.Size = new System.Drawing.Size(1253, 31);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 6;
             // 
@@ -540,11 +542,16 @@ namespace C2.Business.CastleBravo.VPN
             this.actionStatusLabel.Size = new System.Drawing.Size(44, 26);
             this.actionStatusLabel.Text = "未开始";
             // 
+            // lvOtherInfo
+            // 
+            this.lvOtherInfo.Text = "其他信息";
+            this.lvOtherInfo.Width = 100;
+            // 
             // VPNMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 492);
+            this.ClientSize = new System.Drawing.Size(1253, 492);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
@@ -626,5 +633,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem2;
+        private System.Windows.Forms.ColumnHeader lvOtherInfo;
     }
 }
