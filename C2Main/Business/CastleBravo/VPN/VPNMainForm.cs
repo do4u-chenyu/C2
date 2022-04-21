@@ -136,5 +136,25 @@ namespace C2.Business.CastleBravo.VPN
         {
 
         }
+
+        private void RemoveToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void ClearAllToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void SaveResultsMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
