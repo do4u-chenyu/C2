@@ -82,7 +82,7 @@ namespace C2.Business.CastleBravo.VPN
             //array[9] = NetUtil.GetHostAddresses(array[2]);
             //Application.DoEvents();
             //array[10] = NetUtil.IPQuery_WhoIs(array[9]);
-            //Application.DoEvents();
+
             Tasks.Add(new VPNTaskConfig(ST.NowString(),
                                         array[0],
                                         array[1],
