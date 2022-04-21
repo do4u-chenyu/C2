@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using C2.Core;
@@ -85,6 +86,20 @@ namespace C2.Utils
         {
             Uri uri = new Uri(FormatUrl(url));
             return uri.Host;
+        }
+
+        public static bool Ping(string ip, int timeout = 5)
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply pingReply = ping.Send(ip, timeout);
+                return pingReply.Status == IPStatus.Success;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private static string IPCheck(string ip)

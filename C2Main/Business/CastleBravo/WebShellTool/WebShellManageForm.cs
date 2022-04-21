@@ -355,11 +355,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
         {
+            
             // 清空加速缓存
-            using (WaitCursor)
-                ResetCheckCache(ResetTypeEnum.重新开始);
+            ResetCheckCache(ResetTypeEnum.重新开始);
             // 启动加速
             CheckAliveSpeedUpBackground();
+  
             DoCheckAliveAllMenuItemClick(false);
         }
 

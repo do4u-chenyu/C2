@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -256,12 +258,7 @@ namespace C2
         private void ModelMarketButton_Click(object sender, EventArgs e)
         {
             if (!modelMarketControl.Visible || isLeftViewPanelMinimum)
-            {
                 ShowLeftPanel(modelMarketButton, modelMarketControl);
-                //StartForm startForm = new StartForm();
-                //startForm.label5.Location += 187 ;
-                //startForm.test2();
-            }
         }
 
         private void MindMapButton_Click(object sender, EventArgs e)
@@ -332,9 +329,27 @@ namespace C2
                 LoadDataSource();
                 LoadIAOLaboratory();
                 LoadHIBU();
+                LoadHeadLine();
             }
         }
 
+        private void LoadHeadLine()
+        {
+            string v = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);
+            string d = ConfigUtil.TryGetAppSettingsByKey("BuildDay", string.Empty);
+            label2.Text = string.Format("{0}|编译日期:{1}|{2}", v, d, Program.LinceseDeadLineDesc());
+            if (v == "内网版")
+            {
+                Task.Run(() => {
+                    this.Invoke(new Action(() =>
+                    {
+                        bool b = NetUtil.Ping("8.8.8.8") && NetUtil.Ping("114.114.114.114");
+                        if (b)
+                            this.label2.Text = "能接入互联网|" + this.label2.Text;
+                    }));
+                });
+            }
+        }
         private void LoadFile()
         {
             using (GuarderUtil.WaitCursor)

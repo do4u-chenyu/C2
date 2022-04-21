@@ -19,12 +19,6 @@ namespace C2
         public const string DateTimeFormat = "yyyy年MM月dd号";
         public const string LinceseDeadLine = "2022年05月20号";
 
-        public static string HeadLineDesc()
-        {
-            string v = ConfigUtil.TryGetAppSettingsByKey("version",  string.Empty);
-            string b = ConfigUtil.TryGetAppSettingsByKey("BuildDay", string.Empty);
-            return string.Format("{0}|编译日期:{1}|{2}", v, b, LinceseDeadLineDesc());
-        }
         public static string LinceseDeadLineDesc()
         {
             return string.Format("本次迭代装备使用期截止到 {0}", LinceseDeadLine);

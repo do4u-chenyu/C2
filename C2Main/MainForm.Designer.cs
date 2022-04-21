@@ -148,7 +148,6 @@ namespace C2
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(251, 18);
             this.label2.TabIndex = 2;
-            this.label2.Text = Program.HeadLineDesc();
             // 
             // panel2
             // 
