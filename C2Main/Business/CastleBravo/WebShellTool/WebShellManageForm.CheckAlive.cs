@@ -37,10 +37,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         private int NumberOfThread { get => this.threadNumberButton.SelectedIndex; }
         // 并发验活缓存项
         // 加速原理: 开始前先根据验活场景构造待验活项缓存
-        //           主线程从前往后逐项验活
-        //           其他线程对缓存中记录从后往前N线程并发验活,并把结果记录入缓存
-        //           主线程每次验活前,先查看是否在缓存中此项是否已经被验过了
-        //           
+        //           加速线程对缓存中记录平均分配后并发验活,并把结果记录入缓存
+        //           主线程从前往后按老逻辑逐项验活    
+        //           主线程新增逻辑:每次验活前,先查看是否在缓存中此项是否已经被验过了
+        //                          如果命中缓存,则直接采用结果 
         // 因为并发验活涉及到层层反馈结果到界面更新,这样设计,改动最小
         private Dictionary<WebShellTaskConfig, CheckAliveResult> cache;
 

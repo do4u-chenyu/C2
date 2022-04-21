@@ -130,9 +130,7 @@ namespace C2.Utils
                 string country = match.Groups["country"].Value.Trim();
                 result = country;
             }
-            catch (Exception)
-            {
-            }
+            catch { }
             finally
             {
                 if (wrp != null)

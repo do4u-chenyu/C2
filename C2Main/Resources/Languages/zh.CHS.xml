@@ -451,7 +451,7 @@
     <item name="PwdGenerator">SG生成器</item>
     <item name="RobotsScan">(网)W特征素描</item>    
     <item name="WebScan">(网)W目录素描</item>
-    <item name="WebShell">(网)盗洞管理</item>
+    <item name="WebShell">(网)盗洞验活</item>
 	<item name="Intruder">(网)大马破门锤</item>
     <item name="VPN">(网)VPN专项</item>
     <item name="OCR">OCR</item>
