@@ -17,7 +17,7 @@ namespace C2
     {
         public const long OPEN_FILES_MESSAGE = 0x0999;
         public const string DateTimeFormat = "yyyy年MM月dd号";
-        public const string LinceseDeadLine = "2022年05月20号";
+        public const string LinceseDeadLine = "2022年06月01号";
 
         public static string LinceseDeadLineDesc()
         {

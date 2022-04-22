@@ -264,5 +264,19 @@ namespace C2.Business.CastleBravo.VPN
                     sw.Close();
             }
         }
+
+        private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            LVComparer c = LV.ListViewItemSorter as LVComparer;
+            c.col = e.Column;
+            c.asce = !c.asce;
+            using (WaitCursor)
+            using (new LayoutGuarder(LV))
+            {
+                LV.Sort();
+                RefreshTasks(false); // 回写任务, 速度慢, 将来要优化
+                //RefreshBackColor();  // 重新布局
+            }
+        }
     }
 }
