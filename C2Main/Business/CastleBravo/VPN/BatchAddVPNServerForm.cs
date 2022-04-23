@@ -182,12 +182,12 @@ namespace C2.Business.CastleBravo.VPN
             return sb.Length == 0 ? "\t\t\t\t\t\t".Split('\t') : sb.ToString().Split('\t');
         }
 
-        private string GetSSRLine(string content)
+        private string[] GetSSRLine(string content)
         {
             StringBuilder sb = new StringBuilder();
             string[] infoArray = GetBase64Str(content).Split(':');
             if (infoArray.Length < 6 || infoArray[0].IsNullOrEmpty() || infoArray[1].IsNullOrEmpty())
-                return sb.ToString();
+                return "\t\t\t\t\t\t".Split('\t');
             string remark = string.Empty;
             string otherinfo = string.Empty;
             
@@ -209,10 +209,10 @@ namespace C2.Business.CastleBravo.VPN
             sb.Append(GetBase64Str(infoArray[5]) + "\t");
             sb.Append(infoArray[3] + "\t");
             sb.Append(otherinfo + "\t");
-            return sb.ToString();
+            return sb.ToString().Split('\t');
         }
         
-        private string GetVmessLine(string content)
+        private string[] GetVmessLine(string content)
         {
             StringBuilder sb = new StringBuilder();
             string info;
@@ -220,7 +220,7 @@ namespace C2.Business.CastleBravo.VPN
             {
                 info = GetBase64Str(content.Split('?')[0]);
                 if (info.Split('@').Length < 2 || !info.Split('@')[0].Contains(":") || !info.Split('@')[0].Contains(":"))
-                    return sb.ToString();
+                    return "\t\t\t\t\t\t".Split('\t');
                 sb.Append(HexDecode(content.Split('?')[1].Split('&')[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty).Replace("\t", string.Empty)) + "\t");
                 sb.Append(info.Split('@')[1].Split(':')[0].Replace("/", string.Empty) + "\t");
                 sb.Append(info.Split('@')[1].Split(':')[1] + "\t");
@@ -252,14 +252,14 @@ namespace C2.Business.CastleBravo.VPN
                 }
             }
             
-            return sb.ToString();
+            return sb.ToString().Split('\t');
         }
-        private string GetVlessLine(string content)
+        private string[] GetVlessLine(string content)
         {
             StringBuilder sb = new StringBuilder();
             string[] infoArray = content.Split('?');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return sb.ToString();
+                return "\t\t\t\t\t\t".Split('\t');
 
             sb.Append(HexDecode(infoArray[1].Split('#')[1]).Replace("\t", string.Empty) + "\t");
             sb.Append(infoArray[0].Split('@')[1].Split(':')[0].Replace("/",string.Empty) + "\t");
@@ -268,15 +268,15 @@ namespace C2.Business.CastleBravo.VPN
             sb.Append(infoArray[1].Split('&')[0].Replace("encryption=", string.Empty) + "\t");
             sb.Append(string.Join(";", infoArray[1].Split('&')).Replace(infoArray[1].Split('&')[0]+";",string.Empty));
 
-            return sb.ToString();
+            return sb.ToString().Split('\t');
         }
 
-        private string GetTrojanLine(string content)
+        private string[] GetTrojanLine(string content)
         {
             StringBuilder sb = new StringBuilder();
             string[] infoArray = content.Split('#');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return sb.ToString();
+                return "\t\t\t\t\t\t".Split('\t');
             string ipAndport = infoArray[0].Split('@')[1];
             string otherInfo = string.Empty;
             if (infoArray[0].Contains("?"))
@@ -291,7 +291,7 @@ namespace C2.Business.CastleBravo.VPN
             sb.Append(string.Empty + "\t");
             sb.Append(otherInfo);
 
-            return sb.ToString();
+            return sb.ToString().Split('\t'); ;
         }
 
 
