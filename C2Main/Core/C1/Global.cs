@@ -261,5 +261,11 @@ namespace C2.Core
             { "/7W9Q8M2/CNWS2007A500S5/" , "WL"},
             { "1ZM4A2764MG", "XRC"}
         };
+
+        public static readonly string[] EmptyStringArray3 = { string.Empty, string.Empty, string.Empty };
+        public static readonly string[] EmptyStringArray4 = { string.Empty, string.Empty, string.Empty, string.Empty };
+        public static readonly string[] EmptyStringArray5 = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        public static readonly string[] EmptyStringArray6 = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+        public static readonly string[] EmptyStringArray7 = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
     }
 }

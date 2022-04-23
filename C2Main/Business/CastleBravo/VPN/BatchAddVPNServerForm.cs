@@ -79,7 +79,7 @@ namespace C2.Business.CastleBravo.VPN
             string version = mat.Groups[1].Value.ToLower();
             string content = mat.Groups[2].Value.Trim();
 
-            string[] infoArray = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty};
+            string[] infoArray = Global.EmptyStringArray6;
             switch (version)
             {
                 case "ss":
