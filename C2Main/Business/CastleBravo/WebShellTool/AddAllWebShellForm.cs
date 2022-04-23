@@ -52,7 +52,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
         protected override bool OnOKButtonClick()
         {
-            return (this.pasteModeCB.Checked ? GenTasksFromPaste() : GetTasksFromFile()) && base.OnOKButtonClick();
+            return (this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile()) && base.OnOKButtonClick();
         }
 
         private bool GenTasksFromPaste()
@@ -97,7 +97,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return WebShellTaskConfig.AutoDetectClientType(url, defaultVersion);
         }
 
-        private bool GetTasksFromFile()
+        private bool GenTasksFromFile()
         {
             Tasks.Clear();
 

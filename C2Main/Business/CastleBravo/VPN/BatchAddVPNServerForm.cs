@@ -52,7 +52,7 @@ namespace C2.Business.CastleBravo.VPN
 
         protected override bool OnOKButtonClick()
         {
-            return (this.pasteModeCB.Checked ? GenTasksFromPaste() : GetTasksFromFile()) && base.OnOKButtonClick();
+            return (this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile()) && base.OnOKButtonClick();
         }
 
         private bool GenTasksFromPaste()
@@ -72,27 +72,60 @@ namespace C2.Business.CastleBravo.VPN
 
         private void AddTasksByLine(string line)
         {
-            string[] contentArray = Regex.Split(line.Trim(new char[] { '\r', '\n' }), @"://");
-
-            if (contentArray.Length < 2 || contentArray[0].IsNullOrEmpty() || contentArray[1].IsNullOrEmpty())
+            Match mat = Regex.Match(line, @"^(?i)(ss|ssr|vmess|vless|trojan)(?-i)://(.+)$");
+            if (!mat.Success)
                 return;
-            string lineInfo = CheckLineInfo(contentArray);
+
+            string version = mat.Groups[1].Value.ToLower();
+            string content = mat.Groups[2].Value.Trim();
+
+            string info = string.Empty;
+            switch (version)
+            {
+                case "ss":
+                    info = GetSSLine(content);
+                    break;
+                case "ssr":
+                    info = GetSSRLine(content);
+                    break;
+                case "vmess":
+                    info = GetVmessLine(content);
+                    break;
+                case "vless":
+                    info = GetVlessLine(content);
+                    break;
+                case "trojan":
+                    info = GetTrojanLine(content);
+                    break;
+            }
+
+            string[] infoArray = info.Split('\t');
+
+            if (infoArray.Length < 6)
+                infoArray = new string[] { 
+                    content, 
+                    string.Empty, 
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty };
+
             Tasks.Add(new VPNTaskConfig(ST.NowString(),
-                                        lineInfo.Split('\t')[0].Replace(" ",string.Empty),
-                                        lineInfo.Split('\t')[1],
-                                        lineInfo.Split('\t')[2],
-                                        lineInfo.Split('\t')[3],
-                                        lineInfo.Split('\t')[4],
-                                        CheckAliveOneTaskAsyn(contentArray),
-                                        contentArray[0].ToUpper(),
-                                        "probeInfo",
-                                        lineInfo.Split('\t')[5],
+                                        infoArray[0].Trim(),
+                                        infoArray[1].Trim(),
+                                        infoArray[2].Trim(),
+                                        infoArray[3].Trim(),
+                                        infoArray[4].Trim(),
+                                        string.Empty,         // CheckAliveOneTaskAsyn(contentArray),
+                                        version.ToUpper(),
+                                        "探针结果:未测",
+                                        infoArray[5].Trim(),
                                         string.Empty,
                                         string.Empty
                                         ));
         }
 
-        private bool GetTasksFromFile()
+        private bool GenTasksFromFile()
         {
             Tasks.Clear();
 
@@ -106,7 +139,7 @@ namespace C2.Business.CastleBravo.VPN
                 using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 using (StreamReader sr = new StreamReader(fs, Encoding.Default))
                     for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
-                        AddTasksByLine(sr.ReadLine());
+                        AddTasksByLine(sr.ReadLine().Trim());
             }
             catch
             {
@@ -116,35 +149,9 @@ namespace C2.Business.CastleBravo.VPN
             return true;
         }
 
-        private string CheckLineInfo(string[] contentArray)
+        private string GetSSLine(string content)
         {
-            string info = string.Empty;
-            StringBuilder lineInfo = new StringBuilder();
-            switch (contentArray[0])
-            {
-                case "ss":
-                    info = GetSSLine(lineInfo, contentArray[1]);
-                    break;
-                case "ssr":
-                    info = GetSSRLine(lineInfo, contentArray[1]);
-                    break;
-                case "vmess":
-                    info = GetVmessLine(lineInfo, contentArray[1]);
-                    break;
-                case "vless":
-                    info = GetVlessLine(lineInfo, contentArray[1]);
-                    break;
-                case "trojan":
-                    info = GetTrojanLine(lineInfo, contentArray[1]);
-                    break;
-            }
-            if (info.Split('\t').Length < 6)
-                info = contentArray[1] + "\t" + string.Join("\t", new string[5]);               
-            return info;
-        }
-
-        private string GetSSLine(StringBuilder lineInfo, string content)
-        {
+            StringBuilder sb = new StringBuilder();
             string info;
             string ipAndport = string.Empty;
             string methodAndPwd = string.Empty;
@@ -154,7 +161,7 @@ namespace C2.Business.CastleBravo.VPN
                 if (ipAndport.Contains("#"))
                     ipAndport = ipAndport.Split('#')[0];
                 info = content.Split('@')[0];
-                methodAndPwd = GetBase64Str(info);
+                methodAndPwd = GetBase64Str(info); // 这一步
             }
             
             else if (content.Contains("#"))
@@ -166,29 +173,30 @@ namespace C2.Business.CastleBravo.VPN
                     methodAndPwd = info.Split('@')[0];
                 }
             }
-            if (methodAndPwd.Contains(":") == false && ipAndport.Contains(":") == false)
-                return lineInfo.ToString();
+            if (!methodAndPwd.Contains(":") && !ipAndport.Contains(":"))
+                return sb.ToString();
+
             try
             {
-                lineInfo.Append(HexDecode(content.Split("#")[1]).Replace("\t", string.Empty) + "\t");
+                sb.Append(HexDecode(content.Split("#")[1]).Replace("\t", string.Empty) + "\t");
             }
             catch
             {
-                lineInfo.Append(string.Empty + "\t");
+                sb.Append("\t");
             }
-            lineInfo.Append(ipAndport.Split(':')[0]+"\t");
-            lineInfo.Append(ipAndport.Split(':')[1].Replace("/", string.Empty) + "\t");
-            lineInfo.Append(methodAndPwd.Split(':')[1] + "\t");
-            lineInfo.Append(methodAndPwd.Split(':')[0] + "\t");
-            lineInfo.Append(string.Empty);
-            return lineInfo.ToString();
+            sb.Append(ipAndport.Split(':')[0] + "\t");
+            sb.Append(ipAndport.Split(':')[1].Replace("/", string.Empty) + "\t");
+            sb.Append(methodAndPwd.Split(':')[1] + "\t");
+            sb.Append(methodAndPwd.Split(':')[0] + "\t");
+            return sb.ToString();
         }
 
-        private string GetSSRLine(StringBuilder lineInfo, string content)
+        private string GetSSRLine(string content)
         {
+            StringBuilder sb = new StringBuilder();
             string[] infoArray = GetBase64Str(content).Split(':');
             if (infoArray.Length < 6 || infoArray[0].IsNullOrEmpty() || infoArray[1].IsNullOrEmpty())
-                return lineInfo.ToString();
+                return sb.ToString();
             string remark = string.Empty;
             string otherinfo = string.Empty;
             
@@ -204,29 +212,30 @@ namespace C2.Business.CastleBravo.VPN
                     infoArray[5] = infoArray[5].Split("/?")[0];
                 }
             }
-            lineInfo.Append(GetBase64Str(remark).Replace("\t", string.Empty) + "\t");
-            lineInfo.Append(infoArray[0] + "\t");
-            lineInfo.Append(infoArray[1] + "\t");
-            lineInfo.Append(GetBase64Str(infoArray[5]) + "\t");
-            lineInfo.Append(infoArray[3] + "\t");
-            lineInfo.Append(otherinfo + "\t");
-            return lineInfo.ToString();
+            sb.Append(GetBase64Str(remark).Replace("\t", string.Empty) + "\t");
+            sb.Append(infoArray[0] + "\t");
+            sb.Append(infoArray[1] + "\t");
+            sb.Append(GetBase64Str(infoArray[5]) + "\t");
+            sb.Append(infoArray[3] + "\t");
+            sb.Append(otherinfo + "\t");
+            return sb.ToString();
         }
         
-        private string GetVmessLine(StringBuilder lineInfo, string content)
+        private string GetVmessLine(string content)
         {
+            StringBuilder sb = new StringBuilder();
             string info;
             if (content.Contains("?"))
             {
                 info = GetBase64Str(content.Split('?')[0]);
                 if (info.Split('@').Length < 2 || !info.Split('@')[0].Contains(":") || !info.Split('@')[0].Contains(":"))
-                    return lineInfo.ToString();
-                lineInfo.Append(HexDecode(content.Split('?')[1].Split('&')[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty).Replace("\t", string.Empty)) + "\t");
-                lineInfo.Append(info.Split('@')[1].Split(':')[0].Replace("/", string.Empty) + "\t");
-                lineInfo.Append(info.Split('@')[1].Split(':')[1] + "\t");
-                lineInfo.Append(info.Split('@')[0].Split(':')[1] + "\t");
-                lineInfo.Append(info.Split('@')[0].Split(':')[0] + "\t");
-                lineInfo.Append(string.Join(";",content.Split('?')[1].Split('&')).Replace(content.Split('?')[1].Split('&')[0] + ";",string.Empty));
+                    return sb.ToString();
+                sb.Append(HexDecode(content.Split('?')[1].Split('&')[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty).Replace("\t", string.Empty)) + "\t");
+                sb.Append(info.Split('@')[1].Split(':')[0].Replace("/", string.Empty) + "\t");
+                sb.Append(info.Split('@')[1].Split(':')[1] + "\t");
+                sb.Append(info.Split('@')[0].Split(':')[1] + "\t");
+                sb.Append(info.Split('@')[0].Split(':')[0] + "\t");
+                sb.Append(string.Join(";",content.Split('?')[1].Split('&')).Replace(content.Split('?')[1].Split('&')[0] + ";",string.Empty));
             }
             else
             {
@@ -234,47 +243,49 @@ namespace C2.Business.CastleBravo.VPN
                 try
                 {
                     var dict = JsonConvert.DeserializeObject<Dictionary<object, object>>(info);
-                    lineInfo.Append(dict["ps"].ToString().Replace(" ", string.Empty).Replace("\t", string.Empty) + "\t");
-                    lineInfo.Append(dict["add"].ToString() + "\t");
-                    lineInfo.Append(dict["port"].ToString() + "\t");
-                    lineInfo.Append(dict["id"].ToString() + "\t");
-                    lineInfo.Append(dict["v"].ToString().Replace("2", "auto").Replace("0", "ase-128-gcm").Replace("1", "chacha20-poly1305") + "\t");
-                    lineInfo.Append(string.Empty);
+                    sb.Append(dict["ps"].ToString().Replace(" ", string.Empty).Replace("\t", string.Empty) + "\t");
+                    sb.Append(dict["add"].ToString() + "\t");
+                    sb.Append(dict["port"].ToString() + "\t");
+                    sb.Append(dict["id"].ToString() + "\t");
+                    sb.Append(dict["v"].ToString().Replace("2", "auto").Replace("0", "ase-128-gcm").Replace("1", "chacha20-poly1305") + "\t");
+                    sb.Append(string.Empty);
                 }
                 catch
                 {
-                    lineInfo.Append(info.Split(',')[0].Replace("\t", string.Empty) + "\t");
-                    lineInfo.Append(info.Split(',')[1] + "\t");
-                    lineInfo.Append(info.Split(',')[2] + "\t");
-                    lineInfo.Append(info.Split(',')[4] + "\t");
-                    lineInfo.Append(info.Split(',')[3] + "\t");
-                    lineInfo.Append(string.Empty);
+                    sb.Append(info.Split(',')[0].Replace("\t", string.Empty) + "\t");
+                    sb.Append(info.Split(',')[1] + "\t");
+                    sb.Append(info.Split(',')[2] + "\t");
+                    sb.Append(info.Split(',')[4] + "\t");
+                    sb.Append(info.Split(',')[3] + "\t");
+                    sb.Append(string.Empty);
                 }
             }
             
-            return lineInfo.ToString();
+            return sb.ToString();
         }
-        private string GetVlessLine(StringBuilder lineInfo, string content)
+        private string GetVlessLine(string content)
         {
+            StringBuilder sb = new StringBuilder();
             string[] infoArray = content.Split('?');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return lineInfo.ToString();
+                return sb.ToString();
 
-            lineInfo.Append(HexDecode(infoArray[1].Split('#')[1]).Replace("\t", string.Empty) + "\t");
-            lineInfo.Append(infoArray[0].Split('@')[1].Split(':')[0].Replace("/",string.Empty) + "\t");
-            lineInfo.Append(infoArray[0].Split('@')[1].Split(':')[1] + "\t");
-            lineInfo.Append(infoArray[0].Split('@')[0] + "\t");
-            lineInfo.Append(infoArray[1].Split('&')[0].Replace("encryption=", string.Empty) + "\t");
-            lineInfo.Append(string.Join(";", infoArray[1].Split('&')).Replace(infoArray[1].Split('&')[0]+";",string.Empty));
+            sb.Append(HexDecode(infoArray[1].Split('#')[1]).Replace("\t", string.Empty) + "\t");
+            sb.Append(infoArray[0].Split('@')[1].Split(':')[0].Replace("/",string.Empty) + "\t");
+            sb.Append(infoArray[0].Split('@')[1].Split(':')[1] + "\t");
+            sb.Append(infoArray[0].Split('@')[0] + "\t");
+            sb.Append(infoArray[1].Split('&')[0].Replace("encryption=", string.Empty) + "\t");
+            sb.Append(string.Join(";", infoArray[1].Split('&')).Replace(infoArray[1].Split('&')[0]+";",string.Empty));
 
-            return lineInfo.ToString();
+            return sb.ToString();
         }
 
-        private string GetTrojanLine(StringBuilder lineInfo, string content)
+        private string GetTrojanLine(string content)
         {
+            StringBuilder sb = new StringBuilder();
             string[] infoArray = content.Split('#');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return lineInfo.ToString();
+                return sb.ToString();
             string ipAndport = infoArray[0].Split('@')[1];
             string otherInfo = string.Empty;
             if (infoArray[0].Contains("?"))
@@ -282,14 +293,14 @@ namespace C2.Business.CastleBravo.VPN
                 otherInfo = ipAndport.Split('?')[1];
                 ipAndport = ipAndport.Split('?')[0];
             }
-            lineInfo.Append(HexDecode(infoArray[1]).Replace("+", string.Empty).Replace("\t", string.Empty) + "\t");
-            lineInfo.Append(ipAndport.Split(':')[0] + "\t");
-            lineInfo.Append(ipAndport.Split(':')[1] + "\t");
-            lineInfo.Append(infoArray[0].Split('@')[0] + "\t");
-            lineInfo.Append(string.Empty + "\t");
-            lineInfo.Append(otherInfo);
+            sb.Append(HexDecode(infoArray[1]).Replace("+", string.Empty).Replace("\t", string.Empty) + "\t");
+            sb.Append(ipAndport.Split(':')[0] + "\t");
+            sb.Append(ipAndport.Split(':')[1] + "\t");
+            sb.Append(infoArray[0].Split('@')[0] + "\t");
+            sb.Append(string.Empty + "\t");
+            sb.Append(otherInfo);
 
-            return lineInfo.ToString();
+            return sb.ToString();
         }
 
 
