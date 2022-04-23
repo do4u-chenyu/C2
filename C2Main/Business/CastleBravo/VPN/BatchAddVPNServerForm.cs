@@ -79,36 +79,25 @@ namespace C2.Business.CastleBravo.VPN
             string version = mat.Groups[1].Value.ToLower();
             string content = mat.Groups[2].Value.Trim();
 
-            string info = string.Empty;
+            string[] infoArray = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty};
             switch (version)
             {
                 case "ss":
-                    info = GetSSLine(content);
+                    infoArray = GetSSLine(content);
                     break;
                 case "ssr":
-                    info = GetSSRLine(content);
+                    infoArray = GetSSRLine(content);
                     break;
                 case "vmess":
-                    info = GetVmessLine(content);
+                    infoArray = GetVmessLine(content);
                     break;
                 case "vless":
-                    info = GetVlessLine(content);
+                    infoArray = GetVlessLine(content);
                     break;
                 case "trojan":
-                    info = GetTrojanLine(content);
+                    infoArray = GetTrojanLine(content);
                     break;
             }
-
-            string[] infoArray = info.Split('\t');
-
-            if (infoArray.Length < 6)
-                infoArray = new string[] { 
-                    content, 
-                    string.Empty, 
-                    string.Empty,
-                    string.Empty,
-                    string.Empty,
-                    string.Empty };
 
             Tasks.Add(new VPNTaskConfig(ST.NowString(),
                                         infoArray[0].Trim(),
@@ -149,7 +138,7 @@ namespace C2.Business.CastleBravo.VPN
             return true;
         }
 
-        private string GetSSLine(string content)
+        private string[] GetSSLine(string content)
         {
             StringBuilder sb = new StringBuilder();
             string info;
@@ -173,22 +162,24 @@ namespace C2.Business.CastleBravo.VPN
                     methodAndPwd = info.Split('@')[0];
                 }
             }
-            if (!methodAndPwd.Contains(":") && !ipAndport.Contains(":"))
-                return sb.ToString();
 
-            try
+            if (methodAndPwd.Contains(":") || ipAndport.Contains(":"))
             {
-                sb.Append(HexDecode(content.Split("#")[1]).Replace("\t", string.Empty) + "\t");
+                try
+                {
+                    sb.Append(HexDecode(content.Split("#")[1]).Replace("\t", string.Empty) + "\t");
+                }
+                catch
+                {
+                    sb.Append("\t");
+                }
+                sb.Append(ipAndport.Split(':')[0]).Append('\t');
+                sb.Append(ipAndport.Split(':')[1].Replace("/", string.Empty) + "\t");
+                sb.Append(methodAndPwd.Split(':')[1] + "\t");
+                sb.Append(methodAndPwd.Split(':')[0] + "\t");
             }
-            catch
-            {
-                sb.Append("\t");
-            }
-            sb.Append(ipAndport.Split(':')[0] + "\t");
-            sb.Append(ipAndport.Split(':')[1].Replace("/", string.Empty) + "\t");
-            sb.Append(methodAndPwd.Split(':')[1] + "\t");
-            sb.Append(methodAndPwd.Split(':')[0] + "\t");
-            return sb.ToString();
+
+            return sb.Length == 0 ? "\t\t\t\t\t\t".Split('\t') : sb.ToString().Split('\t');
         }
 
         private string GetSSRLine(string content)
