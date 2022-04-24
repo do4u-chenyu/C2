@@ -581,14 +581,28 @@ namespace C2.Core
 
         public static string TryDecodeBase64(string code)
         {
+            string ret;
             try
-            {
-                return DecodeBase64(code);
+            { 
+                switch (4 - code.Length % 4)
+                {
+                    case 3:
+                        ret = DecodeBase64(code + "===");
+                        break;
+                    case 2:
+                        ret = DecodeBase64(code + "==");
+                        break;
+                    case 1:
+                        ret = DecodeBase64(code + "=");
+                        break;
+                    case 0:
+                    default:
+                        ret = DecodeBase64(code);
+                        break;
+                }
             }
-            catch
-            {
-                return string.Empty;
-            }
+            catch { ret =  string.Empty; }
+            return ret;
         }
 
         public static byte[] DecodeBase64ToBytes(string code)

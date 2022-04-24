@@ -262,6 +262,7 @@ namespace C2.Core
             { "1ZM4A2764MG", "XRC"}
         };
 
+        public static readonly string[] EmptyStringArray2 = { string.Empty, string.Empty };
         public static readonly string[] EmptyStringArray3 = { string.Empty, string.Empty, string.Empty };
         public static readonly string[] EmptyStringArray4 = { string.Empty, string.Empty, string.Empty, string.Empty };
         public static readonly string[] EmptyStringArray5 = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };

@@ -79,36 +79,36 @@ namespace C2.Business.CastleBravo.VPN
             string version = mat.Groups[1].Value.ToLower();
             string content = mat.Groups[2].Value.Trim();
 
-            string[] infoArray = Global.EmptyStringArray6;
+            string[] array = Global.EmptyStringArray6;
             switch (version)
             {
                 case "ss":
-                    infoArray = GetSSLine(content);
+                    array = GetSSLine(content);
                     break;
                 case "ssr":
-                    infoArray = GetSSRLine(content);
+                    array = GetSSRLine(content);
                     break;
                 case "vmess":
-                    infoArray = GetVmessLine(content);
+                    array = GetVmessLine(content);
                     break;
                 case "vless":
-                    infoArray = GetVlessLine(content);
+                    array = GetVlessLine(content);
                     break;
                 case "trojan":
-                    infoArray = GetTrojanLine(content);
+                    array = GetTrojanLine(content);
                     break;
             }
 
             Tasks.Add(new VPNTaskConfig(ST.NowString(),
-                                        infoArray[0].Trim(),
-                                        infoArray[1].Trim(),
-                                        infoArray[2].Trim(),
-                                        infoArray[3].Trim(),
-                                        infoArray[4].Trim(),
-                                        string.Empty,         // CheckAliveOneTaskAsyn(contentArray),
+                                        array[0].Trim(),
+                                        array[1].Trim(),
+                                        array[2].Trim(),
+                                        array[3].Trim(),
+                                        array[4].Trim(),
+                                        string.Empty,       // CheckAliveOneTaskAsyn(contentArray),
                                         version.ToUpper(),
                                         "探针结果:未测",
-                                        infoArray[5].Trim(),
+                                        array.Length > 5 ? array[5].Trim(): string.Empty,
                                         string.Empty,
                                         string.Empty
                                         ));
@@ -138,57 +138,88 @@ namespace C2.Business.CastleBravo.VPN
             return true;
         }
 
-        private string[] GetSSLine(string content)
+        private string[] GetSSLine(string value)
         {
-            StringBuilder sb = new StringBuilder();
-            string info;
-            string ipAndport = string.Empty;
-            string methodAndPwd = string.Empty;
-            if (content.Contains("@"))
+            // 第一步: url解码
+            value = ST.UrlDecode(value);
+            // 第二步: 按#分割, 取出remark
+            string[] array = value.Split("#");
+            string remark = array.Length > 1 ? array[1] : string.Empty;
+            // 第三步: 按@分割, 取出base64和地址信息
+            array = array[0].Split("@");
+            string addr = array.Length > 1 ? array[1] : string.Empty;
+            // 第四步: base64解码
+            value = ST.TryDecodeBase64(array[0]);
+            // 如果addr为空则从base64中补充addr
+            if (addr.IsNullOrEmpty())
             {
-                ipAndport = content.Split('@')[1];
-                if (ipAndport.Contains("#"))
-                    ipAndport = ipAndport.Split('#')[0];
-                info = content.Split('@')[0];
-                methodAndPwd = GetBase64Str(info); // 这一步
+                array = value.Split("@");
+                addr = array.Length > 1 ? array[1] : addr;
+                value = array[0];
             }
-
-            else if (content.Contains("#"))
-            {
-                info = GetBase64Str(content.Split("#")[0]);
-                if (info.Contains("@"))
-                {
-                    ipAndport = info.Split('@')[1];
-                    methodAndPwd = info.Split('@')[0];
-                }
-            }
-
-            if (methodAndPwd.Contains(":") || ipAndport.Contains(":"))
-            {
-                try
-                {
-                    sb.Append(StrFormatted(HexDecode(content.Split("#")[1])));
-                }
-                catch
-                {
-                    sb.Append("\t");
-                }
-                sb.Append(ipAndport.Split(':')[0]).Append('\t')
-                  .Append(ipAndport.Split(':')[1].Replace("/", string.Empty)).Append('\t')
-                  .Append(methodAndPwd.Split(':')[1]).Append('\t')
-                  .Append(methodAndPwd.Split(':')[0]).Append('\t')
-                  .Append('\t');
-            }
-
-            return sb.Length == 0 ? "\t\t\t\t\t\t".Split('\t') : sb.ToString().Split('\t');
+            // 第五步: addr中分割IP和端口
+            array = addr.Split(":");
+            addr = array[0];
+            string port = array.Length > 1 ? array[1] : string.Empty;
+            // 第六步: method和password分割
+            array = value.Split(":");
+            string method = array[0];
+            string pass = array.Length > 1 ? array[1] : string.Empty;
+            // 第七步: 返回构造数组
+            return new string[] { addr , port , method , pass , remark };
         }
+
+        //private string[] GetSSLine(string content)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    string info;
+        //    string ipAndport = string.Empty;
+        //    string methodAndPwd = string.Empty;
+        //    if (content.Contains("@"))
+        //    {
+        //        ipAndport = content.Split('@')[1];
+        //        if (ipAndport.Contains("#"))
+        //            ipAndport = ipAndport.Split('#')[0];
+        //        info = content.Split('@')[0];
+        //        methodAndPwd = DecodeBase64String(info); // 这一步
+        //    }
+
+        //    else if (content.Contains("#"))
+        //    {
+        //        info = DecodeBase64String(content.Split("#")[0]);
+        //        if (info.Contains("@"))
+        //        {
+        //            ipAndport = info.Split('@')[1];
+        //            methodAndPwd = info.Split('@')[0];
+        //        }
+        //    }
+
+        //    if (methodAndPwd.Contains(":") || ipAndport.Contains(":"))
+        //    {
+        //        try
+        //        {
+        //            sb.Append(StrFormatted(HexDecode(content.Split("#")[1])));
+        //        }
+        //        catch
+        //        {
+        //            sb.Append("\t");
+        //        }
+        //        sb.Append(ipAndport.Split(':')[0]).Append('\t')
+        //          .Append(ipAndport.Split(':')[1].Replace("/", string.Empty)).Append('\t')
+        //          .Append(methodAndPwd.Split(':')[1]).Append('\t')
+        //          .Append(methodAndPwd.Split(':')[0]).Append('\t')
+        //          .Append('\t');
+        //    }
+
+        //    return sb.Length == 0 ? Global.EmptyStringArray6 : sb.ToString().Split('\t');
+        //}
 
         private string[] GetSSRLine(string content)
         {
             StringBuilder sb = new StringBuilder();
-            string[] infoArray = GetBase64Str(content).Split(':');
+            string[] infoArray = DecodeBase64String(content).Split(':');
             if (infoArray.Length < 6 || infoArray[0].IsNullOrEmpty() || infoArray[1].IsNullOrEmpty())
-                return "\t\t\t\t\t\t".Split('\t');
+                return Global.EmptyStringArray6;
 
             string remark = string.Empty;
             StringBuilder otherinfo = new StringBuilder();
@@ -200,17 +231,17 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     remark = otherArray[2].Replace("remarks=", string.Empty).Replace("-", "+").Replace("_", "+");
                     otherinfo.Append("协议=" + infoArray[2])
-                             .Append(";协议参数=" + GetBase64Str(otherArray[1].Replace("protoparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
+                             .Append(";协议参数=" + DecodeBase64String(otherArray[1].Replace("protoparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
                              .Append(";混淆=" + infoArray[4])
-                             .Append(";混淆参数=" + GetBase64Str(otherArray[0].Replace("obfsparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
-                             .Append(";Group=" + GetBase64Str(otherArray[3].Replace("group=", string.Empty).Replace("-", "+").Replace("_", "+")));
+                             .Append(";混淆参数=" + DecodeBase64String(otherArray[0].Replace("obfsparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
+                             .Append(";Group=" + DecodeBase64String(otherArray[3].Replace("group=", string.Empty).Replace("-", "+").Replace("_", "+")));
                     infoArray[5] = infoArray[5].Split("/?")[0];
                 }
             }
-            sb.Append(StrFormatted(GetBase64Str(remark)))
+            sb.Append(StrFormatted(DecodeBase64String(remark)))
               .Append(infoArray[0]).Append('\t')
               .Append(infoArray[1]).Append('\t')
-              .Append(GetBase64Str(infoArray[5])).Append('\t')
+              .Append(DecodeBase64String(infoArray[5])).Append('\t')
               .Append(infoArray[3]).Append('\t')
               .Append(otherinfo);
             return sb.ToString().Split('\t');
@@ -222,10 +253,10 @@ namespace C2.Business.CastleBravo.VPN
             string info;
             if (content.Contains("?"))
             {
-                info = GetBase64Str(content.Split('?')[0]);
+                info = DecodeBase64String(content.Split('?')[0]);
                 string[] array = info.Split('@');
                 if (array.Length < 2 || !array[0].Contains(":") || !array[1].Contains(":"))
-                    return "\t\t\t\t\t\t".Split('\t');
+                    return Global.EmptyStringArray6;
 
                 string[] contentArray = content.Split('?')[1].Split('&');
                 string remark = HexDecode(contentArray[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty));
@@ -239,7 +270,7 @@ namespace C2.Business.CastleBravo.VPN
             }
             else
             {
-                info = GetBase64Str(content);
+                info = DecodeBase64String(content);
                 try
                 {
                     var dict = JsonUtil.JsonToDictionary(info);
@@ -267,7 +298,7 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     string[] array = info.Split(", ");
                     if (array.Length < 5)
-                        return "\t\t\t\t\t\t".Split('\t');
+                        return Global.EmptyStringArray6;
 
                     string[] arrCopy = new string[array.Length - 5];
                     Array.Copy(array, 5, arrCopy, 0, array.Length - 5);
@@ -288,7 +319,7 @@ namespace C2.Business.CastleBravo.VPN
             StringBuilder sb = new StringBuilder();
             string[] infoArray = content.Split('?');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return "\t\t\t\t\t\t".Split('\t');
+                return Global.EmptyStringArray6;
 
             string[] array0 = infoArray[0].Split('@');
             string[] array1 = infoArray[1].Split('&');
@@ -308,7 +339,7 @@ namespace C2.Business.CastleBravo.VPN
             StringBuilder sb = new StringBuilder();
             string[] infoArray = content.Split('#');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return "\t\t\t\t\t\t".Split('\t');
+                return Global.EmptyStringArray6;
 
             string ipAndport = infoArray[0].Split('@')[1];
             string otherInfo = string.Empty;
@@ -329,7 +360,7 @@ namespace C2.Business.CastleBravo.VPN
         }
 
 
-        public string GetBase64Str(string base64Str)
+        public string DecodeBase64String(string base64Str)
         {
             string info = string.Empty;
             base64Str = Uri.UnescapeDataString(Uri.UnescapeDataString(Uri.UnescapeDataString(base64Str)));
