@@ -173,10 +173,11 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     sb.Append("\t");
                 }
-                sb.Append(StrFormatted(ipAndport.Split(':')[0]));
-                sb.Append(StrFormatted(ipAndport.Split(':')[1].Replace("/", string.Empty)));
-                sb.Append(StrFormatted(methodAndPwd.Split(':')[1]));
-                sb.Append(StrFormatted(methodAndPwd.Split(':')[0]));
+                sb.Append(ipAndport.Split(':')[0]).Append('\t')
+                  .Append(ipAndport.Split(':')[1].Replace("/", string.Empty)).Append('\t')
+                  .Append(methodAndPwd.Split(':')[1]).Append('\t')
+                  .Append(methodAndPwd.Split(':')[0]).Append('\t')
+                  .Append('\t');
             }
 
             return sb.Length == 0 ? "\t\t\t\t\t\t".Split('\t') : sb.ToString().Split('\t');
@@ -188,8 +189,9 @@ namespace C2.Business.CastleBravo.VPN
             string[] infoArray = GetBase64Str(content).Split(':');
             if (infoArray.Length < 6 || infoArray[0].IsNullOrEmpty() || infoArray[1].IsNullOrEmpty())
                 return "\t\t\t\t\t\t".Split('\t');
+
             string remark = string.Empty;
-            string otherinfo = string.Empty;
+            StringBuilder otherinfo = new StringBuilder();
 
             if (infoArray[5].Contains("/?"))
             {
@@ -197,18 +199,20 @@ namespace C2.Business.CastleBravo.VPN
                 if (otherArray.Length == 4)
                 {
                     remark = otherArray[2].Replace("remarks=", string.Empty).Replace("-", "+").Replace("_", "+");
-                    otherinfo = "协议=" + infoArray[2] + ";协议参数=" + GetBase64Str(otherArray[1].Replace("protoparam=", string.Empty).Replace("-", "+").Replace("_", "+"))
-                                + ";混淆=" + infoArray[4] + ";混淆参数=" + GetBase64Str(otherArray[0].Replace("obfsparam=", string.Empty).Replace("-", "+").Replace("_", "+"))
-                                + ";Group=" + GetBase64Str(otherArray[3].Replace("group=", string.Empty).Replace("-", "+").Replace("_", "+"));
+                    otherinfo.Append("协议=" + infoArray[2])
+                             .Append(";协议参数=" + GetBase64Str(otherArray[1].Replace("protoparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
+                             .Append(";混淆=" + infoArray[4])
+                             .Append(";混淆参数=" + GetBase64Str(otherArray[0].Replace("obfsparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
+                             .Append(";Group=" + GetBase64Str(otherArray[3].Replace("group=", string.Empty).Replace("-", "+").Replace("_", "+")));
                     infoArray[5] = infoArray[5].Split("/?")[0];
                 }
             }
-            sb.Append(StrFormatted(GetBase64Str(remark)));
-            sb.Append(StrFormatted(infoArray[0]));
-            sb.Append(StrFormatted(infoArray[1]));
-            sb.Append(StrFormatted(GetBase64Str(infoArray[5])));
-            sb.Append(StrFormatted(infoArray[3]));
-            sb.Append(otherinfo);
+            sb.Append(StrFormatted(GetBase64Str(remark)))
+              .Append(infoArray[0]).Append('\t')
+              .Append(infoArray[1]).Append('\t')
+              .Append(GetBase64Str(infoArray[5])).Append('\t')
+              .Append(infoArray[3]).Append('\t')
+              .Append(otherinfo);
             return sb.ToString().Split('\t');
         }
 
@@ -219,14 +223,19 @@ namespace C2.Business.CastleBravo.VPN
             if (content.Contains("?"))
             {
                 info = GetBase64Str(content.Split('?')[0]);
-                if (info.Split('@').Length < 2 || !info.Split('@')[0].Contains(":") || !info.Split('@')[0].Contains(":"))
+                string[] array = info.Split('@');
+                if (array.Length < 2 || !array[0].Contains(":") || !array[1].Contains(":"))
                     return "\t\t\t\t\t\t".Split('\t');
-                sb.Append(StrFormatted(HexDecode(content.Split('?')[1].Split('&')[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty))));
-                sb.Append(StrFormatted(info.Split('@')[1].Split(':')[0].Replace("/", string.Empty)));
-                sb.Append(StrFormatted(info.Split('@')[1].Split(':')[1]));
-                sb.Append(StrFormatted(info.Split('@')[0].Split(':')[1]));
-                sb.Append(StrFormatted(info.Split('@')[0].Split(':')[0]));
-                sb.Append(string.Join(";", content.Split('?')[1].Split('&')).Replace(content.Split('?')[1].Split('&')[0] + ";", string.Empty));
+
+                string[] contentArray = content.Split('?')[1].Split('&');
+                string remark = HexDecode(contentArray[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty));
+                
+                sb.Append(StrFormatted(remark))
+                  .Append(array[1].Split(':')[0].Replace("/", string.Empty)).Append('\t')
+                  .Append(array[1].Split(':')[1]).Append('\t')
+                  .Append(array[0].Split(':')[1]).Append('\t')
+                  .Append(array[0].Split(':')[0]).Append('\t')
+                  .Append(string.Join(";", contentArray).Replace(contentArray[0] + ";", string.Empty));
             }
             else
             {
@@ -234,24 +243,41 @@ namespace C2.Business.CastleBravo.VPN
                 try
                 {
                     var dict = JsonUtil.JsonToDictionary(info);
-                    sb.Append(dict["ps"]  ).Append('\t')
-                      .Append(dict["add"] ).Append('\t')
-                      .Append(dict["port"]).Append('\t')
-                      .Append(dict["id"]  ).Append('\t')
-                      .Append(dict["v"] == "0" ? "ase-128-gcm" :
-                              dict["v"] == "1" ? "chacha20-poly1305" :
-                                                 "auto")
-                      .Append('\t');
+                    StringBuilder otherInfo = new StringBuilder();
+                    List<string> ootherInfoList = new List<string> { "host", "type", "path", "tls", "net", "aid", "verify_cert", "class", "headerType"};
+                    foreach(string otherInfoKey in ootherInfoList)
+                    {
+                        if (dict.ContainsKey(otherInfoKey))
+                            otherInfo.Append(string.Format("{0}={1};", otherInfoKey, dict[otherInfoKey]));
+                    }
+                    List<string> infoList = new List<string> { "ps", "add", "port", "id", "v"};
+
+                    foreach (string infoKey in infoList)
+                    {
+                        if (dict.ContainsKey(infoKey) && infoKey == "v")
+                            sb.Append(StrFormatted(dict["v"] == "2" ? "auto" : dict["v"])); //这个字段不确定
+                        else if(dict.ContainsKey(infoKey))
+                             sb.Append(StrFormatted(dict[infoKey]));
+                        else
+                            sb.Append("\t");
+                    }
+                    sb.Append(otherInfo.ToString());
                 }
                 catch
                 {
-                    string[] array = info.Split(',');
-                    sb.Append(array[0]).Append('\t')
+                    string[] array = info.Split(", ");
+                    if (array.Length < 5)
+                        return "\t\t\t\t\t\t".Split('\t');
+
+                    string[] arrCopy = new string[array.Length - 5];
+                    Array.Copy(array, 5, arrCopy, 0, array.Length - 5);
+                    
+                    sb.Append(StrFormatted(array[0]))
                       .Append(array[1]).Append('\t')
                       .Append(array[2]).Append('\t')
                       .Append(array[4]).Append('\t')
-                      .Append(array[3]).Append('\t');
- 
+                      .Append(array[3]).Append('\t')
+                      .Append(string.Join(";", arrCopy));
                 }
             }
 
@@ -264,12 +290,15 @@ namespace C2.Business.CastleBravo.VPN
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
                 return "\t\t\t\t\t\t".Split('\t');
 
-            sb.Append(StrFormatted(HexDecode(infoArray[1].Split('#')[1])));
-            sb.Append(StrFormatted(infoArray[0].Split('@')[1].Split(':')[0].Replace("/", string.Empty)));
-            sb.Append(StrFormatted(infoArray[0].Split('@')[1].Split(':')[1]));
-            sb.Append(StrFormatted(infoArray[0].Split('@')[0]));
-            sb.Append(StrFormatted(infoArray[1].Split('&')[0].Replace("encryption=", string.Empty)));
-            sb.Append(string.Join(";", infoArray[1].Split('&')).Replace(infoArray[1].Split('&')[0] + ";", string.Empty));
+            string[] array0 = infoArray[0].Split('@');
+            string[] array1 = infoArray[1].Split('&');
+
+            sb.Append(StrFormatted(HexDecode(infoArray[1].Split('#')[1])))
+             .Append(array0[1].Split(':')[0].Replace("/", string.Empty)).Append('\t')
+             .Append(array0[1].Split(':')[1]).Append('\t')
+             .Append(array0[0]).Append('\t')
+             .Append(array1[0].Replace("encryption=", string.Empty)).Append('\t')
+             .Append(string.Join(";", array1).Replace(array1[0] + ";", string.Empty));
 
             return sb.ToString().Split('\t');
         }
@@ -280,6 +309,7 @@ namespace C2.Business.CastleBravo.VPN
             string[] infoArray = content.Split('#');
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
                 return "\t\t\t\t\t\t".Split('\t');
+
             string ipAndport = infoArray[0].Split('@')[1];
             string otherInfo = string.Empty;
             if (infoArray[0].Contains("?"))
@@ -287,12 +317,13 @@ namespace C2.Business.CastleBravo.VPN
                 otherInfo = ipAndport.Split('?')[1];
                 ipAndport = ipAndport.Split('?')[0];
             }
-            sb.Append(StrFormatted(HexDecode(infoArray[1]).Replace("+", string.Empty)));
-            sb.Append(StrFormatted(ipAndport.Split(':')[0]));
-            sb.Append(StrFormatted(ipAndport.Split(':')[1]));
-            sb.Append(StrFormatted(infoArray[0].Split('@')[0]));
-            sb.Append(StrFormatted(string.Empty));
-            sb.Append(otherInfo);
+
+            sb.Append(StrFormatted(HexDecode(infoArray[1]).Replace("+", string.Empty)))
+             .Append(ipAndport.Split(':')[0]).Append('\t')
+             .Append(ipAndport.Split(':')[1]).Append('\t')
+             .Append(infoArray[0].Split('@')[0]).Append('\t')
+             .Append(string.Empty).Append('\t')
+             .Append(otherInfo);
 
             return sb.ToString().Split('\t'); ;
         }
@@ -373,7 +404,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private string StrFormatted(string input)
         {
-            if (input.Contains("\t"))
+            if (input!=null && input.Contains("\t"))
                 input = input.Replace("\t", string.Empty);
             return string.Format("{0}{1}",input,"\t");
         }

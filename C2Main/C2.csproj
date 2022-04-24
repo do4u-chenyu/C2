@@ -1157,6 +1157,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Utils\InvokeUtil.cs" />
+    <Compile Include="Utils\JsonUtil.cs" />
     <Compile Include="Utils\NetUtil.cs" />
     <Compile Include="Utils\RandomUtil.cs" />
     <Compile Include="Utils\GenericSingleton.cs" />

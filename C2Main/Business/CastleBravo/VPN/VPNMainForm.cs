@@ -245,7 +245,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void SaveResultToLocal(string path)
         {
-            StreamWriter sw = new StreamWriter(path, false);
+            StreamWriter sw = new StreamWriter(path, false, Encoding.GetEncoding("gb2312"));
             try
             {
                 List<string> tmpLists = new List<string>();
