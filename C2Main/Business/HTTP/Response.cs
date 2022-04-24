@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using C2.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +35,7 @@ namespace C2.Business.HTTP
         {
             this.response = resp;
             this.content = GetContent();
-            this.resDict = JsonToDictionary(this.content);
+            this.resDict = JsonUtil.JsonToDictionary(this.content);
             this.statusCode = GetStatusCode();
 
         }
@@ -72,13 +73,6 @@ namespace C2.Business.HTTP
                     reader.Close();
             }
             return content;
-        }
-        private Dictionary<string, string> JsonToDictionary(string jsonStr)
-        {
-            if (string.IsNullOrEmpty(jsonStr))
-                return new Dictionary<string, string>();
-
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonStr);
         }
     }
 }

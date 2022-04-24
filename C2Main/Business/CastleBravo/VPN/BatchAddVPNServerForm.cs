@@ -233,22 +233,24 @@ namespace C2.Business.CastleBravo.VPN
                 info = GetBase64Str(content);
                 try
                 {
-                    var dict = JsonConvert.DeserializeObject<Dictionary<object, object>>(info);
-                    sb.Append(dict["ps"].ToString().Replace(" ", string.Empty).Replace("\t", string.Empty) + "\t");
-                    sb.Append(dict["add"].ToString() + "\t");
-                    sb.Append(dict["port"].ToString() + "\t");
-                    sb.Append(dict["id"].ToString() + "\t");
-                    sb.Append(dict["v"].ToString().Replace("2", "auto").Replace("0", "ase-128-gcm").Replace("1", "chacha20-poly1305") + "\t");
-                    sb.Append(string.Empty);
+                    var dict = JsonUtil.JsonToDictionary(info);
+                    sb.Append(dict["ps"]  ).Append('\t')
+                      .Append(dict["add"] ).Append('\t')
+                      .Append(dict["port"]).Append('\t')
+                      .Append(dict["id"]  ).Append('\t')
+                      .Append(dict["v"] == "0" ? "ase-128-gcm" :
+                              dict["v"] == "1" ? "chacha20-poly1305" :
+                                                 "auto")
+                      .Append('\t');
                 }
                 catch
                 {
-                    sb.Append(info.Split(',')[0].Replace("\t", string.Empty) + "\t");
-                    sb.Append(info.Split(',')[1] + "\t");
-                    sb.Append(info.Split(',')[2] + "\t");
-                    sb.Append(info.Split(',')[4] + "\t");
-                    sb.Append(info.Split(',')[3] + "\t");
-                    sb.Append(string.Empty);
+                    string[] array = info.Split(',');
+                    sb.Append(array[0]).Append('\t')
+                      .Append(array[1]).Append('\t')
+                      .Append(array[2]).Append('\t')
+                      .Append(array[4]).Append('\t')
+                      .Append(array[3]).Append('\t');
                 }
             }
             
