@@ -152,7 +152,7 @@ namespace C2.Business.CastleBravo.VPN
                 info = content.Split('@')[0];
                 methodAndPwd = GetBase64Str(info); // 这一步
             }
-            
+
             else if (content.Contains("#"))
             {
                 info = GetBase64Str(content.Split("#")[0]);
@@ -167,16 +167,16 @@ namespace C2.Business.CastleBravo.VPN
             {
                 try
                 {
-                    sb.Append(HexDecode(content.Split("#")[1]).Replace("\t", string.Empty) + "\t");
+                    sb.Append(StrFormatted(HexDecode(content.Split("#")[1])));
                 }
                 catch
                 {
                     sb.Append("\t");
                 }
-                sb.Append(ipAndport.Split(':')[0]).Append('\t');
-                sb.Append(ipAndport.Split(':')[1].Replace("/", string.Empty) + "\t");
-                sb.Append(methodAndPwd.Split(':')[1] + "\t");
-                sb.Append(methodAndPwd.Split(':')[0] + "\t");
+                sb.Append(StrFormatted(ipAndport.Split(':')[0]));
+                sb.Append(StrFormatted(ipAndport.Split(':')[1].Replace("/", string.Empty)));
+                sb.Append(StrFormatted(methodAndPwd.Split(':')[1]));
+                sb.Append(StrFormatted(methodAndPwd.Split(':')[0]));
             }
 
             return sb.Length == 0 ? "\t\t\t\t\t\t".Split('\t') : sb.ToString().Split('\t');
@@ -190,7 +190,7 @@ namespace C2.Business.CastleBravo.VPN
                 return "\t\t\t\t\t\t".Split('\t');
             string remark = string.Empty;
             string otherinfo = string.Empty;
-            
+
             if (infoArray[5].Contains("/?"))
             {
                 string[] otherArray = infoArray[5].Split("/?")[1].Split('&');
@@ -203,15 +203,15 @@ namespace C2.Business.CastleBravo.VPN
                     infoArray[5] = infoArray[5].Split("/?")[0];
                 }
             }
-            sb.Append(GetBase64Str(remark).Replace("\t", string.Empty) + "\t");
-            sb.Append(infoArray[0] + "\t");
-            sb.Append(infoArray[1] + "\t");
-            sb.Append(GetBase64Str(infoArray[5]) + "\t");
-            sb.Append(infoArray[3] + "\t");
-            sb.Append(otherinfo + "\t");
+            sb.Append(StrFormatted(GetBase64Str(remark)));
+            sb.Append(StrFormatted(infoArray[0]));
+            sb.Append(StrFormatted(infoArray[1]));
+            sb.Append(StrFormatted(GetBase64Str(infoArray[5])));
+            sb.Append(StrFormatted(infoArray[3]));
+            sb.Append(otherinfo);
             return sb.ToString().Split('\t');
         }
-        
+
         private string[] GetVmessLine(string content)
         {
             StringBuilder sb = new StringBuilder();
@@ -221,37 +221,83 @@ namespace C2.Business.CastleBravo.VPN
                 info = GetBase64Str(content.Split('?')[0]);
                 if (info.Split('@').Length < 2 || !info.Split('@')[0].Contains(":") || !info.Split('@')[0].Contains(":"))
                     return "\t\t\t\t\t\t".Split('\t');
-                sb.Append(HexDecode(content.Split('?')[1].Split('&')[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty).Replace("\t", string.Empty)) + "\t");
-                sb.Append(info.Split('@')[1].Split(':')[0].Replace("/", string.Empty) + "\t");
-                sb.Append(info.Split('@')[1].Split(':')[1] + "\t");
-                sb.Append(info.Split('@')[0].Split(':')[1] + "\t");
-                sb.Append(info.Split('@')[0].Split(':')[0] + "\t");
-                sb.Append(string.Join(";",content.Split('?')[1].Split('&')).Replace(content.Split('?')[1].Split('&')[0] + ";",string.Empty));
+                sb.Append(StrFormatted(HexDecode(content.Split('?')[1].Split('&')[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty))));
+                sb.Append(StrFormatted(info.Split('@')[1].Split(':')[0].Replace("/", string.Empty)));
+                sb.Append(StrFormatted(info.Split('@')[1].Split(':')[1]));
+                sb.Append(StrFormatted(info.Split('@')[0].Split(':')[1]));
+                sb.Append(StrFormatted(info.Split('@')[0].Split(':')[0]));
+                sb.Append(string.Join(";", content.Split('?')[1].Split('&')).Replace(content.Split('?')[1].Split('&')[0] + ";", string.Empty));
             }
             else
             {
                 info = GetBase64Str(content);
                 try
                 {
-                    var dict = JsonConvert.DeserializeObject<Dictionary<object, object>>(info);
-                    sb.Append(dict["ps"].ToString().Replace(" ", string.Empty).Replace("\t", string.Empty) + "\t");
-                    sb.Append(dict["add"].ToString() + "\t");
-                    sb.Append(dict["port"].ToString() + "\t");
-                    sb.Append(dict["id"].ToString() + "\t");
-                    sb.Append(dict["v"].ToString().Replace("2", "auto").Replace("0", "ase-128-gcm").Replace("1", "chacha20-poly1305") + "\t");
-                    sb.Append(string.Empty);
+                    var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(info);
+                    //"host":"tha01.hntgxxjc.com",
+                    //"path":"/v2ray",
+                    // "tls":"",
+                    // "verify_cert":true,
+                    // "add":"teshuzz.jfjfhg.com",
+                    // "port":16009,
+                    // "aid":0,
+                    // "net":"ws",
+                    // "headerType":"none",
+                    // "v":"2",
+                    // "type":"vmess",
+                    // "ps":"特殊-V207-0.6倍-泰国*\t",
+                    // "remark":"特殊-V207-0.6倍-泰国*\t",
+                    // "id":"05386a49-688a-3796-8da6-d5af4d4c54f1",
+                    // "class":3}
+
+                    StringBuilder otherInfo = new StringBuilder();
+                    if (dict.ContainsKey("host"))
+                        otherInfo.Append("伪装域名=" + dict["host"]);
+                    if (dict.ContainsKey("type"))
+                        otherInfo.Append(";type=" + dict["type"]); //有时候是客户端类型，有时候是伪装类型
+                    if (dict.ContainsKey("path"))
+                        otherInfo.Append(";路径=" + dict["path"]);
+                    if (dict.ContainsKey("tls"))
+                        otherInfo.Append(";传输层安全=" + dict["tls"]);
+                    if (dict.ContainsKey("net"))
+                        otherInfo.Append(";传输协议=" + dict["net"]);
+                    if (dict.ContainsKey("aid"))
+                        otherInfo.Append(";额外ID=" + dict["aid"]);
+                    if (dict.ContainsKey("verify_cert"))
+                        otherInfo.Append(";verify_cert=" + dict["verify_cert"]);  //这三个字段不知道干嘛的
+                    if (dict.ContainsKey("class"))
+                        otherInfo.Append(";class=" + dict["class"]);   //这三个字段不知道干嘛的
+                    if (dict.ContainsKey("headerType"))
+                        otherInfo.Append(";headerType=" + dict["headerType"]);   //这三个字段不知道干嘛的
+                    if (dict.ContainsKey("ps"))
+                        sb.Append(StrFormatted(dict["ps"].ToString().Replace(" ", string.Empty)));
+                    else
+                        sb.Append("\t");
+                    sb.Append(StrFormatted(dict["add"].ToString()));
+                    sb.Append(StrFormatted(dict["port"].ToString()));
+                    sb.Append(StrFormatted(dict["id"].ToString()));
+                    if (dict.ContainsKey("v"))
+                        sb.Append(StrFormatted(dict["v"].ToString().Replace("2", "auto").Replace("0", "ase-128-gcm").Replace("1", "chacha20-poly1305"))); //这个字段不确定
+                    else
+                        sb.Append("\t");
+                    sb.Append(otherInfo.ToString());
                 }
                 catch
                 {
-                    sb.Append(info.Split(',')[0].Replace("\t", string.Empty) + "\t");
-                    sb.Append(info.Split(',')[1] + "\t");
-                    sb.Append(info.Split(',')[2] + "\t");
-                    sb.Append(info.Split(',')[4] + "\t");
-                    sb.Append(info.Split(',')[3] + "\t");
-                    sb.Append(string.Empty);
+                    string[] infoArray = info.Split(", ");
+                    if (infoArray.Length < 5)
+                        return "\t\t\t\t\t\t".Split('\t');
+                    string[] arrCopy = new string[infoArray.Length - 5];
+                    Array.Copy(infoArray, 5, arrCopy, 0, infoArray.Length - 5);
+                    sb.Append(StrFormatted(infoArray[0]));
+                    sb.Append(StrFormatted(infoArray[1]));
+                    sb.Append(StrFormatted(infoArray[2]));
+                    sb.Append(StrFormatted(infoArray[4]));
+                    sb.Append(StrFormatted(infoArray[3]));
+                    sb.Append(string.Join(";", arrCopy));
                 }
             }
-            
+
             return sb.ToString().Split('\t');
         }
         private string[] GetVlessLine(string content)
@@ -261,12 +307,12 @@ namespace C2.Business.CastleBravo.VPN
             if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
                 return "\t\t\t\t\t\t".Split('\t');
 
-            sb.Append(HexDecode(infoArray[1].Split('#')[1]).Replace("\t", string.Empty) + "\t");
-            sb.Append(infoArray[0].Split('@')[1].Split(':')[0].Replace("/",string.Empty) + "\t");
-            sb.Append(infoArray[0].Split('@')[1].Split(':')[1] + "\t");
-            sb.Append(infoArray[0].Split('@')[0] + "\t");
-            sb.Append(infoArray[1].Split('&')[0].Replace("encryption=", string.Empty) + "\t");
-            sb.Append(string.Join(";", infoArray[1].Split('&')).Replace(infoArray[1].Split('&')[0]+";",string.Empty));
+            sb.Append(StrFormatted(HexDecode(infoArray[1].Split('#')[1])));
+            sb.Append(StrFormatted(infoArray[0].Split('@')[1].Split(':')[0].Replace("/", string.Empty)));
+            sb.Append(StrFormatted(infoArray[0].Split('@')[1].Split(':')[1]));
+            sb.Append(StrFormatted(infoArray[0].Split('@')[0]));
+            sb.Append(StrFormatted(infoArray[1].Split('&')[0].Replace("encryption=", string.Empty)));
+            sb.Append(string.Join(";", infoArray[1].Split('&')).Replace(infoArray[1].Split('&')[0] + ";", string.Empty));
 
             return sb.ToString().Split('\t');
         }
@@ -284,11 +330,11 @@ namespace C2.Business.CastleBravo.VPN
                 otherInfo = ipAndport.Split('?')[1];
                 ipAndport = ipAndport.Split('?')[0];
             }
-            sb.Append(HexDecode(infoArray[1]).Replace("+", string.Empty).Replace("\t", string.Empty) + "\t");
-            sb.Append(ipAndport.Split(':')[0] + "\t");
-            sb.Append(ipAndport.Split(':')[1] + "\t");
-            sb.Append(infoArray[0].Split('@')[0] + "\t");
-            sb.Append(string.Empty + "\t");
+            sb.Append(StrFormatted(HexDecode(infoArray[1]).Replace("+", string.Empty)));
+            sb.Append(StrFormatted(ipAndport.Split(':')[0]));
+            sb.Append(StrFormatted(ipAndport.Split(':')[1]));
+            sb.Append(StrFormatted(infoArray[0].Split('@')[0]));
+            sb.Append(StrFormatted(string.Empty));
             sb.Append(otherInfo);
 
             return sb.ToString().Split('\t'); ;
@@ -300,7 +346,11 @@ namespace C2.Business.CastleBravo.VPN
             string info = string.Empty;
             base64Str = Uri.UnescapeDataString(Uri.UnescapeDataString(Uri.UnescapeDataString(base64Str)));
             if (IsBase64Formatted(base64Str))
-                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str));
+                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str)); 
+            else if (IsBase64Formatted(base64Str + "="))
+                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str + "="));
+            else if (IsBase64Formatted(base64Str + "=="))
+                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str + "=="));
             else
             {
                 int baseLengh = base64Str.Length;
@@ -330,38 +380,7 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
-        private string HexDecode_16(string str)
-        {
-            str = str.Replace("%", string.Empty);
-            string resStr = string.Empty;
-            if (str.Length % 2 != 0)
-            {
-                resStr = str.Substring(str.Length - 1);
-                str = str.Substring(0, str.Length - 1);
-            } 
-            byte[] arrByte = new byte[str.Length / 2];
-            string notByteStr = string.Empty;
-            int index = 0;
-            
-            for (int i = 0; i < str.Length; i += 2)
-            {
-                try
-                {
-                    arrByte[index] = Convert.ToByte(str.Substring(i, 2), 16);
-                    index++;
-                }
-                catch
-                {
-                    notByteStr += str.Substring(i, str.Length-i);
-                    break;
-                }
-            }
-            byte[] arrByteCopy = new byte[index];
-            Array.Copy(arrByte, arrByteCopy, index);
-            str = Encoding.UTF8.GetString(arrByteCopy) + notByteStr + resStr;
-            return str;
-        }
-
+        
         private string HexDecode(string str)
         {
             StringBuilder headStr = new StringBuilder();
@@ -390,10 +409,16 @@ namespace C2.Business.CastleBravo.VPN
                 arrByte[index] = Convert.ToByte(content[i], 16);
                 index++;
             }
-            //arrByte[content.Length - 2] = Convert.ToByte(content[content.Length-1].Substring(0, 2), 16);
-            //notByteStr += content[content.Length-1].Substring(2, content[content.Length-1].Length - 2);
+
             str = headStr.ToString() + Encoding.UTF8.GetString(arrByte) + notByteStr.ToString().Replace("+",string.Empty);
             return str;
+        }
+
+        private string StrFormatted(string input)
+        {
+            if (input.Contains("\t"))
+                input = input.Replace("\t", string.Empty);
+            return string.Format("{0}{1}",input,"\t");
         }
 
         private string CheckAliveOneTaskAsyn(string[] array)
