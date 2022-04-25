@@ -186,7 +186,7 @@ namespace C2.Business.CastleBravo.VPN
             string protoparam = array.Length > 2 ? array[2] : string.Empty;
             string method     = array.Length > 3 ? array[3] : string.Empty;
             string obfsparam  = array.Length > 4 ? array[4] : string.Empty;
-            string password   = array.Length > 5 ? ST.TryDecodeBase64(array[5]) : string.Empty;
+            string password   = array.Length > 5 ? TryDecodeBase64(array[5]) : string.Empty;
             string other      = string.Format("协议={0};混淆={1};", protoparam, obfsparam);
 
             if (right.IsNullOrEmpty())
