@@ -4,6 +4,7 @@ using C2.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -83,19 +84,19 @@ namespace C2.Business.CastleBravo.VPN
             switch (version)
             {
                 case "ss":
-                    array = GetSSLine(content);
+                    array = GenSSLine(content);
                     break;
                 case "ssr":
-                    array = GetSSRLine(content);
+                    array = GenSSRLine(content);
                     break;
                 case "vmess":
-                    array = GetVmessLine(content);
+                    array = GenVmessLine(content);
                     break;
                 case "vless":
-                    array = GetVlessLine(content);
+                    array = GenVlessLine(content);
                     break;
                 case "trojan":
-                    array = GetTrojanLine(content);
+                    array = GenTrojanLine(content);
                     break;
             }
 
@@ -138,13 +139,13 @@ namespace C2.Business.CastleBravo.VPN
             return true;
         }
 
-        private string[] GetSSLine(string value)
+        private string[] GenSSLine(string value)
         {
             // 第一步: url解码
             value = ST.UrlDecode(value);
             // 第二步: 按#分割, 取出remark
             string[] array = value.Split("#");
-            string remark = array.Length > 1 ? array[1] : string.Empty;
+            string remarks = array.Length > 1 ? array[1] : string.Empty;
             // 第三步: 按@分割, 取出base64和地址信息
             array = array[0].Split("@");
             string addr = array.Length > 1 ? array[1] : string.Empty;
@@ -166,88 +167,59 @@ namespace C2.Business.CastleBravo.VPN
             string method = array[0];
             string pass = array.Length > 1 ? array[1] : string.Empty;
             // 第七步: 返回构造数组
-            return new string[] { addr , port , method , pass , remark };
+            return new string[] { remarks, addr, port, pass, method };
         }
 
-        //private string[] GetSSLine(string content)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    string info;
-        //    string ipAndport = string.Empty;
-        //    string methodAndPwd = string.Empty;
-        //    if (content.Contains("@"))
-        //    {
-        //        ipAndport = content.Split('@')[1];
-        //        if (ipAndport.Contains("#"))
-        //            ipAndport = ipAndport.Split('#')[0];
-        //        info = content.Split('@')[0];
-        //        methodAndPwd = DecodeBase64String(info); // 这一步
-        //    }
-
-        //    else if (content.Contains("#"))
-        //    {
-        //        info = DecodeBase64String(content.Split("#")[0]);
-        //        if (info.Contains("@"))
-        //        {
-        //            ipAndport = info.Split('@')[1];
-        //            methodAndPwd = info.Split('@')[0];
-        //        }
-        //    }
-
-        //    if (methodAndPwd.Contains(":") || ipAndport.Contains(":"))
-        //    {
-        //        try
-        //        {
-        //            sb.Append(StrFormatted(HexDecode(content.Split("#")[1])));
-        //        }
-        //        catch
-        //        {
-        //            sb.Append("\t");
-        //        }
-        //        sb.Append(ipAndport.Split(':')[0]).Append('\t')
-        //          .Append(ipAndport.Split(':')[1].Replace("/", string.Empty)).Append('\t')
-        //          .Append(methodAndPwd.Split(':')[1]).Append('\t')
-        //          .Append(methodAndPwd.Split(':')[0]).Append('\t')
-        //          .Append('\t');
-        //    }
-
-        //    return sb.Length == 0 ? Global.EmptyStringArray6 : sb.ToString().Split('\t');
-        //}
-
-        private string[] GetSSRLine(string content)
+        private string[] GenSSRLine(string value)
         {
+            value = ST.UrlDecode(value);
+            value = value.Replace("_", "/").Replace("-", "+");   // 
+            value = ST.TryDecodeBase64(value);
+            string[] array = value.Split("/?");
+
+            string former = array[0];
+            string latter = array.Length > 1 ? array[1] : string.Empty;
+            string[] formerParams = former.Split(":");
+
+            string remarks = string.Empty;
+            string addr = formerParams[0];
+            string port = formerParams.Length > 1 ? formerParams[1] : string.Empty;
+            string proto = formerParams.Length > 2 ? formerParams[2] : string.Empty;
+            string method = formerParams.Length > 3 ? formerParams[3] : string.Empty;
+            string obscure = formerParams.Length > 4 ? formerParams[4] : string.Empty;
+            string passWord = formerParams.Length > 5 ? ST.TryDecodeBase64(formerParams[5]) : string.Empty;
+
             StringBuilder sb = new StringBuilder();
-            string[] infoArray = DecodeBase64String(content).Split(':');
-            if (infoArray.Length < 6 || infoArray[0].IsNullOrEmpty() || infoArray[1].IsNullOrEmpty())
-                return Global.EmptyStringArray6;
+            sb.Append("协议=" + proto + ";")
+              .Append("混淆=" + obscure + ";");
 
-            string remark = string.Empty;
-            StringBuilder otherinfo = new StringBuilder();
+            string otherInfo = sb.ToString();
+            if (latter.IsNullOrEmpty())
+                return new string[] { remarks, addr, port, passWord, method, otherInfo };
 
-            if (infoArray[5].Contains("/?"))
+            try
             {
-                string[] otherArray = infoArray[5].Split("/?")[1].Split('&');
-                if (otherArray.Length == 4)
+                NameValueCollection latterParams = NetUtil.ParseQueryStringUTF8(latter);
+                List<string> paramList = new List<string> { "remarks", "protoparam", "obfsparam", "group" };
+                for(int i=0;i< paramList.Count;i++)
                 {
-                    remark = otherArray[2].Replace("remarks=", string.Empty).Replace("-", "+").Replace("_", "+");
-                    otherinfo.Append("协议=" + infoArray[2])
-                             .Append(";协议参数=" + DecodeBase64String(otherArray[1].Replace("protoparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
-                             .Append(";混淆=" + infoArray[4])
-                             .Append(";混淆参数=" + DecodeBase64String(otherArray[0].Replace("obfsparam=", string.Empty).Replace("-", "+").Replace("_", "+")))
-                             .Append(";Group=" + DecodeBase64String(otherArray[3].Replace("group=", string.Empty).Replace("-", "+").Replace("_", "+")));
-                    infoArray[5] = infoArray[5].Split("/?")[0];
+                    paramList[i] = latterParams[paramList[i]].Replace("_", "/").Replace("-", "+");
+                    paramList[i] = ST.TryDecodeBase64(paramList[i]);
                 }
+
+                sb.Append("协议参数=" + paramList[1] + ";")
+                  .Append("混淆参数=" + paramList[2] + ";")
+                  .Append("Group=" + paramList[3] + ";");
+
+                remarks = paramList[0];
+                otherInfo = sb.ToString();
             }
-            sb.Append(StrFormatted(DecodeBase64String(remark)))
-              .Append(infoArray[0]).Append('\t')
-              .Append(infoArray[1]).Append('\t')
-              .Append(DecodeBase64String(infoArray[5])).Append('\t')
-              .Append(infoArray[3]).Append('\t')
-              .Append(otherinfo);
-            return sb.ToString().Split('\t');
+            catch { }
+
+            return new string[] { remarks, addr, port, passWord, method, otherInfo };
         }
 
-        private string[] GetVmessLine(string content)
+        private string[] GenVmessLine(string content)
         {
             StringBuilder sb = new StringBuilder();
             string info;
@@ -314,51 +286,67 @@ namespace C2.Business.CastleBravo.VPN
 
             return sb.ToString().Split('\t');
         }
-        private string[] GetVlessLine(string content)
+        private string[] GenVlessLine(string value)
         {
+
+            value = ST.UrlDecode(value);
+            string[] array = value.Split("#");
+
+            string remarks = array.Length > 1 ? array[1] : string.Empty;
+            array = array[0].Split("?");
+
+            string method = string.Empty;
             StringBuilder sb = new StringBuilder();
-            string[] infoArray = content.Split('?');
-            if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return Global.EmptyStringArray6;
+            string info = array.Length > 1 ? array[1] : string.Empty;
 
-            string[] array0 = infoArray[0].Split('@');
-            string[] array1 = infoArray[1].Split('&');
-
-            sb.Append(StrFormatted(HexDecode(infoArray[1].Split('#')[1])))
-             .Append(array0[1].Split(':')[0].Replace("/", string.Empty)).Append('\t')
-             .Append(array0[1].Split(':')[1]).Append('\t')
-             .Append(array0[0]).Append('\t')
-             .Append(array1[0].Replace("encryption=", string.Empty)).Append('\t')
-             .Append(string.Join(";", array1).Replace(array1[0] + ";", string.Empty));
-
-            return sb.ToString().Split('\t');
-        }
-
-        private string[] GetTrojanLine(string content)
-        {
-            StringBuilder sb = new StringBuilder();
-            string[] infoArray = content.Split('#');
-            if (infoArray.Length < 2 || !infoArray[0].Contains("@") || !infoArray[0].Contains(":"))
-                return Global.EmptyStringArray6;
-
-            string ipAndport = infoArray[0].Split('@')[1];
-            string otherInfo = string.Empty;
-            if (infoArray[0].Contains("?"))
+            if (!info.IsNullOrEmpty())
             {
-                otherInfo = ipAndport.Split('?')[1];
-                ipAndport = ipAndport.Split('?')[0];
+                NameValueCollection latterParams = NetUtil.ParseQueryStringUTF8(info);
+
+                List<string> paramList = new List<string> { "type", "security", "path", "headerType" };
+                foreach (string param in paramList)
+                    sb.Append(string.Format("{0}={1};", param, latterParams[param]));
+                method = latterParams["encryption"];
             }
 
-            sb.Append(StrFormatted(HexDecode(infoArray[1]).Replace("+", string.Empty)))
-             .Append(ipAndport.Split(':')[0]).Append('\t')
-             .Append(ipAndport.Split(':')[1]).Append('\t')
-             .Append(infoArray[0].Split('@')[0]).Append('\t')
-             .Append(string.Empty).Append('\t')
-             .Append(otherInfo);
+            array = array[0].Split(":");
+            string port = array.Length > 1 ? array[1] : string.Empty;
 
-            return sb.ToString().Split('\t'); ;
+            array = array[0].Split("@");
+            string pass = array[0];
+
+            string addr = array.Length > 1 ? array[1] : string.Empty;
+            addr = addr.Replace("/", string.Empty);
+            string otherInfo = sb.ToString();
+
+            return new string[] { remarks, addr, port, pass, method, otherInfo };
+
         }
 
+        private string[] GenTrojanLine(string value)
+        {
+            value = ST.UrlDecode(value);
+            
+            string[] array = value.Split("#");
+            string remarks = array.Length > 1 ? array[1] : string.Empty;
+
+            array = array[0].Split("?");
+            string otherInfo = array.Length > 1 ? array[1] : string.Empty;
+
+            array = array[0].Split(":");
+            string port = array.Length > 1 ? array[1] : string.Empty;
+
+            array = array[0].Split("@");
+            string pass = array[0];
+
+            string addr = array.Length > 1 ? array[1] : string.Empty;
+            addr = addr.Replace("/", string.Empty);
+            string method = string.Empty;
+
+            return new string[] { remarks, addr, port, pass, method, otherInfo };
+        }
+
+        
 
         public string DecodeBase64String(string base64Str)
         {
