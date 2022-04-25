@@ -22,7 +22,7 @@ namespace C2.IAOLab.BaseAddress
         public String BaseAddressLocate(string input)
         {
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
-                return null;
+                return string.Empty;
 
             string jsonLat = string.Empty;
             string jsonLng = string.Empty;

@@ -24,11 +24,11 @@ namespace C2.IAOLab.BankTool
         {
 
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
-                return null;
+                return string.Empty;
             foreach (var i in input)//检测输入是否为纯数字
             {
                 if (!char.IsDigit(i))
-                    return null;
+                    return string.Empty;
             }
             string location = GetBankTool(input);
             return string.Format("{0}{1}{2}{3}", input, "\t", location, "\n");

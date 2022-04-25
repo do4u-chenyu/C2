@@ -29,7 +29,7 @@ namespace C2.IAOLab.BaseAddress
         public String WebUrlLocate(string input)
         {
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP" || input == "备案号" || input == string.Empty)
-                return null;
+                return string.Empty;
             reverseAddress = GetLocation(input.Trim());
             contentICP = Content(input.Trim());
             return string.Format("{0}\t{1}\t{2}\n", input, reverseAddress, contentICP);
