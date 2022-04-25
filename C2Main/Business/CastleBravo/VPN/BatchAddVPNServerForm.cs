@@ -204,73 +204,85 @@ namespace C2.Business.CastleBravo.VPN
             return new string[] { remarks, addr, port, pass, method, other };
         }
 
-        private string[] GenVmessLine(string content)
+        private string[] GenVmessLine(string value)
         {
+            value = ST.UrlDecode(value);
+
+            string[] array = value.Split("?");
+            string left  = TryDecodeBase64(array[0]);
+            string right = array.Length > 1 ? array[1] : string.Empty;
+
+            string remarks = string.Empty;
+            string addr    = string.Empty;
+            string port    = string.Empty;
+            string pass    = string.Empty;
+            string method  = string.Empty;
+            string other   = string.Empty;
             StringBuilder sb = new StringBuilder();
-            string info;
-            if (content.Contains("?"))
-            {
-                info = DecodeBase64String(content.Split('?')[0]);
-                string[] array = info.Split('@');
-                if (array.Length < 2 || !array[0].Contains(":") || !array[1].Contains(":"))
-                    return Global.EmptyStringArray6;
 
-                string[] contentArray = content.Split('?')[1].Split('&');
-                string remark = HexDecode(contentArray[0].Replace("remarks=", string.Empty).Replace("remark=", string.Empty));
+            if (!right.IsNullOrEmpty()) //第一种情况，remark和其他信息在？后面
+            {
+                string content = right.Split('&')[0];
+                remarks = content.Contains("=") ? content.Split('=')[1] : remarks;
+
+                content += "&";
+                other   = right.Replace(content, string.Empty); //不确定其他信息有几个字段,除了remark都是
+
+                array = left.Split('@');
+                string methodAndPass = array[0];
+                string addrAndPort   = array.Length > 1 ? array[1] : string.Empty;
+
+                array  = methodAndPass.Split(':');
+                method = array[0];
+                pass = array.Length > 1 ? array[1] : string.Empty;
+
+                array = addrAndPort.Split(':');
+                addr  = array[0];
+                port  = array.Length > 1 ? array[1] : string.Empty;
+            }           
+
+            else if (IsDictFormatted(left)) //第二种情况，没有？，base64解码后是字典形式
+            {
+                var dict = JsonUtil.JsonToDictionary(left);
+
+                remarks = dict.ContainsKey("ps")   ? dict["ps"]   : string.Empty;
+                addr    = dict.ContainsKey("add")  ? dict["add"]  : string.Empty;
+                port    = dict.ContainsKey("port") ? dict["port"] : string.Empty;
+                pass    = dict.ContainsKey("id")   ? dict["id"]   : string.Empty;
+                method  = dict.ContainsKey("v") ? dict["v"] == "2" ? "auto" : dict["v"] : string.Empty;  //这个字段不确定
                 
-                sb.Append(StrFormatted(remark))
-                  .Append(array[1].Split(':')[0].Replace("/", string.Empty)).Append('\t')
-                  .Append(array[1].Split(':')[1]).Append('\t')
-                  .Append(array[0].Split(':')[1]).Append('\t')
-                  .Append(array[0].Split(':')[0]).Append('\t')
-                  .Append(string.Join(";", contentArray).Replace(contentArray[0] + ";", string.Empty));
+                List<string> leftList = new List<string> { "ps", "add", "port", "id", "v" };
+                foreach (string infoKey in dict.Keys)
+                {
+                    if (!dict.ContainsKey(infoKey) || leftList.Contains(infoKey))
+                        continue;
+                    sb.Append(string.Format("{0}={1};", infoKey, dict[infoKey]));
+                }
             }
-            else
+
+            else //第三种情况，没有？base64解码后是逗号分割
             {
-                info = DecodeBase64String(content);
-                try
-                {
-                    var dict = JsonUtil.JsonToDictionary(info);
-                    StringBuilder otherInfo = new StringBuilder();
-                    List<string> ootherInfoList = new List<string> { "host", "type", "path", "tls", "net", "aid", "verify_cert", "class", "headerType"};
-                    foreach(string otherInfoKey in ootherInfoList)
-                    {
-                        if (dict.ContainsKey(otherInfoKey))
-                            otherInfo.Append(string.Format("{0}={1};", otherInfoKey, dict[otherInfoKey]));
-                    }
-                    List<string> infoList = new List<string> { "ps", "add", "port", "id", "v"};
+                array = left.Split(", ");
+                
+                remarks = array[0];
+                addr    = array.Length > 1 ? array[1] : string.Empty;
+                port    = array.Length > 2 ? array[2] : string.Empty;
+                method  = array.Length > 3 ? array[3] : string.Empty;
+                pass    = array.Length > 4 ? array[4] : string.Empty;
 
-                    foreach (string infoKey in infoList)
-                    {
-                        if (dict.ContainsKey(infoKey) && infoKey == "v")
-                            sb.Append(StrFormatted(dict["v"] == "2" ? "auto" : dict["v"])); //这个字段不确定
-                        else if(dict.ContainsKey(infoKey))
-                             sb.Append(StrFormatted(dict[infoKey]));
-                        else
-                            sb.Append("\t");
-                    }
-                    sb.Append(otherInfo.ToString());
-                }
-                catch
+                if (array.Length > 5)
                 {
-                    string[] array = info.Split(", ");
-                    if (array.Length < 5)
-                        return Global.EmptyStringArray6;
-
-                    string[] arrCopy = new string[array.Length - 5];
-                    Array.Copy(array, 5, arrCopy, 0, array.Length - 5);
-                    
-                    sb.Append(StrFormatted(array[0]))
-                      .Append(array[1]).Append('\t')
-                      .Append(array[2]).Append('\t')
-                      .Append(array[4]).Append('\t')
-                      .Append(array[3]).Append('\t')
-                      .Append(string.Join(";", arrCopy));
+                    for (int i = 5; i < array.Length; i++)
+                        sb.Append(array[i]);
                 }
             }
 
-            return sb.ToString().Split('\t');
+            other = sb.ToString();
+
+            return new string[] { remarks, addr, port, pass, method, other };
         }
+        
+
         private string[] GenVlessLine(string value)
         {
 
@@ -336,37 +348,12 @@ namespace C2.Business.CastleBravo.VPN
         {
             return ST.TryDecodeBase64(value.Replace("_", "/").Replace("-", "+"));
         }
-        public string DecodeBase64String(string base64Str)
-        {
-            string info = string.Empty;
-            base64Str = Uri.UnescapeDataString(Uri.UnescapeDataString(Uri.UnescapeDataString(base64Str)));
-            if (IsBase64Formatted(base64Str))
-                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str)); 
-            else if (IsBase64Formatted(base64Str + "="))
-                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str + "="));
-            else if (IsBase64Formatted(base64Str + "=="))
-                info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str + "=="));
-            else
-            {
-                int baseLengh = base64Str.Length;
-                int i;
-                for (i = 1; i < 4; i++)
-                {
-                    base64Str = base64Str.Substring(0, baseLengh - i);
-                    if (!IsBase64Formatted(base64Str))
-                        continue;
-                    info = Encoding.UTF8.GetString(Convert.FromBase64String(base64Str));
-                    break;
-                }
-            }
-            return info;
-        }
 
-        public static bool IsBase64Formatted(string input)
+        public static bool IsDictFormatted(string input)
         {
             try
             {
-                Convert.FromBase64String(input);
+                JsonUtil.JsonToDictionary(input);
                 return true;
             }
             catch
@@ -375,46 +362,6 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
-        
-        private string HexDecode(string str)
-        {
-            StringBuilder headStr = new StringBuilder();
-            if (str.Contains("-") && !str.Split('%')[str.Split('%').Length-1].Contains("-"))
-            {
-                string head = str.Split('-')[0].Replace("%20", string.Empty);
-                if (!head.Contains("%"))
-                {
-                    headStr.Append(head.Replace("+", string.Empty));
-                    str = str.Split('-')[1].Replace("+", string.Empty);
-                }     
-            }
-            string[] content = str.Split('%');
-            byte[] arrByte = new byte[content.Length-1];
-
-            StringBuilder notByteStr = new StringBuilder();
-            int index = 0;
-            headStr.Append(content[0]);
-            for (int i = 1; i < content.Length; i ++)
-            {
-                if (content[i].Length != 2)
-                {
-                    notByteStr.Append(content[i].Substring(2, content[i].Length - 2));
-                    content[i] = content[i].Substring(0, 2);
-                }
-                arrByte[index] = Convert.ToByte(content[i], 16);
-                index++;
-            }
-
-            str = headStr.ToString() + Encoding.UTF8.GetString(arrByte) + notByteStr.ToString().Replace("+",string.Empty);
-            return str;
-        }
-
-        private string StrFormatted(string input)
-        {
-            if (input!=null && input.Contains("\t"))
-                input = input.Replace("\t", string.Empty);
-            return string.Format("{0}{1}",input,"\t");
-        }
 
         private string CheckAliveOneTaskAsyn(string[] array)
         {
