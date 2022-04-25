@@ -246,7 +246,13 @@ namespace C2.Utils
 
         public static NameValueCollection ParseQueryStringUTF8(string url)
         {
-            NameValueCollection ret = HttpUtility.ParseQueryString(url, Encoding.UTF8);
+            NameValueCollection ret = new NameValueCollection();
+            try
+            {
+                ret = HttpUtility.ParseQueryString(url, Encoding.UTF8);
+            }
+            catch { }
+            
             return ret;
         }
     }

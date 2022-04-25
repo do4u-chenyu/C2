@@ -172,51 +172,36 @@ namespace C2.Business.CastleBravo.VPN
 
         private string[] GenSSRLine(string value)
         {
-            value = ST.UrlDecode(value);
-            value = value.Replace("_", "/").Replace("-", "+");   // 
-            value = ST.TryDecodeBase64(value);
+            value = ST.UrlDecode(TryDecodeBase64(value));
             string[] array = value.Split("/?");
 
-            string former = array[0];
-            string latter = array.Length > 1 ? array[1] : string.Empty;
-            string[] formerParams = former.Split(":");
+            string left  = array[0];
+            string right = array.Length > 1 ? array[1] : string.Empty;
 
-            string remarks = string.Empty;
-            string addr = formerParams[0];
-            string port = formerParams.Length > 1 ? formerParams[1] : string.Empty;
-            string proto = formerParams.Length > 2 ? formerParams[2] : string.Empty;
-            string method = formerParams.Length > 3 ? formerParams[3] : string.Empty;
-            string obscure = formerParams.Length > 4 ? formerParams[4] : string.Empty;
-            string passWord = formerParams.Length > 5 ? ST.TryDecodeBase64(formerParams[5]) : string.Empty;
+            array = left.Split(":");
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append("协议=" + proto + ";")
-              .Append("混淆=" + obscure + ";");
+            string remarks    = string.Empty;
+            string addr       = array[0];
+            string port       = array.Length > 1 ? array[1] : string.Empty;
+            string protoparam = array.Length > 2 ? array[2] : string.Empty;
+            string method     = array.Length > 3 ? array[3] : string.Empty;
+            string obfsparam  = array.Length > 4 ? array[4] : string.Empty;
+            string password   = array.Length > 5 ? ST.TryDecodeBase64(array[5]) : string.Empty;
+            string other      = string.Format("协议={0};混淆={1};", protoparam, obfsparam);
 
-            string otherInfo = sb.ToString();
-            if (latter.IsNullOrEmpty())
-                return new string[] { remarks, addr, port, passWord, method, otherInfo };
+            if (right.IsNullOrEmpty())
+                return new string[] { remarks, addr, port, password, method, other };
 
-            try
-            {
-                NameValueCollection latterParams = NetUtil.ParseQueryStringUTF8(latter);
-                List<string> paramList = new List<string> { "remarks", "protoparam", "obfsparam", "group" };
-                for(int i=0;i< paramList.Count;i++)
-                {
-                    paramList[i] = latterParams[paramList[i]].Replace("_", "/").Replace("-", "+");
-                    paramList[i] = ST.TryDecodeBase64(paramList[i]);
-                }
+            NameValueCollection lParams = NetUtil.ParseQueryStringUTF8(right);
 
-                sb.Append("协议参数=" + paramList[1] + ";")
-                  .Append("混淆参数=" + paramList[2] + ";")
-                  .Append("Group=" + paramList[3] + ";");
+            string group = TryDecodeBase64(lParams["group"]      ?? string.Empty);
+            remarks      = TryDecodeBase64(lParams["remarks"]    ?? string.Empty); 
+            obfsparam    = TryDecodeBase64(lParams["obfsparam"]  ?? string.Empty);
+            protoparam   = TryDecodeBase64(lParams["protoparam"] ?? string.Empty);
 
-                remarks = paramList[0];
-                otherInfo = sb.ToString();
-            }
-            catch { }
+            other = string.Format("协议={0};混淆={1};Group={2}", protoparam, obfsparam, group);
 
-            return new string[] { remarks, addr, port, passWord, method, otherInfo };
+            return new string[] { remarks, addr, port, password, method, other };
         }
 
         private string[] GenVmessLine(string content)
@@ -346,8 +331,11 @@ namespace C2.Business.CastleBravo.VPN
             return new string[] { remarks, addr, port, pass, method, otherInfo };
         }
 
-        
 
+        public string TryDecodeBase64(string value)
+        {
+            return ST.TryDecodeBase64(value.Replace("_", "/").Replace("-", "+"));
+        }
         public string DecodeBase64String(string base64Str)
         {
             string info = string.Empty;
