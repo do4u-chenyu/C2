@@ -180,28 +180,28 @@ namespace C2.Business.CastleBravo.VPN
 
             array = left.Split(":");
 
-            string remarks    = string.Empty;
-            string addr       = array[0];
-            string port       = array.Length > 1 ? array[1] : string.Empty;
-            string protoparam = array.Length > 2 ? array[2] : string.Empty;
-            string method     = array.Length > 3 ? array[3] : string.Empty;
-            string obfsparam  = array.Length > 4 ? array[4] : string.Empty;
-            string password   = array.Length > 5 ? TryDecodeBase64(array[5]) : string.Empty;
-            string other      = string.Format("协议={0};混淆={1};", protoparam, obfsparam);
+            string remarks = string.Empty;
+            string addr    = array[0];
+            string port    = array.Length > 1 ? array[1] : string.Empty;
+            string proto   = array.Length > 2 ? array[2] : string.Empty;
+            string method  = array.Length > 3 ? array[3] : string.Empty;
+            string obfs    = array.Length > 4 ? array[4] : string.Empty;
+            string pass    = array.Length > 5 ? TryDecodeBase64(array[5]) : string.Empty;
+            string other   = string.Format("协议={0};混淆={1};", proto, obfs);
 
             if (right.IsNullOrEmpty())
-                return new string[] { remarks, addr, port, password, method, other };
+                return new string[] { remarks, addr, port, pass, method, other };
 
             NameValueCollection lParams = NetUtil.ParseQueryStringUTF8(right);
 
-            string group = TryDecodeBase64(lParams["group"]      ?? string.Empty);
-            remarks      = TryDecodeBase64(lParams["remarks"]    ?? string.Empty); 
-            obfsparam    = TryDecodeBase64(lParams["obfsparam"]  ?? string.Empty);
-            protoparam   = TryDecodeBase64(lParams["protoparam"] ?? string.Empty);
+            remarks           = TryDecodeBase64(lParams["remarks"]    ?? string.Empty); 
+            string obfsparam  = TryDecodeBase64(lParams["obfsparam"]  ?? string.Empty);
+            string protoparam = TryDecodeBase64(lParams["protoparam"] ?? string.Empty);
+            string group      = TryDecodeBase64(lParams["group"]      ?? string.Empty);
 
-            other = string.Format("协议={0};混淆={1};Group={2}", protoparam, obfsparam, group);
+            other += string.Format("协议参数={0};混淆参数={1};Group={2}", protoparam, obfsparam, group);
 
-            return new string[] { remarks, addr, port, password, method, other };
+            return new string[] { remarks, addr, port, pass, method, other };
         }
 
         private string[] GenVmessLine(string content)
