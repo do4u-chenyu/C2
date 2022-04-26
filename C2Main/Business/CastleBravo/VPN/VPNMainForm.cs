@@ -265,6 +265,14 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
+        private void RefreshBackColor()
+        {
+            foreach (ListViewItem lvi in LV.Items)
+            {
+                lvi.BackColor = isAlertnatingRows ? SingleRowColor : AltertnatingRowColor;
+                isAlertnatingRows = !isAlertnatingRows;
+            }
+        }
         private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             LVComparer c = LV.ListViewItemSorter as LVComparer;
@@ -275,7 +283,7 @@ namespace C2.Business.CastleBravo.VPN
             {
                 LV.Sort();
                 RefreshTasks(false); // 回写任务, 速度慢, 将来要优化
-                //RefreshBackColor();  // 重新布局
+                RefreshBackColor();  // 重新布局
             }
         }
     }

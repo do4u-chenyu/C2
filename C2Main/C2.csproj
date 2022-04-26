@@ -367,11 +367,20 @@
     <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\ProbeFactory.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\SocketClient.cs" />
+    <Compile Include="Business\CastleBravo\VPN\VPNMainForm.CA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\VPNMainForm.IO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\VPNMainForm.LV.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Business\CastleBravo\VPN\VPNTaskConfig.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.SG.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.CheckAlive.cs">
+    <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.CA.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Business\IAOLab\LngAndLat\LngAndLat.cs" />
