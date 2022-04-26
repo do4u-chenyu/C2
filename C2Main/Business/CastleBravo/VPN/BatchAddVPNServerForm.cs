@@ -1,7 +1,6 @@
 ﻿using C2.Controls;
 using C2.Core;
 using C2.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -9,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace C2.Business.CastleBravo.VPN
 {
@@ -150,7 +150,7 @@ namespace C2.Business.CastleBravo.VPN
             array = array[0].Split("@");
             string addr = array.Length > 1 ? array[1] : string.Empty;
             // 第四步: base64解码
-            value = ST.TryDecodeBase64(array[0]);
+            value = TryDecodeBase64(array[0]);
             // 如果addr为空则从base64中补充addr
             if (addr.IsNullOrEmpty())
             {
@@ -191,7 +191,7 @@ namespace C2.Business.CastleBravo.VPN
 
             if (right.IsNullOrEmpty())
                 return new string[] { remarks, addr, port, pass, method, other };
-
+           
             NameValueCollection lParams = NetUtil.ParseQueryStringUTF8(right);
 
             remarks           = TryDecodeBase64(lParams["remarks"]    ?? string.Empty); 
@@ -245,24 +245,21 @@ namespace C2.Business.CastleBravo.VPN
             {
                 var dict = JsonUtil.JsonToDictionary(left);
 
-                remarks = dict.ContainsKey("ps")   ? dict["ps"]   : string.Empty;
-                addr    = dict.ContainsKey("add")  ? dict["add"]  : string.Empty;
-                port    = dict.ContainsKey("port") ? dict["port"] : string.Empty;
-                pass    = dict.ContainsKey("id")   ? dict["id"]   : string.Empty;
-                method  = dict.ContainsKey("v") ? dict["v"] == "2" ? "auto" : dict["v"] : string.Empty;  //这个字段不确定
-                
-                List<string> leftList = new List<string> { "ps", "add", "port", "id", "v" };
-                foreach (string infoKey in dict.Keys)
-                {
-                    if (!dict.ContainsKey(infoKey) || leftList.Contains(infoKey))
-                        continue;
-                    sb.Append(string.Format("{0}={1};", infoKey, dict[infoKey]));
-                }
+                remarks = dict.ContainsKey("ps")   ? dict["ps"]   : string.Empty; 
+                addr    = dict.ContainsKey("add")  ? dict["add"]  : string.Empty; 
+                port    = dict.ContainsKey("port") ? dict["port"] : string.Empty; 
+                pass    = dict.ContainsKey("id")   ? dict["id"]   : string.Empty; 
+                method  = dict.ContainsKey("v")    ? dict["v"] == "2" ? "auto" : dict["v"] : string.Empty;
+
+                dict.Remove("ps", "add", "port", "id", "v");
+
+                foreach (var kv in dict)
+                    sb.Append(string.Format("{0}={1};", kv.Key, kv.Value));
             }
 
             else //第三种情况，没有？base64解码后是逗号分割
             {
-                array = left.Split(", ");
+                array = left.Split(", ");  // 注释
                 
                 remarks = array[0];
                 addr    = array.Length > 1 ? array[1] : string.Empty;
@@ -270,11 +267,7 @@ namespace C2.Business.CastleBravo.VPN
                 method  = array.Length > 3 ? array[3] : string.Empty;
                 pass    = array.Length > 4 ? array[4] : string.Empty;
 
-                if (array.Length > 5)
-                {
-                    for (int i = 5; i < array.Length; i++)
-                        sb.Append(array[i]);
-                }
+                sb.Append(array.Skip(5).JoinString());
             }
 
             other = sb.ToString();
@@ -346,6 +339,7 @@ namespace C2.Business.CastleBravo.VPN
 
         public string TryDecodeBase64(string value)
         {
+            // base64: 0-9 a-z A-Z / +  
             return ST.TryDecodeBase64(value.Replace("_", "/").Replace("-", "+"));
         }
 
