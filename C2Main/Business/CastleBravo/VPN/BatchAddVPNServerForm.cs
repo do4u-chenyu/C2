@@ -248,10 +248,10 @@ namespace C2.Business.CastleBravo.VPN
                 remarks = dict.ContainsKey("ps")   ? dict["ps"]   : string.Empty; 
                 addr    = dict.ContainsKey("add")  ? dict["add"]  : string.Empty; 
                 port    = dict.ContainsKey("port") ? dict["port"] : string.Empty; 
-                pass    = dict.ContainsKey("id")   ? dict["id"]   : string.Empty; 
-                method  = dict.ContainsKey("v")    ? dict["v"] == "2" ? "auto" : dict["v"] : string.Empty;
+                pass    = dict.ContainsKey("id")   ? dict["id"]   : string.Empty;
+                method  = dict.ContainsKey("scy")  ? dict["scy"]  : string.Empty;
 
-                dict.Remove("ps", "add", "port", "id", "v");
+                dict.Remove("ps", "add", "port", "id", "scy");
 
                 foreach (var kv in dict)
                     sb.Append(string.Format("{0}={1};", kv.Key, kv.Value));
@@ -259,7 +259,7 @@ namespace C2.Business.CastleBravo.VPN
 
             else //第三种情况，没有？base64解码后是逗号分割
             {
-                array = left.Split(", ");  // 注释
+                array = left.Split(", ");  // remark里可能有逗号，不能直接用逗号分隔
                 
                 remarks = array[0];
                 addr    = array.Length > 1 ? array[1] : string.Empty;

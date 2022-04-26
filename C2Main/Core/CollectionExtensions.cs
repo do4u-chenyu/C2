@@ -42,7 +42,7 @@ namespace C2.Core
         }
         public static bool Remove(this Dictionary<string, string> list, string k1, string k2, string k3, string k4, string k5)
         {
-            return list.Remove(k1) || list.Remove(k2) || list.Remove(k3) || list.Remove(k4) || list.Remove(k5);
+            return list.Remove(k1) && list.Remove(k2) && list.Remove(k3) && list.Remove(k4) && list.Remove(k5);
         }
         public static bool IsNullOrEmpty(this IEnumerable list)
         {
