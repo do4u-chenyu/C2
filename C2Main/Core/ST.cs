@@ -903,7 +903,7 @@ namespace C2.Core
                 BlockSize = 128,
                 KeySize = 128,
                 Key = Encoding.UTF8.GetBytes(key),
-                IV = (byte[])(object)new sbyte[16],
+                IV = (byte[])(object)new sbyte[16],//字节数组  sbyte--->object--->byte 真坑！！！ Bytesarray（python）
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
