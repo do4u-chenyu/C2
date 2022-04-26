@@ -264,25 +264,27 @@ namespace C2.Business.CastleBravo.VPN
 
         private string[] GenVlessLine(string value)
         {
+            string[] array = ST.UrlDecode(value).Split("#");
 
-            value = ST.UrlDecode(value);
-            string[] array = value.Split("#");
-
-            string remarks = array.Length > 1 ? array[1] : string.Empty;
+            string method    = string.Empty;
+            string otherInfo = string.Empty;
+            string remarks   = array.Length > 1 ? array[1] : string.Empty;
+            
             array = array[0].Split("?");
-
-            string method = string.Empty;
-            StringBuilder sb = new StringBuilder();
             string info = array.Length > 1 ? array[1] : string.Empty;
 
             if (!info.IsNullOrEmpty())
             {
                 NameValueCollection latterParams = NetUtil.ParseQueryStringUTF8(info);
-
-                List<string> paramList = new List<string> { "type", "security", "path", "headerType" };
-                foreach (string param in paramList)
-                    sb.Append(string.Format("{0}={1};", param, latterParams[param]));
                 method = latterParams["encryption"];
+
+                StringBuilder sb = new StringBuilder();
+                string[] paramsList =  { "type", "security", "path", "headerType" };
+                
+                foreach (string param in paramsList)
+                    sb.Append(string.Format("{0}={1};", param, latterParams[param]));
+                
+                otherInfo = sb.ToString();
             }
 
             array = array[0].Split(":");
@@ -290,13 +292,10 @@ namespace C2.Business.CastleBravo.VPN
 
             array = array[0].Split("@");
             string pass = array[0];
-
             string addr = array.Length > 1 ? array[1] : string.Empty;
             addr = addr.Replace("/", string.Empty);
-            string otherInfo = sb.ToString();
 
             return new string[] { remarks, addr, port, pass, method, otherInfo };
-
         }
 
         private string[] GenTrojanLine(string value)
