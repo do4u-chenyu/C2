@@ -22,7 +22,7 @@ namespace C2.IAOLab.WifiMac
         {
             string url = Global.ServerUrl + "/Test01/search.do";
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
-                return null;
+                return string.Empty;
             string location = GetInfo(url, input,"mac");
             location = location.Replace("\"", String.Empty);            
             return string.Format("{0}\t{1}\n", input,location);

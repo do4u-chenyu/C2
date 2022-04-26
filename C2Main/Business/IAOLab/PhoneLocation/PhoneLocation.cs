@@ -20,7 +20,7 @@ namespace C2.IAOLab.PhoneLocation
         public string GetPhoneLocation(string input) 
         {
             if (input == string.Empty)
-                return null;
+                return string.Empty;
             
             string phoneNum = input.Trim(' ');
             if (!NetUtil.IsPhoneNum(phoneNum))

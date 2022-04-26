@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using C2.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -240,6 +242,18 @@ namespace C2.Utils
                     wrt.Abort();
             }
             return result;
+        }
+
+        public static NameValueCollection ParseQueryStringUTF8(string url)
+        {
+            NameValueCollection ret = new NameValueCollection();
+            try
+            {
+                ret = HttpUtility.ParseQueryString(url, Encoding.UTF8);
+            }
+            catch { }
+            
+            return ret;
         }
     }
 }

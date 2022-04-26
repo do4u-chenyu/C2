@@ -253,8 +253,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
             for (int i = 0; i < encryptStr.Length; i++)
                 result.Add(Convert.ToChar(encryptStr[i]^key[(i + 1) & 15]));
-            string tmp = string.Join("", result); ;
-            return ST.EncodeBase64(tmp);
+            return ST.EncodeBase64(string.Join(string.Empty, result));
         }
     }
 }

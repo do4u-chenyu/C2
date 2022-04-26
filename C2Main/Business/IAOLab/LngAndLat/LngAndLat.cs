@@ -19,7 +19,7 @@ namespace C2.Business.IAOLab.LngAndLat
         public String GetLocation(string input)
         {
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP" || input == "地址")
-                return null;
+                return string.Empty;
             string[] lngandlat;
             if (input.Trim().Contains("\t"))
                 lngandlat = input.Trim().Split('\t');
