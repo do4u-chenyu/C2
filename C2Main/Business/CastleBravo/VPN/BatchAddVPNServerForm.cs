@@ -206,9 +206,8 @@ namespace C2.Business.CastleBravo.VPN
 
         private string[] GenVmessLine(string value)
         {
-            value = ST.UrlDecode(value);
+            string[] array = ST.UrlDecode(value).Split("?");
 
-            string[] array = value.Split("?");
             string left  = TryDecodeBase64(array[0]);
             string right = array.Length > 1 ? array[1] : string.Empty;
 
@@ -218,59 +217,46 @@ namespace C2.Business.CastleBravo.VPN
             string pass    = string.Empty;
             string method  = string.Empty;
             string other   = string.Empty;
-            StringBuilder sb = new StringBuilder();
 
-            if (!right.IsNullOrEmpty()) //第一种情况，remark和其他信息在？后面
+            if (right.IsEmpty()) //第一种情况，base64解码后是字典形式
+            {
+                var dict = TryJsonToDictionary(left);
+                // remark里可能有逗号，不能直接用逗号分隔
+                array = dict.IsEmpty() ? left.Split(", ") : Global.EmptyStringArray5;
+
+                remarks = dict.ContainsKey("ps")   ? dict["ps"]   : array.Length > 0 ? array[0] : string.Empty;
+                addr    = dict.ContainsKey("add")  ? dict["add"]  : array.Length > 1 ? array[1] : string.Empty;
+                port    = dict.ContainsKey("port") ? dict["port"] : array.Length > 2 ? array[2] : string.Empty;
+                method  = dict.ContainsKey("scy")  ? dict["scy"]  : array.Length > 3 ? array[3] : string.Empty;
+                pass    = dict.ContainsKey("id")   ? dict["id"]   : array.Length > 4 ? array[4] : string.Empty;
+
+                dict.Remove("ps", "add", "port", "scy", "id");
+
+                StringBuilder sb = new StringBuilder();
+                foreach (var kv in dict)
+                    sb.Append(string.Format("{0}={1};", kv.Key, kv.Value));
+                other = sb.Append(array.Skip(5).JoinString()).ToString();
+            }
+            else  //第二种情况  remark和其他信息在？后面
             {
                 string content = right.Split('&')[0];
                 remarks = content.Contains("=") ? content.Split('=')[1] : remarks;
 
                 content += "&";
-                other   = right.Replace(content, string.Empty); //不确定其他信息有几个字段,除了remark都是
+                other = right.Replace(content, string.Empty); //不确定其他信息有几个字段,除了remark都是
 
                 array = left.Split('@');
                 string methodAndPass = array[0];
-                string addrAndPort   = array.Length > 1 ? array[1] : string.Empty;
+                string addrAndPort = array.Length > 1 ? array[1] : string.Empty;
 
-                array  = methodAndPass.Split(':');
+                array = methodAndPass.Split(':');
                 method = array[0];
                 pass = array.Length > 1 ? array[1] : string.Empty;
 
                 array = addrAndPort.Split(':');
-                addr  = array[0];
-                port  = array.Length > 1 ? array[1] : string.Empty;
-            }           
-
-            else if (IsDictFormatted(left)) //第二种情况，没有？，base64解码后是字典形式
-            {
-                var dict = JsonUtil.JsonToDictionary(left);
-
-                remarks = dict.ContainsKey("ps")   ? dict["ps"]   : string.Empty; 
-                addr    = dict.ContainsKey("add")  ? dict["add"]  : string.Empty; 
-                port    = dict.ContainsKey("port") ? dict["port"] : string.Empty; 
-                pass    = dict.ContainsKey("id")   ? dict["id"]   : string.Empty;
-                method  = dict.ContainsKey("scy")  ? dict["scy"]  : string.Empty;
-
-                dict.Remove("ps", "add", "port", "id", "scy");
-
-                foreach (var kv in dict)
-                    sb.Append(string.Format("{0}={1};", kv.Key, kv.Value));
+                addr = array[0];
+                port = array.Length > 1 ? array[1] : string.Empty;
             }
-
-            else //第三种情况，没有？base64解码后是逗号分割
-            {
-                array = left.Split(", ");  // remark里可能有逗号，不能直接用逗号分隔
-                
-                remarks = array[0];
-                addr    = array.Length > 1 ? array[1] : string.Empty;
-                port    = array.Length > 2 ? array[2] : string.Empty;
-                method  = array.Length > 3 ? array[3] : string.Empty;
-                pass    = array.Length > 4 ? array[4] : string.Empty;
-
-                sb.Append(array.Skip(5).JoinString());
-            }
-
-            other = sb.ToString();
 
             return new string[] { remarks, addr, port, pass, method, other };
         }
@@ -343,16 +329,15 @@ namespace C2.Business.CastleBravo.VPN
             return ST.TryDecodeBase64(value.Replace("_", "/").Replace("-", "+"));
         }
 
-        public static bool IsDictFormatted(string input)
+        public static Dictionary<string, string> TryJsonToDictionary(string input)
         {
             try
             {
-                JsonUtil.JsonToDictionary(input);
-                return true;
+                return JsonUtil.JsonToDictionary(input);
             }
             catch
             {
-                return false;
+                return new Dictionary<string, string>();
             }
         }
 
