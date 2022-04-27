@@ -201,7 +201,7 @@ namespace C2.Core
         public const string APKUrl = @"http://113.31.110.244:6663/ns/APPtest/home";
         public const string KnowledgeUrl = @"http://15.73.3.241:19001/KnowledgeBase/";
         public const string IpToHostUrl = @"http://113.31.114.239:53373/api/fhge/capture_host_by_ip";
-        public const string SEOUrl = @"http://47.94.39.209:22222/api/fhge/seo_query";
+        public const string SEOUrl = @"http://113.31.114.239:53373/api/fhge/seo_query";
 
         public static Dictionary<string, string> WFDPredictionCodeDict = new Dictionary<string, string>
         {
