@@ -69,12 +69,12 @@ namespace C2.Business.CastleBravo.WebShellTool
         public static ClientSetting LoadSetting(string version)
         {
             if (!WSDict.ContainsKey(version))
-                return ClientSetting.Empty;
+                return Empty;
 
             string path = WSDict[version].Item1;
 
             if (string.IsNullOrEmpty(path))
-                return ClientSetting.Empty;
+                return Empty;
 
             return new ClientSetting() {
                 SPL = Read(version, "SPL", path),
@@ -222,7 +222,7 @@ namespace C2.Business.CastleBravo.WebShellTool
         }
 
 
-        public static String ProcessingResults(byte[] ret, string url, string type)
+        public static string ProcessingResults(byte[] ret, string url, string type)
         {
             if (ret.Length == 0)
                 return type + ":无结果";
