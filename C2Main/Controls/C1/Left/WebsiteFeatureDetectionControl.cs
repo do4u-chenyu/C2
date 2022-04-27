@@ -260,5 +260,19 @@ namespace C2.Controls.C1.Left
             } catch { };
 
         }
+
+        private void AddYQLable_Click(object sender, EventArgs e)
+        {
+            var dialog = new AddYQTask();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                return;
+            }
+        }
+
+        private void YQHelp_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
