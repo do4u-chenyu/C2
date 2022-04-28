@@ -33,7 +33,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.YQHelp = new System.Windows.Forms.Label();
             this.addYQLabel = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.manageYQPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.newEventPanel.SuspendLayout();
             this.backPanel.SuspendLayout();
@@ -63,20 +63,20 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(38, 5);
+            this.label1.Location = new System.Drawing.Point(15, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(150, 22);
             this.label1.TabIndex = 4;
-            this.label1.Text = "舆情侦察兵";
+            this.label1.Text = "舆情侦察兵(施工中)";
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Location = new System.Drawing.Point(4, 372);
+            this.panel1.Controls.Add(this.manageYQPanel);
+            this.panel1.Location = new System.Drawing.Point(3, 372);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 285);
+            this.panel1.Size = new System.Drawing.Size(179, 285);
             this.panel1.TabIndex = 5;
             // 
             // panel3
@@ -86,7 +86,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(175, 38);
+            this.panel3.Size = new System.Drawing.Size(177, 38);
             this.panel3.TabIndex = 0;
             // 
             // YQHelp
@@ -113,13 +113,13 @@
             this.addYQLabel.Text = "+新建任务";
             this.addYQLabel.Click += new System.EventHandler(this.AddYQLable_Click);
             // 
-            // panel4
+            // manageYQPanel
             // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 38);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(175, 245);
-            this.panel4.TabIndex = 1;
+            this.manageYQPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.manageYQPanel.Location = new System.Drawing.Point(0, 38);
+            this.manageYQPanel.Name = "manageYQPanel";
+            this.manageYQPanel.Size = new System.Drawing.Size(177, 245);
+            this.manageYQPanel.TabIndex = 1;
             // 
             // panel2
             // 
@@ -158,7 +158,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel manageYQPanel;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label YQHelp;
         private System.Windows.Forms.Label addYQLabel;

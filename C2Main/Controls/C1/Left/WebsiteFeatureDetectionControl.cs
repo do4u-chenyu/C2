@@ -5,6 +5,7 @@ using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -266,13 +267,39 @@ namespace C2.Controls.C1.Left
             var dialog = new AddYQTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                AddYQButton(new YQTaskButton(dialog.TaskInfo));
                 return;
             }
         }
 
         private void YQHelp_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string helpfile = Path.Combine(Global.ResourcesPath, "Help", "舆情侦察兵帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            }
+            catch { };
+        }
 
+        private void AddYQButton(Control ct)
+        {
+            int ButtonGapY = 40;//上下间隔
+            int ButtonLeftX = 18;
+            int ButtonBottomOffsetY = 23;
+            Point startPoint = new Point(ButtonLeftX, -ButtonGapY);
+            if (this.manageYQPanel.Controls.Count > 0)
+            {
+                startPoint = this.manageYQPanel.Controls[this.manageYQPanel.Controls.Count - 1].Location;
+            }
+            else
+            {
+                this.manageButtonPanel.VerticalScroll.Value = 0;
+                startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            }
+            startPoint.Y += ButtonGapY;
+            ct.Location = startPoint;
+            this.manageYQPanel.Controls.Add(ct);
         }
     }
 }

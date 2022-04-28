@@ -784,6 +784,7 @@
     <Compile Include="Business\WebsiteFeatureDetection\WFDResult.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDTaskInfo.cs" />
     <Compile Include="Business\WebsiteFeatureDetection\WFDWebAPI.cs" />
+    <Compile Include="Business\WebsiteFeatureDetection\YQTaskInfo.cs" />
     <Compile Include="ChartControls\MindMap\Commands\AddLinkCommand.cs" />
     <Compile Include="ChartControls\MindMap\Commands\ChangeLinkCommand.cs" />
     <Compile Include="ChartControls\MindMap\DataTreeView.cs">
@@ -873,6 +874,12 @@
     </Compile>
     <Compile Include="Controls\C1\Left\WebsiteFeatureDetectionControl.Designer.cs">
       <DependentUpon>WebsiteFeatureDetectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\C1\Left\YQTaskButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\C1\Left\YQTaskButton.Designer.cs">
+      <DependentUpon>YQTaskButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataCharts\BarChart.cs">
       <SubType>UserControl</SubType>
@@ -1124,6 +1131,12 @@
     </Compile>
     <Compile Include="Business\IAOLab\WebEngine\GisMap\GenGisMapHtml.cs" />
     <Compile Include="Business\IAOLab\WebEngine\WebManager.cs" />
+    <Compile Include="Dialogs\WebsiteFeatureDetection\YQTaskResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebsiteFeatureDetection\YQTaskResult.Designer.cs">
+      <DependentUpon>YQTaskResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\WidgetChart\OrganizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2536,6 +2549,9 @@
     <EmbeddedResource Include="Controls\C1\Left\WebsiteFeatureDetectionControl.resx">
       <DependentUpon>WebsiteFeatureDetectionControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\C1\Left\YQTaskButton.resx">
+      <DependentUpon>YQTaskButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataCharts\BaseChart.resx">
       <DependentUpon>BaseChart.cs</DependentUpon>
     </EmbeddedResource>
@@ -2805,6 +2821,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\WFDTaskResult.resx">
       <DependentUpon>WFDTaskResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebsiteFeatureDetection\YQTaskResult.resx">
+      <DependentUpon>YQTaskResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WidgetChart\OrganizationForm.resx">
       <DependentUpon>OrganizationForm.cs</DependentUpon>
@@ -3373,6 +3392,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\HIBU.png" />
+    <None Include="Resources\Help\舆情侦察兵帮助文档.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\Icons\check_update.ico" />
     <None Include="Resources\Icons\Datamanagement.png" />
     <Content Include="Resources\Icons\exclamation.ico" />

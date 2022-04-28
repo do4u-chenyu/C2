@@ -78,7 +78,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(320, 69);
+            this.label1.Location = new System.Drawing.Point(320, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 19);
             this.label1.TabIndex = 46;
@@ -88,7 +88,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(9, 69);
+            this.label3.Location = new System.Drawing.Point(9, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 19);
             this.label3.TabIndex = 48;
@@ -137,7 +137,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(280, 113);
+            this.dateTimePicker2.Location = new System.Drawing.Point(280, 119);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(151, 25);
             this.dateTimePicker2.TabIndex = 54;
@@ -145,7 +145,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(251, 115);
+            this.label6.Location = new System.Drawing.Point(253, 121);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(23, 20);
             this.label6.TabIndex = 53;
@@ -155,7 +155,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(9, 116);
+            this.label4.Location = new System.Drawing.Point(9, 122);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 19);
             this.label4.TabIndex = 52;
@@ -163,7 +163,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(98, 113);
+            this.dateTimePicker1.Location = new System.Drawing.Point(98, 119);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 25);
             this.dateTimePicker1.TabIndex = 51;
@@ -176,7 +176,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "关键词",
             "账号"});
-            this.comboBox1.Location = new System.Drawing.Point(392, 65);
+            this.comboBox1.Location = new System.Drawing.Point(392, 70);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(197, 27);
             this.comboBox1.TabIndex = 50;
@@ -194,10 +194,11 @@
             "抖音",
             "暗网",
             "不限"});
-            this.taskModelComboBox.Location = new System.Drawing.Point(98, 65);
+            this.taskModelComboBox.Location = new System.Drawing.Point(98, 70);
             this.taskModelComboBox.Name = "taskModelComboBox";
             this.taskModelComboBox.Size = new System.Drawing.Size(197, 27);
             this.taskModelComboBox.TabIndex = 49;
+            this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskModelComboBox_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -228,6 +229,7 @@
             this.browserButton.TabIndex = 10034;
             this.browserButton.Text = "+浏览";
             this.browserButton.UseVisualStyleBackColor = true;
+            this.browserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
             // pasteModeCB
             // 
@@ -239,6 +241,7 @@
             this.pasteModeCB.TabIndex = 10035;
             this.pasteModeCB.Text = "粘贴模式";
             this.pasteModeCB.UseVisualStyleBackColor = true;
+            this.pasteModeCB.CheckedChanged += new System.EventHandler(this.PasteModeCB_CheckedChanged);
             // 
             // wsTextBox
             // 
@@ -305,14 +308,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 414);
+            this.ClientSize = new System.Drawing.Size(601, 408);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AddYQTask";
-            this.Text = "舆情侦察兵";
+            this.Text = "舆情侦察兵-下发任务";
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.groupBox1.ResumeLayout(false);
