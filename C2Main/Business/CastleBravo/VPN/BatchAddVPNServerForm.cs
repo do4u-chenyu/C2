@@ -230,6 +230,7 @@ namespace C2.Business.CastleBravo.VPN
                 port    = dict.ContainsKey("port") ? dict["port"] : array.Length > 2 ? array[2] : string.Empty;
                 method  = dict.ContainsKey("scy")  ? dict["scy"]  : array.Length > 3 ? array[3] : string.Empty;
                 pass    = dict.ContainsKey("id")   ? dict["id"]   : array.Length > 4 ? array[4] : string.Empty;
+                method = method.IsNullOrEmpty() ? "auto" : method;
 
                 dict.Remove("ps", "add", "port", "scy", "id");
 

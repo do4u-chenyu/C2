@@ -1,7 +1,10 @@
-﻿using C2.Business.WebsiteFeatureDetection;
+﻿using C2.Business.HTTP;
+using C2.Business.WebsiteFeatureDetection;
 using C2.Controls;
 using C2.Core;
 using C2.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,8 +12,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
@@ -69,16 +74,69 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
+            bool token = GenAndCheckToken();
             bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
-            if (genTask == false || base.OnOKButtonClick() == false)
+            if (!(token && genTask && base.OnOKButtonClick()))
                 return false;
+
             HelpUtil.ShowMessageBox("任务下发成功");
+
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             string destFilePath = Path.Combine(destDirectory, string.Format("{0}_{1}.txt", TaskName, "123"));
             FileUtil.CreateDirectory(destDirectory);
             using (File.Create(destFilePath)) { }
-            TaskInfo = new YQTaskInfo(TaskName,"123",TaskModelName, FilePath, destFilePath, YQTaskStatus.Null);
+
+            TaskInfo = new YQTaskInfo(TaskName,"123",TaskModelName, FilePath, destFilePath, YQTaskStatus.Running);
             return true;
+        }
+
+        private bool GenAndCheckToken()
+        {
+            string token = string.Empty;
+            string validate = string.Empty;
+            string getTokenURL = "https://api.fhyqw.com/auth/gettoken?username=iao2&password=60726279d628473f6f3f03d5b81b8c95&apikey=50c9429656499f3b26ca1bd6c8045239";
+            try
+            {
+                JObject json = JObject.Parse(HttpGet(getTokenURL));
+                JToken gList = json["results"];
+                foreach (JToken g in gList)
+                    token = g["access_token"].ToString();
+            }
+            catch
+            {
+                HelpUtil.ShowMessageBox("获取任务下发令牌失败");
+                return false;
+            }
+            if (token.IsNullOrEmpty())
+                return false;
+
+            string validTokenURL = string.Format("https://api.fhyqw.com/auth/validtoken?token={0}", token);
+            try
+            {
+                JObject json = JObject.Parse(HttpGet(validTokenURL));
+                var gList = json["results"];
+                foreach (var g in gList)
+                    validate = g["validate"].ToString();
+                if (validate == "true")
+                    return true;
+            }
+            catch
+            {
+                HelpUtil.ShowMessageBox("获取的令牌无效");
+                return false;
+            }
+            return true;
+        }
+        
+        private string HttpGet(string url)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "GET";
+            req.Timeout = 20000;
+            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+            string postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+            return postContent;
         }
 
         private bool GenTasksFromPaste()
@@ -89,7 +147,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             string[] lines = this.wsTextBox.Text.SplitLine();
             for (int i = 0; i < Math.Min(lines.Length, maxRow); i++)
-                AddTasksByLine(lines[i]);
+                AddTasksByKey(lines[i]);
 
             return true;
         }
@@ -107,7 +165,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 using (StreamReader sr = new StreamReader(fs, Encoding.Default))
                     for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
-                        AddTasksByLine(sr.ReadLine().Trim());
+                        AddTasksByKey(sr.ReadLine().Trim());
             }
             catch
             {
@@ -118,11 +176,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         }
 
 
-        private void AddTasksByLine(string line)
+        private void AddTasksByKey(string keyWord)
         {
             return;
         }
-
-        
     }
 }
