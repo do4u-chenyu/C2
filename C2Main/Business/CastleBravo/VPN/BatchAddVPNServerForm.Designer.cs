@@ -39,8 +39,8 @@ namespace C2.Business.CastleBravo.VPN
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.behinder3 = new System.Windows.Forms.RadioButton();
-            this.trojan = new System.Windows.Forms.RadioButton();
+            this.rss = new System.Windows.Forms.RadioButton();
+            this.server = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,8 +155,8 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox1.Controls.Add(this.behinder3);
-            this.groupBox1.Controls.Add(this.trojan);
+            this.groupBox1.Controls.Add(this.rss);
+            this.groupBox1.Controls.Add(this.server);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox1.Location = new System.Drawing.Point(144, 99);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -166,29 +166,29 @@ namespace C2.Business.CastleBravo.VPN
             this.groupBox1.TabIndex = 10033;
             this.groupBox1.TabStop = false;
             // 
-            // behinder3
+            // rss
             // 
-            this.behinder3.AutoSize = true;
-            this.behinder3.Location = new System.Drawing.Point(223, 21);
-            this.behinder3.Margin = new System.Windows.Forms.Padding(4);
-            this.behinder3.Name = "behinder3";
-            this.behinder3.Size = new System.Drawing.Size(105, 22);
-            this.behinder3.TabIndex = 10021;
-            this.behinder3.Text = "订阅地址";
-            this.behinder3.UseVisualStyleBackColor = true;
+            this.rss.AutoSize = true;
+            this.rss.Location = new System.Drawing.Point(223, 21);
+            this.rss.Margin = new System.Windows.Forms.Padding(4);
+            this.rss.Name = "rss";
+            this.rss.Size = new System.Drawing.Size(105, 22);
+            this.rss.TabIndex = 10021;
+            this.rss.Text = "订阅地址";
+            this.rss.UseVisualStyleBackColor = true;
             // 
-            // trojan
+            // server
             // 
-            this.trojan.AutoSize = true;
-            this.trojan.Checked = true;
-            this.trojan.Location = new System.Drawing.Point(9, 21);
-            this.trojan.Margin = new System.Windows.Forms.Padding(4);
-            this.trojan.Name = "trojan";
-            this.trojan.Size = new System.Drawing.Size(177, 22);
-            this.trojan.TabIndex = 10020;
-            this.trojan.TabStop = true;
-            this.trojan.Text = "服务器(分享)地址";
-            this.trojan.UseVisualStyleBackColor = true;
+            this.server.AutoSize = true;
+            this.server.Checked = true;
+            this.server.Location = new System.Drawing.Point(9, 21);
+            this.server.Margin = new System.Windows.Forms.Padding(4);
+            this.server.Name = "server";
+            this.server.Size = new System.Drawing.Size(177, 22);
+            this.server.TabIndex = 10020;
+            this.server.TabStop = true;
+            this.server.Text = "服务器(分享)地址";
+            this.server.UseVisualStyleBackColor = true;
             // 
             // BatchAddVPNServerForm
             // 
@@ -238,7 +238,7 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton behinder3;
-        private System.Windows.Forms.RadioButton trojan;
+        private System.Windows.Forms.RadioButton rss;
+        private System.Windows.Forms.RadioButton server;
     }
 }

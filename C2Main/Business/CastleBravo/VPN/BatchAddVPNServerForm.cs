@@ -106,12 +106,13 @@ namespace C2.Business.CastleBravo.VPN
                                         array[2].Trim(),
                                         array[3].Trim(),
                                         array[4].Trim(),
-                                        string.Empty,       // CheckAliveOneTaskAsyn(contentArray),
+                                        string.Empty,              // CheckAliveOneTaskAsyn(contentArray),
                                         version.ToUpper(),
                                         "探针结果:未测",
                                         array.Length > 5 ? array[5].Trim(): string.Empty,
                                         string.Empty,
-                                        string.Empty
+                                        string.Empty,
+                                        version + "://" + content  // 原始连接 
                                         ));
         }
 
