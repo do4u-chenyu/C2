@@ -52,8 +52,8 @@ class Query(Thread):
         Thread.__init__(self)
         self.configDict   = {'AUTH_ACCOUNT': 0,'STRDST_IP': 1,'STRSRC_IP': 2,'DST_PORT': 3,'SRC_PORT': 4,'_REFERER': 5,'_QUERY_CONTENT': 6,'SRC_IPID': 7,'DST_IPID': 8,'CAPTURE_TIME': 9}
         self.lineEnd      = '_USERAGENT'
-        self.user_key     = ['account','uid','name','phone','username','userid']
-        self.password_key = ['password','pwd','pass','key']
+        self.user_key     = ['account','uid','name','phone','username','userid','admin_user']
+        self.password_key = ['password','pwd','pass','key', 'admin_pwd']
         self.other_key    = {'safecode':['safepass','code']}
        
         self.lineEndMarkLength  =len(self.lineEnd)
@@ -359,7 +359,7 @@ if __name__ == '__main__':
                     'loginauth','UserAcount','accounts','UserAccountN','member_uname',
                     'Button_Login','userloginid','accousername','userAccount','loginkey','ui_user',
                     'UserPsd','AgentID','AutoLogin','btnlogin','LoginAccount',
-                    'loginAdmin','loginyzm','txAccount','admin_name','txtUser']
+                    'loginAdmin','loginyzm','txAccount','admin_name','txtUser','admin_user']
     LOGIN_VALUE = ['admin', 'administrator', 'root','system','sys']
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
