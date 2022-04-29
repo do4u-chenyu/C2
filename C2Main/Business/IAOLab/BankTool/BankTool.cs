@@ -51,14 +51,23 @@ namespace C2.IAOLab.BankTool
             //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
             //request.Headers.Set("cookie", "td_cookie=1206126369; t=ed9584c3ee86740383a6dd94af963b16; r=461; UM_distinctid=17e2f0d4f7950c-0b8d03a6e92b87-3b39580e-1fa400-17e2f0d4f7a530; ASPSESSIONIDSSRDRBDB=CAJABDJAFEBEAAAHIOFCLBBC; CNZZDATA1279885053=887337253-1641463516-null%7C1643249436; security_session_verify=d256ef371a6fb7ffda35fec7c01e5c64");
 
-            HttpWebResponse response;
-            string postContent;
+            
+            string nameAndType = string.Empty;
+            string city = string.Empty;
             try
             {
                 using (var stream = request.GetRequestStream())
                     stream.Write(data, 0, data.Length);
-                response = (HttpWebResponse)request.GetResponse();
-                postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                string postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                JObject json = JObject.Parse(postContent);
+
+                if (json["status"].ToString() != "success")
+                    return json["masg"].ToString();
+
+                var gList = json["data"];
+                nameAndType = gList["type"].ToString();
+                city = gList["city"].ToString().Replace("-", string.Empty).Replace(" ", string.Empty);
             }
             catch
             {
@@ -72,12 +81,7 @@ namespace C2.IAOLab.BankTool
              * <a href="http://www.bankcomm.com" target="_blank">http://www.bankcomm.com</a>
              */
 
-            JObject json = JObject.Parse(postContent);
-           
-            if (json["success"].ToString() == "0")
-                return "银行卡查询接口错误";
-            var gList = json["card_info"];
-            string nameAndType = gList["type"].ToString();
+            
             string cardName = string.Empty;
             string cardType = string.Empty;
             
@@ -91,7 +95,7 @@ namespace C2.IAOLab.BankTool
             {
                 cardInfo.Add(cardName.Replace(" ", string.Empty));
                 cardInfo.Add(cardType);
-                cardInfo.Add(gList["city"].ToString().Replace("-", string.Empty).Replace(" ", string.Empty));
+                cardInfo.Add(city);
             }
            
             catch { }

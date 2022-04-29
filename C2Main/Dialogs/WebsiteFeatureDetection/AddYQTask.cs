@@ -24,8 +24,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     {
         public YQTaskInfo TaskInfo { set; get; }
         private String token;
-        //private int ruleID;
-        //private int ruleType;
+        private int ruleID;
+        private int ruleType;
         private String ruleName;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskModelName { get => this.taskModelComboBox.Text; set => this.taskModelComboBox.Text = value; }
@@ -38,8 +38,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             maxRow = 100;
             InitTaskName();
             token = string.Empty;
-            //ruleID = 1416305261;
-            //ruleType = 0;
+            ruleID = 1416305261;
+            ruleType = 0;
             ruleName = TaskName;
         }
 
@@ -185,22 +185,25 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void AddTasksByKey(string keyWord)
         {
-            Dictionary<string, string> pairs = new Dictionary<string, string> { };
-            pairs.Add("token", this.token);
-           // pairs.Add("id", this.ruleID);
+            Dictionary<string, object> pairs = new Dictionary<string, object> { };
+            pairs.Add("id", this.ruleID);
+            pairs.Add("type", this.ruleType);
             pairs.Add("keyword", keyWord);
             pairs.Add("name", this.ruleName);
 
             string result = string.Empty;
-            string requestURL = "https://api.fhyqw.com/rule?";
+            string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}",this.token);
             HttpHandler httpHandler = new HttpHandler();
             try
             {
-                Response resp = httpHandler.Post(requestURL, pairs);
+                Response resp = httpHandler.ObjDicPost(requestURL, pairs);
                 if (resp.StatusCode != HttpStatusCode.OK)
                     result = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
+                if (resDict["status"] != "200")
+                    result = string.Format("错误http状态：{0}。", resDict["msg"]);
+
             }
             catch (Exception ex)
             {

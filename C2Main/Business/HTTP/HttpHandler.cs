@@ -85,7 +85,49 @@ namespace C2.Business.HTTP
             return resp;
         }
 
+        public Response ObjDicPost(string url, Dictionary<string, object> postData, string token = "", int timeout = 10000)
+        {
+            Response resp = new Response();
+            try
+            {
+                GC.Collect();//Http相关的资源没有正确释放引起操作超时
+                ServicePointManager.DefaultConnectionLimit = 200;//系统支持同时存在http的connection个数过少引起操作超时
+
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidate);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+
+                req.Timeout = timeout;
+                string content = ObjectDicToJson(postData);
+                byte[] data = Encoding.UTF8.GetBytes(content);
+
+                req.Method = "POST";
+                req.ContentType = "application/json";
+                req.ContentLength = data.Length;
+                req.Headers.Add("Authorization", "Bearer " + token);
+
+                req.KeepAlive = true;//解决GetResponse操作超时问题
+
+                using (var stream = req.GetRequestStream())
+                    stream.Write(data, 0, data.Length);
+                resp = new Response((HttpWebResponse)req.GetResponse());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return resp;
+        }
+
         private string DictionaryToJson(Dictionary<string, string> dict)
+        {
+            if (dict.Count == 0)
+                return String.Empty;
+
+            return JsonConvert.SerializeObject(dict);
+        }
+        
+        private string ObjectDicToJson(Dictionary<string, object> dict)
         {
             if (dict.Count == 0)
                 return String.Empty;
