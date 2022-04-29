@@ -68,6 +68,7 @@
             this.userModelTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.aboutConfigPage = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
@@ -91,7 +92,6 @@
             this.WFDOKButton = new System.Windows.Forms.Button();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label9 = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -510,6 +510,15 @@
             this.aboutConfigPage.Text = "关于和注册";
             this.aboutConfigPage.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(113, 295);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(122, 17);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "到期时间 2022.06.09";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -517,7 +526,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 9;
-            this.label8.Text = "Version 2.1.0";
+            this.label8.Text = "Version 2.1.1";
             // 
             // textBox4
             // 
@@ -726,15 +735,6 @@
             this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(113, 295);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(122, 17);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "到期时间 2022.05.20";
             // 
             // ConfigForm
             // 

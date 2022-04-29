@@ -66,7 +66,7 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;
-                firstLine = "域名\t备案号\t机构名称\tIP\tIP归属地\t注册商\t注册商邮箱\t注册商手机号\t注册时间\t过期时间\n";
+                firstLine = "域名\t备案号\t机构名称\t机构服务标签\tIP\tIP归属地\t注册商\t注册商邮箱\t注册商手机号\t注册人邮箱\t注册人手机号\t注册时间\t过期时间\n";
                 tmpResult.Append(firstLine);
                 foreach (string seo in inputArray)
                 {
@@ -150,6 +150,7 @@ namespace C2.Dialogs.IAOLab
                     {
                         if (text == string.Empty)
                             return;
+                        fs.WriteLine("IP\t域名\t绑定时间\t解绑时间\t备注");
                         string[] lines = text.Split('\n');
                         foreach (string line in lines)
                         {
@@ -220,31 +221,41 @@ namespace C2.Dialogs.IAOLab
             {
                 return "网络连接中断";
             }
-            var gList = json["data"];
-            if (json["status"].ToString() == "失败" || gList == null)
-                return string.Format("SEO查询接口错误,{0}",json["msg"]);
 
-            List<string> cardInfo = new List<string>();
-            try
+            var gList = json["data"];
+            if (json["status"].IsNull() || gList == null || json["msg"].IsNull())
+                return "SEO查询接口错误";
+
+            if (gList.ToString().IsNullOrEmpty())
+                return "SEO查询接口无返回数据";
+
+            if (json["status"].ToString() != "success")
+                return string.Format("SEO查询接口错误,{0}", json["msg"]);
+
+            string[] cardInfo = new string[12]; 
+
+            cardInfo[0] = gList["备案号"].IsNull() ? "未知" : gList["备案号"].ToString().Trim();
+            cardInfo[1] = gList["机构名称"].IsNull() ? "未知" : gList["机构名称"].ToString().Trim();
+            cardInfo[2] = gList["机构服务标签"].IsNull() ? "未知" : gList["机构服务标签"].ToString().Trim();
+            cardInfo[3] = gList["IP"].IsNull() ? "未知" : gList["IP"].ToString().Trim();
+            cardInfo[4] = gList["IP归属地"].IsNull() ? "未知" : gList["IP归属地"].ToString().Trim();
+            cardInfo[4] = cardInfo[4].Replace("|", "-").Replace("0-", string.Empty).Replace(" ", string.Empty); ;
+            
+            if (!gList["域名注册信息"].IsNull())
             {
-                cardInfo.Add(gList["备案号"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["机构名称"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["IP"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["IP归属地"].ToString().Replace("|", "-").Replace("0-", string.Empty).Replace(" ", string.Empty));
-                cardInfo.Add(gList["域名注册信息"]["注册商"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["域名注册信息"]["注册商邮箱"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["域名注册信息"]["注册商手机号"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["域名注册信息"]["注册时间"].ToString().Replace(" ", string.Empty));
-                cardInfo.Add(gList["域名注册信息"]["过期时间"].ToString().Replace(" ", string.Empty));
+                var regInfo = gList["域名注册信息"];
+                cardInfo[5] = regInfo["注册商"].IsNull() ? "未知" : regInfo["注册商"].ToString().Trim();
+                cardInfo[6] = regInfo["注册商邮箱"].IsNull() ? "未知" : regInfo["注册商邮箱"].ToString().Trim();
+                cardInfo[7] = regInfo["注册商手机号"].IsNull() ? "未知" : regInfo["注册商手机号"].ToString().Trim();
+                cardInfo[7] = cardInfo[7].Replace("+86.", string.Empty);
+                cardInfo[8] = regInfo["注册人邮箱"].IsNull() ? "未知" : regInfo["注册人邮箱"].ToString().Trim();
+                cardInfo[9] = regInfo["注册人手机号"].IsNull() ? "未知" : regInfo["注册人手机号"].ToString().Trim();
+                cardInfo[9] = cardInfo[9].Replace("+86.", string.Empty);
+                cardInfo[10] = regInfo["注册时间"].IsNull() ? "未知" : regInfo["注册时间"].ToString().Trim();
+                cardInfo[11] = regInfo["过期时间"].IsNull() ? "未知" : regInfo["过期时间"].ToString().Trim();
             }
-            catch 
-            {
-                return "查询失败";
-            }
-            if (cardInfo.Count != 9)
-                return "查询失败";
-            for(int i=0;i<cardInfo.Count;i++)
-                cardInfo[i] = cardInfo[i] == string.Empty ? "未知" : cardInfo[i];
+            for(int i=0;i < cardInfo.Length;i++)
+                cardInfo[i] = cardInfo[i].IsNullOrEmpty() ? "未知" : cardInfo[i].Trim();
             return string.Join("\t", cardInfo);
         }
 

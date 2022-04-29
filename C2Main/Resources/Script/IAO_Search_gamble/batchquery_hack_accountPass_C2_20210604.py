@@ -32,7 +32,7 @@ class Airport:
                 "col": self.all_items + ['USERNAME', 'PASSWORD', '_COOKIE', '_MAINFILE', '_QUERY_CONTENT', 'keyWords',
                                          'Path', 'Phone', 'sites_path', 'serverType', 'distribution', 'memSize',
                                          'backup_path', 'new_sites_path'],
-                "key": ["DST_PORT:8888 AND login AND username AND password AND code"]
+                "key": ["DST_PORT:8888 AND login AND username AND password"]
             },
             "hack": {
                 "col": self.all_items + ['USERNAME', 'PASSWORD', '_MAINFILE', '_QUERY_CONTENT', '_QUERY_MATCHTERMS',
