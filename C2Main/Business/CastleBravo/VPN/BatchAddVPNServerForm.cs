@@ -14,12 +14,19 @@ namespace C2.Business.CastleBravo.VPN
 {
     partial class BatchAddVPNServerForm : StandardDialog
     {
-        readonly int maxRow;
+        private int maxRow;
+        private int mode;
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<VPNTaskConfig> Tasks;
         public BatchAddVPNServerForm()
         {
             InitializeComponent();
+            InitializeOther();
+        }
+
+        public void InitializeOther()
+        {
+            mode = 0;
             maxRow = 10000;
             FilePath = string.Empty;
             Tasks = new List<VPNTaskConfig>();
@@ -357,6 +364,31 @@ namespace C2.Business.CastleBravo.VPN
                 return true;
             }
             catch { return false; }
+        }
+
+
+        private void RadioButton_Click(object sender, EventArgs e)
+        {
+            new Label[] { label0, label1, label2 }.ToList().ForEach(v => v.Visible = false);
+            RadioButton rb = sender as RadioButton;
+            switch (rb.Name)
+            {
+                case "ss":
+                    label0.Visible = true;
+                    mode = 0;
+                    break;
+                case "addr":
+                    label1.Visible = true;
+                    mode = 1;
+                    break;
+                case "rss":
+                    label2.Visible = true;
+                    mode = 2;
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

@@ -56,13 +56,13 @@ namespace C2.Business.CastleBravo.VPN
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvPass = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvPassword = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvMethod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvInfoCollection = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvProbeInfo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvOtherInfo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCountry = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -87,6 +87,7 @@ namespace C2.Business.CastleBravo.VPN
             this.infoConfigStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lvContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -117,7 +118,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1253, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(1366, 34);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -299,29 +300,31 @@ namespace C2.Business.CastleBravo.VPN
             this.LV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvAddTime,
             this.lvRemark,
-            this.lvUrl,
+            this.lvHost,
             this.lvPort,
-            this.lvPass,
+            this.lvPassword,
             this.lvMethod,
             this.lvStatus,
             this.lvVersion,
-            this.lvInfoCollection,
+            this.lvProbeInfo,
             this.lvOtherInfo,
             this.lvIP,
-            this.lvCountry});
+            this.lvCountry,
+            this.lvContent});
             this.LV.ContextMenuStrip = this.contextMenuStrip;
             this.LV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LV.Font = new System.Drawing.Font("宋体", 9F);
             this.LV.FullRowSelect = true;
             this.LV.GridLines = true;
             this.LV.HideSelection = false;
+            this.LV.LabelEdit = true;
             this.LV.LabelWrap = false;
             this.LV.Location = new System.Drawing.Point(0, 34);
             this.LV.Margin = new System.Windows.Forms.Padding(6);
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1253, 458);
+            this.LV.Size = new System.Drawing.Size(1366, 458);
             this.LV.TabIndex = 4;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -335,27 +338,27 @@ namespace C2.Business.CastleBravo.VPN
             // lvRemark
             // 
             this.lvRemark.Text = "备注";
-            this.lvRemark.Width = 68;
+            this.lvRemark.Width = 215;
             // 
-            // lvUrl
+            // lvHost
             // 
-            this.lvUrl.Text = "主机地址";
-            this.lvUrl.Width = 120;
+            this.lvHost.Text = "主机地址";
+            this.lvHost.Width = 150;
             // 
             // lvPort
             // 
             this.lvPort.Text = "端口";
-            this.lvPort.Width = 74;
+            this.lvPort.Width = 54;
             // 
-            // lvPass
+            // lvPassword
             // 
-            this.lvPass.Text = "密码";
-            this.lvPass.Width = 96;
+            this.lvPassword.Text = "密码";
+            this.lvPassword.Width = 105;
             // 
             // lvMethod
             // 
             this.lvMethod.Text = "加密算法";
-            this.lvMethod.Width = 107;
+            this.lvMethod.Width = 80;
             // 
             // lvStatus
             // 
@@ -364,18 +367,18 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // lvVersion
             // 
-            this.lvVersion.Text = "客户端类型";
-            this.lvVersion.Width = 143;
+            this.lvVersion.Text = "客户端";
+            this.lvVersion.Width = 45;
             // 
-            // lvInfoCollection
+            // lvProbeInfo
             // 
-            this.lvInfoCollection.Text = "探针信息";
-            this.lvInfoCollection.Width = 111;
+            this.lvProbeInfo.Text = "探针信息";
+            this.lvProbeInfo.Width = 100;
             // 
             // lvOtherInfo
             // 
             this.lvOtherInfo.Text = "其他信息";
-            this.lvOtherInfo.Width = 100;
+            this.lvOtherInfo.Width = 160;
             // 
             // lvIP
             // 
@@ -513,7 +516,7 @@ namespace C2.Business.CastleBravo.VPN
             this.statusStrip1.Location = new System.Drawing.Point(0, 461);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 32, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1253, 31);
+            this.statusStrip1.Size = new System.Drawing.Size(1366, 31);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 6;
             // 
@@ -548,11 +551,15 @@ namespace C2.Business.CastleBravo.VPN
             this.actionStatusLabel.Size = new System.Drawing.Size(64, 24);
             this.actionStatusLabel.Text = "未开始";
             // 
+            // lvContent
+            // 
+            this.lvContent.Text = "分享地址";
+            // 
             // VPNMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1253, 492);
+            this.ClientSize = new System.Drawing.Size(1366, 492);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.LV);
             this.Controls.Add(this.toolStrip1);
@@ -599,12 +606,12 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ListView LV;
         private System.Windows.Forms.ColumnHeader lvAddTime;
         private System.Windows.Forms.ColumnHeader lvRemark;
-        private System.Windows.Forms.ColumnHeader lvUrl;
-        private System.Windows.Forms.ColumnHeader lvPass;
+        private System.Windows.Forms.ColumnHeader lvHost;
+        private System.Windows.Forms.ColumnHeader lvPassword;
         private System.Windows.Forms.ColumnHeader lvMethod;
         private System.Windows.Forms.ColumnHeader lvStatus;
         private System.Windows.Forms.ColumnHeader lvVersion;
-        private System.Windows.Forms.ColumnHeader lvInfoCollection;
+        private System.Windows.Forms.ColumnHeader lvProbeInfo;
         private System.Windows.Forms.ColumnHeader lvIP;
         private System.Windows.Forms.ColumnHeader lvCountry;
         private System.Windows.Forms.ColumnHeader lvPort;
@@ -635,5 +642,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem2;
         private System.Windows.Forms.ColumnHeader lvOtherInfo;
+        private System.Windows.Forms.ColumnHeader lvContent;
     }
 }

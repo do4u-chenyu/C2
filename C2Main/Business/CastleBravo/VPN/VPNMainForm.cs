@@ -117,6 +117,7 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems.Add(config.OtherInfo);
             lvi.SubItems.Add(config.IP);
             lvi.SubItems.Add(config.Country);
+            lvi.SubItems.Add(config.Content);
             
             // 指针关联
             lvi.Tag = config;
@@ -167,6 +168,7 @@ namespace C2.Business.CastleBravo.VPN
             LV.SelectedItems[0].SubItems[9].Text = cur.OtherInfo;
             LV.SelectedItems[0].SubItems[10].Text = cur.IP;
             LV.SelectedItems[0].SubItems[11].Text = cur.Country;
+            LV.SelectedItems[0].SubItems[12].Text = cur.Content;
             // 按道理不会出现索引越界
             tasks[tasks.IndexOf(old)] = cur;
         }
