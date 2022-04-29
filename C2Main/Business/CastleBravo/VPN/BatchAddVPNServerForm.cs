@@ -72,13 +72,57 @@ namespace C2.Business.CastleBravo.VPN
 
             string[] lines = this.wsTextBox.Text.SplitLine();
             for (int i = 0; i < Math.Min(lines.Length, maxRow); i++)
-                AddTasksByLine(lines[i]);
+                AddTasksByLine(lines[i].Trim());
 
             return true;
         }
 
 
         private void AddTasksByLine(string line)
+        {
+            switch(mode)
+            {
+                case 0:
+                    DoSSLine(line);
+                    break;
+                case 1:
+                    DoAddrLine(line);
+                    break;
+                case 2:
+                    DoRSSLine(line);
+                    break;
+            } 
+        }
+
+        private void DoAddrLine(string line)
+        {
+            Match mat = Regex.Match(line, @"^(\d{1,2}\.\d{1,2}\.\d{1,2}\.\d{1,2})[:\s]+(\d{1,5})$");
+            if (!mat.Success)
+                return;
+            string ip   = mat.Groups[1].Value;
+            string port = mat.Groups[2].Value;
+
+            Tasks.Add(new VPNTaskConfig(ST.NowString(),
+                            "疑似目标",
+                            ip,
+                            port,
+                            string.Empty,
+                            string.Empty,
+                            string.Empty,
+                            string.Empty,
+                            "探针结果:未测",
+                            string.Empty,
+                            ip,
+                            string.Empty,
+                            ip + ":" + port
+                            ));
+        }
+        private void DoRSSLine(string line)
+        {
+
+        }
+
+        private void DoSSLine(string line)
         {
             Match mat = Regex.Match(line, @"^(?i)(ss|ssr|vmess|vless|trojan)(?-i)://(.+)$");
             if (!mat.Success)
@@ -116,7 +160,7 @@ namespace C2.Business.CastleBravo.VPN
                                         string.Empty,              // CheckAliveOneTaskAsyn(contentArray),
                                         version.ToUpper(),
                                         "探针结果:未测",
-                                        array.Length > 5 ? array[5].Trim(): string.Empty,
+                                        array.Length > 5 ? array[5].Trim() : string.Empty,
                                         string.Empty,
                                         string.Empty,
                                         version + "://" + content  // 原始连接 
