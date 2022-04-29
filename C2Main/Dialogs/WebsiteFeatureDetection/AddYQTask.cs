@@ -23,6 +23,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     partial class AddYQTask : StandardDialog
     {
         public YQTaskInfo TaskInfo { set; get; }
+        private String token;
+        //private int ruleID;
+        //private int ruleType;
+        private String ruleName;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskModelName { get => this.taskModelComboBox.Text; set => this.taskModelComboBox.Text = value; }
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
@@ -33,6 +37,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             FilePath = string.Empty;
             maxRow = 100;
             InitTaskName();
+            token = string.Empty;
+            //ruleID = 1416305261;
+            //ruleType = 0;
+            ruleName = TaskName;
         }
 
         private void InitTaskName()
@@ -92,7 +100,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private bool GenAndCheckToken()
         {
-            string token = string.Empty;
             string validate = string.Empty;
             string getTokenURL = "https://api.fhyqw.com/auth/gettoken?username=iao2&password=60726279d628473f6f3f03d5b81b8c95&apikey=50c9429656499f3b26ca1bd6c8045239";
             try
@@ -100,17 +107,17 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 JObject json = JObject.Parse(HttpGet(getTokenURL));
                 JToken gList = json["results"];
                 foreach (JToken g in gList)
-                    token = g["access_token"].ToString();
+                    this.token = g["access_token"].ToString();
             }
             catch
             {
                 HelpUtil.ShowMessageBox("获取任务下发令牌失败");
                 return false;
             }
-            if (token.IsNullOrEmpty())
+            if (this.token.IsNullOrEmpty())
                 return false;
 
-            string validTokenURL = string.Format("https://api.fhyqw.com/auth/validtoken?token={0}", token);
+            string validTokenURL = string.Format("https://api.fhyqw.com/auth/validtoken?token={0}", this.token);
             try
             {
                 JObject json = JObject.Parse(HttpGet(validTokenURL));
@@ -178,6 +185,27 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void AddTasksByKey(string keyWord)
         {
+            Dictionary<string, string> pairs = new Dictionary<string, string> { };
+            pairs.Add("token", this.token);
+           // pairs.Add("id", this.ruleID);
+            pairs.Add("keyword", keyWord);
+            pairs.Add("name", this.ruleName);
+
+            string result = string.Empty;
+            string requestURL = "https://api.fhyqw.com/rule?";
+            HttpHandler httpHandler = new HttpHandler();
+            try
+            {
+                Response resp = httpHandler.Post(requestURL, pairs);
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    result = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+
+                Dictionary<string, string> resDict = resp.ResDict;
+            }
+            catch (Exception ex)
+            {
+                result =  "下发任务失败：" + ex.Message;
+            }
             return;
         }
     }
