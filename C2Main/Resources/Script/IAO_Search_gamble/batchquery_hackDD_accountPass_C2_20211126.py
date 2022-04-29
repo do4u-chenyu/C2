@@ -292,7 +292,26 @@ if __name__ == '__main__':
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
     DATA_PATH = './_queryResult_hackDD_' + defaultEnd
-    kwl = ['eval System.Text.Encoding.GetEncoding','edoced_46esab z0=', 'system _POST', 'array_map @ev', 'eval _SERVER', 'Function  To IsNumeric Else Response.Write Response.End z1=', 'BaSE64 %40eval%2F .27' ]
+    kwl = [
+    '_RELATIVEURL:aspx System.Convert System.Text FromBase64String Response.Write NOT UmVzcG9uc2UuV3JpdGUoImhhb3JlbmdlLmNvbVFRMzE3Mjc1NzM4Iik7',
+    '_RELATIVEURL:aspx System.Convert System.Text FromBase64String Request.Item',
+    '_RELATIVEURL:aspx System.Convert System.Text Request.Item HexAsciiConvert',
+    '.php @ini_set display_errors @set_time_limit @is_writable',
+    '.php @eval $_POST @base64_decode',
+    '.php @eval $_POST @str_rot13 @vav_frg @frg_gvzr_yvzvg qvfcynl_reebef',
+    'yv66vgAAADEBFgoAQgB7CQBfAHwJAF8AfQgAfgkAXwB OR yv66vgAAADEBDQoAQQB5CQBeAHoJAF4AewgAfAkAXgB9CAB OR ALIIALMHALQKAD8AtQcAtgoAtwC4CAC5CABfCgA OR ALoKALsAvAoAuwC9CABhBwC OR BwDACQCZAMEKALcAvAoAPwDCCgCZAMMKAD8AxAoAxQDGCgBBAJQIAMcKAMgAyQgAygoAKADLCADMCADNCg OR ACBBwD5DAD6APsMAPwA OR CgAdAL8LAGAAwAoACwC OR woAVQD8CgBVAP0IAP4KAFUA',
+    '_RELATIVEURL:asp byVal Error (IsNumeric OR I%s%N%u%m%e%r%i%c) NOT ((Mozilla/5.0 compatible Baiduspider/2.0 www.baidu.com/search/spider.html) OR (Mozilla/4.0 compatible; MSIE 9.0; Windows NT 6.1))',
+    '_RELATIVEURL:php ((z0= z1= z9=  BaSE64_dEcOdE) OR (z0= z9=  BaSE64_dEcOdE ((Mozilla/5.0 compatible Baiduspider/2.0 www.baidu.com/search/spider.html) OR (Mozilla/5.0+ compatible Googlebot/2.1 www.google.com/bot.html))))',
+    'Response.Write Text.Encoding.GetEncoding GetString FromBase64String Response.End z1=',
+    '_RELATIVEURL:asp Function hextostr byVal IsNumeric Description',
+    '_RELATIVEURL:aspx Response.Write System.Text.Encoding System.Convert.FromBase64String',
+    '_RELATIVEURL:jsp V3d3Um9vdFBhdGhDb2Rl',
+    '_RELATIVEURL:php @ini_set @set_time_limit @set_magic_quotes_runtime base64_decode $_POST',
+    '_RELATIVEURL:php ABC @eval base64_decode REQUEST',
+    '_RELATIVEURL:php array_map @ev',
+    '_RELATIVEURL:php eval _SERVER',
+    '_RELATIVEURL:php _TEXT:eval _TEXT:_SERVER NOT DOCUMENT_ROOT',
+    '_RELATIVEURL:asp Execute Server.ScriptTimeout Resume byVal IsNumeric Response.Write']
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     if startTime is None and endTime is None:
