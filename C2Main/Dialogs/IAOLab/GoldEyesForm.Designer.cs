@@ -44,6 +44,11 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uptime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,11 +56,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.domain = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uptime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -245,12 +245,47 @@
             this.uptime,
             this.memo});
             this.dataGridView1.GridColor = System.Drawing.Color.White;
-            this.dataGridView1.Location = new System.Drawing.Point(121, 103);
+            this.dataGridView1.Location = new System.Drawing.Point(117, 103);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(510, 207);
+            this.dataGridView1.Size = new System.Drawing.Size(519, 207);
             this.dataGridView1.TabIndex = 31;
+            // 
+            // IP
+            // 
+            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IP.FillWeight = 24F;
+            this.IP.HeaderText = "IP";
+            this.IP.Name = "IP";
+            // 
+            // domain
+            // 
+            this.domain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.domain.FillWeight = 24F;
+            this.domain.HeaderText = "域名";
+            this.domain.Name = "domain";
+            // 
+            // addtime
+            // 
+            this.addtime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.addtime.FillWeight = 20F;
+            this.addtime.HeaderText = "绑定时间";
+            this.addtime.Name = "addtime";
+            // 
+            // uptime
+            // 
+            this.uptime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.uptime.FillWeight = 20F;
+            this.uptime.HeaderText = "解绑时间";
+            this.uptime.Name = "uptime";
+            // 
+            // memo
+            // 
+            this.memo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.memo.FillWeight = 12F;
+            this.memo.HeaderText = "备注";
+            this.memo.Name = "memo";
             // 
             // button1
             // 
@@ -327,41 +362,6 @@
             this.richTextBox2.TabIndex = 24;
             this.richTextBox2.Text = "";
             this.richTextBox2.WordWrap = false;
-            // 
-            // IP
-            // 
-            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IP.FillWeight = 24F;
-            this.IP.HeaderText = "IP";
-            this.IP.Name = "IP";
-            // 
-            // domain
-            // 
-            this.domain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.domain.FillWeight = 24F;
-            this.domain.HeaderText = "域名";
-            this.domain.Name = "domain";
-            // 
-            // addtime
-            // 
-            this.addtime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.addtime.FillWeight = 20F;
-            this.addtime.HeaderText = "绑定时间";
-            this.addtime.Name = "addtime";
-            // 
-            // uptime
-            // 
-            this.uptime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.uptime.FillWeight = 20F;
-            this.uptime.HeaderText = "解绑时间";
-            this.uptime.Name = "uptime";
-            // 
-            // memo
-            // 
-            this.memo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.memo.FillWeight = 12F;
-            this.memo.HeaderText = "备注";
-            this.memo.Name = "memo";
             // 
             // GoldEyesForm
             // 
