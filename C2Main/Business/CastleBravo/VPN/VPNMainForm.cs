@@ -204,7 +204,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "BCP文件|*.bcp";
-            dialog.FileName = "VPN专项" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
+            dialog.FileName = "VPN专项-所有字段-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -235,12 +235,28 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 导出IP端口ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "BCP文件|*.bcp";
+            dialog.FileName = "VPN专项-IP端口-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
 
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            using (GuarderUtil.WaitCursor)
+                SaveResultToLocal(dialog.FileName, new int[] { 2, 3, 10 });
         }
 
         private void 导出分享地址ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "BCP文件|*.bcp";
+            dialog.FileName = "VPN专项-分享地址-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
 
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            using (GuarderUtil.WaitCursor)
+                SaveResultToLocal(dialog.FileName, new int[] { 12 });
         }
     }
 }

@@ -13,9 +13,12 @@ namespace C2.Business.CastleBravo.VPN
         readonly string configFFP = Path.Combine(Global.ResourcesPath, "WebShellConfig", "vpnconfig.db");
 
 
-        private void SaveResultToLocal(string path)
+        private void SaveResultToLocal(string path, int[] columns = null)
         {
-            StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8);
+            if (columns == null)
+                columns = new int[0];
+
+            StreamWriter sw = new StreamWriter(path, false, Encoding.Default);
             try
             {
                 List<string> tmpLists = new List<string>();
@@ -23,7 +26,10 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     tmpLists.Clear();
                     for (int i = 0; i < lvi.SubItems.Count; i++)
-                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", OpUtil.StringBlank));
+                    {
+                        if (columns.Length == 0 || columns._Contains(i))
+                            tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", OpUtil.StringBlank));
+                    }         
                     sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
                 }
             }
