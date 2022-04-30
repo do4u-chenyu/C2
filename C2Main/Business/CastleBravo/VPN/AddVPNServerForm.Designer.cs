@@ -29,27 +29,28 @@ namespace C2.Business.CastleBravo.VPN
         /// </summary>
         private void InitializeComponent()
         {
-            this.encryptComboBox = new System.Windows.Forms.ComboBox();
+            this.methodCB = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.ssTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.portTextBox = new System.Windows.Forms.TextBox();
+            this.portTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.hostTextBox = new System.Windows.Forms.TextBox();
+            this.hostTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.remarkTextBox = new System.Windows.Forms.TextBox();
-            this.pwdTextBox = new System.Windows.Forms.TextBox();
-            this.versionCombox = new System.Windows.Forms.ComboBox();
+            this.remarkTB = new System.Windows.Forms.TextBox();
+            this.pwdTB = new System.Windows.Forms.TextBox();
+            this.versionCB = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // encryptComboBox
+            // methodCB
             // 
-            this.encryptComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.encryptComboBox.FormattingEnabled = true;
-            this.encryptComboBox.Items.AddRange(new object[] {
+            this.methodCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.methodCB.FormattingEnabled = true;
+            this.methodCB.Items.AddRange(new object[] {
+            "自定义",
             "chacha20-ietf-poly1305",
             "xchacha20-ietf-poly1305",
             "chacha20-ietf",
@@ -69,13 +70,12 @@ namespace C2.Business.CastleBravo.VPN
             "camellia-256-cfb",
             "camellia-192-cfb",
             "camellia-128-cfb",
-            "auto",
-            "自定义"});
-            this.encryptComboBox.Location = new System.Drawing.Point(136, 226);
-            this.encryptComboBox.Margin = new System.Windows.Forms.Padding(4);
-            this.encryptComboBox.Name = "encryptComboBox";
-            this.encryptComboBox.Size = new System.Drawing.Size(426, 26);
-            this.encryptComboBox.TabIndex = 10032;
+            "auto"});
+            this.methodCB.Location = new System.Drawing.Point(136, 226);
+            this.methodCB.Margin = new System.Windows.Forms.Padding(4);
+            this.methodCB.Name = "methodCB";
+            this.methodCB.Size = new System.Drawing.Size(426, 26);
+            this.methodCB.TabIndex = 10032;
             // 
             // label7
             // 
@@ -128,13 +128,13 @@ namespace C2.Business.CastleBravo.VPN
             this.label3.TabIndex = 10026;
             this.label3.Text = "端口：";
             // 
-            // portTextBox
+            // portTB
             // 
-            this.portTextBox.Location = new System.Drawing.Point(136, 122);
-            this.portTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(426, 28);
-            this.portTextBox.TabIndex = 10025;
+            this.portTB.Location = new System.Drawing.Point(136, 122);
+            this.portTB.Margin = new System.Windows.Forms.Padding(4);
+            this.portTB.Name = "portTB";
+            this.portTB.Size = new System.Drawing.Size(426, 28);
+            this.portTB.TabIndex = 10025;
             // 
             // label2
             // 
@@ -146,13 +146,13 @@ namespace C2.Business.CastleBravo.VPN
             this.label2.TabIndex = 10024;
             this.label2.Text = "主机地址：";
             // 
-            // hostTextBox
+            // hostTB
             // 
-            this.hostTextBox.Location = new System.Drawing.Point(136, 69);
-            this.hostTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.hostTextBox.Name = "hostTextBox";
-            this.hostTextBox.Size = new System.Drawing.Size(426, 28);
-            this.hostTextBox.TabIndex = 10023;
+            this.hostTB.Location = new System.Drawing.Point(136, 69);
+            this.hostTB.Margin = new System.Windows.Forms.Padding(4);
+            this.hostTB.Name = "hostTB";
+            this.hostTB.Size = new System.Drawing.Size(426, 28);
+            this.hostTB.TabIndex = 10023;
             // 
             // label1
             // 
@@ -164,38 +164,38 @@ namespace C2.Business.CastleBravo.VPN
             this.label1.TabIndex = 10022;
             this.label1.Text = "备注：";
             // 
-            // remarkTextBox
+            // remarkTB
             // 
-            this.remarkTextBox.Location = new System.Drawing.Point(136, 16);
-            this.remarkTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.remarkTextBox.Name = "remarkTextBox";
-            this.remarkTextBox.Size = new System.Drawing.Size(426, 28);
-            this.remarkTextBox.TabIndex = 10021;
+            this.remarkTB.Location = new System.Drawing.Point(136, 16);
+            this.remarkTB.Margin = new System.Windows.Forms.Padding(4);
+            this.remarkTB.Name = "remarkTB";
+            this.remarkTB.Size = new System.Drawing.Size(426, 28);
+            this.remarkTB.TabIndex = 10021;
             // 
-            // pwdTextBox
+            // pwdTB
             // 
-            this.pwdTextBox.Location = new System.Drawing.Point(136, 174);
-            this.pwdTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.pwdTextBox.Name = "pwdTextBox";
-            this.pwdTextBox.Size = new System.Drawing.Size(426, 28);
-            this.pwdTextBox.TabIndex = 10038;
+            this.pwdTB.Location = new System.Drawing.Point(136, 174);
+            this.pwdTB.Margin = new System.Windows.Forms.Padding(4);
+            this.pwdTB.Name = "pwdTB";
+            this.pwdTB.Size = new System.Drawing.Size(426, 28);
+            this.pwdTB.TabIndex = 10038;
             // 
-            // versionCombox
+            // versionCB
             // 
-            this.versionCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.versionCombox.FormattingEnabled = true;
-            this.versionCombox.Items.AddRange(new object[] {
+            this.versionCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.versionCB.FormattingEnabled = true;
+            this.versionCB.Items.AddRange(new object[] {
+            "自定义",
             "SS",
             "SSR",
-            "Vmess",
-            "Vless",
-            "Trojan",
-            "自定义"});
-            this.versionCombox.Location = new System.Drawing.Point(136, 279);
-            this.versionCombox.Margin = new System.Windows.Forms.Padding(4);
-            this.versionCombox.Name = "versionCombox";
-            this.versionCombox.Size = new System.Drawing.Size(426, 26);
-            this.versionCombox.TabIndex = 10040;
+            "VMESS",
+            "VLESS",
+            "TROJAN"});
+            this.versionCB.Location = new System.Drawing.Point(136, 279);
+            this.versionCB.Margin = new System.Windows.Forms.Padding(4);
+            this.versionCB.Name = "versionCB";
+            this.versionCB.Size = new System.Drawing.Size(426, 26);
+            this.versionCB.TabIndex = 10040;
             // 
             // label12
             // 
@@ -212,55 +212,55 @@ namespace C2.Business.CastleBravo.VPN
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 614);
-            this.Controls.Add(this.versionCombox);
+            this.Controls.Add(this.versionCB);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.pwdTextBox);
-            this.Controls.Add(this.encryptComboBox);
+            this.Controls.Add(this.pwdTB);
+            this.Controls.Add(this.methodCB);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.ssTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.portTextBox);
+            this.Controls.Add(this.portTB);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.hostTextBox);
+            this.Controls.Add(this.hostTB);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.remarkTextBox);
+            this.Controls.Add(this.remarkTB);
             this.Name = "AddVPNServerForm";
             this.Text = "添加VPN服务器";
-            this.Controls.SetChildIndex(this.remarkTextBox, 0);
+            this.Controls.SetChildIndex(this.remarkTB, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.hostTextBox, 0);
+            this.Controls.SetChildIndex(this.hostTB, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.portTextBox, 0);
+            this.Controls.SetChildIndex(this.portTB, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.ssTextBox, 0);
             this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.encryptComboBox, 0);
-            this.Controls.SetChildIndex(this.pwdTextBox, 0);
+            this.Controls.SetChildIndex(this.methodCB, 0);
+            this.Controls.SetChildIndex(this.pwdTB, 0);
             this.Controls.SetChildIndex(this.label12, 0);
-            this.Controls.SetChildIndex(this.versionCombox, 0);
+            this.Controls.SetChildIndex(this.versionCB, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox encryptComboBox;
+        private System.Windows.Forms.ComboBox methodCB;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox ssTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox portTextBox;
+        private System.Windows.Forms.TextBox portTB;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox hostTextBox;
+        private System.Windows.Forms.TextBox hostTB;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox remarkTextBox;
-        private System.Windows.Forms.TextBox pwdTextBox;
-        private System.Windows.Forms.ComboBox versionCombox;
+        private System.Windows.Forms.TextBox remarkTB;
+        private System.Windows.Forms.TextBox pwdTB;
+        private System.Windows.Forms.ComboBox versionCB;
         private System.Windows.Forms.Label label12;
     }
 }

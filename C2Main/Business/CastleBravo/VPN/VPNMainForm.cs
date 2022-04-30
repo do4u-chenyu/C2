@@ -17,6 +17,8 @@ namespace C2.Business.CastleBravo.VPN
         List<VPNTaskConfig> tasks = new List<VPNTaskConfig>();
         private FindSet finder;
 
+        //private bool actionNeedStop = false;
+
         private ToolStripItem[] enableItems;
         public VPNMainForm()
         {
@@ -286,6 +288,16 @@ namespace C2.Business.CastleBravo.VPN
         private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             EditToolStripMenuItem_Click(sender, e);
+        }
+
+        private void VPNMainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //this.actionNeedStop = true;
+            using (GuarderUtil.WaitCursor)
+            {
+                RefreshTasks();
+                SaveDB();
+            }
         }
     }
 }

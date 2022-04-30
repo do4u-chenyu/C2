@@ -675,6 +675,7 @@ namespace C2.Business.CastleBravo.VPN
             this.Name = "VPNMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VPN专项";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VPNMainForm_FormClosing);
             this.Load += new System.EventHandler(this.VPNMainForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
