@@ -48,7 +48,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 添加ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            VPNTaskConfig config = new AddVPNServerForm().ShowDialog(ST.NowString());
+            VPNTaskConfig config = new AddVPNServerForm().ShowDialogNew(ST.NowString());
             if (config == VPNTaskConfig.Empty)
                 return;
             LV.Items.Add(NewLVI(config));
@@ -119,7 +119,7 @@ namespace C2.Business.CastleBravo.VPN
                 return;
 
             VPNTaskConfig old = LV.SelectedItems[0].Tag as VPNTaskConfig;
-            VPNTaskConfig cur = new AddVPNServerForm().ShowDialog(ST.NowString());
+            VPNTaskConfig cur = new AddVPNServerForm().ShowDialogEdit(old);
 
             if (cur == VPNTaskConfig.Empty)
                 return;
@@ -186,15 +186,23 @@ namespace C2.Business.CastleBravo.VPN
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CopyToClipboard();
+        }
+
+        private void CopyToClipboard(int[] columns = null)
+        {
             // 复制当前的选中单元格到粘贴板
             if (this.LV.SelectedItems.Count == 0)
                 return;
 
+            columns = columns ?? (new int[0]);
+       
             StringBuilder sb = new StringBuilder();
             foreach (ListViewItem lvi in this.LV.SelectedItems)
-            {
+            { 
                 for (int i = 0; i < lvi.SubItems.Count; i++)
-                    sb.Append(lvi.SubItems[i].Text).Append(OpUtil.TabSeparator);
+                    if (columns.Length == 0 || columns._Contains(i))
+                        sb.Append(lvi.SubItems[i].Text).Append(OpUtil.TabSeparator);      
                 sb.TrimEndT().AppendLine();
             }
             FileUtil.TryClipboardSetText(sb.ToString());
@@ -257,6 +265,27 @@ namespace C2.Business.CastleBravo.VPN
 
             using (GuarderUtil.WaitCursor)
                 SaveResultToLocal(dialog.FileName, new int[] { 12 });
+        }
+
+        private void CopySSMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyToClipboard(new int[] { 12 });
+        }
+
+        private void CopyOtherMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyToClipboard(new int[] { 9 });
+        }
+
+        private void CopyIPPortMenuItem_Click(object sender, EventArgs e)
+        {
+            // 先10后3, 待验证
+            CopyToClipboard(new int[] { 2, 3, 10 });
+        }
+
+        private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EditToolStripMenuItem_Click(sender, e);
         }
     }
 }
