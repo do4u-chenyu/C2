@@ -19,12 +19,16 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private static WebClientEx Create(int timeout, ProxySetting setting)
         {
+
             WebClientEx one = new WebClientEx()
             {
                 Timeout = timeout,
                 Encoding = Encoding.Default,
-                CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore),
+                CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore), 
             };
+
+            ServicePointManager.ServerCertificateValidationCallback =
+                    delegate { return true; };
 
             if (setting != ProxySetting.Empty && setting.Enable)
             {
@@ -57,5 +61,23 @@ namespace C2.Business.CastleBravo.WebShellTool
                                    .UploadData(url, "POST", bytes);
                 return bytes;
         }
+
+        private static string Get(string url, int timeout, ProxySetting proxy)
+        {
+            return WebClientEx.Create(timeout, proxy).DownloadString(url);
+        }
+
+        public static string TryGet(string url, int timeout, ProxySetting proxy)
+        {
+            try
+            {
+                return Get(url, timeout, proxy);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
     }
 }

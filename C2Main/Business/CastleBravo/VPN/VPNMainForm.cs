@@ -64,7 +64,10 @@ namespace C2.Business.CastleBravo.VPN
             using (GuarderUtil.WaitCursor)
                 LV.Items.AddRange(NewLVIS(dialog.Tasks));
             tasks.AddRange(dialog.Tasks);
+            SaveDB();
         }
+
+
 
         private void 查找ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
@@ -87,11 +90,7 @@ namespace C2.Business.CastleBravo.VPN
             ResetSLabel();
         }
 
-        private void ResetSLabel()
-        {
-            ItemCountSLabel.Text = string.Format("共{0}项", LV.Items.Count);
-            ProxyEnableSLabel.Text = "代理" + (Proxy.Enable ? "启用" : "关闭");
-        }
+
 
         
        // private bool actionNeedStop = false;

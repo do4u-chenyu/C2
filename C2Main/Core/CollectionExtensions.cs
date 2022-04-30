@@ -244,7 +244,7 @@ namespace C2.Core
 
         public static string[] SplitLine(this string str)
         {
-            return str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            return str.Split(new string[] { Environment.NewLine, "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public static bool In(this string str, string[] vs)

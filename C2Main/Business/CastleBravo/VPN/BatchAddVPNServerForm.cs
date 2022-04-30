@@ -9,11 +9,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Linq;
+using C2.Business.CastleBravo.WebShellTool;
 
 namespace C2.Business.CastleBravo.VPN
 {
     partial class BatchAddVPNServerForm : StandardDialog
     {
+        private readonly string ssline   = @"^(?i)(ss|ssr|vmess|vless|trojan)(?-i)://(.+)$";
+        private readonly string addrline = @"^(\d{1,2}\.\d{1,2}\.\d{1,2}\.\d{1,2})[:\s]+(\d{1,5})$";
         private int maxRow;
         private int mode;
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
@@ -27,7 +30,7 @@ namespace C2.Business.CastleBravo.VPN
         public void InitializeOther()
         {
             mode = 0;
-            maxRow = 10000;
+            maxRow = 10000 * 20;
             FilePath = string.Empty;
             Tasks = new List<VPNTaskConfig>();
             OKButton.Size = new System.Drawing.Size(75, 27);
@@ -94,16 +97,16 @@ namespace C2.Business.CastleBravo.VPN
             } 
         }
 
-        private void DoAddrLine(string line)
+        private void DoAddrLine(string line, Match mat = null)
         {
-            Match mat = Regex.Match(line, @"^(\d{1,2}\.\d{1,2}\.\d{1,2}\.\d{1,2})[:\s]+(\d{1,5})$");
+            mat = mat ?? Regex.Match(line, addrline);
             if (!mat.Success)
                 return;
             string ip   = mat.Groups[1].Value;
             string port = mat.Groups[2].Value;
 
             Tasks.Add(new VPNTaskConfig(ST.NowString(),
-                            "疑似目标",
+                            "候选目标",
                             ip,
                             port,
                             string.Empty,
@@ -119,14 +122,33 @@ namespace C2.Business.CastleBravo.VPN
         }
         private void DoRSSLine(string line)
         {
+            bool isRss = line.StartsWith("http://") || line.StartsWith("https://");
+            if (!isRss)
+                return;
 
+            using (GuarderUtil.WaitCursor)
+            {
+                string ret = TryDecodeBase64(WebClientEx.TryGet(line, 
+                                                                Global.WebClientDefaultTimeout,
+                                                                ProxySetting.Empty));
+                foreach (string ss in ret.SplitLine())
+                    DoSSLine(ss);
+            }
         }
 
         private void DoSSLine(string line)
         {
-            Match mat = Regex.Match(line, @"^(?i)(ss|ssr|vmess|vless|trojan)(?-i)://(.+)$");
+            Match mat = Regex.Match(line, ssline);
             if (!mat.Success)
+            {
+                // 妥协一下,很多时候就直接粘贴IP:端口了,没选cb按钮
+                mat = Regex.Match(line, addrline);
+                if (mat.Success)
+                    DoAddrLine(line, mat);
+                else
+                    DoRSSLine(line);
                 return;
+            }
 
             string version = mat.Groups[1].Value.ToLower();
             string content = mat.Groups[2].Value.Trim();
