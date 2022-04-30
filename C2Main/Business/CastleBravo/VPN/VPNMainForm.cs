@@ -5,7 +5,6 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
@@ -67,8 +66,6 @@ namespace C2.Business.CastleBravo.VPN
             SaveDB();
         }
 
-
-
         private void 查找ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             finder.FindHit();
@@ -102,37 +99,9 @@ namespace C2.Business.CastleBravo.VPN
         static bool isAlertnatingRows = true;
         static readonly Color SingleRowColor = Color.FromArgb(255, 217, 225, 242);
         static readonly Color AltertnatingRowColor = Color.FromArgb(255, 208, 206, 206);
-        private ListViewItem NewLVI(VPNTaskConfig config)
-        {
-            ListViewItem lvi = new ListViewItem(config.CreateTime);
-            lvi.SubItems.Add(config.Remark);
-            lvi.SubItems.Add(config.Host);
-            lvi.SubItems.Add(config.Port);
-            lvi.SubItems.Add(config.Password);
-            lvi.SubItems.Add(config.Method);
-            lvi.SubItems.Add(config.Status);
-            lvi.SubItems.Add(config.SSVersion);
-            lvi.SubItems.Add(config.ProbeInfo);
-            lvi.SubItems.Add(config.OtherInfo);
-            lvi.SubItems.Add(config.IP);
-            lvi.SubItems.Add(config.Country);
-            lvi.SubItems.Add(config.Content);
-            
-            // 指针关联
-            lvi.Tag = config;
-            // 设置间隔行背景色
-            lvi.BackColor = isAlertnatingRows ? SingleRowColor : AltertnatingRowColor;
-            isAlertnatingRows = !isAlertnatingRows;
-            return lvi;
-        }
 
-        private ListViewItem[] NewLVIS(IList<VPNTaskConfig> tasks)
-        {
-            ListViewItem[] lvis = new ListViewItem[tasks.Count];
-            for (int i = 0; i < lvis.Length; i++)
-                lvis[i] = NewLVI(tasks[i]);
-            return lvis;
-        }
+
+
 
         private void 重新开始ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
@@ -244,27 +213,7 @@ namespace C2.Business.CastleBravo.VPN
                 SaveResultToLocal(dialog.FileName);
         }
 
-        private void SaveResultToLocal(string path)
-        {
-            StreamWriter sw = new StreamWriter(path, false, Encoding.GetEncoding("gb2312"));
-            try
-            {
-                List<string> tmpLists = new List<string>();
-                foreach (ListViewItem lvi in LV.Items)
-                {
-                    tmpLists.Clear();
-                    for (int i = 0; i < lvi.SubItems.Count; i++)
-                        tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", OpUtil.StringBlank));
-                    sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
-                }
-            }
-            catch { }
-            finally
-            {
-                if (sw != null)
-                    sw.Close();
-            }
-        }
+
 
         private void RefreshBackColor()
         {
@@ -274,18 +223,24 @@ namespace C2.Business.CastleBravo.VPN
                 isAlertnatingRows = !isAlertnatingRows;
             }
         }
-        private void LV_ColumnClick(object sender, ColumnClickEventArgs e)
+
+
+        private void VPNMainForm_Load(object sender, EventArgs e)
         {
-            LVComparer c = LV.ListViewItemSorter as LVComparer;
-            c.col = e.Column;
-            c.asce = !c.asce;
-            using (WaitCursor)
-            using (new LayoutGuarder(LV))
-            {
-                LV.Sort();
-                RefreshTasks(false); // 回写任务, 速度慢, 将来要优化
-                RefreshBackColor();  // 重新布局
-            }
+            LoadDB();
+            RefreshLV();
+            ResetSLabel();
+            StaticItems();
+        }
+
+        private void 导出IP端口ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 导出分享地址ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
