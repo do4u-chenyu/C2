@@ -106,7 +106,8 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 重新开始ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-
+            RandomProbeForm randomProbeForm = new RandomProbeForm();
+            randomProbeForm.ShowDialog();
         }
 
         private void 继续上次ToolStripMenuItem_Click(object sender, System.EventArgs e)
