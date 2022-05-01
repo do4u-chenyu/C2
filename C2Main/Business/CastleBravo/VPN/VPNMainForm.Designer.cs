@@ -456,7 +456,7 @@ namespace C2.Business.CastleBravo.VPN
             this.导出IP端口ToolStripMenuItem,
             this.导出分享地址ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(259, 388);
+            this.contextMenuStrip.Size = new System.Drawing.Size(259, 421);
             // 
             // EditToolStripMenuItem
             // 
@@ -488,6 +488,7 @@ namespace C2.Business.CastleBravo.VPN
             this.DDMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mysqlProbeToolStripMenuItem,
             this.随机探针ToolStripMenuItem});
+            this.DDMenuItem.Enabled = false;
             this.DDMenuItem.Name = "DDMenuItem";
             this.DDMenuItem.Size = new System.Drawing.Size(258, 30);
             this.DDMenuItem.Text = "主动探针";
@@ -499,7 +500,7 @@ namespace C2.Business.CastleBravo.VPN
             this.配置文件探针ToolStripMenuItem,
             this.userMYD探针ToolStripMenuItem});
             this.mysqlProbeToolStripMenuItem.Name = "mysqlProbeToolStripMenuItem";
-            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
+            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.mysqlProbeToolStripMenuItem.Text = "重放探针";
             // 
             // mysqlBlastingToolStripMenuItem
@@ -526,7 +527,7 @@ namespace C2.Business.CastleBravo.VPN
             // 随机探针ToolStripMenuItem
             // 
             this.随机探针ToolStripMenuItem.Name = "随机探针ToolStripMenuItem";
-            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
+            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.随机探针ToolStripMenuItem.Text = "随机探针";
             // 
             // toolStripSeparator4
