@@ -111,6 +111,7 @@ namespace C2.Business.CastleBravo.VPN
             this.StatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -140,7 +141,8 @@ namespace C2.Business.CastleBravo.VPN
             this.refreshStopMenu,
             this.progressBar,
             this.progressMenu,
-            this.proxySettingMenu});
+            this.proxySettingMenu,
+            this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
@@ -760,6 +762,14 @@ namespace C2.Business.CastleBravo.VPN
             this.actionStatusLabel.Size = new System.Drawing.Size(64, 24);
             this.actionStatusLabel.Text = "未开始";
             // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(84, 29);
+            this.toolStripLabel2.Text = "帮助文档";
+            this.toolStripLabel2.Click += new System.EventHandler(this.帮助文档_ToolStripLabel_Click);
+            // 
             // VPNMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
@@ -873,5 +883,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
     }
 }

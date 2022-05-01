@@ -334,5 +334,10 @@ namespace C2.Business.CastleBravo.VPN
         {
 
         }
+
+        private void 帮助文档_ToolStripLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
