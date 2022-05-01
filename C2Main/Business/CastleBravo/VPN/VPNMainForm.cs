@@ -41,7 +41,6 @@ namespace C2.Business.CastleBravo.VPN
                 this.editDDB,
                 this.proxySettingMenu,
                 this.refreshAllShellMenu,
-                this.secondRefreshMenu,
                 this.checkAliveDDB,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
@@ -298,6 +297,11 @@ namespace C2.Business.CastleBravo.VPN
                 RefreshTasks();
                 SaveDB();
             }
+        }
+
+        private void 验活配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new CAForm().ShowDialog();
         }
     }
 }

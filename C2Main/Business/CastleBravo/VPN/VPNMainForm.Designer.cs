@@ -39,11 +39,13 @@ namespace C2.Business.CastleBravo.VPN
             this.查找ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.checkAliveDDB = new System.Windows.Forms.ToolStripDropDownButton();
-            this.地址DNSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ping验活ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tcp验活ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshAllShellMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.重新开始ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.继续上次ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.secondRefreshMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.地址DNSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.验活配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.passwdBlastingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重新开始ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +77,10 @@ namespace C2.Business.CastleBravo.VPN
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CheckAliveSelectedItemMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.DDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mysqlProbeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mysqlBlastingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,9 +187,11 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.checkAliveDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.checkAliveDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.地址DNSToolStripMenuItem,
+            this.ping验活ToolStripMenuItem,
+            this.tcp验活ToolStripMenuItem,
             this.refreshAllShellMenu,
-            this.secondRefreshMenu});
+            this.地址DNSToolStripMenuItem,
+            this.验活配置ToolStripMenuItem});
             this.checkAliveDDB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.checkAliveDDB.Image = ((System.Drawing.Image)(resources.GetObject("checkAliveDDB.Image")));
             this.checkAliveDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -192,12 +199,17 @@ namespace C2.Business.CastleBravo.VPN
             this.checkAliveDDB.Size = new System.Drawing.Size(102, 29);
             this.checkAliveDDB.Text = "验活功能";
             // 
-            // 地址DNSToolStripMenuItem
+            // ping验活ToolStripMenuItem
             // 
-            this.地址DNSToolStripMenuItem.Name = "地址DNSToolStripMenuItem";
-            this.地址DNSToolStripMenuItem.Size = new System.Drawing.Size(222, 34);
-            this.地址DNSToolStripMenuItem.Text = "主机域名查IP";
-            this.地址DNSToolStripMenuItem.ToolTipText = "对主机地址是域名的情况通过DNS查找IP";
+            this.ping验活ToolStripMenuItem.Name = "ping验活ToolStripMenuItem";
+            this.ping验活ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ping验活ToolStripMenuItem.Text = "Ping验活";
+            // 
+            // tcp验活ToolStripMenuItem
+            // 
+            this.tcp验活ToolStripMenuItem.Name = "tcp验活ToolStripMenuItem";
+            this.tcp验活ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.tcp验活ToolStripMenuItem.Text = "Tcp验活";
             // 
             // refreshAllShellMenu
             // 
@@ -205,8 +217,9 @@ namespace C2.Business.CastleBravo.VPN
             this.重新开始ToolStripMenuItem1,
             this.继续上次ToolStripMenuItem1});
             this.refreshAllShellMenu.Name = "refreshAllShellMenu";
-            this.refreshAllShellMenu.Size = new System.Drawing.Size(222, 34);
-            this.refreshAllShellMenu.Text = "批量验活";
+            this.refreshAllShellMenu.Size = new System.Drawing.Size(270, 34);
+            this.refreshAllShellMenu.Text = "204验活(推荐)";
+            this.refreshAllShellMenu.ToolTipText = "访问全球204网站来验活";
             // 
             // 重新开始ToolStripMenuItem1
             // 
@@ -222,11 +235,19 @@ namespace C2.Business.CastleBravo.VPN
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
             this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.继续上次_二刷不活_ToolStripMenuItem_Click);
             // 
-            // secondRefreshMenu
+            // 地址DNSToolStripMenuItem
             // 
-            this.secondRefreshMenu.Name = "secondRefreshMenu";
-            this.secondRefreshMenu.Size = new System.Drawing.Size(222, 34);
-            this.secondRefreshMenu.Text = "二刷不活";
+            this.地址DNSToolStripMenuItem.Name = "地址DNSToolStripMenuItem";
+            this.地址DNSToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.地址DNSToolStripMenuItem.Text = "域名查IP";
+            this.地址DNSToolStripMenuItem.ToolTipText = "对主机地址是域名的情况通过DNS查找IP";
+            // 
+            // 验活配置ToolStripMenuItem
+            // 
+            this.验活配置ToolStripMenuItem.Name = "验活配置ToolStripMenuItem";
+            this.验活配置ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.验活配置ToolStripMenuItem.Text = "验活配置";
+            this.验活配置ToolStripMenuItem.Click += new System.EventHandler(this.验活配置ToolStripMenuItem_Click);
             // 
             // infoCollectionMenu
             // 
@@ -442,7 +463,10 @@ namespace C2.Business.CastleBravo.VPN
             this.EditToolStripMenuItem,
             this.RemoveToolStripMenuItem,
             this.toolStripSeparator,
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
             this.CheckAliveSelectedItemMenuItem,
+            this.toolStripMenuItem3,
             this.DDMenuItem,
             this.toolStripSeparator4,
             this.ClearAllToolStripMenuItem,
@@ -456,7 +480,7 @@ namespace C2.Business.CastleBravo.VPN
             this.导出IP端口ToolStripMenuItem,
             this.导出分享地址ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(259, 421);
+            this.contextMenuStrip.Size = new System.Drawing.Size(259, 478);
             // 
             // EditToolStripMenuItem
             // 
@@ -477,11 +501,29 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(255, 6);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(258, 30);
+            this.toolStripMenuItem1.Text = "选定项验活-Ping";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(258, 30);
+            this.toolStripMenuItem2.Text = "选定项验活-Tcp";
+            // 
             // CheckAliveSelectedItemMenuItem
             // 
             this.CheckAliveSelectedItemMenuItem.Name = "CheckAliveSelectedItemMenuItem";
             this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(258, 30);
-            this.CheckAliveSelectedItemMenuItem.Text = "选定项验活";
+            this.CheckAliveSelectedItemMenuItem.Text = "选定项验活-204";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(258, 30);
+            this.toolStripMenuItem3.Text = "选定项验活-反查IP";
             // 
             // DDMenuItem
             // 
@@ -500,7 +542,7 @@ namespace C2.Business.CastleBravo.VPN
             this.配置文件探针ToolStripMenuItem,
             this.userMYD探针ToolStripMenuItem});
             this.mysqlProbeToolStripMenuItem.Name = "mysqlProbeToolStripMenuItem";
-            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.mysqlProbeToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.mysqlProbeToolStripMenuItem.Text = "重放探针";
             // 
             // mysqlBlastingToolStripMenuItem
@@ -527,7 +569,7 @@ namespace C2.Business.CastleBravo.VPN
             // 随机探针ToolStripMenuItem
             // 
             this.随机探针ToolStripMenuItem.Name = "随机探针ToolStripMenuItem";
-            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.随机探针ToolStripMenuItem.Text = "随机探针";
             // 
             // toolStripSeparator4
@@ -700,7 +742,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem refreshAllShellMenu;
         private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem secondRefreshMenu;
         private System.Windows.Forms.ToolStripDropDownButton infoCollectionMenu;
         private System.Windows.Forms.ToolStripMenuItem systemInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel refreshStopMenu;
@@ -759,5 +800,11 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem CopySSMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyOtherMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyIPPortMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tcp验活ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ping验活ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 验活配置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }
