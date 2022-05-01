@@ -3,6 +3,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Drawing;
+using System.Text;
 
 namespace C2.Business.CastleBravo.VPN
 {
@@ -33,7 +34,14 @@ namespace C2.Business.CastleBravo.VPN
             hostTB.Text = task.Host;
             portTB.Text = task.Port;
             pwdTB.Text = task.Password;
-            ssTextBox.Text = task.Content;
+            
+            ssTextBox.Text = new StringBuilder(task.Content)
+                .AppendLine()
+                .AppendLine()
+                .AppendLine(task.OtherInfo.IsEmpty() ? string.Empty : "其他信息:")
+                .Append(task.OtherInfo)
+                .ToString();
+
 
             methodCB.SelectedIndex = Math.Max(0, methodCB.Items.IndexOf(task.Method));
             versionCB.SelectedIndex = Math.Max(0, versionCB.Items.IndexOf(task.SSVersion));
@@ -45,7 +53,6 @@ namespace C2.Business.CastleBravo.VPN
             task.Host   = this.hostTB.Text;
             task.Port   = this.portTB.Text;
             task.Password = this.pwdTB.Text;
-            task.Content  = this.ssTextBox.Text;
 
             task.Method    = methodCB.Text;
             task.SSVersion = versionCB.Text;

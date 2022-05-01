@@ -71,7 +71,7 @@ namespace C2.Business.CastleBravo.VPN
             "camellia-192-cfb",
             "camellia-128-cfb",
             "auto"});
-            this.methodCB.Location = new System.Drawing.Point(136, 226);
+            this.methodCB.Location = new System.Drawing.Point(136, 220);
             this.methodCB.Margin = new System.Windows.Forms.Padding(4);
             this.methodCB.Name = "methodCB";
             this.methodCB.Size = new System.Drawing.Size(426, 26);
@@ -80,7 +80,7 @@ namespace C2.Business.CastleBravo.VPN
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 232);
+            this.label7.Location = new System.Drawing.Point(20, 222);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 18);
@@ -89,19 +89,19 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // ssTextBox
             // 
-            this.ssTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ssTextBox.Font = new System.Drawing.Font("宋体", 8.75F);
             this.ssTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ssTextBox.Location = new System.Drawing.Point(136, 338);
+            this.ssTextBox.Location = new System.Drawing.Point(136, 319);
             this.ssTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ssTextBox.Multiline = true;
             this.ssTextBox.Name = "ssTextBox";
-            this.ssTextBox.Size = new System.Drawing.Size(426, 199);
+            this.ssTextBox.Size = new System.Drawing.Size(426, 218);
             this.ssTextBox.TabIndex = 10030;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 338);
+            this.label6.Location = new System.Drawing.Point(20, 318);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 18);
@@ -111,7 +111,7 @@ namespace C2.Business.CastleBravo.VPN
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(56, 180);
+            this.label5.Location = new System.Drawing.Point(56, 172);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 18);
@@ -121,7 +121,7 @@ namespace C2.Business.CastleBravo.VPN
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(56, 128);
+            this.label3.Location = new System.Drawing.Point(56, 122);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 18);
@@ -130,7 +130,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // portTB
             // 
-            this.portTB.Location = new System.Drawing.Point(136, 122);
+            this.portTB.Location = new System.Drawing.Point(136, 118);
             this.portTB.Margin = new System.Windows.Forms.Padding(4);
             this.portTB.Name = "portTB";
             this.portTB.Size = new System.Drawing.Size(426, 28);
@@ -139,7 +139,7 @@ namespace C2.Business.CastleBravo.VPN
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 75);
+            this.label2.Location = new System.Drawing.Point(20, 72);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 18);
@@ -148,7 +148,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // hostTB
             // 
-            this.hostTB.Location = new System.Drawing.Point(136, 69);
+            this.hostTB.Location = new System.Drawing.Point(136, 67);
             this.hostTB.Margin = new System.Windows.Forms.Padding(4);
             this.hostTB.Name = "hostTB";
             this.hostTB.Size = new System.Drawing.Size(426, 28);
@@ -174,7 +174,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // pwdTB
             // 
-            this.pwdTB.Location = new System.Drawing.Point(136, 174);
+            this.pwdTB.Location = new System.Drawing.Point(136, 169);
             this.pwdTB.Margin = new System.Windows.Forms.Padding(4);
             this.pwdTB.Name = "pwdTB";
             this.pwdTB.Size = new System.Drawing.Size(426, 28);
@@ -191,7 +191,7 @@ namespace C2.Business.CastleBravo.VPN
             "VMESS",
             "VLESS",
             "TROJAN"});
-            this.versionCB.Location = new System.Drawing.Point(136, 279);
+            this.versionCB.Location = new System.Drawing.Point(136, 269);
             this.versionCB.Margin = new System.Windows.Forms.Padding(4);
             this.versionCB.Name = "versionCB";
             this.versionCB.Size = new System.Drawing.Size(426, 26);
@@ -200,7 +200,7 @@ namespace C2.Business.CastleBravo.VPN
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 285);
+            this.label12.Location = new System.Drawing.Point(2, 272);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(116, 18);
