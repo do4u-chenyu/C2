@@ -306,6 +306,7 @@ namespace C2.Business.CastleBravo.VPN
             this.验活配置ToolStripMenuItem.Name = "验活配置ToolStripMenuItem";
             this.验活配置ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.验活配置ToolStripMenuItem.Text = "验活配置";
+            this.验活配置ToolStripMenuItem.ToolTipText = "显示当前验活配置信息";
             this.验活配置ToolStripMenuItem.Click += new System.EventHandler(this.验活配置_ToolStripMenuItem_Click);
             // 
             // infoCollectionMenu

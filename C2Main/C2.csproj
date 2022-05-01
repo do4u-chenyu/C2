@@ -372,6 +372,7 @@
     </Compile>
     <Compile Include="Business\CastleBravo\VPN\Client\ClientSetting.cs" />
     <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
+    <Compile Include="Business\CastleBravo\VPN\Probe\CANetUtil.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\ProbeFactory.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\SocketClient.cs" />
     <Compile Include="Business\CastleBravo\VPN\RandomProbeForm.cs">

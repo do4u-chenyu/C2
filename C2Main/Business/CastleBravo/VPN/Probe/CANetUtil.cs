@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C2.Business.CastleBravo.VPN.Rss
+namespace C2.Business.CastleBravo.VPN.Probe
 {
-    class RssClient
+    // 验活辅助类
+    class CANetUtil
     {
     }
 }
