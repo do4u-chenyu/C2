@@ -33,10 +33,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.timeoutBox = new System.Windows.Forms.TextBox();
             this.lengthBox = new System.Windows.Forms.TextBox();
-            this.probeContextBox = new System.Windows.Forms.TextBox();
+            this.probeContentBox = new System.Windows.Forms.TextBox();
             this.numBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.infoBox = new System.Windows.Forms.TextBox();
+            this.contentCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -84,17 +84,18 @@
             this.lengthBox.TabIndex = 10008;
             this.lengthBox.Text = "1-225";
             // 
-            // probeContextBox
+            // probeContentBox
             // 
-            this.probeContextBox.BackColor = System.Drawing.SystemColors.Menu;
-            this.probeContextBox.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.probeContextBox.Location = new System.Drawing.Point(5, 116);
-            this.probeContextBox.MaxLength = 16777216;
-            this.probeContextBox.Multiline = true;
-            this.probeContextBox.Name = "probeContextBox";
-            this.probeContextBox.Size = new System.Drawing.Size(385, 172);
-            this.probeContextBox.TabIndex = 10029;
-            this.probeContextBox.WordWrap = false;
+            this.probeContentBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.probeContentBox.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.probeContentBox.Location = new System.Drawing.Point(5, 122);
+            this.probeContentBox.MaxLength = 16777216;
+            this.probeContentBox.Multiline = true;
+            this.probeContentBox.Name = "probeContentBox";
+            this.probeContentBox.ReadOnly = true;
+            this.probeContentBox.Size = new System.Drawing.Size(385, 166);
+            this.probeContentBox.TabIndex = 10029;
+            this.probeContentBox.WordWrap = false;
             // 
             // numBox
             // 
@@ -105,15 +106,6 @@
             this.numBox.TabIndex = 10030;
             this.numBox.Text = "80";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 101);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(161, 12);
-            this.label4.TabIndex = 10031;
-            this.label4.Text = "自定义探针内容 (默认为空):";
-            // 
             // infoBox
             // 
             this.infoBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -121,9 +113,20 @@
             this.infoBox.Location = new System.Drawing.Point(17, 67);
             this.infoBox.Multiline = true;
             this.infoBox.Name = "infoBox";
-            this.infoBox.Size = new System.Drawing.Size(368, 31);
+            this.infoBox.Size = new System.Drawing.Size(351, 31);
             this.infoBox.TabIndex = 10033;
-            this.infoBox.Text = "* 说明:\'-\'表示取连续区间,\',\'表示离散区间。如测试探针长度区间是1到6，8，10到12可写为1-6，8，10-12";
+            this.infoBox.Text = "* 说明:\'-\'表示取连续区间,\',\'表示离散区间。如测试探针长度区间是1到6，8，10到12可写为\'1-6,8,10-12\'。";
+            // 
+            // contentCheckBox
+            // 
+            this.contentCheckBox.AutoSize = true;
+            this.contentCheckBox.Location = new System.Drawing.Point(16, 100);
+            this.contentCheckBox.Name = "contentCheckBox";
+            this.contentCheckBox.Size = new System.Drawing.Size(180, 16);
+            this.contentCheckBox.TabIndex = 10034;
+            this.contentCheckBox.Text = "自定义探针内容 (默认为空):";
+            this.contentCheckBox.UseVisualStyleBackColor = true;
+            this.contentCheckBox.CheckedChanged += new System.EventHandler(this.ContentCheckBox_CheckedChanged);
             // 
             // RandomProbeForm
             // 
@@ -131,10 +134,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(394, 339);
+            this.Controls.Add(this.contentCheckBox);
             this.Controls.Add(this.infoBox);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.numBox);
-            this.Controls.Add(this.probeContextBox);
+            this.Controls.Add(this.probeContentBox);
             this.Controls.Add(this.lengthBox);
             this.Controls.Add(this.timeoutBox);
             this.Controls.Add(this.label3);
@@ -147,10 +150,10 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.timeoutBox, 0);
             this.Controls.SetChildIndex(this.lengthBox, 0);
-            this.Controls.SetChildIndex(this.probeContextBox, 0);
+            this.Controls.SetChildIndex(this.probeContentBox, 0);
             this.Controls.SetChildIndex(this.numBox, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.infoBox, 0);
+            this.Controls.SetChildIndex(this.contentCheckBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,9 +166,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox timeoutBox;
         private System.Windows.Forms.TextBox lengthBox;
-        private System.Windows.Forms.TextBox probeContextBox;
+        private System.Windows.Forms.TextBox probeContentBox;
         private System.Windows.Forms.TextBox numBox;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox infoBox;
+        private System.Windows.Forms.CheckBox contentCheckBox;
     }
 }
