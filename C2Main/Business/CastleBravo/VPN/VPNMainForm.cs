@@ -5,6 +5,7 @@ using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
@@ -339,6 +340,31 @@ namespace C2.Business.CastleBravo.VPN
         }
 
         private void 帮助文档_ToolStripLabel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string helpfile = Path.Combine(Global.ResourcesPath, "Help", "VPN专项帮助文档.txt");
+                Help.ShowHelp(this, helpfile);
+            }
+            catch { };
+        }
+
+        private void 选定项验活_Ping_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 选定项验活_Tcp_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 选定项验活_204_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 选定项验活_反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
