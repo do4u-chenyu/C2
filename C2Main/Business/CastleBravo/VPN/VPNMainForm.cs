@@ -342,5 +342,25 @@ namespace C2.Business.CastleBravo.VPN
         {
 
         }
+
+        private void 选定项验活_Ping_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 选定项验活_Tcp_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 选定项验活_204_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 选定项验活_反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
