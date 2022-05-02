@@ -52,20 +52,36 @@ namespace C2.Utils
             
             return false;
         }
-        public static string GetHostAddresses(string url)
+        public static string GetHostAddress(string url)
         {
-            try 
+            return GetHostAddressList(url)[0];
+        }
+
+        public static string[] GetHostAddressList(string url)
+        {
+            try
             {   // 遇到host就是ip的,返回, Dns.GetHostEntry此时会报错
                 string host = new Uri(FormatUrl(url)).Host.Trim();
                 if (IsIPAddress(host))
-                    return host;
-                return Dns.GetHostEntry(host).AddressList[0].ToString();
+                    return new string[] { host };
+
+                List<string> addressList = new List<string>();
+
+                foreach (var addr in Dns.GetHostEntry(host).AddressList)
+                {
+                    if (addr.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
+                        continue;
+                    addressList.Add(addr.ToString());
+                }
+                return addressList.ToArray();
             }
-            catch 
+            catch
             {
-                return "0.0.0.0";
+                return new string[] { "0.0.0.0" };
             }
         }
+
+        
 
         public static bool IsIPAddress(string url)
         {

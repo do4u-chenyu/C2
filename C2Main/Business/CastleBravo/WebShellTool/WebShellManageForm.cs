@@ -498,7 +498,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             if (task.Status != "待")
             {
                 Application.DoEvents();
-                task.IP = NetUtil.GetHostAddresses(task.Url);
+                task.IP = NetUtil.GetHostAddress(task.Url);
                 Application.DoEvents();
                 task.Country = NetUtil.IPQuery_WhoIs(task.IP);
                 Application.DoEvents();
