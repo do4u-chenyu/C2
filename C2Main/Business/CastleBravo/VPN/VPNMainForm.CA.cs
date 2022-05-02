@@ -31,12 +31,9 @@ namespace C2.Business.CastleBravo.VPN
         // 验活类型
         enum CATypeEnum
         {
-            DNS_重新开始,
-            DNS_继续上次,
-            Ping_重新开始,
-            Ping_继续上次,
-            TCP_重新开始,
-            TCP_继续上次,
+            DNS,
+            Ping,
+            TCP,
             HTTP204_重新开始,
             HTTP204_继续上次,
         }
@@ -80,7 +77,61 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
+        // DNS验活
+        private void DoItemsDNS(IList Items)
+        {
+            //  进度条重置
+            ResetProgressMenuValue(Items.Count);
+            //  相关内容域重置
+            ResetDnsSubItems(Items);
+            //  DNS反查
+            Run_DNS_CA(Items);
+            //  收尾
+            EndCheckAlive();
+        }
+
+        // Ping验活
+        private void DoItemsPing(IList Items)
+        {
+            //  进度条重置
+            ResetProgressMenuValue(Items.Count);
+            //  相关内容域重置
+            ResetDnsSubItems(Items);
+            
+            Run_Ping_CA(Items);
+            //  收尾
+            EndCheckAlive();
+        }
+
+        // TCP验活
+        private void DoItemsTcp(IList Items)
+        {
+            //  进度条重置
+            ResetProgressMenuValue(Items.Count);
+            //  相关内容域重置
+            ResetDnsSubItems(Items);
+        
+            Run_Tcp_CA(Items);
+            //  收尾
+            EndCheckAlive();
+        }
+
+        private void Run_Ping_CA(IList items)
+        {
+            Run_XXX_CA(items, CATypeEnum.Ping);
+        }
+
+        private void Run_Tcp_CA(IList items)
+        {
+            Run_XXX_CA(items, CATypeEnum.TCP);
+        }
+
         private void Run_DNS_CA(IList items)
+        {
+            Run_XXX_CA(items, CATypeEnum.DNS);
+        }
+
+        private void Run_XXX_CA(IList items, CATypeEnum type)
         {
 
             s = DateTime.Now;
@@ -91,7 +142,20 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     if (actionNeedStop)
                         break;
-                    Run_DNS_One(lvi);
+
+                    switch (type)
+                    {
+                        case CATypeEnum.DNS:
+                            Run_DNS_One(lvi);
+                            break;
+                        case CATypeEnum.Ping:
+                            Run_Ping_One(lvi);
+                            break;
+                        case CATypeEnum.TCP:
+                            Run_Tcp_One(lvi);
+                            break;
+                    }
+                    
                     UpdateProgress();
                     CheckSavePoint(); // 5分钟保存一次
                 }
@@ -109,6 +173,16 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems[CI_归属地].Text = task.Country;
             lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
             lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+        }
+
+        private void Run_Ping_One(ListViewItem lvi)
+        {
+
+        }
+
+        private void Run_Tcp_One(ListViewItem lvi)
+        {
+
         }
 
         private void RefreshIPAddress(VPNTaskConfig task)

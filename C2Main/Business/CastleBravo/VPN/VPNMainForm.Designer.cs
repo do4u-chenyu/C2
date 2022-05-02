@@ -40,11 +40,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.checkAliveDDB = new System.Windows.Forms.ToolStripDropDownButton();
             this.ping验活ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重新开始ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.继续上次ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tcp验活ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重新开始ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.继续上次ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.验活204Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.重新开始ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.继续上次ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,51 +203,19 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // ping验活ToolStripMenuItem
             // 
-            this.ping验活ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.重新开始ToolStripMenuItem3,
-            this.继续上次ToolStripMenuItem3});
             this.ping验活ToolStripMenuItem.Name = "ping验活ToolStripMenuItem";
             this.ping验活ToolStripMenuItem.Size = new System.Drawing.Size(282, 34);
             this.ping验活ToolStripMenuItem.Text = "Ping验活";
             this.ping验活ToolStripMenuItem.ToolTipText = "Ping主机";
-            // 
-            // 重新开始ToolStripMenuItem3
-            // 
-            this.重新开始ToolStripMenuItem3.Name = "重新开始ToolStripMenuItem3";
-            this.重新开始ToolStripMenuItem3.Size = new System.Drawing.Size(186, 34);
-            this.重新开始ToolStripMenuItem3.Text = "重新开始";
-            this.重新开始ToolStripMenuItem3.Click += new System.EventHandler(this.Ping验活_重新开始_ToolStripMenuItem_Click);
-            // 
-            // 继续上次ToolStripMenuItem3
-            // 
-            this.继续上次ToolStripMenuItem3.Name = "继续上次ToolStripMenuItem3";
-            this.继续上次ToolStripMenuItem3.Size = new System.Drawing.Size(186, 34);
-            this.继续上次ToolStripMenuItem3.Text = "继续上次";
-            this.继续上次ToolStripMenuItem3.Click += new System.EventHandler(this.Ping验活_继续上次_ToolStripMenuItem_Click);
+            this.ping验活ToolStripMenuItem.Click += new System.EventHandler(this.Ping验活_ToolStripMenuItem_Click);
             // 
             // tcp验活ToolStripMenuItem
             // 
-            this.tcp验活ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.重新开始ToolStripMenuItem4,
-            this.继续上次ToolStripMenuItem4});
             this.tcp验活ToolStripMenuItem.Name = "tcp验活ToolStripMenuItem";
             this.tcp验活ToolStripMenuItem.Size = new System.Drawing.Size(282, 34);
             this.tcp验活ToolStripMenuItem.Text = "Tcp验活";
             this.tcp验活ToolStripMenuItem.ToolTipText = "向主机IP+端口发起TCP连接请求";
-            // 
-            // 重新开始ToolStripMenuItem4
-            // 
-            this.重新开始ToolStripMenuItem4.Name = "重新开始ToolStripMenuItem4";
-            this.重新开始ToolStripMenuItem4.Size = new System.Drawing.Size(186, 34);
-            this.重新开始ToolStripMenuItem4.Text = "重新开始";
-            this.重新开始ToolStripMenuItem4.Click += new System.EventHandler(this.TCP验活_重新开始_ToolStripMenuItem_Click);
-            // 
-            // 继续上次ToolStripMenuItem4
-            // 
-            this.继续上次ToolStripMenuItem4.Name = "继续上次ToolStripMenuItem4";
-            this.继续上次ToolStripMenuItem4.Size = new System.Drawing.Size(186, 34);
-            this.继续上次ToolStripMenuItem4.Text = "继续上次";
-            this.继续上次ToolStripMenuItem4.Click += new System.EventHandler(this.TCP验活_继续上次_ToolStripMenuItem_Click);
+            this.tcp验活ToolStripMenuItem.Click += new System.EventHandler(this.Tcp验活_ToolStripMenuItem_Click);
             // 
             // 验活204Menu
             // 
@@ -266,14 +230,14 @@ namespace C2.Business.CastleBravo.VPN
             // 重新开始ToolStripMenuItem1
             // 
             this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
-            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.重新开始ToolStripMenuItem1.Text = "重新开始";
             this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_重新开始_ToolStripMenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem1
             // 
             this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
-            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
             this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_继续上次_ToolStripMenuItem_Click);
             // 
@@ -866,10 +830,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
     }
 }

@@ -327,26 +327,6 @@ namespace C2.Business.CastleBravo.VPN
 
         }
 
-        private void TCP验活_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TCP验活_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Ping验活_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Ping验活_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void 帮助文档_ToolStripLabel_Click(object sender, EventArgs e)
         {
             try
@@ -357,16 +337,6 @@ namespace C2.Business.CastleBravo.VPN
             catch { };
         }
 
-        private void 选定项验活_Ping_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 选定项验活_Tcp_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void 选定项验活_HTTP204_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -374,28 +344,32 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 选定项验活_反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IList Items = LV.SelectedItems;
-            DoItemsDNS(Items);
+            DoItemsDNS(LV.SelectedItems);
         }
 
         private void 域名反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IList Items = LV.Items;
-            DoItemsDNS(Items);
+            DoItemsDNS(LV.Items);
         }
 
-        private void DoItemsDNS(IList Items)
+
+        private void Ping验活_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //  进度条重置
-            ResetProgressMenuValue(Items.Count);
-            //  相关内容域重置
-            ResetDnsSubItems(Items);
-            //  DNS反查
-            Run_DNS_CA(Items);
-            //  收尾
-            EndCheckAlive();
+            DoItemsPing(LV.Items);
+        }
+        private void 选定项验活_Ping_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoItemsPing(LV.SelectedItems);
         }
 
+        private void Tcp验活_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoItemsTcp(LV.Items);
+        }
 
+        private void 选定项验活_Tcp_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoItemsTcp(LV.SelectedItems);
+        }
     }
 }
