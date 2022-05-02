@@ -3,6 +3,7 @@ using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -18,7 +19,7 @@ namespace C2.Business.CastleBravo.VPN
         List<VPNTaskConfig> tasks = new List<VPNTaskConfig>();
         private FindSet finder;
 
-        //private bool actionNeedStop = false;
+        
 
         private ToolStripItem[] enableItems;
         public VPNMainForm()
@@ -306,7 +307,15 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 域名查IP_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            IList Items = LV.Items;
+            //  进度条重置
+            ResetProgressMenuValue(Items.Count);
+            //  相关内容域重置
+            ResetDnsSubItems();
+            //  DNS反查
+            Run_DNS_CA(Items, false);
+            //  收尾
+            EndCheckAlive();
         }
 
         private void 域名查IP_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -359,7 +368,7 @@ namespace C2.Business.CastleBravo.VPN
 
         }
 
-        private void 选定项验活_204_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 选定项验活_HTTP204_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
