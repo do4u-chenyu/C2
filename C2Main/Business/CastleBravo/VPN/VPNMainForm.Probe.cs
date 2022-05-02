@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
 
 namespace C2.Business.CastleBravo.VPN
 {
-   
+
     public partial class VPNMainForm
     {
-        private DateTime s;
+        private DateTime s;  // 自动保存
         #region 随机探针
         // 选定项发探针
         // 重新发探针
@@ -32,8 +28,8 @@ namespace C2.Business.CastleBravo.VPN
         }
         private void UpdateRandomProbeItem(ListViewItem lvi)
         {
-            VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-            lvi.SubItems[8].Text = "";
+            // VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+            lvi.SubItems[CI_探针信息].Text = string.Empty;
         }
         #endregion
         #region 重放探针

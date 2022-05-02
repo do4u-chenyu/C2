@@ -214,9 +214,11 @@ namespace C2.Business.CastleBravo.VPN
 
         private void SaveResultsMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "BCP文件|*.bcp";
-            dialog.FileName = "VPN专项-所有字段-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "BCP文件|*.bcp",
+                FileName = "VPN专项-所有字段-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp"
+            };
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -247,44 +249,48 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 导出IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "BCP文件|*.bcp";
-            dialog.FileName = "VPN专项-IP端口-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "BCP文件|*.bcp",
+                FileName = "VPN专项-IP端口-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp"
+            };
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
             using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName, new int[] { 2, 3, 10 });
+                SaveResultToLocal(dialog.FileName, new int[] { CI_主机地址, CI_端口, CI_IP地址 });
         }
 
         private void 导出分享地址_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "BCP文件|*.bcp";
-            dialog.FileName = "VPN专项-分享地址-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp";
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "BCP文件|*.bcp",
+                FileName = "VPN专项-分享地址-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp"
+            };
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
             using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName, new int[] { 12 });
+                SaveResultToLocal(dialog.FileName, new int[] { CI_分享地址 });
         }
 
         private void CopySSMenuItem_Click(object sender, EventArgs e)
         {
-            CopyToClipboard(new int[] { 12 });
+            CopyToClipboard(new int[] { CI_分享地址 });
         }
 
         private void CopyOtherMenuItem_Click(object sender, EventArgs e)
         {
-            CopyToClipboard(new int[] { 9 });
+            CopyToClipboard(new int[] { CI_其他信息 });
         }
 
         private void CopyIPPortMenuItem_Click(object sender, EventArgs e)
         {
             // 先10后3, 待验证
-            CopyToClipboard(new int[] { 2, 3, 10 });
+            CopyToClipboard(new int[] { CI_主机地址, CI_端口, CI_IP地址 });
         }
 
         private void LV_MouseDoubleClick(object sender, MouseEventArgs e)

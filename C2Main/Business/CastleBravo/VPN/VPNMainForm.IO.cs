@@ -65,7 +65,7 @@ namespace C2.Business.CastleBravo.VPN
 
             foreach (ListViewItem lvi in LV.Items)
             {
-                switch (lvi.SubItems[7].Text)
+                switch (lvi.SubItems[CI_客户端].Text)
                 {
                     case "SS":
                         ss++;
@@ -100,7 +100,7 @@ namespace C2.Business.CastleBravo.VPN
 
             foreach (ListViewItem lvi in LV.Items)
             {
-                switch (lvi.SubItems[6].Text)
+                switch (lvi.SubItems[CI_验活].Text)
                 {
                     case "√":
                         alive++;
