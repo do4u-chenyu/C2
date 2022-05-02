@@ -70,9 +70,9 @@ namespace C2.Business.CastleBravo.VPN
             _ = CI_分享地址;
 
         }
-        private void ResetDnsSubItems()
+        private void ResetDnsSubItems(IList items)
         {
-            foreach (ListViewItem lvi in LV.Items)
+            foreach (ListViewItem lvi in items)
             {
                 lvi.SubItems[CI_状态].Text = Todo;
                 lvi.SubItems[CI_IP地址].Text = string.Empty;
@@ -80,7 +80,7 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
-        private void Run_DNS_CA(IList items, bool skipAlive)
+        private void Run_DNS_CA(IList items)
         {
 
             s = DateTime.Now;
@@ -91,9 +91,6 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     if (actionNeedStop)
                         break;
-                    // 启用二刷
-                    if (skipAlive && lvi.SubItems[CI_状态].Text != "待")
-                        continue;
                     Run_DNS_One(lvi);
                     UpdateProgress();
                     CheckSavePoint(); // 5分钟保存一次
