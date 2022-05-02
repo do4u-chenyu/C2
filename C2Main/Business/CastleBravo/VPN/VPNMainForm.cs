@@ -99,7 +99,7 @@ namespace C2.Business.CastleBravo.VPN
 
 
 
-        private void 重新开始ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void 随机探针_重新开始MenuItem_Click(object sender, System.EventArgs e)
         {
             RandomProbeConfig rpConfig = new RandomProbeForm().ShowDialog();
             if (rpConfig.Equals(RandomProbeConfig.Empty))
@@ -108,7 +108,7 @@ namespace C2.Business.CastleBravo.VPN
  
         }
 
-        private void 继续上次ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void 随机探针_继续上次MenuItem_Click(object sender, System.EventArgs e)
         {
 
         }

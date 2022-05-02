@@ -337,14 +337,14 @@ namespace C2.Business.CastleBravo.VPN
             this.重新开始ToolStripMenuItem.Name = "重新开始ToolStripMenuItem";
             this.重新开始ToolStripMenuItem.Size = new System.Drawing.Size(186, 34);
             this.重新开始ToolStripMenuItem.Text = "重新开始";
-            this.重新开始ToolStripMenuItem.Click += new System.EventHandler(this.重新开始ToolStripMenuItem_Click);
+            this.重新开始ToolStripMenuItem.Click += new System.EventHandler(this.随机探针_重新开始MenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem
             // 
             this.继续上次ToolStripMenuItem.Name = "继续上次ToolStripMenuItem";
             this.继续上次ToolStripMenuItem.Size = new System.Drawing.Size(186, 34);
             this.继续上次ToolStripMenuItem.Text = "继续上次";
-            this.继续上次ToolStripMenuItem.Click += new System.EventHandler(this.继续上次ToolStripMenuItem_Click);
+            this.继续上次ToolStripMenuItem.Click += new System.EventHandler(this.随机探针_继续上次MenuItem_Click);
             // 
             // systemInfoToolStripMenuItem
             // 
