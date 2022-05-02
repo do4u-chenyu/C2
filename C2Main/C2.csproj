@@ -364,7 +364,15 @@
     <Compile Include="Business\CastleBravo\VPN\BatchAddVPNServerForm.Designer.cs">
       <DependentUpon>BatchAddVPNServerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\VPN\CAForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\CAForm.Designer.cs">
+      <DependentUpon>CAForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\Client\ClientSetting.cs" />
     <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
+    <Compile Include="Business\CastleBravo\VPN\Probe\CANetUtil.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\ProbeFactory.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\SocketClient.cs" />
     <Compile Include="Business\CastleBravo\VPN\RandomProbeForm.cs">
@@ -2377,6 +2385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\VPN\BatchAddVPNServerForm.resx">
       <DependentUpon>BatchAddVPNServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\VPN\CAForm.resx">
+      <DependentUpon>CAForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\VPN\RandomProbeForm.resx">
       <DependentUpon>RandomProbeForm.cs</DependentUpon>

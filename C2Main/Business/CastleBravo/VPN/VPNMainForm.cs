@@ -40,8 +40,7 @@ namespace C2.Business.CastleBravo.VPN
             {
                 this.editDDB,
                 this.proxySettingMenu,
-                this.refreshAllShellMenu,
-                this.secondRefreshMenu,
+                this.验活204Menu,
                 this.checkAliveDDB,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
@@ -73,12 +72,7 @@ namespace C2.Business.CastleBravo.VPN
             finder.FindHit();
         }
 
-        private void 重新开始_批量验活_ToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void 继续上次_二刷不活_ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void 验活204_重新开始_ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
 
         }
@@ -247,7 +241,7 @@ namespace C2.Business.CastleBravo.VPN
             StaticItems();
         }
 
-        private void 导出IP端口ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 导出IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "BCP文件|*.bcp";
@@ -260,7 +254,7 @@ namespace C2.Business.CastleBravo.VPN
                 SaveResultToLocal(dialog.FileName, new int[] { 2, 3, 10 });
         }
 
-        private void 导出分享地址ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 导出分享地址_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "BCP文件|*.bcp";
@@ -302,6 +296,51 @@ namespace C2.Business.CastleBravo.VPN
                 RefreshTasks();
                 SaveDB();
             }
+        }
+
+        private void 验活配置_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new CAForm().ShowDialog();
+        }
+
+        private void 域名查IP_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 域名查IP_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 验活204_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TCP验活_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TCP验活_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Ping验活_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Ping验活_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 帮助文档_ToolStripLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
