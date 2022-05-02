@@ -390,6 +390,7 @@
     <Compile Include="Business\CastleBravo\VPN\VPNMainForm.LV.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Business\CastleBravo\VPN\VPNMainForm.Probe.cs" />
     <Compile Include="Business\CastleBravo\VPN\VPNTaskConfig.cs" />
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.SG.cs">
       <SubType>Form</SubType>
