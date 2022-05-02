@@ -2415,6 +2415,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C7E23FC0FDD34059B8BCFCE1E3812857"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C81EB530ABEB4E66B68C5BB28C8ACFA8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2560,12 +2566,6 @@
         "Entry"
         {
         "MsmKey" = "8:_D46ED829AF13402DA1442B75637F4A1A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D495757F2A914150B1FD9817D5143B1D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -10957,6 +10957,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7E23FC0FDD34059B8BCFCE1E3812857"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Help\\VPN专项帮助文档.txt"
+            "TargetName" = "8:VPN专项帮助文档.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C81EB530ABEB4E66B68C5BB28C8ACFA8"
             {
             "SourcePath" = "8:..\\C2Main\\Business\\IAOLab\\WebEngine\\img\\img1\\amiddboxttop.png"
@@ -11365,26 +11385,6 @@
             "TargetName" = "8:88_文本分析.png"
             "Tag" = "8:"
             "Folder" = "8:_F84AAC0DFA9247EFA40F9D2B8C9D59DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D495757F2A914150B1FD9817D5143B1D"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Help\\VPN专项帮助文档 .txt"
-            "TargetName" = "8:VPN专项帮助文档 .txt"
-            "Tag" = "8:"
-            "Folder" = "8:_BF2CFE4DA3214F738046A1B79D73AD19"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
