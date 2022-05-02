@@ -100,7 +100,7 @@ namespace C2.Business.CastleBravo.VPN
 
             foreach (ListViewItem lvi in LV.Items)
             {
-                switch (lvi.SubItems[CI_验活].Text)
+                switch (lvi.SubItems[CI_状态].Text)
                 {
                     case "√":
                         alive++;

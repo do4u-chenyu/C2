@@ -49,8 +49,6 @@ namespace C2.Business.CastleBravo.VPN
             this.重新开始ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.继续上次ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.域名查IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重新开始ToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.继续上次ToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.验活配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoCollectionMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.passwdBlastingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -268,40 +266,24 @@ namespace C2.Business.CastleBravo.VPN
             // 重新开始ToolStripMenuItem1
             // 
             this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
-            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
+            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.重新开始ToolStripMenuItem1.Text = "重新开始";
             this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_重新开始_ToolStripMenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem1
             // 
             this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
-            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
+            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
             this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_继续上次_ToolStripMenuItem_Click);
             // 
             // 域名查IPToolStripMenuItem
             // 
-            this.域名查IPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.重新开始ToolStripMenuItem5,
-            this.继续上次ToolStripMenuItem5});
             this.域名查IPToolStripMenuItem.Name = "域名查IPToolStripMenuItem";
             this.域名查IPToolStripMenuItem.Size = new System.Drawing.Size(282, 34);
             this.域名查IPToolStripMenuItem.Text = "域名查IP";
             this.域名查IPToolStripMenuItem.ToolTipText = "对主机地址是域名的情况通过DNS查找IP";
-            // 
-            // 重新开始ToolStripMenuItem5
-            // 
-            this.重新开始ToolStripMenuItem5.Name = "重新开始ToolStripMenuItem5";
-            this.重新开始ToolStripMenuItem5.Size = new System.Drawing.Size(186, 34);
-            this.重新开始ToolStripMenuItem5.Text = "重新开始";
-            this.重新开始ToolStripMenuItem5.Click += new System.EventHandler(this.域名查IP_重新开始_ToolStripMenuItem_Click);
-            // 
-            // 继续上次ToolStripMenuItem5
-            // 
-            this.继续上次ToolStripMenuItem5.Name = "继续上次ToolStripMenuItem5";
-            this.继续上次ToolStripMenuItem5.Size = new System.Drawing.Size(186, 34);
-            this.继续上次ToolStripMenuItem5.Text = "继续上次";
-            this.继续上次ToolStripMenuItem5.Click += new System.EventHandler(this.域名查IP_继续上次_ToolStripMenuItem_Click);
+            this.域名查IPToolStripMenuItem.Click += new System.EventHandler(this.域名反查IP_ToolStripMenuItem_Click);
             // 
             // 验活配置ToolStripMenuItem
             // 
@@ -495,7 +477,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // lvStatus
             // 
-            this.lvStatus.Text = "验活";
+            this.lvStatus.Text = "状态";
             this.lvStatus.Width = 53;
             // 
             // lvVersion
@@ -505,7 +487,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // lvProbeInfo
             // 
-            this.lvProbeInfo.Text = "探针信息";
+            this.lvProbeInfo.Text = "探测信息";
             this.lvProbeInfo.Width = 100;
             // 
             // lvOtherInfo
@@ -888,8 +870,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem 重新开始ToolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem 继续上次ToolStripMenuItem5;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
     }
 }

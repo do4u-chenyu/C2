@@ -92,7 +92,7 @@ namespace C2.Business.CastleBravo.VPN
        // private bool actionNeedStop = false;
         private void StopMenu_Click(object sender, System.EventArgs e)
         {
-            //actionNeedStop = true;
+            actionNeedStop = true;
         }
 
         static bool isAlertnatingRows = true;
@@ -259,7 +259,7 @@ namespace C2.Business.CastleBravo.VPN
                 return;
 
             using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName, new int[] { CI_主机地址, CI_端口, CI_IP地址 });
+                SaveResultToLocal(dialog.FileName, new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
         }
 
         private void 导出分享地址_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -290,7 +290,7 @@ namespace C2.Business.CastleBravo.VPN
         private void CopyIPPortMenuItem_Click(object sender, EventArgs e)
         {
             // 先10后3, 待验证
-            CopyToClipboard(new int[] { CI_主机地址, CI_端口, CI_IP地址 });
+            CopyToClipboard(new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
         }
 
         private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -311,24 +311,6 @@ namespace C2.Business.CastleBravo.VPN
         private void 验活配置_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new CAForm().ShowDialog();
-        }
-
-        private void 域名查IP_重新开始_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IList Items = LV.Items;
-            //  进度条重置
-            ResetProgressMenuValue(Items.Count);
-            //  相关内容域重置
-            ResetDnsSubItems();
-            //  DNS反查
-            Run_DNS_CA(Items, false);
-            //  收尾
-            EndCheckAlive();
-        }
-
-        private void 域名查IP_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void 验活204_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -383,7 +365,28 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 选定项验活_反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            IList Items = LV.SelectedItems;
+            DoItemsDNS(Items);
         }
+
+        private void 域名反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IList Items = LV.Items;
+            DoItemsDNS(Items);
+        }
+
+        private void DoItemsDNS(IList Items)
+        {
+            //  进度条重置
+            ResetProgressMenuValue(Items.Count);
+            //  相关内容域重置
+            ResetDnsSubItems();
+            //  DNS反查
+            Run_DNS_CA(Items, false);
+            //  收尾
+            EndCheckAlive();
+        }
+
+
     }
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using C2.Utils;
+using C2.Core;
+using System;
 using System.Collections;
+using System.Linq;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
 
@@ -13,13 +16,16 @@ namespace C2.Business.CastleBravo.VPN
         private readonly int CI_端口     = 3;
         private readonly int CI_密码     = 4;
         private readonly int CI_加密算法 = 5;
-        private readonly int CI_验活     = 6;
+        private readonly int CI_状态     = 6;
         private readonly int CI_客户端   = 7;
-        private readonly int CI_探针信息 = 8;
+        private readonly int CI_探测信息 = 8;
         private readonly int CI_其他信息 = 9;
         private readonly int CI_IP地址   = 10;
         private readonly int CI_归属地   = 11;
         private readonly int CI_分享地址 = 12;
+
+        private readonly string Done = "√";
+        private readonly string Todo = "待";
 
 
         // 验活类型
@@ -59,7 +65,7 @@ namespace C2.Business.CastleBravo.VPN
             _ = CI_密码;
             _ = CI_加密算法;
             _ = CI_客户端;
-            _ = CI_探针信息;
+            _ = CI_探测信息;
             _ = CI_其他信息;
             _ = CI_分享地址;
 
@@ -68,6 +74,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             foreach (ListViewItem lvi in LV.Items)
             {
+                lvi.SubItems[CI_状态].Text = Todo;
                 lvi.SubItems[CI_IP地址].Text = string.Empty;
                 lvi.SubItems[CI_归属地].Text = string.Empty;
             }
@@ -85,7 +92,7 @@ namespace C2.Business.CastleBravo.VPN
                     if (actionNeedStop)
                         break;
                     // 启用二刷
-                    if (skipAlive && lvi.SubItems[CI_验活].Text != "待")
+                    if (skipAlive && lvi.SubItems[CI_状态].Text != "待")
                         continue;
                     Run_DNS_One(lvi);
                     UpdateProgress();
@@ -96,16 +103,28 @@ namespace C2.Business.CastleBravo.VPN
         private void Run_DNS_One(ListViewItem lvi)
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-            string rts = "√";
 
-            if (rts == "√")
-            {
-                this.NumberOfAlive++;
-            }
-            lvi.SubItems[CI_验活].Text = rts;
+            RefreshIPAddress(task);
+
+            this.NumberOfAlive++;
+            lvi.SubItems[CI_状态].Text   = Done;
             lvi.SubItems[CI_IP地址].Text = task.IP;
             lvi.SubItems[CI_归属地].Text = task.Country;
+            lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
             lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+        }
+
+        private void RefreshIPAddress(VPNTaskConfig task)
+        {
+            string[] ipList = NetUtil.GetHostAddressList(task.Host);
+            task.IP = ipList[0];
+
+            // DNS出多个IP时,放到探针信息里
+            if (ipList.Length > 1)
+                task.ProbeInfo = ipList.Skip(1).JoinString(",");
+
+            task.Country = NetUtil.IPQuery_WhoIs(task.IP);
+            Application.DoEvents();
         }
 
         private void UpdateProgress()

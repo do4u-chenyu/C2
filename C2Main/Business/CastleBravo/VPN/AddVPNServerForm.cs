@@ -39,7 +39,9 @@ namespace C2.Business.CastleBravo.VPN
                 .AppendLine()
                 .AppendLine()
                 .AppendLine(task.OtherInfo.IsEmpty() ? string.Empty : "其他信息:")
-                .Append(task.OtherInfo)
+                .AppendLine(task.OtherInfo)
+                .AppendLine(task.ProbeInfo.IsEmpty() ? string.Empty : "探测信息:")
+                .AppendLine(task.ProbeInfo)
                 .ToString();
 
 

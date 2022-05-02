@@ -29,7 +29,7 @@ namespace C2.Business.CastleBravo.VPN
         private void UpdateRandomProbeItem(ListViewItem lvi)
         {
             // VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-            lvi.SubItems[CI_探针信息].Text = string.Empty;
+            lvi.SubItems[CI_探测信息].Text = string.Empty;
         }
         #endregion
         #region 重放探针
