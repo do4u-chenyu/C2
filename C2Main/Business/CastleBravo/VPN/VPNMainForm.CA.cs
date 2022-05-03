@@ -86,7 +86,7 @@ namespace C2.Business.CastleBravo.VPN
                 task.Status    = lvi.SubItems[CI_状态].Text = s1;
                 task.IP        = lvi.SubItems[CI_IP地址].Text = s2;
                 task.Country   = lvi.SubItems[CI_归属地].Text = s3;
-                task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = s3;
+                task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = s4;
             }
         }
 
