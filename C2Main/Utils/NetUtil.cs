@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -87,6 +89,12 @@ namespace C2.Utils
         {
             return Regex.IsMatch(url, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$");
         }
+
+        public static bool IsPort(string port)
+        {
+            int ret = ConvertUtil.TryParseInt(port, -1);
+            return ret >= 0 && ret < 65535;
+        }
         public static bool IsPhoneNum(string num) 
         {
             return Regex.IsMatch(num, @"^(1\d{10})$");
@@ -108,30 +116,60 @@ namespace C2.Utils
 
         public static long Ping(string ip, int timeout = 3, int echoNum = 2)
         {
-            long roundtripTime = -1;
+            long rtt = -1;
             try
             {
                 Ping ping = new Ping();
                 for (int i = 0; i < echoNum; i++)
                 {
                     PingReply reply = ping.Send(ip, timeout);
-                    if (reply.Status != IPStatus.Success)
+                    if (reply.Status != IPStatus.Success || reply.RoundtripTime < 0)
                         continue;
 
-                    if (reply.RoundtripTime < 0)
-                        continue;
-
-                    if (roundtripTime < 0 || reply.RoundtripTime < roundtripTime)
-                        roundtripTime = reply.RoundtripTime;
+                    if (rtt < 0 || reply.RoundtripTime < rtt)
+                        rtt = reply.RoundtripTime;
                 }
             }
-            catch
-            {
-                return -1;
-            }
-            return roundtripTime;
+            catch { rtt = -1; }
+            return rtt;
         }
 
+        public static Tuple<long, string> Tcp(string ip, string port, int timeout = 3)
+        {
+            int p = ConvertUtil.TryParseInt(port);
+            IPAddress a = ConvertUtil.TryParseIPAddress(ip);
+            
+            long rrt = -1;
+            string msg = "TCP通";
+            
+            Stopwatch timer = new Stopwatch();
+            try
+            {
+                timer.Start();
+                using (Socket socket = DefaultSocket())
+                {
+                    IAsyncResult ret = socket.BeginConnect(a, p, null, null);
+
+                    if (!ret.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(timeout)))
+                        return Tuple.Create(rrt, "超时");
+                    socket.EndConnect(ret);
+                    socket.Close();
+                }  
+                timer.Stop();
+                rrt = timer.Elapsed.Milliseconds;
+            }
+            catch (Exception ex)
+            {
+                rrt = -1;
+                msg = ex.Message;
+            }
+            return Tuple.Create(rrt, msg);
+        }
+
+        private static Socket DefaultSocket()
+        {
+            return new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
         public static string IPCheck(string ip)
         {
             if (ip.IsNullOrEmpty())

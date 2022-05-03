@@ -1,7 +1,9 @@
-﻿using System;
+﻿using C2.IAOLab.IPAddress;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -97,6 +99,19 @@ namespace C2.Utils
             {
                 return float.NaN;
             }
+        }
+
+        public static IPAddress TryParseIPAddress(string ip)
+        {
+            try 
+            {
+                return IPAddress.Parse(ip);
+            }
+            catch
+            {
+                return IPAddress.None;
+            }
+            
         }
 
         public static bool IsInt(string value)
