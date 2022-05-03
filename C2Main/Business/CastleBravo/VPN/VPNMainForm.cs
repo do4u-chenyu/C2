@@ -15,7 +15,7 @@ namespace C2.Business.CastleBravo.VPN
     public partial class VPNMainForm : Form
     {
         public static ProxySetting Proxy { get; set; } = ProxySetting.Empty;
-        public static RandomProbeConfig RPConfig { get; set; } = RandomProbeConfig.Empty;
+        public static RandomProbeConfig RndProbeConfig { get; set; } = RandomProbeConfig.Empty;
         List<VPNTaskConfig> tasks = new List<VPNTaskConfig>();
         private FindSet finder;
 
@@ -102,12 +102,12 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 随机探针_重新开始MenuItem_Click(object sender, System.EventArgs e)
         {
-            RPConfig = new RandomProbeForm().ShowDialog();
-            if (RPConfig.Equals(RandomProbeConfig.Empty))
+            RndProbeConfig = new RandomProbeForm().ShowDialog();
+            if (RndProbeConfig.Equals(RandomProbeConfig.Empty))
                 return;
-            SendRandomProbe(LV.Items);
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+                SendRandomProbe(LV.Items);
 
- 
         }
 
         private void 随机探针_继续上次MenuItem_Click(object sender, System.EventArgs e)
