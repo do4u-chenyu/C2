@@ -3,7 +3,6 @@ using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;

@@ -24,7 +24,8 @@ namespace C2.Business.CastleBravo.VPN
         private readonly int CI_归属地   = 11;
         private readonly int CI_分享地址 = 12;
 
-        private readonly string Done = "√";
+        private readonly string Succ = "√";
+        private readonly string Fail = "×";
         private readonly string Todo = "待";
 
 
@@ -165,10 +166,16 @@ namespace C2.Business.CastleBravo.VPN
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
-            RefreshIPAddress(task);
+            IPAddressUpdate(task);
 
+            UpdateRedrawItem(lvi);
+        }
+
+        private void UpdateRedrawItem(ListViewItem lvi)
+        {
+            VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
             this.NumberOfAlive++;
-            lvi.SubItems[CI_状态].Text   = Done;
+            lvi.SubItems[CI_状态].Text = task.Status;
             lvi.SubItems[CI_IP地址].Text = task.IP;
             lvi.SubItems[CI_归属地].Text = task.Country;
             lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
@@ -177,15 +184,34 @@ namespace C2.Business.CastleBravo.VPN
 
         private void Run_Ping_One(ListViewItem lvi)
         {
+            VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
+            // 先dns出IP地址
+            if (task.IP.IsNullOrEmpty())
+                IPAddressUpdate(task);  
+
+            // 回写task
+            PingInfoUpdate(task);
+
+            // 回刷界面
+            UpdateRedrawItem(lvi);
         }
 
         private void Run_Tcp_One(ListViewItem lvi)
         {
+            VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
+            // 先dns出IP地址
+            if (task.IP.IsNullOrEmpty())
+                IPAddressUpdate(task);
+
+            RefreshTcpInfo(task);
+
+            // 回刷界面
+            UpdateRedrawItem(lvi);
         }
 
-        private void RefreshIPAddress(VPNTaskConfig task)
+        private void IPAddressUpdate(VPNTaskConfig task)
         {
             string[] ipList = NetUtil.GetHostAddressList(task.Host);
             task.IP = ipList[0];
@@ -194,7 +220,36 @@ namespace C2.Business.CastleBravo.VPN
             if (ipList.Length > 1)
                 task.ProbeInfo = ipList.Skip(1).JoinString(",");
 
+            task.Status = NetUtil.IPCheck(task.IP) == task.IP ? Succ : Fail;
             task.Country = NetUtil.IPQuery_WhoIs(task.IP);
+            
+            Application.DoEvents();
+        }
+
+        private void PingInfoUpdate(VPNTaskConfig task)
+        {
+            if (!NetUtil.IsIPAddress(task.IP))
+            {
+                task.ProbeInfo = "IP地址格式不对";
+                return;
+            }
+
+            long replyTime = NetUtil.Ping(task.IP);
+
+            task.Status = replyTime == -1 ? Fail : Succ;
+            task.ProbeInfo = replyTime == -1 ? "Ping不通" : "Ping通:" + replyTime + "ms";
+  
+            Application.DoEvents();
+        }
+
+        private void RefreshTcpInfo(VPNTaskConfig task)
+        {
+            if (!NetUtil.IsIPAddress(task.IP))
+            {
+                task.ProbeInfo = "IP地址格式不对";
+                return;
+            }
+
             Application.DoEvents();
         }
 

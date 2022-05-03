@@ -106,21 +106,33 @@ namespace C2.Utils
             return uri.Host;
         }
 
-        public static bool Ping(string ip, int timeout = 5)
+        public static long Ping(string ip, int timeout = 3, int echoNum = 2)
         {
+            long roundtripTime = -1;
             try
             {
                 Ping ping = new Ping();
-                PingReply pingReply = ping.Send(ip, timeout);
-                return pingReply.Status == IPStatus.Success;
+                for (int i = 0; i < echoNum; i++)
+                {
+                    PingReply reply = ping.Send(ip, timeout);
+                    if (reply.Status != IPStatus.Success)
+                        continue;
+
+                    if (reply.RoundtripTime < 0)
+                        continue;
+
+                    if (roundtripTime < 0 || reply.RoundtripTime < roundtripTime)
+                        roundtripTime = reply.RoundtripTime;
+                }
             }
             catch
             {
-                return false;
+                return -1;
             }
+            return roundtripTime;
         }
 
-        private static string IPCheck(string ip)
+        public static string IPCheck(string ip)
         {
             if (ip.IsNullOrEmpty())
                 return "空地址";

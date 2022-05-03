@@ -343,7 +343,7 @@ namespace C2
                 Task.Run(() => {
                     this.Invoke(new Action(() =>
                     {
-                        bool b = NetUtil.Ping("8.8.8.8") && NetUtil.Ping("114.114.114.114");
+                        bool b = NetUtil.Ping("8.8.8.8") != -1 && NetUtil.Ping("114.114.114.114") != -1;
                         if (b)
                             this.label2.Text = "能接入互联网|" + this.label2.Text;
                     }));
