@@ -378,7 +378,22 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 去重_域名端口密码客户端_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
 
+            foreach(ListViewItem item in LV.Items)
+            {
+                VPNTaskConfig task = item.Tag as VPNTaskConfig;
+                string key = task.Host + task.Port + task.Password + task.SSVersion;
+                dict[key] = task;
+            }
+
+            tasks.Clear();
+            tasks.AddRange(dict.Values);
+
+            RefreshLV();    // 刷新LV
+            ResetSLabel();  // 重新计算工具栏,状态栏信息
+            StaticItems();  // 
+            SaveDB();       // 写入文件
         }
     }
 }
