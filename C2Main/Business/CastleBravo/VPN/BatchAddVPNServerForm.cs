@@ -16,7 +16,7 @@ namespace C2.Business.CastleBravo.VPN
     partial class BatchAddVPNServerForm : StandardDialog
     {
         private readonly string ssline   = @"^(?i)(ss|ssr|vmess|vless|trojan)(?-i)://(.+)$";
-        private readonly string addrline = @"^(\d{1,2}\.\d{1,2}\.\d{1,2}\.\d{1,2})[:\s]+(\d{1,5})$";
+        private readonly string addrline = @"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})[:\s]+(\d{1,5})$";
         private int maxRow;
         private int mode;
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
@@ -102,23 +102,26 @@ namespace C2.Business.CastleBravo.VPN
             mat = mat ?? Regex.Match(line, addrline);
             if (!mat.Success)
                 return;
+
             string ip   = mat.Groups[1].Value;
             string port = mat.Groups[2].Value;
 
-            Tasks.Add(new VPNTaskConfig(ST.NowString(),
-                            "候选目标",
-                            ip,
-                            port,
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
-                            ip,
-                            string.Empty,
-                            ip + ":" + port
-                            ));
+            // 实锤一下必须是IP和端口
+            if (NetUtil.IsIPAddress(ip) && NetUtil.IsPort(port))
+                Tasks.Add(new VPNTaskConfig(ST.NowString(),
+                                string.Empty,
+                                ip,
+                                port,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                ip,
+                                string.Empty,
+                                ip + ":" + port
+                                ));
         }
         private void DoRSSLine(string line)
         {
