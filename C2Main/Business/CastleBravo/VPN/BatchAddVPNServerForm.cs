@@ -387,7 +387,10 @@ namespace C2.Business.CastleBravo.VPN
             string otherInfo = array.Length > 1 ? array[1] : string.Empty;
 
             array = array[0].Split(":");
-            string port = array.Length > 1 ? array[1] : string.Empty;
+            string port = array.Length > 1 ? array[1] == "0" ? 
+                "443" :        // 默认443
+                array[1] :     
+                string.Empty;
 
             array = array[0].Split("@");
             string pass = array[0];
