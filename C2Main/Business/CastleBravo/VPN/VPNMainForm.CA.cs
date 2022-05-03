@@ -187,7 +187,8 @@ namespace C2.Business.CastleBravo.VPN
         private void UpdateRedrawItem(ListViewItem lvi)
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-            this.NumberOfAlive++;
+            NumberOfAlive = task.Status == Succ ? NumberOfAlive + 1 : NumberOfAlive;
+
             lvi.SubItems[CI_状态].Text = task.Status;
             lvi.SubItems[CI_IP地址].Text = task.IP;
             lvi.SubItems[CI_归属地].Text = task.Country;
