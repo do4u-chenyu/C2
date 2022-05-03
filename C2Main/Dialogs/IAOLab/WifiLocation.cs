@@ -260,7 +260,7 @@ namespace C2.Dialogs.IAOLab
                         bankCardIR.AppendText(line);
                         break;
                     case "IPAddress":
-                        line = string.Format("{0}\t{1}", input.Trim('\n'), IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0]));
+                        line = string.Format("{0}\t{1}", input.Trim('\n'), C2IPAddress.GetInstance().GetIPAddress(CollectionExtensions.SplitWhitespace(input)[0]));
                         tmpResult.Append(line);
                         IPStationIR.AppendText(line);
                         break;

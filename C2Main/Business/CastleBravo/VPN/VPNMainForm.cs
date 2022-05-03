@@ -370,5 +370,15 @@ namespace C2.Business.CastleBravo.VPN
         {
             DoItemsTcp(LV.SelectedItems);
         }
+
+        private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetSubItemsEmpty(LV.Items);
+        }
+
+        private void 去重_域名端口密码客户端_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

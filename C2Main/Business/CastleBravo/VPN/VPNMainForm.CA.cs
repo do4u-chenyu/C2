@@ -68,13 +68,24 @@ namespace C2.Business.CastleBravo.VPN
             _ = CI_分享地址;
 
         }
-        private void ResetDnsSubItems(IList items)
+        private void ResetSubItemsTodo(IList items)
+        {
+            ResetSubItem(items, Todo, string.Empty, string.Empty, string.Empty);
+        }
+
+        private void ResetSubItemsEmpty(IList items)
+        {
+            ResetSubItem(items, string.Empty, string.Empty, string.Empty, string.Empty);
+        }
+
+        private void ResetSubItem(IList items, string s1, string s2, string s3, string s4)
         {
             foreach (ListViewItem lvi in items)
             {
-                lvi.SubItems[CI_状态].Text = Todo;
-                lvi.SubItems[CI_IP地址].Text = string.Empty;
-                lvi.SubItems[CI_归属地].Text = string.Empty;
+                lvi.SubItems[CI_状态].Text = s1;
+                lvi.SubItems[CI_IP地址].Text = s2;
+                lvi.SubItems[CI_归属地].Text = s3;
+                lvi.SubItems[CI_探测信息].Text = s3;
             }
         }
 
@@ -84,7 +95,7 @@ namespace C2.Business.CastleBravo.VPN
             //  进度条重置
             ResetProgressMenuValue(Items.Count);
             //  相关内容域重置
-            ResetDnsSubItems(Items);
+            ResetSubItemsTodo(Items);
             //  DNS反查
             Run_DNS_CA(Items);
             //  收尾
@@ -97,7 +108,7 @@ namespace C2.Business.CastleBravo.VPN
             //  进度条重置
             ResetProgressMenuValue(Items.Count);
             //  相关内容域重置
-            ResetDnsSubItems(Items);
+            ResetSubItemsTodo(Items);
             
             Run_Ping_CA(Items);
             //  收尾
@@ -110,7 +121,7 @@ namespace C2.Business.CastleBravo.VPN
             //  进度条重置
             ResetProgressMenuValue(Items.Count);
             //  相关内容域重置
-            ResetDnsSubItems(Items);
+            ResetSubItemsTodo(Items);
         
             Run_Tcp_CA(Items);
             //  收尾
@@ -153,7 +164,8 @@ namespace C2.Business.CastleBravo.VPN
                             Run_Ping_One(lvi);
                             break;
                         case CATypeEnum.TCP:
-                            Run_Tcp_One(lvi);
+                            using (WaitCursor)         // TCP 时间比较长
+                                Run_Tcp_One(lvi);
                             break;
                     }
                     
@@ -250,6 +262,18 @@ namespace C2.Business.CastleBravo.VPN
                 return;
             }
 
+            if (!NetUtil.IsPort(task.Port))
+            {
+                task.ProbeInfo = "端口格式不对";
+                return;
+            }
+
+            Tuple<long, string> ret = NetUtil.Tcp(task.IP, task.Port);
+            long replyTime = ret.Item1;
+            string message = ret.Item2;
+
+            task.Status = replyTime == -1 ? Fail : Succ;
+            task.ProbeInfo = replyTime == -1 ? "Tcp不通:" + message : "Tcp通:" + replyTime + "ms";
             Application.DoEvents();
         }
 
