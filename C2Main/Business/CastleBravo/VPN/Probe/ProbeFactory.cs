@@ -10,6 +10,8 @@ namespace C2.Business.CastleBravo.VPN.Probe
     {
         public static string GetRandomString(int length)
         {
+            if (length == 0)
+                return string.Empty;
             byte[] b = new byte[4];
             Random r = new Random(BitConverter.ToInt32(b, 0));
             string str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";

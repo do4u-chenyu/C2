@@ -7,54 +7,40 @@ using System.Threading.Tasks;
 
 namespace C2.Business.CastleBravo.VPN.Probe
 {
-    
+
     public class SocketClient
     {
-        public SocketClient()
-        { }
-        public static Socket Send(string host, int port, string data)
+
+        public static Socket Send(string host, int port, string data, int timeout)
         {
-            try
+            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
-                Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                {
-                    ReceiveTimeout= 10000
-                };
-                clientSocket.Connect(host, port);
-                clientSocket.Send(Encoding.Default.GetBytes(data));
-                return clientSocket;
-            }
-            catch 
-            {
-                return null;
-            }
+                ReceiveTimeout = timeout
+            };
+            clientSocket.Connect(host, port);
+            clientSocket.Send(Encoding.Default.GetBytes(data));
+            return clientSocket;
+
         }
 
         public static string Receive(Socket socket) //10s 
         {
             string result = string.Empty;
             List<byte> data = new List<byte>();
-            byte[] buffer = new byte[1024];          
-            try
+            byte[] buffer = new byte[1024];
+
+            int length;
+            while ((length = socket.Receive(buffer)) > 0)
             {
-                int length = 0;
-                while ((length = socket.Receive(buffer)) > 0)
-                {
-                    for (int j = 0; j < length; j++)
-                        data.Add(buffer[j]);
-                    if (length < buffer.Length)
-                        break;
-                }
-                if (data.Count > 0)
-                {
-                    result = Encoding.Default.GetString(data.ToArray(), 0, data.Count);
-                }
+                for (int j = 0; j < length; j++)
+                    data.Add(buffer[j]);
+                if (length < buffer.Length)
+                    break;
             }
-            catch(Exception ex) 
+            if (data.Count > 0)
             {
-                result = ex.Message;
+                result = Encoding.Default.GetString(data.ToArray(), 0, data.Count);
             }
-            
             return result;
         }
 
@@ -64,7 +50,7 @@ namespace C2.Business.CastleBravo.VPN.Probe
             {
                 try { socket.Shutdown(SocketShutdown.Both); }
                 catch { }
-            }             
+            }
             socket.Close();
         }
     }
