@@ -82,10 +82,11 @@ namespace C2.Business.CastleBravo.VPN
         {
             foreach (ListViewItem lvi in items)
             {
-                lvi.SubItems[CI_状态].Text = s1;
-                lvi.SubItems[CI_IP地址].Text = s2;
-                lvi.SubItems[CI_归属地].Text = s3;
-                lvi.SubItems[CI_探测信息].Text = s3;
+                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+                task.Status    = lvi.SubItems[CI_状态].Text = s1;
+                task.IP        = lvi.SubItems[CI_IP地址].Text = s2;
+                task.Country   = lvi.SubItems[CI_归属地].Text = s3;
+                task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = s3;
             }
         }
 

@@ -53,13 +53,13 @@ namespace C2.Business.CastleBravo.VPN
             this.systemInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重新开始ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.继续上次ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.pcapDecryptMenu = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshStopMenu = new System.Windows.Forms.ToolStripLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressMenu = new System.Windows.Forms.ToolStripLabel();
             this.proxySettingMenu = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.helpInfoMenu = new System.Windows.Forms.ToolStripLabel();
             this.LV = new System.Windows.Forms.ListView();
             this.lvAddTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvRemark = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -101,6 +101,8 @@ namespace C2.Business.CastleBravo.VPN
             this.导出IP端口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出分享地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.删除重复项域名端口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除重复项域名端口密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.去重域名端口密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -133,13 +135,13 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator2,
             this.checkAliveDDB,
             this.infoCollectionMenu,
-            this.toolStripLabel1,
+            this.pcapDecryptMenu,
             this.toolStripSeparator3,
             this.refreshStopMenu,
             this.progressBar,
             this.progressMenu,
             this.proxySettingMenu,
-            this.toolStripLabel2});
+            this.helpInfoMenu});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
@@ -316,12 +318,12 @@ namespace C2.Business.CastleBravo.VPN
             this.继续上次ToolStripMenuItem2.Size = new System.Drawing.Size(186, 34);
             this.继续上次ToolStripMenuItem2.Text = "继续上次";
             // 
-            // toolStripLabel1
+            // pcapDecryptMenu
             // 
-            this.toolStripLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(84, 29);
-            this.toolStripLabel1.Text = "流量解密";
+            this.pcapDecryptMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.pcapDecryptMenu.Name = "pcapDecryptMenu";
+            this.pcapDecryptMenu.Size = new System.Drawing.Size(84, 29);
+            this.pcapDecryptMenu.Text = "流量解密";
             // 
             // toolStripSeparator3
             // 
@@ -365,13 +367,13 @@ namespace C2.Business.CastleBravo.VPN
             this.proxySettingMenu.Text = "代理设置";
             this.proxySettingMenu.Click += new System.EventHandler(this.ProxySettingMenu_Click);
             // 
-            // toolStripLabel2
+            // helpInfoMenu
             // 
-            this.toolStripLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(84, 29);
-            this.toolStripLabel2.Text = "帮助文档";
-            this.toolStripLabel2.Click += new System.EventHandler(this.帮助文档_ToolStripLabel_Click);
+            this.helpInfoMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.helpInfoMenu.Name = "helpInfoMenu";
+            this.helpInfoMenu.Size = new System.Drawing.Size(84, 29);
+            this.helpInfoMenu.Text = "帮助文档";
+            this.helpInfoMenu.Click += new System.EventHandler(this.帮助文档_ToolStripLabel_Click);
             // 
             // LV
             // 
@@ -501,9 +503,11 @@ namespace C2.Business.CastleBravo.VPN
             this.导出IP端口ToolStripMenuItem,
             this.导出分享地址ToolStripMenuItem,
             this.toolStripSeparator6,
+            this.删除重复项域名端口ToolStripMenuItem,
+            this.删除重复项域名端口密码ToolStripMenuItem,
             this.去重域名端口密码ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(365, 544);
+            this.contextMenuStrip.Size = new System.Drawing.Size(365, 604);
             // 
             // EditToolStripMenuItem
             // 
@@ -685,6 +689,20 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(361, 6);
             // 
+            // 删除重复项域名端口ToolStripMenuItem
+            // 
+            this.删除重复项域名端口ToolStripMenuItem.Name = "删除重复项域名端口ToolStripMenuItem";
+            this.删除重复项域名端口ToolStripMenuItem.Size = new System.Drawing.Size(364, 30);
+            this.删除重复项域名端口ToolStripMenuItem.Text = "删除重复项-[域名,端口]";
+            this.删除重复项域名端口ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项_域名端口_ToolStripMenuItem_Click);
+            // 
+            // 删除重复项域名端口密码ToolStripMenuItem
+            // 
+            this.删除重复项域名端口密码ToolStripMenuItem.Name = "删除重复项域名端口密码ToolStripMenuItem";
+            this.删除重复项域名端口密码ToolStripMenuItem.Size = new System.Drawing.Size(364, 30);
+            this.删除重复项域名端口密码ToolStripMenuItem.Text = "删除重复项-[域名,端口,密码]";
+            this.删除重复项域名端口密码ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项_域名端口密码_ToolStripMenuItem_Click);
+            // 
             // 去重域名端口密码ToolStripMenuItem
             // 
             this.去重域名端口密码ToolStripMenuItem.Name = "去重域名端口密码ToolStripMenuItem";
@@ -842,7 +860,7 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem 导出分享地址ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel pcapDecryptMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem 域名查IPToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
@@ -855,9 +873,11 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripLabel helpInfoMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem 去重域名端口密码ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除重复项域名端口ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除重复项域名端口密码ToolStripMenuItem;
     }
 }

@@ -41,6 +41,8 @@ namespace C2.Business.CastleBravo.VPN
             enableItems = new ToolStripItem[]
             {
                 this.editDDB,
+                this.pcapDecryptMenu,
+                this.helpInfoMenu,
                 this.验活204Menu,
                 this.checkAliveDDB,
                 this.infoCollectionMenu,
@@ -384,6 +386,51 @@ namespace C2.Business.CastleBravo.VPN
             {
                 VPNTaskConfig task = item.Tag as VPNTaskConfig;
                 string key = task.Host + task.Port + task.Password + task.SSVersion;
+                dict[key] = task;
+            }
+
+            tasks.Clear();
+            tasks.AddRange(dict.Values);
+
+            RefreshLV();    // 刷新LV
+            ResetSLabel();  // 重新计算工具栏,状态栏信息
+            StaticItems();  // 
+            SaveDB();       // 写入文件
+        }
+
+        private void 删除重复项_域名端口密码_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveRepeatItems();
+        }
+
+        private void RemoveRepeatItems()
+        {
+            Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
+
+            foreach (ListViewItem item in LV.Items)
+            {
+                VPNTaskConfig task = item.Tag as VPNTaskConfig;
+                string key = task.Host + task.Port + task.Password;
+                dict[key] = task;
+            }
+
+            tasks.Clear();
+            tasks.AddRange(dict.Values);
+
+            RefreshLV();    // 刷新LV
+            ResetSLabel();  // 重新计算工具栏,状态栏信息
+            StaticItems();  // 
+            SaveDB();       // 写入文件
+        }
+
+        private void 删除重复项_域名端口_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
+
+            foreach (ListViewItem item in LV.Items)
+            {
+                VPNTaskConfig task = item.Tag as VPNTaskConfig;
+                string key = task.Host + task.Port;
                 dict[key] = task;
             }
 
