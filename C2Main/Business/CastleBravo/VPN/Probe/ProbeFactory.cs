@@ -8,10 +8,15 @@ namespace C2.Business.CastleBravo.VPN.Probe
 {
     class ProbeFactory
     {
-        public static void GenRandomProbe()
+        public static string GetRandomString(int length)
         {
-            Random random = new Random();
-        }
-
+            byte[] b = new byte[4];
+            Random r = new Random(BitConverter.ToInt32(b, 0));
+            string str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+            string randomStr = string.Empty;
+            for (int i = 0; i < length; i++)
+                randomStr += str.Substring(r.Next(0, str.Length), 1);
+            return randomStr;
+        } 
     }
 }

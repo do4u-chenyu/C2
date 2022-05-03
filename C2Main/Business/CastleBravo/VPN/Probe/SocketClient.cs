@@ -10,7 +10,6 @@ namespace C2.Business.CastleBravo.VPN.Probe
     
     public class SocketClient
     {
-        private static Encoding encode = Encoding.Default;
         public SocketClient()
         { }
         public static Socket Send(string host, int port, string data)
@@ -22,7 +21,7 @@ namespace C2.Business.CastleBravo.VPN.Probe
                     ReceiveTimeout= 10000
                 };
                 clientSocket.Connect(host, port);
-                clientSocket.Send(encode.GetBytes(data));
+                clientSocket.Send(Encoding.Default.GetBytes(data));
                 return clientSocket;
             }
             catch 
@@ -48,7 +47,7 @@ namespace C2.Business.CastleBravo.VPN.Probe
                 }
                 if (data.Count > 0)
                 {
-                    result = encode.GetString(data.ToArray(), 0, data.Count);
+                    result = Encoding.Default.GetString(data.ToArray(), 0, data.Count);
                 }
             }
             catch(Exception ex) 
