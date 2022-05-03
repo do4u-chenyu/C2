@@ -378,39 +378,34 @@ namespace C2.Business.CastleBravo.VPN
             ResetSubItemsEmpty(LV.Items);
         }
 
-        private void 去重_域名端口密码客户端_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 删除重复项_域名_端口_密码_加密算法_客户端ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
-
-            foreach(ListViewItem item in LV.Items)
-            {
-                VPNTaskConfig task = item.Tag as VPNTaskConfig;
-                string key = task.Host + task.Port + task.Password + task.SSVersion;
-                dict[key] = task;
-            }
-
-            tasks.Clear();
-            tasks.AddRange(dict.Values);
-
-            RefreshLV();    // 刷新LV
-            ResetSLabel();  // 重新计算工具栏,状态栏信息
-            StaticItems();  // 
-            SaveDB();       // 写入文件
+            RemoveDuplicateItems((t) => { return t.Host + t.Port + t.Password + t.Method + t.SSVersion; });
         }
 
-        private void 删除重复项_域名端口密码_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 删除重复项_域名_端口_密码_客户端_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveRepeatItems();
+            RemoveDuplicateItems((t) => { return t.Host + t.Port + t.Password + t.SSVersion; });
         }
 
-        private void RemoveRepeatItems()
+        private void 删除重复项_域名_端口_密码_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Host + t.Port + t.Password; });
+        }
+        private void 删除重复项_域名_端口_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Host + t.Port; });
+        }
+
+
+        private void RemoveDuplicateItems(Func<VPNTaskConfig, string> method)
         {
             Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
 
             foreach (ListViewItem item in LV.Items)
             {
                 VPNTaskConfig task = item.Tag as VPNTaskConfig;
-                string key = task.Host + task.Port + task.Password;
+                string key = method(task);
                 dict[key] = task;
             }
 
@@ -423,24 +418,6 @@ namespace C2.Business.CastleBravo.VPN
             SaveDB();       // 写入文件
         }
 
-        private void 删除重复项_域名端口_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
 
-            foreach (ListViewItem item in LV.Items)
-            {
-                VPNTaskConfig task = item.Tag as VPNTaskConfig;
-                string key = task.Host + task.Port;
-                dict[key] = task;
-            }
-
-            tasks.Clear();
-            tasks.AddRange(dict.Values);
-
-            RefreshLV();    // 刷新LV
-            ResetSLabel();  // 重新计算工具栏,状态栏信息
-            StaticItems();  // 
-            SaveDB();       // 写入文件
-        }
     }
 }
