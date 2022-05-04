@@ -294,6 +294,7 @@ namespace C2.Business.CastleBravo.VPN
             string pass    = string.Empty;
             string method  = string.Empty;
             string other   = string.Empty;
+            string v       = string.Empty;
 
             if (right.IsEmpty()) //第一种情况，base64解码后是字典形式
             {
@@ -306,7 +307,15 @@ namespace C2.Business.CastleBravo.VPN
                 port    = dict.ContainsKey("port") ? dict["port"] : array.Length > 2 ? array[2] : string.Empty;
                 method  = dict.ContainsKey("scy")  ? dict["scy"]  : array.Length > 3 ? array[3] : string.Empty;
                 pass    = dict.ContainsKey("id")   ? dict["id"]   : array.Length > 4 ? array[4] : string.Empty;
-                method = method.IsNullOrEmpty() ? "auto" : method;
+                v       = dict.ContainsKey("v")    ? dict["v"]    : string.Empty;
+
+                method = method.IsNullOrEmpty() ? 
+                         v == "0" ? "aes-128-gcm" : 
+                         v == "1" ? "chacha20-poly1305" : 
+                         v == "2" ? "auto" : 
+                         v == "3" ? "none" :
+                         "auto" : 
+                         method;
 
                 dict.Remove("ps", "add", "port", "scy", "id");
 
