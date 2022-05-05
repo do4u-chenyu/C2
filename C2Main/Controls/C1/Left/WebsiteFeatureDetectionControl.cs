@@ -250,6 +250,7 @@ namespace C2.Controls.C1.Left
         {
             //初次加载时加载本地文件内容到button
             LoadTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
+            LoadYQTasks(Path.Combine(Global.WorkspaceDirectory, Global.GetUsername()));
         }
 
         private void HelpInfoLable_Click(object sender, EventArgs e)
@@ -268,7 +269,7 @@ namespace C2.Controls.C1.Left
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 AddYQButton(new YQTaskButton(dialog.TaskInfo));
-                return;
+                YQSave();
             }
         }
 
@@ -300,6 +301,95 @@ namespace C2.Controls.C1.Left
             startPoint.Y += ButtonGapY;
             ct.Location = startPoint;
             this.manageYQPanel.Controls.Add(ct);
+        }
+
+        public void YQSave()
+        {
+            List<YQTaskButton> buttons = FindYQControls<YQTaskButton>();
+
+            string xmlDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵");
+            string xmlPath = Path.Combine(xmlDirectory, "YQTasks.xml");
+            Directory.CreateDirectory(xmlDirectory);
+            XmlDocument xDoc = new XmlDocument();
+            XmlElement rootElement = xDoc.CreateElement("YQTasks");
+            xDoc.AppendChild(rootElement);
+
+            SaveUserInfo(rootElement);
+            foreach (YQTaskButton button in buttons)
+                SaveYQSingleTask(button.TaskInfo, rootElement);
+
+            // 保存时覆盖原文件
+            xDoc.Save(xmlPath);
+        }
+
+        public List<T> FindYQControls<T>() where T : Control
+        {
+            List<T> controls = new List<T>();
+            foreach (Control ct in this.manageYQPanel.Controls)
+            {
+                if (ct is T t)
+                    controls.Add(t);
+            }
+            return controls;
+        }
+        private void SaveYQSingleTask(YQTaskInfo taskInfo, XmlNode node)
+        {
+            new ModelXmlWriter("task", node)
+               .Write("taskName", taskInfo.TaskName)
+               .Write("taskId", taskInfo.TaskID)
+               .Write("taskCreateTime", taskInfo.TaskCreateTime)
+               .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
+               .Write("resultFilePath", taskInfo.ResultFilePath)
+               .Write("status", taskInfo.Status);
+        }
+
+        private void LoadYQTasks(string xmlDirectory)
+        {
+            string xmlPath = Path.Combine(xmlDirectory, "侦察兵", "YQTasks.xml");
+            if (!File.Exists(xmlPath))
+                return;
+
+            XmlDocument xDoc = new XmlDocument(); ;
+            try
+            {
+                xDoc.Load(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
+            }
+
+            LoadUserInfo(xDoc.SelectSingleNode(@"YQTasks/userInfo"));
+            foreach (XmlNode xn in xDoc.SelectNodes(@"YQTasks/task")) //要学着尽量利用XPath自己的能力
+                LoadSingleYQTask(xn);
+
+            return;
+        }
+
+        private void LoadSingleYQTask(XmlNode xn)
+        {
+            try
+            {
+                YQTaskInfo taskInfo = new YQTaskInfo
+                {
+                    TaskName = xn.SelectSingleNode("taskName").InnerText,
+                    TaskID = xn.SelectSingleNode("taskId").InnerText,
+                    TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
+                    DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
+                    ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
+                    Status = YQTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
+                };
+
+                AddYQButton(new YQTaskButton(taskInfo));
+            }
+            catch { }
+        }
+
+        private YQTaskStatus YQTaskStatusEnum(string encoding, YQTaskStatus defaultStatus = YQTaskStatus.Null)
+        {
+            if (!Enum.TryParse(encoding, true, out YQTaskStatus outStatus))
+                return defaultStatus;
+            return outStatus;
         }
     }
 }

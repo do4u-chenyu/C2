@@ -3,19 +3,12 @@ using C2.Business.WebsiteFeatureDetection;
 using C2.Controls;
 using C2.Core;
 using C2.Utils;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
