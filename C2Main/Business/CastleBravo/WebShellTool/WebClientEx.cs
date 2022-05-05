@@ -19,6 +19,12 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private static WebClientEx Create(int timeout, ProxySetting setting)
         {
+            // 应对某些https打开时的问题
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            ServicePointManager.ServerCertificateValidationCallback =
+                    delegate { return true; };
+            
 
             WebClientEx one = new WebClientEx()
             {
@@ -27,8 +33,6 @@ namespace C2.Business.CastleBravo.WebShellTool
                 CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore), 
             };
 
-            ServicePointManager.ServerCertificateValidationCallback =
-                    delegate { return true; };
 
             if (setting != ProxySetting.Empty && setting.Enable)
             {
