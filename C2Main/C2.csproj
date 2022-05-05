@@ -4345,7 +4345,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_hackDD_accountPass_C2_20211126.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -4363,7 +4363,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -4380,14 +4380,22 @@
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_email_accountPass_C2_20211111.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py" />
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py" />
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py" />
-    <Content Include="Resources\Script\IAO_Search_gamble\dsqquery_http_EncryptedTraffic_C2.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\dsqquery_http_EncryptedTraffic_C2.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\StartPage\startPageTitle.png" />
     <None Include="Resources\Templates\DocxExample.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
