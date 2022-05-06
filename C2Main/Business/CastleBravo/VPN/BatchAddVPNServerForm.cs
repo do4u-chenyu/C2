@@ -237,14 +237,20 @@ namespace C2.Business.CastleBravo.VPN
             }
             // 第五步: addr中分割IP和端口
             array = addr.Split(":");
-            addr = array[0];
+            addr  = array[0];
             string port = array.Length > 1 ? array[1] : string.Empty;
+
+            // 有些地方这里会遇到
+            array = port.Split("/?");
+            port  = array[0];
+            string other = array.Length > 1 ? array[1] : string.Empty;
+
             // 第六步: method和password分割
             array = value.Split(":");
             string method = array[0];
             string pass = array.Length > 1 ? array[1] : string.Empty;
             // 第七步: 返回构造数组
-            return new string[] { remarks, addr, port, pass, method };
+            return new string[] { remarks, addr, port, pass, method, other };
         }
 
         private string[] GenSSRLine(string value)
