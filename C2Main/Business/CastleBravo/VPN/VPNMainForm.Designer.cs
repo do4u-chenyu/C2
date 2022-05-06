@@ -439,7 +439,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // lvPassword
             // 
-            this.lvPassword.Text = "密码";
+            this.lvPassword.Text = "密码(UUID)";
             this.lvPassword.Width = 105;
             // 
             // lvMethod
@@ -501,7 +501,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem4,
             this.toolStripMenuItem7});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(397, 415);
+            this.contextMenuStrip.Size = new System.Drawing.Size(397, 382);
             // 
             // EditToolStripMenuItem
             // 
