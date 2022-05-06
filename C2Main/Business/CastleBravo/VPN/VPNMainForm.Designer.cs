@@ -92,19 +92,20 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.CopyAllMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopySSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyIPPortMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyOtherMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveResultsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出IP端口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出分享地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除重复项域名端口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除重复项域名端口密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除重复项域名端口密码客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyAllMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopySSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyIPPortMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyOtherMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ItemCountSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProxyEnableSLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -112,6 +113,7 @@ namespace C2.Business.CastleBravo.VPN
             this.StatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -495,52 +497,42 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator4,
             this.ClearAllToolStripMenuItem,
             this.toolStripSeparator5,
-            this.CopyAllMenuItem,
-            this.CopySSMenuItem,
-            this.CopyIPPortMenuItem,
-            this.CopyOtherMenuItem,
-            this.toolStripSeparator1,
-            this.SaveResultsMenuItem,
-            this.导出IP端口ToolStripMenuItem,
-            this.导出分享地址ToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.删除重复项域名端口ToolStripMenuItem,
-            this.删除重复项域名端口密码ToolStripMenuItem,
-            this.删除重复项域名端口密码客户端ToolStripMenuItem,
-            this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem});
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem7});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(441, 634);
+            this.contextMenuStrip.Size = new System.Drawing.Size(397, 415);
             // 
             // EditToolStripMenuItem
             // 
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(396, 30);
             this.EditToolStripMenuItem.Text = "编辑";
             this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(396, 30);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // ResetToolStripMenuItem
             // 
             this.ResetToolStripMenuItem.Name = "ResetToolStripMenuItem";
-            this.ResetToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.ResetToolStripMenuItem.Size = new System.Drawing.Size(396, 30);
             this.ResetToolStripMenuItem.Text = "重置";
             this.ResetToolStripMenuItem.Click += new System.EventHandler(this.ResetToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(437, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(393, 6);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(440, 30);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(396, 30);
             this.toolStripMenuItem1.Text = "选定项验活-Ping";
             this.toolStripMenuItem1.ToolTipText = "向目标发送Ping报文";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.选定项验活_Ping_ToolStripMenuItem_Click);
@@ -548,7 +540,7 @@ namespace C2.Business.CastleBravo.VPN
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(440, 30);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(396, 30);
             this.toolStripMenuItem2.Text = "选定项验活-Tcp";
             this.toolStripMenuItem2.ToolTipText = "向目标创建一个Tcp连接";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.选定项验活_Tcp_ToolStripMenuItem_Click);
@@ -556,7 +548,7 @@ namespace C2.Business.CastleBravo.VPN
             // CheckAliveSelectedItemMenuItem
             // 
             this.CheckAliveSelectedItemMenuItem.Name = "CheckAliveSelectedItemMenuItem";
-            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.CheckAliveSelectedItemMenuItem.Size = new System.Drawing.Size(396, 30);
             this.CheckAliveSelectedItemMenuItem.Text = "选定项验活-HTTP(204)(难度太大-暂缓)";
             this.CheckAliveSelectedItemMenuItem.ToolTipText = "向目标发起一个访问指定204网站的http请求";
             this.CheckAliveSelectedItemMenuItem.Click += new System.EventHandler(this.选定项验活_HTTP204_ToolStripMenuItem_Click);
@@ -564,7 +556,7 @@ namespace C2.Business.CastleBravo.VPN
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(440, 30);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(396, 30);
             this.toolStripMenuItem3.Text = "选定项验活-反查IP";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.选定项验活_反查IP_ToolStripMenuItem_Click);
             // 
@@ -575,7 +567,7 @@ namespace C2.Business.CastleBravo.VPN
             this.随机探针ToolStripMenuItem});
             this.DDMenuItem.Enabled = false;
             this.DDMenuItem.Name = "DDMenuItem";
-            this.DDMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.DDMenuItem.Size = new System.Drawing.Size(396, 30);
             this.DDMenuItem.Text = "主动探针";
             // 
             // mysqlProbeToolStripMenuItem
@@ -618,106 +610,128 @@ namespace C2.Business.CastleBravo.VPN
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(437, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(393, 6);
             // 
             // ClearAllToolStripMenuItem
             // 
             this.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem";
-            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.ClearAllToolStripMenuItem.Size = new System.Drawing.Size(396, 30);
             this.ClearAllToolStripMenuItem.Text = "全部清空";
             this.ClearAllToolStripMenuItem.Click += new System.EventHandler(this.ClearAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(437, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(393, 6);
             // 
-            // CopyAllMenuItem
+            // toolStripMenuItem6
             // 
-            this.CopyAllMenuItem.Name = "CopyAllMenuItem";
-            this.CopyAllMenuItem.Size = new System.Drawing.Size(440, 30);
-            this.CopyAllMenuItem.Text = "复制-所有字段-剪切板";
-            this.CopyAllMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
-            // 
-            // CopySSMenuItem
-            // 
-            this.CopySSMenuItem.Name = "CopySSMenuItem";
-            this.CopySSMenuItem.Size = new System.Drawing.Size(440, 30);
-            this.CopySSMenuItem.Text = "复制-分享地址-剪切板";
-            this.CopySSMenuItem.Click += new System.EventHandler(this.CopySSMenuItem_Click);
-            // 
-            // CopyIPPortMenuItem
-            // 
-            this.CopyIPPortMenuItem.Name = "CopyIPPortMenuItem";
-            this.CopyIPPortMenuItem.Size = new System.Drawing.Size(440, 30);
-            this.CopyIPPortMenuItem.Text = "复制-IP和端口-剪切板";
-            this.CopyIPPortMenuItem.Click += new System.EventHandler(this.CopyIPPortMenuItem_Click);
-            // 
-            // CopyOtherMenuItem
-            // 
-            this.CopyOtherMenuItem.Name = "CopyOtherMenuItem";
-            this.CopyOtherMenuItem.Size = new System.Drawing.Size(440, 30);
-            this.CopyOtherMenuItem.Text = "复制-其他信息-剪切板";
-            this.CopyOtherMenuItem.Click += new System.EventHandler(this.CopyOtherMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(437, 6);
+            this.toolStripMenuItem6.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SaveResultsMenuItem,
+            this.导出IP端口ToolStripMenuItem,
+            this.导出分享地址ToolStripMenuItem});
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(396, 30);
+            this.toolStripMenuItem6.Text = "导出操作";
             // 
             // SaveResultsMenuItem
             // 
             this.SaveResultsMenuItem.Name = "SaveResultsMenuItem";
-            this.SaveResultsMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.SaveResultsMenuItem.Size = new System.Drawing.Size(270, 34);
             this.SaveResultsMenuItem.Text = "导出-所有字段";
             this.SaveResultsMenuItem.Click += new System.EventHandler(this.SaveResultsMenuItem_Click);
             // 
             // 导出IP端口ToolStripMenuItem
             // 
             this.导出IP端口ToolStripMenuItem.Name = "导出IP端口ToolStripMenuItem";
-            this.导出IP端口ToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.导出IP端口ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.导出IP端口ToolStripMenuItem.Text = "导出-IP和端口";
             this.导出IP端口ToolStripMenuItem.Click += new System.EventHandler(this.导出IP端口_ToolStripMenuItem_Click);
             // 
             // 导出分享地址ToolStripMenuItem
             // 
             this.导出分享地址ToolStripMenuItem.Name = "导出分享地址ToolStripMenuItem";
-            this.导出分享地址ToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.导出分享地址ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.导出分享地址ToolStripMenuItem.Text = "导出-分享地址";
             this.导出分享地址ToolStripMenuItem.Click += new System.EventHandler(this.导出分享地址_ToolStripMenuItem_Click);
             // 
-            // toolStripSeparator6
+            // toolStripMenuItem7
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(437, 6);
+            this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除重复项域名端口ToolStripMenuItem,
+            this.删除重复项域名端口密码ToolStripMenuItem,
+            this.删除重复项域名端口密码客户端ToolStripMenuItem,
+            this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem});
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(396, 30);
+            this.toolStripMenuItem7.Text = "去重操作";
             // 
             // 删除重复项域名端口ToolStripMenuItem
             // 
             this.删除重复项域名端口ToolStripMenuItem.Name = "删除重复项域名端口ToolStripMenuItem";
-            this.删除重复项域名端口ToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.删除重复项域名端口ToolStripMenuItem.Size = new System.Drawing.Size(470, 34);
             this.删除重复项域名端口ToolStripMenuItem.Text = "删除重复项-[域名,端口]";
             this.删除重复项域名端口ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项_域名_端口_ToolStripMenuItem_Click);
             // 
             // 删除重复项域名端口密码ToolStripMenuItem
             // 
             this.删除重复项域名端口密码ToolStripMenuItem.Name = "删除重复项域名端口密码ToolStripMenuItem";
-            this.删除重复项域名端口密码ToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.删除重复项域名端口密码ToolStripMenuItem.Size = new System.Drawing.Size(470, 34);
             this.删除重复项域名端口密码ToolStripMenuItem.Text = "删除重复项-[域名,端口,密码]";
             this.删除重复项域名端口密码ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项_域名_端口_密码_ToolStripMenuItem_Click);
             // 
             // 删除重复项域名端口密码客户端ToolStripMenuItem
             // 
             this.删除重复项域名端口密码客户端ToolStripMenuItem.Name = "删除重复项域名端口密码客户端ToolStripMenuItem";
-            this.删除重复项域名端口密码客户端ToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.删除重复项域名端口密码客户端ToolStripMenuItem.Size = new System.Drawing.Size(470, 34);
             this.删除重复项域名端口密码客户端ToolStripMenuItem.Text = "删除重复项-[域名,端口,密码,客户端]";
             this.删除重复项域名端口密码客户端ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项_域名_端口_密码_客户端_ToolStripMenuItem_Click);
             // 
             // 删除重复项域名端口密码加密算法客户端ToolStripMenuItem
             // 
             this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem.Name = "删除重复项域名端口密码加密算法客户端ToolStripMenuItem";
-            this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem.Size = new System.Drawing.Size(440, 30);
+            this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem.Size = new System.Drawing.Size(470, 34);
             this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem.Text = "删除重复项-[域名,端口,密码,加密算法,客户端]";
             this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项_域名_端口_密码_加密算法_客户端ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyAllMenuItem,
+            this.CopySSMenuItem,
+            this.CopyIPPortMenuItem,
+            this.CopyOtherMenuItem});
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(396, 30);
+            this.toolStripMenuItem4.Text = "复制操作";
+            // 
+            // CopyAllMenuItem
+            // 
+            this.CopyAllMenuItem.Name = "CopyAllMenuItem";
+            this.CopyAllMenuItem.Size = new System.Drawing.Size(288, 34);
+            this.CopyAllMenuItem.Text = "复制-所有字段-剪切板";
+            this.CopyAllMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
+            // 
+            // CopySSMenuItem
+            // 
+            this.CopySSMenuItem.Name = "CopySSMenuItem";
+            this.CopySSMenuItem.Size = new System.Drawing.Size(288, 34);
+            this.CopySSMenuItem.Text = "复制-分享地址-剪切板";
+            this.CopySSMenuItem.Click += new System.EventHandler(this.CopySSMenuItem_Click);
+            // 
+            // CopyIPPortMenuItem
+            // 
+            this.CopyIPPortMenuItem.Name = "CopyIPPortMenuItem";
+            this.CopyIPPortMenuItem.Size = new System.Drawing.Size(288, 34);
+            this.CopyIPPortMenuItem.Text = "复制-IP和端口-剪切板";
+            this.CopyIPPortMenuItem.Click += new System.EventHandler(this.CopyIPPortMenuItem_Click);
+            // 
+            // CopyOtherMenuItem
+            // 
+            this.CopyOtherMenuItem.Name = "CopyOtherMenuItem";
+            this.CopyOtherMenuItem.Size = new System.Drawing.Size(288, 34);
+            this.CopyOtherMenuItem.Text = "复制-其他信息-剪切板";
+            this.CopyOtherMenuItem.Click += new System.EventHandler(this.CopyOtherMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -774,6 +788,12 @@ namespace C2.Business.CastleBravo.VPN
             this.actionStatusLabel.Name = "actionStatusLabel";
             this.actionStatusLabel.Size = new System.Drawing.Size(64, 24);
             this.actionStatusLabel.Text = "未开始";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(285, 34);
+            this.toolStripMenuItem5.Text = "toolStripMenuItem5";
             // 
             // VPNMainForm
             // 
@@ -865,7 +885,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ColumnHeader lvOtherInfo;
         private System.Windows.Forms.ColumnHeader lvContent;
         private System.Windows.Forms.ToolStripMenuItem 导出IP端口ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem 导出分享地址ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -883,11 +902,14 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripLabel helpInfoMenu;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem 删除重复项域名端口密码客户端ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除重复项域名端口ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除重复项域名端口密码ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除重复项域名端口密码加密算法客户端ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
     }
 }
