@@ -19,7 +19,11 @@ namespace C2.Business.CastleBravo.VPN
         List<VPNTaskConfig> tasks = new List<VPNTaskConfig>();
         private FindSet finder;
 
-        
+        private HashSet<string> setOfIPAddress;
+        private HashSet<string> setOfHost;
+
+        private int NumberOfHost { get => setOfHost.Count; }
+        private int NumberOfIPAddress { get => setOfIPAddress.Count; }
 
         private ToolStripItem[] enableItems;
         public VPNMainForm()
@@ -33,6 +37,9 @@ namespace C2.Business.CastleBravo.VPN
         {
             finder = new FindSet(LV);
             LV.ListViewItemSorter = new LVComparer();
+
+            setOfHost = new HashSet<string>();
+            setOfIPAddress = new HashSet<string>();
         }
 
         private void InitializeToolStrip()

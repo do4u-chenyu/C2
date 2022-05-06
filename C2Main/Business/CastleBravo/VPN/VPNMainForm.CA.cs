@@ -27,6 +27,7 @@ namespace C2.Business.CastleBravo.VPN
         private readonly string Succ = "√";
         private readonly string Fail = "×";
         private readonly string Todo = "待";
+        private readonly string Done = "Done";
 
 
         // 验活类型
@@ -49,6 +50,8 @@ namespace C2.Business.CastleBravo.VPN
             this.progressBar.Maximum = progressMaxValue;
             this.actionNeedStop = false;
             this.NumberOfAlive = 0;
+            this.setOfIPAddress.Clear();
+            this.setOfHost.Clear();
         }
 
         // 哑元函数,过编译器检查用的
@@ -200,9 +203,8 @@ namespace C2.Business.CastleBravo.VPN
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
-            // 先dns出IP地址
-            if (task.IP.IsNullOrEmpty())
-                IPAddressUpdate(task);  
+
+            IPAddressUpdate(task);  
 
             // 回写task
             PingInfoUpdate(task);
@@ -215,9 +217,8 @@ namespace C2.Business.CastleBravo.VPN
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
-            // 先dns出IP地址
-            if (task.IP.IsNullOrEmpty())
-                IPAddressUpdate(task);
+
+            IPAddressUpdate(task);
 
             RefreshTcpInfo(task);
 
@@ -234,8 +235,11 @@ namespace C2.Business.CastleBravo.VPN
             if (ipList.Length > 1)
                 task.ProbeInfo = ipList.Skip(1).JoinString(",");
 
-            task.Status = NetUtil.IPCheck(task.IP) == task.IP ? Succ : Fail;
+            task.Status = NetUtil.IPCheck(task.IP) == task.IP ? Done : Fail;
             task.Country = NetUtil.IPQuery_WhoIs(task.IP);
+
+            this.setOfHost.Add(task.Host);
+            this.setOfIPAddress.UnionWith(ipList);
             
             Application.DoEvents();
         }
@@ -281,12 +285,14 @@ namespace C2.Business.CastleBravo.VPN
 
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} {3} - 活 {2} - CH {4}",
+            this.progressMenu.Text = string.Format("{0}/{1} {3} - 活 {2} - 站 {5} - IP {6} - CH {4}",
                 ++progressBar.Value,
                 progressBar.Maximum,
                 NumberOfAlive,
                 progressBar.Value == progressBar.Maximum ? "完成" : string.Empty,
-                "未");
+                "未",
+                NumberOfHost,
+                NumberOfIPAddress);
         }
 
         private void CheckSavePoint()

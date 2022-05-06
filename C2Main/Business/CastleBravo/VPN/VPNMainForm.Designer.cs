@@ -236,14 +236,14 @@ namespace C2.Business.CastleBravo.VPN
             // 重新开始ToolStripMenuItem1
             // 
             this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
-            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.重新开始ToolStripMenuItem1.Text = "重新开始";
             this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_重新开始_ToolStripMenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem1
             // 
             this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
-            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
             this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_继续上次_ToolStripMenuItem_Click);
             // 
@@ -509,7 +509,7 @@ namespace C2.Business.CastleBravo.VPN
             this.删除重复项域名端口密码客户端ToolStripMenuItem,
             this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(441, 667);
+            this.contextMenuStrip.Size = new System.Drawing.Size(441, 634);
             // 
             // EditToolStripMenuItem
             // 
