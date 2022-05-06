@@ -169,6 +169,9 @@
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>..\ThirdPartyLibrary\Oracle.ManagedDataAccess.19.10.0\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.9.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.6.9\lib\net45\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Rebex.Common">
       <HintPath>..\ThirdPartyLibrary\Cracker\rebex\Rebex.Common.dll</HintPath>
     </Reference>
@@ -2966,6 +2969,7 @@
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>

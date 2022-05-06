@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,5 +30,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskResultTextBox.Text = taskInfo.ResultFilePath;
             this.taskInfoLabel.Text = taskInfo.Status.ToString();
         }
+
+        private void YQTaskResult_Shown(object sender, EventArgs e)
+        {
+            if (taskInfo.Status == YQTaskStatus.Done && File.Exists(taskInfo.ResultFilePath))
+                return;
+
+            if (taskInfo.IsOverTime())
+            {
+                HelpUtil.ShowMessageBox("任务已过期，请在下发24小时内获取结果。");
+                return;
+            }
+        }
+        
     }
 }

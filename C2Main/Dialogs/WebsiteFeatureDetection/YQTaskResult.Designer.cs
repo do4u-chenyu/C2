@@ -209,6 +209,7 @@
             this.MinimizeBox = false;
             this.Name = "YQTaskResult";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Shown += new System.EventHandler(this.YQTaskResult_Shown);
             this.Text = "舆情侦察兵";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
