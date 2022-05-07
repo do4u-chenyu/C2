@@ -42,6 +42,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private bool actionNeedStop = false;
         private int NumberOfAlive { get; set; }
+        private int NumberOfChina { get; set; }
 
         private void ResetProgressMenuValue(int progressMaxValue)
         {
@@ -50,6 +51,7 @@ namespace C2.Business.CastleBravo.VPN
             this.progressBar.Maximum = progressMaxValue;
             this.actionNeedStop = false;
             this.NumberOfAlive = 0;
+            this.NumberOfChina = 0;
             this.setOfIPAddress.Clear();
             this.setOfHost.Clear();
         }
@@ -191,6 +193,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
             NumberOfAlive = task.Status == Succ ? NumberOfAlive + 1 : NumberOfAlive;
+            NumberOfChina = NetUtil.IsMainlandOfChina(task.Country) ? NumberOfChina + 1 : NumberOfChina;
 
             lvi.SubItems[CI_状态].Text = task.Status;
             lvi.SubItems[CI_IP地址].Text = task.IP;
@@ -285,12 +288,12 @@ namespace C2.Business.CastleBravo.VPN
 
         private void UpdateProgress()
         {
-            this.progressMenu.Text = string.Format("{0}/{1} {3} - 活 {2} - 站 {5} - IP {6} - CH {4}",
+            this.progressMenu.Text = string.Format("{0}/{1} {3} - 活 {2} - 站 {5} - IP {6} - 国内 {4}",
                 ++progressBar.Value,
                 progressBar.Maximum,
                 NumberOfAlive,
                 progressBar.Value == progressBar.Maximum ? "完成" : string.Empty,
-                "未",
+                NumberOfChina,
                 NumberOfHost,
                 NumberOfIPAddress);
         }

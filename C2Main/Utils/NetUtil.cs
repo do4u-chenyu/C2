@@ -37,7 +37,7 @@ namespace C2.Utils
             "巴林", "阿富", "伊拉", "葡萄", "朝鲜", 
         });
 
-        public static bool IsChina(string countryDesc)
+        public static bool IsMainlandOfChina(string countryDesc)
         {
             for(int i = 0; i < countryDesc.Length; i += 2)
             {

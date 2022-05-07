@@ -1,5 +1,6 @@
 ﻿using C2.Core;
 using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,7 +14,7 @@ namespace C2.Business.CastleBravo.VPN
         readonly string configFFP = Path.Combine(Global.ResourcesPath, "WebShellConfig", "vpnconfig.db");
 
 
-        private void SaveResultToLocal(string path, int[] columns = null)
+        private void SaveResultToLocal(string path, int[] columns = null, Func<VPNTaskConfig, bool> filter = null)
         {
             if (columns == null)
                 columns = new int[0];
@@ -29,7 +30,12 @@ namespace C2.Business.CastleBravo.VPN
                     {
                         if (columns.Length == 0 || columns._Contains(i))
                             tmpLists.Add(lvi.SubItems[i].Text.Replace("\r\n", OpUtil.StringBlank));
-                    }         
+                    }
+
+                    // 自定义条件过滤
+                    if (filter != null && !filter(lvi.Tag as VPNTaskConfig))
+                        continue;
+
                     sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
                 }
             }

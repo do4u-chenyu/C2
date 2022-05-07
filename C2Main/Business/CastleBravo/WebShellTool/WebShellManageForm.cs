@@ -506,7 +506,7 @@ namespace C2.Business.CastleBravo.WebShellTool
                 Application.DoEvents();
             }
 
-            return NetUtil.IsChina(task.Country) || NetUtil.IsChina(task.Country2);
+            return NetUtil.IsMainlandOfChina(task.Country) || NetUtil.IsMainlandOfChina(task.Country2);
         }
    
         private void ClearAllToolStripMenuItem_Click(object sender, EventArgs e)
