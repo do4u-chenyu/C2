@@ -31,8 +31,8 @@ namespace C2.Business.CastleBravo.VPN
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.I204TB = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.O204TB = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -66,6 +66,16 @@ namespace C2.Business.CastleBravo.VPN
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "国内204站点";
             // 
+            // I204TB
+            // 
+            this.I204TB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.I204TB.Location = new System.Drawing.Point(3, 24);
+            this.I204TB.Multiline = true;
+            this.I204TB.Name = "I204TB";
+            this.I204TB.ReadOnly = true;
+            this.I204TB.Size = new System.Drawing.Size(780, 168);
+            this.I204TB.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.O204TB);
@@ -76,16 +86,6 @@ namespace C2.Business.CastleBravo.VPN
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "境外204站点";
-            // 
-            // I204TB
-            // 
-            this.I204TB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.I204TB.Location = new System.Drawing.Point(3, 24);
-            this.I204TB.Multiline = true;
-            this.I204TB.Name = "I204TB";
-            this.I204TB.ReadOnly = true;
-            this.I204TB.Size = new System.Drawing.Size(780, 168);
-            this.I204TB.TabIndex = 0;
             // 
             // O204TB
             // 
@@ -103,6 +103,7 @@ namespace C2.Business.CastleBravo.VPN
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 469);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CAForm";
             this.Text = "验活配置";
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);

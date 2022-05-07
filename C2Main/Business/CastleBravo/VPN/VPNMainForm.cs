@@ -1,4 +1,5 @@
-﻿using C2.Business.CastleBravo.WebShellTool;
+﻿using C2.Business.CastleBravo.VPN.Info;
+using C2.Business.CastleBravo.WebShellTool;
 using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
@@ -52,6 +53,7 @@ namespace C2.Business.CastleBravo.VPN
                 this.helpInfoMenu,
                 this.验活204Menu,
                 this.checkAliveDDB,
+                this.staticsMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
             };
@@ -220,22 +222,7 @@ namespace C2.Business.CastleBravo.VPN
             FileUtil.TryClipboardSetText(sb.ToString());
         }
 
-        private void SaveResultsMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog dialog = new SaveFileDialog
-            {
-                Filter = "BCP文件|*.bcp",
-                FileName = "VPN专项-所有字段-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp"
-            };
 
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName);
-
-            HelpUtil.ShowMessageBox(string.Format("导出到{0}【成功】", dialog.FileName));
-        }
 
 
 
@@ -257,38 +244,50 @@ namespace C2.Business.CastleBravo.VPN
             StaticItems();
         }
 
-        private void 导出IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Export(string exportType, int[] exportColumns, Func<VPNTaskConfig, bool> filter = null)
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
-                Filter = "BCP文件|*.bcp",
-                FileName = "VPN专项-IP端口-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp"
+                Filter = "csv文件|*.csv",
+                FileName = string.Format("VPN专项-{0}-{1}.csv", exportType, DateTime.Now.ToString("yyyyMMddHHmm")),
             };
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
             using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName, new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
+                SaveResultToLocal(dialog.FileName, exportColumns, filter);
 
             HelpUtil.ShowMessageBox(string.Format("导出到{0}【成功】", dialog.FileName));
         }
 
-        private void 导出分享地址_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 导出_IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog
-            {
-                Filter = "BCP文件|*.bcp",
-                FileName = "VPN专项-分享地址-" + DateTime.Now.ToString("yyyyMMddHHmm") + ".bcp"
-            };
+            Export("IP端口", new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
+        }
 
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
+        private void 导出_所有字段_MenuItem_Click(object sender, EventArgs e)
+        {
+            Export("所有字段", new int[0]);
+        }
 
-            using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName, new int[] { CI_分享地址 });
+        private void 导出_分享地址_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("分享地址", new int[] { CI_分享地址 });
+        }
 
-            HelpUtil.ShowMessageBox(string.Format("导出到{0}【成功】", dialog.FileName));
+        private void 导出_IP归属地_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("IP归属地", new int[] { CI_IP地址, CI_归属地 });
+        }
+
+        private void 导出_境内站点_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("境内站点", new int[0], (t) => { return NetUtil.IsMainlandOfChina(t.Country); });
+        }
+        private void 导出_境外站点_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("境外站点", new int[0], (t) => { return !NetUtil.IsMainlandOfChina(t.Country); });
         }
 
         private void CopySSMenuItem_Click(object sender, EventArgs e)
@@ -425,6 +424,9 @@ namespace C2.Business.CastleBravo.VPN
             SaveDB();       // 写入文件
         }
 
-
+        private void StaticsMenu_Click(object sender, EventArgs e)
+        {
+            new StaticForm(Static.DoStatic(tasks)).ShowDialog();
+        }
     }
 }

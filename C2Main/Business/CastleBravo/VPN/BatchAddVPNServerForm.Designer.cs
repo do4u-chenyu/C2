@@ -47,14 +47,14 @@ namespace C2.Business.CastleBravo.VPN
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // label0
             // 
             this.label0.AutoSize = true;
             this.label0.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label0.ForeColor = System.Drawing.Color.Red;
             this.label0.Location = new System.Drawing.Point(33, 80);
             this.label0.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label0.Name = "label1";
+            this.label0.Name = "label0";
             this.label0.Size = new System.Drawing.Size(413, 18);
             this.label0.TabIndex = 10029;
             this.label0.Text = "* 格式:一行一个,支持ss,ssr,vmess,vless,trojan";
@@ -208,27 +208,27 @@ namespace C2.Business.CastleBravo.VPN
             this.ss.UseVisualStyleBackColor = true;
             this.ss.Click += new System.EventHandler(this.RadioButton_Click);
             // 
-            // label2
+            // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(33, 80);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label2";
+            this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(395, 18);
             this.label1.TabIndex = 10034;
             this.label1.Text = "* 格式:一行一个, IP和端口, : 或 空白符 分割";
             this.label1.Visible = false;
             // 
-            // label3
+            // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(33, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label3";
+            this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(278, 18);
             this.label2.TabIndex = 10035;
             this.label2.Text = "* 格式:一行一个,飞机场订阅地址";
@@ -253,6 +253,7 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchAddVPNServerForm";
             this.Text = "批量添加";
