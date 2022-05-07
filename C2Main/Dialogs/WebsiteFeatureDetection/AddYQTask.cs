@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
@@ -21,10 +22,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private String token;
         private String TaskID;
         private long ruleID;
-        private int areaCode;
-        private String ruleName;
-        private string destDirectory ;
+        private long startTime;
+        private long endTime;
+        private string areaCode;
+        private string ruleName;
+        private string ruleHost;
+        private string destDirectory;
         private string taskFilePath;
+        private string destFilePath;
+        private string TaskCreateTime;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskContent { get => this.taskContentComboBox.Text; set => this.taskContentComboBox.Text = value; }
         string TaskModelName { get => this.taskModelComboBox.Text; set => this.taskModelComboBox.Text = value; }
@@ -38,6 +44,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             maxRow = 100;
             InitTaskInfo();
             token = string.Empty;
+            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            startTime = 0;
+            endTime = 0;
 
             destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             FileUtil.CreateDirectory(destDirectory);
@@ -52,6 +61,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void InitTaskInfo()
         {
             taskModelComboBox.SelectedIndex = 0;
+            taskContentComboBox.SelectedIndex = 0;
             TaskName = String.Format("{0}任务{1}", TaskModelName, DateTime.Now.ToString("MMdd"));
         }
 
@@ -86,11 +96,16 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
-            
-            bool token = GenAndCheckToken();
-            TaskInfo = UpdateYQTaskInfo();
+            if(!GenAndCheckToken())
+                return false;
+            if(TaskContent=="账号" && TaskModelName == "不限")
+            {
+                HelpUtil.ShowMessageBox("查询内容为账号时，必须指定任务类型。");
+                return false;
+            }
+            this.TaskInfo = UpdateYQTaskInfo();
             bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
-            if (!(token && genTask && base.OnOKButtonClick()))
+            if (!(genTask && base.OnOKButtonClick()))
                 return false;
 
             HelpUtil.ShowMessageBox("任务下发成功");
@@ -151,20 +166,61 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.ruleName = TaskName;
             try
             {
-                areaCode = int.Parse(areaTextBox.Text);
+                areaCode = areaTextBox.Text;
             }
             catch
             {
-                areaCode = 110000;
+                areaCode = string.Empty;
             }
-            DateTime dtStart = new DateTime(1970, 1, 1, 8, 0, 0);
-            long time = Convert.ToInt32(DateTime.Now.Subtract(dtStart).TotalSeconds);
+            this.startTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker1.Value));
+            this.endTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker2.Value));
+            this.ruleHost = GenModelHost(this.TaskModelName);
 
             Random ran = new Random();
             int n = ran.Next(10, 100);
-            this.TaskID = string.Format("{0}{1}", n.ToString(), time.ToString());
+            this.TaskID = string.Format("{0}{1}", n.ToString(), this.TaskCreateTime);
 
             return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running);
+        }
+
+        private string GenModelHost(string model)
+        {
+            //抖音： iesdouyin.com
+            //今日头条： toutiao.com
+            //微信公众号： mp.weixin.qq.com
+            //新浪微博： weibo.com
+            //Twitter： twitter.com
+            //百家号： baijiahao.baidu.com
+
+            //Twitter
+            //微博
+            //微信公众号
+            //今日头条
+            //抖音
+            //抖音APP
+            //快手
+            //暗网
+            //不限
+            string modelHost = string.Empty;
+            switch (model)
+            {
+                case "微博":
+                    modelHost = "weibo.com";
+                    break;
+                case "Twitter":
+                    modelHost = "twitter.com";
+                    break;
+                case "微信公众号":
+                    modelHost = "mp.weixin.qq.com";
+                    break;
+                case "今日头条":
+                    modelHost = "toutiao.com";
+                    break;
+                case "抖音":
+                    modelHost = "iesdouyin.com";
+                    break;
+            }
+            return modelHost;
         }
 
         private bool GenTasksFromPaste()
@@ -206,19 +262,29 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void AddTasksByKey(string keyWord, int number)
         {
-            this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
-            //this.ruleID = 1416305261;
-            
-            string destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.TaskID, keyWord));
+            //this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
+            this.ruleID = 1416305261;
+            destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.TaskID, keyWord));
             using (File.Create(destFilePath)) { }
-            long ss = Convert.ToInt64(this.TaskID + number.ToString());
+            
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
-
-
             pairs.Add("id", this.ruleID);
             pairs.Add("type", this.ruleType);
-            pairs.Add("keyword", keyWord);
             pairs.Add("name", this.ruleName);
+            if(this.startTime != 0)
+                pairs.Add("starttime", this.startTime);
+            if (this.endTime != 0)
+                pairs.Add("endtime", this.endTime);
+            if (!this.areaCode.IsNullOrEmpty())
+                pairs.Add("areakeyword", this.areaCode);
+            if(this.TaskContent == "关键词")
+                pairs.Add("keyword", keyWord);
+            else if(this.TaskContent == "账号")
+            {
+                if (!this.ruleHost.IsNullOrEmpty())
+                    pairs.Add("host", this.ruleHost);
+                pairs.Add("userid", keyWord);
+            }
 
             string error = string.Empty;
             string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}",this.token);
@@ -239,8 +305,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 error =  "下发任务失败：" + ex.Message;
             }
             if (!error.IsNullOrEmpty())
+            {
                 HelpUtil.ShowMessageBox(error);
-            
+                return;
+            }
+            //Thread.Sleep(5);
             GenYQTaskResult(destFilePath);
             return;
         }
@@ -255,6 +324,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             factory.Password = "Iao123456";
 
             string testID = string.Empty;
+            StreamWriter sw = null;
+            sw = new StreamWriter(destFilePath);
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -274,9 +345,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                         }
                         if (testID == this.ruleID.ToString())
                         {
-                            StreamWriter sw = null;
-                            sw = new StreamWriter(destFilePath);
-                            sw.WriteLine(gList.ToString());
+                            sw.Write(gList.ToString());
                         };
                     };
                 }
