@@ -21,8 +21,8 @@ namespace C2.Business.CastleBravo.VPN
 
         private void InitializeOther()
         {
-            OKButton.Size = new Size(75, 24);
-            CancelBtn.Size = new Size(75, 24);
+            this.OKButton.Size = new Size(75, 27);
+            this.CancelBtn.Size = new Size(75, 27);
         }
     }
 }

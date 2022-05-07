@@ -16,7 +16,14 @@ namespace C2.Business.CastleBravo.VPN
         public RandomProbeForm()
         {
             InitializeComponent();
+            InitializeOther();
+        }
+
+        private void InitializeOther()
+        {
             this.lengthValues = new List<int>();
+            this.OKButton.Size = new Size(75, 27);
+            this.CancelBtn.Size = new Size(75, 27);
         }
         public new RandomProbeConfig ShowDialog()
         {
