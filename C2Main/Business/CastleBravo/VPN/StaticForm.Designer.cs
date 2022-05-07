@@ -51,7 +51,7 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "StaticForm";
-            this.Text = "StaticForm";
+            this.Text = "统计窗口";
             this.Controls.SetChildIndex(this.textBox1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
