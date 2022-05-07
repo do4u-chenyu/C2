@@ -374,6 +374,7 @@
       <DependentUpon>CAForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\VPN\Client\ClientSetting.cs" />
+    <Compile Include="Business\CastleBravo\VPN\Info\Static.cs" />
     <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\CAFactory.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\CANetUtil.cs" />

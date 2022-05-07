@@ -27,7 +27,7 @@ namespace C2.Business.CastleBravo.VPN
         }
         public new RandomProbeConfig ShowDialog()
         {
-            return base.ShowDialog() == System.Windows.Forms.DialogResult.OK ?
+            return base.ShowDialog() == DialogResult.OK ?
                 new RandomProbeConfig(
                     this.timeout, 
                     this.sendCount, 

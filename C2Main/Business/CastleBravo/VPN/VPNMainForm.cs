@@ -1,4 +1,5 @@
-﻿using C2.Business.CastleBravo.WebShellTool;
+﻿using C2.Business.CastleBravo.VPN.Info;
+using C2.Business.CastleBravo.WebShellTool;
 using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
@@ -425,7 +426,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void StaticsMenu_Click(object sender, EventArgs e)
         {
-            new StaticForm().ShowDialog();
+            new StaticForm(Static.DoStatic(tasks)).ShowDialog();
         }
     }
 }
