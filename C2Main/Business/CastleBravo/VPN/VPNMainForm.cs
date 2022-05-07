@@ -52,6 +52,7 @@ namespace C2.Business.CastleBravo.VPN
                 this.helpInfoMenu,
                 this.验活204Menu,
                 this.checkAliveDDB,
+                this.staticsMenu,
                 this.infoCollectionMenu,
                 this.passwdBlastingMenuItem,
             };
@@ -422,6 +423,9 @@ namespace C2.Business.CastleBravo.VPN
             SaveDB();       // 写入文件
         }
 
-
+        private void StaticsMenu_Click(object sender, EventArgs e)
+        {
+            new StaticForm().ShowDialog();
+        }
     }
 }
