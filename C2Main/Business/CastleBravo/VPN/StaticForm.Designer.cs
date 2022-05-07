@@ -41,14 +41,14 @@ namespace C2.Business.CastleBravo.VPN
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(678, 500);
+            this.textBox1.Size = new System.Drawing.Size(911, 500);
             this.textBox1.TabIndex = 10003;
             // 
             // StaticForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 564);
+            this.ClientSize = new System.Drawing.Size(911, 564);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "StaticForm";

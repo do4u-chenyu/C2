@@ -426,7 +426,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void StaticsMenu_Click(object sender, EventArgs e)
         {
-            new StaticForm(Static.DoStatic(tasks)).ShowDialog();
+            new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
     }
 }

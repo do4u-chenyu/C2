@@ -10,19 +10,19 @@ namespace C2.Business.CastleBravo.VPN
 {
     public partial class VPNMainForm
     {
-        private readonly int CI_创建时间 = 0;
-        private readonly int CI_备注     = 1;
-        private readonly int CI_主机地址 = 2;
-        private readonly int CI_端口     = 3;
-        private readonly int CI_密码     = 4;
-        private readonly int CI_加密算法 = 5;
-        private readonly int CI_状态     = 6;
-        private readonly int CI_客户端   = 7;
-        private readonly int CI_探测信息 = 8;
-        private readonly int CI_其他信息 = 9;
-        private readonly int CI_IP地址   = 10;
-        private readonly int CI_归属地   = 11;
-        private readonly int CI_分享地址 = 12;
+        public static readonly int CI_创建时间 = 0;
+        public static readonly int CI_备注     = 1;
+        public static readonly int CI_主机地址 = 2;
+        public static readonly int CI_端口     = 3;
+        public static readonly int CI_密码     = 4;
+        public static readonly int CI_加密算法 = 5;
+        public static readonly int CI_状态     = 6;
+        public static readonly int CI_客户端   = 7;
+        public static readonly int CI_探测信息 = 8;
+        public static readonly int CI_其他信息 = 9;
+        public static readonly int CI_IP地址   = 10;
+        public static readonly int CI_归属地   = 11;
+        public static readonly int CI_分享地址 = 12;
 
         private readonly string Succ = "√";
         private readonly string Fail = "×";

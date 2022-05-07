@@ -1,4 +1,5 @@
-﻿using C2.Core;
+﻿using C2.Business.CastleBravo.VPN.Info;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -62,41 +63,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void StaticSS()
         {
-            int ss = 0;
-            int ssr = 0;
-            int vmess = 0;
-            int vless = 0;
-            int trojan = 0;
-            int count = LV.Items.Count;
-
-            foreach (ListViewItem lvi in LV.Items)
-            {
-                switch (lvi.SubItems[CI_客户端].Text)
-                {
-                    case "SS":
-                        ss++;
-                        break;
-                    case "SSR":
-                        ssr++;
-                        break;
-                    case "VMESS":
-                        vmess++;
-                        break;
-                    case "VLESS":
-                        vless++;
-                        break;
-                    case "TROJAN":
-                        trojan++;
-                        break;
-                }
-            }
-
-            StatusLabel2.Text = string.Format("ss:{0}|ssr:{1}|vmess:{2}|vless:{3}|trojan:{4}",
-                                               string.Format("{0}({1:P2})", ss,     count < 1 ? 0 : (float)ss     / count),
-                                               string.Format("{0}({1:P2})", ssr,    count < 1 ? 0 : (float)ssr    / count),
-                                               string.Format("{0}({1:P2})", vmess,  count < 1 ? 0 : (float)vmess  / count),
-                                               string.Format("{0}({1:P2})", vless,  count < 1 ? 0 : (float)vless  / count),
-                                               string.Format("{0}({1:P2})", trojan, count < 1 ? 0 : (float)trojan / count));
+            StatusLabel2.Text = Static.StaticSS(LV);
         }
 
         private void StaticCA()
