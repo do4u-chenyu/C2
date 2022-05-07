@@ -1,4 +1,5 @@
 ﻿using C2.Utils;
+using C2.Core;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -23,6 +24,9 @@ namespace C2.Business.CastleBravo.VPN.Info
             HashSet<string> hostSet = new HashSet<string>();
             HashSet<string> iportSet = new HashSet<string>();
 
+            Dictionary<string, int> methodDict  = new Dictionary<string, int>();
+            Dictionary<string, int> countryDict = new Dictionary<string, int>();
+
             foreach (ListViewItem lv in LV.Items)
             {
                 VPNTaskConfig task = lv.Tag as VPNTaskConfig;
@@ -30,32 +34,70 @@ namespace C2.Business.CastleBravo.VPN.Info
                 hostSet.Add(task.Host);
                 iportSet.Add(task.IP + task.Port);
 
+                if (methodDict.ContainsKey(task.Method))
+                    methodDict[task.Method]++;
+                else
+                    methodDict[task.Method] = 1;
+
                 _ = NetUtil.IsMainlandOfChina(task.Country) ? numberOfMainlandVPN++ : numberofForeinVPN++;
+
+                // 简易统计,头2个字就有足够的区分度了
+                string country = task.Country.Substring(0, 2);
+                if (countryDict.ContainsKey(country))
+                    countryDict[country]++;
+                else
+                    countryDict[country] = 1;
             }
+
 
             int numberOfIP = ipSet.Count;
             int numberOfHost = hostSet.Count;
             int numberOfIPort = iportSet.Count;
 
-            sb.AppendLine(string.Format("总计: {0}",      total))
+            sb.AppendLine(string.Format("总计: {0}", total))
               .AppendLine()
-              .AppendLine(string.Format("域名数: {0}",    numberOfHost))
-              .AppendLine(string.Format("独立IP数: {0}",  numberOfIP))
+              .AppendLine(string.Format("域名数: {0}", numberOfHost))
+              .AppendLine(string.Format("独立IP数: {0}", numberOfIP))
               .AppendLine(string.Format("IP/端口数: {0}", numberOfIPort))
               .AppendLine()
               .AppendLine(string.Format("境内VPN服务器: {0}({1:P2})", numberOfMainlandVPN, total < 1 ? 0 : (float)numberOfMainlandVPN / total))
-              .AppendLine(string.Format("境外VPN服务器: {0}({1:P2})", numberofForeinVPN, total   < 1 ? 0 : (float)numberofForeinVPN   / total))
+              .AppendLine(string.Format("境外VPN服务器: {0}({1:P2})", numberofForeinVPN, total < 1 ? 0 : (float)numberofForeinVPN / total))
               .AppendLine()
-              .AppendLine("加密算法分布: TODO")
+              .AppendLine(string.Format("加密算法分布: {1}{2}{0}", GenStaticMethodString(methodDict, total), System.Environment.NewLine, OpUtil.Blank))
               .AppendLine()
               .AppendLine(string.Format("协议类型分布:{1}{2}{0}", StaticSS(LV), System.Environment.NewLine, OpUtil.Blank))
               .AppendLine()
-              .AppendLine("境内服务器省份分布:  TODO")
-              .AppendLine("境外服务器国家分布:  TODO");
+              .AppendLine(string.Format("服务器地区分布:{1}{2}{0}", GenStaticCountryString(countryDict), System.Environment.NewLine, OpUtil.Blank));
 
             return sb.ToString();
         }
 
+        private static string GenStaticMethodString(Dictionary<string, int> methodDict, int total)
+        {
+
+            // Method为空的不参与统计
+            methodDict.Remove(string.Empty);
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var kv in methodDict)
+            {
+                sb.Append(string.Format("{0}:{1}({2:P2})|", kv.Key, kv.Value, total < 1 ? 0 : (float)kv.Value / total));
+            }
+            return sb.ToString().TrimEnd('|');
+        }
+
+        private static string GenStaticCountryString(Dictionary<string, int> dict)
+        {
+
+            // Method为空的不参与统计
+            dict.Remove(string.Empty);
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var kv in dict)
+                sb.Append(string.Format("{0}:{1}|", kv.Key, kv.Value));
+
+            return sb.ToString().TrimEnd('|');
+        }
         public static string StaticSS(ListView LV)
         {
             int ss = 0;
