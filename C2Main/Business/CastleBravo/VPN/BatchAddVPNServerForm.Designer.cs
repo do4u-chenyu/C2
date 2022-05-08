@@ -39,11 +39,13 @@ namespace C2.Business.CastleBravo.VPN
             this.label101 = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.addr = new System.Windows.Forms.RadioButton();
             this.rss = new System.Windows.Forms.RadioButton();
             this.ss = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +70,7 @@ namespace C2.Business.CastleBravo.VPN
             this.wsTextBox.Multiline = true;
             this.wsTextBox.Name = "wsTextBox";
             this.wsTextBox.ReadOnly = true;
-            this.wsTextBox.Size = new System.Drawing.Size(492, 236);
+            this.wsTextBox.Size = new System.Drawing.Size(567, 236);
             this.wsTextBox.TabIndex = 10028;
             this.wsTextBox.WordWrap = false;
             // 
@@ -88,7 +90,7 @@ namespace C2.Business.CastleBravo.VPN
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(548, 36);
+            this.browserButton.Location = new System.Drawing.Point(621, 35);
             this.browserButton.Margin = new System.Windows.Forms.Padding(4);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(88, 34);
@@ -105,7 +107,7 @@ namespace C2.Business.CastleBravo.VPN
             this.filePathTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(392, 33);
+            this.filePathTextBox.Size = new System.Drawing.Size(469, 33);
             this.filePathTextBox.TabIndex = 10025;
             // 
             // label102
@@ -158,22 +160,37 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.addr);
             this.groupBox1.Controls.Add(this.rss);
             this.groupBox1.Controls.Add(this.ss);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox1.Location = new System.Drawing.Point(144, 99);
+            this.groupBox1.Location = new System.Drawing.Point(138, 99);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(490, 54);
+            this.groupBox1.Size = new System.Drawing.Size(571, 54);
             this.groupBox1.TabIndex = 10033;
             this.groupBox1.TabStop = false;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Font = new System.Drawing.Font("宋体", 9F);
+            this.radioButton1.Location = new System.Drawing.Point(461, 21);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.radioButton1.Name = "clash";
+            this.radioButton1.Size = new System.Drawing.Size(114, 22);
+            this.radioButton1.TabIndex = 10023;
+            this.radioButton1.Text = "Clash订阅";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Click += new System.EventHandler(this.RadioButton_Click);
             // 
             // addr
             // 
             this.addr.AutoSize = true;
-            this.addr.Location = new System.Drawing.Point(222, 21);
+            this.addr.Font = new System.Drawing.Font("宋体", 9F);
+            this.addr.Location = new System.Drawing.Point(188, 21);
             this.addr.Margin = new System.Windows.Forms.Padding(4);
             this.addr.Name = "addr";
             this.addr.Size = new System.Drawing.Size(105, 22);
@@ -185,12 +202,13 @@ namespace C2.Business.CastleBravo.VPN
             // rss
             // 
             this.rss.AutoSize = true;
-            this.rss.Location = new System.Drawing.Point(363, 21);
+            this.rss.Font = new System.Drawing.Font("宋体", 9F);
+            this.rss.Location = new System.Drawing.Point(320, 21);
             this.rss.Margin = new System.Windows.Forms.Padding(4);
             this.rss.Name = "rss";
-            this.rss.Size = new System.Drawing.Size(105, 22);
+            this.rss.Size = new System.Drawing.Size(114, 22);
             this.rss.TabIndex = 10021;
-            this.rss.Text = "订阅地址";
+            this.rss.Text = "v2ray订阅";
             this.rss.UseVisualStyleBackColor = true;
             this.rss.Click += new System.EventHandler(this.RadioButton_Click);
             // 
@@ -198,13 +216,14 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.ss.AutoSize = true;
             this.ss.Checked = true;
-            this.ss.Location = new System.Drawing.Point(9, 21);
+            this.ss.Font = new System.Drawing.Font("宋体", 9F);
+            this.ss.Location = new System.Drawing.Point(2, 21);
             this.ss.Margin = new System.Windows.Forms.Padding(4);
             this.ss.Name = "ss";
-            this.ss.Size = new System.Drawing.Size(177, 22);
+            this.ss.Size = new System.Drawing.Size(159, 22);
             this.ss.TabIndex = 10020;
             this.ss.TabStop = true;
-            this.ss.Text = "服务器(分享)地址";
+            this.ss.Text = "协议(分享)地址";
             this.ss.UseVisualStyleBackColor = true;
             this.ss.Click += new System.EventHandler(this.RadioButton_Click);
             // 
@@ -229,17 +248,30 @@ namespace C2.Business.CastleBravo.VPN
             this.label2.Location = new System.Drawing.Point(33, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(278, 18);
+            this.label2.Size = new System.Drawing.Size(269, 18);
             this.label2.TabIndex = 10035;
-            this.label2.Text = "* 格式:一行一个,飞机场订阅地址";
+            this.label2.Text = "* 格式:一行一个,V2ray订阅地址";
             this.label2.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(33, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(341, 18);
+            this.label3.TabIndex = 10036;
+            this.label3.Text = "* 格式:一行一个,Clash订阅地址(施工中)";
+            this.label3.Visible = false;
             // 
             // BatchAddVPNServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(656, 488);
+            this.ClientSize = new System.Drawing.Size(722, 488);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label104);
             this.Controls.Add(this.groupBox1);
@@ -252,11 +284,13 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.Add(this.label102);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchAddVPNServerForm";
             this.Text = "批量添加";
+            this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label102, 0);
@@ -292,5 +326,7 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.RadioButton addr;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label3;
     }
 }

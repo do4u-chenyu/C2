@@ -437,26 +437,9 @@ namespace C2.Business.CastleBravo.VPN
         }
 
 
-        private string CheckAliveOneTaskAsyn(string[] array)
-        {
-            if (CheckAlive(array))
-                return "√";
-            return "×";
-        }
-
-        private bool CheckAlive(string[] array)
-        {
-            try
-            {
-                return true;
-            }
-            catch { return false; }
-        }
-
-
         private void RadioButton_Click(object sender, EventArgs e)
         {
-            new Label[] { label0, label1, label2 }.ToList().ForEach(v => v.Visible = false);
+            new Label[] { label0, label1, label2, label3 }.ToList().ForEach(v => v.Visible = false);
             RadioButton rb = sender as RadioButton;
             switch (rb.Name)
             {
@@ -472,6 +455,11 @@ namespace C2.Business.CastleBravo.VPN
                     label2.Visible = true;
                     mode = 2;
                     break;
+                case "clash":
+                    label3.Visible = true;
+                    mode = 3;
+                    break;
+                    // TODO
                 default:
                     break;
             }
