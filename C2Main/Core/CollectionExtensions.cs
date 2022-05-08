@@ -247,6 +247,19 @@ namespace C2.Core
             return str.Split(new string[] { Environment.NewLine, "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        public static string TrySubstring(this string str, int startIndex, int length)
+        {
+            startIndex = Math.Max(startIndex, 0);
+            // 左区间 超长
+            if (startIndex >= str.Length)
+                return string.Empty;
+            // 右区间 剪枝
+            if (startIndex + length > str.Length)
+                length = str.Length - startIndex;
+
+            return str.Substring(startIndex, length);
+        }
+
         public static bool In(this string str, string[] vs)
         {
             foreach (string v in vs)

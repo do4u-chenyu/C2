@@ -14,8 +14,6 @@ namespace C2.Business.CastleBravo.VPN.Info
 
             int total = LV.Items.Count;
 
-
-
             int numberofForeinVPN = 0;
             int numberOfMainlandVPN = 0;
             
@@ -39,16 +37,18 @@ namespace C2.Business.CastleBravo.VPN.Info
                 else
                     methodDict[task.Method] = 1;
 
-                _ = NetUtil.IsMainlandOfChina(task.Country) ? numberOfMainlandVPN++ : numberofForeinVPN++;
+                _ = NetUtil.IsMainlandOfChina(task.Country) ? numberOfMainlandVPN++ :
+                    NetUtil.IsAbroadChina(task.Country) ? numberofForeinVPN++ : 0;
 
                 // 简易统计,头2个字就有足够的区分度了
-                string country = task.Country.Substring(0, 2);
+                string country = task.Country.TrySubstring(0, 2);
                 if (countryDict.ContainsKey(country))
                     countryDict[country]++;
                 else
                     countryDict[country] = 1;
             }
 
+            ipSet.Remove(string.Empty);
 
             int numberOfIP = ipSet.Count;
             int numberOfHost = hostSet.Count;

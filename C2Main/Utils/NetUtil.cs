@@ -49,10 +49,12 @@ namespace C2.Utils
                     return true;    
             }
 
-            if (countryDesc.Contains("中国"))
-                return true;
-            
-            return false;
+            return countryDesc.Contains("中国");
+        }
+
+        public static bool IsAbroadChina(string countryDesc)
+        {
+            return !countryDesc.IsNullOrEmpty() && !IsMainlandOfChina(countryDesc);
         }
         public static string GetHostAddress(string url)
         {
