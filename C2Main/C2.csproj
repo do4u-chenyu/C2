@@ -4759,7 +4759,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Business\CastleBravo\VPN\V2ray\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UserInstallSet\UserInstallSet.csproj">
       <Project>{8587D0E2-E1F2-442D-B729-897391FB2881}</Project>
