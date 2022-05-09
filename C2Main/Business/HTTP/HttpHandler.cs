@@ -53,7 +53,7 @@ namespace C2.Business.HTTP
             return resp;
         }
 
-        public Response PostCode(string url, string postData, int timeout = 10000)
+        public Response PostCode(string url, string postData, int timeout = 10000,bool keepAlive = true)
         {
             Response resp = new Response();
             try
@@ -72,7 +72,7 @@ namespace C2.Business.HTTP
                 req.ContentType = "application/x-www-form-urlencoded";
                 req.ContentLength = data.Length;
 
-                req.KeepAlive = true;//解决GetResponse操作超时问题
+                req.KeepAlive = keepAlive;//解决GetResponse操作超时问题
 
                 using (var stream = req.GetRequestStream())
                     stream.Write(data, 0, data.Length);

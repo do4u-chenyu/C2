@@ -107,7 +107,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             string data;
             try
             {
-                Response resp = httpHandler.PostCode(OCRUrl, "sentence=" + HttpUtility.UrlEncode(base64Str), 60000);
+                Response resp = httpHandler.PostCode(OCRUrl, "sentence=" + HttpUtility.UrlEncode(base64Str), 60000, false);
                 HttpStatusCode statusCode = resp.StatusCode;
                 if (statusCode != HttpStatusCode.OK)
                 {
@@ -136,36 +136,30 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
-            try
+
+            if (result == "解析出错，可尝试重新识别。" || result.Contains("查询失败!"))
             {
-                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell
-                {
-                    Value = listRealData[0]
-                };
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = String.Empty;
                 dr.Cells.Add(textCell1);
 
-                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell
-                {
-                    Value = listRealData[1]
-                };
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = result;
                 dr.Cells.Add(textCell2);
             }
-            catch 
+            else
             {
-                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell
-                {
-                    Value = string.Empty
-                };
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
+                textCell1.Value = listRealData[0];
                 dr.Cells.Add(textCell1);
 
-                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell
-                {
-                    Value = result
-                };
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
+                textCell2.Value = listRealData[1];
                 dr.Cells.Add(textCell2);
             }
             dataGridView1.Rows.Add(dr);
         }
+
 
         List<string> listRealData = new List<string>();
         private string DealData(string data)
