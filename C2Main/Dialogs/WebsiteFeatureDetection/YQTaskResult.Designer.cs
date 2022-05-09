@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YQTaskResult));
             this.panel1 = new System.Windows.Forms.Panel();
             this.taskInfoGB = new System.Windows.Forms.GroupBox();
+            this.taskInfoLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.taskModelLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.statusInfoLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.taskInfoLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.taskInfoGB.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +77,16 @@
             this.taskInfoGB.TabIndex = 10036;
             this.taskInfoGB.TabStop = false;
             this.taskInfoGB.Text = "任务状态";
+            // 
+            // taskInfoLabel
+            // 
+            this.taskInfoLabel.AutoSize = true;
+            this.taskInfoLabel.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskInfoLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.taskInfoLabel.Location = new System.Drawing.Point(87, 35);
+            this.taskInfoLabel.Name = "taskInfoLabel";
+            this.taskInfoLabel.Size = new System.Drawing.Size(0, 28);
+            this.taskInfoLabel.TabIndex = 1;
             // 
             // label5
             // 
@@ -128,6 +138,7 @@
             this.taskResultButton.TabIndex = 10032;
             this.taskResultButton.Text = "查看";
             this.taskResultButton.UseVisualStyleBackColor = false;
+            this.taskResultButton.Click += new System.EventHandler(this.TaskResultButton_Click);
             // 
             // label1
             // 
@@ -188,16 +199,6 @@
             this.label4.TabIndex = 10025;
             this.label4.Text = "结果文件：";
             // 
-            // taskInfoLabel
-            // 
-            this.taskInfoLabel.AutoSize = true;
-            this.taskInfoLabel.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskInfoLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.taskInfoLabel.Location = new System.Drawing.Point(87, 35);
-            this.taskInfoLabel.Name = "taskInfoLabel";
-            this.taskInfoLabel.Size = new System.Drawing.Size(0, 28);
-            this.taskInfoLabel.TabIndex = 1;
-            // 
             // YQTaskResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -209,8 +210,8 @@
             this.MinimizeBox = false;
             this.Name = "YQTaskResult";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Shown += new System.EventHandler(this.YQTaskResult_Shown);
             this.Text = "舆情侦察兵";
+            this.Shown += new System.EventHandler(this.YQTaskResult_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.taskInfoGB.ResumeLayout(false);

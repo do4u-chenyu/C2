@@ -42,6 +42,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return;
             }
         }
-        
+
+        private void TaskResultButton_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
+        }
     }
 }
