@@ -24,8 +24,8 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         public PoliticsTextRecognitionForm()
         {
             InitializeComponent();
-            this.OKButton.Text = "保存结果";
-            this.CancelBtn.Text = "退出";
+            OKButton.Text = "保存结果";
+            CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
             OCRUrl = Global.ServerHIUrl + "/HI_NLP/PoliticsTextRecognition";
@@ -39,7 +39,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-            this.filePathTextBox.Text = OpenFileDialog.FileName;
+            filePathTextBox.Text = OpenFileDialog.FileName;
             picPath = OpenFileDialog.FileName;
         }
 
@@ -48,7 +48,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                this.filePathTextBox.Text = dialog.SelectedPath;
+                filePathTextBox.Text = dialog.SelectedPath;
                 picPath = dialog.SelectedPath;
             }
         }
@@ -56,7 +56,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         private void TransBtn_Click(object sender, EventArgs e)
         {
             //清空上一次的查询结果
-            this.dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)
             {
