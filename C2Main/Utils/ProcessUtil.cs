@@ -47,6 +47,12 @@ namespace C2.Utils
             if (File.Exists(ffp))
                 ProcessOpen(ffp);
         }
+        
+        public static void TryOpenDirectory(string ffp)
+        {
+            if (Directory.Exists(ffp))
+                ProcessOpen(ffp);
+        }
 
         private static void ProcessExplorer(string ffp)
         {

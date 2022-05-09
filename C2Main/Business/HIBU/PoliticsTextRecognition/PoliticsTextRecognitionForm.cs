@@ -24,8 +24,8 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         public PoliticsTextRecognitionForm()
         {
             InitializeComponent();
-            this.OKButton.Text = "保存结果";
-            this.CancelBtn.Text = "退出";
+            OKButton.Text = "保存结果";
+            CancelBtn.Text = "退出";
 
             httpHandler = new HttpHandler();
             OCRUrl = Global.ServerHIUrl + "/HI_NLP/PoliticsTextRecognition";
@@ -39,7 +39,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             };
             if (OpenFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-            this.filePathTextBox.Text = OpenFileDialog.FileName;
+            filePathTextBox.Text = OpenFileDialog.FileName;
             picPath = OpenFileDialog.FileName;
         }
 
@@ -48,7 +48,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                this.filePathTextBox.Text = dialog.SelectedPath;
+                filePathTextBox.Text = dialog.SelectedPath;
                 picPath = dialog.SelectedPath;
             }
         }
@@ -56,7 +56,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         private void TransBtn_Click(object sender, EventArgs e)
         {
             //清空上一次的查询结果
-            this.dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)
             {
@@ -104,7 +104,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
 
         public string StartTask(string base64Str)
         {
-            string data = string.Empty;
+            string data;
             try
             {
                 Response resp = httpHandler.PostCode(OCRUrl, "sentence=" + HttpUtility.UrlEncode(base64Str), 60000);
@@ -136,34 +136,41 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
-
-            if (result == "解析出错，可尝试重新识别。")
+            try
             {
-                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = String.Empty;
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell
+                {
+                    Value = listRealData[0]
+                };
                 dr.Cells.Add(textCell1);
 
-                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-                textCell2.Value = String.Empty;
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell
+                {
+                    Value = listRealData[1]
+                };
                 dr.Cells.Add(textCell2);
             }
-            else
+            catch 
             {
-                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = listRealData[0];
+                DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell
+                {
+                    Value = string.Empty
+                };
                 dr.Cells.Add(textCell1);
 
-                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-                textCell2.Value = listRealData[1];
+                DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell
+                {
+                    Value = result
+                };
                 dr.Cells.Add(textCell2);
             }
             dataGridView1.Rows.Add(dr);
         }
 
-        List<String> listRealData = new List<string>();
+        List<string> listRealData = new List<string>();
         private string DealData(string data)
         {
-            List<String> resultList = new List<string>();
+            List<string> resultList = new List<string>();
             if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
                 return string.Empty;
             try
@@ -180,14 +187,14 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             return string.Join("\n", resultList);
         }
 
-        public List<String> listData(List<string> resultList)
+        public List<string> listData(List<string> resultList)
         {
             return resultList;
         }
 
         protected override bool OnOKButtonClick()
         {
-            if (this.dataGridView1.Rows.Count == 0)
+            if (dataGridView1.Rows.Count == 0)
             {
                 HelpUtil.ShowMessageBox("结果为空，无法保存。");
                 return false;
@@ -215,7 +222,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             sw.Write("文件名称" + OpUtil.StringBlank + "是否涉政" + OpUtil.StringBlank + "准确率" + "\r\n");
             try
             {
-                foreach (DataGridViewRow row in this.dataGridView1.Rows)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value != null)
                     {

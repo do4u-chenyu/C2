@@ -51,9 +51,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             FileUtil.CreateDirectory(destDirectory);
 
-            taskFilePath = Path.Combine(this.destDirectory, this.TaskName);
-            FileUtil.CreateDirectory(taskFilePath);
-
             this.OKButton.Size = new System.Drawing.Size(75, 27);
             this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
@@ -163,7 +160,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private YQTaskInfo UpdateYQTaskInfo()
         {
-            this.ruleName = TaskName;
+            this.ruleName = this.TaskName;
+
+            taskFilePath = Path.Combine(this.destDirectory, this.TaskName);
+            FileUtil.CreateDirectory(taskFilePath);
+
             try
             {
                 areaCode = areaTextBox.Text;
