@@ -395,6 +395,12 @@
     <Compile Include="Business\CastleBravo\VPN\StaticForm.Designer.cs">
       <DependentUpon>StaticForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Config\Config.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Config\EConfigType.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Config\ListenerType.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Config\V2rayConfig.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Global.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Utils.cs" />
     <Compile Include="Business\CastleBravo\VPN\VPNMainForm.CA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4764,7 +4770,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\CastleBravo\VPN\V2ray\" />
+    <Folder Include="Business\CastleBravo\VPN\V2ray\Handler\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UserInstallSet\UserInstallSet.csproj">

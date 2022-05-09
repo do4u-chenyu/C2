@@ -280,5 +280,10 @@ namespace C2.Core
                     return true;
             return false;
         }
+
+        public static string TrimEx(this string value)
+        {
+            return value == null ? string.Empty : value.Trim();
+        }
     }
 }
