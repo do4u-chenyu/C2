@@ -35,7 +35,7 @@ namespace C2.Business.HTTP
         {
             this.response = resp;
             this.content = GetContent();
-            this.resDict = JsonUtil.JsonToDictionary(this.content);
+            this.resDict = JsonUtil.JsonStringToDictionary(this.content);
             this.statusCode = GetStatusCode();
 
         }

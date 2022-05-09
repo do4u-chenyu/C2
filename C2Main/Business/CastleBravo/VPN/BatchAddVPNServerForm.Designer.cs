@@ -179,7 +179,7 @@ namespace C2.Business.CastleBravo.VPN
             this.radioButton1.Font = new System.Drawing.Font("宋体", 9F);
             this.radioButton1.Location = new System.Drawing.Point(461, 21);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton1.Name = "clash";
+            this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(114, 22);
             this.radioButton1.TabIndex = 10023;
             this.radioButton1.Text = "Clash订阅";
@@ -261,9 +261,9 @@ namespace C2.Business.CastleBravo.VPN
             this.label3.Location = new System.Drawing.Point(33, 80);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(341, 18);
+            this.label3.Size = new System.Drawing.Size(269, 18);
             this.label3.TabIndex = 10036;
-            this.label3.Text = "* 格式:一行一个,Clash订阅地址(施工中)";
+            this.label3.Text = "* 格式:一行一个,Clash订阅地址\r\n";
             this.label3.Visible = false;
             // 
             // BatchAddVPNServerForm

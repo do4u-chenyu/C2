@@ -15,7 +15,7 @@ namespace C2.Business.CastleBravo.VPN
         readonly string configFFP = Path.Combine(Global.ResourcesPath, "WebShellConfig", "vpnconfig.db");
 
 
-        private void SaveResultToLocal(string path, int[] columns = null, Func<VPNTaskConfig, bool> filter = null)
+        private void SaveResultToLocal(string path, int[] columns, Func<VPNTaskConfig, bool> filter, Func<List<string>, List<string>> inplace)
         {
             if (columns == null)
                 columns = new int[0];
@@ -36,6 +36,8 @@ namespace C2.Business.CastleBravo.VPN
                     // 自定义条件过滤
                     if (filter != null && !filter(lvi.Tag as VPNTaskConfig))
                         continue;
+
+                    tmpLists = inplace == null ? tmpLists : inplace(tmpLists);
 
                     sw.WriteLine(string.Join("\t", tmpLists.ToArray()));
                 }

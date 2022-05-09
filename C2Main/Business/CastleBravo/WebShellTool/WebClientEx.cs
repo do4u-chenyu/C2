@@ -17,7 +17,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             return request;
         }
 
-        private static WebClientEx Create(int timeout, ProxySetting setting)
+        private static WebClientEx Create(int timeout, ProxySetting setting, Encoding encoding)
         {
             // 应对某些https打开时的问题
             ServicePointManager.Expect100Continue = true;
@@ -29,7 +29,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             WebClientEx one = new WebClientEx()
             {
                 Timeout = timeout,
-                Encoding = Encoding.Default,
+                Encoding = encoding,
                 CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore), 
             };
 
@@ -51,7 +51,7 @@ namespace C2.Business.CastleBravo.WebShellTool
             byte[] bytes = Encoding.Default.GetBytes(payload);
             using (GuarderUtil.WaitCursor)
                 // TODO: 测试时发现webclient必须每次new一个新的才行, 按道理不应该
-                bytes = WebClientEx.Create(timeout, proxy)
+                bytes = WebClientEx.Create(timeout, proxy, Encoding.Default)
                                    .UploadData(url, "POST", bytes);
              return Encoding.Default.GetString(bytes);   
         }
@@ -61,14 +61,14 @@ namespace C2.Business.CastleBravo.WebShellTool
             // 调用者处理异常
             byte[] bytes = Encoding.Default.GetBytes(payload);
             using (GuarderUtil.WaitCursor)
-                bytes = WebClientEx.Create(timeout, proxy)
+                bytes = WebClientEx.Create(timeout, proxy, Encoding.Default)
                                    .UploadData(url, "POST", bytes);
                 return bytes;
         }
 
         private static string Get(string url, int timeout, ProxySetting proxy)
         {
-            return WebClientEx.Create(timeout, proxy).DownloadString(url);
+            return WebClientEx.Create(timeout, proxy, Encoding.UTF8).DownloadString(url);
         }
 
         public static string TryGet(string url, int timeout, ProxySetting proxy)

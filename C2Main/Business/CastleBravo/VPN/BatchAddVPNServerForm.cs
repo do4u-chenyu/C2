@@ -1,15 +1,15 @@
-﻿using C2.Controls;
+﻿using C2.Business.CastleBravo.WebShellTool;
+using C2.Controls;
 using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Linq;
-using C2.Business.CastleBravo.WebShellTool;
 
 namespace C2.Business.CastleBravo.VPN
 {
@@ -94,6 +94,10 @@ namespace C2.Business.CastleBravo.VPN
                 case 2:
                     DoRSSLine(line);
                     break;
+                case 3:
+                    DoClashLine(line);
+                    break;
+
             } 
         }
 
@@ -103,8 +107,8 @@ namespace C2.Business.CastleBravo.VPN
             if (!mat.Success)
                 return;
 
-            string ip   = mat.Groups[1].Value;
-            string port = mat.Groups[2].Value;
+            string ip   = mat.Groups[1].Value.Trim();
+            string port = mat.Groups[2].Value.Trim();
 
             // 实锤一下必须是IP和端口
             if (NetUtil.IsIPAddress(ip) && NetUtil.IsPort(port))
@@ -136,6 +140,56 @@ namespace C2.Business.CastleBravo.VPN
                                                                 ProxySetting.Empty));
                 foreach (string ss in ret.SplitLine())
                     DoSSLine(ss);
+            }
+        }
+
+        private void DoClashLine(string line)
+        {
+            bool isRss = line.StartsWith("http://") || line.StartsWith("https://");
+            if (!isRss)
+                return;
+
+            using (GuarderUtil.WaitCursor)
+            {
+                string ret = WebClientEx.TryGet(line, Global.WebClientDefaultTimeout, ProxySetting.Empty);
+                Dictionary<object, object> obj = YamlUtil.YamlStringToDictionary(ret);
+
+                List<object> list = obj.ContainsKey("Proxy") ? obj["Proxy"] as List<object> :
+                                    obj.ContainsKey("proxies") ? obj["proxies"] as List<object> :
+                                    new List<object>();
+
+                
+                foreach (Dictionary<object, object> vmess in list)
+                {
+                    string addr = vmess.ContainsKey("server") ? vmess["server"] as string : string.Empty;
+                    string port = vmess.ContainsKey("port") ? vmess["port"] as string : string.Empty;
+                    string pass = vmess.ContainsKey("uuid") ? vmess["uuid"] as string : string.Empty;
+                    string method = vmess.ContainsKey("cipher") ? vmess["cipher"] as string : string.Empty;
+                    string version = vmess.ContainsKey("type") ? vmess["type"] as string : string.Empty;
+                    string remarks = vmess.ContainsKey("name") ? vmess["name"] as string : string.Empty;
+
+                    vmess.Remove("server", "port", "uuid", "cipher", "type", "name");
+
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var kv in vmess)
+                        sb.Append(string.Format("{0}={1};", kv.Key as string, kv.Value.ToString()));
+                    string other = sb.ToString();
+
+                    Tasks.Add(new VPNTaskConfig(ST.NowString(),
+                            remarks.Trim(),
+                            addr.Trim(),
+                            port.Trim(),
+                            pass.Trim(),
+                            method.Trim(),
+                            string.Empty,
+                            version.ToUpper(),
+                            string.Empty,
+                            other.Trim(),
+                            string.Empty,
+                            string.Empty,
+                            string.Empty
+                            ));
+                }
             }
         }
 
@@ -182,13 +236,13 @@ namespace C2.Business.CastleBravo.VPN
                                         array[2].Trim(),
                                         array[3].Trim(),
                                         array[4].Trim(),
-                                        string.Empty,              // CheckAliveOneTaskAsyn(contentArray),
+                                        string.Empty,
                                         version.ToUpper(),
                                         string.Empty,
                                         array.Length > 5 ? array[5].Trim() : string.Empty,
                                         string.Empty,
                                         string.Empty,
-                                        version + "://" + content  // 原始连接 
+                                        version + "://" + content  // 分享链接 
                                         ));
         }
 
@@ -399,7 +453,7 @@ namespace C2.Business.CastleBravo.VPN
             string remarks = array.Length > 1 ? array[1] : string.Empty;
 
             array = array[0].Split("?");
-            string otherInfo = array.Length > 1 ? array[1] : string.Empty;
+            string other = array.Length > 1 ? array[1] : string.Empty;
 
             array = array[0].Split(":");
             string port = array.Length > 1 ? array[1] == "0" ? 
@@ -414,7 +468,7 @@ namespace C2.Business.CastleBravo.VPN
             addr = addr.Replace("/", string.Empty);
             string method = string.Empty;
 
-            return new string[] { remarks, addr, port, pass, method, otherInfo };
+            return new string[] { remarks, addr, port, pass, method, other };
         }
 
 
@@ -428,7 +482,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             try
             {
-                return JsonUtil.JsonToDictionary(input);
+                return JsonUtil.JsonStringToDictionary(input);
             }
             catch
             {
@@ -459,7 +513,6 @@ namespace C2.Business.CastleBravo.VPN
                     label3.Visible = true;
                     mode = 3;
                     break;
-                    // TODO
                 default:
                     break;
             }

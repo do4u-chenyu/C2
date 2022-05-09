@@ -45,9 +45,15 @@ namespace C2.Core
         {
             return list == null;
         }
-        public static bool Remove(this Dictionary<string, string> list, string k1, string k2, string k3, string k4, string k5)
+        public static bool Remove(this Dictionary<string, string> dict, string k1, string k2, string k3, string k4, string k5)
         {
-            return list.Remove(k1) | list.Remove(k2) | list.Remove(k3) | list.Remove(k4) | list.Remove(k5);
+            return dict.Remove(k1) | dict.Remove(k2) | dict.Remove(k3) | dict.Remove(k4) | dict.Remove(k5);
+        }
+
+        public static bool Remove(this Dictionary<object, object> dict, 
+            string k1, string k2, string k3, string k4, string k5, string k6)
+        {
+            return dict.Remove(k1) | dict.Remove(k2) | dict.Remove(k3) | dict.Remove(k4) | dict.Remove(k5) | dict.Remove(k6);
         }
         public static bool IsNullOrEmpty(this IEnumerable list)
         {
@@ -232,6 +238,13 @@ namespace C2.Core
         public static string[] Split(this string str, string separator)
         {
             return str.Split(separator, StringSplitOptions.None);
+        }
+
+        public static void Swap<T>(ref T a, ref T b)
+        {
+            T t = a;
+            a = b;
+            b = t;
         }
         public static string[] Split(this string str, string separator, StringSplitOptions options)
         {

@@ -244,7 +244,7 @@ namespace C2.Business.CastleBravo.VPN
             StaticItems();
         }
 
-        private void Export(string exportType, int[] exportColumns, Func<VPNTaskConfig, bool> filter = null)
+        private void Export(string exportType, int[] exportColumns, Func<VPNTaskConfig, bool> filter, Func<List<string>, List<string>> inplace)
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
@@ -256,16 +256,36 @@ namespace C2.Business.CastleBravo.VPN
                 return;
 
             using (GuarderUtil.WaitCursor)
-                SaveResultToLocal(dialog.FileName, exportColumns, filter);
+                SaveResultToLocal(dialog.FileName, exportColumns, filter, inplace);
 
             HelpUtil.ShowMessageBox(string.Format("导出到{0}【成功】", dialog.FileName));
         }
 
-        private void 导出_IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Export(string exportType, int[] exportColumns, Func<VPNTaskConfig, bool> filter)
         {
-            Export("IP端口", new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
+            Export(exportType, exportColumns, filter, null);
         }
 
+        private void Export(string exportType, int[] exportColumns)
+        {
+            Export(exportType, exportColumns, null);
+        }
+
+        private void 导出_IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("IP端口", 
+                new int[] { CI_端口, CI_IP地址, CI_归属地 },
+                null,  
+                (t) => { string tmp = t[0]; t[0] = t[1]; t[1] = tmp; return t; });  // 交换 端口 地址 位置
+        }
+
+        private void 导出_IP端口分享地址_toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            Export("IP端口分享地址", 
+                new int[] { CI_端口, CI_IP地址, CI_归属地, CI_分享地址 }, 
+                null, 
+                (t) => { string tmp = t[0]; t[0] = t[1]; t[1] = tmp; return t; });  // 交换 端口 地址 位置
+        }
         private void 导出_所有字段_MenuItem_Click(object sender, EventArgs e)
         {
             Export("所有字段", new int[0]);
@@ -289,6 +309,8 @@ namespace C2.Business.CastleBravo.VPN
         {
             Export("境外站点", new int[0], (t) => { return !NetUtil.IsMainlandOfChina(t.Country); });
         }
+
+
 
         private void CopySSMenuItem_Click(object sender, EventArgs e)
         {
@@ -428,5 +450,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
+
+
     }
 }

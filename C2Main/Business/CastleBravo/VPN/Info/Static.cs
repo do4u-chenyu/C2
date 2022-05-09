@@ -74,14 +74,14 @@ namespace C2.Business.CastleBravo.VPN.Info
 
         private static string GenStaticMethodString(Dictionary<string, int> methodDict, int total)
         {
-
-            // Method为空的不参与统计
-            methodDict.Remove(string.Empty);
             StringBuilder sb = new StringBuilder();
 
             foreach (var kv in methodDict)
             {
-                sb.Append(string.Format("{0}:{1}({2:P2})|", kv.Key, kv.Value, total < 1 ? 0 : (float)kv.Value / total));
+                sb.Append(string.Format("{0}:{1}({2:P2})|", 
+                    kv.Key.IsNullOrEmpty() ? "空白" : kv.Key, 
+                    kv.Value, 
+                    total < 1 ? 0 : (float)kv.Value / total));
             }
             return sb.ToString().TrimEnd('|');
         }

@@ -121,6 +121,7 @@ namespace C2.Business.CastleBravo.VPN
             this.StatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出IP端口分享地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -156,7 +157,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1366, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(1366, 34);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -169,7 +170,7 @@ namespace C2.Business.CastleBravo.VPN
             this.editDDB.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.editDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editDDB.Name = "editDDB";
-            this.editDDB.Size = new System.Drawing.Size(66, 33);
+            this.editDDB.Size = new System.Drawing.Size(66, 29);
             this.editDDB.Text = "常规";
             this.editDDB.ToolTipText = "常规操作";
             // 
@@ -199,7 +200,7 @@ namespace C2.Business.CastleBravo.VPN
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
             // 
             // checkAliveDDB
             // 
@@ -214,7 +215,7 @@ namespace C2.Business.CastleBravo.VPN
             this.checkAliveDDB.Image = ((System.Drawing.Image)(resources.GetObject("checkAliveDDB.Image")));
             this.checkAliveDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.checkAliveDDB.Name = "checkAliveDDB";
-            this.checkAliveDDB.Size = new System.Drawing.Size(102, 33);
+            this.checkAliveDDB.Size = new System.Drawing.Size(102, 29);
             this.checkAliveDDB.Text = "验活功能";
             // 
             // ping验活ToolStripMenuItem
@@ -281,7 +282,7 @@ namespace C2.Business.CastleBravo.VPN
             this.infoCollectionMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.infoCollectionMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.infoCollectionMenu.Name = "infoCollectionMenu";
-            this.infoCollectionMenu.Size = new System.Drawing.Size(102, 33);
+            this.infoCollectionMenu.Size = new System.Drawing.Size(102, 29);
             this.infoCollectionMenu.Text = "主动探针";
             this.infoCollectionMenu.ToolTipText = "各种信息探针";
             // 
@@ -333,19 +334,19 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.pcapDecryptMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.pcapDecryptMenu.Name = "pcapDecryptMenu";
-            this.pcapDecryptMenu.Size = new System.Drawing.Size(84, 33);
+            this.pcapDecryptMenu.Size = new System.Drawing.Size(84, 29);
             this.pcapDecryptMenu.Text = "流量解密";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 34);
             // 
             // refreshStopMenu
             // 
             this.refreshStopMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.refreshStopMenu.Name = "refreshStopMenu";
-            this.refreshStopMenu.Size = new System.Drawing.Size(84, 33);
+            this.refreshStopMenu.Size = new System.Drawing.Size(84, 29);
             this.refreshStopMenu.Text = "停止任务";
             this.refreshStopMenu.Click += new System.EventHandler(this.StopMenu_Click);
             // 
@@ -365,7 +366,7 @@ namespace C2.Business.CastleBravo.VPN
             this.progressMenu.Enabled = false;
             this.progressMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.progressMenu.Name = "progressMenu";
-            this.progressMenu.Size = new System.Drawing.Size(37, 33);
+            this.progressMenu.Size = new System.Drawing.Size(37, 29);
             this.progressMenu.Text = "-/-";
             this.progressMenu.ToolTipText = "验活进度";
             // 
@@ -373,7 +374,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.staticsMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.staticsMenu.Name = "staticsMenu";
-            this.staticsMenu.Size = new System.Drawing.Size(84, 33);
+            this.staticsMenu.Size = new System.Drawing.Size(84, 29);
             this.staticsMenu.Text = "数据统计";
             this.staticsMenu.Click += new System.EventHandler(this.StaticsMenu_Click);
             // 
@@ -382,7 +383,7 @@ namespace C2.Business.CastleBravo.VPN
             this.proxySettingMenu.Enabled = false;
             this.proxySettingMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.proxySettingMenu.Name = "proxySettingMenu";
-            this.proxySettingMenu.Size = new System.Drawing.Size(84, 33);
+            this.proxySettingMenu.Size = new System.Drawing.Size(84, 29);
             this.proxySettingMenu.Text = "代理设置";
             this.proxySettingMenu.Click += new System.EventHandler(this.ProxySettingMenu_Click);
             // 
@@ -390,7 +391,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.helpInfoMenu.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.helpInfoMenu.Name = "helpInfoMenu";
-            this.helpInfoMenu.Size = new System.Drawing.Size(84, 33);
+            this.helpInfoMenu.Size = new System.Drawing.Size(84, 29);
             this.helpInfoMenu.Text = "帮助文档";
             this.helpInfoMenu.Click += new System.EventHandler(this.帮助文档_ToolStripLabel_Click);
             // 
@@ -421,12 +422,12 @@ namespace C2.Business.CastleBravo.VPN
             this.LV.HideSelection = false;
             this.LV.LabelEdit = true;
             this.LV.LabelWrap = false;
-            this.LV.Location = new System.Drawing.Point(0, 38);
+            this.LV.Location = new System.Drawing.Point(0, 34);
             this.LV.Margin = new System.Windows.Forms.Padding(6);
             this.LV.Name = "LV";
             this.LV.ShowGroups = false;
             this.LV.ShowItemToolTips = true;
-            this.LV.Size = new System.Drawing.Size(1366, 458);
+            this.LV.Size = new System.Drawing.Size(1366, 462);
             this.LV.TabIndex = 4;
             this.LV.UseCompatibleStateImageBehavior = false;
             this.LV.View = System.Windows.Forms.View.Details;
@@ -517,7 +518,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem4,
             this.toolStripMenuItem7});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(397, 382);
+            this.contextMenuStrip.Size = new System.Drawing.Size(397, 415);
             // 
             // EditToolStripMenuItem
             // 
@@ -647,6 +648,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator7,
             this.导出IP端口ToolStripMenuItem,
             this.导出IP归属地ToolStripMenuItem,
+            this.导出IP端口分享地址ToolStripMenuItem,
             this.toolStripSeparator1,
             this.导出分享地址ToolStripMenuItem,
             this.toolStripSeparator6,
@@ -659,57 +661,57 @@ namespace C2.Business.CastleBravo.VPN
             // SaveResultsMenuItem
             // 
             this.SaveResultsMenuItem.Name = "SaveResultsMenuItem";
-            this.SaveResultsMenuItem.Size = new System.Drawing.Size(226, 34);
+            this.SaveResultsMenuItem.Size = new System.Drawing.Size(294, 34);
             this.SaveResultsMenuItem.Text = "导出-所有字段";
             this.SaveResultsMenuItem.Click += new System.EventHandler(this.导出_所有字段_MenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(291, 6);
             // 
             // 导出IP端口ToolStripMenuItem
             // 
             this.导出IP端口ToolStripMenuItem.Name = "导出IP端口ToolStripMenuItem";
-            this.导出IP端口ToolStripMenuItem.Size = new System.Drawing.Size(226, 34);
-            this.导出IP端口ToolStripMenuItem.Text = "导出-IP和端口";
+            this.导出IP端口ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
+            this.导出IP端口ToolStripMenuItem.Text = "导出-IP/端口";
             this.导出IP端口ToolStripMenuItem.Click += new System.EventHandler(this.导出_IP端口_ToolStripMenuItem_Click);
             // 
             // 导出IP归属地ToolStripMenuItem
             // 
             this.导出IP归属地ToolStripMenuItem.Name = "导出IP归属地ToolStripMenuItem";
-            this.导出IP归属地ToolStripMenuItem.Size = new System.Drawing.Size(226, 34);
-            this.导出IP归属地ToolStripMenuItem.Text = "导出-IP归属地";
+            this.导出IP归属地ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
+            this.导出IP归属地ToolStripMenuItem.Text = "导出-IP/归属地";
             this.导出IP归属地ToolStripMenuItem.Click += new System.EventHandler(this.导出_IP归属地_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(291, 6);
             // 
             // 导出分享地址ToolStripMenuItem
             // 
             this.导出分享地址ToolStripMenuItem.Name = "导出分享地址ToolStripMenuItem";
-            this.导出分享地址ToolStripMenuItem.Size = new System.Drawing.Size(226, 34);
+            this.导出分享地址ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
             this.导出分享地址ToolStripMenuItem.Text = "导出-分享地址";
             this.导出分享地址ToolStripMenuItem.Click += new System.EventHandler(this.导出_分享地址_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(291, 6);
             // 
             // 导出境内站点ToolStripMenuItem
             // 
             this.导出境内站点ToolStripMenuItem.Name = "导出境内站点ToolStripMenuItem";
-            this.导出境内站点ToolStripMenuItem.Size = new System.Drawing.Size(226, 34);
+            this.导出境内站点ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
             this.导出境内站点ToolStripMenuItem.Text = "导出-境内站点";
             this.导出境内站点ToolStripMenuItem.Click += new System.EventHandler(this.导出_境内站点_ToolStripMenuItem_Click);
             // 
             // 导出境外站点ToolStripMenuItem
             // 
             this.导出境外站点ToolStripMenuItem.Name = "导出境外站点ToolStripMenuItem";
-            this.导出境外站点ToolStripMenuItem.Size = new System.Drawing.Size(226, 34);
+            this.导出境外站点ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
             this.导出境外站点ToolStripMenuItem.Text = "导出-境外站点";
             this.导出境外站点ToolStripMenuItem.Click += new System.EventHandler(this.导出_境外站点_ToolStripMenuItem_Click);
             // 
@@ -853,6 +855,13 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem5.Size = new System.Drawing.Size(285, 34);
             this.toolStripMenuItem5.Text = "toolStripMenuItem5";
             // 
+            // 导出IP端口分享地址ToolStripMenuItem
+            // 
+            this.导出IP端口分享地址ToolStripMenuItem.Name = "导出IP端口分享地址ToolStripMenuItem";
+            this.导出IP端口分享地址ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
+            this.导出IP端口分享地址ToolStripMenuItem.Text = "导出-IP/端口/分享地址";
+            this.导出IP端口分享地址ToolStripMenuItem.Click += new System.EventHandler(this.导出_IP端口分享地址_toolStripMenuItem8_Click);
+            // 
             // VPNMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
@@ -976,5 +985,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripLabel staticsMenu;
+        private System.Windows.Forms.ToolStripMenuItem 导出IP端口分享地址ToolStripMenuItem;
     }
 }

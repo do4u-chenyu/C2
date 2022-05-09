@@ -5,7 +5,7 @@ namespace C2.Utils
 {
     class JsonUtil
     {
-        public static Dictionary<string, string> JsonToDictionary(string jsonStr)
+        public static Dictionary<string, string> JsonStringToDictionary(string jsonStr)
         {
             if (string.IsNullOrEmpty(jsonStr))
                 return new Dictionary<string, string>();

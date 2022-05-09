@@ -218,6 +218,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\Thrift.0.9.1.3\lib\net35\Thrift.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>..\ThirdPartyLibrary\yamldotnet\11.2.1\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\CastleBravo\Binary\Behinder.cs" />
@@ -1820,6 +1823,7 @@
     <Compile Include="Utils\ProcessUtil.cs" />
     <Compile Include="Utils\ScreenshotUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />
+    <Compile Include="Utils\YamlUtil.cs" />
     <Compile Include="WorkSpace\BaseWorkSpace.cs">
       <SubType>Component</SubType>
     </Compile>
