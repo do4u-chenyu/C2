@@ -255,7 +255,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             // C2调用 v2ray.exe 进行真验活
             // 大部分相关代码从 v2rayN 中移植过来,做了相应调整
-            C2V2rayWrapper.RunRealPing(lv);
+            C2V2rayWrapper.RunRealPing(lv, (lvi, msg) => { lvi.SubItems[CI_探测信息].Text = msg; });
         }
 
         private void UpdateRedrawItem(ListViewItem lvi)

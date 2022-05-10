@@ -8,6 +8,10 @@ using v2rayN.Handler;
 
 namespace C2.Business.CastleBravo.VPN.V2ray
 {
+
+    /**
+     * 大部分代码是从v2rayN中移植过来的
+     */
     class C2V2rayWrapper
     {
         private static string GetRealPingTime(string url, WebProxy webProxy, out int responseTime)
@@ -46,7 +50,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
         {
             return false;
         }
-        public static void RunRealPing(List<ListViewItem> lv)
+        public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string> _updateFunc)
         {
             int pid = -1;
             _ = lv;
@@ -72,13 +76,20 @@ namespace C2.Business.CastleBravo.VPN.V2ray
                     {
                         WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort);
                         int responseTime = -1;
-                        string status = GetRealPingTime(v2rayN.Global.SpeedPingTestUrl, webProxy, out responseTime);
-                        //string output = status.IsNullOrEmpty() ? FormatOut(responseTime, "ms") : FormatOut(status, "");
-                        //_updateFunc(itemIndex, output);
+
+                        // 境外
+                        string status0 = GetRealPingTime(v2rayN.Global.AbroadGenerate204, webProxy, out responseTime);
+                        string output0 = string.IsNullOrEmpty(status0) ? FormatOut(responseTime, "ms", "境外") : FormatOut(status0, string.Empty, "境外");
+                        // 境内
+                        string status1 = GetRealPingTime(v2rayN.Global.AbroadGenerate204, webProxy, out responseTime);
+                        string output1 = string.IsNullOrEmpty(status1) ? FormatOut(responseTime, "ms", "境内") : FormatOut(status1, string.Empty, "境内");
+
+
+                        _updateFunc(lvi, output0 + ":" + output1);
                     }
                     catch 
                     {
-                        //Utils.SaveLog(ex.Message, ex);
+                       
                     }
                 }));
 
@@ -92,6 +103,15 @@ namespace C2.Business.CastleBravo.VPN.V2ray
 
             //  并发访问代理端口,设置好回调更新函数
 
+        }
+
+        private static string FormatOut(object time, string unit, string prefix)
+        {
+            if (time.ToString().Equals("-1"))
+            {
+                return "Timeout";
+            }
+            return string.Format("{2}{0}{1}", time, unit, prefix).PadLeft(6, ' ');
         }
     }
 }
