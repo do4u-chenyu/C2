@@ -400,6 +400,9 @@
     <Compile Include="Business\CastleBravo\VPN\V2ray\Config\ListenerType.cs" />
     <Compile Include="Business\CastleBravo\VPN\V2ray\Config\V2rayConfig.cs" />
     <Compile Include="Business\CastleBravo\VPN\V2ray\Global.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Handler\V2rayConfigHandler.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Handler\V2rayHandler.cs" />
+    <Compile Include="Business\CastleBravo\VPN\V2ray\Tool\Job.cs" />
     <Compile Include="Business\CastleBravo\VPN\V2ray\Utils.cs" />
     <Compile Include="Business\CastleBravo\VPN\VPNMainForm.CA.cs">
       <SubType>Form</SubType>
@@ -4621,6 +4624,9 @@
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
     <None Include="Resources\可视化数据可视化.png" />
+    <Content Include="Resources\VPN\SampleClientConfig.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WebScanDict\PHP一级目录.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -4769,9 +4775,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\CastleBravo\VPN\V2ray\Handler\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\UserInstallSet\UserInstallSet.csproj">
       <Project>{8587D0E2-E1F2-442D-B729-897391FB2881}</Project>

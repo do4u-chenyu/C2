@@ -98,6 +98,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.导出IP端口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出IP归属地ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出IP端口分享地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.导出分享地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -121,7 +122,6 @@ namespace C2.Business.CastleBravo.VPN
             this.StatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.导出IP端口分享地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -247,14 +247,15 @@ namespace C2.Business.CastleBravo.VPN
             // 重新开始ToolStripMenuItem1
             // 
             this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
-            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
+            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.重新开始ToolStripMenuItem1.Text = "重新开始";
             this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_重新开始_ToolStripMenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem1
             // 
+            this.继续上次ToolStripMenuItem1.Enabled = false;
             this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
-            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
+            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
             this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_继续上次_ToolStripMenuItem_Click);
             // 
@@ -518,7 +519,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem4,
             this.toolStripMenuItem7});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(397, 415);
+            this.contextMenuStrip.Size = new System.Drawing.Size(397, 382);
             // 
             // EditToolStripMenuItem
             // 
@@ -683,6 +684,13 @@ namespace C2.Business.CastleBravo.VPN
             this.导出IP归属地ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
             this.导出IP归属地ToolStripMenuItem.Text = "导出-IP/归属地";
             this.导出IP归属地ToolStripMenuItem.Click += new System.EventHandler(this.导出_IP归属地_ToolStripMenuItem_Click);
+            // 
+            // 导出IP端口分享地址ToolStripMenuItem
+            // 
+            this.导出IP端口分享地址ToolStripMenuItem.Name = "导出IP端口分享地址ToolStripMenuItem";
+            this.导出IP端口分享地址ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
+            this.导出IP端口分享地址ToolStripMenuItem.Text = "导出-IP/端口/分享地址";
+            this.导出IP端口分享地址ToolStripMenuItem.Click += new System.EventHandler(this.导出_IP端口分享地址_toolStripMenuItem8_Click);
             // 
             // toolStripSeparator1
             // 
@@ -854,13 +862,6 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(285, 34);
             this.toolStripMenuItem5.Text = "toolStripMenuItem5";
-            // 
-            // 导出IP端口分享地址ToolStripMenuItem
-            // 
-            this.导出IP端口分享地址ToolStripMenuItem.Name = "导出IP端口分享地址ToolStripMenuItem";
-            this.导出IP端口分享地址ToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
-            this.导出IP端口分享地址ToolStripMenuItem.Text = "导出-IP/端口/分享地址";
-            this.导出IP端口分享地址ToolStripMenuItem.Click += new System.EventHandler(this.导出_IP端口分享地址_toolStripMenuItem8_Click);
             // 
             // VPNMainForm
             // 

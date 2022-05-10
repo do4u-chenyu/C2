@@ -5,6 +5,8 @@ using System.Collections;
 using System.Linq;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
+using System.Collections.Generic;
+using v2rayN.Handler;
 
 namespace C2.Business.CastleBravo.VPN
 {
@@ -36,6 +38,7 @@ namespace C2.Business.CastleBravo.VPN
             DNS,
             Ping,
             TCP,
+            HTTP204,
             HTTP204_重新开始,
             HTTP204_继续上次,
         }
@@ -96,42 +99,73 @@ namespace C2.Business.CastleBravo.VPN
         }
 
         // DNS验活
-        private void DoItemsDNS(IList Items)
+        private void DoItemsDNS(IList items)
         {
             //  进度条重置
-            ResetProgressMenuValue(Items.Count);
+            ResetProgressMenuValue(items.Count);
             //  相关内容域重置
-            ResetSubItemsTodo(Items);
+            ResetSubItemsTodo(items);
             //  DNS反查
-            Run_DNS_CA(Items);
+            Run_DNS_CA(items);
             //  收尾
             EndCheckAlive();
         }
 
         // Ping验活
-        private void DoItemsPing(IList Items)
+        private void DoItemsPing(IList items)
         {
             //  进度条重置
-            ResetProgressMenuValue(Items.Count);
+            ResetProgressMenuValue(items.Count);
             //  相关内容域重置
-            ResetSubItemsTodo(Items);
+            ResetSubItemsTodo(items);
             
-            Run_Ping_CA(Items);
+            Run_Ping_CA(items);
             //  收尾
             EndCheckAlive();
         }
 
         // TCP验活
-        private void DoItemsTcp(IList Items)
+        private void DoItemsTcp(IList items)
         {
             //  进度条重置
-            ResetProgressMenuValue(Items.Count);
+            ResetProgressMenuValue(items.Count);
             //  相关内容域重置
-            ResetSubItemsTodo(Items);
+            ResetSubItemsTodo(items);
         
-            Run_Tcp_CA(Items);
+            Run_Tcp_CA(items);
             //  收尾
             EndCheckAlive();
+        }
+
+        // HTTP验活整个逻辑跟其他的都不一样
+        // 需要定制化
+        private void DoItemHttp204(IList items)
+        {
+            //  进度条重置
+            ResetProgressMenuValue(items.Count);
+            //  相关内容域重置
+            ResetSubItemsTodo(items);
+            
+            Run_Http204_CA(items);
+
+            //  收尾
+            EndCheckAlive();
+        }
+
+        private void DoItemHttp204Continue(IList items)
+        {
+            List<ListViewItem> itemsContinue = new List<ListViewItem>();
+
+            foreach (ListViewItem lvi in items)
+            {
+                if (lvi.SubItems[CI_状态].Text == Todo)
+                    itemsContinue.Add(lvi);
+
+                if (lvi.SubItems[CI_状态].Text == string.Empty)
+                    itemsContinue.Add(lvi);
+            }
+
+            DoItemHttp204(itemsContinue);
         }
 
         private void Run_Ping_CA(IList items)
@@ -147,6 +181,18 @@ namespace C2.Business.CastleBravo.VPN
         private void Run_DNS_CA(IList items)
         {
             Run_XXX_CA(items, CATypeEnum.DNS);
+        }
+
+        // 批量并发 HTTP204 验活用的控制变量
+        ListViewItem last204 = new ListViewItem();                  // 结尾标识
+        List<ListViewItem> buffer204 = new List<ListViewItem>();    // 堆积缓存
+
+        private void Run_Http204_CA(IList items)
+        {
+            // 跑 HTTP204 之前的工作
+            buffer204.Clear();
+            last204 = items[items.Count - 1] as ListViewItem;
+            Run_XXX_CA(items, CATypeEnum.HTTP204);
         }
 
         private void Run_XXX_CA(IList items, CATypeEnum type)
@@ -173,6 +219,10 @@ namespace C2.Business.CastleBravo.VPN
                             using (WaitCursor)         // TCP 时间比较长
                                 Run_Tcp_One(lvi);
                             break;
+                        case CATypeEnum.HTTP204:
+                            Run_Http204_One(lvi);
+                            break;
+
                     }
                     
                     UpdateProgress();
@@ -187,6 +237,33 @@ namespace C2.Business.CastleBravo.VPN
             IPAddressUpdate(task);
 
             UpdateRedrawItem(lvi);
+        }
+
+        private void Run_Http204_One(ListViewItem lvi)
+        {
+            buffer204.Add(lvi);
+            if (buffer204.Count >= 20 || lvi == last204)
+            {
+                Run_Http204_V2ray(buffer204);
+                buffer204.Clear();
+            }
+        }
+
+        private void Run_Http204_V2ray(List<ListViewItem> lv)
+        {
+            int pid = -1;
+            _ = lv;
+            int startPort = v2rayN.Utils.GetAvailablePort();
+            _ = startPort;
+
+            pid = new V2rayHandler().LoadV2rayConfigString(lv);
+            _ = pid;
+
+            //  选择端口
+            //  构造v2ray配置文件 
+            //  启动v2ray进程
+            //  并发访问代理端口,设置好回调更新函数
+            //  Join等待并发结束
         }
 
         private void UpdateRedrawItem(ListViewItem lvi)

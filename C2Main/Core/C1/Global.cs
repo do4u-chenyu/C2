@@ -191,6 +191,7 @@ namespace C2.Core
         public static string ResourcesPath =  Path.Combine(Application.StartupPath, "Resources");
         public static string TemplatesPath = Path.Combine(ResourcesPath, "Templates");  
         public static string WebEnginePath = Path.Combine(BusinessPath, "IAOLab", "WebEngine");
+        public static string VPNPath = Path.Combine(ResourcesPath, "VPN");
 
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
 

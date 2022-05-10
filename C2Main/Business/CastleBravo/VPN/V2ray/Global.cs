@@ -8,5 +8,10 @@ namespace v2rayN
 
         public const string InboundSocks = "socks";
         public const string InboundHttp = "http";
+
+        public static Job processJob
+        {
+            get; set;
+        }
     }
 }

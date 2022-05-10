@@ -41,6 +41,9 @@ namespace C2.Business.CastleBravo.VPN
 
             setOfHost = new HashSet<string>();
             setOfIPAddress = new HashSet<string>();
+
+            // 移植自v2ray,将 v2ray.exe 跟C2主进程放在一起管理
+            v2rayN.Global.processJob = new v2rayN.Job();
         }
 
         private void InitializeToolStrip()
@@ -82,11 +85,6 @@ namespace C2.Business.CastleBravo.VPN
         private void 查找ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             finder.FindHit();
-        }
-
-        private void 验活204_重新开始_ToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-
         }
 
         private void ProxySettingMenu_Click(object sender, System.EventArgs e)
@@ -353,7 +351,12 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 验活204_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DoItemHttp204Continue(LV.Items);
+        }
 
+        private void 验活204_重新开始_ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            DoItemHttp204(LV.Items);
         }
 
         private void 帮助文档_ToolStripLabel_Click(object sender, EventArgs e)
@@ -368,7 +371,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 选定项验活_HTTP204_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            DoItemHttp204(LV.SelectedItems);
         }
 
         private void 选定项验活_反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
