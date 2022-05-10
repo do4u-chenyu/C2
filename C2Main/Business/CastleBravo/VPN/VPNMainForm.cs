@@ -114,6 +114,7 @@ namespace C2.Business.CastleBravo.VPN
             RndProbeConfig = new RandomProbeForm().ShowDialog();
             if (RndProbeConfig.Equals(RandomProbeConfig.Empty))
                 return;
+            Application.DoEvents();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
                 SendRandomProbe(LV.Items);
 
