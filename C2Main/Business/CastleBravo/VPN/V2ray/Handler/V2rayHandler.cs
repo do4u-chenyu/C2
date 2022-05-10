@@ -56,7 +56,7 @@ namespace v2rayN.Handler
              /// <summary>
         /// V2ray停止
         /// </summary>
-        public void V2rayStopPid(int pid)
+        public static void V2rayStopPid(int pid)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace v2rayN.Handler
             ProcessEvent?.Invoke(updateToTrayTooltip, msg);
         }
 
-        private void KillProcess(Process p)
+        private static void KillProcess(Process p)
         {
             try
             {

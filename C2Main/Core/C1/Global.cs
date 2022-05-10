@@ -180,6 +180,7 @@ namespace C2.Core
         public static string SearchToolkitPath { get => Path.Combine(UserWorkspacePath, SearchDesc); }
         public static string JSViewPath { get => Path.Combine(UserWorkspacePath, JSDesc); }
         public static string TempDirectory { get; set; }
+
         public const float Factor = 1.3F;
 
         public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
