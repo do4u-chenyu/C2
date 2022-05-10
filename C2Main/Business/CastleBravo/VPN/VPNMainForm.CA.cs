@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
 using System.Collections.Generic;
 using v2rayN.Handler;
+using System.Threading.Tasks;
+using C2.Business.CastleBravo.VPN.V2ray;
 
 namespace C2.Business.CastleBravo.VPN
 {
@@ -251,19 +253,9 @@ namespace C2.Business.CastleBravo.VPN
 
         private void Run_Http204_V2ray(List<ListViewItem> lv)
         {
-            int pid = -1;
-            _ = lv;
-            int startPort = v2rayN.Utils.GetAvailablePort();
-            _ = startPort;
-
-            pid = new V2rayHandler().LoadV2rayConfigString(lv);
-            _ = pid;
-
-            //  选择端口
-            //  构造v2ray配置文件 
-            //  启动v2ray进程
-            //  并发访问代理端口,设置好回调更新函数
-            //  Join等待并发结束
+            // C2调用 v2ray.exe 进行真验活
+            // 大部分相关代码从 v2rayN 中移植过来,做了相应调整
+            C2V2rayWrapper.RunRealPing(lv);
         }
 
         private void UpdateRedrawItem(ListViewItem lvi)

@@ -395,6 +395,7 @@
     <Compile Include="Business\CastleBravo\VPN\StaticForm.Designer.cs">
       <DependentUpon>StaticForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\CastleBravo\VPN\V2ray\C2V2rayWrapper.cs" />
     <Compile Include="Business\CastleBravo\VPN\V2ray\Config\Config.cs" />
     <Compile Include="Business\CastleBravo\VPN\V2ray\Config\EConfigType.cs" />
     <Compile Include="Business\CastleBravo\VPN\V2ray\Config\ListenerType.cs" />
