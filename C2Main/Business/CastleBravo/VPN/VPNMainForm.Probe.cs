@@ -39,7 +39,16 @@ namespace C2.Business.CastleBravo.VPN
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
             int port = ConvertUtil.TryParseInt(task.Port.Trim());
-            if (port == 0) return;
+            if (port == 0)
+            {
+                lvi.SubItems[8].Text = "失败，端口字段格式不正确";
+                return;
+            }
+            if (string.IsNullOrEmpty(task.IP))
+            {
+                lvi.SubItems[8].Text = "失败，IP字段不能为空";
+                return;
+            }
 
 
             this.resultList.Clear();
@@ -72,7 +81,7 @@ namespace C2.Business.CastleBravo.VPN
             }
             catch (SocketException e)
             {
-                result = e.Message;
+                result = e.SocketErrorCode.ToString();
             }
             finally
             {

@@ -83,6 +83,7 @@ namespace C2.Business.CastleBravo.VPN
                     if (value == 0 || value > 225)
                         return new List<int>();
                     result.Add(value);
+                    continue;
                 }
                 string[] endpoints = interval.Trim().Split('-');
                 if (endpoints.Length != 2)
