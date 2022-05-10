@@ -48,6 +48,7 @@
             // 
             // backPanel
             // 
+            this.backPanel.AutoScroll = true;
             this.backPanel.Size = new System.Drawing.Size(179, 305);
             // 
             // manageButtonPanel
