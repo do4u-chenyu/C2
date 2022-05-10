@@ -46,6 +46,8 @@ namespace C2.Business.CastleBravo.VPN.Probe
 
         public static void DestroySocket(Socket socket)
         {
+            if (socket == null)
+                return;
             if (socket.Connected)
             {
                 try { socket.Shutdown(SocketShutdown.Both); }

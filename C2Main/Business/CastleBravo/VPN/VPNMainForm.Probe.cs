@@ -70,7 +70,7 @@ namespace C2.Business.CastleBravo.VPN
                 result = SocketClient.Receive(s);
 
             }
-            catch (Exception e)
+            catch (SocketException e)
             {
                 result = e.Message;
             }
@@ -80,10 +80,11 @@ namespace C2.Business.CastleBravo.VPN
                 {
                     resultList.Add(data.Length + "#" + result);
                 }
+
                 SocketClient.DestroySocket(s);
             }
-           
-            
+
+
         }
         private string GenRndProbeRequest(int length)
         {
