@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -48,33 +49,46 @@ namespace C2.Business.CastleBravo.VPN.V2ray
 
         private static bool IsV2raySupport(VPNTaskConfig task)
         {
-            return false;
+            bool ret = false;
+            switch (task.SSVersion.ToLower())
+            {
+                case "ss":
+                case "vmess":
+                case "vless":
+                case "trojan":
+                    ret = true;
+                    break;
+            }
+             return ret;
         }
         public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string> _updateFunc)
         {
             int pid = -1;
-            _ = lv;
-
             //  选择端口
             int startPort = v2rayN.Utils.GetAvailablePort();
-            _ = startPort;
+            startPort = 10911;  // 测试用
 
             //  构造v2ray配置文件, 并启动v2ray进程
             pid = new V2rayHandler().LoadV2rayConfigString(lv);
             _ = pid;
 
+            //  并发访问代理端口,设置好回调更新函数
             List<Task> tasks = new List<Task>();
-
-            foreach (ListViewItem lvi in lv)
+            for (int i = 0; i < lv.Count; i++)
             {
-                if (IsV2raySupport(lvi.Tag as VPNTaskConfig))
+                ListViewItem lvi = lv[i];
+                VPNTaskConfig vtc = lvi.Tag as VPNTaskConfig;
+                if (!IsV2raySupport(vtc))
+                {
+                    _updateFunc(lvi, string.Format("{0}不支持验活", vtc.SSVersion));
                     continue;
+                }
 
                 tasks.Add(Task.Run(() =>
                 {
                     try
                     {
-                        WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort);
+                        WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort + i);
                         int responseTime = -1;
 
                         // 境外
@@ -84,7 +98,6 @@ namespace C2.Business.CastleBravo.VPN.V2ray
                         string status1 = GetRealPingTime(v2rayN.Global.AbroadGenerate204, webProxy, out responseTime);
                         string output1 = string.IsNullOrEmpty(status1) ? FormatOut(responseTime, "ms", "境内") : FormatOut(status1, string.Empty, "境内");
 
-
                         _updateFunc(lvi, output0 + ":" + output1);
                     }
                     catch 
@@ -92,7 +105,6 @@ namespace C2.Business.CastleBravo.VPN.V2ray
                        
                     }
                 }));
-
             }
 
             //  Join等待并发结束
@@ -100,9 +112,6 @@ namespace C2.Business.CastleBravo.VPN.V2ray
 
             // 结束进程
             if (pid > 0) V2rayHandler.V2rayStopPid(pid);
-
-            //  并发访问代理端口,设置好回调更新函数
-
         }
 
         private static string FormatOut(object time, string unit, string prefix)
@@ -111,7 +120,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             {
                 return "Timeout";
             }
-            return string.Format("{2}{0}{1}", time, unit, prefix).PadLeft(6, ' ');
+            return string.Format("{2}{0}{1}", time, unit, prefix).PadLeft(6, OpUtil.Blank);
         }
     }
 }
