@@ -34,6 +34,16 @@ namespace C2.Business.CastleBravo.VPN
                 // 5分钟保存一次
             }
         }
+        private void ContinueSendRandomProbe(IList items)
+        {
+            foreach (ListViewItem lvi in items)
+            {
+                if (actionNeedStop)
+                    break;
+                if (string.IsNullOrEmpty(lvi.SubItems[8].Text))
+                    UpdateOneRandomProbeResult(lvi);
+            }
+        }
 
         private void UpdateOneRandomProbeResult(ListViewItem lvi)
         {

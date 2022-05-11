@@ -107,26 +107,39 @@ namespace C2.Business.CastleBravo.VPN
         static readonly Color AltertnatingRowColor = Color.FromArgb(255, 208, 206, 206);
 
 
-
+        #region 随机探针
 
         private void 随机探针_重新开始MenuItem_Click(object sender, System.EventArgs e)
         {
-            RndProbeConfig = new RandomProbeForm().ShowDialog();
-            if (RndProbeConfig.Equals(RandomProbeConfig.Empty))
-                return;         
-            ResetSubItemEmpty(LV.Items, CI_探测信息);
-            Application.DoEvents();
+            SetRandomProbeConfig();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 SendRandomProbe(LV.Items);
 
         }
-
+        private void 随机探针ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetRandomProbeConfig();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                SendRandomProbe(LV.SelectedItems);
+        }
+        private void SetRandomProbeConfig()
+        {
+            RndProbeConfig = new RandomProbeForm().ShowDialog();
+            if (RndProbeConfig.Equals(RandomProbeConfig.Empty))
+                return;
+            ResetSubItemEmpty(LV.Items, CI_探测信息);
+            Application.DoEvents();
+        }
         private void 随机探针_继续上次MenuItem_Click(object sender, System.EventArgs e)
         {
-           
+            SetRandomProbeConfig();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                ContinueSendRandomProbe(LV.Items);
         }
-
+        #endregion
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.LV.SelectedItems.Count == 0)
@@ -456,5 +469,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
+
+
     }
 }
