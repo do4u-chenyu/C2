@@ -61,7 +61,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             }
              return ret;
         }
-        public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string> _updateFunc)
+        public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string, bool> _updateFunc)
         {
             int pid = -1;
             //  选择端口
@@ -80,25 +80,29 @@ namespace C2.Business.CastleBravo.VPN.V2ray
                 VPNTaskConfig vtc = lvi.Tag as VPNTaskConfig;
                 if (!IsV2raySupport(vtc))
                 {
-                    _updateFunc(lvi, string.Format("{0}不支持验活", vtc.SSVersion));
+                    _updateFunc(lvi, string.Format("{0}不支持验活", vtc.SSVersion), false);
                     continue;
                 }
-
+                int dummy = i;
                 tasks.Add(Task.Run(() =>
                 {
                     try
                     {
-                        WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort + i);
+                        WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort + dummy);
                         int responseTime = -1;
 
                         // 境外
                         string status0 = GetRealPingTime(v2rayN.Global.AbroadGenerate204, webProxy, out responseTime);
                         string output0 = string.IsNullOrEmpty(status0) ? FormatOut(responseTime, "ms", "境外") : FormatOut(status0, string.Empty, "境外");
                         // 境内
-                        string status1 = GetRealPingTime(v2rayN.Global.AbroadGenerate204, webProxy, out responseTime);
+                        string status1 = GetRealPingTime(v2rayN.Global.ChinaGenerate204, webProxy, out responseTime);
                         string output1 = string.IsNullOrEmpty(status1) ? FormatOut(responseTime, "ms", "境内") : FormatOut(status1, string.Empty, "境内");
 
-                        _updateFunc(lvi, output0 + ":" + output1);
+                        // 境内,境外一个就够
+                        bool status = string.IsNullOrEmpty(status0) || string.IsNullOrEmpty(status1);
+
+
+                        _updateFunc(lvi, output0 + "|" + output1, status);
                     }
                     catch 
                     {
@@ -120,7 +124,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             {
                 return "Timeout";
             }
-            return string.Format("{2}{0}{1}", time, unit, prefix).PadLeft(6, OpUtil.Blank);
+            return string.Format("{2}:{0}{1}", time, unit, prefix).PadLeft(6, OpUtil.Blank);
         }
     }
 }

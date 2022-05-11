@@ -251,6 +251,16 @@ namespace C2.Business.CastleBravo.VPN
 
         private void Run_Http204_One(ListViewItem lvi)
         {
+            // 先查DNS
+            VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+
+            IPAddressUpdate(task);
+
+            // 更新DNS信息
+            lvi.SubItems[CI_IP地址].Text = task.IP;
+            lvi.SubItems[CI_归属地].Text = task.Country;
+            lvi.SubItems[CI_探测信息].Text = "进行中";
+
             buffer204.Add(lvi);
             if (buffer204.Count >= 20 || lvi == last204)
             {
@@ -263,7 +273,20 @@ namespace C2.Business.CastleBravo.VPN
         {
             // C2调用 v2ray.exe 进行真验活
             // 大部分相关代码从 v2rayN 中移植过来,做了相应调整
-            C2V2rayWrapper.RunRealPing(lv, (lvi, msg) => { lvi.SubItems[CI_探测信息].Text = msg; });
+            C2V2rayWrapper.RunRealPing(lv, (lvi, msg, status) => {
+                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+                task.ProbeInfo = msg;
+                task.Status = status ? Succ : Fail;
+            });
+            
+            foreach(ListViewItem lvi in lv)
+            {
+                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+
+                lvi.SubItems[CI_状态].Text = task.Status;
+                lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
+                lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+            }
         }
 
         private void UpdateRedrawItem(ListViewItem lvi)
