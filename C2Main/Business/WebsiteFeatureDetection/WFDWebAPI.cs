@@ -258,7 +258,7 @@ namespace C2.Business.WebsiteFeatureDetection
 
         public bool ReAuthBeforeQuery(bool flag = false)
         {
-            //后台尝试3次登陆，均认证失败后前台弹出认证窗口
+            //后台尝试3次登陆，均认证失败后前台弹出认证窗口#
             int maxRetryTime = 3;
             int time = 0;
             if (!string.IsNullOrEmpty(UserName))
