@@ -1,4 +1,5 @@
-﻿using C2.Configuration;
+﻿using C2.Business.WebsiteFeatureDetection;
+using C2.Configuration;
 using C2.Controls;
 using C2.Controls.OS;
 using C2.Core;
@@ -44,6 +45,10 @@ namespace C2
             //窗体启动前调用 
             Application.EnableVisualStyles();   
             Application.SetCompatibleTextRenderingDefault(false);
+#if C2_Outer
+            if (!new WFDWebAPI().ReAuthBeforeQuery(true))
+                return;
+#endif
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
        

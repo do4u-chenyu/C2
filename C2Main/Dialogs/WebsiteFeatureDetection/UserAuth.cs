@@ -10,8 +10,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 {
     partial class UserAuth : StandardDialog
     {
-        public string UserName { get => this.userNameTextBox.Text; set => this.userNameTextBox.Text = value; }
-        public string Otp { get => this.otpTextBox.Text; set => this.otpTextBox.Text = value; }
+        public string UserName { get => userNameTextBox.Text; set => userNameTextBox.Text = value; }
+        public string Otp { get => otpTextBox.Text; set => otpTextBox.Text = value; }
 
         public UserAuth()
         {
@@ -65,19 +65,19 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void UserNameTextBox_Enter(object sender, EventArgs e)
         {
-            if (this.userNameTextBox.ForeColor == SystemColors.InactiveCaption)
+            if (userNameTextBox.ForeColor == SystemColors.InactiveCaption)
             {
-                this.userNameTextBox.Text = String.Empty;
-                this.userNameTextBox.ForeColor = Color.Black;
+                userNameTextBox.Text = string.Empty;
+                userNameTextBox.ForeColor = Color.Black;
             }
         }
 
         private void OtpTextBox_Enter(object sender, EventArgs e)
         {
-            if (this.otpTextBox.ForeColor == SystemColors.InactiveCaption)
+            if (otpTextBox.ForeColor == SystemColors.InactiveCaption)
             {
-                this.otpTextBox.Text = String.Empty;
-                this.otpTextBox.ForeColor = Color.Black;
+                otpTextBox.Text = string.Empty;
+                otpTextBox.ForeColor = Color.Black;
             }
         }
     }

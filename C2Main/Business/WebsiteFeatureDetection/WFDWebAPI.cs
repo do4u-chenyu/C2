@@ -256,7 +256,7 @@ namespace C2.Business.WebsiteFeatureDetection
 
         }
 
-        public bool ReAuthBeforeQuery()
+        public bool ReAuthBeforeQuery(bool flag = false)
         {
             //后台尝试3次登陆，均认证失败后前台弹出认证窗口
             int maxRetryTime = 3;
@@ -273,6 +273,11 @@ namespace C2.Business.WebsiteFeatureDetection
             }
 
             var UAdialog = new UserAuth();
+            if (flag)
+            {
+                UAdialog.StartPosition = FormStartPosition.CenterScreen;
+                UAdialog.Text = "C2-用户认证";
+            }
             if (UAdialog.ShowDialog() != DialogResult.OK)
                 return false;
             UserName = UAdialog.UserName;
