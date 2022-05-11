@@ -20,8 +20,8 @@ namespace C2.Controls.C1.Left
 
         private void InitButtonType()
         {
-            this.leftPictureBox.Image = global::C2.Properties.Resources.全文工具左侧;
-            this.rightPictureBox.Image = global::C2.Properties.Resources.提示;
+            leftPictureBox.Image = Properties.Resources.全文工具左侧;
+            rightPictureBox.Image = Properties.Resources.提示;
         }
 
         private void InitButtonMenu()
@@ -45,7 +45,7 @@ namespace C2.Controls.C1.Left
             };
             ResultToolStripMenuItem.Click += new EventHandler(ResultToolStripMenuItem_Click);
 
-            this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {
+            contextMenuStrip.Items.AddRange(new ToolStripItem[] {
                     ResultToolStripMenuItem,
                     RemoveToolStripMenuItem
                  });
@@ -55,9 +55,9 @@ namespace C2.Controls.C1.Left
         private void InitTaskInfo(SearchTaskInfo task)
         {
             this.task = task;
-            this.toolTip.SetToolTip(this.rightPictureBox, task.BastionInfo);
-            this.toolTip.SetToolTip(this.leftPictureBox, task.TaskModel);
-            this.toolTip.SetToolTip(this.noFocusButton, task.TaskName);
+            toolTip.SetToolTip(rightPictureBox, task.BastionInfo);
+            toolTip.SetToolTip(leftPictureBox, task.TaskModel);
+            toolTip.SetToolTip(noFocusButton, task.TaskName);
         }
         private void ResultToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -67,7 +67,7 @@ namespace C2.Controls.C1.Left
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult rs = MessageBox.Show(
-                  String.Format("删除任务【{0}】及结果文件, 继续删除请点击 \"确定\"", task.TaskName),
+                  string.Format("删除任务【{0}】及结果文件, 继续删除请点击 \"确定\"", task.TaskName),
                   "删除", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
             if (rs != DialogResult.OK)
@@ -75,7 +75,7 @@ namespace C2.Controls.C1.Left
             // 用全局变量机械降神, 不是好的方式, 只是相对省事儿,不得已为之,尽量少用 
             Global.GetSearchToolkitControl().DeleteButton(this, task);
         }
-        private void NoFocusButton_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void NoFocusButton_Paint(object sender, PaintEventArgs e)
         {
             Button B = (Button)sender;
             Size S = TextRenderer.MeasureText(task.TaskName, B.Font);
@@ -96,7 +96,5 @@ namespace C2.Controls.C1.Left
         {
             new SearchToolkitForm().ShowTaskInfoDialog(this.task);
         }
-
-
     }
 }
