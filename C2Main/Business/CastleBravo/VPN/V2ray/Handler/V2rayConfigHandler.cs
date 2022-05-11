@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace v2rayN.Handler
@@ -8,9 +9,10 @@ namespace v2rayN.Handler
 
         public static string GenerateClientSpeedtestConfigString(List<ListViewItem> lv)
         {
-
             _ = lv;
-            return string.Empty;
+            // 临时测试用
+            StreamReader sr = new StreamReader(@"C:\Users\quixote\Desktop\熊猫网络5用户\验活测试.v2rayconfig.v1.txt");
+            return sr.ReadToEnd();
         }
     }
 }

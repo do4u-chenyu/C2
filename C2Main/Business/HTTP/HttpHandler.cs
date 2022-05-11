@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -11,7 +12,8 @@ namespace C2.Business.HTTP
     class HttpHandler
     {
         public HttpHandler()
-        {
+        { 
+
         }
         private bool RemoteCertificateValidate(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors error)
         {
@@ -52,8 +54,44 @@ namespace C2.Business.HTTP
             }
             return resp;
         }
+        public string Get(string url, Dictionary<string, string> dic,int timeout = 10000)
+        {
+            string result = string.Empty;
+            StringBuilder builder = new StringBuilder();
+            builder.Append(url);
+            if (dic.Count > 0)
+            {
+                builder.Append("?");
+                int i = 0;
+                foreach (var item in dic)
+                {
+                    if (i > 0)
+                        builder.Append("&");
+                    builder.AppendFormat("{0}={1}", item.Key, item.Value);
+                    i++;
+                }
+            }
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
+            req.Method = "GET";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.Timeout = timeout;
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream stream = resp.GetResponseStream();
+            try
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            finally
+            {
+                stream.Close();
+            }
+            return result;
+        }
 
-        public Response PostCode(string url, string postData, int timeout = 10000,bool keepAlive = true)
+            public Response PostCode(string url, string postData, int timeout = 10000,bool keepAlive = true)
         {
             Response resp = new Response();
             try
@@ -122,7 +160,7 @@ namespace C2.Business.HTTP
         private string DictionaryToJson(Dictionary<string, string> dict)
         {
             if (dict.Count == 0)
-                return String.Empty;
+                return string.Empty;
 
             return JsonConvert.SerializeObject(dict);
         }
@@ -130,7 +168,7 @@ namespace C2.Business.HTTP
         private string ObjectDicToJson(Dictionary<string, object> dict)
         {
             if (dict.Count == 0)
-                return String.Empty;
+                return string.Empty;
 
             return JsonConvert.SerializeObject(dict);
         }

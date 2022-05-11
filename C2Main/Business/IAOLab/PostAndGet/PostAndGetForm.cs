@@ -176,7 +176,7 @@ namespace C2.Business.IAOLab.PostAndGet
         public HttpWebRequest WeatherIpProHttp(HttpWebRequest req)
         {
             WebProxy proxy = new WebProxy();
-            proxy.Address = new Uri(String.Format("{0}{1}", "http://", textBoxIp.Text));
+            proxy.Address = new Uri(string.Format("{0}{1}", "http://", textBoxIp.Text));
             req.Proxy = proxy;
             return req;
         }
@@ -349,12 +349,12 @@ namespace C2.Business.IAOLab.PostAndGet
 
         private void AutoProxyLabel_Click(object sender, EventArgs e)
         {
-            this.textBoxIp.Text = this.textBoxIp.Text.Trim() == string.Empty ? "127.0.0.1:10809" : string.Empty;
+            textBoxIp.Text = textBoxIp.Text.Trim() == string.Empty ? "127.0.0.1:10809" : string.Empty;
         }
 
         private void ClearProxyLabel_Click(object sender, EventArgs e)
         {
-            this.textBoxIp.Text = string.Empty;
+            textBoxIp.Text = string.Empty;
         }
         private void textBoxPost_KeyDown(object sender, KeyEventArgs e)
         {

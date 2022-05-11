@@ -1,4 +1,6 @@
 ﻿
+using C2.Business.CastleBravo.VPN.Client;
+
 namespace v2rayN
 {
     class Global
@@ -10,7 +12,8 @@ namespace v2rayN
         public const string InboundHttp = "http";
         public const string Loopback = "127.0.0.1";
 
-        public const string SpeedPingTestUrl = @"https://www.google.com/generate_204";
+        public static string AbroadGenerate204 { get => ClientSetting.O204List[0]; }
+        public static string ChinaGenerate204  { get => ClientSetting.I204List[0]; }
 
         public static Job processJob
         {

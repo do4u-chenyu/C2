@@ -424,6 +424,18 @@
     <Compile Include="Business\CastleBravo\WebShellTool\WebShellManageForm.CA.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Dns\DefaultDnsResolver.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Dns\IDnsResolver.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Enums\AddressType.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Enums\Authentication.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Enums\Command.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Enums\SocketConnectionResult.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\ErrorResponseBuilder.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Helpers.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\HttpToSocks5Proxy.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\ProxyInfo.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\SocketRelay.cs" />
+    <Compile Include="Business\HTTP\HttpToSocks5Proxy\Socks5.cs" />
     <Compile Include="Business\IAOLab\LngAndLat\LngAndLat.cs" />
     <Compile Include="Business\IAOLab\PwdGenerator\PwdResultForm.cs">
       <SubType>Form</SubType>
@@ -740,18 +752,6 @@
     <Compile Include="Business\IAOLab\Plugins\IPlugin.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsDownloader.cs" />
     <Compile Include="Business\IAOLab\Plugins\PluginsManager.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Dns\DefaultDnsResolver.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Dns\IDnsResolver.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\AddressType.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\Authentication.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\Command.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Enums\SocketConnectionResult.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\ErrorResponseBuilder.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Helpers.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\ProxyInfo.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\SocketRelay.cs" />
-    <Compile Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\Socks5.cs" />
     <Compile Include="Business\IAOLab\PostAndGet\PostAndGetForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2989,7 +2989,7 @@
     <None Include="Business\CastleBravo\WebShellTool\Payload\db_dict" />
     <None Include="Business\CastleBravo\WebShellTool\Payload\gzip.php" />
     <None Include="Business\CastleBravo\WebShellTool\Payload\unzip.php" />
-    <None Include="Business\IAOLab\PostAndGet\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
+    <None Include="Business\HTTP\HttpToSocks5Proxy\HttpToSocks5Proxy.csproj" />
     <None Include="Demo\demo_bcp.bcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4637,6 +4637,12 @@
     <Content Include="Resources\VPN\SampleClientConfig.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\VPN\v2ctl.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\VPN\wv2ray.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WebScanDict\PHP一级目录.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -4794,8 +4800,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if not exist plugins md plugins
-</PostBuildEvent>
+    <PostBuildEvent>if not exist plugins md plugins</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)tools\zip\zip.exe  -j -u $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py.zip  $(ProjectDir)\Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py
