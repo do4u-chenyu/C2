@@ -26,12 +26,14 @@ namespace C2.Business.CastleBravo.VPN
         private void SendRandomProbe(IList items)
         {
 
+
             foreach (ListViewItem lvi in items)
             {
                 if (actionNeedStop)
                     break;
                 UpdateOneRandomProbeResult(lvi);
-                // 5分钟保存一次
+                Application.DoEvents();
+                CheckSavePoint(1);// 1分钟保存一次
             }
         }
         private void ContinueSendRandomProbe(IList items)
@@ -42,6 +44,8 @@ namespace C2.Business.CastleBravo.VPN
                     break;
                 if (string.IsNullOrEmpty(lvi.SubItems[8].Text))
                     UpdateOneRandomProbeResult(lvi);
+                Application.DoEvents();
+                CheckSavePoint(1);// 1分钟保存一次
             }
         }
 
@@ -121,7 +125,7 @@ namespace C2.Business.CastleBravo.VPN
             ListViewItem item = LV.SelectedItems[0];
             ListViewItem.ListViewSubItem subItem = item.GetSubItemAt(e.X, e.Y);
 
-            if (subItem == null || item.SubItems.IndexOf(subItem) != 7)
+            if (subItem == null || item.SubItems.IndexOf(subItem) != 8)
                 return;
 
             if (!subItem.Text.StartsWith(Path.Combine(Global.UserWorkspacePath, "探针结果采集")))
