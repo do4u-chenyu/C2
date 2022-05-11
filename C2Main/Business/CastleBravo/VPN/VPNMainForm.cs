@@ -456,7 +456,5 @@ namespace C2.Business.CastleBravo.VPN
         {
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
-
-
     }
 }

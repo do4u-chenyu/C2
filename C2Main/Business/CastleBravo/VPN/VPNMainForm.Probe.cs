@@ -97,5 +97,47 @@ namespace C2.Business.CastleBravo.VPN
         #endregion
         #region 重放探针
         #endregion
+
+
+        #region 菜单
+
+        private void LV_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.LV.ContextMenuStrip = this.contextMenuStrip;
+
+            if (e.Button != MouseButtons.Right || e.Clicks != 1 || LV.SelectedItems.Count == 0)
+                return;
+
+            ListViewItem item = LV.SelectedItems[0];
+            ListViewItem.ListViewSubItem subItem = item.GetSubItemAt(e.X, e.Y);
+
+            if (subItem == null || item.SubItems.IndexOf(subItem) != 7)
+                return;
+
+            if (!subItem.Text.StartsWith(Path.Combine(Global.UserWorkspacePath, "探针结果采集")))
+                return;
+            this.LV.ContextMenuStrip = this.contextMenuStrip1;
+
+        }
+
+        private void OpenFileMenu_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.ProcessOpen(CurrentFilePath());
+        }
+
+        private void OpenDirMenu_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(CurrentFilePath());
+        }
+
+        private void CopyDirMenu_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(CurrentFilePath());
+        }
+        private string CurrentFilePath()
+        {
+            return LV.SelectedItems[0].SubItems[8].Text;
+        }
+        #endregion
     }
 }
