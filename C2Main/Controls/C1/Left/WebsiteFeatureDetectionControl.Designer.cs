@@ -49,11 +49,11 @@
             this.backPanel.AutoScroll = true;
             this.backPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.backPanel.Location = new System.Drawing.Point(0, 30);
-            this.backPanel.Size = new System.Drawing.Size(185, 305);
+            this.backPanel.Size = new System.Drawing.Size(185, 342);
             // 
             // manageButtonPanel
             // 
-            this.manageButtonPanel.Size = new System.Drawing.Size(183, 271);
+            this.manageButtonPanel.Size = new System.Drawing.Size(183, 308);
             // 
             // helpInfoLable
             // 
@@ -63,9 +63,9 @@
             // 
             this.panel1.Controls.Add(this.yqFeatureDetectionControl1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 335);
+            this.panel1.Location = new System.Drawing.Point(0, 372);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(185, 325);
+            this.panel1.Size = new System.Drawing.Size(185, 288);
             this.panel1.TabIndex = 4;
             // 
             // yqFeatureDetectionControl1
@@ -75,7 +75,7 @@
             this.yqFeatureDetectionControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.yqFeatureDetectionControl1.Location = new System.Drawing.Point(0, 0);
             this.yqFeatureDetectionControl1.Name = "yqFeatureDetectionControl1";
-            this.yqFeatureDetectionControl1.Size = new System.Drawing.Size(185, 325);
+            this.yqFeatureDetectionControl1.Size = new System.Drawing.Size(185, 288);
             this.yqFeatureDetectionControl1.TabIndex = 0;
             // 
             // WebsiteFeatureDetectionControl

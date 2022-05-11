@@ -31,12 +31,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private string taskFilePath;
         private string destFilePath;
         private string TaskCreateTime;
+        private readonly Dictionary<string, string> table;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskContent { get => this.taskContentComboBox.Text; set => this.taskContentComboBox.Text = value; }
         string TaskModelName { get => this.taskModelComboBox.Text; set => this.taskModelComboBox.Text = value; }
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
+        string provinceName { get => this.provinceCB.Text; set => this.provinceCB.Text = value; }
+        string cityName { get => this.cityCB.Text; set => this.cityCB.Text = value; }
         int ruleType { get => this.taskContentComboBox.SelectedIndex; set => this.taskContentComboBox.SelectedIndex = value; }
-        int modelType { get => this.taskModelComboBox.SelectedIndex; set => this.taskModelComboBox.SelectedIndex = value; }
         readonly int maxRow;
         public AddYQTask()
         {
@@ -51,6 +53,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             FileUtil.CreateDirectory(destDirectory);
 
+            table = new Dictionary<string, string>(1024 * 4);
+            InitCodeTable();
+
             this.OKButton.Size = new System.Drawing.Size(75, 27);
             this.CancelBtn.Size = new System.Drawing.Size(75, 27);
         }
@@ -64,10 +69,41 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             TaskName = String.Format("{0}任务{1}", TaskModelName, DateTime.Now.ToString("MMdd"));
         }
 
+        public void InitCodeTable()
+        {
+            string ret = FileUtil.FileReadToEnd(Path.Combine(Global.TemplatesPath, "ProvinceAndCityCode.txt"));
+            foreach (string line in ret.Split(System.Environment.NewLine))
+            {
+                string[] lineSplit = line.Split(":");
+                if (lineSplit.Length >= 2)
+                    table[lineSplit[0].Trim()] = lineSplit[1].Trim();
+            }
+        }
+
         private void TaskModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.TaskName = String.Format("{0}任务{1}", this.TaskModelName, DateTime.Now.ToString("MMdd"));
         }
+
+        private void ProvinceCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cityCB.Items.Clear();
+            this.cityCB.Items.Add("不限");
+            if (provinceCB.SelectedIndex == 0)
+            {
+                cityName = "不限";
+                return;
+            }
+            string provinceheadCode = table[provinceName].Substring(0,2);
+            foreach(var kv in table)
+            {
+                if (kv.Key == provinceName || kv.Value.Substring(0, 2) != provinceheadCode)
+                    continue;
+                this.cityCB.Items.Add(kv.Key);
+            }
+            this.cityCB.SelectedIndex = 0;
+        }
+
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
         {
             this.wsTextBox.Clear();
@@ -167,14 +203,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             taskFilePath = Path.Combine(this.destDirectory, this.TaskName);
             FileUtil.CreateDirectory(taskFilePath);
 
-            try
-            {
-                areaCode = GenCode(provinceCB.Text,cityCB.Text);
-            }
-            catch
-            {
-                areaCode = string.Empty;
-            }
+            areaCode = GenCode();
+
             this.startTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker1.Value));
             this.endTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker2.Value));
             this.ruleHost = GenModelHost(this.TaskModelName);
@@ -186,15 +216,20 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running);
         }
 
-        private string GenCode(string province, string city)
+        private string GenCode()
         {
             string code = string.Empty;
-            string ret = FileUtil.FileReadToEnd(Path.Combine(Global.TemplatesPath, "ProvinceAndCityCode.txt"));
-            //try
-            //{
-            //    code = province + city;
-            //}
-            //catch { }
+
+            if (provinceName == "不限")
+                return code;
+            try
+            {
+                if (cityName == "不限")
+                    code = table[provinceName];
+                else
+                    code = table[cityName];
+            }
+            catch { }
             return code;
         }
 
@@ -366,11 +401,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 }
             }
             return;
-        }
-
-        private void ProvinceCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
