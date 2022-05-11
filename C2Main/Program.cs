@@ -46,8 +46,8 @@ namespace C2
             Application.EnableVisualStyles();   
             Application.SetCompatibleTextRenderingDefault(false);
 #if C2_Outer
-            if (!new WFDWebAPI().ReAuthBeforeQuery(true))
-                return;
+            //if (!new WFDWebAPI().ReAuthBeforeQuery(true))
+            //    return;
 #endif
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
