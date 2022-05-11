@@ -34,7 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.areaTextBox = new System.Windows.Forms.TextBox();
+            this.cityCB = new System.Windows.Forms.ComboBox();
+            this.provinceCB = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
@@ -70,7 +71,7 @@
             this.taskNameTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.taskNameTextBox.Location = new System.Drawing.Point(98, 27);
             this.taskNameTextBox.Name = "taskNameTextBox";
-            this.taskNameTextBox.Size = new System.Drawing.Size(196, 25);
+            this.taskNameTextBox.Size = new System.Drawing.Size(200, 25);
             this.taskNameTextBox.TabIndex = 44;
             this.taskNameTextBox.Text = "Twitter任务";
             // 
@@ -96,7 +97,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.areaTextBox);
+            this.groupBox1.Controls.Add(this.cityCB);
+            this.groupBox1.Controls.Add(this.provinceCB);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.label6);
@@ -117,13 +119,68 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "爬虫配置";
             // 
-            // areaTextBox
+            // cityCB
             // 
-            this.areaTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.areaTextBox.Location = new System.Drawing.Point(392, 27);
-            this.areaTextBox.Name = "areaTextBox";
-            this.areaTextBox.Size = new System.Drawing.Size(196, 25);
-            this.areaTextBox.TabIndex = 57;
+            this.cityCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cityCB.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cityCB.FormattingEnabled = true;
+            this.cityCB.Items.AddRange(new object[] {
+            "不限"});
+            this.cityCB.Location = new System.Drawing.Point(502, 26);
+            this.cityCB.Name = "cityCB";
+            this.cityCB.Size = new System.Drawing.Size(90, 27);
+            this.cityCB.TabIndex = 58;
+            // 
+            // provinceCB
+            // 
+            this.provinceCB.DropDownHeight = 200;
+            this.provinceCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.provinceCB.DropDownWidth = 130;
+            this.provinceCB.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.provinceCB.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.provinceCB.FormattingEnabled = true;
+            this.provinceCB.IntegralHeight = false;
+            this.provinceCB.Items.AddRange(new object[] {
+            "不限",
+            "云南省",
+            "内蒙古自治区",
+            "台湾省",
+            "吉林省",
+            "四川省",
+            "宁夏回族自治区",
+            "安徽省",
+            "山东省",
+            "山西省",
+            "广东省",
+            "广西壮族自治区",
+            "新疆维吾尔自治区",
+            "江苏省",
+            "江西省",
+            "河北省",
+            "河南省",
+            "浙江省",
+            "海南省",
+            "湖北省",
+            "湖南省",
+            "澳门特别行政区",
+            "甘肃省",
+            "福建省",
+            "西藏自治区",
+            "贵州省",
+            "辽宁省",
+            "陕西省",
+            "青海省",
+            "香港特别行政区",
+            "黑龙江省",
+            "北京市",
+            "天津市",
+            "重庆市",
+            "上海市"});
+            this.provinceCB.Location = new System.Drawing.Point(392, 26);
+            this.provinceCB.Name = "provinceCB";
+            this.provinceCB.Size = new System.Drawing.Size(90, 27);
+            this.provinceCB.TabIndex = 57;
+            this.provinceCB.SelectedIndexChanged += new System.EventHandler(this.ProvinceCB_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -178,7 +235,7 @@
             "账号"});
             this.taskContentComboBox.Location = new System.Drawing.Point(392, 70);
             this.taskContentComboBox.Name = "taskContentComboBox";
-            this.taskContentComboBox.Size = new System.Drawing.Size(197, 27);
+            this.taskContentComboBox.Size = new System.Drawing.Size(200, 27);
             this.taskContentComboBox.TabIndex = 50;
             // 
             // taskModelComboBox
@@ -198,7 +255,7 @@
             "不限"});
             this.taskModelComboBox.Location = new System.Drawing.Point(98, 70);
             this.taskModelComboBox.Name = "taskModelComboBox";
-            this.taskModelComboBox.Size = new System.Drawing.Size(197, 27);
+            this.taskModelComboBox.Size = new System.Drawing.Size(200, 27);
             this.taskModelComboBox.TabIndex = 49;
             this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskModelComboBox_SelectedIndexChanged);
             // 
@@ -341,7 +398,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox taskContentComboBox;
-        private System.Windows.Forms.TextBox areaTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox filePathTextBox;
@@ -352,5 +408,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cityCB;
+        private System.Windows.Forms.ComboBox provinceCB;
     }
 }

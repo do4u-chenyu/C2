@@ -11,15 +11,18 @@ using C2.Business.WebsiteFeatureDetection;
 using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Core;
 using C2.Utils;
+using System.IO;
 
 namespace C2.Controls.C1.Left
 {
     public partial class YQTaskButton : BaseLeftInnerButton
     {
+        private YQFeatureDetectionControl yqfdc;
         public YQTaskInfo TaskInfo { get; set; } = YQTaskInfo.Empty;
         public YQTaskButton(YQTaskInfo task) : base(task.TaskName)
         {
             TaskInfo = task;
+            yqfdc = new YQFeatureDetectionControl();
             InitializeComponent();
             InitButtonMenu();
             InitButtonType();
@@ -95,9 +98,10 @@ namespace C2.Controls.C1.Left
             if (rs != DialogResult.OK)
                 return;
 
-            Global.GetWebsiteFeatureDetectionControl().RemoveButton(this);
-            FileUtil.DeleteFile(this.TaskInfo.ResultFilePath);
-            
+            yqfdc.RemoveYQButton(this);
+            FileUtil.DeleteDirectory(this.TaskInfo.ResultFilePath);
+            yqfdc.YQSave();
+            yqfdc = new YQFeatureDetectionControl();
         }
 
         private void NoFocusButton_MouseDown(object sender, MouseEventArgs e)

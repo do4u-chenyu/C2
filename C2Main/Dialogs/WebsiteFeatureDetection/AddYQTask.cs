@@ -59,6 +59,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             taskModelComboBox.SelectedIndex = 0;
             taskContentComboBox.SelectedIndex = 0;
+            provinceCB.SelectedIndex = 0;
+            cityCB.SelectedIndex = 0;
             TaskName = String.Format("{0}任务{1}", TaskModelName, DateTime.Now.ToString("MMdd"));
         }
 
@@ -167,7 +169,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             try
             {
-                areaCode = areaTextBox.Text;
+                areaCode = GenCode(provinceCB.Text,cityCB.Text);
             }
             catch
             {
@@ -182,6 +184,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.TaskID = string.Format("{0}{1}", n.ToString(), this.TaskCreateTime);
 
             return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running);
+        }
+
+        private string GenCode(string province, string city)
+        {
+            string code = string.Empty;
+            string ret = FileUtil.FileReadToEnd(Path.Combine(Global.TemplatesPath, "ProvinceAndCityCode.txt"));
+            //try
+            //{
+            //    code = province + city;
+            //}
+            //catch { }
+            return code;
         }
 
         private string GenModelHost(string model)
@@ -352,6 +366,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 }
             }
             return;
+        }
+
+        private void ProvinceCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

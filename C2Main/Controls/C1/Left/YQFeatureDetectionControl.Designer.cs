@@ -34,13 +34,22 @@
             // 
             // titleLabel
             // 
-            this.titleLabel.Text = "舆情侦察兵";
+            this.titleLabel.Text = "舆情侦察兵(施工中)";
+            // 
+            // addTaskLabel
+            // 
+            this.addTaskLabel.Click += new System.EventHandler(this.AddTaskLabel_Click);
+            // 
+            // helpInfoLable
+            // 
+            this.helpInfoLable.Click += new System.EventHandler(this.HelpInfoLable_Click);
             // 
             // YQFeatureDetectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "YQFeatureDetectionControl";
+            this.Load += new System.EventHandler(this.YQFeatureDetectionControl_Load);
             this.newEventPanel.ResumeLayout(false);
             this.newEventPanel.PerformLayout();
             this.backPanel.ResumeLayout(false);

@@ -4475,6 +4475,9 @@
     <Content Include="Resources\StartPage\首页_战术手册.png" />
     <Content Include="Resources\StartPage\首页_知识库.png" />
     <Content Include="Resources\StartPage\首页_网站侦察兵.png" />
+    <Content Include="Resources\Templates\ProvinceAndCityCode.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Templates\数据预处理文件夹模板.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
