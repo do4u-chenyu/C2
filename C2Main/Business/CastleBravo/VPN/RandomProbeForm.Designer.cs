@@ -74,7 +74,7 @@
             this.timeoutBox.Name = "timeoutBox";
             this.timeoutBox.Size = new System.Drawing.Size(89, 21);
             this.timeoutBox.TabIndex = 10006;
-            this.timeoutBox.Text = "10";
+            this.timeoutBox.Text = "5";
             // 
             // lengthBox
             // 

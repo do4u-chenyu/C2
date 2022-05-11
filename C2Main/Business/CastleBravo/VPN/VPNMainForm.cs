@@ -111,6 +111,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 随机探针_重新开始MenuItem_Click(object sender, System.EventArgs e)
         {
+            s = DateTime.Now;
             SetRandomProbeConfig();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
@@ -119,10 +120,20 @@ namespace C2.Business.CastleBravo.VPN
         }
         private void 随机探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            s = DateTime.Now;
             SetRandomProbeConfig();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 SendRandomProbe(LV.SelectedItems);
+        }
+       
+        private void 随机探针_继续上次MenuItem_Click(object sender, System.EventArgs e)
+        {
+            s = DateTime.Now;
+            SetRandomProbeConfig();
+            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                ContinueSendRandomProbe(LV.Items);
         }
         private void SetRandomProbeConfig()
         {
@@ -131,13 +142,6 @@ namespace C2.Business.CastleBravo.VPN
                 return;
             ResetSubItemEmpty(LV.Items, CI_探测信息);
             Application.DoEvents();
-        }
-        private void 随机探针_继续上次MenuItem_Click(object sender, System.EventArgs e)
-        {
-            SetRandomProbeConfig();
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                ContinueSendRandomProbe(LV.Items);
         }
         #endregion
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)

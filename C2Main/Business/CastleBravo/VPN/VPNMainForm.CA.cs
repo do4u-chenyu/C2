@@ -398,10 +398,10 @@ namespace C2.Business.CastleBravo.VPN
                 NumberOfIPAddress);
         }
 
-        private void CheckSavePoint()
+        private void CheckSavePoint(int time = 5)
         {
             TimeSpan gap = DateTime.Now - s;
-            if (gap.TotalMinutes >= 5)
+            if (gap.TotalMinutes >= time)
             {   // 5分钟保存一次
                 RefreshTasks();
                 SaveDB();
