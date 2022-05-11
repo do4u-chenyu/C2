@@ -1,11 +1,14 @@
 ﻿using Amib.Threading;
 using C2.Business.CastleBravo.VPN.Probe;
+using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
 
@@ -14,8 +17,6 @@ namespace C2.Business.CastleBravo.VPN
     
     public partial class VPNMainForm
     {
-        private readonly int maxThread = 50;
-        List<string> resultList = new List<string>();
         private DateTime s;  // 自动保存
         #region 随机探针
         // 选定项发探针
@@ -24,17 +25,16 @@ namespace C2.Business.CastleBravo.VPN
 
         private void SendRandomProbe(IList items)
         {
-            s = DateTime.Now;
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                foreach (ListViewItem lvi in items)
-                {
-                    if (actionNeedStop)
-                        break;
-                    UpdateOneRandomProbeResult(lvi);
-                                          // 5分钟保存一次
-                }
+
+            foreach (ListViewItem lvi in items)
+            {
+                if (actionNeedStop)
+                    break;
+                UpdateOneRandomProbeResult(lvi);
+                // 5分钟保存一次
+            }
         }
-        private SmartThreadPool stp = null;
+
         private void UpdateOneRandomProbeResult(ListViewItem lvi)
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
@@ -50,76 +50,50 @@ namespace C2.Business.CastleBravo.VPN
                 return;
             }
 
-
-            this.resultList.Clear();
-             stp = new SmartThreadPool
+            string resultPath = WriteResult(task.IP, port.ToString());
+            if (string.IsNullOrEmpty(resultPath))
             {
-                MaxThreads = maxThread
-            };
-            foreach (int index in RndProbeConfig.LengthValues)
+                lvi.SubItems[8].Text = string.Format("创建输出文件失败:{0}", resultPath);
+                return;
+            }
+            using (StreamWriter sw = new StreamWriter(resultPath, false, Encoding.Default))
             {
-                for (int i = 0; i < RndProbeConfig.SendCount; i++)
+                foreach (int index in RndProbeConfig.LengthValues)
                 {
-                    string data = GenRndProbeRequest(index);
-                    stp.QueueWorkItem<string, int, string>(RndProbeResponse, task.IP, port, data);
-                    stp.WaitFor(maxThread);
+                    for (int i = 0; i < RndProbeConfig.SendCount; i++)
+                    {
+                        string data = GenRndProbeRequest(index);
+                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, data,RndProbeConfig.Timeout));
+                    }
+                    sw.Flush();
                 }
-            }
-            stp.WaitForIdle();
-            stp.Shutdown();
-            lvi.SubItems[8].Text = DealResult(resultList);
+            }           
+            lvi.SubItems[8].Text = resultPath;
         }
-        private void RndProbeResponse(string ip, int port, string data)
-        {
-            Socket s = null;
-            string result = string.Empty;
-            try
-            {
-                s = SocketClient.Send(ip, port, data, RndProbeConfig.Timeout * 1000);
-                result = SocketClient.Receive(s);
 
-            }
-            catch (SocketException e)
-            {
-                result = e.SocketErrorCode.ToString();
-            }
-            finally
-            {
-                lock (resultList)
-                {
-                    resultList.Add(data.Length + "#" + result);
-                }
-
-                SocketClient.DestroySocket(s);
-            }
-
-
-        }
         private string GenRndProbeRequest(int length)
         {
             if (RndProbeConfig.LengthValues.Count == 0)
                 return RndProbeConfig.ProbeContent;
             return ProbeFactory.GetRandomString(length);
         }
-        private string DealResult(List<string> result)
+        public string WriteResult(string ip, string port)
         {
-            if (result == null || result.Count() == 0)
-                return string.Empty;
-            string formatResult = string.Empty;
-            var lst = from v in result
-                      group v by v into G
-                      orderby G.Key
-                      select new
-                      {
-                          data = G.Key,
-                          count = G.Count()
-                      };
-            foreach (var v in lst)
+            string time = DateTime.Now.ToString("yyyyMMddhhmmss");
+            try
             {
-                formatResult +=  v.count + "#" + v.data + ";";
+                string path = Path.Combine(Global.UserWorkspacePath, "探针结果采集", "随机探针");
+                Directory.CreateDirectory(path);
+                string filename = string.Format("{0}_{1}_{2}.txt", ip, port, time);
+                string filePath = Path.Combine(path, filename);
+                return filePath;
             }
-            return formatResult.Trim(';');
+            catch
+            {
+                return string.Empty;
+            }
         }
+
         #endregion
         #region 重放探针
         #endregion

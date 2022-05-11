@@ -55,5 +55,28 @@ namespace C2.Business.CastleBravo.VPN.Probe
             }
             socket.Close();
         }
+
+        public static string RndProbeResponse(string ip, int port, string data, int timeout)
+        {
+            Socket s = null;
+            string result = string.Empty;
+            string time = DateTime.Now.ToString("yyyyMMddhhmmss");
+            try
+            {
+                s = Send(ip, port, data, timeout * 1000);
+                result = Receive(s);
+
+            }
+            catch (SocketException e)
+            {
+                result = e.SocketErrorCode.ToString();
+            }
+            finally
+            {
+                DestroySocket(s);
+            }
+            return time + "\t" + data.Length + "\t" + result;
+
+        }
     }
 }

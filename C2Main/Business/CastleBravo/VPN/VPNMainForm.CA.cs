@@ -99,7 +99,15 @@ namespace C2.Business.CastleBravo.VPN
                 task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = s4;
             }
         }
-
+        private void ResetSubItemEmpty(IList items, int index)
+        {
+            foreach (ListViewItem lvi in items)
+            {
+                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+                if(CI_探测信息.Equals(index))
+                    task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = string.Empty;
+            }
+        }
         // DNS验活
         private void DoItemsDNS(IList items)
         {

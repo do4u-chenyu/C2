@@ -113,9 +113,11 @@ namespace C2.Business.CastleBravo.VPN
         {
             RndProbeConfig = new RandomProbeForm().ShowDialog();
             if (RndProbeConfig.Equals(RandomProbeConfig.Empty))
-                return;
+                return;         
+            ResetSubItemEmpty(LV.Items, CI_探测信息);
             Application.DoEvents();
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 SendRandomProbe(LV.Items);
 
         }
