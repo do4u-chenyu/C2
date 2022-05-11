@@ -36,10 +36,10 @@ namespace v2rayN.Handler
         /// 新建进程，载入V2ray配置文件字符串
         /// 返回新进程pid。
         /// </summary>
-        public int LoadV2rayConfigString(List<ListViewItem> lv)
+        public int LoadV2rayConfigString(List<ListViewItem> lv, int startPort)
         {
             int pid = -1;
-            string configStr = V2rayConfigHandler.GenerateClientSpeedtestConfigString(lv);
+            string configStr = V2rayConfigHandler.GenerateClientSpeedtestConfigString(lv, startPort);
             if (configStr == string.Empty)
             {
                 ShowMsg(false, string.Empty);
