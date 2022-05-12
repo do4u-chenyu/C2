@@ -26,6 +26,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 
 namespace C2
@@ -55,6 +56,14 @@ namespace C2
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
         private string fullFilePath;
+
+        private static DirectoryInfo info = new DirectoryInfo(Global.TempDirectory);
+        private static string xmlDirectory = Path.Combine(info.Parent.FullName, "tmpRedisASK");
+        private static string xmlPath = Path.Combine(xmlDirectory, "tmpRedisASK.xml");
+        private static XmlDocument xDoc = new XmlDocument();
+        private static DateTime e = DateTime.Now;
+        private string startTime = e.ToString("yyyyMMddHHmmss");
+        private int days = 7;//C2鉴权时间
 
         private void InitializeOpenFile(string path)
         {
@@ -231,7 +240,7 @@ namespace C2
 
         public void BlankButtonFocus()
         {
-            this.blankButton.Focus();
+            blankButton.Focus();
         }
 
         public void ShowLeftPanel(Control leftButton, Control leftPanel)
@@ -246,9 +255,9 @@ namespace C2
 
         public void SelectLeftPanel(Control leftButton, Control leftPanel)
         {
-            foreach (Control ct in this.leftPanelControls)
+            foreach (Control ct in leftPanelControls)
                 ct.Visible = false;
-            foreach (Control ct in this.leftMainButtons)
+            foreach (Control ct in leftMainButtons)
                 ct.BackColor = LeftLeaveColor;
 
             leftPanel.Visible = true;
@@ -330,17 +339,57 @@ namespace C2
                 LoadIAOLaboratory();
                 LoadHIBU();
                 LoadHeadLine();
+#if C2_Outer
                 Identification();
+#endif
             }
         }
 
         private void Identification()
         {
-#if C2_Outer
-            // TODO 此处要增加逻辑, 第一次成功输入口令后,后续当前迭代版本不需要再输入口令
+            if (!File.Exists(xmlPath))
+                AddIden();
+
+            if (File.Exists(xmlPath))
+            {
+                xDoc.Load(xmlPath);
+                string endTime = xDoc.SelectSingleNode(@"IdenInformation/userInfo/EndTime").InnerText;
+                if (string.Compare(endTime, startTime, true) == 1)
+                    return;
+                else
+                {
+                    File.Delete(xmlPath);
+                    AddIden();
+                }             
+            }
+        }
+
+        private void AddIden()
+        {
             if (!new WFDWebAPI().ReAuthBeforeQuery(true))
                 Close();
-#endif
+            Save();
+        }
+
+        private void Save()
+        {
+            Directory.CreateDirectory(xmlDirectory);
+            XmlDocument xDoc = new XmlDocument();
+            XmlElement rootElement = xDoc.CreateElement("IdenInformation");
+            xDoc.AppendChild(rootElement);
+            SaveUserInfo(rootElement);
+            xDoc.Save(xmlPath);
+        }
+
+        private void SaveUserInfo(XmlNode node)
+        {
+            DateTime s = e.AddDays(0 + days);
+            string endTime   = s.ToString("yyyyMMddHHmmss");
+
+            new ModelXmlWriter("userInfo", node)
+                .Write("StartTime", startTime)
+                .Write("EndTime", endTime)
+                .Write("userName", WFDWebAPI.GetInstance().UserName);
         }
 
         private void LoadHeadLine()

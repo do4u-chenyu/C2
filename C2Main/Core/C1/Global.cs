@@ -194,8 +194,8 @@ namespace C2.Core
         public static string TemplatesPath = Path.Combine(ResourcesPath, "Templates");  
         public static string WebEnginePath = Path.Combine(BusinessPath, "IAOLab", "WebEngine");
         public static string VPNPath = Path.Combine(ResourcesPath, "VPN");
-        public static string superName = Encoding.UTF8.GetString(Convert.FromBase64String("YW50aQ=="));
-        public static string superPass = Encoding.UTF8.GetString(Convert.FromBase64String("MTIzNDU2"));
+        public static string superName = Encoding.UTF8.GetString(Convert.FromBase64String("Ym9tYg=="));
+        public static string superPass = Encoding.UTF8.GetString(Convert.FromBase64String("MjQ2ODAw"));
 
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
 
