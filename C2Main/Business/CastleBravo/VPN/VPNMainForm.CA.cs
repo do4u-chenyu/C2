@@ -195,7 +195,7 @@ namespace C2.Business.CastleBravo.VPN
 
         // 批量并发 HTTP204 验活用的控制变量
         ListViewItem last204 = new ListViewItem();                  // 结尾标识
-        List<ListViewItem> buffer204 = new List<ListViewItem>();    // 堆积缓存
+        readonly List<ListViewItem> buffer204 = new List<ListViewItem>();    // 堆积缓存
 
         private void Run_Http204_CA(IList items)
         {
@@ -273,20 +273,20 @@ namespace C2.Business.CastleBravo.VPN
         {
             // C2调用 v2ray.exe 进行真验活
             // 大部分相关代码从 v2rayN 中移植过来,做了相应调整
-            C2V2rayWrapper.RunRealPing(lv, (lvi, msg, status) => {
-                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-                task.ProbeInfo = msg;
-                task.Status = status ? Succ : Fail;
-            });
-            
-            foreach(ListViewItem lvi in lv)
-            {
-                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+            C2V2rayWrapper.RunRealPing(lv,
+                (lvi, msg, status) => {
+                    VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
+                    task.ProbeInfo = msg;
+                    task.Status = status ? Succ : Fail;
+                },
+                (lvi) => {
+                    VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
-                lvi.SubItems[CI_状态].Text = task.Status;
-                lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
-                lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
-            }
+                    lvi.SubItems[CI_状态].Text = task.Status;
+                    lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
+                    lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+                }
+            );
         }
 
         private void UpdateRedrawItem(ListViewItem lvi)

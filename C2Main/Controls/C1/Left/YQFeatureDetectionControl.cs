@@ -63,6 +63,7 @@ namespace C2.Controls.C1.Left
         {
             new ModelXmlWriter("task", node)
                .Write("taskName", taskInfo.TaskName)
+               .Write("taskModel", taskInfo.TaskModel)
                .Write("taskId", taskInfo.TaskID)
                .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.DatasourceFilePath)

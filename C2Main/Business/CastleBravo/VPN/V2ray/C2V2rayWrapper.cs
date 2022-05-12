@@ -61,16 +61,14 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             }
              return ret;
         }
-        public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string, bool> _updateFunc)
+        public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string, bool> _updateFunc, Action<ListViewItem> _redrawFunc)
         {
-            int pid = -1;
             //  选择端口
             int startPort = v2rayN.Utils.GetAvailablePort();
             startPort = 10911;  // 测试用
 
             //  构造v2ray配置文件, 并启动v2ray进程
-            pid = new V2rayHandler().LoadV2rayConfigString(lv);
-            _ = pid;
+            int pid = new V2rayHandler().LoadV2rayConfigString(lv, startPort);
 
             //  并发访问代理端口,设置好回调更新函数
             List<Task> tasks = new List<Task>();
@@ -83,12 +81,13 @@ namespace C2.Business.CastleBravo.VPN.V2ray
                     _updateFunc(lvi, string.Format("{0}不支持验活", vtc.SSVersion), false);
                     continue;
                 }
-                int dummy = i;
+                int dummyI = i;
+
                 tasks.Add(Task.Run(() =>
                 {
                     try
                     {
-                        WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort + dummy);
+                        WebProxy webProxy = new WebProxy(v2rayN.Global.Loopback, startPort + dummyI);
                         int responseTime = -1;
 
                         // 境外
@@ -100,19 +99,29 @@ namespace C2.Business.CastleBravo.VPN.V2ray
 
                         // 境内,境外一个就够
                         bool status = string.IsNullOrEmpty(status0) || string.IsNullOrEmpty(status1);
-
-
-                        _updateFunc(lvi, output0 + "|" + output1, status);
+                        
+                        _updateFunc(lvi, output1 + "|" + output0, status);
                     }
-                    catch 
-                    {
-                       
-                    }
+                    catch  { }
                 }));
             }
 
+            // 这一块是让我彻底写塌方了
+            Task[] ts = tasks.ToArray();
+
+            Dictionary<Task, int> indexDict = new Dictionary<Task, int>();
+            for (int i = 0; i < tasks.Count; i++)
+                indexDict[tasks[i]] = i;
+
+            for (int i = 0; i < lv.Count; i++)
+            {
+                int index = Task.WaitAny(tasks.ToArray());
+                _redrawFunc(lv[indexDict[tasks[index]]]);
+                tasks.RemoveAt(index);
+            }
+
             //  Join等待并发结束
-            Task.WaitAll(tasks.ToArray());
+            Task.WaitAll(ts);
 
             // 结束进程
             if (pid > 0) V2rayHandler.V2rayStopPid(pid);
