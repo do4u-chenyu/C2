@@ -48,8 +48,8 @@ namespace C2
 #if C2_Outer
             // TODO 此处要增加逻辑, 第一次成功输入口令后,后续当前迭代版本不需要再输入口令
             //      然后要增加一个Ghost万能口令, 以备不时之需
-            //if (!new WFDWebAPI().ReAuthBeforeQuery(true))
-            //    return;
+            if (!new WFDWebAPI().ReAuthBeforeQuery(true))
+                return;
 #endif
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);

@@ -54,16 +54,16 @@ namespace MD5Plugin
             }
         }
 
-        public static String TryGetSysTempDir()
+        public static string TryGetSysTempDir()
         {
-            String tempDir;
+            string tempDir;
             try
             {
                 tempDir = Path.GetTempPath();
             }
             catch (System.Security.SecurityException)
             {
-                tempDir = String.Empty;
+                tempDir = string.Empty;
             }
             return tempDir;
         }

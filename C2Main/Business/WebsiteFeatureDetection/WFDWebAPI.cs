@@ -283,7 +283,5 @@ namespace C2.Business.WebsiteFeatureDetection
             UserName = UAdialog.UserName;
             return true;
         }
-
     }
-    
 }
