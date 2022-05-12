@@ -43,10 +43,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public AddYQTask()
         {
             InitializeComponent();
-            maxRow = 100;
             InitTaskInfo();
+
             token = string.Empty;
-            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            maxRow = 100;
             startTime = 0;
             endTime = 0;
 
@@ -67,6 +67,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             provinceCB.SelectedIndex = 0;
             cityCB.SelectedIndex = 0;
             TaskName = String.Format("{0}任务{1}", TaskModelName, DateTime.Now.ToString("MMdd"));
+
+            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            Random ran = new Random();
+            int n = ran.Next(10, 100);
+
+            this.TaskID = string.Format("{0}{1}", n.ToString(), this.TaskCreateTime);
         }
 
         public void InitCodeTable()
@@ -113,6 +119,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             this.wsTextBox.Enabled = this.pasteModeCB.Checked;
             this.wsTextBox.ReadOnly = !this.pasteModeCB.Checked;
+
+            if (this.pasteModeCB.Checked)
+                FilePath = Path.Combine(Global.TempDirectory, TaskID + ".txt");
+            else
+                FilePath = String.Empty;
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
@@ -131,7 +142,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
-            if(!GenAndCheckToken())
+            if (this.pasteModeCB.Checked)
+            {
+                if (this.wsTextBox.Text.Trim().IsEmpty())
+                    return false;
+                FileUtil.FileWriteToEnd(FilePath, this.wsTextBox.Text);
+            }
+
+            if (!GenAndCheckToken())
                 return false;
             if(TaskContent=="账号" && TaskModelName == "不限")
             {
@@ -208,10 +226,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.startTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker1.Value));
             this.endTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker2.Value));
             this.ruleHost = GenModelHost(this.TaskModelName);
-
-            Random ran = new Random();
-            int n = ran.Next(10, 100);
-            this.TaskID = string.Format("{0}{1}", n.ToString(), this.TaskCreateTime);
 
             return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running);
         }
@@ -358,47 +372,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             {
                 HelpUtil.ShowMessageBox(error);
                 return;
-            }
-            //Thread.Sleep(5);
-            GenYQTaskResult(destFilePath);
-            return;
-        }
-
-        private void GenYQTaskResult(string destFilePath)
-        {
-            var factory = new ConnectionFactory();
-            factory.HostName = "61.177.139.251";
-            factory.Port = 25672;
-            factory.VirtualHost = "iao2";
-            factory.UserName = "iao2";
-            factory.Password = "Iao123456";
-
-            string testID = string.Empty;
-            StreamWriter sw = null;
-            sw = new StreamWriter(destFilePath);
-            using (var connection = factory.CreateConnection())
-            {
-                using (var channel = connection.CreateModel())
-                {
-                    channel.QueueDeclare("iao2", true, false, false, null);
-                    var consumer = new EventingBasicConsumer(channel);//消费者
-                    channel.BasicConsume("iao2", true, consumer);//消费消息
-                    consumer.Received += (model, ea) =>
-                    {
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        var gList = JObject.Parse(message)["articleinfo"];
-                        var ruleInfo = gList["rules"];
-                        foreach (var info in ruleInfo)
-                        {
-                            testID = info["ruleid"].ToString();
-                        }
-                        if (testID == this.ruleID.ToString())
-                        {
-                            sw.Write(gList.ToString());
-                        };
-                    };
-                }
             }
             return;
         }
