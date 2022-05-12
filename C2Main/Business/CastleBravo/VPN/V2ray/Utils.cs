@@ -33,13 +33,9 @@ namespace v2rayN
             {
                 string ffp = Path.Combine(C2.Core.Global.VPNPath, "SampleClientConfig.txt"); 
                 using (StreamReader reader = new StreamReader(ffp))
-                {
                     sampleClientText = reader.ReadToEnd();
-                }
             }
-            catch
-            {
-            }
+            catch { }
             return sampleClientText;
         }
         
@@ -64,15 +60,29 @@ namespace v2rayN
         {
             try
             {
-                T obj = JsonConvert.DeserializeObject<T>(strJson);
-                return obj;
+                return JsonConvert.DeserializeObject<T>(strJson);
             }
             catch
             {
-                return JsonConvert.DeserializeObject<T>("");
+                return JsonConvert.DeserializeObject<T>(string.Empty);
             }
         }
 
+        public static string ToJson(Object obj)
+        {
+            string result = string.Empty;
+            try
+            {
+                result = JsonConvert.SerializeObject(obj,
+                                           Formatting.Indented,
+                                           new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            }
+            catch
+            {
+            }
+            return result;
+        }
+        // 为了和v2ray代码形式上兼容
         public static void SaveLog(string strContent)
         {
             SaveLog("info", new Exception(strContent));

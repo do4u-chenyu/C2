@@ -10,6 +10,7 @@ namespace v2rayN
 
         public const string InboundSocks = "socks";
         public const string InboundHttp = "http";
+        public const string agentTag = "proxy";
         public const string Loopback = "127.0.0.1";
 
         public static string AbroadGenerate204 { get => ClientSetting.O204List[0]; }
