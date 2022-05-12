@@ -112,10 +112,12 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             Dictionary<Task, int> indexDict = new Dictionary<Task, int>();
             for (int i = 0; i < tasks.Count; i++)
                 indexDict[tasks[i]] = i;
-
+           
             for (int i = 0; i < lv.Count; i++)
             {
+                // 等待出一个结束的任务, 然后更新对应的界面项
                 int index = Task.WaitAny(tasks.ToArray());
+                // 更新界面
                 _redrawFunc(lv[indexDict[tasks[index]]]);
                 tasks.RemoveAt(index);
             }

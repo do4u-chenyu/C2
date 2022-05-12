@@ -64,10 +64,7 @@ namespace v2rayN.Handler
         private static void GenerateV2rayOutbounds(List<ListViewItem> lv, int startPort, V2rayConfig v2rayConfig)
         {
             for (int i = 0; i < lv.Count; i++)
-            {
-                VPNTaskConfig vtc = lv[i].Tag as VPNTaskConfig;
-                GenOutbound(vtc, startPort + i, v2rayConfig);
-            }
+                GenOutbound(lv[i].Tag as VPNTaskConfig, startPort + i, v2rayConfig);
         }
 
         private static void GenOutbound(VPNTaskConfig vtc, int port, V2rayConfig v2rayConfig)
@@ -85,6 +82,7 @@ namespace v2rayN.Handler
         private static void Outbound(VPNTaskConfig vtc, ref V2rayConfig v2rayConfig)
         {
             _ = vtc;
+            // TODO
             _ = v2rayConfig;
         }
     }
