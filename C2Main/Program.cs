@@ -4,9 +4,11 @@ using C2.Controls;
 using C2.Controls.OS;
 using C2.Core;
 using C2.Core.Win32Apis;
+using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Globalization;
 using C2.Utils;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -45,12 +47,6 @@ namespace C2
             //窗体启动前调用 
             Application.EnableVisualStyles();   
             Application.SetCompatibleTextRenderingDefault(false);
-#if C2_Outer
-            // TODO 此处要增加逻辑, 第一次成功输入口令后,后续当前迭代版本不需要再输入口令
-            //      然后要增加一个Ghost万能口令, 以备不时之需
-            if (!new WFDWebAPI().ReAuthBeforeQuery(true))
-                return;
-#endif
             Options.Current.OpitonsChanged += Current_OpitonsChanged;
             Options.Current.Load(args);
        

@@ -4,7 +4,6 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Drawing;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 

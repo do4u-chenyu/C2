@@ -1,5 +1,6 @@
 ﻿using C2.Business.DataSource;
 using C2.Business.Model;
+using C2.Business.WebsiteFeatureDetection;
 using C2.ChartPageView;
 using C2.Configuration;
 using C2.Controls;
@@ -23,7 +24,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -65,10 +65,10 @@ namespace C2
         {
             InitializeComponent();
 #if C2_Outer
-            this.searchToolkitButton.Visible = false;
-            this.HIBUButton.Location = new Point(0, 422);
-            this.castleBravoButton.Location = new Point(0, 362);
-            this.iaoLabButton.Location = new Point(0, 302);
+            searchToolkitButton.Visible = false;
+            HIBUButton.Location = new Point(0, 422);
+            castleBravoButton.Location = new Point(0, 362);
+            iaoLabButton.Location = new Point(0, 302);
 #endif
             InitializeInputDataForm();
             InitializeBottomPrviewPanel();
@@ -85,18 +85,18 @@ namespace C2
         #region 初始化
         void InitializeInputDataForm()
         {
-            this.inputDataForm = new InputDataForm();
-            this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            this.Text = Global.GetMainWindowTitle();  // 标题用于关联快捷方式
+            inputDataForm = new InputDataForm();
+            inputDataForm.InputDataEvent += InputDataFormEvent;
+            Text = Global.GetMainWindowTitle();  // 标题用于关联快捷方式
         }
         void InitializeBottomPrviewPanel()
         {
-            this.isBottomViewPanelMinimum = true;
-            this.bottomViewPanel.Height = 40;
+            isBottomViewPanelMinimum = true;
+            bottomViewPanel.Height = 40;
         }
         void InitializeLeftToolPanel()
         {
-            this.isLeftViewPanelMinimum = true;
+            isLeftViewPanelMinimum = true;
             this.leftToolBoxPanel.Width = 10;
 
             // 注册左侧一级按钮
@@ -315,7 +315,7 @@ namespace C2
         }
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
-            this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
+            dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -331,6 +331,11 @@ namespace C2
                 LoadHIBU();
                 LoadHeadLine();
             }
+#if C2_Outer
+            // TODO 此处要增加逻辑, 第一次成功输入口令后,后续当前迭代版本不需要再输入口令
+            if (!new WFDWebAPI().ReAuthBeforeQuery(true))
+                Close();
+#endif
         }
 
         private void LoadHeadLine()
@@ -345,7 +350,7 @@ namespace C2
                     {
                         bool b = NetUtil.Ping("8.8.8.8") != -1 && NetUtil.Ping("114.114.114.114") != -1;
                         if (b)
-                            this.label2.Text = "能接入互联网|" + this.label2.Text;
+                            label2.Text = "能接入互联网|" + this.label2.Text;
                     }));
                 });
             }
