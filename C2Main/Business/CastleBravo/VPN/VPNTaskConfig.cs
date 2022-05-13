@@ -130,7 +130,7 @@ namespace C2.Business.CastleBravo.VPN
 
         internal bool allowInsecure()
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         internal string path()
