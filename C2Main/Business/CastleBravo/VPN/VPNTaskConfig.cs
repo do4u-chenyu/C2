@@ -1,4 +1,5 @@
 ﻿using System;
+using v2rayN.Mode;
 
 namespace C2.Business.CastleBravo.VPN
 {
@@ -20,6 +21,7 @@ namespace C2.Business.CastleBravo.VPN
         public string IP;              // IP地址
         public string Country;         // 归属地
         public string Content;         // 分享地址原内容
+        
 
         public VPNTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
@@ -46,5 +48,77 @@ namespace C2.Business.CastleBravo.VPN
             Country = array.Length > 11 ? array[11] : string.Empty;
             Content = array.Length > 12 ? array[12] : string.Empty;
         }
+
+        #region 跟v2ray代码兼容的字段
+        internal bool muxEnabled = false;
+        internal KcpItem kcpItem
+        {
+            get; set;
+        }
+        internal string address()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int port()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string id()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string flow()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string security()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int alterId()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string network()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string requestHost()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int configType()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string streamSecurity()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool allowInsecure()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string path()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string headerType()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
