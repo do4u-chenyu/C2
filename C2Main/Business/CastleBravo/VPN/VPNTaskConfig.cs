@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Utils;
+using System;
 using v2rayN.Mode;
 
 namespace C2.Business.CastleBravo.VPN
@@ -57,17 +58,17 @@ namespace C2.Business.CastleBravo.VPN
         }
         internal string address()
         {
-            throw new NotImplementedException();
+            return this.Host;
         }
 
         internal int port()
         {
-            throw new NotImplementedException();
+            return ConvertUtil.TryParseInt(this.Port, 0);
         }
 
         internal string id()
         {
-            throw new NotImplementedException();
+            return this.Password;
         }
 
         internal string flow()
@@ -77,7 +78,7 @@ namespace C2.Business.CastleBravo.VPN
 
         internal string security()
         {
-            throw new NotImplementedException();
+            return this.Method;
         }
 
         internal int alterId()
@@ -97,7 +98,29 @@ namespace C2.Business.CastleBravo.VPN
 
         internal int configType()
         {
-            throw new NotImplementedException();
+            int ret;
+            switch (this.SSVersion.ToLower())
+            {
+                case "ss":
+                    ret = (int)EConfigType.Shadowsocks;
+                    break;
+                case "vmess":
+                    ret = (int)EConfigType.Vmess;
+                    break;
+                case "vless":
+                    ret = (int)EConfigType.VLESS;
+                    break;
+                case "trojan":
+                    ret = (int)EConfigType.Trojan;
+                    break;
+                case "Socks":
+                    ret = (int)EConfigType.Socks;
+                    break;
+                default:
+                    ret = (int)EConfigType.Custom;
+                    break;
+            }
+            return ret;
         }
 
         internal string streamSecurity()

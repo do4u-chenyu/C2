@@ -43,6 +43,8 @@ namespace C2.Business.CastleBravo.VPN
             this.pwdTB = new System.Windows.Forms.TextBox();
             this.versionCB = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ipCountryTB = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // methodCB
@@ -71,7 +73,7 @@ namespace C2.Business.CastleBravo.VPN
             "camellia-192-cfb",
             "camellia-128-cfb",
             "auto"});
-            this.methodCB.Location = new System.Drawing.Point(136, 220);
+            this.methodCB.Location = new System.Drawing.Point(136, 212);
             this.methodCB.Margin = new System.Windows.Forms.Padding(4);
             this.methodCB.Name = "methodCB";
             this.methodCB.Size = new System.Drawing.Size(426, 26);
@@ -80,7 +82,7 @@ namespace C2.Business.CastleBravo.VPN
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 222);
+            this.label7.Location = new System.Drawing.Point(20, 214);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 18);
@@ -91,17 +93,18 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.ssTextBox.Font = new System.Drawing.Font("宋体", 8.75F);
             this.ssTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ssTextBox.Location = new System.Drawing.Point(136, 319);
+            this.ssTextBox.Location = new System.Drawing.Point(136, 359);
             this.ssTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ssTextBox.Multiline = true;
             this.ssTextBox.Name = "ssTextBox";
-            this.ssTextBox.Size = new System.Drawing.Size(426, 218);
+            this.ssTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ssTextBox.Size = new System.Drawing.Size(426, 238);
             this.ssTextBox.TabIndex = 10030;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 318);
+            this.label6.Location = new System.Drawing.Point(20, 358);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 18);
@@ -111,7 +114,7 @@ namespace C2.Business.CastleBravo.VPN
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(56, 172);
+            this.label5.Location = new System.Drawing.Point(56, 166);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 18);
@@ -121,7 +124,7 @@ namespace C2.Business.CastleBravo.VPN
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(56, 122);
+            this.label3.Location = new System.Drawing.Point(56, 118);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 18);
@@ -130,7 +133,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // portTB
             // 
-            this.portTB.Location = new System.Drawing.Point(136, 118);
+            this.portTB.Location = new System.Drawing.Point(136, 114);
             this.portTB.Margin = new System.Windows.Forms.Padding(4);
             this.portTB.Name = "portTB";
             this.portTB.Size = new System.Drawing.Size(426, 28);
@@ -139,7 +142,7 @@ namespace C2.Business.CastleBravo.VPN
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 72);
+            this.label2.Location = new System.Drawing.Point(20, 70);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 18);
@@ -148,7 +151,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // hostTB
             // 
-            this.hostTB.Location = new System.Drawing.Point(136, 67);
+            this.hostTB.Location = new System.Drawing.Point(136, 65);
             this.hostTB.Margin = new System.Windows.Forms.Padding(4);
             this.hostTB.Name = "hostTB";
             this.hostTB.Size = new System.Drawing.Size(426, 28);
@@ -174,7 +177,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // pwdTB
             // 
-            this.pwdTB.Location = new System.Drawing.Point(136, 169);
+            this.pwdTB.Location = new System.Drawing.Point(136, 163);
             this.pwdTB.Margin = new System.Windows.Forms.Padding(4);
             this.pwdTB.Name = "pwdTB";
             this.pwdTB.Size = new System.Drawing.Size(426, 28);
@@ -191,7 +194,7 @@ namespace C2.Business.CastleBravo.VPN
             "VMESS",
             "VLESS",
             "TROJAN"});
-            this.versionCB.Location = new System.Drawing.Point(136, 269);
+            this.versionCB.Location = new System.Drawing.Point(136, 259);
             this.versionCB.Margin = new System.Windows.Forms.Padding(4);
             this.versionCB.Name = "versionCB";
             this.versionCB.Size = new System.Drawing.Size(426, 26);
@@ -200,18 +203,39 @@ namespace C2.Business.CastleBravo.VPN
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 272);
+            this.label12.Location = new System.Drawing.Point(2, 262);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(116, 18);
             this.label12.TabIndex = 10039;
             this.label12.Text = "服务端类型：";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(20, 310);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 18);
+            this.label4.TabIndex = 10041;
+            this.label4.Text = "IP归属地：";
+            // 
+            // ipCountryTB
+            // 
+            this.ipCountryTB.Location = new System.Drawing.Point(136, 307);
+            this.ipCountryTB.Margin = new System.Windows.Forms.Padding(4);
+            this.ipCountryTB.Name = "ipCountryTB";
+            this.ipCountryTB.ReadOnly = true;
+            this.ipCountryTB.Size = new System.Drawing.Size(426, 28);
+            this.ipCountryTB.TabIndex = 10042;
+            // 
             // AddVPNServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 614);
+            this.ClientSize = new System.Drawing.Size(579, 674);
+            this.Controls.Add(this.ipCountryTB);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.versionCB);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.pwdTB);
@@ -242,6 +266,8 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.SetChildIndex(this.pwdTB, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.versionCB, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.ipCountryTB, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +288,7 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.TextBox pwdTB;
         private System.Windows.Forms.ComboBox versionCB;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox ipCountryTB;
     }
 }

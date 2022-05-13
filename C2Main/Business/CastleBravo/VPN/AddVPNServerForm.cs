@@ -34,6 +34,7 @@ namespace C2.Business.CastleBravo.VPN
             hostTB.Text = task.Host;
             portTB.Text = task.Port;
             pwdTB.Text = task.Password;
+            ipCountryTB.Text = task.IP + "\t" + task.Country;
             
             ssTextBox.Text = new StringBuilder(task.Content)
                 .AppendLine()
