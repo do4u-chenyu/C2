@@ -96,7 +96,7 @@ namespace C2.Business.CastleBravo.VPN
 
         internal int alterId()
         {
-            if (configType() != (int)EConfigType.Vmess)
+            if (configType() != EConfigType.Vmess)
                 return 0;
 
             Match mat = Regex.Match(this.OtherInfo, @"\baid=(\d+)");
@@ -124,10 +124,10 @@ namespace C2.Business.CastleBravo.VPN
             // 不同协议字段不同, vless样本太少
             Match mat = null;
            
-            if (configType() == (int)EConfigType.Vmess)
+            if (configType() == EConfigType.Vmess)
                 mat = Regex.Match(this.OtherInfo, @"\bhost=([^;]+)");
 
-            if (configType() == (int)EConfigType.Trojan)
+            if (configType() == EConfigType.Trojan)
                 mat = Regex.Match(this.OtherInfo, @"\bsni=([^;]+)");
 
             if (mat != null && mat.Success && mat.Groups[1].Success)
@@ -136,28 +136,31 @@ namespace C2.Business.CastleBravo.VPN
             return string.Empty;
         }
 
-        internal int configType()
+        internal EConfigType configType()
         {
-            int ret;
+            EConfigType ret;
             switch (this.SSVersion.ToLower())
             {
                 case "ss":
-                    ret = (int)EConfigType.Shadowsocks;
+                    ret = EConfigType.Shadowsocks;
                     break;
                 case "vmess":
-                    ret = (int)EConfigType.Vmess;
+                    ret = EConfigType.Vmess;
                     break;
                 case "vless":
-                    ret = (int)EConfigType.VLESS;
+                    ret = EConfigType.VLESS;
                     break;
                 case "trojan":
-                    ret = (int)EConfigType.Trojan;
+                    ret = EConfigType.Trojan;
                     break;
-                case "Socks":
-                    ret = (int)EConfigType.Socks;
+                case "socks":
+                    ret = EConfigType.Socks;
+                    break;
+                case "ssr":
+                    ret = EConfigType.ShadowsocksR;
                     break;
                 default:
-                    ret = (int)EConfigType.Custom;
+                    ret = EConfigType.Custom;
                     break;
             }
             return ret;
@@ -165,7 +168,7 @@ namespace C2.Business.CastleBravo.VPN
 
         internal string streamSecurity()
         {
-            if (configType() == (int)EConfigType.Vmess)
+            if (configType() == EConfigType.Vmess)
             {
                 Match mat = Regex.Match(this.OtherInfo, @"\btls=([^;]+)");
                 if (mat.Success && mat.Groups[1].Success)
@@ -173,7 +176,7 @@ namespace C2.Business.CastleBravo.VPN
             }
 
             // 不能100%肯定,目前观察看,似乎Trojan都是tls
-            if (configType() == (int)EConfigType.Trojan)
+            if (configType() == EConfigType.Trojan)
                 return v2rayN.Global.StreamSecurity;
 
             // 剩下的不知道了
@@ -192,10 +195,10 @@ namespace C2.Business.CastleBravo.VPN
             // 不同协议字段不同, vless样本太少
             Match mat = null;
 
-            if (configType() == (int)EConfigType.Vmess)
+            if (configType() == EConfigType.Vmess)
                 mat = Regex.Match(this.OtherInfo, @"\bpath=([^;]+)");
 
-            if (configType() == (int)EConfigType.VLESS)
+            if (configType() == EConfigType.VLESS)
                 mat = Regex.Match(this.OtherInfo, @"\bpath=([^;]+)");
 
             if (mat != null && mat.Success && mat.Groups[1].Success)
@@ -206,21 +209,20 @@ namespace C2.Business.CastleBravo.VPN
 
         internal string headerType()
         {
-            string ret = string.Empty;
             Match mat = null;
 
-            if (configType() == (int)EConfigType.Vmess)
+            if (configType() == EConfigType.Vmess)
                 mat = Regex.Match(this.OtherInfo, @"\bheaderType==([^;]+)");
 
-            if (configType() == (int)EConfigType.VLESS)
+            if (configType() == EConfigType.VLESS)
                 mat = Regex.Match(this.OtherInfo, @"\bheaderType==([^;]+)");
 
             if (mat != null && mat.Success && mat.Groups[1].Success)
                 return mat.Groups[1].Value;
 
-            if (configType() == (int)EConfigType.Vmess)
+            if (configType() == EConfigType.Vmess)
                 return v2rayN.Global.None;
-            if (configType() == (int)EConfigType.VLESS)
+            if (configType() == EConfigType.VLESS)
                 return v2rayN.Global.None;
 
             return string.Empty;

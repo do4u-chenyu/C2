@@ -41,15 +41,9 @@ namespace v2rayN.Handler
             int pid = -1;
             string configStr = V2rayConfigHandler.GenerateClientSpeedtestConfigString(lv, startPort);
             if (configStr == string.Empty)
-            {
-                ShowMsg(false, string.Empty);
-            }
-            else
-            {
-                ShowMsg(false, string.Empty);
-                pid = V2rayStartNew(configStr);
-            }
-            return pid;
+                return pid;
+
+            return V2rayStartNew(configStr);
         }
 
 

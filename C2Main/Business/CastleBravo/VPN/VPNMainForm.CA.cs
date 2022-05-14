@@ -207,7 +207,6 @@ namespace C2.Business.CastleBravo.VPN
 
         private void Run_XXX_CA(IList items, CATypeEnum type)
         {
-
             s = DateTime.Now;
             using (new ControlEnableGuarder(this.contextMenuStrip))
             using (new ToolStripItemEnableGuarder(this.enableItems))
@@ -261,7 +260,22 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems[CI_归属地].Text = task.Country;
             lvi.SubItems[CI_探测信息].Text = "进行中";
 
-            buffer204.Add(lvi);
+            switch (task.configType())
+            {
+                case v2rayN.Mode.EConfigType.Shadowsocks:
+                case v2rayN.Mode.EConfigType.Vmess:
+                case v2rayN.Mode.EConfigType.VLESS:
+                case v2rayN.Mode.EConfigType.Trojan:
+                    buffer204.Add(lvi);
+                    break;
+                case v2rayN.Mode.EConfigType.Custom:
+                case v2rayN.Mode.EConfigType.ShadowsocksR:
+                case v2rayN.Mode.EConfigType.Socks:
+                default:
+                    lvi.SubItems[CI_探测信息].Text = "暂不支持";
+                    break;
+            }
+
             if (buffer204.Count >= 20 || lvi == last204)
             {
                 Run_Http204_V2ray(buffer204);
