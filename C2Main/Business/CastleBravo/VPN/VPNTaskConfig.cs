@@ -52,11 +52,22 @@ namespace C2.Business.CastleBravo.VPN
         }
 
         #region 跟v2ray代码兼容的字段
+        
+        // 目前观察到的都是false
         internal bool muxEnabled = false;
-        internal KcpItem kcpItem
+
+        // 给个默认值,不知道干嘛用的
+        internal KcpItem kcpItem = new KcpItem
         {
-            get; set;
-        }
+            mtu = 1350,
+            tti = 50,
+            uplinkCapacity = 12,
+            downlinkCapacity = 100,
+            readBufferSize = 2,
+            writeBufferSize = 2,
+            congestion = false
+        };
+
         internal string address()
         {
             return this.Host;
