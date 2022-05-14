@@ -54,7 +54,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             {
                 case "ss":
                 case "vmess":
-                case "vless":
+                // case "vless":  样本占比太少,规律吃不透,先放弃
                 case "trojan":
                     ret = true;
                     break;

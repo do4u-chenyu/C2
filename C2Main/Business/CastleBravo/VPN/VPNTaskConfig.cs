@@ -1,5 +1,7 @@
-﻿using C2.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using System;
+using System.Text.RegularExpressions;
 using v2rayN.Mode;
 
 namespace C2.Business.CastleBravo.VPN
@@ -21,8 +23,7 @@ namespace C2.Business.CastleBravo.VPN
         public string OtherInfo;       // 其他信息
         public string IP;              // IP地址
         public string Country;         // 归属地
-        public string Content;         // 分享地址原内容
-        
+        public string Content;         // 分享地址原内容  
 
         public VPNTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
@@ -73,7 +74,8 @@ namespace C2.Business.CastleBravo.VPN
 
         internal string flow()
         {
-            throw new NotImplementedException();
+            // 只有vless才有, 先返回一个默认值吧
+            return "xtls-rprx-origin";
         }
 
         internal string security()
@@ -83,17 +85,44 @@ namespace C2.Business.CastleBravo.VPN
 
         internal int alterId()
         {
-            throw new NotImplementedException();
+            if (configType() != (int)EConfigType.Vmess)
+                return 0;
+
+            Match mat = Regex.Match(this.OtherInfo, @"\baid=(\d+)");
+            if (mat.Success && mat.Groups[1].Success)
+                return ConvertUtil.TryParseInt(mat.Groups[1].Value);
+
+            return 0;
         }
 
         internal string network()
         {
-            throw new NotImplementedException();
+            Match mat = Regex.Match(this.OtherInfo, @"\bnet=([^;]+)");
+            if (mat.Success && mat.Groups[1].Success)
+            {
+                string ret = mat.Groups[1].Value;
+                return ret.IsNullOrEmpty() ? v2rayN.Global.DefaultNetwork : ret;
+            }
+
+            return v2rayN.Global.DefaultNetwork;
         }
 
+        // 伪装访问地址
         internal string requestHost()
         {
-            throw new NotImplementedException();
+            // 不同协议字段不同, vless样本太少
+            Match mat = null;
+           
+            if (configType() == (int)EConfigType.Vmess)
+                mat = Regex.Match(this.OtherInfo, @"\bhost=([^;]+)");
+
+            if (configType() == (int)EConfigType.Trojan)
+                mat = Regex.Match(this.OtherInfo, @"\bsni=([^;]+)");
+
+            if (mat != null && mat.Success && mat.Groups[1].Success)
+                return mat.Groups[1].Value;
+
+            return string.Empty;
         }
 
         internal int configType()
@@ -125,22 +154,65 @@ namespace C2.Business.CastleBravo.VPN
 
         internal string streamSecurity()
         {
-            throw new NotImplementedException();
+            if (configType() == (int)EConfigType.Vmess)
+            {
+                Match mat = Regex.Match(this.OtherInfo, @"\btls=([^;]+)");
+                if (mat.Success && mat.Groups[1].Success)
+                    return mat.Groups[1].Value;
+            }
+
+            // 不能100%肯定,目前观察看,似乎Trojan都是tls
+            if (configType() == (int)EConfigType.Trojan)
+                return v2rayN.Global.StreamSecurity;
+
+            // 剩下的不知道了
+            return string.Empty;
         }
 
         internal bool allowInsecure()
         {
+            // 不知道,目前观察到的好像都是false
             return false;
         }
 
         internal string path()
         {
-            throw new NotImplementedException();
+            // vmess 和 vless 有
+            // 不同协议字段不同, vless样本太少
+            Match mat = null;
+
+            if (configType() == (int)EConfigType.Vmess)
+                mat = Regex.Match(this.OtherInfo, @"\bpath=([^;]+)");
+
+            if (configType() == (int)EConfigType.VLESS)
+                mat = Regex.Match(this.OtherInfo, @"\bpath=([^;]+)");
+
+            if (mat != null && mat.Success && mat.Groups[1].Success)
+                return mat.Groups[1].Value;
+
+            return string.Empty;
         }
 
         internal string headerType()
         {
-            throw new NotImplementedException();
+            string ret = string.Empty;
+            Match mat = null;
+
+            if (configType() == (int)EConfigType.Vmess)
+                mat = Regex.Match(this.OtherInfo, @"\bheaderType==([^;]+)");
+
+            if (configType() == (int)EConfigType.VLESS)
+                mat = Regex.Match(this.OtherInfo, @"\bheaderType==([^;]+)");
+
+            if (mat != null && mat.Success && mat.Groups[1].Success)
+                return mat.Groups[1].Value;
+
+            if (configType() == (int)EConfigType.Vmess)
+                return v2rayN.Global.None;
+            if (configType() == (int)EConfigType.VLESS)
+                return v2rayN.Global.None;
+
+            return string.Empty;
         }
         #endregion
     }

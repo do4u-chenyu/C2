@@ -28,6 +28,7 @@ namespace v2rayN
                 return new List<string>();
             }
         }
+
         public static bool IsNullOrEmpty(string text)
         {
             if (string.IsNullOrEmpty(text))
