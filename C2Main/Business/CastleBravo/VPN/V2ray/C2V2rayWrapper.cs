@@ -23,7 +23,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             {
                 HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
                 myHttpWebRequest.Timeout = 5000;
-                myHttpWebRequest.Proxy = webProxy;//new WebProxy(Global.Loopback, Global.httpPort);
+                myHttpWebRequest.Proxy = webProxy;
 
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
@@ -47,20 +47,6 @@ namespace C2.Business.CastleBravo.VPN.V2ray
         }
 
 
-        private static bool IsV2raySupport(VPNTaskConfig task)
-        {
-            bool ret = false;
-            switch (task.SSVersion.ToLower())
-            {
-                case "ss":
-                case "vmess":
-                // case "vless":  样本占比太少,规律吃不透,先放弃
-                case "trojan":
-                    ret = true;
-                    break;
-            }
-             return ret;
-        }
         public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string, bool> _updateFunc, Action<ListViewItem> _redrawFunc)
         {
             //  选择端口

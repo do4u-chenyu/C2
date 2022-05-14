@@ -27,8 +27,6 @@ namespace v2rayN.Handler
 
             return Utils.ToJson(v2rayConfig);
 
-            // StreamReader sr = new StreamReader(@"C:\Users\quixote\Desktop\熊猫网络5用户\验活测试.v2rayconfig.v1.txt");
-            // return sr.ReadToEnd();
         }
         private static void GenerateV2rayRoutingRules(V2rayConfig v2rayConfig)
         {
