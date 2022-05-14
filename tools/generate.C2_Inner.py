@@ -12,6 +12,12 @@ import ctypes, sys
 import subprocess
 
 
+def try_remove(path):
+    try:
+        os.remove(path)
+    except:
+        pass
+        
 def read_paths(file_path: str) -> List[str]:
     with open(file_path) as f:
         ret = []
@@ -66,6 +72,13 @@ def C2_install():
         return -1;
 
 def beauty_product():
+    # 先把v2ray的两个大文件删掉, 内网用不到
+    
+    v2ctl  = r"C:\Program Files\FiberHome\IAO解决方案\Resources\VPN\v2ctl.exe"
+    wv2ray = r"C:\Program Files\FiberHome\IAO解决方案\Resources\VPN\wv2ray.exe"
+    try_remove(v2ctl)
+    try_remove(wv2ray)
+    
     beauty_path = "C:\Program Files (x86)\Inno Setup 5"
     beauty_cmd = "chdir /d {} & compil32 /cc \"".format(beauty_path) + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\gen_beauty_inner_package.iss\""
     print(beauty_cmd)
