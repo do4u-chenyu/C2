@@ -78,6 +78,13 @@ namespace C2.Business.CastleBravo.VPN
             _ = CI_分享地址;
 
         }
+
+        private void ResetSubItemsDNS(IList items)
+        {
+            ResetSubItem(items,
+                new string[] { Todo, string.Empty, string.Empty, string.Empty },
+                new bool[] { false, false, false, true });
+        }
         private void ResetSubItemsTodo(IList items)
         {
             ResetSubItem(items, Todo, string.Empty, string.Empty, string.Empty);
@@ -88,17 +95,22 @@ namespace C2.Business.CastleBravo.VPN
             ResetSubItem(items, string.Empty, string.Empty, string.Empty, string.Empty);
         }
 
-        private void ResetSubItem(IList items, string s1, string s2, string s3, string s4)
+        private void ResetSubItem(IList items, string status, string ip, string country, string probeInfo)
+        {
+            ResetSubItem(items, new string[] { status, ip, country, probeInfo }, new bool[] { false, false, false, false });
+        }
+        private void ResetSubItem(IList items, string[] values, bool[] ignores)
         {
             foreach (ListViewItem lvi in items)
             {
                 VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-                task.Status    = lvi.SubItems[CI_状态].Text = s1;
-                task.IP        = lvi.SubItems[CI_IP地址].Text = s2;
-                task.Country   = lvi.SubItems[CI_归属地].Text = s3;
-                task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = s4;
+                if (!ignores[0]) task.Status  = lvi.SubItems[CI_状态].Text   = values[0];
+                if (!ignores[1]) task.IP      = lvi.SubItems[CI_IP地址].Text = values[1];
+                if (!ignores[2]) task.Country = lvi.SubItems[CI_归属地].Text = values[2];
+                if (!ignores[3]) task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = values[3];
             }
         }
+
         private void ResetSubItemEmpty(IList items, int index)
         {
             foreach (ListViewItem lvi in items)
@@ -114,7 +126,7 @@ namespace C2.Business.CastleBravo.VPN
             //  进度条重置
             ResetProgressMenuValue(items.Count);
             //  相关内容域重置
-            ResetSubItemsTodo(items);
+            ResetSubItemsDNS(items);
             //  DNS反查
             Run_DNS_CA(items);
             //  收尾
@@ -199,6 +211,9 @@ namespace C2.Business.CastleBravo.VPN
 
         private void Run_Http204_CA(IList items)
         {
+            if (items.IsEmpty())
+                return;
+
             // 跑 HTTP204 之前的工作
             buffer204.Clear();
             last204 = items[items.Count - 1] as ListViewItem;
@@ -298,7 +313,7 @@ namespace C2.Business.CastleBravo.VPN
 
                 (lvi) => {
                     UpdateRedrawItem(lvi);   // 更新LV项
-                    UpdateProgress(true);   // 更新统计栏
+                    UpdateProgress(true);    // 更新统计栏
                     Application.DoEvents();  // 缓卡
                 }
             );
