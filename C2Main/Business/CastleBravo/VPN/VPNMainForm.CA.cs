@@ -111,14 +111,11 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
-        private void ResetSubItemEmpty(IList items, int index)
+        private bool ResetSubItemEmpty(IList items, int index)
         {
             foreach (ListViewItem lvi in items)
-            {
-                VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-                if(CI_探测信息.Equals(index))
-                    task.ProbeInfo = lvi.SubItems[CI_探测信息].Text = string.Empty;
-            }
+                (lvi.Tag as VPNTaskConfig).ProbeInfo = lvi.SubItems[index].Text = string.Empty;
+            return true;
         }
         // DNS验活
         private void DoItemsDNS(IList items)

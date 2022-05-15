@@ -4,6 +4,7 @@ using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -92,9 +93,6 @@ namespace C2.Business.CastleBravo.VPN
             Proxy = new ProxySettingForm(Proxy).ShowDialog();
             ResetSLabel();
         }
-
-
-
         
        // private bool actionNeedStop = false;
         private void StopMenu_Click(object sender, System.EventArgs e)
@@ -109,39 +107,19 @@ namespace C2.Business.CastleBravo.VPN
 
         #region 随机探针
 
-        private void 随机探针_重新开始MenuItem_Click(object sender, System.EventArgs e)
+        private void 随机探针_重新开始MenuItem_Click(object sender, EventArgs e)
         {
-            s = DateTime.Now;
-            SetRandomProbeConfig();
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                SendRandomProbe(LV.Items);
+            DoRandomProbe(LV.Items);
+        }
 
-        }
-        private void 随机探针ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 选定项_随机探针_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            s = DateTime.Now;
-            SetRandomProbeConfig();
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                SendRandomProbe(LV.SelectedItems);
+            DoRandomProbe(LV.SelectedItems);
         }
-       
-        private void 随机探针_继续上次MenuItem_Click(object sender, System.EventArgs e)
+
+        private void 随机探针_继续上次MenuItem_Click(object sender, EventArgs e)
         {
-            s = DateTime.Now;
-            SetRandomProbeConfig();
-            using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
-            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
-                ContinueSendRandomProbe(LV.Items);
-        }
-        private void SetRandomProbeConfig()
-        {
-            RndProbeConfig = new RandomProbeForm().ShowDialog();
-            if (RndProbeConfig.Equals(RandomProbeConfig.Empty))
-                return;
-            ResetSubItemEmpty(LV.Items, CI_探测信息);
-            Application.DoEvents();
+            DoRandomProbe(LV.Items, true);
         }
         #endregion
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -473,7 +451,5 @@ namespace C2.Business.CastleBravo.VPN
         {
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
-
-
     }
 }

@@ -1,20 +1,16 @@
-﻿using Amib.Threading;
-using C2.Business.CastleBravo.VPN.Probe;
+﻿using C2.Business.CastleBravo.VPN.Probe;
 using C2.Core;
 using C2.Utils;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using static C2.Utils.GuarderUtil;
 
 namespace C2.Business.CastleBravo.VPN
 {
-    
+
     public partial class VPNMainForm
     {
         private DateTime s;  // 自动保存
@@ -23,30 +19,36 @@ namespace C2.Business.CastleBravo.VPN
         // 重新发探针
         // 继续发探针
 
-        private void SendRandomProbe(IList items)
+        private void SendRandomProbe(IList items, bool isContinue = false)
         {
-
-
             foreach (ListViewItem lvi in items)
             {
                 if (actionNeedStop)
                     break;
+                
+                if (isContinue && lvi.SubItems[CI_状态].Text != Todo)
+                    continue;
+
                 UpdateOneRandomProbeResult(lvi);
                 Application.DoEvents();
                 CheckSavePoint(1);// 1分钟保存一次
             }
         }
-        private void ContinueSendRandomProbe(IList items)
+
+        private bool SetRandomProbeConfig(IList items)
         {
-            foreach (ListViewItem lvi in items)
-            {
-                if (actionNeedStop)
-                    break;
-                if (string.IsNullOrEmpty(lvi.SubItems[8].Text))
-                    UpdateOneRandomProbeResult(lvi);
-                Application.DoEvents();
-                CheckSavePoint(1);// 1分钟保存一次
-            }
+            RndProbeConfig = new RandomProbeForm().ShowDialog();
+            return !RndProbeConfig.IsEmpty() && ResetSubItemEmpty(items, CI_探测信息);
+        }
+
+        private void DoRandomProbe(IList items, bool isContinue = false)
+        {
+            s = DateTime.Now;
+            if (!SetRandomProbeConfig(items))
+                return;
+            using (new CursorGuarder(Cursors.WaitCursor))
+            using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
+                SendRandomProbe(items, isContinue);
         }
 
         private void UpdateOneRandomProbeResult(ListViewItem lvi)

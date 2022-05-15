@@ -126,6 +126,10 @@ namespace C2.Business.CastleBravo.VPN
             this.probeContent = probeContent;
         }
         public RandomProbeConfig() : this(0, 0, new List<int>(),  string.Empty) { }
+        public bool IsEmpty()
+        {
+            return this.Equals(Empty);
+        }
     }
 
 }

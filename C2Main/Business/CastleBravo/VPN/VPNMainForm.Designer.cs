@@ -85,8 +85,7 @@ namespace C2.Business.CastleBravo.VPN
             this.CheckAliveSelectedItemMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.DDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.随机探针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重放探针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -249,14 +248,14 @@ namespace C2.Business.CastleBravo.VPN
             // 重新开始ToolStripMenuItem1
             // 
             this.重新开始ToolStripMenuItem1.Name = "重新开始ToolStripMenuItem1";
-            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.重新开始ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.重新开始ToolStripMenuItem1.Text = "重新开始";
             this.重新开始ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_重新开始_ToolStripMenuItem_Click);
             // 
             // 继续上次ToolStripMenuItem1
             // 
             this.继续上次ToolStripMenuItem1.Name = "继续上次ToolStripMenuItem1";
-            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.继续上次ToolStripMenuItem1.Size = new System.Drawing.Size(186, 34);
             this.继续上次ToolStripMenuItem1.Text = "继续上次";
             this.继续上次ToolStripMenuItem1.Click += new System.EventHandler(this.验活204_继续上次_ToolStripMenuItem_Click);
             // 
@@ -514,6 +513,7 @@ namespace C2.Business.CastleBravo.VPN
             this.CheckAliveSelectedItemMenuItem,
             this.toolStripMenuItem3,
             this.DDMenuItem,
+            this.toolStripMenuItem8,
             this.toolStripSeparator4,
             this.ClearAllToolStripMenuItem,
             this.toolStripSeparator5,
@@ -521,7 +521,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem4,
             this.toolStripMenuItem7});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(353, 382);
+            this.contextMenuStrip.Size = new System.Drawing.Size(353, 445);
             // 
             // EditToolStripMenuItem
             // 
@@ -582,25 +582,17 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // DDMenuItem
             // 
-            this.DDMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.随机探针ToolStripMenuItem,
-            this.重放探针ToolStripMenuItem});
             this.DDMenuItem.Name = "DDMenuItem";
             this.DDMenuItem.Size = new System.Drawing.Size(352, 30);
-            this.DDMenuItem.Text = "主动探针";
+            this.DDMenuItem.Text = "选定项-随机探针";
+            this.DDMenuItem.Click += new System.EventHandler(this.选定项_随机探针_ToolStripMenuItem_Click);
             // 
-            // 随机探针ToolStripMenuItem
+            // toolStripMenuItem8
             // 
-            this.随机探针ToolStripMenuItem.Name = "随机探针ToolStripMenuItem";
-            this.随机探针ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
-            this.随机探针ToolStripMenuItem.Text = "随机探针";
-            this.随机探针ToolStripMenuItem.Click += new System.EventHandler(this.随机探针ToolStripMenuItem_Click);
-            // 
-            // 重放探针ToolStripMenuItem
-            // 
-            this.重放探针ToolStripMenuItem.Name = "重放探针ToolStripMenuItem";
-            this.重放探针ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
-            this.重放探针ToolStripMenuItem.Text = "重放探针";
+            this.toolStripMenuItem8.Enabled = false;
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(352, 30);
+            this.toolStripMenuItem8.Text = "选定项-重放探针";
             // 
             // toolStripSeparator4
             // 
@@ -939,8 +931,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem CheckAliveSelectedItemMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DDMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 重放探针ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 随机探针ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem ClearAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyAllMenuItem;
@@ -997,5 +987,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem OpenFileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenDirMenu;
         private System.Windows.Forms.ToolStripMenuItem CopyDirMenu;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
     }
 }
