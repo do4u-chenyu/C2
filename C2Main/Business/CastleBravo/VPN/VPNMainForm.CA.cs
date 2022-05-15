@@ -272,7 +272,9 @@ namespace C2.Business.CastleBravo.VPN
                 case v2rayN.Mode.EConfigType.ShadowsocksR:
                 case v2rayN.Mode.EConfigType.Socks:
                 default:
-                    lvi.SubItems[CI_探测信息].Text = "暂不支持";
+                    task.ProbeInfo = "暂不支持";
+                    task.Status = Done;
+                    UpdateRedrawItem(lvi);
                     break;
             }
 
@@ -293,12 +295,11 @@ namespace C2.Business.CastleBravo.VPN
                     task.ProbeInfo = msg;
                     task.Status = status ? Succ : Fail;
                 },
-                (lvi) => {
-                    VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
 
-                    lvi.SubItems[CI_状态].Text = task.Status;
-                    lvi.SubItems[CI_探测信息].Text = task.ProbeInfo;
-                    lvi.ListView.RedrawItems(lvi.Index, lvi.Index, false);
+                (lvi) => {
+                    UpdateRedrawItem(lvi);   // 更新LV项
+                    UpdateProgress(true);   // 更新统计栏
+                    Application.DoEvents();  // 缓卡
                 }
             );
         }
@@ -400,10 +401,10 @@ namespace C2.Business.CastleBravo.VPN
             Application.DoEvents();
         }
 
-        private void UpdateProgress()
+        private void UpdateProgress(bool refresh = false)
         {
             this.progressMenu.Text = string.Format("{0}/{1} {3} - 活 {2} - 站 {5} - IP {6} - 国内 {4}",
-                ++progressBar.Value,
+                refresh ? progressBar.Value : ++progressBar.Value,
                 progressBar.Maximum,
                 NumberOfAlive,
                 progressBar.Value == progressBar.Maximum ? "完成" : string.Empty,

@@ -22,7 +22,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             try
             {
                 HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                myHttpWebRequest.Timeout = 5000;
+                myHttpWebRequest.Timeout = 4500;
                 myHttpWebRequest.Proxy = webProxy;
 
                 Stopwatch timer = new Stopwatch();
@@ -50,9 +50,7 @@ namespace C2.Business.CastleBravo.VPN.V2ray
         public static void RunRealPing(List<ListViewItem> lv, Action<ListViewItem, string, bool> _updateFunc, Action<ListViewItem> _redrawFunc)
         {
             //  选择端口
-            int startPort = v2rayN.Utils.GetAvailablePort();
-            startPort = 10911;  // 测试用
-
+            int startPort = v2rayN.Utils.GetRandomPort();
             //  构造v2ray配置文件, 并启动v2ray进程
             int pid = new V2rayHandler().LoadV2rayConfigString(lv, startPort);
 
@@ -63,6 +61,8 @@ namespace C2.Business.CastleBravo.VPN.V2ray
             {
                 ListViewItem lvi = lv[i];
                 int dummyI = i;            // 内存复刻
+                
+                Application.DoEvents();    // 处理下界面事件,缓卡
 
                 tasks.Add(Task.Run(() =>
                 {

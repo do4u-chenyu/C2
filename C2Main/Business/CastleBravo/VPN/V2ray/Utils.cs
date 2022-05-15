@@ -75,21 +75,9 @@ namespace v2rayN
         }
 
 
-        public static int GetAvailablePort(int start = 10912)
+        public static int GetRandomPort(int start = 10912)
         {
-            var ps = IPGlobalProperties.
-                GetIPGlobalProperties().
-                GetActiveTcpListeners().
-                Select(e => e.Port).
-                Where(e => e > start + RandomUtil.RandomInt(1024, 1024 * 4)).
-                OrderBy(e => e).
-                ToList();
-
-            var port = ps.Take(ps.Count - 1).
-                          Where((e, i) => ps[i + 1] - e > 1).
-                          FirstOrDefault();
-
-            return port;
+            return start + RandomUtil.RandomInt(1024, 1024 * 4);
         }
 
         public static T FromJson<T>(string strJson)
