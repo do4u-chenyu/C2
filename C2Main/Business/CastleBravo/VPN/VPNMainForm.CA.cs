@@ -115,6 +115,8 @@ namespace C2.Business.CastleBravo.VPN
         {
             foreach (ListViewItem lvi in items)
                 (lvi.Tag as VPNTaskConfig).ProbeInfo = lvi.SubItems[index].Text = string.Empty;
+            
+            Application.DoEvents();
             return true;
         }
         // DNS验活

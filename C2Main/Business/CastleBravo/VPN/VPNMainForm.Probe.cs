@@ -35,6 +35,16 @@ namespace C2.Business.CastleBravo.VPN
             }
         }
 
+        /// <summary>
+        /// 测试用
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="isContinue"></param>
+        private void SendRandomProbeMock(IList items, bool isContinue = false)
+        {
+            return;
+        }
+
         private bool SetRandomProbeConfig(IList items)
         {
             RndProbeConfig = new RandomProbeForm().ShowDialog();
@@ -49,69 +59,66 @@ namespace C2.Business.CastleBravo.VPN
             using (new CursorGuarder(Cursors.WaitCursor))
             using (new ToolStripItemTextGuarder(this.actionStatusLabel, "进行中", "已完成"))
                 SendRandomProbe(items, isContinue);
+                //SendRandomProbeMock(items, isContinue);
         }
 
         private void UpdateOneRandomProbeResult(ListViewItem lvi)
         {
             VPNTaskConfig task = lvi.Tag as VPNTaskConfig;
-            int port = ConvertUtil.TryParseInt(task.Port.Trim());
+            int port = ConvertUtil.TryParseInt(task.Port);
+
             if (port == 0)
             {
-                lvi.SubItems[8].Text = "失败，端口字段格式不正确";
-                return;
-            }
-            if (string.IsNullOrEmpty(task.IP))
-            {
-                lvi.SubItems[8].Text = "失败，IP字段不能为空";
+                lvi.SubItems[CI_探测信息].Text = "端口不正确";
                 return;
             }
 
-            string resultPath = WriteResult(task.IP, port.ToString());
-            if (string.IsNullOrEmpty(resultPath))
+            if (NetUtil.IsIPAddress(task.IP))
             {
-                lvi.SubItems[8].Text = string.Format("创建输出文件失败:{0}", resultPath);
+                lvi.SubItems[CI_探测信息].Text = "IP字段格式错误";
                 return;
             }
-            using (StreamWriter sw = new StreamWriter(resultPath, false, Encoding.Default))
+
+            if (NetUtil.IPCheck(task.IP) != task.IP)
             {
-                foreach (int index in RndProbeConfig.LengthValues)
+                lvi.SubItems[CI_探测信息].Text = string.Format("IP字段格式错误:{0}", NetUtil.IPCheck(task.IP));
+                return;
+            }
+
+            string ffp = TouchResultFile(task.IP, port);
+
+            using (StreamWriter sw = new StreamWriter(ffp))
+            {
+                foreach (int length in RndProbeConfig.LengthValues)
                 {
                     for (int i = 0; i < RndProbeConfig.SendCount; i++)
                     {
-                        string data = GenRndProbeRequest(index);
-                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, data,RndProbeConfig.Timeout));
+                        Application.DoEvents(); // 缓卡
+                        string data = GenRndProbeRequest(length);
+                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, data, RndProbeConfig.Timeout));
                     }
                     sw.Flush();
                 }
             }           
-            lvi.SubItems[8].Text = resultPath;
+            lvi.SubItems[CI_探测信息].Text = ffp;
         }
 
         private string GenRndProbeRequest(int length)
         {
             if (RndProbeConfig.LengthValues.Count == 0)
                 return RndProbeConfig.ProbeContent;
+
             return ProbeFactory.GetRandomString(length);
         }
-        public string WriteResult(string ip, string port)
+        private string TouchResultFile(string ip, int port)
         {
             string time = DateTime.Now.ToString("yyyyMMddhhmmss");
-            try
-            {
-                string path = Path.Combine(Global.UserWorkspacePath, "探针结果采集", "随机探针");
-                Directory.CreateDirectory(path);
-                string filename = string.Format("{0}_{1}_{2}.txt", ip, port, time);
-                string filePath = Path.Combine(path, filename);
-                return filePath;
-            }
-            catch
-            {
-                return string.Empty;
-            }
+            string path = Path.Combine(Global.UserWorkspacePath, "探针结果采集", "随机探针");
+            string filename = string.Format("{0}_{1}_{2}.txt", ip, port, time);
+            FileUtil.CreateDirectory(path);
+            return Path.Combine(path, filename);
         }
 
-        #endregion
-        #region 重放探针
         #endregion
 
 
@@ -127,11 +134,12 @@ namespace C2.Business.CastleBravo.VPN
             ListViewItem item = LV.SelectedItems[0];
             ListViewItem.ListViewSubItem subItem = item.GetSubItemAt(e.X, e.Y);
 
-            if (subItem == null || item.SubItems.IndexOf(subItem) != 8)
+            if (subItem == null || item.SubItems.IndexOf(subItem) != CI_探测信息)
                 return;
 
             if (!subItem.Text.StartsWith(Path.Combine(Global.UserWorkspacePath, "探针结果采集")))
                 return;
+
             this.LV.ContextMenuStrip = this.contextMenuStrip1;
 
         }
@@ -152,7 +160,7 @@ namespace C2.Business.CastleBravo.VPN
         }
         private string CurrentFilePath()
         {
-            return LV.SelectedItems[0].SubItems[8].Text;
+            return LV.SelectedItems[0].SubItems[CI_探测信息].Text;
         }
         #endregion
     }

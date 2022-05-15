@@ -110,10 +110,12 @@ namespace C2.Business.CastleBravo.VPN
     public class RandomProbeConfig
     {
         public static readonly RandomProbeConfig Empty = new RandomProbeConfig();
-        private int timeout;
-        private int sendCount;
-        private List<int> lengthValues;
-        private string probeContent;
+
+        private readonly int timeout;
+        private readonly int sendCount;
+        private readonly List<int> lengthValues;
+        private readonly string probeContent;
+
         public int Timeout { get { return timeout; } }
         public int SendCount { get { return sendCount; } }
         public List<int> LengthValues { get { return lengthValues; } }

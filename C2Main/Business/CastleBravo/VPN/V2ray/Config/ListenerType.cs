@@ -1,5 +1,8 @@
 ﻿namespace v2rayN.HttpProxyHandler
 {
+    /// <summary>
+    /// v2ray源码硬移植来的
+    /// </summary>
     public enum ListenerType
     {
         noHttpProxy = 0,

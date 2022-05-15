@@ -3,6 +3,9 @@ using C2.Business.CastleBravo.VPN.Client;
 
 namespace v2rayN
 {
+    /// <summary>
+    /// 大部分内容是从v2ray源码硬移植过来的
+    /// </summary>
     class Global
     {
         public const string TcpHeaderHttp = "http";

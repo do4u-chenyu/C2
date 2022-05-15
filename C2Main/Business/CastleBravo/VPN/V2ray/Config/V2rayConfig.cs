@@ -4,6 +4,7 @@ namespace v2rayN.Mode
 {
     /// <summary>
     /// v2ray配置文件实体类
+    /// v2ray源码硬移植来的
     /// 例子SampleConfig.txt
     /// </summary>
     public class V2rayConfig

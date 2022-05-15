@@ -6,6 +6,9 @@ using v2rayN.Mode;
 
 namespace v2rayN.Handler
 {
+    /// <summary>
+    /// 从v2ray源码魔改来的
+    /// </summary>
     class V2rayConfigHandler
     {
 

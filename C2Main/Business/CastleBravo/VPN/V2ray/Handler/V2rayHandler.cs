@@ -7,8 +7,8 @@ using System.Windows.Forms;
 
 namespace v2rayN.Handler
 {
-
     /// <summary>
+    /// 大部分内容是从v2ray源码硬移植过来的
     /// 消息委托
     /// </summary>
     /// <param name="notify">是否显示在托盘区</param>
