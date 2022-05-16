@@ -8,17 +8,27 @@ namespace C2.Business.CastleBravo.VPN.Probe
 
     public class SocketClient
     {
-
-        public static Socket Send(string host, int port, string data, int timeout)
+        public static Socket Create(out Socket s, int timeout)
         {
-            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
-                ReceiveTimeout = timeout
+                SendTimeout = timeout,
+                ReceiveTimeout = timeout,
             };
-            clientSocket.Connect(host, port);
-            clientSocket.Send(Encoding.Default.GetBytes(data));
-            return clientSocket;
+            return s;
+        }
+        public static Socket Connect(Socket s, string host, int ip)
+        { 
+            IAsyncResult iar = s.BeginConnect(host, ip, null, null);
+            if (iar.AsyncWaitHandle.WaitOne(s.SendTimeout, false))
+                return s;
+            throw new Exception("TCP_Connect_Timeout");
+        }
 
+        public static Socket Send(Socket socket, string data)
+        {
+            socket.Send(Encoding.Default.GetBytes(data));
+            return socket;
         }
 
         public static string Receive(Socket socket) //10s 
@@ -54,27 +64,32 @@ namespace C2.Business.CastleBravo.VPN.Probe
             socket.Close();
         }
 
-        public static string RndProbeResponse(string ip, int port, string data, int timeout)
+        public static string RndProbeResponse(string ip, int port, string data, int timeoutSec)
         {
             Socket s = null;
-            string result = string.Empty;
-            string time = DateTime.Now.ToString("yyyyMMddhhmmss");
+            string m = string.Empty;
             try
             {
-                s = Send(ip, port, data, timeout * 1000);
-                result = Receive(s);
-
+                // 探针分为三个阶段: 建立链接, 发送数据, 接收数据, 三阶段都可能超时(失败)
+                // 建立链接超时 说明IPort+TCP不通，与后面收发数据超时意义不同
+                // 发送数据失败 可能是对方问题,但大概率是自己问题
+                // 接收数据失败 可能是自己问题,但大概率是对方问题
+                // 期望的是能建立链接(三方握手过), 且能发送数据, 但对方不应答(超时)或者应答FIN
+                m = Receive(Send(Connect(Create(out s, timeoutSec * 1000), ip, port), data));
             }
             catch (SocketException e)
             {
-                result = e.SocketErrorCode.ToString();
+                m = e.SocketErrorCode.ToString();
+            }
+            catch (Exception e)
+            {
+                m = e.Message;
             }
             finally
             {
                 DestroySocket(s);
             }
-            return time + "\t" + data.Length + "\t" + result;
-
+            return string.Format("{0}\t{1}\t{2}", DateTime.Now.ToString("yyyyMMddhhmmss"), data.Length, m);
         }
     }
 }

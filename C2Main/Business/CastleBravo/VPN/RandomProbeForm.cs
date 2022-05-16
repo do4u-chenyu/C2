@@ -116,7 +116,7 @@ namespace C2.Business.CastleBravo.VPN
         private readonly List<int> lengthValues;
         private readonly string probeContent;
 
-        public int Timeout { get { return timeout; } }
+        public int TimeoutSeconds { get { return timeout; } }
         public int SendCount { get { return sendCount; } }
         public List<int> LengthValues { get { return lengthValues; } }
         public string ProbeContent { get { return probeContent; } }
