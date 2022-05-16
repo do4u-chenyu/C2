@@ -33,8 +33,6 @@
             this.taskInfoGB = new System.Windows.Forms.GroupBox();
             this.taskInfoLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.taskModelLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.taskResultTextBox = new System.Windows.Forms.TextBox();
             this.taskResultButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,8 +48,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.taskInfoGB);
-            this.panel1.Controls.Add(this.taskModelLabel);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.taskResultTextBox);
             this.panel1.Controls.Add(this.taskResultButton);
             this.panel1.Controls.Add(this.label1);
@@ -63,7 +59,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(481, 237);
+            this.panel1.Size = new System.Drawing.Size(481, 193);
             this.panel1.TabIndex = 0;
             // 
             // taskInfoGB
@@ -71,9 +67,9 @@
             this.taskInfoGB.Controls.Add(this.taskInfoLabel);
             this.taskInfoGB.Controls.Add(this.label5);
             this.taskInfoGB.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskInfoGB.Location = new System.Drawing.Point(235, 18);
+            this.taskInfoGB.Location = new System.Drawing.Point(271, 18);
             this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(235, 93);
+            this.taskInfoGB.Size = new System.Drawing.Size(199, 107);
             this.taskInfoGB.TabIndex = 10036;
             this.taskInfoGB.TabStop = false;
             this.taskInfoGB.Text = "任务状态";
@@ -83,10 +79,12 @@
             this.taskInfoLabel.AutoSize = true;
             this.taskInfoLabel.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskInfoLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.taskInfoLabel.Location = new System.Drawing.Point(87, 35);
+            this.taskInfoLabel.Location = new System.Drawing.Point(51, 40);
             this.taskInfoLabel.Name = "taskInfoLabel";
-            this.taskInfoLabel.Size = new System.Drawing.Size(0, 28);
+            this.taskInfoLabel.Size = new System.Drawing.Size(103, 28);
             this.taskInfoLabel.TabIndex = 1;
+            this.taskInfoLabel.Text = "Running";
+            this.taskInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -99,31 +97,10 @@
             this.label5.TabIndex = 0;
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // taskModelLabel
-            // 
-            this.taskModelLabel.AutoSize = true;
-            this.taskModelLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskModelLabel.Location = new System.Drawing.Point(88, 80);
-            this.taskModelLabel.Name = "taskModelLabel";
-            this.taskModelLabel.Size = new System.Drawing.Size(56, 19);
-            this.taskModelLabel.TabIndex = 10035;
-            this.taskModelLabel.Text = "Twitter";
-            this.taskModelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(13, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 19);
-            this.label3.TabIndex = 10034;
-            this.label3.Text = "任务类型：";
-            // 
             // taskResultTextBox
             // 
             this.taskResultTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskResultTextBox.Location = new System.Drawing.Point(88, 190);
+            this.taskResultTextBox.Location = new System.Drawing.Point(88, 147);
             this.taskResultTextBox.Name = "taskResultTextBox";
             this.taskResultTextBox.Size = new System.Drawing.Size(310, 25);
             this.taskResultTextBox.TabIndex = 10033;
@@ -132,7 +109,7 @@
             // 
             this.taskResultButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.taskResultButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskResultButton.Location = new System.Drawing.Point(404, 190);
+            this.taskResultButton.Location = new System.Drawing.Point(404, 147);
             this.taskResultButton.Name = "taskResultButton";
             this.taskResultButton.Size = new System.Drawing.Size(66, 25);
             this.taskResultButton.TabIndex = 10032;
@@ -154,22 +131,22 @@
             // 
             this.taskIDLabel.AutoSize = true;
             this.taskIDLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskIDLabel.Location = new System.Drawing.Point(88, 134);
+            this.taskIDLabel.Location = new System.Drawing.Point(88, 86);
             this.taskIDLabel.Name = "taskIDLabel";
-            this.taskIDLabel.Size = new System.Drawing.Size(181, 19);
+            this.taskIDLabel.Size = new System.Drawing.Size(57, 19);
             this.taskIDLabel.TabIndex = 10029;
-            this.taskIDLabel.Text = "3ZF9wqCJ6aZmJfrDnFjKJ9";
+            this.taskIDLabel.Text = "123456";
             this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // taskNameLabel
             // 
             this.taskNameLabel.AutoSize = true;
             this.taskNameLabel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.taskNameLabel.Location = new System.Drawing.Point(88, 29);
+            this.taskNameLabel.Location = new System.Drawing.Point(88, 28);
             this.taskNameLabel.Name = "taskNameLabel";
-            this.taskNameLabel.Size = new System.Drawing.Size(82, 19);
+            this.taskNameLabel.Size = new System.Drawing.Size(49, 19);
             this.taskNameLabel.TabIndex = 10028;
-            this.taskNameLabel.Text = "Twitter任务";
+            this.taskNameLabel.Text = "Name";
             // 
             // statusInfoLabel
             // 
@@ -183,7 +160,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(13, 133);
+            this.label2.Location = new System.Drawing.Point(13, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 19);
             this.label2.TabIndex = 10022;
@@ -193,7 +170,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(13, 193);
+            this.label4.Location = new System.Drawing.Point(13, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 19);
             this.label4.TabIndex = 10025;
@@ -203,7 +180,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 237);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(481, 193);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -230,8 +208,6 @@
         private System.Windows.Forms.Label statusInfoLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label taskModelLabel;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox taskResultTextBox;
         private System.Windows.Forms.GroupBox taskInfoGB;
         private System.Windows.Forms.Label label5;

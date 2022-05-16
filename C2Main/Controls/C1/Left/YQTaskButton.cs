@@ -12,17 +12,19 @@ using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Core;
 using C2.Utils;
 using System.IO;
+using System.Xml;
 
 namespace C2.Controls.C1.Left
 {
     public partial class YQTaskButton : BaseLeftInnerButton
     {
         private YQFeatureDetectionControl yqfdc;
+
         public YQTaskInfo TaskInfo { get; set; } = YQTaskInfo.Empty;
+
         public YQTaskButton(YQTaskInfo task) : base(task.TaskName)
         {
             TaskInfo = task;
-            yqfdc = new YQFeatureDetectionControl();
             InitializeComponent();
             InitButtonMenu();
             InitButtonType();
@@ -84,12 +86,11 @@ namespace C2.Controls.C1.Left
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (!TaskInfo.IsOverTime() && TaskInfo.Status != YQTaskStatus.Done)
-            {
-                HelpUtil.ShowMessageBox("当前任务正在执行中，无法删除。");
-                return;
-            }
+            //if (!TaskInfo.IsOverTime() && TaskInfo.Status == YQTaskStatus.Running)
+            //{
+            //    HelpUtil.ShowMessageBox("当前任务正在执行中，无法删除。");
+            //    return;
+            //}
 
             DialogResult rs = MessageBox.Show(
                 String.Format("删除任务 {0}及结果文件, 继续删除请点击 \"确定\"", ButtonText),
@@ -97,11 +98,42 @@ namespace C2.Controls.C1.Left
 
             if (rs != DialogResult.OK)
                 return;
+            
+            string xmlPath = Path.Combine(Global.UserWorkspacePath, "侦察兵", "YQTasks.xml");
+            if (!File.Exists(xmlPath))
+                return;
+            RemoveYQTasks(xmlPath);
 
-            yqfdc.RemoveYQButton(this);
-            FileUtil.DeleteDirectory(this.TaskInfo.ResultFilePath);
-            yqfdc.YQSave();
             yqfdc = new YQFeatureDetectionControl();
+            yqfdc.LoadYQTasks(xmlPath);
+            
+            //yqfdc.RemoveYQButton(this);
+            //FileUtil.DeleteDirectory(this.TaskInfo.ResultFilePath);
+            //yqfdc.YQSave();
+        }
+
+        public void RemoveYQTasks(string xmlPath)
+        {
+            XmlDocument xDoc = new XmlDocument(); ;
+            try
+            {
+                xDoc.Load(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
+            }
+            XmlNodeList xnl = xDoc.SelectNodes(@"YQTasks/task");
+            
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.SelectSingleNode("taskId").InnerText != TaskInfo.TaskID)
+                    continue;
+                xn.ParentNode.RemoveChild(xn);
+                break;   
+            }
+            xDoc.Save(xmlPath);
+            return;
         }
 
         private void NoFocusButton_MouseDown(object sender, MouseEventArgs e)
