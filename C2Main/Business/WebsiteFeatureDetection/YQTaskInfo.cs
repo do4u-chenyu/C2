@@ -37,7 +37,7 @@ namespace C2.Business.WebsiteFeatureDetection
             Status = YQTaskStatus.Null;
         }
 
-        public YQTaskInfo(string taskName, string taskId,  string taskModel, string datasourceFilePath, string resultFilePath, YQTaskStatus status)
+        public YQTaskInfo(string taskName, string taskId,  string taskModel, string datasourceFilePath, string resultFilePath, YQTaskStatus status,string taskCreateTime)
         {
             TaskName = taskName;
             TaskID = taskId;
@@ -45,7 +45,7 @@ namespace C2.Business.WebsiteFeatureDetection
             DatasourceFilePath = datasourceFilePath;
             ResultFilePath = resultFilePath;
             Status = status;
-            TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            TaskCreateTime = taskCreateTime;
         }
 
         public bool IsOverTime()
