@@ -26,7 +26,8 @@ namespace C2.Business.CastleBravo.VPN
         public static readonly int CI_其他信息 = 9;
         public static readonly int CI_IP地址   = 10;
         public static readonly int CI_归属地   = 11;
-        public static readonly int CI_分享地址 = 12;
+        public static readonly int CI_梯子地址 = 12;
+        public static readonly int CI_订阅地址 = 13;
 
         private readonly string Succ = "√";
         private readonly string Fail = "×";
@@ -75,7 +76,7 @@ namespace C2.Business.CastleBravo.VPN
             _ = CI_客户端;
             _ = CI_探测信息;
             _ = CI_其他信息;
-            _ = CI_分享地址;
+            _ = CI_梯子地址;
 
         }
 

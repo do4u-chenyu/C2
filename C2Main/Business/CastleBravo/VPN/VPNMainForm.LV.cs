@@ -31,7 +31,7 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems.Add(config.IP);
             lvi.SubItems.Add(config.Country);
             lvi.SubItems.Add(config.Content);
-            lvi.SubItems.Add(config.ssAddress);
+            lvi.SubItems.Add(config.rssAddress);
 
             // 指针关联
             lvi.Tag = config;

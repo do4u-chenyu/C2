@@ -24,7 +24,7 @@ namespace C2.Business.CastleBravo.VPN
         public string IP;              // IP地址
         public string Country;         // 归属地
         public string Content;         // 分享地址原内容  
-        public string ssAddress;
+        public string rssAddress;      // 订阅地址
 
         public VPNTaskConfig() : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty) { }
 
@@ -50,7 +50,7 @@ namespace C2.Business.CastleBravo.VPN
             IP = array.Length > 10 ? array[10] : "0.0.0.0";
             Country = array.Length > 11 ? array[11] : string.Empty;
             Content = array.Length > 12 ? array[12] : string.Empty;
-            ssAddress = array.Length > 13 ? array[13] : string.Empty;
+            rssAddress = array.Length > 13 ? array[13] : string.Empty;
 
         }
 

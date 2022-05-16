@@ -73,5 +73,12 @@ namespace C2.Utils
         {
             return rd.Next(minValue, maxValue);
         }
+
+        public static byte[] RandomBytes(int length)
+        {
+            byte[] ret = new byte[length];
+            rd.NextBytes(ret);
+            return ret;
+        }
     }
 }
