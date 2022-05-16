@@ -124,7 +124,8 @@ namespace C2.Business.CastleBravo.VPN
                                 string.Empty,
                                 ip,
                                 string.Empty,
-                                ip + ":" + port
+                                ip + ":" + port,
+                                string.Empty
                                 ));
         }
         private void DoRSSLine(string line)
@@ -139,7 +140,7 @@ namespace C2.Business.CastleBravo.VPN
                                                                 Global.WebClientDefaultTimeout,
                                                                 ProxySetting.Empty));
                 foreach (string ss in ret.SplitLine())
-                    DoSSLine(ss);
+                    DoSSLine(ss, line);
             }
         }
 
@@ -187,13 +188,14 @@ namespace C2.Business.CastleBravo.VPN
                             other.Trim(),
                             string.Empty,
                             string.Empty,
+                            string.Empty,
                             string.Empty
                             ));
                 }
             }
         }
 
-        private void DoSSLine(string line)
+        private void DoSSLine(string line, string ssAddress = "")
         {
             Match mat = Regex.Match(line, ssline);
             if (!mat.Success)
@@ -242,7 +244,8 @@ namespace C2.Business.CastleBravo.VPN
                                         array.Length > 5 ? array[5].Trim() : string.Empty,
                                         string.Empty,
                                         string.Empty,
-                                        version + "://" + content  // 分享链接 
+                                        version + "://" + content,  // 分享链接 
+                                        ssAddress
                                         ));
         }
 
