@@ -18,36 +18,26 @@ namespace C2.IAOLab.WifiMac
                 instance = new WifiMac();
             return instance;
         }
-        public String MacLocate(String input)
+        public string MacLocate(string input)
         {
             string url = Global.ServerUrl + "/Test01/search.do";
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
                 return string.Empty;
             string location = GetInfo(url, input,"mac");
-            location = location.Replace("\"", String.Empty);            
+            location = location.Replace("\"", string.Empty);            
             return string.Format("{0}\t{1}\n", input,location);
         }
         public string GetInfo(string url,string mac,string type)
         {
-
-            //创建一个HTTP请求  
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //Post请求方式  
             request.Method = "POST";
-            //内容类型
             request.ContentType = "application/x-www-form-urlencoded";
-
-            //设置参数，并进行URL编码 
-
             string paraUrlCoded = type + "=" + mac.Replace(OpUtil.StringBlank, string.Empty);
-
-            //将Json字符串转化为字节  
             byte[] payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);
-            //设置请求的ContentLength   
             request.ContentLength = payload.Length;
-            //发送请求，获得请求流 
 
-            Stream writer = null;
+            //发送请求，获得请求流 
+            Stream writer;
             try
             {
                 writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
@@ -58,8 +48,8 @@ namespace C2.IAOLab.WifiMac
             }
             //将请求参数写入流
             writer.Write(payload, 0, payload.Length);
-            writer.Close();//关闭请求流
-                           // String strValue = string.Empty;//strValue为http响应所返回的字符流
+            writer.Close();
+           
             HttpWebResponse response;
             try
             {
@@ -79,7 +69,6 @@ namespace C2.IAOLab.WifiMac
             {
                 return "网络连接中断";
             }
-            //  Stream postData = Request.InputStream;
             StreamReader sRead = new StreamReader(s);
             string postContent = sRead.ReadToEnd();
             sRead.Close();
@@ -94,6 +83,5 @@ namespace C2.IAOLab.WifiMac
                                         rt.address);
             return "查询失败";
         }
-
     }
 }

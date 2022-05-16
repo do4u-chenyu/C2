@@ -13,13 +13,13 @@ namespace C2.IAOLab.BaseStation
             return instance;
         }
 
-        public String BaseStationLocate(String input)
+        public string BaseStationLocate(string input)
         {
             string url = Global.ServerUrl  + "/Test01/station.do";
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
                 return string.Empty;
             string location = WifiMac.WifiMac.GetInstance().GetInfo(url, input,"station");
-            location = location.Replace("\"", String.Empty);
+            location = location.Replace("\"", string.Empty);
             return string.Format("{0}\t{1}\n", input, location);
         }
     }
