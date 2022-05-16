@@ -95,7 +95,7 @@ namespace C2.Business.CastleBravo.VPN
                     {
                         Application.DoEvents(); // 缓卡
                         string data = GenRndProbeRequest(length);
-                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, data, RndProbeConfig.Timeout));
+                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, data, RndProbeConfig.TimeoutSeconds));
                     }
                     sw.Flush();
                 }
