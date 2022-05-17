@@ -218,15 +218,15 @@ namespace C2.Controls.Left
                 case "Wifi":
                     return "Wifi查询";
                 case "InformationSearch":
-                    return "信息查询";
+                    return "银行卡号查询";
                 case "Tude":
-                    return "转换工具";
+                    return "坐标经纬度转换";
                 case "PostAndGet":
                     return "POST工具";
                 case "PwdGenerator":
                     return "社工生成器";
                 case "GoldEyes":
-                    return "火眼金睛";
+                    return "SEO综合查询";
                 default:
                     return string.Empty;
             }

@@ -66,6 +66,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible == true)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage6.Text, "02");
                 string[] inputArray = this.richTextBox1.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
@@ -85,6 +86,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage7 && tabControl1.Visible == true)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage7.Text, "02");
                 string[] inputArray = this.richTextBox2.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
@@ -104,7 +106,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage8 && tabControl1.Visible == true)     //身份证号查询
             {
-
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage8.Text, "02");
                 string[] inputArray = this.richTextBox3.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
@@ -124,7 +126,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage9 && tabControl1.Visible == true)     //身份证号查询
             {
-
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage9.Text, "02");
                 string[] inputArray = this.richTextBox4.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
@@ -144,6 +146,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)     // IMEI查询
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "02");
                 string[] inputArray = this.richTextBox5.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
@@ -159,7 +162,6 @@ namespace C2.Dialogs.IAOLab
                         progressBar1.Value = 0;
                     }
                 }
-
             }
 
             this.Cursor = Cursors.Arrow;
@@ -352,5 +354,18 @@ namespace C2.Dialogs.IAOLab
             }
         }
 
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage6)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage6.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage7)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage7.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage8)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage8.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage9)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage9.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage1)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "01");
+        }
     }
 }

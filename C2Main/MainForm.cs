@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-
 namespace C2
 {
     public enum FormType

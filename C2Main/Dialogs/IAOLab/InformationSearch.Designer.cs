@@ -37,6 +37,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -64,16 +66,14 @@
             this.label12 = new System.Windows.Forms.Label();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage6.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // confirm
@@ -177,6 +177,44 @@
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "备案号查询";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("宋体", 11F);
+            this.label16.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label16.Location = new System.Drawing.Point(541, 74);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(90, 15);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "秒 反爬间隔";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown1.Font = new System.Drawing.Font("宋体", 10F);
+            this.numericUpDown1.Location = new System.Drawing.Point(502, 70);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(34, 23);
+            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // textBox1
             // 
@@ -298,6 +336,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(660, 337);
             this.tabControl1.TabIndex = 12;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage8
             // 
@@ -485,44 +524,6 @@
             this.label11.TabIndex = 16;
             this.label11.Text = "请在下方输入待查询设备号(IMEI)";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numericUpDown1.Font = new System.Drawing.Font("宋体", 10F);
-            this.numericUpDown1.Location = new System.Drawing.Point(502, 70);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ReadOnly = true;
-            this.numericUpDown1.Size = new System.Drawing.Size(34, 23);
-            this.numericUpDown1.TabIndex = 5;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("宋体", 11F);
-            this.label16.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label16.Location = new System.Drawing.Point(541, 74);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(90, 15);
-            this.label16.TabIndex = 6;
-            this.label16.Text = "秒 反爬间隔";
-            // 
             // InformationSearch
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -543,6 +544,7 @@
             this.panel1.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -552,7 +554,6 @@
             this.tabPage9.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

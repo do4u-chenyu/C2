@@ -206,6 +206,7 @@ namespace C2.Business.IAOLab.PostAndGet
 
         private async void Submit_ClickAsync(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("实验楼" + "-" + this.Text, "02");
             using (GuarderUtil.WaitCursor)
             {
                 if (splitType == "POST")

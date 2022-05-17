@@ -1088,7 +1088,6 @@ namespace _2048
             MessageBox.Show("上上下下左左右右BABA，Show Me The Money，Kirov Reporting! 白帝圣剑! 御剑跟着我! 一袋米抗几楼! May The Force Be With You! 教练，我想打篮球!");
         }
 
-
         private void 新游戏ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StartNewGame();
