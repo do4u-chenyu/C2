@@ -266,8 +266,10 @@ namespace C2.Controls.Left
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(buttonType != "Visualization")
+            if(buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || buttonType == "PwdGenerator" || buttonType == "GoldEyes")
                 new Log.Log().LogManualButton("实验楼" + "-" + trans(buttonType), "01");
+            else
+                new Log.Log().LogManualButton(buttonType, "01");
             OpenToolForm();
         }
 
@@ -275,8 +277,10 @@ namespace C2.Controls.Left
         {
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
             {
-                if (buttonType != "Visualization")
+                if (buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || buttonType == "PwdGenerator" || buttonType == "GoldEyes")
                     new Log.Log().LogManualButton("实验楼" + "-" + trans(buttonType), "01");
+                else
+                    new Log.Log().LogManualButton(buttonType, "01");
                 OpenToolForm();
             }
         }

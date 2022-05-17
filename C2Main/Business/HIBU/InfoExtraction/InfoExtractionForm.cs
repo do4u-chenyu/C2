@@ -54,6 +54,7 @@ namespace C2.Business.HIBU.InfoExtraction
         }
         private void ExtractButton_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("HIBU" + "-" + this.Text, "02");
             this.dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)
