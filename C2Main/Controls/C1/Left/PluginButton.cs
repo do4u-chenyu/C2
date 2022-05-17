@@ -148,6 +148,7 @@ namespace C2.Controls.C1.Left
 
         private void OpenMindMapMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton(JST[pluginType], "01");
             Global.GetManualControl().TryOpen(JST[pluginType]);
         }
 
@@ -192,11 +193,22 @@ namespace C2.Controls.C1.Left
                     new VPNMainForm().ShowDialog();
                     break;
                 case "涉赌专项":
+                    new Log.Log().LogManualButton(pluginType, "01");
+                    break;
                 case "涉枪专项":
+                    new Log.Log().LogManualButton(pluginType, "01");
+                    break;
                 case "涉黄专项":
+                    new Log.Log().LogManualButton(pluginType, "01");
+                    break;
                 case "盗洞专项":
+                    new Log.Log().LogManualButton(pluginType, "01");
+                    break;
                 case "肉鸡黑吃黑":
+                    new Log.Log().LogManualButton(pluginType, "01");
+                    break;
                 case "境外网产专项":
+                    new Log.Log().LogManualButton(pluginType, "01");
                     Global.GetMainForm().OpenJSTab(pluginType);
                     break;
                 default:

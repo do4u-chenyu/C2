@@ -140,7 +140,7 @@ namespace C2.SearchToolkit
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-
+            new Log.Log().LogManualButton(this.Text, "02");
             if (ValidateInputControls())
             {
                 this.DialogResult = DialogResult.OK;

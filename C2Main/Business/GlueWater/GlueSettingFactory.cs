@@ -20,8 +20,10 @@ namespace C2.Business.GlueWater
                 case GlueType.Gamble:
                     return DbGlueSetting.GetInstance();
                 case GlueType.Gun:
+                    //new Log.Log().LogManualButton("涉枪专项", "01");
                     return SqGlueSetting.GetInstance();
                 case GlueType.Yellow:
+                    //new Log.Log().LogManualButton("涉黄专项", "01");
                     return YellowGlueSetting.GetInstance();
                 default:
                     return DbGlueSetting.GetInstance();
