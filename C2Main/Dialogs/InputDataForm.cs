@@ -105,7 +105,7 @@ namespace C2.Dialogs
                 HelpUtil.ShowMessageBox("请输入数据名称！");
             else if (FileUtil.IsContainIllegalCharacters(name, "数据名称", false))
                 HelpUtil.ShowMessageBox("数据名称中存在非法字符，请检查数据名称！非法字符" + System.Environment.NewLine + "非法字符包含：*, \\, $, [, ], +, -, &, %, #, !, ~, `, \\t, \\n, \\r, :, 空格");
-            else if (String.IsNullOrEmpty(this.fullFilePath))
+            else if (string.IsNullOrEmpty(this.fullFilePath))
                 HelpUtil.ShowMessageBox("请选择数据路径！");
             else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
@@ -140,6 +140,7 @@ namespace C2.Dialogs
             }
             this.extType = OpUtil.ExtType.Unknow;
             this.encoding = OpUtil.Encoding.UTF8;
+            new Log.Log().LogManualButton("数据管理-添加数据", "02");
         }
 
         private void InitInvalidCharPattern()

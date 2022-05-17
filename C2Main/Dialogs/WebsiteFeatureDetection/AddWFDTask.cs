@@ -154,6 +154,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 HelpUtil.ShowMessageBox(result.RespMsg.Replace("time", "时间").Replace("version", "版本").Replace("attention", "注意").Replace("tasks_in_pool", "任务池任务数量").Replace("try_again", "预计再次下发时间（分钟）").Replace("task pool is full", "任务池任务已满，请在预计再次下发时间后下发"));
                 return false;
             }
+            new Log.Log().LogManualButton("网站侦察兵", "02");
 
             HelpUtil.ShowMessageBox("任务下发成功");
             string destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "网站侦察兵");

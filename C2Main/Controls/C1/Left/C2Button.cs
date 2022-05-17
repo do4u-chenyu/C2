@@ -96,16 +96,17 @@ namespace C2.Controls.Left
                 }
             }
             
-   
-
             ZipDialog zipDialog = new ExportZipDialog(ModelTitle, desc);
             if (zipDialog.ShowDialog() == DialogResult.OK)
             {
                 string exportFullPath = zipDialog.ModelPath;
                 string password = zipDialog.Password;
                 using (GuarderUtil.WaitCursor)
-                if (Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
-                    HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
+                    if (Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
+                    {
+                        HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
+                        new Log.Log().LogManualButton("分析笔记", "05");
+                    } 
             }
         }
 

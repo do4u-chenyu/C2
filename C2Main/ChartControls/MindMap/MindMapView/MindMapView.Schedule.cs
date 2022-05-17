@@ -234,7 +234,7 @@ namespace C2.Controls.MapViews
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
                 return "执行命令为空";
-            string message = String.Empty;
+            string message = string.Empty;
 
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
@@ -266,6 +266,9 @@ namespace C2.Controls.MapViews
                     {
                         cmd = cmds[i] + string.Empty;
                     }
+                    string modelName = cmd.Split(@"\")[6].ToString();
+                    new Log.Log().LogManualButton("战术手册" + "-" + modelName, "02");
+
                     p.StandardInput.WriteLine(cmd);
                     //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");

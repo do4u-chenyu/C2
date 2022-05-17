@@ -1214,6 +1214,7 @@
     <Compile Include="Forms\Splash\ManualSplashForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Log\Log.cs" />
     <Compile Include="Model\MindMaps\APEDocxFile.cs" />
     <Compile Include="Model\MindMaps\ImportXmindFile.cs" />
     <Compile Include="Model\MindMaps\DocxFile.cs" />

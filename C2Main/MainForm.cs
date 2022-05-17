@@ -804,7 +804,11 @@ namespace C2
             DialogResult dialogResult = createNewModelForm.ShowDialog();
             // 新建业务视图
             if (dialogResult == DialogResult.OK)
+            {
                 this.NewDocumentForm(templateName, createNewModelForm.ModelTitle);
+                new Log.Log().LogManualButton("分析笔记", "03");
+            }
+               
         }
 
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)

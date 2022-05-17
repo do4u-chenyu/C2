@@ -441,5 +441,21 @@ namespace C2.Dialogs.IAOLab
                 ExportData();
             }
         }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage1)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage2)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage2.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage3)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage3.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage4)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage4.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage5)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage5.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage6)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage6.Text, "01");
+        }
     }
 }
