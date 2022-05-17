@@ -94,8 +94,7 @@ namespace C2.Business.CastleBravo.VPN
                     for (int i = 0; i < RndProbeConfig.SendCount; i++)
                     {
                         Application.DoEvents(); // 缓卡
-                        string data = GenRndProbeRequest(length);
-                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, data, RndProbeConfig.TimeoutSeconds));
+                        sw.WriteLine(SocketClient.RndProbeResponse(task.IP, port, GenRndProbeRequest(length), RndProbeConfig.TimeoutSeconds));
                     }
                     sw.Flush();
                 }
@@ -103,12 +102,12 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems[CI_探测信息].Text = ffp;
         }
 
-        private string GenRndProbeRequest(int length)
+        private byte[] GenRndProbeRequest(int length)
         {
             if (RndProbeConfig.LengthValues.Count == 0)
-                return RndProbeConfig.ProbeContent;
+                return new byte[0];  // TODO 实现
 
-            return ProbeFactory.GetRandomString(length);
+            return ProbeFactory.RandomBytes(length);
         }
         private string TouchResultFile(string ip, int port)
         {

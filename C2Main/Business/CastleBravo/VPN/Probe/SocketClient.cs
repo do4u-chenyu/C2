@@ -25,9 +25,9 @@ namespace C2.Business.CastleBravo.VPN.Probe
             throw new Exception("TCP_Connect_Timeout");
         }
 
-        public static Socket Send(Socket socket, string data)
+        public static Socket Send(Socket socket, byte[] data)
         {
-            socket.Send(Encoding.Default.GetBytes(data));
+            socket.Send(data);
             return socket;
         }
 
@@ -64,7 +64,7 @@ namespace C2.Business.CastleBravo.VPN.Probe
             socket.Close();
         }
 
-        public static string RndProbeResponse(string ip, int port, string data, int timeoutSec)
+        public static string RndProbeResponse(string ip, int port, byte[] data, int timeoutSec)
         {
             Socket s = null;
             string m = string.Empty;

@@ -19,14 +19,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     partial class AddYQTask : StandardDialog
     {
         public YQTaskInfo TaskInfo { set; get; }
-        private String token;
-        private String TaskID;
+        private string token;
+        private string TaskID;
         private long ruleID;
         private long startTime;
         private long endTime;
         private string areaCode;
         private string ruleName;
         private string ruleHost;
+        private long ruleDatasource;
         private string destDirectory;
         private string taskFilePath;
         private string destFilePath;
@@ -49,6 +50,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             maxRow = 100;
             startTime = 0;
             endTime = 0;
+            ruleDatasource = 0;
 
             destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             FileUtil.CreateDirectory(destDirectory);
@@ -66,9 +68,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             taskContentComboBox.SelectedIndex = 0;
             provinceCB.SelectedIndex = 0;
             cityCB.SelectedIndex = 0;
-            TaskName = String.Format("{0}任务{1}", TaskModelName, DateTime.Now.ToString("MMdd"));
 
             TaskCreateTime = ConvertUtil.TransToUniversalTime(DateTime.Now);
+            TaskName = String.Format("{0}任务{1}_{2}", TaskModelName, DateTime.Now.ToString("MMdd"), this.TaskCreateTime);
+
             Random ran = new Random();
             int n = ran.Next(10, 100);
 
@@ -88,7 +91,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void TaskModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.TaskName = String.Format("{0}任务{1}", this.TaskModelName, DateTime.Now.ToString("MMdd"));
+            this.TaskName = String.Format("{0}任务{1}_{2}", this.TaskModelName, DateTime.Now.ToString("MMdd"), this.TaskCreateTime);
         }
 
         private void ProvinceCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,7 +148,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (this.pasteModeCB.Checked)
             {
                 if (this.wsTextBox.Text.Trim().IsEmpty())
+                {
+                    HelpUtil.ShowMessageBox("请输入查询内容");
                     return false;
+                }
                 FileUtil.FileWriteToEnd(FilePath, this.wsTextBox.Text);
             }
 
@@ -203,7 +209,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return true;
         }
         
-        private string HttpGet(string url)
+        public string HttpGet(string url)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
@@ -226,9 +232,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             this.startTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker1.Value));
             this.endTime = Convert.ToInt64(ConvertUtil.TransToUniversalTime(dateTimePicker2.Value));
-            this.ruleHost = GenModelHost(this.TaskModelName);
+            List<string> result = GenModelHostAndData(this.TaskModelName);
+            this.ruleHost = result[0];
+            if(!result[1].IsNullOrEmpty())
+                this.ruleDatasource = Convert.ToInt64(result[1]);
 
-            return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running);
+            return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running, TaskCreateTime);
         }
 
         private string GenCode()
@@ -248,7 +257,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return code;
         }
 
-        private string GenModelHost(string model)
+        private List<string> GenModelHostAndData(string model)
         {
             //抖音： iesdouyin.com
             //今日头条： toutiao.com
@@ -267,31 +276,42 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //暗网
             //不限
             string modelHost = string.Empty;
+            string dataType = string.Empty;
+            
+
             switch (model)
             {
                 case "微博":
                     modelHost = "weibo.com";
+                    dataType = "1048576";
                     break;
                 case "Twitter":
                     modelHost = "twitter.com";
+                    dataType = "32";
                     break;
                 case "微信公众号":
                     modelHost = "mp.weixin.qq.com";
+                    dataType = "268435456";
                     break;
                 case "今日头条":
-                    modelHost = "toutiao.com";
+                    modelHost = "toutiao.com"; 
+                    dataType = "16384";
                     break;
                 case "抖音":
                     modelHost = "iesdouyin.com";
+                    dataType = "131072";
                     break;
             }
-            return modelHost;
+
+            List<string> result = new List<string> { modelHost, dataType };
+            return result;
         }
 
         private bool GenTasksFromPaste()
         {
-            if (this.wsTextBox.Text.Trim().IsEmpty())
+            if (this.wsTextBox.Text.Trim().IsEmpty())         
                 return false;
+                
             // 如果粘贴文件不合格,就别清空旧数据了
 
             string[] lines = this.wsTextBox.Text.SplitLine();
@@ -328,7 +348,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void AddTasksByKey(string keyWord, int number)
         {
             //this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
-            this.ruleID = 1416305261;
+            this.ruleID = 1416305260;
             destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.TaskID, keyWord));
             using (File.Create(destFilePath)) { }
             
@@ -336,7 +356,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             pairs.Add("id", this.ruleID);
             pairs.Add("type", this.ruleType);
             pairs.Add("name", this.ruleName);
-            if(this.startTime != 0)
+            pairs.Add("datasource", this.ruleDatasource);
+            if (this.startTime != 0)
                 pairs.Add("starttime", this.startTime);
             if (this.endTime != 0)
                 pairs.Add("endtime", this.endTime);

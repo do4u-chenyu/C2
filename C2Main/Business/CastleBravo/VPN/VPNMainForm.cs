@@ -4,7 +4,6 @@ using C2.Business.CastleBravo.WebShellTool.SettingsDialog;
 using C2.Core;
 using C2.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -277,8 +276,8 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 导出_IP端口分享地址_toolStripMenuItem8_Click(object sender, EventArgs e)
         {
-            Export("IP端口分享地址", 
-                new int[] { CI_端口, CI_IP地址, CI_归属地, CI_分享地址 }, 
+            Export("IP端口-梯子地址", 
+                new int[] { CI_端口, CI_IP地址, CI_归属地, CI_梯子地址 }, 
                 null, 
                 (t) => { string tmp = t[0]; t[0] = t[1]; t[1] = tmp; return t; });  // 交换 端口 地址 位置
         }
@@ -287,9 +286,9 @@ namespace C2.Business.CastleBravo.VPN
             Export("所有字段", new int[0]);
         }
 
-        private void 导出_分享地址_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 导出_梯子地址_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Export("分享地址", new int[] { CI_分享地址 });
+            Export("梯子地址", new int[] { CI_梯子地址 });
         }
 
         private void 导出_IP归属地_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -306,12 +305,21 @@ namespace C2.Business.CastleBravo.VPN
             Export("境外站点", new int[0], (t) => { return !NetUtil.IsMainlandOfChina(t.Country); });
         }
 
-
+        private void 导出_梯子地址_订阅地址_toolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("梯子地址-订阅地址", new int[] { CI_梯子地址, CI_订阅地址 });
+        }
 
         private void CopySSMenuItem_Click(object sender, EventArgs e)
         {
-            CopyToClipboard(new int[] { CI_分享地址 });
-            HelpUtil.ShowMessageBox("复制【分享地址】到剪切板【成功】");
+            CopyToClipboard(new int[] { CI_梯子地址 });
+            HelpUtil.ShowMessageBox("复制【梯子地址】到剪切板【成功】");
+        }
+
+        private void CopyRSSMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyToClipboard(new int[] { CI_订阅地址 });
+            HelpUtil.ShowMessageBox("复制【订阅地址】到剪切板【成功】");
         }
 
         private void CopyOtherMenuItem_Click(object sender, EventArgs e)
@@ -326,6 +334,7 @@ namespace C2.Business.CastleBravo.VPN
             CopyToClipboard(new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
             HelpUtil.ShowMessageBox("复制【IP和端口信息】到剪切板【成功】");
         }
+
 
         private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -451,5 +460,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
+
+
     }
 }
