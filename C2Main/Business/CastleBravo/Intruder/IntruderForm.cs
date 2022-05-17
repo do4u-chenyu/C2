@@ -157,6 +157,7 @@ hbapass=111111";
          */
         private void startButton_Click(object sender, System.EventArgs e)
         {
+            new Log.Log().LogManualButton("大码破门锤", "02");
             if (!CheckStartOption())
                 return;
 

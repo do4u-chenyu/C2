@@ -172,9 +172,11 @@ namespace C2.Controls.C1.Left
             switch (pluginType)
             {
                 case "Cracker":
+                    new Log.Log().LogManualButton("弱口令素描", "01");
                     new CrackerForm().ShowDialog();
                     break;
                 case "WebScan":
+                    new Log.Log().LogManualButton("目录扫描", "01");
                     new WebScanForm().ShowDialog();
                     break;
                 case "RobotsScan":
@@ -184,9 +186,11 @@ namespace C2.Controls.C1.Left
                     new WebShellManageForm().ShowDialog();
                     break;
                 case "Binary":
+                    new Log.Log().LogManualButton("二进制分析", "01");
                     new BinaryMainForm().ShowDialog();
                     break;
                 case "Intruder":
+                    new Log.Log().LogManualButton("大码破门锤", "01");
                     new IntruderForm().ShowDialog();
                     break;
                 case "VPN":

@@ -280,6 +280,7 @@ namespace C2.Business.CastleBravo.WebScan
         //开始扫描功能
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("目录扫描", "02");
             if (!CheckStartOption())
                 return;
 

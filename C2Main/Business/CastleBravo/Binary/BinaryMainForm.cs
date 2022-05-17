@@ -90,6 +90,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void FileButton_Click(object sender, System.EventArgs e)
         {
+            new Log.Log().LogManualButton("二进制分析", "02");
             DialogResult ret = this.openFileDialog1.ShowDialog();
             if (ret != DialogResult.OK)
                 return;
@@ -160,8 +161,9 @@ namespace C2.Business.CastleBravo.Binary
             return Count(strings, new Regex(@"^[\w \._-]+$"));
         }
 
-        private void XiseDecryptButton_Click(object sender, System.EventArgs e)
+        private void XiseDecryptButton_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("Xise流量解密", "02");
             string plainText = XiseTextBox.Text.Trim().ToLower();
             if (plainText.Contains("?"))
                 if (plainText.Contains("~"))
@@ -200,6 +202,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderDecryptButton_Click(object sender, System.EventArgs e)
         {
+            new Log.Log().LogManualButton("冰蝎流量解密", "02");
             BehinderDTextBox.Focus();
             InitializeBehinderLabels();
             Behinder bh = new Behinder();
@@ -217,7 +220,7 @@ namespace C2.Business.CastleBravo.Binary
             SuccessLabel.Text = bh.Success ? "成功" : "完成";
         }
 
-        private void Bh_OnIteratorCount(object sender, System.EventArgs e)
+        private void Bh_OnIteratorCount(object sender, EventArgs e)
         {
             Behinder bh  = sender as Behinder;
             this.progressBar.Value = bh.IteratorCount;
@@ -235,6 +238,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderDGenButton_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("冰蝎流量加密", "02");
             BehinderETextBox.Focus();
 
             Behinder bh = new Behinder();
@@ -268,12 +272,28 @@ namespace C2.Business.CastleBravo.Binary
 
         private void Button2_Click(object sender, EventArgs e)
         {
-
+            new Log.Log().LogManualButton("百度LBS报文解密", "02");
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == StringsTabPage)
+                new Log.Log().LogManualButton("二进制逆向" + "-" + StringsTabPage.Text, "01");
+            else if (tabControl1.SelectedTab == XiseTabPage)
+                new Log.Log().LogManualButton("二进制逆向" + "-" + XiseTabPage.Text, "01");
+            else if (tabControl1.SelectedTab == BehinderDTabPage)
+                new Log.Log().LogManualButton("二进制逆向" + "-" + BehinderDTabPage.Text, "01");
+            else if (tabControl1.SelectedTab == BehinderETabPage)
+                new Log.Log().LogManualButton("二进制逆向" + "-" + BehinderETabPage.Text, "01");
+            else if (tabControl1.SelectedTab == BaiduLBSTabPage)
+                new Log.Log().LogManualButton("二进制逆向" + "-" + BaiduLBSTabPage.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage1)
+                new Log.Log().LogManualButton("二进制逆向" + "-" + tabPage1.Text, "01");
         }
     }
 }

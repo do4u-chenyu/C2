@@ -836,6 +836,7 @@ namespace C2.Business.Cracker.Dialogs
 
         private void Btn_cracker_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("弱口令素描", "02");
             this.btn_cracker.Enabled = false;
             this.list_success_username.Clear();
             this.services_list.Enabled = false;
