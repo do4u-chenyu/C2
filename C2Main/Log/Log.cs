@@ -10,15 +10,17 @@ namespace C2.Log
     class Log
     {
         //日志：工号/功能模块/动作/时间/IP
-        public void LogManualButton(string modelName,string type)
+        public void LogManualButton(string modelName, string type)
         {
             // new Log.Log().LogManualButton(modelName,"01");
             DateTime e = DateTime.Now;
             string startTime = e.ToString("yyyyMMddHHmmss");
             string userName = WFDWebAPI.GetInstance().UserName;
             string ip = IPGet();
-
-            MessageBox.Show(SToJson(userName, modelName, type, startTime, ip));
+            /*
+            if(IsInternetAvailable())
+                MessageBox.Show(SToJson(userName, modelName, type, startTime, ip));
+            */
         }
 
         private string IPGet()
@@ -41,5 +43,18 @@ namespace C2.Log
             string contentjson = JsonConvert.SerializeObject(myDic);
             return contentjson;
         }
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Dns.GetHostEntry("www.baidu.com"); 
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
+

@@ -24,7 +24,8 @@ namespace C2.Log
             string userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
             string ip = IPGet();
 
-            MessageBox.Show(SToJson(userName, modelName, type, startTime, ip));
+            if (IsInternetAvailable())
+                MessageBox.Show(SToJson(userName, modelName, type, startTime, ip));
         }
 
         private string IPGet()
@@ -46,6 +47,18 @@ namespace C2.Log
             };
             string contentjson = JsonConvert.SerializeObject(myDic);
             return contentjson;
+        }
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                Dns.GetHostEntry("www.baidu.com");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
