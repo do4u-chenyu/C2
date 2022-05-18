@@ -39,13 +39,16 @@ namespace C2.Business.CastleBravo.VPN
             this.label101 = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.clash = new System.Windows.Forms.RadioButton();
             this.addr = new System.Windows.Forms.RadioButton();
             this.rss = new System.Windows.Forms.RadioButton();
             this.ss = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.rssPB = new System.Windows.Forms.ProgressBar();
+            this.rssLable = new System.Windows.Forms.Label();
+            this.rssLB = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,9 +60,9 @@ namespace C2.Business.CastleBravo.VPN
             this.label0.Location = new System.Drawing.Point(33, 80);
             this.label0.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label0.Name = "label0";
-            this.label0.Size = new System.Drawing.Size(413, 18);
+            this.label0.Size = new System.Drawing.Size(521, 18);
             this.label0.TabIndex = 10029;
-            this.label0.Text = "* 格式:一行一个,支持ss,ssr,vmess,vless,trojan";
+            this.label0.Text = "* 格式:一行一个,支持ss,ssr,vmess,vless,trojan五种梯子地址\r\n";
             // 
             // wsTextBox
             // 
@@ -160,7 +163,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.clash);
             this.groupBox1.Controls.Add(this.addr);
             this.groupBox1.Controls.Add(this.rss);
             this.groupBox1.Controls.Add(this.ss);
@@ -173,24 +176,24 @@ namespace C2.Business.CastleBravo.VPN
             this.groupBox1.TabIndex = 10033;
             this.groupBox1.TabStop = false;
             // 
-            // radioButton1
+            // clash
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("宋体", 9F);
-            this.radioButton1.Location = new System.Drawing.Point(461, 21);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(114, 22);
-            this.radioButton1.TabIndex = 10023;
-            this.radioButton1.Text = "Clash订阅";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.Click += new System.EventHandler(this.RadioButton_Click);
+            this.clash.AutoSize = true;
+            this.clash.Font = new System.Drawing.Font("宋体", 9F);
+            this.clash.Location = new System.Drawing.Point(461, 21);
+            this.clash.Margin = new System.Windows.Forms.Padding(4);
+            this.clash.Name = "clash";
+            this.clash.Size = new System.Drawing.Size(114, 22);
+            this.clash.TabIndex = 10023;
+            this.clash.Text = "Clash订阅";
+            this.clash.UseVisualStyleBackColor = true;
+            this.clash.Click += new System.EventHandler(this.RadioButton_Click);
             // 
             // addr
             // 
             this.addr.AutoSize = true;
             this.addr.Font = new System.Drawing.Font("宋体", 9F);
-            this.addr.Location = new System.Drawing.Point(188, 21);
+            this.addr.Location = new System.Drawing.Point(119, 21);
             this.addr.Margin = new System.Windows.Forms.Padding(4);
             this.addr.Name = "addr";
             this.addr.Size = new System.Drawing.Size(105, 22);
@@ -203,12 +206,12 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.rss.AutoSize = true;
             this.rss.Font = new System.Drawing.Font("宋体", 9F);
-            this.rss.Location = new System.Drawing.Point(320, 21);
+            this.rss.Location = new System.Drawing.Point(236, 21);
             this.rss.Margin = new System.Windows.Forms.Padding(4);
             this.rss.Name = "rss";
-            this.rss.Size = new System.Drawing.Size(114, 22);
+            this.rss.Size = new System.Drawing.Size(213, 22);
             this.rss.TabIndex = 10021;
-            this.rss.Text = "v2ray订阅";
+            this.rss.Text = "V2ray/小火箭/SSR订阅";
             this.rss.UseVisualStyleBackColor = true;
             this.rss.Click += new System.EventHandler(this.RadioButton_Click);
             // 
@@ -220,10 +223,10 @@ namespace C2.Business.CastleBravo.VPN
             this.ss.Location = new System.Drawing.Point(2, 21);
             this.ss.Margin = new System.Windows.Forms.Padding(4);
             this.ss.Name = "ss";
-            this.ss.Size = new System.Drawing.Size(159, 22);
+            this.ss.Size = new System.Drawing.Size(105, 22);
             this.ss.TabIndex = 10020;
             this.ss.TabStop = true;
-            this.ss.Text = "协议(分享)地址";
+            this.ss.Text = "梯子地址";
             this.ss.UseVisualStyleBackColor = true;
             this.ss.Click += new System.EventHandler(this.RadioButton_Click);
             // 
@@ -248,9 +251,9 @@ namespace C2.Business.CastleBravo.VPN
             this.label2.Location = new System.Drawing.Point(33, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(269, 18);
+            this.label2.Size = new System.Drawing.Size(557, 18);
             this.label2.TabIndex = 10035;
-            this.label2.Text = "* 格式:一行一个,V2ray订阅地址";
+            this.label2.Text = "* 格式:一行一个,V2ray/Shadowrocket/SSR订阅地址,http(s)://开头";
             this.label2.Visible = false;
             // 
             // label3
@@ -261,10 +264,44 @@ namespace C2.Business.CastleBravo.VPN
             this.label3.Location = new System.Drawing.Point(33, 80);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(269, 18);
+            this.label3.Size = new System.Drawing.Size(431, 18);
             this.label3.TabIndex = 10036;
-            this.label3.Text = "* 格式:一行一个,Clash订阅地址\r\n";
+            this.label3.Text = "* 格式:一行一个,Clash(R)订阅地址,http(s)://开头";
             this.label3.Visible = false;
+            // 
+            // rssPB
+            // 
+            this.rssPB.Location = new System.Drawing.Point(8, 379);
+            this.rssPB.Name = "rssPB";
+            this.rssPB.Size = new System.Drawing.Size(120, 23);
+            this.rssPB.TabIndex = 10037;
+            this.rssPB.Visible = false;
+            // 
+            // rssLable
+            // 
+            this.rssLable.AutoSize = true;
+            this.rssLable.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rssLable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.rssLable.Location = new System.Drawing.Point(6, 349);
+            this.rssLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.rssLable.Name = "rssLable";
+            this.rssLable.Size = new System.Drawing.Size(80, 18);
+            this.rssLable.TabIndex = 10038;
+            this.rssLable.Text = "解析进度";
+            this.rssLable.Visible = false;
+            // 
+            // rssLB
+            // 
+            this.rssLB.AutoSize = true;
+            this.rssLB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rssLB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.rssLB.Location = new System.Drawing.Point(82, 349);
+            this.rssLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.rssLB.Name = "rssLB";
+            this.rssLB.Size = new System.Drawing.Size(35, 18);
+            this.rssLB.TabIndex = 10039;
+            this.rssLB.Text = "0/1";
+            this.rssLB.Visible = false;
             // 
             // BatchAddVPNServerForm
             // 
@@ -272,6 +309,9 @@ namespace C2.Business.CastleBravo.VPN
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(722, 488);
+            this.Controls.Add(this.rssLB);
+            this.Controls.Add(this.rssLable);
+            this.Controls.Add(this.rssPB);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label104);
             this.Controls.Add(this.groupBox1);
@@ -303,6 +343,9 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.label104, 0);
             this.Controls.SetChildIndex(this.label0, 0);
+            this.Controls.SetChildIndex(this.rssPB, 0);
+            this.Controls.SetChildIndex(this.rssLable, 0);
+            this.Controls.SetChildIndex(this.rssLB, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -326,7 +369,10 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.RadioButton addr;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton clash;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ProgressBar rssPB;
+        private System.Windows.Forms.Label rssLable;
+        private System.Windows.Forms.Label rssLB;
     }
 }

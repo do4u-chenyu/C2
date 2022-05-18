@@ -74,12 +74,28 @@ namespace C2.Business.CastleBravo.VPN
             Tasks.Clear();
 
             string[] lines = this.wsTextBox.Text.SplitLine();
+            ResetProgressBar(lines.Length);
+
             for (int i = 0; i < Math.Min(lines.Length, maxRow); i++)
                 AddTasksByLine(lines[i].Trim());
 
             return true;
         }
 
+        private void ResetProgressBar(int max)
+        {
+            this.rssPB.Minimum = 0;
+            this.rssPB.Maximum = max;
+            this.rssPB.Value = 0;
+            this.rssLB.Text = string.Empty;
+        }
+
+        private void VisibleProgressBar()
+        {
+            this.rssLable.Visible = true;
+            this.rssPB.Visible = true;
+            this.rssLB.Visible = true;
+        }
 
         private void AddTasksByLine(string line)
         {
@@ -92,13 +108,15 @@ namespace C2.Business.CastleBravo.VPN
                     DoAddrLine(line);
                     break;
                 case 2:
+                    VisibleProgressBar();
                     DoRSSLine(line);
                     break;
                 case 3:
+                    VisibleProgressBar();
                     DoClashLine(line);
                     break;
 
-            } 
+            }
         }
 
         private void DoAddrLine(string line, Match mat = null)
@@ -130,6 +148,7 @@ namespace C2.Business.CastleBravo.VPN
         }
         private void DoRSSLine(string line)
         {
+            line = line.Trim('"');
             bool isRss = line.StartsWith("http://") || line.StartsWith("https://");
             if (!isRss)
                 return;
@@ -141,11 +160,14 @@ namespace C2.Business.CastleBravo.VPN
                                                                 ProxySetting.Empty));
                 foreach (string ss in ret.SplitLine())
                     DoSSLine(ss, line);
+
+                UpdateProgressBar();
             }
         }
 
         private void DoClashLine(string line)
         {
+            line = line.Trim('"');
             bool isRss = line.StartsWith("http://") || line.StartsWith("https://");
             if (!isRss)
                 return;
@@ -191,8 +213,17 @@ namespace C2.Business.CastleBravo.VPN
                             string.Empty,
                             string.Empty
                             ));
+
+                    UpdateProgressBar();
                 }
             }
+        }
+
+        private void UpdateProgressBar()
+        {
+            this.rssPB.Value++;
+            this.rssLB.Text = string.Format("{0}/{1}", rssPB.Value, rssPB.Maximum);
+            Application.DoEvents();
         }
 
         private void DoSSLine(string line, string ssAddress = "")
@@ -205,7 +236,11 @@ namespace C2.Business.CastleBravo.VPN
                 if (mat.Success)
                     DoAddrLine(line, mat);
                 else
+                {
+                    VisibleProgressBar();
                     DoRSSLine(line);
+                }
+                    
                 return;
             }
 
@@ -262,8 +297,17 @@ namespace C2.Business.CastleBravo.VPN
             {
                 using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 using (StreamReader sr = new StreamReader(fs, Encoding.Default))
+                {
+                    List<string> lines = new List<string>();
                     for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
-                        AddTasksByLine(sr.ReadLine().Trim());
+                        lines.Add(sr.ReadLine().Trim());
+
+                    ResetProgressBar(lines.Count);
+
+                    foreach (string line in lines)
+                        AddTasksByLine(line);
+                }
+
             }
             catch
             {
