@@ -1,6 +1,7 @@
 ﻿using C2.Business.CastleBravo.WebShellTool;
 using C2.Controls;
 using C2.Core;
+using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace C2.Business.CastleBravo.VPN
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<VPNTaskConfig> Tasks;
 
-        private List<string> rssFailedList;
+        private List<string> rssFList;
 
         public BatchAddVPNServerForm()
         {
@@ -38,7 +39,7 @@ namespace C2.Business.CastleBravo.VPN
             Tasks = new List<VPNTaskConfig>();
             OKButton.Size = new System.Drawing.Size(75, 27);
             CancelBtn.Size = new System.Drawing.Size(75, 27);
-            rssFailedList = new List<string>();
+            rssFList = new List<string>();
         }
 
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
@@ -68,8 +69,17 @@ namespace C2.Business.CastleBravo.VPN
         protected override bool OnOKButtonClick()
         {
             bool ret = (this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile()) && base.OnOKButtonClick();
-            if (!rssFailedList.IsEmpty())
-                HelpUtil.ShowMessageBox(string.Format("有{0}个订阅地址解析失败，需要手工复核", rssFailedList.Count)) ;
+
+            if (rssFList.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("有{0}个订阅地址解析失败，需要手工复核:", rssFList.Count));
+                
+                foreach (string line in rssFList)
+                    sb.AppendLine(line);
+
+                new MessageDialog(sb.ToString()).ShowDialog();
+            }
             return ret;
         }
 
@@ -95,7 +105,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssPB.Maximum = max;
             this.rssPB.Value = 0;
             this.rssLB.Text = string.Empty;
-            this.rssFailedList.Clear();
+            this.rssFList.Clear();
         }
 
         private void VisibleProgressBar()
@@ -167,7 +177,7 @@ namespace C2.Business.CastleBravo.VPN
                                                                 Global.WebClientDefaultTimeout,
                                                                 ProxySetting.Empty));
                 if (ret.IsNullOrEmpty())
-                    rssFailedList.Add(line);
+                    rssFList.Add(line);
 
                 foreach (string ss in ret.SplitLine())
                     DoSSLine(ss, line);
@@ -193,7 +203,7 @@ namespace C2.Business.CastleBravo.VPN
                                     new List<object>();
 
                 if (list.IsEmpty())
-                    rssFailedList.Add(line);
+                    rssFList.Add(line);
 
                 foreach (Dictionary<object, object> vmess in list)
                 {
