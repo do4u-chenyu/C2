@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Sockets;
 using System.Windows.Forms;
 
 namespace C2.Log
@@ -17,17 +18,20 @@ namespace C2.Log
             string startTime = e.ToString("yyyyMMddHHmmss");
             string userName = WFDWebAPI.GetInstance().UserName;
             string ip = IPGet();
-            /*
             if(IsInternetAvailable())
                 MessageBox.Show(SToJson(userName, modelName, type, startTime, ip));
-            */
         }
 
         private string IPGet()
         {
-            IPHostEntry ipEntry = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress[] addr = ipEntry.AddressList;
-            return addr[1].ToString();
+            string name = Dns.GetHostName();
+            IPAddress[] ipadrlist = Dns.GetHostAddresses(name);
+            foreach (IPAddress ipa in ipadrlist)
+            {
+                if (ipa.AddressFamily == AddressFamily.InterNetwork)
+                    return ipa.ToString();
+            }
+            return string.Empty;
         }
 
         private string SToJson(string userName, string featureModel, string action, string time, string ip)
