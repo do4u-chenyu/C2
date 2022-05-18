@@ -1,4 +1,5 @@
 ﻿using C2.IAOLab.Plugins;
+using C2.Log;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -61,6 +62,8 @@ namespace MD5Plugin
 
         private void TreeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            new Log().LogManualButton(e.Node.Name, "01");
+
             if (e.Button == MouseButtons.Right)
                 return;
 

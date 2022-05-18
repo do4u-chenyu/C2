@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Log;
+using System;
 using System.Text;
 
 namespace MD5Plugin
@@ -32,6 +33,11 @@ namespace MD5Plugin
 
         public override void Encode(string str)
         {
+            if(decimalBase == 8)
+                new Log().LogManualButton("八进制转十六", "02");
+            else
+                new Log().LogManualButton("十进制转十六", "02");
+
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
                 ResetTextBox();
@@ -39,8 +45,14 @@ namespace MD5Plugin
             }
             outputTextBox.Text = DoConvert(str, decimalBase, 16);
         }
+
         public override void Decode(string str)
         {
+            if (decimalBase == 8)
+                new Log().LogManualButton("八进制转十六", "02");
+            else
+                new Log().LogManualButton("十进制转十六", "02");
+
             if (outputTextBox.Text == "请输入你要解码的内容")
             {
                 OriginOutput();
@@ -72,7 +84,5 @@ namespace MD5Plugin
                 sb.Append(ConvertBaseString(s, baseStr, baseDst)).Append(sepType);
             return sb.ToString();
         }
-
-
     }
 }

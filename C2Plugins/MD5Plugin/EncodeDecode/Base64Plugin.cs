@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using C2.Log;
 
 namespace MD5Plugin
 {
@@ -43,6 +44,7 @@ namespace MD5Plugin
 
         public override void Encode(string str)
         {
+            new Log().LogManualButton("超级Base64", "02");
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
                 ResetTextBox();
@@ -120,6 +122,7 @@ namespace MD5Plugin
 
         public override void Decode(string base64Str)
         {
+            new Log().LogManualButton("超级Base64", "02");
             Dictionary<string, string> pairs = new Dictionary<string, string>();
             pairs.Add("/9j/", "jpg");
             pairs.Add("iVBORw", "png");

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Web;
+using C2.Log;
 
 namespace MD5Plugin
 {
@@ -23,6 +24,7 @@ namespace MD5Plugin
 
         public override void Encode(string str)
         {
+            new Log().LogManualButton("URL编解码", "02");
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
                 ResetTextBox();
@@ -35,6 +37,7 @@ namespace MD5Plugin
 
         public virtual void Decode(string url)
         {
+            new Log().LogManualButton("URL编解码", "02");
             if (outputTextBox.Text == "请输入你要解码的内容")
             {
                 OriginOutput();

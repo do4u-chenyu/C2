@@ -1,4 +1,5 @@
 ﻿using C2.IAOLab.Plugins;
+using C2.Log;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Drawing;
@@ -131,17 +132,18 @@ namespace RookieKnowledgePlugin
 
         private void LinuxTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            new Log().LogManualButton("技能宝典" + "-" + tabPage1.Text, "02");
             if (e.Node.Name == "首页")
             {
                 linuxTextBox.SetTextAndRefresh("Linux 首页");
             }
             else
                 TreeView_AfterSelect(linuxTextBox, e.Node.Name);
-
         }
 
         private void PythonTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            new Log().LogManualButton("技能宝典" + "-" + tabPage2.Text, "02");
             if (e.Node.Name == "首页")
             {
                 pythonTextBox.SetTextAndRefresh("Python 首页");
@@ -212,6 +214,14 @@ namespace RookieKnowledgePlugin
                 node.Expand();
                 node = node.Parent;
             }
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage1)
+                new Log().LogManualButton("技能宝典" + "-" + tabPage1.Text, "01");
+            else if (tabControl1.SelectedTab == tabPage2)
+                new Log().LogManualButton("技能宝典" + "-" + tabPage2.Text, "01");
         }
     }
 }

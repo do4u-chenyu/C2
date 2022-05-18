@@ -353,16 +353,19 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 验活配置_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("VPN-验活配置", "02");
             new CAForm().ShowDialog();
         }
 
         private void 验活204_继续上次_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("VPN-HTTP204验活", "02");
             DoItemHttp204Continue(LV.Items);
         }
 
         private void 验活204_重新开始_ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
+            new Log.Log().LogManualButton("VPN-HTTP204验活", "02");
             DoItemHttp204(LV.Items);
         }
 
@@ -388,12 +391,14 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 域名反查IP_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("VPN-域名查IP", "02");
             DoItemsDNS(LV.Items);
         }
 
 
         private void Ping验活_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("VPN-Ping验活", "02");
             DoItemsPing(LV.Items);
         }
         private void 选定项验活_Ping_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -403,6 +408,7 @@ namespace C2.Business.CastleBravo.VPN
 
         private void Tcp验活_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("VPN-TCPg验活", "02");
             DoItemsTcp(LV.Items);
         }
 

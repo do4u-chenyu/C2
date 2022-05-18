@@ -183,6 +183,7 @@ namespace C2.Controls.C1.Left
                     new RobotsScan().ShowDialog();
                     break;
                 case "WebShell":
+                    new Log.Log().LogManualButton("盗洞验活", "01");
                     new WebShellManageForm().ShowDialog();
                     break;
                 case "Binary":
@@ -194,6 +195,7 @@ namespace C2.Controls.C1.Left
                     new IntruderForm().ShowDialog();
                     break;
                 case "VPN":
+                    new Log.Log().LogManualButton("VPN专项", "01");
                     new VPNMainForm().ShowDialog();
                     break;
                 case "涉赌专项":

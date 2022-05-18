@@ -12,8 +12,10 @@ namespace C2.Business.CastleBravo.WebShellTool
         private string Password { get => this.passTextBox.Text.Trim(); }
         private string Key { get => this.keyTextBox.Text.Trim(); }
         private string EncryType { get => this.encryComboBox.Text.Trim(); }
+        private string type = string.Empty;
         public TrojanGeneratorForm(string trojanType, bool encry = false)
         {
+            type = trojanType;
             InitializeComponent();
             InitializeComponent2(trojanType, encry); 
         }
@@ -46,6 +48,7 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         protected override bool OnOKButtonClick()
         {
+            new Log.Log().LogManualButton(type, "02");
             this.saveFileDialog1.FileName = this.trojanComboBox.Text;
             if (TrojanType == "哥斯拉配套Trojan")
                 this.saveFileDialog1.FileName += "_" + this.EncryType;

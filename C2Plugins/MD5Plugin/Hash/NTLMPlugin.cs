@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics.Contracts;
+using C2.Log;
 
 namespace MD5Plugin
 {
@@ -138,6 +139,7 @@ namespace MD5Plugin
         }
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("NTLM", "02");
             return NTLM.ComputeHashHexString(str);
         }
     }

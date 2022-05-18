@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Log;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -100,6 +101,7 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("Mysql5", "02");
             byte[] strRes = GetBytes(str);
             HashAlgorithm iSha = new SHA1CryptoServiceProvider();
             strRes = iSha.ComputeHash(iSha.ComputeHash(strRes));

@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DgvManager.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="QQCrawler.cs" />
     <Compile Include="CookieContainerExtensions.cs" />
     <Compile Include="QQSpiderForm.cs">

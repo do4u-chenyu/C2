@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using C2.Log;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MD5Plugin
@@ -12,6 +13,7 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("SHA-256", "02");
             byte[] bytValue = GetBytes(str);
             SHA256 sha256 = new SHA256CryptoServiceProvider();
             byte[] retVal = sha256.ComputeHash(bytValue);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
+using C2.Log;
 
 namespace MD5Plugin
 {
@@ -66,6 +67,7 @@ namespace MD5Plugin
 
         public override void Encode(string EncryptStr)
         {
+            new Log().LogManualButton("AES(128位)", "02");
             string Key = textBoxEncryptionkey.Text;
             if (inputTextBox.Text == "请把你需要加密的内容粘贴在这里")
             {
@@ -97,6 +99,7 @@ namespace MD5Plugin
 
         public override void Decode(string DecryptStr)
         {
+            new Log().LogManualButton("AES(128位)", "02");
             string Key = textBoxEncryptionkey.Text;
             if (outputTextBox.Text == "请把你需要解密的内容粘贴在这里")
             {

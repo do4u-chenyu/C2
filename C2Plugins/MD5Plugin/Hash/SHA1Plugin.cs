@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using C2.Log;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MD5Plugin
@@ -12,6 +13,7 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("SHA-1", "02");
             byte[] strRes = GetBytes(str);
             HashAlgorithm iSha = new SHA1CryptoServiceProvider();
             strRes = iSha.ComputeHash(strRes);

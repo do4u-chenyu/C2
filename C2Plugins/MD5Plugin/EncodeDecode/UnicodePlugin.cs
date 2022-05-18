@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C2.Log;
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +23,7 @@ namespace MD5Plugin
 
         public override void Encode(string str)
         {
+            new Log().LogManualButton("Unicode编解码", "02");
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
                 ResetTextBox();
@@ -54,6 +56,7 @@ namespace MD5Plugin
 
         public override void Decode(string str)
         {
+            new Log().LogManualButton("Unicode编解码", "02");
             string a = "&#".ToString();
             string b = "x".ToString();
             try

@@ -30,6 +30,9 @@
         {
             this.SuspendLayout();
             // 
+            // buttonEncode
+            // 
+            // 
             // MD5128Plugin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

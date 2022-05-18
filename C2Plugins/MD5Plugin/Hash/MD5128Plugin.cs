@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using C2.Log;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MD5Plugin
@@ -12,6 +13,7 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("MD5(128位)", "02");
             MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
             byte[] data = md5Hasher.ComputeHash(GetBytes(str));
             StringBuilder sBuilder = new StringBuilder();
@@ -19,5 +21,6 @@ namespace MD5Plugin
                 sBuilder.Append(data[i].ToString("x2"));
             return sBuilder.ToString();
         }
+
     }
 }
