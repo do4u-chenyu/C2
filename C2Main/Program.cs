@@ -1,14 +1,11 @@
-﻿using C2.Business.WebsiteFeatureDetection;
-using C2.Configuration;
+﻿using C2.Configuration;
 using C2.Controls;
 using C2.Controls.OS;
 using C2.Core;
 using C2.Core.Win32Apis;
-using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Globalization;
 using C2.Utils;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;

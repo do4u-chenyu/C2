@@ -24,7 +24,6 @@ namespace C2.Controls.C1.Left
 
         private void AddLabel_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("Hash彩虹表", "01");
             var dialog = new AddCBTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {

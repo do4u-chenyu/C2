@@ -38,7 +38,6 @@ namespace C2.Controls.Left
             //现在需要手动new一个canvasform
             using (new GuarderUtil.CursorGuarder())
                 Global.GetMainForm().LoadCanvasFormByXml(Global.MarketViewPath, ModelTitle);
-            new Log.Log().LogManualButton("聚沙成塔" + "-" + ModelTitle, "01");
             this.OpenToolStripMenuItem.Enabled = false;
         }
 

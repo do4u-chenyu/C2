@@ -326,20 +326,17 @@ namespace C2.Business.CastleBravo.WebShellTool
         private void TrojanGeneratorMenuItem_Click(object sender, EventArgs e)
         {
             string type = (sender as ToolStripMenuItem).ToolTipText.Split('|')[0];
-            new Log.Log().LogManualButton(type, "01");
             new TrojanGeneratorForm(type).ShowDialog();
         }
 
         private void GodzillaTrojanGeneratorMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("哥斯拉配套Trojan", "01");
             new TrojanGeneratorForm("哥斯拉配套Trojan", true).ShowDialog();
         }
 
 
         private void CheckAliveSelectedItemMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞验活", "02");
             if (this.LV.SelectedItems.Count == 0)
                 return;
             ResetProgressMenuValue(LV.SelectedItems.Count);
@@ -358,7 +355,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void CheckAliveAllMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞验活", "02");
             // 清空加速缓存
             ResetCheckCache(ResetTypeEnum.重新开始);
             // 启动加速
@@ -571,7 +567,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void SecondeCheckAliveMenu_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞验活", "02");
             using (WaitCursor)
                 ResetCheckCache(ResetTypeEnum.二刷不活);
             // 启动加速
@@ -581,7 +576,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void RefreshOtherMenu_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞验活", "02");
             using (WaitCursor)
                 // 清空加速缓存
                 ResetCheckCache(ResetTypeEnum.重新开始_境外站);
@@ -698,7 +692,6 @@ namespace C2.Business.CastleBravo.WebShellTool
         // msf部分
         private void MSFMenu_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞MSF联动", "02");
             if (this.LV.SelectedItems.Count == 0)
                 return;
             DialogResult dialogResult = new MSFSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
@@ -708,7 +701,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void ReverseShellMenu_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞反弹Shell", "02");
             if (this.LV.SelectedItems.Count == 0)
                 return;
             DialogResult dialogResult = new ReverseShellSet(LV.SelectedItems[0].Tag as WebShellTaskConfig, Proxy).ShowDialog();
@@ -784,35 +776,30 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 地理定位ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("地理定位探针", "02");
             this.sgType = SGType.LocationInfo;
             DoCurrentItemTask();
         }
 
         private void 定时任务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("定时任务探针", "02");
             this.sgType = SGType.ScheduleTask;
             DoCurrentItemTask();
         }
 
         private void 进程列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("进程列表探针", "02");
             this.sgType = SGType.ProcessView;
             DoCurrentItemTask();
         }
 
         private void 系统信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("系统信息探针", "02");
             this.sgType = SGType.SystemInfo;
             DoCurrentItemTask();
         }
         // 超级ping部分
         private void SuperPingMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("超级ping探针", "02");
             CreatePingPayload();
             DoCurrentItemTask();
         }     
@@ -831,7 +818,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 配置文件探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("Mysql探针", "02");
             if (this.LV.SelectedItems.Count == 0)
                 return;
             int timeout = ConfigPayloadOk();
@@ -842,7 +828,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void UserMYD探针ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("Mysql探针", "02");
             if (this.LV.SelectedItems.Count == 0)
                 return;
             if (!UserMYDPayloadOK())
@@ -853,7 +838,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 全部验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞验活", "02");
             using (WaitCursor)
                 ResetCheckCache(ResetTypeEnum.继续上次);
             // 启动加速
@@ -863,7 +847,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void 境外验活_继续上次ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("盗洞验活", "02");
             using (WaitCursor)
                 ResetCheckCache(ResetTypeEnum.继续上次_境外);
             // 启动加速
@@ -885,7 +868,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         private void MB_选定项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("Mysql探针", "02");
             this.sgType = SGType.MysqlBlasting;
             DoCurrentItemTask();
         }

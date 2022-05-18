@@ -139,7 +139,6 @@ namespace MD5Plugin
         }
         protected override string EncodeLine(string str)
         {
-            new Log().LogManualButton("NTLM", "02");
             return NTLM.ComputeHashHexString(str);
         }
     }

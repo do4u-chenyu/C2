@@ -23,7 +23,6 @@ namespace C2.Controls.C1.Left
         protected override void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Open();
-            new Log.Log().LogManualButton("战术手册" + "-" + ModelTitle, "01");
         }
 
         protected override void TextButton_MouseDown(object sender, MouseEventArgs e)
@@ -33,7 +32,6 @@ namespace C2.Controls.C1.Left
                 return;
             // 双击打开对应模型
             Open();
-            new Log.Log().LogManualButton("战术手册" + "-" + ModelTitle, "01");
         }
 
         public void Open()

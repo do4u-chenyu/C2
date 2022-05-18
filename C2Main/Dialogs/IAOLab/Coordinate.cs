@@ -78,15 +78,6 @@ namespace C2.Dialogs.IAOLab
                 this.inputAndResult.Focus();
             else
                 this.inputAndResult1.Focus();
-
-            if (tabControl.SelectedTab == tabPage1)
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "01");
-            else if (tabControl.SelectedTab == tabPage2)
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage2.Text, "01");
-            else if (tabControl.SelectedTab == tabPage3)
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage3.Text, "01");
-            else if (tabControl.SelectedTab == tabPage4)
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage4.Text, "01");
         }
 
         private void ComputeXYTransform(string[] inputArray, StringBuilder tmpResult)
@@ -163,25 +154,13 @@ namespace C2.Dialogs.IAOLab
             StringBuilder tmpResult = new StringBuilder();
             this.Cursor = Cursors.WaitCursor;
             if (tabControl.SelectedIndex == 0)
-            {
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "02");
                 ComputeXYTransform(this.inputAndResult.Text.Split('\n'), tmpResult);
-            }
             if (tabControl.SelectedIndex == 1)
-            {
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage2.Text, "02");
                 ComputeDistance(this.inputAndResult1.Text.Split('\n'), tmpResult);
-            }
-            if (this.tabControl.SelectedIndex == 2)
-            {
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage3.Text, "02");
+            if (tabControl.SelectedIndex == 2)
                 IPTransform(this.richTextBox1.Text.Split('\n'), tmpResult);
-            }
-            if (this.tabControl.SelectedIndex == 3)
-            {
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage4.Text, "02");
+            if (tabControl.SelectedIndex == 3)
                 TimeTransform(this.richTextBox2.Text.Split('\n'), tmpResult);
-            }
             this.Cursor = Cursors.Arrow;
         }
 

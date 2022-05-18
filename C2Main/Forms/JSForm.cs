@@ -102,7 +102,6 @@ namespace C2.Forms
             this.label1.Visible = true;
 
             GlueType type = (GlueType)tabBar1.SelectedItem.Tag;
-            new Log.Log().LogManualButton(GlueListDesc[type], "01");
             glueSetting = GlueSettingFactory.GetSetting(type);
             if (GlueListTmpDesc.ContainsKey(type))
             {
@@ -189,7 +188,6 @@ namespace C2.Forms
         private void BrowserButton_Click(object sender, EventArgs e)
         {
             GlueType type = (GlueType)tabBar1.SelectedItem.Tag;
-            new Log.Log().LogManualButton(GlueListDesc[type], "02");
             OpenFileDialog OpenFileDialog = new OpenFileDialog
             {
                 Filter = "数据包 | *.zip|其他| *.xls;*.xlsx"

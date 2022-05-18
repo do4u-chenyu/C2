@@ -13,7 +13,6 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
-            new Log().LogManualButton("MD5(128位)", "02");
             MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
             byte[] data = md5Hasher.ComputeHash(GetBytes(str));
             StringBuilder sBuilder = new StringBuilder();

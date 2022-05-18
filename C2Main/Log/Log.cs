@@ -13,7 +13,6 @@ namespace C2.Log
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-            // new Log.Log().LogManualButton(modelName,"01");
             DateTime e = DateTime.Now;
             string startTime = e.ToString("yyyyMMddHHmmss");
             string userName = WFDWebAPI.GetInstance().UserName;

@@ -207,30 +207,6 @@ namespace C2.Controls.Left
             }
 
         }
-        private string trans(string buttonType)
-        {
-            switch (buttonType)
-            {
-                case "BigAPK":
-                    return "APK大眼睛";
-                case "APK":
-                    return "APK小眼睛";
-                case "Wifi":
-                    return "Wifi查询";
-                case "InformationSearch":
-                    return "银行卡号查询";
-                case "Tude":
-                    return "坐标经纬度转换";
-                case "PostAndGet":
-                    return "POST工具";
-                case "PwdGenerator":
-                    return "社工生成器";
-                case "GoldEyes":
-                    return "SEO综合查询";
-                default:
-                    return string.Empty;
-            }
-        }
         
         #region 定义弹窗
 
@@ -266,23 +242,13 @@ namespace C2.Controls.Left
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || buttonType == "PwdGenerator" || buttonType == "GoldEyes")
-                new Log.Log().LogManualButton("实验楼" + "-" + trans(buttonType), "01");
-            else
-                new Log.Log().LogManualButton(buttonType, "01");
             OpenToolForm();
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
-            {
-                if (buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || buttonType == "PwdGenerator" || buttonType == "GoldEyes")
-                    new Log.Log().LogManualButton("实验楼" + "-" + trans(buttonType), "01");
-                else
-                    new Log.Log().LogManualButton(buttonType, "01");
                 OpenToolForm();
-            }
         }
         public void OpenToolForm()
         {

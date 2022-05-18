@@ -43,7 +43,6 @@ namespace KnowledgeBase
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            new Log().LogManualButton("知识库", "02");
             string chromePath = GetChromePath();
             if (!string.IsNullOrEmpty(chromePath))
             {

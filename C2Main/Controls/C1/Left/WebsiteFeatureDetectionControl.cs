@@ -22,7 +22,6 @@ namespace C2.Controls.C1.Left
 
         private void AddLabel_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("网站侦察兵", "01");
             var dialog = new AddWFDTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {

@@ -140,7 +140,6 @@ namespace C2.Dialogs
             }
             this.extType = OpUtil.ExtType.Unknow;
             this.encoding = OpUtil.Encoding.UTF8;
-            new Log.Log().LogManualButton("数据管理-添加数据", "02");
         }
 
         private void InitInvalidCharPattern()

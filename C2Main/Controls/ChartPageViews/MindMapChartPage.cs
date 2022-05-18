@@ -757,12 +757,10 @@ namespace C2.ChartPageView
         }
         void MenuAddMap_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("图上作战", "01");
             mindMapView1.AddMap();
         }
         void MenuAddBoss_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("数据大屏", "01");
             mindMapView1.AddBoss();
         }
         
@@ -915,10 +913,11 @@ namespace C2.ChartPageView
                 DocxEngine docxEngine = new DocxEngine();
                 if (docxEngine.MindMapExportChartToFile(this.Chart.Document, this.Chart, dialog.FileName))
                 {
-                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
-                    fld.Text = Lang._("Export Success");
+                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName)
+                    {
+                        Text = Lang._("Export Success")
+                    };
                     fld.ShowDialog(Global.GetMainForm());
-                    new Log.Log().LogManualButton("Word文档", "06");
                 }
             }
         }
@@ -935,10 +934,11 @@ namespace C2.ChartPageView
                 XmindEngine xmindEngine = new XmindEngine();
                 if (xmindEngine.MindMapExportChartToFile(this.Chart.Document, this.Chart, dialog.FileName))
                 {
-                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName);
-                    fld.Text = Lang._("Export Success");
+                    var fld = new FileLocationDialog(dialog.FileName, dialog.FileName)
+                    {
+                        Text = Lang._("Export Success")
+                    };
                     fld.ShowDialog(Global.GetMainForm());
-                    new Log.Log().LogManualButton("XML文档", "06");
                 }
             }
         }

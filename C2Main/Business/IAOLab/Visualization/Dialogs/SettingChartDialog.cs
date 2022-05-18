@@ -47,7 +47,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
         #region 生成图表
         protected override bool OnOKButtonClick()
         {
-            new Log.Log().LogManualButton("实验楼" + "-" + this.chartType.Text, "02");
             if (OptionsHaveBlank())
             {
                 HelpUtil.ShowMessageBox("有未配置的参数，请重新配置后再确定。");
@@ -301,7 +300,6 @@ namespace C2.Business.IAOLab.Visualization.Dialogs
 
         private void ChartType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("实验楼" + "-" + this.chartType.Text, "01");
             if (this.chartType.SelectedIndex == 0)
             {
                 this.panel1.Show();

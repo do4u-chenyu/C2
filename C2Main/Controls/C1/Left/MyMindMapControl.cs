@@ -50,10 +50,7 @@ namespace C2.Controls.Left
                 }
                 using (GuarderUtil.WaitCursor)
                     if (ImportModel.GetInstance().UnZipC2File(fullFilePath, Global.GetMainForm().UserName, password))
-                    {
                         HelpUtil.ShowMessageBox(String.Format("[{0}] 导入 分析笔记 成功", filename));
-                        new Log.Log().LogManualButton("分析笔记", "04");
-                    }
             }
         }
     }

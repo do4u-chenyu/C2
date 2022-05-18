@@ -62,7 +62,6 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true)
             {
-                new Log.Log().LogManualButton("实验楼" + "-" + SEOTabPage.Text, "02");
                 string[] inputArray = this.richTextBox1.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
@@ -82,7 +81,6 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
             {
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "02");
                 string[] inputArray = richTextBox2.Text.Split('\n');
                 progressBar2.Value = 0;
                 progressBar2.Maximum = GetRelLengthOfArry(inputArray);
@@ -398,14 +396,6 @@ namespace C2.Dialogs.IAOLab
             catch
             {
             }
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab == SEOTabPage)
-                new Log.Log().LogManualButton("实验楼" + "-" + SEOTabPage.Text, "01");
-            else if (tabControl1.SelectedTab == tabPage1)
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "01");
         }
     }
 }

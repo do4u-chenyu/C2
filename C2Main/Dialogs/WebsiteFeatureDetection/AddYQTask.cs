@@ -167,7 +167,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!(genTask && base.OnOKButtonClick()))
                 return false;
 
-            new Log.Log().LogManualButton("舆情侦察兵", "02");
             HelpUtil.ShowMessageBox("任务下发成功");
             return true;
         }

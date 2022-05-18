@@ -637,7 +637,6 @@ namespace FullTextGrammarAssistant
 
         private void Clipboard_Click(object sender, EventArgs e)
         {
-            new Log().LogManualButton("全文语法助手", "02");
             if (tabControl1.SelectedTab.Text == "queryclient")
                 System.Windows.Forms.Clipboard.SetDataObject(previewqueryText.Text);
             else

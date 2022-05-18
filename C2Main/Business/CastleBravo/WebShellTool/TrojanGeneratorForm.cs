@@ -48,7 +48,6 @@ namespace C2.Business.CastleBravo.WebShellTool
 
         protected override bool OnOKButtonClick()
         {
-            new Log.Log().LogManualButton(type, "02");
             this.saveFileDialog1.FileName = this.trojanComboBox.Text;
             if (TrojanType == "哥斯拉配套Trojan")
                 this.saveFileDialog1.FileName += "_" + this.EncryType;

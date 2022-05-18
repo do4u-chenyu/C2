@@ -14,7 +14,6 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
-            new Log().LogManualButton("SHA-512", "02");
             byte[] bytValue = GetBytes(str);
             SHA512 sha512 = new SHA512CryptoServiceProvider();
             byte[] retVal = sha512.ComputeHash(bytValue);

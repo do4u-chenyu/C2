@@ -56,7 +56,6 @@ namespace C2.Business.HIBU.FaceDetector
 
         private void TransBtn_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("HIBU" + "-" + this.Text, "02");
             //清空上一次的查询结果
             this.dataGridView1.Rows.Clear();
 

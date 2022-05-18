@@ -35,7 +35,6 @@ namespace C2.Controls.C1.Left
 
         private void AddTaskLabel_MouseClick(object sender, MouseEventArgs e)
         {
-            new Log.Log().LogManualButton("全文工具箱", "01");
             if (e.Button != MouseButtons.Left)
                 return;
 
