@@ -21,6 +21,9 @@ namespace C2.Business.CastleBravo.VPN
         private int mode;
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<VPNTaskConfig> Tasks;
+
+        private List<string> rssFailedList;
+
         public BatchAddVPNServerForm()
         {
             InitializeComponent();
@@ -35,6 +38,7 @@ namespace C2.Business.CastleBravo.VPN
             Tasks = new List<VPNTaskConfig>();
             OKButton.Size = new System.Drawing.Size(75, 27);
             CancelBtn.Size = new System.Drawing.Size(75, 27);
+            rssFailedList = new List<string>();
         }
 
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
@@ -63,7 +67,10 @@ namespace C2.Business.CastleBravo.VPN
 
         protected override bool OnOKButtonClick()
         {
-            return (this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile()) && base.OnOKButtonClick();
+            bool ret = (this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile()) && base.OnOKButtonClick();
+            if (!rssFailedList.IsEmpty())
+                HelpUtil.ShowMessageBox(string.Format("有{0}个订阅地址解析失败，需要手工复核", rssFailedList.Count)) ;
+            return ret;
         }
 
         private bool GenTasksFromPaste()
@@ -88,6 +95,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssPB.Maximum = max;
             this.rssPB.Value = 0;
             this.rssLB.Text = string.Empty;
+            this.rssFailedList.Clear();
         }
 
         private void VisibleProgressBar()
@@ -158,6 +166,9 @@ namespace C2.Business.CastleBravo.VPN
                 string ret = TryDecodeBase64(WebClientEx.TryGet(line, 
                                                                 Global.WebClientDefaultTimeout,
                                                                 ProxySetting.Empty));
+                if (ret.IsNullOrEmpty())
+                    rssFailedList.Add(line);
+
                 foreach (string ss in ret.SplitLine())
                     DoSSLine(ss, line);
 
@@ -181,7 +192,9 @@ namespace C2.Business.CastleBravo.VPN
                                     obj.ContainsKey("proxies") ? obj["proxies"] as List<object> :
                                     new List<object>();
 
-                
+                if (list.IsEmpty())
+                    rssFailedList.Add(line);
+
                 foreach (Dictionary<object, object> vmess in list)
                 {
                     string addr = vmess.ContainsKey("server") ? vmess["server"] as string : string.Empty;
