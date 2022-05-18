@@ -19,6 +19,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             InitializeComponent();
         }
 
+        public bool FreeButtonVisible { set => freeButton.Visible = value; }
+
         protected override bool OnOKButtonClick()
         {
             string respMsg = string.Empty;
@@ -81,6 +83,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 otpTextBox.Text = string.Empty;
                 otpTextBox.ForeColor = Color.Black;
             }
+        }
+
+        private void FreeButton_Click(object sender, EventArgs e)
+        {  
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

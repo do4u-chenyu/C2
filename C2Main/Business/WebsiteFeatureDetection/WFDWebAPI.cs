@@ -277,6 +277,7 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 UAdialog.StartPosition = FormStartPosition.CenterScreen;
                 UAdialog.Text = "C2-用户认证";
+                UAdialog.FreeButtonVisible = true;
             }
             if (UAdialog.ShowDialog() != DialogResult.OK)
                 return false;
