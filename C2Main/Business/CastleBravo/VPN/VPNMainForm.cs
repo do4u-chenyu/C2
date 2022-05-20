@@ -62,13 +62,15 @@ namespace C2.Business.CastleBravo.VPN
             };
         }
 
-        private void 添加ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void 导入备份_ToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            VPNTaskConfig config = new AddVPNServerForm().ShowDialogNew(ST.NowString());
-            if (config == VPNTaskConfig.Empty)
+            ImportForm dialog = new ImportForm();
+            if (dialog.ShowDialog() != DialogResult.OK)
                 return;
-            LV.Items.Add(NewLVI(config));
-            tasks.Add(config);
+            using (GuarderUtil.WaitCursor)
+                LV.Items.AddRange(NewLVIS(dialog.Tasks));
+            tasks.AddRange(dialog.Tasks);
+            SaveDB();
         }
 
         private void 批量添加ToolStripMenuItem_Click(object sender, System.EventArgs e)

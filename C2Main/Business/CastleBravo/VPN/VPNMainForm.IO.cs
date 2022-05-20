@@ -20,7 +20,7 @@ namespace C2.Business.CastleBravo.VPN
             if (columns == null)
                 columns = new int[0];
 
-            StreamWriter sw = new StreamWriter(path, false, Encoding.Default);
+            StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8);
             try
             {
                 List<string> tmpLists = new List<string>();

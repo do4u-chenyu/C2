@@ -180,16 +180,15 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // 单个添加ToolStripMenuItem
             // 
-            this.单个添加ToolStripMenuItem.Enabled = false;
             this.单个添加ToolStripMenuItem.Name = "单个添加ToolStripMenuItem";
-            this.单个添加ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
-            this.单个添加ToolStripMenuItem.Text = "单个添加";
-            this.单个添加ToolStripMenuItem.Click += new System.EventHandler(this.添加ToolStripMenuItem_Click);
+            this.单个添加ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.单个添加ToolStripMenuItem.Text = "导入备份";
+            this.单个添加ToolStripMenuItem.Click += new System.EventHandler(this.导入备份_ToolStripMenuItem_Click);
             // 
             // 批量添加ToolStripMenuItem
             // 
             this.批量添加ToolStripMenuItem.Name = "批量添加ToolStripMenuItem";
-            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
+            this.批量添加ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.批量添加ToolStripMenuItem.Text = "批量添加";
             this.批量添加ToolStripMenuItem.Click += new System.EventHandler(this.批量添加ToolStripMenuItem_Click);
             // 
@@ -197,7 +196,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             this.查找ToolStripMenuItem.Name = "查找ToolStripMenuItem";
             this.查找ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(218, 34);
+            this.查找ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.查找ToolStripMenuItem.Text = "查找";
             this.查找ToolStripMenuItem.Click += new System.EventHandler(this.查找ToolStripMenuItem_Click);
             // 
