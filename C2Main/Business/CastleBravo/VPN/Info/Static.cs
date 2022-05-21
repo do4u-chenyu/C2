@@ -65,11 +65,42 @@ namespace C2.Business.CastleBravo.VPN.Info
               .AppendLine()
               .AppendLine(string.Format("加密算法分布:{1}{2}{0}", GenStaticMethodString(methodDict, total), System.Environment.NewLine, OpUtil.Blank))
               .AppendLine()
+              .AppendLine(string.Format("Stream流加密:{0}", GenStaticStreamString(methodDict, total)))
+              .AppendLine()
               .AppendLine(string.Format("协议类型分布:{1}{2}{0}", StaticSS(LV), System.Environment.NewLine, OpUtil.Blank))
               .AppendLine()
               .AppendLine(string.Format("服务器地区分布:{1}{2}{0}", GenStaticCountryString(countryDict), System.Environment.NewLine, OpUtil.Blank));
 
             return sb.ToString();
+        }
+
+        private static string GenStaticStreamString(Dictionary<string, int> methodDict, int total)
+        {
+            int a = 0;
+            foreach (var kv in methodDict)
+            {
+                switch (kv.Key)
+                {
+                    case "chacha20-ietf":
+                    case "rc4-md5":
+                    case "salsa20":
+                    case "chacha20":
+                    case "bf-cfb":
+                    case "aes-256-cfb":
+                    case "aes-192-cfb":
+                    case "aes-128-cfb":
+                    case "aes-256-ctr":
+                    case "aes-192-ctr":
+                    case "aes-128-ctr":
+                    case "camellia-256-cfb":
+                    case "camellia-192-cfb":
+                    case "camellia-128-cfb":
+                        a += kv.Value;
+                        break;
+                }
+            }
+
+            return string.Format("{0}({1:P2})", a, total < 1 ? 0 : (float)a / total);
         }
 
         private static string GenStaticMethodString(Dictionary<string, int> methodDict, int total)
