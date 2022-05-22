@@ -94,8 +94,8 @@ namespace C2.Business.CastleBravo.VPN
             Proxy = new ProxySettingForm(Proxy).ShowDialog();
             ResetSLabel();
         }
-        
-       // private bool actionNeedStop = false;
+
+        // private bool actionNeedStop = false;
         private void StopMenu_Click(object sender, System.EventArgs e)
         {
             actionNeedStop = true;
@@ -137,8 +137,8 @@ namespace C2.Business.CastleBravo.VPN
             LV.SelectedItems[0].Tag = cur;
             LV.SelectedItems[0].SubItems[1].Text = cur.Remark;
             LV.SelectedItems[0].SubItems[2].Text = cur.Host;
-            LV.SelectedItems[0].SubItems[3].Text = cur.Port;   
-            LV.SelectedItems[0].SubItems[4].Text = cur.Password; 
+            LV.SelectedItems[0].SubItems[3].Text = cur.Port;
+            LV.SelectedItems[0].SubItems[4].Text = cur.Password;
             LV.SelectedItems[0].SubItems[5].Text = cur.Method;
             LV.SelectedItems[0].SubItems[6].Text = cur.Status;
             LV.SelectedItems[0].SubItems[7].Text = cur.SSVersion;
@@ -207,13 +207,13 @@ namespace C2.Business.CastleBravo.VPN
                 return;
 
             columns = columns ?? (new int[0]);
-       
+
             StringBuilder sb = new StringBuilder();
             foreach (ListViewItem lvi in this.LV.SelectedItems)
-            { 
+            {
                 for (int i = 0; i < lvi.SubItems.Count; i++)
                     if (columns.Length == 0 || columns._Contains(i))
-                        sb.Append(lvi.SubItems[i].Text).Append(OpUtil.TabSeparator);      
+                        sb.Append(lvi.SubItems[i].Text).Append(OpUtil.TabSeparator);
                 sb.TrimEndT().AppendLine();
             }
             FileUtil.TryClipboardSetText(sb.ToString());
@@ -270,17 +270,17 @@ namespace C2.Business.CastleBravo.VPN
 
         private void 导出_IP端口_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Export("IP端口", 
+            Export("IP端口",
                 new int[] { CI_端口, CI_IP地址, CI_归属地 },
-                null,  
+                null,
                 (t) => { string tmp = t[0]; t[0] = t[1]; t[1] = tmp; return t; });  // 交换 端口 地址 位置
         }
 
         private void 导出_IP端口分享地址_toolStripMenuItem8_Click(object sender, EventArgs e)
         {
-            Export("IP端口-梯子地址", 
-                new int[] { CI_端口, CI_IP地址, CI_归属地, CI_梯子地址 }, 
-                null, 
+            Export("IP端口-梯子地址",
+                new int[] { CI_端口, CI_IP地址, CI_归属地, CI_梯子地址 },
+                null,
                 (t) => { string tmp = t[0]; t[0] = t[1]; t[1] = tmp; return t; });  // 交换 端口 地址 位置
         }
         private void 导出_所有字段_MenuItem_Click(object sender, EventArgs e)
@@ -458,9 +458,94 @@ namespace C2.Business.CastleBravo.VPN
             SaveDB();       // 写入文件
         }
 
+        private void FilterItems(Func<VPNTaskConfig, bool> method, bool reserveTag = true)
+        {
+            List<VPNTaskConfig> _tasks = new List<VPNTaskConfig>();
+
+            foreach (ListViewItem item in LV.Items)
+            {
+                VPNTaskConfig task = item.Tag as VPNTaskConfig;
+                if (reserveTag && method(task))
+                    _tasks.Add(task);
+                else if (!reserveTag && !method(task))
+                    _tasks.Add(task);
+            }
+
+            tasks.Clear();
+            tasks.AddRange(_tasks);
+
+            RefreshLV();    // 刷新LV
+            ResetSLabel();  // 重新计算工具栏,状态栏信息
+            StaticItems();  // 
+            SaveDB();       // 写入文件
+        }
+
         private void StaticsMenu_Click(object sender, EventArgs e)
         {
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
+        }
+
+        private void 只保留SS协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 只保留SSR协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.ShadowsocksR; });
+        }
+
+        private void 只保留SS协议ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Shadowsocks; });
+        }
+
+        private void 只保留VMESS协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Vmess; });
+        }
+
+        private void 只保留VLESS协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.VLESS; });
+        }
+
+        private void 只保留Trojan协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Trojan; });
+        }
+        private void 只保留自定义协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Custom; });
+        }
+        private void 删除SS协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Shadowsocks; }, false);
+        }
+
+        private void 删除SSR协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.ShadowsocksR; }, false);
+        }
+
+        private void 删除VMESS协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Vmess; }, false);
+        }
+
+        private void 删除VLESS协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.VLESS; }, false);
+        }
+
+        private void 删除Trojan协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Trojan; }, false);
+        }
+
+        private void 删除自定义协议ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterItems((t) => { return t.configType() == v2rayN.Mode.EConfigType.Custom; }, false);
         }
 
 
