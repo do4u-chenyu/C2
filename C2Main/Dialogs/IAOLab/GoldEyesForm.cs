@@ -199,7 +199,7 @@ namespace C2.Dialogs.IAOLab
 
         public string GetSEOTool(string host)
         {
-            string url =  Global.SEOUrl;
+            string url =  Global.FastIaoUrl + "/seo_query";
             HttpWebRequest request = ConfigPost(url);
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "domain", host } };
             string content = JsonConvert.SerializeObject(pairs);
@@ -288,7 +288,7 @@ namespace C2.Dialogs.IAOLab
 
         private List<Dictionary<string, string>> IpConvertHost(string ip)
         {
-            string url = Global.IpToHostUrl;
+            string url = Global.FastIaoUrl + "/capture_host_by_ip";
             HttpWebRequest req = ConfigPost(url);
             HttpWebResponse resp;
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", ip } };

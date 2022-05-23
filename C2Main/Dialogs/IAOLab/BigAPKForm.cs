@@ -21,11 +21,11 @@ namespace C2.Dialogs.IAOLab
             {
                 string chromePath = ProcessUtil.GetChromePath();
                 System.Diagnostics.Process.Start(chromePath, Global.APKUrl);
-                this.Close();
+                Close();
             }
             else
             {
-                this.webBrowser1.Url = new Uri(Global.APKUrl, UriKind.Absolute);
+                webBrowser1.Url = new Uri(Global.APKUrl, UriKind.Absolute);
             }
         }
     }
