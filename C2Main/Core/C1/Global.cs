@@ -203,7 +203,7 @@ namespace C2.Core
         public const string ServerUrl = @"http://221.226.113.110:8484";
         public const string IpUrl = @"http://221.226.113.110:8484/Castle/ip?ip=";
         public const string CastleIDLEUrl = @"http://221.226.113.110:8484/Castle/check";
-        public const string APKUrl = @"http://113.31.110.244:6663/ns/APPtest/home";
+        public const string APKUrl = @"http://113.31.110.244:5147/APK/";
         public const string KnowledgeUrl = @"http://15.73.3.241:19001/KnowledgeBase/";
         public const string IpToHostUrl = @"http://113.31.114.239:53373/api/fhge/capture_host_by_ip";
         public const string SEOUrl = @"http://113.31.114.239:53373/api/fhge/seo_query";

@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Core;
+using C2.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace C2.Dialogs.IAOLab
         public BigAPKForm()
         {
             InitializeComponent();
-            IntPtr Hicon = global::C2.Properties.Resources.BigAPK.GetHicon();
+            IntPtr Hicon = Properties.Resources.BigAPK.GetHicon();
             this.Icon = Icon.FromHandle(Hicon);
         }
         
@@ -19,12 +20,12 @@ namespace C2.Dialogs.IAOLab
             if (!string.IsNullOrEmpty(ProcessUtil.GetChromePath()))
             {
                 string chromePath = ProcessUtil.GetChromePath();
-                System.Diagnostics.Process.Start(chromePath, "http://113.31.110.244:6663/ns/APPtest/home");
+                System.Diagnostics.Process.Start(chromePath, Global.APKUrl);
                 this.Close();
             }
             else
             {
-                this.webBrowser1.Url = new System.Uri("http://113.31.110.244:6663/ns/APPtest/home", System.UriKind.Absolute);
+                this.webBrowser1.Url = new Uri(Global.APKUrl, UriKind.Absolute);
             }
         }
     }
