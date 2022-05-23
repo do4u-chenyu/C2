@@ -104,12 +104,12 @@ namespace C2.Business.CastleBravo.VPN
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 358);
+            this.label6.Location = new System.Drawing.Point(56, 358);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 18);
+            this.label6.Size = new System.Drawing.Size(62, 18);
             this.label6.TabIndex = 10029;
-            this.label6.Text = "分享地址：";
+            this.label6.Text = "其他：";
             // 
             // label5
             // 

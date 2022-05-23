@@ -56,7 +56,7 @@
             // BtnReset
             // 
             this.BtnReset.Location = new System.Drawing.Point(279, 176);
-            this.BtnReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnReset.Margin = new System.Windows.Forms.Padding(4);
             this.BtnReset.Name = "BtnReset";
             this.BtnReset.Size = new System.Drawing.Size(112, 38);
             this.BtnReset.TabIndex = 2;
@@ -67,7 +67,7 @@
             // BtnStartStop
             // 
             this.BtnStartStop.Location = new System.Drawing.Point(16, 176);
-            this.BtnStartStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnStartStop.Margin = new System.Windows.Forms.Padding(4);
             this.BtnStartStop.Name = "BtnStartStop";
             this.BtnStartStop.Size = new System.Drawing.Size(112, 38);
             this.BtnStartStop.TabIndex = 1;
@@ -79,7 +79,7 @@
             // 
             this.NudHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.NudHour.Location = new System.Drawing.Point(4, 39);
-            this.NudHour.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NudHour.Margin = new System.Windows.Forms.Padding(4);
             this.NudHour.Maximum = new decimal(new int[] {
             99,
             0,
@@ -113,7 +113,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label7, 3, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 16);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
@@ -159,7 +159,7 @@
             // 
             this.NudMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.NudMinute.Location = new System.Drawing.Point(137, 39);
-            this.NudMinute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NudMinute.Margin = new System.Windows.Forms.Padding(4);
             this.NudMinute.Maximum = new decimal(new int[] {
             59,
             0,
@@ -175,7 +175,7 @@
             // 
             this.NudSecond.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.NudSecond.Location = new System.Drawing.Point(270, 39);
-            this.NudSecond.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NudSecond.Margin = new System.Windows.Forms.Padding(4);
             this.NudSecond.Maximum = new decimal(new int[] {
             59,
             0,
@@ -272,7 +272,7 @@
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(16, 148);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(375, 12);
             this.progressBar1.TabIndex = 3;
@@ -287,7 +287,7 @@
             this.Controls.Add(this.BtnStartStop);
             this.Controls.Add(this.BtnReset);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TimerDialog";
             this.Text = "Timer";
             ((System.ComponentModel.ISupportInitialize)(this.NudHour)).EndInit();

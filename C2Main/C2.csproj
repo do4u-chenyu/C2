@@ -377,6 +377,12 @@
       <DependentUpon>CAForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\CastleBravo\VPN\Client\ClientSetting.cs" />
+    <Compile Include="Business\CastleBravo\VPN\ImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Business\CastleBravo\VPN\ImportForm.Designer.cs">
+      <DependentUpon>ImportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Business\CastleBravo\VPN\Info\Static.cs" />
     <Compile Include="Business\CastleBravo\VPN\Info\Type.cs" />
     <Compile Include="Business\CastleBravo\VPN\Probe\CAFactory.cs" />
@@ -2429,6 +2435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\VPN\CAForm.resx">
       <DependentUpon>CAForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Business\CastleBravo\VPN\ImportForm.resx">
+      <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Business\CastleBravo\VPN\RandomProbeForm.resx">
       <DependentUpon>RandomProbeForm.cs</DependentUpon>
