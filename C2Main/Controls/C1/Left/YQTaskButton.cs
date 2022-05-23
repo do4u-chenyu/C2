@@ -106,9 +106,12 @@ namespace C2.Controls.C1.Left
 
             yqfdc = new YQFeatureDetectionControl();
             yqfdc.LoadYQTasks(xmlPath);
-            
+            this.leftPictureBox.Visible = false;
+            this.rightPictureBox.Visible = false;
+            this.noFocusButton.Visible = false;
+            FileUtil.DeleteDirectory(this.TaskInfo.ResultFilePath);
             //yqfdc.RemoveYQButton(this);
-            //FileUtil.DeleteDirectory(this.TaskInfo.ResultFilePath);
+
             //yqfdc.YQSave();
         }
 
