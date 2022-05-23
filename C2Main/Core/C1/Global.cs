@@ -205,6 +205,7 @@ namespace C2.Core
         public const string APKUrl = @"http://113.31.110.244:5147/APK/";
         public const string KnowledgeUrl = @"http://15.73.3.241:19001/KnowledgeBase/";
         public const string FastIaoUrl = @"http://113.31.114.239:53373/api/fhge";
+        public const string YQUrl = @"http://47.94.39.209:22222/api/yq/";   //测试
 
         public static Dictionary<string, string> WFDPredictionCodeDict = new Dictionary<string, string>
         {
