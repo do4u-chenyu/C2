@@ -101,7 +101,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             string status = string.Empty;
             string error = string.Empty;
-            string requestURL = Global.SEOUrl + "get_status";
+            string requestURL = Global.FastIaoUrl + "get_status";
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "rule_id", infoArray[1] } };
             HttpHandler httpHandler = new HttpHandler();
             try
@@ -157,7 +157,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             string error = string.Empty;
             string result = string.Empty;
             JObject json = new JObject();
-            string requestURL = Global.SEOUrl + "get_message";
+            string requestURL = Global.FastIaoUrl + "get_message";
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "rule_id", ruleID } };
             HttpHandler httpHandler = new HttpHandler();
             try
