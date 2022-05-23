@@ -91,7 +91,7 @@ namespace C2.Business.HTTP
             return result;
         }
 
-            public Response PostCode(string url, string postData, int timeout = 10000,bool keepAlive = true)
+        public Response PostCode(string url, string postData, int timeout = 10000,bool keepAlive = true)
         {
             Response resp = new Response();
             try

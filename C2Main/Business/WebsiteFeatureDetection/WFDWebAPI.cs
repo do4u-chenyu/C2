@@ -15,7 +15,7 @@ namespace C2.Business.WebsiteFeatureDetection
     class WFDWebAPI
     {
         public string UserName { set; get; }
-        string Token;
+        public string Token;
         string APIUrl;
         string LoginUrl;
         string ProClassifierUrl;
