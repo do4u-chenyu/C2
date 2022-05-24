@@ -31,6 +31,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private string destDirectory;
         private string taskFilePath;
         private string destFilePath;
+        private string statusFilePath;
         private string TaskCreateTime;
         private readonly Dictionary<string, string> table;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
@@ -47,7 +48,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             InitTaskInfo();
 
             token = string.Empty;
-            maxRow = 100;
+            maxRow = 1000;
             startTime = 0;
             endTime = 0;
             ruleDatasource = 0;
@@ -163,10 +164,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
             }
             this.TaskInfo = UpdateYQTaskInfo();
+
             bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
             if (!(genTask && base.OnOKButtonClick()))
                 return false;
 
+            new Log.Log().LogManualButton("舆情侦察兵", "02");
             HelpUtil.ShowMessageBox("任务下发成功");
             return true;
         }
@@ -224,8 +227,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             this.ruleName = this.TaskName;
 
-            taskFilePath = Path.Combine(this.destDirectory, this.TaskName);
-            FileUtil.CreateDirectory(taskFilePath);
+            this.taskFilePath = Path.Combine(this.destDirectory, this.TaskName);
+            FileUtil.CreateDirectory(this.taskFilePath);
+
+            this.statusFilePath = Path.Combine(this.taskFilePath, this.TaskID + "_status.txt");
+            File.Create(this.statusFilePath);
 
             areaCode = GenCode();
 
@@ -346,11 +352,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void AddTasksByKey(string keyWord, int number)
         {
-            //this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
-            this.ruleID = 1416305260;
+            this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
+            //this.ruleID = 1416305260;
+
             destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.TaskID, keyWord));
             using (File.Create(destFilePath)) { }
-            
+
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
             pairs.Add("type", this.ruleType);
@@ -366,9 +373,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 pairs.Add("keyword", keyWord);
             else if(this.TaskContent == "账号")
             {
-                if (!this.ruleHost.IsNullOrEmpty())
-                    pairs.Add("host", this.ruleHost);
-                pairs.Add("userid", keyWord);
+                if (this.TaskModelName == "Twitter") 
+                    pairs.Add("url", "https://twitter.com/" +keyWord.Replace("@",string.Empty));
+                else
+                {
+                    if (!this.ruleHost.IsNullOrEmpty())
+                        pairs.Add("host", this.ruleHost);
+                    pairs.Add("userid", keyWord);
+                }
             }
 
             string error = string.Empty;
@@ -387,14 +399,41 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch (Exception ex)
             {
-                error =  "下发任务失败：" + ex.Message;
+                error = keyWord + "任务下发失败：" + ex.Message;
             }
             if (!error.IsNullOrEmpty())
             {
                 HelpUtil.ShowMessageBox(error);
-                return;
+                StreamWriter sw = null;
+                sw = new StreamWriter(this.statusFilePath, true);
+                sw.WriteLine(keyWord + "\t" +this.ruleID.ToString() + "\tFail\t" + destFilePath);
+                if (sw != null)
+                    sw.Close();
             }
+            else
+            {
+                StreamWriter sw = null;
+                sw = new StreamWriter(this.statusFilePath, true);
+                sw.WriteLine(keyWord + "\t" + this.ruleID.ToString() + "\tRunning\t" + destFilePath);
+                if (sw != null)
+                    sw.Close();
+                StartRunTask(this.ruleID.ToString());
+            }
+            
             return;
         }
+
+        private void StartRunTask(string rule_id)
+        {
+            string requestURL = Global.YQUrl + "get_message";
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "rule_id", rule_id } };
+            HttpHandler httpHandler = new HttpHandler();
+            try
+            {
+                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 1000);
+            }
+            catch { }
+        }
+
     }
 }
