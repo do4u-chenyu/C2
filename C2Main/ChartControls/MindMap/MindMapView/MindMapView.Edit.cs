@@ -157,7 +157,7 @@ namespace C2.Controls.MapViews
                 DialogResult dialogResult = createNewModelForm.ShowDialog();
                 if (dialogResult != DialogResult.OK)
                     return;
-
+                new Log.Log().LogManualButton("多维运算", "运行");
 
                 // 新建模型视图
                 string modelDocumentName = createNewModelForm.ModelTitle;

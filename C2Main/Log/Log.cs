@@ -5,7 +5,6 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -23,15 +22,15 @@ namespace C2.Log
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-            DateTime e = DateTime.Now;
-            string startTime = e.ToString("yyyyMMddHHmmss");
-            string userName = WFDWebAPI.GetInstance().UserName;
-            string ip = IPGet();
-            if (IsInternetAvailable())
-            {
-                KibaRabbitMQSend(SToJson(userName, modelName, type, startTime, ip));//client
-                KibaRabbitMQReceived();//server
-            }   
+            //DateTime e = DateTime.Now;
+            //string startTime = e.ToString("yyyyMMddHHmmss");
+            //string userName = WFDWebAPI.GetInstance().UserName;
+            //string ip = IPGet();
+            //if (IsInternetAvailable())
+            //{
+            //    KibaRabbitMQSend(SToJson(userName, modelName, type, startTime, ip));//client
+            //    KibaRabbitMQReceived();//server
+            //}   
         }
 
         private void KibaRabbitMQSend(string sendMessage)

@@ -267,7 +267,7 @@ namespace C2.Controls.MapViews
                         cmd = cmds[i] + string.Empty;
                     }
                     string modelName = cmd.Split(@"\")[6].ToString();
-
+                    new Log.Log().LogManualButton("战术手册" + "-" + modelName, "运行");
                     p.StandardInput.WriteLine(cmd);
                     //等待进程结束，等待时间为指定的毫秒
                     p.StandardInput.WriteLine("exit");
@@ -277,7 +277,7 @@ namespace C2.Controls.MapViews
             }
             catch (InvalidOperationException)
             {
-                //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
+                //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭D:\work\C2\C2Main\Business\SSH\
                 //UpdateLogDelegate("InvalidOperationException: " + ex.Message);
             }
             

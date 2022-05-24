@@ -753,14 +753,17 @@ namespace C2.ChartPageView
 
         void MenuAddModelOp_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("多维运算", "打开");
             mindMapView1.AddModelOp();
         }
         void MenuAddMap_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("图上作战", "打开");
             mindMapView1.AddMap();
         }
         void MenuAddBoss_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("数据大屏", "打开");
             mindMapView1.AddBoss();
         }
         
@@ -918,6 +921,7 @@ namespace C2.ChartPageView
                         Text = Lang._("Export Success")
                     };
                     fld.ShowDialog(Global.GetMainForm());
+                    new Log.Log().LogManualButton("Word文档", "生成");
                 }
             }
         }
@@ -939,6 +943,7 @@ namespace C2.ChartPageView
                         Text = Lang._("Export Success")
                     };
                     fld.ShowDialog(Global.GetMainForm());
+                    new Log.Log().LogManualButton("Xmind文档", "生成");
                 }
             }
         }

@@ -103,7 +103,10 @@ namespace C2.Controls.Left
                 string password = zipDialog.Password;
                 using (GuarderUtil.WaitCursor)
                     if (Business.Model.ExportModel.GetInstance().ExportC2Model(this.FullFilePath, exportFullPath, password))
+                    {
                         HelpUtil.ShowMessageBox("导出成功,存储路径：" + exportFullPath);
+                        new Log.Log().LogManualButton("分析笔记", "导出");
+                    }
             }
         }
 

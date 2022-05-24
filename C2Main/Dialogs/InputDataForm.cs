@@ -138,8 +138,9 @@ namespace C2.Dialogs
                 DvgClear();
                 Close();
             }
-            this.extType = OpUtil.ExtType.Unknow;
-            this.encoding = OpUtil.Encoding.UTF8;
+            extType = OpUtil.ExtType.Unknow;
+            encoding = OpUtil.Encoding.UTF8;
+            new Log.Log().LogManualButton("数据管理-添加数据", "运行");
         }
 
         private void InitInvalidCharPattern()
