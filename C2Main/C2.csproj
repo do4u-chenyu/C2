@@ -3383,6 +3383,9 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py.z02">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4380,9 +4383,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py.zip">
