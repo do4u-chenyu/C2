@@ -366,6 +366,7 @@ namespace C2.Forms
                     currentManager.Reset();
                 }
                 currentManager.Start();
+                new Log.Log().LogManualButton("聚沙成塔" + "-" + this.Text, "运行");
                 int taskNum = currentManager.CountOpStatus(ElementStatus.Ready);
                 this.progressBar.Step = taskNum > 0 ? 100 / taskNum : 100;
 

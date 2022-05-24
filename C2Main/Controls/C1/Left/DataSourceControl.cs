@@ -368,6 +368,7 @@ namespace C2.Controls.Left
 
         private void addLocalConnectLabel_MouseClick(object sender, MouseEventArgs e)
         {
+            new Log.Log().LogManualButton("数据管理-添加数据", "打开");
             this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
             this.inputDataForm.ShowDialog();
             this.inputDataForm.ReSetParams();

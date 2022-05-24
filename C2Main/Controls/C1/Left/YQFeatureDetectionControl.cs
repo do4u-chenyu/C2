@@ -26,7 +26,7 @@ namespace C2.Controls.C1.Left
        
         private void AddTaskLabel_Click(object sender, EventArgs e)
         {
-            new Log.Log().LogManualButton("舆情侦察兵", "01");
+            new Log.Log().LogManualButton("舆情侦察兵", "打开");
             var dialog = new AddYQTask();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
