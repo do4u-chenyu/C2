@@ -104,7 +104,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
                 selectData = DataItems[ChartOptions["Datasource"][0]];
 
             datasource.Text = selectData.FileName;
-            this.bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
+            bcpInfo = new BcpInfo(selectData.FilePath, selectData.FileEncoding, new char[] { selectData.FileSep });
         }
 
         private void LoadChartOptions()
@@ -122,7 +122,6 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         private void LoadChartOption(string chartType, Control controlX, Control controlY)
         {
-
             if (bcpInfo == null || bcpInfo.ColumnArray.Length == 0)
                 return;
 
@@ -152,6 +151,7 @@ namespace C2.IAOLab.WebEngine.Dialogs
         #region 事件
         protected override bool OnOKButtonClick()
         {
+            new Log.Log().LogManualButton("数据大屏", "运行");
             if (OptionsHaveBlank())
             {
                 HelpUtil.ShowMessageBox("有未配置的参数，请重新配置后再确定。");

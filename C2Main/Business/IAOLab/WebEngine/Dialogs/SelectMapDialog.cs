@@ -6,15 +6,9 @@ using C2.Model;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using C2.Dialogs;
 
 namespace C2.IAOLab.WebEngine.Dialogs
 {
@@ -89,7 +83,8 @@ namespace C2.IAOLab.WebEngine.Dialogs
 
         protected override bool OnOKButtonClick()
         {
-            map = this.mapTypeComboBox.Text;
+            new Log.Log().LogManualButton("图上作战", "运行");
+            map = mapTypeComboBox.Text;
 
             //生成html
             WebUrl = GenGisMapHtml.GetInstance().TransDataToHtml();
@@ -98,11 +93,11 @@ namespace C2.IAOLab.WebEngine.Dialogs
             int upperLimit = 100;
             // 获得x,y轴数据的列索引
             LngIndex = lonComboBox.Tag == null ? lonComboBox.SelectedIndex : ConvertUtil.TryParseInt(lonComboBox.Tag.ToString());
-            List<int> indexlon = new List<int>() { LngIndex }; 
+            _ = new List<int>() { LngIndex };
             LatIndex = latComboBox.Tag == null ? latComboBox.SelectedIndex : ConvertUtil.TryParseInt(latComboBox.Tag.ToString());
-            List<int> indexlat = new List<int>() { LatIndex };
+            _ = new List<int>() { LatIndex };
             WeightIndex = countComboBox.Tag == null ? countComboBox.SelectedIndex : ConvertUtil.TryParseInt(countComboBox.Tag.ToString());
-            List<int> indexcount = new List<int>() { WeightIndex };
+            _ = new List<int>() { WeightIndex };
 
             // 获取选中输入、输出各列数据
             string fileContent;
