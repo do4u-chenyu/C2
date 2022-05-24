@@ -31,15 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YQTaskResult));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.taskInfoGB = new System.Windows.Forms.GroupBox();
-            this.taskInfoLabel = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.taskResultTextBox = new System.Windows.Forms.TextBox();
             this.taskResultButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.taskIDLabel = new System.Windows.Forms.Label();
             this.taskNameLabel = new System.Windows.Forms.Label();
-            this.statusInfoLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,7 +45,6 @@
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilePath = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel1.SuspendLayout();
-            this.taskInfoGB.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -57,13 +52,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Controls.Add(this.taskInfoGB);
             this.panel1.Controls.Add(this.taskResultTextBox);
             this.panel1.Controls.Add(this.taskResultButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.taskIDLabel);
             this.panel1.Controls.Add(this.taskNameLabel);
-            this.panel1.Controls.Add(this.statusInfoLabel);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -72,54 +65,19 @@
             this.panel1.Size = new System.Drawing.Size(646, 150);
             this.panel1.TabIndex = 0;
             // 
-            // taskInfoGB
-            // 
-            this.taskInfoGB.Controls.Add(this.taskInfoLabel);
-            this.taskInfoGB.Controls.Add(this.label5);
-            this.taskInfoGB.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskInfoGB.Location = new System.Drawing.Point(440, 18);
-            this.taskInfoGB.Name = "taskInfoGB";
-            this.taskInfoGB.Size = new System.Drawing.Size(199, 107);
-            this.taskInfoGB.TabIndex = 10036;
-            this.taskInfoGB.TabStop = false;
-            this.taskInfoGB.Text = "任务状态";
-            // 
-            // taskInfoLabel
-            // 
-            this.taskInfoLabel.AutoSize = true;
-            this.taskInfoLabel.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskInfoLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.taskInfoLabel.Location = new System.Drawing.Point(51, 40);
-            this.taskInfoLabel.Name = "taskInfoLabel";
-            this.taskInfoLabel.Size = new System.Drawing.Size(103, 28);
-            this.taskInfoLabel.TabIndex = 1;
-            this.taskInfoLabel.Text = "Running";
-            this.taskInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(70, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 36);
-            this.label5.TabIndex = 0;
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // taskResultTextBox
             // 
             this.taskResultTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskResultTextBox.Location = new System.Drawing.Point(107, 100);
+            this.taskResultTextBox.Location = new System.Drawing.Point(111, 103);
             this.taskResultTextBox.Name = "taskResultTextBox";
-            this.taskResultTextBox.Size = new System.Drawing.Size(246, 25);
+            this.taskResultTextBox.Size = new System.Drawing.Size(404, 25);
             this.taskResultTextBox.TabIndex = 10033;
             // 
             // taskResultButton
             // 
             this.taskResultButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.taskResultButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskResultButton.Location = new System.Drawing.Point(361, 100);
+            this.taskResultButton.Location = new System.Drawing.Point(555, 103);
             this.taskResultButton.Name = "taskResultButton";
             this.taskResultButton.Size = new System.Drawing.Size(66, 25);
             this.taskResultButton.TabIndex = 10032;
@@ -158,14 +116,6 @@
             this.taskNameLabel.TabIndex = 10028;
             this.taskNameLabel.Text = "Name";
             // 
-            // statusInfoLabel
-            // 
-            this.statusInfoLabel.AutoSize = true;
-            this.statusInfoLabel.Location = new System.Drawing.Point(294, 95);
-            this.statusInfoLabel.Name = "statusInfoLabel";
-            this.statusInfoLabel.Size = new System.Drawing.Size(0, 12);
-            this.statusInfoLabel.TabIndex = 10024;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -180,7 +130,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(9, 103);
+            this.label4.Location = new System.Drawing.Point(9, 106);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 19);
             this.label4.TabIndex = 10025;
@@ -252,7 +202,7 @@
             // 
             this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Status.FillWeight = 25F;
-            this.Status.HeaderText = "查询状态";
+            this.Status.HeaderText = "已返回结果条数";
             this.Status.Name = "Status";
             this.Status.ReadOnly = true;
             // 
@@ -283,8 +233,6 @@
             this.Shown += new System.EventHandler(this.YQTaskResult_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.taskInfoGB.ResumeLayout(false);
-            this.taskInfoGB.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -298,13 +246,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label taskIDLabel;
         private System.Windows.Forms.Label taskNameLabel;
-        private System.Windows.Forms.Label statusInfoLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox taskResultTextBox;
-        private System.Windows.Forms.GroupBox taskInfoGB;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label taskInfoLabel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyWord;

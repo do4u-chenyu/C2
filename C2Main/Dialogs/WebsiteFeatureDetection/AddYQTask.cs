@@ -230,8 +230,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskFilePath = Path.Combine(this.destDirectory, this.TaskName);
             FileUtil.CreateDirectory(this.taskFilePath);
 
-            this.statusFilePath = Path.Combine(this.taskFilePath, this.TaskID + "_status.txt");
-            File.Create(this.statusFilePath);
+            this.statusFilePath = Path.Combine(this.taskFilePath, this.TaskID + "_info.txt");
+            //using (File.Create(this.statusFilePath)) { } ;
+            
 
             areaCode = GenCode();
 
@@ -353,14 +354,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void AddTasksByKey(string keyWord, int number)
         {
             this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
+            int resultNumber = 0;
             //this.ruleID = 1416305260;
 
-            destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.TaskID, keyWord));
+            destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.ruleID.ToString(), keyWord));
             using (File.Create(destFilePath)) { }
 
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
-            pairs.Add("type", this.ruleType);
             pairs.Add("name", this.ruleName);
             pairs.Add("datasource", this.ruleDatasource);
             if (this.startTime != 0)
@@ -373,8 +374,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 pairs.Add("keyword", keyWord);
             else if(this.TaskContent == "账号")
             {
-                if (this.TaskModelName == "Twitter") 
-                    pairs.Add("url", "https://twitter.com/" +keyWord.Replace("@",string.Empty));
+                if (this.TaskModelName == "Twitter")
+                {
+                    keyWord = keyWord.Replace("@", string.Empty).Replace(" ",string.Empty);
+                    pairs.Add("url", "https://twitter.com/" + keyWord);
+                    string accountUrl = string.Format("https://api.fhyqw.com/twitter/account?token={0}&screenname={1}",this.token,keyWord);
+                    if(WriteTwitterAccount(accountUrl,keyWord))
+                        resultNumber = 1;
+                }
                 else
                 {
                     if (!this.ruleHost.IsNullOrEmpty())
@@ -382,9 +389,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     pairs.Add("userid", keyWord);
                 }
             }
+            pairs.Add("type", this.ruleType);
 
             string error = string.Empty;
-            string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}",this.token);
+            string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}", this.token);
             HttpHandler httpHandler = new HttpHandler();
             try
             {
@@ -404,36 +412,109 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!error.IsNullOrEmpty())
             {
                 HelpUtil.ShowMessageBox(error);
-                StreamWriter sw = null;
-                sw = new StreamWriter(this.statusFilePath, true);
-                sw.WriteLine(keyWord + "\t" +this.ruleID.ToString() + "\tFail\t" + destFilePath);
-                if (sw != null)
-                    sw.Close();
+                return;
             }
-            else
-            {
-                StreamWriter sw = null;
-                sw = new StreamWriter(this.statusFilePath, true);
-                sw.WriteLine(keyWord + "\t" + this.ruleID.ToString() + "\tRunning\t" + destFilePath);
-                if (sw != null)
-                    sw.Close();
-                StartRunTask(this.ruleID.ToString());
-            }
-            
-            return;
-        }
 
-        private void StartRunTask(string rule_id)
-        {
-            string requestURL = Global.YQUrl + "get_message";
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "rule_id", rule_id } };
-            HttpHandler httpHandler = new HttpHandler();
+            List<string> rowHeaderList = new List<string>
+            {
+                "采集任务url", "文章url", "文章标题", "数据源标识", "用户userid", "发表人昵称", "发表楼层",
+                "回复数", "点赞数、热度值", "主线地区", "图片实际网页地址", "图片短串", "发表时间", "网站域名",
+                "网站名称", "板块名称", "文章正文", "是否转发", "转发数", "点赞数", "评论数", "粉丝数",
+                "关注者数", "发表文章数", "阅读数", "是否为官方认证", "注册地址", "注册地地区编号",
+                "头像链接", "境内外标识", "文章所属分类", "文章所属分类得分", "正负面标识", "文章敏感度",
+                "是否为噪音标识", "文章命中地区编码", "文章命中地区", "行业情感正负面", "行业id", "行业说明"
+            };
+
+            StreamWriter sw = null;
             try
             {
-                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 1000);
+                sw = new StreamWriter(destFilePath, true, Encoding.UTF8);
+                sw.WriteLine(string.Join("\t", rowHeaderList.ToArray()));
+                sw.Flush();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox(ex.Message);
+            }
+            if (sw != null)
+                sw.Close();
+
+            WriteTaskInfo(keyWord, resultNumber.ToString());
         }
 
+        private bool WriteTwitterAccount(string accountUrl,string keyWord)
+        {
+            StringBuilder sb = new StringBuilder();
+            string error = string.Empty;
+            List<string> colList = new List<string>()
+            {
+                "id", "screenName", "name", "isProtected", "isVerified", "description", "createdAt",
+                "profileImageURL", "profileImageLocalURI", "location", "statusesCount", "friendsCount",
+                "followersCount", "favouritesCount", "lastSpideTime", "lastStatTime"
+            };
+            try
+            {
+                JObject json = JObject.Parse(HttpGet(accountUrl));
+                string status = json["status"].ToString();
+                if (status != "200")
+                    error = keyWord + "获取Twitter账号信息失败：" + json["msg"].ToString();
+                else
+                {
+                    var gList = json["results"]["data"];
+                    foreach (string col in colList)
+                    {
+                        string value = gList[col].IsNull() ? string.Empty : gList[col].ToString();
+                        sb.Append(value + "\t");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                error = keyWord + "获取Twitter账号信息失败：" + ex.Message;
+            }
+            StreamWriter sw = null;
+            try
+            {
+                sw = new StreamWriter(this.destFilePath, true, Encoding.UTF8);
+                if (!error.IsNullOrEmpty())
+                {
+                    sw.WriteLine(error);
+                    sw.Write(Environment.NewLine);
+                    sw.Close();
+                    return false;
+                }
+                sw.WriteLine(string.Join("\t", colList.ToArray()));
+                sw.WriteLine(sb.ToString());
+                sw.Write(Environment.NewLine);
+                sw.Flush();
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox(ex.Message);
+            }
+            if (sw != null)
+                sw.Close();
+            return true;
+        }
+
+        private void WriteTaskInfo(string keyWord, string num)
+        {
+            try
+            {
+                FileStream file = new FileStream(this.statusFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                using (StreamWriter sw = new StreamWriter(file,Encoding.UTF8))
+                {
+                    sw.WriteLine(keyWord + "\t" + this.ruleID.ToString() + "\t" + num + "\t" + destFilePath);
+                    sw.Flush();
+                    sw.Close();
+                    file.Close();
+                }
+            }
+            catch (Exception ex)
+            { 
+                HelpUtil.ShowMessageBox(ex.Message); 
+            }
+            return;
+        }
     }
 }

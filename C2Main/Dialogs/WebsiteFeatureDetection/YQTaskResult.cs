@@ -31,9 +31,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskNameLabel.Text = taskInfo.TaskName;
             this.taskIDLabel.Text = taskInfo.TaskID;
             this.taskResultTextBox.Text = taskInfo.ResultFilePath;
-            this.taskInfoLabel.Text = taskInfo.Status.ToString();
             datasourceFilePath = taskInfo.DatasourceFilePath;
-            statusFilePath = Path.Combine(taskInfo.ResultFilePath, taskInfo.TaskID + "_status.txt");
+            statusFilePath = Path.Combine(taskInfo.ResultFilePath, taskInfo.TaskID + "_info.txt");
         }
 
         private void YQTaskResult_Shown(object sender, EventArgs e)
@@ -54,7 +53,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             if (!File.Exists(statusFilePath))
             {
-                HelpUtil.ShowMessageBox(statusFilePath + "任务状态文件不存在");
+                HelpUtil.ShowMessageBox(statusFilePath + "任务信息文件不存在");
                 return;
             }
             string ret = FileUtil.FileReadToEnd(statusFilePath);
@@ -67,9 +66,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 string[] lineSplit = line.Split("\t");
                 if (lineSplit.Length != 4)
                     continue;
-                if (lineSplit[2] == "Running")
-                    lineSplit = UpdateStatus(lineSplit);
-
+                
+                lineSplit = UpdateResult(lineSplit);
                 sb.Append(string.Join("\t", lineSplit) + Environment.NewLine);
 
                 DataGridViewRow dr = new DataGridViewRow();
@@ -97,58 +95,19 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
         }
 
-        private string[] UpdateStatus(string[] infoArray)
+        private string[] UpdateResult(string[] infoArray)
         {
-            string status = string.Empty;
-            string error = string.Empty;
-            string requestURL = Global.YQUrl + "get_status";
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "rule_id", infoArray[1] } };
-            HttpHandler httpHandler = new HttpHandler();
-            try
-            {
-                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 2000);
-                if (resp.StatusCode != HttpStatusCode.OK)
-                    error = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
-
-                Dictionary<string, string> resDict = resp.ResDict;
-                if (resDict["status"] != "success")
-                    error = string.Format("错误http状态：{0}。", resDict["msg"]);
-                else
-                    status = resDict["data"];
-                if (status == "Done")
-                {
-                    List<string> resultList = QueryTaskResultsById(infoArray[1]);
-                    List<string> rowHeaderList = new List<string> 
-                    {
-                        "采集任务url", "文章url", "文章标题", "数据源标识", "用户userid", "发表人昵称", "发表楼层", 
-                        "回复数", "点赞数、热度值", "主线地区", "图片实际网页地址", "图片短串", "发表时间", "网站域名", 
-                        "网站名称", "板块名称", "文章正文", "是否转发", "转发数", "点赞数", "评论数", "粉丝数", 
-                        "关注者数", "发表文章数", "阅读数", "是否为官方认证", "注册地址", "注册地地区编号", 
-                        "头像链接", "境内外标识", "文章所属分类", "文章所属分类得分", "正负面标识", "文章敏感度", 
-                        "是否为噪音标识", "文章命中地区编码", "文章命中地区", "行业情感正负面", "行业id", "行业说明"
-                    };
-                    StreamWriter sw = null;
-                    sw = new StreamWriter(infoArray[3], true);
-                    sw.WriteLine(string.Join("\t", rowHeaderList.ToArray()));
-                    sw.WriteLine(string.Join(Environment.NewLine, resultList.ToArray()));
-                    sw.Flush();
-                    if (sw != null)
-                        sw.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                error = infoArray[1] + "任务状态查询失败：" + ex.Message;
-            }
-            if (!error.IsNullOrEmpty())
-            {
-                HelpUtil.ShowMessageBox(error);
-                status = "Fail";
-            }
-            infoArray[2] = status;
+            List<string> resultList = QueryTaskResultsById(infoArray[1]);
+            
+            StreamWriter sw = null;
+            sw = new StreamWriter(infoArray[3], true);
+            sw.WriteLine(string.Join(Environment.NewLine, resultList.ToArray()));
+            sw.Flush();
+            if (sw != null)
+                sw.Close();
+            infoArray[2] = (Convert.ToInt64(infoArray[2]) + resultList.Count).ToString();
             return infoArray;
         }
-
 
 
         public List<string> QueryTaskResultsById(string ruleID)
@@ -173,7 +132,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     result = resDict["data"];
                 if (result.IsNullOrEmpty())
                 {
-                    resultList.Add(result);
                     return resultList;
                 }
             }
@@ -244,7 +202,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //};
 
 
-
             for (int i = 0; i < array.Length; i++)
             {
                 StringBuilder sb = new StringBuilder();
@@ -271,7 +228,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DeleteRuleID()
         {
-            string ruleID = "2116530364550"; //6116530357670
+            string ruleID = "9616533756201"; //9616533756201
             string token = string.Empty;
             string getTokenURL = "https://api.fhyqw.com/auth/gettoken?username=iao2&password=60726279d628473f6f3f03d5b81b8c95&apikey=50c9429656499f3b26ca1bd6c8045239";
             try
@@ -288,7 +245,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             try
             {
-                long type = 1; //记得改
+                long type = 0; //记得改
                 string deleteIDURL = string.Format("https://api.fhyqw.com/rule?token={0}&id={1}&type={2}", token, ruleID, type);
                 JObject jsonInfo = JObject.Parse(HttpReq(deleteIDURL, "DELETE"));
                 if (jsonInfo["status"].ToString() == "200")
@@ -309,25 +266,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             string postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
             return postContent;
-        }
-
-
-        private void UpdateTaskInfoByResp(string respMsg)
-        {
-            if (respMsg == "success")
-            {
-                taskInfo.Status = YQTaskStatus.Done;
-            }
-            else if (respMsg == "wait")
-            {
-                taskInfo.Status = YQTaskStatus.Running;
-            }
-            else if (respMsg == "fail")
-            {
-                taskInfo.Status = YQTaskStatus.Failed;
-            }
-
-            this.taskInfoLabel.Text = taskInfo.Status.ToString();
         }
 
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
