@@ -60,6 +60,7 @@ namespace C2
         private static string xmlDirectory = Path.Combine(info.Parent.FullName, "tmpRedisASK");
         private static string xmlPath = Path.Combine(xmlDirectory, "tmpRedisASK.xml");
         private static XmlDocument xDoc = new XmlDocument();
+        private static DateTime e = DateTime.Now;
         private string startTime = DateTime.Now.ToString("yyyyMMddHHmmss");
 
         private void InitializeOpenFile(string path)
@@ -381,6 +382,7 @@ namespace C2
         private void SaveUserInfo(XmlNode node)
         {
             DateTime s = ConvertUtil.TryParseDateTime(Program.LinceseDeadLine, Program.DateTimeFormat);
+            //DateTime s = e.AddDays(0 + 7);
             string endTime = s.ToString("yyyyMMddHHmmss");
             new ModelXmlWriter("userInfo", node)
                 .Write("StartTime", startTime)

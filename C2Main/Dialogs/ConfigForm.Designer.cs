@@ -526,7 +526,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 9;
-            this.label8.Text = "Version 2.1.1";
+            this.label8.Text = "Version 2.1.3";
             // 
             // textBox4
             // 

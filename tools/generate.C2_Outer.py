@@ -10,7 +10,14 @@ from typing import List
 from subprocess import Popen
 import ctypes, sys
 import subprocess
+import tempfile
 
+
+def try_remove(path):
+    try:
+        os.remove(path)
+    except:
+        pass
 
 def read_paths(file_path: str) -> List[str]:
     with open(file_path) as f:
@@ -66,6 +73,10 @@ def C2_install():
         return -1;
 
 def beauty_product():
+    tmpfd, tempfilename = tempfile.mkstemp()
+    tmpdir = os.path.split(tempfilename)[0]
+    tmpRedisASK = os.path.join(tmpdir,"tmpRedisASK\\tmpRedisASK.xml")
+    try_remove(tmpRedisASK)
     beauty_path = "C:\Program Files (x86)\Inno Setup 5"
     beauty_cmd = "chdir /d {} & compil32 /cc \"".format(beauty_path) + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\gen_beauty_outer_package.iss\""
     print(beauty_cmd)

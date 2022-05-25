@@ -1,5 +1,7 @@
 ﻿using C2.Business.HTTP;
+using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
+using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -277,7 +279,10 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 UAdialog.StartPosition = FormStartPosition.CenterScreen;
                 UAdialog.Text = "C2-用户认证";
-                UAdialog.FreeButtonVisible = true;
+                if (Global.SNS.ContainsKey(ConfigUtil.GetBIOSSerialNumber()))
+                    UAdialog.FreeButtonVisible = true;
+                else
+                    UAdialog.FreeButtonVisible = false;
             }
             if (UAdialog.ShowDialog() != DialogResult.OK)
                 return false;

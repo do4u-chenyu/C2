@@ -86,7 +86,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         }
 
         private void FreeButton_Click(object sender, EventArgs e)
-        {  
+        {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
