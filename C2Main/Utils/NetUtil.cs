@@ -63,6 +63,7 @@ namespace C2.Utils
 
         public static string[] GetHostAddressList(string url)
         {
+            
             try
             {   // 遇到host就是ip的,返回, Dns.GetHostEntry此时会报错
                 string host = new Uri(FormatUrl(url)).Host.Trim();
@@ -77,6 +78,10 @@ namespace C2.Utils
                         continue;
                     addressList.Add(addr.ToString());
                 }
+
+                if (addressList.IsEmpty())
+                    addressList.Add("0.0.0.0");
+
                 return addressList.ToArray();
             }
             catch

@@ -213,7 +213,7 @@ namespace C2.Business.CastleBravo.VPN
                     string addr = vmess.ContainsKey("server") ? vmess["server"] as string : string.Empty;
                     string port = vmess.ContainsKey("port") ? vmess["port"] as string : string.Empty;
                     string pass = vmess.ContainsKey("uuid") ? vmess["uuid"] as string : string.Empty;
-                    string method = vmess.ContainsKey("cipher") ? vmess["cipher"] as string : string.Empty;
+                    string method = vmess.  ContainsKey("cipher") ? vmess["cipher"] as string : string.Empty;
                     string version = vmess.ContainsKey("type") ? vmess["type"] as string : string.Empty;
                     string remarks = vmess.ContainsKey("name") ? vmess["name"] as string : string.Empty;
 
@@ -245,7 +245,8 @@ namespace C2.Business.CastleBravo.VPN
 
         private void UpdateProgressBar()
         {
-            this.rssLB.Text = string.Format("{0}/{1}", rssPB.Value++, rssPB.Maximum);
+            int val = rssPB.Value < rssPB.Maximum ? rssPB.Value++ : rssPB.Maximum;
+            this.rssLB.Text = string.Format("{0}/{1}", val, rssPB.Maximum);
             Application.DoEvents();
         }
 
@@ -261,7 +262,12 @@ namespace C2.Business.CastleBravo.VPN
                 else
                 {
                     VisibleProgressBar();
-                    DoRSSLine(line);
+                    // clash类订阅地址
+                    if (line.ToLower().Contains("clash="))
+                        DoClashLine(line);
+                    // 非clash类订阅地址
+                    else
+                        DoRSSLine(line);
                 }
                     
                 return;

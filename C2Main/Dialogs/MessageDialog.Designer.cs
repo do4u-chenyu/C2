@@ -52,7 +52,9 @@ namespace C2.Dialogs
             this.ClientSize = new System.Drawing.Size(543, 615);
             this.Controls.Add(this.textBox1);
             this.Name = "MessageDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "信息窗口";
+            this.TopMost = true;
             this.Controls.SetChildIndex(this.textBox1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();

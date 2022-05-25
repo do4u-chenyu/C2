@@ -87,6 +87,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void FreeButton_Click(object sender, EventArgs e)
         {
+            // TODO 试用一次后, 按钮置灰
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

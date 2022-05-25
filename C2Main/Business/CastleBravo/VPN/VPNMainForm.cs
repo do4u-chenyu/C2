@@ -311,6 +311,10 @@ namespace C2.Business.CastleBravo.VPN
         {
             Export("梯子地址-订阅地址", new int[] { CI_梯子地址, CI_订阅地址 });
         }
+        private void 导出密码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("密码(UUID)", new int[] { CI_密码 });
+        }
 
         private void CopySSMenuItem_Click(object sender, EventArgs e)
         {
@@ -436,7 +440,15 @@ namespace C2.Business.CastleBravo.VPN
         {
             RemoveDuplicateItems((t) => { return t.Host + t.Port; });
         }
+        private void 删除重复项密码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Password; });
+        }
 
+        private void 删除重复项密码客户端ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Password + t.SSVersion; });
+        }
 
         private void RemoveDuplicateItems(Func<VPNTaskConfig, string> method)
         {
