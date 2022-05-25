@@ -4,33 +4,77 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace C2.Log
 {
-    class Log
+    partial class Log
     {
         HttpHandler httpHandler = new HttpHandler();
         public string Token;
         private const string APIUrl = "https://113.31.119.85:53374/apis/";//正式
         private string LoginUrl = APIUrl + "Login";
         private string uploadUrl = "http://47.94.39.209:8000/api/log/upload";
+        DateTime e = DateTime.Now;
+        static LogItem logItem = new LogItem();
+        public static ConcurrentQueue<LogItem> ConcurrenLogs = new ConcurrentQueue<LogItem>();
 
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-            //DateTime e = DateTime.Now;
-            //string startTime = e.ToString("yyyyMMddHHmmss");
-            //string userName = WFDWebAPI.GetInstance().UserName;
-            //string ip = IPGet();
-            //if (IsInternetAvailable())
-            //{
-            //    KibaRabbitMQSend(SToJson(userName, modelName, type, startTime, ip));//client
-            //    KibaRabbitMQReceived();//server
-            //}   
+            /*
+            string startTime = e.ToString("yyyyMMddHHmmss");
+            string userName = WFDWebAPI.GetInstance().UserName;
+            string ip = IPGet();
+
+            Task t = Task.Factory.StartNew(() =>
+            {
+                AddQueueEn(userName, modelName, type, startTime, ip);
+            });
+            Task.WaitAll(t);
+            */
+        }
+
+        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
+        {
+            logItem.UserName = userName;
+            logItem.ModelName = modelName;
+            logItem.Type = type;
+            logItem.StartTime = startTime;
+            logItem.Ip = ip;
+            ConcurrenLogs.Enqueue(logItem);//入队
+        }
+
+        private void QueueDequeue()
+        {
+            if (ConcurrenLogs.Count > 0)
+            {
+                LogItem topElement = ConcurrenLogs.ElementAt(0);
+                ConcurrenLogs.TryDequeue(out logItem);//出队
+                if (IsInternetAvailable())
+                {
+                    try
+                    {
+                        KibaRabbitMQSend(SToJson(topElement.UserName, topElement.ModelName, topElement.Type, topElement.StartTime, topElement.Ip));//producter
+                        KibaRabbitMQReceived();//consumer
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        public void LogThread()
+        {
+            ThreadStart childref = new ThreadStart(QueueDequeue);
+            Thread childThread = new Thread(childref);
+            childThread.Start();
         }
 
         private void KibaRabbitMQSend(string sendMessage)
@@ -76,7 +120,7 @@ namespace C2.Log
                     BasicGetResult result = channel.BasicGet("AnTiQueue", true);
                     if (result != null)
                     {
-                        string data =Encoding.UTF8.GetString(result.Body);
+                        string data = Encoding.UTF8.GetString(result.Body);
                         LogUpload(data);
                     }
                 }
@@ -90,18 +134,18 @@ namespace C2.Log
             Dictionary<string, string> resDict = resp.ResDict;
             resDict.TryGetValue("token", out Token);
         }
-      
+
         private void LogUpload(string reciveMessage)
         {
             // {"工号":"X7619","功能模块":"战术手册-ddos模型","动作":"01","时间":"20220523100058","IP":"10.1.203.5"}
             string[] sArray = reciveMessage.Split(',');
             GetToken();
-            Dictionary<string, string> pairs = new Dictionary<string, string> { 
-                { "userid", sArray[0].Split(':')[1].Replace(@"""",string.Empty)}, 
+            Dictionary<string, string> pairs = new Dictionary<string, string> {
+                { "userid", sArray[0].Split(':')[1].Replace(@"""",string.Empty)},
                 { "tasktypename", sArray[1].Split(':')[1].Replace(@"""",string.Empty)},
                 { "submit_time", sArray[3].Split(':')[1].Replace(@"""",string.Empty)},
                 { "action",sArray[2].Split(':')[1].Replace(@"""",string.Empty)},
-                { "ip",sArray[4].Split(':')[1].Replace("}",string.Empty).Replace(@"""",string.Empty)} 
+                { "ip",sArray[4].Split(':')[1].Replace("}",string.Empty).Replace(@"""",string.Empty)}
             };
             try
             {
@@ -109,7 +153,7 @@ namespace C2.Log
                 //Dictionary<string, string> resDict = resp.ResDict;
                 //if (resDict.TryGetValue("status", out string status) && status == "success"){}
             }
-            catch{}
+            catch { }
         }
 
         private string IPGet()
@@ -141,14 +185,19 @@ namespace C2.Log
         {
             try
             {
-                Dns.GetHostEntry("www.baidu.com"); 
+                Dns.GetHostEntry("47.94.39.209");
                 return true;
             }
-            catch
-            {
-                return false;
-            }
+            catch { return false; }
         }
+    }
+    class LogItem
+    {
+        public string UserName { get; set; }
+        public string ModelName { get; set; }
+        public string Type { get; set; }
+        public string StartTime { get; set; }
+        public string Ip { get; set; }
     }
 }
 
