@@ -341,6 +341,12 @@ namespace C2.Business.CastleBravo.VPN
             HelpUtil.ShowMessageBox("复制【IP和端口信息】到剪切板【成功】");
         }
 
+        private void CopyUUIDMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyToClipboard(new int[] { CI_密码});
+            HelpUtil.ShowMessageBox("复制【密码(UUID)】到剪切板【成功】");
+        }
+
 
         private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
         {

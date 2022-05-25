@@ -74,7 +74,7 @@ namespace C2.Utils
 
                 foreach (var addr in Dns.GetHostEntry(host).AddressList)
                 {
-                    if (addr.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
+                    if (addr.AddressFamily != AddressFamily.InterNetwork)
                         continue;
                     addressList.Add(addr.ToString());
                 }
