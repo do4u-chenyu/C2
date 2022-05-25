@@ -491,7 +491,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     sw.Close();
                     return false;
                 }
-                sw.WriteLine(string.Join("\t", colList.ToArray()));
+                sw.WriteLine(string.Join("\t", colList.ToArray()).Replace("id","UserID").Replace("screenName", "UserName").Replace("name", "NickName"));
                 sw.WriteLine(sb.ToString());
                 sw.Write(Environment.NewLine);
                 sw.Flush();
