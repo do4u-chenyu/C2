@@ -156,13 +156,21 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 FileUtil.FileWriteToEnd(FilePath, this.wsTextBox.Text);
             }
 
-            if (!GenAndCheckToken())
-                return false;
-            if(TaskContent=="账号" && TaskModelName == "不限")
+            if (TaskContent == "账号" && TaskModelName == "不限")
             {
                 HelpUtil.ShowMessageBox("查询内容为账号时，必须指定任务类型。");
                 return false;
             }
+
+            if (TaskModelName == "抖音APP" || TaskModelName == "快手")
+            {
+                HelpUtil.ShowMessageBox(" 抖音APP和快手相关查询施工中，敬请期待。");
+                return false;
+            }
+
+            if (!GenAndCheckToken())
+                return false;
+
             this.TaskInfo = UpdateYQTaskInfo();
 
             bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
