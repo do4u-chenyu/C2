@@ -382,7 +382,6 @@ namespace C2
         private void SaveUserInfo(XmlNode node)
         {
             DateTime s = ConvertUtil.TryParseDateTime(Program.LinceseDeadLine, Program.DateTimeFormat);
-            //DateTime s = e.AddDays(0 + 7);
             string endTime = s.ToString("yyyyMMddHHmmss");
             new ModelXmlWriter("userInfo", node)
                 .Write("StartTime", startTime)

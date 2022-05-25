@@ -23,7 +23,7 @@ namespace C2.Business.CastleBravo.VPN
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<VPNTaskConfig> Tasks;
 
-        private List<string> rssFList;
+        private List<string> rssFailHist;
 
         public BatchAddVPNServerForm()
         {
@@ -39,7 +39,7 @@ namespace C2.Business.CastleBravo.VPN
             Tasks = new List<VPNTaskConfig>();
             OKButton.Size = new System.Drawing.Size(75, 27);
             CancelBtn.Size = new System.Drawing.Size(75, 27);
-            rssFList = new List<string>();
+            rssFailHist = new List<string>();
         }
 
         private void PasteModeCB_CheckedChanged(object sender, EventArgs e)
@@ -70,12 +70,12 @@ namespace C2.Business.CastleBravo.VPN
         {
             bool ret = (this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile()) && base.OnOKButtonClick();
 
-            if (rssFList.Count > 0)
+            if (rssFailHist.Count > 0)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(string.Format("有{0}个订阅地址解析失败，需要手工复核:", rssFList.Count));
+                sb.AppendLine(string.Format("有{0}个订阅地址解析失败，需要手工复核:", rssFailHist.Count));
                 
-                foreach (string line in rssFList)
+                foreach (string line in rssFailHist)
                     sb.AppendLine(line);
 
                 new MessageDialog(sb.ToString()).ShowDialog();
@@ -105,7 +105,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssPB.Maximum = max;
             this.rssPB.Value = 0;
             this.rssLB.Text = string.Empty;
-            this.rssFList.Clear();
+            this.rssFailHist.Clear();
         }
 
         private void VisibleProgressBar()
@@ -166,6 +166,7 @@ namespace C2.Business.CastleBravo.VPN
         }
         private void DoRSSLine(string line)
         {
+            UpdateProgressBar();
             line = line.Trim('"');
             bool isRss = line.StartsWith("http://") || line.StartsWith("https://");
             if (!isRss)
@@ -177,17 +178,16 @@ namespace C2.Business.CastleBravo.VPN
                                                                 Global.WebClientDefaultTimeout,
                                                                 ProxySetting.Empty));
                 if (ret.IsNullOrEmpty())
-                    rssFList.Add(line);
+                    rssFailHist.Add(line);
 
                 foreach (string ss in ret.SplitLine())
                     DoSSLine(ss, line);
-
-                UpdateProgressBar();
             }
         }
 
         private void DoClashLine(string line)
         {
+            UpdateProgressBar();
             line = line.Trim('"');
             bool isRss = line.StartsWith("http://") || line.StartsWith("https://");
             if (!isRss)
@@ -202,8 +202,11 @@ namespace C2.Business.CastleBravo.VPN
                                     obj.ContainsKey("proxies") ? obj["proxies"] as List<object> :
                                     new List<object>();
 
-                if (list.IsEmpty())
-                    rssFList.Add(line);
+                if (list.IsNullOrEmpty())
+                {
+                    rssFailHist.Add(line);
+                    return;
+                }     
 
                 foreach (Dictionary<object, object> vmess in list)
                 {
@@ -236,16 +239,13 @@ namespace C2.Business.CastleBravo.VPN
                             string.Empty,
                             string.Empty
                             ));
-
-                    UpdateProgressBar();
                 }
             }
         }
 
         private void UpdateProgressBar()
         {
-            this.rssPB.Value++;
-            this.rssLB.Text = string.Format("{0}/{1}", rssPB.Value, rssPB.Maximum);
+            this.rssLB.Text = string.Format("{0}/{1}", rssPB.Value++, rssPB.Maximum);
             Application.DoEvents();
         }
 

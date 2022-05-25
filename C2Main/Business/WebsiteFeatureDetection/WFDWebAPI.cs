@@ -279,10 +279,7 @@ namespace C2.Business.WebsiteFeatureDetection
             {
                 UAdialog.StartPosition = FormStartPosition.CenterScreen;
                 UAdialog.Text = "C2-用户认证";
-                if (Global.SNS.ContainsKey(ConfigUtil.GetBIOSSerialNumber()))
-                    UAdialog.FreeButtonVisible = true;
-                else
-                    UAdialog.FreeButtonVisible = false;
+                UAdialog.FreeButtonVisible = true;
             }
             if (UAdialog.ShowDialog() != DialogResult.OK)
                 return false;
