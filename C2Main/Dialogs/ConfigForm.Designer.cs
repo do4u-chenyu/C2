@@ -517,7 +517,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(122, 17);
             this.label9.TabIndex = 10;
-            this.label9.Text = "到期时间 2022.06.09";
+            this.label9.Text = "到期时间 2022.07.05";
             // 
             // label8
             // 
