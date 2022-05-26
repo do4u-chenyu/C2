@@ -4,6 +4,7 @@ using C2.Core;
 using C2.Utils;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -12,14 +13,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     partial class UserAuth : StandardDialog
     {
         public string UserName { get => userNameTextBox.Text; set => userNameTextBox.Text = value; }
+        public bool FreeButtonVisible { set => freeButton.Visible = value; }
         public string Otp { get => otpTextBox.Text; set => otpTextBox.Text = value; }
-
+        private static string xmlPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmp.xml");
         public UserAuth()
         {
             InitializeComponent();
+            if (File.Exists(xmlPath))
+                freeButton.Enabled = false;
         }
-
-        public bool FreeButtonVisible { set => freeButton.Visible = value; }
 
         protected override bool OnOKButtonClick()
         {
@@ -31,8 +33,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);//填写熵情口令
                 //respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName));
             }
-       
-            if (respMsg == "success" ||(UserName == Global.superName && Otp == Global.superPass))
+
+            if (respMsg == "success" || (UserName == Global.superName && Otp == Global.superPass))
                 return base.OnOKButtonClick();
             else
             {
@@ -40,7 +42,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
             }
         }
-
 
         private bool IsValidityUser()
         {
@@ -87,9 +88,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void FreeButton_Click(object sender, EventArgs e)
         {
-            // TODO 试用一次后, 按钮置灰
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (!File.Exists(xmlPath))
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+                File.Create(xmlPath);
+            }
         }
     }
 }

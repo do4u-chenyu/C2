@@ -1,7 +1,5 @@
 ﻿using C2.Business.HTTP;
-using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
-using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -61,7 +59,7 @@ namespace C2.Business.WebsiteFeatureDetection
         // 用户信息认证
         public string UserAuthentication(string userName, string otp)
         {
-            Dictionary<string, string> pairs = new Dictionary<string, string>{ { "user_id", userName }, { "password", otp } };
+            Dictionary<string, string> pairs = new Dictionary<string, string> { { "user_id", userName }, { "password", otp } };
             try
             {
                 Response resp = httpHandler.Post(LoginUrl, pairs);
@@ -110,7 +108,7 @@ namespace C2.Business.WebsiteFeatureDetection
                     result.Datas = datas;
                     result.RespMsg = status;
                 }
-                else if(resDict.TryGetValue("desc", out string error))
+                else if (resDict.TryGetValue("desc", out string error))
                     result.RespMsg = error;
                 else
                     result.RespMsg = "任务下发失败。";
@@ -167,8 +165,8 @@ namespace C2.Business.WebsiteFeatureDetection
             JArray json = JArray.Parse(datas);
             foreach (JObject item in json)
             {
-                Dictionary<string,string> tmpDict = item.ToObject<Dictionary<string, string>>();
-                if(tmpDict.TryGetValue("lable", out string lable))
+                Dictionary<string, string> tmpDict = item.ToObject<Dictionary<string, string>>();
+                if (tmpDict.TryGetValue("lable", out string lable))
                 {
                     PredictionCodeDict.Add(lable, tmpDict.TryGetValue("chinese_lable", out string chinese_lable) ? chinese_lable : string.Empty);
                     FraudCodeDict.Add(lable, tmpDict.TryGetValue("fraud", out string fraud) ? fraud : string.Empty);
@@ -273,18 +271,38 @@ namespace C2.Business.WebsiteFeatureDetection
                     Thread.Sleep(1000);
                 }
             }
-
             var UAdialog = new UserAuth();
-            if (flag)
-            {
-                UAdialog.StartPosition = FormStartPosition.CenterScreen;
-                UAdialog.Text = "C2-用户认证";
-                UAdialog.FreeButtonVisible = true;
-            }
             if (UAdialog.ShowDialog() != DialogResult.OK)
                 return false;
             UserName = UAdialog.UserName;
             return true;
+        }
+
+        public string ReAuthBeforeQueryC2()
+        {
+            //后台尝试3次登陆，均认证失败后前台弹出认证窗口#
+            int maxRetryTime = 3;
+            int time = 0;
+            if (!string.IsNullOrEmpty(UserName))
+            {
+                while (time++ < maxRetryTime)
+                {
+                    if (UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) == "success")
+                        return "true" + UserName;
+                    //存在验证时刚好口令跳60秒边界的情况，等待1秒再次申请
+                    Thread.Sleep(1000);
+                }
+            }
+            var UAdialog = new UserAuth
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                Text = "C2-用户认证",
+                FreeButtonVisible = true
+            };
+            if (UAdialog.ShowDialog() != DialogResult.OK)
+                return "false" + UserName;
+            UserName = UAdialog.UserName;
+            return "true" + UserName;
         }
     }
 }
