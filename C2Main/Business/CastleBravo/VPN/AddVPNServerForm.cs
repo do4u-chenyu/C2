@@ -43,6 +43,9 @@ namespace C2.Business.CastleBravo.VPN
                 .AppendLine(task.OtherInfo)
                 .AppendLine(task.ProbeInfo.IsEmpty() ? string.Empty : "探测信息:")
                 .AppendLine(task.ProbeInfo)
+                .AppendLine()
+                .AppendLine(task.rssAddress.IsEmpty() ? string.Empty : "订阅地址:")
+                .AppendLine(task.rssAddress)
                 .ToString();
 
 

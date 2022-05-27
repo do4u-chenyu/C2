@@ -19,8 +19,10 @@ namespace C2.Business.CastleBravo.VPN.Info
             
 
             HashSet<string> ipSet = new HashSet<string>();
+            HashSet<string> rssSet = new HashSet<string>();
             HashSet<string> hostSet = new HashSet<string>();
             HashSet<string> iportSet = new HashSet<string>();
+            
 
             Dictionary<string, int> methodDict  = new Dictionary<string, int>();
             Dictionary<string, int> countryDict = new Dictionary<string, int>();
@@ -29,6 +31,7 @@ namespace C2.Business.CastleBravo.VPN.Info
             {
                 VPNTaskConfig task = lv.Tag as VPNTaskConfig;
                 ipSet.Add(task.IP);
+                rssSet.Add(task.rssAddress);
                 hostSet.Add(task.Host);
                 iportSet.Add(task.IP + task.Port);
 
@@ -49,16 +52,20 @@ namespace C2.Business.CastleBravo.VPN.Info
             }
 
             ipSet.Remove(string.Empty);
+            rssSet.Remove(string.Empty);
 
             int numberOfIP = ipSet.Count;
+            int numberOfRSS = rssSet.Count;
             int numberOfHost = hostSet.Count;
             int numberOfIPort = iportSet.Count;
+            
 
             sb.AppendLine(string.Format("总计: {0}", total))
               .AppendLine()
               .AppendLine(string.Format("域名数: {0}", numberOfHost))
               .AppendLine(string.Format("独立IP数: {0}", numberOfIP))
               .AppendLine(string.Format("IP/端口数: {0}", numberOfIPort))
+              .AppendLine(string.Format("订阅地址数: {0}", numberOfRSS))
               .AppendLine()
               .AppendLine(string.Format("境内: {0}({1:P2})", numberOfMainlandVPN, total < 1 ? 0 : (float)numberOfMainlandVPN / total))
               .AppendLine(string.Format("境外: {0}({1:P2})", numberofForeinVPN, total < 1 ? 0 : (float)numberofForeinVPN / total))
