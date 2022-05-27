@@ -20,6 +20,7 @@ namespace C2.Business.CastleBravo.VPN
         private readonly string addrline = @"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})[:\s]+(\d{1,5})$";
         private int maxRow;
         private int mode;
+        private int vpnCount;
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<VPNTaskConfig> Tasks;
 
@@ -105,6 +106,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssPB.Maximum = max;
             this.rssPB.Value = 0;
             this.rssLB.Text = string.Empty;
+            this.vpnCount = 0;
             this.rssFailHist.Clear();
         }
 
@@ -113,6 +115,8 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLable.Visible = true;
             this.rssPB.Visible = true;
             this.rssLB.Visible = true;
+            this.vpnPB.Visible = true;
+            this.vpnLB.Visible = true;
         }
 
         private void AddTasksByLine(string line)
@@ -181,7 +185,11 @@ namespace C2.Business.CastleBravo.VPN
                     rssFailHist.Add(line);
 
                 foreach (string ss in ret.SplitLine())
+                {
                     DoSSLine(ss, line);
+                    vpnCount++;
+                }
+                    
             }
         }
 
@@ -223,7 +231,8 @@ namespace C2.Business.CastleBravo.VPN
                     foreach (var kv in vmess)
                         sb.Append(string.Format("{0}={1};", kv.Key as string, kv.Value.ToString()));
                     string other = sb.ToString();
-
+                    
+                    vpnCount++;
                     Tasks.Add(new VPNTaskConfig(ST.NowString(),
                             remarks.Trim(),
                             addr.Trim(),
@@ -247,6 +256,7 @@ namespace C2.Business.CastleBravo.VPN
         {
             int val = rssPB.Value < rssPB.Maximum ? rssPB.Value++ : rssPB.Maximum;
             this.rssLB.Text = string.Format("{0}/{1}", val, rssPB.Maximum);
+            this.vpnLB.Text = string.Format("{0}", this.vpnCount);
             Application.DoEvents();
         }
 
