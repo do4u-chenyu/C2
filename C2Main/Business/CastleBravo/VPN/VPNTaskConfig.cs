@@ -138,6 +138,10 @@ namespace C2.Business.CastleBravo.VPN
 
             return string.Empty;
         }
+        internal bool IsPluginObfsLocal()
+        {
+            return this.OtherInfo.Contains("plugin=obfs-local");
+        }
 
         internal EConfigType configType()
         {

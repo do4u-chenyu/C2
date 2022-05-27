@@ -4656,6 +4656,8 @@
     <None Include="Resources\WebBrowser\map_sourceCode.png" />
     <None Include="Resources\城堡.png" />
     <None Include="Resources\可视化数据可视化.png" />
+    <Content Include="Resources\VPN\libwinpthread-1.dll" />
+    <Content Include="Resources\VPN\obfs-local.exe" />
     <Content Include="Resources\VPN\SampleClientConfig.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

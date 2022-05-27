@@ -274,10 +274,15 @@ namespace C2.Business.CastleBravo.VPN
             lvi.SubItems[CI_IP地址].Text = task.IP;
             lvi.SubItems[CI_归属地].Text = task.Country;
             lvi.SubItems[CI_探测信息].Text = "进行中";
-
+            
             switch (task.configType())
             {
                 case v2rayN.Mode.EConfigType.Shadowsocks:
+                    if (task.IsPluginObfsLocal())
+                        UnSupportVersion(lvi, task);
+                    else
+                        buffer204.Add(lvi);
+                    break;
                 case v2rayN.Mode.EConfigType.Vmess:
                 case v2rayN.Mode.EConfigType.VLESS:
                 case v2rayN.Mode.EConfigType.Trojan:
@@ -287,9 +292,7 @@ namespace C2.Business.CastleBravo.VPN
                 case v2rayN.Mode.EConfigType.ShadowsocksR:
                 case v2rayN.Mode.EConfigType.Socks:
                 default:
-                    task.ProbeInfo = "暂不支持";
-                    task.Status = Done;
-                    UpdateRedrawItem(lvi);
+                    UnSupportVersion(lvi, task);
                     break;
             }
 
@@ -298,6 +301,13 @@ namespace C2.Business.CastleBravo.VPN
                 Run_Http204_V2ray(buffer204);
                 buffer204.Clear();
             }
+        }
+
+        private void UnSupportVersion(ListViewItem lvi, VPNTaskConfig task)
+        {
+            task.ProbeInfo = "暂不支持";
+            task.Status = Done;
+            UpdateRedrawItem(lvi);
         }
 
         private void Run_Http204_V2ray(List<ListViewItem> lv)
