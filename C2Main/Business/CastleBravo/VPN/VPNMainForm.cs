@@ -456,6 +456,11 @@ namespace C2.Business.CastleBravo.VPN
             RemoveDuplicateItems((t) => { return t.Password + t.SSVersion; });
         }
 
+        private void 删除重复项完全重复ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Host + t.Port + t.Password + t.Method + t.SSVersion + t.OtherInfo + t.Remark; });
+        }
+
         private void RemoveDuplicateItems(Func<VPNTaskConfig, string> method)
         {
             Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();

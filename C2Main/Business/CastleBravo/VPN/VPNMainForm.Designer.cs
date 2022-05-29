@@ -110,6 +110,7 @@ namespace C2.Business.CastleBravo.VPN
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyIPPortMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyOtherMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyUUIDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除重复项密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除重复项密码客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,7 +145,7 @@ namespace C2.Business.CastleBravo.VPN
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyDirMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyUUIDMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除重复项完全重复ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -792,6 +793,13 @@ namespace C2.Business.CastleBravo.VPN
             this.CopyOtherMenuItem.Text = "复制-其他信息-剪切板";
             this.CopyOtherMenuItem.Click += new System.EventHandler(this.CopyOtherMenuItem_Click);
             // 
+            // CopyUUIDMenuItem
+            // 
+            this.CopyUUIDMenuItem.Name = "CopyUUIDMenuItem";
+            this.CopyUUIDMenuItem.Size = new System.Drawing.Size(297, 34);
+            this.CopyUUIDMenuItem.Text = "复制-密码UUID-剪切板";
+            this.CopyUUIDMenuItem.Click += new System.EventHandler(this.CopyUUIDMenuItem_Click);
+            // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -801,7 +809,8 @@ namespace C2.Business.CastleBravo.VPN
             this.删除重复项域名端口ToolStripMenuItem,
             this.删除重复项域名端口密码ToolStripMenuItem,
             this.删除重复项域名端口密码客户端ToolStripMenuItem,
-            this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem});
+            this.删除重复项域名端口密码加密算法客户端ToolStripMenuItem,
+            this.删除重复项完全重复ToolStripMenuItem});
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(352, 30);
             this.toolStripMenuItem7.Text = "去重操作";
@@ -876,89 +885,89 @@ namespace C2.Business.CastleBravo.VPN
             // 删除SS协议ToolStripMenuItem
             // 
             this.删除SS协议ToolStripMenuItem.Name = "删除SS协议ToolStripMenuItem";
-            this.删除SS协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.删除SS协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.删除SS协议ToolStripMenuItem.Text = "删除SS协议";
             this.删除SS协议ToolStripMenuItem.Click += new System.EventHandler(this.删除SS协议ToolStripMenuItem_Click);
             // 
             // 删除SSR协议ToolStripMenuItem
             // 
             this.删除SSR协议ToolStripMenuItem.Name = "删除SSR协议ToolStripMenuItem";
-            this.删除SSR协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.删除SSR协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.删除SSR协议ToolStripMenuItem.Text = "删除SSR协议";
             this.删除SSR协议ToolStripMenuItem.Click += new System.EventHandler(this.删除SSR协议ToolStripMenuItem_Click);
             // 
             // 删除VMESS协议ToolStripMenuItem
             // 
             this.删除VMESS协议ToolStripMenuItem.Name = "删除VMESS协议ToolStripMenuItem";
-            this.删除VMESS协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.删除VMESS协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.删除VMESS协议ToolStripMenuItem.Text = "删除VMESS协议";
             this.删除VMESS协议ToolStripMenuItem.Click += new System.EventHandler(this.删除VMESS协议ToolStripMenuItem_Click);
             // 
             // 删除VLESS协议ToolStripMenuItem
             // 
             this.删除VLESS协议ToolStripMenuItem.Name = "删除VLESS协议ToolStripMenuItem";
-            this.删除VLESS协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.删除VLESS协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.删除VLESS协议ToolStripMenuItem.Text = "删除VLESS协议";
             this.删除VLESS协议ToolStripMenuItem.Click += new System.EventHandler(this.删除VLESS协议ToolStripMenuItem_Click);
             // 
             // 删除Trojan协议ToolStripMenuItem
             // 
             this.删除Trojan协议ToolStripMenuItem.Name = "删除Trojan协议ToolStripMenuItem";
-            this.删除Trojan协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.删除Trojan协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.删除Trojan协议ToolStripMenuItem.Text = "删除Trojan协议";
             this.删除Trojan协议ToolStripMenuItem.Click += new System.EventHandler(this.删除Trojan协议ToolStripMenuItem_Click);
             // 
             // 删除自定义协议ToolStripMenuItem
             // 
             this.删除自定义协议ToolStripMenuItem.Name = "删除自定义协议ToolStripMenuItem";
-            this.删除自定义协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.删除自定义协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.删除自定义协议ToolStripMenuItem.Text = "删除自定义协议";
             this.删除自定义协议ToolStripMenuItem.Click += new System.EventHandler(this.删除自定义协议ToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(257, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(267, 6);
             // 
             // 只保留SS协议ToolStripMenuItem
             // 
             this.只保留SS协议ToolStripMenuItem.Name = "只保留SS协议ToolStripMenuItem";
-            this.只保留SS协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.只保留SS协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.只保留SS协议ToolStripMenuItem.Text = "只保留SS协议";
             this.只保留SS协议ToolStripMenuItem.Click += new System.EventHandler(this.只保留SS协议ToolStripMenuItem_Click_1);
             // 
             // 只保留SSR协议ToolStripMenuItem
             // 
             this.只保留SSR协议ToolStripMenuItem.Name = "只保留SSR协议ToolStripMenuItem";
-            this.只保留SSR协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.只保留SSR协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.只保留SSR协议ToolStripMenuItem.Text = "只保留SSR协议";
             this.只保留SSR协议ToolStripMenuItem.Click += new System.EventHandler(this.只保留SSR协议ToolStripMenuItem_Click);
             // 
             // 只保留VMESS协议ToolStripMenuItem
             // 
             this.只保留VMESS协议ToolStripMenuItem.Name = "只保留VMESS协议ToolStripMenuItem";
-            this.只保留VMESS协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.只保留VMESS协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.只保留VMESS协议ToolStripMenuItem.Text = "只保留VMESS协议";
             this.只保留VMESS协议ToolStripMenuItem.Click += new System.EventHandler(this.只保留VMESS协议ToolStripMenuItem_Click);
             // 
             // 只保留VLESS协议ToolStripMenuItem
             // 
             this.只保留VLESS协议ToolStripMenuItem.Name = "只保留VLESS协议ToolStripMenuItem";
-            this.只保留VLESS协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.只保留VLESS协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.只保留VLESS协议ToolStripMenuItem.Text = "只保留VLESS协议";
             this.只保留VLESS协议ToolStripMenuItem.Click += new System.EventHandler(this.只保留VLESS协议ToolStripMenuItem_Click);
             // 
             // 只保留Trojan协议ToolStripMenuItem
             // 
             this.只保留Trojan协议ToolStripMenuItem.Name = "只保留Trojan协议ToolStripMenuItem";
-            this.只保留Trojan协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.只保留Trojan协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.只保留Trojan协议ToolStripMenuItem.Text = "只保留Trojan协议";
             this.只保留Trojan协议ToolStripMenuItem.Click += new System.EventHandler(this.只保留Trojan协议ToolStripMenuItem_Click);
             // 
             // 只保留自定义协议ToolStripMenuItem
             // 
             this.只保留自定义协议ToolStripMenuItem.Name = "只保留自定义协议ToolStripMenuItem";
-            this.只保留自定义协议ToolStripMenuItem.Size = new System.Drawing.Size(260, 34);
+            this.只保留自定义协议ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.只保留自定义协议ToolStripMenuItem.Text = "只保留自定义协议";
             this.只保留自定义协议ToolStripMenuItem.Click += new System.EventHandler(this.只保留自定义协议ToolStripMenuItem_Click);
             // 
@@ -1055,12 +1064,12 @@ namespace C2.Business.CastleBravo.VPN
             this.CopyDirMenu.Text = "完整路径到剪切板";
             this.CopyDirMenu.Click += new System.EventHandler(this.CopyDirMenu_Click);
             // 
-            // CopyUUIDMenuItem
+            // 删除重复项完全重复ToolStripMenuItem
             // 
-            this.CopyUUIDMenuItem.Name = "CopyUUIDMenuItem";
-            this.CopyUUIDMenuItem.Size = new System.Drawing.Size(297, 34);
-            this.CopyUUIDMenuItem.Text = "复制-密码UUID-剪切板";
-            this.CopyUUIDMenuItem.Click += new System.EventHandler(this.CopyUUIDMenuItem_Click);
+            this.删除重复项完全重复ToolStripMenuItem.Name = "删除重复项完全重复ToolStripMenuItem";
+            this.删除重复项完全重复ToolStripMenuItem.Size = new System.Drawing.Size(470, 34);
+            this.删除重复项完全重复ToolStripMenuItem.Text = "删除重复项-[完全重复]";
+            this.删除重复项完全重复ToolStripMenuItem.Click += new System.EventHandler(this.删除重复项完全重复ToolStripMenuItem_Click);
             // 
             // VPNMainForm
             // 
@@ -1210,5 +1219,6 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ToolStripMenuItem 删除重复项密码客户端ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem CopyUUIDMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除重复项完全重复ToolStripMenuItem;
     }
 }
