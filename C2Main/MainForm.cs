@@ -11,7 +11,6 @@ using C2.Core;
 using C2.Core.Win32Apis;
 using C2.Database;
 using C2.Dialogs;
-using C2.Dialogs.WebsiteFeatureDetection;
 using C2.Forms;
 using C2.Globalization;
 using C2.IAOLab.Plugins;
@@ -60,9 +59,6 @@ namespace C2
         private static DirectoryInfo info = new DirectoryInfo(Global.TempDirectory);
         private static string xmlDirectory = Path.Combine(info.Parent.FullName, "tmpRedisASK");
         private static string xmlPath = Path.Combine(xmlDirectory, "tmpRedisASK.xml");
-        private static string tmpPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmp.xml");
-        private static XmlDocument xDoc = new XmlDocument();
-        private static DateTime e = DateTime.Now;
         private string startTime = DateTime.Now.ToString("yyyyMMddHHmmss");
 
         private void InitializeOpenFile(string path)
@@ -352,8 +348,7 @@ namespace C2
 
             if (File.Exists(xmlPath))
             {
-                xDoc.Load(xmlPath);
-                string endTime = xDoc.SelectSingleNode(@"IdenInformation/userInfo/EndTime").InnerText;
+                string endTime = EndTimeString();
                 if (string.Compare(endTime, startTime, true) == 1)
                     return;
                 else
@@ -388,12 +383,15 @@ namespace C2
 
         private void SaveUserInfo(XmlNode node)
         {
-            DateTime s = ConvertUtil.TryParseDateTime(Program.LinceseDeadLine, Program.DateTimeFormat);
-            string endTime = s.ToString("yyyyMMddHHmmss");
+            string endTime = EndTimeString();
             new ModelXmlWriter("userInfo", node)
                 .Write("StartTime", startTime)
-                .Write("EndTime", endTime)
                 .Write("userName", WFDWebAPI.GetInstance().UserName);
+        }
+
+        private string EndTimeString()
+        {
+            return ConvertUtil.TryParseDateTime(Program.LinceseDeadLine, Program.DateTimeFormat).ToString("yyyyMMddHHmmss");
         }
 
         private void LoadHeadLine()

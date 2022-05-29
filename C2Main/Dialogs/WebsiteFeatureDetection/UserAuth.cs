@@ -26,15 +26,22 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         protected override bool OnOKButtonClick()
         {
             string respMsg = string.Empty;
+
+            // 正反日期            
+            string secretPass = ST.DecodeBase64(Global.SuperPass) + DateTime.Now.ToString("yyyyMMdd");
+            if (Otp.CompareTo(secretPass) == 0)
+                return base.OnOKButtonClick();
+
             if (!IsValidityUser() || !IsValidityOtp())
                 return false;
+
             using (new GuarderUtil.CursorGuarder(Cursors.WaitCursor))
             {
                 respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, Otp);//填写熵情口令
                 //respMsg = WFDWebAPI.GetInstance().UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName));
             }
 
-            if (respMsg == "success" || (UserName == Global.superName && Otp == Global.superPass))
+            if (respMsg == "success")
                 return base.OnOKButtonClick();
             else
             {
