@@ -27,6 +27,7 @@ namespace C2.Log
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
+#if C2_Outer
             string startTime = e.ToString("yyyyMMddHHmmss");
             string ip = IPGet();
 
@@ -36,6 +37,7 @@ namespace C2.Log
             });
             Task.WaitAll(t);
             LogThread();
+#endif
             //MessageBox.Show(userName + modelName + type + startTime + ip);
         }
 
