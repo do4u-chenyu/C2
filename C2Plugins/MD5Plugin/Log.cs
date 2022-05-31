@@ -48,9 +48,6 @@ namespace C2.Log
             });
             Task.WaitAll(t);
             LogThread();
-
-
-            MessageBox.Show(userName + modelName + type + startTime + ip);
         }
         public void LogThread()
         {

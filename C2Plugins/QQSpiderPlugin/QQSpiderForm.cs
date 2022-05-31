@@ -170,7 +170,7 @@ namespace QQSpiderPlugin
 
         private void ActStartButton_Click(object sender, EventArgs e)
         {
-            new Log().LogManualButton("QQ爬虫", "运行");
+            new Log().LogManualButton("(网)QQ爬虫", "运行");
             DgvManager dgvMgr = new DgvManager(this.dataGridView1);
             List<string> dataSource = this.idDataSource;
             ResetProgressBar(0, dataSource.Count);

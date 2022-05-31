@@ -12,7 +12,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Log
@@ -48,9 +47,6 @@ namespace C2.Log
             });
             Task.WaitAll(t);
             LogThread();
-
-
-            MessageBox.Show(userName + modelName + type + startTime + ip);
         }
         public void LogThread()
         {
