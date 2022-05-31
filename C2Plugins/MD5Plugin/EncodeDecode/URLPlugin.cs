@@ -24,6 +24,7 @@ namespace MD5Plugin
 
         public override void Encode(string str)
         {
+            new Log().LogManualButton("URL编解码", "运行");
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
                 ResetTextBox();
@@ -36,6 +37,7 @@ namespace MD5Plugin
 
         public virtual void Decode(string url)
         {
+            new Log().LogManualButton("URL编解码", "运行");
             if (outputTextBox.Text == "请输入你要解码的内容")
             {
                 OriginOutput();

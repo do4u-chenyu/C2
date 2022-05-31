@@ -30,15 +30,16 @@ namespace C2.Log
             string startTime = e.ToString("yyyyMMddHHmmss");
             string ip = IPGet();
 
-            
+            /*
             Task t = Task.Factory.StartNew(() =>
             {
                 AddQueueEn(userName, modelName, type, startTime, ip);
             });
             Task.WaitAll(t);
             LogThread();
+            */
             
-            //MessageBox.Show(userName + modelName + type + startTime + ip);
+            MessageBox.Show(userName + modelName + type + startTime + ip);
         }
 
         private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
