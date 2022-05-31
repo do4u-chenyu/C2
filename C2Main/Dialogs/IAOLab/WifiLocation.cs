@@ -62,6 +62,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "运行");
                 string[] inputArray = this.wifiMacIR.Text.Split('\n');
                 this.wifiMacIR.Clear();
                 progressBar1.Value = 0;
@@ -86,6 +87,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage2 && tabControl1.Visible)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage2.Text, "运行");
                 string[] inputArray = this.baseStationIR.Text.Split('\n');
                 this.baseStationIR.Clear();
                 progressBar1.Value = 0;
@@ -110,6 +112,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage3 && tabControl1.Visible)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage3.Text, "运行");
                 string[] inputArray = this.baseAddressIR.Text.Split('\n');
                 this.baseAddressIR.Clear();
 
@@ -134,6 +137,7 @@ namespace C2.Dialogs.IAOLab
             }
             if (tabControl1.SelectedTab == tabPage4 && tabControl1.Visible)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage4.Text, "运行");
                 string[] inputArray = this.IPStationIR.Text.Split('\n');
                 this.IPStationIR.Clear();
                 progressBar1.Value = 0;
@@ -154,6 +158,7 @@ namespace C2.Dialogs.IAOLab
             }
             if (tabControl1.SelectedTab == tabPage5 && tabControl1.Visible)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage5.Text, "运行");
                 string[] inputArray = this.PhoneLocationIR.Text.Split('\n');
                 this.PhoneLocationIR.Clear();
                 progressBar1.Value = 0;
@@ -175,6 +180,7 @@ namespace C2.Dialogs.IAOLab
 
             if (tabControl1.SelectedTab == tabPage6 && tabControl1.Visible)
             {
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage6.Text, "运行");
                 string[] inputArray = this.LngAndLatRichTextBox.Text.Split('\n');
                 this.LngAndLatRichTextBox.Clear();
                 progressBar1.Value = 0;
@@ -440,6 +446,21 @@ namespace C2.Dialogs.IAOLab
             {
                 ExportData();
             }
+        }
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage1)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage2)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage2.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage3)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage3.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage4)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage4.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage5)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage5.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage6)
+                new Log.Log().LogManualButton("实验楼" + "-" + tabPage6.Text, "打开");
         }
     }
 }

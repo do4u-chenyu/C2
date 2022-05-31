@@ -291,6 +291,7 @@ namespace C2.Business.IAOLab.PwdGenerator
 
         private void button2_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("实验楼" + "-" + this.Text, "运行");
             if (tBName.Text == "姓名简拼" || tBName.Text == string.Empty || tBName.Text.Substring(0,1) == OpUtil.StringBlank) 
             {
                 MessageBox.Show("请输入姓名简拼");

@@ -54,6 +54,7 @@ namespace C2.Business.HIBU.FaceAgeGender
 
         private void TransBtn_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton(this.Text, "运行");
             //清空上一次的查询结果
             this.dataGridView1.Rows.Clear();
 

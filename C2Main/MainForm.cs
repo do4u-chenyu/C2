@@ -335,8 +335,9 @@ namespace C2
                 LoadIAOLaboratory();
                 LoadHIBU();
                 LoadHeadLine();
-
+#if C2_Outer
                 Identification();
+#endif
 
             }
         }
@@ -543,7 +544,7 @@ namespace C2
             if (Global.GetCanvasPanel() != null && Global.GetCanvasPanel().LeftButtonDown)
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
-        #region C2
+#region C2
         private void NewDocumentForm(string name = "", string titile = "")
         {
             Document doc = CreateNewMap(name);
@@ -826,8 +827,8 @@ namespace C2
             var hasForms = TaskBar.Items.Exists(item => item.Tag is Form);
             TabNew.Visible = hasForms;
         }
-        #endregion
-        #region 底部控件事件
+#endregion
+#region 底部控件事件
         public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             if (!File.Exists(fullFilePath))
@@ -926,7 +927,7 @@ namespace C2
             this.ShowBottomPanel();
             this.ShowLogView();
         }
-        #endregion
+#endregion
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             if (this.isBottomViewPanelMinimum == true)

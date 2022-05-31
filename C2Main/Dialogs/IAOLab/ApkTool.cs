@@ -49,6 +49,7 @@ namespace C2.Dialogs.IAOLab
         }
         private void Analyse_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("实验楼" + "-" + "APK小眼睛", "运行");
             if (!IsReady())
                 return;
             this.Cursor = Cursors.WaitCursor;

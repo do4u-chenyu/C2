@@ -1,15 +1,14 @@
 ﻿using C2.Business.HTTP;
 using C2.Business.WebsiteFeatureDetection;
-using C2.Core;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace C2.Log
 {
@@ -17,7 +16,7 @@ namespace C2.Log
     {
         HttpHandler httpHandler = new HttpHandler();
         public string Token;
-        private const string APIUrl = "https://113.31.119.85:53374/apis/";//正式
+        private const string APIUrl = "https://113.31.119.85:53374/apis/";
         private string LoginUrl = APIUrl + "Login";
         private string uploadUrl = "https://47.94.39.209:8000/api/log/upload";
         DateTime e = DateTime.Now;
@@ -31,12 +30,15 @@ namespace C2.Log
             string startTime = e.ToString("yyyyMMddHHmmss");
             string ip = IPGet();
 
+            /*
             Task t = Task.Factory.StartNew(() =>
             {
                 AddQueueEn(userName, modelName, type, startTime, ip);
             });
             Task.WaitAll(t);
             LogThread();
+            */
+            MessageBox.Show(userName + modelName + type + startTime + ip);
         }
 
         private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
