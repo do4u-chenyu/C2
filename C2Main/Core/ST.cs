@@ -579,6 +579,10 @@ namespace C2.Core
             return Encoding.UTF8.GetString(bytes);
         }
 
+        public static string N(string value)
+        {
+            return value.IsNull() ? string.Empty : value;
+        }
         public static string TryDecodeBase64(string code)
         {
             string ret;

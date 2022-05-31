@@ -33,6 +33,11 @@ namespace C2.Business.CastleBravo.WebShellTool.SettingsDialog
                 
 
             ListViewItem lvi = FindItemWithText(SText, this.lastIndex);
+            
+            //  wrap模式, 往后没找到,再从头来一遍
+            if (lastIndex > 0 && lvi == null)
+                lvi = FindItemWithText(SText, 0);
+
             this.lastIndex = lvi == null ? 0 : lvi.Index + 1;
 
             if (lvi == null) 
