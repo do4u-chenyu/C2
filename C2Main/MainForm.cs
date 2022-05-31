@@ -335,9 +335,9 @@ namespace C2
                 LoadIAOLaboratory();
                 LoadHIBU();
                 LoadHeadLine();
-#if C2_Outer
+
                 Identification();
-#endif
+
             }
         }
 
