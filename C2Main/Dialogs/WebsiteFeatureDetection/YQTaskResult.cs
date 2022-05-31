@@ -56,19 +56,16 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 HelpUtil.ShowMessageBox(statusFilePath + "任务信息文件不存在");
                 return;
             }
-            string ret = FileUtil.FileReadToEnd(statusFilePath);
-            string[] retArray = ret.Split(Environment.NewLine);
-            StringBuilder sb = new StringBuilder();
-            foreach (string line in retArray)
+
+            string ret1 = FileUtil.FileReadToEnd(statusFilePath);
+            string[] retArray1 = ret1.Split(Environment.NewLine);
+            foreach (string line in retArray1)
             {
                 if (!line.Contains("\t"))
                     continue;
                 string[] lineSplit = line.Split("\t");
                 if (lineSplit.Length != 4)
                     continue;
-                
-                lineSplit = UpdateResult(lineSplit);
-                sb.Append(string.Join("\t", lineSplit) + Environment.NewLine);
 
                 DataGridViewRow dr = new DataGridViewRow();
 
@@ -82,6 +79,59 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
                 dataGridView.Rows.Add(dr);
             }
+        }
+
+        private void TaskResultButton_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            UpdateResult();
+
+            string ret2 = FileUtil.FileReadToEnd(statusFilePath);
+            string[] retArray2 = ret2.Split(Environment.NewLine);
+            foreach (string line in retArray2)
+            {
+                if (!line.Contains("\t"))
+                    continue;
+                string[] lineSplit = line.Split("\t");
+                if (lineSplit.Length != 4)
+                    continue;
+
+                DataGridViewRow dr = new DataGridViewRow();
+
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[0] });
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[1] });
+                dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[2] });
+                if (!File.Exists(lineSplit[3]))
+                    dr.Cells.Add(new DataGridViewTextBoxCell { Value = string.Empty });
+                else
+                    dr.Cells.Add(new DataGridViewLinkCell { Value = "查看", Tag = lineSplit[3] });
+
+                dataGridView.Rows.Add(dr);
+            }
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void UpdateResult()
+        {
+            string ret = FileUtil.FileReadToEnd(statusFilePath);
+            string[] retArray = ret.Split(Environment.NewLine);
+            StringBuilder sb = new StringBuilder();
+            foreach (string line in retArray)
+            {
+                if (!line.Contains("\t"))
+                    continue;
+                string[] lineSplit = line.Split("\t");
+                if (lineSplit.Length != 4)
+                    continue;
+                lineSplit = UpdateInfo(lineSplit);
+                sb.Append(string.Join("\t", lineSplit) + Environment.NewLine);
+            }
 
             StreamWriter sw = new StreamWriter(statusFilePath);
             sw.Write(sb.ToString());
@@ -90,15 +140,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 sw.Close();
         }
 
-        private void TaskResultButton_Click(object sender, EventArgs e)
-        {
-            ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
-        }
-
-        private string[] UpdateResult(string[] infoArray)
+        private string[] UpdateInfo(string[] infoArray)
         {
             List<string> resultList = QueryTaskResultsById(infoArray[1]);
-            
+
+            if(resultList.Count == 0)
+                return infoArray;
+
             StreamWriter sw = null;
             sw = new StreamWriter(infoArray[3], true);
             sw.WriteLine(string.Join(Environment.NewLine, resultList.ToArray()));
@@ -121,13 +169,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             HttpHandler httpHandler = new HttpHandler();
             try
             {
-                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 2000);
+                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 1000);
                 if (resp.StatusCode != HttpStatusCode.OK)
                     error = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
-                if (resDict["status"] != "success")
+                if (resDict.TryGetValue("status", out string value) && value != "success")
                     error = string.Format("错误http状态：{0}。", resDict["msg"]);
+                else if (resDict.ContainsKey("status"))
+                    error = string.Format("接口访问失败，请查看网络状态。");
                 else
                     result = resDict["data"];
                 if (result.IsNullOrEmpty())
@@ -142,6 +192,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!error.IsNullOrEmpty())
             {
                 HelpUtil.ShowMessageBox(error);
+                return resultList;
             }
             string[] array = result.Trim('\n').Split("\n");
 
@@ -150,7 +201,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
               "heat", "mainareacode", "netimgurl", "imgurl", "posttime", "domain", "domainname", "forumname",
               "context", "isforward", "forwardnum", "likenum", "commentnum", "fannum", "followernum", "blognum",
               "readnum", "verify", "address", "addresscode", "imagepath", "domaintype", "classifyid", "classifyscore",
-              "commentsign", "sensitivity", "areacode", "tagarea", "signcode", "eventcode", "tagevent" 
+              "commentsign", "sensitivity", "areacode", "tagarea", "signcode", "eventcode", "tagevent"
             };
 
             Dictionary<string, string> sourceDict = new Dictionary<string, string>
@@ -216,7 +267,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     }
                     if (col == "datasourcetype" && sourceDict.TryGetValue(key, out string type))
                         key = type;
-                    else if (col == "classifyDict" && classifyDict.TryGetValue(key, out string classify))
+                    else if (col == "classifyid" && classifyDict.TryGetValue(key, out string classify))
                         key = classify;
 
                     sb.Append(key + "\t");
@@ -228,7 +279,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DeleteRuleID()
         {
-            string ruleID = "9616533756201"; //9616533756201
+            string ruleID = "1416305261"; //9616533756201
             string token = string.Empty;
             string getTokenURL = "https://api.fhyqw.com/auth/gettoken?username=iao2&password=60726279d628473f6f3f03d5b81b8c95&apikey=50c9429656499f3b26ca1bd6c8045239";
             try
@@ -277,7 +328,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     return;
                 ProcessUtil.TryProcessOpen(cell.Tag.ToString());
             }
-
         }
     }
 }

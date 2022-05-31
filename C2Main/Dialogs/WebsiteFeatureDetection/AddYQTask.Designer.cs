@@ -49,9 +49,8 @@
             this.pasteModeCB = new System.Windows.Forms.CheckBox();
             this.wsTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +76,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.taskContentComboBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.taskModelComboBox);
@@ -133,6 +133,8 @@
             "微信公众号",
             "今日头条",
             "抖音",
+            "贴吧",
+            "知乎",
             "抖音APP",
             "快手",
             "暗网",
@@ -322,36 +324,12 @@
             this.label9.ForeColor = System.Drawing.Color.Red;
             this.label9.Location = new System.Drawing.Point(91, 43);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(143, 12);
+            this.label9.Size = new System.Drawing.Size(209, 12);
             this.label9.TabIndex = 10037;
-            this.label9.Text = "* 文件内容格式:一行一个";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(8, 111);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 12);
-            this.label8.TabIndex = 10039;
-            this.label8.Text = "*大约5W行";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(8, 93);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 12);
-            this.label7.TabIndex = 10038;
-            this.label7.Text = "*最大[4M]文本";
+            this.label9.Text = "* 文件内容格式:一行一个,最多1000行";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.wsTextBox);
             this.panel1.Controls.Add(this.pasteModeCB);
@@ -362,6 +340,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(650, 203);
             this.panel1.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(413, 126);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(161, 12);
+            this.label11.TabIndex = 10038;
+            this.label11.Text = "* 最多支持查询近半年的数据";
             // 
             // AddYQTask
             // 
@@ -401,8 +390,6 @@
         private System.Windows.Forms.CheckBox pasteModeCB;
         private System.Windows.Forms.TextBox wsTextBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cityCB;
         private System.Windows.Forms.ComboBox provinceCB;
@@ -410,5 +397,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox taskModelComboBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label11;
     }
 }

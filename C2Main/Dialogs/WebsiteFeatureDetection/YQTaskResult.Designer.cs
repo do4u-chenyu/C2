@@ -44,6 +44,7 @@
             this.RuleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilePath = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.update = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -52,6 +53,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.Controls.Add(this.update);
             this.panel1.Controls.Add(this.taskResultTextBox);
             this.panel1.Controls.Add(this.taskResultButton);
             this.panel1.Controls.Add(this.label1);
@@ -70,16 +72,16 @@
             this.taskResultTextBox.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskResultTextBox.Location = new System.Drawing.Point(111, 103);
             this.taskResultTextBox.Name = "taskResultTextBox";
-            this.taskResultTextBox.Size = new System.Drawing.Size(404, 25);
+            this.taskResultTextBox.Size = new System.Drawing.Size(369, 25);
             this.taskResultTextBox.TabIndex = 10033;
             // 
             // taskResultButton
             // 
             this.taskResultButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.taskResultButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskResultButton.Location = new System.Drawing.Point(555, 103);
+            this.taskResultButton.Location = new System.Drawing.Point(486, 103);
             this.taskResultButton.Name = "taskResultButton";
-            this.taskResultButton.Size = new System.Drawing.Size(66, 25);
+            this.taskResultButton.Size = new System.Drawing.Size(60, 25);
             this.taskResultButton.TabIndex = 10032;
             this.taskResultButton.Text = "查看";
             this.taskResultButton.UseVisualStyleBackColor = false;
@@ -216,6 +218,18 @@
             this.FilePath.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.FilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // update
+            // 
+            this.update.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.update.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.update.Location = new System.Drawing.Point(564, 103);
+            this.update.Name = "update";
+            this.update.Size = new System.Drawing.Size(72, 25);
+            this.update.TabIndex = 10034;
+            this.update.Text = "结果刷新";
+            this.update.UseVisualStyleBackColor = false;
+            this.update.Click += new System.EventHandler(this.Update_Click);
+            // 
             // YQTaskResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -256,5 +270,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RuleID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.DataGridViewLinkColumn FilePath;
+        private System.Windows.Forms.Button update;
     }
 }
