@@ -338,7 +338,6 @@ namespace C2
 #if C2_Outer
                 Identification();
 #endif
-
             }
         }
 
