@@ -373,16 +373,16 @@ namespace C2.Business.CastleBravo.VPN
             {
                 array = value.Split("@");
                 addr = array.Length > 1 ? array[1] : addr;
-                value = array[0];
+                value = array[0].IsNull() ? string.Empty : array[0];
             }
             // 第五步: addr中分割IP和端口
             array = addr.Split(":");
-            addr  = array[0];
+            addr  = array[0].IsNull() ? string.Empty : array[0];
             string port = array.Length > 1 ? array[1] : string.Empty;
 
             // 有些地方这里会遇到
             array = port.Split("/?");
-            port  = array[0];
+            port  = array[0].IsNull() ? string.Empty : array[0];
             string other = array.Length > 1 ? array[1] : string.Empty;
 
             // 第六步: method和password分割
@@ -390,7 +390,7 @@ namespace C2.Business.CastleBravo.VPN
             string method = array[0];
             string pass = array.Length > 1 ? array[1] : string.Empty;
             // 第七步: 返回构造数组
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
         private string[] GenSSRLine(string value)
@@ -413,8 +413,8 @@ namespace C2.Business.CastleBravo.VPN
             string other   = string.Format("协议={0};混淆={1};", proto, obfs);
 
             if (right.IsNullOrEmpty())
-                return new string[] { remarks, addr, port, pass, method, other };
-           
+                return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
+
             NameValueCollection lParams = NetUtil.ParseQueryStringUTF8(right);
 
             remarks           = TryDecodeBase64(lParams["remarks"]    ?? string.Empty); 
@@ -424,7 +424,7 @@ namespace C2.Business.CastleBravo.VPN
 
             other += string.Format("协议参数={0};混淆参数={1};Group={2}", protoparam, obfsparam, group);
 
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
         private string[] GenVmessLine(string value)
@@ -491,7 +491,7 @@ namespace C2.Business.CastleBravo.VPN
                 port = array.Length > 1 ? array[1] : string.Empty;
             }
 
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
         
 
@@ -500,7 +500,7 @@ namespace C2.Business.CastleBravo.VPN
             string[] array = ST.UrlDecode(value).Split("#");
 
             string method    = string.Empty;
-            string otherInfo = string.Empty;
+            string other = string.Empty;
             string remarks   = array.Length > 1 ? array[1] : string.Empty;
             
             array = array[0].Split("?");
@@ -517,7 +517,7 @@ namespace C2.Business.CastleBravo.VPN
                 foreach (string param in paramsList)
                     sb.Append(string.Format("{0}={1};", param, latterParams[param]));
                 
-                otherInfo = sb.ToString();
+                other = sb.ToString();
             }
 
             array = array[0].Split(":");
@@ -528,7 +528,7 @@ namespace C2.Business.CastleBravo.VPN
             string addr = array.Length > 1 ? array[1] : string.Empty;
             addr = addr.Replace("/", string.Empty);
 
-            return new string[] { remarks, addr, port, pass, method, otherInfo };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
         private string[] GenTrojanLine(string value)
@@ -554,7 +554,7 @@ namespace C2.Business.CastleBravo.VPN
             addr = addr.Replace("/", string.Empty);
             string method = string.Empty;
 
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] {ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
 
