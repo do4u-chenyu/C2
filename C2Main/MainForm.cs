@@ -38,7 +38,7 @@ namespace C2
         StartForm,   // 首页
         JSForm       // 胶水界面
     }
-    public partial class MainForm: DocumentManageForm
+    public partial class MainForm : DocumentManageForm
     {
         public string UserName { get => Global.GetUsername(); }
 
@@ -51,7 +51,7 @@ namespace C2
         private InputDataForm inputDataForm;
         private Control[] leftPanelControls;
         private Control[] leftMainButtons;
-   
+
         private static readonly Color LeftFocusColor = Color.FromArgb(228, 60, 89); // 红
         private static readonly Color LeftLeaveColor = Color.FromArgb(41, 60, 85);  // 蓝
         private string fullFilePath;
@@ -59,8 +59,6 @@ namespace C2
         private static DirectoryInfo info = new DirectoryInfo(Global.TempDirectory);
         private static string xmlDirectory = Path.Combine(info.Parent.FullName, "tmpRedisASK");
         private static string xmlPath = Path.Combine(xmlDirectory, "tmpRedisASK.xml");
-        private static XmlDocument xDoc = new XmlDocument();
-        private static DateTime e = DateTime.Now;
         private string startTime = DateTime.Now.ToString("yyyyMMddHHmmss");
 
         private void InitializeOpenFile(string path)
@@ -107,7 +105,7 @@ namespace C2
             this.leftToolBoxPanel.Width = 10;
 
             // 注册左侧一级按钮
-            this.leftMainButtons = new Control[] { 
+            this.leftMainButtons = new Control[] {
                 this.manualButton,
                 this.mindMapButton,
                 this.modelMarketButton,
@@ -120,9 +118,9 @@ namespace C2
             };
 
             // 注册左侧二级面板
-            this.leftPanelControls = new Control[] { 
+            this.leftPanelControls = new Control[] {
                 this.manualControl,
-                this.mindMapControl, 
+                this.mindMapControl,
                 this.modelMarketControl,
                 this.dataSourceControl,
                 this.iaoLabControl,
@@ -199,7 +197,7 @@ namespace C2
             Global.SetWorkSpacePanel(this.workSpacePanel);
             Global.SetManualControl(this.manualControl);
             Global.SetMindMapControl(this.mindMapControl);
-            Global.SetIAOLabControl (this.iaoLabControl);
+            Global.SetIAOLabControl(this.iaoLabControl);
             Global.SetHIBUControl(this.HIBUControl);
         }
         void InitializeMdiClient()
@@ -207,14 +205,14 @@ namespace C2
             MdiClient = this.mdiWorkSpace;
         }
         void InitializeStartForm()
-        {  
+        {
             ShowForm(new StartForm(), true, false, true);
 #if !C2_Outer
             ShowForm(new JSForm(), true, false, false);      // 想默认展示JSForm,ZZ策略,但JSForm鬼影太严重,支楞不起来
 #endif
         }
-#endregion
-        
+        #endregion
+
         void SetAGoodLocation()
         {
             if (WindowState == FormWindowState.Normal)
@@ -248,7 +246,7 @@ namespace C2
                 SelectLeftPanel(leftButton, leftPanel);
                 if (isLeftViewPanelMinimum)
                     this.ShowLeftFold();
-            }   
+            }
         }
 
         public void SelectLeftPanel(Control leftButton, Control leftPanel)
@@ -279,13 +277,13 @@ namespace C2
             if (!manualControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(manualButton, manualControl);
         }
-        
+
         private void DataSourceButton_Click(object sender, EventArgs e)
         {
             ShowDataSourcePanel();
         }
 
-        public void ShowDataSourcePanel() 
+        public void ShowDataSourcePanel()
         {
             if (!dataSourceControl.Visible || isLeftViewPanelMinimum)
                 ShowLeftPanel(dataSourceButton, dataSourceControl);
@@ -350,23 +348,27 @@ namespace C2
 
             if (File.Exists(xmlPath))
             {
-                xDoc.Load(xmlPath);
-                string endTime = xDoc.SelectSingleNode(@"IdenInformation/userInfo/EndTime").InnerText;
+                string endTime = EndTimeString();
                 if (string.Compare(endTime, startTime, true) == 1)
                     return;
                 else
                 {
                     File.Delete(xmlPath);
                     AddIden();
-                }             
+                }
             }
         }
 
         private void AddIden()
         {
-            if (!new WFDWebAPI().ReAuthBeforeQuery(true))
+            string result = new WFDWebAPI().ReAuthBeforeQueryC2();
+
+            if (result.Contains("false"))
                 Close();
-            Save();
+            else if (!result.Contains("首字母大写"))
+                Save();
+            else
+            { }
         }
 
         private void Save()
@@ -381,12 +383,15 @@ namespace C2
 
         private void SaveUserInfo(XmlNode node)
         {
-            DateTime s = ConvertUtil.TryParseDateTime(Program.LinceseDeadLine, Program.DateTimeFormat);
-            string endTime = s.ToString("yyyyMMddHHmmss");
+            string endTime = EndTimeString();
             new ModelXmlWriter("userInfo", node)
                 .Write("StartTime", startTime)
-                .Write("EndTime", endTime)
                 .Write("userName", WFDWebAPI.GetInstance().UserName);
+        }
+
+        private string EndTimeString()
+        {
+            return ConvertUtil.TryParseDateTime(Program.LinceseDeadLine, Program.DateTimeFormat).ToString("yyyyMMddHHmmss");
         }
 
         private void LoadHeadLine()
@@ -418,12 +423,12 @@ namespace C2
 
             string HotModelPath = Global.TemplatesPath;
             string[] ModelFiles = Directory.GetFiles(HotModelPath, "*.iao");
-            
+
             foreach (string file in ModelFiles)
             {
                 ImportModel.GetInstance().UnZipIaoFile(file, UserName);
             }
-            
+
         }
 
         private void LoadDocuments()
@@ -445,10 +450,10 @@ namespace C2
 
         private void LoadDataSource()
         {
-           
+
             DataSourceInfo dataSource0 = new DataSourceInfo(this.UserName);
             List<DataButton> dataButtons = dataSource0.LoadDataSourceInfo();
-           
+
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);
             // 外部数据源加载
@@ -489,11 +494,11 @@ namespace C2
         private void LoadHIBU()
         {
             // 加载固定工具
-            string[] HIArr = { "图片文本识别", "涉赌文本识别", "涉政文本识别", " 涉黄图像识别", 
-                               "涉恐图像识别", "涉藏图像检测", "涉枪图像检测", "颜值打分", 
-                               "人脸年龄性别识别", "银行卡图像识别", "红包转账图像识别", "卡证识别", 
-                               "语种识别", "语音转文本", "二维码识别", "二维码图像识别", 
-                               "红头文件识别", "命名实体识别", "信息抽取", "轨迹联通类图像识别", 
+            string[] HIArr = { "图片文本识别", "涉赌文本识别", "涉政文本识别", " 涉黄图像识别",
+                               "涉恐图像识别", "涉藏图像检测", "涉枪图像检测", "颜值打分",
+                               "人脸年龄性别识别", "银行卡图像识别", "红包转账图像识别", "卡证识别",
+                               "语种识别", "语音转文本", "二维码识别", "二维码图像识别",
+                               "红头文件识别", "命名实体识别", "信息抽取", "轨迹联通类图像识别",
                                "表情识别", "人脸检测", "人脸识别"};
             foreach (string name in HIArr)
                 this.HIBUControl.GenIAOButton(name.Trim());
@@ -503,7 +508,7 @@ namespace C2
         {
             this.isLeftViewPanelMinimum = false;
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            this.leftToolBoxPanel.Width = 187; 
+            this.leftToolBoxPanel.Width = 187;
         }
 
         private void HideLeftFold()
@@ -518,7 +523,7 @@ namespace C2
             {
                 int i = Array.FindIndex(leftMainButtons, v => v.BackColor == LeftFocusColor);
                 ShowLeftPanel(leftMainButtons[i], leftPanelControls[i]);
-            }    
+            }
             else
                 HideLeftFold();
         }
@@ -527,10 +532,10 @@ namespace C2
         {
             this.toolTip1.SetToolTip(this.usernamelabel, this.usernamelabel.Text + "已登录");
         }
-    
+
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
-            if(Global.GetCanvasPanel() != null && Global.GetCanvasPanel().DragWrapper.StartDrag)
+            if (Global.GetCanvasPanel() != null && Global.GetCanvasPanel().DragWrapper.StartDrag)
             {
                 Global.GetCanvasPanel().DragWrapper.StartDrag = false;
                 Global.GetCanvasPanel().DragWrapper.ControlChange();
@@ -547,7 +552,7 @@ namespace C2
             DocumentForm form = new DocumentForm(doc);
             ShowForm(form);
         }
-        public void ShowFormWord(DocumentForm form) 
+        public void ShowFormWord(DocumentForm form)
         {
             ShowForm(form);
         }
@@ -562,7 +567,7 @@ namespace C2
             ShowForm(form);
             form.GenMindMapDataSources(topic);
             OperatorWidget opw = topic.FindWidget<OperatorWidget>();
-            if(opw != null)
+            if (opw != null)
                 opw.ModelRelateTab = TaskBar.SelectedItem;
             form.Save();
         }
@@ -603,16 +608,16 @@ namespace C2
                 opw.ModelRelateTab = TaskBar.SelectedItem;
         }
 
-        public  Document CreateNewMapForWord(string templateName) 
+        public Document CreateNewMapForWord(string templateName)
         {
             return CreateNewMap(templateName);
-        }   
+        }
         Document CreateNewMap(string templateName)
         {
             Document doc = LoadDocumentTemplate(templateName);
             doc.Modified = true;
             return doc;
-        }    
+        }
         private Document LoadDocumentTemplate(string templateName)
         {
             Document doc;
@@ -636,7 +641,7 @@ namespace C2
             }
             return doc;
         }
-        
+
         public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
         {
             if (MyFindDialog == null || MyFindDialog.IsDisposed)
@@ -788,7 +793,7 @@ namespace C2
         }
         public void NewDocumentForm_Click(string templateName)
         {
-            
+
             CreateNewModelForm createNewModelForm = new CreateNewModelForm
             {
                 StartPosition = FormStartPosition.CenterScreen,
@@ -804,7 +809,7 @@ namespace C2
             {
                 NewDocumentForm(templateName, createNewModelForm.ModelTitle);
                 new Log.Log().LogManualButton("分析笔记", "新建");
-            }  
+            }
         }
 
         void TaskBar_Items_ItemRemoved(object sender, XListEventArgs<TabItem> e)
@@ -847,7 +852,7 @@ namespace C2
                     this.bottomPreview.PreViewDataByDatabase(item);
                     this.ShowBottomPreview();
                 }
-                else 
+                else
                     HelpUtil.ShowMessageBox(HelpUtil.DbCannotBeConnectedInfo);
                 return;
             }
@@ -901,7 +906,7 @@ namespace C2
         {
             this.ShowBottomPanel();
             this.ShowBottomPreview();
-         
+
         }
 
         private void PyControlLabel_Click(object sender, EventArgs e)
@@ -1011,6 +1016,7 @@ namespace C2
                     OpenMindMapDocument(filename);
         }
 
+        /*
         protected override void DefWndProc(ref Message m)
         {
             switch(m.Msg)
@@ -1024,6 +1030,7 @@ namespace C2
             }
             
         }
+        */
 
         private void DoCopyData(Message m)
         {
@@ -1048,6 +1055,5 @@ namespace C2
             User32.ShowWindowAsync(this.Handle, ShowWindowFlags.SW_MAXIMIZE);
             User32.SetForegroundWindow(this.Handle);
         }
-
     }
 }

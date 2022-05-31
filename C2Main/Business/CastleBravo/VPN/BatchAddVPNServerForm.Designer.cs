@@ -49,6 +49,8 @@ namespace C2.Business.CastleBravo.VPN
             this.rssPB = new System.Windows.Forms.ProgressBar();
             this.rssLable = new System.Windows.Forms.Label();
             this.rssLB = new System.Windows.Forms.Label();
+            this.vpnPB = new System.Windows.Forms.Label();
+            this.vpnLB = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -271,7 +273,7 @@ namespace C2.Business.CastleBravo.VPN
             // 
             // rssPB
             // 
-            this.rssPB.Location = new System.Drawing.Point(8, 379);
+            this.rssPB.Location = new System.Drawing.Point(5, 379);
             this.rssPB.Name = "rssPB";
             this.rssPB.Size = new System.Drawing.Size(120, 23);
             this.rssPB.TabIndex = 10037;
@@ -282,8 +284,8 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLable.AutoSize = true;
             this.rssLable.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rssLable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.rssLable.Location = new System.Drawing.Point(6, 349);
-            this.rssLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.rssLable.Location = new System.Drawing.Point(0, 349);
+            this.rssLable.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.rssLable.Name = "rssLable";
             this.rssLable.Size = new System.Drawing.Size(80, 18);
             this.rssLable.TabIndex = 10038;
@@ -295,7 +297,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLB.AutoSize = true;
             this.rssLB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rssLB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.rssLB.Location = new System.Drawing.Point(82, 349);
+            this.rssLB.Location = new System.Drawing.Point(77, 349);
             this.rssLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.rssLB.Name = "rssLB";
             this.rssLB.Size = new System.Drawing.Size(35, 18);
@@ -303,12 +305,38 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLB.Text = "0/1";
             this.rssLB.Visible = false;
             // 
+            // vpnPB
+            // 
+            this.vpnPB.AutoSize = true;
+            this.vpnPB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.vpnPB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.vpnPB.Location = new System.Drawing.Point(0, 320);
+            this.vpnPB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vpnPB.Name = "vpnPB";
+            this.vpnPB.Size = new System.Drawing.Size(80, 18);
+            this.vpnPB.TabIndex = 10040;
+            this.vpnPB.Text = "梯子总数";
+            this.vpnPB.Visible = false;
+            // 
+            // vpnLB
+            // 
+            this.vpnLB.AutoSize = true;
+            this.vpnLB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.vpnLB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.vpnLB.Location = new System.Drawing.Point(77, 320);
+            this.vpnLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vpnLB.Name = "vpnLB";
+            this.vpnLB.Size = new System.Drawing.Size(0, 18);
+            this.vpnLB.TabIndex = 10041;
+            this.vpnLB.Visible = false;
+            // 
             // BatchAddVPNServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(722, 488);
+            this.Controls.Add(this.vpnLB);
             this.Controls.Add(this.rssLB);
             this.Controls.Add(this.rssLable);
             this.Controls.Add(this.rssPB);
@@ -325,11 +353,13 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.vpnPB);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BatchAddVPNServerForm";
             this.Text = "批量添加";
+            this.Controls.SetChildIndex(this.vpnPB, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label1, 0);
@@ -346,6 +376,7 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.SetChildIndex(this.rssPB, 0);
             this.Controls.SetChildIndex(this.rssLable, 0);
             this.Controls.SetChildIndex(this.rssLB, 0);
+            this.Controls.SetChildIndex(this.vpnLB, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -374,5 +405,7 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.ProgressBar rssPB;
         private System.Windows.Forms.Label rssLable;
         private System.Windows.Forms.Label rssLB;
+        private System.Windows.Forms.Label vpnPB;
+        private System.Windows.Forms.Label vpnLB;
     }
 }

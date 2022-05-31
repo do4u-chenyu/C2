@@ -194,8 +194,7 @@ namespace C2.Core
         public static string TemplatesPath = Path.Combine(ResourcesPath, "Templates");  
         public static string WebEnginePath = Path.Combine(BusinessPath, "IAOLab", "WebEngine");
         public static string VPNPath = Path.Combine(ResourcesPath, "VPN");
-        public static string superName = Encoding.UTF8.GetString(Convert.FromBase64String("Ym9tYg=="));
-        public static string superPass = Encoding.UTF8.GetString(Convert.FromBase64String("MjQ2ODAw"));
+        public static string SuperPass = "ZmVuZ2h1b2h1b2Zlbmc="; 
 
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
 
@@ -254,8 +253,8 @@ namespace C2.Core
         // 网络安全类工具的授权列表
         // windows命令行 :  wmic BASEBOARD get SerialNumber
         public static readonly Dictionary<string, string> SNS = new Dictionary<string, string>(){
-            { "L1HF58S04Y6", "LQ1" },
-            { "L1HF1B505E0", "LQ2" },
+            //{ "L1HF58S04Y6", "LQ1" },
+            //{ "L1HF1B505E0", "LQ2" },
             { "L1HF68F046A", "SQY"},
             //{ "PF2Z4F9W",    "HZH"},
             { "L1HF68F02VM", "MHD"},

@@ -20,6 +20,7 @@ namespace C2.Business.CastleBravo.VPN
         private readonly string addrline = @"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})[:\s]+(\d{1,5})$";
         private int maxRow;
         private int mode;
+        private int vpnCount;
         string FilePath { get => this.filePathTextBox.Text; set => this.filePathTextBox.Text = value; }
         public List<VPNTaskConfig> Tasks;
 
@@ -105,6 +106,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssPB.Maximum = max;
             this.rssPB.Value = 0;
             this.rssLB.Text = string.Empty;
+            this.vpnCount = 0;
             this.rssFailHist.Clear();
         }
 
@@ -113,6 +115,8 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLable.Visible = true;
             this.rssPB.Visible = true;
             this.rssLB.Visible = true;
+            this.vpnPB.Visible = true;
+            this.vpnLB.Visible = true;
         }
 
         private void AddTasksByLine(string line)
@@ -181,7 +185,11 @@ namespace C2.Business.CastleBravo.VPN
                     rssFailHist.Add(line);
 
                 foreach (string ss in ret.SplitLine())
+                {
                     DoSSLine(ss, line);
+                    vpnCount++;
+                }
+                    
             }
         }
 
@@ -213,7 +221,7 @@ namespace C2.Business.CastleBravo.VPN
                     string addr = vmess.ContainsKey("server") ? vmess["server"] as string : string.Empty;
                     string port = vmess.ContainsKey("port") ? vmess["port"] as string : string.Empty;
                     string pass = vmess.ContainsKey("uuid") ? vmess["uuid"] as string : string.Empty;
-                    string method = vmess.ContainsKey("cipher") ? vmess["cipher"] as string : string.Empty;
+                    string method = vmess.  ContainsKey("cipher") ? vmess["cipher"] as string : string.Empty;
                     string version = vmess.ContainsKey("type") ? vmess["type"] as string : string.Empty;
                     string remarks = vmess.ContainsKey("name") ? vmess["name"] as string : string.Empty;
 
@@ -223,7 +231,8 @@ namespace C2.Business.CastleBravo.VPN
                     foreach (var kv in vmess)
                         sb.Append(string.Format("{0}={1};", kv.Key as string, kv.Value.ToString()));
                     string other = sb.ToString();
-
+                    
+                    vpnCount++;
                     Tasks.Add(new VPNTaskConfig(ST.NowString(),
                             remarks.Trim(),
                             addr.Trim(),
@@ -245,7 +254,9 @@ namespace C2.Business.CastleBravo.VPN
 
         private void UpdateProgressBar()
         {
-            this.rssLB.Text = string.Format("{0}/{1}", rssPB.Value++, rssPB.Maximum);
+            int val = rssPB.Value < rssPB.Maximum ? rssPB.Value++ : rssPB.Maximum;
+            this.rssLB.Text = string.Format("{0}/{1}", val, rssPB.Maximum);
+            this.vpnLB.Text = string.Format("{0}", this.vpnCount);
             Application.DoEvents();
         }
 
@@ -261,7 +272,12 @@ namespace C2.Business.CastleBravo.VPN
                 else
                 {
                     VisibleProgressBar();
-                    DoRSSLine(line);
+                    // clash类订阅地址
+                    if (line.ToLower().Contains("clash="))
+                        DoClashLine(line);
+                    // 非clash类订阅地址
+                    else
+                        DoRSSLine(line);
                 }
                     
                 return;
@@ -357,16 +373,16 @@ namespace C2.Business.CastleBravo.VPN
             {
                 array = value.Split("@");
                 addr = array.Length > 1 ? array[1] : addr;
-                value = array[0];
+                value = array[0].IsNull() ? string.Empty : array[0];
             }
             // 第五步: addr中分割IP和端口
             array = addr.Split(":");
-            addr  = array[0];
+            addr  = array[0].IsNull() ? string.Empty : array[0];
             string port = array.Length > 1 ? array[1] : string.Empty;
 
             // 有些地方这里会遇到
             array = port.Split("/?");
-            port  = array[0];
+            port  = array[0].IsNull() ? string.Empty : array[0];
             string other = array.Length > 1 ? array[1] : string.Empty;
 
             // 第六步: method和password分割
@@ -374,7 +390,7 @@ namespace C2.Business.CastleBravo.VPN
             string method = array[0];
             string pass = array.Length > 1 ? array[1] : string.Empty;
             // 第七步: 返回构造数组
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
         private string[] GenSSRLine(string value)
@@ -397,8 +413,8 @@ namespace C2.Business.CastleBravo.VPN
             string other   = string.Format("协议={0};混淆={1};", proto, obfs);
 
             if (right.IsNullOrEmpty())
-                return new string[] { remarks, addr, port, pass, method, other };
-           
+                return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
+
             NameValueCollection lParams = NetUtil.ParseQueryStringUTF8(right);
 
             remarks           = TryDecodeBase64(lParams["remarks"]    ?? string.Empty); 
@@ -408,7 +424,7 @@ namespace C2.Business.CastleBravo.VPN
 
             other += string.Format("协议参数={0};混淆参数={1};Group={2}", protoparam, obfsparam, group);
 
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
         private string[] GenVmessLine(string value)
@@ -475,7 +491,7 @@ namespace C2.Business.CastleBravo.VPN
                 port = array.Length > 1 ? array[1] : string.Empty;
             }
 
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
         
 
@@ -484,7 +500,7 @@ namespace C2.Business.CastleBravo.VPN
             string[] array = ST.UrlDecode(value).Split("#");
 
             string method    = string.Empty;
-            string otherInfo = string.Empty;
+            string other = string.Empty;
             string remarks   = array.Length > 1 ? array[1] : string.Empty;
             
             array = array[0].Split("?");
@@ -501,7 +517,7 @@ namespace C2.Business.CastleBravo.VPN
                 foreach (string param in paramsList)
                     sb.Append(string.Format("{0}={1};", param, latterParams[param]));
                 
-                otherInfo = sb.ToString();
+                other = sb.ToString();
             }
 
             array = array[0].Split(":");
@@ -512,7 +528,7 @@ namespace C2.Business.CastleBravo.VPN
             string addr = array.Length > 1 ? array[1] : string.Empty;
             addr = addr.Replace("/", string.Empty);
 
-            return new string[] { remarks, addr, port, pass, method, otherInfo };
+            return new string[] { ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
         private string[] GenTrojanLine(string value)
@@ -538,7 +554,7 @@ namespace C2.Business.CastleBravo.VPN
             addr = addr.Replace("/", string.Empty);
             string method = string.Empty;
 
-            return new string[] { remarks, addr, port, pass, method, other };
+            return new string[] {ST.N(remarks), ST.N(addr), ST.N(port), ST.N(pass), ST.N(method), ST.N(other) };
         }
 
 

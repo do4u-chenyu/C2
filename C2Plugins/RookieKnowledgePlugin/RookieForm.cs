@@ -132,6 +132,7 @@ namespace RookieKnowledgePlugin
 
         private void LinuxTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            new Log().LogManualButton("技能宝典" + "-" + tabPage1.Text, "运行");
             if (e.Node.Name == "首页")
             {
                 linuxTextBox.SetTextAndRefresh("Linux 首页");
@@ -142,6 +143,7 @@ namespace RookieKnowledgePlugin
 
         private void PythonTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            new Log().LogManualButton("技能宝典" + "-" + tabPage2.Text, "运行");
             if (e.Node.Name == "首页")
             {
                 pythonTextBox.SetTextAndRefresh("Python 首页");
@@ -149,7 +151,13 @@ namespace RookieKnowledgePlugin
             else
                 TreeView_AfterSelect(pythonTextBox, e.Node.Name);
         }
-
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage1)
+                new Log().LogManualButton("技能宝典" + "-" + tabPage1.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage2)
+                new Log().LogManualButton("技能宝典" + "-" + tabPage2.Text, "打开");
+        }
 
         private void TreeView_AfterSelect(ICSharpCode.TextEditor.TextEditorControlEx tc, String name)
         {

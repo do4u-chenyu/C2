@@ -311,6 +311,10 @@ namespace C2.Business.CastleBravo.VPN
         {
             Export("梯子地址-订阅地址", new int[] { CI_梯子地址, CI_订阅地址 });
         }
+        private void 导出密码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export("密码(UUID)", new int[] { CI_密码 });
+        }
 
         private void CopySSMenuItem_Click(object sender, EventArgs e)
         {
@@ -335,6 +339,12 @@ namespace C2.Business.CastleBravo.VPN
             // 先10后3, 待验证
             CopyToClipboard(new int[] { CI_主机地址, CI_端口, CI_IP地址, CI_归属地 });
             HelpUtil.ShowMessageBox("复制【IP和端口信息】到剪切板【成功】");
+        }
+
+        private void CopyUUIDMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyToClipboard(new int[] { CI_密码});
+            HelpUtil.ShowMessageBox("复制【密码(UUID)】到剪切板【成功】");
         }
 
 
@@ -436,7 +446,20 @@ namespace C2.Business.CastleBravo.VPN
         {
             RemoveDuplicateItems((t) => { return t.Host + t.Port; });
         }
+        private void 删除重复项密码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Password; });
+        }
 
+        private void 删除重复项密码客户端ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Password + t.SSVersion; });
+        }
+
+        private void 删除重复项完全重复ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Host + t.Port + t.Password + t.Method + t.SSVersion + t.OtherInfo + t.Remark; });
+        }
 
         private void RemoveDuplicateItems(Func<VPNTaskConfig, string> method)
         {

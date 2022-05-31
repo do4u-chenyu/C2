@@ -101,6 +101,7 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("Mysql5", "运行");
             byte[] strRes = GetBytes(str);
             HashAlgorithm iSha = new SHA1CryptoServiceProvider();
             strRes = iSha.ComputeHash(iSha.ComputeHash(strRes));

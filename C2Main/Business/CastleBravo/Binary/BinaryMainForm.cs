@@ -90,6 +90,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void FileButton_Click(object sender, System.EventArgs e)
         {
+            new Log.Log().LogManualButton("二进制分析", "运行");
             DialogResult ret = this.openFileDialog1.ShowDialog();
             if (ret != DialogResult.OK)
                 return;
@@ -162,6 +163,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void XiseDecryptButton_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("Xise流量解密", "运行");
             string plainText = XiseTextBox.Text.Trim().ToLower();
             if (plainText.Contains("?"))
                 if (plainText.Contains("~"))
@@ -200,6 +202,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderDecryptButton_Click(object sender, System.EventArgs e)
         {
+            new Log.Log().LogManualButton("冰蝎流量解密", "运行");
             BehinderDTextBox.Focus();
             InitializeBehinderLabels();
             Behinder bh = new Behinder();
@@ -235,6 +238,7 @@ namespace C2.Business.CastleBravo.Binary
 
         private void BehinderDGenButton_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("冰蝎流量加密", "运行");
             BehinderETextBox.Focus();
 
             Behinder bh = new Behinder();
@@ -268,12 +272,27 @@ namespace C2.Business.CastleBravo.Binary
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton("百度LBS报文解密", "运行");
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
 
         }
-
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == StringsTabPage)
+                new Log.Log().LogManualButton(StringsTabPage.Text, "打开");
+            else if (tabControl1.SelectedTab == XiseTabPage)
+                new Log.Log().LogManualButton(XiseTabPage.Text, "打开");
+            else if (tabControl1.SelectedTab == BehinderDTabPage)
+                new Log.Log().LogManualButton(BehinderDTabPage.Text, "打开");
+            else if (tabControl1.SelectedTab == BehinderETabPage)
+                new Log.Log().LogManualButton(BehinderETabPage.Text, "打开");
+            else if (tabControl1.SelectedTab == BaiduLBSTabPage)
+                new Log.Log().LogManualButton(BaiduLBSTabPage.Text, "打开");
+            else if (tabControl1.SelectedTab == tabPage1)
+                new Log.Log().LogManualButton(tabPage1.Text, "打开");
+        }
     }
 }

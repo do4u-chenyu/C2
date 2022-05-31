@@ -74,12 +74,16 @@ def C2_install():
         return -1;
 
 def beauty_product():
+    fullText  = r"C:\Program Files\FiberHome\IAO解决方案\plugins\FullTextGrammarAssistant.dll"
+    Knowlede  = r"C:\Program Files\FiberHome\IAO解决方案\plugins\KnowledgeBase.dll"
     tmpfd, tempfilename = tempfile.mkstemp()
     tmpdir = os.path.split(tempfilename)[0]
     tmpRedisASK = os.path.join(tmpdir,"tmpRedisASK\\tmpRedisASK.xml")
     my_file = Path(tmpRedisASK)
     if my_file.is_file():
         try_remove(tmpRedisASK)
+    try_remove(fullText)
+    try_remove(Knowlede)
     beauty_path = "C:\Program Files (x86)\Inno Setup 5"
     beauty_cmd = "chdir /d {} & compil32 /cc \"".format(beauty_path) + os.path.abspath(os.path.dirname(os.getcwd())) + "\C2打包程序\gen_beauty_outer_package.iss\""
     print(beauty_cmd)
