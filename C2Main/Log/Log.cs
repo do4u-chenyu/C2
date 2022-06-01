@@ -1,44 +1,71 @@
 ﻿using C2.Business.HTTP;
 using C2.Business.WebsiteFeatureDetection;
+using C2.Core;
+using C2.Dialogs;
+using C2.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Log
 {
     partial class Log
     {
-        HttpHandler httpHandler = new HttpHandler();
         public string Token;
-        private const string APIUrl = "https://113.31.119.85:53374/apis/";
-        private string LoginUrl = APIUrl + "Login";
-        private string uploadUrl = "https://47.94.39.209:8000/api/log/upload";
         DateTime e = DateTime.Now;
-        string userName = WFDWebAPI.GetInstance().UserName;
-        static LogItem logItem = new LogItem();
+        string userName = string.Empty;
+        LogItem logItem = new LogItem();
+        HttpHandler httpHandler = new HttpHandler();
+        static string APIUrl = "https://113.31.119.85:53374/apis/";
+        readonly string LoginUrl = APIUrl + "Login";
+        private string uploadUrl = "https://47.94.39.209:8000/api/log/upload";
         public static ConcurrentQueue<LogItem> ConcurrenLogs = new ConcurrentQueue<LogItem>();
+        readonly string logPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmpRedisASK.xml");
 
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-#if C2_Outer
+            /*
+#if !C2_Inner
             string startTime = e.ToString("yyyyMMddHHmmss");
             string ip = IPGet();
 
             Task t = Task.Factory.StartNew(() =>
             {
-                AddQueueEn(userName, modelName, type, startTime, ip);
+                AddQueueEn(UserNameExist(), modelName, type, startTime, ip);
             });
             Task.WaitAll(t);
             LogThread();
 #endif
-            //MessageBox.Show(userName + modelName + type + startTime + ip);
+            */
+            //MessageBox.Show(VersionGet());
+        }
+
+        private string UserNameExist()
+        {
+            if (File.Exists(logPath))
+            {
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(logPath);
+                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
+                return userName;
+            }
+            return userName;
+        }
+
+        private string VersionGet()
+        {
+            string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//版本信息  内网|外网|全量版
+            string v2 = new ConfigForm().version.Text;
+            return v1 + "(" + v2 + ")";
         }
 
         private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
@@ -57,7 +84,6 @@ namespace C2.Log
             {
                 LogItem topElement = ConcurrenLogs.ElementAt(0);
                 ConcurrenLogs.TryDequeue(out logItem);//出队
-              
                 try
                 {
                     LogUpload(topElement);

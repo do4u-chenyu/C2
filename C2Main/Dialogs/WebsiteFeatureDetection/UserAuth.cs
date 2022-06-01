@@ -15,11 +15,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public string UserName { get => userNameTextBox.Text; set => userNameTextBox.Text = value; }
         public bool FreeButtonVisible { set => freeButton.Visible = value; }
         public string Otp { get => otpTextBox.Text; set => otpTextBox.Text = value; }
-        private static string xmlPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmp.xml");
+        private static string tmpRedisASKPath = Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK");
+        private static string tmpXmlPath = Path.Combine(tmpRedisASKPath, "tmp.xml");
         public UserAuth()
         {
             InitializeComponent();
-            if (File.Exists(xmlPath))
+            if (!File.Exists(tmpRedisASKPath))
+                Directory.CreateDirectory(tmpRedisASKPath);
+            if (File.Exists(tmpXmlPath))
                 freeButton.Enabled = false;
         }
 
@@ -95,11 +98,11 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void FreeButton_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(xmlPath))
+            if (!File.Exists(tmpXmlPath))
             {
                 DialogResult = DialogResult.OK;
                 Close();
-                File.Create(xmlPath);
+                File.Create(tmpXmlPath);
             }
         }
     }
