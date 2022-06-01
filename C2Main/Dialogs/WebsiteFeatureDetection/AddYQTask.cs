@@ -4,14 +4,12 @@ using C2.Controls;
 using C2.Core;
 using C2.Utils;
 using Newtonsoft.Json.Linq;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
@@ -167,7 +165,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 HelpUtil.ShowMessageBox(" 抖音APP和快手相关查询施工中，敬请期待。");
                 return false;
             }
-
+            
             if (!GenAndCheckToken())
                 return false;
 
@@ -176,10 +174,26 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
             if (!(genTask && base.OnOKButtonClick()))
                 return false;
-
+            //RunPython();
             new Log.Log().LogManualButton("舆情侦察兵", "运行");
             HelpUtil.ShowMessageBox("任务下发成功");
             return true;
+        }
+
+        private void RunPython()
+        {
+            string pyPath = Path.Combine(Global.TemplatesPath, "get_yq_result.py");
+            string strInput = @"python " + pyPath + " --f " + this.statusFilePath;
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
+            p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+            p.StartInfo.RedirectStandardInput = true;  // 接受来自调用程序的输入信息
+            p.StartInfo.RedirectStandardOutput = true;   //输出信息
+            p.StartInfo.RedirectStandardError = true;   // 输出错误
+            p.StartInfo.CreateNoWindow = true;     //不显示程序窗口    
+            p.Start();     //启动程序     
+            p.StandardInput.WriteLine(strInput + "&exit"); //向cmd窗口发送输入信息
+            p.StandardInput.AutoFlush = true;
         }
 
         private bool GenAndCheckToken()
@@ -226,7 +240,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             req.Timeout = 20000;
             HttpWebResponse response = (HttpWebResponse)req.GetResponse();
             string postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
             return postContent;
         }
 
@@ -279,16 +292,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //新浪微博： weibo.com
             //Twitter： twitter.com
             //百家号： baijiahao.baidu.com
-
-            //Twitter
-            //微博
-            //微信公众号
-            //今日头条
-            //抖音
-            //抖音APP
-            //快手
-            //暗网
-            //不限
             string modelHost = string.Empty;
             string dataType = string.Empty;
             
@@ -315,6 +318,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     modelHost = "iesdouyin.com";
                     dataType = "131072";
                     break;
+                case "知乎":
+                    modelHost = "zhihu.com";
+                    dataType = "32768";
+                    break;
+                case "贴吧":
+                    modelHost = "tieba.baidu.com";
+                    dataType = "64";
+                    break;
             }
 
             List<string> result = new List<string> { modelHost, dataType };
@@ -337,7 +348,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private bool GenTasksFromFile()
         {
-
             if (!File.Exists(FilePath))
             {
                 HelpUtil.ShowMessageBox("该数据文件不存在");
@@ -370,7 +380,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
-            pairs.Add("name", this.ruleName);
+            
             pairs.Add("datasource", this.ruleDatasource);
             if (this.startTime != 0)
                 pairs.Add("starttime", this.startTime);
@@ -385,19 +395,29 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 if (this.TaskModelName == "Twitter")
                 {
                     keyWord = keyWord.Replace("@", string.Empty).Replace(" ",string.Empty);
-                    pairs.Add("url", "https://twitter.com/" + keyWord);
-                    string accountUrl = string.Format("https://api.fhyqw.com/twitter/account?token={0}&screenname={1}",this.token,keyWord);
-                    if(WriteTwitterAccount(accountUrl,keyWord))
+                    
+                    string accountUrl = string.Format("https://api.fhyqw.com/twitter/detail?token={0}&screenname={1}", this.token,keyWord);
+                    List<string> returnList = WriteTwitterAccount(accountUrl, keyWord);
+                    if (returnList[0] != "false")
                         resultNumber = 1;
+                    if (returnList[1].IsNullOrEmpty() || this.ruleHost.IsNullOrEmpty())
+                    {
+                        HelpUtil.ShowMessageBox(keyWord + "推特账号任务下发失败");
+                        return;
+                    }
+                    this.ruleName = keyWord;
+                    pairs.Add("userid", returnList[1]);
+                    pairs.Add("host", this.ruleHost);
                 }
                 else
                 {
                     if (!this.ruleHost.IsNullOrEmpty())
                         pairs.Add("host", this.ruleHost);
-                    pairs.Add("userid", keyWord);
+                    pairs.Add("nickname", keyWord);
                 }
             }
             pairs.Add("type", this.ruleType);
+            pairs.Add("name", this.ruleName);
 
             string error = string.Empty;
             string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}", this.token);
@@ -450,8 +470,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             WriteTaskInfo(keyWord, resultNumber.ToString());
         }
 
-        private bool WriteTwitterAccount(string accountUrl,string keyWord)
+        private List<string> WriteTwitterAccount(string accountUrl,string keyWord)
         {
+            List<string> returnList = new List<string>() { "true", string.Empty};
             StringBuilder sb = new StringBuilder();
             string error = string.Empty;
             List<string> colList = new List<string>()
@@ -472,6 +493,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     foreach (string col in colList)
                     {
                         string value = gList[col].IsNull() ? string.Empty : gList[col].ToString();
+                        if (col == "id")
+                            returnList[1] = value;
                         sb.Append(value + "\t");
                     }
                 }
@@ -489,7 +512,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     sw.WriteLine(error);
                     sw.Write(Environment.NewLine);
                     sw.Close();
-                    return false;
+                    returnList[0] = "fasle";
+                    return returnList;
                 }
                 sw.WriteLine(string.Join("\t", colList.ToArray()).Replace("id","UserID").Replace("screenName", "UserName").Replace("name", "NickName"));
                 sw.WriteLine(sb.ToString());
@@ -502,7 +526,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             if (sw != null)
                 sw.Close();
-            return true;
+            return returnList;
         }
 
         private void WriteTaskInfo(string keyWord, string num)
