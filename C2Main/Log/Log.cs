@@ -1,6 +1,8 @@
 ﻿using C2.Business.HTTP;
 using C2.Business.WebsiteFeatureDetection;
 using C2.Core;
+using C2.Dialogs;
+using C2.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace C2.Log
@@ -30,7 +33,8 @@ namespace C2.Log
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-#if C2_Outer
+            /*
+#if !C2_Inner
             string startTime = e.ToString("yyyyMMddHHmmss");
             string ip = IPGet();
 
@@ -41,7 +45,8 @@ namespace C2.Log
             Task.WaitAll(t);
             LogThread();
 #endif
-            //MessageBox.Show(userName + modelName + type + startTime + ip);
+            */
+            //MessageBox.Show(VersionGet());
         }
 
         private string UserNameExist()
@@ -54,6 +59,13 @@ namespace C2.Log
                 return userName;
             }
             return userName;
+        }
+
+        private string VersionGet()
+        {
+            string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//版本信息  内网|外网|全量版
+            string v2 = new ConfigForm().version.Text;
+            return v1 + "(" + v2 + ")";
         }
 
         private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)

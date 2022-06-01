@@ -69,7 +69,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.aboutConfigPage = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.version = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -494,7 +494,7 @@
             // aboutConfigPage
             // 
             this.aboutConfigPage.Controls.Add(this.label9);
-            this.aboutConfigPage.Controls.Add(this.label8);
+            this.aboutConfigPage.Controls.Add(this.version);
             this.aboutConfigPage.Controls.Add(this.textBox4);
             this.aboutConfigPage.Controls.Add(this.button7);
             this.aboutConfigPage.Controls.Add(this.textBox3);
@@ -519,14 +519,14 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "到期时间 2022.07.05";
             // 
-            // label8
+            // version
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 295);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 17);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Version 2.1.3";
+            this.version.AutoSize = true;
+            this.version.Location = new System.Drawing.Point(9, 295);
+            this.version.Name = "version";
+            this.version.Size = new System.Drawing.Size(47, 17);
+            this.version.TabIndex = 9;
+            this.version.Text = "V:2.1.3";
             // 
             // textBox4
             // 
@@ -794,7 +794,7 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label chosenPythonLable;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        public System.Windows.Forms.Label version;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFFPColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn aliasColumn;
