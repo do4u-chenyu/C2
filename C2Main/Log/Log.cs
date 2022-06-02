@@ -26,30 +26,30 @@ namespace C2.Log
         HttpHandler httpHandler = new HttpHandler();
         static string APIUrl = "https://113.31.119.85:53374/apis/";
         readonly string LoginUrl = APIUrl + "Login";
-        private string uploadUrl = "https://47.94.39.209:8000/api/log/upload";
+        private string uploadUrl = "http://113.31.114.239:53373/api/log/upload";
         public static ConcurrentQueue<LogItem> ConcurrenLogs = new ConcurrentQueue<LogItem>();
         readonly string logPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmpRedisASK.xml");
 
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-            /*
+            
 #if !C2_Inner
             string startTime = e.ToString("yyyyMMddHHmmss");
             string ip = IPGet();
 
             Task t = Task.Factory.StartNew(() =>
             {
-                AddQueueEn(UserNameExist(), modelName, type, startTime, ip);
+                AddQueueEn(UserNameGet(), modelName, type, startTime, ip, VersionGet());
             });
             Task.WaitAll(t);
             LogThread();
 #endif
-            */
+  
             //MessageBox.Show(VersionGet());
         }
 
-        private string UserNameExist()
+        private string UserNameGet()
         {
             if (File.Exists(logPath))
             {
@@ -63,18 +63,19 @@ namespace C2.Log
 
         private string VersionGet()
         {
-            string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//版本信息  内网|外网|全量版
-            string v2 = new ConfigForm().version.Text;
-            return v1 + "(" + v2 + ")";
+            string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//内网|外网|全量版
+            string v2 = new ConfigForm().version.Text;//V:2.1.3
+            return string.Format("{0}|{1}", v1,v2);
         }
 
-        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
+        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip,string version)
         {
             logItem.UserName = userName;
             logItem.ModelName = modelName;
             logItem.Type = type;
             logItem.StartTime = startTime;
             logItem.Ip = ip;
+            logItem.Version = version;
             ConcurrenLogs.Enqueue(logItem);//入队
         }
 
@@ -118,7 +119,8 @@ namespace C2.Log
                 { "tasktypename", reciveMessage.ModelName.Replace(@"""",string.Empty)},
                 { "submit_time", reciveMessage.StartTime.Replace(@"""",string.Empty)},
                 { "action",reciveMessage.Type.Replace(@"""",string.Empty)},
-                { "ip",reciveMessage.Ip.Replace("}",string.Empty).Replace(@"""",string.Empty)}
+                { "ip",reciveMessage.Ip.Replace("}",string.Empty).Replace(@"""",string.Empty)},
+                { "version",reciveMessage.Version.Replace("}",string.Empty).Replace(@"""",string.Empty)}
             };
             try
             {
@@ -146,6 +148,7 @@ namespace C2.Log
         public string Type { get; set; }
         public string StartTime { get; set; }
         public string Ip { get; set; }
+        public string Version { get; set; }
     }
 }
 
