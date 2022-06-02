@@ -67,7 +67,8 @@ namespace C2.Controls.C1.Left
                .Write("taskId", taskInfo.TaskID)
                .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
-               .Write("resultFilePath", taskInfo.ResultFilePath);
+               .Write("resultFilePath", taskInfo.ResultFilePath)
+               .Write("taskProcessId", taskInfo.PId.ToString());
         }
 
         private void YQFeatureDetectionControl_Load(object sender, EventArgs e)
@@ -118,6 +119,7 @@ namespace C2.Controls.C1.Left
                     TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
                     DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
                     ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
+                    PId = Convert.ToInt32(xn.SelectSingleNode("taskProcessId").InnerText),
                 };
 
                 AddInnerButton(new YQTaskButton(taskInfo));
