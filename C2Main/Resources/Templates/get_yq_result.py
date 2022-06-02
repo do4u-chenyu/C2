@@ -10,7 +10,7 @@ def get_yq_result(data_list):
     id = data_list[1]
     result_path = data_list[3]
     dict = json.dumps({"rule_id": id})
-    url = "http://47.94.39.209:22222/api/yq/get_message"
+    url = "http://113.31.114.239:53373/api/yq/get_message"
     headers = {"Content-Type": 'application/json'}
     post_data = bytes(dict, 'utf8')
     req = urllib.request.Request(url, data=post_data, headers=headers)
@@ -24,7 +24,7 @@ def get_yq_result(data_list):
               "readnum", "verify", "address", "addresscode", "imagepath", "domaintype", "classifyid", "classifyscore",
               "commentsign", "sensitivity", "areacode", "tagarea", "signcode", "eventcode", "tagevent"]
     info_list = result["data"].strip("\n").split("\n")
-    data_list[1] = data_list[1] + str(len(info_list))
+    data_list[2] = str(int(data_list[2]) + len(info_list))
     for info in info_list:
         result_list = []
         col_info = json.loads(info)["articleinfo"]
@@ -65,9 +65,7 @@ def main():
                      "文章所属分类得分", "正负面标识", "文章敏感度", "是否为噪音标识", "文章命中地区编码", "文章命中地区",
                      "行业情感正负面", "行业id", "行业说明"]
 
-    # rule_id_list = ["26165356897133", "2616535689712"]
-
-    for i in range(0, 12):
+    for i in range(0, 120):
         content_list = read_file(file_path)
         update_content = []
         for content in content_list:
@@ -80,7 +78,7 @@ def main():
             content = "\t".join(get_yq_result(data_list))
             update_content.append(content)
         write_info(update_content, file_path)
-        time.sleep(60)
+        time.sleep(300)
 
 
 if __name__ == "__main__":

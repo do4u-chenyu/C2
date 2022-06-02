@@ -31,6 +31,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private string destFilePath;
         private string statusFilePath;
         private string TaskCreateTime;
+        private int pid;
         private readonly Dictionary<string, string> table;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskContent { get => this.taskContentComboBox.Text; set => this.taskContentComboBox.Text = value; }
@@ -50,6 +51,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             startTime = 0;
             endTime = 0;
             ruleDatasource = 0;
+            pid = 0;
 
             destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             FileUtil.CreateDirectory(destDirectory);
@@ -170,11 +172,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
 
             this.TaskInfo = UpdateYQTaskInfo();
-
+            
             bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
             if (!(genTask && base.OnOKButtonClick()))
                 return false;
-            //RunPython();
+
+            RunPython();
             new Log.Log().LogManualButton("舆情侦察兵", "运行");
             HelpUtil.ShowMessageBox("任务下发成功");
             return true;
@@ -190,8 +193,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             p.StartInfo.RedirectStandardInput = true;  // 接受来自调用程序的输入信息
             p.StartInfo.RedirectStandardOutput = true;   //输出信息
             p.StartInfo.RedirectStandardError = true;   // 输出错误
-            p.StartInfo.CreateNoWindow = true;     //不显示程序窗口    
-            p.Start();     //启动程序     
+            p.StartInfo.CreateNoWindow = true;     //不显示程序窗口 
+            if(p.Start())
+                this.TaskInfo.PId = p.Id;     //启动程序     
             p.StandardInput.WriteLine(strInput + "&exit"); //向cmd窗口发送输入信息
             p.StandardInput.AutoFlush = true;
         }
@@ -252,8 +256,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             FileUtil.CreateDirectory(this.taskFilePath);
 
             this.statusFilePath = Path.Combine(this.taskFilePath, this.TaskID + "_info.txt");
-            //using (File.Create(this.statusFilePath)) { } ;
-            
 
             areaCode = GenCode();
 
@@ -264,7 +266,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if(!result[1].IsNullOrEmpty())
                 this.ruleDatasource = Convert.ToInt64(result[1]);
 
-            return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running, TaskCreateTime);
+            return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, pid, TaskCreateTime);
         }
 
         private string GenCode()

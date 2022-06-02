@@ -67,8 +67,7 @@ namespace C2.Controls.C1.Left
                .Write("taskId", taskInfo.TaskID)
                .Write("taskCreateTime", taskInfo.TaskCreateTime)
                .Write("datasourceFilePath", taskInfo.DatasourceFilePath)
-               .Write("resultFilePath", taskInfo.ResultFilePath)
-               .Write("status", taskInfo.Status);
+               .Write("resultFilePath", taskInfo.ResultFilePath);
         }
 
         private void YQFeatureDetectionControl_Load(object sender, EventArgs e)
@@ -119,19 +118,11 @@ namespace C2.Controls.C1.Left
                     TaskCreateTime = xn.SelectSingleNode("taskCreateTime").InnerText,
                     DatasourceFilePath = xn.SelectSingleNode("datasourceFilePath").InnerText,
                     ResultFilePath = xn.SelectSingleNode("resultFilePath").InnerText,
-                    Status = YQTaskStatusEnum(xn.SelectSingleNode("status").InnerText)
                 };
 
                 AddInnerButton(new YQTaskButton(taskInfo));
             }
             catch { }
-        }
-
-        private YQTaskStatus YQTaskStatusEnum(string encoding, YQTaskStatus defaultStatus = YQTaskStatus.Null)
-        {
-            if (!Enum.TryParse(encoding, true, out YQTaskStatus outStatus))
-                return defaultStatus;
-            return outStatus;
         }
 
         public void RemoveYQButton(Control innerButton)

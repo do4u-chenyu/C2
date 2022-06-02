@@ -5,6 +5,7 @@ using C2.Utils;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -19,6 +20,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public string statusMsg;
         public string datasourceFilePath;
         public string statusFilePath;
+        public int pid;
         public YQTaskResult()
         {
             statusMsg = string.Empty;
@@ -33,40 +35,37 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskResultTextBox.Text = taskInfo.ResultFilePath;
             datasourceFilePath = taskInfo.DatasourceFilePath;
             statusFilePath = Path.Combine(taskInfo.ResultFilePath, taskInfo.TaskID + "_info.txt");
+            pid = taskInfo.PId;
         }
 
         private void YQTaskResult_Shown(object sender, EventArgs e)
         {
             // DeleteRuleID();
-            if (taskInfo.Status == YQTaskStatus.Done && File.Exists(taskInfo.ResultFilePath))
-                return;
-
-            if (taskInfo.IsOverTime())
+            if (!File.Exists(taskInfo.ResultFilePath))
             {
-                HelpUtil.ShowMessageBox("任务已过期，请在下发24小时内获取结果。");
+                HelpUtil.ShowMessageBox(taskInfo.ResultFilePath + "结果文件路径不存在");
                 return;
             }
-
-            FillDGV();
-        }
-        private void FillDGV()
-        {
             if (!File.Exists(statusFilePath))
             {
                 HelpUtil.ShowMessageBox(statusFilePath + "任务信息文件不存在");
                 return;
             }
-
-            string ret1 = FileUtil.FileReadToEnd(statusFilePath);
-            string[] retArray1 = ret1.Split(Environment.NewLine);
-            foreach (string line in retArray1)
+            FillDGV();
+        }
+        private void FillDGV()
+        {
+            string ret = FileUtil.FileReadToEnd(statusFilePath);
+            string[] retArray = ret.Split(Environment.NewLine);
+            dataGridView.Rows.Clear();
+            foreach (string line in retArray)
             {
                 if (!line.Contains("\t"))
                     continue;
                 string[] lineSplit = line.Split("\t");
                 if (lineSplit.Length != 4)
                     continue;
-
+                
                 DataGridViewRow dr = new DataGridViewRow();
 
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[0] });
@@ -80,7 +79,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 dataGridView.Rows.Add(dr);
             }
         }
-
+         
         private void TaskResultButton_Click(object sender, EventArgs e)
         {
             ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
@@ -89,31 +88,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void Update_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-
-            UpdateResult();
-
-            string ret2 = FileUtil.FileReadToEnd(statusFilePath);
-            string[] retArray2 = ret2.Split(Environment.NewLine);
-            foreach (string line in retArray2)
-            {
-                if (!line.Contains("\t"))
-                    continue;
-                string[] lineSplit = line.Split("\t");
-                if (lineSplit.Length != 4)
-                    continue;
-
-                DataGridViewRow dr = new DataGridViewRow();
-
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[0] });
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[1] });
-                dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[2] });
-                if (!File.Exists(lineSplit[3]))
-                    dr.Cells.Add(new DataGridViewTextBoxCell { Value = string.Empty });
-                else
-                    dr.Cells.Add(new DataGridViewLinkCell { Value = "查看", Tag = lineSplit[3] });
-
-                dataGridView.Rows.Add(dr);
-            }
+            Process ps = Process.GetProcessById(pid);
+            if (ps.HasExited)
+                UpdateResult();
+            FillDGV();
             this.Cursor = Cursors.Arrow;
         }
 
