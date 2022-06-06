@@ -446,6 +446,10 @@ namespace C2.Business.CastleBravo.VPN
         {
             RemoveDuplicateItems((t) => { return t.Host + t.Port; });
         }
+        private void 删除重复项域名ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.Host; });
+        }
         private void 删除重复项密码ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoveDuplicateItems((t) => { return t.Password; });
