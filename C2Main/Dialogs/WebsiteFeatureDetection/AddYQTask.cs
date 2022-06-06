@@ -93,6 +93,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void TaskModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.TaskName = String.Format("{0}任务{1}_{2}", this.TaskModelName, DateTime.Now.ToString("MMdd"), this.TaskCreateTime);
+            if (this.TaskModelName == "Twitter" && this.TaskContent == "账号")
+                this.exampleLabel.Text = "Twitter账号输入样例：@DreawmParts";
+            else
+                this.exampleLabel.Text = string.Empty;
+        }
+
+        private void TaskContentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.TaskModelName == "Twitter" && this.TaskContent == "账号")
+                this.exampleLabel.Text = "Twitter账号输入样例：@DreawmParts";
+            else
+                this.exampleLabel.Text = string.Empty;
         }
 
         private void ProvinceCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -146,40 +158,68 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
+            this.Cursor = Cursors.WaitCursor;
             if (this.pasteModeCB.Checked)
             {
                 if (this.wsTextBox.Text.Trim().IsEmpty())
                 {
                     HelpUtil.ShowMessageBox("请输入查询内容");
+                    this.Cursor = Cursors.Arrow;
                     return false;
                 }
                 FileUtil.FileWriteToEnd(FilePath, this.wsTextBox.Text);
+
+            }
+
+            if (!this.pasteModeCB.Checked)
+            {
+                if (!File.Exists(FilePath))
+                {
+                    HelpUtil.ShowMessageBox("该数据文件不存在");
+                    this.Cursor = Cursors.Arrow;
+                    return false;
+                }
             }
 
             if (TaskContent == "账号" && TaskModelName == "不限")
             {
                 HelpUtil.ShowMessageBox("查询内容为账号时，必须指定任务类型。");
+                this.Cursor = Cursors.Arrow;
                 return false;
             }
 
             if (TaskModelName == "抖音APP" || TaskModelName == "快手")
             {
                 HelpUtil.ShowMessageBox(" 抖音APP和快手相关查询施工中，敬请期待。");
+                this.Cursor = Cursors.Arrow;
                 return false;
             }
             
             if (!GenAndCheckToken())
+            {
+                this.Cursor = Cursors.Arrow;
                 return false;
+            }
 
             this.TaskInfo = UpdateYQTaskInfo();
-            
-            bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
-            if (!(genTask && base.OnOKButtonClick()))
+
+            HelpUtil.ShowMessageBox("任务创建成功");
+
+            if (this.pasteModeCB.Checked)
+                GenTasksFromPaste();
+            else
+                GenTasksFromFile();
+
+            if (!base.OnOKButtonClick())
+            {
+                this.Cursor = Cursors.Arrow;
                 return false;
+            }
+               
 
             RunPython();
             new Log.Log().LogManualButton("舆情侦察兵", "运行");
-            HelpUtil.ShowMessageBox("任务下发成功");
+            this.Cursor = Cursors.Arrow;
             return true;
         }
 
@@ -334,27 +374,17 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return result;
         }
 
-        private bool GenTasksFromPaste()
+        private void GenTasksFromPaste()
         {
-            if (this.wsTextBox.Text.Trim().IsEmpty())         
-                return false;
-                
-            // 如果粘贴文件不合格,就别清空旧数据了
-
             string[] lines = this.wsTextBox.Text.SplitLine();
             for (int i = 0; i < Math.Min(lines.Length, maxRow); i++)
                 AddTasksByKey(lines[i], i);
 
-            return true;
+            return;
         }
 
-        private bool GenTasksFromFile()
+        private void GenTasksFromFile()
         {
-            if (!File.Exists(FilePath))
-            {
-                HelpUtil.ShowMessageBox("该数据文件不存在");
-                return false;
-            }
             try
             {
                 using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
@@ -365,9 +395,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             catch
             {
                 HelpUtil.ShowMessageBox(FilePath + ",文件加载出错，请检查文件内容。");
-                return false;
             }
-            return true;
+            return;
         }
 
 
@@ -404,7 +433,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                         resultNumber = 1;
                     if (returnList[1].IsNullOrEmpty() || this.ruleHost.IsNullOrEmpty())
                     {
-                        HelpUtil.ShowMessageBox(keyWord + "推特账号任务下发失败");
+                        //HelpUtil.ShowMessageBox(keyWord + "推特账号任务下发失败");
                         return;
                     }
                     this.ruleName = keyWord;
@@ -418,6 +447,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     pairs.Add("nickname", keyWord);
                 }
             }
+            int domainType = -1;
+            pairs.Add("domaintype", domainType);
             pairs.Add("type", this.ruleType);
             pairs.Add("name", this.ruleName);
 

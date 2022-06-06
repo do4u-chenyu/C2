@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
@@ -35,13 +36,40 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskResultTextBox.Text = taskInfo.ResultFilePath;
             datasourceFilePath = taskInfo.DatasourceFilePath;
             statusFilePath = Path.Combine(taskInfo.ResultFilePath, taskInfo.TaskID + "_info.txt");
-            pid = taskInfo.PId;
+            pid = GetPIdByXml();
         }
+
+        public int GetPIdByXml()
+        {
+            int pId = 0;
+            string xmlPath = Path.Combine(Global.UserWorkspacePath, "侦察兵", "YQTasks.xml");
+            XmlDocument xDoc = new XmlDocument(); ;
+            try
+            {
+                xDoc.Load(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
+            }
+            XmlNodeList xnl = xDoc.SelectNodes(@"YQTasks/task");
+
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.SelectSingleNode("taskId").InnerText != taskInfo.TaskID)
+                    continue;
+                pId = Convert.ToInt32(xn.SelectSingleNode("taskProcessId").InnerText);
+                break;
+            }
+            xDoc.Save(xmlPath);
+            return pId;
+        }
+
 
         private void YQTaskResult_Shown(object sender, EventArgs e)
         {
             // DeleteRuleID();
-            if (!File.Exists(taskInfo.ResultFilePath))
+            if (!Directory.Exists(taskInfo.ResultFilePath))
             {
                 HelpUtil.ShowMessageBox(taskInfo.ResultFilePath + "结果文件路径不存在");
                 return;
@@ -88,11 +116,64 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void Update_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            Process ps = Process.GetProcessById(pid);
-            if (ps.HasExited)
-                UpdateResult();
+            try
+            {
+                if (pid == 0 || !ProcessExists(pid))
+                    RunPython();
+                    //UpdateResult();
+            }
+            catch { }
             FillDGV();
             this.Cursor = Cursors.Arrow;
+        }
+
+        private bool ProcessExists(int id)
+        {
+            return Process.GetProcesses().Any(x => x.Id == id);
+        }
+
+        private void RunPython()
+        {
+            string pyPath = Path.Combine(Global.TemplatesPath, "get_yq_result.py");
+            string strInput = @"python " + pyPath + " --f " + this.statusFilePath;
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
+            p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+            p.StartInfo.RedirectStandardInput = true;  // 接受来自调用程序的输入信息
+            p.StartInfo.RedirectStandardOutput = true;   //输出信息
+            p.StartInfo.RedirectStandardError = true;   // 输出错误
+            p.StartInfo.CreateNoWindow = true;     //不显示程序窗口 
+            if (p.Start())
+            {
+                this.pid = p.Id;     //启动程序
+                SavePIDToXml();
+            }
+            p.StandardInput.WriteLine(strInput + "&exit"); //向cmd窗口发送输入信息
+            p.StandardInput.AutoFlush = true;
+        }
+
+        private void SavePIDToXml()
+        {
+            string xmlPath = Path.Combine(Global.UserWorkspacePath, "侦察兵", "YQTasks.xml");
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.Load(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
+            }
+            XmlNodeList xnl = xDoc.SelectNodes(@"YQTasks/task");
+
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.SelectSingleNode("taskId").InnerText != taskInfo.TaskID)
+                    continue;
+                xn.SelectSingleNode("taskProcessId").InnerText = this.pid.ToString();
+                break;
+            }
+            xDoc.Save(xmlPath);
         }
 
         private void UpdateResult()
@@ -154,7 +235,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 Dictionary<string, string> resDict = resp.ResDict;
                 if (resDict.TryGetValue("status", out string value) && value != "success")
                     error = string.Format("错误http状态：{0}。", resDict["msg"]);
-                else if (resDict.ContainsKey("status"))
+                else if (!resDict.ContainsKey("status"))
                     error = string.Format("接口访问失败，请查看网络状态。");
                 else
                     result = resDict["data"];
