@@ -377,7 +377,7 @@
             this.taskNameTB.Name = "taskNameTB";
             this.taskNameTB.Size = new System.Drawing.Size(211, 25);
             this.taskNameTB.TabIndex = 0;
-            this.taskNameTB.Text = "涉赌模型";
+            this.taskNameTB.Text = "网站管理后台模型";
             // 
             // label5
             // 

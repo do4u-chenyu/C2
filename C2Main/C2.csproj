@@ -2764,6 +2764,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorHelper.resx">
       <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\C1OperatorViews\PythonOperatorView.resx">
       <DependentUpon>PythonOperatorView.cs</DependentUpon>
@@ -3387,6 +3388,7 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_ht_accountPass_C2_20210324.py.zip" />
     <None Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4389,9 +4391,6 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4433,9 +4432,6 @@
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_20210324.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_db_accountPass_C2_Test_Running.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_email_accountPass_C2_20211111.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -4443,6 +4439,7 @@
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_hack_accountPass_C2_20210604.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_ht_accountPass_C2_20210324.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

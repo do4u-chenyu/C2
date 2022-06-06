@@ -17,7 +17,7 @@ namespace C2.SearchToolkit
     {
         public static readonly Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
         {
-            ["涉赌模型"] = "gamble",
+            ["网站管理后台模型"] = "ht",
             ["涉枪模型"] = "gun",
             ["涉黄模型"] = "yellow",
             ["飞机场模型"] = "plane",
@@ -44,7 +44,7 @@ namespace C2.SearchToolkit
 
         public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
         {
-            ["涉赌模型"] = "batchquery_db_accountPass_C2_20210324_{0}.py",
+            ["网站管理后台模型"] = "batchquery_ht_accountPass_C2_20210324_{0}.py",
             ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
             ["涉黄模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
             ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py",
@@ -71,7 +71,7 @@ namespace C2.SearchToolkit
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
         {
-            ["涉赌模型"] = @"([^\n\r]+000000_queryResult_db_\d+_\d+.tgz)",
+            ["网站管理后台模型"] = @"([^\n\r]+000000_queryResult_ht_\d+_\d+.tgz)",
             ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
             ["涉黄模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)",
@@ -98,7 +98,7 @@ namespace C2.SearchToolkit
 
         public static readonly Dictionary<String, String> TaskHelpInfoTable = new Dictionary<String, String>
         {
-            ["涉赌模型"] = "JS的经典涉赌模型",
+            ["网站管理后台模型"] = "网站管理后台模型",
             ["涉枪模型"] = "JS的经典涉枪模型",
             ["涉黄模型"] = "JS的经典涉黄模型",
             ["飞机场模型"] = "私搭境外翻墙主机",
