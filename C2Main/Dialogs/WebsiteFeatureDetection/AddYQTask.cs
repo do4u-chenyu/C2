@@ -234,7 +234,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void RunPython()
         {
             string pyPath = Path.Combine(Global.TemplatesPath, "get_yq_result.py");
-            string strInput = @"python " + pyPath + " --f " + this.statusFilePath;
+            string strInput = @"python " + '"' + pyPath + '"' + " --f " + this.statusFilePath;
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
             p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
@@ -261,7 +261,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch
             {
-                HelpUtil.ShowMessageBox("获取任务下发令牌失败");
+                HelpUtil.ShowMessageBox("获取任务下发令牌失败，请检查网络环境。");
                 return false;
             }
             if (this.token.IsNullOrEmpty())

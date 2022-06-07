@@ -78,7 +78,7 @@ def main():
                      "文章所属分类得分", "正负面标识", "文章敏感度", "文章命中地区编码", "文章命中地区",
                      "行业情感正负面", "行业id", "行业说明"]
 
-    for i in range(0, 120):
+    for i in range(0, 240):
         content_list = read_file(file_path)
         update_content = []
         for content in content_list:
@@ -91,7 +91,10 @@ def main():
             content = "\t".join(get_yq_result(data_list))
             update_content.append(content)
         write_info(update_content, file_path)
-        time.sleep(300)
+        if i < 120:
+            time.sleep(60)
+        else:
+            time.sleep(300)
 
 
 if __name__ == "__main__":
