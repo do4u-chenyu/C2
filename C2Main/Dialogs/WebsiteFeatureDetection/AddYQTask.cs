@@ -188,6 +188,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
             }
 
+            if (TaskContent == "账号" && TaskModelName == "暗网")
+            {
+                HelpUtil.ShowMessageBox("暗网不支持账号查询任务，只支持关键词类型。");
+                this.Cursor = Cursors.Arrow;
+                return false;
+            }
+
             if (TaskModelName == "抖音APP" || TaskModelName == "快手")
             {
                 HelpUtil.ShowMessageBox(" 抖音APP和快手相关查询施工中，敬请期待。");
@@ -420,10 +427,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         {
             string result = string.Empty;
             this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
-            //this.ruleID = 1416305260;
 
             destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.ruleID.ToString(), keyWord));
-            //File.Create(destFilePath);
 
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
@@ -442,19 +447,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 if (this.TaskModelName == "Twitter")
                 {
                     keyWord = keyWord.Replace("@", string.Empty).Replace(" ",string.Empty);
-                    
-                    //string accountUrl = string.Format("https://api.fhyqw.com/twitter/detail?token={0}&screenname={1}", this.token,keyWord);
-                    //List<string> returnList = WriteTwitterAccount(accountUrl, keyWord);
-                    //if (returnList[0] != "false")
-                    //    resultNumber = 1;
-                    //if (returnList[1].IsNullOrEmpty() || this.ruleHost.IsNullOrEmpty())
-                    //{
-                    //    //HelpUtil.ShowMessageBox(keyWord + "推特账号任务下发失败");
-                    //    return;
-                    //}
-                    //this.ruleName = keyWord;
-                    //pairs.Add("userid", returnList[1]);
-                    //pairs.Add("host", this.ruleHost);
                     pairs.Add("url", "https://twitter.com/" + keyWord);
                 }
                 else
@@ -468,6 +460,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             pairs.Add("domaintype", domainType);
             pairs.Add("type", this.ruleType);
             pairs.Add("name", this.ruleName);
+            if (this.TaskModelName == "暗网")
+            {
+                int netType = 1;
+                pairs.Add("nettype", netType);
+            }
+                
 
             string error = string.Empty;
             string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}", this.token);
@@ -492,32 +490,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 HelpUtil.ShowMessageBox(error);
                 return result;
             }
+
             result = string.Format("{0}\t{1}\t{2}\t{3}", keyWord, this.ruleID.ToString(), "0", destFilePath);
-
             return result;
-            //List<string> rowHeaderList = new List<string>
-            //{
-            //    "采集任务url", "文章url", "文章标题", "数据源标识", "用户userid", "发表人昵称", "发表楼层",
-            //    "回复数", "点赞数、热度值", "主线地区", "图片实际网页地址", "图片短串", "发表时间", "网站域名",
-            //    "网站名称", "板块名称", "文章正文", "是否转发", "转发数", "点赞数", "评论数", "粉丝数",
-            //    "关注者数", "发表文章数", "阅读数", "是否为官方认证", "注册地址", "注册地地区编号",
-            //    "头像链接", "境内外标识", "文章所属分类", "文章所属分类得分", "正负面标识", "文章敏感度",
-            //    "文章命中地区编码", "文章命中地区", "行业情感正负面", "行业id", "行业说明"
-            //};
-
-            //StreamWriter sw = null;
-            //try
-            //{
-            //    sw = new StreamWriter(destFilePath, true, Encoding.UTF8);
-            //    sw.WriteLine(string.Join("\t", rowHeaderList.ToArray()));
-            //    sw.Flush();
-            //}
-            //catch (Exception ex)
-            //{
-            //    HelpUtil.ShowMessageBox(ex.Message);
-            //}
-            //if (sw != null)
-            //    sw.Close();
         }
 
         private void WriteTaskInfo(List<string> returnList)
@@ -601,7 +576,5 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 sw.Close();
             return returnList;
         }
-
-        
     }
 }
