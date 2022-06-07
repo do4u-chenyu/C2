@@ -262,7 +262,8 @@ namespace C2.Core
             { "L1HF68F04XB", "WLY"},
             { "1ZM4A2764MG", "XRC"},
             { "/7W9Q8M2/CNWS2007A500S5/" , "WL"},
-            {".7JQF432.CN762064BD001D.","XXY" }//徐晓阳
+            {".7JQF432.CN762064BD001D.","XXY" },//徐晓阳
+             {"/49D2SD3/CNCMC0014O050F/","LZT" }//刘忠堂
         };
 
         public static readonly string[] EmptyStringArray2 = { string.Empty, string.Empty };
