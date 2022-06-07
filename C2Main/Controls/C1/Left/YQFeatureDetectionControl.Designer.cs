@@ -34,7 +34,7 @@
             // 
             // titleLabel
             // 
-            this.titleLabel.Text = "舆情侦察兵(施工中)";
+            this.titleLabel.Text = "舆情侦察兵";
             // 
             // addTaskLabel
             // 
