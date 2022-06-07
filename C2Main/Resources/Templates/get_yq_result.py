@@ -48,6 +48,19 @@ def write_info(info_list, path):
         f.write("\n".join(info_list))
 
 
+def read_header(info_list, path):
+    no_header = True
+    line = ""
+    try:
+        with open(path, "r", encoding='utf8', errors='ignore') as f:
+            line = f.readline()
+    except:
+        pass
+    if "\t".join(info_list) in line:
+        no_header = False
+    return no_header
+
+
 def read_file(path):
     result_list = []
     if not os.path.exists(path):
@@ -73,8 +86,8 @@ def main():
             if len(data_list) != 4:
                 update_content.append(content)
                 continue
-            #if i == 0:
-            #    write_result(header_list, data_list[3])
+            if i == 0 and read_header(header_list, data_list[3]):
+                write_result(header_list, data_list[3])
             content = "\t".join(get_yq_result(data_list))
             update_content.append(content)
         write_info(update_content, file_path)
@@ -85,7 +98,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--f', type=str, default=None)
     args = parser.parse_args()
-    # file_path = "C:\\FiberHomeIAOModelDocument\\IAO\\侦察兵\\舆情侦察兵\\微博任务0526_1653568971\\261653568970_info.txt"
+    # file_path = "C:\\FiberHomeIAOModelDocument\\IAO\\侦察兵\\舆情侦察兵\\Twitter任务0606_1654496233\\691654496233_info.txt"
     file_path = args.f
     source_dict = {"1": "新闻", "2": "报刊", "4": "新闻APP", "8": "Facebook", "16": "论坛", "32": "Twitter",
                    "64": "贴吧", "256": "博客", "65536": "视频", "1048576": "微博", "268435456": "微信",
