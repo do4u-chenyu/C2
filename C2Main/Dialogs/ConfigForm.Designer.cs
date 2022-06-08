@@ -526,7 +526,7 @@
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(47, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "V:2.1.3";
+            this.version.Text = "V:2.1.4";
             // 
             // textBox4
             // 
