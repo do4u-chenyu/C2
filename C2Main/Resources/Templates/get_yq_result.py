@@ -71,6 +71,8 @@ def read_file(path):
 
 
 def main():
+    time.sleep(5)  #等待文件写入完成
+
     header_list = ["采集任务url", "文章url", "文章标题", "数据源标识", "用户userid", "发表人昵称", "发表楼层", "回复数",
                      "点赞数、热度值", "主线地区", "图片实际网页地址", "图片短串", "发表时间", "网站域名", "网站名称",
                      "板块名称", "文章正文", "是否转发", "转发数", "点赞数", "评论数", "粉丝数", "关注者数", "发表文章数",
@@ -79,18 +81,21 @@ def main():
                      "行业情感正负面", "行业id", "行业说明"]
 
     for i in range(0, 240):
-        content_list = read_file(file_path)
-        update_content = []
-        for content in content_list:
-            data_list = content.strip("\n").split("\t")
-            if len(data_list) != 4:
+        try:
+            content_list = read_file(file_path)
+            update_content = []
+            for content in content_list:
+                data_list = content.strip("\n").split("\t")
+                if len(data_list) != 4:
+                    update_content.append(content)
+                    continue
+                if i == 0 and read_header(header_list, data_list[3]):
+                    write_result(header_list, data_list[3])
+                content = "\t".join(get_yq_result(data_list))
                 update_content.append(content)
-                continue
-            if i == 0 and read_header(header_list, data_list[3]):
-                write_result(header_list, data_list[3])
-            content = "\t".join(get_yq_result(data_list))
-            update_content.append(content)
-        write_info(update_content, file_path)
+            write_info(update_content, file_path)
+        except:
+            pass
         if i < 120:
             time.sleep(60)
         else:
@@ -129,8 +134,5 @@ if __name__ == "__main__":
         "0x00000055": "戏剧", "0x00000056": "篮球", "0x00000057": "足球", "0x00000058": "乒乓球", "0x00000059": "羽毛球",
         "0x0000005A": "排球", "0x0000005B": "游泳", "0x0000005C": "健身", "0x0000005D": "高尔夫", "0x0000005E": "田径",
         "0x0000005F": "历史", "0x00000036": "违法犯罪之赌博", "0X0000FFFF": "其他"}
-    try:
-        main()
-    except Exception as ex:
-        print(ex)
+    main()
 
