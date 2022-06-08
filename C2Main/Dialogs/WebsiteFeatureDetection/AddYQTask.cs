@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
@@ -210,8 +211,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             this.TaskInfo = UpdateYQTaskInfo();
 
-            HelpUtil.ShowMessageBox("任务创建成功");
-
             List<string> resultList = new List<string>();
             if (this.pasteModeCB.Checked)
                 resultList = GenTasksFromPaste();
@@ -224,8 +223,9 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
             }
             WriteTaskInfo(resultList);
-
+            Thread.Sleep(1000);
             RunPython();
+            HelpUtil.ShowMessageBox("任务创建成功");
             new Log.Log().LogManualButton("舆情侦察兵", "运行");
             this.Cursor = Cursors.Arrow;
             return true;
@@ -233,8 +233,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void RunPython()
         {
-            string pyPath = Path.Combine(Global.TemplatesPath, "get_yq_result.py");
-            string strInput = @"python " + '"' + pyPath + '"' + " --f " + this.statusFilePath;
+            string strInput = @"cd " + Global.TemplatesPath + @"&python get_yq_result.py --f " + this.statusFilePath;
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
             p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
@@ -246,6 +245,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 this.TaskInfo.PId = p.Id;     //启动程序     
             p.StandardInput.WriteLine(strInput + "&exit"); //向cmd窗口发送输入信息
             p.StandardInput.AutoFlush = true;
+            
         }
 
         private bool GenAndCheckToken()
