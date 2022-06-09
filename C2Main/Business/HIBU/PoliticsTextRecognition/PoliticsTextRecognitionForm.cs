@@ -2,7 +2,6 @@
 using C2.Controls;
 using C2.Core;
 using C2.Utils;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,6 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
     partial class PoliticsTextRecognitionForm : StandardDialog
     {
         private string picPath;
-        readonly HttpHandler httpHandler;
         private readonly string OCRUrl;
 
         public PoliticsTextRecognitionForm()
@@ -26,11 +24,15 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             InitializeComponent();
             OKButton.Text = "保存结果";
             CancelBtn.Text = "退出";
-
-            httpHandler = new HttpHandler();
-            OCRUrl = Global.ServerHIUrl + "/HI_NLP/PoliticsTextRecognition";
+            //OCRUrl = Global.ServerHIUrl + "/HI_NLP/PoliticsTextRecognition";
+            OCRUrl = "http://106.75.225.21:53371/politicDetect";
         }
 
+        /// <summary>
+        /// 单文本按钮对应的事件，获取一个txt文件的路径
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BrowserBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog
@@ -43,6 +45,11 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             picPath = OpenFileDialog.FileName;
         }
 
+        /// <summary>
+        /// 多文本按钮对应的事件，获取一个文件夹的路径
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FolderBtn_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -53,29 +60,41 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
             }
         }
 
+        /// <summary>
+        /// 开始识别按钮对应的事件，遍历txt文件，获取文件内容，并进行请求接口实现涉政文本识别
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TransBtn_Click(object sender, EventArgs e)
         {
-            //清空上一次的查询结果
-            dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear();  // 清空上一次的查询结果
 
             using (GuarderUtil.WaitCursor)
             {
-                List<string> picPathList = GetPicsByPath(picPath);
+                List<string> picPathList = GetPicsByPath(picPath);  // 将所有txt文件保存至一个列表中
 
                 foreach (string singlePicPath in picPathList)
                 {
-                    string result = StartTask(TransBase64(singlePicPath));
-                    FillDGV(singlePicPath, result);
+                    List<string> contentList = TransBase64(singlePicPath);
+                    int.TryParse(contentList[0], out int rows);  // txt文件中共有多少行
+                    string content = contentList[1];  // txt文件的文本内容
+                    List<string> result = StartTask(content, rows);  // 读取文件并进行识别
+                    FillDGV(singlePicPath, result);  // 数据保存至DGV中
                 }
             }
             HelpUtil.ShowMessageBox("识别完成。");
         }
 
+        /// <summary>
+        /// 获取path中的文件名，将其保存到一个列表中，如果path是目录，遍历目录中的txt文件
+        /// </summary>
+        /// <param name="path"> 文件名或文件夹名 </param>
+        /// <returns></returns>
         private List<string> GetPicsByPath(string path)
         {
-            string[] picSuffix = new string[] { ".txt" };
-            List<string> picPathList = new List<string>();
-            if (Directory.Exists(path))
+            string[] picSuffix = new string[] { ".txt" };  // 仅遍历txt文件
+            List<string> picPathList = new List<string>();  // 结果存放列表
+            if (Directory.Exists(path))  // 文件夹的处理方式
             {
                 foreach (FileSystemInfo fsinfo in new DirectoryInfo(path).GetFiles())
                 {
@@ -83,107 +102,142 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
                         picPathList.Add(fsinfo.FullName);
                 }
             }
-            else if (File.Exists(path))
+            else if (File.Exists(path))  // 文件的处理方式
             {
                 picPathList.Add(path);
             }
             return picPathList;
         }
 
-        private string TransBase64(string singlePicPath)
+        /// <summary>
+        /// 读取文件内容
+        /// </summary>
+        /// <param name="singlePicPath"> 文件名 </param>
+        /// <returns></returns>
+        private List<string> TransBase64(string singlePicPath)
         {
             string base64Str = string.Empty;
+            List<string> res = new List<string>();
 
             using (FileStream filestream = new FileStream(singlePicPath, FileMode.Open))
             {
-                StreamReader read = new StreamReader(filestream, Encoding.UTF8);
-                base64Str = read.ReadLine();
+                StreamReader read = new StreamReader(filestream, Encoding.UTF8);  // 文件为utf8编码
+                base64Str = read.ReadToEnd();
             }
-            return base64Str;
+
+            string[] strSplit = base64Str.Split("\n");
+            int strLength = strSplit.Length;
+            res.Add(strLength.ToString());
+            res.Add(base64Str);
+            return res;
         }
 
-        public string StartTask(string base64Str)
+        /// <summary>
+        /// 请求接口，获取识别结果，并对识别结果进行处理
+        /// </summary>
+        /// <param name="base64Str"> 要识别的字符串 </param>
+        /// <param name="rows"> 文本行数 </param>
+        /// <returns></returns>
+        public List<string> StartTask(string base64Str, int rows)
         {
-            string data;
+            List<string> res = new List<string>();
             try
             {
-                Response resp = httpHandler.PostCode(OCRUrl, "sentence=" + HttpUtility.UrlEncode(base64Str), 60000, false);
+                string getData = "?data=" + base64Str.TrimEnd('\n');
+                string targetUrl = OCRUrl + getData;
+                HttpWebResponse resp = HttpGet(targetUrl);
                 HttpStatusCode statusCode = resp.StatusCode;
                 if (statusCode != HttpStatusCode.OK)
                 {
-                    return string.Format("查询失败! http状态码为：{0}.", statusCode);
+                    string s = string.Format("查询失败! http状态码为：{0}.", statusCode);
+                    res.Add(s);
+                    return res;
                 }
-                Dictionary<string, string> resDict = resp.ResDict;
-
-                if (resDict.TryGetValue("status", out string status))
+                string content = new StreamReader(resp.GetResponseStream()).ReadToEnd();
+                JObject resDict = JObject.Parse(content);
+                resDict.TryGetValue("status", out JToken status_jtoken);
+                resDict.TryGetValue("msg", out JToken msg_jtoken);
+                resDict.TryGetValue("result", out JToken result_jtoken);
+                string status = status_jtoken.ToString();
+                string msg = msg_jtoken.ToString();
+                if (status == "200")
                 {
-                    resDict.TryGetValue("results", out string datas);
-                    data = status == "200" ? DealData(datas) : datas;
+                    int politicsNumber = 0;
+                    string result = result_jtoken.ToString().Replace("\r\n", "").Replace("\n", "").Replace(" ", "");
+                    res.Add(result);
+                    if (result != "[]")
+                    {
+                        politicsNumber = result.Trim('[').Trim(']').Split(",").GetLength(0);
+                    }
+                    res.Add((politicsNumber*1.0 / rows * 100).ToString("f2")+"%");
                 }
                 else
-                    data = "查询失败! status不存在。";
+                {
+                    if (status == "1000")
+                    {
+                        res.Add("查询失败!数据为空");
+                    }
+                    else
+                    {
+                        res.Add("查询失败!" + msg);
+                    }
+                }
             }
             catch (Exception e)
             {
-                data = "查询失败!" + e.Message;
+                res.Add("查询失败!" + e.Message);
             }
-            return data;
+            return res;
         }
 
-        private void FillDGV(string singlePicPath, string result)
+        public HttpWebResponse HttpGet(string url, int timeout=60000)
         {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "GET";
+            req.Timeout = timeout;
+            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+            return response;
+        }
+
+        /// <summary>
+        /// 填充DataGridView
+        /// </summary>
+        /// <param name="singlePicPath"> 当前处理txt文件对应的文件路径 </param>
+        /// <param name="result"> 涉政文本的识别结果 </param>
+        private void FillDGV(string singlePicPath, List<string> result)
+        {
+
             DataGridViewRow dr = new DataGridViewRow();
             DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
             textCell0.Value = Path.GetFileName(singlePicPath);
             dr.Cells.Add(textCell0);
 
-            if (result == "解析出错，可尝试重新识别。" || result.Contains("查询失败!"))
+            if (result.Count() == 2)
             {
+                string rowIndex = result[0];
+                string ratio = result[1];
+
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = String.Empty;
+                textCell1.Value = rowIndex;
                 dr.Cells.Add(textCell1);
 
                 DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-                textCell2.Value = result;
+                textCell2.Value = ratio;
                 dr.Cells.Add(textCell2);
             }
             else
             {
+                string msg = result[0];
+
                 DataGridViewTextBoxCell textCell1 = new DataGridViewTextBoxCell();
-                textCell1.Value = listRealData[0];
+                textCell1.Value = msg;
                 dr.Cells.Add(textCell1);
 
                 DataGridViewTextBoxCell textCell2 = new DataGridViewTextBoxCell();
-                textCell2.Value = listRealData[1];
+                textCell2.Value = string.Empty;
                 dr.Cells.Add(textCell2);
             }
             dataGridView1.Rows.Add(dr);
-        }
-
-
-        List<string> listRealData = new List<string>();
-        private string DealData(string data)
-        {
-            List<string> resultList = new List<string>();
-            if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
-                return string.Empty;
-            try
-            {
-                data = "[" + data + "]";
-                JArray ja = (JArray)JsonConvert.DeserializeObject(data);
-                string isSensitive = ja[0]["is_sensitive"].ToString();
-                string confidence = ja[0]["confidence"].ToString();
-                resultList.Add(isSensitive);
-                resultList.Add(confidence);
-                listRealData = listData(resultList);
-            }
-            catch { return "解析出错，可尝试重新识别。"; }
-            return string.Join("\n", resultList);
-        }
-
-        public List<string> listData(List<string> resultList)
-        {
-            return resultList;
         }
 
         protected override bool OnOKButtonClick()
@@ -213,7 +267,7 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         private void SaveResultToLocal(string path)
         {
             StreamWriter sw = new StreamWriter(path, true);
-            sw.Write("文件名称" + OpUtil.StringBlank + "是否涉政" + OpUtil.StringBlank + "准确率" + "\r\n");
+            sw.Write("文件名称" + OpUtil.StringBlank + "涉政文本所在行" + OpUtil.StringBlank + "涉政文本行数占比" + "\r\n");
             try
             {
                 foreach (DataGridViewRow row in dataGridView1.Rows)

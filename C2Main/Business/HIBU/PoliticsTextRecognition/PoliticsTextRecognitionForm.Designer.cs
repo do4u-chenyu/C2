@@ -34,13 +34,13 @@
             this.folderBtn = new System.Windows.Forms.Button();
             this.transBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ageContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sexContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.picName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ageContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sexContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HITab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -117,8 +117,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.picName,
             this.ageContent,
-            this.sexContent
-            });
+            this.sexContent});
             this.dataGridView1.Location = new System.Drawing.Point(80, 75);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -126,6 +125,30 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(686, 258);
             this.dataGridView1.TabIndex = 10009;
+            // 
+            // picName
+            // 
+            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.picName.FillWeight = 40F;
+            this.picName.HeaderText = "文件路径";
+            this.picName.Name = "picName";
+            this.picName.ReadOnly = true;
+            // 
+            // ageContent
+            // 
+            this.ageContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ageContent.FillWeight = 60F;
+            this.ageContent.HeaderText = "涉政文本所在行";
+            this.ageContent.Name = "ageContent";
+            this.ageContent.ReadOnly = true;
+            // 
+            // sexContent
+            // 
+            this.sexContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sexContent.FillWeight = 60F;
+            this.sexContent.HeaderText = "涉政文本行数占比";
+            this.sexContent.Name = "sexContent";
+            this.sexContent.ReadOnly = true;
             // 
             // label1
             // 
@@ -154,9 +177,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.label3.Location = new System.Drawing.Point(82, 49);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.Size = new System.Drawing.Size(493, 19);
             this.label3.TabIndex = 10011;
-            this.label3.Text = "支持识别单个文件或一个目录里所有文件的内容";
+            this.label3.Text = "支持识别单个txt文件或一个目录里所有txt文件的内容，涉政文本所在行从1开始计数";
             // 
             // tabControl1
             // 
@@ -168,31 +191,7 @@
             this.tabControl1.Size = new System.Drawing.Size(780, 367);
             this.tabControl1.TabIndex = 10011;
             // 
-            // picName
-            // 
-            this.picName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.picName.FillWeight = 40F;
-            this.picName.HeaderText = "文件路径";
-            this.picName.Name = "picName";
-            this.picName.ReadOnly = true;
-            // 
-            // ageContent
-            // 
-            this.ageContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ageContent.FillWeight = 60F;
-            this.ageContent.HeaderText = "是否涉政";
-            this.ageContent.Name = "ageContent";
-            this.ageContent.ReadOnly = true;
-            // 
-            // sexContent
-            // 
-            this.sexContent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.sexContent.FillWeight = 60F;
-            this.sexContent.HeaderText = "准确率";
-            this.sexContent.Name = "sexContent";
-            this.sexContent.ReadOnly = true;
-            // 
-            // NERForm
+            // PoliticsTextRecognitionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -201,7 +200,7 @@
             this.ClientSize = new System.Drawing.Size(786, 424);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FaceAgeGenderForm";
+            this.Name = "PoliticsTextRecognitionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "涉政本文识别";
             this.Controls.SetChildIndex(this.tabControl1, 0);
