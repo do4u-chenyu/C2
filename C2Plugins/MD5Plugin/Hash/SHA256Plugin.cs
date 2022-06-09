@@ -13,6 +13,7 @@ namespace MD5Plugin
 
         protected override string EncodeLine(string str)
         {
+            new Log().LogManualButton("SHA-256", "运行");
             byte[] bytValue = GetBytes(str);
             SHA256 sha256 = new SHA256CryptoServiceProvider();
             byte[] retVal = sha256.ComputeHash(bytValue);

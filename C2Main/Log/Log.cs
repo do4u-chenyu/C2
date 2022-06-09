@@ -1,54 +1,81 @@
 ﻿using C2.Business.HTTP;
 using C2.Business.WebsiteFeatureDetection;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+using C2.Core;
+using C2.Dialogs;
+using C2.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Log
 {
     partial class Log
     {
-        HttpHandler httpHandler = new HttpHandler();
         public string Token;
-        private const string APIUrl = "https://113.31.119.85:53374/apis/";//正式
-        private string LoginUrl = APIUrl + "Login";
-        private string uploadUrl = "http://47.94.39.209:8000/api/log/upload";
         DateTime e = DateTime.Now;
-        static LogItem logItem = new LogItem();
+        string userName = string.Empty;
+        LogItem logItem = new LogItem();
+        HttpHandler httpHandler = new HttpHandler();
+        static string APIUrl = "https://113.31.119.85:53374/apis/";
+        readonly string LoginUrl = APIUrl + "Login";
+        private string uploadUrl = "http://113.31.114.239:53373/api/log/upload";
         public static ConcurrentQueue<LogItem> ConcurrenLogs = new ConcurrentQueue<LogItem>();
+        readonly string logPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmpRedisASK.xml");
 
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-            /*
+            
+#if !C2_Inner
             string startTime = e.ToString("yyyyMMddHHmmss");
-            string userName = WFDWebAPI.GetInstance().UserName;
             string ip = IPGet();
 
             Task t = Task.Factory.StartNew(() =>
             {
-                AddQueueEn(userName, modelName, type, startTime, ip);
+                AddQueueEn(UserNameGet(), modelName, type, startTime, ip, VersionGet());
             });
             Task.WaitAll(t);
-            */
+            LogThread();
+#endif
+  
+            //MessageBox.Show(VersionGet());
         }
 
-        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
+        private string UserNameGet()
+        {
+            if (File.Exists(logPath))
+            {
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(logPath);
+                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
+                return userName;
+            }
+            return userName;
+        }
+
+        private string VersionGet()
+        {
+            string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//内网|外网|全量版
+            string v2 = new ConfigForm().version.Text;//V:2.1.3
+            return string.Format("{0}|{1}", v1,v2);
+        }
+
+        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip,string version)
         {
             logItem.UserName = userName;
             logItem.ModelName = modelName;
             logItem.Type = type;
             logItem.StartTime = startTime;
             logItem.Ip = ip;
+            logItem.Version = version;
             ConcurrenLogs.Enqueue(logItem);//入队
         }
 
@@ -58,15 +85,11 @@ namespace C2.Log
             {
                 LogItem topElement = ConcurrenLogs.ElementAt(0);
                 ConcurrenLogs.TryDequeue(out logItem);//出队
-                if (IsInternetAvailable())
+                try
                 {
-                    try
-                    {
-                        KibaRabbitMQSend(SToJson(topElement.UserName, topElement.ModelName, topElement.Type, topElement.StartTime, topElement.Ip));//producter
-                        KibaRabbitMQReceived();//consumer
-                    }
-                    catch { }
+                    LogUpload(topElement);
                 }
+                catch { }
             }
         }
 
@@ -77,81 +100,31 @@ namespace C2.Log
             childThread.Start();
         }
 
-        private void KibaRabbitMQSend(string sendMessage)
-        {
-            var factory = new ConnectionFactory
-            {
-                HostName = "10.1.126.4",//主机名
-                UserName = "admin",//RabbitMQ自定义用户名
-                Password = "admin"//RabbitMQ自定义自定义密码
-            };
-
-            using (IConnection connection = factory.CreateConnection())
-            {
-                using (IModel channel = connection.CreateModel())
-                {
-                    /*//创建一个名称为AnTiQueue的消息队列
-                     *  QueueDeclare 第二个参数中设置为false，queue发送的message只会存留于内存中，
-                     *  server 重启，数据丢失，设置为true，永久存储在硬盘中
-                     */
-                    channel.QueueDeclare("AnTiQueue", false, false, false, null);
-                    var properties = channel.CreateBasicProperties();
-                    properties.DeliveryMode = 1;
-                    string message = sendMessage; //传递的消息内容
-                    channel.BasicPublish("", "AnTiQueue", properties, Encoding.UTF8.GetBytes(message)); //生产消息
-                }
-            }
-        }
-        private void KibaRabbitMQReceived()
-        {
-            var factory = new ConnectionFactory
-            {
-                HostName = "10.1.126.4",
-                UserName = "admin",
-                Password = "admin"
-            };
-
-            using (IConnection connection = factory.CreateConnection())
-            {
-                using (IModel channel = connection.CreateModel())
-                {
-                    channel.QueueDeclare("AnTiQueue", false, false, false, null);
-                    var consumer = new EventingBasicConsumer(channel);
-                    BasicGetResult result = channel.BasicGet("AnTiQueue", true);
-                    if (result != null)
-                    {
-                        string data = Encoding.UTF8.GetString(result.Body);
-                        LogUpload(data);
-                    }
-                }
-            }
-        }
-
         private void GetToken()
         {
-            Dictionary<string, string> pairsL = new Dictionary<string, string> { { "user_id", "X7619" }, { "password", TOTP.GetInstance().GetTotp("X7619") } };
+            Dictionary<string, string> pairsL = new Dictionary<string, string> 
+            { 
+                { "user_id", userName }, { "password", TOTP.GetInstance().GetTotp(userName)} 
+            };
             Response resp = httpHandler.Post(LoginUrl, pairsL);
             Dictionary<string, string> resDict = resp.ResDict;
             resDict.TryGetValue("token", out Token);
         }
 
-        private void LogUpload(string reciveMessage)
+        private void LogUpload(LogItem reciveMessage)
         {
-            // {"工号":"X7619","功能模块":"战术手册-ddos模型","动作":"01","时间":"20220523100058","IP":"10.1.203.5"}
-            string[] sArray = reciveMessage.Split(',');
             GetToken();
             Dictionary<string, string> pairs = new Dictionary<string, string> {
-                { "userid", sArray[0].Split(':')[1].Replace(@"""",string.Empty)},
-                { "tasktypename", sArray[1].Split(':')[1].Replace(@"""",string.Empty)},
-                { "submit_time", sArray[3].Split(':')[1].Replace(@"""",string.Empty)},
-                { "action",sArray[2].Split(':')[1].Replace(@"""",string.Empty)},
-                { "ip",sArray[4].Split(':')[1].Replace("}",string.Empty).Replace(@"""",string.Empty)}
+                { "userid", reciveMessage.UserName.Replace(@"""",string.Empty)},
+                { "tasktypename", reciveMessage.ModelName.Replace(@"""",string.Empty)},
+                { "submit_time", reciveMessage.StartTime.Replace(@"""",string.Empty)},
+                { "action",reciveMessage.Type.Replace(@"""",string.Empty)},
+                { "ip",reciveMessage.Ip.Replace("}",string.Empty).Replace(@"""",string.Empty)},
+                { "version",reciveMessage.Version.Replace("}",string.Empty).Replace(@"""",string.Empty)}
             };
             try
             {
                 Response resp = httpHandler.Post(uploadUrl, pairs, Token);
-                //Dictionary<string, string> resDict = resp.ResDict;
-                //if (resDict.TryGetValue("status", out string status) && status == "success"){}
             }
             catch { }
         }
@@ -167,29 +140,6 @@ namespace C2.Log
             }
             return string.Empty;
         }
-
-        private string SToJson(string userName, string featureModel, string action, string time, string ip)
-        {
-            Dictionary<string, string> myDic = new Dictionary<string, string>
-            {
-                { "工号", userName },
-                { "功能模块", featureModel },
-                { "动作", action },
-                { "时间", time },
-                { "IP", ip }
-            };
-            string contentjson = JsonConvert.SerializeObject(myDic);
-            return contentjson;
-        }
-        private bool IsInternetAvailable()
-        {
-            try
-            {
-                Dns.GetHostEntry("47.94.39.209");
-                return true;
-            }
-            catch { return false; }
-        }
     }
     class LogItem
     {
@@ -198,6 +148,7 @@ namespace C2.Log
         public string Type { get; set; }
         public string StartTime { get; set; }
         public string Ip { get; set; }
+        public string Version { get; set; }
     }
 }
 

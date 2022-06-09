@@ -33,6 +33,11 @@ namespace MD5Plugin
 
         public override void Encode(string str)
         {
+            if (decimalBase == 8)
+                new Log().LogManualButton("八进制转十六", "运行");
+            else
+                new Log().LogManualButton("十进制转十六", "运行");
+
             if (inputTextBox.Text == "请输入你要编码的内容")
             {
                 ResetTextBox();
@@ -43,6 +48,11 @@ namespace MD5Plugin
 
         public override void Decode(string str)
         {
+            if (decimalBase == 8)
+                new Log().LogManualButton("八进制转十六", "运行");
+            else
+                new Log().LogManualButton("十进制转十六", "运行");
+
             if (outputTextBox.Text == "请输入你要解码的内容")
             {
                 OriginOutput();

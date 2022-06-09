@@ -95,6 +95,7 @@ namespace C2.Dialogs.CastleBravo
 
         protected override bool OnOKButtonClick()
         {
+            new Log.Log().LogManualButton("Hash彩虹表", "运行");
             int mode = this.taskComboBox.SelectedIndex;
 
             TaskName = TaskName.Trim(); //去掉首尾空白符

@@ -5,11 +5,13 @@ using C2.Utils;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Dialogs.WebsiteFeatureDetection
 {
@@ -19,6 +21,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public string statusMsg;
         public string datasourceFilePath;
         public string statusFilePath;
+        public int pid;
         public YQTaskResult()
         {
             statusMsg = string.Empty;
@@ -33,32 +36,56 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.taskResultTextBox.Text = taskInfo.ResultFilePath;
             datasourceFilePath = taskInfo.DatasourceFilePath;
             statusFilePath = Path.Combine(taskInfo.ResultFilePath, taskInfo.TaskID + "_info.txt");
+            pid = GetPIdByXml();
         }
+
+        public int GetPIdByXml()
+        {
+            int pId = 0;
+            string xmlPath = Path.Combine(Global.UserWorkspacePath, "侦察兵", "YQTasks.xml");
+            XmlDocument xDoc = new XmlDocument(); ;
+            try
+            {
+                xDoc.Load(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
+            }
+            XmlNodeList xnl = xDoc.SelectNodes(@"YQTasks/task");
+
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.SelectSingleNode("taskId").InnerText != taskInfo.TaskID)
+                    continue;
+                pId = Convert.ToInt32(xn.SelectSingleNode("taskProcessId").InnerText);
+                break;
+            }
+            xDoc.Save(xmlPath);
+            return pId;
+        }
+
 
         private void YQTaskResult_Shown(object sender, EventArgs e)
         {
             // DeleteRuleID();
-            if (taskInfo.Status == YQTaskStatus.Done && File.Exists(taskInfo.ResultFilePath))
-                return;
-
-            if (taskInfo.IsOverTime())
+            if (!Directory.Exists(taskInfo.ResultFilePath))
             {
-                HelpUtil.ShowMessageBox("任务已过期，请在下发24小时内获取结果。");
+                HelpUtil.ShowMessageBox(taskInfo.ResultFilePath + "结果文件路径不存在");
                 return;
             }
-
-            FillDGV();
-        }
-        private void FillDGV()
-        {
             if (!File.Exists(statusFilePath))
             {
                 HelpUtil.ShowMessageBox(statusFilePath + "任务信息文件不存在");
                 return;
             }
+            FillDGV();
+        }
+        private void FillDGV()
+        {
             string ret = FileUtil.FileReadToEnd(statusFilePath);
             string[] retArray = ret.Split(Environment.NewLine);
-            StringBuilder sb = new StringBuilder();
+            dataGridView.Rows.Clear();
             foreach (string line in retArray)
             {
                 if (!line.Contains("\t"))
@@ -67,9 +94,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 if (lineSplit.Length != 4)
                     continue;
                 
-                lineSplit = UpdateResult(lineSplit);
-                sb.Append(string.Join("\t", lineSplit) + Environment.NewLine);
-
                 DataGridViewRow dr = new DataGridViewRow();
 
                 dr.Cells.Add(new DataGridViewTextBoxCell { Value = lineSplit[0] });
@@ -82,6 +106,91 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
                 dataGridView.Rows.Add(dr);
             }
+        }
+         
+        private void TaskResultButton_Click(object sender, EventArgs e)
+        {
+            ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (pid == 0 || !ProcessExists(pid))
+                    RunPython();
+                    //UpdateResult();
+            }
+            catch { }
+            FillDGV();
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private bool ProcessExists(int id)
+        {
+            return Process.GetProcesses().Any(x => x.Id == id);
+        }
+
+        private void RunPython()
+        {
+            string pyPath = Path.Combine(Global.TemplatesPath, "get_yq_result.py");
+            string strInput = @"python " + '"' + pyPath + '"' + " --f " + this.statusFilePath;
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
+            p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+            p.StartInfo.RedirectStandardInput = true;  // 接受来自调用程序的输入信息
+            p.StartInfo.RedirectStandardOutput = true;   //输出信息
+            p.StartInfo.RedirectStandardError = true;   // 输出错误
+            p.StartInfo.CreateNoWindow = true;     //不显示程序窗口 
+            if (p.Start())
+            {
+                this.pid = p.Id;     //启动程序
+                SavePIDToXml();
+            }
+            p.StandardInput.WriteLine(strInput + "&exit"); //向cmd窗口发送输入信息
+            p.StandardInput.AutoFlush = true;
+        }
+
+        private void SavePIDToXml()
+        {
+            string xmlPath = Path.Combine(Global.UserWorkspacePath, "侦察兵", "YQTasks.xml");
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.Load(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                HelpUtil.ShowMessageBox("任务加载时发生错误:" + ex.Message);
+            }
+            XmlNodeList xnl = xDoc.SelectNodes(@"YQTasks/task");
+
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.SelectSingleNode("taskId").InnerText != taskInfo.TaskID)
+                    continue;
+                xn.SelectSingleNode("taskProcessId").InnerText = this.pid.ToString();
+                break;
+            }
+            xDoc.Save(xmlPath);
+        }
+
+        private void UpdateResult()
+        {
+            string ret = FileUtil.FileReadToEnd(statusFilePath);
+            string[] retArray = ret.Split(Environment.NewLine);
+            StringBuilder sb = new StringBuilder();
+            foreach (string line in retArray)
+            {
+                if (!line.Contains("\t"))
+                    continue;
+                string[] lineSplit = line.Split("\t");
+                if (lineSplit.Length != 4)
+                    continue;
+                lineSplit = UpdateInfo(lineSplit);
+                sb.Append(string.Join("\t", lineSplit) + Environment.NewLine);
+            }
 
             StreamWriter sw = new StreamWriter(statusFilePath);
             sw.Write(sb.ToString());
@@ -90,15 +199,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 sw.Close();
         }
 
-        private void TaskResultButton_Click(object sender, EventArgs e)
-        {
-            ProcessUtil.TryOpenDirectory(this.taskInfo.ResultFilePath);
-        }
-
-        private string[] UpdateResult(string[] infoArray)
+        private string[] UpdateInfo(string[] infoArray)
         {
             List<string> resultList = QueryTaskResultsById(infoArray[1]);
-            
+
+            if(resultList.Count == 0)
+                return infoArray;
+
             StreamWriter sw = null;
             sw = new StreamWriter(infoArray[3], true);
             sw.WriteLine(string.Join(Environment.NewLine, resultList.ToArray()));
@@ -121,13 +228,15 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             HttpHandler httpHandler = new HttpHandler();
             try
             {
-                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 2000);
+                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 1000);
                 if (resp.StatusCode != HttpStatusCode.OK)
                     error = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 
                 Dictionary<string, string> resDict = resp.ResDict;
-                if (resDict["status"] != "success")
+                if (resDict.TryGetValue("status", out string value) && value != "success")
                     error = string.Format("错误http状态：{0}。", resDict["msg"]);
+                else if (!resDict.ContainsKey("status"))
+                    error = string.Format("接口访问失败，请查看网络状态。");
                 else
                     result = resDict["data"];
                 if (result.IsNullOrEmpty())
@@ -142,6 +251,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!error.IsNullOrEmpty())
             {
                 HelpUtil.ShowMessageBox(error);
+                return resultList;
             }
             string[] array = result.Trim('\n').Split("\n");
 
@@ -150,7 +260,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
               "heat", "mainareacode", "netimgurl", "imgurl", "posttime", "domain", "domainname", "forumname",
               "context", "isforward", "forwardnum", "likenum", "commentnum", "fannum", "followernum", "blognum",
               "readnum", "verify", "address", "addresscode", "imagepath", "domaintype", "classifyid", "classifyscore",
-              "commentsign", "sensitivity", "areacode", "tagarea", "signcode", "eventcode", "tagevent" 
+              "commentsign", "sensitivity", "areacode", "tagarea", "signcode", "eventcode", "tagevent"
             };
 
             Dictionary<string, string> sourceDict = new Dictionary<string, string>
@@ -216,7 +326,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     }
                     if (col == "datasourcetype" && sourceDict.TryGetValue(key, out string type))
                         key = type;
-                    else if (col == "classifyDict" && classifyDict.TryGetValue(key, out string classify))
+                    else if (col == "classifyid" && classifyDict.TryGetValue(key, out string classify))
                         key = classify;
 
                     sb.Append(key + "\t");
@@ -228,7 +338,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void DeleteRuleID()
         {
-            string ruleID = "9616533756201"; //9616533756201
+            string ruleID = "1416305261"; //9616533756201
             string token = string.Empty;
             string getTokenURL = "https://api.fhyqw.com/auth/gettoken?username=iao2&password=60726279d628473f6f3f03d5b81b8c95&apikey=50c9429656499f3b26ca1bd6c8045239";
             try
@@ -277,7 +387,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     return;
                 ProcessUtil.TryProcessOpen(cell.Tag.ToString());
             }
-
         }
     }
 }

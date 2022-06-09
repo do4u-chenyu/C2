@@ -440,10 +440,10 @@ namespace C2.Business.SSH
             return true;
         }
 
-        private String GetRemoteFilename(String s)
+        private string GetRemoteFilename(string s)
         {
-            String command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
-            String content = RunCommand(command, shell);
+            string command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
+            string content = RunCommand(command, shell);
 
             Match mat = Regex.Match(content, Wrap(TaskResultRegexPattern));
             if (mat.Success && mat.Groups[1].Success)
@@ -482,12 +482,12 @@ namespace C2.Business.SSH
             }
 
             // 000000_queryResult_db_开始时间_结束时间.tgz
-            String s = TaskDirectory + "/" + TaskResultShellPattern;
+            string s = TaskDirectory + "/" + TaskResultShellPattern;
             //String s = TaskDirectory + "/" + "000000_queryResult_plane_20210604094525_20210902094525.tgz";
 
             if (Oops()) return false;
 
-            String ffp = GetRemoteFilename(s);
+            string ffp = GetRemoteFilename(s);
             long len = GetRemoteFileSize(ffp);  // 文件有可能超过2G,不能用int
             if (len <= 0)
             {
@@ -803,7 +803,7 @@ namespace C2.Business.SSH
             else
             {
                 String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-                return Regex.IsMatch(result, @"000000_queryResult_(db|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|code|hostDD|hackDD|dm|custom|behinder-godzilla)_\d+_\d+.tgz\r?\n");
+                return Regex.IsMatch(result, @"000000_queryResult_(ht|yellow|gun|plane|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|code|hostDD|hackDD|dm|custom|behinder-godzilla)_\d+_\d+.tgz\r?\n");
             }
 
         }

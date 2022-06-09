@@ -4,10 +4,9 @@ using C2.Controls;
 using C2.Core;
 using C2.Utils;
 using Newtonsoft.Json.Linq;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -33,6 +32,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private string destFilePath;
         private string statusFilePath;
         private string TaskCreateTime;
+        private int pid;
         private readonly Dictionary<string, string> table;
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskContent { get => this.taskContentComboBox.Text; set => this.taskContentComboBox.Text = value; }
@@ -52,6 +52,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             startTime = 0;
             endTime = 0;
             ruleDatasource = 0;
+            pid = 0;
 
             destDirectory = Path.Combine(Global.UserWorkspacePath, "侦察兵", "舆情侦察兵");
             FileUtil.CreateDirectory(destDirectory);
@@ -93,6 +94,18 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private void TaskModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.TaskName = String.Format("{0}任务{1}_{2}", this.TaskModelName, DateTime.Now.ToString("MMdd"), this.TaskCreateTime);
+            if (this.TaskModelName == "Twitter" && this.TaskContent == "账号")
+                this.exampleLabel.Text = "Twitter账号输入样例：@DreawmParts";
+            else
+                this.exampleLabel.Text = string.Empty;
+        }
+
+        private void TaskContentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.TaskModelName == "Twitter" && this.TaskContent == "账号")
+                this.exampleLabel.Text = "Twitter账号输入样例：@DreawmParts";
+            else
+                this.exampleLabel.Text = string.Empty;
         }
 
         private void ProvinceCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -146,40 +159,93 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         protected override bool OnOKButtonClick()
         {
+            this.Cursor = Cursors.WaitCursor;
             if (this.pasteModeCB.Checked)
             {
                 if (this.wsTextBox.Text.Trim().IsEmpty())
                 {
                     HelpUtil.ShowMessageBox("请输入查询内容");
+                    this.Cursor = Cursors.Arrow;
                     return false;
                 }
                 FileUtil.FileWriteToEnd(FilePath, this.wsTextBox.Text);
+
+            }
+
+            if (!this.pasteModeCB.Checked)
+            {
+                if (!File.Exists(FilePath))
+                {
+                    HelpUtil.ShowMessageBox("该数据文件不存在");
+                    this.Cursor = Cursors.Arrow;
+                    return false;
+                }
             }
 
             if (TaskContent == "账号" && TaskModelName == "不限")
             {
                 HelpUtil.ShowMessageBox("查询内容为账号时，必须指定任务类型。");
+                this.Cursor = Cursors.Arrow;
+                return false;
+            }
+
+            if (TaskContent == "账号" && TaskModelName == "暗网")
+            {
+                HelpUtil.ShowMessageBox("暗网不支持账号查询任务，只支持关键词类型。");
+                this.Cursor = Cursors.Arrow;
                 return false;
             }
 
             if (TaskModelName == "抖音APP" || TaskModelName == "快手")
             {
                 HelpUtil.ShowMessageBox(" 抖音APP和快手相关查询施工中，敬请期待。");
+                this.Cursor = Cursors.Arrow;
+                return false;
+            }
+            
+            if (!GenAndCheckToken())
+            {
+                this.Cursor = Cursors.Arrow;
                 return false;
             }
 
-            if (!GenAndCheckToken())
-                return false;
-
             this.TaskInfo = UpdateYQTaskInfo();
 
-            bool genTask = this.pasteModeCB.Checked ? GenTasksFromPaste() : GenTasksFromFile();
-            if (!(genTask && base.OnOKButtonClick()))
-                return false;
+            List<string> resultList = new List<string>();
+            if (this.pasteModeCB.Checked)
+                resultList = GenTasksFromPaste();
+            else
+                resultList = GenTasksFromFile();
 
+            if (!base.OnOKButtonClick())
+            {
+                this.Cursor = Cursors.Arrow;
+                return false;
+            }
+            WriteTaskInfo(resultList);
+            Thread.Sleep(1000);
+            RunPython();
+            HelpUtil.ShowMessageBox("任务创建成功");
             new Log.Log().LogManualButton("舆情侦察兵", "运行");
-            HelpUtil.ShowMessageBox("任务下发成功");
+            this.Cursor = Cursors.Arrow;
             return true;
+        }
+
+        private void RunPython()
+        {
+            string strInput = @"cd " + Global.TemplatesPath + @"&python get_yq_result.py --f " + this.statusFilePath;
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
+            p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
+            p.StartInfo.RedirectStandardInput = true;  // 接受来自调用程序的输入信息
+            p.StartInfo.RedirectStandardOutput = true;   //输出信息
+            p.StartInfo.RedirectStandardError = true;   // 输出错误
+            p.StartInfo.CreateNoWindow = true;     //不显示程序窗口 
+            if(p.Start())
+                this.TaskInfo.PId = p.Id;     //启动程序     
+            p.StandardInput.WriteLine(strInput + "&exit"); //向cmd窗口发送输入信息
+            p.StandardInput.AutoFlush = true;
+            
         }
 
         private bool GenAndCheckToken()
@@ -195,7 +261,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             catch
             {
-                HelpUtil.ShowMessageBox("获取任务下发令牌失败");
+                HelpUtil.ShowMessageBox("获取任务下发令牌失败，请检查网络环境。");
                 return false;
             }
             if (this.token.IsNullOrEmpty())
@@ -226,7 +292,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             req.Timeout = 20000;
             HttpWebResponse response = (HttpWebResponse)req.GetResponse();
             string postContent = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
             return postContent;
         }
 
@@ -239,8 +304,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             FileUtil.CreateDirectory(this.taskFilePath);
 
             this.statusFilePath = Path.Combine(this.taskFilePath, this.TaskID + "_info.txt");
-            //using (File.Create(this.statusFilePath)) { } ;
-            
 
             areaCode = GenCode();
 
@@ -251,7 +314,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if(!result[1].IsNullOrEmpty())
                 this.ruleDatasource = Convert.ToInt64(result[1]);
 
-            return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, YQTaskStatus.Running, TaskCreateTime);
+            return new YQTaskInfo(TaskName, TaskID, TaskModelName, FilePath, taskFilePath, pid, TaskCreateTime);
         }
 
         private string GenCode()
@@ -279,16 +342,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             //新浪微博： weibo.com
             //Twitter： twitter.com
             //百家号： baijiahao.baidu.com
-
-            //Twitter
-            //微博
-            //微信公众号
-            //今日头条
-            //抖音
-            //抖音APP
-            //快手
-            //暗网
-            //不限
             string modelHost = string.Empty;
             string dataType = string.Empty;
             
@@ -315,62 +368,71 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     modelHost = "iesdouyin.com";
                     dataType = "131072";
                     break;
+                case "知乎":
+                    modelHost = "zhihu.com";
+                    dataType = "32768";
+                    break;
+                case "贴吧":
+                    modelHost = "tieba.baidu.com";
+                    dataType = "64";
+                    break;
             }
 
             List<string> result = new List<string> { modelHost, dataType };
             return result;
         }
 
-        private bool GenTasksFromPaste()
+        private List<string> GenTasksFromPaste()
         {
-            if (this.wsTextBox.Text.Trim().IsEmpty())         
-                return false;
-                
-            // 如果粘贴文件不合格,就别清空旧数据了
-
+            List<string> resultList = new List<string>();
+            string result = string.Empty;
             string[] lines = this.wsTextBox.Text.SplitLine();
             for (int i = 0; i < Math.Min(lines.Length, maxRow); i++)
-                AddTasksByKey(lines[i], i);
+            {
+                result = AddTasksByKey(lines[i], i);
+                if (!result.IsNullOrEmpty())
+                    resultList.Add(result);
+            }
+                
 
-            return true;
+            return resultList;
         }
 
-        private bool GenTasksFromFile()
+        private List<string> GenTasksFromFile()
         {
-
-            if (!File.Exists(FilePath))
-            {
-                HelpUtil.ShowMessageBox("该数据文件不存在");
-                return false;
-            }
+            List<string> resultList = new List<string>();
+            string result = string.Empty;
             try
             {
                 using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 using (StreamReader sr = new StreamReader(fs, Encoding.Default))
+                {
                     for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
-                        AddTasksByKey(sr.ReadLine().Trim(), row);
+                    {
+                        result = AddTasksByKey(sr.ReadLine().Trim(), row);
+                        if (!result.IsNullOrEmpty())
+                            resultList.Add(result);
+                    }
+                }
             }
             catch
             {
                 HelpUtil.ShowMessageBox(FilePath + ",文件加载出错，请检查文件内容。");
-                return false;
             }
-            return true;
+            return resultList;
         }
 
 
-        private void AddTasksByKey(string keyWord, int number)
+        private string AddTasksByKey(string keyWord, int number)
         {
+            string result = string.Empty;
             this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
-            int resultNumber = 0;
-            //this.ruleID = 1416305260;
 
             destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.ruleID.ToString(), keyWord));
-            using (File.Create(destFilePath)) { }
 
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
-            pairs.Add("name", this.ruleName);
+            
             pairs.Add("datasource", this.ruleDatasource);
             if (this.startTime != 0)
                 pairs.Add("starttime", this.startTime);
@@ -386,18 +448,24 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 {
                     keyWord = keyWord.Replace("@", string.Empty).Replace(" ",string.Empty);
                     pairs.Add("url", "https://twitter.com/" + keyWord);
-                    string accountUrl = string.Format("https://api.fhyqw.com/twitter/account?token={0}&screenname={1}",this.token,keyWord);
-                    if(WriteTwitterAccount(accountUrl,keyWord))
-                        resultNumber = 1;
                 }
                 else
                 {
                     if (!this.ruleHost.IsNullOrEmpty())
                         pairs.Add("host", this.ruleHost);
-                    pairs.Add("userid", keyWord);
+                    pairs.Add("nickname", keyWord);
                 }
             }
+            int domainType = -1;
+            pairs.Add("domaintype", domainType);
             pairs.Add("type", this.ruleType);
+            pairs.Add("name", this.ruleName);
+            if (this.TaskModelName == "暗网")
+            {
+                int netType = 1;
+                pairs.Add("nettype", netType);
+            }
+                
 
             string error = string.Empty;
             string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}", this.token);
@@ -420,38 +488,39 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (!error.IsNullOrEmpty())
             {
                 HelpUtil.ShowMessageBox(error);
-                return;
+                return result;
             }
 
-            List<string> rowHeaderList = new List<string>
-            {
-                "采集任务url", "文章url", "文章标题", "数据源标识", "用户userid", "发表人昵称", "发表楼层",
-                "回复数", "点赞数、热度值", "主线地区", "图片实际网页地址", "图片短串", "发表时间", "网站域名",
-                "网站名称", "板块名称", "文章正文", "是否转发", "转发数", "点赞数", "评论数", "粉丝数",
-                "关注者数", "发表文章数", "阅读数", "是否为官方认证", "注册地址", "注册地地区编号",
-                "头像链接", "境内外标识", "文章所属分类", "文章所属分类得分", "正负面标识", "文章敏感度",
-                "是否为噪音标识", "文章命中地区编码", "文章命中地区", "行业情感正负面", "行业id", "行业说明"
-            };
+            result = string.Format("{0}\t{1}\t{2}\t{3}", keyWord, this.ruleID.ToString(), "0", destFilePath);
+            return result;
+        }
 
-            StreamWriter sw = null;
+        private void WriteTaskInfo(List<string> returnList)
+        {
             try
             {
-                sw = new StreamWriter(destFilePath, true, Encoding.UTF8);
-                sw.WriteLine(string.Join("\t", rowHeaderList.ToArray()));
-                sw.Flush();
+                FileStream file = new FileStream(this.statusFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                using (StreamWriter sw = new StreamWriter(file, Encoding.UTF8))
+                {
+                    foreach (string line in returnList)
+                    {
+                        sw.WriteLine(line);
+                        sw.Flush();
+                    }
+                    sw.Close();
+                    file.Close();
+                }
             }
             catch (Exception ex)
             {
                 HelpUtil.ShowMessageBox(ex.Message);
             }
-            if (sw != null)
-                sw.Close();
-
-            WriteTaskInfo(keyWord, resultNumber.ToString());
+            return;
         }
 
-        private bool WriteTwitterAccount(string accountUrl,string keyWord)
+        private List<string> WriteTwitterAccount(string accountUrl,string keyWord)
         {
+            List<string> returnList = new List<string>() { "true", string.Empty};
             StringBuilder sb = new StringBuilder();
             string error = string.Empty;
             List<string> colList = new List<string>()
@@ -472,6 +541,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     foreach (string col in colList)
                     {
                         string value = gList[col].IsNull() ? string.Empty : gList[col].ToString();
+                        if (col == "id")
+                            returnList[1] = value;
                         sb.Append(value + "\t");
                     }
                 }
@@ -489,7 +560,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     sw.WriteLine(error);
                     sw.Write(Environment.NewLine);
                     sw.Close();
-                    return false;
+                    returnList[0] = "fasle";
+                    return returnList;
                 }
                 sw.WriteLine(string.Join("\t", colList.ToArray()).Replace("id","UserID").Replace("screenName", "UserName").Replace("name", "NickName"));
                 sw.WriteLine(sb.ToString());
@@ -502,27 +574,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             if (sw != null)
                 sw.Close();
-            return true;
-        }
-
-        private void WriteTaskInfo(string keyWord, string num)
-        {
-            try
-            {
-                FileStream file = new FileStream(this.statusFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
-                using (StreamWriter sw = new StreamWriter(file,Encoding.UTF8))
-                {
-                    sw.WriteLine(keyWord + "\t" + this.ruleID.ToString() + "\t" + num + "\t" + destFilePath);
-                    sw.Flush();
-                    sw.Close();
-                    file.Close();
-                }
-            }
-            catch (Exception ex)
-            { 
-                HelpUtil.ShowMessageBox(ex.Message); 
-            }
-            return;
+            return returnList;
         }
     }
 }

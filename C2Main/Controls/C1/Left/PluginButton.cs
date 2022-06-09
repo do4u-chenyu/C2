@@ -148,6 +148,7 @@ namespace C2.Controls.C1.Left
 
         private void OpenMindMapMenuItem_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton(JST[pluginType], "打开");
             Global.GetManualControl().TryOpen(JST[pluginType]);
         }
 
@@ -171,29 +172,40 @@ namespace C2.Controls.C1.Left
             switch (pluginType)
             {
                 case "Cracker":
+                    new Log.Log().LogManualButton("弱口令素描", "打开");
                     new CrackerForm().ShowDialog();
                     break;
                 case "WebScan":
+                    new Log.Log().LogManualButton("目录扫描", "打开");
                     new WebScanForm().ShowDialog();
                     break;
                 case "RobotsScan":
                     new RobotsScan().ShowDialog();
                     break;
                 case "WebShell":
+                    new Log.Log().LogManualButton("盗洞验活", "打开");
                     new WebShellManageForm().ShowDialog();
                     break;
                 case "Binary":
+                    new Log.Log().LogManualButton("二进制分析", "打开");
                     new BinaryMainForm().ShowDialog();
                     break;
                 case "Intruder":
+                    new Log.Log().LogManualButton("大码破门锤", "打开");
                     new IntruderForm().ShowDialog();
                     break;
                 case "VPN":
                     new VPNMainForm().ShowDialog();
                     break;
                 case "涉赌专项":
+                    new Log.Log().LogManualButton(pluginType, "打开");
+                    break;
                 case "涉枪专项":
+                    new Log.Log().LogManualButton(pluginType, "打开");
+                    break;
                 case "涉黄专项":
+                    new Log.Log().LogManualButton(pluginType, "打开");
+                    break;
                 case "盗洞专项":
                 case "肉鸡黑吃黑":
                 case "境外网产专项":
@@ -201,7 +213,6 @@ namespace C2.Controls.C1.Left
                     break;
                 default:
                     break;
-                   
             }
         }
 

@@ -55,6 +55,7 @@ namespace C2.Business.HIBU.FaceRecognizer
 
         private void TransBtn_Click(object sender, EventArgs e)
         {
+            new Log.Log().LogManualButton(this.Text, "运行");
             this.dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)

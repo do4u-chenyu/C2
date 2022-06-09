@@ -32,6 +32,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.taskNameTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.exampleLabel = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.taskContentComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.taskModelComboBox = new System.Windows.Forms.ComboBox();
@@ -49,8 +51,6 @@
             this.pasteModeCB = new System.Windows.Forms.CheckBox();
             this.wsTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -77,6 +77,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.exampleLabel);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.taskContentComboBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.taskModelComboBox);
@@ -94,10 +96,31 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(650, 159);
+            this.groupBox1.Size = new System.Drawing.Size(719, 162);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "爬虫配置";
+            // 
+            // exampleLabel
+            // 
+            this.exampleLabel.AutoSize = true;
+            this.exampleLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.exampleLabel.ForeColor = System.Drawing.Color.Red;
+            this.exampleLabel.Location = new System.Drawing.Point(501, 102);
+            this.exampleLabel.Name = "exampleLabel";
+            this.exampleLabel.Size = new System.Drawing.Size(0, 12);
+            this.exampleLabel.TabIndex = 10039;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(413, 132);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(161, 12);
+            this.label11.TabIndex = 10038;
+            this.label11.Text = "* 最多支持查询近半年的数据";
             // 
             // taskContentComboBox
             // 
@@ -109,8 +132,9 @@
             "账号"});
             this.taskContentComboBox.Location = new System.Drawing.Point(497, 67);
             this.taskContentComboBox.Name = "taskContentComboBox";
-            this.taskContentComboBox.Size = new System.Drawing.Size(147, 27);
+            this.taskContentComboBox.Size = new System.Drawing.Size(210, 27);
             this.taskContentComboBox.TabIndex = 62;
+            this.taskContentComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskContentComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -133,13 +157,15 @@
             "微信公众号",
             "今日头条",
             "抖音",
+            "贴吧",
+            "知乎",
             "抖音APP",
             "快手",
             "暗网",
             "不限"});
             this.taskModelComboBox.Location = new System.Drawing.Point(497, 24);
             this.taskModelComboBox.Name = "taskModelComboBox";
-            this.taskModelComboBox.Size = new System.Drawing.Size(147, 27);
+            this.taskModelComboBox.Size = new System.Drawing.Size(210, 27);
             this.taskModelComboBox.TabIndex = 60;
             this.taskModelComboBox.SelectedIndexChanged += new System.EventHandler(this.TaskModelComboBox_SelectedIndexChanged);
             // 
@@ -160,7 +186,7 @@
             this.cityCB.FormattingEnabled = true;
             this.cityCB.Items.AddRange(new object[] {
             "不限"});
-            this.cityCB.Location = new System.Drawing.Point(264, 67);
+            this.cityCB.Location = new System.Drawing.Point(264, 69);
             this.cityCB.Name = "cityCB";
             this.cityCB.Size = new System.Drawing.Size(141, 27);
             this.cityCB.TabIndex = 58;
@@ -210,7 +236,7 @@
             "天津市",
             "重庆市",
             "上海市"});
-            this.provinceCB.Location = new System.Drawing.Point(91, 67);
+            this.provinceCB.Location = new System.Drawing.Point(91, 69);
             this.provinceCB.Name = "provinceCB";
             this.provinceCB.Size = new System.Drawing.Size(142, 27);
             this.provinceCB.TabIndex = 57;
@@ -220,7 +246,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(9, 71);
+            this.label2.Location = new System.Drawing.Point(9, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 19);
             this.label2.TabIndex = 56;
@@ -228,7 +254,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(267, 119);
+            this.dateTimePicker2.Location = new System.Drawing.Point(267, 125);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(140, 25);
             this.dateTimePicker2.TabIndex = 54;
@@ -236,7 +262,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(237, 121);
+            this.label6.Location = new System.Drawing.Point(237, 127);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(23, 20);
             this.label6.TabIndex = 53;
@@ -246,7 +272,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(9, 122);
+            this.label4.Location = new System.Drawing.Point(9, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 19);
             this.label4.TabIndex = 52;
@@ -254,7 +280,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(91, 119);
+            this.dateTimePicker1.Location = new System.Drawing.Point(91, 125);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(142, 25);
             this.dateTimePicker1.TabIndex = 51;
@@ -276,13 +302,13 @@
             this.filePathTextBox.Location = new System.Drawing.Point(91, 12);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.ReadOnly = true;
-            this.filePathTextBox.Size = new System.Drawing.Size(425, 25);
+            this.filePathTextBox.Size = new System.Drawing.Size(533, 25);
             this.filePathTextBox.TabIndex = 10033;
             // 
             // browserButton
             // 
             this.browserButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browserButton.Location = new System.Drawing.Point(563, 13);
+            this.browserButton.Location = new System.Drawing.Point(637, 13);
             this.browserButton.Name = "browserButton";
             this.browserButton.Size = new System.Drawing.Size(59, 23);
             this.browserButton.TabIndex = 10034;
@@ -311,7 +337,7 @@
             this.wsTextBox.Multiline = true;
             this.wsTextBox.Name = "wsTextBox";
             this.wsTextBox.ReadOnly = true;
-            this.wsTextBox.Size = new System.Drawing.Size(425, 137);
+            this.wsTextBox.Size = new System.Drawing.Size(533, 135);
             this.wsTextBox.TabIndex = 10036;
             this.wsTextBox.WordWrap = false;
             // 
@@ -322,52 +348,29 @@
             this.label9.ForeColor = System.Drawing.Color.Red;
             this.label9.Location = new System.Drawing.Point(91, 43);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(143, 12);
+            this.label9.Size = new System.Drawing.Size(209, 12);
             this.label9.TabIndex = 10037;
-            this.label9.Text = "* 文件内容格式:一行一个";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(8, 111);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 12);
-            this.label8.TabIndex = 10039;
-            this.label8.Text = "*大约5W行";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(8, 93);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 12);
-            this.label7.TabIndex = 10038;
-            this.label7.Text = "*最大[4M]文本";
+            this.label9.Text = "* 文件内容格式:一行一个,最多1000行";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.wsTextBox);
             this.panel1.Controls.Add(this.pasteModeCB);
             this.panel1.Controls.Add(this.browserButton);
             this.panel1.Controls.Add(this.filePathTextBox);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Location = new System.Drawing.Point(0, 159);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 162);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(650, 203);
+            this.panel1.Size = new System.Drawing.Size(719, 201);
             this.panel1.TabIndex = 1;
             // 
             // AddYQTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 408);
+            this.ClientSize = new System.Drawing.Size(719, 408);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
@@ -401,8 +404,6 @@
         private System.Windows.Forms.CheckBox pasteModeCB;
         private System.Windows.Forms.TextBox wsTextBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cityCB;
         private System.Windows.Forms.ComboBox provinceCB;
@@ -410,5 +411,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox taskModelComboBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label exampleLabel;
     }
 }

@@ -67,7 +67,9 @@ namespace C2.Business.HIBU.PoliticsTextRecognition
         /// <param name="e"></param>
         private void TransBtn_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();  // 清空上一次的查询结果
+            new Log.Log().LogManualButton(this.Text, "运行");
+            //清空上一次的查询结果
+            dataGridView1.Rows.Clear();
 
             using (GuarderUtil.WaitCursor)
             {
