@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -39,7 +40,7 @@ namespace C2.Log
                 xDoc.Load(xmlPath);
                 userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
             }
-            string ip = IPGet();
+            string ip = GetPublicIp();
 
             Task t = Task.Factory.StartNew(() =>
             {
@@ -114,6 +115,45 @@ namespace C2.Log
                     return ipa.ToString();
             }
             return string.Empty;
+        }
+        private string GetPublicIp()
+        {
+            var urlList = new List<string>
+            {
+                "http://ip.qq.com/",
+                "http://pv.sohu.com/cityjson?ie=utf-8",
+                "http://ip.taobao.com/service/getIpInfo2.php?ip=myip"
+            };
+            string tempip = string.Empty;
+            foreach (var a in urlList)
+            {
+                try
+                {
+                    var req = WebRequest.Create(a);
+                    req.Timeout = 20000;
+                    var response = req.GetResponse();
+                    var resStream = response.GetResponseStream();
+                    if (resStream != null)
+                    {
+                        var sr = new StreamReader(resStream, Encoding.UTF8);
+                        var htmlinfo = sr.ReadToEnd();
+                        //匹配IP的正则表达式
+                        var r = new Regex("((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|[1-9])", RegexOptions.None);
+                        var mc = r.Match(htmlinfo);
+                        //获取匹配到的IP
+                        tempip = mc.Groups[0].Value;
+                        resStream.Close();
+                        sr.Close();
+                        response.Dispose();
+                    }
+                    return tempip;
+                }
+                catch
+                {
+                    tempip = IPGet();
+                }
+            }
+            return tempip;
         }
     }
     class LogItem
