@@ -5,6 +5,7 @@ using System.Xml;
 using System.Net;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace C2.Update
 {
@@ -23,6 +24,7 @@ namespace C2.Update
         private string downloadC2F;
         private string filenameOuter;
         private const string updateUrl = "http://113.31.114.239:53373/C2/update.xml";//升级配置的XML文件地址  
+        private string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
 
         #region 构造函数  
         public SoftUpdate() { }
@@ -135,22 +137,38 @@ namespace C2.Update
                     }
                 }
             }
-            string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
             if (!File.Exists(downloadPath))
                 Directory.CreateDirectory(downloadPath);
             string extenInner = downloadC2Inner.Substring(downloadC2Inner.LastIndexOf("/")).Replace("/", string.Empty);
             string filenameInner = downloadPath + "\\" + extenInner;
             string extenF = downloadC2F.Substring(downloadC2F.LastIndexOf("/")).Replace("/", string.Empty);
             string filenameF = downloadPath + "\\" + extenF;
-            MessageBox.Show("安装包下载中，下载完成后会弹出安装页面，请耐心等待!");
             if (flag)
-                wc.DownloadFile(downloadC2Inner, filenameInner);
+            {
+                MessageBox.Show("单兵作战(内网版)下载中，下载完成后会弹出安装目录，请耐心等待!");
+                wc.DownloadFileCompleted += Client_DownloadFileCompleted;
+                wc.DownloadFileTaskAsync(downloadC2Inner, filenameInner);
+            }
             else
-                wc.DownloadFile(downloadC2F, filenameF);
-            Process.Start(downloadPath);
+            {
+                MessageBox.Show("战术手册下载中，下载完成后会弹出安装目录，请耐心等待!");
+                wc.DownloadFileCompleted += Client_DownloadFileFCompleted; 
+                wc.DownloadFileTaskAsync(downloadC2F, filenameF);
+            }
             wc.Dispose();
         }
-
+        void Client_DownloadFileFCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.UserState != null)
+                MessageBox.Show("战术手册下载完成");
+            Process.Start(downloadPath);
+        }
+        void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.UserState != null)
+                MessageBox.Show("单兵作战(内网版)下载完成");
+            Process.Start(downloadPath);
+        }
         /// <summary>  
         /// 下载更新  
         /// </summary>  

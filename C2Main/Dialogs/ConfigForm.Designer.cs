@@ -518,9 +518,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(316, 326);
+            this.button2.Location = new System.Drawing.Point(198, 326);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 23);
+            this.button2.Size = new System.Drawing.Size(91, 23);
             this.button2.TabIndex = 13;
             this.button2.Text = "战术手册下载";
             this.button2.UseVisualStyleBackColor = true;
@@ -528,11 +528,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(116, 326);
+            this.button1.Location = new System.Drawing.Point(102, 326);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 23);
+            this.button1.Size = new System.Drawing.Size(80, 23);
             this.button1.TabIndex = 12;
-            this.button1.Text = "单兵作战装备(内网版)下载";
+            this.button1.Text = "内网版下载";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -548,7 +548,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(113, 295);
+            this.label9.Location = new System.Drawing.Point(130, 295);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(122, 17);
             this.label9.TabIndex = 10;
