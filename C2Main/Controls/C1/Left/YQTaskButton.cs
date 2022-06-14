@@ -18,7 +18,7 @@ namespace C2.Controls.C1.Left
 {
     public partial class YQTaskButton : BaseLeftInnerButton
     {
-        private YQFeatureDetectionControl yqfdc;
+        //private YQFeatureDetectionControl yqfdc;
 
         public YQTaskInfo TaskInfo { get; set; } = YQTaskInfo.Empty;
 
@@ -102,17 +102,9 @@ namespace C2.Controls.C1.Left
             string xmlPath = Path.Combine(Global.UserWorkspacePath, "侦察兵", "YQTasks.xml");
             if (!File.Exists(xmlPath))
                 return;
-            RemoveYQTasks(xmlPath);
-
-            yqfdc = new YQFeatureDetectionControl();
-            yqfdc.LoadYQTasks(xmlPath);
-            this.leftPictureBox.Visible = false;
-            this.rightPictureBox.Visible = false;
-            this.noFocusButton.Visible = false;
+            Global.GetWebsiteFeatureDetectionControl().yqFeatureDetectionControl1.RemoveButton(this);
             FileUtil.DeleteDirectory(this.TaskInfo.ResultFilePath);
-            //yqfdc.RemoveYQButton(this);
-
-            //yqfdc.YQSave();
+            Global.GetWebsiteFeatureDetectionControl().yqFeatureDetectionControl1.YQSave();
         }
 
         public void RemoveYQTasks(string xmlPath)

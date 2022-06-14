@@ -99,6 +99,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private YQFeatureDetectionControl yqFeatureDetectionControl1;
+        public YQFeatureDetectionControl yqFeatureDetectionControl1;
     }
 }
