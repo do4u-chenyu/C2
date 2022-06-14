@@ -18,13 +18,18 @@ namespace C2.Update
     /// </summary>  
     public class SoftUpdate
     {
-
+        /// <summary>  
+        /// 如何对程序进行更新
+        /// 1. 首先需要修改 Properties/AssemblyInfo里面的版本号为当前更新后的版本号
+        /// 2. 服务器端上传更新后的分析师单兵作战装备内网、外网和战术手册
+        /// 3. 更新服务端配置文件里面的下载文件地址和版本号
+        /// </summary>  
         private string downloadC2Outer;
         private string downloadC2Inner;
         private string downloadC2F;
         private string filenameOuter;
         private const string updateUrl = "http://113.31.114.239:53373/C2/update.xml";//升级配置的XML文件地址  
-        private string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
+        private readonly string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
 
         #region 构造函数  
         public SoftUpdate() { }
@@ -185,7 +190,6 @@ namespace C2.Update
             }
         }
 
-       
         /// <summary>  
         /// 检查是否需要更新  
         /// </summary>  
@@ -215,7 +219,6 @@ namespace C2.Update
                         }
                     }
                 }
-
                 Version ver = new Version(newVerson);
                 Version verson = Assembly.LoadFrom(loadFile).GetName().Version;
                 int tm = verson.CompareTo(ver);
@@ -225,7 +228,6 @@ namespace C2.Update
                 else
                     isUpdate = true;
             }
-            
             catch
             {
                 throw new Exception("更新出现错误，请确认网络连接无误后重试！");
