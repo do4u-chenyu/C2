@@ -18,12 +18,15 @@ using C2.Model;
 using C2.Model.Documents;
 using C2.Model.MindMaps;
 using C2.Model.Widgets;
+using C2.Update;
 using C2.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -59,6 +62,7 @@ namespace C2
         private static DirectoryInfo info = new DirectoryInfo(Global.TempDirectory);
         private static string xmlDirectory = Path.Combine(info.Parent.FullName, "tmpRedisASK");
         private static string xmlPath = Path.Combine(xmlDirectory, "tmpRedisASK.xml");
+        private static string installPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
         private string startTime = DateTime.Now.ToString("yyyyMMddHHmmss");
 
         private void InitializeOpenFile(string path)
@@ -337,8 +341,47 @@ namespace C2
                 LoadHeadLine();
 #if !C2_Inner
                 Identification();
+                CheckUpdate();
 #endif
             }
+        }
+        public void CheckUpdate()
+        {
+            SoftUpdate app = new SoftUpdate(Application.ExecutablePath, "C2");
+            app.UpdateFinish += new UpdateState(App_UpdateFinish);
+            app.SaveFinish += new UpdateState(App_SaveFinish);
+            try
+            {
+                if (app.IsUpdate && MessageBox.Show("检查到新版本，是否更新？", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (!File.Exists(installPath))
+                        Directory.CreateDirectory(installPath);
+                    Thread update = new Thread(new ThreadStart(app.Update));
+                    update.Start();
+                    this.Dispose();
+                }
+                /*
+                else
+                {
+                    Thread save = new Thread(new ThreadStart(app.SaveFile));
+                    save.Start();
+                    Process.Start(installPath);
+                }
+                */
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        void App_UpdateFinish()
+        {
+            MessageBox.Show("下载完成，请点击进行安装！", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+        }
+        void App_SaveFinish()
+        {
+            MessageBox.Show("新版本下载完成", "Download", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Identification()

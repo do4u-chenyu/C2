@@ -1245,6 +1245,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Update\SoftUpdate.cs" />
     <Compile Include="Utils\InvokeUtil.cs" />
     <Compile Include="Utils\JsonUtil.cs" />
     <Compile Include="Utils\NetUtil.cs" />
