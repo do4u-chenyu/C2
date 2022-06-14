@@ -37,23 +37,19 @@ namespace C2.Log
             // 同理,这里也放到发送进程里，判断文件在不在，读文件都是耗时操作，不要放在主进程里
             // 发送日志的线程里 来获取用户名，而且显然，这个地方只要获取一次就够了
             // 不需要每次都读文件获取用户名
-            //if (File.Exists(xmlPath))
-            //{
-                //xDoc.Load(xmlPath);
-                //userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
-            //}
+            if (File.Exists(xmlPath))
+            {
+                xDoc.Load(xmlPath);
+                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
+            }
             // IP 放到发送进程里去, 获取IP访问网络会卡,不要放在主进程
             // 而且显然，这个地方只要获取一次就够了,不需要每次都访问网络GetIP
-            // string ip = GetPublicIp();
+            string ip = GetPublicIp();
 
             // 这都是什么神鬼设计, 直接加入队列，东西放入队列不费时间
             // 但你这里又开启线程，让线程把东西放入队列，然后等线程结束
             // 这一顿骚操作 比 直接放入队列费事更多，属于行为艺术
-            // Task t = Task.Factory.StartNew(() =>
-            //{
-            AddQueueEn("", modelName, type, startTime, "");
-            //});
-            // Task.WaitAll(t);
+            AddQueueEn(userName, modelName, type, startTime, ip);
             // 每个日志动作都单开一个线程，很挫，但勉强接受
             LogThread();
         }

@@ -1,7 +1,6 @@
 ﻿using C2.Business.HTTP;
 using C2.Business.WebsiteFeatureDetection;
 using C2.Core;
-using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.Collections.Concurrent;
@@ -10,10 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -38,25 +37,11 @@ namespace C2.Log
             
 #if !C2_Inner
             string startTime = e.ToString("yyyyMMddHHmmss");
-            // IP 放到发送进程里去, 获取IP访问网络会卡,不要放在主进程
-            // 而且显然，这个地方只要获取一次就够了,不需要每次都访问网络GetIP
-            // string ip = GetPublicIp();
-            // 同理,这里也放到发送进程里，判断文件在不在，读文件都是耗时操作，不要放在主进程里
-            // 发送日志的线程里 来获取用户名，而且显然，这个地方只要获取一次就够了
-            // 不需要每次都读文件获取用户名
-
-            // 这都是什么神鬼设计, 直接加入队列，东西放入队列不费时间
-            // 但你这里又开启线程，让线程把东西放入队列，然后等线程结束
-            // 这一顿骚操作 比 直接放入队列费事更多，属于行为艺术
-            // Task t = Task.Factory.StartNew(() =>
-            //{
-            AddQueueEn("", modelName, type, startTime, "", VersionGet());
-            //});
-            //Task.WaitAll(t);
-            // 每个日志动作都单开一个线程，很挫，但勉强接受
+          
+            string ip = GetPublicIp();
+            AddQueueEn(UserNameGet(), modelName, type, startTime, ip, VersionGet());
             LogThread();
 #endif
-  
             //MessageBox.Show(VersionGet());
         }
 
@@ -75,10 +60,8 @@ namespace C2.Log
         private string VersionGet()
         {
             string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//内网|外网|全量版
-            // 很挫，获取个字符串，定义常量，不要每次都new一个窗体，如果将来构造函数里加一个访问外部资源的动作
-            // 这里就是个坑
-            //string v2 = new ConfigForm().version.Text;//V:2.1.3
-            return string.Format("{0}|{1}", v1, "");
+            Version v2 = Assembly.LoadFrom(Application.ExecutablePath).GetName().Version;//读取Properties version
+            return string.Format("{0}|{1}", v1, v2);
         }
 
         private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip,string version)
