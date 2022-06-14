@@ -440,5 +440,29 @@ namespace C2.Dialogs
 
             return true;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try 
+            {
+                new Update.SoftUpdate().SaveOther(true);
+            }
+            catch
+            {
+                MessageBox.Show("更新出现错误，请确认网络连接无误后重试！");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new Update.SoftUpdate().SaveOther(false);
+            }
+            catch
+            {
+                MessageBox.Show("更新出现错误，请确认网络连接无误后重试！");
+            }
+        }
     }
 }

@@ -18,9 +18,10 @@ namespace C2.Update
     public class SoftUpdate
     {
 
-        private string download;
-        private string exten;
-        private string filename;
+        private string downloadC2Outer;
+        private string downloadC2Inner;
+        private string downloadC2F;
+        private string filenameOuter;
         private const string updateUrl = "http://113.31.114.239:53373/C2/update.xml";//升级配置的XML文件地址  
 
         #region 构造函数  
@@ -50,7 +51,7 @@ namespace C2.Update
         {
             get
             {
-                checkUpdate();
+                CheckUpdate();
                 return isUpdate;
             }
         }
@@ -97,15 +98,56 @@ namespace C2.Update
         {
             SaveFinish?.Invoke();
         }
+
+        /// <summary>  
+        /// 存储下载文件  
+        /// </summary>  
         private void Save()
         {
             if (!isUpdate)
                 return;
             WebClient wc = new WebClient();
-            exten = download.Substring(download.LastIndexOf("/")).Replace("/", string.Empty);
-            filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install") + "\\" + exten;
+            string extenOuter = downloadC2Outer.Substring(downloadC2Outer.LastIndexOf("/")).Replace("/", string.Empty);
+            filenameOuter = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install") + "\\" + extenOuter;
             MessageBox.Show("安装包下载中，下载完成后会弹出安装页面，请耐心等待!");
-            wc.DownloadFile(download, filename);
+            wc.DownloadFile(downloadC2Outer, filenameOuter);
+            Process.Start(filenameOuter);
+            wc.Dispose();
+        }
+
+        public void SaveOther(bool flag = true)
+        {
+            WebClient wc = new WebClient();
+            Stream stream = wc.OpenRead(updateUrl);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+            XmlNode list = xmlDoc.SelectSingleNode("Update");
+            foreach (XmlNode node in list)
+            {
+                if (node.Name == "Soft")
+                {
+                    foreach (XmlNode xml in node)
+                    {
+                        if (xml.Name == "DownLoadC2Inner")
+                            downloadC2Inner = xml.InnerText;
+                        else if (xml.Name == "DownLoadC2F")
+                            downloadC2F = xml.InnerText;
+                    }
+                }
+            }
+            string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
+            if (!File.Exists(downloadPath))
+                Directory.CreateDirectory(downloadPath);
+            string extenInner = downloadC2Inner.Substring(downloadC2Inner.LastIndexOf("/")).Replace("/", string.Empty);
+            string filenameInner = downloadPath + "\\" + extenInner;
+            string extenF = downloadC2F.Substring(downloadC2F.LastIndexOf("/")).Replace("/", string.Empty);
+            string filenameF = downloadPath + "\\" + extenF;
+            MessageBox.Show("安装包下载中，下载完成后会弹出安装页面，请耐心等待!");
+            if (flag)
+                wc.DownloadFile(downloadC2Inner, filenameInner);
+            else
+                wc.DownloadFile(downloadC2F, filenameF);
+            Process.Start(downloadPath);
             wc.Dispose();
         }
 
@@ -117,7 +159,6 @@ namespace C2.Update
             try
             {
                 Save();
-                Process.Start(filename);
                 //isFinish();
             }
             catch(Exception ex)
@@ -126,26 +167,11 @@ namespace C2.Update
             }
         }
 
-        /// <summary>  
-        /// 存储下载文件  
-        /// </summary>  
-        public void SaveFile()
-        {
-            try
-            {
-                Save();
-                IsFileFinish();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+       
         /// <summary>  
         /// 检查是否需要更新  
         /// </summary>  
-        public void checkUpdate()
+        public void CheckUpdate()
         {
             try
             {
@@ -162,8 +188,12 @@ namespace C2.Update
                         {
                             if (xml.Name == "Verson")
                                 newVerson = xml.InnerText;
-                            else
-                                download = xml.InnerText;
+                            else if(xml.Name == "DownLoadC2Outer")
+                                downloadC2Outer = xml.InnerText;
+                            else if (xml.Name == "DownLoadC2Inner")
+                                downloadC2Inner = xml.InnerText;
+                            else if (xml.Name == "DownLoadC2F")
+                                downloadC2F = xml.InnerText;
                         }
                     }
                 }
@@ -177,6 +207,7 @@ namespace C2.Update
                 else
                     isUpdate = true;
             }
+            
             catch
             {
                 throw new Exception("更新出现错误，请确认网络连接无误后重试！");

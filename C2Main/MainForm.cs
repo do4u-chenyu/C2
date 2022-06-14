@@ -340,8 +340,8 @@ namespace C2
                 LoadHIBU();
                 LoadHeadLine();
 #if !C2_Inner
-                Identification();
                 CheckUpdate();
+                Identification();
 #endif
             }
         }
