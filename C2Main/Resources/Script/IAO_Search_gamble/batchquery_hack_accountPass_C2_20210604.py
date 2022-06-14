@@ -130,7 +130,7 @@ class Airport:
             '--querystring', '"{0}"'.format(keyWords),
             '--start', self.startTime,
             '--end', self.endTime,
-            '--contextlen', '1000',
+            '--contextlen', '10000',
             '--maxcount', '1000000'
         ]
         req = Popen(". /home/search/search_profile && {0}".format(" ".join(cmd)), shell=True, stdout=PIPE)

@@ -360,14 +360,6 @@ namespace C2
                     update.Start();
                     this.Dispose();
                 }
-                /*
-                else
-                {
-                    Thread save = new Thread(new ThreadStart(app.SaveFile));
-                    save.Start();
-                    Process.Start(installPath);
-                }
-                */
             }
             catch (Exception ex)
             {
