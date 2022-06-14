@@ -53,6 +53,7 @@ namespace C2.Log
             AddQueueEn("", modelName, type, startTime, "", VersionGet());
             //});
             //Task.WaitAll(t);
+            // 每个日志动作都单开一个线程，很挫，但勉强接受
             LogThread();
 #endif
   
