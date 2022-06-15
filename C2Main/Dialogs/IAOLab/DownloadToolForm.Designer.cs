@@ -128,6 +128,7 @@
             this.import.TabIndex = 23;
             this.import.Text = "导入";
             this.import.UseVisualStyleBackColor = true;
+            this.import.Click += new System.EventHandler(this.Import_Click);
             // 
             // progressBar1
             // 

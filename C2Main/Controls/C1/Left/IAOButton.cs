@@ -93,7 +93,7 @@ namespace C2.Controls.Left
                     toolTip.SetToolTip(this.rightPictureBox, HelpUtil.GoldEyesFormHelpInfo);
                     break;
                 case "DownloadTool":
-                    this.leftPictureBox.Image = global::C2.Properties.Resources.GoldEyes;
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.DownloadTool;
                     toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DownloadToolFormHelpInfo);
                     break;
                 case "Card":
