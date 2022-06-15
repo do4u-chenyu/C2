@@ -9,7 +9,7 @@ namespace C2.Utils
 {
     class ConfigUtil
     {
-        public static string DefaultIAOLab = "BigAPK, APK, Visualization, Wifi, InformationSearch, Tude, PostAndGet, PwdGenerator, GoldEyes";
+        public static string DefaultIAOLab = "BigAPK, APK, Visualization, Wifi, InformationSearch, Tude, PostAndGet, GoldEyes, PwdGenerator";
 
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")
         {
