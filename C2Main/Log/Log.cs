@@ -21,28 +21,24 @@ namespace C2.Log
     partial class Log
     {
         public string Token;
-        DateTime e = DateTime.Now;
+        readonly DateTime e = DateTime.Now;
         string userName = string.Empty;
         LogItem logItem = new LogItem();
         HttpHandler httpHandler = new HttpHandler();
-        static string APIUrl = "https://113.31.119.85:53374/apis/";
+        static readonly string APIUrl = "https://113.31.119.85:53374/apis/";
         readonly string LoginUrl = APIUrl + "Login";
-        private string uploadUrl = "http://113.31.114.239:53373/api/log/upload";
+        private readonly string uploadUrl = "http://113.31.114.239:53373/api/log/upload";
         public static ConcurrentQueue<LogItem> ConcurrenLogs = new ConcurrentQueue<LogItem>();
         readonly string logPath = Path.Combine(Path.Combine(new DirectoryInfo(Global.TempDirectory).Parent.FullName, "tmpRedisASK"), "tmpRedisASK.xml");
 
         //日志：工号/功能模块/动作/时间/IP
         public void LogManualButton(string modelName, string type)
         {
-            
 #if !C2_Inner
             string startTime = e.ToString("yyyyMMddHHmmss");
-          
-            string ip = GetPublicIp();
-            AddQueueEn(UserNameGet(), modelName, type, startTime, ip, VersionGet());
+            AddQueueEn(modelName, type, startTime, VersionGet());
             LogThread();
 #endif
-            //MessageBox.Show(VersionGet());
         }
 
         private string UserNameGet()
@@ -64,13 +60,11 @@ namespace C2.Log
             return string.Format("{0}|{1}", v1, v2);
         }
 
-        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip,string version)
+        private void AddQueueEn(string modelName, string type, string startTime,string version)
         {
-            logItem.UserName = userName;
             logItem.ModelName = modelName;
             logItem.Type = type;
             logItem.StartTime = startTime;
-            logItem.Ip = ip;
             logItem.Version = version;
             ConcurrenLogs.Enqueue(logItem);//入队
         }
@@ -111,11 +105,11 @@ namespace C2.Log
         {
             GetToken();
             Dictionary<string, string> pairs = new Dictionary<string, string> {
-                { "userid", reciveMessage.UserName.Replace(@"""",string.Empty)},
+                { "userid",UserNameGet()},
                 { "tasktypename", reciveMessage.ModelName.Replace(@"""",string.Empty)},
                 { "submit_time", reciveMessage.StartTime.Replace(@"""",string.Empty)},
                 { "action",reciveMessage.Type.Replace(@"""",string.Empty)},
-                { "ip",reciveMessage.Ip.Replace("}",string.Empty).Replace(@"""",string.Empty)},
+                { "ip",GetPublicIp()},
                 { "version",reciveMessage.Version.Replace("}",string.Empty).Replace(@"""",string.Empty)}
             };
             try
@@ -178,11 +172,9 @@ namespace C2.Log
     }
     class LogItem
     {
-        public string UserName { get; set; }
         public string ModelName { get; set; }
         public string Type { get; set; }
         public string StartTime { get; set; }
-        public string Ip { get; set; }
         public string Version { get; set; }
     }
 }
