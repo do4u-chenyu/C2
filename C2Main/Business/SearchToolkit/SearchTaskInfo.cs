@@ -19,7 +19,7 @@ namespace C2.SearchToolkit
         {
             ["网站管理后台模型"] = "ht",
             ["涉枪模型"] = "gun",
-            ["涉黄模型"] = "yellow",
+            ["涉黄图片模型"] = "yellow",
             ["飞机场模型"] = "plane",
             ["黑客模型"] = "hack",
             ["宝塔面板"] = "bt",
@@ -46,7 +46,7 @@ namespace C2.SearchToolkit
         {
             ["网站管理后台模型"] = "batchquery_ht_accountPass_C2_20210324_{0}.py",
             ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
-            ["涉黄模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
+            ["涉黄图片模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
             ["飞机场模型"] = "batchquery_plane_accountPass_C2_20210414_{0}.py",
             ["黑客模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
             ["宝塔面板"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
@@ -73,7 +73,7 @@ namespace C2.SearchToolkit
         {
             ["网站管理后台模型"] = @"([^\n\r]+000000_queryResult_ht_\d+_\d+.tgz)",
             ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
-            ["涉黄模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
+            ["涉黄图片模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_plane_\d+_\d+.tgz)",
             ["黑客模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
             ["宝塔面板"] = @"([^\n\r]+000000_queryResult_bt_\d+_\d+.tgz)",
@@ -100,7 +100,7 @@ namespace C2.SearchToolkit
         {
             ["网站管理后台模型"] = "网站管理后台模型",
             ["涉枪模型"] = "JS的经典涉枪模型",
-            ["涉黄模型"] = "JS的经典涉黄模型",
+            ["涉黄图片模型"] = "JS的经典涉黄图片模型",
             ["飞机场模型"] = "私搭境外翻墙主机",
             ["黑客模型"] = "传统黑客模型",
             ["宝塔面板"] = "一键搭站,黑灰产领域的热门工具",
