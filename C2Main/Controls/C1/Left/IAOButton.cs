@@ -92,6 +92,10 @@ namespace C2.Controls.Left
                     this.leftPictureBox.Image = global::C2.Properties.Resources.GoldEyes;
                     toolTip.SetToolTip(this.rightPictureBox, HelpUtil.GoldEyesFormHelpInfo);
                     break;
+                case "DownloadTool":
+                    this.leftPictureBox.Image = global::C2.Properties.Resources.GoldEyes;
+                    toolTip.SetToolTip(this.rightPictureBox, HelpUtil.DownloadToolFormHelpInfo);
+                    break;
                 case "Card":
                     this.leftPictureBox.Image = global::C2.Properties.Resources.Card;
                     toolTip.SetToolTip(this.rightPictureBox, HelpUtil.BankToolFormHelpInfo);
@@ -311,6 +315,9 @@ namespace C2.Controls.Left
                     break;
                 case "GoldEyes":
                     new GoldEyesForm().ShowDialog();
+                    break;
+                case "DownloadTool":
+                    new DownloadToolForm().ShowDialog();
                     break;
                 case "Fraud":
                     new FraudDialog().ShowDialog();
