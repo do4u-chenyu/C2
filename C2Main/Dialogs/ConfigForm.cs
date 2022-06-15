@@ -441,10 +441,11 @@ namespace C2.Dialogs
             return true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             try 
             {
+                new Log.Log().LogManualButton("内网版", "下载");
                 new Update.SoftUpdate().SaveOther(true);
             }
             catch
@@ -453,10 +454,11 @@ namespace C2.Dialogs
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             try
             {
+                new Log.Log().LogManualButton("战术手册", "下载");
                 new Update.SoftUpdate().SaveOther(false);
             }
             catch

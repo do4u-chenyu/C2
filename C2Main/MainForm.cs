@@ -354,6 +354,7 @@ namespace C2
             {
                 if (app.IsUpdate && MessageBox.Show("检查到新版本，是否更新？", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    new Log.Log().LogManualButton("外网版", "下载");
                     if (!File.Exists(installPath))
                         Directory.CreateDirectory(installPath);
                     Thread update = new Thread(new ThreadStart(app.Update));
