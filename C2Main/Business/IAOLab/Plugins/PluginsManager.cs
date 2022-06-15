@@ -36,7 +36,15 @@ namespace C2.IAOLab.Plugins
 
         public void Refresh()
         {
-            foreach (string dll in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.dll"))
+            string[] array = FileUtil.TryListFiles(Global.LocalPluginsPath, "*.dll");
+            Array.Reverse(array);
+            if (array.Length > 3)
+            {
+                string tmp = array[0];
+                array[0] = array[2];
+                array[2] = tmp;
+            }
+            foreach (string dll in array)
                 TryLoadOne(dll);
             //foreach (string exe in FileUtil.TryListFiles(Global.LocalPluginsPath, "*.exe"))
             //    TryLoadOne(exe);

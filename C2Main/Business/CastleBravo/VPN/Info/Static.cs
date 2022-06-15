@@ -21,6 +21,7 @@ namespace C2.Business.CastleBravo.VPN.Info
             HashSet<string> ipSet = new HashSet<string>();
             HashSet<string> rssSet = new HashSet<string>();
             HashSet<string> hostSet = new HashSet<string>();
+            HashSet<string> passSet = new HashSet<string>();
             HashSet<string> iportSet = new HashSet<string>();
             
 
@@ -33,6 +34,7 @@ namespace C2.Business.CastleBravo.VPN.Info
                 ipSet.Add(task.IP);
                 rssSet.Add(task.rssAddress);
                 hostSet.Add(task.Host);
+                passSet.Add(task.Password);
                 iportSet.Add(task.IP + task.Port);
 
                 if (methodDict.ContainsKey(task.Method))
@@ -57,11 +59,14 @@ namespace C2.Business.CastleBravo.VPN.Info
             int numberOfIP = ipSet.Count;
             int numberOfRSS = rssSet.Count;
             int numberOfHost = hostSet.Count;
+            int numberOfPass = passSet.Count;
             int numberOfIPort = iportSet.Count;
+            
             
 
             sb.AppendLine(string.Format("总计: {0}", total))
               .AppendLine()
+              .AppendLine(string.Format("密码数: {0}", numberOfPass))
               .AppendLine(string.Format("域名数: {0}", numberOfHost))
               .AppendLine(string.Format("独立IP数: {0}", numberOfIP))
               .AppendLine(string.Format("IP/端口数: {0}", numberOfIPort))
