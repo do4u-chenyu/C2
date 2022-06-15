@@ -465,6 +465,16 @@ namespace C2.Business.CastleBravo.VPN
             RemoveDuplicateItems((t) => { return t.Host + t.Port + t.Password + t.Method + t.SSVersion + t.OtherInfo + t.Remark; });
         }
 
+        private void 删除重复项IP端口ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.IP + t.Port; });
+        }
+
+        private void 删除重复项IPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicateItems((t) => { return t.IP; });
+        }
+
         private void RemoveDuplicateItems(Func<VPNTaskConfig, string> method)
         {
             Dictionary<string, VPNTaskConfig> dict = new Dictionary<string, VPNTaskConfig>();
@@ -512,10 +522,6 @@ namespace C2.Business.CastleBravo.VPN
             new StaticForm(Static.DoStatic(LV)).ShowDialog();
         }
 
-        private void 只保留SS协议ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void 只保留SSR协议ToolStripMenuItem_Click(object sender, EventArgs e)
         {
