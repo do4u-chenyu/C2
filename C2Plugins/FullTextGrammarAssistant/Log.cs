@@ -34,23 +34,7 @@ namespace C2.Log
         public void LogManualButton(string modelName,string type)
         {
             string startTime = DateTime.Now.ToString("yyyyMMddHHmmss");
-            // 同理,这里也放到发送进程里，判断文件在不在，读文件都是耗时操作，不要放在主进程里
-            // 发送日志的线程里 来获取用户名，而且显然，这个地方只要获取一次就够了
-            // 不需要每次都读文件获取用户名
-            if (File.Exists(xmlPath))
-            {
-                xDoc.Load(xmlPath);
-                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
-            }
-            // IP 放到发送进程里去, 获取IP访问网络会卡,不要放在主进程
-            // 而且显然，这个地方只要获取一次就够了,不需要每次都访问网络GetIP
-            string ip = GetPublicIp();
-
-            // 这都是什么神鬼设计, 直接加入队列，东西放入队列不费时间
-            // 但你这里又开启线程，让线程把东西放入队列，然后等线程结束
-            // 这一顿骚操作 比 直接放入队列费事更多，属于行为艺术
-            AddQueueEn(userName, modelName, type, startTime, ip);
-            // 每个日志动作都单开一个线程，很挫，但勉强接受
+            AddQueueEn(modelName, type, startTime);
             LogThread();
         }
         public void LogThread()
@@ -87,12 +71,17 @@ namespace C2.Log
         private void LogUpload(LogItem reciveMessage)
         {
             GetToken();
+            if (File.Exists(xmlPath))
+            {
+                xDoc.Load(xmlPath);
+                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
+            }
             Dictionary<string, string> pairs = new Dictionary<string, string> {
-                { "userid", reciveMessage.UserName.Replace(@"""",string.Empty)},
+                { "userid", userName},
                 { "tasktypename", reciveMessage.ModelName.Replace(@"""",string.Empty)},
                 { "submit_time", reciveMessage.StartTime.Replace(@"""",string.Empty)},
                 { "action",reciveMessage.Type.Replace(@"""",string.Empty)},
-                { "ip",reciveMessage.Ip.Replace("}",string.Empty).Replace(@"""",string.Empty)}
+                { "ip",GetPublicIp()}
             };
             try
             {
@@ -100,13 +89,11 @@ namespace C2.Log
             }
             catch { }
         }
-        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
+        private void AddQueueEn(string modelName, string type, string startTime)
         {
-            logItem.UserName = userName;
             logItem.ModelName = modelName;
             logItem.Type = type;
             logItem.StartTime = startTime;
-            logItem.Ip = ip;
             ConcurrenLogs.Enqueue(logItem);//入队
         }
         private string IPGet()
@@ -162,11 +149,9 @@ namespace C2.Log
     }
     class LogItem
     {
-        public string UserName { get; set; }
         public string ModelName { get; set; }
         public string Type { get; set; }
         public string StartTime { get; set; }
-        public string Ip { get; set; }
     }
     class HttpHandler
     {

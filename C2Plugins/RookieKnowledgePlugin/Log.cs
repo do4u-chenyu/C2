@@ -36,18 +36,7 @@ namespace C2.Log
         public void LogManualButton(string modelName, string type)
         {
             string startTime = DateTime.Now.ToString("yyyyMMddHHmmss");
-            if (File.Exists(xmlPath))
-            {
-                xDoc.Load(xmlPath);
-                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
-            }
-            string ip = GetPublicIp();
-
-            Task t = Task.Factory.StartNew(() =>
-            {
-                AddQueueEn(userName, modelName, type, startTime, ip);
-            });
-            Task.WaitAll(t);
+            AddQueueEn(modelName, type, startTime);
             LogThread();
         }
         public void LogThread()
@@ -84,12 +73,17 @@ namespace C2.Log
         private void LogUpload(LogItem reciveMessage)
         {
             GetToken();
+            if (File.Exists(xmlPath))
+            {
+                xDoc.Load(xmlPath);
+                userName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
+            }
             Dictionary<string, string> pairs = new Dictionary<string, string> {
-                { "userid", reciveMessage.UserName.Replace(@"""",string.Empty)},
+                { "userid", userName},
                 { "tasktypename", reciveMessage.ModelName.Replace(@"""",string.Empty)},
                 { "submit_time", reciveMessage.StartTime.Replace(@"""",string.Empty)},
                 { "action",reciveMessage.Type.Replace(@"""",string.Empty)},
-                { "ip",reciveMessage.Ip.Replace("}",string.Empty).Replace(@"""",string.Empty)}
+                { "ip",GetPublicIp()}
             };
             try
             {
@@ -97,13 +91,11 @@ namespace C2.Log
             }
             catch { }
         }
-        private void AddQueueEn(string userName, string modelName, string type, string startTime, string ip)
+        private void AddQueueEn(string modelName, string type, string startTime)
         {
-            logItem.UserName = userName;
             logItem.ModelName = modelName;
             logItem.Type = type;
             logItem.StartTime = startTime;
-            logItem.Ip = ip;
             ConcurrenLogs.Enqueue(logItem);//入队
         }
 
