@@ -63,7 +63,6 @@ namespace C2.Controls.ThumbViews
                 //知识库
 #if C2_Outer
                 case ThumbItem.ModelTypes.Knowledge:
-                    //new IntruderForm().ShowDialog();
                     new AddYQTask().ShowDialog();
                     break;
 #else
