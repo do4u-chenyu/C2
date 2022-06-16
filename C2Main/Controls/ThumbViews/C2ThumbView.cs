@@ -23,7 +23,7 @@ namespace C2.Controls.ThumbViews
             Items.Add(new C2ThumbItem("网站侦察兵", "对网站分类、爬取、截图和信息侦察", Properties.Resources.首页_网站侦察兵, ThumbItem.ModelTypes.WTD));
             Items.Add(new C2ThumbItem("APK大眼睛", "APK逆向、信息提取和分析报告", Properties.Resources.首页_APK检测站, ThumbItem.ModelTypes.APK));
 #if C2_Outer
-            Items.Add(new C2ThumbItem("舆情侦查兵", "搜集指定关键词或账号的工具", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
+            Items.Add(new C2ThumbItem("舆情侦查兵", "搜集指定平台的舆情信息", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
 #else
             Items.Add(new C2ThumbItem("知识库", "各业务方向关键词库和线索库", Properties.Resources.首页_知识库, ThumbItem.ModelTypes.Knowledge));
 #endif
