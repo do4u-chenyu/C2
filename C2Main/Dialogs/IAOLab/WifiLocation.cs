@@ -412,8 +412,11 @@ namespace C2.Dialogs.IAOLab
                                 continue;
                             if (line.Contains("WiFiMac号"))
                                 continue;
+                            /*
+                             * IP不做筛选进行输出
                             if (line.Contains("IP"))
                                 continue;
+                            */
                             if (line.Contains("经度") || line.Contains("纬度"))
                                 continue;
                             fs.WriteLine(line);
