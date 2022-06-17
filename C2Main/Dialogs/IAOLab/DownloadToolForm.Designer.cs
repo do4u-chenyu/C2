@@ -57,13 +57,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 341);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(647, 39);
+            this.panel1.Size = new System.Drawing.Size(742, 39);
             this.panel1.TabIndex = 7;
             // 
             // check
             // 
             this.check.Font = new System.Drawing.Font("宋体", 11F);
-            this.check.Location = new System.Drawing.Point(571, 8);
+            this.check.Location = new System.Drawing.Point(670, 7);
             this.check.Name = "check";
             this.check.Size = new System.Drawing.Size(56, 23);
             this.check.TabIndex = 12;
@@ -74,7 +74,7 @@
             // confirm
             // 
             this.confirm.Font = new System.Drawing.Font("宋体", 11F);
-            this.confirm.Location = new System.Drawing.Point(491, 7);
+            this.confirm.Location = new System.Drawing.Point(602, 7);
             this.confirm.Margin = new System.Windows.Forms.Padding(2);
             this.confirm.Name = "confirm";
             this.confirm.Size = new System.Drawing.Size(56, 23);
@@ -89,7 +89,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(647, 341);
+            this.panel2.Size = new System.Drawing.Size(742, 341);
             this.panel2.TabIndex = 8;
             // 
             // tabControl1
@@ -100,7 +100,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(647, 341);
+            this.tabControl1.Size = new System.Drawing.Size(742, 341);
             this.tabControl1.TabIndex = 1;
             // 
             // DouYinTabPage
@@ -116,7 +116,7 @@
             this.DouYinTabPage.Location = new System.Drawing.Point(4, 24);
             this.DouYinTabPage.Name = "DouYinTabPage";
             this.DouYinTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DouYinTabPage.Size = new System.Drawing.Size(639, 313);
+            this.DouYinTabPage.Size = new System.Drawing.Size(734, 313);
             this.DouYinTabPage.TabIndex = 0;
             this.DouYinTabPage.Text = "抖音视频下载";
             this.DouYinTabPage.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@
             // import
             // 
             this.import.Font = new System.Drawing.Font("宋体", 11F);
-            this.import.Location = new System.Drawing.Point(571, 27);
+            this.import.Location = new System.Drawing.Point(670, 28);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(56, 23);
             this.import.TabIndex = 23;
@@ -134,10 +134,10 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(88, 27);
+            this.progressBar1.Location = new System.Drawing.Point(88, 28);
             this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(455, 23);
+            this.progressBar1.Size = new System.Drawing.Size(566, 23);
             this.progressBar1.TabIndex = 22;
             // 
             // label1
@@ -193,7 +193,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox1.Size = new System.Drawing.Size(633, 207);
+            this.richTextBox1.Size = new System.Drawing.Size(728, 207);
             this.richTextBox1.TabIndex = 17;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -202,7 +202,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(647, 380);
+            this.ClientSize = new System.Drawing.Size(742, 380);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 10.5F);
