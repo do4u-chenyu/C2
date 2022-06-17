@@ -21,7 +21,7 @@ namespace QQSpiderPlugin
         private void ResetSession()
         {
             session = new Session(
-                new Dictionary<string, string> { 
+                new Dictionary<string, string> {
                     { "User-Agent", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, " +
                     "like Gecko) Chrome/29.0.1547.59 QQ/8.9.3.21169 Safari/537.36"} ,
                     { "Host", "ui.ptlogin2.qq.com"}
@@ -34,15 +34,15 @@ namespace QQSpiderPlugin
             try
             {
                 Dictionary<string, string> param = new Dictionary<string, string>();
-                
+
                 string url = "http://ui.ptlogin2.qq.com/cgi-bin/login";
                 //param.Add("id", "2732844");
-                
+
                 param.Add("appid", "715030901");
                 param.Add("daid", "73");
                 param.Add("pt_no_auth", "1");
                 param.Add("s_url", "https://qun.qq.com/member.html");
-                
+
 
                 resp = this.session.Get(url, param);
 
@@ -55,7 +55,7 @@ namespace QQSpiderPlugin
                 //获取二维码
                 //https://ssl.ptlogin2.qq.com/ptqrshow?appid=715030901&e=2&l=M&s=3&d=72&v=4&t=0.12108830293255246&daid=73&pt_3rd_aid=0
                 url = "https://ssl.ptlogin2.qq.com/ptqrshow";
-               
+
                 param = new Dictionary<string, string>
                        {
                            {"appid", "715030901" },
@@ -79,22 +79,48 @@ namespace QQSpiderPlugin
             }
             return resp;
         }
-        
+
         public byte[] GetKeyWordQRCode()
         {
+            session = new Session(
+                new Dictionary<string, string> {
+                    { "User-Agent", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, " +
+                    "like Gecko) Chrome/29.0.1547.59 QQ/8.9.3.21169 Safari/537.36"},
+                    { "Referer",  "https://qun.qq.com/"}
+                });
+
+
             Response resp;
             byte[] imgBytes = Response.Empty.Content;
             try
             {
-                string url = "http://113.31.114.239:53373/api/spider/get_qr";
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                req.Method = "GET";
-                req.Timeout = 20000;
-                resp = new Response((HttpWebResponse)req.GetResponse());
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                Dictionary<string, object> obj = (Dictionary<string, object>)serializer.DeserializeObject(resp.Text);
-                if (obj.ContainsKey("success") && obj["success"].ToString() == "1")
-                    imgBytes = Convert.FromBase64String(obj["img_data"].ToString());
+                //需要用到的接口
+                String url1 = "https://xui.ptlogin2.qq.com/cgi-bin/xlogin";
+                String url2 = "https://ssl.ptlogin2.qq.com/ptqrshow";
+
+                Dictionary<string, string> param1 = new Dictionary<string, string>
+                {
+                    { "pt_disable_pwd" , "1"},
+                    { "appid", "715030901"},
+                    { "daid", "73"},
+                    { "pt_no_auth", "1"},
+                    { "s_url", "https://qun.qq.com/"}
+                };
+                resp = this.session.Get(url1, param1);
+                Dictionary<string, string> param2 = new Dictionary<string, string>
+                {
+                    { "appid" , "715030901"},
+                    { "e", "2"},
+                    { "l", "M"},
+                    { "s", "3"},
+                    { "d", "72"},
+                    { "v", "4"},
+                    { "t", String.Format("{0:%.16f}", new Random().NextDouble()) },
+                    { "daid", "73" },
+                    { "pt_3rd_aid", "0" }
+                };
+                resp = this.session.Get(url2, param2);
+                imgBytes = resp.Content;
             }
             catch { }
             return imgBytes;
@@ -179,31 +205,59 @@ namespace QQSpiderPlugin
             loginResult.Add("errorMsg", errorMsg);
             return loginResult;
         }
-        public Dictionary<string, object> GetScanStatus()
+        public Dictionary<string, object> KeyWordLogin()
         {
-           
+            String url3 = "https://ssl.ptlogin2.qq.com/ptqrlogin";
+
             Dictionary<string, object> loginResult = new Dictionary<string, object>();
 
             int status = -1;
             string errorMsg = String.Empty;
 
-            string url = "http://113.31.114.239:53373/api/spider/get_scan_status";
-            Response resp = null;
+            string qrsig = this.session.Cookies.GetCookieValue("qrsig");
+            string pt_login_sig = this.session.Cookies.GetCookieValue("pt_login_sig");
+
+            Dictionary<string, string> params3 = new Dictionary<string, string>
+            {
+                { "u1", "https://qun.qq.com/" },
+                { "ptqrtoken", Util.GenQrToken(qrsig) },
+                { "ptredirect", "1"},
+                { "h", "1"},
+                { "t", "1"},
+                { "g", "1"},
+                { "from_ui", "1"},
+                { "ptlang", "2052"},
+                { "action", String.Format("0-0-{0:%d}", Util.GetTimeStamp() * 1000)},
+                { "js_type", "1"},
+                { "login_sig", pt_login_sig},
+                { "pt_uistyle", "40"},
+                { "aid", "715030901"},
+                { "daid", "73"},
+            };
+            Response resp3 = new Response();
             try
             {
-                resp = new Response(this.session.Get(url));
-                string result = resp.Text;
-                if (result == "false")
+                resp3 = this.session.Get(url3, params3);
+                string result = resp3.Text;
+                if (result.Contains("二维码未失效"))
                     status = 0;
-                else if (result == "true")
+                else if (result.Contains("二维码认证中"))
                     status = 1;
+                else if (result.Contains("登录成功")) 
+                { 
+                    status = 2;
+                    string new_url = result.Split(',')[2].Trim('\'');
+                    this.session.Get(new_url);  // 访问返回的url，以便获取p_skey
+                }
+                else if (result.Contains("二维码已失效"))
+                    status = 3;
                 else
                     errorMsg = result;
             }
             catch
             {
-                if (resp != null)
-                    errorMsg = resp.StatusCode.ToString();
+                if (resp3 != null)
+                    errorMsg = resp3.StatusCode.ToString();
                 else
                     errorMsg = "unknow";
             }

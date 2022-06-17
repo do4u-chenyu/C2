@@ -118,27 +118,81 @@ namespace QQSpiderPlugin
         public List<string> QueryKeyWord(string id)
         {
             List<string> resultList = new List<string> { };
-            string url = "http://113.31.114.239:53373/api/spider/group_info";
-            Dictionary<string, string> pairs = new Dictionary<string, string> { { "keyword", id } };
-            try
-            {
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                req.Timeout = 200000;
-                string content = JsonConvert.SerializeObject(pairs);
-                byte[] data = Encoding.UTF8.GetBytes(content);
 
-                req.Method = "POST";
-                req.ContentType = "application/json";
-                req.ContentLength = data.Length;
-
-                using (var stream = req.GetRequestStream())
-                    stream.Write(data, 0, data.Length);
-                Response resp = new Response((HttpWebResponse)req.GetResponse());
-                resultList = this.ParseKeyWord(id, resp.Text);
-                Thread.Sleep(1000);
-            }
-            catch
+            string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
+            Dictionary<string, string> param = new Dictionary<string, string>
             {
+                {"from", "1" },
+                { "keyword", id },
+                { "wantnum", "24" },
+                { "page", "0" },
+                {"sort", "2"},  // sort type: 0 默认排序, 1 人数优先, 2 活跃优先
+                {"isRecommend", "false"}
+            };
+            List<string> target_keys = new List<string> 
+            { "code", "name", "member_num", "max_member_num", "owner_uin", "qaddr", "gcate", "labels", "memo", "url"};
+            int i = -1;
+            while (resultList.Count < 150 && i < 10)  // 一个词最多抓100条，且请求不超过10次
+            {
+                i++;
+                param["page"] = i.ToString();
+                try
+                {
+                    Response resp = this.session.Post(url, param);
+                    JObject json = JObject.Parse(resp.Text);
+                    if (json["errcode"].ToString()=="0" && json["ec"].ToString() != "99997")  // 不满足这些条件，表示被爬虫被限制了
+                    {
+                        if (json.ContainsKey("group_list"))
+                        {
+                            string group_list_string = json["group_list"].ToString();
+                            List<JToken> group_list1 = json["group_list"].ToList();
+                            foreach(JToken x in group_list1)
+                            {
+                                string tmp = "";
+                                foreach (string key in target_keys)
+                                {
+                                    if (x.SelectToken(key) != null)
+                                    {
+                                        string s = x[key].ToString();
+                                        if (key == "qaddr")
+                                        {
+                                            StringBuilder qaddrSb = new StringBuilder();
+                                            foreach (var q in x["qaddr"])
+                                                qaddrSb.Append(q.ToString());
+                                            s = qaddrSb.ToString();
+                                        }
+                                        if (key == "gcate")
+                                        {
+                                            StringBuilder gcateSb = new StringBuilder();
+                                            foreach (var l in x["gcate"])
+                                                gcateSb.Append(l.ToString()).Append("|");
+                                            s = Util.GenRwWTS(gcateSb.ToString().Trim('|'));
+                                        }
+                                        if (key == "labels")
+                                        {
+                                            StringBuilder labelSb = new StringBuilder();
+                                            foreach (var l in x["labels"])
+                                                labelSb.Append(l["label"].ToString()).Append("|");
+                                            s = Util.GenRwWTS(labelSb.ToString().Trim('|'));
+                                        }
+                                        tmp = tmp + "\t" + s;
+                                    }
+                                    else
+                                    {
+                                        tmp = tmp + "\t" + "";
+                                    }
+                                }
+                                resultList.Add(tmp.Trim('\t'));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch { }
+                Thread.Sleep(new Random().Next(3000, 8000));  //随机停3到8秒
             }
             return resultList;
         }
