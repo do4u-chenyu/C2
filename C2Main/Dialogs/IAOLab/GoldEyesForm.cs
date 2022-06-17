@@ -151,7 +151,8 @@ namespace C2.Dialogs.IAOLab
                     {
                         if (text == string.Empty)
                             return;
-                        fs.WriteLine("IP\t域名\t绑定时间\t解绑时间\t备注");
+                        if (formclass == "IP反查")
+                            fs.WriteLine("IP\t域名\t绑定时间\t解绑时间\t备注");
                         string[] lines = text.Split('\n');
                         foreach (string line in lines)
                         {

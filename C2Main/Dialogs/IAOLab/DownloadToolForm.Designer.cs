@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadToolForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.export = new System.Windows.Forms.Button();
+            this.check = new System.Windows.Forms.Button();
             this.confirm = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -51,7 +51,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.Controls.Add(this.export);
+            this.panel1.Controls.Add(this.check);
             this.panel1.Controls.Add(this.confirm);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 341);
@@ -60,26 +60,28 @@
             this.panel1.Size = new System.Drawing.Size(647, 39);
             this.panel1.TabIndex = 7;
             // 
-            // export
+            // check
             // 
-            this.export.Font = new System.Drawing.Font("宋体", 11F);
-            this.export.Location = new System.Drawing.Point(568, 8);
-            this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(56, 23);
-            this.export.TabIndex = 12;
-            this.export.Text = "导出";
-            this.export.UseVisualStyleBackColor = true;
+            this.check.Font = new System.Drawing.Font("宋体", 11F);
+            this.check.Location = new System.Drawing.Point(571, 8);
+            this.check.Name = "check";
+            this.check.Size = new System.Drawing.Size(56, 23);
+            this.check.TabIndex = 12;
+            this.check.Text = "查看";
+            this.check.UseVisualStyleBackColor = true;
+            this.check.Click += new System.EventHandler(this.Check_Click);
             // 
             // confirm
             // 
             this.confirm.Font = new System.Drawing.Font("宋体", 11F);
-            this.confirm.Location = new System.Drawing.Point(478, 7);
+            this.confirm.Location = new System.Drawing.Point(491, 7);
             this.confirm.Margin = new System.Windows.Forms.Padding(2);
             this.confirm.Name = "confirm";
-            this.confirm.Size = new System.Drawing.Size(56, 24);
+            this.confirm.Size = new System.Drawing.Size(56, 23);
             this.confirm.TabIndex = 3;
             this.confirm.Text = "下载";
             this.confirm.UseVisualStyleBackColor = true;
+            this.confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
             // panel2
             // 
@@ -122,7 +124,7 @@
             // import
             // 
             this.import.Font = new System.Drawing.Font("宋体", 11F);
-            this.import.Location = new System.Drawing.Point(564, 27);
+            this.import.Location = new System.Drawing.Point(571, 27);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(56, 23);
             this.import.TabIndex = 23;
@@ -135,7 +137,7 @@
             this.progressBar1.Location = new System.Drawing.Point(88, 27);
             this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(442, 23);
+            this.progressBar1.Size = new System.Drawing.Size(455, 23);
             this.progressBar1.TabIndex = 22;
             // 
             // label1
@@ -157,9 +159,9 @@
             this.label18.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label18.Location = new System.Drawing.Point(6, 76);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(414, 14);
+            this.label18.Size = new System.Drawing.Size(406, 14);
             this.label18.TabIndex = 20;
-            this.label18.Text = "批量查询格式：多个下载链接间用换行分隔，最大支持5000条";
+            this.label18.Text = "批量查询格式：多个下载链接间用换行分隔，最大支持500条";
             // 
             // label17
             // 
@@ -206,10 +208,7 @@
             this.Font = new System.Drawing.Font("宋体", 10.5F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "DownloadToolForm";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "下载工具";
             this.panel1.ResumeLayout(false);
@@ -223,7 +222,7 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button export;
+        private System.Windows.Forms.Button check;
         private System.Windows.Forms.Button confirm;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
