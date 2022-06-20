@@ -56,8 +56,8 @@ namespace C2.Log
         private string VersionGet()
         {
             string v1 = ConfigUtil.TryGetAppSettingsByKey("version", string.Empty);//内网|外网|全量版
-            Version v2 = Assembly.LoadFrom(Application.ExecutablePath).GetName().Version;//读取Properties version
-            return string.Format("{0}|{1}", v1, v2);
+            string v2 = Assembly.LoadFrom(Application.ExecutablePath).GetName().Version.ToString().Substring(0,5);//读取Properties version
+            return string.Format("{0}|V:{1}", v1, v2);
         }
 
         private void AddQueueEn(string modelName, string type, string startTime,string version)
