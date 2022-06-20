@@ -21,6 +21,7 @@ namespace QQSpiderPlugin
         private List<string> grpDataSource;
         private List<string> keyWordDataSource;
         private Dictionary<string, List<string>> resultDictionary;
+        QrLogin keyWordLogin = new QrLogin();
         //{ "头像", "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介"};
         //{ "头像", "账号", "昵称", "国家", "省市", "城市", "性别", "年龄" };
         public string TmpPath
@@ -264,9 +265,9 @@ namespace QQSpiderPlugin
                 ShowMessageBox("请先导入信息");
                 return;
             }
-            if (dataSource.Count > 5)
+            if (dataSource.Count > 13)
             {
-                ShowMessageBox("查询关键词个数超过5个，请重新输入");
+                ShowMessageBox("查询关键词个数超过13个，请重新输入");
                 return;
             }
             if(!KeyWordLogin())
@@ -279,7 +280,7 @@ namespace QQSpiderPlugin
                 return;
             }
 
-            QQCrawler crawler = new QQCrawler(session);
+            QQCrawler crawler = new QQCrawler(this.keyWordLogin.Session);
 
             this.Cursor = Cursors.WaitCursor;
             foreach (string id in dataSource)
@@ -288,6 +289,7 @@ namespace QQSpiderPlugin
                 if (resultList.Count == 0)
                 {
                     ShowMessageBox(string.Format("关键词{0}无查询结果",id));
+                    this.progressBar3.Value += 1;
                     continue;
                 }
                 dgvMgr.AppendLineList(resultList);
@@ -491,11 +493,10 @@ namespace QQSpiderPlugin
         
         public bool KeyWordLogin()
         {
-            QrLogin login = new QrLogin();
-            byte[] imgBytes = login.GetKeyWordQRCode();
+            byte[] imgBytes = keyWordLogin.GetKeyWordQRCode();
             if (imgBytes == null || imgBytes != null && imgBytes.Length == 0)
             {
-                ShowMessageBox("爬虫服务器或本地网络错误");
+                ShowMessageBox("本地网络错误或爬虫被限制");
                 return false ;
             }
                 
@@ -522,13 +523,13 @@ namespace QQSpiderPlugin
             object status = -1;
             while (count < maxTimes)
             {
-                Dictionary<string, object> result = login.GetScanStatus();
+                Dictionary<string, object> result = keyWordLogin.KeyWordLogin();
                 if (qrCodeForm.IsDisposed)
                 {
                     _thread.Abort();
                     break;
                 }
-                if (result.TryGetValue("status", out status) && (int)status == 1)
+                if (result.TryGetValue("status", out status) && (int)status == 2)
                 {
                     this.Invoke(new CloseQrForm(new CloseQrForm(delegate ()
                     {

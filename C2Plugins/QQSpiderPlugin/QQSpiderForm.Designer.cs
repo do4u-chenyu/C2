@@ -128,7 +128,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            //this.tabControl1.Controls.Add(this.QQGroupKeyWord);
+            this.tabControl1.Controls.Add(this.QQGroupKeyWord);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -501,9 +501,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 31);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(415, 12);
+            this.label14.Size = new System.Drawing.Size(435, 12);
             this.label14.TabIndex = 10;
-            this.label14.Text = "每次爬虫最多支持5个关键词，每个关键词的详细查询结果请导出后查看";
+            this.label14.Text = "建议每小时最多查询13个关键词，每个关键词的详细查询结果请导出后查看";
             // 
             // outputButton3
             // 
