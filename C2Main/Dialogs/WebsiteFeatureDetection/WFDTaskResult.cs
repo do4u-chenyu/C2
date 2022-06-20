@@ -62,7 +62,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             if (TaskInfo.IsOverTime())
             {
-                HelpUtil.ShowMessageBox("任务已过期，请在下发24小时内获取结果。");
+                HelpUtil.ShowMessageBox("任务已过期，请根据任务ID获取任务结果。");//24小时内获取任务结果
                 return;
             }
 
