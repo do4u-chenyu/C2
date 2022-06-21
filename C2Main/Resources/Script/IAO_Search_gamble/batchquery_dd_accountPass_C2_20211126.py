@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
-# @File : batchquery_hackDD_accountPass_C2_20211126.py
+# @File : batchquery_dd_accountPass_C2_20211126.py
 # @Author : 安替
-# @Time : 2022/5/7 11:38
+# @Time : 2022/6/21 11:38
 # @Software : PyCharm
 # Python版本：3.6.3
 
@@ -104,7 +104,7 @@ class BatchQuery:
 
     def handle_res(self):
         tmplist = []
-        out_file = 'ws_out.txt'
+        out_file = 'dd_out.txt'
         result_file = 'qw_res.txt'
         with open(os.path.join(self.data_path, out_file), "r") as f:
             with open(os.path.join(self.data_path,result_file), "w") as f1:
@@ -141,7 +141,7 @@ class BatchQuery:
 
     def run_query(self):
         QUREY_TYPE = 'hackDD'
-        out_file = 'ws_out.txt'
+        out_file = 'dd_out.txt'
         with open(os.path.join(self.data_path, out_file), 'a+') as f:
             f.write('\t'.join(ALL_ITEMS + ['PAYLOAD', 'METHOD', 'KEY_WORDS']) + '\n')
             for KEY_WORDS in kwl:
@@ -194,7 +194,7 @@ def main():
     ap.run_query()
     ap.handle_res()
 
-    ZIP_PATH = DATA_PATH + '_' + defaultStart + '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + defaultEnd + '_' + defaultStart + '.tgz.tmp'
     zip_result(DATA_PATH, ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)
@@ -222,7 +222,7 @@ if __name__ == '__main__':
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
     ALL_ITEMS = ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_hackDD_' + defaultEnd
+    DATA_PATH = './_queryResult_dd_'
 
     kwl = ['_RELATIVEURL:aspx System.Convert System.Text FromBase64String Response.Write NOT UmVzcG9uc2UuV3JpdGUoImhhb3JlbmdlLmNvbVFRMzE3Mjc1NzM4Iik7',
     '_RELATIVEURL:aspx System.Convert System.Text FromBase64String Request.Item',
