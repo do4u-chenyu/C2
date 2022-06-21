@@ -312,7 +312,7 @@ def init_path(path):
         os.mkdir(path)
 
 def queryBatch(keyWords):
-    tempFilename   = "_result_password_" + startTime + '_' + endTime
+    tempFilename   = "_dbqt_" + 'out'
     sch = Scheduler(startTime, endTime, tempFilename,keyWords)
     sch.scheduling()
     sch.saver.writer.close()
