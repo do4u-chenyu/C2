@@ -1,39 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct 29 09:08:44 2018
-  version 0621:
-      增加根据登陆控件和控件值生成keyword功能，实现函数：prdoucKey
-  version 0628:
-      增加查询：
-          去除登陆控件值；
-          挑选 只包含admin的url 
-  version 0708:
-      增加线程时间检测功能
-      增加文件》50M即压缩一次功能
-  version 0803:
-       修改了脚本临时文件命名
-       修改了脚本压缩加密方式
-  version 0224:
-       增加机场查询脚本              
-  version 20220613:
-       删除无用函数和变量，增加管理员类型判断关键词
-@author: Administrator
+2022.06.21
+Modify by AnTi
+格式规范
 """
-from Queue import Queue
-from threading import Thread
 from subprocess import Popen,PIPE
-import time
-import urllib
 import re 
 import sys
 import datetime
 import os
-import itertools
 import logging
 from optparse import OptionParser
 reload(sys)
 sys.setdefaultencoding('utf-8')
-#################
 
 class Airport:
     def __init__(self,data_path,startTime,endTime,all_items):
@@ -48,7 +27,7 @@ class Airport:
         cont_end_flag = True
         content = ''
         end_item = '_QUERY_MATCHTERMS'
-        with open(os.path.join(self.data_path,'result1.log'),'a+') as f:
+        with open(os.path.join(self.data_path, 'result.log'), 'a+') as f:
             cmd = [
                 '/home/search/sbin/queryclient',
                 '--server', '127.0.0.1',
@@ -165,18 +144,16 @@ def init_path(path):
 
 def main():
     LOGGER.info('START AIRPORT QUERY BATCH....')
-    ap_path = os.path.join(DATA_PATH, areacode +  "_queryResult_plane_"+startTime+"_"+endTime)
-    init_path(ap_path)
     key_word_1 = '_RELATIVEURL:auth/login AND email= AND (passwd= OR password=)'
     key_word_2 = '_RELATIVEURL:admin AND _COOKIE:email= AND _COOKIE:expire_in'
     out_file_1 = 'airport_out.txt'
     out_file_2 = 'airport_admin_out.txt'
-    ap = Airport(ap_path,startTime,endTime,ALL_ITEMS)
+    ap = Airport(DATA_PATH, startTime, endTime, ALL_ITEMS)
     ap.run_query(key_word_1, out_file_1)
     ap.run_query(key_word_2, out_file_2)
     LOGGER.info('END AIRPORT QUERY BATCH')
 
-    ZIP_PATH = DATA_PATH + startTime + '_' + endTime +  '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + startTime + '_' + endTime + '.tgz.tmp'
     logger = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     zip_result(DATA_PATH,ZIP_PATH)
     ZIP_SUCCEED = areacode +  ZIP_PATH[2:].replace('.tmp','')
@@ -205,7 +182,7 @@ if __name__ == '__main__':
    
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE']                                                                                                                                             
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
-    DATA_PATH = './_queryResult_plane_'
+    DATA_PATH = './_queryResult_airport_'
     LOGIN_VALUE = ['admin', 'administrator', 'root','system','sys']
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))

@@ -3383,7 +3383,8 @@
     </Content>
     <None Include="Resources\Block.png" />
     <Content Include="logo.ico" />
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_bxgsl_accountPass_C2_20220621.py.zip" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_airport_accountPass_C2_20210414.py.zip" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_bxgsl_accountPass_C2_20220125.py.zip" />
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py.z01">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4428,15 +4429,13 @@
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_hostDD_accountPass_C2_20211126.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_yellow_accountPass_C2_eml_pic_web_20210414.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\tab_button.png" />
     <None Include="Resources\Robots.png" />
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_bxgsl_accountPass_C2_20220621.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_airport_accountPass_C2_20210414.py" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_bxgsl_accountPass_C2_20220125.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -4448,9 +4447,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_ht_accountPass_C2_20210324.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_plane_accountPass_C2_20210414.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_gun_accountPass_C2_20200908.py" />
