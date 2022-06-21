@@ -438,9 +438,9 @@ def encrypTion(path):
 
 def main():
     LOGGER.info('START AIRPORT QUERY BATCH....')
-    ap_path = os.path.join(DATA_PATH, areacode +  "_queryResult_custom_"+startTime+"_"+endTime)
-    init_path(ap_path)
-    ap = Airport(ap_path,startTime,endTime,ALL_ITEMS)
+    #ap_path = os.path.join(DATA_PATH, areacode +  "_queryResult_custom_"+startTime+"_"+endTime)
+    #init_path(ap_path)
+    ap = Airport(DATA_PATH,startTime,endTime,ALL_ITEMS)
     ap.run_query()
     LOGGER.info('END AIRPORT QUERY BATCH')
     
