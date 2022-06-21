@@ -99,8 +99,8 @@ namespace C2.SearchToolkit
         {
             if (task == SearchTaskInfo.EmptyTaskInfo)
                 return;
-
-            this.saveFileDialog.FileName = string.Format("{0}_{1}", task.TaskName, task.TaskCreateTime);
+            Random rd = new Random();
+            saveFileDialog.FileName = string.Format("{0}_{1}_{2}", Regex.Replace(task.TaskName, @"\d", string.Empty), task.TaskCreateTime, rd.Next(100, 1000));
             DialogResult ret = this.saveFileDialog.ShowDialog();
             if (ret != DialogResult.OK)
                 return;
