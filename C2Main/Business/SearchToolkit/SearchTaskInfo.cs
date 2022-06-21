@@ -65,7 +65,7 @@ namespace C2.SearchToolkit
             ["自定义查询"] = "batchquery_custom_accountPass_C2_20210831_{0}.py",
             ["海运走私模型"] = "dsqquery_email_BillofLading_C2_{0}.py",
             ["加密流量发现"] = "dsqquery_http_EncryptedTraffic_C2_{0}.py",
-            ["冰蝎哥斯拉模型"] = "batchquery_behinder-godzilla_accountPass_C2_20220125_{0}.py",
+            ["冰蝎哥斯拉模型"] = "batchquery_bxgsl_accountPass_C2_20220125_{0}.py",
             ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
         };
 
@@ -92,7 +92,7 @@ namespace C2.SearchToolkit
             ["自定义查询"] = @"([^\n\r]+000000_queryResult_custom_\d+_\d+.tgz)",
             ["海运走私模型"] = @"([^\n\r]+000000_queryResult_海运走私模型_\d+_\d+.tgz)",
             ["加密流量发现"] = @"([^\n\r]+000000_queryResult_加密流量发现_\d+_\d+.tgz)",
-            ["冰蝎哥斯拉模型"] = @"([^\n\r]+000000_queryResult_behinder-godzilla_\d+_\d+.tgz)",
+            ["冰蝎哥斯拉模型"] = @"([^\n\r]+000000_queryResult_bxgsl_\d+_\d+.tgz)",
             ["PASS分析"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
         };
 

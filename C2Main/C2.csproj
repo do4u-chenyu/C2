@@ -3383,12 +3383,7 @@
     </Content>
     <None Include="Resources\Block.png" />
     <Content Include="logo.ico" />
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_behinder-godzilla_accountPass_C2_20220125.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Script\IAO_Search_gamble\batchquery_behinder-godzilla_accountPass_C2_20220125.py.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_bxgsl_accountPass_C2_20220621.py.zip" />
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_dbqt_accountPass_C2_20220121.py.z01">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -4441,6 +4436,7 @@
     </None>
     <None Include="Resources\tab_button.png" />
     <None Include="Resources\Robots.png" />
+    <Content Include="Resources\Script\IAO_Search_gamble\batchquery_bxgsl_accountPass_C2_20220621.py" />
     <Content Include="Resources\Script\IAO_Search_gamble\batchquery_custom_accountPass_C2_20210831.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

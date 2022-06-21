@@ -2,25 +2,22 @@
 """
 Created on 2022/01/25
 version 0125:查询冰蝎哥斯拉流量
+
+2022.06.21
+Modify by AnTi
+校正文件输出格式
 """
-from Queue import Queue
-from threading import Thread
 from subprocess import Popen,PIPE
-import time
-import urllib
 import re 
 import sys
 import datetime
 import os
-import itertools
 import logging
 import urllib2
-from urllib import unquote
 
 from optparse import OptionParser
 reload(sys)
 sys.setdefaultencoding('utf-8')
-#################
 
 class BatchQuery:
     def __init__(self,data_path,startTime,endTime,all_items):
@@ -28,7 +25,7 @@ class BatchQuery:
         self.startTime = startTime
         self.endTime   = endTime
         self.all_items = all_items
-        self.out_file = 'ws_out.txt'
+        self.out_file = 'bxgsl_out.txt'
 
     def queryclient(self,keyWords):
         batch = []
@@ -169,7 +166,7 @@ def main():
     ap.run_query(key_words_gsl_0,"whole_req_content","疑似哥斯拉加密流量")
     ap.run_query(key_words_gsl_1,"whole_req_content","疑似哥斯拉上传木马")
 
-    ZIP_PATH = DATA_PATH + '_' + defaultStart + '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + defaultEnd + '_' + defaultStart + '.tgz.tmp'
     zip_result(DATA_PATH, ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)
@@ -180,7 +177,7 @@ def main():
 
 if __name__ == '__main__':
     ##Program description
-    usage = 'python batchquery_behinder-godzilla_accountPass_C2_20220125.py --start [start_time] --end [end_time] --areacode [areacode]'
+    usage = 'python batchquery_bxgsl_accountPass_C2_20220125.py --start [start_time] --end [end_time] --areacode [areacode]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
     parser = OptionParser(usage)
@@ -199,7 +196,7 @@ if __name__ == '__main__':
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
     ALL_ITEMS = ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_behinder-godzilla_' + defaultEnd
+    DATA_PATH = './_queryResult_bxgsl_'
     key_words_bx_0 = [
     '3Mn1yNMtoZViV5wotQHPJtwwj0F4b2lyToNK7LfdUnN7zmyQFfx OR j7cEF7zpdtyAnFYCSqiRX OR bbRvs1NfjV6iKKs65VTnlSIbCArJv OR I25fHDt6u7G5EAckKvobL3rxD OR a2TU3gN1PGeSroZ0I3CRFwbMmKQ0 OR P04Fr67bQFg5BxkurjYDC OR mH5oEL2ABTwaCIBShMiIx OR WWKmDkw3Kcel93W3oWv0KXZQRkSy7kBAh OR htOltdTMF92bbN28yJxYnRARCUq4 OR GGCPNAMpRgj1auGlaRQjYm2F915iDKRYkUaJgPChZRszVQYBKyGdM1hVz6a OR 3KOLSBt1I1ZnFMZRLMFqSHpt4doUPO OR ExLvjPnbInJ6YXhfP4 OR G6w8vmJ19L4qDWrwfB1CjAazQ OR Gl0VoIUsjez6l7Srsq2q OR cwQWSEeUTpX36oyiHerjUEInWN','sx5X62RwZRQ0K53cUho3ZcpzuEzbpJIHlKr7ejJgVHTGxowzaKYbHQtzeT OR PY9Hn91L4tc20DC07NjqcmA4HYdff1lX OR rPUCIckXgO2CJj2ljU OR 2GDjEJ0fAVfcI098hIRSr6HfWoM7vK OR ELEAmHTnwn7vXwsNCLNiMq8YybbfnuhnrSuuruNubVqC OR 0YTC6XKE9yW0crualykZatikCuSP1sMnTHVYkcKUFz4hWlauBxCDP OR nKmPC3yHoor4AAOtX1rMS9zLPHYsnxSHOFGb OR OxdIC4JoGQy62Ub6ObmP9iLdRmcyM6 OR j7C8lvSho6UsjWQ62HQMLKsbcn3v OR Us124AELlIcEfN73EtdcDVOTP67qhIZqIN',
     '7Pwvfbbo3ZplI40L OR roWObO9rbonnTa52P57V8OwUz1prlDUDt OR Ibe1t2QOh5u3gYalL7BydmXhbTp5v7ANlzjdDVOZ86mdIKyHOyUG OR SNTrHDYrbzsSKm02akqqVZBJg0QgzYXrQ3UPHDAR3RAjcbtxkYdx OR FDdBRRYSjPE5wCA4YMLC OR ig3n74hqPwizOVAf0JqVOkDIg2lXkp3XDbeF9wlrN1Rn4HVe OR uv3X2g9EQOD2rKto2VU2OAQQO',
