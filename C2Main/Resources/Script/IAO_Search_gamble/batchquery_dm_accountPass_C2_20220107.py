@@ -1,40 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct 29 09:08:44 2018
-  version 0621:
-      增加根据登陆控件和控件值生成keyword功能，实现函数：prdoucKey
-  version 0628:
-      增加查询：
-          去除登陆控件值；
-          挑选 只包含admin的url 
-  version 0708:
-      增加线程时间检测功能
-      增加文件》50M即压缩一次功能
-  version 0803:
-       修改了脚本临时文件命名
-       修改了脚本压缩加密方式
-  version 0224:
-       增加机场查询脚本
-@author: Administrator
+2022.06.21
+modify by AnTi
 """
-from Queue import Queue
-from threading import Thread
 from subprocess import Popen,PIPE
-import time
-import urllib
 import re 
 import sys
 import datetime
 import os
-import itertools
 import logging
 import urllib2
-from urllib import unquote
 
 from optparse import OptionParser
 reload(sys)
 sys.setdefaultencoding('utf-8')
-#################
+
 
 class BatchQuery:
     def __init__(self,data_path,startTime,endTime,all_items):
@@ -49,7 +29,7 @@ class BatchQuery:
         cont_end_flag = True
         content = ''
         end_item = '_QUERY_MATCHTERMS'
-        with open(os.path.join(self.data_path,'result1.log'),'a+') as f:
+        with open(os.path.join(self.data_path, 'result.log'), 'a+') as f:
             cmd = [
                 '/home/search/sbin/queryclient',
                 '--server', '127.0.0.1',
@@ -65,7 +45,7 @@ class BatchQuery:
             LOGGER.info('QUERYTIME:{0}_{1}\n wait...'.format(self.startTime,self.endTime)) 
             #req = Popen(['/home/search/sbin/queryclient','--server','127.0.0.1','--port', '9870','--querystring', keyWords,'--start', startTime,'--end', endTime,'--contextlen','10000','--maxcount', '10000'],stdout=PIPE)
             for line in req.stdout:
-                if queryType == 'airport':
+                if queryType == 'dm':
                     f.write(line)
                 line  = line.replace('\x1a','')
                 if line == '\n' and cont_flag and cont_end_flag:
@@ -136,7 +116,7 @@ class BatchQuery:
 
     def handle_res(self):
         result = []
-        out_file = 'ws_out.txt'
+        out_file = 'dm_out.txt'
         result_file = 'cd_dama_res.txt'
         data = open(os.path.join(self.data_path, out_file), mode='r', errors='ignore').read()
         data1 = open(os.path.join(self.data_path,result_file), mode='w')
@@ -161,8 +141,8 @@ class BatchQuery:
 
     def run_query(self):
         
-        QUREY_TYPE = 'airport_'
-        out_file = 'ws_out.txt'
+        QUREY_TYPE = 'dm'
+        out_file = 'dm_out.txt'
         
         with open(os.path.join(self.data_path, out_file), 'a+') as f:
             f.write('\t'.join(ALL_ITEMS + ['PAYLOAD', 'METHOD', 'KEY_WORDS']) + '\n')
@@ -216,7 +196,7 @@ def main():
     ap = BatchQuery(DATA_PATH,startTime,endTime,ALL_ITEMS)
     ap.run_query()
 
-    ZIP_PATH = DATA_PATH + '_' + defaultStart + '.tgz.tmp'
+    ZIP_PATH = DATA_PATH + defaultEnd +  '_' + defaultStart + '.tgz.tmp'
     zip_result(DATA_PATH, ZIP_PATH)
     ZIP_SUCCEED = areacode + ZIP_PATH[2:].replace('.tmp', '')
     os.rename(ZIP_PATH, ZIP_SUCCEED)
@@ -247,33 +227,9 @@ if __name__ == '__main__':
 
     #ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', '_MAINFILE', '_QUERY_CONTENT']
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER','_COOKIE','_USERAGENT','_MAINFILE']
-    DATA_PATH = './_queryResult_dm_' + defaultEnd
-    key_words = [
-    'yourip= yourport= (use=perl OR use=nc)',
-    'SUPort= SUUser= SUPass= SUCommand=net',
-    '_COOKIE:loginpass=phpspy2014',
-    '_RELATIVEURL:php?base64= OR _RELATIVEURL:php?bomber= OR _RELATIVEURL:php?cookiemanager= OR _RELATIVEURL:php?cracker= OR _RELATIVEURL:php?eanver= OR _RELATIVEURL:php?mass=  OR _RELATIVEURL:php?phpconsole=',
-    '(_RELATIVEURL:php (admin_hbapass= OR  postpass=)) OR _RELATIVEURL:php?s=d OR _RELATIVEURL:php?s=e OR _RELATIVEURL:php?s=ff OR _RELATIVEURL:php?s=gg OR _RELATIVEURL:php?s=pq OR _RELATIVEURL:php?sessionmanager= OR (_RELATIVEURL:php?upload= filename) OR _RELATIVEURL:php?website_ OR _RELATIVEURL:php?x=bHhmLmdpZg OR (name= uppath upfiles  filename) OR  (newfile= charset= class= txt= time= bin=) OR (nsql= querysql=) OR (path= pass= passreturn=)',
-    '_RELATIVEURL:php (Sql OR SecInfo) _charset=Windows-1251',
-    '_RELATIVEURL:php ((_TEXT:cmd= _TEXT:show=) OR (code= codificar=Encode) OR (codigo= cargar=) OR (comando= ejecutar=) OR (cookienew= valor=) OR (dir= codigo= def=) OR (do= wcmd=) OR (do= wuser= wpasw=) OR phpspypass= OR admin_spiderpass= OR admin_silicpass= OR (ip=127.0.0.1 port=2 3306) OR (ip=localhost port=2 3306) OR (proto= charset= server= type= reverse= login= dict=) OR (sessionew= valor=) OR (sfp= sft= sfc= sff= sfb=) OR (tp= tt= th= tca= tcb= td= tb=))',
-    '_RELATIVEURL:php doit code_file webroot find_webroot_in_dir',
-    '_RELATIVEURL:php ((getpwd= go= include= filters= type= range=) OR (sqlhost= sqluser= sqlpass= sqlname= sqlcode=))',
-    '_RELATIVEURL:php ((go= godir= govar=) OR (durl= dpath=) OR (sql_host= sql_login= sql_pass= sql_base=))',
-    '_RELATIVEURL:php ((_TEXT:name= _TEXT:password= _TEXT:sub=) OR (user= pass= dbname= path= submit=) OR (user= passnow= services=) OR (nombrefalso= listamails=  bombers=))',
-    '_RELATIVEURL:php ((connect[host]= connect[user]= connect[pass]=) OR (connect[dbname]= connect[path]=))',
-    '_RELATIVEURL:php ((serveru= serverp=) OR (m_hbahost= m_hbaport= m_hbauser= m_hbapass=) OR envlpass= OR (m_eanverhost= m_eanverport= m_eanveruser= m_eanverpass=))',
-    '_RELATIVEURL:php ((mdata= mpath= outdll= sqlcmd=) OR (mdata= msql=) OR (mhost= mport= mpass=))',
-    '_RELATIVEURL:php ((sp=stphp sb=) OR (tex= optionsa=) OR (zip= zfile= jypt=))',
-   '_RELATIVEURL:aspx ((EVENTTARGET  VIEWSTATE EVENTVALIDATION ((HRJ ZSnXu) OR (Sqon NdCX Xgvv JJjbW) OR (iaMKl UDLvA NaLJ))) OR (_COOKIE:ASPXSpy= OR _COOKIE:Backdoor=) OR (_TEXT:Sqon _TEXT:NdCX _TEXT:Xgvv _TEXT:JJjbW))',
-    '(_RELATIVEURL:asp?Action=Cmd1Shell)  OR  (_RELATIVEURL:asp?Action=cmdx) OR  (_RELATIVEURL:asp?Action=ScFolder) OR (_RELATIVEURL:asp?Action= Action2= Submit=) OR (_RELATIVEURL:asp?Action= pcfile= FType=)',
-    '(_RELATIVEURL:asp CheckNextDir= CheckFile= NoCheckTemp=) OR (_RELATIVEURL:asp?Action=hiddenshell) OR (_RELATIVEURL:asp?Action=PageAddToMdb) OR (_RELATIVEURL:asp?Action=Servu) OR (_RELATIVEURL:asp?Action=ReadREG) OR (_RELATIVEURL:asp?Action=getTerminalInfo) OR (_RELATIVEURL:asp?Action=pcanywhere4) OR (_RELATIVEURL:asp _TEXT:theUrl=  _TEXT:thePath=  _TEXT:theAct=) OR (_RELATIVEURL:asp?Action=ScanPort  scan  port= ip=)',
-    '(_RELATIVEURL:asp?Action=fuzhutq5)  OR (_RELATIVEURL:asp?action=PageExecute)  OR (_RELATIVEURL:asp?Action=DbManager)  OR (_RELATIVEURL:asp AspCode= PageName= theAct=)  OR (_RELATIVEURL:asp CheckNextDir= CheckFile= NoCheckTemp=)  OR (_RELATIVEURL:asp DbStr= Driver= Server= Database=)',
-    '_RELATIVEURL:asp ((oej1= oej= wnb=) OR (qsa= qsm= cwb= Submit=) OR (Action= FName= Newfile) OR  (AspCode= theAct= Submit= ) OR (cmdx=cmd.exe cmd=))',
-    '_RELATIVEURL:jsp?sort= (downfile= OR file=)',
-    '_RELATIVEURL:jsp? _RELATIVEURL:uplMonitor=',
-    '_RELATIVEURL:jsp ((action=  path= content= tabID= cmd=) OR (passw= btnpasswd=) OR _TEXT:vConn OR _TEXT:vPortScan OR (shell type= program= submit=) OR (FileManage do= path=) OR _TEXT:EnvsInfo OR _TEXT:DBManage OR (filt= selfile= cr_dir= Submit=) OR (LName= LPass=) OR (dir= cr_dir= Submit=))',
-    '_RELATIVEURL:jsp?action= (_TEXT:curPath= OR _TEXT:cfAction= OR  _TEXT:fsAction= OR  _TEXT:dbAction=)',
-    '_RELATIVEURL:jsp?Action=S  OR _RELATIVEURL:jsp?Action=T']
+    DATA_PATH = './_queryResult_dm_'
+    key_words = ['envlpass=','postpass=','admin_spiderpass=','admin_silicpass=','serveru= serverp=','eanver= .php','ip=127.0.0.1 port=2 3306','ip=localhost port=2 3306','host=localhost port= user= pass=','host=127.0.0.1 port= user= pass=','yourip= yourport= use=perl','yourip= yourport= use=nc','SUPort= SUUser= SUPass= SUCommand=net','phpspypass=','_COOKIE:loginpass=phpspy2014']
+
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
     if startTime is None and endTime is None:
