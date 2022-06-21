@@ -133,7 +133,14 @@ namespace C2.Dialogs.IAOLab
                 }
                 if (input.Split('\t').Length == 3 && input.Split('\t')[0].StartsWith("https:"))
                     input = input.Split('\t')[0];
-                tmpResult.Append(string.Format("{0}\t{1}\n", input, GetDownLoadTool(input)));
+                string result = string.Empty;
+                for(int i=0; i < 2; i++)
+                {
+                    result = GetDownLoadTool(input);
+                    if (!result.Contains("远程服务器返回错误"))
+                        break;
+                }
+                tmpResult.Append(string.Format("{0}\t{1}\n", input, result));
                 richTextBox1.Text = tmpResult.ToString();
                 progressBar1.Value += 1;
             }
