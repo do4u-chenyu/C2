@@ -8,14 +8,13 @@ import re
 import sys
 import datetime
 import os
-import itertools
 import logging
 import base64
 from optparse import OptionParser
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-#################
+
 class Scheduler:
     def __init__(self,startTime,endTime,filename,queryWords):
         self.queryclient_keyWordQueue = Queue()
@@ -307,7 +306,7 @@ def init_path(path):
 
 ##cquey FULLTEXT 
 def queryBatch(keyWords):
-    tempFilename   = "_result_" + startTime + '_' + endTime 
+    tempFilename   = "_pass_" + 'out'
     sch = Scheduler(startTime, endTime, tempFilename,keyWords)
     sch.scheduling()
     sch.saver.writer.close()
@@ -315,7 +314,7 @@ def queryBatch(keyWords):
     
     os.rename(os.path.join(DATA_PATH,tempFilename), os.path.join(DATA_PATH,succeedFilename))
     ZIP_PATH =  os.path.join(DATA_PATH,succeedFilename).replace('txt','tgz')
-    zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
+    #zip_result(os.path.join(DATA_PATH,succeedFilename),ZIP_PATH)
 
 def encrypTion(path):
     with open(path,'rb') as f:
@@ -357,7 +356,7 @@ if __name__ == '__main__':
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
    
     PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
-    DATA_PATH = './_queryResult_code_'
+    DATA_PATH = './_queryResult_pass_'
     KEY_NUM = 13
     LOGIN_BUTTON = ['password=','pwd=','pass=','passwd=','psd=']
     init_path(DATA_PATH)

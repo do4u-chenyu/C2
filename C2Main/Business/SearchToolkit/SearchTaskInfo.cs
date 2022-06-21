@@ -39,7 +39,7 @@ namespace C2.SearchToolkit
             ["冰蝎哥斯拉模型"] = "bxgsl",
             ["海运走私模型"] = "billoflading",
             ["加密流量发现"] = "encryptedTraffic",
-            ["PASS分析"] = "md5",
+            ["PASS分析"] = "pass",
         };
 
         public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
@@ -66,7 +66,7 @@ namespace C2.SearchToolkit
             ["海运走私模型"] = "dsqquery_email_BillofLading_C2_{0}.py",
             ["加密流量发现"] = "dsqquery_http_EncryptedTraffic_C2_{0}.py",
             ["冰蝎哥斯拉模型"] = "batchquery_bxgsl_accountPass_C2_20220125_{0}.py",
-            ["PASS分析"] = "batchquery_code_accountPass_C2_20210624_{0}.py",
+            ["PASS分析"] = "batchquery_pass_accountPass_C2_20210624_{0}.py",
         };
 
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
@@ -93,7 +93,7 @@ namespace C2.SearchToolkit
             ["海运走私模型"] = @"([^\n\r]+000000_queryResult_海运走私模型_\d+_\d+.tgz)",
             ["加密流量发现"] = @"([^\n\r]+000000_queryResult_加密流量发现_\d+_\d+.tgz)",
             ["冰蝎哥斯拉模型"] = @"([^\n\r]+000000_queryResult_bxgsl_\d+_\d+.tgz)",
-            ["PASS分析"] = @"([^\n\r]+000000_queryResult_code_\d+_\d+.tgz)",
+            ["PASS分析"] = @"([^\n\r]+000000_queryResult_pass_\d+_\d+.tgz)",
         };
 
         public static readonly Dictionary<String, String> TaskHelpInfoTable = new Dictionary<String, String>

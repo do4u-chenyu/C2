@@ -803,7 +803,7 @@ namespace C2.Business.SSH
             else
             {
                 String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
-                return Regex.IsMatch(result, @"000000_queryResult_(ht|yellow|gun|airport|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|code|hch|hackDD|dm|custom|bxgsl)_\d+_\d+.tgz\r?\n");
+                return Regex.IsMatch(result, @"000000_queryResult_(ht|yellow|gun|airport|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|pass|hch|hackDD|dm|custom|bxgsl)_\d+_\d+.tgz\r?\n");
             }
 
         }
