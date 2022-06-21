@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 27 15:42:06 2019
-##全文数据存在特殊字符
-@author: Administrator
-version 0730:
-   增加脚本压缩加密功能
-"""
+
 from subprocess import Popen, PIPE
 import logging
 from os import mkdir
@@ -25,7 +19,7 @@ def queryclient(data_path,keyWords,startTime,endTime,queryType):
     cont_end_flag = True
     content = ''
     end_item = '_QUERY_MATCHTERMS'
-    with open(join(data_path,'result1.log'),'a+') as f:
+    with open(join(data_path, 'result.log'), 'a+') as f:
         cmd = [
             '/home/search/sbin/queryclient',
             '--server', '127.0.0.1',
@@ -157,6 +151,7 @@ def get_UserKeyfromEd(USERPW):
         else:
             othercode_str.append("")
     return user_str,pass_str,"\t".join(othercode_str)
+
 ##计算字符串相似度
 def levenshtein(first, second):
     if len(first) > len(second):
@@ -180,6 +175,7 @@ def levenshtein(first, second):
     a = distance_matrix[first_length - 1][second_length - 1]
     b = round(1.0 * a / max(len(first), len(second)), 6)
     return b
+
 ##日志文件打印
 def init_logger(logname,filename,logger_level = logging.INFO):
     logger = logging.getLogger(logname)
@@ -194,6 +190,7 @@ def init_logger(logname,filename,logger_level = logging.INFO):
     logger.addHandler(fh)
     logger.addHandler(ch)
     return logger
+
 ##文件压缩
 def zip_result(DATA_PATH,ZIP_PATH):
     pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH,  '--remove-files'], stdout=PIPE, stderr=PIPE)
@@ -227,7 +224,7 @@ def save(items,keyWords,data_path,path,querytype,startTime,endTime):
 def main(config_dict):
     QUERY_TYPE = 'gun'
     [KEY_YALIE, ALL_ITEMS, OUT_HTTP, startTime, KEY_LIEYOU, OUT_PASSWORD, KEY_YLIE, DATA_PATH, AUTH_ITEMS, endTime] = config_dict.values()
-    ZIP_PATH =  DATA_PATH + '.tgz.tmp'
+    ZIP_PATH =  areacode + DATA_PATH + defaultStart + '_' + defaultEnd + '.tgz.tmp'
     KEY_WORDS = "'" + ' OR '.join(KEY_YLIE + KEY_LIEYOU + KEY_YALIE) + "'"       
     try:
         auth = save(ALL_ITEMS,KEY_WORDS,DATA_PATH,OUT_PASSWORD,QUERY_TYPE,startTime,endTime)
@@ -280,8 +277,9 @@ if __name__ == '__main__':
         sys.exit(1)
     ##PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
     CONFIG_DICT = {
-        'DATA_PATH': areacode + '_queryResult_gun_' + defaultStart + '_' + defaultEnd,
-        'OUT_PASSWORD' : 'out_gun',
+        #'DATA_PATH': areacode + '_queryResult_sq_' + defaultStart + '_' + defaultEnd,
+        'DATA_PATH': '_queryResult_sq_',
+        'OUT_PASSWORD' : 'sq_out' + '.txt',
         'OUT_HTTP': 'out_http',
         'ALL_ITEMS' : ['_HOST','AUTH_ACCOUNT','AUTH_TYPE','CAPTURE_TIME','STRDST_IP','STRSRC_IP','DST_PORT','SRC_PORT','CONTENT','USERNAME','PASSWORD'],
         'AUTH_ITEMS' : ['_HOST','AUTH_ACCOUNT','AUTH_TYPE','CAPTURE_TIME','FROM_PROTYPE','IM_TYPE','UPAREAID','USERNAME'],
@@ -289,7 +287,7 @@ if __name__ == '__main__':
         'KEY_LIEYOU' : ['www.lieyou' + str(i) + '.com' for i in range(24,100)],
         'KEY_YALIE' : ['www.yalie' + str(i) + '.com' for i in range(24,100)] + ['www.soubao' + str(i) + '.com' for i in range(9,100)],
         'startTime' : startTime,
-        'endTime'   : endTime
+        'endTime'   : endTime,
     }
     
     mkdir(CONFIG_DICT['DATA_PATH'])

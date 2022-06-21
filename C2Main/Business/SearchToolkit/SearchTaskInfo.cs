@@ -18,7 +18,7 @@ namespace C2.SearchToolkit
         public static readonly Dictionary<String, String> TaskDescriptionTable = new Dictionary<String, String>
         {
             ["网站管理后台模型"] = "ht",
-            ["涉枪模型"] = "gun",
+            ["涉枪模型"] = "sq",
             ["涉黄图片模型"] = "yellow",
             ["飞机场模型"] = "airport",
             ["黑客模型"] = "hack",
@@ -45,7 +45,7 @@ namespace C2.SearchToolkit
         public static readonly Dictionary<String, String> TaskScriptTable = new Dictionary<String, String>
         {
             ["网站管理后台模型"] = "batchquery_ht_accountPass_C2_20210324_{0}.py",
-            ["涉枪模型"] = "batchquery_gun_accountPass_C2_20200908_{0}.py",
+            ["涉枪模型"] = "batchquery_sq_accountPass_C2_20200908_{0}.py",
             ["涉黄图片模型"] = "batchquery_yellow_accountPass_C2_eml_pic_web_20210414_{0}.py",
             ["飞机场模型"] = "batchquery_airport_accountPass_C2_20210414_{0}.py",
             ["黑客模型"] = "batchquery_hack_accountPass_C2_20210604_{0}.py",
@@ -72,7 +72,7 @@ namespace C2.SearchToolkit
         private static readonly Dictionary<String, String> TaskResultPatternTable = new Dictionary<String, String>
         {
             ["网站管理后台模型"] = @"([^\n\r]+000000_queryResult_ht_\d+_\d+.tgz)",
-            ["涉枪模型"] = @"([^\n\r]+000000_queryResult_gun_\d+_\d+.tgz)",
+            ["涉枪模型"] = @"([^\n\r]+000000_queryResult_sq_\d+_\d+.tgz)",
             ["涉黄图片模型"] = @"([^\n\r]+000000_queryResult_yellow_\d+_\d+.tgz)",
             ["飞机场模型"] = @"([^\n\r]+000000_queryResult_airport_\d+_\d+.tgz)",
             ["黑客模型"] = @"([^\n\r]+000000_queryResult_hack_\d+_\d+.tgz)",
