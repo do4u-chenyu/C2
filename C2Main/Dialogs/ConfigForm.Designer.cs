@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.pythonConfigPage = new System.Windows.Forms.TabPage();
             this.chosenPythonLable = new System.Windows.Forms.Label();
@@ -518,7 +517,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(198, 326);
+            this.button2.Location = new System.Drawing.Point(198, 299);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(91, 23);
             this.button2.TabIndex = 13;
@@ -528,7 +527,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(102, 326);
+            this.button1.Location = new System.Drawing.Point(102, 299);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 23);
             this.button1.TabIndex = 12;
@@ -539,7 +538,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 332);
+            this.label8.Location = new System.Drawing.Point(9, 305);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 17);
             this.label8.TabIndex = 11;
@@ -548,7 +547,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(130, 295);
+            this.label9.Location = new System.Drawing.Point(130, 268);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(122, 17);
             this.label9.TabIndex = 10;
@@ -557,7 +556,7 @@
             // version
             // 
             this.version.AutoSize = true;
-            this.version.Location = new System.Drawing.Point(9, 295);
+            this.version.Location = new System.Drawing.Point(9, 268);
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(47, 17);
             this.version.TabIndex = 9;
@@ -570,14 +569,15 @@
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(537, 172);
+            this.textBox4.Size = new System.Drawing.Size(537, 133);
             this.textBox4.TabIndex = 8;
-            this.textBox4.Text = resources.GetString("textBox4.Text");
+            this.textBox4.Text = "分析师单兵作战装备,是一系列分析工具的沉淀集合,并覆盖了历史战例中各种成功经验，旨在提升分析师的单兵和小团队作战能力,在独立环境下能够以一当十,快速展开各类型分析" +
+    "实战攻坚任务。装备包含成熟的战术手册、分析笔记、各种实用小工具、智能分析工具和一系列高阶分析工具等，轻量精干、携带方便，是分析师实战工作中强有力的武器库。";
             // 
             // button7
             // 
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(489, 256);
+            this.button7.Location = new System.Drawing.Point(489, 229);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(59, 23);
             this.button7.TabIndex = 7;
@@ -588,7 +588,7 @@
             // 
             this.textBox3.BackColor = System.Drawing.Color.White;
             this.textBox3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.textBox3.Location = new System.Drawing.Point(11, 256);
+            this.textBox3.Location = new System.Drawing.Point(11, 229);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(463, 23);
@@ -618,7 +618,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 225);
+            this.label6.Location = new System.Drawing.Point(8, 198);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 17);
             this.label6.TabIndex = 1;
