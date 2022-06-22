@@ -181,7 +181,6 @@
   <ItemGroup>
     <None Include="Resources\images.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist plugins md $(SolutionDir)\C2Main\bin\Release\plugins  

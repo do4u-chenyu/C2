@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -115,9 +116,9 @@ namespace QQSpiderPlugin
             return defaultResult.result.ToString();
         }
         
-        public List<string> QueryKeyWord(string id)
+        public void QueryKeyWord(string id, string resultPath)
         {
-            List<string> resultList = new List<string> { };
+            int resultCount = 0;
 
             string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
             Dictionary<string, string> param = new Dictionary<string, string>
@@ -132,10 +133,15 @@ namespace QQSpiderPlugin
             List<string> target_keys = new List<string> 
             { "code", "name", "member_num", "max_member_num", "owner_uin", "qaddr", "gcate", "labels", "memo", "url"};
             int i = -1;
-            while (resultList.Count < 150 && i < 10)  // 一个词最多抓100条，且请求不超过10次
+            while (resultCount < 150 && i < 10)  // 一个词最多抓150条，且请求不超过10次
             {
                 i++;
                 param["page"] = i.ToString();
+                string filePath = resultPath + "\\" + id + ".txt";  // 创建储存当前词的txt文件
+                if (!File.Exists(filePath))
+                {
+                    File.Create(filePath);
+                }
                 try
                 {
                     Response resp = this.session.Post(url, param);
@@ -145,8 +151,8 @@ namespace QQSpiderPlugin
                         if (json.ContainsKey("group_list"))
                         {
                             string group_list_string = json["group_list"].ToString();
-                            List<JToken> group_list1 = json["group_list"].ToList();
-                            foreach(JToken x in group_list1)
+                            List<JToken> group_list = json["group_list"].ToList();
+                            foreach(JToken x in group_list)
                             {
                                 string tmp = "";
                                 foreach (string key in target_keys)
@@ -182,7 +188,13 @@ namespace QQSpiderPlugin
                                         tmp = tmp + "\t" + "";
                                     }
                                 }
-                                resultList.Add(tmp.Trim('\t'));
+                               
+                                byte[] data = System.Text.Encoding.Default.GetBytes(tmp.Trim('\t'));
+                                FileStream fs = new FileStream(filePath, FileMode.Append);
+                                fs.Write(data, 0, data.Length);
+                                fs.Flush();
+                                fs.Close();
+                                resultCount++;
                             }
                         }
                     }
@@ -194,7 +206,6 @@ namespace QQSpiderPlugin
                 catch { }
                 Thread.Sleep(new Random().Next(3000, 8000));  //随机停3到8秒
             }
-            return resultList;
         }
 
         private QueryResult ParseGroup(string id, string text)

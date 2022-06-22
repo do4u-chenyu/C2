@@ -55,25 +55,17 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.keyWordRichTextBox = new System.Windows.Forms.RichTextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel8 = new System.Windows.Forms.Panel();
             this.KeyWordCancle = new System.Windows.Forms.Button();
             this.KeyWordStartButton = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.outputButton3 = new System.Windows.Forms.Button();
+            this.ResultButton = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.InputKeyWordButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -189,7 +181,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(122, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.RowTemplate.Height = 20;
             this.dataGridView1.Size = new System.Drawing.Size(522, 308);
             this.dataGridView1.TabIndex = 6;
             // 
@@ -359,98 +351,57 @@
             // 
             // keyWordRichTextBox
             // 
+            this.keyWordRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.keyWordRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keyWordRichTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.keyWordRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.keyWordRichTextBox.Name = "keyWordRichTextBox";
             this.keyWordRichTextBox.Size = new System.Drawing.Size(122, 308);
             this.keyWordRichTextBox.TabIndex = 16;
-            this.keyWordRichTextBox.Text = "";
-            this.keyWordRichTextBox.TextChanged += new System.EventHandler(this.KeyWordRichTextBox_TextChanged);
+            this.keyWordRichTextBox.Text = "请输入关键词，\n每行一个，\n建议不超过10个";
+            this.keyWordRichTextBox.Click += new System.EventHandler(this.keyWordRichTextBox_Click);
+            this.keyWordRichTextBox.TextChanged += new System.EventHandler(this.keyWordRichTextBox_TextChanged);
             // 
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.AllowUserToDeleteRows = false;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.ColumnHeadersHeight = 25;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewImageColumn1,
             this.Column2,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn8});
+            this.dataGridViewTextBoxColumn6});
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridView3.Location = new System.Drawing.Point(122, 0);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.RowTemplate.Height = 23;
+            this.dataGridView3.RowHeadersWidth = 20;
+            this.dataGridView3.RowTemplate.Height = 25;
+            this.dataGridView3.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView3.Size = new System.Drawing.Size(522, 308);
             this.dataGridView3.TabIndex = 15;
             // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.HeaderText = "群头像";
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            // 
             // Column2
             // 
-            this.Column2.HeaderText = "群ID";
+            this.Column2.HeaderText = "关键词";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 150;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "群名称";
+            this.dataGridViewTextBoxColumn2.HeaderText = "已爬取群数量";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 150;
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "群人数";
+            this.dataGridViewTextBoxColumn6.HeaderText = "本词查询进度";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "群人数上限";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "群主ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "群地址";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "群分类";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "群标签";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "群简介";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 175;
             // 
             // panel8
             // 
@@ -484,11 +435,10 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.textBox2);
             this.panel7.Controls.Add(this.label14);
-            this.panel7.Controls.Add(this.outputButton3);
+            this.panel7.Controls.Add(this.ResultButton);
             this.panel7.Controls.Add(this.label12);
-            this.panel7.Controls.Add(this.progressBar3);
-            this.panel7.Controls.Add(this.InputKeyWordButton);
             this.panel7.Controls.Add(this.label13);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(3, 3);
@@ -496,24 +446,33 @@
             this.panel7.Size = new System.Drawing.Size(644, 90);
             this.panel7.TabIndex = 2;
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(116, 54);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(500, 21);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "C:\\FiberHomeIAOModelDocument\\IAO\\实验楼\\QQ爬虫";
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 31);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(435, 12);
+            this.label14.Size = new System.Drawing.Size(448, 12);
             this.label14.TabIndex = 10;
-            this.label14.Text = "建议每小时最多查询13个关键词，每个关键词的详细查询结果请导出后查看";
+            this.label14.Text = "建议每小时查询不超过10个关键词，查询结果请在所有关键词查询结束后查看";
             // 
-            // outputButton3
+            // ResultButton
             // 
-            this.outputButton3.Location = new System.Drawing.Point(541, 17);
-            this.outputButton3.Name = "outputButton3";
-            this.outputButton3.Size = new System.Drawing.Size(75, 23);
-            this.outputButton3.TabIndex = 9;
-            this.outputButton3.Text = "导出";
-            this.outputButton3.UseVisualStyleBackColor = true;
-            this.outputButton3.Click += new System.EventHandler(this.OutputButton3_Click);
+            this.ResultButton.Location = new System.Drawing.Point(541, 17);
+            this.ResultButton.Name = "ResultButton";
+            this.ResultButton.Size = new System.Drawing.Size(75, 23);
+            this.ResultButton.TabIndex = 9;
+            this.ResultButton.Text = "查看";
+            this.ResultButton.UseVisualStyleBackColor = true;
+            this.ResultButton.Click += new System.EventHandler(this.ResultButton_Click);
             // 
             // label12
             // 
@@ -523,33 +482,16 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(76, 16);
             this.label12.TabIndex = 8;
-            this.label12.Text = "查询进度";
-            // 
-            // progressBar3
-            // 
-            this.progressBar3.Location = new System.Drawing.Point(116, 54);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(500, 23);
-            this.progressBar3.TabIndex = 7;
-            // 
-            // InputKeyWordButton
-            // 
-            this.InputKeyWordButton.Location = new System.Drawing.Point(446, 17);
-            this.InputKeyWordButton.Name = "InputKeyWordButton";
-            this.InputKeyWordButton.Size = new System.Drawing.Size(75, 23);
-            this.InputKeyWordButton.TabIndex = 5;
-            this.InputKeyWordButton.Text = "导入";
-            this.InputKeyWordButton.UseVisualStyleBackColor = true;
-            this.InputKeyWordButton.Click += new System.EventHandler(this.InputKeyWordButton_Click);
+            this.label12.Text = "结果路径";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(6, 11);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(422, 12);
+            this.label13.Size = new System.Drawing.Size(291, 12);
             this.label13.TabIndex = 4;
-            this.label13.Text = "导入QQ群爬虫关键词文件，或者粘贴到左侧任务列表中，一行一个关键词";
+            this.label13.Text = "请在左侧任务列表中输入关键词，一行一个关键词";
             // 
             // panel6
             // 
@@ -934,24 +876,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage QQGroupKeyWord;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button outputButton3;
+        private System.Windows.Forms.Button ResultButton;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.Button InputKeyWordButton;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button KeyWordCancle;
         private System.Windows.Forms.Button KeyWordStartButton;
@@ -966,6 +895,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn age;
         private System.Windows.Forms.RichTextBox keyWordRichTextBox;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }
 

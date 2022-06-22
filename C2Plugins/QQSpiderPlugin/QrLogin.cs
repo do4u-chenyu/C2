@@ -264,6 +264,7 @@ namespace QQSpiderPlugin
             loginResult.Add("status", status);
             loginResult.Add("time", Util.GetTimeStamp());
             loginResult.Add("errorMsg", errorMsg);
+            loginResult.Add("session", this.session);
             return loginResult;
         }
     }

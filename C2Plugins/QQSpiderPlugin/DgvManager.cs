@@ -65,5 +65,25 @@ namespace QQSpiderPlugin
             }
             return Util.ResizeImage(img, new Size(imgSize, imgSize));
         }
+
+        public void ChangeCellValue(int x, int y, string value)
+        {
+            this.dataGridView.Rows[x].Cells[y].Value = value;
+            this.dataGridView.Update();
+        }
+
+        public void InitGroupResult(List<string> columns)
+        {
+            for (int i = 0; i < columns.Count; i++)
+            {
+                List<string> tmp = new List<string> { columns[i], "0", "0%" };
+                int index = this.dataGridView.Rows.Add();
+                this.dataGridView.Rows[index].Height = 25;
+                this.dataGridView.Rows[index].Cells[0].Value = columns[i];
+                this.dataGridView.Rows[index].Cells[1].Value = "0";
+                this.dataGridView.Rows[index].Cells[2].Value = "0%";
+                this.dataGridView.Update();
+            }
+        }
     }
 }

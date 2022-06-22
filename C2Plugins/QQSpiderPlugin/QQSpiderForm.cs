@@ -1,9 +1,11 @@
 ﻿using C2.IAOLab.Plugins;
 using C2.Log;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -20,7 +22,7 @@ namespace QQSpiderPlugin
         private List<string> idDataSource;
         private List<string> grpDataSource;
         private List<string> keyWordDataSource;
-        private Dictionary<string, List<string>> resultDictionary;
+        private string ResultFilePath = @"C:\FiberHomeIAOModelDocument\IAO\实验楼\QQ爬虫";
         QrLogin keyWordLogin = new QrLogin();
         //{ "头像", "群号", "群名称", "群人数", "群上限", "群主", "地域", "分类", "标签", "群简介"};
         //{ "头像", "账号", "昵称", "国家", "省市", "城市", "性别", "年龄" };
@@ -33,20 +35,22 @@ namespace QQSpiderPlugin
         {
             InitializeComponent();
             InitializeForm();
+            if (!Directory.Exists(this.ResultFilePath))  // 创建目标路径
+            {
+                Directory.CreateDirectory(this.ResultFilePath);
+            }
         }
         private void InitializeForm()
         {
             session = new Session();
             this.richTextBox2.Text = String.Empty;
             this.richTextBox1.Text = String.Empty;
-            this.keyWordRichTextBox.Text = String.Empty;
             DgvUtil.CleanDgv(this.dataGridView1);
             DgvUtil.CleanDgv(this.dataGridView2);
             DgvUtil.CleanDgv(this.dataGridView3);
             idDataSource = new List<string>();
             grpDataSource = new List<string>();
             keyWordDataSource = new List<string>();
-            resultDictionary = new Dictionary<string, List<string>>();
         }
 
         public string GetPluginDescription()
@@ -84,16 +88,11 @@ namespace QQSpiderPlugin
             ImportData(0);
             UpdateListView(0);
         }
+
         private void InputGroupButton_Click(object sender, EventArgs e)
         {
             ImportData(1);
             UpdateListView(1);
-        }
-
-        private void InputKeyWordButton_Click(object sender, EventArgs e)
-        {
-            ImportData(2);
-            UpdateListView(2);
         }
 
         private void UpdateListView(int tabIndex)
@@ -109,6 +108,8 @@ namespace QQSpiderPlugin
             {
                 lv = this.richTextBox2;
                 dataSource = this.grpDataSource;
+                this.keyWordRichTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+                this.keyWordRichTextBox.Text = "请输入关键词，\n每行一个，\n建议不超过10个";
             }
             else
             {
@@ -163,7 +164,6 @@ namespace QQSpiderPlugin
             return lines;
         }
         
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -213,7 +213,6 @@ namespace QQSpiderPlugin
             this.Cursor = Cursors.Arrow;
         }
 
-
         private void GroupStartButton_Click(object sender, EventArgs e)
         {
             DgvManager dgvMgr = new DgvManager(this.dataGridView2);
@@ -256,21 +255,20 @@ namespace QQSpiderPlugin
 
         private void KeyWordStartButton_Click(object sender, EventArgs e)
         {
+            new Log().LogManualButton("(网)QQ爬虫", "运行");
             DgvManager dgvMgr = new DgvManager(this.dataGridView3);
             List<string> dataSource = this.keyWordDataSource;
-            this.resultDictionary = new Dictionary<string, List<string>>();
-            ResetProgressBar(2, dataSource.Count);
             if (dataSource.Count == 0)
             {
                 ShowMessageBox("请先导入信息");
                 return;
             }
-            if (dataSource.Count > 13)
+            if (dataSource.Count > 10)
             {
-                ShowMessageBox("查询关键词个数超过13个，请重新输入");
+                ShowMessageBox("查询关键词个数超过10个，请重新输入");
                 return;
             }
-            if(!KeyWordLogin())
+            if (!KeyWordLogin())
                 return;
 
             if (this.session.Ldw != "true")
@@ -280,23 +278,17 @@ namespace QQSpiderPlugin
                 return;
             }
 
-            QQCrawler crawler = new QQCrawler(this.keyWordLogin.Session);
+            dgvMgr.InitGroupResult(dataSource);  // 初始化关键词爬虫的dgv
 
-            this.Cursor = Cursors.WaitCursor;
-            foreach (string id in dataSource)
+
+            this.Cursor = Cursors.WaitCursor;  // 程序执行过程中箭头变为等待圆圈
+            for (int i = 0; i < dataSource.Count; i++)
             {
-                List<string> resultList = crawler.QueryKeyWord(id);
-                if (resultList.Count == 0)
-                {
-                    ShowMessageBox(string.Format("关键词{0}无查询结果",id));
-                    this.progressBar3.Value += 1;
-                    continue;
-                }
-                dgvMgr.AppendLineList(resultList);
-                this.resultDictionary.Add(id, resultList);
-                this.progressBar3.Value += 1;
+                string keyword = dataSource[i];
+                this.QueryKeyWord(keyword, i, dgvMgr);
             }
             this.Cursor = Cursors.Arrow;
+            ShowMessageBox("查询完成！");
         }
 
         private void ResetProgressBar(int tabIndex, int count)
@@ -312,33 +304,13 @@ namespace QQSpiderPlugin
                     case 1:
                         bar = this.progressBar2;
                         break;
-                    case 2:
-                        bar = this.progressBar3;
-                        break;
                 }
             }
             bar.Maximum = count;
             bar.Minimum = 0;
             bar.Value = 0;
         }
-        //private void ShowResult(string result, int tabIndex, StringBuilder tmpResult)
-        //{
-        //    if ((tabIndex == 0 || tabIndex == 1) && tmpResult != null)
-        //    {
-        //        tmpResult.Append(result);
-        //        switch (tabIndex)
-        //        {
-        //            case 0:
-        //                UpdateStatus(this.IDResultRichTextBox, result);
-        //                this.progressBar1.Value += 1;
-        //                break;
-        //            case 1:
-        //                UpdateStatus(this.GroupRichTextBox, result);
-        //                this.progressBar2.Value += 1;
-        //                break;
-        //        }
-        //    }
-        //}
+
         void UpdateStatus(RichTextBox richTextBox, string textMessage)
         {
             if (richTextBox.InvokeRequired)
@@ -354,6 +326,7 @@ namespace QQSpiderPlugin
         {
             this.Close();
         }
+        
         public static DialogResult ShowMessageBox(string message, string caption = "提示信息", MessageBoxIcon type = MessageBoxIcon.Information)
         {
             return MessageBox.Show(message, caption, MessageBoxButtons.OK, type);
@@ -400,23 +373,11 @@ namespace QQSpiderPlugin
                 ShowMessageBox("导出成功");
             }
         }
-        private void OutputButton3_Click(object sender, EventArgs e)
+        
+        private void ResultButton_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView3.Rows.Count == 0)
-            {
-                ShowMessageBox("空文件无法导出");
-                return;
-            }
-
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "Excel Documents (*.xls)|*.xls",
-            };
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                Util.KeyWordSaveToExcel(sfd.FileName, this.resultDictionary);
-                ShowMessageBox("导出成功");
-            }
+            if (Directory.Exists(this.ResultFilePath))
+                System.Diagnostics.Process.Start(this.ResultFilePath);
         }
 
         public void Login()
@@ -493,6 +454,11 @@ namespace QQSpiderPlugin
         
         public bool KeyWordLogin()
         {
+            if (this.session.Cookies.GetCookieValue("p_skey") != "")  // 避免重复登录
+            {
+                return true;
+            }
+
             byte[] imgBytes = keyWordLogin.GetKeyWordQRCode();
             if (imgBytes == null || imgBytes != null && imgBytes.Length == 0)
             {
@@ -536,6 +502,10 @@ namespace QQSpiderPlugin
                         qrCodeForm.Close();
                         _thread.Abort();
                     })));
+                    if (result.ContainsKey("session"))
+                    {
+                        this.session = (Session)result["session"];
+                    }
                     this.session.Ldw = "true";
                     break;
                 }
@@ -593,24 +563,6 @@ namespace QQSpiderPlugin
 
         }
 
-        private void KeyWordRichTextBox_TextChanged(object sender, EventArgs e)
-        {
-            List<string> input = new List<string>();
-            try
-            {
-                string trim_space = Regex.Replace(this.keyWordRichTextBox.Text, " ", string.Empty);
-                input = new List<string>(trim_space
-                    .Trim(Environment.NewLine.ToCharArray())
-                    .Split(Environment.NewLine.ToCharArray())
-                    );
-            }
-            catch
-            {
-                ShowMessageBox("输出有误");
-            }
-            this.keyWordDataSource = input;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.label11.Visible = false;
@@ -641,6 +593,136 @@ namespace QQSpiderPlugin
         private void KeyWordCancle_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void QueryKeyWord(string keyword, int id, DgvManager dgvM)
+        {
+            int resultCount = 0;
+
+            string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
+            Dictionary<string, string> param = new Dictionary<string, string>
+            {
+                {"from", "1" },
+                { "keyword", keyword },
+                { "wantnum", "24" },
+                { "page", "0" },
+                {"sort", "2"},  // sort type: 0 默认排序, 1 人数优先, 2 活跃优先
+                {"isRecommend", "false"}
+            };
+            List<string> target_keys = new List<string>
+            { "code", "name", "member_num", "max_member_num", "owner_uin", "qaddr", "gcate", "labels", "memo", "url"};
+            string filePath = this.ResultFilePath + "\\" + keyword + ".txt";  // 创建储存当前词的txt文件
+            FileStream fs = File.Open(filePath, FileMode.OpenOrCreate);
+            string tmp = "群号\t群名称\t群人数\t群人数上限\t群主\t地域\t群分类\t群标签\t群简介\t群头像地址\n";  // 添加列名
+            byte[] data = Encoding.Default.GetBytes(tmp);
+            fs.Position = fs.Length;
+            fs.Write(data, 0, data.Length);
+            fs.Flush();
+            int i = 0;
+            int t = 0;
+            bool isId = int.TryParse(keyword, out t);
+            int maxPage = 10;
+            if (isId)
+            {
+                maxPage = 1;
+            }
+            while (resultCount < 150 && i < maxPage)  // 一个词最多抓150条，且请求不超过10次
+            {
+                param["page"] = i.ToString();
+                try
+                {
+                    Response resp = this.session.Post(url, param);
+                    JObject json = JObject.Parse(resp.Text);
+                    if (json["errcode"].ToString() == "0" && json["ec"].ToString() != "99997")  // 不满足这些条件，表示被爬虫被限制了
+                    {
+                        if (json.ContainsKey("group_list"))
+                        {
+                            string group_list_string = json["group_list"].ToString();
+                            List<JToken> group_list = json["group_list"].ToList();
+                            foreach (JToken x in group_list)
+                            {
+                                tmp = "";
+                                foreach (string key in target_keys)
+                                {
+                                    if (x.SelectToken(key) != null)
+                                    {
+                                        string s = x[key].ToString();
+                                        if (key == "qaddr")
+                                        {
+                                            StringBuilder qaddrSb = new StringBuilder();
+                                            foreach (var q in x["qaddr"])
+                                                qaddrSb.Append(q.ToString());
+                                            s = qaddrSb.ToString();
+                                        }
+                                        if (key == "gcate")
+                                        {
+                                            StringBuilder gcateSb = new StringBuilder();
+                                            foreach (var l in x["gcate"])
+                                                gcateSb.Append(l.ToString()).Append("|");
+                                            s = Util.GenRwWTS(gcateSb.ToString().Trim('|'));
+                                        }
+                                        if (key == "labels")
+                                        {
+                                            StringBuilder labelSb = new StringBuilder();
+                                            foreach (var l in x["labels"])
+                                                labelSb.Append(l["label"].ToString()).Append("|");
+                                            s = Util.GenRwWTS(labelSb.ToString().Trim('|'));
+                                        }
+                                        tmp = tmp + "\t" + s;
+                                    }
+                                    else
+                                    {
+                                        tmp = tmp + "\t" + "";
+                                    }
+                                }
+                                data = Encoding.Default.GetBytes(tmp.Trim('\t').Replace('\n', ',')+"\n");
+                                fs.Position = fs.Length;
+                                fs.Write(data, 0, data.Length);
+                                fs.Flush();
+                                resultCount++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    dgvM.ChangeCellValue(id, 1, resultCount.ToString());
+                    dgvM.ChangeCellValue(id, 2, ((i+1)*1.0 / maxPage * 100.0).ToString() + "%");
+                }
+                catch { }
+                Thread.Sleep(new Random().Next(3000, 8000));  //随机停3到8秒
+                i++;
+            }
+            fs.Close();
+            dgvM.ChangeCellValue(id, 2, "100%");
+        }
+
+        private void keyWordRichTextBox_TextChanged(object sender, EventArgs e)
+        {
+            List<string> input = new List<string>();
+            try
+            {
+                string trim_space = Regex.Replace(this.keyWordRichTextBox.Text, " ", string.Empty);
+                input = new List<string>(trim_space
+                    .Trim(Environment.NewLine.ToCharArray())
+                    .Split(Environment.NewLine.ToCharArray())
+                    );
+            }
+            catch
+            {
+                ShowMessageBox("输出有误");
+            }
+            this.keyWordDataSource = input;
+        }
+
+        private void keyWordRichTextBox_Click(object sender, EventArgs e)
+        {
+            if(keyWordRichTextBox.Text== "请输入关键词，\n每行一个，\n建议不超过10个")
+            {
+                keyWordRichTextBox.Clear();
+                keyWordRichTextBox.ForeColor = SystemColors.WindowText;
+            }
         }
     }
 }
