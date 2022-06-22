@@ -41,11 +41,10 @@ namespace C2.Business.HTTP
                 req.Method = "POST";
                 req.ContentType = "application/json";
                 req.ContentLength = data.Length;
-                string Token = WFDWebAPI.GetInstance().IsVerify();
-                if (!string.IsNullOrEmpty(Token))
-                    req.Headers.Add("Authorization", "Bearer " + Token);
-                else
+                if (!string.IsNullOrEmpty(token))
                     req.Headers.Add("Authorization", "Bearer " + token);
+                else
+                    req.Headers.Add("Authorization", "Bearer " + WFDWebAPI.GetInstance().IsVerify());
                 req.KeepAlive = true;//解决GetResponse操作超时问题
                 using (var stream = req.GetRequestStream())
                     stream.Write(data, 0, data.Length);
