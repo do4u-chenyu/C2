@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using C2.Business.WebsiteFeatureDetection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,10 +41,12 @@ namespace C2.Business.HTTP
                 req.Method = "POST";
                 req.ContentType = "application/json";
                 req.ContentLength = data.Length;
-                req.Headers.Add("Authorization", "Bearer " + token);
-
+                string Token = WFDWebAPI.GetInstance().IsVerify();
+                if (!string.IsNullOrEmpty(Token))
+                    req.Headers.Add("Authorization", "Bearer " + Token);
+                else
+                    req.Headers.Add("Authorization", "Bearer " + token);
                 req.KeepAlive = true;//解决GetResponse操作超时问题
-
                 using (var stream = req.GetRequestStream())
                     stream.Write(data, 0, data.Length);
                 resp = new Response((HttpWebResponse)req.GetResponse());
@@ -157,7 +160,7 @@ namespace C2.Business.HTTP
             return resp;
         }
 
-        private string DictionaryToJson(Dictionary<string, string> dict)
+        public string DictionaryToJson(Dictionary<string, string> dict)
         {
             if (dict.Count == 0)
                 return string.Empty;

@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -313,11 +316,12 @@ namespace C2.Business.WebsiteFeatureDetection
             UserName = UAdialog.UserName;
             return "true" + UserName;
         }
-        public HttpWebRequest ConfigPost(string url)
+
+        public string IsVerify()
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             int maxRetryTime = 10;
             int time = 0;
+            string token = string.Empty;
             if (File.Exists(xmlPath))
             {
                 xDoc.Load(xmlPath);
@@ -325,15 +329,24 @@ namespace C2.Business.WebsiteFeatureDetection
                 while (time++ < maxRetryTime)
                 {
                     if (UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) == "success")
-                    {
-                        request.Timeout = 200000;
-                        request.Method = "POST";
-                        request.ContentType = "application/json";
-                        request.Headers.Add("Authorization", "Bearer " + Token);
-                        return request;
-                    }
+                        return Token;
                     Thread.Sleep(1000);
                 }
+            }
+            return token;
+        }
+
+        public HttpWebRequest ConfigPost(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            string token = IsVerify();
+            if (!string.IsNullOrEmpty(token))
+            {
+                request.Timeout = 200000;
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.Headers.Add("Authorization", "Bearer " + token);
+                return request; 
             }
             else
                 HelpUtil.ShowMessageBox("请关闭软件登录熵情口令使用");
