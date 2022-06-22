@@ -1,4 +1,5 @@
-﻿using C2.Controls;
+﻿using C2.Business.WebsiteFeatureDetection;
+using C2.Controls;
 using C2.Core;
 using C2.Utils;
 using Newtonsoft.Json;
@@ -191,19 +192,11 @@ namespace C2.Dialogs.IAOLab
                 progressBar1.Value += 1;
             }
         }
-        private HttpWebRequest ConfigPost(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Timeout = 200000;
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            return request;
-        }
 
         public string GetSEOTool(string host)
         {
             string url =  Global.FastIaoUrl + "/seo_query";
-            HttpWebRequest request = ConfigPost(url);
+            HttpWebRequest request = WFDWebAPI.GetInstance().ConfigPost(url);
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "domain", host } };
             string content = JsonConvert.SerializeObject(pairs);
             byte[] data = Encoding.UTF8.GetBytes(content);
@@ -292,7 +285,7 @@ namespace C2.Dialogs.IAOLab
         private List<Dictionary<string, string>> IpConvertHost(string ip)
         {
             string url = Global.FastIaoUrl + "/capture_host_by_ip";
-            HttpWebRequest req = ConfigPost(url);
+            HttpWebRequest req = WFDWebAPI.GetInstance().ConfigPost(url);
             HttpWebResponse resp;
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "ip", ip } };
             byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(pairs));

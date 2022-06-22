@@ -1,4 +1,5 @@
-﻿using C2.Utils;
+﻿using C2.Business.WebsiteFeatureDetection;
+using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -39,14 +40,9 @@ namespace C2.IAOLab.BankTool
             Thread.Sleep(500);
             string url = "http://113.31.114.239:53373/api/spider/bank_info";
             Dictionary<string, string> pairs = new Dictionary<string, string> { { "bankcard", bankCardNum } };
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Timeout = 200000;
+            HttpWebRequest request = WFDWebAPI.GetInstance().ConfigPost(url);
             string content = JsonConvert.SerializeObject(pairs);
             byte[] data = Encoding.UTF8.GetBytes(content);
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
-            //request.Headers.Set("cookie", "td_cookie=1206126369; t=ed9584c3ee86740383a6dd94af963b16; r=461; UM_distinctid=17e2f0d4f7950c-0b8d03a6e92b87-3b39580e-1fa400-17e2f0d4f7a530; ASPSESSIONIDSSRDRBDB=CAJABDJAFEBEAAAHIOFCLBBC; CNZZDATA1279885053=887337253-1641463516-null%7C1643249436; security_session_verify=d256ef371a6fb7ffda35fec7c01e5c64");
             string nameAndType;
             string city;
             try

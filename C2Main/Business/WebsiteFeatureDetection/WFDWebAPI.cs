@@ -1,13 +1,17 @@
 ﻿using C2.Business.HTTP;
+using C2.Core;
 using C2.Dialogs.WebsiteFeatureDetection;
+using C2.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace C2.Business.WebsiteFeatureDetection
 {
@@ -25,6 +29,11 @@ namespace C2.Business.WebsiteFeatureDetection
 
         Dictionary<string, string> PredictionCodeDict;
         Dictionary<string, string> FraudCodeDict;
+
+        private static DirectoryInfo info = new DirectoryInfo(Global.TempDirectory);
+        private static string xmlDirectory = Path.Combine(info.Parent.FullName, "tmpRedisASK");
+        private static string xmlPath = Path.Combine(xmlDirectory, "tmpRedisASK.xml");
+        private static readonly XmlDocument xDoc = new XmlDocument();
 
         HttpHandler httpHandler;
 
@@ -303,6 +312,32 @@ namespace C2.Business.WebsiteFeatureDetection
                 return "false" + UserName;
             UserName = UAdialog.UserName;
             return "true" + UserName;
+        }
+        public HttpWebRequest ConfigPost(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            int maxRetryTime = 10;
+            int time = 0;
+            if (File.Exists(xmlPath))
+            {
+                xDoc.Load(xmlPath);
+                UserName = xDoc.SelectSingleNode(@"IdenInformation/userInfo/userName").InnerText;
+                while (time++ < maxRetryTime)
+                {
+                    if (UserAuthentication(UserName, TOTP.GetInstance().GetTotp(UserName)) == "success")
+                    {
+                        request.Timeout = 200000;
+                        request.Method = "POST";
+                        request.ContentType = "application/json";
+                        request.Headers.Add("Authorization", "Bearer " + Token);
+                        return request;
+                    }
+                    Thread.Sleep(1000);
+                }
+            }
+            else
+                HelpUtil.ShowMessageBox("请关闭软件登录熵情口令使用");
+            return request;
         }
     }
 }
