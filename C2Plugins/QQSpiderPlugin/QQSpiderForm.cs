@@ -10,6 +10,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using System.Drawing.Imaging;
 
 namespace QQSpiderPlugin
 {
@@ -285,7 +288,12 @@ namespace QQSpiderPlugin
             for (int i = 0; i < dataSource.Count; i++)
             {
                 string keyword = dataSource[i];
-                this.QueryKeyWord(keyword, i, dgvMgr);
+                //this.QueryKeyWord(keyword, i, dgvMgr);
+                this.QueryKeyWordExcel(keyword, i, dgvMgr);
+                //string txtPath = this.ResultFilePath + "\\" + keyword + ".txt";
+                //string excelPath = this.ResultFilePath + "\\" + keyword + ".xls";
+
+                //Util.TxtToExcel(excelPath, txtPath);  // txt转excel
             }
             this.Cursor = Cursors.Arrow;
             ShowMessageBox("查询完成！");
@@ -668,7 +676,7 @@ namespace QQSpiderPlugin
                                                 labelSb.Append(l["label"].ToString()).Append("|");
                                             s = Util.GenRwWTS(labelSb.ToString().Trim('|'));
                                         }
-                                        tmp = tmp + "\t" + s;
+                                        tmp = tmp + "\t" + (s.Replace('\t', ','));
                                     }
                                     else
                                     {
@@ -723,6 +731,183 @@ namespace QQSpiderPlugin
                 keyWordRichTextBox.Clear();
                 keyWordRichTextBox.ForeColor = SystemColors.WindowText;
             }
+        }
+
+        private void QueryKeyWordExcel(string keyword, int id, DgvManager dgvM)
+        {
+            int resultCount = 0;
+
+            string url = "https://qun.qq.com/cgi-bin/group_search/pc_group_search";
+            Dictionary<string, string> param = new Dictionary<string, string>
+            {
+                {"from", "1" },
+                { "keyword", keyword },
+                { "wantnum", "24" },
+                { "page", "0" },
+                {"sort", "2"},  // sort type: 0 默认排序, 1 人数优先, 2 活跃优先
+                {"isRecommend", "false"}
+            };
+            List<string> target_keys = new List<string>
+            { "url", "code", "name", "member_num", "max_member_num", "owner_uin", "qaddr", "gcate", "labels", "memo" };
+
+            // excel相关
+            string excelPath = this.ResultFilePath + "\\" + keyword + ".xls";  // 创建储存当前词的xls文件
+            FileStream fs = new FileStream(excelPath, FileMode.Create, FileAccess.Write);
+            short rowHeight = 800;
+            List<string> headList = new List<string> { "群头像", "群ID", "群名称", "群人数", "群人数上限", "群主QQ", "群地址", "群分类", "群标签", "群简介" };
+            HSSFWorkbook workbook;
+            HSSFSheet sheet;
+            int colCount = 10;  // excel列数
+            workbook = new HSSFWorkbook();
+            sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
+            // 第一行处理
+            try
+            {
+                IRow row = sheet.CreateRow(0);
+                for (int j = 0; j < colCount; j++)
+                {
+                    ICell cell = row.CreateCell(j);
+                    cell.SetCellValue(headList[j]);
+                }
+            }
+            catch (Exception) { }
+
+            int i = 0;  // 表示page
+            // 判断是否为群号，若为群号则只翻一页，即maxPage为1，否则最多翻10页，即maxPage为10
+            int t = 0;
+            bool isId = int.TryParse(keyword, out t);
+            int maxPage = 10;
+            if (isId)
+            {
+                maxPage = 1;
+            }
+            // 开始翻页抓取
+            string tmp;
+            while (resultCount < 150 && i < maxPage)  // 一个词最多抓150条，且请求不超过10次
+            {
+                param["page"] = i.ToString();
+                try
+                {
+                    Response resp = this.session.Post(url, param);
+                    JObject json = JObject.Parse(resp.Text);
+                    if (json["errcode"].ToString() == "0" && json["ec"].ToString() != "99997")  // 不满足这些条件，表示被爬虫被限制了
+                    {
+                        if (json.ContainsKey("group_list"))
+                        {
+                            string group_list_string = json["group_list"].ToString();
+                            List<JToken> group_list = json["group_list"].ToList();
+                            foreach (JToken x in group_list)  // 处理每个群
+                            {
+                                tmp = "";
+                                foreach (string key in target_keys)  // 处理每个字段
+                                {
+                                    if (x.SelectToken(key) != null)
+                                    {
+                                        string s = x[key].ToString();
+                                        if (key == "qaddr")
+                                        {
+                                            StringBuilder qaddrSb = new StringBuilder();
+                                            foreach (var q in x["qaddr"])
+                                                qaddrSb.Append(q.ToString());
+                                            s = qaddrSb.ToString();
+                                        }
+                                        if (key == "gcate")
+                                        {
+                                            StringBuilder gcateSb = new StringBuilder();
+                                            foreach (var l in x["gcate"])
+                                                gcateSb.Append(l.ToString()).Append("|");
+                                            s = Util.GenRwWTS(gcateSb.ToString().Trim('|'));
+                                        }
+                                        if (key == "labels")
+                                        {
+                                            StringBuilder labelSb = new StringBuilder();
+                                            foreach (var l in x["labels"])
+                                                labelSb.Append(l["label"].ToString()).Append("|");
+                                            s = Util.GenRwWTS(labelSb.ToString().Trim('|'));
+                                        }
+                                        tmp = tmp + "\t" + (s.Replace('\t', ','));
+                                    }
+                                    else
+                                    {
+                                        tmp = tmp + "\t" + "";
+                                    }
+                                }
+                                // 结果写入excel
+                                if (tmp.StartsWith("\t"))
+                                {
+                                    tmp = tmp.Substring(1, tmp.Length-1);
+                                }
+                                string[] currentRowList = tmp.Split('\t');
+                                if ((resultCount+1) >= 65536)
+                                {
+                                    break;
+                                }
+                                IRow row = sheet.CreateRow((resultCount + 1));
+                                row.Height = rowHeight;
+                                Console.WriteLine(currentRowList.Length.ToString());
+                                for (int j = 0; j < colCount; j++)
+                                {
+                                    ICell cell = row.CreateCell(j);
+
+                                    // 头像
+                                    if (j == 0)
+                                    {
+                                        Image image;
+                                        try
+                                        {
+                                            image = Util.GetImage(currentRowList[0]);
+                                            byte[] bytes;
+                                            using (var ms = new MemoryStream())
+                                            {
+                                                image.Save(ms, ImageFormat.Png);
+                                                bytes = ms.ToArray();
+                                            }
+                                            int pictureIndex = workbook.AddPicture(bytes, PictureType.PNG);
+                                            ICreationHelper helper = workbook.GetCreationHelper();
+                                            IDrawing drawing = sheet.CreateDrawingPatriarch();
+                                            IClientAnchor anchor = helper.CreateClientAnchor();
+                                            anchor.Col1 = 0;//0 index based column
+                                            anchor.Row1 = resultCount+1;//0 index based row
+                                            IPicture picture = drawing.CreatePicture(anchor, pictureIndex);
+                                            picture.Resize();
+                                        }
+                                        catch (Exception) { }
+                                    }
+                                    else
+                                    {
+                                        cell.SetCellValue(currentRowList[j]);
+                                    }
+                                }
+                                resultCount++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    dgvM.ChangeCellValue(id, 1, resultCount.ToString());
+                    dgvM.ChangeCellValue(id, 2, ((i + 1) * 1.0 / maxPage * 100.0).ToString() + "%");
+                }
+                catch { }
+                Thread.Sleep(new Random().Next(3000, 8000));  //随机停3到8秒
+                i++;
+            }
+            try
+            {
+                workbook.Write(fs);
+            }
+            catch { }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+                workbook = null;
+            }
+            dgvM.ChangeCellValue(id, 2, "100%");
         }
     }
 }
