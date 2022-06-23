@@ -228,7 +228,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             HttpHandler httpHandler = new HttpHandler();
             try
             {
-                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 1000);
+                Response resp = httpHandler.Post(requestURL, pairs, string.Empty, 1000,false);
                 if (resp.StatusCode != HttpStatusCode.OK)
                     error = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
 

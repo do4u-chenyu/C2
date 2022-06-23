@@ -22,7 +22,7 @@ namespace C2.Business.HTTP
             return true;
         }
 
-        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 10000)
+        public Response Post(string url, Dictionary<string, string> postData, string token = "", int timeout = 10000,bool flag = true)
         {
             Response resp = new Response();
             try
@@ -41,9 +41,8 @@ namespace C2.Business.HTTP
                 req.Method = "POST";
                 req.ContentType = "application/json";
                 req.ContentLength = data.Length;
-                if (!string.IsNullOrEmpty(token))
-                    req.Headers.Add("Authorization", "Bearer " + token);
-                else
+                req.Headers.Add("Authorization", "Bearer " + token);
+                if(!flag)
                     req.Headers.Add("Authorization", "Bearer " + WFDWebAPI.GetInstance().IsVerify());
                 req.KeepAlive = true;//解决GetResponse操作超时问题
                 using (var stream = req.GetRequestStream())
