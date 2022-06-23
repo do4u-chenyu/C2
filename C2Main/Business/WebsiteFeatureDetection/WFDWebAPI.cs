@@ -337,7 +337,6 @@ namespace C2.Business.WebsiteFeatureDetection
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             string token = IsVerify();
-            //string token = "";
             if (!string.IsNullOrEmpty(token))
             {
                 request.Timeout = 200000;
