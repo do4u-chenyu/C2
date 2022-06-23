@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -314,6 +315,112 @@ namespace QQSpiderPlugin
                 {
                     fs.Close();
                     fs.Dispose();
+                }
+                workbook = null;
+            }
+            return result;
+        }
+
+        public static bool TxtToExcel(string excelPath, string txtPath)
+        {
+            short rowHeight = 800;
+            bool result = true;
+            List<string> headList = new List<string> { "群头像", "群ID", "群名称", "群人数", "群人数上限", "群主QQ", "群地址", "群分类", "群标签", "群简介" };
+            FileStream excelFs;
+            FileStream txtFs;
+            HSSFWorkbook workbook;
+            HSSFSheet sheet;
+            int colCount = 10;  // excel列数
+            txtFs = new FileStream(txtPath, FileMode.Open, FileAccess.Read);
+            int n = (int)txtFs.Length;
+            byte[] b = new byte[n];
+            int r = txtFs.Read(b, 0, n);
+            txtFs.Close();
+            string txtString = Encoding.Default.GetString(b, 0, n);
+            string[] txtList = txtString.Trim('\n').Split('\n');
+            int rowCount = txtList.Length;  // excel行数
+
+
+            try
+            {
+                excelFs = new FileStream(excelPath, FileMode.Create, FileAccess.Write);
+                workbook = new HSSFWorkbook();
+                sheet = (HSSFSheet)workbook.CreateSheet("Sheet1");
+
+                // 第一行处理
+                IRow row = sheet.CreateRow(0);
+                for (int j = 0; j < colCount; j++)
+                {
+                    ICell cell = row.CreateCell(j);
+                    cell.SetCellValue(headList[j]);
+                }
+            }
+            catch (Exception)
+            {
+                result = false;
+                return result;
+            }
+
+            for (int i = 1; i < rowCount; i++)
+            {
+                if (i >= 65536)
+                {
+                    result = false;
+                    break;
+                }
+                IRow row = sheet.CreateRow(i);
+                row.Height = rowHeight;
+                string s = txtList[i];
+                string[] currentRowList = s.Split('\t');
+                for (int j = 0; j < colCount; j++)
+                {
+                    ICell cell = row.CreateCell(j);
+
+                    // 头像
+                    if (j == 0)
+                    {
+                        Image image;
+                        try
+                        {
+                            image = GetImage(currentRowList[colCount-1]);
+                            byte[] bytes;
+                            using (var ms = new MemoryStream())
+                            {
+                                image.Save(ms, ImageFormat.Png);
+                                bytes = ms.ToArray();
+                            }
+                            int pictureIndex = workbook.AddPicture(bytes, PictureType.PNG);
+                            ICreationHelper helper = workbook.GetCreationHelper();
+                            IDrawing drawing = sheet.CreateDrawingPatriarch();
+                            IClientAnchor anchor = helper.CreateClientAnchor();
+                            anchor.Col1 = 0;//0 index based column
+                            anchor.Row1 = i;//0 index based row
+                            IPicture picture = drawing.CreatePicture(anchor, pictureIndex);
+                            picture.Resize();
+                        }
+                        catch (Exception) { }   
+                    }
+                    else
+                    {
+                        cell.SetCellValue(currentRowList[j - 1]);
+                    }
+                }
+            }
+            try
+            {
+                workbook.Write(excelFs);
+            }
+            catch
+            {
+                result = false;
+                return result;
+            }
+            finally
+            {
+                if (excelFs != null)
+                {
+                    excelFs.Close();
+                    excelFs.Dispose();
                 }
                 workbook = null;
             }
