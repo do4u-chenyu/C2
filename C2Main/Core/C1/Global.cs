@@ -256,14 +256,15 @@ namespace C2.Core
             { "L1HF58S04Y6", "LQ1" },
             { "L1HF1B505E0", "LQ2" },
             { "L1HF68F046A", "SQY"},
-            //{ "PF2Z4F9W",    "HZH"},
+            { "PF2Z4F9W",    "HZH"},
             { "L1HF68F02VM", "MHD"},
             { "L1HF5AL00EV", "LXF"},
             { "L1HF68F04XB", "WLY"},
             { "1ZM4A2764MG", "XRC"},
             { "/7W9Q8M2/CNWS2007A500S5/" , "WL"},
-            {".7JQF432.CN762064BD001D.","XXY" },//徐晓阳
-             {"/49D2SD3/CNCMC0014O050F/","LZT" }//刘忠堂
+            { ".7JQF432.CN762064BD001D.","XXY" },//徐晓阳
+            { "/49D2SD3/CNCMC0014O050F/","LZT" },//刘忠堂
+            { "PHMMU038JAW0BK","WW" }//万玮
         };
 
         public static readonly string[] EmptyStringArray2 = { string.Empty, string.Empty };
