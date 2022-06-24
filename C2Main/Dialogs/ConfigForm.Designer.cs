@@ -551,7 +551,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(122, 17);
             this.label9.TabIndex = 10;
-            this.label9.Text = "到期时间 2022.07.24";
+            this.label9.Text = "到期时间 2022.08.04";
             // 
             // version
             // 
@@ -560,7 +560,7 @@
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(47, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "V:2.1.5";
+            this.version.Text = "V:2.1.6";
             // 
             // textBox4
             // 
