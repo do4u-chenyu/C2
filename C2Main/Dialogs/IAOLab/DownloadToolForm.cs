@@ -89,7 +89,7 @@ namespace C2.Dialogs.IAOLab
                 this.check.Enabled = true;
                 new Log.Log().LogManualButton("实验楼" + "-" + DouYinTabPage.Text, "运行");
 
-                string[] inputArray = this.richTextBox1.Text.Split('\n');
+                string[] inputArray = richTextBox1.Text.Split('\n');
                 progressBar1.Value = 0;
                 progressBar1.Maximum = GetRelLengthOfArry(inputArray);
                 progressBar1.Minimum = 0;

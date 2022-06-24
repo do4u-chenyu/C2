@@ -211,7 +211,7 @@ namespace C2.Controls.Left
             }
 
         }
-        private string trans(string buttonType)
+        private string Trans(string buttonType)
         {
             switch (buttonType)
             {
@@ -231,6 +231,8 @@ namespace C2.Controls.Left
                     return "社工生成器";
                 case "GoldEyes":
                     return "SEO综合查询";
+                case "DownloadTool":
+                    return "抖音视频下载";
                 default:
                     return string.Empty;
             }
@@ -270,8 +272,10 @@ namespace C2.Controls.Left
         #endregion
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || buttonType == "PwdGenerator" || buttonType == "GoldEyes")
-                new Log.Log().LogManualButton("实验楼" + "-" + trans(buttonType), "打开");
+            if (buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || 
+                buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || 
+                buttonType == "PwdGenerator" || buttonType == "GoldEyes" || buttonType == "DownloadTool")
+                new Log.Log().LogManualButton("实验楼" + "-" + Trans(buttonType), "打开");
             else
                 new Log.Log().LogManualButton(buttonType, "打开");
             OpenToolForm();
@@ -281,8 +285,10 @@ namespace C2.Controls.Left
         {
             if (e.Button == MouseButtons.Left && e.Clicks == 2)
             {
-                if (buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || buttonType == "PwdGenerator" || buttonType == "GoldEyes")
-                    new Log.Log().LogManualButton("实验楼" + "-" + trans(buttonType), "打开");
+                if (buttonType == "BigAPK" || buttonType == "APK" || buttonType == "Wifi" || 
+                    buttonType == "InformationSearch" || buttonType == "Tude" || buttonType == "PostAndGet" || 
+                    buttonType == "PwdGenerator" || buttonType == "GoldEyes" || buttonType == "DownloadTool")
+                    new Log.Log().LogManualButton("实验楼" + "-" + Trans(buttonType), "打开");
                 else
                     new Log.Log().LogManualButton(buttonType, "打开");
                 OpenToolForm();
