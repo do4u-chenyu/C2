@@ -33,7 +33,7 @@
             this.export = new System.Windows.Forms.Button();
             this.confirm = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.IPChecktabPage = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,7 +58,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.IPChecktabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SEOTabPage.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -108,23 +108,23 @@
             this.panel2.Size = new System.Drawing.Size(647, 341);
             this.panel2.TabIndex = 7;
             // 
-            // tabPage1
+            // IPChecktabPage
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.progressBar2);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.richTextBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(639, 313);
-            this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "IP反查域名";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.IPChecktabPage.Controls.Add(this.dataGridView1);
+            this.IPChecktabPage.Controls.Add(this.button1);
+            this.IPChecktabPage.Controls.Add(this.progressBar2);
+            this.IPChecktabPage.Controls.Add(this.label2);
+            this.IPChecktabPage.Controls.Add(this.label3);
+            this.IPChecktabPage.Controls.Add(this.label4);
+            this.IPChecktabPage.Controls.Add(this.label5);
+            this.IPChecktabPage.Controls.Add(this.richTextBox2);
+            this.IPChecktabPage.Location = new System.Drawing.Point(4, 24);
+            this.IPChecktabPage.Name = "IPChecktabPage";
+            this.IPChecktabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.IPChecktabPage.Size = new System.Drawing.Size(639, 313);
+            this.IPChecktabPage.TabIndex = 1;
+            this.IPChecktabPage.Text = "IP反查域名";
+            this.IPChecktabPage.UseVisualStyleBackColor = true;
             // 
             // richTextBox2
             // 
@@ -354,7 +354,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.SEOTabPage);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.IPChecktabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("宋体", 10.5F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -378,8 +378,8 @@
             this.Text = "火眼金睛";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.IPChecktabPage.ResumeLayout(false);
+            this.IPChecktabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.SEOTabPage.ResumeLayout(false);
             this.SEOTabPage.PerformLayout();
@@ -402,7 +402,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage IPChecktabPage;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn IP;
         private System.Windows.Forms.DataGridViewTextBoxColumn domain;

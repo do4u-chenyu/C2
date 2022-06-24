@@ -81,9 +81,9 @@ namespace C2.Dialogs.IAOLab
                 }
             }
 
-            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == IPChecktabPage && tabControl1.Visible == true)
             {
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "运行");
+                new Log.Log().LogManualButton("实验楼" + "-" + IPChecktabPage.Text, "运行");
                 string[] inputArray = richTextBox2.Text.Split('\n');
                 progressBar2.Value = 0;
                 progressBar2.Maximum = GetRelLengthOfArry(inputArray);
@@ -105,7 +105,7 @@ namespace C2.Dialogs.IAOLab
         private void Export_Click(object sender, EventArgs e)
         {
             if ((tabControl1.SelectedTab == SEOTabPage && tabControl1.Visible == true && richTextBox1.Text == string.Empty) ||
-                (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true && dataGridView1.RowCount == 0))
+                (tabControl1.SelectedTab == IPChecktabPage && tabControl1.Visible == true && dataGridView1.RowCount == 0))
             {
                 MessageBox.Show("当前无数据可导出!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -261,7 +261,7 @@ namespace C2.Dialogs.IAOLab
             {
                 fileType = "SEO";
             }
-            if (tabControl1.SelectedTab == tabPage1 && tabControl1.Visible == true)
+            if (tabControl1.SelectedTab == IPChecktabPage && tabControl1.Visible == true)
             {
                 fileType = "IP反查";
             }
@@ -396,9 +396,9 @@ namespace C2.Dialogs.IAOLab
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == SEOTabPage)
-                new Log.Log().LogManualButton("实验楼" + "-" + SEOTabPage.Text, "01");
-            else if (tabControl1.SelectedTab == tabPage1)
-                new Log.Log().LogManualButton("实验楼" + "-" + tabPage1.Text, "01");
+                new Log.Log().LogManualButton("实验楼" + "-" + SEOTabPage.Text, "打开");
+            else if (tabControl1.SelectedTab == IPChecktabPage)
+                new Log.Log().LogManualButton("实验楼" + "-" + IPChecktabPage.Text, "打开");
         }
     }
 }
