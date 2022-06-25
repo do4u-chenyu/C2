@@ -51,6 +51,8 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLB = new System.Windows.Forms.Label();
             this.vpnPB = new System.Windows.Forms.Label();
             this.vpnLB = new System.Windows.Forms.Label();
+            this.sucPB = new System.Windows.Forms.Label();
+            this.sucLB = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -284,7 +286,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLable.AutoSize = true;
             this.rssLable.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rssLable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.rssLable.Location = new System.Drawing.Point(0, 349);
+            this.rssLable.Location = new System.Drawing.Point(0, 352);
             this.rssLable.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.rssLable.Name = "rssLable";
             this.rssLable.Size = new System.Drawing.Size(80, 18);
@@ -297,7 +299,7 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLB.AutoSize = true;
             this.rssLB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rssLB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.rssLB.Location = new System.Drawing.Point(77, 349);
+            this.rssLB.Location = new System.Drawing.Point(77, 352);
             this.rssLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.rssLB.Name = "rssLB";
             this.rssLB.Size = new System.Drawing.Size(35, 18);
@@ -310,7 +312,7 @@ namespace C2.Business.CastleBravo.VPN
             this.vpnPB.AutoSize = true;
             this.vpnPB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.vpnPB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.vpnPB.Location = new System.Drawing.Point(0, 320);
+            this.vpnPB.Location = new System.Drawing.Point(0, 324);
             this.vpnPB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.vpnPB.Name = "vpnPB";
             this.vpnPB.Size = new System.Drawing.Size(80, 18);
@@ -323,12 +325,39 @@ namespace C2.Business.CastleBravo.VPN
             this.vpnLB.AutoSize = true;
             this.vpnLB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.vpnLB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.vpnLB.Location = new System.Drawing.Point(77, 320);
+            this.vpnLB.Location = new System.Drawing.Point(77, 324);
             this.vpnLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.vpnLB.Name = "vpnLB";
-            this.vpnLB.Size = new System.Drawing.Size(0, 18);
+            this.vpnLB.Size = new System.Drawing.Size(17, 18);
             this.vpnLB.TabIndex = 10041;
+            this.vpnLB.Text = "0";
             this.vpnLB.Visible = false;
+            // 
+            // sucPB
+            // 
+            this.sucPB.AutoSize = true;
+            this.sucPB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sucPB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.sucPB.Location = new System.Drawing.Point(0, 296);
+            this.sucPB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sucPB.Name = "sucPB";
+            this.sucPB.Size = new System.Drawing.Size(80, 18);
+            this.sucPB.TabIndex = 10042;
+            this.sucPB.Text = "订阅成比";
+            this.sucPB.Visible = false;
+            // 
+            // sucLB
+            // 
+            this.sucLB.AutoSize = true;
+            this.sucLB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sucLB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.sucLB.Location = new System.Drawing.Point(77, 296);
+            this.sucLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sucLB.Name = "sucLB";
+            this.sucLB.Size = new System.Drawing.Size(35, 18);
+            this.sucLB.TabIndex = 10043;
+            this.sucLB.Text = "0/1";
+            this.sucLB.Visible = false;
             // 
             // BatchAddVPNServerForm
             // 
@@ -336,6 +365,8 @@ namespace C2.Business.CastleBravo.VPN
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(722, 488);
+            this.Controls.Add(this.sucLB);
+            this.Controls.Add(this.sucPB);
             this.Controls.Add(this.vpnLB);
             this.Controls.Add(this.rssLB);
             this.Controls.Add(this.rssLable);
@@ -377,6 +408,8 @@ namespace C2.Business.CastleBravo.VPN
             this.Controls.SetChildIndex(this.rssLable, 0);
             this.Controls.SetChildIndex(this.rssLB, 0);
             this.Controls.SetChildIndex(this.vpnLB, 0);
+            this.Controls.SetChildIndex(this.sucPB, 0);
+            this.Controls.SetChildIndex(this.sucLB, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -407,5 +440,7 @@ namespace C2.Business.CastleBravo.VPN
         private System.Windows.Forms.Label rssLB;
         private System.Windows.Forms.Label vpnPB;
         private System.Windows.Forms.Label vpnLB;
+        private System.Windows.Forms.Label sucPB;
+        private System.Windows.Forms.Label sucLB;
     }
 }

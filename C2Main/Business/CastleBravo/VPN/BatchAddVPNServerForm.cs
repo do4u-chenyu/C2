@@ -25,6 +25,7 @@ namespace C2.Business.CastleBravo.VPN
         public List<VPNTaskConfig> Tasks;
 
         private List<string> rssFailHist;
+        private int rssSuccCnt;
 
         public BatchAddVPNServerForm()
         {
@@ -117,6 +118,8 @@ namespace C2.Business.CastleBravo.VPN
             this.rssLB.Visible = true;
             this.vpnPB.Visible = true;
             this.vpnLB.Visible = true;
+            this.sucLB.Visible = true;
+            this.sucPB.Visible = true;
         }
 
         private void AddTasksByLine(string line)
@@ -183,6 +186,8 @@ namespace C2.Business.CastleBravo.VPN
                                                                 ProxySetting.Empty));
                 if (ret.IsNullOrEmpty())
                     rssFailHist.Add(line);
+                else
+                    rssSuccCnt++;
 
                 foreach (string ss in ret.SplitLine())
                 {
@@ -257,6 +262,7 @@ namespace C2.Business.CastleBravo.VPN
             int val = rssPB.Value < rssPB.Maximum ? rssPB.Value++ : rssPB.Maximum;
             this.rssLB.Text = string.Format("{0}/{1}", val, rssPB.Maximum);
             this.vpnLB.Text = string.Format("{0}", this.vpnCount);
+            this.sucLB.Text = string.Format("{0}/{1}", rssSuccCnt, rssFailHist.Count);
             Application.DoEvents();
         }
 
