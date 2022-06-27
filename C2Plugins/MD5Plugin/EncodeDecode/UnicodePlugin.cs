@@ -70,6 +70,11 @@ namespace MD5Plugin
                     str = str.Replace(@"\", string.Empty);
                     DealWithUnicode(str);
                 }
+                else if (splitType == "%u")
+                {
+                    str = str.Replace(@"%", string.Empty);
+                    DealWithUnicode(str);
+                }
                 else if (splitType == "&#;") //&#22823;&#28385;&#36143;&#22823;&#22235;
                 {
                     if(str.Substring(str.Length - 1, 1) == ";")
