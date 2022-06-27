@@ -3401,6 +3401,12 @@
     </None>
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_pass_accountPass_C2_20210624.py.zip" />
     <None Include="Resources\Script\IAO_Search_gamble\batchquery_sq_accountPass_C2_20200908.py.zip" />
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_wg_accountPass_C2_20220622.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Script\IAO_Search_gamble\batchquery_wg_accountPass_C2_20220622.py.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Script\IAO_Search_gamble\dsqquery_email_BillofLading_C2.py.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
