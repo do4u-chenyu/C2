@@ -135,7 +135,7 @@ namespace C2.Update
                 {
                     foreach (XmlNode xml in node)
                     {
-                        if (xml.Name == "DownLoadC2Inner")
+                        if (xml.Name == "DownLoadC2Inner")  
                             downloadC2Inner = xml.InnerText;
                         else if (xml.Name == "DownLoadC2F")
                             downloadC2F = xml.InnerText;
@@ -230,7 +230,10 @@ namespace C2.Update
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex.Message.Contains("分析 EntityName 时出错"))
+                    return;
+                else
+                    MessageBox.Show(ex.Message);
             }
         }
 
