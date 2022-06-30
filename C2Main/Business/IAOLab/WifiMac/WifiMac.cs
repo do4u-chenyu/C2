@@ -20,7 +20,7 @@ namespace C2.IAOLab.WifiMac
         }
         public string MacLocate(string input)
         {
-            string url = Global.ServerUrl + "/Test01/search.do";
+            string url = Global.ServerUrl + "/Castle02/mac";
             if (input == "基站号" || input == "WiFiMac号" || input == "银行卡号" || input == "IP")
                 return string.Empty;
             string location = GetInfo(url, input,"mac");

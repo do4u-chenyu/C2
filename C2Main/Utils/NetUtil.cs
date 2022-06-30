@@ -238,7 +238,7 @@ namespace C2.Utils
             if (ip != IPCheck(ip))
                 return IPCheck(ip);
             
-            string url = Global.ServerUrl + "/Castle/ip?ip=" + ip;
+            string url = Global.ServerUrl + "/Castle01/ip?ip=" + ip;
             string result = string.Empty;
             WebRequest wrt = null;
             WebResponse wrp = null;

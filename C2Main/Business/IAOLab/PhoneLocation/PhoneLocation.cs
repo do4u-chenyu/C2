@@ -25,7 +25,7 @@ namespace C2.IAOLab.PhoneLocation
             string phoneNum = input.Trim(' ');
             if (!NetUtil.IsPhoneNum(phoneNum))
                 return "请输入手机号\n";
-            string url = Global.ServerUrl + "/Castle/phone?phone=" + phoneNum;
+            string url = Global.ServerUrl + "/Castle01/phone?phone=" + phoneNum;
             string location = Post(url);
             return location;
         }

@@ -344,7 +344,7 @@ namespace C2.Dialogs.CastleBravo
         private void QueryButton_Click(object sender, EventArgs e)
         {
             string result = string.Empty;
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(Global.CastleIDLEUrl);
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(Global.CastleIDLEUrl + "/Castle/check");
             req.Method = "POST";
             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
             Stream stream = resp.GetResponseStream();

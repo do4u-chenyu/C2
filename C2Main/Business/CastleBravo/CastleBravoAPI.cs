@@ -26,7 +26,7 @@ namespace C2.Business.CastleBravo
 
         public CastleBravoAPI()
         {
-            APIUrl = Global.ServerUrl +  "/Castle/";//正式
+            APIUrl = Global.CastleIDLEUrl +  "/Castle/";//正式
 
             SearchUrl = APIUrl + "search";
             ResultUrl = APIUrl + "result";
