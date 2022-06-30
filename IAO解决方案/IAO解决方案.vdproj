@@ -429,12 +429,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_23DC8596066647F08124E837E1EDAE0B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2612D43EC3B74FE2BEC5FE77AC9865A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -965,18 +959,6 @@
         {
         "MsmKey" = "8:_4D009B6E703547AC9C7511D3FC38BC21"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4D605D3D711903C11235C2A6A254E0EA"
-        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4D605D3D711903C11235C2A6A254E0EA"
-        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1893,6 +1875,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
+        "OwnerKey" = "8:_37039095DF6C4402A22713B87BCB6EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_94F3F70C23FA400C9EDF4B11DE05747B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2763,6 +2757,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E3B1FD3FD7284BFB8BC7075B65E32291"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E40465C9DCEB4056A788668D6114B2E9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3400,7 +3400,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4D605D3D711903C11235C2A6A254E0EA"
+        "OwnerKey" = "8:_94E4E632480C0800C6A219D633BA9E04"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -5149,26 +5149,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23DC8596066647F08124E837E1EDAE0B"
-            {
-            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_wg_accountPass_C2_20220622.py.zip"
-            "TargetName" = "8:batchquery_wg_accountPass_C2_20220622.py.zip"
-            "Tag" = "8:"
-            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2612D43EC3B74FE2BEC5FE77AC9865A6"
             {
             "SourcePath" = "8:..\\C2Main\\Resources\\PictureIconLib\\241_no.png"
@@ -6728,37 +6708,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4D605D3D711903C11235C2A6A254E0EA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:UserInstallSet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_4D605D3D711903C11235C2A6A254E0EA"
-                    {
-                    "Name" = "8:UserInstallSet.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:UserInstallSet.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4DC888F54FE84FCCAD61E7C1464A0DE4"
@@ -9536,6 +9485,37 @@
                     }
                 }
             "SourcePath" = "8:ConsoleControlAPI.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94E4E632480C0800C6A219D633BA9E04"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:UserInstallSet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_94E4E632480C0800C6A219D633BA9E04"
+                    {
+                    "Name" = "8:UserInstallSet.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -12434,6 +12414,26 @@
             "TargetName" = "8:BossIndex14.html"
             "Tag" = "8:"
             "Folder" = "8:_D896FD688F60459D930F76038B4CDFC7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E3B1FD3FD7284BFB8BC7075B65E32291"
+            {
+            "SourcePath" = "8:..\\C2Main\\Resources\\Script\\IAO_Search_gamble\\batchquery_wpwg_accountPass_C2_20220622.py.zip"
+            "TargetName" = "8:batchquery_wpwg_accountPass_C2_20220622.py.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_A84863BC140649D99C499CAD84190897"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -15465,7 +15465,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\C2_Inner\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -15493,7 +15493,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\C2Main\\obj\\Debug\\C2.exe"
+            "SourcePath" = "8:..\\C2Main\\obj\\C2_Inner\\C2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
