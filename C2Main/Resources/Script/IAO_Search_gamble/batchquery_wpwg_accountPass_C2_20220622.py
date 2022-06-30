@@ -2,7 +2,10 @@
 """
 2022.06.22
 Modify by HZH
-格式规范
+基本需求实现
+2022.06.30
+Modify by HZH
+生成.net文件并加密
 """
 from subprocess import Popen,PIPE
 import re 
@@ -49,7 +52,7 @@ class WaiGua:
                     if batch != []:
                         data = dict(batch)
                         content = data.get('_QUERY_CONTENT')
-                        if queryOut == "wg_user.txt":
+                        if queryOut == "wpwg_user.txt":
                             data['DLMC'] = data.get('_HOST').replace(".cccpan.com", "").replace(".uepan.com", "")
                             data['USER_PWD'] = self.get_user_pwd(content)
                         else:
@@ -129,7 +132,7 @@ class WaiGua:
 
 
     def run_query(self, KEY_WORDS, out_file):
-        if out_file == "wg_admin.txt":
+        if out_file == "wpwg_admin.txt":
             self.all_items += ['ADMIN_PWD']
         with open(os.path.join(self.data_path, out_file), 'a+') as f:
             f.write('\t'.join(ALL_ITEMS) + '\n')
@@ -165,33 +168,54 @@ def init_logger(logname,filename,logger_level = logging.INFO):
 def macth_admin(DATA_PATH):
     admin_dict = {}
     result_list = []
-    with open(os.path.join(DATA_PATH, 'wg_admin.txt'), 'r') as f:
+    with open(os.path.join(DATA_PATH, 'wpwg_admin.txt'), 'r') as f:
         lines = f.readlines()
         index = lines[0].split("\t").index("DLMC")
         for line in lines[1:]:
             line = line.strip('\n').split("\t")
             if line[index] not in admin_dict.keys():
                 admin_dict[line[index]] = []
-            if line[index+2] not in admin_dict[line[index]]:
-                admin_dict[line[index]].append(line[index+2])
+            if line[index + 2] not in admin_dict[line[index]]:
+                admin_dict[line[index]].append(line[index + 2])
     if admin_dict == {}:
         return result_list
-
-    with open(os.path.join(DATA_PATH, 'wg_out.txt'), 'a+') as f:
-        with open(os.path.join(DATA_PATH, 'wg_user.txt'), 'r') as fs:
+    wpwg_out = []
+    wpwg_user = []
+    with open(os.path.join(DATA_PATH, 'wpwg_out.txt'), 'a+') as f:
+        with open(os.path.join(DATA_PATH, 'wpwg_user.txt'), 'r') as fs:
             lines = fs.readlines()
-            index = lines[0].split("\t").index("DLMC")
+            header_list = lines[0].split("\t")
+            index = header_list.index("DLMC")
             f.write(lines[0].strip('\n').replace("DLMC\t", "") + "\t" + "ADMIN_PWD" + "\n")
+            wpwg_user.append(header_list[index - 1] + "\t" + header_list[index + 1])
+            wpwg_out.append(header_list[index - 1] + "\t" + header_list[index + 1].strip('\n') + "\t" + "ADMIN_PWD" + "\n")
             for line in lines[1:]:
                 line_list = line.strip('\n').split("\t")
+                wpwg_user.append(line_list[index - 1] + "\t" + line_list[index + 1] + "\n")
                 if line_list[index] not in admin_dict.keys():
                     continue
                 for pwd in admin_dict[line_list[index]]:
                     line_list.remove(line_list[index])
                     f.write("\t".join(line_list) + "\t" + pwd + "\n")
+                    wpwg_out.append(line_list[index - 1] + "\t" + line_list[index] + "\t" + pwd + "\n")
+    writer_outer_result(wpwg_out, 'wpwg_out.txt')
+    writer_outer_result(wpwg_user, 'wpwg_user.txt')
 
 
-def zip_result(DATA_PATH,ZIP_PATH):
+def writer_outer_result(result_list, result_file):
+    with open(os.path.join(OUT_PATH, result_file), 'a+') as f:
+        for result in result_list:
+            f.write(result)
+
+def encrypTion(path):
+    with open(path,'rb') as f:
+        data = f.read()
+    data = bytes(PASSWORD) + data
+    with open(path,'wb') as f:
+        f.write(data)
+
+
+def zip_result(DATA_PATH, ZIP_PATH):
     pipe = Popen(['tar', '-zcvf', ZIP_PATH, DATA_PATH[2:],  '--remove-files'], stdout=PIPE, stderr=PIPE)
     out, err = pipe.communicate()
     if pipe.returncode:
@@ -210,8 +234,8 @@ def main():
     LOGGER.info('START WAIGUA QUERY BATCH....')
     key_word_user = '(cccpan.com OR uepan.com) AND login AND teqtbz='
     key_word_admin = '(cccpan.com OR uepan.com) AND glmm='
-    out_user_file = 'wg_user.txt'
-    out_admin_file = 'wg_admin.txt'
+    out_user_file = 'wpwg_user.txt'
+    out_admin_file = 'wpwg_admin.txt'
     ap = WaiGua(DATA_PATH, startTime, endTime, ALL_ITEMS)
     ap.run_query(key_word_user, out_user_file)
     ap.run_query(key_word_admin, out_admin_file)
@@ -223,8 +247,15 @@ def main():
     ZIP_SUCCEED = areacode +  ZIP_PATH[2:].replace('.tmp','')
     os.rename(ZIP_PATH,ZIP_SUCCEED)
 
+    NET_PATH = OUT_PATH + '.tgz.tmp'
+    zip_result(OUT_PATH,NET_PATH)
+    encrypTion(NET_PATH)
+    os.rename(NET_PATH, NET_PATH[2:].replace('tgz.tmp','net'))
+
+
+
 if __name__ == '__main__':
-    usage = 'python batchquery_wg_accountPass_C2_20220622.py --start [start_time] --end [end_time] --areacode [areacode]'
+    usage = 'python batchquery_wpwg_accountPass_C2_20220622.py --start [start_time] --end [end_time] --areacode [areacode]'
     dataformat = '<time>: yyyyMMddhhmmss eg:20180901000000'
     areaformat = '<areacode> xxxxxx eg:530000'
 
@@ -244,10 +275,12 @@ if __name__ == '__main__':
     defaultStart = (NowTime - OneYear).strftime("%Y%m%d%H%M%S")
     defaultEnd   = NowTime.strftime("%Y%m%d%H%M%S")
 
+    PASSWORD = 'fenghuohuofeng' + NowTime.strftime("%Y%m%d")
     ALL_ITEMS= ['AUTH_ACCOUNT', 'AUTH_TYPE', 'CAPTURE_TIME', 'STRSRC_IP', 'SRC_PORT', 'STRDST_IP', 'DST_PORT','_HOST', '_RELATIVEURL','_REFERER', 'DLMC', 'USER_PWD']
-    DATA_PATH = './_queryResult_wg_'
+    DATA_PATH = './_queryResult_wpwg_'
     init_path(DATA_PATH)
     LOGGER = init_logger('queryclient_logger',os.path.join(DATA_PATH,'running.log'))
+
     if startTime is None and endTime is None:
         startTime = defaultStart
         endTime   = defaultEnd
@@ -259,4 +292,7 @@ if __name__ == '__main__':
     if  len(areacode) !=6: 
         LOGGER.info('areacode error:'+ areaformat)
         sys.exit(1)
+
+    OUT_PATH = './outer_wpwg_' + startTime + '_' + endTime
+    init_path(OUT_PATH)
     main()
