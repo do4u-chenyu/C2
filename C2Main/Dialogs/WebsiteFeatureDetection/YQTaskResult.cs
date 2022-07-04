@@ -91,7 +91,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 if (!line.Contains("\t"))
                     continue;
                 string[] lineSplit = line.Split("\t");
-                if (lineSplit.Length != 4)
+                if (lineSplit.Length != 6 && lineSplit.Length != 4)
                     continue;
                 
                 DataGridViewRow dr = new DataGridViewRow();

@@ -211,6 +211,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
             this.TaskInfo = UpdateYQTaskInfo();
 
+            if(this.startTime == this.endTime)
+            {
+                HelpUtil.ShowMessageBox("查询起止时间不能相同，请修改。");
+                this.Cursor = Cursors.Arrow;
+                return false;
+            }
+
             List<string> resultList = new List<string>();
             if (this.pasteModeCB.Checked)
                 resultList = GenTasksFromPaste();
@@ -429,7 +436,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
 
             destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.ruleID.ToString(), keyWord));
-
+            long invalidTime = Convert.ToInt64(this.TaskCreateTime) + 24 * 3600;
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
             
@@ -437,7 +444,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (this.startTime != 0)
                 pairs.Add("starttime", this.startTime);
             if (this.endTime != 0)
-                pairs.Add("endtime", this.endTime);
+                pairs.Add("endtime", invalidTime);
             if (!this.areaCode.IsNullOrEmpty())
                 pairs.Add("areakeyword", this.areaCode);
             if(this.TaskContent == "关键词")
@@ -464,8 +471,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             {
                 int netType = 1;
                 pairs.Add("nettype", netType);
-            }
-                
+            } 
 
             string error = string.Empty;
             string requestURL = string.Format("https://api.fhyqw.com/rule?token={0}", this.token);
@@ -504,7 +510,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 {
                     foreach (string line in returnList)
                     {
-                        sw.WriteLine(line);
+                        sw.WriteLine(line+ "\t" + this.startTime + "\t" + this.endTime);
                         sw.Flush();
                     }
                     sw.Close();

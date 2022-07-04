@@ -6,6 +6,9 @@ Modify by HZH
 2022.06.30
 Modify by HZH
 生成.net文件并加密
+2022.07.04
+Modify by HZH
+修改.net文件的路径
 """
 from subprocess import Popen,PIPE
 import re 
@@ -250,7 +253,7 @@ def main():
     NET_PATH = OUT_PATH + '.tgz.tmp'
     zip_result(OUT_PATH,NET_PATH)
     encrypTion(NET_PATH)
-    os.rename(NET_PATH, NET_PATH[2:].replace('tgz.tmp','net'))
+    os.rename(NET_PATH, NET_PATH[2:].replace('.tmp',''))
 
 
 
@@ -293,6 +296,6 @@ if __name__ == '__main__':
         LOGGER.info('areacode error:'+ areaformat)
         sys.exit(1)
 
-    OUT_PATH = './outer_wpwg_' + startTime + '_' + endTime
+    OUT_PATH = './outer' + DATA_PATH[2:] + startTime + '_' + endTime
     init_path(OUT_PATH)
     main()
