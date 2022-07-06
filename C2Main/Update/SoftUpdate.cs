@@ -6,6 +6,8 @@ using System.Net;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace C2.Update
 {
@@ -28,7 +30,7 @@ namespace C2.Update
         private string downloadC2Inner;
         private string downloadC2F;
         private string filenameOuter;
-        private const string updateUrl = "http://113.31.114.239:53373/C2/update.xml";//升级配置的XML文件地址  
+        private const string updateUrl = "https://113.31.114.239:53376/C2/update.xml";//升级配置的XML文件地址  
         private readonly string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
 
         #region 构造函数  
@@ -189,6 +191,10 @@ namespace C2.Update
                 MessageBox.Show(ex.Message);
             }
         }
+        private static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
 
         /// <summary>  
         /// 检查是否需要更新  
@@ -197,6 +203,7 @@ namespace C2.Update
         {
             try
             {
+                ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;
                 WebClient wc = new WebClient();
                 Stream stream = wc.OpenRead(updateUrl);
                 XmlDocument xmlDoc = new XmlDocument();
