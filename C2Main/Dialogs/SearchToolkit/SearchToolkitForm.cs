@@ -3,6 +3,7 @@ using C2.Dialogs;
 using C2.Utils;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -100,6 +101,51 @@ namespace C2.SearchToolkit
             if (task == SearchTaskInfo.EmptyTaskInfo)
                 return;
             Random rd = new Random();
+           
+            if (task.TaskModel == "网盘外挂模型")
+            {
+                string fp;
+                string fileName = string.Format("外网_{0}_{1}_{2}.tgz", Regex.Replace(task.TaskName, @"\d", string.Empty), task.TaskCreateTime, rd.Next(100, 1000));
+                try
+                {
+                    string destDirectory = Path.Combine(@"D:\tgz", SearchTaskInfo.TaskDescriptionTable[task.TaskModel]);
+                    if (!Directory.Exists(destDirectory))
+                        Directory.CreateDirectory(destDirectory);
+                    fp = Path.Combine(destDirectory, fileName);
+                }
+                catch
+                {
+                    FolderBrowserDialog dialog = new FolderBrowserDialog();
+                    dialog.Description = "请选择下载结果保存路径";
+                    if (dialog.ShowDialog() != DialogResult.OK)
+                    {
+                        MessageBox.Show("请先选择下载结果保存路径。");
+                        return;
+                    }
+                    fp = Path.Combine(dialog.SelectedPath, fileName);
+                }
+                BastionDownloadProgressBar progressBar1 = new BastionDownloadProgressBar(task, fp)
+                {
+                    Status = "下载中",
+                    ProgressValue = 0,
+                    ProgressPercentage = "0%",
+                    MinimumValue = 0,
+                    MaximumValue = 100,
+                };
+                task.LastErrorMsg = string.Empty; // 清空错误信息
+                progressBar1.Show(this);
+
+                bool outer_succ1 = progressBar1.Download();
+                if (progressBar1 == null || !progressBar1.Visible)
+                    return;
+
+                if (outer_succ1)
+                    progressBar1.Status = string.Format("{0}-任务【{1}】下载成功", task.TaskModel, task.TaskName);
+                else
+                    progressBar1.Status = task.LastErrorMsg;
+
+                return;
+            }
             saveFileDialog.FileName = string.Format("{0}_{1}_{2}", Regex.Replace(task.TaskName, @"\d", string.Empty), task.TaskCreateTime, rd.Next(100, 1000));
             DialogResult ret = this.saveFileDialog.ShowDialog();
             if (ret != DialogResult.OK)

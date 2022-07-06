@@ -2,6 +2,7 @@
 using C2.SearchToolkit;
 using C2.Utils;
 using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace C2.Dialogs
@@ -32,7 +33,11 @@ namespace C2.Dialogs
                     MessageBoxButtons.OKCancel, 
                     MessageBoxIcon.Information);
 
-                if (dr == DialogResult.OK)
+                if (dr != DialogResult.OK)
+                    return;
+                if (done.Contains("外网_"))
+                    FileUtil.TryExploreDirectory(done.Replace("外网_", ""));
+                else
                     FileUtil.TryExploreDirectory(done);
 
                 return;
@@ -72,12 +77,25 @@ namespace C2.Dialogs
 
         public bool Download()
         {
-            bool succ = api.Login()
-                           .DownloadTaskResult(temp);
+            BastionAPI aPI = api.Login();
+            bool succ = aPI.DownloadTaskResult(temp);
+            if (temp.Contains("外网"))
+            {
+                Thread.Sleep(1000);
+                succ = succ && aPI.DownloadTaskResult(temp.Replace("外网_", ""));
+            }
+               
             if (succ) // 成功 临时文件转正
             {
                 FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
-                FileUtil.FileMove(temp, done);
+                if (temp.Contains("外网"))
+                {
+                    FileUtil.FileMove(temp, done.Replace(".tgz", ".net"));
+                    FileUtil.DeleteFile(done.Replace("外网_", ""));
+                    FileUtil.FileMove(temp.Replace("外网_", ""), done.Replace("外网_", ""));
+                }
+                else
+                    FileUtil.FileMove(temp, done);
             }
             api.Close();
             return succ;
