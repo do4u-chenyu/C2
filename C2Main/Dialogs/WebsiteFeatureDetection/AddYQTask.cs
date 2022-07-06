@@ -275,21 +275,21 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             if (this.token.IsNullOrEmpty())
                 return false;
 
-            string validTokenURL = string.Format("https://api.fhyqw.com/auth/validtoken?token={0}", this.token);
-            try
-            {
-                JObject json = JObject.Parse(HttpGet(validTokenURL));
-                var gList = json["results"];
-                foreach (var g in gList)
-                    validate = g["validate"].ToString();
-                if (validate == "true")
-                    return true;
-            }
-            catch
-            {
-                HelpUtil.ShowMessageBox("获取的令牌无效");
-                return false;
-            }
+            //string validTokenURL = string.Format("https://api.fhyqw.com/auth/validtoken?token={0}", this.token);
+            //try
+            //{
+            //    JObject json = JObject.Parse(HttpGet(validTokenURL));
+            //    var gList = json["results"];
+            //    foreach (var g in gList)
+            //        validate = g["validate"].ToString();
+            //    if (validate == "true")
+            //        return true;
+            //}
+            //catch
+            //{
+            //    HelpUtil.ShowMessageBox("获取的令牌无效");
+            //    return false;
+            //}
             return true;
         }
         
@@ -397,9 +397,22 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             string[] lines = this.wsTextBox.Text.SplitLine();
             for (int i = 0; i < Math.Min(lines.Length, maxRow); i++)
             {
-                result = AddTasksByKey(lines[i], i);
-                if (!result.IsNullOrEmpty())
-                    resultList.Add(result);
+                int count = 0;
+                while (count < 3)
+                {
+                    result = AddTasksByKey(lines[i], i);
+                    if (!result.IsNullOrEmpty() && result != "错误http状态：TOEKN无效。")
+                    {
+                        resultList.Add(result);
+                        break;
+                    }
+                    else if (result == "错误http状态：TOEKN无效。")
+                    {
+                        count++;
+                        GenAndCheckToken();
+                        continue;
+                    }
+                }
             }
                 
 
@@ -417,9 +430,23 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 {
                     for (int row = 0; row < maxRow && !sr.EndOfStream; row++)
                     {
-                        result = AddTasksByKey(sr.ReadLine().Trim(), row);
-                        if (!result.IsNullOrEmpty())
-                            resultList.Add(result);
+                        int count = 0;
+                        while (count<3)
+                        {
+                            result = AddTasksByKey(sr.ReadLine().Trim(), row);
+                            if (!result.IsNullOrEmpty() && result != "错误http状态：TOEKN无效。")
+                            {
+                                resultList.Add(result);
+                                break;
+                            }
+                            else if (result == "错误http状态：TOEKN无效。")
+                            {
+                                count++;
+                                GenAndCheckToken();
+                                continue;
+                            }
+                        }
+
                     }
                 }
             }
@@ -434,8 +461,10 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private string AddTasksByKey(string keyWord, int number)
         {
             // 时间检查
-            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            int timeStamp = (int)Convert.ToInt64(ts.TotalMilliseconds);
+            long timeStamp = Convert.ToInt64(ConvertUtil.TransToUniversalTime(DateTime.Now));
+
+            //TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            //int timeStamp = (int)Convert.ToInt64(ts.TotalMilliseconds);
             if (timeStamp >= this.expirestime)  // 如果当前时间大于token到期时间，重新获取token
             {
                 GenAndCheckToken();
@@ -506,8 +535,16 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             if (!error.IsNullOrEmpty())
             {
-                HelpUtil.ShowMessageBox(error);
-                return result;
+                if(error == "错误http状态：TOEKN无效。")
+                {
+                    return error;
+                }
+                else
+                {
+                    HelpUtil.ShowMessageBox(error);
+                    return result;
+                }
+
             }
 
             result = string.Format("{0}\t{1}\t{2}\t{3}", keyWord, this.ruleID.ToString(), "0", destFilePath);
