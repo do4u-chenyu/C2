@@ -19,6 +19,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
     {
         public YQTaskInfo TaskInfo { set; get; }
         private string token;
+        private int expirestime;
         private string TaskID;
         private long ruleID;
         private long startTime;
@@ -258,13 +259,13 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private bool GenAndCheckToken()
         {
             string validate = string.Empty;
-            string getTokenURL = "https://api.fhyqw.com/auth/gettoken?username=iao2&password=60726279d628473f6f3f03d5b81b8c95&apikey=50c9429656499f3b26ca1bd6c8045239";
+            string getTokenURL = "http://113.31.114.239:53373/api/yq/get_token";
             try
             {
                 JObject json = JObject.Parse(HttpGet(getTokenURL));
-                JToken gList = json["results"];
-                foreach (JToken g in gList)
-                    this.token = g["access_token"].ToString();
+                JToken token_info = json["data"];
+                this.token = token_info["access_token"].ToString();
+                this.expirestime = (int)token_info["expirestime"];
             }
             catch
             {
@@ -432,10 +433,22 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private string AddTasksByKey(string keyWord, int number)
         {
+            // 时间检查
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            int timeStamp = (int)Convert.ToInt64(ts.TotalMilliseconds);
+            if (timeStamp >= this.expirestime)  // 如果当前时间大于token到期时间，重新获取token
+            {
+                GenAndCheckToken();
+            }
+
             string result = string.Empty;
             this.ruleID = Convert.ToInt64(this.TaskID + number.ToString());
 
-            destFilePath = Path.Combine(this.taskFilePath, string.Format("{0}_{1}.txt", this.ruleID.ToString(), keyWord));
+            destFilePath = Path.Combine(this.taskFilePath, 
+                string.Format("{0}_{1}.txt", 
+                this.ruleID.ToString(), 
+                keyWord.Replace("\\", "").Replace("/", "").Replace(":", "").Replace("*", "").
+                Replace("?", "").Replace("\"", "").Replace("<", "").Replace(">", "").Replace("|", "")));  // 处理无法当做文件名的特殊字符
             long invalidTime = Convert.ToInt64(this.TaskCreateTime) + 24 * 3600;
             Dictionary<string, object> pairs = new Dictionary<string, object> { };
             pairs.Add("id", this.ruleID);
