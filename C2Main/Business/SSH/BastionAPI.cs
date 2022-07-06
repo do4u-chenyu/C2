@@ -277,7 +277,7 @@ namespace C2.Business.SSH
                 ssm.WriteLine(String.Format("echo {0}", SeparatorString));
                 // 根据分隔符和timeout确定任务输出结束
                 String ret = ssm.Expect(SeparatorRegex, TimeSpan.FromSeconds(timeout));
-
+ 
                 if (ret != null)
                 {
                     if (writeLog)
@@ -434,9 +434,9 @@ namespace C2.Business.SSH
                 }
             }
             catch (Exception ex) { task.LastErrorMsg = ex.Message; return false; }
-
+            if (!ffp.Contains("outer_queryResult_"))
             // 下载100%
-            DownloadProgressEvent?.Invoke("100%", 0, fileLength);
+                DownloadProgressEvent?.Invoke("100%", 0, fileLength);
             return true;
         }
 
@@ -444,8 +444,13 @@ namespace C2.Business.SSH
         {
             string command = String.Format("ls -l {0} | awk '{{print $9}}' | head -n 1", s);
             string content = RunCommand(command, shell);
-
-            Match mat = Regex.Match(content, Wrap(TaskResultRegexPattern));
+           
+            string OuterResultRegexPattern = @"([^\n\r]+outer_queryResult_wpwg_\d+_\d+.tgz)";
+            Match mat;
+            if (s.Contains("outer_queryResult"))
+                mat = Regex.Match(content, Wrap(OuterResultRegexPattern));
+            else
+                mat = Regex.Match(content, Wrap(TaskResultRegexPattern));
             if (mat.Success && mat.Groups[1].Success)
                 return mat.Groups[1].Value;
             return String.Empty;
@@ -480,11 +485,25 @@ namespace C2.Business.SSH
                     return false;
                 }
             }
+            bool res;
+            if (d.Contains("外网"))
+            {
+                string outer_s = TaskDirectory + "/outer_queryResult_*_*_*.tgz";
+                res = JudgeTaskResult(outer_s, d);
+            }
+            else
+            {
+                // 000000_queryResult_db_开始时间_结束时间.tgz
+                string s = TaskDirectory + "/" + TaskResultShellPattern;
+                res = JudgeTaskResult(s, d);
+            }
+            
+            return res;
 
-            // 000000_queryResult_db_开始时间_结束时间.tgz
-            string s = TaskDirectory + "/" + TaskResultShellPattern;
-            //String s = TaskDirectory + "/" + "000000_queryResult_plane_20210604094525_20210902094525.tgz";
+        }
 
+        private bool JudgeTaskResult(string s, string d)
+        {
             if (Oops()) return false;
 
             string ffp = GetRemoteFilename(s);
@@ -802,7 +821,7 @@ namespace C2.Business.SSH
             }
             else
             {
-                String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
+                String result = RunCommand(String.Format("ls {0} | grep tgz", TaskDirectory), shell);
                 return Regex.IsMatch(result, @"000000_queryResult_(ht|yellow|sq|airport|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|wpwg|pass|hch|dd|dm|custom|bxgsl)_\d+_\d+.tgz\r?\n");
             }
 
