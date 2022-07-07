@@ -401,12 +401,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 while (count < 3)
                 {
                     result = AddTasksByKey(lines[i], i);
-                    if (!result.IsNullOrEmpty() && result != "错误http状态：TOEKN无效。")
+                    if (!result.IsNullOrEmpty() && result != "错误http状态：TOKEN无效。")
                     {
                         resultList.Add(result);
                         break;
                     }
-                    else if (result == "错误http状态：TOEKN无效。")
+                    else if (result == "错误http状态：TOKEN无效。")
                     {
                         count++;
                         GenAndCheckToken();
@@ -434,12 +434,12 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                         while (count<3)
                         {
                             result = AddTasksByKey(sr.ReadLine().Trim(), row);
-                            if (!result.IsNullOrEmpty() && result != "错误http状态：TOEKN无效。")
+                            if (!result.IsNullOrEmpty() && result != "错误http状态：TOKEN无效。")
                             {
                                 resultList.Add(result);
                                 break;
                             }
-                            else if (result == "错误http状态：TOEKN无效。")
+                            else if (result == "错误http状态：TOKEN无效。")
                             {
                                 count++;
                                 GenAndCheckToken();
@@ -535,7 +535,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             if (!error.IsNullOrEmpty())
             {
-                if(error == "错误http状态：TOEKN无效。")
+                if(error == "错误http状态：TOKEN无效。")
                 {
                     return error;
                 }
