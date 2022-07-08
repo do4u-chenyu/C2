@@ -224,7 +224,7 @@ namespace C2.Controls.Left
                 case "InformationSearch":
                     return "银行卡号查询";
                 case "Tude":
-                    return "坐标经纬度转换";
+                    return "坐标系经纬度转换";
                 case "PostAndGet":
                     return "POST工具";
                 case "PwdGenerator":
