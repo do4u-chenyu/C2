@@ -79,7 +79,7 @@ namespace C2.Dialogs
         {
             BastionAPI aPI = api.Login();
             bool succ = aPI.DownloadTaskResult(temp);
-            if (temp.Contains("外网"))
+            if (temp.Contains("外网_"))
             {
                 Thread.Sleep(1000);
                 succ = succ && aPI.DownloadTaskResult(temp.Replace("外网_", ""));
@@ -88,7 +88,7 @@ namespace C2.Dialogs
             if (succ) // 成功 临时文件转正
             {
                 FileUtil.DeleteFile(done);     // 先删除重名文件,要确认下载成功后再删,以免文件没下载,以前的也没有了
-                if (temp.Contains("外网"))
+                if (temp.Contains("外网_"))
                 {
                     FileUtil.FileMove(temp, done.Replace(".tgz", ".net"));
                     FileUtil.DeleteFile(done.Replace("外网_", ""));

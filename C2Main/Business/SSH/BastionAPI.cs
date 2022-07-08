@@ -486,7 +486,7 @@ namespace C2.Business.SSH
                 }
             }
             bool res;
-            if (d.Contains("外网"))
+            if (d.Contains("外网_"))
             {
                 string outer_s = TaskDirectory + "/outer_queryResult_*_*_*.tgz";
                 res = JudgeTaskResult(outer_s, d);
@@ -821,8 +821,8 @@ namespace C2.Business.SSH
             }
             else
             {
-                String result = RunCommand(String.Format("ls {0} | grep tgz", TaskDirectory), shell);
-                return Regex.IsMatch(result, @"000000_queryResult_(ht|yellow|sq|airport|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|wpwg|pass|hch|dd|dm|custom|bxgsl)_\d+_\d+.tgz\r?\n");
+                String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 2", TaskDirectory), shell);
+                return Regex.IsMatch(result, @"(000000|outer)_queryResult_(ht|yellow|sq|airport|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|wpwg|pass|hch|dd|dm|custom|bxgsl)_\d+_\d+.tgz\r?\n");
             }
 
         }
