@@ -821,7 +821,7 @@ namespace C2.Business.SSH
             }
             else
             {
-                String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 2", TaskDirectory), shell);
+                String result = RunCommand(String.Format("ls {0} | grep tgz | tail -n 1", TaskDirectory), shell);
                 return Regex.IsMatch(result, @"(000000|outer)_queryResult_(ht|yellow|sq|airport|hack|bt|apk|ddos|xss|qg|sf|vps|email|dbqt|wpwg|pass|hch|dd|dm|custom|bxgsl)_\d+_\d+.tgz\r?\n");
             }
 
