@@ -144,7 +144,7 @@ class WaiGua:
             except Exception, e:
                 LOGGER.info('QUERY_ERROR-{0}'.format(e))
             for data in self.queryclient(KEY_WORDS,out_file):
-                if not data.get('DLMC', ''):
+                if (not data.get('DLMC', '')) or (not data.get('_REFERER', '')):
                     continue
                 try:
                     f.write('\t'.join([data.get(item, '') for item in self.all_items]) + '\n')
