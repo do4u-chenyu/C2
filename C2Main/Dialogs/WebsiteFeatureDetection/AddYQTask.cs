@@ -35,6 +35,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         private string TaskCreateTime;
         private int pid;
         private readonly Dictionary<string, string> table;
+        private static readonly LogUtil log = LogUtil.GetInstance("YQTask");
         string TaskName { get => this.taskNameTextBox.Text; set => this.taskNameTextBox.Text = value; }
         string TaskContent { get => this.taskContentComboBox.Text; set => this.taskContentComboBox.Text = value; }
         string TaskModelName { get => this.taskModelComboBox.Text; set => this.taskModelComboBox.Text = value; }
@@ -218,7 +219,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 this.Cursor = Cursors.Arrow;
                 return false;
             }
-
+            
             List<string> resultList = new List<string>();
             if (this.pasteModeCB.Checked)
                 resultList = GenTasksFromPaste();
@@ -231,6 +232,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                 return false;
             }
             WriteTaskInfo(resultList);
+            UpLoadUserInfo();
             Thread.Sleep(1000);
             RunPython();
             HelpUtil.ShowMessageBox("任务创建成功");
@@ -239,9 +241,56 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             return true;
         }
 
+        private void UpLoadUserInfo()
+        {
+            string userName = new Log.Log().UserNameGet();
+            if (userName.IsNullOrEmpty())
+            {
+                HelpUtil.ShowMessageBox("上传任务信息时获取用户名失败。");
+                return;
+            }
+            string taskCreatTime = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+            Dictionary<string, object> pairs = new Dictionary<string, object> { };
+            pairs.Add("taskid", Convert.ToInt64(this.TaskID));
+            pairs.Add("username", userName);
+            pairs.Add("submittime", taskCreatTime);
+
+
+            string error = string.Empty;
+            //string upLoadInfoURL = "http://113.31.114.239:53373/api/yq/upload_user_info";
+            string upLoadInfoURL = "http://47.94.39.209:53373/api/yq/upload_user_info";
+            HttpHandler httpHandler = new HttpHandler();
+            try
+            {
+                Response resp = httpHandler.ObjDicPost(upLoadInfoURL, pairs);
+                if (resp.StatusCode != HttpStatusCode.OK)
+                    error = string.Format("错误http状态：{0}。", resp.StatusCode.ToString());
+
+
+                Dictionary<string, string> resDict = resp.ResDict;
+                if (resDict["status"] != "success")
+                    error = string.Format("错误http状态：{0}。", resDict["msg"]);
+            }
+            catch (Exception ex)
+            {
+                error = "上传任务信息失败：" + ex.Message;
+            }
+            if (!error.IsNullOrEmpty())
+                HelpUtil.ShowMessageBox(error);
+            return;
+        }
+
         private void RunPython()
         {
-            string strInput = @"cd " + Global.TemplatesPath + @"&python get_yq_result.py --f " + this.statusFilePath;
+            string pythonExePath = GetPythonExePaths();
+            if (pythonExePath.IsNullOrEmpty())
+            {
+                HelpUtil.ShowMessageBox("未找到合适的python解释器运行后台脚本");
+                return;
+            }
+            string strInput = @"cd " + Global.TemplatesPath + "&\"" + pythonExePath + "\"" + @" get_yq_result.py --f " + this.statusFilePath;
+            log.Info("新建任务执行后台脚本：" + strInput);
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
             p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
@@ -256,9 +305,31 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             
         }
 
+        public string GetPythonExePaths()
+        {
+            string path = string.Empty;
+            if (OpUtil.GetPythonConfigPaths().Count == 0)
+            {
+                HelpUtil.ShowMessageBox(HelpUtil.InvalidPythonENV2);
+                new ConfigForm().ShowDialog();
+            }
+            string value = ConfigUtil.TryGetAppSettingsByKey("python");
+
+            foreach (string pItem in value.Split(';'))
+            {
+                string[] oneConfig = pItem.Split('|');
+                if (oneConfig.Length != 3)
+                    continue;
+                if (!oneConfig[0].EndsWith("python.exe") || oneConfig[2] != "True")
+                    continue;
+                path = oneConfig[0].Trim();
+                break;
+            }
+            return path;
+        }
+
         private bool GenAndCheckToken()
         {
-            string validate = string.Empty;
             string getTokenURL = "http://113.31.114.239:53373/api/yq/get_token";
             try
             {
@@ -274,22 +345,6 @@ namespace C2.Dialogs.WebsiteFeatureDetection
             }
             if (this.token.IsNullOrEmpty())
                 return false;
-
-            //string validTokenURL = string.Format("https://api.fhyqw.com/auth/validtoken?token={0}", this.token);
-            //try
-            //{
-            //    JObject json = JObject.Parse(HttpGet(validTokenURL));
-            //    var gList = json["results"];
-            //    foreach (var g in gList)
-            //        validate = g["validate"].ToString();
-            //    if (validate == "true")
-            //        return true;
-            //}
-            //catch
-            //{
-            //    HelpUtil.ShowMessageBox("获取的令牌无效");
-            //    return false;
-            //}
             return true;
         }
         

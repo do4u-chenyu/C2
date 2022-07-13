@@ -22,6 +22,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public string datasourceFilePath;
         public string statusFilePath;
         public int pid;
+        private static readonly LogUtil log = LogUtil.GetInstance("YQTask");
         public YQTaskResult()
         {
             statusMsg = string.Empty;
@@ -134,8 +135,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void RunPython()
         {
-            string pyPath = Path.Combine(Global.TemplatesPath, "get_yq_result.py");
-            string strInput = @"python " + '"' + pyPath + '"' + " --f " + this.statusFilePath;
+            string pythonExePath = new AddYQTask().GetPythonExePaths();
+            if (pythonExePath.IsNullOrEmpty())
+            {
+                HelpUtil.ShowMessageBox("未找到合适的python解释器运行后台脚本");
+                return;
+            }
+            string strInput = @"cd " + Global.TemplatesPath + "&\"" + pythonExePath + "\"" + @" get_yq_result.py --f " + this.statusFilePath;
+            log.Info("新建任务执行后台脚本：" + strInput);
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";      //设置要启动的应用程序
             p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动

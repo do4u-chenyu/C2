@@ -41,7 +41,7 @@ namespace C2.Log
 #endif
         }
 
-        private string UserNameGet()
+        public string UserNameGet()
         {
             if (File.Exists(logPath))
             {
