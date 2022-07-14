@@ -258,8 +258,8 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
 
             string error = string.Empty;
-            //string upLoadInfoURL = "http://113.31.114.239:53373/api/yq/upload_user_info";
-            string upLoadInfoURL = "http://47.94.39.209:53373/api/yq/upload_user_info";
+            string upLoadInfoURL = "http://113.31.114.239:53373/api/yq/upload_user_info";
+            //string upLoadInfoURL = "http://47.94.39.209:53373/api/yq/upload_user_info";
             HttpHandler httpHandler = new HttpHandler();
             try
             {
