@@ -17,6 +17,22 @@ namespace C2.IAOLab.IPAddress
             if (!NetUtil.IsIPAddress(IP))
                 return "请正确输入IP号\n";
             string result = NetUtil.IPQuery_ChunZhen(IP);
+            string province = result.Split('\t')[0];
+            if (result.Contains("内网IP"))
+            {
+                result = result + '\t' + "内网";
+            }
+            else
+            {
+                if (NetUtil.IsMainlandOfChina(province))
+                {
+                    result = result + '\t' + "境内";
+                }
+                else
+                {
+                    result = result + '\t' + "境外";
+                }
+            }
             return string.Format("{0}\n",result);
         }
     }
