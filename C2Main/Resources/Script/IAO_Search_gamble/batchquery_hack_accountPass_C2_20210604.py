@@ -364,9 +364,12 @@ class Airport:
                     for data in self.queryclient(KEY_WORDS, model):
                         data['keyWords'] = KEY_WORDS
                         data = self.deal(data, model)
-                        if data:
-                            f.write('\t'.join(
-                                [data.get(item, '').replace("\r", "").replace("\t", "") for item in items]) + '\n')
+                        if not data:
+                            continue
+                        if model == "qg" and data.get("p_num", '').replace("\r", "").replace("\t", "") == '':
+                            continue
+                        f.write('\t'.join(
+                            [data.get(item, '').replace("\r", "").replace("\t", "") for item in items]) + '\n')
                 except Exception, e:
                     self.LOGGER.info('QUERY_ERROR-{0}'.format(e))
 

@@ -60,7 +60,8 @@ namespace C2.Dialogs.IAOLab
         private void Confirm_Click(object sender, EventArgs e)
         {
             StringBuilder tmpResult = new StringBuilder();
-
+            //string path = @"C:\Users\Administrator\Desktop\test2.eml";
+            //ReadEML(path);
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
 
@@ -109,6 +110,61 @@ namespace C2.Dialogs.IAOLab
             this.Cursor = Cursors.Arrow;
         }
 
+        //private void ReadEML(string emailPath)
+        //{
+        //    string file = emailPath;
+        //    CDO.Message oMsg = new CDO.Message();
+        //    ADODB.Stream stm = null;
+        //    //读取EML文件到CDO.MESSAGE
+        //    try
+        //    {
+        //        stm = new ADODB.Stream();
+        //        stm.Open(System.Reflection.Missing.Value,
+        //        ADODB.ConnectModeEnum.adModeUnknown,
+        //        ADODB.StreamOpenOptionsEnum.adOpenStreamUnspecified,
+        //        "", "");
+        //        stm.Type = ADODB.StreamTypeEnum.adTypeText;//二进制方式读入
+
+        //        stm.LoadFromFile(file); //将EML读入数据流
+
+        //        oMsg.DataSource.OpenObject(stm, "_stream"); //将EML数据流载入到CDO.Message，要做解析的话，后面就可以了。
+        //        StringBuilder sb = new StringBuilder();
+        //        //邮件的内容
+        //        sb.Append(oMsg.TextBody+"\t");
+        //        //发件人
+        //        sb.Append(oMsg.From + "\t");
+
+        //        //收件人
+        //        sb.Append(oMsg.To + "\t");
+
+        //        //标题
+        //        sb.Append(oMsg.Subject + "\t");
+        //        //时间
+        //        sb.Append(oMsg.ReceivedTime.ToString() + "\t");
+
+        //        sb.Append(oMsg.Attachments.Count.ToString() + "\t");
+
+        //        int count = oMsg.Attachments.Count;
+        //        for (int i = 1; i <= count; i++)
+        //        {
+        //            ////获取到附件的文件名称+后缀
+        //            object FileName = oMsg.Attachments[i].FileName;
+
+        //            //将附件存储到指定位置
+        //            oMsg.Attachments[i].SaveToFile(@"F:\" + FileName);
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("邮件解析失败，" + ex.Message, "ERROR");
+        //    }
+        //    finally
+        //    {
+        //        stm.Close();
+        //    }
+
+        //}
         private int GetRelLengthOfArry(string[] arry)
         {
             int relLength = 0;
