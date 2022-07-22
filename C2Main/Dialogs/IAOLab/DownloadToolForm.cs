@@ -17,6 +17,7 @@ namespace C2.Dialogs.IAOLab
     public partial class DownloadToolForm : BaseDialog
     {
         private string SavePath;
+        private string emailPath;
         public DownloadToolForm()
         {
             InitializeComponent();
@@ -60,8 +61,6 @@ namespace C2.Dialogs.IAOLab
         private void Confirm_Click(object sender, EventArgs e)
         {
             StringBuilder tmpResult = new StringBuilder();
-            //string path = @"C:\Users\Administrator\Desktop\test2.eml";
-            //ReadEML(path);
             this.Cursor = Cursors.WaitCursor;
             string firstLine;
 
@@ -110,61 +109,7 @@ namespace C2.Dialogs.IAOLab
             this.Cursor = Cursors.Arrow;
         }
 
-        //private void ReadEML(string emailPath)
-        //{
-        //    string file = emailPath;
-        //    CDO.Message oMsg = new CDO.Message();
-        //    ADODB.Stream stm = null;
-        //    //读取EML文件到CDO.MESSAGE
-        //    try
-        //    {
-        //        stm = new ADODB.Stream();
-        //        stm.Open(System.Reflection.Missing.Value,
-        //        ADODB.ConnectModeEnum.adModeUnknown,
-        //        ADODB.StreamOpenOptionsEnum.adOpenStreamUnspecified,
-        //        "", "");
-        //        stm.Type = ADODB.StreamTypeEnum.adTypeText;//二进制方式读入
 
-        //        stm.LoadFromFile(file); //将EML读入数据流
-
-        //        oMsg.DataSource.OpenObject(stm, "_stream"); //将EML数据流载入到CDO.Message，要做解析的话，后面就可以了。
-        //        StringBuilder sb = new StringBuilder();
-        //        //邮件的内容
-        //        sb.Append(oMsg.TextBody+"\t");
-        //        //发件人
-        //        sb.Append(oMsg.From + "\t");
-
-        //        //收件人
-        //        sb.Append(oMsg.To + "\t");
-
-        //        //标题
-        //        sb.Append(oMsg.Subject + "\t");
-        //        //时间
-        //        sb.Append(oMsg.ReceivedTime.ToString() + "\t");
-
-        //        sb.Append(oMsg.Attachments.Count.ToString() + "\t");
-
-        //        int count = oMsg.Attachments.Count;
-        //        for (int i = 1; i <= count; i++)
-        //        {
-        //            ////获取到附件的文件名称+后缀
-        //            object FileName = oMsg.Attachments[i].FileName;
-
-        //            //将附件存储到指定位置
-        //            oMsg.Attachments[i].SaveToFile(@"F:\" + FileName);
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("邮件解析失败，" + ex.Message, "ERROR");
-        //    }
-        //    finally
-        //    {
-        //        stm.Close();
-        //    }
-
-        //}
         private int GetRelLengthOfArry(string[] arry)
         {
             int relLength = 0;
@@ -270,6 +215,229 @@ namespace C2.Dialogs.IAOLab
         private void Check_Click(object sender, EventArgs e)
         {
             ProcessUtil.TryOpenDirectory(this.SavePath);
+        }
+
+        private void BrowserBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog = new OpenFileDialog
+            {
+                Filter = "邮件 | *.eml"
+            };
+            if (OpenFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            this.filePathTextBox.Text = OpenFileDialog.FileName;
+            emailPath = OpenFileDialog.FileName;
+        }
+
+        private void FolderBtn_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                this.filePathTextBox.Text = dialog.SelectedPath;
+                emailPath = dialog.SelectedPath;
+            }
+        }
+
+        private void TransBtn_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            this.emailDataGridView.Rows.Clear();
+            new Log.Log().LogManualButton(emailParaseTabPage.Text, "运行");
+            using (GuarderUtil.WaitCursor)
+            {
+                List<string> emlPathList = GetEmlsByPath(emailPath);
+
+                foreach (string singleEmailPath in emlPathList)
+                {
+                    string result = ParaseEML(singleEmailPath);
+                    FillDGV(singleEmailPath, result);
+                }
+            }
+            this.Cursor = Cursors.Arrow;
+            HelpUtil.ShowMessageBox("邮件信息提取完成。");
+        }
+
+        private List<string> GetEmlsByPath(string path)
+        {
+            List<string> picPathList = new List<string>();
+            if (Directory.Exists(path))
+            {
+                foreach (FileSystemInfo fsinfo in new DirectoryInfo(path).GetFiles())
+                {
+                    if (Path.GetExtension(fsinfo.FullName) == ".eml")
+                        picPathList.Add(fsinfo.FullName);
+                }
+            }
+            else if (File.Exists(path))
+            {
+                picPathList.Add(path);
+            }
+
+            return picPathList;
+        }
+
+        private string ParaseEML(string singleEmailPath)
+        {
+            StringBuilder sb = new StringBuilder();
+            CDO.Message oMsg = new CDO.Message();
+            ADODB.Stream stm = null;
+            //读取EML文件到CDO.MESSAGE
+            try
+            {
+                stm = new ADODB.Stream();
+                stm.Open(System.Reflection.Missing.Value,
+                ADODB.ConnectModeEnum.adModeUnknown,
+                ADODB.StreamOpenOptionsEnum.adOpenStreamUnspecified,
+                "", "");
+                stm.Type = ADODB.StreamTypeEnum.adTypeText;//二进制方式读入
+                stm.LoadFromFile(singleEmailPath); //将EML读入数据流
+                oMsg.DataSource.OpenObject(stm, "_stream"); //将EML数据流载入到CDO.Message，要做解析的话，后面就可以了。
+
+                sb.Append(oMsg.From.Replace("\t", string.Empty) + "\t");   //发件人
+                sb.Append(oMsg.To.Replace("\t", string.Empty) + "\t");   //收件人  
+                sb.Append(oMsg.Subject.Replace("\t", string.Empty) + "\t");   //标题
+                sb.Append(oMsg.ReceivedTime.ToString().Replace("\t", string.Empty) + "\t");  //时间
+
+                string contentType = "邮件正文类型解析失败";
+                try
+                {
+                    string content = string.Empty;
+                    using (FileStream fs = new FileStream(singleEmailPath, FileMode.Open, FileAccess.Read))
+                    using (StreamReader sr = new StreamReader(fs, Encoding.Default))
+                        content = sr.ReadToEnd().Trim();
+                    if (oMsg.TextBody.IsNullOrEmpty())
+                    {
+                        oMsg.TextBody = "正文内容提取失败";
+                        string[] array = content.Split("\r\nContent-Type:");
+                        if (array.Length > 2)
+                        {
+                            oMsg.TextBody = array[array.Length - 1].Replace("text/html", string.Empty)
+                                                                    .Replace("text/plain", string.Empty)
+                                                                    .Replace("multipart/alternative", string.Empty)
+                                                                    .Replace("\r\n\r\n", "\r\n");
+                            contentType = "multipart/alternative";
+                        }
+                        else if (array.Length == 2)
+                        {
+                            oMsg.TextBody = array[array.Length - 1].Replace("text/html", string.Empty)
+                                                                    .Replace("text/plain", string.Empty)
+                                                                    .Replace("\r\n\r\n", "\r\n");
+                            Match match = Regex.Match(content, @"\r\nContent-Type:(.*?)\r\n");
+                            if (match.Groups[match.Groups.Count - 1].Success)
+                                contentType = match.Groups[match.Groups.Count - 1].Value;
+                        }
+                    }
+                    else
+                    {
+                        Match match = Regex.Match(content, @"\r\nContent-Type:(.*?)\r\n");
+                        if (match.Groups[match.Groups.Count - 1].Success)
+                            contentType = match.Groups[match.Groups.Count - 1].Value;
+                        oMsg.TextBody = oMsg.TextBody.Replace("\r\n\r\n", "\r\n");
+                    }
+                }
+                catch { }
+
+                sb.Append(contentType.Replace("\t", string.Empty) + "\t");   //邮件的正文类型
+                sb.Append(oMsg.TextBody.Replace("\t", string.Empty));   //邮件的正文
+
+                int count = oMsg.Attachments.Count;
+                for (int i = 1; i <= count; i++)
+                {
+                    ////获取到附件的文件名称+后缀
+                    object FileName = oMsg.Attachments[i].FileName;
+                    //将附件存储到指定位置
+                    oMsg.Attachments[i].SaveToFile(Path.Combine(Path.GetDirectoryName(singleEmailPath), FileName.ToString()));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("邮件解析失败，" + ex.Message, "ERROR");
+            }
+            finally
+            {
+                stm.Close();
+            }
+            return sb.ToString();
+        }
+
+        private void FillDGV(string singleEmailPath, string result)
+        {
+            string[] array = result.Split('\t');
+            if (array.Length != 6)
+                return;
+            DataGridViewRow dr = new DataGridViewRow();
+            DataGridViewTextBoxCell textCell0 = new DataGridViewTextBoxCell();
+            textCell0.Value = Path.GetFileName(singleEmailPath);
+            dr.Cells.Add(textCell0);
+
+            foreach(string value in array)
+            {
+                DataGridViewTextBoxCell textCell = new DataGridViewTextBoxCell();
+                textCell.Value = value;
+                dr.Cells.Add(textCell);
+            }
+            emailDataGridView.Rows.Add(dr);
+        }
+        private void SaveEmail_Click(object sender, EventArgs e)
+        {
+            if (this.emailDataGridView.Rows.Count == 0)
+            {
+                HelpUtil.ShowMessageBox("结果为空，无法保存。");
+                return;
+            }
+            using (GuarderUtil.WaitCursor)
+            {
+                string savePath = string.Empty;
+                if (Directory.Exists(emailPath))
+                    savePath = Path.Combine(emailPath, "邮件提取结果_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");
+                else if (File.Exists(emailPath))
+                    savePath = Path.Combine(Path.GetDirectoryName(emailPath), "邮件提取结果_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");
+                else
+                {
+                    var dialog = new FolderBrowserDialog();
+                    if (dialog.ShowDialog() != DialogResult.OK)
+                        return;
+                    savePath = dialog.SelectedPath;
+                }
+                SaveResultToLocal(savePath);
+            }
+        }
+
+        private void SaveResultToLocal(string path)
+        {
+            StreamWriter sw = null;
+            try
+            {
+                List<string> headerList = new List<string> { "邮件名", "发件人", "收件人", "邮件主题", "发送时间", "正文类型", "正文" };
+                sw = new StreamWriter(path);
+                sw.WriteLine(string.Join("\t", headerList));
+                foreach (DataGridViewRow row in this.emailDataGridView.Rows)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (DataGridViewTextBoxCell textCell in row.Cells)
+                    {
+                        if (textCell.Value != null)
+                            sb.Append(textCell.Value.ToString().Replace("\r\n", string.Empty) + "\t");
+                        else
+                            sb.Append(string.Empty);
+                    }
+                    sw.WriteLine(sb.ToString());
+                }
+                if (sw != null)
+                    sw.Close();
+                HelpUtil.ShowMessageBox("提取结果已保存至"+ path);
+            }
+            catch(Exception ex)
+            {
+                HelpUtil.ShowMessageBox("邮件信息提取结果保存失败，" + ex.Message);
+            }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
         }
     }
 }
