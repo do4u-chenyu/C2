@@ -248,9 +248,12 @@ namespace C2.Dialogs.IAOLab
             using (GuarderUtil.WaitCursor)
             {
                 List<string> emlPathList = GetEmlsByPath(emailPath);
-
+                if (emlPathList.Count > 1000)
+                    emlPathList.RemoveRange(1000, emlPathList.Count - 1000);
                 foreach (string singleEmailPath in emlPathList)
                 {
+                    if (Path.GetExtension(singleEmailPath) != ".eml")
+                        continue;
                     string result = ParaseEML(singleEmailPath);
                     FillDGV(singleEmailPath, result);
                 }
@@ -295,12 +298,12 @@ namespace C2.Dialogs.IAOLab
                 stm.LoadFromFile(singleEmailPath); //将EML读入数据流
                 oMsg.DataSource.OpenObject(stm, "_stream"); //将EML数据流载入到CDO.Message，要做解析的话，后面就可以了。
 
-                sb.Append(oMsg.From.Replace("\t", string.Empty) + "\t");   //发件人
-                sb.Append(oMsg.To.Replace("\t", string.Empty) + "\t");   //收件人  
+                sb.Append(oMsg.From.Replace("\t", string.Empty).Replace("\"", string.Empty) + "\t");   //发件人
+                sb.Append(oMsg.To.Replace("\t", string.Empty).Replace("\"", string.Empty) + "\t");   //收件人  
                 sb.Append(oMsg.Subject.Replace("\t", string.Empty) + "\t");   //标题
                 sb.Append(oMsg.ReceivedTime.ToString().Replace("\t", string.Empty) + "\t");  //时间
 
-                string contentType = "邮件正文类型解析失败";
+                string contentType = "未知";
                 try
                 {
                     string content = string.Empty;
@@ -316,44 +319,49 @@ namespace C2.Dialogs.IAOLab
                             oMsg.TextBody = array[array.Length - 1].Replace("text/html", string.Empty)
                                                                     .Replace("text/plain", string.Empty)
                                                                     .Replace("multipart/alternative", string.Empty)
-                                                                    .Replace("\r\n\r\n", "\r\n");
+                                                                    .Replace("\n", " ").Replace("\r", " ");
                             contentType = "multipart/alternative";
                         }
                         else if (array.Length == 2)
                         {
-                            oMsg.TextBody = array[array.Length - 1].Replace("text/html", string.Empty)
-                                                                    .Replace("text/plain", string.Empty)
-                                                                    .Replace("\r\n\r\n", "\r\n");
+                            oMsg.TextBody = array[1].Replace("text/html", string.Empty)
+                                                    .Replace("text/plain", string.Empty)
+                                                    .Replace("\n", " ").Replace("\r", " ");
                             Match match = Regex.Match(content, @"\r\nContent-Type:(.*?)\r\n");
                             if (match.Groups[match.Groups.Count - 1].Success)
                                 contentType = match.Groups[match.Groups.Count - 1].Value;
+                            else if (array[1].Trim() == "text/html" || array[1].Trim() == "text/plain")
+                                contentType = array[1];
                         }
                     }
                     else
                     {
+                        oMsg.TextBody = oMsg.TextBody.Replace("\n", " ").Replace("\r", " ");
+
                         Match match = Regex.Match(content, @"\r\nContent-Type:(.*?)\r\n");
                         if (match.Groups[match.Groups.Count - 1].Success)
                             contentType = match.Groups[match.Groups.Count - 1].Value;
-                        oMsg.TextBody = oMsg.TextBody.Replace("\r\n\r\n", "\r\n");
                     }
                 }
                 catch { }
 
-                sb.Append(contentType.Replace("\t", string.Empty) + "\t");   //邮件的正文类型
-                sb.Append(oMsg.TextBody.Replace("\t", string.Empty));   //邮件的正文
+                sb.Append(contentType.Replace("\t", string.Empty).Trim(';') + "\t");   //邮件的正文类型
+                sb.Append(oMsg.TextBody.Replace("\t", string.Empty).Trim().Trim(';'));   //邮件的正文
 
                 int count = oMsg.Attachments.Count;
                 for (int i = 1; i <= count; i++)
                 {
                     ////获取到附件的文件名称+后缀
-                    object FileName = oMsg.Attachments[i].FileName;
+                    object FileName = oMsg.Attachments[i+1].FileName;
+                    if (FileName.ToString().IsNullOrEmpty())
+                        continue;
                     //将附件存储到指定位置
                     oMsg.Attachments[i].SaveToFile(Path.Combine(Path.GetDirectoryName(singleEmailPath), FileName.ToString()));
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("邮件解析失败，" + ex.Message, "ERROR");
+                sb.Append("邮件解析失败，" + ex.Message + "\t" + "\t" + "\t" + "\t" + "\t");
             }
             finally
             {
@@ -375,7 +383,7 @@ namespace C2.Dialogs.IAOLab
             foreach(string value in array)
             {
                 DataGridViewTextBoxCell textCell = new DataGridViewTextBoxCell();
-                textCell.Value = value;
+                textCell.Value = value.IsNullOrEmpty() ? "未知" : value;
                 dr.Cells.Add(textCell);
             }
             emailDataGridView.Rows.Add(dr);

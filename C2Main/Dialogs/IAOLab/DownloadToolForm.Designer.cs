@@ -278,9 +278,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.label3.Location = new System.Drawing.Point(78, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(308, 19);
+            this.label3.Size = new System.Drawing.Size(418, 19);
             this.label3.TabIndex = 10019;
-            this.label3.Text = "支持提取单个邮件或一个目录里所有邮件的文字内容";
+            this.label3.Text = "支持提取单个邮件或一个目录里所有邮件的文字内容，最多支持1000个";
             // 
             // label2
             // 
