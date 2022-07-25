@@ -436,6 +436,7 @@ namespace C2.Dialogs.IAOLab
                 if (sw != null)
                     sw.Close();
                 HelpUtil.ShowMessageBox("提取结果已保存至"+ path);
+                System.Diagnostics.Process.Start("explorer.exe", Path.GetDirectoryName(path));
             }
             catch(Exception ex)
             {
