@@ -151,6 +151,8 @@ begin
       result := true;
       if FileOrDirExists(ExpandConstant('{localappdata}\FeikuaBrowser\UserDataDefault')) then
         DelTree(ExpandConstant('{localappdata}\FeikuaBrowser\UserDataDefault'), True, True, True);
+      DeleteFile(ExpandConstant('{localappdata}\temp\tmpRedisASK\tmpRedisASK.xml'));
+      DeleteFile(ExpandConstant('{localappdata}\temp\tmpRedisASK\tmp.xml'));
     end;
 end;
 

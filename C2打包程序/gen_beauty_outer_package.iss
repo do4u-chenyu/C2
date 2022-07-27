@@ -120,6 +120,7 @@ Root: HKCR; Subkey: "C2File\shell\open\command"; ValueType: string; ValueName: "
 #include "HoverEvent.iss"
 #include "SetupMisc.iss"
 
+
 //;判断进程是否存在
 function IsAppRunning(const FileName : string): Boolean;
 var
@@ -151,6 +152,8 @@ begin
       result := true;
       if FileOrDirExists(ExpandConstant('{localappdata}\FeikuaBrowser\UserDataDefault')) then
         DelTree(ExpandConstant('{localappdata}\FeikuaBrowser\UserDataDefault'), True, True, True);
+      DeleteFile(ExpandConstant('{localappdata}\temp\tmpRedisASK\tmpRedisASK.xml'));
+      DeleteFile(ExpandConstant('{localappdata}\temp\tmpRedisASK\tmp.xml'));
     end;
 end;
 
