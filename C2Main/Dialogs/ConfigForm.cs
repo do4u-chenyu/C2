@@ -446,7 +446,7 @@ namespace C2.Dialogs
             try 
             {
                 new Log.Log().LogManualButton("内网版", "下载");
-                new Update.SoftUpdate().SaveOther(true);
+                new Update.SoftUpdate().SaveOther(0);
             }
             catch
             {
@@ -459,7 +459,20 @@ namespace C2.Dialogs
             try
             {
                 new Log.Log().LogManualButton("战术手册", "下载");
-                new Update.SoftUpdate().SaveOther(false);
+                new Update.SoftUpdate().SaveOther(1);
+            }
+            catch
+            {
+                MessageBox.Show("更新出现错误，请确认网络连接无误后重试！");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new Log.Log().LogManualButton("内网服务版", "下载");
+                new Update.SoftUpdate().SaveOther(2);
             }
             catch
             {

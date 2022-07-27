@@ -29,6 +29,7 @@ namespace C2.Update
         private string downloadC2Outer;
         private string downloadC2Inner;
         private string downloadC2F;
+        private string downloadC2Service;
         private string filenameOuter;
         private const string updateUrl = "https://113.31.114.239:53376/C2/update.xml";//升级配置的XML文件地址  
         private readonly string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
@@ -124,7 +125,7 @@ namespace C2.Update
             wc.Dispose();
         }
 
-        public void SaveOther(bool flag = true)
+        public void SaveOther(int flagNum = 0)
         {
             WebClient wc = new WebClient();
             Stream stream = wc.OpenRead(updateUrl);
@@ -141,6 +142,8 @@ namespace C2.Update
                             downloadC2Inner = xml.InnerText;
                         else if (xml.Name == "DownLoadC2F")
                             downloadC2F = xml.InnerText;
+                        else if (xml.Name == "DownLoadC2Service")
+                            downloadC2Service = xml.InnerText;
                     }
                 }
             }
@@ -150,17 +153,25 @@ namespace C2.Update
             string filenameInner = downloadPath + "\\" + extenInner;
             string extenF = downloadC2F.Substring(downloadC2F.LastIndexOf("/")).Replace("/", string.Empty);
             string filenameF = downloadPath + "\\" + extenF;
-            if (flag)
+            string extentService = downloadC2Service.Substring(downloadC2Service.LastIndexOf("/")).Replace("/", string.Empty);
+            string filenameService = downloadPath + "\\" + extentService;
+            if (flagNum == 0)
             {
                 MessageBox.Show("单兵作战(内网版)下载中，下载完成后会弹出安装目录，请耐心等待!");
                 wc.DownloadFileCompleted += Client_DownloadFileCompleted;
                 wc.DownloadFileTaskAsync(downloadC2Inner, filenameInner);
             }
-            else
+            else if(flagNum == 1)
             {
                 MessageBox.Show("战术手册下载中，下载完成后会弹出安装目录，请耐心等待!");
                 wc.DownloadFileCompleted += Client_DownloadFileFCompleted; 
                 wc.DownloadFileTaskAsync(downloadC2F, filenameF);
+            }
+            else
+            {
+                MessageBox.Show("服务版(内网)下载中，下载完成后会弹出安装目录，请耐心等待!");
+                wc.DownloadFileCompleted += Client_DownloadFileServiceCompleted;
+                wc.DownloadFileTaskAsync(downloadC2Service, filenameService);
             }
             wc.Dispose();
         }
@@ -174,6 +185,12 @@ namespace C2.Update
         {
             if (e.UserState != null)
                 MessageBox.Show("单兵作战(内网版)下载完成");
+            Process.Start(downloadPath);
+        }
+        void Client_DownloadFileServiceCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.UserState != null)
+                MessageBox.Show("服务(内网版)下载完成");
             Process.Start(downloadPath);
         }
         /// <summary>  
