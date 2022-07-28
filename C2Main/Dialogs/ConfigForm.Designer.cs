@@ -67,7 +67,7 @@
             this.userModelTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.aboutConfigPage = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -94,7 +94,6 @@
             this.WFDOKButton = new System.Windows.Forms.Button();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button3 = new System.Windows.Forms.Button();
             this.mainTabControl.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -497,7 +496,6 @@
             // aboutConfigPage
             // 
             this.aboutConfigPage.Controls.Add(this.button3);
-            this.aboutConfigPage.Controls.Add(this.button2);
             this.aboutConfigPage.Controls.Add(this.button1);
             this.aboutConfigPage.Controls.Add(this.label8);
             this.aboutConfigPage.Controls.Add(this.label9);
@@ -517,15 +515,15 @@
             this.aboutConfigPage.Text = "关于和注册";
             this.aboutConfigPage.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // button3
             // 
-            this.button2.Location = new System.Drawing.Point(198, 299);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "战术手册下载";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.button3.Location = new System.Drawing.Point(210, 299);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(101, 23);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "内网服务版下载";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
@@ -562,7 +560,7 @@
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(47, 17);
             this.version.TabIndex = 9;
-            this.version.Text = "V:2.1.9";
+            this.version.Text = "V:2.2.0";
             // 
             // textBox4
             // 
@@ -773,16 +771,6 @@
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(305, 299);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "内网服务版下载";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // ConfigForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -875,7 +863,6 @@
         private System.Windows.Forms.Button WFDOKButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
     }

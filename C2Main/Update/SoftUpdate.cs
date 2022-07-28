@@ -31,6 +31,7 @@ namespace C2.Update
         private string downloadC2F;
         private string downloadC2Service;
         private string filenameOuter;
+        private string filenameC2F;
         private const string updateUrl = "https://113.31.114.239:53376/C2/update.xml";//升级配置的XML文件地址  
         private readonly string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install");
 
@@ -51,13 +52,14 @@ namespace C2.Update
         #region 属性  
         private string loadFile;
         private string newVerson;
+        private string manulVersion;
         private string softName;
-        private bool isUpdate;
+        private int isUpdate;
 
         /// <summary>  
         /// 或取是否需要更新  
         /// </summary>  
-        public bool IsUpdate
+        public int IsUpdate
         {
             get
             {
@@ -114,15 +116,42 @@ namespace C2.Update
         /// </summary>  
         private void Save()
         {
-            if (!isUpdate)
+            if (isUpdate == 0)
                 return;
             WebClient wc = new WebClient();
+            WebClient wcBackup = new WebClient();
             string extenOuter = downloadC2Outer.Substring(downloadC2Outer.LastIndexOf("/")).Replace("/", string.Empty);
+            string extenC2F = downloadC2F.Substring(downloadC2F.LastIndexOf("/")).Replace("/", string.Empty);
             filenameOuter = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install") + "\\" + extenOuter;
-            MessageBox.Show("安装包下载中，下载完成后会弹出安装页面，请耐心等待!");
-            wc.DownloadFile(downloadC2Outer, filenameOuter);
-            Process.Start(filenameOuter);
-            wc.Dispose();
+            filenameC2F = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install") + "\\" + extenC2F;
+
+            if (isUpdate == 1)
+            {
+                MessageBox.Show("安装包下载中，下载完成后会弹出安装页面，请耐心等待!");
+                wc.DownloadFile(downloadC2Outer, filenameOuter);
+                Process.Start(filenameOuter);
+                wc.Dispose();
+            }
+            else if(isUpdate == 2)
+            {
+                MessageBox.Show("战术手册下载中，下载完成后会弹出安装页面，请耐心等待!");
+                wc.DownloadFile(downloadC2F, filenameC2F);
+                Process.Start(filenameC2F);
+                wc.Dispose();
+            }
+            /*
+            else if (isUpdate == 3)
+            {
+                MessageBox.Show("安装包&战术手册下载中，下载完成后会弹出安装页面，请耐心等待!");
+                wc.DownloadFile(downloadC2F, filenameC2F);
+                Process.Start(filenameC2F);
+
+                wc.Dispose();
+                wcBackup.DownloadFile(downloadC2Outer, filenameOuter);
+                Process.Start(filenameOuter);
+                wcBackup.Dispose();
+            }
+            */
         }
 
         public void SaveOther(int flagNum = 0)
@@ -234,6 +263,8 @@ namespace C2.Update
                         {
                             if (xml.Name == "Verson")
                                 newVerson = xml.InnerText;
+                            else if(xml.Name == "ManulVersion")
+                                manulVersion = xml.InnerText;
                             else if(xml.Name == "DownLoadC2Outer")
                                 downloadC2Outer = xml.InnerText;
                             else if (xml.Name == "DownLoadC2Inner")
@@ -243,14 +274,26 @@ namespace C2.Update
                         }
                     }
                 }
-                Version ver = new Version(newVerson);
-                Version verson = Assembly.LoadFrom(loadFile).GetName().Version;
-                int tm = verson.CompareTo(ver);
+                // C2版本检测更新
+                string localC2Verson = Assembly.LoadFrom(loadFile).GetName().Version.ToString();
+                int tm = localC2Verson.Substring(0, 5).CompareTo(newVerson);
+                //战术手册检测更新
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                string versionM = titleAttribute.Title;
+                int tmM = versionM.CompareTo(manulVersion);
 
-                if (tm >= 0)
-                    isUpdate = false;
-                else
-                    isUpdate = true;
+
+                if (tm >= 0 && tmM >= 0)//皆不更新
+                    isUpdate = 0;
+                else if (tm < 0)//只更新C2
+                    isUpdate = 1;
+                else if (tmM < 0)//只更新战术手册
+                    isUpdate = 2;
+                /*
+                else if (tm < 0 && tmM < 0)//C2和战术手册都更新
+                    isUpdate = 3;
+                */
             }
             catch(Exception ex)
             {

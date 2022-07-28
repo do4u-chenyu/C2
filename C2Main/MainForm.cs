@@ -352,7 +352,7 @@ namespace C2
             app.SaveFinish += new UpdateState(App_SaveFinish);
             try
             {
-                if (app.IsUpdate && MessageBox.Show("检查到新版本，是否更新？", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (app.IsUpdate == 1 && MessageBox.Show("检查到C2新版本，是否更新？", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     new Log.Log().LogManualButton("外网版", "下载");
                     if (!File.Exists(installPath))
@@ -361,6 +361,27 @@ namespace C2
                     update.Start();
                     this.Dispose();
                 }
+                else if (app.IsUpdate == 2 && MessageBox.Show("检查到战术手册新版本，是否更新？", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    new Log.Log().LogManualButton("战术手册", "下载");
+                    if (!File.Exists(installPath))
+                        Directory.CreateDirectory(installPath);
+                    Thread update = new Thread(new ThreadStart(app.Update));
+                    update.Start();
+                    this.Dispose();
+                }
+                /*
+                else if (app.IsUpdate == 3 && MessageBox.Show("检查到C2和战术手册皆有版本更新，是否更新？", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    new Log.Log().LogManualButton("外网版", "下载");
+                    new Log.Log().LogManualButton("战术手册", "下载");
+                    if (!File.Exists(installPath))
+                        Directory.CreateDirectory(installPath);
+                    Thread update = new Thread(new ThreadStart(app.Update));
+                    update.Start();
+                    this.Dispose();
+                }
+                */
             }
             catch (Exception ex)
             {

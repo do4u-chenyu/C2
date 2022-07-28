@@ -454,19 +454,6 @@ namespace C2.Dialogs
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                new Log.Log().LogManualButton("战术手册", "下载");
-                new Update.SoftUpdate().SaveOther(1);
-            }
-            catch
-            {
-                MessageBox.Show("更新出现错误，请确认网络连接无误后重试！");
-            }
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             try
