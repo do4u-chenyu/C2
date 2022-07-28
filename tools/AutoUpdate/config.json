@@ -1,0 +1,14 @@
+﻿{
+    "gen_beauty_path": "D:\\work\\C2\\C2打包程序",
+    "AssemblyInfo_path": "D:\\work\\C2\\C2Main\\Properties\\AssemblyInfo.cs",
+    "local_C2_output": "D:\\work\\C2\\C2打包程序\\output",
+    "remote_upload_dir": "/data/C2/C2_exe",
+    "update_xml_path": "./update.xml",
+    "hostname":"113.31.114.239",
+    "username":"root",
+    "password":"206D-Ab56VzfPqq}V20",
+    "port":53378,
+    "c2_output": "D:\\work\\C2\\C2打包程序\\output",
+    "old_version": "2.2.0",
+    "new_version": "2.2.1"
+}
