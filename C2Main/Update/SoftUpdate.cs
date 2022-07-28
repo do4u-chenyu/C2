@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
+using C2.Core;
 
 namespace C2.Update
 {
@@ -119,7 +120,6 @@ namespace C2.Update
             if (isUpdate == 0)
                 return;
             WebClient wc = new WebClient();
-            WebClient wcBackup = new WebClient();
             string extenOuter = downloadC2Outer.Substring(downloadC2Outer.LastIndexOf("/")).Replace("/", string.Empty);
             string extenC2F = downloadC2F.Substring(downloadC2F.LastIndexOf("/")).Replace("/", string.Empty);
             filenameOuter = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "install") + "\\" + extenOuter;
@@ -139,19 +139,6 @@ namespace C2.Update
                 Process.Start(filenameC2F);
                 wc.Dispose();
             }
-            /*
-            else if (isUpdate == 3)
-            {
-                MessageBox.Show("安装包&战术手册下载中，下载完成后会弹出安装页面，请耐心等待!");
-                wc.DownloadFile(downloadC2F, filenameC2F);
-                Process.Start(filenameC2F);
-
-                wc.Dispose();
-                wcBackup.DownloadFile(downloadC2Outer, filenameOuter);
-                Process.Start(filenameOuter);
-                wcBackup.Dispose();
-            }
-            */
         }
 
         public void SaveOther(int flagNum = 0)
@@ -277,23 +264,20 @@ namespace C2.Update
                 // C2版本检测更新
                 string localC2Verson = Assembly.LoadFrom(loadFile).GetName().Version.ToString();
                 int tm = localC2Verson.Substring(0, 5).CompareTo(newVerson);
-                //战术手册检测更新
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                string versionM = titleAttribute.Title;
-                int tmM = versionM.CompareTo(manulVersion);
-
-
-                if (tm >= 0 && tmM >= 0)//皆不更新
+                int tmM = 1;
+                //战术手册检测更新，检测修改日期是否一致
+                string backManulDir = Path.Combine(Global.UserWorkspacePath, "备份数据");
+                DirectoryInfo TheFolder = new DirectoryInfo(backManulDir);
+                foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+                    if (!NextFolder.LastWriteTime.ToString().Contains(manulVersion))
+                        tmM = -1;
+                    
+                if (tm >= 0 && tmM == 1)//皆不更新
                     isUpdate = 0;
                 else if (tm < 0)//只更新C2
                     isUpdate = 1;
-                else if (tmM < 0)//只更新战术手册
+                else if (tmM == -1)//只更新战术手册
                     isUpdate = 2;
-                /*
-                else if (tm < 0 && tmM < 0)//C2和战术手册都更新
-                    isUpdate = 3;
-                */
             }
             catch(Exception ex)
             {

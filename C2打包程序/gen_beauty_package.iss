@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 ;添加可以更改工作空间的目录
 #define MyAppName "分析师单兵作战装备"
-#define MyAppVersion "2.1.9"
+#define MyAppVersion "2.2.0"
 #define MyAppPublisher "FiberHome"
 #define MyAppURL ""
 #define MyAppPkgDir "C:\Program Files\FiberHome\IAO解决方案"
