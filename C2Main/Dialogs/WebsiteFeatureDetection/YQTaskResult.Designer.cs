@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YQTaskResult));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.update = new System.Windows.Forms.Button();
             this.taskResultTextBox = new System.Windows.Forms.TextBox();
             this.taskResultButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.RuleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilePath = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.update = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -66,6 +66,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(646, 150);
             this.panel1.TabIndex = 0;
+            // 
+            // update
+            // 
+            this.update.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.update.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.update.Location = new System.Drawing.Point(564, 103);
+            this.update.Name = "update";
+            this.update.Size = new System.Drawing.Size(72, 25);
+            this.update.TabIndex = 10034;
+            this.update.Text = "结果刷新";
+            this.update.UseVisualStyleBackColor = false;
+            this.update.Click += new System.EventHandler(this.Update_Click);
             // 
             // taskResultTextBox
             // 
@@ -107,6 +119,7 @@
             this.taskIDLabel.TabIndex = 10029;
             this.taskIDLabel.Text = "123456";
             this.taskIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.taskIDLabel.Click += new System.EventHandler(this.TaskIDLabel_Click);
             // 
             // taskNameLabel
             // 
@@ -217,18 +230,6 @@
             this.FilePath.ReadOnly = true;
             this.FilePath.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.FilePath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // update
-            // 
-            this.update.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.update.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.update.Location = new System.Drawing.Point(564, 103);
-            this.update.Name = "update";
-            this.update.Size = new System.Drawing.Size(72, 25);
-            this.update.TabIndex = 10034;
-            this.update.Text = "结果刷新";
-            this.update.UseVisualStyleBackColor = false;
-            this.update.Click += new System.EventHandler(this.Update_Click);
             // 
             // YQTaskResult
             // 
