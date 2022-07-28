@@ -23,6 +23,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
         public string statusFilePath;
         public int pid;
         private static readonly LogUtil log = LogUtil.GetInstance("YQTask");
+        TextBox txt = null;
         public YQTaskResult()
         {
             statusMsg = string.Empty;
@@ -69,6 +70,7 @@ namespace C2.Dialogs.WebsiteFeatureDetection
 
         private void YQTaskResult_Shown(object sender, EventArgs e)
         {
+            txt = new TextBox();
             // DeleteRuleID();
             if (!Directory.Exists(taskInfo.ResultFilePath))
             {
@@ -394,6 +396,14 @@ namespace C2.Dialogs.WebsiteFeatureDetection
                     return;
                 ProcessUtil.TryProcessOpen(cell.Tag.ToString());
             }
+        }
+
+        private void TaskIDLabel_Click(object sender, EventArgs e)
+        {
+            txt.Text = taskIDLabel.Text;
+            txt.SelectAll();
+            txt.Copy();
+            HelpUtil.ShowMessageBox("任务ID已复制");
         }
     }
 }
