@@ -1,10 +1,10 @@
 <Update>  
    <Soft Name="C2">  
-     <Verson>2.2.1</Verson>
-     <ManulVersion>20220728</ManulVersion>
-     <DownLoadC2Outer>https://113.31.114.239:53376/C2/单兵作战(外网版)_0728.exe</DownLoadC2Outer>
-     <DownLoadC2Inner>https://113.31.114.239:53376/C2/单兵作战(内网版)_0728.exe</DownLoadC2Inner>
-     <DownLoadC2F>https://113.31.114.239:53376/C2/战术手册_0728.exe</DownLoadC2F>
-     <DownLoadC2Service>https://113.31.114.239:53376/C2/单兵作战(内网服务版)_0728.exe</DownLoadC2Service>
+     <Verson>2.2.0</Verson>
+     <ManulVersion>20220729</ManulVersion>
+     <DownLoadC2Outer>https://113.31.114.239:53376/C2/单兵作战(外网版)_0729.exe</DownLoadC2Outer>
+     <DownLoadC2Inner>https://113.31.114.239:53376/C2/单兵作战(内网版)_0729.exe</DownLoadC2Inner>
+     <DownLoadC2F>https://113.31.114.239:53376/C2/战术手册_0729.exe</DownLoadC2F>
+     <DownLoadC2Service>https://113.31.114.239:53376/C2/单兵作战(内网服务版)_0729.exe</DownLoadC2Service>
   </Soft>  
 </Update>
