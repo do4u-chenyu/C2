@@ -197,8 +197,9 @@ def macth_admin(DATA_PATH):
                 wpwg_user.append(line_list[index - 1] + "\t" + line_list[index + 1] + "\n")
                 if line_list[index] not in admin_dict.keys():
                     continue
-                for pwd in admin_dict[line_list[index]]:
-                    line_list.remove(line_list[index])
+                pwd_list = admin_dict[line_list[index]]
+                line_list.remove(line_list[index])
+                for pwd in pwd_list:
                     f.write("\t".join(line_list) + "\t" + pwd + "\n")
                     wpwg_out.append(line_list[index - 1] + "\t" + line_list[index] + "\t" + pwd + "\n")
     writer_outer_result(wpwg_out, 'wpwg_out.txt')
