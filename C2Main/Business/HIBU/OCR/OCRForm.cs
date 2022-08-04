@@ -159,11 +159,13 @@ namespace C2.Business.HIBU.OCR
                 return string.Empty;
             try
             {
-                JArray json = JArray.Parse(data);
-                foreach (JValue item in json)
-                {
-                    resultList.Add(item.ToString());
-                }
+                resultList = new List<string>(data.Split('\n'));
+                resultList.RemoveAt(0);
+                //JArray json = JArray.Parse(data);
+                //foreach (JValue item in json)
+                //{
+                //    resultList.Add(item.ToString());
+                //}
             }
             catch { return "解析出错，可尝试重新识别。"; }
             return string.Join("\n", resultList);

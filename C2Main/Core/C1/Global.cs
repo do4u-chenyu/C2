@@ -198,7 +198,7 @@ namespace C2.Core
 
         public static List<string> ChartNames = new List<string> { "业务拓展视图", "组织架构视图", "运作模式视图" };
 
-        public const string ServerHIUrl = @"http://221.226.113.110:8970";
+        public const string ServerHIUrl = @"http://106.75.241.108:53371";
         public const string ServerUrl = @"http://113.31.114.239:53375";
         public const string CastleIDLEUrl = @"http://106.75.218.102:53371";
         public const string APKUrl = @"http://113.31.110.244:5147/APK/";

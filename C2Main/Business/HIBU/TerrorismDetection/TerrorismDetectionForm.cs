@@ -67,6 +67,11 @@ namespace C2.Business.HIBU.TerrorismDetection
                 foreach (string singlePicPath in picPathList)
                 {
                     string result = StartTask(TransBase64(singlePicPath));
+                    if (result.Contains("查询失败"))
+                    {
+                        HelpUtil.ShowMessageBox(result);
+                        return;
+                    }
                     FillDGV(singlePicPath, result);
                 }
             }
@@ -124,6 +129,11 @@ namespace C2.Business.HIBU.TerrorismDetection
                 if (resDict.TryGetValue("status", out string status))
                 {
                     resDict.TryGetValue("results", out string datas);
+                    if (datas.Contains("错误"))
+                    {
+                        data = "查询失败!" + datas;
+                        return data;
+                    }
                     data = status == "200" ? DealData(datas) : datas;
                 }
                 else
@@ -190,6 +200,10 @@ namespace C2.Business.HIBU.TerrorismDetection
             List<String> resultList = new List<string>();
             if (string.IsNullOrEmpty(data))//jarray.parse解析空字符串报错
                 return string.Empty;
+            if (data.Contains("错误"))
+            {
+                return "解析出错，可尝试重新识别。";
+            }
             try
             {
                 data = data.ToString().Replace(@"\", "").Replace(@"""", "").Replace("'[", "[").Replace("]'", "]");
